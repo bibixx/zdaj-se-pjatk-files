@@ -1,0 +1,125 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="pl">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<title></title>
+</head>
+
+<body>
+
+<center>
+<table border="1" width="800" id="tabelka_rozkazow" cellspacing="1">
+	<tr>
+		<td rowspan="2" align="center">
+		<p align="center">Adres<br />
+		(hex)</td>
+		<td colspan="3" align="center">
+		<p align="center">Kod rozkazu<br />
+		(hex)</td>
+		<td rowspan="2" align="center">Mnemonik<br />
+		rozkazu</td>
+		<td rowspan="2" align="center">Liczba<br />
+		bajtów</td>
+		<td colspan="4" align="center">Rodzaje cykli<br />
+		maszynowych</td>
+	</tr>
+	<tr>
+		<td align="center">Bajt 1</td>
+		<td align="center">Bajt 2</td>
+		<td align="center">Bajt 3</td>
+		<td align="center">1</td>
+		<td align="center">2</td>
+		<td align="center">3</td>
+		<td align="center">4</td>
+	</tr>
+	<tr>
+		<td align="center">0000</td>
+		<td align="center">3E</td>
+		<td align="center">61</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">LD A,61H</td>
+		<td align="center">2</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">x</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">0002</td>
+		<td align="center">67</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">LD H,A</td>
+		<td align="center">1</td>
+		<td align="center">x</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">0003</td>
+		<td align="center">7E</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">LD A,(HC)</td>
+		<td align="center">1</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">x</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">0004</td>
+		<td align="center">32</td>
+		<td align="center">02</td>
+		<td align="center">75</td>
+		<td align="center">LD (0275H),A</td>
+		<td align="center">3</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">x</td>
+	</tr>
+	<tr>
+		<td align="center">0007</td>
+		<td align="center">2C</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">INC L</td>
+		<td align="center">1</td>
+		<td align="center">x</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">0008</td>
+		<td align="center">D3</td>
+		<td align="center">10</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">OUT (10H),A</td>
+		<td align="center">2</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">x</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">000A</td>
+		<td align="center">C3</td>
+		<td align="center">00</td>
+		<td align="center">00</td>
+		<td align="center">JP 0000,H</td>
+		<td align="center">3</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">x</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+</table>
+</center>
+
+</body>
+
+</html>

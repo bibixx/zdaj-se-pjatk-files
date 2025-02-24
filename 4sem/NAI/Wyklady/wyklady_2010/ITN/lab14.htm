@@ -1,0 +1,122 @@
+<html>
+
+<head>
+  <meta http-equiv=Content-Type content="text/html; charset=ISO-8859-2">
+  <title>NAI, laboratorium 14</title>
+
+  <style>
+   <!--
+      BODY {margin-left: 0.5cm; margin-right: 1cm; margin-top: 1cm;
+            font-family: Bookman Old Style, Times; font-size: 12pt; text-align: left;
+            font-height: 170%; line-height: 170%
+           }
+      pre {  font-size: 95%;  line-height: 120% }
+      H1   {font-family: tahoma, arial, helvetica; font-size: 14pt; 
+            font-weight: bold; text-align: right
+           }
+	  
+      div.c   {margin-left: 35%; margin-right: 1cm; margin-top: 1cm;
+            font-family: Bookman, Times; font-size: 12pt; text-align: left;
+            font-height: 170%; width: 65%;  float=right}	   
+      LI {list-style: url(./images/punkt2.gif) square }
+    -->
+  </style>
+</head>
+
+<body bgcolor="#F3FAFF">
+  <H1><font color=RED>Liczby rozmyte</font>, czyli liczby humanistów, <br>
+       inaczej... dlaczego około trzy dodać prawie pięć to coś koło ośmiu</H1>
+  <p align=right><img src="./images/line.gif"></p> 
+
+   <ul>
+
+      <li> &nbsp; <B> Zadanie 1</B> <BR><br>
+      Napisać moduł umożliwiający definiowanie dowolnych liczb rozmytych. Tak, aby liczbę rozmytą można było zdefiniować podając parametry (jakie?).<br>
+
+<pre>
+   <b>FuzzyNumber</b> a = new FuzzyNumber(...);
+   <b>FuzzyNumber</b> b = new FuzzyNumber(...);
+</pre><br>
+  <p align=center><img src="./images/lab14a.gif"></p>
+         <hr color="#0066CC" width="100%" size="2"><BR><br>
+
+
+      <li> &nbsp; <B> Zadanie 2 </B> <BR><br>
+      Uzupełnić pisany moduł o możliwość mnożenia liczby rozmytej przez liczbę rzeczywistą, np.:<br>
+<pre>   FuzzyNumber c = a.<b>multiply(3)</b>;
+   FuzzyNumber d = b.<b>multiply(-1)</b>;</pre>
+          <hr color="#0066CC" width="100%" size="5"><BR><br>
+
+
+      <li> &nbsp; <B> Zadanie 3 </B> <BR><br>
+      Uzupełnić pisany moduł o możliwość dodawania dwóch liczb rozmytych, np.:<br>
+<pre>   FuzzyNumber e = a.<b>add(c)</b>;
+   FuzzyNumber f = b.<b>add(d)</b>;</pre>
+      <hr color="#0066CC" width="100%" size="8"><BR><br>
+ 
+      <li> &nbsp; <B> Zadanie 4 </B> <BR><br>
+Uzpełnić pisany moduł o możliwość konwersji liczby rozmytej do liczby rzeczywistej. Zastosuj <b>przynajmniej dwie</b> metody "wyostrzania".
+
+
+
+
+<pre>   float x = a.<b>toCrisp(TYPE_A)</b>+100;
+   System.out.println(e.<b>toCrisp(TYPE_B)</b>);
+   System.out.println(f.<b>toCrisp(TYPE_A)</b>);</pre>
+          <hr color="#0066CC" width="100%" size="11"><br><br>
+
+
+
+      <li> &nbsp; <B> Alternatywa A: (zadania 1--4) </B> <BR><br>
+Zaprojektuj i zaimplementuj system wnioskowania rozmytego, którego dane wejściowe
+to temperatura otoczenia,
+zachmurzenie,  wielkość
+opadów oraz cecha osobnicza użytkownika systemu mierzona w skali 1-10, gdzie 1 oznacza 
+bycie zmarźlakiem (śpi w wełnianych skarpetkach latem),
+za 10 oznacza twardziela, który chodzi w rozpiętej kurtce przy mrozie minus 20 stopni.<br><br>
+System ma pełnić rolę doradczą co na siebie włożyć (i czy np. brać parasol).
+<Br><br>
+&nbsp;&nbsp;A. &nbsp;Zdefiniuj niezbędne pojęcia lingwistyczne wykorzystywane przez system oraz odpowiadające
+im zbiory rozmyte.<br>
+
+&nbsp;&nbsp;B. &nbsp;Zdefiniuj bazę reguł.<br>
+
+&nbsp;&nbsp;C. &nbsp;Wykorzystaj w systemie różne metody wyostrzania.<br>
+
+&nbsp;&nbsp;D. &nbsp;Zdefiniuj jakie znaczenie będą
+miały dane wyjściowe
+z tego systemu.<br><br>
+
+Przeprowadź odpowiednie eksperymenty "na ludziach".
+          <hr color="#0066CC" width="100%" size="11"><BR><br>
+
+
+
+
+
+
+
+
+
+      <li> &nbsp; <B> Alternatywa B: (zadania 1--4)</B> <BR><br>
+
+ Obliczyć następujące wyrażenia. Przedstawić wyniki  w postaci
+ graficznej i używanej na wykładach notacji.<br>
+ a) <tt>A1+B</tt><br>
+ b) <tt>A1+C</tt><br>
+ c) <tt>A2+B</tt><br>
+ d) <tt>B+D</tt><br>
+ e) <tt>C+E+2</tt><br>
+ f) <tt>-B</tt><br>
+ g) <tt>A2-A1</tt><br>
+ h) <tt>C-F</tt><br>
+ i) <tt>C-D+A1</tt><br>
+ j) <tt>A2-C</tt><br>
+ k) <tt>2C</tt><br>
+ l) <tt>-4B</tt><br>
+
+  <p align=center><img src="./images/lab14b.gif"></p>
+          <hr color="#0066CC" width="100%" size="14"><br><br>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,19 @@
+﻿Perceptron:
+
+Dany jest wektor wejściowy p=(0,1,-2) oraz wektor wag perceptronu q=(2,-2,1) i próg r=2 dyskretnego perceptronu unipolarnego.
+a) oblicz wyjście tego perceptronu
+b) zakładając, że wyjście jest nieprawidłowe, oblicz, używając reguły uczenia delta,
+ zmodyfikowany wektor wag, zakładając, że stała ucząca wynosci a=1.
+c) czy wartość progu podniesie się, czy obniży?
+
+
+a) net = 0*2 + 1*(-2) + (-2)*1 = -4
+r = 2
+net < r wiec perceptron nie aktywuje sie, wyjscie wynosi y = 0
+b) jezeli zalozymy, ze wyjscie y = 0 jest nieprawidlowe, 
+to prawidlowe wyjscie powinno byc d = 1.
+w = q = (2,-2,1)
+x = p = (0,1,-2)
+Ze wzoru na regule uczenia delta, nowe wagi musza wyniesc:
+w' = w + a*(d-y)*x = (2,-2,1) + 1*(1-0)*(0,1,-2) = (2,-2,1) + (0,1,-2) = (2,-1,-1)
+c) perceptron nie aktywuje sie, a powinien, wiec prog musi sie obnizyc

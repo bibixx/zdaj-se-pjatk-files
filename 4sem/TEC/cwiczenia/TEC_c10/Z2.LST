@@ -1,0 +1,85 @@
+0001   0000             ;MIROS£AW DABROWSKI, EWA KOBAYASHI
+0002   0000             .ORG 0;
+0003   0000 C3 3B 00    	JP START;
+0004   0003             
+0005   0008             	.ORG 08H;	ODCZYT Z PIO
+0006   0008 C3 48 00    	JP PIO;
+0007   000B             
+0008   0028             	.ORG 28H;	SIO
+0009   0028 C3 51 00    	JP SIO;
+0010   002B             
+0011   0038             	.ORG 38H;	REQ
+0012   0038 C3 57 00    	JP INTREQ;
+0013   003B             
+0014   003B             START:	
+0015   003B 31 FF 7F    	LD SP,7FFFH;
+0016   003E CD 74 00    	CALL PIO_INIT;
+0017   0041 CD 5F 00    	CALL SIO_INIT;
+0018   0044 FB          	EI
+0019   0045             
+0020   0045             LOOP:	
+0021   0045 C3 45 00    	JP LOOP;
+0022   0048             
+0023   0048             PIO:
+0024   0048 CD 93 00    	CALL PIO_IN;	PODPUNKT 3
+0025   004B 4F          	LD C,A;
+0026   004C CD 88 00    	CALL SIO_OUT;	
+0027   004F FB          	EI
+0028   0050 C9          	RET
+0029   0051             
+0030   0051             SIO:
+0031   0051 DB 00       	IN A,(00H);	PODPUNKT 1
+0032   0053 D3 10       	OUT (10H),A;
+0033   0055 FB          	EI
+0034   0056 C9          	RET
+0035   0057             
+0036   0057             INTREQ:
+0037   0057 DB 10       	IN A,(10H);
+0038   0059 4F          	LD C,A;
+0039   005A CD 88 00    	CALL SIO_OUT;
+0040   005D FB          	EI
+0041   005E C9          	RET
+0042   005F             
+0043   005F             SIO_INIT:
+0044   005F 3E 8A       	LD A,10001010B;	
+0045   0061 D3 03       	OUT (03H),A;	
+0046   0063 3E 06       	LD A,06H;	//SZYBKOSC TRANSMISJI
+0047   0065 D3 00       	OUT (00H),A;	//MNIEJ ZNACZACY BIT DZIELNIKA
+0048   0067 3E 00       	LD A,00H;
+0049   0069 D3 01       	OUT (01H),A;	//BARDZIEJ ZNACZACY BIT DZIELNIKA
+0050   006B 3E 0A       	LD A,00001010B;
+0051   006D D3 03       	OUT (03H),A;	
+0052   006F 3E 01       	LD A,01H;
+0053   0071 D3 01       	OUT (01H),A;
+0054   0073 C9          	RET
+0055   0074             
+0056   0074             PIO_INIT:	
+0057   0074 3E BC       	LD A,0BCH;
+0058   0076 D3 0B       	OUT (0BH),A;
+0059   0078 3E 09       	LD A,09H;
+0060   007A D3 0B       	OUT (0BH),A;
+0061   007C C9          	RET
+0062   007D             
+0063   007D             SIO_IN:
+0064   007D DB 05       	IN A,(05H);	
+0065   007F CB 47       	BIT 0,A;
+0066   0081 CA 7D 00    	JP Z,SIO_IN;
+0067   0084 3A 00 00    	LD A,(0);
+0068   0087 C9          	RET
+0069   0088             
+0070   0088             SIO_OUT:
+0071   0088 DB 05       	IN A,(05H);
+0072   008A CB 6F       	BIT 5,A;
+0073   008C CA 88 00    	JP Z,SIO_OUT;
+0074   008F 79          	LD A,C;
+0075   0090 D3 00       	OUT (00H),A;
+0076   0092 C9          	RET
+0077   0093             
+0078   0093             PIO_IN:
+0079   0093 DB 0A       	IN A,(0AH);
+0080   0095 CB 5F       	BIT 3,A;
+0081   0097 CA 93 00    	JP Z,PIO_IN;
+0082   009A DB 08       	IN A,(08H);
+0083   009C C9          	RET			
+0084   009D             .END
+tasm: Number of errors = 0

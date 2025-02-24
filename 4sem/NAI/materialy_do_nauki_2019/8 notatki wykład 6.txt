@@ -1,0 +1,40 @@
+0. Sieci neuronowe jako Black Box- s¹ œwietnym modelem uczenia maszynowego
+   ale nie maj¹ odpowiedniej reprezentacji wiedzy, gdy¿ s¹ nieczytelne 
+   dla cz³owieka
+1. s¹ modele uczenia maszynowego które reprezentujê wiedzê w sposób przejrzysty dla 
+cz³owieka;; s¹ to m.in.:
+	- regu³y decyzyjne (np kod programowania z funkcj¹ IF)
+	- drzewa decyzyjne
+2. Metoda ID3 (czyli jak generowaæ automatycznie drzewa decyzyjne):
+	- wybieramy atrybut
+	- tworzymy rozga³êzienie dla poszczególnego atrybutu
+	- powtarzamy 1 i 2 a¿ zostan¹ tylko elementy jednej kategorii 
+//intuicyjnie atrybut jest tym lepszy im lepiej 'rozdziela kategorie'
+//przy podziale kolejny atrybut nale¿y wybraæ tak by dla danej miary 
+  wystêpowa³ on najczêœciej 
+
+//najczêœciej stosowanym w praktyce algorytmem do budowy drzew jest 
+  algorytm C4.5, zawiera on ulepszenia m.in:
+	- zapobiega przetrenowaniu przez upraszczanie drzewa
+3. Z³o¿onoœæ modelu:
+//Im bardziej z³o¿ony model tym lepiej odwzorowane niuanse ale te¿
+ wiêksze ryzyko przetrenowania (czyli dostosowanie siê modelu na 
+sztywno bez uogólniania wiedzy na nieznane przypadki)
+
+MODEL POWINIEN BYÆ JAK NAJPROSTSZY:
+	*za krótki powodujê d³ugi i kosztowny obliczeniowo proces uczenia 
+	*za d³ugi powodujê przetrenowanie 
+	 (i brak mo¿liwoœci uogólniania na nieznane przypadki)
+4.Jeœli jest z ama³o danych ucz¹cych tostosujê siê metody:
+	*walidacji krzy¿owej (najbardziej popularna)
+		-pozwala u¿yæ ca³ego zbioru treningowego i jednoczeœnie
+		 nie oceniaæ tylko na podstawie zbioru treningowego
+		-dzielimy zbiór treningowy na czeœæ treningow¹ i ewaluacyjn¹
+	*leave-one-out
+	*bootstrap
+
+
+
+
+
+

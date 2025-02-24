@@ -1,0 +1,40 @@
+﻿Zadanie 2b-1
+
+Zbiór testowy zawiera 60 przypadków (obserwacji) dotyczących danych pacjentów chorych na 
+pewną chorobę i poddanych pewnej kuracji.
+Każdy pacjent w wyniku kuracji wyzdrowiał (klasa "pozytywna") lub nie (klasa "negatywna").
+
+Załóżmy, że w celu wspomagania decyzji czy poddac pacjenta w/w kuracji, 
+zbudowano klasyfikator, 
+który na podstawie pewnych atrybutów dotyczących pacjentów próbuje przewidzieć, 
+czy kuracja dla danego pacjenta będzie skuteczna (wyzdrowieje), czy też nie.
+
+Dla 36 pacjentów ze zbioru testowego system przewidział, że kuracja będzie skuteczna, 
+przy czym w 30 przypadkach była to faktycznie prawda. Ponadto system prawidłowo przewidział,
+ że w 4 przypadkach kuracja będzie nieskuteczna.
+
+
+
+Stwórz macierz omyłek 
+
+oblicz: 
+a) TP, FN, FP, FN
+b) dokładność klasyfikatora
+c) precyzję
+d) pełność
+e) F-miarę
+
+(UWAGA: proszę podać wynik w postaci ułamka zwykłego maksymalnie uproszczonego)
+
+
+macierz omyłek:
+zaklasyfikowane jako -> p  | n
+faktycznie p:           30 | 20
+faktycznie n:           6  | 4
+
+a) TP = 30, FN = 20, FP = 6, TN = 4
+b) dokładność: (30+4)/60 = 17/30
+c) precyzja: P = 30/(30+6) = 5/6
+d) pełność: R = 30/(30+20) = 3/5
+e) F-miara: F = 2PR/(P+R) = (2*5/6*3/5)/(5/6 + 3/5)
+   = (6/6)/(25+18/30) = 30/43

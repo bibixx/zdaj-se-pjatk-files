@@ -1,0 +1,73 @@
+﻿1. Co to są miary ewaluacyjne i do czego służą?
+	Miary Ewaluacyjne służą do oceny jakości klasyfikatorów
+2. Wymień 4 przykładowe miary ewaluacyjne dla klasyfikatorów do 2 klas
+	*dokładność 
+	*precyzja i pełność
+	*F-miara(tylko 2 klasy)
+	*Macierz Omyłek(dowolna liczba klas)
+
+3. Co to jest dokładność?
+//procentowy udział przypadków prawidłowo zaklasyfikowanych w zbiorze testowym
+	dokładność =(TP+TN)/all
+
+4. Opisz co to jest macierz omyłek
+//
+*Kwadratowa macierz K x K, gdzie K jest liczbą klas;
+*Każdy wiersz odpowiada faktycznej liczbie obiektów
+ danej klasy
+*Każda kolumna odpowiada liczbie obiektów 
+ wskazanych przez kwalifikator
+*Każda komórka (i,j) wskazuję na liczbę przypadków 
+obiektów klasy "i" zakwalifikowanych jako "j"
+*idealna macierz to macierz diagonalna
+//
+5. Opisz co oznaczają wielkości: TP, FP, TN, FN
+*TP - TRUE/positive
+*FP - FALSE/positive
+*FN - FALSE/negative
+*TN - TRUE/negative
+
+
+6. Jaka jest wada dokładności (miary ewaluacyjnej)?
+//
+'Ma wady dla bardziej niezrównoważonych klas
+'Dokładnośc jest najprostszą miarą ewaluacji przez co 
+w poszczególnych przypadkach może pokazywać 
+przekłamane wyniki
+
+//
+
+7. Jaka jest definicja precyzji?
+//
+Precyzja to proporcja przypadków zaklasyfikowanych jako 
+pozytywne i jednocześnie faktycznie pozytywne do wszystkich
+zakwalifikowanych jako pozytywne
+P=TP/(TP+FP)
+//
+
+8. Jaka jest definicja pełności?
+//
+Pełność to proporcja przypadków zaklasyfikowanych jako 
+pozytywne i jednocześnie faktycznie pozytywne do wszystkich
+faktycznie pozytywnych
+R=TP/(TP+FN)
+//
+
+9. Co to jest F-miara?
+//
+Jest to średnia harmoniczna P i R.
+Zbiorczo reprezentuję te dwie miary za pomocą 
+jednej liczby 
+F=(2*P*R)/(P+R)
+//
+zaklasyfikowano jako → | pozytywne  |  negatywne 
+----------------------------------------------
+faktycznie pozytywne   |   TP       |    FN
+-----------------------------------------------
+faktycznie negatywne   |   FP       |    TN
+//
+
+10. Jaka jest zaleta F-miary?
+W praktyce P i R są sprzeczne i poprawianie jednej 
+zwykle pogarsza drugą dlatego lepiej wyrazić te dwie 
+liczby za pomocą jednej miary

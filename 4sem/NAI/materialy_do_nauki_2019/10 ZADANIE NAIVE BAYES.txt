@@ -1,0 +1,43 @@
+Zadanie z klasyfikacji za pomoca klasyfikatora "naive Bayes"
+
+Potraktuj zalaczona tabele decyzyjna w nastepujacy sposob:
+a) zbior treningowy: pierwsze 12 wierszy tabeli
+b) przypadek do zaklasyfikowania: wiersz 13 tabeli (zignoruj atrybut decyzyjny 
+w 13 wierszu)
+c) wiersz 14 zignoruj
+
+Nastepnie, stosujac klasyfikator "naiwnego Bayesa" zaklasyfikuj przypadek 
+b) uzywajac zbioru treningowego a). Pokaz wszystkie niezbedne obliczenia.
+
+Jesli jest to konieczne dla jakiegos atrybutu, to zastosuj wygladzanie
+dla tego atrybutu.
+
+***
+
+P(tak|pochmurno & cieplo & normalna & brak):
+P1 = P(pochmurno|tak) * P(cieplo|tak) * P(normalna|tak) * P(brak|tak) * P(tak) = 
+= 3/8 * 1/8 * 5/8 * 5/8 * 8/12 = 0.01220703
+
+P(nie|pochmurno & cieplo & normalna & brak):
+P2 = P(pochmurno|nie) * P(cieplo|nie) * P(normalna|nie) * P(brak|nie) * P(nie) =
+= 0/4 * 2/4 * 1/4 * 2/4 * 4/12
+
+tu zauwazamy, ze pierwsze prawdopobodobienstwo wynosi 0 (0/4), wiec 
+zastosujemy dla tego atrybutu wygladzanie Laplace'a.
+
+Do licznika dodajemy 1 a do mianownika liczbe mozliwych wartosci tego
+ atrybutu (3)
+0/4 -> (0+1)/(4+3) = 1/7
+
+po modyfikacji mamy:
+P2' = 1/7 * 2/4 * 1/4 * 2/4 * 4/12 = 0.00297619
+
+a wiec P1 > P2, czyli zgodnie z algorytmem naiwnego Bayesa przypadek bedzie 
+zaklasyfikowany do klasy "TAK"
+
+Podczas sprawdzianu nie bedzie kalkulatorow, wiec wystarczy oszacowac oba 
+wyrazenia (przez skracanie ulamkow), aby okreslic ktore jest wyzsze, nie
+ trzeba dokladnie obliczac wartosci.
+
+
+

@@ -1,0 +1,100 @@
+<html>
+
+<head>
+  <meta http-equiv=Content-Type content="text/html; charset=ISO-8859-2">
+  <title>NAI, laboratorium 3</title>
+
+  <style>
+   <!--
+      BODY {margin-left: 0.5cm; margin-right: 1cm; margin-top: 1cm;
+            font-family: Bookman Old Style, Times; font-size: 12pt; text-align: left;
+            font-height: 170%; line-height: 170%
+           }
+      pre {  font-size: 95%;  line-height: 120% }
+      H1   {font-family: tahoma, arial, helvetica; font-size: 14pt; 
+            font-weight: bold; text-align: right
+           }
+	  
+      div.c   {margin-left: 35%; margin-right: 1cm; margin-top: 1cm;
+            font-family: Bookman, Times; font-size: 12pt; text-align: left;
+            font-height: 170%; width: 65%;  float=right}	   
+      LI {list-style: url(./images/point3.gif) square }
+    -->
+  </style>
+</head>
+
+<body bgcolor="#F3FAFF">
+  <H1>Neuron, perceptron i okolice...</H1>
+  <p align=right><img src="./images/line.gif"> 
+
+
+  <p>
+
+   <ul>
+
+
+      <li> &nbsp; <B> Zadanie 1</B> <BR><br>
+Zbuduj dwa różne dychotomizatory dzielące płaszczyznę na dwie klasy punktów zgodnie z naniesionymi na poniższym rysunku prostymi (S, T). Każdy z neuronów przedstaw przy użyciu dwóch różnych schematów graficznych.
+  <p align=center><img src="./images/lab3a.gif"> 
+          <hr color="#0066CC" width="100%" size="2"><BR><br>
+
+      <li> &nbsp; <B> Zadanie 2</B> <BR><br>
+Dla zbioru z zadania 1., przy założeniu, że dla kwadracików na wyjściu oczekujemy wartości -1, pewien student zaproponował przedstawiony poniżej
+neuron umożliwiający, według niego, poprawną klasyfikację wszystkich punktów ze zbioru z zadania 1.<br><br>
+
+Czy i w jakich okolicznościach poniższe odpowiedzi będą prawdziwe?<br>
+
+&nbsp;&nbsp;&nbsp;<b>A.</b> Wszystkie kółka są poprawnie klasyfikowane, jeden kwadracik jest klasyfikowany niepoprawnie.<br>
+
+&nbsp;&nbsp;&nbsp;<b>B.</b> Wszystkie kółka są klasyfikowane niepoprawnie, ale za to dokładnie jeden kwadracik jest poprawnie sklasyfikowany.<br>
+
+&nbsp;&nbsp;&nbsp;<b>C.</b> Wszystkie kwadraciki są poprawnie klasyfikowane i prawie wszystkie kółka (jedno kółko klasyfikowane jest niepoprawnie).<br>
+
+
+&nbsp;&nbsp;&nbsp;<b>D.</b> Tylko jedno kółko jest klasyfikowane poprawnie, niestety
+Wszystkie kwadraciki s klasyfikowane niepoprawnie.<br>
+ 
+  <p align=center><img src="./images/lab3b.gif"> 
+          <hr color="#0066CC" width="100%" size="5"><BR><br>
+
+
+
+
+
+
+      <li> &nbsp; <B> Zadanie 3</B> <BR><br>
+Na podstawie prostych rozdzielających dwa zbiory (A, B, C) określ wszystkie niezbędne
+parametry neuronów, których te proste są interpretacją geometryczną. <br><br>
+
+Dla otrzymanych wyników liczbowych sprawdź, czy jest jakakolwiek zależność między
+wagą W<sub>2</sub> a wartością progu? <br><br>
+
+<b>Zakładając, że</b> interesują nas tylko dychotomizatory, których prosta rozdzielająca przechodzi zawsze przez punkt (-2,0), zdefiniuj dwie graniczne postaci tych dychotomizatorów, tak aby pozwalały na poprawną klasyfikację wszystkich przedstawionych poniżej punktów.
+  <p align=center><img src="./images/lab3c.gif"> 
+          <hr color="#0066CC" width="100%" size="8"><BR><br>
+
+
+      <li> &nbsp; <B> Zadanie 4</B> <BR><br>
+Na podstawie prostych rozdzielających dwa zbiory (D, E) określ wszystkie niezbędne
+parametry neuronów, których te proste są interpretacją geometryczną. <br><br>
+
+<b>Zakładając, że</b> interesują nas tylko dychotomizatory o wagach identycznych jak te określone
+przez proste D, E zdefiniuj dwie graniczne postaci tych dychotomizatorów, tak aby pozwalały na poprawną klasyfikację wszystkich przedstawionych poniżej punktów.
+  <p align=center><img src="./images/lab3d.gif"> 
+          <hr color="#0066CC" width="100%" size="11"><BR><br>
+
+
+      <li> &nbsp; <B> Zadanie 5 (alternatywa dla zadań 1--4, 6 punktów)</B> <BR><br>
+Zaimplementuj model sztucznego neuronu. Wykorzystując ten model napisz aplikację która 
+umożliwia zilustrowanie jego własności.<br><br>
+
+Interfejs użytkownika:<br>
+   <hr color="#0066CC" width="30%" align=left size="1">
+--- możliwość wyboru wag i progu ---> interpretacja geometryczna,<br>
+--- możliwość wyboru "linii podziału" --> określenie parametrów neuronu,<br>
+--- możliwość wyboru funkcji aktywacji ---> zilustrowanie jej wpływu na sposób klasyfikowania punktów na płaszczyźnie.<br>
+          <hr color="#0066CC" width="100%" size="11"><BR><br>
+
+    </ul>
+</body>
+</html>

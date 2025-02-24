@@ -1,0 +1,89 @@
+<html>
+
+<head>
+  <meta http-equiv=Content-Type content="text/html; charset=ISO-8859-2">
+  <title>NAI, laboratorium 5</title>
+
+  <style>
+   <!--
+      BODY {margin-left: 0.5cm; margin-right: 1cm; margin-top: 1cm;
+            font-family: Bookman Old Style, Times; font-size: 12pt; text-align: left;
+            font-height: 170%; line-height: 170%
+           }
+      pre {  font-size: 95%;  line-height: 120% }
+      H1   {font-family: tahoma, arial, helvetica; font-size: 14pt; 
+            font-weight: bold; text-align: right
+           }
+	  
+      div.c   {margin-left: 35%; margin-right: 1cm; margin-top: 1cm;
+            font-family: Bookman, Times; font-size: 12pt; text-align: left;
+            font-height: 170%; width: 65%;  float=right}	   
+      LI {list-style: url(./images/point3.gif) square }
+    -->
+  </style>
+</head>
+
+<body bgcolor="#F3FAFF">
+  <H1>Obyś cudze <font color=red>sieci</font> uczył...</H1>
+  <p align=right><img src="./images/line.gif"> 
+
+
+   <ul>
+      <li> &nbsp; <B> Zadanie 1 </B> <BR><br>
+ 
+Podczas uczenia sieci <i>on-line</i> na wejście sieci podano wzorzec uczący X=(-3, 4), oczekując na wyjściu wektora [1, 0, 1]. Jeśli trzeba, wykonaj jeden krok uczenia dla przedstawionej
+sieci, wiedząc że neurony warstwy wyjściowej mają unipolarną funkcję aktywacji, zaś
+neurony warstwy ukrytej funkcję bipolarną.
+    <p align=center><img src="./images/lab5a.gif"> 
+          <hr color="#0066CC" width="100%" size="2"><BR><br>
+
+
+      <li> &nbsp; <B> Zadanie 2 </B> <BR><br>
+   Wyprowadź wzory, które mogłyby zostać wykorzystane w procesie uczenia
+   sieci neuronowej do korekty wag neuronów w obu warstwach sieci
+    <p align=center><img src="./images/lab5b1.gif"></P> <br>
+
+    dla:<br>
+    <b>a</b>) funkcji <i>g</i>(<i>NET</i>) postaci:
+       <p align=center><img src="./images/lab5b2.gif"> </p>
+
+    <b>b</b>) przedstawionej poniżej funkcji <i>g</i>(<i>NET</i>):
+       <p align=center><img src="./images/lab5b3.gif"> 
+          <hr color="#0066CC" width="100%" size="5"><BR><br>
+
+
+
+      <li> &nbsp; <B> Zadanie 3</B> <BR><br>
+          Wyznacz minimalne
+ wartości współczynnika wykorzystanego w sigmoidalnej funkcji aktywacji dla poniższych sieci (a, b, c i d), aby wszystkie
+wzorce uczące,
+przedstawione poniżej, były poprawnie klasyfikowane (tj. aby wartość
+na wyjściu była równa 1 lub 0 z dokładnością
+do 10 miejsc przecinku).
+       <p align=center><img src="./images/lab5c1.gif"> 
+       <img src="./images/lab5c2.gif"> 
+          <hr color="#0066CC" width="100%" size="8"><BR><br>
+
+      <li> &nbsp; <B> Zadanie 4</B> <BR><br>
+          Przedstaw własny, inny niż w zadaniu 3. zbiór uczący, przedstaw propozycję
+      sieci umożliwiającej poprawną klasyfikację (np. z dokładnością do 13 miejsc po przecinku) 
+z minimalną wartością współczynnika wykorzystanego w tangensoidalnej funkcji aktywacji. 
+Uzasadnij, dlaczego wybrana minimalna wartość współczynnika nie może być już mniejsza.
+          <hr color="#0066CC" width="100%" size="11"><BR><br>
+
+
+      <li> &nbsp; <B> Zadanie 5 (alternatywa do zadań 1--4, 8 punktów)</B> <BR><br>
+  Napisz program, który ilustruje proces uczenia wielowarstwowej sieci neuronowej,
+której zadaniem jest poprawna klasyfikacja punktów leżących na płaszczyźnie.<br>
+
+Użytkownik ma mieć możliwość interaktywnego określania zbioru uczącego (rodek skupiska, wariancja, liczba punktów), zawierającego
+punkty należące do minimum trzech klas.<br>
+
+Program w trakcie i po przeprowadzonym procesie uczenia powinien przedstawiać
+zmiany "stanu" sieci neuronowej poprzez
+wizualizację podziału płaszczyzny na poszczególne klasy.
+          <hr color="#0066CC" width="100%" size="14"><br><br>
+
+    </ul>
+</body>
+</html>

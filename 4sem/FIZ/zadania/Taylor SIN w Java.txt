@@ -1,0 +1,53 @@
+/*by Rafau*/
+
+package zad_1_Taylor;
+
+import javax.swing.JOptionPane;
+import java.math.*;
+
+public class taylor {
+	public static void main (String[] args){
+		
+ 
+		double wyraz;
+		double z;
+		boolean minus = true;
+		int dzielnik = 2;	
+		
+		String a = JOptionPane.showInputDialog("Podaj k¹t (w radianach):");
+		double x = Double.parseDouble(a);
+		
+		String ilosc = JOptionPane.showInputDialog("Podaj ilosc wyrazów ciagu:");
+		int licznik = Integer.parseInt(ilosc);
+		
+		if(licznik <= 0){
+			JOptionPane.showMessageDialog(null, "Z³a iloœæ wyrazów ci¹gu !!!");
+		}
+		
+		wyraz = x;
+		double temp = x;
+		
+		for (int i=2; i<=licznik; i++){
+			
+				z=(x*x /(dzielnik * (dzielnik+1)));
+				dzielnik = dzielnik + 2;
+				temp = temp * z;
+				
+				if (minus){	
+					wyraz = wyraz - temp;
+					minus=false;
+				}else{
+					wyraz = wyraz + temp;
+					minus=true;	
+				}
+		}
+		
+		int blad = (int) (((Math.sin(x)-wyraz)/Math.sin(x))*100);
+		
+		System.out.println("Szereg Taylora: Sin(" + x + ") = " + wyraz);
+		System.out.println("Funkcja wbudowana w Javie: Sin(" + x + ") = " + Math.sin(x));
+				System.out.println("Blad wynosi: " + blad + "%");
+		
+	}
+
+}

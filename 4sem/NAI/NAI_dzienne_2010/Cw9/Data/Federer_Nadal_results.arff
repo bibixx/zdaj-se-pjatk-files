@@ -1,0 +1,26 @@
+@relation F_N_Results
+
+@attribute Czas {Morning, Afternoon, Evening}
+@attribute Rodzaj_meczu {Master, GrandSlam, Friendly}
+@attribute Nawierzchnia {Grass, Clay, Hard, Mixed}
+@attribute Results {F, N}
+
+@data
+
+Morning,Master,Grass,F
+Afternoon,GrandSlam,Clay,F
+Evening,Friendly,Hard,F
+Afternoon,Friendly,Mixed,N
+Afternoon,Master,Clay,N
+Afternoon,GrandSlam,Grass,F
+Afternoon,GrandSlam,Hard,F
+Afternoon,GrandSlam,Hard,F
+Morning,Master,Grass,F
+Afternoon,GrandSlam,Clay,N
+Evening,Friendly,Hard,F
+Evening,Master,Mixed,N
+Afternoon,Master,Clay,N
+Afternoon,Master,Grass,F
+Afternoon,GrandSlam,Hard,F
+Afternoon,GrandSlam,Clay,F
+

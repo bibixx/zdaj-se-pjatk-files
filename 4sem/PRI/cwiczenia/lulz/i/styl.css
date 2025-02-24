@@ -1,0 +1,321 @@
+
+* { 
+  margin: 0; 
+  padding: 0; 
+}
+#pagemenu {
+  b-order: solid red 1px;
+  margin-left:16em;
+  padding-left:1em;
+  background: #d0eea8;
+  padding-bottom:2px;
+  background-image:url('http://www.usprawnienia.pl/green-l1.gif');
+  background-position:top left;
+  background-repeat:repeat-y;
+}
+
+#pagemenu ul{
+  font-size:90%;
+  font-family:Arial,sans-serif;
+}
+
+#pagemenu li{
+  display:inline;
+  padding-right:0.5ex;
+  padding-left:0.5ex;
+}
+
+ul.umenu{
+  margin-bottom:3ex;
+}
+
+div.dmenuhead{
+  background:#bab573;
+  padding:0.5ex;
+  padding-top:1ex;
+  padding-bottom:1ex;
+  font-weight:bold;
+  color:#663;
+  font-stretch:50%;
+  font-family:Arial,sans-serif;
+  background-image:url('http://www.usprawnienia.pl/brown.gif');
+  background-repeat:repeat-x;
+}
+
+#jezyki{
+  position:absolute;
+  top:110px;
+  left:1em;
+}
+
+#motto{
+  font-family:sans-serif;
+  font-size: 120%; 
+  text-align:center;
+  font-weight:bold;
+}
+
+td.bord{
+  background:#97c1b0;
+  width:5ex;
+}
+
+#topobrazek2{
+  position:absolute;
+  top: 0;
+  left: 0;
+  width:100%;
+  background:#d0eea8;
+}
+
+#topobrazek{
+  top: 0;
+  left: 0;
+  width:58em;
+  background:#d0eea8;
+}
+
+#cont{
+  b-order: solid red 1px; 
+  position:relative;
+  top: 100px; 
+}
+
+#mainmenutlo{
+  border: solid red 1px; 
+width:1px;
+}
+
+#mainmenu { 
+  border-left:solid #bc8 1px;
+  border-right:solid #bc8 1px;
+  font-family:sans-serif;
+  clear: both; 
+  b-order: solid green 1px; 
+  float:left;
+  background: #d0eea8;
+  position: absolute; 
+  top: 100px;
+  left: 0px;
+  font-size: 100%; 
+  width: 11em; 
+  margin-left: 5em; 
+  background-image:url('http://www.usprawnienia.pl/green-r.gif');
+  background-position:top right;
+  background-repeat:repeat-y;
+}
+
+
+
+#mainmenu a { 
+  text-align: left; 
+  color:#063;
+  margin:0;
+  padding:0;
+  font-size:90%;
+  font-family:Arial,sans-serif;
+  display:block;
+  text-decoration:none;
+}
+
+#mainmenu li:hover {
+  background: #bedebf;
+} 
+
+#mainmenu ul,#mainmenu li { 
+  display:block;
+  background-image:url('http://www.usprawnienia.pl/green-l.gif');
+  background-position:bottom left;
+  background-repeat:no-repeat;
+}
+
+#mainmenu li { 
+  display:block;
+  b-order-top: solid   #c3e3b9 1px;
+  padding-left:0.5em;
+  padding-right:0.5em;
+  padding-top:0.2em;
+  padding-bottom:0.5em;
+}
+
+#content { 
+  b-ackground: #d0eea8;
+  border-left:solid #bc8 1px;
+  border-right:solid #bc8 1px;
+  b-ackground-image:url('http://www.usprawnienia.pl/green-r.gif');
+  background-position:top right;
+  background-repeat:repeat-y;
+  f-loat: left; 
+  width: 11em; 
+  text-align: justify; 
+  b-order: solid red 1px; 
+  top: 0; 
+  font-size: 100%; 
+  left: 0em; 
+  margin: 0; 
+  margin-left: 5em; 
+  padding: 0; 
+  m-argin-top:1em;
+}
+
+#tekst  { 
+  background-image: url('http://www.usprawnienia.pl/tlo.gif');
+  b-order: solid red 1px; 
+  margin-left:1ex;
+  width: 40em; 
+  text-align: justify;
+  padding: 0ex;
+  position: relative; 
+  font-size: 100%; 
+  left: 14em; 
+  font-family:sans-serif;
+  color:#583822;
+}
+
+#tekst td{
+  padding-right:0.5ex;
+  padding-left:1ex;
+}
+
+#tekst2{
+  font-size: 80%; 
+  l-ine-height:130%;
+  font-family:Verdana,sans-serif;
+}
+
+#tekst ul {
+  padding-left:2em;
+}
+
+#tekst p{
+  text-indent:2ex;
+}
+
+
+table.tab{
+background:#ccc;
+border-spacing:0px;
+}
+
+th.tab{
+border-bottom:solid #aaa 1px;
+}
+
+td.tab,th.tab{
+padding-left:1ex;
+padding-right:0.5ex;
+text-align:right;
+}
+
+tr.trlight{
+background:#f0f0f0;
+b-ackground:#e4e4e4;
+}
+
+#pagemenu ul { 
+  margin: 0; 
+}
+
+p.imgopis {
+  border-left: solid gray 1px;
+  border-right: solid gray 1px;
+  border-bottom: solid gray 4px;
+  padding: 4px; 
+  margin-bottom: 2ex; 
+  float:left;
+}
+
+div.obrazek{
+  float:left;
+  clear:left;
+}
+
+span.zadarmo {
+  margin:0px;
+  padding:0px;
+  border:1px solid #00eeaa;
+  background: #00eeaa;
+}
+
+#stopka{
+  padding-left: 1ex; 
+  padding-right: 1ex;  
+  background:#fff4a5; 
+  border:solid 1px #ffbb22; 
+  float:right; 
+}
+
+h1.wramce,h1.wramcenc {
+  text-align:left; 
+  font-size:medium;
+  font-weight:bold;
+  margin-top:1ex;
+  b-order-bottom:#9c999c 1px solid; 
+  background: #eeffc5;
+  padding:5px; 
+  background-image:url('http://www.usprawnienia.pl/tlo_h1.gif');
+  background-position:top left;
+  background-repeat:repeat-y;
+  text-align:left; 
+  font-family: 
+  font-weight:bold;
+}
+
+h1.wramce {
+  clear:both;
+}
+
+div.nofloat{
+  clear:both;
+}
+
+div.ramkatresc {
+  b-order: 2px blue solid; 
+  padding-left:20px;
+  /*font-family: sans-serif; */
+}
+
+img.ramkatresc {
+  float:left;
+  margin:10px;
+}
+
+
+#mainmenuup li { 
+  font-size: small;
+}
+
+
+div.wiecej {
+  text-align:right; 
+  font-size:small;
+}
+
+img.obrr {
+  float:right;
+  padding-left:5px;
+}
+
+img.obrl  {
+  float:left;
+  padding-right:5px;
+}
+
+
+
+img.lang {
+  border: 0px;
+}
+
+span.mb{
+  text-decoration:underline;
+}
+
+span.ma{
+  display:block;
+  color:gray;
+  font-size: 80%; 
+  font-weight:normal;
+  l-ine-height:90%;
+  text-decoration:none;
+}

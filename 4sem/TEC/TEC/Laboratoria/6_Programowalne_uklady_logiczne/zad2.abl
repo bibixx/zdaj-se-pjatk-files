@@ -1,0 +1,40 @@
+
+MODULE zad2
+DECLARATIONS
+zad2 DEVICE 'P16V8';
+CLOCK PIN 1;
+X PIN 3;
+Q0 PIN 12 ISTYPE 'REG';
+Q1 PIN 13 ISTYPE 'REG';
+Y1 PIN 14 ISTYPE 'COM';
+Y2 PIN 15 ISTYPE 'COM';
+
+EQUATIONS
+Q0.CLK = CLOCK;
+Q1.CLK = CLOCK;
+
+STATE_DIAGRAM [Q1, Q0]
+STATE [0, 0]: Y1 = 0; Y2 = 0;
+IF (X == 0) THEN GOTO [0, 0];
+IF (X == 1) THEN GOTO [0, 1];
+
+STATE [0, 1]: Y1 = 1; Y2 = 0;
+IF (X == 0) THEN GOTO [0, 0];
+IF (X == 1) THEN GOTO [1, 0];
+
+STATE [1, 0]: Y1 = 0; Y2 = 1;
+IF (X == 0) THEN GOTO [0, 0];
+IF (X == 1) THEN GOTO [0, 0];
+
+TEST_VECTORS ([CLOCK, X] -> [Q1, Q0, Y2, Y1])
+[.C., 0] -> [0, 0, 0, 0];
+[.C., 1] -> [0, 1, 0, 1];
+[.C., 1] -> [1, 0, 1, 0];
+[.C., 1] -> [0, 0, 0, 0];
+[.C., 1] -> [0, 1, 0, 1];
+[.C., 0] -> [0, 0, 0, 0];
+[.C., 1] -> [0, 1, 0, 1];
+[.C., 1] -> [1, 0, 1, 0];
+[.C., 0] -> [0, 0, 0, 0];
+
+END

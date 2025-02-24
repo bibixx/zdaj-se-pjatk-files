@@ -1,0 +1,94 @@
+﻿1. Motywacje eksploracji danych
+// Dane których jest dużo przez co są trudne do analizy 
+   przez człowieka, łatwiej przetworzyć wykorzystując 
+   algorytmy i komputery
+
+2. Przykładowe typy zadań uczenia maszynowego
+// 
+	*grupowanie obiektów podobnych;
+	*klasyfikacja nowo-obserwowanych przypadków
+
+	*rozpoznawanie wzorców
+	*przewidywanie przyszłości na podstawie poprzednich obserwacji
+//
+3. Fazy w uczeniu maszynowym
+//
+	*zbieranie danych 
+	*czyszczenie i wstępne przetworzenie danych
+	*(tylko w uczenie z nadzorem) podział na zbiór treningowy i testowy
+	*uczenie się na danych
+	*ewaluacja
+	*używanie systemu do zadań
+//
+4. Co to jest tablica decyzyjna? Jaka ma formę, co reprezentują kolumny a co wiersze?
+//
+Tablica decyzyjna pomaga budować wnioski na podstawie 
+poprzednio zaobserwowanych danych
+wiersze - obserwacje(złożone przypadki- różne kombinacje)
+kolumny - atrybuty
+//
+5. Krótko scharakteryzuj uczenie z nadzorem
+//
+uczenie się z nadzorem
+	*podawanie systemowi "prawidłowych" rozwiązań 
+	 w tzw. zbiorze danych treningowych (gdzie wartość
+	 atrybutu decyzyjnego jest znana) 
+	*(automatyczne budowanie modelu prawidłowego 
+	 rozwiązania); system uczy się metody rozwiąząnia
+	 poprzez wykrycie zwiazków między danymi a 
+	 "prawidłowymi rozwiązaniami"
+	*"wyuczony" model stosuję się w nowych przypadków
+.np.: metoda kNN (najbliższych sąsiadów);;
+      podejście Bayesowskie;; drzewa decyzyjne
+
+Uczenie z nadzorem nazywane jest:
+   - kwalifikacją - gdy atrybut decyzyjny jest nominalny
+	np.: wykrywanie trendu, przewidywanie ceny 
+	     papieru wartościowego, oszacowanie ilościowe
+      	     zapotrzebowania na dany towar, przewidywanie temperatury
+ 
+   - regresją -gdy atrybut decyzyjny jest numeryczny
+	np.: spam, chłąm internetowy maszynowa 
+	     identyfikacja języka w tekście
+//
+6. Krótko scharakteryzuj uczenie bez nadzoru
+//
+uczenie się bez nadzoru
+	*brak sygnału uczącego tzn podania prawiłowych 
+	 rozwiązań (nie podajemy przykładów)
+	*CEL: wykrycie związków między obiektami i atrybutami
+	*zadania - grupowanie, odkrywanie reguł 
+	 asocjacyjnych, wykrywanie warości odstających
+//
+6.5 GRUPOWANIE:
+	*należy podzielić wszystkie badane przypadki 
+	na grupy obiektów, które powinny się różnić 
+	między sobą. 
+	*następnie trzeb wykryc wszystkie przypadki
+	które odstają w jakiś sposób
+	Zastosowanie: wartości odstające to próby włamań 
+	do systemów, nadużycia i wykrywania błędów.
+
+7. Typy atrybutów
+//
+*numeryczne albo kategoryczne
+*uporządkowane lub nie 
+**przeskalowane, transformacja atrybutów
+**kwantyzacja (zamiana z numerycznych na kategoryczne)
+//
+
+8. Co to jest atrybut decyzyjny?
+//brany pod uwagę w uczeniu z nadzorem 
+  i jest to wyszczególniony atrybut w tabeli decyzyjnej
+
+9. Co to jest zbiór treningowy? 
+//taki zbiór obserwacji (przypadków),
+ dla których wartości atrybut decyzyjny jest znany
+
+10. Co to jest zbiór testowy?
+//zbiór danych (bez niektórych atrybutów) podany 
+  programowi w celu przetworzenia i wydania wyniku 
+  konkretnych atrybutów (m.in atrybutu decyzyjnego) ;;
+  Następnie porównanie wydanych wyników z uprzednio 
+  przygotowanymi
+ 

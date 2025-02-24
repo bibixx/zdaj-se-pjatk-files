@@ -1,0 +1,26 @@
+1. Ogólne informacje:
+
+	Zbierano dane o cyferkach pisanych rêcznie przez 44 osoby
+	(ok. 250 od ka¿dej osoby). Cyferki pochodz±ce od 30 osob uzyto
+	do treningu, a cyferki pochodz±ce od pozosta³ych 14 uzyto do testu.
+
+	Cyferki zosta³y pisane na specjalnym urz¹dzeniu, o rozdzielczoœci
+	500x500, pozwalaj¹cym zapamiêtaæ kolejne spó³rzêdne (x,y)
+	d³ugopisu w 100-milisekundowych odstêpach czasu. Po zastosowaniu
+	skalowania i normalizacji, wsp. (x,y) przekszta³cono na wartosci
+	z przedzia³u [0,100].
+
+	W tablicach treningowych i testowych, arybuty s¹ definiowane jako
+	wspó³rzêdne 8 punktów losowo wybranych w przetrzeni czasowej.
+
+
+2. Liczba przyk³adów
+	Trening	7494
+	Test	3498
+
+	W praktyce, u¿ywano 50% danych treningowych do uczenia siê, 25% do
+	sprawdzenia jakoœci i 25% do testowania zaleznoœci miêdzy cyferkami
+	a pisarzami.
+
+3. Atrybuty
+	16 atrybutów (wartosci: 0..100) + 1 decyzja (0..9)

@@ -1,0 +1,85 @@
+﻿1) Wymień 3 ważne własności neuronu
+//
+*TRANSMITUJE sygnał będący funkcją sygnałów z "wejść",po jego przetworzeniu
+wewnątrz komóki na "wyjśćie" podlączone do wejść innych neuronów 
+*NIELINIOWE PRZETWARZANIE SYGNAŁU:wyjśćie nie jest po prostu sumą sygnałów z wejść
+*DYNAMICZNIE MODYFIKUJĘC CZUŁOŚĆ POŁĄCZEŃ innymi neuronami, dzięki czemu może
+wzmacniać lub osłabiać połączenia z innymi neuronami w zależnośći od wykonywalnego zadania
+//
+
+2)Opisz krótko matematyczny model Perceptronu
+//
+*Perceptron to prosty matematyczny model Neuronu
+*Pojedyńczy perceptron możę służyć jako klasyfikator lub regresor
+Perceptron skłąda się z:
+- n wejść x1...xn
+- n wag w1...wn
+- progu
+- wyjścia y
+//
+
+3) Jak obliczane jest wyjście Perceptronu?
+//
+y=1 jeśli [[  SUMA(n, i=1) wi*xi == (W T X) >=próg ]] gdzie W,X oznaczają wektory wag i wejść
+y=0 w przeciwnym wypadku 
+
+*Perceptron jest aktywowany (y=1) tylko jeśli 
+iloczyn skalarny W T X (net)
+przekracza wartosć progu
+
+
+//
+
+4) Opisz krótko interpretację geometryczną działania Perceptronu
+//
+Perceptron aktywuję się tylko jeśli wektor wejść X jest po tej samej
+stronie hieprpłszczyzny decyzyjnej co wektor wag W
+//
+
+5) Jak Perceptron może działać jako klasyfikator
+//
+*Perceptron może służyć jako klasyfikator gdy mamy dokładnie 2 klasy 
+*pojedyńczy perceptron może też rozróżniąc tylko 
+rejony liniowo-separowalne w przestrzeni atrybutów
+//
+
+6) Wymień przynajmniej 2 ograniczenia działania Perceptronu jako klasyfikatora
+//
+*nie jest zdolny do modelowania funkcji XOR (chyba żę połączy się 2 perceptory)
+//
+
+7) Opisz regułę delta uczenia perceptronu 
+(wzór + interpretacja geometryczna)
+//
+*podajemy perceptronowi przykłądy uczące ze zbioru treningowego po kolei
+*po każym przykładzie jeśli odpowiedź jest niewłaściwa modyfikujemy wagi:
+	W' = W +(d-y)@X
+
+	gdzie: d - decyzja prawidłowa
+	       Y - faktyczna decyzja
+	       0 <A<1 - stała uczenia
+/////////////////////////////////////////////////////////////////////
+WYKŁAD 4B:
+1.Najczęściej używane funkcje aktywacji:
+*funkcja 'signum' : y=signum(net)
+*funkcja progowa: y= [x>0]
+*funkcja sigmoidalna: y=1/1+[e(do -net)]
+*funkcja liniowa y=net
+
+*Perceptron nazywamy dyskretnym jeśli y należy {0,1} (lub{-1,1})
+możę być użyty do kwalifikacji
+*Perecptron nazywamy ciągłym jeśli y należy [0,1] (lub[-1,1])
+może być użyty do regresji
+
+2 podejścia do reprezentacji wyjśćia:
+  -lokalna - liczba perceptronów jest dokładnie taka sama jak liczba klas ;; 
+	   - każdy perceptron jest trenowany do aktywacji dla dokładnie 1 klasy;;
+	   - schemat wyjśćia: 1 perceptron jest aktywny (i wyznacza decyzję klasyfikatora) 
+	     a pozostałe są nieaktywne.
+
+  -globalna- liczba perceptronów nie jest określona
+	   - decyzja klasyfikacyjna jest wyznaczana na podstawie wyjść wszystkich 	
+	     perceptronów
+
+
+

@@ -1,0 +1,19 @@
+void solveEuler(Punkt  *p,  float dt){
+     //p->v=p->v+p->f*(1.0/p->m)*dt;
+     //p->r=p->r+p->v*dt;
+	
+	Wektor stan_poczatkowy[2];
+	Wektor stan_aktualny[2];
+	
+	
+	stan_poczatkowy[0]=p->r;
+	stan_poczatkowy[1]=p->v;
+	
+	derivatives(stan_poczatkowy, stan_aktualny, p);
+	
+	
+	p->r=p->r+stan_aktualny[0]*dt;
+	p->v=p->v+stan_aktualny[1]*dt;
+	
+	
+}

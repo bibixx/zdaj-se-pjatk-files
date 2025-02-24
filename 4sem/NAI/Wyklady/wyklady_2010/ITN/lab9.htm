@@ -1,0 +1,86 @@
+<html>
+
+<head>
+  <meta http-equiv=Content-Type content="text/html; charset=ISO-8859-2">
+  <title>NAI, laboratorium 9</title>
+
+  <style>
+   <!--
+      BODY {margin-left: 0.5cm; margin-right: 1cm; margin-top: 1cm;
+            font-family: Bookman Old Style, Times; font-size: 12pt; text-align: left;
+            font-height: 170%; line-height: 170%
+           }
+      pre {  font-size: 95%;  line-height: 120% }
+      H1   {font-family: tahoma, arial, helvetica; font-size: 14pt; 
+            font-weight: bold; text-align: right
+           }
+	  
+      div.c   {margin-left: 35%; margin-right: 1cm; margin-top: 1cm;
+            font-family: Bookman, Times; font-size: 12pt; text-align: left;
+            font-height: 170%; width: 65%;  float=right}	   
+      LI {list-style: url(./images/point3.gif) square }
+    -->
+  </style>
+</head>
+
+<body bgcolor="#F3FAFF">
+
+  <H1>Niby całkiem naiwny <font color=RED>Bayes</font>...</H1>
+  <p align=right><img src="./images/line.gif"></p> 
+
+
+   <ul>
+      <li> &nbsp; <B> Zadanie 1--4 </B> <BR><br>
+W zbiorze <i>lab9_DaneOpis.txt</i> znajduje się opis danych znajdujących
+się w zbiorze <i>lab9_Dane.xls</i>. <br><br>
+
+&nbsp;&nbsp; A. &nbsp; Wyznacz arność
+każdego z atrybutów.<br>
+&nbsp;&nbsp; B. &nbsp; Dla każdego z wierszy zbioru testowego (T1, T2) określ
+z jakich krajów pochodzą
+osoby.<br>
+
+
+&nbsp;&nbsp; C. &nbsp; Dla wiersza T3 ze zbioru testowego uzupełnij brakujący 
+atrybut <i>maritalStatus</i>.<br>
+
+&nbsp;&nbsp; D. &nbsp; Dla wiersza T4 i T5 ze zbioru testowego uzupełnij brakujące wartości atrybutów.<br>
+
+  
+          <hr color="#0066CC" width="100%" size="2"><BR><br>
+
+
+      <li> &nbsp; <B> Zadanie 1--4 (alternatywa A, 6 punktów) </B> <BR><br>
+Zaimplementować naiwny klasyfikator Bayesa i sprawdzić poprawność działania na zbiorze <i>car</i> z bazy UCI.
+(<i>http://archive.ics.uci.edu/ml/datasets/Car+Evaluation</i>).
+          <hr color="#0066CC" width="100%" size="5"><BR><br>
+
+      <li> &nbsp; <B> Zadanie 1--4 (alternatywa B, 6 punktów) </B> <BR><br>
+ wykorzystując walidację krzyżową porównać zdolność klasyfikowania sieci neuronowej i klasyfikatora Bayesa na przykład na zbiorze <i>car</i> z bazy UCI (lub na dowolnym innym zbiorze z tego repozytorium, którego wszystkie atrybuty są jakościowe).
+          <hr color="#0066CC" width="100%" size="5"><BR><br>
+
+      <li> &nbsp; <B> Zadanie 1--4  (alternatywa C, 12 punktów) </B> <BR><br>
+Zgromadzić artykuły z kilku dziedzin, np. konkretna dyscyplina sportowa, kino, recencje książek. W obrębie każdej kategorii stworzyć histogramy wystąpień poszczególnych słów w artykułach. Stosując własne (rozsądne) kryterium "ważności" słowa, stworzyć jeden słownik słów istotnych dla wybranych kategorii.<br>
+
+
+ Wykorzystując słownik utworzony w ten sposób, na podstawie artykułów stworzyć zbiór uczący postaci:<br><br>
+          <hr color=black width="80%" size="1">
+<pre>
+<b>nrArtykułu  liczbaWystąpieńSłowa1zeSłownika liczbaWystąpieńSłowa2zeSłownika ... liczbaWystąpieńSłowaNzeSłownika kategoria</b>
+np.:
+ A19                4                                3                      ...             2                   sport
+ A20                0                                0                      ...             7                   kino
+ A21                2                                1                      ...             4                   kino
+  .                 .                                .                      ...             .                   ........
+  .                 .                                .                      ...             .                   .....
+  .                 .                                .                      ...             .                   ...........
+</pre>  
+          <hr color=black width="80%" size="1">
+Przykładowo w artykule A19 pierwsze słowo pojawiło się 4 razy, drugie zaś 3 a ostatnie 2. Artykuł A19 należał do kategorii "sport".<br>
+
+<br><br>
+Dla otworzonego w ten sposób zbioru uczącego, w miarę potrzeby wykonaj dyskretyzację poszczególnych atrybutów i wykorzystując klasyfikator Bayesa spróbuj zaklasyfikować nieznane artykuły.
+          <hr color="#0066CC" width="100%" size="11"><BR><br>
+    </ul>
+</body>
+</html>

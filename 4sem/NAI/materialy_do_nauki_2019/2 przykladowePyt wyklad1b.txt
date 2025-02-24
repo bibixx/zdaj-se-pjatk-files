@@ -1,0 +1,34 @@
+﻿1. Motywacja dla uczenia maszynowego
+   -chęć pozwolenia sobie na unikanie dokładnego specyfikowania 
+   wiedzy ==> rozwiązywanie intuicyjnych problemów łatwych 
+   do rozwiązania dla człowieka poprzez uczenie się na przykładach
+
+   -ominięcie tworzenia pół-automatycznych baz wiedzy poprzez 
+   automatyczne gromadzenie wiedzy i wychwytywania z niej danych 
+   wzorców (uczenie maszynowe)
+
+///////////////////////////////////
+[prawidłowy dobór atrybutów]==>
+i lepsze - dostosowanie algorytmu do formy reprezentacji
+///////////////////////////////////
+
+2. Krótka charakteryzacja głębokiego uczenia maszynowego
+   -modeluję bardziej złożone pojęcia za pomocą prostszych
+   -ma rozbudowaną hierarchie reprezentacji (pojęc dziedziny) 
+   (gdzie jest wiele warstw abstrakcji)
+   
+3. Jakie są przyczyny niedawnego odnowienia zainteresowania 
+głębokim uczeniem maszynowym?
+   - możliwości obliczeniowe pozwalają na skuteczne trenowanie 
+   coraz większych modeli 
+   - dostępność ogromnych zbiorów danych treningowych
+   - stosowane aktualnie modele są przystosowane do trenowania
+   sieci o większej liczbie warstw
+
+4. Wymień 2-3 powody mocy obliczeniowej mózgu ludzkiego, 
+która jest wciąż trudna do osiągnięcia przez implementacje 
+sztucznych sieci neuronowych.
+	- znacznie wieksza liczba neuronów
+	- znacznie większa liczba połączeń neuronowych
+ 	(10 do 4 połączeń na neuron dla człowieka - google 10 do 3)
+

@@ -1,0 +1,55 @@
+﻿Algorytm k-NN
+=======================
+//zbiór treningowy- X(zbiór wektorów w n-wymiarowej przestrzeni atrybutów)
+//**Wektor X jest klasyfikowany za pomocą funkcji odległośći d, która znajduję
+    pewną ilość wektorów spośród X które są najbliższe od wektora x
+  **Wektorowi x przyporządkowuję się tę klasę któa odpowiada najliczniej 
+    występującej klasie 
+//zazwyczaj wszystkie atrybuty (współrzędne wektorów) są numeryczne dlatego 
+    stosuję się funkcję odlgłości Eklidesowej
+//W Klasyfikatorze k-NN nie występuje faza uczenia modelu tylko 
+  obliczenia są wykonywane w fazie kwalifikacji;
+
+
+========================
+Mając podane 6 wektorów należących do 3 kategorii (klas):
+klasa A:
+a = (1,1,0)
+c = (2,1,-2)
+klasa B:
+b = (0,1,-1)
+d = (1,0,0)
+klasa C:
+e = (1,-1,3)
+f = (1,-1,4)
+
+Zaklasyfikuj wektor x = (1,0,4) używając algorytmu k-NN (k nearest neighbours) dla k = 3 
+i zwykłej odległości euklidesowej. Zademonstruj wszystkie niezbedne obliczenia.
+
+***
+
+odpowiedz: x bedzie nalezal do kategorii C
+
+Rozwiązanie zadania dotyczącego k-NN:
+(ponizej, d(x,y) bedzie oznaczalo odleglosc euklidesowa pomiedzy wektorami x,y)
+
+Obliczamy odleglosci wektora x do wszystkich wektorow w zbiorze danych:
+d(x,a) = 4.12 (=sqrt(17))
+d(x,b) = 5.19 (=sqrt(27))
+d(x,c) = 6.16 (=sqrt(38))
+d(x,d) = 4 (=sqrt(16))
+d(x,e) = 1.41 (=sqrt(2))
+d(x,f) = 1
+
+a wiec najblizsze 3 wektory do wektora x to beda:
+wektor f (z klasy C)
+wektor e (z klasy C)
+wektor d (z klasy B)
+
+poniewaz wsrod 3 najblizszych wektorowi x wektorow najliczniejsza klase stanowi klasa C, wektor x jest zaklasyfikowany do klasy C
+
+UWAGA praktyczna:
+zauwazmy, ze przy braku kalkulatorow, prosciej bedzie liczyc kwadraty odleglosci (czyli wzor euklidesa bez wyciagania z nich pierwiastka),
+ nie zmieni to faktu, ktore wektory sa najblizsze
+
+
