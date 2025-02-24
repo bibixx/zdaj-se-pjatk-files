@@ -1,0 +1,577 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0077)http://hampshire.edu/~lasCCS/courses/resolution-prolog/resolution-prolog.html -->
+<HTML><HEAD><TITLE>resolution-prolog</TITLE>
+<META http-equiv=Content-Type content=text/html;CHARSET=iso-8859-1>
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR></HEAD>
+<BODY bgColor=#ffffff>
+<P align=center>&nbsp;</P>
+<P align=center><FONT color=#000000 size=7>Resolution, Prolog</FONT></P>
+<P><FONT color=#000000 size=4>c) 2000, Lee Spector</FONT></P>
+<P><FONT color=#000000 size=4>lspector@hampshire.edu</FONT></P>
+<CENTER>
+<P><FONT color=#000000 size=4></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P>
+<HR>
+<FONT color=#000000 size=4>&nbsp;</FONT>
+<P></P></CENTER>
+<P><FONT color=#000000 size=6>Resolution in the Propositional 
+Calculus</FONT><FONT color=#000000 size=4></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>A proof method that can be extended for the 
+predicate calculus</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>A single rule of inference -- the <I>resolution 
+principle:</I></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><IMG height=23 src="resolution-prolog_files/resolution-prolog1.jpg" width=549 
+align=bottom border=0 NATURALSIZEFLAG="3"></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>where <IMG height=23 
+src="resolution-prolog_files/resolution-prolog2.jpg" width=78 align=bottom 
+border=0 NATURALSIZEFLAG="3">.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Example</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><IMG height=19 src="resolution-prolog_files/resolution-prolog3.jpg" width=169 
+align=bottom border=0 NATURALSIZEFLAG="3"></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT> 
+<HR>
+<FONT color=#000000 size=4></FONT>
+<P></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4><BR></FONT><FONT color=#000000 size=5>Proofs using 
+the resolution principle in the propositional calculus</FONT><FONT color=#000000 
+size=4></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4><I>reductio ad absurdum</I></FONT></P>
+<P>&nbsp;</P>
+<P><FONT color=#000000 size=4>Assert all premises and the <I>negation</I> of the 
+desired conclusion. Then try to derive the empty clause (which represents a 
+contradiction: it is a disjunction with no disjuncts, so it cannot be 
+true).</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Example</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Premises: <IMG height=19 
+src="resolution-prolog_files/resolution-prolog4.jpg" width=137 align=bottom 
+border=0 NATURALSIZEFLAG="3"></FONT></P>
+<P><FONT color=#000000 size=4>Clause form: <IMG height=19 
+src="resolution-prolog_files/resolution-prolog5.jpg" width=146 align=bottom 
+border=0 NATURALSIZEFLAG="3"></FONT></P>
+<P><FONT color=#000000 size=4>Desired conclusion: <IMG height=14 
+src="resolution-prolog_files/resolution-prolog6.jpg" width=27 align=bottom 
+border=0 NATURALSIZEFLAG="3"></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Proof</FONT></P>
+<P><FONT color=#000000 size=4><I>label &nbsp; &nbsp; &nbsp; clause &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; where from</I></FONT></P>
+<P><FONT color=#000000 size=4>C1 &nbsp; &nbsp; &nbsp; <IMG height=19 
+src="resolution-prolog_files/resolution-prolog7.jpg" width=56 align=bottom 
+border=0 NATURALSIZEFLAG="3"> &nbsp; &nbsp; &nbsp; Premise</FONT></P>
+<P><FONT color=#000000 size=4>C2 &nbsp; &nbsp; &nbsp; <IMG height=19 
+src="resolution-prolog_files/resolution-prolog8.jpg" width=57 align=bottom 
+border=0 NATURALSIZEFLAG="3"> &nbsp; &nbsp; &nbsp; Premise</FONT></P>
+<P><FONT color=#000000 size=4>C3 &nbsp; &nbsp; &nbsp; <IMG height=14 
+src="resolution-prolog_files/resolution-prolog9.jpg" width=26 align=bottom 
+border=0 NATURALSIZEFLAG="3"> &nbsp; &nbsp; &nbsp; Premise</FONT></P>
+<P><FONT color=#000000 size=4>C4 &nbsp; &nbsp; &nbsp; <I>P </I>&nbsp; &nbsp; 
+&nbsp; Negation of conclusion</FONT></P>
+<P><FONT color=#000000 size=4>C5 &nbsp; &nbsp; &nbsp; <I>Q </I>&nbsp; &nbsp; 
+&nbsp; Resolve C1 with C4</FONT></P>
+<P><FONT color=#000000 size=4>C6 &nbsp; &nbsp; &nbsp; <I>R </I>&nbsp; &nbsp; 
+&nbsp; Resolve C2 with C5</FONT></P>
+<P><FONT color=#000000 size=4>C7 &nbsp; &nbsp; &nbsp; <IMG height=19 
+src="resolution-prolog_files/resolution-prolog10.jpg" width=10 align=bottom 
+border=0 NATURALSIZEFLAG="3">* &nbsp; &nbsp; &nbsp; Resolve C3 with 
+C6</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Resolution in the predicate calculus requires 
+three enhancements:</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>1) A more elaborate procedure for converting 
+statements into clause form.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>2) A more elaborate procedure for detecting of 
+"complementary pairs" (unification)</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>3) Unification variable bindings must be 
+substituted in resolvents.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>To convert a list of statements into clause 
+form:</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>1. Eliminate implications</FONT></P>
+<P><IMG height=21 src="resolution-prolog_files/resolution-prolog11.jpg" 
+width=147 align=bottom border=0 NATURALSIZEFLAG="3"></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>2. Move negations down to the atomic 
+formulas</FONT></P>
+<P><IMG height=135 src="resolution-prolog_files/resolution-prolog12.jpg" 
+width=178 align=bottom border=0 NATURALSIZEFLAG="3"></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>3. Purge existential quantifiers using Skolem 
+functions taking one argument for each universally quantified variable in the 
+scope (use a Skolem constant if there are none).</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Example: <IMG height=22 
+src="resolution-prolog_files/resolution-prolog13.jpg" width=115 align=bottom 
+border=0 NATURALSIZEFLAG="3"> can be replaced with <IMG height=22 
+src="resolution-prolog_files/resolution-prolog14.jpg" width=108 align=bottom 
+border=0 NATURALSIZEFLAG="3"></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>4. Rename variables if necessary (each quantified 
+variable should have a different name).</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>5. Move the universal quantifiers to the 
+left.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>6. Move the disjunctions down to the 
+literals.</FONT></P>
+<P><IMG height=21 src="resolution-prolog_files/resolution-prolog15.jpg" 
+width=209 align=bottom border=0 NATURALSIZEFLAG="3"></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>7. Eliminate the conjunctions (list each conjunct 
+as a separate formula, using whatever quantifiers correspond to the variables in 
+the formula).</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>8. Rename variables again, if 
+necessary.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>9. Purge the universal quantifiers.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT> 
+<HR>
+<FONT color=#000000 size=4></FONT>
+<P></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=6>Unification</FONT><FONT color=#000000 
+size=4></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Unification is a pattern match between two or more 
+expressions, all of which may contain variables.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Often there are many variable substitutions that 
+will unify a set of expressions. In general we want the <I>most general unifier 
+(MGU).</I></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>A variable may be replaced by:</FONT></P>
+<P><FONT color=#000000 size=4>* a constant</FONT></P>
+<P><FONT color=#000000 size=4>* a variable</FONT></P>
+<P><FONT color=#000000 size=4>* a function expression as long as it doesn't 
+contain the variable.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Example</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><IMG height=56 src="resolution-prolog_files/resolution-prolog16.jpg" 
+width=131 align=bottom border=0 NATURALSIZEFLAG="3"></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>The MGU for {<I>L</I><SUB>1</SUB>, 
+<I>L</I><SUB>2</SUB>} is {(<I>a,x</I>), 
+(<I>g</I>(<I>z</I>),<I>y</I>)}.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Another, less general unifier is {(<I>a,x</I>), 
+(<I>g</I>(<I>b</I>),<I>y</I>), (<I>b,z</I>)}</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Tanimoto defines a 2-term unification function. 
+Here is the result of his TEST function:</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Result of UNIFY on (P X (F A)) and (P B Y) is (((F 
+A) Y) (B X)).</FONT></P>
+<P><FONT color=#000000 size=4>Result of UNIFY on (P (F X) (G A Y)) and (P (F (H 
+B)) (G X Y)) is</FONT></P>
+<P><FONT color=#000000 size=4>NOT-UNIFIABLE.</FONT></P>
+<P><FONT color=#000000 size=4>Result of UNIFY on (P X) and (P (F X)) is 
+NOT-UNIFIABLE.</FONT></P>
+<P><FONT color=#000000 size=4>Result of UNIFY on (P X (F Y) X) and (P Z (F Z) A) 
+is</FONT></P>
+<P><FONT color=#000000 size=4>((A Z) (A Y) (A X)).</FONT></P>
+<P><FONT color=#000000 size=4>Result of applying U to (P X (F Y) X) is (P A (F 
+A) A).</FONT></P>
+<P><FONT color=#000000 size=4>Result of applying U to (P Z (F Z) A) is (P A (F 
+A) A).</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>An example of resolution in the predicate calculus 
+(Tanimoto)</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Premises: Any prime number other than 2 is odd. 
+The square of an odd number is odd. The number 7 is a prime. The number 7 is 
+different from 2.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Prove: The square of 7 is odd.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Predicates:</FONT></P>
+<P><FONT color=#000000 size=4><I>P</I>(<I>x</I>): <I>x</I> is prime</FONT></P>
+<P><FONT color=#000000 size=4><I>O</I>(<I>x</I>): <I>x</I> is odd</FONT></P>
+<P><FONT color=#000000 size=4><I>E</I>(<I>x,y</I>): <I>x</I> = 
+<I>y</I></FONT></P>
+<P><FONT color=#000000 size=4><I>s</I>(<I>x</I>) = 
+<I>x</I><SUP>2</SUP></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Premises in predicate calculus:</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><IMG height=105 src="resolution-prolog_files/resolution-prolog17.jpg" 
+width=220 align=bottom border=0 NATURALSIZEFLAG="3"></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Negation of the goal: <IMG height=19 
+src="resolution-prolog_files/resolution-prolog18.jpg" width=69 align=bottom 
+border=0 NATURALSIZEFLAG="3"></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4><BR>&nbsp;</FONT></P>
+<P><FONT color=#000000 size=6>Proof</FONT><FONT color=#000000 size=4></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4><I>label &nbsp; &nbsp; &nbsp; clause &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; how 
+derived</I></FONT></P>
+<P><FONT color=#000000 size=4>C1 &nbsp; &nbsp; &nbsp; <IMG height=19 
+src="resolution-prolog_files/resolution-prolog19.jpg" width=166 align=bottom 
+border=0 NATURALSIZEFLAG="3"> &nbsp; &nbsp; &nbsp; First premise in clause 
+form</FONT></P>
+<P><FONT color=#000000 size=4>C2 &nbsp; &nbsp; &nbsp; <IMG height=19 
+src="resolution-prolog_files/resolution-prolog20.jpg" width=121 align=bottom 
+border=0 NATURALSIZEFLAG="3"> &nbsp; &nbsp; &nbsp; Second premise in clause 
+form</FONT></P>
+<P><FONT color=#000000 size=4>C3 &nbsp; &nbsp; &nbsp; <I>P</I>(7) &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; Third premise in clause form</FONT></P>
+<P><FONT color=#000000 size=4>C4 &nbsp; &nbsp; &nbsp; <IMG height=19 
+src="resolution-prolog_files/resolution-prolog21.jpg" width=63 align=bottom 
+border=0 NATURALSIZEFLAG="3"> &nbsp; &nbsp; &nbsp; Fourth premise in clause 
+form</FONT></P>
+<P><FONT color=#000000 size=4>C5 &nbsp; &nbsp; &nbsp; <IMG height=19 
+src="resolution-prolog_files/resolution-prolog22.jpg" width=69 align=bottom 
+border=0 NATURALSIZEFLAG="3"> &nbsp; &nbsp; &nbsp; Negated conclusion</FONT></P>
+<P><FONT color=#000000 size=4>C6 &nbsp; &nbsp; &nbsp; <IMG height=19 
+src="resolution-prolog_files/resolution-prolog23.jpg" width=101 align=bottom 
+border=0 NATURALSIZEFLAG="3"> &nbsp; &nbsp; &nbsp; C1, C3 
+(<I>x</I>=7)</FONT></P>
+<P><FONT color=#000000 size=4>C7 &nbsp; &nbsp; &nbsp; <I>O</I>(7) &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; C6, C4</FONT></P>
+<P><FONT color=#000000 size=4>C8 &nbsp; &nbsp; &nbsp; <I>O</I>(<I>s</I>(7)) 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; C7, C2 (<I>x</I>=7)</FONT></P>
+<P><FONT color=#000000 size=4>C9 &nbsp; &nbsp; &nbsp; * &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; C8, C5</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>This proof was guided by human intuition. In 
+general there will be very large numbers of possible resolutions at every step, 
+and care must be taken to ensure that progress is made toward the derivation of 
+a null clause.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=6>Strategies</FONT><FONT color=#000000 
+size=4></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Set of Support: give priority to resolvents 
+derived from the clauses that express the negation of the goal.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Linear Format: insist that each step build on the 
+results of the last.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Unit preference: prefer to resolve with unit 
+(1-literal) clauses.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=6>Horn Clauses</FONT></P>
+<P><FONT color=#000000 size=6></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>At most one of the literals in each clause is 
+unnegated</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><IMG height=96 src="resolution-prolog_files/resolution-prolog24.jpg" 
+width=136 align=bottom border=0 NATURALSIZEFLAG="3"></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>These can be rewritten:</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><IMG height=96 src="resolution-prolog_files/resolution-prolog25.jpg" 
+width=110 align=bottom border=0 NATURALSIZEFLAG="3"></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>They can also be written in "goal-oriented" 
+format:</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><IMG height=96 src="resolution-prolog_files/resolution-prolog26.jpg" width=85 
+align=bottom border=0 NATURALSIZEFLAG="3"></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=6>Prolog</FONT><FONT color=#000000 
+size=4></FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Prolog is a programming language based on 
+logic.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>A Prolog program consists of Horn 
+clauses.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Programming in PROLOG is quite different from 
+programming in LISP</FONT></P>
+<P><FONT color=#000000 size=4>(or in C, or Pascal, etc.).</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>3 critical ideas behind Prolog:</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>1) a uniform knowledge base</FONT></P>
+<P><FONT color=#000000 size=4>2) unification of logic variables</FONT></P>
+<P><FONT color=#000000 size=4>3) automatic backtracking</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>In most programming languages we program by 
+writing procedures. Procedures tell the computer "what to do" when they are 
+called. Such languages are called <I>procedural languages</I>.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>In Lisp we write functions. Functions can be 
+thought of as procedures. If you think of the function telling the computer 
+"what to return" rather than "what to do", then you are thinking of Lisp as a 
+<I>functional language</I> rather than as a procedural language.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>In Prolog, we program by stating <I>facts</I> and 
+<I>rules</I>. Facts and rules don't tell the computer what to do <I>or</I> what 
+to return -- they merely state truths. We can also ask Prolog to try to <I>prove 
+</I>statements based on what it knows. We don't tell Prolog <I>how</I> to prove 
+it -- Prolog takes care of that by itself. When viewed in this light, Prolog is 
+considered a <I>declarative language</I>. Full implementations of Prolog also 
+include procedural elements, but the flavor of Prolog is decidedly 
+declarative.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Tanimoto provides a "mock Prolog" written in 
+Lisp.</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P><FONT color=#000000 size=4>Examples</FONT></P>
+<P><FONT color=#000000 size=4></FONT>&nbsp;</P>
+<P>&nbsp;</P><PRE>;;; Here we declare certain symbols to be variables.
+;;; Others are assumed to be functions or constants.
+(defvar *known-variables*
+  '(u v w x y z wine entree lst lst2 r) )
+
+;;; database of clauses for example 1:
+(setf database1 '(
+  ((grandson x y) (son x z) (parent y z))
+  ((son walter martha))
+  ((parent jonathan martha))
+ ))
+
+(setf *database* database1)  ; Use the database for example 1.
+;;; Who is the grandson of jonathan?
+(query '((grandson w jonathan)))
+
+
+? (query '((grandson w jonathan)))
+solution: W=WALTER; 
+NIL
+? 
+
+
+
+
+
+
+
+
+
+
+;;; database of clauses for example 2:
+(setf database2 '(
+  ((redwine beaujolais))
+  ((redwine burgundy))
+  ((redwine merlot))
+  ((whitewine chardonnay))
+  ((whitewine riesling))
+  ((meat steak))
+  ((meat lamb))
+  ((fish salmon))
+  ((goodwine wine) (maincourse entree) (meat entree)
+   (redwine wine))
+  ((goodwine wine) (maincourse entree) (fish entree)
+   (whitewine wine))
+  ((maincourse salmon))
+ ))
+
+
+(setf *database* database2) ; Now use the database for example 2.
+;;; What is a good wine for dinner tonight?
+? (query '((goodwine wine)))
+solution: WINE=CHARDONNAY; 
+solution: WINE=RIESLING; 
+NIL
+? 
+
+;;; Find combinations of a red wine with a meat entree...
+? (query '((redwine wine) (meat entree)))
+solution: ENTREE=STEAK; WINE=BEAUJOLAIS; 
+solution: ENTREE=LAMB; WINE=BEAUJOLAIS; 
+solution: ENTREE=STEAK; WINE=BURGUNDY; 
+solution: ENTREE=LAMB; WINE=BURGUNDY; 
+solution: ENTREE=STEAK; WINE=MERLOT; 
+solution: ENTREE=LAMB; WINE=MERLOT; 
+NIL
+? 
+
+
+
+
+
+
+
+
+
+
+More "mock Prolog" examples
+
+(setq *known-variables*
+  '(x c p) )
+
+
+
+
+;; your basic Aristotlian syllogism
+(setq *database*
+      '(((mortal x) (man x))
+        ((man socrates))))
+
+? (query '((mortal x)))
+solution: X=SOCRATES; 
+NIL
+? 
+
+
+
+
+
+
+
+
+
+
+(setq *database*
+      '(
+        ;; some kinship relations
+        ((father-of isaac abraham))
+        ((father-of ishmail abraham))
+        ((father-of shuah abraham))
+        ((father-of jacob isaac))
+        ((father-of esau isaac))
+        ((father-of reuben jacob))
+        ((father-of dinah jacob))
+        ((father-of dan jacob))
+        ((father-of asher jacob))
+        ((father-of joseph jacob))
+        ((mother-of isaac sarah))
+        ((mother-of ishmail hagar))
+        ((mother-of shuah ketura))
+        ((mother-of jacob rebeccah))
+        ((mother-of esau rebeccah))
+        ((mother-of reuben leah))
+        ((mother-of dinah leah))
+        ((mother-of dan bilhah))
+        ((mother-of asher zilpah))
+        ((mother-of joseph rachel))
+        ((parent-of c p) (mother-of c p))
+        ((parent-of c p) (father-of c p))))
+
+? (query '((mother-of isaac x)))
+solution: X=SARAH; 
+NIL
+? (query '((mother-of x rebeccah)))
+solution: X=JACOB; 
+solution: X=ESAU; 
+NIL
+? (query '((parent-of isaac x)))
+solution: X=SARAH; 
+solution: X=ABRAHAM; 
+NIL
+? 
+
+;; a rule with a multiple-clause condition
+(push '((grandparent-of c x)
+        (parent-of c p)
+        (parent-of p x))
+      *database*)
+
+? (query '((grandparent-of x abraham)))
+solution: X=JACOB; 
+solution: X=ESAU; 
+NIL
+? (query '((grandparent-of esau x)))
+solution: X=SARAH; 
+solution: X=ABRAHAM; 
+NIL
+? 
+
+;; a recursive rule
+(push '((ancestor c p)
+        (parent-of c p))
+      *database*)
+
+(push '((ancestor c x)
+        (parent-of c p)
+        (ancestor p x))
+      *database*)
+
+? (query '((ancestor x sarah)))
+solution: X=JACOB; 
+solution: X=ESAU; 
+solution: X=REUBEN; 
+solution: X=DINAH; 
+solution: X=DAN; 
+solution: X=ASHER; 
+solution: X=JOSEPH; 
+solution: X=ISAAC; 
+NIL
+? </PRE></BODY></HTML>

@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Linia Lotnicza</title><meta name="generator" content="DocBook XSL Stylesheets V1.62.4" /></head><body><div class="book" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h1 class="title"><a id="id2434852"></a>Linia Lotnicza</h1></div><div><div class="author"><h3 class="author"><span class="firstname">Tomasz</span> <span class="surname">Dackiewicz</span></h3></div></div><div><div class="author"><h3 class="author"><span class="firstname">Piotr</span> <span class="surname">Komorek</span></h3></div></div><div><div class="author"><h3 class="author"><span class="firstname">Leszek</span> <span class="surname">Krupinski</span></h3><div class="affiliation"><span class="jobtitle">Kierownik grupy projektowej<br /></span></div><tt class="email">&lt;<a href="mailto:kierownik@wafel.com">kierownik@wafel.com</a>&gt;</tt></div></div><div><div class="author"><h3 class="author"><span class="firstname">Sebastian</span> <span class="surname">Lusiński</span></h3></div></div><div><div class="author"><h3 class="author"><span class="firstname">Jacek</span> <span class="surname">Malinowski</span></h3></div></div><div><div class="author"><h3 class="author"><span class="firstname">Sebastian</span> <span class="surname">Wiśniewski</span></h3></div></div><div><p class="copyright">Copyright © 2004 Grupa Projektowa Linia Lotnicza</p></div></div><div></div><hr /></div><div class="toc"><p><b>Spis treści</b></p><dl><dt><span class="chapter"><a href="#wymagania">1. Dokument definicji wymagań</a></span></dt><dd><dl><dt><span class="sect1"><a href="#id2435183">Cel projektu</a></span></dt><dt><span class="sect1"><a href="#id2435190">Zakres projektu</a></span></dt><dt><span class="sect1"><a href="#id2438485">Wymagania funkcjonalne</a></span></dt><dt><span class="sect1"><a href="#id2438595">Wymagania niefunkcjonalne</a></span></dt></dl></dd><dt><span class="chapter"><a href="#dzialania">2. Plan działań</a></span></dt><dd><dl><dt><span class="sect1"><a href="#id2438692">Diagram Gantta</a></span></dt><dt><span class="sect1"><a href="#id2438713">Kontrola postępów prac</a></span></dt></dl></dd><dt><span class="chapter"><a href="#struktura">3. Struktura organizacji zespołu projektowego</a></span></dt><dd><dl><dt><span class="sect1"><a href="#id2438770">Struktura zespołu</a></span></dt><dt><span class="sect1"><a href="#id2437029">Kompetencje</a></span></dt></dl></dd><dt><span class="chapter"><a href="#komunikacja">4. Standardy komunikacyjne</a></span></dt><dd><dl><dt><span class="sect1"><a href="#id2437286">Standardy</a></span></dt><dt><span class="sect1"><a href="#id2433808">Śledzenie błędów</a></span></dt></dl></dd><dt><span class="chapter"><a href="#ankieta">5. Ankieta badania wymagań</a></span></dt><dt><span class="chapter"><a href="#jakosc">6. Plan zapewnienia jakości</a></span></dt><dd><dl><dt><span class="sect1"><a href="#id2434301">Zarządzanie</a></span></dt><dt><span class="sect1"><a href="#id2434370">Dokumentacja</a></span></dt><dt><span class="sect1"><a href="#id2434390">Standardy, praktyki konwencje i metryki</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2434396">Standardy dokumentacyjne</a></span></dt><dt><span class="sect2"><a href="#id2434416">Standardy kodowania</a></span></dt><dt><span class="sect2"><a href="#id2434430">Standardy komentowania</a></span></dt><dt><span class="sect2"><a href="#id2434451">Wybrane metryki ZJO</a></span></dt><dt><span class="sect2"><a href="#id2434507">Ustalenia dotyczące sposobu monitorowania zgodności z planem</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id2434530">Przeglądy i audyty</a></span></dt><dt><span class="sect1"><a href="#id2434551">Testowanie</a></span></dt><dt><span class="sect1"><a href="#id2434569">Raportowanie problemów i akcje korygujące</a></span></dt><dt><span class="sect1"><a href="#id2434590">Kontrola kodu</a></span></dt><dt><span class="sect1"><a href="#id2434609">Kontrola mediów</a></span></dt><dt><span class="sect1"><a href="#id2434627">Zbieranie, pielęgnacja i utrzymanie zapisów</a></span></dt><dt><span class="sect1"><a href="#id2434649">Szkolenie</a></span></dt><dt><span class="sect1"><a href="#id2434668">Zarządzanie ryzykiem</a></span></dt><dt><span class="sect1"><a href="#id2434690">Przegląd pozostałej części projektu</a></span></dt></dl></dd><dt><span class="chapter"><a href="#testowanie">7. Plan testowania oprogramowania</a></span></dt><dd><dl><dt><span class="sect1"><a href="#id2434719">Klasyfikacja błędów</a></span></dt><dt><span class="sect1"><a href="#id2493226">Lista testów</a></span></dt><dt><span class="sect1"><a href="#id2493550">Harmonogram</a></span></dt><dt><span class="sect1"><a href="#id2493606">Scenariusze akceptacji</a></span></dt></dl></dd><dt><span class="chapter"><a href="#fpa">8. Oszacowanie złożoności oprogramowania</a></span></dt><dd><dl><dt><span class="sect1"><a href="#id2493792">Nie skorygowane punkty funkcyjne</a></span></dt><dt><span class="sect1"><a href="#id2494022">Korekcja punktów funkcyjnych</a></span></dt><dt><span class="sect1"><a href="#id2494289">Rezultat końcowy</a></span></dt><dt><span class="sect1"><a href="#id2494307">Szacowanie koniecznych nakładów</a></span></dt></dl></dd></dl></div><div class="chapter" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title"><a id="wymagania"></a>Rozdział 1. Dokument definicji wymagań</h2></div></div><div></div></div><div class="toc"><p><b>Spis treści</b></p><dl><dt><span class="sect1"><a href="#id2435183">Cel projektu</a></span></dt><dt><span class="sect1"><a href="#id2435190">Zakres projektu</a></span></dt><dt><span class="sect1"><a href="#id2438485">Wymagania funkcjonalne</a></span></dt><dt><span class="sect1"><a href="#id2438595">Wymagania niefunkcjonalne</a></span></dt></dl></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2435183"></a>Cel projektu</h2></div></div><div></div></div>
+         Usprawnienie pracy linii lotniczych
+      </div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2435190"></a>Zakres projektu</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  Wspomaganie działu obsługi klienta 
+               </p></li><li><p>
+                  Obsługa sprzedaży i rezerwacji biletów 
+               </p></li><li><p>
+                  Prezentacja informacji
+               </p></li><li><p>
+                  Pozyskiwanie informacji z bazy danych
+               </p></li><li><p>
+                  Wspomaganie zarządzania lotami
+               </p></li><li><p>
+                  Wymiana danych z innymi liniami lotniczymi
+               </p></li><li><p>
+                  Wspomaganie obsługi naziemnej
+               </p></li><li><p>
+                  Zarządzanie personelem
+               </p></li><li><p>
+                  Obsługa testów kwalifikacyjnych
+               </p></li><li><p>
+                  System do mierzenia wydajności pracy
+               </p></li><li><p>
+                  Obsługa limitów bezpieczeństwa dla pracowników
+               </p></li></ul></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2438485"></a>Wymagania funkcjonalne</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  Przechowywanie informacji o lotach, personelu i sprzęcie
+               </p></li><li><p>
+                  Publikowanie informacji o lotach, wolnych miejscach i cenach
+                  na terminalach lotniskowych i stronie internetowej 
+               </p></li><li><p>
+                  Automatyczne wysyłanie zamówień do firm cateringowych
+                  dostarczających posiłki 
+               </p></li><li><p>
+                  Rezerwacja biletów przez internet, telefonicznie lub
+                  osobiście w placówkach handlowych
+               </p></li><li><p>
+                  Powiadamianie odpowiednich pracowników o konieczności
+                  odnowienia umów z lotniskami
+               </p></li><li><p>
+                  Udostępnianie informacji placówkom handlowym
+               </p></li><li><p>
+                  Wspomaganie procesu rekrutacji personelu poprzez
+                  rejestrowanie zgłoszeń oraz szacowanie dopasowania osoby do
+                  stanowiska na podstawie wyników testów kwalifikacyjnych
+               </p></li><li><p>
+                  Przypisywanie pilotów do lotów na podstawie aktualnej
+                  lokalizacji z uwzględnieniem limitów bezpieczeństwa długości
+                  pracy pilota
+               </p></li><li><p>
+                  Analiza ilości niezbędnego personelu w stosunku do ilości
+                  obsługiwanych lotów.
+               </p></li></ul></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2438595"></a>Wymagania niefunkcjonalne</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  W celu zmniejszenia kosztów, system powinien pracować pod
+                  kontrolą systemu Linux; mimo to, ze względu na wysoki stopień
+                  rozproszenia systemu, niezbędne jest zapewnienie
+                  wieloplatformowości
+               </p></li><li><p>
+                  Baza danych powinna być archiwizowana raz dziennie
+               </p></li><li><p>
+                  System powinien pracować w trybie replikacji, aby w wypadku
+                  awarii głównego systemu, system zapasowy automatycznie
+                  przejął kontrolę
+               </p></li><li><p>
+                  Baza serwerowa systemu powinna mieć zapewnioną ciągłość
+                  zasilania poprzez zastosowanie systemu UPS z baterią
+                  zapewniającą przynajmniej 8 godzin pracy, oraz generatora z
+                  paliwem na kolejne 24 godziny
+               </p></li><li><p>
+                  Dane przekazywane między serwerem systemu a aplikacjami
+                  klienckimi powinny być przekazywane kanałami szyfrowanymi
+               </p></li><li><p>
+                  Aplikacja kliencka powinna być przygotowana w wersji
+                  graficznej oraz tekstowej
+               </p></li></ul></div></div></div><div class="chapter" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title"><a id="dzialania"></a>Rozdział 2. Plan działań</h2></div></div><div></div></div><div class="toc"><p><b>Spis treści</b></p><dl><dt><span class="sect1"><a href="#id2438692">Diagram Gantta</a></span></dt><dt><span class="sect1"><a href="#id2438713">Kontrola postępów prac</a></span></dt></dl></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2438692"></a>Diagram Gantta</h2></div></div><div></div></div><p>
+            Diagramy WBS i Gantta zostały przygotowane w postaci pliku programu
+            Microsoft Project, załączonego do tego dokumentu (plik <a href="diagramy.mpp" target="_top">diagramy.mpp</a>).
+         </p></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2438713"></a>Kontrola postępów prac</h2></div></div><div></div></div><p>
+            Postęp prac będzie na bieżąco kontrolowany, w szczególności
+            poprzez:
+         </p><div class="itemizedlist"><ul type="disc"><li><p>
+                  wykonywanie cyklicznych raportów na temat postępów prac,
+                  aktualnie wykonywanego zadania, stopnia jego realizacji
+               </p></li><li><p>
+                  spotkania grup funkcyjnych
+               </p></li><li><p>
+                  nadzór grupy kontroli jakości
+               </p></li></ul></div></div></div><div class="chapter" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title"><a id="struktura"></a>Rozdział 3. Struktura organizacji zespołu projektowego</h2></div></div><div></div></div><div class="toc"><p><b>Spis treści</b></p><dl><dt><span class="sect1"><a href="#id2438770">Struktura zespołu</a></span></dt><dt><span class="sect1"><a href="#id2437029">Kompetencje</a></span></dt></dl></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2438770"></a>Struktura zespołu</h2></div></div><div></div></div><p>
+            Ze względu na rozmiar przedsięwzięcia, zespół będzie miał strukturę
+            rozproszoną. Kontakt między grupami będzie się odbywał poprzez
+            liderów grup funkcjonalnych.
+         </p><p>
+            Zespół projektowy będzie podzielony na osiem grup funkcjonalnych.
+         </p><div class="itemizedlist"><ul type="disc"><li><p>
+                  Grupa projektowania interfejsu
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Opracowanie zasad projektowania interfejsu użytkownika
+                     </p></li><li><p>
+                        Projektowanie okien dialogowych
+                     </p></li><li><p>
+                        Projektowanie interfejsu WWW
+                     </p></li></ul></div></li><li><p>
+                  Grupa implementacji
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Przygotowanie środowiska programistycznego
+                     </p></li><li><p>
+                        Przygotowanie systemu współdzielenia kodu
+                     </p></li><li><p>
+                        Implementacja systemu
+                     </p></li><li><p>
+                        Kompilacja kodu
+                     </p></li><li><p>
+                        Wypełnianie bazy danych
+                     </p></li><li><p>
+                        Dokumentacja kodu
+                     </p></li></ul></div></li><li><p>
+                  Grupa administracyjna
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Przygotowywanie sprzętu i oprogramowania
+                     </p></li><li><p>
+                        Szkolenie klientów
+                     </p></li><li><p>
+                        Przydzielanie uprawnień do modyfikacji kodu
+                     </p></li><li><p>
+                        Wykonywanie kopii zapasowych
+                     </p></li><li><p>
+                        Utrzymywanie lokalnej kopii systemu
+                     </p></li><li><p>
+                        Zarządzanie lokalną bazą danych
+                     </p></li><li><p>
+                        Opieka nad bazą sprzętowo-programową zespołu
+                     </p></li></ul></div></li><li><p>
+                  Grupa kontroli jakości
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Kontrola wersji systemu przekazywanych klientowi
+                     </p></li><li><p>
+                        Zbieranie i przetwarzanie danych dotyczących jakości
+                     </p></li><li><p>
+                        Nadzór nad terminowością wykonywania zadań
+                     </p></li><li><p>
+                        Kontrola dokumentacji
+                     </p></li><li><p>
+                        Nadzór nad testami
+                     </p></li><li><p>
+                        Kontrolowanie przeprowadzania inspekcji i audytów
+                     </p></li></ul></div></li><li><p>
+                  Grupa dokumentacji
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Stworzenie dokumentacji technicznej, administracyjnej i
+                        użytkownika
+                     </p></li></ul></div></li><li><p>
+                  Grupa konserwacji
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Zbieranie raportów użytkowników systemu
+                     </p></li><li><p>
+                        Analiza działającego systemu
+                     </p></li><li><p>
+                        Przygotowywanie raportów dotyczących stanu instalacji
+                     </p></li></ul></div></li><li><p>
+                  Grupa testowania
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Przygotowanie planu testów
+                     </p></li><li><p>
+                        Przeprowadzanie testów
+                     </p></li><li><p>
+                        Przekazywanie raportów o błędach do odpowiednich
+                        zespołów
+                     </p></li></ul></div></li><li><p>
+                  Grupa analizy
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Kontakty z klientami
+                     </p></li><li><p>
+                        Przygotowanie wymagań
+                     </p></li><li><p>
+                        Kontrola kosztów
+                     </p></li></ul></div></li></ul></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2437029"></a>Kompetencje</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  Kierownik
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Raporty
+                     </p></li><li><p>
+                        Planowanie
+                     </p></li></ul></div></li><li><p>
+                  Analityk
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Raporty
+                     </p></li><li><p>
+                        Planowanie
+                     </p></li><li><p>
+                        Analiza wymagań
+                     </p></li><li><p>
+                        Analiza postępu prac
+                     </p></li><li><p>
+                        Analiza jakości
+                     </p></li></ul></div></li><li><p>
+                  Projektant
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Raporty
+                     </p></li><li><p>
+                        Design
+                     </p></li><li><p>
+                        Wymagania sprzętowe
+                     </p></li></ul></div></li><li><p>
+                  Konserwator projektu
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Raporty
+                     </p></li><li><p>
+                        Analiza w czasie rzeczywistym
+                     </p></li></ul></div></li><li><p>
+                  Programista
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Implementacja
+                     </p></li><li><p>
+                        Testy kompatybilności
+                     </p></li><li><p>
+                        Testy i weryfikacja procedur
+                     </p></li></ul></div></li><li><p>
+                  Tester
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Raporty
+                     </p></li><li><p>
+                        Testowanie
+                     </p></li><li><p>
+                        Analiza wydajności
+                     </p></li><li><p>
+                        Testy i weryfikacja procedur
+                     </p></li></ul></div></li><li><p>
+                  Administrator
+               </p><div class="itemizedlist"><ul type="circle"><li><p>
+                        Raporty
+                     </p></li><li><p>
+                        Wymagania sprzętowe
+                     </p></li><li><p>
+                        Konfiguracja sprzętowa
+                     </p></li></ul></div></li></ul></div></div></div><div class="chapter" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title"><a id="komunikacja"></a>Rozdział 4. Standardy komunikacyjne</h2></div></div><div></div></div><div class="toc"><p><b>Spis treści</b></p><dl><dt><span class="sect1"><a href="#id2437286">Standardy</a></span></dt><dt><span class="sect1"><a href="#id2433808">Śledzenie błędów</a></span></dt></dl></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2437286"></a>Standardy</h2></div></div><div></div></div><p>
+            W celu przyspieszenia komunikacji między członkami zespołu, cała
+            komunikacja formalna odbywać się będzie w postaci elektronicznej.
+            Stworzony zostanie system obiegu dokumentów, który będzie
+            kontrolował położenie każdego dokumentu, poprawnie adresował
+            ścieżkę (od nadawcy, przez kierowników odpowiednich grup, do
+            odbiorcy). Będzie on także automatycznie archiwizował wszystkie
+            dokumenty, a także przechowywał czas odebrania i nadania przez każdą
+            osobę. Wszystkie dokumenty muszą być sygnowane kluczem PGP. Klucze
+            te będą przechowywane na wydzielonym serwerze kluczy, poświadczone
+            przez kierownika projektu.
+         </p><p>
+            Ze względu na obieg dokumentów poprzez aplikację kliencką, nie ma
+            potrzeby definiowania określonych szablonów dokumentów.
+         </p><p>
+            Wszystkie dokumenty kierowane na zewnątrz zespołu projektowego
+            muszą zostać zaakceptowane przez kierownika projektu. Dokumenty
+            przekazywane na zewnątrz <span class="bold"><b>nie mogą</b></span>
+            być zapisane w formatach o zamkniętych specyfikacjach (włączając w
+            to dokumenty w formacie Microsoft Word).
+         </p><p>
+            Do zdalnych, nieformalnych kontaktów uruchomiony zostanie
+            wewnętrzny serwer usługi typu Instant Messanger.
+         </p></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2433808"></a>Śledzenie błędów</h2></div></div><div></div></div><p>
+            Zgłaszanie błędów odbywać się będzie poprzez aplikację typu BTS
+            (Bug Tracking System). Korzystanie z tej aplikacji odbywać się
+            będzie przez przeglądarkę internetową. Każda osoba odpowiedzialna
+            za testowanie (wliczając w to pracowników firmy wykonujących testy
+            alfa) będzie zarejestrowana w systemie. Formularz zgłaszania błędu
+            będzie zawierał pola dotyczące opisu błędu, warunków zajścia,
+            powtarzalności, sugestii rozwiązania, wstępnej klasyfikacji błędu
+            (według grup opisanych w dalszej części tego dokumentu). Taki
+            "bilet" zgłoszeniowy jest następnie sprawdzany przez kierownika
+            grupy testowania, przypisywany wstępnie stan (nierozwiązany, nie do
+            rozwiązania, błąd, brak funkcjonalności itp), a także osoba
+            odpowiedzialna za poprawienie danego błędu. Wszystkie informacje o
+            zmianach stanu danego biletu są przekazywane do osoby zgłaszającej
+            błąd, osoby poprawiającej błąd oraz do kierownika grupy testującej.
+         </p></div></div><div class="chapter" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title"><a id="ankieta"></a>Rozdział 5. Ankieta badania wymagań</h2></div></div><div></div></div><p>
+         W systemie wyróżniono czterech aktorów: pracownika działu kadr,
+         pracownika działu logistyki, pracownika placówki handlowej oraz
+         klienta. Ze względu na różne potrzeby tych aktorów, przygotowano
+         cztery ankiety, umożliwiające poznie wymagań tych aktorów.
+      </p><div class="sect2" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h3 class="title"><a id="id2433873"></a>Pracownik działu kadr</h3></div></div><div></div></div><div class="orderedlist"><ol type="1"><li><p>
+                  Czy chciałbyś mieć możliwość przeprowadzania testów dla
+                  potencjalnych pracowników na komputerze?
+               </p><p>
+                  Test jest głównym sposobem oceny potencjalnego pracownika.
+                  Testy te mogą być przeprowadzane od razu na komputerze, z
+                  pominięciem "papierowej" metody.
+               </p></li><li><p>
+                  W jaki sposób chciałbyś dostawać informację o wyniku
+                  potencjalnego pracownika?
+               </p><p>
+                  Wyniki mogą być reprezentowane w postaci tak/nie,
+                  procentowej, punkowej, wykresu słabości i zalet.
+               </p></li><li><p>
+                  Czy chciałbyś mieć możliwość definiowania sposobu punktacji dla
+                  poszczególnych stanowisk pracy?
+               </p><p>
+                  W testach dla potencjalnych pracowników pewne pytania będą
+                  się powtarzać, lecz dla różnych stanowisk będą one miały
+                  różne znaczenie.
+               </p></li><li><p>
+                  Czy chciałbyś mieć możliwość drukowania testów oraz raportów z
+                  wyników?
+               </p><p>
+                  Niektóre firmy preferują przechowywanie dokumentów w wersji
+                  "tradycyjnej".
+               </p></li></ol></div></div><div class="sect2" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h3 class="title"><a id="id2433971"></a>Pracownik działu logistyki</h3></div></div><div></div></div><div class="orderedlist"><ol type="1"><li><p>
+                  Czy chciałbyś mieć możliwość ustalenia automatycznych
+                  zamówień?
+               </p><p>
+                  Automatyczne zamówienia wysyłane do dostawców mogą znacznie
+                  przyspieszyć pracę, lecz nie wszyscy mają zaufanie do takiego
+                  trybu przekazywania zamówień.
+               </p></li><li><p>
+                  Jakie informacje chciałbyś przechowywać w systemie?
+               </p><p>
+                  Baza danych to potężne narzędzie, lecz aby ją zaprojektować,
+                  trzeba wiedzieć jakie dane mają być w niej przechowywane.
+               </p></li><li><p>
+                  Czy potrzebny jest dostęp do danych handlowych poprzez
+                  urządzenia przenośne?
+               </p><p>
+                  Pracownik działu logistyki często pracuje "w terenie". Wtedy
+                  konieczne może być uzyskanie dostępu do danych przez
+                  urządzenie typu handheld (palmtop, telefon komórkowy).
+               </p></li><li><p>
+                  Czy chciałbyś mieć możliwość wydruku faktur?
+               </p><p>
+                  W chwili obecnej faktury co raz częściej przekazuje się drogą
+                  elektroniczną, lecz niekiedy firmy wymagają wersji
+                  papierowych.
+               </p></li><li><p>
+                  Czy chciałbyś mieć możliwość bezpośredniej wymiany danych
+                  między systemem a systemem dostawcy?
+               </p><p>
+                  Możliwa jest wymiana danych między różnymi systemami. Należy
+                  jednak ustalić, czy jest ona niezbędna, ponieważ zapewnienie
+                  takiej wymiany danych może być pracochłonne ze względu na
+                  różnice w formatach przechowywania danych.
+               </p></li><li><p>
+                  Czy chciałbyś mieć dostęp do danych przez przeglądarkę
+                  internetową?
+               </p><p>
+                  Specjalizowane aplikacje klienckie umożliwiają lepsze
+                  dostosowanie do systemu, lecz użytkownicy mogą preferować
+                  dostęp do danych przez przeglądarkę, gdyż znają to narzędzie
+                  i wiedzą jak się nim posługiwać.
+               </p></li></ol></div></div><div class="sect2" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h3 class="title"><a id="id2434119"></a>Pracownik placówki handlowej</h3></div></div><div></div></div><div class="orderedlist"><ol type="1"><li><p>
+                  Jaki system operacyjny jest używany w Twojej placówce?
+               </p><p>
+                  Przygotowanie listy używanych systemów operacyjnych jest
+                  niezbędne, gdyż należy to uwzględnić przy przygotowywaniu
+                  aplikacji klienckich.
+               </p></li><li><p>
+                  Wolisz dostęp do danych przez przeglądarkę internetową czy
+                  aplikację kliencką?
+               </p><p>
+                  Pracownicy często nie chcą korzystać z wyspecjalizowanych
+                  narzędzi, nie chcą się uczyć obsługi nowych programów.
+               </p></li><li><p>
+                  Do jakich danych potrzebujesz mieć dostęp?
+               </p><p>
+                  W celu lepszego zaprojektowania aplikacji klienckiej lub
+                  interfejsu przez przeglądarkę internetową niezbędne są
+                  informacje jakie dane muszą być prezentowane.
+               </p></li></ol></div></div><div class="sect2" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h3 class="title"><a id="id2434195"></a>Klient</h3></div></div><div></div></div><div class="orderedlist"><ol type="1"><li><p>
+                  Jaki sposób rezerwacji biletów jest dla Ciebie
+                  najwygodniejszy?
+               </p><p>
+                  Wygoda dostępu to kwestia subiektywna, lecz niektóre metody
+                  mogą być preferowane przez więcej osób niż inne.
+               </p></li><li><p>
+                  Czy zgodziłbyś się na trwałe przechowywanie Twoich danych
+                  osobowych w systemie?
+               </p><p>
+                  Obecnie wiele osób nie zgadza się na jakiekolwiek
+                  przechowywanie danych osobowych przez czas dłuższy niż do
+                  końca lotu.
+               </p></li><li><p>
+                  W jakim formacie chciałbyś otrzymywać formularze?
+               </p><p>
+                  Wiele firm, niesłusznie, wymusza na klientach używanie
+                  programu Microsoft Word. Jest wiele formatów, które mogą być
+                  odczytane przez darmowe programy (np. PDF czy format
+                  dokumentu Open Office)
+               </p></li><li><p>
+                  Jakie opcje chciałbyś móc podać przy rezerwacji biletu?
+               </p><p>
+                  Przykładowo: miejsce dla palących/niepalących, posiłek
+                  wegetariański, miejsce przy oknie.
+               </p></li></ol></div></div></div><div class="chapter" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title"><a id="jakosc"></a>Rozdział 6. Plan zapewnienia jakości</h2></div></div><div></div></div><div class="toc"><p><b>Spis treści</b></p><dl><dt><span class="sect1"><a href="#id2434301">Zarządzanie</a></span></dt><dt><span class="sect1"><a href="#id2434370">Dokumentacja</a></span></dt><dt><span class="sect1"><a href="#id2434390">Standardy, praktyki konwencje i metryki</a></span></dt><dd><dl><dt><span class="sect2"><a href="#id2434396">Standardy dokumentacyjne</a></span></dt><dt><span class="sect2"><a href="#id2434416">Standardy kodowania</a></span></dt><dt><span class="sect2"><a href="#id2434430">Standardy komentowania</a></span></dt><dt><span class="sect2"><a href="#id2434451">Wybrane metryki ZJO</a></span></dt><dt><span class="sect2"><a href="#id2434507">Ustalenia dotyczące sposobu monitorowania zgodności z planem</a></span></dt></dl></dd><dt><span class="sect1"><a href="#id2434530">Przeglądy i audyty</a></span></dt><dt><span class="sect1"><a href="#id2434551">Testowanie</a></span></dt><dt><span class="sect1"><a href="#id2434569">Raportowanie problemów i akcje korygujące</a></span></dt><dt><span class="sect1"><a href="#id2434590">Kontrola kodu</a></span></dt><dt><span class="sect1"><a href="#id2434609">Kontrola mediów</a></span></dt><dt><span class="sect1"><a href="#id2434627">Zbieranie, pielęgnacja i utrzymanie zapisów</a></span></dt><dt><span class="sect1"><a href="#id2434649">Szkolenie</a></span></dt><dt><span class="sect1"><a href="#id2434668">Zarządzanie ryzykiem</a></span></dt><dt><span class="sect1"><a href="#id2434690">Przegląd pozostałej części projektu</a></span></dt></dl></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434301"></a>Zarządzanie</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>Organizacja</p><p>
+                  Menadżer projektu wyznacza kierowników i przydziela im
+                  poszczególne zadania z których składa się cały projekt.
+                  Kierownicy są w pełni odpowiedzialni za powierzone im zadanie
+                  oraz sami określają ile osób jest im potrzebnych do
+                  realizacji konkretnego zadania. Osoby które są odpowiedzialne
+                  za testy zgłaszają problemy menadżerowi który przekazuje je
+                  do odpowiednich kierowników.
+               </p></li><li><p>Zadania</p><p>
+                  Zespół zarządzania jakością ma za zadanie kontrolować zgodność
+                  wykonanej pracy z przyjętymi standardami, jak wypadają testy
+                  wykonywane przez odpowiednie grupy osób, jak odbywa się komunikacja
+                  między zespołami oraz zaangażowanie personelu.
+               </p></li><li><p>Odpowiedzialność</p><p>
+                  Menadżer projektu jest odpowiedzialny za  odpowiednie podzielenie
+                  projektu na konkretne zadanie, za które kierownicy są
+                  odpowiedzialni.
+               </p></li></ul></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434370"></a>Dokumentacja</h2></div></div><div></div></div><p>
+            Każdy kierownik, gdy jego personel skończy prace nad zadaniem, musi
+            stworzyć raport w którym zapisane będą wnioski, problemy napotkane
+            podczas prowadzonych działań oraz udokumentowane wszelkie
+            ustalenia. Następnie taki raport kierownik bezpośrednio przekazuje
+            do menadżera. Menadżer grupuje raporty według zadań projektowych i
+            nadaje im unikalne identyfikatory.
+         </p></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434390"></a>Standardy, praktyki konwencje i metryki</h2></div></div><div></div></div><div class="sect2" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h3 class="title"><a id="id2434396"></a>Standardy dokumentacyjne</h3></div></div><div></div></div><p>
+               Zostały przyjęte szablony dokumentów, według których pisana jest
+               dokumentacja. Szablony określają co musi się znajdować na
+               odpowiednim dokumencie oraz formatowanie tekstu (Rozdziały,
+               numeracje, rozmiary czcionek).
+            </p></div><div class="sect2" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h3 class="title"><a id="id2434416"></a>Standardy kodowania</h3></div></div><div></div></div><p>
+               Określenie języków programowania, styl kodowania i nazewnictwo
+               plików z kodem.
+            </p></div><div class="sect2" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h3 class="title"><a id="id2434430"></a>Standardy komentowania</h3></div></div><div></div></div><p>
+               Określenie odpowiednich komentarzy dla poszczególnych elementów.
+               Każdy element musi mieć informacje w postaci komentarzy na temat
+               jakiego rodzaju dane wejściowe przyjmuje, z jakich plików
+               źródłowych korzysta oraz jakiego typu dane zwraca.
+            </p></div><div class="sect2" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h3 class="title"><a id="id2434451"></a>Wybrane metryki ZJO</h3></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                     Przenaszalność:
+                  </p><p>
+                     stopień przenaszalności - określa jaki odsetek kodu jest
+                     napisany w językach działających na wielu platformach (np.
+                     JAVA, C++). Miarą stopnia przenaszalności jest "p"
+                     podawane w [%] i wyliczany jest jako stosunek ilości
+                     linii kodu użytecznego dla wielu platform do ilości linii
+                     kodu całego programu.
+                  </p></li><li><p>
+                     Skalowalność:
+                  </p><p>
+                     stopień skalowalności - określa rozmiar bazy danych, który
+                     program jest stanie obsłużyć. Miarą stopnia skalowalności
+                     jest "s" podawane w [MB], wyliczone na podstawie testów po
+                     wprowadzeniu pewnych danych do bazy aż do krytycznego
+                     spowolnienia pracy systemu.
+                  </p></li></ul></div></div><div class="sect2" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h3 class="title"><a id="id2434507"></a>Ustalenia dotyczące sposobu monitorowania zgodności z planem</h3></div></div><div></div></div><p>
+               Monitorowanie zgodności z planem jest przeprowadzane przez
+               zespół zapewnienia jakości podczas kontroli wykonanych prac,
+               planu przydziału zadań stworzonego przez menadżera projektu oraz
+               kontroli grup projektowych.
+            </p></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434530"></a>Przeglądy i audyty</h2></div></div><div></div></div><p>
+            Będą przeprowadzane inspekcje wewnętrzne przeprowadzane przez grupę
+            zapewnienia jakości oprogramowania. Zespoły projektowe będą miały
+            dostęp do niezależnej grupy ekspertów, którą wyznacza menadżer
+            projektu. Audyty będą odbywały się po zakończeniu każdej fazy
+            projektu.
+         </p></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434551"></a>Testowanie</h2></div></div><div></div></div><p>
+            Testy będą przeprowadzane przez trzy niezależne grupy testujące aby
+            zapewnić większy obiektywizm przeprowadzanych testów a ich wyniki
+            będą weryfikowane do czasu uzyskania zbliżonych wartości.
+         </p></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434569"></a>Raportowanie problemów i akcje korygujące</h2></div></div><div></div></div><p>
+            Wszystkie problemy zgłaszane są menadżerowi, który zleca
+            poprawienie błędu kierownikowi odpowiedzialnemu za daną część
+            projektu, w której problem wynikł. Akcja jest powtarzana do
+            całkowitego wyeliminowania problemu.
+         </p></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434590"></a>Kontrola kodu</h2></div></div><div></div></div><p>
+            Każdy fragment oprogramowania jest przechowywany na serwerze
+            projektowym który codziennie tworzy kopie zapasowe. Personel ma
+            obowiązek przesyłać co najemnej raz dziennie, na ten serwer,
+            aktualny stan swojej pracy.
+         </p></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434609"></a>Kontrola mediów</h2></div></div><div></div></div><p>
+            Kopie zapasowe serwera które są wykonywane codziennie tworzone są
+            na 7 kasetach DAT oznaczonych każdym dniem tygo dnia, a kopie
+            wykonywane co tydzień na płytach CDR.
+         </p></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434627"></a>Zbieranie, pielęgnacja i utrzymanie zapisów</h2></div></div><div></div></div><p>
+            Sekretarz jest odpowiedzialny za prowadzenie kronik spotkań oraz
+            wprowadzaniem ich do bazy danych na serwerze projektowym. Kroniki
+            zawierają raporty ze wszystkich spotkań zespołu projektowego,
+            notatki, korespondencje z grupą zamawiającą projekt.
+         </p></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434649"></a>Szkolenie</h2></div></div><div></div></div><p>
+            Szkolenia będą prowadzone przez osoby które brały udział w
+            tworzeniu tego projektu i będą wyznaczane przez kierowników
+            poszczególnych grup a o ich ostatecznym przydzieleniu do grupy
+            szkoleniowej będzie decydował menadżer.
+         </p></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434668"></a>Zarządzanie ryzykiem</h2></div></div><div></div></div><p>
+            Na początku każdej fazy przeprowadzana jest ogólna analiza ryzyka.
+            Polega ona na wyszczególnieniu najbardziej ryzykownych elementów
+            projektu. Menadżer projektu ma za zadanie sprawdzać wymagania
+            użytkownika, plany, procedury i dokumenty na zgodność ze
+            standardami i przyjętymi procedurami postępowania.
+         </p></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434690"></a>Przegląd pozostałej części projektu</h2></div></div><div></div></div><p>
+            Po każdej inspekcji przeprowadzana jest analiza projektu pod kątem
+            kosztów, zużytego czasu realizacji, prognozy co do terminu
+            zakończenia projektu oraz sensowności dalszego prowadzenia
+            projektu.
+         </p></div></div><div class="chapter" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title"><a id="testowanie"></a>Rozdział 7. Plan testowania oprogramowania</h2></div></div><div></div></div><div class="toc"><p><b>Spis treści</b></p><dl><dt><span class="sect1"><a href="#id2434719">Klasyfikacja błędów</a></span></dt><dt><span class="sect1"><a href="#id2493226">Lista testów</a></span></dt><dt><span class="sect1"><a href="#id2493550">Harmonogram</a></span></dt><dt><span class="sect1"><a href="#id2493606">Scenariusze akceptacji</a></span></dt></dl></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2434719"></a>Klasyfikacja błędów</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  Funkcjonalne
+               </p><p>
+                  Funkcja źle wykonana bądź źle funkcjonująca
+               </p></li><li><p>
+                  Systemowe
+               </p><p>
+                  nieprawidłowe zarządzanie zasobami, mylne interfejsy, zła
+                  komunikacja z bazą danych bądź jej brak
+               </p></li><li><p>
+                  Przetwarzania
+               </p><p>
+                  niewłaściwe przetwarzanie danych w poszczególnych modułach
+               </p></li><li><p>
+                  Danych
+               </p><p>
+                  źle wprowadzone dane, ich brak, błędna specyfikacja
+               </p></li><li><p>
+                  Graficzne
+               </p><p>
+                  interfejs graficzny niezgodny z założeniami
+               </p></li><li><p>
+                  Kodowania
+               </p><p>
+                  niewłaściwe użycie języka programowania
+               </p></li><li><p>
+                  Dokumentacji
+               </p><p>
+                  niepełna lub błędna dokumentacja
+               </p></li><li><p>
+                  Inne
+               </p><p>
+                  niezidentyfikowana przyczyna wystąpienia
+               </p></li></ul></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2493226"></a>Lista testów</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  Analiza kodu
+               </p></li><li><p>
+                  Testy funkcjonalne poszczególnych modułów systemu
+               </p><p>
+                  Przetestowana szczegółowo zostanie każda funkcja systemu
+                  wynikająca z dokumentacji. Ocenione zostaną: obecność (lub
+                  nieobecność funkcji), poprawność jej działania oraz szybkość
+                  działania. W przypadku braku funkcji lub nieprawidłowego
+                  działania należy wprowadzić poprawki. Jeśli funkcja działa
+                  zbyt wolno (oczekiwany i maksymalny czas reakcji - patrz
+                  dokumentacja odpowiednich funkcji) zalecana jest
+                  optymalizacja.
+               </p></li><li><p>
+                  Test porównawczy wyników otrzymanych z oczekiwanymi
+               </p><p>
+                  Ze względu na konieczność współpracy ze sobą wszystkich
+                  modułów systemu przyjmujemy model testowania zstępującego.
+               </p></li><li><p>
+                  Testy obciążenia
+               </p><p>
+                  Wykonany na maszynie z minimalną konfiguracją sprzętową, oraz
+                  konfiguracjami bardziej rozbudowanymi. Na podstawie
+                  otrzymanych wyników przeprowadzamy ocenę przypuszczalnej
+                  wydajności systemu na platformie docelowej.
+               </p></li><li><p>
+                  Testy odpornościowe
+               </p><p>
+                  Podczas testów zostanie wywołana seria sytuacji awaryjnych
+                  (wyłączenia prądu, restarty systemu, znanaczne zwiększenie
+                  obciążenia serwera), zarówno w czasie "typowego" jak i
+                  "nietypowego" działania systemu. Po przywróceniu normalnej
+                  pracy systemu zostanie w każdym przypadku przeprowadzona
+                  szczegółowa analiza skutków sytuacji.
+               </p></li><li><p>
+                  Test zużycia zasobów przez system
+               </p><p>
+                  Przeprowadzone równolegle z testem wydajności systemu za
+                  pomocą firmowego oprogramowania monitorującego. Na podstawie
+                  otrzymanych wyników przeprowadzamy ocenę przypuszczalnego
+                  zużycia zasobów na platformie docelowej.
+               </p></li><li><p>
+                  Testy wydajności
+               </p></li><li><p>
+                  Testy niezawodności
+               </p><p>
+                  Niezawodność oceniona zostanie na podstawie wyników ankiet
+                  wypełnianych przez testujących w pozostałych testach, jak
+                  również analizy dzienników tworzonych automatycznie przez
+                  system podczas tych testów.  Ponadto przez pierwsze 3
+                  miesiące po wdrożeniu systemu przedstawiciele firmy będą
+                  prowadzili dalsze analizy niezawodności (równolegle z analizą
+                  pozostałych parametrów pracy systemu).
+               </p></li><li><p>
+                  Test bezpieczeństwa
+               </p><p>
+                  Kontrola dwuetapowa. W pierwszym etapie próbę złamania
+                  zabezpieczeń systemu przeprowadzi zespół firmowy, w drugim
+                  wynajęta specjalistyczna firma.
+               </p></li><li><p>
+                  Test ergonomii interfejsu
+               </p><p>
+                  Ocena zgodności wykonanego interfejsu z projektami
+                  zatwierdzonymi przez użytkownika przez dwa zespoły - firmowy
+                  oraz niezależny. Pożądany udział przedstawicieli
+                  zamawiającego w jednym (lub obu) zespołach.  Poza zgodnością
+                  wykonania zespół firmowy oceni również spójność interfejsu.
+               </p></li><li><p>
+                  Testy funkcjonalne uruchamiania i działania procesów
+               </p></li><li><p>
+                  Testy modyfikowalności oprogramowania
+               </p><p>
+                  Dwa firmowe zespoły programistów nie związane z implementacją
+                  tego systemu otrzymają polecenie wprowadzenia poprawek do
+                  działania kilku z funkcji systemu oraz uzupełnienia systemu o
+                  dodatkowe funkcje. W wypadku braku wolnych zespołów w tym
+                  czasie możliwe jest zlecenie tego wykonawcy zewnęt rznemu
+                  (choć nie jest to zalecane ze względu na wyższe koszty). Po
+                  zakończeniu modyfikacji zespoły te wypełnią ankiety służące
+                  do oceny łatwości wprowadzenia zmian, działanie zaś samych
+                  modyfikacji, jak również reszty systemu zostanie ponownie
+                  przetestowane (tylko na poprawność działania).
+                  Przypuszczalnie zostaną przeprowadzone dodatkowe "testy" ze
+                  względu na zmianę wymagań przez użytkownika w trakcie
+                  realizacji systemu.
+               </p></li><li><p>
+                  Testy skalowalności systemu
+               </p><p>
+                  Przeprowadzana razem z testem zużycia zasobów, na podstawie
+                  tych samych danych, uzupełnionych o czas reakcji systemu
+                  oceniany przez użytkownika.  Dane uzyskane podczas testu
+                  zostaną przeanalizowane pod katem pracy systemu przy dużych
+                  obciążeniach.
+               </p></li><li><p>
+                  Testy alfa
+               </p><p>
+                  Przeprowadzona w formie odbioru systemu przez przedstawicieli
+                  użytkownika. Przedstawiciele dostają wolną rękę w testowaniu
+                  systemu, pełną pomoc personelu firmy. Wynikiem testu będzie
+                  ocena systemu wystawiona przez przedstawicieli użytkownika.
+               </p></li><li><p>
+                  Przegląd jakości dokumentacji
+               </p><p>
+                  Test zostanie przeprowadzony w formie szkolenia przyszłych
+                  użytkowników systemu. Po zakończeniu szkolenia wypełnią oni
+                  ankietę przeznaczoną do oceny jakości materiałów
+                  dydaktycznych. Następnie zostanie przeprowadzona symulacja
+                  rzeczywistych działań przy użyciu systemu. Zespół firmowy
+                  (ew. uzupełniony o przedstawicieli klienta - b. pożądane)
+                  oceni jakość działań pracowników, a co za tym idzie ich
+                  stopień przygotowania do pracy. Na podstawie tych danych
+                  zostanie oceniona dokumentacja systemu oraz sam proces
+                  szkolenia.
+               </p></li></ul></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2493550"></a>Harmonogram</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  Testy modułów
+               </p><p>
+                  Testy te zostaną przeprowadzone w fazie implementacji, po
+                  zakończeniu realizacji poszczególnych modułów.
+               </p></li><li><p>
+                  Testy systemu
+               </p><p>
+                  Testy przeprowadzane po integracji modułów. System jest
+                  już testowany jako spójna całość.
+               </p></li><li><p>
+                  Testy akceptacji (testy alfa)
+               </p><p>
+                  Test przeprowadzany przez końcowych użytkowników systemu.
+               </p></li></ul></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2493606"></a>Scenariusze akceptacji</h2></div></div><div></div></div><p>
+            Ze względu na specyfikę testów, przygotowanie poszczególnych testów
+            funkcjonalności zostało podzielone według aktorów występujących w
+            systemie.
+         </p><div class="orderedlist"><ol type="1"><li><p>
+                  pracownik działu kadr
+               </p><div class="itemizedlist"><ul type="disc"><li><p>
+                        Przygotywywanie testów
+                     </p></li><li><p>
+                        Ustalanie parametrów testów
+                     </p></li><li><p>
+                        Przeprowadzanie testów
+                     </p></li><li><p>
+                        Przygotowywanie raportów
+                     </p></li><li><p>
+                        Generowanie analiz potrzeb personalnych
+                     </p></li><li><p>
+                        Przypisywanie pilotów do lotów
+                     </p></li></ul></div></li><li><p>
+                  pracownik działu logistyki
+               </p><div class="itemizedlist"><ul type="disc"><li><p>
+                        Przygotowywanie faktur
+                     </p></li><li><p>
+                        Ustalanie automatyki zamówień
+                     </p></li><li><p>
+                        Wprowadzanie danych o sprzęcie
+                     </p></li></ul></div></li><li><p>
+                  pracownik placówki handlowej
+               </p><div class="itemizedlist"><ul type="disc"><li><p>
+                        Publikacja informacji na stronach internetowych
+                     </p></li><li><p>
+                        Dostęp do danych o lotach
+                     </p></li></ul></div></li><li><p>
+                  klient
+               </p><div class="itemizedlist"><ul type="disc"><li><p>
+                        Rezerwacja biletów
+                     </p></li></ul></div></li></ol></div></div></div><div class="chapter" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title"><a id="fpa"></a>Rozdział 8. Oszacowanie złożoności oprogramowania</h2></div></div><div></div></div><div class="toc"><p><b>Spis treści</b></p><dl><dt><span class="sect1"><a href="#id2493792">Nie skorygowane punkty funkcyjne</a></span></dt><dt><span class="sect1"><a href="#id2494022">Korekcja punktów funkcyjnych</a></span></dt><dt><span class="sect1"><a href="#id2494289">Rezultat końcowy</a></span></dt><dt><span class="sect1"><a href="#id2494307">Szacowanie koniecznych nakładów</a></span></dt></dl></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2493792"></a>Nie skorygowane punkty funkcyjne</h2></div></div><div></div></div><div class="informaltable"><table border="1"><colgroup><col /><col /><col /><col /><col /></colgroup><tbody><tr><td>
+                        Typ
+                     </td><td colspan="3">
+                        Złożoność
+                     </td><td>
+                        Suma
+                     </td></tr><tr><td> </td><td>
+                        Niska
+                     </td><td>
+                        Średnia
+                     </td><td>
+                        Wysoka
+                     </td><td> </td></tr><tr><td>
+                        Wejścia użytkownika
+                     </td><td>
+                        19 * 4
+                     </td><td>
+                        15 * 5
+                     </td><td>
+                        13 * 6
+                     </td><td>
+                        229
+                     </td></tr><tr><td>
+                        Wyjścia użytkownika
+                     </td><td>
+                        19 * 5
+                     </td><td>
+                        15 * 6
+                     </td><td>
+                        13 * 7
+                     </td><td>
+                        276
+                     </td></tr><tr><td>
+                        Zbiory danych wewnętrzne
+                     </td><td>
+                        20 * 5
+                     </td><td>
+                        15 * 10
+                     </td><td>
+                        20 * 15
+                     </td><td>
+                        550
+                     </td></tr><tr><td>
+                        Zbiory danych zewnętrzne
+                     </td><td>
+                        5 * 5
+                     </td><td>
+                        2 * 7
+                     </td><td>
+                        2 * 9
+                     </td><td>
+                        57
+                     </td></tr><tr><td>
+                        Zapytania zewnętrzne
+                     </td><td>
+                        9 * 4
+                     </td><td>
+                        5 * 6
+                     </td><td>
+                        2 * 8
+                     </td><td>
+                        82
+                     </td></tr><tr><td colspan="4">
+                        Suma nie skorygowanych (UFP)
+                     </td><td>
+                        1194
+                     </td></tr></tbody></table></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2494022"></a>Korekcja punktów funkcyjnych</h2></div></div><div></div></div><div class="informaltable"><table border="1"><colgroup><col /><col /><col /></colgroup><tbody><tr><td>
+                        Nr
+                     </td><td>
+                        Ogólna charakterystyka sytemu
+                     </td><td>
+                        Punkt
+                     </td></tr><tr><td>
+                        1.
+                     </td><td>
+                        Występowanie urządzeń komunikacyjnych
+                     </td><td>
+                        3
+                     </td></tr><tr><td>
+                        2.
+                     </td><td>
+                        Rozproszenie przetwarzania
+                     </td><td>
+                        1
+                     </td></tr><tr><td>
+                        3.
+                     </td><td>
+                        Wymagane parametry szybkości działania
+                     </td><td>
+                        2
+                     </td></tr><tr><td>
+                        4.
+                     </td><td>
+                        Skomplikowana logika przetwarzania
+                     </td><td>
+                        1
+                     </td></tr><tr><td>
+                        5.
+                     </td><td>
+                        Obciążenie systemu - liczba transakcji
+                     </td><td>
+                        4
+                     </td></tr><tr><td>
+                        6.
+                     </td><td>
+                        Wprowadzanie danych w trybie online
+                     </td><td>
+                        4
+                     </td></tr><tr><td>
+                        7.
+                     </td><td>
+                        Wydajność użytkownika końcowego
+                     </td><td>
+                        2
+                     </td></tr><tr><td>
+                        8.
+                     </td><td>
+                        Aktualizacja danych w trybie online
+                     </td><td>
+                        3
+                     </td></tr><tr><td>
+                        9.
+                     </td><td>
+                        Rozproszenie terytorialne
+                     </td><td>
+                        4
+                     </td></tr><tr><td>
+                        10.
+                     </td><td>
+                        Złożoność przetwarzania danych
+                     </td><td>
+                        2
+                     </td></tr><tr><td>
+                        11.
+                     </td><td>
+                        Przenośność
+                     </td><td>
+                        5
+                     </td></tr><tr><td>
+                        12.
+                     </td><td>
+                        Prostota instalacji
+                     </td><td>
+                        1
+                     </td></tr><tr><td>
+                        13.
+                     </td><td>
+                        Prostota obsługi
+                     </td><td>
+                        3
+                     </td></tr><tr><td>
+                        14.
+                     </td><td>
+                        Zmiany w okresie eksploatacji
+                     </td><td>
+                        1
+                     </td></tr><tr><td> </td><td>
+                        Suma (VAF)
+                     </td><td>
+                        36
+                     </td></tr></tbody></table></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2494289"></a>Rezultat końcowy</h2></div></div><div></div></div><p>
+            VAF = 36
+         </p><p>
+            FP = (0.65 + 0.01*VAF) * UFP
+         </p><p>
+            FP = 1.01  * 1194 = 1205.94
+         </p></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2494307"></a>Szacowanie koniecznych nakładów</h2></div></div><div></div></div><p>
+            1205.94 punktów funkcyjnych odpowiada pracochłonności około 120
+            osobomiesiącom.
+         </p></div></div></div></body></html>

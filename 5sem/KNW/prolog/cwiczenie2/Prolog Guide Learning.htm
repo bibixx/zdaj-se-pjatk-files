@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0058)http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning.html -->
+<HTML><HEAD><TITLE>Prolog Guide: Learning</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<META content=file:///C|/WINDOWS/Desktop/www/Project.vpp name=VPSiteProject>
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR></HEAD>
+<BODY background="Prolog Guide Learning_files/CLOUDY%20BLUE.jpg">
+<P>
+<SCRIPT language=JavaScript>
+<!--
+document.write("<IMG SRC=\"http://www.monitor.cz:8080/cgi-bin/stat?id=roman&ref=" + top.document.referrer+'&'+Math.round(Math.random()*10000)+ "\" WIDTH=1 HEIGHT=1>");
+// --></SCRIPT>
+<NOSCRIPT><IMG height=1 src="Prolog Guide Learning_files/stat.gif" width=1 
+align=bottom> </NOSCRIPT></P>
+<P align=right><A 
+href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/index.html"><IMG height=23 
+alt=index src="Prolog Guide Learning_files/book_small.gif" width=28 align=left 
+border=0 NATURALSIZEFLAG="3"></A>I<FONT size=-1>NTERACTIVE</FONT> P<FONT 
+size=-1>ROLOG</FONT> G<FONT size=-1>UIDE<BR>© Roman Barták 1997</FONT> 
+<HR align=right noShade SIZE=1>
+
+<TABLE cellSpacing=5 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top><B><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/index.html#TOC">Table 
+      of Contents</A></B></TD>
+    <TD></TD>
+    <TD>
+      <P align=right><B><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/examples.html">Previous 
+      Chapter</A></B><BR>(examples)</P></TD>
+    <TD>
+      <P align=right><B><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/references.html">Next 
+      Chapter</A></B><BR>(references)</P></TD></TR></TBODY></TABLE>
+<HR align=right noShade SIZE=1>
+
+<P></P>
+<H1><FONT size=+4>L</FONT>EARNING<FONT size=+4> P</FONT>ROLOG<FONT size=+4> 
+</FONT>VIA<FONT size=+4> E</FONT>XAMPLES 
+<HR align=left noShade>
+</H1>
+<P>I designed this subsite to enable novices to Prolog to learn basics of this 
+language. I use examples of "real" programs to show features of Prolog. The 
+lessons start with trivial examples to learn basic program structures and 
+methodology, and continue with more advanced programs which show how to 
+implement algorithms in Prolog and how to solve problems using Prolog.</P>
+<P>I welcome your <A 
+href="mailto:bartak@kti.mff.cuni.cz?Subject=Learning Prolog">comments and 
+suggestions</A> to this site.</P>
+<P>
+<HR align=left noShade SIZE=1>
+
+<P></P>
+<P><A name=TOC></A><B><FONT size=+1>T</FONT>ABLE OF <FONT 
+size=+1>C</FONT>ONTENTS </B>(click on the title of chosen lesson to get 
+there)</P>
+<OL>
+  <LI><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog1.html">Genealogy 
+  database</A> (you first steps with Prolog) 
+  <LI><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog2.html">Data 
+  Structures</A> (Basics-Dates example; Lists) 
+  <LI><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog3.html">Data 
+  Flow and Recursion</A> (working with recursive data structures) 
+  <UL>
+    <LI><A 
+    href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog3a.html">List 
+    Processor </A>(generalized program for list processing) </LI></UL>
+  <LI><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog4.html">Combinatorics</A> 
+  (permutations, combinations, variations) 
+  <LI><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog5.html">Arithmetics 
+  Expressions</A> (evaluation and compilation) 
+  <UL>
+    <LI><A 
+    href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog5a.html">Boolean 
+    Expressions</A> (evaluation and normalization) </LI></UL>
+  <LI><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog6.html">Sorting</A> 
+  (sorting algorithms) 
+  <LI><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog7.html">Terms 
+  and Operators</A> (basic Prolog data structure) 
+  <LI><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog8.html">Sets</A> 
+  (representation and operations) 
+  <LI><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog9.html">Graphs</A> 
+  (representation, coloring, isomorfism, search) 
+  <UL>
+    <LI><A 
+    href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog9a.html">Graphs 
+    in General</A> (general algorithm schema for search) </LI></UL>
+  <LI><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog10.html">Meta-Programming</A> 
+  (meta-interpreters etc.) 
+  <LI><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog11.html">How 
+  does it work?</A> (some "difficult" features of Prolog) 
+  <LI><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog12.html">???</A> 
+  (the further contents depends on your <A 
+  href="mailto:bartak@kti.mff.cuni.cz">reactions</A>) </LI></OL>
+<P align=right>If you cannot decide, <B><A 
+href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning/LearningProlog1.html">start 
+here</A></B>. 
+<HR align=right noShade SIZE=1>
+
+<P></P>
+<DL>
+  <DT><B>Comment:</B> 
+  <DD>I optimize the pages for fast download so there are no bells and whistles. 
+  </DD></DL>
+<P>
+<HR align=left noShade SIZE=1>
+
+<TABLE cellSpacing=5 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top><B><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/index.html#TOC">Table 
+      of Contents</A></B></TD>
+    <TD></TD>
+    <TD>
+      <P align=right><B><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/examples.html">Previous 
+      Chapter</A></B><BR>(examples)</P></TD>
+    <TD>
+      <P align=right><B><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/references.html">Next 
+      Chapter</A></B><BR>(references)</P></TD></TR></TBODY></TABLE>
+<HR align=left noShade>
+<A href="http://www.apple.com/"><IMG height=40 
+src="Prolog Guide Learning_files/macspin.gif" width=176 align=right border=0 
+NATURALSIZEFLAG="0"></A><FONT size=-1>Last update 26</FONT><SUP><FONT 
+size=-1>nd</FONT></SUP><FONT size=-1> December 1997<BR>Designed and maintained 
+by <A href="http://kti.ms.mff.cuni.cz/~bartak/index.html">Roman Bartak</A><BR>© 
+December 1997</FONT> </BODY></HTML>

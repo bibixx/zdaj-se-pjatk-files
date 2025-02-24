@@ -1,0 +1,147 @@
+#article {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+#content {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+#footer {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-SIZE: 95%; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+#pagestats {
+	FONT-SIZE: 9pt
+}
+#powersearch {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: 1px solid; PADDING-LEFT: 2px; BACKGROUND: #ddeeff; PADDING-BOTTOM: 2px; BORDER-LEFT: 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: 1px solid
+}
+#quickbar {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-SIZE: 95%; Z-INDEX: 99; VISIBILITY: visible; PADDING-BOTTOM: 4px; WIDTH: 140px; PADDING-TOP: 4px
+}
+#topbar {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-SIZE: 95%; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+#toc {
+	BORDER-RIGHT: #8888aa 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #8888aa 1px solid; PADDING-LEFT: 5px; FONT-SIZE: 95%; PADDING-BOTTOM: 5px; BORDER-LEFT: #8888aa 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #8888aa 1px solid; BACKGROUND-COLOR: #f7f8ff
+}
+#toolbar {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+#infobox {
+	BACKGROUND: #eeeeff; COLOR: black
+}
+#editform {
+	MARGIN-TOP: 1px
+}
+.bodytext {
+	
+}
+A.interwiki {
+	COLOR: #3366bb
+}
+A.external {
+	COLOR: #3366bb
+}
+A.printable {
+	TEXT-DECORATION: underline
+}
+A.stub {
+	COLOR: #772233; TEXT-DECORATION: none
+}
+A.stub {
+	COLOR: #772233; TEXT-DECORATION: none
+}
+BODY {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; MARGIN: 0px; COLOR: black; PADDING-TOP: 4px
+}
+FORM.inline {
+	DISPLAY: inline
+}
+H1.pagetitle {
+	MARGIN-TOP: 0px; FONT-SIZE: 150%; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+H2 {
+	FONT-SIZE: 120%
+}
+H2 {
+	MARGIN-BOTTOM: 0px
+}
+H3 {
+	MARGIN-BOTTOM: 0px
+}
+H4 {
+	MARGIN-BOTTOM: 0px
+}
+H5 {
+	MARGIN-BOTTOM: 0px
+}
+H6 {
+	MARGIN-BOTTOM: 0px
+}
+H3 {
+	FONT-SIZE: 106.25%
+}
+H4 {
+	FONT-SIZE: 103.12%
+}
+H5 {
+	FONT-SIZE: 100%
+}
+H6 {
+	FONT-SIZE: 95%
+}
+HR.sep {
+	COLOR: gray; HEIGHT: 1px; BACKGROUND-COLOR: gray
+}
+P.subpages {
+	FONT-SIZE: small
+}
+P.subtitle {
+	MARGIN-TOP: 0px; PADDING-TOP: 0px
+}
+TD {
+	empty-cells: show
+}
+TD.bottom {
+	BORDER-TOP: gray 1px solid
+}
+TD.top {
+	BORDER-BOTTOM: gray 1px solid
+}
+DIV.floatright {
+	FLOAT: right; MARGIN: 0px 0px 1em 1em
+}
+DIV.floatright P {
+	FONT-STYLE: italic
+}
+DIV.floatleft {
+	FLOAT: left; MARGIN: 0.3em 0.5em 0.5em 0px
+}
+DIV.floatleft P {
+	FONT-STYLE: italic
+}
+DIV.thumbnail-none {
+	BORDER-RIGHT: #8888aa 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #8888aa 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 85%; BACKGROUND: #cccccc; PADDING-BOTTOM: 2px; MARGIN: 0.3em 0px 0.5em; BORDER-LEFT: #8888aa 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: #8888aa 1px solid; TEXT-ALIGN: center
+}
+DIV.thumbnail-right {
+	BORDER-RIGHT: #8888aa 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #8888aa 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 85%; BACKGROUND: #cccccc; PADDING-BOTTOM: 2px; MARGIN: 0.3em 0px 0.5em; BORDER-LEFT: #8888aa 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: #8888aa 1px solid; TEXT-ALIGN: center
+}
+DIV.thumbnail-left {
+	BORDER-RIGHT: #8888aa 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #8888aa 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 85%; BACKGROUND: #cccccc; PADDING-BOTTOM: 2px; MARGIN: 0.3em 0px 0.5em; BORDER-LEFT: #8888aa 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: #8888aa 1px solid; TEXT-ALIGN: center
+}
+DIV.thumbnail-none P {
+	MARGIN-TOP: 3px; MARGIN-BOTTOM: 3px; TEXT-ALIGN: left
+}
+DIV.thumbnail-right P {
+	MARGIN-TOP: 3px; MARGIN-BOTTOM: 3px; TEXT-ALIGN: left
+}
+DIV.thumbnail-left P {
+	MARGIN-TOP: 3px; MARGIN-BOTTOM: 3px; TEXT-ALIGN: left
+}
+DIV.thumbnail-right {
+	FLOAT: right; MARGIN-LEFT: 0.5em
+}
+DIV.thumbnail-left {
+	FLOAT: left; MARGIN-RIGHT: 0.5em
+}
+TABLE.rimage {
+	FONT-SIZE: smaller; FLOAT: right; MARGIN-BOTTOM: 1em; MARGIN-LEFT: 1em; WIDTH: 1pt; TEXT-ALIGN: center
+}

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Rozdział 7. Plan testowania oprogramowania</title><meta name="generator" content="DocBook XSL Stylesheets V1.62.4" /><link rel="home" href="index.html" title="Linia Lotnicza" /><link rel="up" href="index.html" title="Linia Lotnicza" /><link rel="previous" href="jakosc.html" title="Rozdział 6. Plan zapewnienia jakości" /><link rel="next" href="fpa.html" title="Rozdział 8. Oszacowanie złożoności oprogramowania" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Rozdział 7. Plan testowania oprogramowania</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="jakosc.html">Poprzedni</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="fpa.html">Następny</a></td></tr></table><hr /></div><div class="chapter" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title"><a id="testowanie"></a>Rozdział 7. Plan testowania oprogramowania</h2></div></div><div></div></div><div class="toc"><p><b>Spis treści</b></p><dl><dt><span class="sect1"><a href="testowanie.html#id2450341">Klasyfikacja błędów</a></span></dt><dt><span class="sect1"><a href="testowanie.html#id2508799">Lista testów</a></span></dt><dt><span class="sect1"><a href="testowanie.html#id2509123">Harmonogram</a></span></dt><dt><span class="sect1"><a href="testowanie.html#id2509179">Scenariusze akceptacji</a></span></dt></dl></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2450341"></a>Klasyfikacja błędów</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  Funkcjonalne
+               </p><p>
+                  Funkcja źle wykonana bądź źle funkcjonująca
+               </p></li><li><p>
+                  Systemowe
+               </p><p>
+                  nieprawidłowe zarządzanie zasobami, mylne interfejsy, zła
+                  komunikacja z bazą danych bądź jej brak
+               </p></li><li><p>
+                  Przetwarzania
+               </p><p>
+                  niewłaściwe przetwarzanie danych w poszczególnych modułach
+               </p></li><li><p>
+                  Danych
+               </p><p>
+                  źle wprowadzone dane, ich brak, błędna specyfikacja
+               </p></li><li><p>
+                  Graficzne
+               </p><p>
+                  interfejs graficzny niezgodny z założeniami
+               </p></li><li><p>
+                  Kodowania
+               </p><p>
+                  niewłaściwe użycie języka programowania
+               </p></li><li><p>
+                  Dokumentacji
+               </p><p>
+                  niepełna lub błędna dokumentacja
+               </p></li><li><p>
+                  Inne
+               </p><p>
+                  niezidentyfikowana przyczyna wystąpienia
+               </p></li></ul></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2508799"></a>Lista testów</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  Analiza kodu
+               </p></li><li><p>
+                  Testy funkcjonalne poszczególnych modułów systemu
+               </p><p>
+                  Przetestowana szczegółowo zostanie każda funkcja systemu
+                  wynikająca z dokumentacji. Ocenione zostaną: obecność (lub
+                  nieobecność funkcji), poprawność jej działania oraz szybkość
+                  działania. W przypadku braku funkcji lub nieprawidłowego
+                  działania należy wprowadzić poprawki. Jeśli funkcja działa
+                  zbyt wolno (oczekiwany i maksymalny czas reakcji - patrz
+                  dokumentacja odpowiednich funkcji) zalecana jest
+                  optymalizacja.
+               </p></li><li><p>
+                  Test porównawczy wyników otrzymanych z oczekiwanymi
+               </p><p>
+                  Ze względu na konieczność współpracy ze sobą wszystkich
+                  modułów systemu przyjmujemy model testowania zstępującego.
+               </p></li><li><p>
+                  Testy obciążenia
+               </p><p>
+                  Wykonany na maszynie z minimalną konfiguracją sprzętową, oraz
+                  konfiguracjami bardziej rozbudowanymi. Na podstawie
+                  otrzymanych wyników przeprowadzamy ocenę przypuszczalnej
+                  wydajności systemu na platformie docelowej.
+               </p></li><li><p>
+                  Testy odpornościowe
+               </p><p>
+                  Podczas testów zostanie wywołana seria sytuacji awaryjnych
+                  (wyłączenia prądu, restarty systemu, znanaczne zwiększenie
+                  obciążenia serwera), zarówno w czasie "typowego" jak i
+                  "nietypowego" działania systemu. Po przywróceniu normalnej
+                  pracy systemu zostanie w każdym przypadku przeprowadzona
+                  szczegółowa analiza skutków sytuacji.
+               </p></li><li><p>
+                  Test zużycia zasobów przez system
+               </p><p>
+                  Przeprowadzone równolegle z testem wydajności systemu za
+                  pomocą firmowego oprogramowania monitorującego. Na podstawie
+                  otrzymanych wyników przeprowadzamy ocenę przypuszczalnego
+                  zużycia zasobów na platformie docelowej.
+               </p></li><li><p>
+                  Testy wydajności
+               </p></li><li><p>
+                  Testy niezawodności
+               </p><p>
+                  Niezawodność oceniona zostanie na podstawie wyników ankiet
+                  wypełnianych przez testujących w pozostałych testach, jak
+                  również analizy dzienników tworzonych automatycznie przez
+                  system podczas tych testów.  Ponadto przez pierwsze 3
+                  miesiące po wdrożeniu systemu przedstawiciele firmy będą
+                  prowadzili dalsze analizy niezawodności (równolegle z analizą
+                  pozostałych parametrów pracy systemu).
+               </p></li><li><p>
+                  Test bezpieczeństwa
+               </p><p>
+                  Kontrola dwuetapowa. W pierwszym etapie próbę złamania
+                  zabezpieczeń systemu przeprowadzi zespół firmowy, w drugim
+                  wynajęta specjalistyczna firma.
+               </p></li><li><p>
+                  Test ergonomii interfejsu
+               </p><p>
+                  Ocena zgodności wykonanego interfejsu z projektami
+                  zatwierdzonymi przez użytkownika przez dwa zespoły - firmowy
+                  oraz niezależny. Pożądany udział przedstawicieli
+                  zamawiającego w jednym (lub obu) zespołach.  Poza zgodnością
+                  wykonania zespół firmowy oceni również spójność interfejsu.
+               </p></li><li><p>
+                  Testy funkcjonalne uruchamiania i działania procesów
+               </p></li><li><p>
+                  Testy modyfikowalności oprogramowania
+               </p><p>
+                  Dwa firmowe zespoły programistów nie związane z implementacją
+                  tego systemu otrzymają polecenie wprowadzenia poprawek do
+                  działania kilku z funkcji systemu oraz uzupełnienia systemu o
+                  dodatkowe funkcje. W wypadku braku wolnych zespołów w tym
+                  czasie możliwe jest zlecenie tego wykonawcy zewnęt rznemu
+                  (choć nie jest to zalecane ze względu na wyższe koszty). Po
+                  zakończeniu modyfikacji zespoły te wypełnią ankiety służące
+                  do oceny łatwości wprowadzenia zmian, działanie zaś samych
+                  modyfikacji, jak również reszty systemu zostanie ponownie
+                  przetestowane (tylko na poprawność działania).
+                  Przypuszczalnie zostaną przeprowadzone dodatkowe "testy" ze
+                  względu na zmianę wymagań przez użytkownika w trakcie
+                  realizacji systemu.
+               </p></li><li><p>
+                  Testy skalowalności systemu
+               </p><p>
+                  Przeprowadzana razem z testem zużycia zasobów, na podstawie
+                  tych samych danych, uzupełnionych o czas reakcji systemu
+                  oceniany przez użytkownika.  Dane uzyskane podczas testu
+                  zostaną przeanalizowane pod katem pracy systemu przy dużych
+                  obciążeniach.
+               </p></li><li><p>
+                  Testy alfa
+               </p><p>
+                  Przeprowadzona w formie odbioru systemu przez przedstawicieli
+                  użytkownika. Przedstawiciele dostają wolną rękę w testowaniu
+                  systemu, pełną pomoc personelu firmy. Wynikiem testu będzie
+                  ocena systemu wystawiona przez przedstawicieli użytkownika.
+               </p></li><li><p>
+                  Przegląd jakości dokumentacji
+               </p><p>
+                  Test zostanie przeprowadzony w formie szkolenia przyszłych
+                  użytkowników systemu. Po zakończeniu szkolenia wypełnią oni
+                  ankietę przeznaczoną do oceny jakości materiałów
+                  dydaktycznych. Następnie zostanie przeprowadzona symulacja
+                  rzeczywistych działań przy użyciu systemu. Zespół firmowy
+                  (ew. uzupełniony o przedstawicieli klienta - b. pożądane)
+                  oceni jakość działań pracowników, a co za tym idzie ich
+                  stopień przygotowania do pracy. Na podstawie tych danych
+                  zostanie oceniona dokumentacja systemu oraz sam proces
+                  szkolenia.
+               </p></li></ul></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2509123"></a>Harmonogram</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  Testy modułów
+               </p><p>
+                  Testy te zostaną przeprowadzone w fazie implementacji, po
+                  zakończeniu realizacji poszczególnych modułów.
+               </p></li><li><p>
+                  Testy systemu
+               </p><p>
+                  Testy przeprowadzane po integracji modułów. System jest
+                  już testowany jako spójna całość.
+               </p></li><li><p>
+                  Testy akceptacji (testy alfa)
+               </p><p>
+                  Test przeprowadzany przez końcowych użytkowników systemu.
+               </p></li></ul></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2509179"></a>Scenariusze akceptacji</h2></div></div><div></div></div><p>
+            Ze względu na specyfikę testów, przygotowanie poszczególnych testów
+            funkcjonalności zostało podzielone według aktorów występujących w
+            systemie.
+         </p><div class="orderedlist"><ol type="1"><li><p>
+                  pracownik działu kadr
+               </p><div class="itemizedlist"><ul type="disc"><li><p>
+                        Przygotywywanie testów
+                     </p></li><li><p>
+                        Ustalanie parametrów testów
+                     </p></li><li><p>
+                        Przeprowadzanie testów
+                     </p></li><li><p>
+                        Przygotowywanie raportów
+                     </p></li><li><p>
+                        Generowanie analiz potrzeb personalnych
+                     </p></li><li><p>
+                        Przypisywanie pilotów do lotów
+                     </p></li></ul></div></li><li><p>
+                  pracownik działu logistyki
+               </p><div class="itemizedlist"><ul type="disc"><li><p>
+                        Przygotowywanie faktur
+                     </p></li><li><p>
+                        Ustalanie automatyki zamówień
+                     </p></li><li><p>
+                        Wprowadzanie danych o sprzęcie
+                     </p></li></ul></div></li><li><p>
+                  pracownik placówki handlowej
+               </p><div class="itemizedlist"><ul type="disc"><li><p>
+                        Publikacja informacji na stronach internetowych
+                     </p></li><li><p>
+                        Dostęp do danych o lotach
+                     </p></li></ul></div></li><li><p>
+                  klient
+               </p><div class="itemizedlist"><ul type="disc"><li><p>
+                        Rezerwacja biletów
+                     </p></li></ul></div></li></ol></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="jakosc.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="fpa.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">Rozdział 6. Plan zapewnienia jakości </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> Rozdział 8. Oszacowanie złożoności oprogramowania</td></tr></table></div></body></html>

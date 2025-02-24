@@ -1,0 +1,1896 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1250">
+	<TITLE>1</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Win32)">
+	<META NAME="AUTHOR" CONTENT="Pawel Fronczak">
+	<META NAME="CREATED" CONTENT="20040124;15240000">
+	<META NAME="CHANGEDBY" CONTENT="Leszek Krupinski">
+	<META NAME="CHANGED" CONTENT="20040128;9582985">
+	<STYLE>
+	<!--
+		@page { size: 21cm 29.7cm; margin-left: 2.5cm; margin-right: 2.5cm; margin-top: 2.5cm; margin-bottom: 1.27cm }
+		P { margin-bottom: 0.21cm; direction: ltr; color: #000000; widows: 2; orphans: 2 }
+		P.western { font-family: "Times New Roman", serif; font-size: 12pt; so-language: en-US }
+		P.cjk { font-family: "Times New Roman", serif; font-size: 12pt }
+		P.ctl { font-family: "Times New Roman", serif; font-size: 12pt; so-language: ar-SA }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="pl-PL" TEXT="#000000" DIR="LTR">
+<OL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Jakie
+	problemy rozwiazac musi warstwa sprzetowa? W jaki spos&oacute;b
+	formuluje sie adresy sprzetowe?</B></FONT></P>
+</OL>
+<UL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Podzial
+	strumienia danych na pakiety (ramki): istotne dla koordynacji i
+	podzialu czasu (wsp&oacute;lne medium!);</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Wykrywanie
+	kolizji;</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Kontrola
+	poprawnosci transmisji: bity parzystosci, sumy kontrolne lub CRC
+	(Cyclic Redundancy Check): szybki algorytm (indeksy przesuwajace,
+	bramki XOR, sprzezenie zwrotne) =&gt; wielomian komunikatu; dosc
+	skuteczny przy identyfikowaniu bled&oacute;w; latwosc sprawdzenia
+	przez odbiorce;</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Identyfikacja
+	adresata (sygnal dociera do wszystkich maszyn&hellip;): adresy
+	sprzetowe;</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Interpretacja
+	komunikatu: identyfikatory typ&oacute;w ramek</FONT></P>
+	<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="pl-PL"><FONT SIZE=2>Zwane
+	MAC (<I>Media Access Control</I>), tj. adres dostepu do nosnika;
+	Ethernet: 48 bit&oacute;w.</FONT></SPAN></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Interfejs
+	sieciowy filtruje ramki nie obciazajac &bdquo;cudzymi&rdquo;
+	procesora;</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Sposoby
+	okreslania: statyczne, konfigurowalne, dynamiczne;</FONT></P>
+</UL>
+<OL START=2>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Przedstaw
+	7-warstwowy model interfejs&oacute;w OSI. Jakie role pelnia
+	poszczeg&oacute;lne warstwy?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>7.
+Aplikacji: uslugi realizowane przez aplikacje.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>6.
+Prezentacji danych: format wymiany danych, ich ewentualne
+szyfrowanie. (zwykle nie wystepuje)</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>5.
+Sesji: nawiazywanie i zamykanie polaczen (zwiazana z duzymi systemami
+wielodostepnymi &ndash; stracila na znaczeniu)</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>4.
+Transportu: podzial danych, gwarancja dostarczenia, weryfikacja.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>3.
+Sieciowa: logiczne adresy zamienia na sprzetowe, pakiety logiczne
+dzieli na ramki danych.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>2.
+Lacza: interpretowanie przesylanych bit&oacute;w jako ramek.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>1.
+Fizyczna: przesyla nieprzetworzone bity danych przez nosnik.</FONT></P>
+<OL START=3>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Om&oacute;w
+	podzial na warstwy stosowany w protokolach internetowych.</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; margin-bottom: 0cm">
+<FONT SIZE=2><SPAN LANG="pl-PL">-Warstwa <B>aplikacji</B> (Telnet,
+FTP, e-mail&hellip;). </SPAN>Takze SMNP (Simple Network Management
+Protocol).</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Transportowa</B> (TCP, UDP). TCP
+zapewnia wiarygodny (<I>reliable</I>) przeplyw danych (porcjowanie,
+<I>timeouts</I>). UDP przesyla datagramy nie gwarantujac ich
+dotarcia.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Sieciowa</B> (IP, ICMP, IGMP).
+Albo warstwa internetowa. Obsluguje ruch pakiet&oacute;w poprzez
+siec. Miedzy innymi zachodzi tu rutowanie pakiet&oacute;w. <I>Internet
+Protocol, Internet Control Message Protocol, Internet Group
+Management Protocol</I>.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Polaczeniowa</B> (sterowniki
+urzadzenia i karta interfejsu sieciowego; np. Ethernet, token ring,
+uzycie ARP i RARP) Albo warstwa interfejsu sieciowego. Wszelkie
+szczeg&oacute;ly fizycznej komunikacji.</FONT></SPAN></P>
+<OL START=4>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Wyjasnij,
+	na czym polega warstwowy model protokol&oacute;w internetowych.
+	Dlaczego wyr&oacute;znia sie poszczeg&oacute;lne warstwy?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 1.27cm; margin-bottom: 0cm"><FONT SIZE=2>-Zlozonoscia
+zadania;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 1.27cm; margin-bottom: 0cm"><FONT SIZE=2>-Heterogenicznoscia
+istniejacych sieci skladowych;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 1.27cm; margin-bottom: 0cm"><FONT SIZE=2>-Specjalizacja
+poszczeg&oacute;lnych protokol&oacute;w do zastosowan.</FONT></P>
+<OL START=5>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>W
+	jakim celu wprowadzono system adres&oacute;w logicznych?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>Identyfikuje
+polaczenie komputera z dana siecia.</FONT></P>
+<OL START=6>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Objasnij
+	podzial odpowiedzialnosci pomiedzy protokolami TCP oraz IP.</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<OL START=7>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Om&oacute;w
+	tradycyjny podzial adres&oacute;w IP na 4 klasy. Jakie problemy
+	wiaza sie z takim podejsciem i jak sie im zapobiega?</B></FONT></P>
+	<OL>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>A:
+		do 127:</FONT></P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>B:
+		128-191: </FONT>
+		</P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>C:
+		192-223:</FONT></P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>D:
+		224-239: </FONT>
+		</P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>E:
+		240-255: </FONT>
+		</P>
+	</OL>
+</OL>
+<P CLASS="western" STYLE="margin-left: 1.27cm; margin-bottom: 0cm"><FONT SIZE=2>marnotrawstwo
+adres&oacute;w;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 1.27cm; margin-bottom: 0cm"><FONT SIZE=2>duze
+tablice tras (zob. dalej).</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>IPv6:
+128-bitowe adresy =&gt; ogromna pula. Ponadto:</FONT></P>
+<UL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Zmieniony,
+	rozszerzalny format nagl&oacute;wka: pole &bdquo;typ nastepnego
+	nagl&oacute;wka&rdquo;;</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Wsparcie
+	dla obslugi dzwieku i obrazu;</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Trzy
+	rodzaje adres&oacute;w: jednostkowy, rozsylania grupowego, &bdquo;grono&rdquo;
+	-&gt; sluzy np. realizacji replik uslugi.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Spos&oacute;b
+	zapisu: notacja szesnastkowa z dwukropkami; mozliwosc pomijania
+	segmentu zer: FF0C:0:0:0:0:0:0:B1 -&gt; FF0C::B1</FONT></P>
+</UL>
+<OL START=8>
+	<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><B><SPAN LANG="pl-PL"><FONT SIZE=2>Objasnij
+	mechanizm enkapsulacji (<I>encapsulation</I>) datagramu IP.</FONT></SPAN></B></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zapakowanie
+wewnatrz ramki sieciowej; zawartosc nie jest interpretowana przez
+nizsza warstwe.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Datagram
+IP jako zawartosc takiej ramki jest identyfikowany odpowiednim typem
+ramki sieciowej. Oczywiscie ramka sieciowa otaczajaca datagram musi
+miec wyspecyfikowany adres sprzetowy odbiorcy.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Kazdy
+etap na drodze datagramu wiaze sie z rozpakowaniem ramki sieciowej a
+nastepnie wyslaniem go w nowej ramce.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-MTU (<I>Maximum Transfer Unit</I>):
+ogranicza wielkosc danych w ramce. Jezeli dla danej sieci rozmiar
+datagramu przekracza MTU, to wykonywana jest fragmentacja. Skladanie
+datagramu odbywa sie dopiero u ostatecznego odbiorcy. Odbi&oacute;r
+datagramu: wszystko albo nic.</FONT></SPAN></P>
+<OL START=9>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Objasnij
+	mechanizm odwzorowywania adres&oacute;w logicznych na adresy
+	sprzetowe.</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Aby
+dostarczyc dane, nalezy na podstawie adresu protokolowego ustalic
+adres sprzetowy.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Metody:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Tablicowe
+		(zwykle w sieciach rozleglych);</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Obliczeniowe
+		(gdy adres sprzetowy konfigurowalny);</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Sieciowe:
+		pytanie-odpowiedz (zwykle w lokalnych ze statycznymi adresami).</FONT></P>
+	</OL>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Adres
+sprzetowy mozna okreslic tylko wtedy, jesli adresat jest w tej samej
+sieci fizycznej.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Pakiety dla adresat&oacute;w
+nielokalnych przejmuje <B>ruter</B>.</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Ruter
+przynalezy do co najmniej dw&oacute;ch sieci (posiadajac tylez
+adres&oacute;w logicznych i sprzetowych).</FONT></P>
+<OL START=10>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Jakiego
+	rodzaju urzadzenia aktywne sa stosowane w budowie sieci
+	komputerowych?</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Repeater (<B>wzmacniak</B>), oraz
+hub -&gt; warstwa fizyczna (1 w OSI).<BR>Propaguja r&oacute;wniez
+zakl&oacute;cenia&hellip;</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Most</B>: podzial na dwie sieci,
+mogace posiadac r&oacute;zne media transmisyjne -&gt; warstwa lacza
+(2); pracuje na adresach MAC.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Switch</B> -&gt; warstwa lacza
+danych  (2). Symuluje siec lokalna z mostami, gdzie w kazdym
+segmencie jest tylko jeden komputer.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Ruter</B> -&gt; podzial na wiecej
+podsieci IP -&gt; warstwa lacza (2) i sieciowa (3). Laczenie sieci
+heterogenicznych. Podobnie jak most = specjalizowany komputer:
+procesor, pamiec, interfejsy sieciowe. R&oacute;zne media
+transmisyjne, mechanizmy adresowania sprzetowego i formaty ramek.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Zapora</B> sieciowa -&gt;
+ogranicza dostepu z zewnatrz. Rodzaje filtr&oacute;w:</FONT></SPAN></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>bramki
+		aplikacji: pakiety sa odpowiednio tlumaczone; wymaga
+		skonfigurowania oprogramowania proxy dla kazdej uslugi sieciowej na
+		kazdej z maszyn w sieci;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>filtry
+		pakiet&oacute;w: blokowanie pakiet&oacute;w w oparciu o adres
+		pochodzenia, adres docelowy, protok&oacute;l, nr portu czy nawet
+		zawartosc.</FONT></P>
+	</OL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Om&oacute;w
+	wlasciwosci i zadania protokolu TCP.</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>Obsluguje
+nastepujace powazne problemy transmisji:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>przywracanie
+		wlasciwej kolejnosci odebranych pakiet&oacute;w: wykorzystanie
+		numeru porzadkowego pakiet&oacute;w;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>unikanie
+		duplikat&oacute;w &ndash; j.w.;</FONT></P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="pl-PL"><FONT SIZE=2>retransmisja
+		zgubionych pakiet&oacute;w: nadawca wysyla ponownie, jesli w
+		zadanym czasie nie otrzymal potwierdzenia (<I>acknowledgment</I>);</FONT></SPAN></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>unikanie
+		powt&oacute;rzen spowodowanych nadmiernym op&oacute;znieniem:
+		numery pakiet&oacute;w dodatkowo kwalifikowane identyfikatorami
+		sesji;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>kontrola
+		przeplywu dla unikniecia zalewu danych: metoda przesuwajacego sie
+		okna.</FONT></P>
+	</OL>
+	<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><B><SPAN LANG="pl-PL"><FONT SIZE=2>Wyjasnij
+	mechanizm enkapsulacji pomiedzy warstwami protokol&oacute;w
+	internetowych. Na czym polega <I>demultiplexing</I>?</FONT></SPAN></B></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Kazda
+warstwa dolacza swe nagl&oacute;wki przed i niekiedy r&oacute;wniez
+(np. Ethernet trailer) za przekazywanym pakietem danych.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Jednostka danych wysylanych przez
+protok&oacute;l TCP = <I>segment;</I></FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Jednostka wysylana przez protok&oacute;w
+IP = <I>datagram </I>(tak naprawde &ndash; <I>packet</I>: tj.
+datagram IP albo fragment datagramu IP);</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Jednostka w ramach Ethernetu = <I>frame
+(ramka) </I>&ndash; o okreslonym typie</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-8-bitowy
+identyfikator w nagl&oacute;wku IP identyfikuje protok&oacute;l
+datagramu: ICMP, IGMP, TCP, UDP.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Analogicznie
+TCP i UDP uzywaja w nagl&oacute;wku 16-bitowych numer&oacute;w port&oacute;w
+do zidentyfikowania aplikacji: numery zr&oacute;dlowego i docelowego
+portu.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Analogicznie (np. rozr&oacute;znienie
+pomiedzy IP, ARP, RARP), nagl&oacute;wek Ethernetowy zawiera
+16-bitowe <I>pole typu ramki.</I></FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Demultiplexing:
+po otrzymaniu ramki kolejne warstwy &bdquo;rozpakowuja&rdquo; dane i
+w oparciu o identyfikatory w znanych sobie nagl&oacute;wkach
+przekazuja odpowiedniemu protokolowi warstwy wyzszej.</FONT></P>
+<OL START=13>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Czemu
+	sluza numery port&oacute;w? Jakie zalozenia przyjeto przy ich
+	przydzielaniu?</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Przydzialem numer&oacute;w od 1 do
+1023 zajmuje sie <I>Internet Assigned Numbers Authority (IANA).</I>Unix:
+porty zarezerwowane =&gt; tylko superuser moze przydzielic taki port.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Porty klienckie zwane efemerycznymi
+(<I>ephemeral ports</I>), gdyz uzywane sa na czas korzystania danego
+klienta z uslugi. Zwykle alokowane pomiedzy 1024 a 5000.</FONT></SPAN></P>
+<OL START=14>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Co
+	to jest interfejs gniazd i jakie oferuje mozliwosci?</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Najpopularniejsze jednak &ndash;
+udostepnianie jednolitego interfejsu tzw. <B>gniazd</B> (sockets).
+Powstal jako czesc BSD; zwany tez <I>Berkeley sockets.</I></FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Moga
+byc dostepne jako wywolania systemu operacyjnego, lub w postaci
+funkcji bibliotecznych.</FONT></P>
+<OL START=15>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Objasnij
+	organizacje i funkcjonowanie DNS (Domain Name System).</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zapewnia
+przyjaznosc adres&oacute;w Webu dla czlowieka: umozliwia lokalizacje
+maszyny (adres logiczny) na podstawie znakowej nazwy;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Pozycja
+w bazie danych DNS zawiera nastepujace elementy:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>nazwa
+		dziedziny;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>typ
+		rekordu;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>wartosc.</FONT></P>
+	</OL>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Wystepuja
+r&oacute;zne typy rekord&oacute;w &ndash; oto najwazniejsze:</FONT></P>
+<OL>
+	<OL>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="pl-PL"><FONT SIZE=2>Wiazania:
+		nazwa -&gt; adres IP =&gt; wiazania typu <B>A</B>;</FONT></SPAN></P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="pl-PL"><FONT SIZE=2>Wiazania:
+		nazwa dziedziny poczty elektronicznej -&gt; adres IP =&gt; wiazania
+		typu <B>MX</B> (Mail eXchanger).</FONT></SPAN></P>
+	</OL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>W
+	jaki spos&oacute;b realizowana jest obsluga zapytan DNS?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Podstawowe
+zalozenie projektowe: rozproszenie bazy poprzez hierarchiczna
+dekompozycje.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zapewnia
+to autonomie definiowania nazw lokalnych przez poszczeg&oacute;lne
+organizacje. Hierarchia jest zorganizowana nastepujaco:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>kazdy
+		serwer bierze odpowiedzialnosc za  czesc hierarchii nazw;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>na
+		szczycie &ndash; serwer gl&oacute;wny, posiadajacy liste serwer&oacute;w
+		kontrolujacych poszczeg&oacute;lne dziedziny poziomu gl&oacute;wnego
+		(np. .com);</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>pojedynczy
+		komputer musi byc odpowiedzialny za wszystkie komputery o danym
+		zakonczeniu nazwy. Innymi slowy, danego wierzcholka drzewa nie
+		mozna podzielic.</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>poszczeg&oacute;lne
+		organizacje moga zatem uruchamiac dla swoich domen jeden lub
+		hierarchie serwer&oacute;w, albo oddelegowac to zadanie
+		uslugodawcy;</FONT></P>
+	</OL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Czemu
+	sluzy standard MIME i jak organizuje obslugiwana zawartosc?</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<FONT SIZE=2>MIME = <I>Multipurpose Internet Mail Extensions</I>:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Standaryzuje
+		dodatkowe wiersze nagl&oacute;wkowe;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Otwarty
+		system definiowania r&oacute;znego typu zawartosci;</FONT></P>
+	</OL>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>Dopuszcza:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>wiele
+		odrebnych obiekt&oacute;w przesylanych jako pojedynczy list;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>nieograniczone
+		dlugosci wiersza oraz calego tekstu;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>zbiory
+		znak&oacute;w inne niz ASCII;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>wiele
+		r&oacute;znych font&oacute;w w jednej wiadomosci;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>r&oacute;znego
+		rodzaju zalaczniki multimedialne;</FONT></P>
+	</OL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Om&oacute;w
+	zasady dzialania systemu WWW.</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<FONT SIZE=2>-Tzw. interfejs <I>point and click</I>. <SPAN LANG="pl-PL">Okreslany
+jako system <B><I>hipermedialny</I></B>, tzn. rozszerzenie (obecnosc
+innych niz tekst postaci informacji) systemu <I>hipertekstu</I>.</SPAN></FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Dokumenty
+administrowane niezaleznie =&gt; niska stabilnosc odsylaczy.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Scenariusz
+dzialania serwera jest dosc prosty: udostepnianie w odpowiedzi na
+komunikat klienta zadanych przezen dokument&oacute;w.</FONT></P>
+<OL START=19>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Przedstaw
+	zasadnicze kategorie dokument&oacute;w WWW wraz z ich zaletami i
+	wadami.</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="text-indent: 0.61cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>Statyczne</B>: zawartosc okreslona
+w momencie ich napisania przez autora:</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.61cm; margin-bottom: 0cm"><FONT SIZE=2>+
+prostota, latwosc implementacji;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.61cm; margin-bottom: 0cm">&ndash;
+<FONT SIZE=2>slaba elastycznosc.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.61cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>Dynamiczne</B>: brak
+predefiniowanej postaci; generowany na nowo w odpowiedzi na kazde
+wezwanie:</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.61cm; margin-bottom: 0cm"><FONT SIZE=2>+
+mozliwosc prezentowania aktualizowanej czesto informacji;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.61cm; margin-bottom: 0cm"><FONT SIZE=2>+
+zapewnienie interakcyjnosci bez dodatkowych wymog&oacute;w dla
+oprogramowania przegladarki (z punktu widzenia jej mechanizm&oacute;w
+strony statyczne nieodr&oacute;znialne od dynamicznych);</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.61cm; margin-bottom: 0cm">&ndash;
+<FONT SIZE=2>po pobraniu takiej strony ulec ona moze dezaktualizacji;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.61cm; margin-bottom: 0cm">&ndash;
+<FONT SIZE=2>wieksze wymagania dla wydajnosci lacza i serwera;
+wiekszy narzut czasowy (konieczne generowanie strony);</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.61cm; margin-bottom: 0cm">&ndash;
+<FONT SIZE=2>wyzsze koszty opracowania i przetestowania.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>Aktywne</B>: dokumenty zawierajace
+w sobie kopie programu uruchamialnego lokalnie w srodowisku
+przegladarki:</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.61cm; margin-bottom: 0cm"><FONT SIZE=2>+
+moze siegac do zr&oacute;del na serwerach celem biezacego
+aktualizowania informacji;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.61cm; margin-bottom: 0cm">&ndash;
+<FONT SIZE=2>potencjalne luki w bezpieczenstwie;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.61cm; margin-bottom: 0cm">&ndash;
+<FONT SIZE=2>dodatkowe koszty tworzenia i dzialania;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.61cm; margin-bottom: 0cm">&ndash;
+<FONT SIZE=2>wymaga bardziej zaawansowanego, zgodnego oprogramowania
+przegladarki (w tym &ndash; problem sprawdzenia wersji danej
+przegladarki)<BR>i odpowiednich zasob&oacute;w po stronie klienta.</FONT></P>
+<OL START=20>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Scharakteryzuj
+	protok&oacute;l HTTP oraz budowe jego komunikat&oacute;w.</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Przegladanie
+dokument&oacute;w hipermedialnych nie wykazuje istotnej lokalnosci
+odwolan. =&gt; Inny wzorzec odwolan niz dla pozostalych rodzaj&oacute;w
+program&oacute;w uzytkowych!</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Protok&oacute;l zaprojektowany jako
+<B>bezstanowy </B>(brak pojecia sesji grupujacej interakcje).
+Interakcja przegladarki z serwerem WWW odbywa sie wedlug modelu
+<B><I>bezpolaczeniowego</I></B>:</FONT></SPAN></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>zadanie
+		jest wysylane przez klienta;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Serwer
+		przekazuje (zawsze z inicjatywy klienta) zadane zasoby lub
+		informacja o ich niedostepnosci;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>polaczenie
+		zostaje zamkniete.</FONT></P>
+	</OL>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Protok&oacute;l
+okresla format zadania oraz odpowiedzi.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Domyslny
+numer portu: 80.</FONT></P>
+<OL START=21>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Om&oacute;w
+	najwazniejsze rodzaje komunikat&oacute;w HTTP stanowiacych zadanie
+	ze strony klienta.</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-GET:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Stosowany
+		przy specyfikowaniu wymaganego zasobu;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Parametry
+		dolaczane do URL (po znaku zapytania);</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Ograniczona
+		dlugosc przekazywanych parametr&oacute;w;</FONT></P>
+	</OL>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-POST:</FONT></P>
+<OL>
+	<OL START=4>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Parametry
+		wysylane w ciele komunikatu;</FONT></P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="pl-PL"><FONT SIZE=2>Opisane
+		dodatkowo nagl&oacute;wkami <B>Content-Type:</B> (np.
+		<I>application/x-www-form-urlencoded</I>) <BR>oraz <B>Content-Length:</B></FONT></SPAN></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>wolana
+		lokalizacja (URI) wskazuje zwykle na program obslugujacy, nie zas
+		na pobierany zas&oacute;b;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>odpowiedz
+		jest zwykle dokumentem generowanym, nie zas statycznym.</FONT></P>
+	</OL>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-HEAD:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>jak
+		GET, ale sluzy jedynie sprawdzeniu dostepnosci zasobu: zwracany w
+		odpowiedzi jest komunikat nie posiadajacy ciala;</FONT></P>
+	</OL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Jakie
+	udoskonalenia wprowadza specyfikacja HTTP w wersji 1.1 i jakich
+	dodatkowych element&oacute;w komunikat&oacute;w wobec tego wymaga?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Wprowadzenie
+trwalych polaczen (persistent connection), umozliwiajacych wykonanie
+wielu transakcji w oparciu o to samo polaczenie TCP<BR>=&gt;
+sprawniejsze dzialanie. </FONT>
+</P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<FONT SIZE=2>-Wsparcie dla cache<SPAN LANG="pl-PL">.</SPAN></FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Wsparcie dla tzw. <I>chunked
+encoding</I>, pozwalajace nadawanie odpowiedzi jeszcze przed
+ustaleniem jej ostatecznego rozmiaru. Zapewnia sprawniejsza odpowiedz
+dla dynamicznie generowanych stron. </FONT></SPAN>
+</P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Umozliwienie
+obslugi wielu domen z tego samego adresu IP -&gt; efektywniejsze
+wykorzystanie puli adres&oacute;w IP. </FONT>
+</P>
+<OL START=23>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Wskaz
+	najwazniejsze ograniczenia tradycyjnych dokument&oacute;w WWW.</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Bezstanowosc
+protokolu HTTP;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Statyczny
+charakter dokument&oacute;w;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Scisle
+splecione zawartosc, opis struktury oraz opis sposobu wizualizacji
+dokumentu;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>=&gt;
+niemoznosc efektywnej personalizacji serwisu;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>=&gt;
+bardzo ograniczone mozliwosci autoryzacji uzytkownika;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>=&gt;
+utrudnione zarzadzanie stylem wizualizacji w przypadku wiekszych
+dokument&oacute;w;</FONT></P>
+<OL START=24>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Czym
+	jest jezyk JavaScript i do jakich typowych zadan bywa stosowany w
+	dokumentach WWW?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>Interpretowany
+jezyk skryptowy o luznej kontroli typ&oacute;w.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>Od
+poczatku planowany jako rozszerzenie mozliwosci stron WWW,
+przystosowane do uzycia przez nieprofesjonalist&oacute;w. Waznym
+pierwotnie zakladanym zastosowaniem miala byc interakcja z apletami
+Javy.</FONT></P>
+<UL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Umozliwienie
+	modyfikowania wygladu dokumentu, czy tez np. nawigowania w historii
+	biezacego okna;</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Wykonywanie
+	operacji zaleznych od platformy (przegladarka, system operacyjny);</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Wykonywanie
+	prostych obliczen po stronie klienta;</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Kontrola
+	poprawnosci wypelnienia formularza;</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Okreslanie
+	aktualnej daty i czasu;</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Generowanie
+	lokalnie dokument&oacute;w HTML.</FONT></P>
+</UL>
+<OL START=25>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Scharakteryzuj
+	pokr&oacute;tce skladnie jezyka JavaScript oraz spos&oacute;b jego
+	laczenia z HTML.</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Wyr&oacute;znione typy danych:
+&quot;number&quot;, &quot;string&quot;, &quot;boolean&quot;,
+&quot;function&quot;, &quot;object&quot;, &quot;undefined&quot;.
+Mozliwosc sprawdzenia typu: funkcja string typeof(<I>zmienna_lub_stala</I>).</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Operatory
+logiczne, arytmetyczne i bitowe -&gt; skladnia podobnie jak w Javie;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Instrukcje
+warunkowe i petle -&gt; podobnie jak w Javie;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Mozliwosc
+deklarowania w kodzie zmiennych i tablic zmiennych; w dowolnym
+miejscu</FONT></P>
+<OL START=26>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Czym
+	sa aplety i jakie cechy odr&oacute;zniaja je od JavaScript?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Trzy
+zasadnicze komponenty tej technologii:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>jezyk
+		programowania;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>system
+		wykonawczy;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>biblioteka
+		klas;</FONT></P>
+	</OL>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Mozliwosc
+wykonywania operacji na plikach;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Mozliwosc
+cyfrowego podpisania apletu celem udostepnienia mu operacji
+uprzywilejowanych;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Wieksza
+skalowalnosc, mozliwosc tworzenia bardziej wyrafinowanego kodu;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Udostepnianie
+apletu:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>bezposrednie
+		wskazanie w URL pliku .class zawierajacego aplet;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>osadzenie
+		apletu w dokumencie HTML: <BR>&lt;APPLET CODEBASE=&rdquo;serwer/sciezka
+		CODE=&rdquo;nazwaApletu.class&rdquo;&gt;</FONT></P>
+	</OL>
+	<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><B><SPAN LANG="pl-PL"><FONT SIZE=2>Czym
+	sa <I>cookies</I>? Jakie sa ich mozliwosci oraz ograniczenia?</FONT></SPAN></B></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Plik
+tekstowy przechowywany po stronie klienta. Tradycyjny termin
+informatyczny oznaczajacy nieprzejrzysty element danych przechowywany
+przez posrednika.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zastosowanie:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>kto
+		odwiedza strone? Ilu jest uzytkownik&oacute;w, ilu nowych?</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>personalizacja
+		strony;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>zachowanie
+		stanu wsp&oacute;lpracy ze strona;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>umieszczenie
+		identyfikatora &ldquo;koszyka&rdquo;; </FONT>
+		</P>
+	</OL>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Ciasteczka
+staja sie uzyteczne dopiero przy wykorzystaniu skrypt&oacute;w (po
+stronie klienta lub po stronie serwera)</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Ciasteczko
+moze byc zalozone, usuniete lub zmienione na skutek odpowiedzi
+serwera, zas zawarta w nim informacja zostanie przekazana przy
+nastepnym wezwaniu.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Stad
+dopiero przy nastepnym wezwaniu jestesmy w stanie zorientowac sie, ze
+uzytkownik nie przyjmuje ciasteczek.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Serwer
+moze zazadac tylko ciasteczka, kt&oacute;re sam zapisal u klienta
+(zgodnosc domeny w zadaniach).</FONT></P>
+<OL START=28>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Czym
+	sa Kaskadowe Arkusze Styl&oacute;w (CSS)? Jak moga byc wiazane z
+	dokumentem oraz na czym polega wlasciwosc ich &bdquo;kaskadowosci&rdquo;?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Umozliwienie
+separacji styl&oacute;w wzgledem struktury i tresci dokumentu.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Bardziej
+precyzyjna kontrola nad ukladami, fontami, kolorami, tlem, efektami
+typograficznymi;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Mozliwosc
+modyfikowania wiekszego zbioru stron poprzez edytowanie pojedynczego
+dokumentu; b. wazne dla pielegnacji!</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zapewnienie
+zgodnosci pomiedzy przegladarkami; zapewnienie sprawnego ladowania
+stron.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>Definicje
+styl&oacute;w posiadaja okreslone (dosc intuicyjne priorytety).
+Przypominaja nieco przeslanianie definicji zmiennych w lokalnych
+podprogramach:</FONT></P>
+<UL>
+	<OL>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="pl-PL"><FONT SIZE=2>Style
+		specyfikowane specjalnie dla danego tagu </FONT></SPAN>
+		</P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Style
+		osadzone w nagl&oacute;wku</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Style
+		polaczone referencja</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Style
+		zaimportowane</FONT></P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="pl-PL"><FONT SIZE=2>Style
+		domyslne przegladarki </FONT></SPAN>
+		</P>
+	</OL>
+</UL>
+<OL START=29>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Scharakteryzuj
+	technologie Dynamic HTML.</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Nie
+jest to wyodrebniona technologia jak np. JavaScript czy ActiveX.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Definicja:
+zawartosc HTML mogaca zmieniac sw&oacute;j wyglad juz po zaladowaniu
+do przegladarki.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Umozliwia
+manipulacje elementami dokumentu WWW wczesniej traktowanymi jako
+niezmienne. Na og&oacute;l pisane w JavaScript lub VBScript. Wyr&oacute;znik
+&ndash; dostep skryptu do wlasciwosci DHTML dostepnych w
+przegladarkach 4 generacji, choc w&oacute;wczas rozbieznosci byly
+frustrujaco duze.</FONT></P>
+<OL START=30>
+	<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><B><SPAN LANG="pl-PL"><FONT SIZE=2>Czym
+	jest DOM (<I>Dynamic Object Model</I>)? Jakie podstawowe rodzaje
+	wezl&oacute;w obsluguje?</FONT></SPAN></B></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>DOM
+udostepnia kompletny i ustandaryzowany model dokumentu jako strukture
+zarzadzana przez przegladarke. Wprowadza r&oacute;wniez wsparcie dla
+zdarzen myszy i klawiatury wzgledem wszystkich element&oacute;w
+dokumentu.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>Pozwala
+na manipulowanie obiektami dokumentu:</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>posiadajacymi
+wlasciwosci;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>mogacymi
+zawierac inne obiekty.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-mozliwosc
+nawigowania w tej hierarchii, albo dostepu poprzez identyfikator
+(atrybut ID obiektu).</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>Rodzaje
+wezl&oacute;w:</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Element</B>: odpowiada tagowi lub
+parze tag&oacute;w; moze zawierac zagniezdzone elementy (typu
+<I>element) </I>lub wezly tekstowe (typu <I>text</I>).</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Text</B>: odpowiada danym
+znakowym. Nie posiada element&oacute;w potomnych.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Attribute</B>: okreslaja atrybuty
+element&oacute;w. Wartoscia atrybutu jest zawsze string. R&oacute;wniez
+nie zawiera element&oacute;w pochodnych.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Document</B>: specjalizacja typu
+<I>element. </I>Stanowi pojedynczy korzen dokumentu i udostepnia
+specyficzne operacje dla globalnego przeszukiwania.</FONT></SPAN></P>
+<OL START=31>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Jakie
+	mozliwosci wnosi stosowanie dokument&oacute;w dynamicznych?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-aplikacje
+oparte na bazie danych;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-autoryzacja
+uzytkownika i personalizacja; koszyk;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-forum;
+poczta przez WWW oraz listy rozsylkowe;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-zarzadzanie
+trescia; generowanie dokument&oacute;w.</FONT></P>
+<OL START=32>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Om&oacute;w
+	podstawowy mechanizm autentykacji dostepny w protokole HTTP.</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Autentykacja</B>: uzytkownik jest
+rzeczywiscie tym, za kogo sie podaje (najpowszechniejsza metoda =
+sprawdzenie hasla).</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Autoryzacja</B>: sprawdzenie, czy
+dany uzytkownik jest uprawniony do danego dostepu.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Kontrola dostepu</B>: inne,
+ujecie zagadnienia. Poza zidentyfikowaniem uzytkownika mozliwe sa
+jeszcze inne kryteria udostepnienia zasobu (np. adres, spod kt&oacute;rego
+nadchodzi zadanie). </FONT></SPAN>
+</P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>Najprostsza metoda, tzw. <I>basic</I>:</FONT></SPAN></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-uwzgledniona
+w protokole HTTP;</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-wymaga
+ustawien konfiguracyjnych serwera WWW;</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-haslo
+nie jest kodowane;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>Przebieg
+interakcji:</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-w odpowiedzi na zadanie serwer
+zwraca zamiast zasobu nagl&oacute;wek: 401 Authentication Required;
+oraz nazwe chronionego obszaru (tzw. <I>realm</I>)</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-przegladarka
+wyswietla dialog (uzytkownik i haslo);</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-wprowadzone
+dane sa wykorzystywane przez przegladarke w kolejnych zadaniach
+dotyczacych danego obszaru;</FONT></P>
+<OL START=33>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Scharakteryzuj
+	technologie interfejsu CGI. Jakie posiada ograniczenia?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Protok&oacute;l
+uruchamiania program&oacute;w na serwerze WWW. Ustandaryzowanie
+takiego interfejsu zapewnia niezaleznosc od platformy tj. OS oraz
+serwera webowego.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Pozwala
+na udostepnianie dynamicznej informacji. Nie ogranicza sie do
+dokument&oacute;w HTML.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-CGI
+nie jest jezykiem programowania i nie determinuje jezyka
+programowania. Mozna stosowac nawet skrypty powloki. Czesto stosowany
+Perl w zwiazku z dostepnoscia modul&oacute;w dla Webu oraz bardzo
+dobrymi udogodnieniami dla przetwarzania tekstu.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Ograniczona
+sprawnosc dzialania: koniecznosc zaladowania procesu przy obsludze
+kazdego zadania stanowi znaczne obciazenie;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Problem
+wsp&oacute;ldzielenia zasob&oacute;w nie jest latwy do rozwiazania;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Mozliwosc
+wywolywania polecen po stronie serwera tworzy istotne zagrozenie dla
+bezpieczenstwa;</FONT></P>
+<OL START=34>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Jakie
+	mozliwosci oferuje technologia SSI? Czym r&oacute;zni sie od CGI?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Jak
+sugeruje nazwa, w tym wypadku kod jest wstawiany w strukture
+dokumentu HTML.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Odpowiednie
+fragmenty dokumentu sa ponownie generowane przy kazdym odwolaniu.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Dynamika
+dokumentu bez koniecznosci stosowania CGI; generowane sa tylko
+wymagane fragmenty dokumentu.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Mozliwe
+zastosowania:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Licznik
+		odwolan;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Data
+		i czas; data ostatniej modyfikacji dokumentu;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Wkomponowywanie
+		innego pliku lub rezultatu wywolania programu CGI.</FONT></P>
+	</OL>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Rozszerzenia
+specyfikacji obejmuja m. in.:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Instrukcje
+		warunkowe (if &hellip; else);</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Wysylanie
+		poczty.</FONT></P>
+	</OL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Scharakteryzuj
+	technologie ASP. Jakie rodzaje zmiennych sa dostepne w jej
+	skryptach?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zalety:</FONT></P>
+<OL>
+	<OL>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Dynamiczna
+		zawartosc webowa; </FONT>
+		</P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Obsluga
+		danych przekazanych poprzez formularze;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Udostepnianie
+		zr&oacute;del danych znajdujacych sie na serwerze; </FONT>
+		</P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>W
+		stosunku do CGI przewaga jest prostota i szybkosc tworzenia; </FONT>
+		</P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Kod
+		ASP nie jest widoczny po stronie przegladarki; </FONT>
+		</P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Udostepnia
+		zwykly HTML -&gt; brak specjalnych wymog&oacute;w wobec
+		przegladarki; </FONT>
+		</P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Przy
+		odpowiednim programowaniu stron pozwala ograniczyc ruch w sieci.</FONT></P>
+	</OL>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Lokalne </B>(wewnatrz procedur).</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Globalne</B> strony (poza cialem
+procedury):<BR>dostepne dla kazdego skryptu na danej stronie.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Sesji</B>: Dostepne ze wszystkich
+stron danej aplikacji &ndash; tworzone i wypelniane na potrzeby
+wsp&oacute;lpracy z konkretnym uzytkownikiem. Przechowuja np. imie,
+identyfikator, preferencje.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Aplikacyjne</B>: R&oacute;wniez
+dostepne dla wszystkich stron. Przechowuja jednak wlasciwosci
+obowiazujace wszystkich uzytkownik&oacute;w.</FONT></SPAN></P>
+<OL START=36>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Scharakteryzuj
+	technologie PHP.</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-R&oacute;wniez
+zaliczany do gatunku SSI.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Bardzo
+szeroko dostepny; Obsluga PHP na danej platformie dostepna jako modul
+serwera albo jako program CGI.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zastosowania:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>skrypty
+		po stronie serwera;</B></FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>skrypty
+		uruchamiane z linii komend;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>okienkowe
+		programy dzialajace po stronie uzytkownika;</FONT></P>
+	</OL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Scharakteryzuj
+	technologie servlet&oacute;w. Jak implementuje sie zachowanie
+	servletu?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Servlet
+funkcjonuje jako element oprogramowania odpowiadajacy na zadania
+(zwykle) HTTP.<BR>Model dzialania nawiazuje wiec po czesci do CGI, ma
+jednak w stosunku do niego istotne zalety:</FONT></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Przystosowane
+		do wykonania wielowatkowego.</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Dzieki
+		rozbudowanemu API Javy zwykle nie ma potrzeby wywolywania polecen
+		systemu operacyjnego &ndash; lepsze bezpieczenstwo.</FONT></P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="pl-PL"><FONT SIZE=2>Mozliwosc
+		okreslenia precyzyjnej kontroli dostepu do zasob&oacute;w (<I>ACL &ndash;
+		Java Access Control List</I>).</FONT></SPAN></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Mechanizm
+		obslugi wyjatk&oacute;w &ndash; potencjalnie lepsza stabilnosc.</FONT></P>
+	</OL>
+</OL>
+<P CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm"><FONT SIZE=2>-Servlet
+jest ladowany przy pierwszym odwolaniu don lub przy starcie engine-u.
+Pozostaje w pamieci do momentu jawnego usuniecia lub zatrzymania
+serwera. </FONT>
+</P>
+<P CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm"><FONT SIZE=2>-Mozna
+wskazac trzy metody sevletu wyznaczajace jego cykl zyciowy:</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="text-indent: 1.25cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-void init(ServletConfig config)</B>
+- Uruchamiana przy zaladowaniu servletu. </FONT></SPAN>
+</P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-void service(ServletRequest
+request, ServletResponse response) - </B>Metoda uruchamiana przy
+kazdym zadaniu skierowanym do servletu. Implementacja musi
+uwzgledniac wielowatkowe wykonanie. </FONT></SPAN>
+</P>
+<P LANG="en-US" CLASS="western" STYLE="text-indent: 1.25cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-void destroy()</B> - Uruchamiana
+przy wylaczaniu servletu. </FONT></SPAN>
+</P>
+<OL START=38>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Om&oacute;w
+	skladnie JSP oraz stosunek tej technologii do technologii servlet&oacute;w.</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Umozliwiaja osadzanie kodu wewnatrz
+struktury HTML. Wewnatrz struktury dokumentu HTML kod Javy jest
+umieszczany wewnatrz znacznik&oacute;w: <B>&lt;% </B>&hellip;<B> %&gt;</B>.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Kod strony, opatrzony rozszerzeniem
+.jsp jest nastepnie przetwarzany przez silnik JSP do postaci servletu
+i kompilowany. Wytworzony kod opiera sie na pakiecie
+<I>javax.servlet.jsp </I>i stanowi rozszerzenie klasy
+<I><B>javax.servlet.http.HttpServlet</B>, </I>implementujace
+interfejs <B><I>javax.servlet.jsp.HttpJspPage</I></B>.<I> </I></FONT></SPAN>
+</P>
+<OL START=39>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Przedstaw
+	zalozenia i zastosowanie jezyka SGML.</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Jezyk znacznik&oacute;w (<I>markup
+language</I>) &ndash; zbi&oacute;r konwencji znacznik&oacute;w
+stosowanych do opisywania (kodowania) tekstu. Okresla:</FONT></SPAN></P>
+<OL>
+	<OL>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>znaczniki
+		dozwolone i wymagane;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>zapewnia
+		niezawodny spos&oacute;b ich wyr&oacute;zniania ze zwyklego tekstu;</FONT></P>
+		<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>[definiuje
+		znaczenie poszczeg&oacute;lnych znacznik&oacute;w].</FONT></P>
+	</OL>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-SGML
+= standard opisu tekstu za pomoca znacznik&oacute;w. Okreslany jako
+metajezyk (?) (wr&oacute;cimy jeszcze do tego pojecia).</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Charakter <B>opisowy</B> a nie
+proceduralny: w tekscie umieszczone sa znaczniki okreslajace
+interpretacje poszczeg&oacute;lnych element&oacute;w, a ew. elementy
+proceduralne, opisujace wymagane czynnosci np. sformatowania tekstu,
+istnieja odrebnie &ndash; w postaci osobnych zasob&oacute;w.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-SGML wprowadza pojecie <B>typu
+dokumentu</B>, specyfikujac DTD (<I>Dynamic Type Definitions</I>).</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Typ
+dokumentu jest formalnie zdefiniowany w terminach jego skladowych i
+ich struktury.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Dla znanych typ&oacute;w dokument&oacute;w
+(tj. dla kt&oacute;rych istnieja definicje typu), mozna sprawdzic
+zgodnosc dokumentu ze specyfikacja typu. Program dokonujacy takiego
+sprawdzenia nazywamy <B><I>parserem</I></B>.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Znajac typ dokumentu mozna w
+bardziej efektywny i wyspecjalizowany spos&oacute;b przetwarzac
+wszelkie dokumenty zgodne z tym typem. Jesli wykonywane jest
+przetwarzanie dokumentu, to odpowiedni program nazywamy z kolei
+<B><I>procesorem</I></B>.</FONT></SPAN></P>
+<OL START=40>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>W
+	jaki spos&oacute;b mozliwosci oferowane przez DTD w jezyku SGML
+	rozbudowuja podstawowy, czysto hierarchiczny model dokumentu?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Definicje
+Typu Dokumentu stanowia ceche szczeg&oacute;lna XML a zarazem
+integralna czesc specyfikacji jezyka.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Definicja
+typu pozwala sprawdzic strukturalna poprawnosc dokumentu. Mozna je
+postrzegac jako jezyk opisu dokumentu.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Definicje
+typu moga wystepowac w pliku dokumentu, lub w plikach zewnetrznych.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-W
+przeciwienstwie do SGML, obecnosc definicji typu nie jest
+obowiazkowa.</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Powstaly
+jezyk HTML pozostal jednak silnie zwiazany ze swym protoplasta:</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-HTML
+stanowi istotnie okrojony podzbi&oacute;r SGML;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Skladnia
+HTML zdefiniowana jest przy uzyciu srodk&oacute;w definiowania
+struktury dokument&oacute;w SGML (istnieje definicja HTML w postaci
+DTD);</FONT></P>
+<OL START=41>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Wyjasnij
+	pojecie metajezyka. W jakim zakresie stosuje sie ono do SGML i XML?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Pojecie
+meta-poziomu oznacza zwykle definicje rozpatrywanego przez nas zbioru
+element&oacute;w, z kt&oacute;ra ten ostatni jest zwiazany relacja
+&bdquo;jest wystapieniem&rdquo;.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Pojecie
+dotyczy czesto danych i metadanych (schemat jest poziomem &bdquo;meta&rdquo;
+w stosunku do danych gromadzonych w bazie) albo jezyk&oacute;w
+programowania (mechanizmu pozwalajacy kontrolowac zachowanie
+rozpatrywanego przez nas poziomu; np. wolanie procedury). Przykladem
+moze byc klasa, jako definicja narzucajaca ograniczenie na strukture
+jej obiekt&oacute;w oraz definiujaca metody czy aktywne reguly dla
+tych obiekt&oacute;w. Zob. tez &ndash; metamodel w UML.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Pojecie
+metajezyka sugerowaloby zatem, ze SGML oraz XML sa jezykami sluzacymi
+definiowanie innych jezyk&oacute;w. Termin zatem pasowalby raczej do
+DTD. Stad okreslanie bez blizszego komentarza SGML oraz XML
+&bdquo;metajezykami&rdquo; moze byc nieco mylace&hellip;</FONT></P>
+<OL START=42>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Scharakteryzuj
+	jezyk XML. Jakie zalozenia legly u podstaw jego specyfikacji?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Uzyteczny
+bezposrednio w Internecie.</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Uniwersalny
+wobec dziedzin zastosowan.</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zgodny
+SGML.</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zapewnienie
+wsparcia dla tworzenia program&oacute;w przetwarzajacych dokumenty
+XML.</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Minimalizacja
+element&oacute;w opcjonalnych w specyfikacji.</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Klarownosc
+i czytelnosc dla czlowieka.</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Koniecznosc
+szybkiego zaprojektowania jezyka.</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Formalny
+i sp&oacute;jny styl projektu.</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Latwosc
+tworzenia dokument&oacute;w XML.</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Brak
+wymog&oacute;w odnosnie zwiezlosci skladni. </FONT>
+</P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Jezyk
+tekstowy;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Rozszerzalny:
+zestaw znacznik&oacute;w nie stanowi zamknietej listy;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Elastyczna
+struktura;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Niezaleznosc
+od platformy;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Mozliwosc
+definiowania regul poprawnosci dla struktury dokumentu (definicja
+typu dokumentu);</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Stosunkowo
+rygorystyczna skladnia;</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Opisuje klase obiekt&oacute;w
+danych, zwana <B>dokumentami XML</B>;</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Czesciowo
+okresla zachowanie program&oacute;w, kt&oacute;re je przetwarzaja;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zgodny
+z SGML: okreslany jako profil zastosowan SGML albo ograniczony SGML.</FONT></P>
+<OL START=43>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Przedstaw
+	podstawowe reguly poprawnosci skladniowej dokument&oacute;w XML.</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Zgodny z definicja produkcji
+&bdquo;<I>document</I>&rdquo; (tj. m.in. zawiera deklaracje XML);</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Element
+gl&oacute;wny (&bdquo;korzen&rdquo;) wystepuje raz w kazdym z
+dokument&oacute;w i nie jest zawarty w zadnym innym elemencie.
+Pozostale elementy musza byc poprawnie zagniezdzone. W oparciu o
+takie zagniezdzenie m&oacute;wi sie o relacji rodzic-dziecko.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Spelnienie
+wszystkich ograniczen poprawnosciowych ujetych w specyfikacji;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Wszystkie
+parsowalne encje do kt&oacute;rych odwoluje sie dokument spelniaja
+warunek poprawnosci;</FONT></P>
+<OL START=44>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Jakie
+	rodzaje zawartosci moga znalezc sie w dokumentach XML?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-elementy
+puste (pojedynczy znacznik zakonczony &bdquo;/&rdquo;);</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-elementy
+zawierajace tylko tekst;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-elementy
+zlozone, tj. posiadajace podelementy;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-elementy
+o zawartosci mieszanej (tj. zar&oacute;wno tekst jak i podelementy &ndash;
+moga byc na rozne sposoby przeplecione);</FONT></P>
+<OL START=45>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Na
+	czym polega poprawnosc strukturalna dokumentu XML i w jakim celu
+	wprowadzono to kryterium?</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Dokument poprawny strukturalnie
+(<I>valid</I>): zgodnosc z definicja typu dokumentu (DTD).</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Definicje
+Typu Dokumentu stanowia ceche szczeg&oacute;lna XML a zarazem
+integralna czesc specyfikacji jezyka.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Definicja
+typu pozwala sprawdzic strukturalna poprawnosc dokumentu. Mozna je
+postrzegac jako jezyk opisu dokumentu.</FONT></P>
+<OL START=46>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>W
+	jaki spos&oacute;b definicje typu dokumentu moga byc laczone z
+	opisywanym dokumentem?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Definicje
+typu moga wystepowac w pliku dokumentu, lub w plikach zewnetrznych.</FONT></P>
+<P CLASS="western" STYLE="text-indent: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-W
+przeciwienstwie do SGML, obecnosc definicji typu nie jest
+obowiazkowa.</FONT></P>
+<OL START=47>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>W
+	jaki spos&oacute;b definiuje sie elementy w DTD? Jakie rodzaje
+	zawartosci elementu wyr&oacute;zniamy?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-W
+najprostszej postaci, jest to nazwa elementu zawieranego
+(podelementu) ujeta w nawias;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Oznacza
+to dokladnie jedno wystapienie takiego podelementu;</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Te licznosc mozna modyfikowac
+symbolami:&bdquo;<B>+</B>&rdquo; oznacza [1..*],	&bdquo;<B>?</B>&rdquo;
+oznacza [0..1],	&bdquo;<B>*</B>&rdquo; oznacza [0..*].</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Nazwy
+podelement&oacute;w (wraz z okresleniemi ich licznosci) mozna
+grupowac za pomoca:</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>symbolu
+przecinka =&gt; oznacza sekwencje, </FONT>
+</P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>symbolu
+&bdquo;|&rdquo; =&gt; oznacza wyb&oacute;r dokladnie jednego z
+rozdzielonych tak element&oacute;w;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-W
+oparciu o powyzsze konstrukcje mozna tworzyc zlozone deklaracje
+uzywajac nawias&oacute;w:</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>&lt;!ELEMENT
+firma ((oddzial)+ | przedstawicielstwo)&gt;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>&lt;!ELEMENT
+oddzial(dyrektor, handlowiec*, osoba_kontaktowa?)&gt;</FONT></P>
+<OL START=48>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Na
+	czym polega zawartosc mieszana i jakim podlega ograniczeniom jej
+	deklaracja?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Moze
+stanowic albo sam tekst (co sprowadza sie do zawartosci tekstowej),</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">&hellip;
+<FONT SIZE=2>albo dowolna liczba powt&oacute;rzen tekstu i
+podelement&oacute;w;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>Istnieje
+istotne ograniczenia na postac deklaracji. Efektywnie jedyna
+dozwolona postac deklaracji to:&lt;!ELEMENT nazwaMieszanego (#PCDATA
+| element_1 | element_2)*&gt;</FONT></P>
+<OL START=49>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Jakie
+	niedogodnosci wykazuje spos&oacute;b okreslania zawartosci
+	elementowej w DTD?</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>Podstawowa trudnoscia jest
+zadeklarowanie jako mozliwej zawartosci elementowej <B>podzbioru</B>
+z jakiegos repertuaru dokument&oacute;w.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>Np. <I>koniecznosc umieszczenia dw&oacute;ch
+dokument&oacute;w tozsamosci, sposr&oacute;d kilku zdefiniowanych
+rodzaj&oacute;w<BR></I>=&gt; potrzeba zadeklarowac osobno kazda
+dwuelementowa kombinacje:</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>&lt;!ELEMENT
+tozsamosc ((dowod_osobisty | prawo_jazdy) | (dowod_osobisty,
+paszport) | (prawo_jazdy, paszport) | (dowod_osobisty, indeks) |
+(prawo_jazdy, indeks) |<BR>(paszport, indeks))&gt;</FONT></P>
+<OL START=50>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Om&oacute;w
+	spos&oacute;b deklarowania atrybut&oacute;w w DTD. Jakie
+	najwazniejsze typy sa dostepne?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Atrybuty
+wystepuja w postaci par nazwa=&rdquo;wartosc&rdquo; w otwierajacych
+znacznikach XML.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Deklaracje
+atrybut&oacute;w dla danego rodzaju elementu zawarte sa w deklaracji
+ATTLIST odnoszacej sie do nazwy opisywanego elementu.</FONT></P>
+<OL START=51>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Czemu
+	sluza przestrzenie nazwowe i jaka role odgrywa w ich definicji URI?</B></FONT></P>
+</OL>
+<UL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Umozliwiaja
+	bezkolizyjne korzystanie z niezaleznie powstalych definicji
+	element&oacute;w i ich atrybut&oacute;w.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Deklarowane
+	w postaci: </FONT>
+	</P>
+</UL>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>	xmlns:NASZ_PREFIKS=&rdquo;http://uri.do.naszego/prefiksu&rdquo;</FONT></P>
+<UL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>URI
+	nie musi wskazywac na plik z definicja typu dokumentu; jedynie
+	unikalnie identyfikuje dana przestrzen nazwowa. Zaleca sie, aby w
+	tym celu nie stosowac wzglednych adres&oacute;w URL.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Deklaracja
+	zwykle jest zlokalizowana jako atrybut w korzeniu dokumentu, jako ze
+	obowiazuje w&oacute;wczas dla wszystkich element&oacute;w
+	podrzednych.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Uzycie:
+	NASZ_PREFIKS:nazwaElementu</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Prefiks
+	xml jest zarezerwowany: predefiniowane atrybuty (xml:lang,
+	xml:space, xml:base) -&gt; zob. dalej.</FONT></P>
+</UL>
+<OL START=52>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Czym
+	sa w XML encje (entities)? Jakie ich rodzaje wyr&oacute;zniamy?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Umozliwiaja
+wyodrebnianie i odwolywanie sie do nazwanych element&oacute;w XML.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Encje <B>og&oacute;lne przetwarzane</B>:
+odwolania w postaci &amp;nazwaEncji;</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>wewnetrzna</B>: tresc zawarta w
+deklaracji encji; Np.: &lt;!ENTITY pjwstk &rdquo;Polsko-Japonska
+Wyzsza Szkola Technik Komputerowych&rdquo;&gt;</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>zewnetrzna</B>: tresc zawarta w
+zewnetrznym dokumencie;</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>&lt;!ENTITY
+tekstNaglowka SYSTEM &quot;naglowek.txt&quot;&gt; </FONT>
+</P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2><I>(mechanizm
+jednostek zewnetrznych rozwijany jest jako XML Inclusions (Xinclude))</I></FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Og&oacute;lna zewnetrzna
+nieprzetwarzana</B>: inna postac odwolania &ndash; nazwa encji jako
+wartosc atrybutu. Zawiera etykiete NDATA a za nia nazwe formatu. Np.
+&lt;!ENTITY logo SYSTEM &rdquo;NaszeLogo.jpg&rdquo;NDATA obraz_jpg&gt;</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Parametryczna</B>: oznaczana
+symbolem <B>%</B>. Odwolania do niej moga wystepowac tylko w ramach
+tego samego DTD. Sluza okreslaniu powtarzajacych sie w danym DTD
+tresci.</FONT></SPAN></P>
+<OL START=53>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Jakie
+	niepozadane ograniczenia narzuca definicja DTD?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Okreslenie
+zawartosci elementu jako tekstowej powoduje pelna dowolnosc co do
+jego zawartosci;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Elementy
+nie moga okreslac wartosci domyslnych;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Brak
+ograniczenia na unikalnosc wartosci atrybutu;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Brak
+ograniczenia na unikalnosc zawartosci elementu;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Slabe
+mozliwosci kontroli typ&oacute;w;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Brak
+mozliwosci odrebnego definiowania typ&oacute;w wykorzystywanych w
+r&oacute;znych miejscach; brak dziedziczenia;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Niemoznosc
+ustalenia kolejnosci atrybut&oacute;w;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Niemoznosc
+zmiany kolejnosci element&oacute;w;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Przestrzenie
+nazwowe nie sa wspierane w DTD;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Rozbieznosci
+skladniowe w stosunku do zwyklego XML.</FONT></P>
+<OL START=54>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Jakie
+	zalety posiada XML Schema w stosunku do DTD?</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-W przeciwienstwie do DTD, XML Schema
+jest osobnym jezykiem, wiec nalezy wyspecyfikowac jego przestrzen
+nazwowa. Przypomnijmy, ze przewidziano dlan prefiks <B><I>xsd</I></B>.</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Poza
+predefiniowanymi typami (znaczny repertuar) istnieje mozliwosc
+deklarowania wlasnych typ&oacute;w.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Og&oacute;lnie
+zawartosc schematu moze byc nastepujaca:</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; text-indent: 0.61cm; margin-bottom: 0cm">
+<FONT SIZE=2>-deklaracja XML;</FONT></P>
+<P CLASS="western" STYLE="text-indent: 1.25cm; margin-bottom: 0cm"><FONT SIZE=2>-element-korzen
+schema;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.66cm; text-indent: 0.59cm; margin-bottom: 0cm">
+<FONT SIZE=2>-definicje typ&oacute;w;</FONT></P>
+<P CLASS="western" STYLE="text-indent: 1.25cm; margin-bottom: 0cm"><FONT SIZE=2>-deklaracje
+atrybut&oacute;w i element&oacute;w.</FONT></P>
+<OL START=55>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Wyjasnij
+	r&oacute;znice pomiedzy definicja typu zlozonego a deklaracja
+	elementu zlozonego w XML Schema.</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Definicje
+typ&oacute;w tworza nowe typy dostepne do wykorzystania;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Deklaracje
+element&oacute;w okreslaja nazwy i typy element&oacute;w i atrybut&oacute;w,
+kt&oacute;re moga pojawic sie w odpowiednich miejscach dokumentu.</FONT></P>
+<OL START=56>
+	<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><B><SPAN LANG="pl-PL"><FONT SIZE=2>Om&oacute;w
+	metode definiowania typ&oacute;w pochodnych XML Schema poprzez
+	ograniczenia (<I>restrictions</I>)? Jakiego rodzaju ograniczenie
+	moga wystapic?</FONT></SPAN></B></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Tworzeniu
+pochodnych typ&oacute;w prostych poprzez nakladanie ograniczen sluzy
+element xsd:restriction, umieszczany wewnatrz elementu
+xsd:simpleType.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Element restriction zawiera atrybut
+base, okreslajacy typ bazowy definicji. Moze zawierac szereg
+podelement&oacute;w, okreslanych jako <I>constraining facets</I>
+(aspekty ograniczajace).</FONT></SPAN></P>
+<OL START=57>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Czemu
+	sluza w XML Schema tzw. grupy element&oacute;w oraz grupy atrybut&oacute;w.
+	Jaka konstrukcja DTD jest ich odpowiednikiem?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Ograniczaja
+nadmiarowosc definicji schematu.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zastosowanie
+(ograniczenie nadmiarowosci i uczynienie schemat&oacute;w bardziej
+przejrzystymi) odpowiada encjom parametrycznym z DTD.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<FONT SIZE=2><SPAN LANG="pl-PL">-Do zadeklarowania grupy stosowane sa
+elementy odpowiednio: &lt;xsd:group&gt; &hellip; </SPAN>&lt;/xsd:group&gt;
+oraz &lt;xsd:attributeGroup&gt; ... &lt;/xsd:attributeGroup&gt;,
+posiadajace atrybut name.</FONT></P>
+<OL START=58>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Om&oacute;w
+	mozliwosci XML Schema w zakresie nakladania ograniczen unikalnosci i
+	integralnosci referencyjnej.</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Integralnosc referencyjna</B> &ndash;
+okresla zaleznosc klucza obcego. Przedmiotem odwolania musi byc
+wartosc zadeklarowana jako klucz.</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Deklarowane
+za pomoca elementu keyref: &lt;xsd:keyref refer=&rdquo;nazwaKlucza&rdquo;&gt;
+. . . &lt;/xsd:keyref&gt;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Atrybut
+refer okresla, do jakiego klucza odwoluja sie referencje.</FONT></P>
+<OL START=59>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Objasnij
+	mozliwe style tworzenie definicji schematu.</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Poprzez zagniezdzanie</B>:
+definicje potrzebnych typ&oacute;w tworzone anonimowo na potrzeby
+poszczeg&oacute;lnych deklaracji.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Plaski katalog element&oacute;w</B>:
+elementy tworzace hierarchie sa deklarowane globalnie, zas w ich
+docelowych miejscach wystepowania w schemacie stosuje sie odwolania
+do tych globalnych deklaracji.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Definiowanie typ&oacute;w</B>:
+globalnie sa definiowane nazwane typy, wykorzystywane nastepnie w
+deklaracjach element&oacute;w i atrybut&oacute;w. Metoda
+najskuteczniej ogranicza nadmiarowosc, choc wprowadza pewien narzut,
+wobec czego nadaje sie szczeg&oacute;lnie dla bardziej rozbudowanych
+schemat&oacute;w.</FONT></SPAN></P>
+<OL START=60>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Scharakteryzuj
+	jezyk XPath i wyjasnij pojecie kroku w tym jezyku.</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Jezyk
+deklaratywny sluzacy wskazywaniu element&oacute;w, atrybut&oacute;w,
+lub calych fragment&oacute;w dokumentu XML.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Posiada
+zwiezla nie-XML-owa skladnie, przyjeta w celu umozliwienia
+umieszczania wyrazen XPath w wartosciach atrybut&oacute;w oraz w URI.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<FONT SIZE=2><SPAN LANG="pl-PL">-Typy zwracanych</SPAN> wartosci:</FONT></P>
+<OL>
+	<OL>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><SPAN LANG="pl-PL">b</SPAN>oolean<SPAN LANG="pl-PL">;</SPAN></FONT></P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>number
+		(liczba zmiennoprzecinkowa)<SPAN LANG="pl-PL">;</SPAN></FONT></P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><SPAN LANG="pl-PL">s</SPAN>tring<SPAN LANG="pl-PL">;</SPAN></FONT></P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>node-set<SPAN LANG="pl-PL">
+		(zbi&oacute;r wezl&oacute;w).</SPAN></FONT></P>
+	</OL>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Sciezka (ciag okreslajacy) XPath
+jest zbudowana z tzw. krok&oacute;w (<I>step</I>), oddzielonych
+symbolem &bdquo;/&rdquo;.</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Krok
+moze reprezentowac: element, atrybut lub funkcje. Poszczeg&oacute;lne
+kroki zawezaja obszar przeszukiwania.</FONT></P>
+<OL START=61>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Om&oacute;w
+	budowe kroku w jezyku XPath.</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Skladnia
+pojedynczego kroku jest nastepujaca:</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>kierunek (<I>axis</I>);</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>podw&oacute;jny
+dwukropek: &ldquo;::&rdquo;</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>symbol </B>&bdquo;<B>*</B>&rdquo;
+<I>albo</I> <B>nazwa elementu</B>, <I>albo</I> <B>funkcja</B>:</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>node()</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>text()</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>comment()</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>processing-instruction()
+&lt;- moze zawierac nazwe szukanej instrukcji przetwarzania;</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>dowolna liczba <I>predykat&oacute;w</I>
+umieszczonych w nawiasach kwadratowych: &bdquo;[ ]&rdquo;</FONT></SPAN></P>
+<OL START=62>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Jaka
+	role pelnia w XPath predykaty? Jakie srodki udostepniono do ich
+	tworzenia?</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Predykaty zmieniaja <B><I>pozycje
+kontekstu</I></B> i <B><I>rozmiar kontekstu</I></B>.</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Wystepuja
+opcjonalnie, umieszczane wewnatrz nawias&oacute;w kwadratowych celem
+zawezenia zwr&oacute;conego zbioru element&oacute;w.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Musza
+zwracac wartosc logiczna.</FONT></P>
+<OL START=63>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>W
+	jaki spos&oacute;b jezyk XPointer rozszerza funkcjonalnosc
+	dostarczana przez XPath?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Stanowi
+rozszerzenie jezyka XPath.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Uzupelnia
+system adres&oacute;w URI uzywanych w XLink (zob. dalej).</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Pozwala
+oznaczac i wskazywac fragmenty dokument&oacute;w XML.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Moze
+traktowac dokument zar&oacute;wno jako drzewo wezl&oacute;w (jak
+XPath), lub jako ciag znak&oacute;w (w tresci element&oacute;w),
+pozwalajac wskazywac jego podciagi.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Wprowadza
+dwa specjalne typy wskaznik&oacute;w:</FONT></P>
+<OL>
+	<OL>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="pl-PL"><FONT SIZE=2>punkt
+		(<I>point</I>) w dokumencie XML;</FONT></SPAN></P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="pl-PL"><FONT SIZE=2>zakres
+		(<I>range</I>) pomiedzy punktami koncowymi (mogacymi sie znajdowac
+		w r&oacute;znych elementach);</FONT></SPAN></P>
+	</OL>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Rozr&oacute;znia sie takze (uzywajac
+srodk&oacute;w XPath) wezly (<I>node</I>) i elementy (<I>element</I>).</FONT></SPAN></P>
+<OL START=64>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Scharakteryzuj
+	jezyk XSL. Czemu sluza dokumenty XSLT?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Okresla
+zakresy przeszukiwania; wskazania zawartosci do przetworzenia za
+pomoca XPath.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Definiuje
+spos&oacute;b przeksztalcenia poszczeg&oacute;lnych rodzaj&oacute;w
+wyszukanej zawartosci.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zakladane
+przez XML oczyszczenie informacji z zawartosci zwiazanej z
+prezentacja pozostawia otwartym problem wizualizacji takich
+dokument&oacute;w.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-W celu realizacji niezbednych
+przeksztalcen powstal jezyk XSL (<I>eXtensible Stylesheet Language</I>).
+Swego rodzaju protoplasta tego mechanizmu byly kaskadowe arkusze
+styl&oacute;w (CSS), jednak realizacja jezyka XSL jest odmienna.</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>66.
+XLink</B></FONT></P>
+<P CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm"><FONT SIZE=2>Pokonuje
+nastepujace ograniczenia odsylaczy HTML:</FONT></P>
+<P CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm"><FONT SIZE=2>-brak
+mozliwosci oznaczenia charakteru odnosnika;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm"><FONT SIZE=2>-maja
+charakter binarny (lacza jedynie pary dokument&oacute;w: zr&oacute;dlowy
+i docelowy);</FONT></P>
+<P CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm"><FONT SIZE=2>-sa
+zawarte w dokumencie zr&oacute;dlowym (nie moga byc przechowywane
+zewnetrznie);</FONT></P>
+<P CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm"><FONT SIZE=2>-problemem
+jest aktualizacja;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 1.25cm; margin-bottom: 0cm"><FONT SIZE=2>-moga
+wskazywac dokumenty lub punkty w dokumentach, ale nie np. elementy
+dokumentu XML.</FONT></P>
+<OL START=65>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Objasnij,
+	jakie style budowy szablon&oacute;w XSLT mozna wyr&oacute;znic.</B></FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Objasnij
+	r&oacute;znice pomiedzy dokumentami kierowanymi trescia a
+	dokumentami kierowanymi ukladem.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Czemu
+	sluzy specyfikacja XSL &ndash; Formatting Objects? W jaki spos&oacute;b
+	udoskonala istniejace wczesniej w tym obszarze zastosowania?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Przedstaw
+	(w oparciu o poznana budowe dokumentu XSL-FO), najwazniejsze
+	mozliwosci oferowane przez ten jezyk.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Podaj
+	definicje przestrzeni nazwowej. W jakim celu wprowadzono to pojecie?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Objasnij
+	spos&oacute;b deklarowania przestrzeni nazwowych (w tym przestrzeni
+	domyslnej).</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Scharakteryzuj
+	interfejs DOM (model dokumentu, spos&oacute;b dzialania, dostepna
+	funkcjonalnosc).</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Wskaz
+	najwazniejsze pojecia wprowadzone w DOM dla reprezentowania
+	zawartosci dokumentu.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Czemu
+	sluza modulu DOM Traversal i DOM Range?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Scharakteryzuj
+	model dzialania interfejsu SAX.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Jakie
+	zdarzenia wystepuja w interfejsie SAX i jakie srodki zdefiniowano
+	dla ich obslugi?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Por&oacute;wnaj
+	wlasciwosci (zalety i wady) interfejs&oacute;w DOM i SAX.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>W
+	jakim celu zdefiniowano interfejs JAXP? Jakie interfejsy on wspiera?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Wsp&oacute;lny
+standardowy interfejs tworzacy podstawe dla wykorzystania interfejs&oacute;w
+ SAX, DOM oraz XSLT z poziomu jezyka Java, zapewniajac niezaleznosc
+wykorzystujacego je kodu od konkretnych implementacji.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Podstawowe
+interfejsy zawarte w pakiecie javax.xml.parsers. Pozwalaja na
+podlaczania dowolnych zgodnych parser&oacute;w.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-W
+zakresie interfejs&oacute;w SAX i DOM udostepnia fabryki obiekt&oacute;w
+realizujacych oba te rodzaje przetwarzania.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-W
+zakresie wsparcia XSLT, JAXP dostarcza interfejs&oacute;w
+zdefiniowanych w pakiecie javax.xml.transform.</FONT></P>
+<OL START=79>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Jakie
+	zalety oraz jakie ograniczenia posiada technologia JAXB w stosunku
+	do innych interfejs&oacute;w dla obslugi XML?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Objasnij
+	koncepcje i skadniki technologii JAXB.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Przedstaw
+	scenariusz budowy aplikacji w oparciu o JAXB.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Jakie
+	rozwiniecia interfejsu DOM wprowadzono specjalnie dla Javy i czym sa
+	motywowane?</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-</B>Narzedzie udostepniajace
+zaprojektowany dla Javy model dokumentu XML. Jak sugeruje nazwa,
+inspirowany DOM; stanowi rozwiazanie alternatywne, latwiejsze w
+uzyciu, lecz nieprzenosne na inne jezyki programowania.</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Rozwijane
+jako Java Community Process (JSR 102).</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Mozliwosci
+integracji z DOM i SAX: zar&oacute;wno wejscie jak i wyjscie przy
+przetwarzaniu z uzyciem JDOM moze przybrac postac: plik&oacute;w XML,
+drzew DOM lub zdarzen SAX.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Istnieje
+mozliwosc wykorzystania XSLT i XPath do struktur JDOM.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Cecha
+szczeg&oacute;lna: API JDOM jest oparte na klasach konkretnych Javy,
+nie zas na interfejsach. Zapewnia to prostote i zwiezlosc (uzywamy
+konstruktor&oacute;w zamiast posrednictwa &bdquo;fabryk&rdquo;)
+kosztem elastycznosci implementacji.</FONT></P>
+<OL START=84>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Jakie
+	specyficzne wlasciwosci posiadaja z punktu widzenia jezyk&oacute;w
+	zapytan dokumenty XML jako dane p&oacute;lstrukturalne?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Czym
+	jest XML Information Set i w jakim celu zostal wprowadzony?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Objasnij
+	wzajemny stosunek technologii XSLT, XPath, XQuery oraz XML
+	Information Set.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Scharakteryzuj
+	jezyk XQuery. Jaka role odgrywa w nim jezyk XPath?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Objasnij
+	pojecie kontekstu wyrazenia XPath.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Objasnij
+	budowe wyrazenia &bdquo;FLWOR&rdquo; w XQuery.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Jakie
+	mozliwosci oferuje XQuery w zakresie uzycia funkcji oraz
+	definiowania ich sygnatur?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Jaka
+	role pelni &bdquo;prolog&rdquo; zapytania XQuery.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Om&oacute;w
+	zalety i wady jezyka XQuery.</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Dokonaj
+	przegladu wlasciwosci technologii CORBA, DCOM i RMI. Jakie problemy
+	dla wsp&oacute;ldzialania system&oacute;w sie z nimi wiaza?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2><B>CORBA</B></FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Specyfikacja
+neutralna w stosunku do producent&oacute;w, niezalezna od konkretnego
+jezyka programowania: wspiera szereg wiazan.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Definiuje wlasny protok&oacute;l
+wymiany komunikat&oacute;w IIOP (<I>Internet Inter-ORB Protocol</I>).</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Wsp&oacute;ldzialanie
+jest realizowane poprzez dzialajace w kazdej czesci rozproszonej
+aplikacji oprogramowanie posredniczace zwane brokerem zadan obiekt&oacute;w
+(ORB).</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-W
+por&oacute;wnaniu z innymi technologiami, odpowiednio zaprojektowane
+oprogramowanie oparte na standardzie CORBA zapewnia szczeg&oacute;lnie
+wysoka wydajnosc rozproszonej komunikacji.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Wady:
+ekspresyjnosc srodk&oacute;w programistycznych jest ograniczona
+dazeniem do wyodrebnienia wsp&oacute;lnego mianownika wszystkich
+wspieranych jezyk&oacute;w programowania.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2><B>RMI</B></FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Technologia
+oparta na jezyku Java. Stad nie jest tu potrzebny abstrakcyjny jezyk
+interfejs&oacute;w, jak to ma miejsce w standardzie CORBA. Zamiast
+tego, do opisania interfejs&oacute;w do odleglych obiekt&oacute;w
+stosuje sie bezposrednio deklaracje interfejs&oacute;w Javy, z
+zachowaniem odpowiednich regul (m.in. serializowalnosc przekazywanych
+do odleglej metody parametr&oacute;w).</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Podobnie
+jak w wypadku CORBA, celem sformulowania komunikatu do okreslonego
+obiektu (odpowiadajacego wywolaniu jego metody), aplikacja musi
+wczesniej dysponowac jego referencja. Jednym ze sposob&oacute;w
+uzyskania takowej jest odwolanie sie do uslugi nazwowej.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Uzywa <I>Java Remote Method Protocol</I>
+(JRMP).</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2><B>DCOM</B></FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Zbudowany
+jako warstwa oparta na proceduralnym DCE RPC.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Specyfikuje
+jezyk definicji interfejs&oacute;w IDL, przypominajacy skladnia C++.
+Podobnie jak w wypadku CORBA interfejsy te sa kompilowane celem
+uzyskania kodu tzw. szkielet&oacute;w i pienk&oacute;w w jednym z
+obslugiwanych jezyk&oacute;w. Interfejsy sa r&oacute;wniez
+rejestrowane w rejestrze systemowym.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Podobnie jak RMI obsluguje
+rozproszone zbieranie nieuzytk&oacute;w (<I>distributed garbage
+collection</I>).</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Technologia ta wprowadza r&oacute;wniez
+wlasny protok&oacute;l: ORPC (<I>Object Remote Procedure Call</I>).</FONT></SPAN></P>
+<OL START=94>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Wyjasnij
+	pojecie uslug Webu (Web Services).</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-W przeciwienstwie do tradycyjnej
+tresci Webu (informacja wprowadzana przez czlowieka i prezentowana
+czlowiekowi), usluga Webu jest <B><I>dostepnym poprzez siec
+komponentem aplikacyjnym przeznaczonym do wykorzystania przez inne
+aplikacje, zwane aplikacjami klienckimi</I></B>.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Definicja wedlug
+Webservices.org:<I>Hermetyzowane, luzno skojarzone &ldquo;kontraktowane&rdquo;
+funkcje, oferowane poprzez standardowe protokoly.</I></FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-&bdquo;Hermetyzowane&rdquo;:
+mplementacja nigdy nie jest widoczna z zewnatrz.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-&ldquo;Luzno
+skojarzone&rdquo;: modyfikowanie danej implementacji nie generuje
+problemu propagacji zmiany.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-&ldquo;Kontraktowane&rdquo;
+opisy dzialania funkcji oraz specyfikacja ich interfejs&oacute;w jest
+publicznie dostepna.</FONT></P>
+<OL START=95>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Objasnij
+	architekture Web Services. Na jakich protokolach sie opiera?</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Podobnie jak w wypadku tradycyjnego
+oprogramowania posredniczacego niezbedne jest wyr&oacute;znienie
+<B>klienta</B>, <B>dostawcy uslug</B> oraz serwisu umozliwiajacego
+klientowi zlokalizowanie dostawcy.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Serwis taki, zwany <B>brokerem
+uslug</B>, umozliwia klientowi<BR>wyszukiwanie uslug, zas dostawcy
+publikowanie ich opis&oacute;w.</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Protok&oacute;l
+nie jest binarny: srodowisko (Internet) wymaga oparcia komunikacji na
+rozpowszechnionym protokole. Zaklada sie uzycie http (ominiecie
+problemu zap&oacute;r ogniowych), choc potencjalnie moga to byc tez
+inne protokoly.</FONT></P>
+<OL START=96>
+	<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Czym
+	jest SOAP (Simple Object Access Protocol)?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-SOAP
+jest w swojej istocie protokolem bezstanowym i jednokierunkowym.
+Umozliwia jednak budowe bardziej zlozonych wzorc&oacute;w
+komunikacji.</FONT></P>
+<OL START=97>
+	<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Om&oacute;w
+	budowe komunikatu SOAP.</B></FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Elementem-korzeniem jest tzw.
+koperta (<I>envelope</I>). Moze ona zawierac: nagl&oacute;wek
+(<I>Header</I>) &ndash; opcjonalnie oraz cialo komunikatu (<I>Body</I>).</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-Bloki nagl&oacute;wkowe (<I>header
+blocks</I>), bedace podelementami elementu <I>Header, </I>zawieraja
+informacje precyzujace spos&oacute;b traktowania wiadomosci (np.
+kodowanie zawartosci czy autentykacja).</FONT></SPAN></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Pozycja
+nagl&oacute;wkowa jest opisywana przez atrybuty:</FONT></P>
+<OL>
+	<OL>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="pl-PL"><FONT SIZE=2>role:
+		okresla adresata danej pozycji (moze to byc adresat docelowy
+		komunikatu lub jakis wezel posredniczacy). Standard okresla m.in. 
+		role &bdquo;next&rdquo;, wskazujaca na przetwarzanie tej pozycji
+		nagl&oacute;wkowej przez najblizszy wezel SOAP. Brak atrybutu role
+		oznacza przeznaczenie danej pozycji nagl&oacute;wkowej dla
+		ostatecznego odbiorcy.</FONT></SPAN></P>
+		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="pl-PL"><FONT SIZE=2>mustUnderstand:
+		okresla, czy pozycja musi zostac przetworzona przez jej adresata.</FONT></SPAN></P>
+	</OL>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Jakie
+	informacje mozna wyr&oacute;znic w opisie uslugi oraz potencjalnego
+	klienta uslugi? Dlaczego warto przedstawiac taki opis w postaci
+	czytelnej maszynowo?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Wyjasnij,
+	czym jest semantyka interakcji. W jakim zakresie jest ona opisywana
+	w dzisiejszych technologiach uslug Webu?</B></FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Czemu
+	sluzy specyfikacja WSDL? Jakie informacje zawiera dokument WSDL?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Poniewaz
+opisuje usluge, nie zas wymagania klienta, stad budowa swoistej
+gieldy, gdzie zar&oacute;wno uslugi jak i zapotrzebowania bylyby
+przedmiotem wyszukiwania i ew. kojarzenia przez odrebnego brokera,
+wymaga dodatkowo okreslenia sposob&oacute;w opisu takich
+zapotrzebowan.</FONT></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2>-WSDL opisuje <U>technike
+wsp&oacute;ldzialania</U> z usluga. Zaklada, ze semantyka uslugi jest
+opisana na zewnatrz i moze byc jednoznacznie wskazana poprzez
+identyfikator. Tym samym &bdquo;kontrakt&rdquo; dotyczacy <U>znaczenia</U>
+i <U>celu</U> jest oddzielony od &bdquo;kontraktu&rdquo;
+okreslajacego <U>mechanike</U> wsp&oacute;ldzialania.</FONT></SPAN></P>
+<OL START=101>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Om&oacute;w
+	budowe dokumentu WSDL.</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Jest
+to opis abstrakcyjnego interfejsu, tj. niezaleznego od protokolu
+transportowego oraz od jezyka programowania.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Struktura
+pliku WSDL jest zdefiniowana w specyfikacji w postaci schemat&oacute;w
+XML Schema.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Typy
+danych uzywanych w opisywanych przez dokument WSDL interfejsach moga
+byc zdefiniowane w dowolnym systemie typ&oacute;w, choc domyslnie
+stosuje sie wlasnie XML Schema.</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Funkcjonalnosc
+odpowiada np. IDL ze standardu OMG CORBA.</FONT></P>
+<OL START=102>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Scharakteryzuj
+	technologie UDDI. Jakie cele ma ona realizowac?</B></FONT></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Specyfikacja,
+tworzona przez konsorcjum OASIS, okresla rozproszony katalog,
+zawierajacy zar&oacute;wno informacje o samych firmach jak i o
+udostepnianych przez nie uslugach Webu, czyli swoista &bdquo;ksiazke
+telefoniczna&rdquo;. Rozwijajac te metafore, specyfikacja wyr&oacute;znia:</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-&bdquo;zielone
+strony&rdquo;: techniczny opis uslug wraz z odnosnikami URL (w
+zalozeniach nie musza to byc koniecznie uslugi Webu);</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-&bdquo;biale
+strony&rdquo;: identyfikacja, adresy i inne dane kontaktowe firm;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-&bdquo;z&oacute;lte
+strony&rdquo;: wykaz firm ulozony wedlug klasyfikacji przemyslowej;</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Rejestr
+zaprojektowano jako logicznie scentralizowany, zas fizycznie
+rozproszony i replikowany. Moze byc dostepny zar&oacute;wno
+tradycyjnie (interfejs WWW), jak i programowo (jak uslugi Webu).</FONT></P>
+<P CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><FONT SIZE=2>-Interfejs
+programistyczny wyr&oacute;znia czesc sluzaca formulowaniu zapytan
+oraz czesc sluzaca publikowaniu opis&oacute;w.</FONT></P>
+<OL START=103>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Om&oacute;w
+	budowe rejestru UDDI.</FONT></P>
+</OL>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Informacja o usludze</B>:
+Informacja ta znajduje sie wewnatrz elementu zawierajacego informacje
+biznesowe. Sklada sie z element&oacute;w businessService (opis
+uslugi) oraz bindingTemplate (informacja niezbedna dla wywolania
+uslugi): informacje techniczne niezbedne do polaczenia sie z usluga;
+m.in. czy jest samodzielna, jej URL itp.</FONT></SPAN></P>
+<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
+<SPAN LANG="pl-PL"><FONT SIZE=2><B>-Specyfikacja uslugi</B>: Element
+bindingTemplate zawiera zbi&oacute;r odnosnik&oacute;w do
+specyfikacji (zawartych w elementach tModel). Kazdy element tModel
+stanowi opis pewnej specyfikacji, na kt&oacute;rej oparta jest
+usluga. Komplet takich specyfikacji okresla wzorzec zgodnosci z dana
+usluga.</FONT></SPAN></P>
+<OL START=104>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Jaka
+	funkcjonalnosc oferuje API do rejestru UDDI?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Czym
+	jest ebXML? W jakim celu powstal?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Jakie
+	dokumenty w technologii ebXML musza powstac, aby nawiazac
+	wsp&oacute;ldzialanie partner&oacute;w biznesowych?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Czym
+	jest i jak zostal skonstruowany &bdquo;Message Service&rdquo; w
+	technologii ebXML?</FONT></P>
+	<LI><P CLASS="western" STYLE="margin-bottom: 0cm"><FONT SIZE=2>Czym
+	charakteryzuje sie Architektura Zorientowana na Uslugi (Service
+	Oriented Architecture) SOA?</FONT></P>
+</OL>
+<DIV TYPE=FOOTER>
+	<P LANG="en-US" STYLE="margin-right: 0.64cm; margin-top: 0.73cm; margin-bottom: 0cm">
+	<SPAN ID="Frame1" DIR="LTR" STYLE="position: absolute; top: 0cm; left: 0cm; width: 0.78cm; height: 0.04cm; border: none; padding: 0cm; background: #ffffff">
+		<P LANG="en-US" STYLE="margin-bottom: 0cm"><SDFIELD TYPE=PAGE SUBTYPE=RANDOM FORMAT=PAGE>12</SDFIELD></P>
+	</SPAN><BR>
+	</P>
+</DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,36 @@
+Czy promienie rzutowania w rzutowaniu rownoleglym prostokatnym sa rownolegle do rzutni? (NIE) 
+Czy rzutnia w rzutowaniu perspektywicznym 2-pktowym jest rownolegla do plaszczyzny X0Y? (NIE) 
+Czy w rzucie prostokatnym jest pkt zbieznosci? 
+Czy prostopadloscian moze byc dokladnie reprezentowany przez metode zagarniania przestrzeni (TAK) 
+Czy kula jest powierzchnia 2-go stopnia (TAK) 
+Czy krzywa Beziera moze byc zamknieta? (TAK) 
+Czy krzywa B. przechodzi przez 1-szy pkt, (druga grupa miala przez 2-g)i? (TAK,(NIE))
+ Czy Z-buffor wymaga sortowania wielokatow? (NIE) 
+Czy krzywa opisana wielomianem x-stopnia moze byc odcinkiem Czy jest wykorzystywany alg malarski w urzadzeniach drukujacych? (NIE) 
+I byly podane trzy pkt w przestrzeni A(1,1,1), B(7,1,7),C(5,7,9) i P(4,3) i trzeba bylo obliczyc zawartosc z-bufora dla punktu PPodane bylo tez,ze jest 50000 wielokatow, rozdzielczosc ekranu wynosi 1024x1024 i pytanie, jaki rozmiar musi miec z-bufor.  (bufor ma 1024*1024) 
+Bry³a widzenia okresla fragment sceny 3D potencjalnie widoczny na ekranie TAK musi byæ wyznaczana w metodzie sledzenia promieni NIE W rzucie perspektywicznym jest ostroslupenm œciêtym TAK 
+Algorytm malarski wymaga sortowania wielok¹tów TAK 
+wymaga wstêpnego zapisania w pamieci w calej pamieci obrazu tla NIE 
+jest wykorzystywany w metodzie sledzenia promieni NIE 
+Krzywa beziera jest okreslona przez punkty kontrolne p0(2,1) p1(3,3) p2(5,3) op3(3,2) pkt dla którego parametr biezacy u=0,5 ma wspó³rzêdne x=2, y=2 NIE 
+pkt x=0 y = 2 nale¿y do krzywej NIE przynajmniej jeden pkt odcinka p2p3 nale¿y do krzywej TAK 
+W metodzie Phonga wnetrze wielok¹ta jest zawsze wypelniane stala barwa NIE
+wykorzystuje siê pdowjna interpolacje normalnych (??) TAK 
+mo¿liwe jest uzyskanie efektu rozœwietlenia TAK 
+W metodzie sledzenia promieni sledzi  siê bieg promienia zawsze od chwili wyjêcia poza scene NIE 
+w celu wyznaczenia cieni wykorzystuje siê pomocnicze promienie NIE 
+najwiêcej czasu zajmuje wyznaczenie barw poszczególnych pikseli NIE 
+Scena sklada siê z szeœcianu i odleglego Ÿród³a swiatla. Obserwator mo¿e byæ w dowolnym miejscu(poza szeœcianem)przy obliczaniu oœwietlenia sceny trzeba rozwi¹zaæ problem widocznoœci œcian ze Ÿród³a swiatla TAKobliczona barwy wszystkich œcian SA takei same NIE 
+w trakcie obliczen konieczne jest wyznaczenie normalnych do poszczególnych œcian TAK 
+Zas³anianie metoda badania normalnych do œcian obiektow jest uniwersalna metoda rozwi¹zania problemu przes³aniania NIE 
+w metodzie metodzie-bufora konieczne jest sortowanie wielok¹tów NIE 
+w metodzie z-bufora przy wyznaczaniu barwy piksela x,y zawsze pamieta siê wspolrzedna ‘z’ ostatnio analizowanego punktu z,y,z NIE 
+Przy modelowaniu 3D metoda wielok¹tów preferowane jest korzystanie z trójk¹tów TAK 
+metoda CSG bryly tworzy siê w wyniku obracania zadanego przekroju wokó³ wybranej osi NIE 
+metoda OCTREE dokonuje siê równomiernego podzialu z zadana dok³adnoœci¹ NIE 
+W modelach wyznaczania osiwetlenia œwiat³o rozproszenia jest zwi¹zane z wybranym Ÿród³em swiatla NIE
+œwiat³o rozproszenia pozwala okreœlaæ oœwietlenie dla punktow nie widocznych ze Ÿród³a swiatla TAK 
+przy analizie odbicia zwierciadlanego wektor normalny jest skierowany do obserwatora NIE 
+Rozne przy opisie parametrycznym odcinka znaj¹c wart parametru bie¿¹cego mo¿na wyznaczyc wspó³rzêdne odpowiedniego punktu na odcinku TAK 
+algorytm z-bufora jest wykorzystywany do wypelnienia powierzchni wielok¹ta NIE 
+w metodzie sledzenia promieni otoczenie obiektow prostszymi brylami pozwala przyspieszyc znajdowanie pierwszego obiektu napotkanego przez promien TAK

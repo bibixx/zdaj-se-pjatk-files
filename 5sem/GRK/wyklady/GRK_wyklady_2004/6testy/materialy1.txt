@@ -1,0 +1,22 @@
+2. Przedstawienie podstawowych technik cieniowania
+    - cieniowanie ci¹gle - oœwietlana p³aszczyzna jest najjaœniejsza kiedy œwiat³o pada na ni¹ pod k¹tem 90stopni. Wartoœæ natê¿enia œwiat³a na tej p³aszczyŸnie okreœlamy wzorem I = I¿* cos(alfa) gdzie  I - natê¿enie œwiat³a na naszej p³aszczyŸnie, Iz - natê¿enie Ÿród³a œwiat³a, alfa - kat pomiêdzy normalna p³aszczyzny a wektorem skierowanym do Ÿród³a œwiat³a
+    - cieniowanie Gouraud -polega na interpolowaniu znanych kolorów (wyznaczonych jeszcze w przestrzeni) wierzcho³ków aby uzyskaæ kolor pixela w wielok¹cie (wyznaczanych metod¹ interpolacji po zrzutowaniu na p³aszczyznê). Gouraud nie pozwala na rozb³ski
+   - cieniowanie Phonga - bardzo podobne od Gouraud ale zamiast interpolownia koloru interpolujemy normalne wiecho³ku wielok¹ta, maj¹c normalna ka¿dego Piela (wyznaczone przed rzutowaniem na p³aszczyzne) obliczamy dla niego natê¿enie (I = Iz i cos(alfa))
+Phong pozwala na uzyskanie efektu rozœwietlenia (highlight) Barwê w ka¿dym punkcie wyznaczamy niezale¿nie od innych.
+3, Podsumowanie - cieniowanie pozwala nam urealistyczniæ scenê i uatrakcyjniæ wygl¹d obiektów.
+Najprostsza wype³nieniowa jest metoda cieniowania ci¹g³ego,  a nieco trudniejsza G., ale najlepsze rezultaty daje PH. Metoda cieniowania ci¹g³ego i gouraud s¹ wykorzystywane  w grafice czasu rzeczywistego.
+
+Metoda œledzenia promienia= Raytraicing
+Z oka obserwatora prowadzimy wektor przechodz¹cy przez poszczególne piksele obrazu.
+b. dobre efekty. Trzeba te¿ wzi¹æ pod uwagê cienie rzucane prze obiekty, wiêc trzeba rzuciæ cieñ = promieñ, jeœli trafi na Ÿród³o œwiat³a tzn. ten pkt. Jest bezpoœrednio oœwietlony, jeœli na inny obiekt to rzuca cieñ w tym pkt. 
++ nie trzeba wchodziæ w rzutowania, nie ma problemu zas³aniania, nie ma problemu cieniowania, bo dla ka¿dego pkt. Obl. Piks., cieni
+Uniwersalna metoda ale nies³ychanie czasoch³onna.
+80% czasu na obliczanie przeciêcia promieni z wektorami (który obiekt jest pierwszy trafiony).  Rozw. Ka¿dy z obiektów otaczamy kól¹ albo szeœcianem. Mo¿na te¿ scena zawiera siê w prostopad³oœcianie, dzielonym na ileœ wokseli, przecinane SA obiekty tylko pod przecinanymi wokselami.
+
+Przes³anianie
+Met. Normalnych - Liczymy normalna p³aszczyzny, bierzemy pod uwagê sk³adow¹ Z (jej znak) (Ax+By+Cz+D=0) jeœli skierowana do obserwatora to œcianka widoczna. Jeœli nie jest widoczna to znaczy ze plaszczyzny nie trzeba oswietlac/renderowac, ale to dziala tylko dla bryl wypuk³ych.
+Alg. Malarski - Wyswietla najpierw obiekty najdalej nas, a nastêpnie coraz bli¿sze.1Faza =sortowanie obiektów (dla ka¿dego etapy (najwieksza wspó³rzêdna z dla ka¿dego wierzcho³ka;  weryfikacji=pomocnicze testy(zakresy roz³¹czne?), 2faza:wyœwietlanie
+Z-bufor - Ogólny schemat algorytmu. Dostêpne s¹ dwie pamiêci: obrazu i g³êbokoœci. Obie maj¹ tyle s³ów, ile jest pikseli obrazu.
+1.	Dla ka¿dego piksela obrazy o wsp.(x,y) podstawiamy: zawartoœæ pamieci obraz dla piksela (x,t) = kolor t³a, zawartoœæ pamiêci g³êbokoœci dla piksela (x,y) = max. Wart,wspó³.Z.
+2.	Dla ka¿dego piksela rzutu œciany s1, wyliczamy wartoœæ z(x,y) If z(x,y)<pam.z-buf. To pam(x,y) = v1 (kolor) , z-buf = z.
+Krok 2 powtarzamy dla kolejnych œcian, a¿ do wyczerpania listy œcian. Potrzeba stosunkowo du¿o pamiêci, doœæ proste oblicznie,

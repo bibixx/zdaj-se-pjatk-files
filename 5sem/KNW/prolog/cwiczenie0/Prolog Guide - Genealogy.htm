@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0055)http://kti.ms.mff.cuni.cz/~bartak/prolog/genealogy.html -->
+<HTML><HEAD><TITLE>Prolog Guide - Genealogy</TITLE>
+<META http-equiv=Content-Type content=text/html;CHARSET=iso-8859-1>
+<META content=file:///C|/My%20Documents/Web%20Sites/www/MyProject.vpp 
+name=VPSiteProject><X-CLARIS-WINDOW RIGHT="752" LEFT="222" BOTTOM="763" 
+TOP="48"><X-CLARIS-TAGVIEW MODE="minimal">
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR></HEAD>
+<BODY bgColor=white>
+<P>
+<SCRIPT language=JavaScript>
+<!--
+document.write("<IMG SRC=\"http://www.monitor.cz:8080/cgi-bin/stat?id=roman&ref=" + top.document.referrer+'&'+Math.round(Math.random()*10000)+ "\" WIDTH=1 HEIGHT=1>");
+// --></SCRIPT>
+<NOSCRIPT><IMG height=1 src="Prolog Guide - Genealogy_files/stat.gif" width=1 
+align=bottom border=0> </NOSCRIPT></P>
+<H3 align=right></H3>
+<P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" bgColor=#ffffcc border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top><I><FONT face="Times New Roman, Times">Guide to Prolog 
+      Programming</FONT></I></TD>
+    <TD vAlign=top width=150>
+      <P align=right><I><FONT face="Times New Roman, Times">© Roman Barták, 
+      1998</FONT></I> </P></TD></TR>
+  <TR>
+    <TD vAlign=bottom><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/index.html"><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2>Home</FONT></A><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2><BR></FONT><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/learning.html"><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2>Prolog in 
+      Examples</FONT></A><FONT face="Arial, Helvetica, Geneva, SansSerif" 
+      size=2><BR></FONT><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/first_steps.html"><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2>First Steps in 
+      Prolog</FONT></A></TD>
+    <TD vAlign=bottom width=150>
+      <P align=right><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/first_steps.html"><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2>Previous</FONT></A><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2> | </FONT><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/contents.html"><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2>Contents</FONT></A><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2> | </FONT><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/basic_struct.html"><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2>Next</FONT></A> 
+  </P></TD></TR>
+  <TR>
+    <TD vAlign=bottom colSpan=2>
+      <H3><FONT face="Arial, Helvetica, Geneva, SansSerif">Genealogy Database 
+      <HR align=center noShade>
+      </FONT></H3></TD></TR></TBODY></TABLE><A 
+href="http://kti.ms.mff.cuni.cz/~bartak/prolog/testing.html" target=_blank><IMG 
+height=23 src="Prolog Guide - Genealogy_files/testsign.gif" width=24 
+align=middle border=0 X-CLARIS-USEIMAGEHEIGHT X-CLARIS-USEIMAGEWIDTH></A></P>
+<P><FONT face="Arial, Helvetica, Geneva, SansSerif">A genealogy database seems 
+to be a good introductory to Prolog. In this lesson, we present a simple Prolog 
+program that captures basic family relations. The program demonstrates features 
+of Prolog like using facts, rules, variables or recursion.</FONT></P>
+<P>
+<HR align=center noShade SIZE=1>
+<B><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2>Tip:</FONT></B><FONT 
+face="Arial, Helvetica, Geneva, SansSerif" size=2> Use Copy&amp;Paste function 
+of the browser to move the code directly into the PROLOG environment. 
+<HR align=center noShade SIZE=1>
+</FONT>
+<P></P>
+<P><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2>First, we express the 
+property of being a man or woman by following </FONT><B><FONT 
+face="Arial, Helvetica, Geneva, SansSerif" size=2>PROLOG facts</FONT></B><FONT 
+face="Arial, Helvetica, Geneva, SansSerif" size=2>:</FONT></P>
+<DL>
+  <DD><TT><FONT size=2>man(adam).</FONT></TT> 
+  <DD><TT><FONT size=2>man(peter).</FONT></TT> 
+  <DD><TT><FONT size=2>man(paul).</FONT></TT> 
+  <DD><FONT size=2></FONT> 
+  <DD><TT><FONT size=2>woman(marry).</FONT></TT> 
+  <DD><TT><FONT size=2>woman(eve).</FONT></TT> </DD></DL>
+<P><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2>Then, we can add 
+relation "parent" which associates parent and child.</FONT></P>
+<DL>
+  <DD><TT><FONT size=2>parent(adam,peter). % means adam is parent of 
+  peter</FONT></TT> 
+  <DD><TT><FONT size=2>parent(eve,peter).</FONT></TT> 
+  <DD><TT><FONT size=2>parent(adam,paul).</FONT></TT> 
+  <DD><TT><FONT size=2>parent(marry,paul).</FONT></TT> </DD></DL>
+<P><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2>Till now, we added 
+only facts to our program but the real power of Prolog is in </FONT><B><FONT 
+face="Arial, Helvetica, Geneva, SansSerif" size=2>rules</FONT></B><FONT 
+face="Arial, Helvetica, Geneva, SansSerif" size=2>. While facts state the 
+relation explicitely, rules define the relation in a more general way. Each rule 
+has its </FONT><B><FONT face="Arial, Helvetica, Geneva, SansSerif" 
+size=2>head</FONT></B><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2> - 
+name of the defined relation, and its </FONT><B><FONT 
+face="Arial, Helvetica, Geneva, SansSerif" size=2>body</FONT></B><FONT 
+face="Arial, Helvetica, Geneva, SansSerif" size=2> - a real definition of the 
+relation. The following rules define the relations being a father and being a 
+mother using previously defined relations of being a man or woman and being a 
+parent.</FONT></P>
+<DL>
+  <DD><TT><FONT size=2>father(F,C):-man(F),parent(F,C).</FONT></TT> 
+  <DD><TT><FONT size=2>mother(M,C):-woman(M),parent(M,C).</FONT></TT> </DD></DL>
+<P><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2>Note that we use 
+</FONT><B><FONT face="Arial, Helvetica, Geneva, SansSerif" 
+size=2>variables</FONT></B><FONT face="Arial, Helvetica, Geneva, SansSerif" 
+size=2> (start with capital letter) to express the feature that </FONT><B><FONT 
+face="Arial, Helvetica, Geneva, SansSerif" size=2>every</FONT></B><FONT 
+face="Arial, Helvetica, Geneva, SansSerif" size=2> man which is a parent of any 
+child is also her or his father. If some parameter of the relation is not 
+important we can use anonymous variable (denoted _ ) like in these 
+definitions:</FONT></P>
+<DL>
+  <DD><TT><FONT size=2>is_father(F):-father(F,_).</FONT></TT> 
+  <DD><TT><FONT size=2>is_mother(M):-mother(M,_).</FONT></TT> </DD></DL>
+<P><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2>Before proceeding 
+further one should know how to run the Prolog programs. You run the program by 
+asking </FONT><B><FONT face="Arial, Helvetica, Geneva, SansSerif" 
+size=2>questions</FONT></B><FONT face="Arial, Helvetica, Geneva, SansSerif" 
+size=2> like this one:</FONT></P>
+<DL>
+  <DD><TT><FONT size=2>?-father(X,paul).</FONT></TT> </DD></DL>
+<P><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2>which expresses: who 
+is father of paul? The answer is X=adam, naturally.</FONT></P>
+<P><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2>Now extend your facts 
+database and try to define other family relations like being a son, aunt or 
+grandparent. Also, try to ask Prolog system various questions and see what 
+happens. You can compare your program with following rules:</FONT></P>
+<DL>
+  <DD><TT><FONT size=2>son(S,P):-man(S),parent(P,S).</FONT></TT> 
+  <DD><TT><FONT size=2>daughter(D,P):-woman(D),parent(P,D).</FONT></TT> 
+  <DD><FONT size=2></FONT> 
+  <DD><TT><FONT size=2>siblings(A,B):-parent(P,A),parent(P,B),A\=B.</FONT></TT> 
+  <DL>
+    <DD><TT><FONT size=2>% siblings have at least one common parent</FONT></TT> 
+    <DD><TT><FONT size=2>% the test A\=B preserves that siblings are different 
+    persons</FONT></TT> 
+    <DD><FONT size=2></FONT> </DD></DL>
+  <DD><TT><FONT size=2>full_siblings(A,B):-</FONT></TT> 
+  <DL>
+    <DD><TT><FONT 
+    size=2>parent(F,A),parent(F,B),<BR>parent(M,A),parent(M,B),<BR>A\=B, 
+    F\=M.<BR>% full siblings have common parents (both)<BR>% the test F\=M 
+    preserves that full siblings have two different parents (father and mother, 
+    naturally)<BR></FONT></TT><FONT size=2>&nbsp;</FONT> </DD></DL>
+  <DD><TT><FONT size=2>full_siblings2(A,B):-</FONT></TT> 
+  <DL>
+    <DD><TT><FONT 
+    size=2>father(F,A),father(F,B),<BR>mother(M,A),mother(M,B),<BR>A\=B.<BR>% 
+    another solution to "full siblings problem" that uses relations father and 
+    mother</FONT></TT> </DD></DL>
+  <DD><FONT size=2></FONT> 
+  <DD><TT><FONT 
+  size=2>uncle(U,N):-man(U),siblings(U,P),parent(P,N).</FONT></TT><BR><TT><FONT 
+  size=2>aunt(A,N):-woman(A),siblings(A,P),parent(P,N).</FONT></TT><BR><FONT 
+  size=2>&nbsp;</FONT> 
+  <DD><TT><FONT size=2>grand_parent(G,N):-parent(G,X),parent(X,N).</FONT></TT> 
+  </DD></DL>
+<P><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2>Till now, we use only 
+one rule to express the newly defined relation but we can also define the 
+relation using two and more rules. If we want to express that being a human 
+means being a man or being a woman, we can do it by these two rules:</FONT></P>
+<DL>
+  <DD><TT><FONT size=2>human(H):-man(H).</FONT></TT> 
+  <DD><TT><FONT size=2>human(H):-woman(H).</FONT></TT> </DD></DL>
+<P><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2>The body of rule can 
+also use the relation that is just being defined. This features is called 
+</FONT><B><FONT face="Arial, Helvetica, Geneva, SansSerif" 
+size=2>recursion</FONT></B><FONT face="Arial, Helvetica, Geneva, SansSerif" 
+size=2> and the following rules show its typical usage:</FONT></P>
+<DL>
+  <DD><TT><FONT size=2>descendent(D,A):-parent(A,D).</FONT></TT> 
+  <DD><TT><FONT size=2>descendent(D,A):-parent(P,D),descendent(P,A).</FONT></TT> 
+  </DD></DL>
+<P><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2>One can use the 
+feature of PROLOG of non-determing the input and output variables and easily 
+define the relation ancestor:</FONT></P>
+<DL>
+  <DD><TT><FONT size=2>ancestor(A,D):-descendent(D,A).</FONT></TT> </DD></DL>
+<CENTER>
+<P>
+<HR align=center noShade SIZE=1>
+<B><FONT face="Arial, Helvetica, Geneva, SansSerif" size=2>Nobody can learn 
+programming only by studying programs of others so try to add your own rules to 
+the genealogy program.</FONT></B>
+<P></P></CENTER>
+<P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" bgColor=#ffffcc border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=bottom align=right colSpan=2>
+      <DIV align=right>
+      <DIV align=right>
+      <P>
+      <HR align=center noShade>
+      </DIV></DIV></TD></TR>
+  <TR>
+    <TD vAlign=top><I><FONT face="Times New Roman, Times">Designed and 
+      maintained by </FONT></I><A href="mailto:bartak@kti.mff.cuni.cz"><I><FONT 
+      face="Times New Roman, Times">Roman Barták</FONT></I></A></TD>
+    <TD vAlign=top width=150>
+      <P align=right><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/intro.html"><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2>Previous</FONT></A><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2> | </FONT><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/contents.html"><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2>Contents</FONT></A><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2> | </FONT><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/basic_struct.html"><FONT 
+      face="Arial, Helvetica, Geneva, SansSerif" size=2>Next</FONT></A> 
+  </P></TD></TR></TBODY></TABLE></P></BODY></HTML>

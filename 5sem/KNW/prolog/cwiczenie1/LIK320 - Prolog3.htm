@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0052)http://www.ceti.pl/~gralinski/lik320/lik-prolog3.htm -->
+<HTML><HEAD><TITLE>LIK320 / Prolog</TITLE><LINK 
+href="LIK320 - Prolog3_files/lik.css" type=text/css rel=stylesheet>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-2">
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR></HEAD>
+<BODY>
+<H1>Lingwistyka komputerowa 320</H1>
+<H2>Programowanie w Prologu - powtórzenie</H2>
+<H3>Ćwiczenia 3</H3>
+<H4>Kłopoty z rekurencją</H4>
+<H5>rekurencja lewostronna</H5>
+<P>Mechanizm prologowy napotyka kłopoty z realizacją reguł z rekurencją 
+lewostronną. Z <EM class=term>rekurencją lewostronną</EM> mamy do czynienia 
+wtedy, kiedy ten sam predykat występuje w głowie reguły i w pierwszym podcelu 
+ciała. Przykład (patrz też zadanie 1): <PRE>rodzeństwo(piotr, paweł).
+rodzeństwo(A, B):- rodzeństwo(B, A).
+</PRE>
+<P>Podanie celu niezgodnego z bazą, np. <TT>rodzeństwo(marek, X)</TT>, spowoduje 
+zapętlenie programu.</P>
+<P>Przykładowe rozwiązanie:</P><PRE>rodzeństwo1(piotr, paweł).
+rodzeństwo(A, B):- rodzeństwo1(A, B).
+rodzeństwo(A, B):- rodzeństwo1(B, A).
+</PRE>
+<H5>stosowanie akumulatora</H5>
+<P>Efektywniejszą metodą stosowania rekurencji w programach arytmetycznych jest 
+użycie konstrukcji z akumulatorem. Odpowiada to zastąpieniu rekurencji iteracją, 
+np. zamiast następującego programu:</P><PRE>silnia(1, 1) :- !. 
+silnia(N, Wynik) :- 
+       N1 is N - 1,
+       silnia(N1, Wynik1),
+       Wynik is N * Wynik1.
+</PRE>
+<P>można użyć programu:</P><PRE>silnia(N, Wynik) :-
+          silnia_z_akumulatorem_i_licznikiem(N, 1, 1, Wynik).
+
+silnia_z_akumulatorem_i_licznikiem(N, N, Wynik, Wynik) :- !.
+
+silnia_z_akumulatorem_i_licznikiem(N, L, A, Wynik) :-
+       L1 is L+1,
+       A1 is A*L1,
+       silnia_z_akumulatorem_i_licznikiem(N, L1, A1, Wynik).
+</PRE>
+<P>Drugi argument predykatu <TT>silnia_z_akumulatorem_i_licznikiem</TT> pełni 
+funkcję <EM class=term>licznika</EM> zliczającego liczbę wykonanych pętli (od 1 
+do <I>N</I>), trzeci argument to <EM class=term>akumulator</EM> przechowujący 
+cząstkowy wynik, zaś czwarty argument służy do przekazania wyniku.</P>
+<P>Najczęściej możliwe jest, by funkcję licznika pełnił jednocześnie argument 
+wejściowy - wtedy liczba argumentów zmniejsza się o jeden, np. dla silni:</P><PRE>silnia(N, Wynik) :- 
+          silnia_z_akumulatorem(N, 1, Wynik).    /* (1) */
+
+silnia_z_akumulatorem(1, A, A) :- !.   /* (2) */
+
+silnia_z_akumulatorem(N, A, Wynik) :-       /* (3) */
+          N1 is N - 1,
+	  A1 is A * N,
+	  silnia_z_akumulatorem(N1, A1, Wynik).
+</PRE>
+<P>Tym razem drugi argument pełni rolę <EM class=term>akumulatora</EM>, trzeci 
+argument służy do przekazywania wyniku. Procedura <TT>silnia_z_akumulatorem</TT> 
+działa w ten sposób, że dla wywołania <TT>silnia_z_akumulatorem(N, A, W)</TT> 
+pod <VAR>W</VAR> zostanie podstawiona wartość wyrażenia <TT>N! * A</TT>. Przy 
+stosowaniu tej techniki musimy podać:</P>
+<OL type=a>
+  <LI>regułę wprowadzającą akumulator i ustalającą jego początkową wartość 
+  (tutaj klauzula (1)), 
+  <LI>regułę kończącą iterację (tutaj: (2)) 
+  <LI>regułę dokonującą obliczenia kolejnej wartości akumulatora (tutaj: (3)). 
+  </LI></OL>
+<H4>Predykaty wejścia-wyjścia</H4>
+<UL>
+  <LI><TT>nl</TT> - wypisanie znaku końca wiersza, 
+  <LI><TT>get0(-Char)</TT> - wczytanie znaku z klawiatury, zmienna 
+  <VAR>Char</VAR> przyjmuje wartość kodu znaku (w ASCII), 
+  <LI><TT>get_single_char(-Char)</TT> - wczytanie znaku z klawiatury bez echa i 
+  czekania na naciśnięcie klawisza Enter, 
+  <LI><TT>write(+Term)</TT> - wypisanie termu prologowego na standardowym 
+  wyjściu, 
+  <LI><TT>read(-Term)</TT> - wczytanie termu prologowego ze standardowego 
+  wejścia, <STRONG>uwaga:</STRONG> podawany term należy zakończyć kropką, a 
+  następnie nacisnąć klawisz Enter. </LI></UL>
+<P>Szczegółowe informacje na temat wszystkich predykatów wbudowanych dostępnych 
+w SWI-Prologu można znaleźć w <A class=ext 
+href="http://www.swi.psy.uva.nl/projects/SWI-Prolog/Manual/Contents.html">podręczniku 
+do tego programu</A>.</P>
+<H4>Stosowanie alternatywy</H4>
+<P>W Prologu dopuszczalne jest stosowanie alternatywy w celu uproszczenia zapisu 
+(jak również poprawienia działania mechanizmu wnioskowania). Do wyrażania 
+alternatywy służy operator <TT>;</TT> (średnik). Następujące zapisy są 
+równoważne: <PRE>A :- B.
+A :- C.
+</PRE>
+<P>oraz</P><PRE>A :- (B; C).
+</PRE>
+<H4>Predykat <TT>call</TT></H4>
+<P>Predykat <TT>call</TT> służy do wywołania predykatu, który jest argumentem 
+innego predykatu. Przykład:</P><PRE>pokaż_rozwiązanie(Cel) :- call(Cel).
+
+?- pokaż_rozwiązanie(syn(X, henryk)).
+</PRE>
+<P>Podanie powyższego celu spowoduje wykonanie celu <TT>syn(X, henryk)</TT>.</P>
+<H4>Predykat <TT>repeat</TT></H4>
+<P>Predykat <TT>repeat</TT> służy do wymuszenia poszukiwania kolejnych 
+rozwiązań. Jest to predykat, który zawsze się powodzi i wymusza "zmianę 
+kierunku" podczas nawracania. Przykład:</P><PRE>/* czeka na naciśnięcie klawisza N lub T, 
+   inne klawisze są pomijane */
+potwierdzenie(X):-
+    repeat,
+    get_single_char(Odp),
+    ((Odp = 78; Odp = 110), X = no;
+     (Odp = 84; Odp = 116), X = yes).
+</PRE>
+<P>Przykład zastosowania predykatów <TT>call</TT> i <TT>repeat</TT>:</P><PRE>sesja :-   
+          repeat,
+          write('Podaj cel'), nl,
+          read(Cel), nl,
+          szukaj_wszystkie_rozw(Cel).
+
+szukaj_wszystkie_rozw(Cel):- 
+          	call(Cel),
+          	write('Znalezione rozwiązanie'), nl,
+                write(Cel),  nl,
+	        write('Czy podać następne?'), nl,
+                get(Odp), nl,
+                (Odp = 78; Odp = 110). 
+
+szukaj_wszystkie_rozw(_) :- write('Brak innych rozwiazan'), nl, fail.
+</PRE>
+<H4>Śledzenie działania mechanizmu wnioskowania</H4>
+<P>Poszukiwanie rozwiązań można śledzić poprzez podanie celu <TT>trace</TT>, a 
+następnie podanie celu, którego osiągnięcie chcemy śledzić. Kolejne kroki 
+obserwuje się naciskając klawisz Enter. Debugowanie można przerwać poprzez 
+naciśnięcie <TT>n</TT> (koniec śledzenia) lub <TT>a</TT> (przerwanie działania). 
+Cel <TT>notrace</TT> unieważnia cel <TT>trace</TT>. Można śledzić wybrane kroki 
+poprzez podanie celu <TT>spy(<I>predykat</I>)</TT>. Wówczas program zatrzymuje 
+się przy napotkaniu podanego predykatu. Naciśnięcie <TT>l</TT> powoduje skok do 
+następnej realizacji predykatu.</P>
+<H4>Modyfikowanie bazy danych w trakcie działania programu</H4>
+<P>Do bazy danych można dołączyć nowe klauzule podczas wykonywania programu przy 
+pomocy polecenia <TT>asserta(+<I>Klauzula</I>)</TT> lub 
+<TT>assertz(+<I>Klauzula</I>)</TT>. Różnica między nimi polega na tym, że 
+polecenie <TT>asserta</TT> umieszcza klauzule przed wszystkimi klauzulami 
+znajdującymi się już w bazie danych, natomiast <TT>assertz</TT> - za klauzulami. 
+Przykłady:</P><PRE>asserta(ojciec(bronek, broncio)).
+asserta(syn(X, Y):- ojciec(Y,X)).
+</PRE>
+<P>Predykat <TT>retract(+<I>Klauzula</I>)</TT> powoduje usunięcie klauzuli z 
+bazy danych. Predykat <TT>abolish(+<I>Predykat</I>, +<I>Arg</I>)</TT> powoduje 
+usunięcie z bazy danych wszystkich klauzul opisujących <VAR>Predykat</VAR> o 
+arności (liczbie argumentów) <VAR>Arg</VAR>.</P>
+<H3>Zadania z ćwiczeń 3</H3>
+<P><B>Zadanie 1</B> Podać przykład opisu relacji przechodniej (np. 
+dwuargumentowej relacji <TT>przodek</TT>) z lewostronną rekurencją i bez 
+niej.</P>
+<P><B>Zadanie 2</B> Zdefiniować rekurencyjnie predykat <TT>potęga(A, B, C)</TT>, 
+gdzie <VAR>C</VAR> jest wynikiem potęgowania 
+<VAR>A</VAR><SUP><VAR>B</VAR></SUP>. Zdefiniować ten sam predykat przy użyciu 
+konstrukcji z akumulatorem (z licznikiem lub bez).</P>
+<P><B>Zadanie 3</B> Podane przykłady zastosowania instrukcji <TT>repeat</TT> 
+wykonać z zasłonięciem i bez zasłonięcia instrukcji <TT>repeat</TT>.</P>
+<P><B>Zadanie 4</B> Sprawdzić na wybranej przez siebie bazie, czy zapisy a) 
+<TT>A :- B, C. A:- B, D.</TT> b) <TT>A:- B, (C; D)</TT> są równoważne (tzn., że 
+przy obu zapisach cel A jest spełniony dla tych samych warunków). Który z 
+zapisów jest efektywniejszy (tzn. wymaga mniej pracy od mechanizmu 
+wnioskowania)? Odpowiedź znaleźć, wykorzystując mechanizm śledzenia 
+wnioskowania.</P>
+<P><B>Zadanie 5</B> Plik <A 
+href="http://www.ceti.pl/~gralinski/lik320/odmiana.pl">odmiana.pl</A> zawiera 
+program-bazę danych form fleksyjnych rzeczowników męskożywotnych (rzeczowników 
+męskich oznaczających zwierzęta, uwaga: program nie zawsze generuje poprawne 
+formy). 
+<OL type=a>
+  <LI>sprawdzić działanie programu, ustawić formę celownika liczby pojedynczej 
+  rzeczownika 'kot' na 'kotu' (zamiast 'kotowi'), ustawić poprawny temat dla 
+  rzeczowników 'lew' i 'paw', 
+  <LI>zmodyfikować program, tak aby poprawnie były generowane formy narzędnika 
+  liczby pojedynczej dla 'rak' i innych rzeczowników zakończonych na 'k' 
+  ('rakiem' zamiast 'rakem'), 
+  <LI>rozszerzyć program o opcje 'a - dodaj wyjątek-formę alternatywną', np. dla 
+  rzeczownika 'osioł' oprócz regularnej formy 'osłowi' celownikiem liczby 
+  pojedynczej może być 'osłu', zmodyfikować procedurę <TT>wykonaj(102)</TT>, tak 
+  aby wypisywała ona wszystkie formy fleksyjne (jeśli jest ich więcej niż 
+  jedna). </LI></OL>
+<P><B>Zadanie A</B> Na podstawie pliku <A 
+href="http://www.ceti.pl/~gralinski/lik320/baza_dan.pl">baza_dan.pl</A> napisać 
+swoją bazę danych, np. bazę danych samochodów lub rozbudować bazę danych z 
+przykładu o dodatkowe operacje.</P>
+<P><B>Zadanie 6</B> Na podstawie pliku <A 
+href="http://www.ceti.pl/~gralinski/lik320/alkohol.pl">alkohol.pl</A> napisać 
+podobny program typu "zgadywanka", np. "Twoja ulubiona książka".</P>
+<P><B>Zadanie B</B> (dodatkowe) Podać a) predykat dwuargumentowy obliczający 
+n-tą liczbę ciągu Fibbonacciego, b) predykat wykonujący to samo zadanie z 
+licznikiem i akumulatorem.</P></BODY></HTML>

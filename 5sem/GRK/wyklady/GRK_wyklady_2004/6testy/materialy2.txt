@@ -1,0 +1,49 @@
+Krzywe Bezier’a
+-	wa¿na kolejnoœæ punktów
+-	krzywa przechodzi przez pierwszy i ostatni punkt
+-	mieœci siê w otoczce wypuk³ej przechodz¹cej przez punkty kontrolne
+-	przesuwaj¹c punkt zmieniamy kszta³t krzywej
+-	aby zapamiêtaæ krzyw¹ nale¿y pamiêtaæ tylko punkty kontrolne
+Reprezentacja wielok¹towa (BREP)
+-	zapamiêtujemy w niej tylko punkty i krawêdzie
+Metoda Sweep
+-	definiujemy przekrój i przesuwamy go wzd³u¿ prostej lub krzywej (mo¿na zmieniaæ kszta³t)
+Metoda OCTREE
+-	dzielimy szeœcian na 8 mniejszych szeœcianów... i jesteœmy w stanie zapisaæ bry³ê z dok³adnoœci¹ wokselow¹ (najmniejsza jednostka przestrzenna)
+Rzutowanie (przejœcie z 3D na 2D)
+-	równoleg³e (promienie || do siebie)
+-	ortogonalne (promienie || do siebie i prostopad³e do rzutu)
+-	ukoœne (promienie || do siebie i ukoœne do rzutu)
+Eliminowanie rzeczy niewidocznych
+Metoda wektora normalnego
+-	gdy bry³a wypuk³a, to dla ka¿dej œciany wyznaczamy wektor normalny (jeœli jest on zwrócony do obserwatora, to œcianka widoczna)
+Z-bufor
+-	potrzebna jest druga pamiêæ o takiej samej wielkoœci jak pamiêæ obrazu
+-	przegl¹damy piksele i do z-bufora wpisujemy wartoœæ „z”, a do pamiêci obrazu minimum z wartoœci „z” w z-buforze i pamiêci obrazu (czyli barwê piksela najbli¿szego obiektu).
+-	du¿a z³o¿onoœæ obliczeniowa
+-	nie zale¿y od z³o¿onoœci sceny
+Metoda malarska
+-	porz¹dkujemy wielok¹ty (sortujemy) kolejno wg wszystkich 3 wspó³rzêdnych (jeœli pokrywaj¹ siê)
+Cieniowanie powierzchni
+-	najproœciej wyznaczyæ barwy przed zrzutowaniem
+-	jeœli Ÿród³o œwiat³a jest daleko i promienie docieraj¹ ||, to wszystkie œcianki s¹ pokryte jednolicie
+-	jasnoœæ œcianki zale¿y od cos k¹ta miêdzy promieniem padaj¹cym a normaln¹ œcianki
+Œwiat³o otoczenia
+-	stajemy w Ÿródle œwiat³a, ustalamy widocznoœæ
+-	dla œcianek widocznych ustalamy barwê zgodnie z cos k¹ta
+-	œciankom niewidocznym dajemy barwê œwiat³a otoczenia
+Metoda Gouraud 
+-	mamy informacjê o barwie ka¿dego wierzcho³ka
+-	wyliczamy barwy poœrednie dla krawêdzi
+-	wyliczamy barwy dla wnêtrza figury
+-	jeœli Ÿród³o œwiat³a jest bardzo blisko, to nie uzyskamy efektu rozœwietlenia
+Metoda Phonga
+-	mamy informacjê o wartoœciach normalnych w wierzcho³kach
+-	(dalej podobnie jak w metodzie Gouraud)
+-	przy dok³adniejszych obliczeniach nale¿y braæ pod uwagê równie¿ œwiat³o odbite od innych obiektów
+Metoda œledzenia promieni
+-	analizujemy drogê promieni z oka i dla ka¿dego z nich ustalamy barwê
+-	wykorzystuje siê dodatkowe (pomocnicze) promienie
+-	gdy promieñ trafia na obiekt, to analizujemy odbicia (góra 1-2)
+-	sprawdzenie, czy punkt le¿y w cieniu innego obiektu: wypuszczamy z takiego punktu promienie (pomocnicze) w kierunku Ÿróde³ œwiat³a – gdy trafiamy na obiekt, to punkt le¿y w jego cieniu.
+-	t¹ metod¹ rozwi¹zujemy: eliminowanie obiektów niewidocznych, rzutowania oraz wyznaczania bry³y widzenia

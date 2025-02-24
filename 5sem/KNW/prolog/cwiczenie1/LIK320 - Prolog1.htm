@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0052)http://www.ceti.pl/~gralinski/lik320/lik-prolog1.htm -->
+<HTML><HEAD><TITLE>LIK320 / Prolog</TITLE><LINK 
+href="LIK320 - Prolog1_files/lik.css" type=text/css rel=stylesheet>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-2">
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR></HEAD>
+<BODY>
+<DIV class=main>
+<H1>Lingwistyka komputerowa 320</H1>
+<H2>Programowanie w Prologu - powtórzenie</H2>
+<H3>Ćwiczenia 1. Fakty, reguły, cele, operator równości, operatory 
+arytmetyczne</H3>
+<H4>Powtórzenie podstawowych pojęć</H4>
+<P>Prolog jest <EM class=term>językiem deklaratywnym</EM>. Jego deklaratywność 
+polega na tym, że programista deklaruje (wymienia) jedynie obiekty konieczne do 
+rozwiązania problemu oraz związki, jakie pomiędzy tymi obiektami zachodzą, w 
+postaci tzw. <EM class=term>faktów</EM> oraz reguł. Zadanie do rozwiązania 
+przedstawiane jest w postaci <EM class=term>celu</EM>.</P>
+<H5>fakty</H5>Fakty to bezwarunkowo prawdziwe stwierdzenia o istnieniu pewnych 
+powiązań pomiędzy obiektami. Powiązania, jakie istnieją między obiektami, 
+przedstawia się za pomocą <EM class=term>predykatów</EM>. Fakty przedstawiamy w 
+Prologu w następujący sposób: <PRE><I>symbol_predykatu</I>(<I>obiekt1</I>, <I>obiekt2</I>,<I>obiekt3</I>,... <I>obiektn</I>).</PRE>gdzie 
+<I>symbol_predykatu</I> oznacza nazwę predykatu, zaś <I>obiekt1</I>, 
+<I>obiekt2</I>, <I>obiekt3</I>,... <I>obiektn</I> stanowią argumenty predykatu. 
+Tak zapisany fakt oznacza istnienie zależności o nazwie <I>symbol_predykatu</I> 
+między obiektami reprezentowanymi przez nazwy <I>obiekt1</I>, <I>obiekt2</I>, 
+<I>obiekt3</I>,... <I>obiektn</I>, np. <TT>lubi(marta,piotr)</TT>. Uwaga: 
+kolejność argumentów jest ważna, np. fakt <TT>lubi(marta,piotr)</TT> oznacza co 
+innego niż fakt <TT>lubi(piotr,marta)</TT>. 
+<H5>reguły</H5>
+<P>Reguły to warunkowe stwierdzenia o istnieniu pewnych zależności między 
+obiektami. Znaczenie reguł można przedstawić schematycznie w następujący sposób: 
+
+<BLOCKQUOTE><I>nazwa_powiązania</I>(<I>obiekt1</I>, <I>obiekt2</I>, 
+  <I>obiekt3</I>,... <I>obiektn</I>) <STRONG>if</STRONG> 
+  <I>nazwa_powiązania1</I>(<I>obiekt<SUB>1</SUB>1</I>, 
+  <I>obiekt<SUB>1</SUB>2</I>, 
+  <I>obiekt<SUB>1</SUB>3</I>,...<I>obiekt<SUB>1</SUB>m<SUB>1</SUB></I>) 
+  <STRONG>and</STRONG> <I>nazwa_powiązania2</I>(<I>obiekt<SUB>2</SUB>1</I>, 
+  <I>obiekt<SUB>2</SUB>2</I>, <I>obiekt<SUB>2</SUB>3</I>, ... 
+  <I>obiekt<SUB>2</SUB>m<SUB>2</SUB></I>) <STRONG>and</STRONG> ... 
+  <I>nazwa_powiązaniak</I>(<I>obiekt<SUB>k</SUB>1</I>, 
+  <I>obiekt<SUB>k</SUB>2</I>,<I>obiekt<SUB>k</SUB>3</I>,... 
+  <I>obiekt<SUB>k</SUB>m<SUB>k</SUB></I>). </BLOCKQUOTE>
+<P>Warunkowy charakter reguł polega na tym, że predykat występujący po lewej 
+stronie słowa <STRONG>if</STRONG> jest prawdziwy jedynie wówczas, gdy prawdziwe 
+są wszystkie warunki zapisane po prawej stronie. Słowa kluczowe 
+<STRONG>if</STRONG> oraz <STRONG>and</STRONG> zastępujemy symbolami odpowiednio 
+<TT>:-</TT> oraz <TT>,</TT>. Przykład reguły: <TT>lubi(magda,X):- mezczyzna(X), 
+przystojny(X).</TT>, predykat <VAR>lubi</VAR> jest tutaj <EM 
+class=term>głową</EM> reguły (głowa składa się tylko z jednego predykatu), zaś 
+dwa warunki <TT>mezczyzna(X)</TT> i <TT>przystojny(X)</TT> tworzą <EM 
+class=term>ciało</EM> reguły. Uwaga: zakres zmiennej jest lokalny - dotyczy 
+tylko jednej reguły, np.</P><PRE>ma_powodzenie(X):- lubi(magda, X), lubi(dorota,X).
+</PRE>
+<P>dotyczy tego samego <VAR>X</VAR>, ale reguły <PRE>ma_powodzenie(X) :- lubi(magda, X).
+ma_powodzenie(X) :- lubi(dorota, X).
+</PRE>
+<P>dotyczyć mogą różnych <VAR>X</VAR>-ów.</P>
+<P>Fakty i reguły stanowią tzw. <EM class=term>klauzule</EM>. W przypadku faktów 
+mamy do czynienia z klauzulami składającymi się tylko z głowy. Fakty i reguły 
+występujące w programie tworzą tzw. <EM class=term>bazę danych programu</EM>. 
+Zbiór klauzul o takiej samej głowie i identycznej liczbie argumenty 
+(<EM>arności</EM>) tworzy tzw. <EM class=term>procedurę</EM>. 
+<H5>cel</H5>
+<P>Mając skonstruowaną bazę danych programu, można ją wykorzystać poprzez 
+zadawanie pytań (celów). Celem jest: 
+<UL>
+  <LI>pytanie o prawdziwość podanych faktów, 
+  <LI>polecenie znalezienia nazw obiektów będących w relacji z innymi obiektami. 
+  </LI></UL>
+<P>Cel może być albo pojedynczym predykatem, albo koniunkcją predykatów (tzw. 
+podcelów). Przykłady celów: 
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD><TT>?- lubi(marta,piotr).</TT></TD>
+    <TD><I>czy Marta lubi Piotra?</I></TD></TR>
+  <TR>
+    <TD><TT>?- lubi(piotr,marta).</TT></TD>
+    <TD><I>czy Piotr lubi Martę?</I></TD></TR>
+  <TR>
+    <TD><TT>?- lubi(marta,X).</TT></TD>
+    <TD><I>kogo lubi Marta?</I></TD></TR></TBODY></TABLE>
+<H4>Transfer programów do pamięci</H4>
+<P>Jako interpretera Prologu używać będziemy programu SWI-Prolog działającego w 
+Linuksie. Wszelkie informacje o SWI-Prologu można znaleźć na stronie <A 
+class=ext href="http://www.swi-prolog.org/">http://www.swi-prolog.org/</A>. Z 
+podanej strony można także <A class=ext 
+href="http://www.swi-prolog.org/download.html">ściągnąć najnowsze wersje binarne 
+dla różnych systemów operacyjnych</A>.</P>
+<P>Na komputerach uczelnianych SWI-Prolog jest już zainstalowany - w systemie 
+Linux wystarczy wydać polecenie <TT>pl</TT>, by uruchomić interpreter.</P>
+<P>SWI-Prolog nie udostępnia edytora programów. Programy prologowe można 
+zapisywać używając dowolnego edytora (np. pico, vim, emacs). Najwygodniej mieć 
+równocześnie otwarte dwa okna - jedno z interpreterem, drugie z edytorem. 
+Programy napisane w języku SWI Prolog mają domyślne rozszerzenie <TT>.pl</TT> 
+(przez co niestety mogą się mieszać z programami w języku Perl, które 
+przypadkowo mają takie same rozszerzenie).</P>
+<P>Aby <EM>skonsultować</EM> (wczytać do pamięci) pliki <TT>plik1.pl</TT>, 
+<TT>plik2.pl</TT>, ... należy wydać interpreterowi następujące polecenia:</P><PRE>?- [plik1].
+?- [plik2].
+
+</PRE>
+<P>Uwaga: wczytywane pliki muszą być w tym samym katalogu, spod którego 
+uruchamiany jest program <TT>pl</TT>.</P>
+<P>Inna metoda uruchamiania plików polega na utworzeniu pliku o nazwie np. 
+<TT>start.pl</TT> i o następującej treści:</P><PRE>:- [plik1]. 
+:- [plik2].
+</PRE>
+<P>Następnie wystarczy skonsultować ten plik poprzez cel:</P><PRE>?- [start].
+</PRE>
+<H4>Omówienie niektórych elementów języka</H4>
+<H5>równość i uzgadnianie</H5>
+<P>Równość jest wbudowanym predykatem infiksowym. Wyrażenie <TT>A=B</TT> oznacza 
+próbę uzgodnienia (<I>matching</I>) zmiennych <VAR>A</VAR> i <VAR>B</VAR>, tj. 
+sprawienia, by były sobie równe. W przypadku wyrażenia <TT>A=B</TT> możemy mieć 
+następujące możliwości: 
+<UL>
+  <LI><VAR>A</VAR> jest <EM class=term>zmienną ukonkretnioną</EM>, tj. związaną 
+  z pewną stałą, <VAR>B</VAR> jest <EM class=term>zmienną wolną</EM> - wówczas 
+  <VAR>B</VAR> zostanie ukonkretniona przez wartość zmiennej <VAR>A</VAR>, 
+  <LI><VAR>B</VAR> jest zmienną ukonkretnioną, <VAR>A</VAR> jest zmienną wolną - 
+  wówczas <VAR>B</VAR> zostanie ukonkretniona przez wartość zmiennej 
+  <VAR>B</VAR>, 
+  <LI>jeśli obie zmienne są wolne, to wtedy następuje ich powiązanie, w efekcie 
+  którego jeżeli później jedna z nich zostanie ukonkretniona, to druga 
+  automatycznie przyjmie tę samą wartość, 
+  <LI>jeśli obie zmienne są ukonkretnione, następuje porównanie ich wartości i 
+  równość zachodzi, jeśli ta sama wartość występuje po obu stronach predykatu 
+  <TT>=</TT>. </LI></UL>(Predykatem przeciwnym do równości jest <TT>X\=Y</TT> lub 
+inaczej <TT>not(A=B)</TT>.) <!--<table border="1">
+<tr><th>fakt</th><th>pytanie</th><th>uzgodnienie</th><th>rodzaj</th></tr>
+<tr>
+<td><tt>lubi(jan,wino)</tt></td>
+<td><tt>lubi(X,wino)</tt></td>
+<td><tt>X=jan</tt></td>
+<td>ukonkretnienie</td></tr>
+<tr>
+<td><tt>lubi(piotr,maria)</tt></td>
+<td><tt>lubi(X,Y)</tt></td>
+<td><tt>X=piotr, Y=maria</tt></td>
+<td>ukonkretnienie</td></tr>
+<tr>
+<td><tt>lubi(jan,Z)</tt></td>
+<td><tt>lubi(jan,X)</tt></td>
+<td><tt>Z=X</tt></td>
+<td>powiązanie</td></tr>
+</table>
+-->
+<H4>operator specjalny <TT>is</TT></H4>
+<P>Operator <TT>is</TT> służy do ukonkretniania występującej po lewej stronie 
+zmiennej przez wartość termu znajdującego się po prawej stronie. Term ten musi 
+być wyrażeniem arytmetycznym, ponieważ Prolog stara się najpierw obliczyć jego 
+wartość. Inne struktury nie są dopuszczalne.</P>
+<P>Przykład zastosowania wyrażeń arytmetycznych:</P><PRE>długość(obiekt, 10).
+szerokość(obiekt, 20).
+powierzchnia(X, Y):- dlugość(X, A),
+	             szerokość(X, B),
+		     Y is A * B.	
+</PRE>
+<P>(Patrz także <A 
+href="http://www.ceti.pl/~gralinski/lik320/lik-prolog1.htm#dodatek">dodatek</A>.)</P>
+<H3>Zadania z ćwiczeń 1</H3>
+<P><B>Zadanie 1</B> (dla "niewprawionych") Utworzyć plik z faktami i predykatami 
+podanymi jako przykłady (<TT>lubi</TT>, <TT>przystojny</TT>, 
+<TT>ma_powodzenie</TT>) i uzupełnić kilkoma klauzulami. Wypróbować różnego typu 
+cele: sprawdzenie prawdziwości pewnych faktów (np. <TT>?- 
+ma_powodzenie(jan)</TT>), wyszukanie pewnych informacji (np. 
+<TT>ma_powodzenie(X)</TT>).</P>
+<P><B>Zadanie 2</B> Dane jest drzewo genealogiczne:</P><IMG 
+src="LIK320 - Prolog1_files/rodzina.png"> 
+<P>Utworzyć bazę danych: 
+<UL>
+  <LI>fakty: <TT>rodzic</TT>, <TT>mężczyzna</TT>, <TT>kobieta</TT>, 
+  <LI>reguły: <TT>matka</TT>, <TT>ojciec</TT>, <TT>dziecko</TT>, <TT>wnuk</TT>, 
+  <TT>potomek</TT>, <TT>przodek</TT>, <TT>brat</TT>, <TT>siostra</TT>. </LI></UL>
+<P>Zadawać cele: 
+<OL type=a>
+  <LI>sprawdzające poprawność faktów, 
+  <LI>sprawdzające poprawność reguł, np. <TT>przodek(eugenia, maria)</TT>, 
+  <LI>wyszukujące, np. <TT>przodek(X, maria)</TT>. </LI></OL>
+<P>(W celu wyszukania kilku odpowiedzi należy po wyświetleniu odpowiedzi 
+nacisnąć '<TT>;</TT>'.)</P>
+<P><B>Zadanie A</B> (dodatkowe) Na przykładzie rodziny zdefiniować pewną relację 
+symetryczną, np. <TT>rodzeństwo</TT>, czyli napisać taką regułę, która umożliwi 
+wywnioskowanie, że <TT>rodzeństwo(b, a)</TT> na podstawie faktu 
+<TT>rodzeństwo(a, b)</TT>.</P>
+<P><B>Zadanie B</B> (dodatkowe) Informacje o rodzinie poszerzyć o dane dotyczące 
+wieku oraz o pewne dodatkowe klauzule poszerzające relację pokrewieństwa. 
+Sprawdzić, czy istnieje jakaś osoba z poprzedniego pokolenia młodsza od osoby z 
+młodszego pokolenia (np. ciocia młodsza od bratanka).</P>
+<P><B>Zadanie 3</B> Zdefiniować relację <TT>większy(X, Y, Z)</TT>, której dwoma 
+pierwszymi elementami są dwie liczby, a trzecim elementem jest większa z 
+nich.</P>
+<P><B>Zadanie 4</B>. Zdefiniować dwuargumentową relację <TT>moduł</TT>, w której 
+drugim argumentem jest wartość bezwzględna pierwszego argumentu.</P>
+<P><B>Zadanie 5</B>. Zdefiniować rekurencyjnie relację <TT>silnia</TT>, której 
+drugim argumentem jest wartość silni pierwszego argumentu. Wskazówka - 
+skorzystać z następującego opisu sumowania kolejnych liczb naturalnych od 0 do 
+<VAR>N</VAR>. <PRE>suma(0,0).  /* suma 0 liczb wynosi 0 */
+
+suma(N, Nwynik) :-
+     N &gt; 0, 
+     M is N-1, /* za M przyjmij N-1  */
+     suma(M, Mwynik), /* oblicz rekurencyjnie sumę N-1 liczb */
+     Nwynik is N + Mwynik. /* do uzyskanej sumy dodaj N */
+</PRE>
+<P><B>Zadanie C</B> (dodatkowe) Zdefiniować operację potęgowania liczb 
+naturalnych.</P>
+<P><B>Zadanie D</B> (dodatkowe) Napisać predykat, który opisuje rozwiązanie 
+problemu wieży z Hanoi: N krążków poukładanych jeden na drugim od największego 
+(na spodzie) do największego należy przenieść na inną wieżę w tym samym 
+układzie. Nie można krążka większego położyć na mniejszy. Mamy do dyspozycji 
+trzecią wieżę pomocniczą.<BR>Wskazówki: 1. Opis rozwiązania może wyglądać tak 
+"przenieś krążek z wieży pierwszej na drugą, przenieś krążek z wieży trzecią na 
+pierwszą", itp. 2. Aby przenieść N krążków z wieży pierwszej na drugą, należy 
+przeniesć N-1 krażków na wieżę trzecią, następnie przenieść pozostały krażek na 
+wieżę drugą i przenieść N-1 krążków z wieży trzeciej na drugą.</P>
+<P><B>Zadanie 6</B> (dodatkowe) Napisać predykat <TT>slownie</TT>, którego 
+pierwszym argumentem jest liczba, a drugim liczebnik w języku polskim 
+odpowiadający tej liczbie, przykład oczekiwanego działania predykatu: <PRE>?- slownie(5, L).
+
+L = pięć
+
+Yes
+
+?- slownie(214, L).
+
+L = 'dwieście czternaście'
+
+Yes
+</PRE>
+<P>Ograniczyć się do liczb naturalnych mniejszych od 10000. Wskazówka: użyć 
+predykatu wbudowanego <TT>concat</TT>, który skleja napisy podane jako dwa 
+pierwsze argumenty; przykład działania predykatu <TT>concat</TT>: <PRE>?- concat('Ala',' ma kota', S).
+
+S = 'Ala ma kota'
+
+Yes
+</PRE><A name=dodatek></A>
+<H3>Dodatek</H3>
+<H4>niektóre operatory w Prologu</H4>
+<TABLE cellPadding=5 border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top width="20%"><CODE>L = R</CODE></TD>
+    <TD vAlign=top><VAR>L</VAR> i <VAR>R</VAR> pasują do siebie 
+      (<I>matching</I>)</TD>
+    <TD vAlign=top><PRE>?- X = 2+3
+
+X = 2+3
+
+Yes
+?- [5, X] = [Y, 7].
+
+X = 7
+Y = 5
+
+Yes
+</PRE></TD></TR>
+  <TR>
+    <TD vAlign=top><CODE>L == R</CODE></TD>
+    <TD vAlign=top><VAR>L</VAR> i <VAR>R</VAR> są tym samym</TD>
+    <TD vAlign=top><PRE>?- X == X.
+
+X = _G174
+
+Yes
+?- X == Y.
+
+No
+
+?- X == 5.
+
+No
+</PRE></TD></TR>
+  <TR>
+    <TD vAlign=top><CODE>L =:= R</CODE></TD>
+    <TD vAlign=top>arytmetyczna równość (L i R są wyliczane)</TD>
+    <TD vAlign=top><PRE>?- X =:= 2+3.
+
+ERROR: Arguments are not 
+sufficiently instanstiated
+[Prolog próbuje wyliczyć 
+wartość arytmetyczną X, 
+co nie ma sensu]
+
+Yes
+?- 22-12+2 =:= 7+5.
+
+Yes
+</PRE></TD></TR>
+  <TR>
+    <TD vAlign=top><CODE>L is R</CODE></TD>
+    <TD vAlign=top>dopasuj R do L, R jest wyliczane (zwykle używane do 
+      wiązania zmiennej)</TD>
+    <TD vAlign=top><PRE>?- X is 2+3.
+
+X = 5
+
+Yes
+?- 5 is 2+3.
+
+Yes
+</PRE></TD></TR>
+  <TR>
+    <TD vAlign=top><CODE>L + R</CODE></TD>
+    <TD vAlign=top>dodawanie</TD>
+    <TD>&nbsp;</TD></TD></TR>
+  <TR>
+    <TD vAlign=top><CODE>L - R</CODE></TD>
+    <TD vAlign=top>odejmowanie</TD>
+    <TD>&nbsp;</TD></TD></TR>
+  <TR>
+    <TD vAlign=top><CODE>L * R</CODE></TD>
+    <TD vAlign=top>mnożenie</TD>
+    <TD>&nbsp;</TD></TD></TR>
+  <TR>
+    <TD vAlign=top><CODE>L / R</CODE></TD>
+    <TD vAlign=top>dzielenie (na liczbach rzeczywistych)</TD>
+    <TD vAlign=top><PRE>?- X is 5/2.
+
+X = 2.5
+
+Yes
+</PRE></TD></TD></TR>
+  <TR>
+    <TD vAlign=top><CODE>L // R</CODE></TD>
+    <TD vAlign=top>dzielenie (całkowitoliczbowe)</TD>
+    <TD vAlign=top><PRE>?- X is 5//2.
+
+X = 2
+
+Yes
+</PRE></TD></TD></TR>
+  <TR>
+    <TD vAlign=top><CODE>L mod R</CODE></TD>
+    <TD vAlign=top>reszta z dzielenia</TD>
+    <TD vAlign=top><PRE>?- X is 14 mod 10.
+
+X = 4
+
+Yes
+</PRE></TD></TD></TR></TBODY></TABLE>
+<P>Uwaga: znaczenie operatorów <CODE>/</CODE> i <CODE>//</CODE> zależy od 
+interpretera Prologu (może być na odwrót).</P></DIV></BODY></HTML>

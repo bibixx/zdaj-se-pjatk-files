@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0057)http://kti.ms.mff.cuni.cz/~bartak/prolog.old/samples.html -->
+<HTML><HEAD><TITLE>Prolog Guide: Samples</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content=file:///C|/WINDOWS/Desktop/www/Project.vpp name=VPSiteProject>
+<META content="MSHTML 6.00.2737.800" name=GENERATOR></HEAD>
+<BODY background="Prolog Guide Samples_files/CLOUDY%20BLUE.jpg">
+<P>
+<SCRIPT language=JavaScript>
+<!--
+document.write("<IMG SRC=\"http://www.monitor.cz:8080/cgi-bin/stat?id=roman&ref=" + top.document.referrer+'&'+Math.round(Math.random()*10000)+ "\" WIDTH=1 HEIGHT=1>");
+// --></SCRIPT>
+<NOSCRIPT><IMG height=1 src="Prolog Guide Samples_files/stat.gif" width=1 
+align=bottom> </NOSCRIPT></P>
+<P align=right><A 
+href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/index.html"><IMG height=23 
+alt=index src="Prolog Guide Samples_files/book_small.gif" width=28 align=left 
+border=0 NATURALSIZEFLAG="3"></A>I<FONT size=-1>NTERACTIVE</FONT> P<FONT 
+size=-1>ROLOG</FONT> G<FONT size=-1>UIDE<BR>© Roman Barták 1997</FONT> 
+<HR align=right noShade SIZE=1>
+
+<TABLE cellSpacing=5 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top><B><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/index.html#TOC">Table 
+      of Contents</A></B></TD>
+    <TD></TD>
+    <TD>
+      <P align=right><B><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/implementations.html">Previous 
+      Chapter</A></B><BR>(implementations)</P></TD>
+    <TD>
+      <P align=right><B><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/examples.html">Next 
+      Chapter</A></B><BR>(examples)</P></TD></TR></TBODY></TABLE>
+<HR align=right noShade SIZE=1>
+
+<P></P>
+<H1><A name=top></A><FONT size=+4>I</FONT>NTRODUCTORY<FONT size=+4> 
+S</FONT>AMPLES 
+<HR align=left noShade>
+</H1>
+<P>I try to collect some introductory PROLOG programs that can help you to 
+understand underlying principles of PROLOG programming. <A 
+href="mailto:%20bartak@kti.mff.cuni.cz?Subject=PROLOG samples">Send me</A> other 
+examples or ideas of short programs to publish them in this page.</P>
+<P>Currently, I am working on a new subsite <A 
+href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/learning.html">Learning 
+Prolog via Examples</A> which will contain much more examples of PROLOG code. As 
+soon as this subsite infills by more examples I expect to remove this page.</P>
+<P><B>Tip:</B> Use Copy&amp;Paste function of the browser to move the code into 
+the PROLOG environment.</P>
+<P>
+<HR align=left noShade SIZE=1>
+
+<P></P>
+<DL>
+  <DT><FONT size=+2>member/2</FONT> 
+  <DD>test membership relation (member(3,[1,2,3])-&gt;true) 
+  <DD>also generates members of given list 
+  <DD>usage: <TT>?-member(X,[1,2,3]).</TT> 
+  <DD> 
+  <DD><TT>member(X,[X|T]).</TT> 
+  <DD><TT>member(X,[_|T]):-</TT> 
+  <DL>
+    <DD><TT>member(X,T).</TT> </DD></DL>
+  <DD> 
+  <DT>
+  <HR align=left>
+  <FONT size=+2>append/3</FONT> 
+  <DD>appends two lists ([1,2,3],[4,5]-&gt;[1,2,3,4,5]) 
+  <DD>usage: <TT>?-append([1,2,3],[4,5],X).</TT> 
+  <DD>try also <TT>?-append(A,B,[1,2,3,4,5]).</TT> 
+  <DD> 
+  <DD><TT>append([H|T],L2,[H|R]):-</TT> 
+  <DL>
+    <DD><TT>append(T,L2,R2).</TT> </DD></DL>
+  <DD><TT>append([],R,R).</TT> 
+  <DD> 
+  <DT>
+  <HR align=left>
+  <FONT size=+2>revert/2</FONT> 
+  <DD>list reversion ([1,2,3]-&gt;[3,2,1]) 
+  <DD>usage: <TT>?-revert([1,2,3],R).</TT> 
+  <DD> 
+  <DD><TT>revert(List,RevList):-</TT> 
+  <DL>
+    <DD><TT>rev(List,[],RevList).</TT> </DD></DL>
+  <DD> 
+  <DD><TT>rev([H|T],S,R):-</TT> 
+  <DL>
+    <DD><TT>rev(T,[H|S],R).</TT> </DD></DL>
+  <DD><TT>rev([],R,R).</TT> 
+  <DT> 
+  <DT>
+  <HR align=left>
+  <FONT size=+2>perm/2</FONT> 
+  <DD>permutation generator 
+  ([1,2,3]-&gt;[1,2,3];[2,1,3];[2,3,1],[1,3,2],[3,1,2],[3,2,1]) 
+  <DD>usage: <TT>?-perm([1,2,3],P).</TT> 
+  <DD> 
+  <DD><TT>perm([H|T],Perm):-</TT> 
+  <DL>
+    <DD><TT>perm(T,SP),insert(H,SP,Perm).</TT> </DD></DL>
+  <DD><TT>perm([],[]).</TT> 
+  <DD> 
+  <DD><TT>insert(X,T,[X|T]).</TT> 
+  <DD><TT>insert(X,[H|T],[H|NT]):-</TT> 
+  <DL>
+    <DD><TT>insert(X,T,NT).</TT> </DD></DL>
+  <DT><TT><BR></TT>
+  <HR align=left>
+  <FONT size=+2>solve/1</FONT> 
+  <DD>PROLOG interpreter written in PROLOG (so-called vanilla meta-interpreter) 
+  <DD>usage: <TT>?-solve(PrologGoal).</TT> 
+  <DD> 
+  <DD><TT>solve(true).</TT> 
+  <DD><TT>solve((A,B)):-</TT> 
+  <DL>
+    <DD><TT>solve(A),</TT> 
+    <DD><TT>solve(B).</TT> </DD></DL>
+  <DD><TT>solve(A):-</TT> 
+  <DL>
+    <DD><TT>clause(A,B),</TT> 
+    <DD><TT>solve(B).</TT> </DD></DL>
+  <DT>
+  <HR align=left>
+  <FONT size=+2>turing/3</FONT> 
+  <DD>emulator of Turing machine (more information can be found <B><A 
+  href="http://kti.ms.mff.cuni.cz/~bartak/computing/index.html">here</A></B>-only 
+  in Czech) 
+  <DD>usage: 
+  <TT>?-turing(InitialState,LeftPartOfTape-RightPartOfTape,ResultTape).</TT> 
+  <DD> 
+  <DD><TT>turing(State,[Letter|Left]-Right,FinalTape):-</TT> 
+  <DL>
+    <DD><TT>c(State,Letter,NewState,Write,Move),</TT> 
+    <DD><TT>move(Move,[Write|Left]-Right,NewTape),</TT> 
+    <DD><TT>turing(NewState,NewTape,FinalTape).</TT> </DD></DL>
+  <DD><TT>turing(State,Tape,Tape):-</TT> 
+  <DL>
+    <DD><TT>f(State).</TT> </DD></DL>
+  <DD> 
+  <DD><TT>move(none,Tape,Tape).</TT> 
+  <DD><TT>move(left,[X|Left]-Right,NewLeft-NewRight):-</TT> 
+  <DL>
+    <DD><TT>(Left=[] -&gt; NewLeft=[free] ; NewLeft=Left),</TT> 
+    <DD><TT>(Right=[free] -&gt; NewRight=[X] ; NewRight=[X|Right]).</TT> 
+</DD></DL>
+  <DD><TT>move(right,Left-[X|Right],NewLeft-Right):-</TT> 
+  <DL>
+    <DD><TT>Left=[free] -&gt; NewLeft=[X] ; NewLeft=[X|Left].</TT> </DD></DL>
+  <DD><TT>move(right,Left-[],NewLeft-[]):-</TT> 
+  <DL>
+    <DD><TT>Left=[free] -&gt; NewLeft=Left ; NewLeft=[free|Left].</TT> 
+  </DD></DL></DD></DL>
+<P>
+<HR align=left noShade SIZE=1>
+
+<TABLE cellSpacing=5 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top><B><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/index.html#TOC">Table 
+      of Contents</A></B></TD>
+    <TD></TD>
+    <TD>
+      <P align=right><B><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/implementations.html">Previous 
+      Chapter</A></B><BR>(implementations)</P></TD>
+    <TD>
+      <P align=right><B><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog.old/examples.html">Next 
+      Chapter</A></B><BR>(examples)</P></TD></TR></TBODY></TABLE>
+<HR align=left noShade>
+<A href="http://www.apple.com/"><IMG height=40 
+src="Prolog Guide Samples_files/macspin.gif" width=176 align=right border=0 
+NATURALSIZEFLAG="0"></A><FONT size=-1>Last update 6</FONT><SUP><FONT 
+size=-1>th</FONT></SUP><FONT size=-1> October 1997<BR>Designed and maintained by 
+<A href="http://kti.ms.mff.cuni.cz/~bartak/index.html">Roman Bartak</A><BR>© 
+October 1997</FONT> </BODY></HTML>

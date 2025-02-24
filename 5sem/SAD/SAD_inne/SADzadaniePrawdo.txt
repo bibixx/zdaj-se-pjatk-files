@@ -1,0 +1,135 @@
+Omega = { (i,j), i,j = 1,...,6 } = { (1,1) (1,2), (1,3), ... , (2,1), ... (6,6)} 
+
+P(A) = #A / #Omega
+
+#Omega = 36
+#(A) = 18 parzystych
+#B = 11 szostek
+
+#AnB = 6 (parzyste i z szostka)
+P(AnB) = 6/36 = 1/6
+AuB) = 18+11-powtorzone(6)=12  
+P(AuB)=12/36 = 23/36
+B' = 25
+#AuB' = 25+6 (A zawarte w B) = 31/36
+
+
+ZADANIE NA KOLOSA.
+Sposrod cyfr 1,2,3,4,5 wylosowano jedna cyfre, a nastepnie druga cyfre z pozostalych.
+Oblicz prawdopodobienstwo wylosowania cyfry nieparzystej.
+
+   3/5   	 2/5 	-	 1 losowanie
+   (n)  	 (p)
+  /  \          /    \
+2/4  2/4     3/4     1/4	-	2 losowanie
+(n)   p      (n)       p
+
+Niech N1 - zdanie, ze nieparzysta w I l,losowaniu
+Nii - zdanie, ze nieparzysta w II l,losowaniu
+Pi - parzyta w I
+P2 - parzysta w II
+
+a) P(N1) = 3/5
+b) P(N2) = 3/5 * 2/4 +  2/5 * 3/4 
+
+Tw o prawdopodobienstwie calkowitym
+Z. Omega = U (n nad U) (i=1 pod U) Ai, Ai1A;=/0, dla u!=j, P(Ai)>0
+T. P(B) = P(B|A1)P(A1)+...+P(B|An)P(An)=Suma (n na gorze, i=1 na dole)P(B|Ai)P(i)
+
+P(Nii)=P(Nii|Ni)*P(Ni)+P(Nii|Pi)*P(Pi)=
+P(Nii) =  2/4   * 3/5 +  3/4	* 2/5
+
+P(ii|Pi) <-- prawdopodobiensto ze w drugim bedzie parzyysta, jak w pierwszym jest parzysta
+
+
+
+-----------------------------------
+Zad. Dane sa 3 klasy. W klasie:
+A: sa 3 dziewczyny 10 chlopcow.	[3/10]
+B: 11 dziewczyn 11 chlopcow.	[11/11]
+C: 7 dziewczynek i 6 chlopcow	[7/6]
+-----------------------------------
+
+a) losujemy klase, a nastepnie z klasy losujemy ucznia. Oblicz prawdopodobiensto, ze wylosowano dziewczynke.
+b) z prawdopodobienstwiem proporcjonalnym do licznosci klasy wybieramy klase, a nastepnie ucznia. 
+Oblicz prawdopodobienstwo, ze wylosowano dziewcznke.
+
+Niech:
+Ki - zdarzenie, ze wylosowano klase i-t¹.
+D - zdarzenie, ze wylosowano dziewczyne
+C - zdarzenie, ze wylosowano chlopca.
+
+a) P(Ki) = 1/3
+P(D) = P(D|Ki)*P(Ki)+P(D|K2)*P(K2)+P(D|K3)*P(K3)=E(3 na gorze, i=1 na dole)P(D|Ki)*P(Ki)
+P(D) = 3/13 * 1/3 + 11/12 * 1/3 + 7/13 * 1/3 = wynik
+
+
+
+b) 13+22+13 = 48
+P(K1) = 13/48
+P(K2) = 22/48
+P(K3) = 13/48
+P(D) = 3/13 * 13/48 + 11/12 * 22/48 + 7/13 * 13/48 = wynik
+
+
+
+
+
+c) Wybieramy losowo klase, a z klasy ucznia. 
+Oblicz prawdopodobienstwo, ze losowano z klasy A, pod warunkiem, 
+¿e wiadomo, ¿e wylosowano dziewczynke.
+
+TW. BAYESA - 
+z. Omega = U(n na gorze, i=1 na dole)Ai, AinAj=/0, i!=j
+T. P(Ak|B) = P(B|Ak)P(Ak)   //  P(B|A1)P(A1)+...+P(B|An)P(An)     ==   P(B|Ak)P(Ak) //  E(n, i=1)P(B|Ai)P(Ai_ ; k e {1,..,n}
+ wiem ze wylosowalem dziewczynke (B) i jakie jest prawdopodobienstwo ze wylosowalem ja z klasy A.
+
+Klasa A -> K1
+
+
+c) P(K1|D) =
+jakie jest prawd. ze wylosowalem dziewcznynke jezeli wiem ze losowalem z klasy A.
+
+P(K1|D) = 
+=    P(D|K1)    P(K1)  // P(D|K1) P(K1)+P(D|K2) P(K2)+P(D|K3) P(K3) = 
+=       3/13 *   1/3  //    3/13 * 1/3 + 11/22 * 1/3 + 7/13  * 1/3
+
+
+
+
+
+
+
+
+
+
+
+KOLOS
+1. obliczyn mediane, srednia, wariacje, i inne szity
+2. zdanie - calkowanie gestosci zeby znalezc kwartyl lol
+3 zadanko, prawdo (2 wzorki) i ze P(A) = #A / #Omega
+
+
+
+
+
+
+Zadanie z kanalem binarnymL
+
+Rysunek.
+
+Oblicz prawdopodobiensto, ze wyslanym sygnalem byla 1, jesli na wyjsciu otrzymano 0
+
+Niech. We0 We1 Wy0 Wy1
+
+P(We1|Wy0) = P(Wy0|We1)P(We1) // P(Wy0|We0)P(We0)+P(Wy0|We1)P(We1)
+
+
+
+Rysunek:
+
+0 -> 0 1-E
+0 -> 1 E
+1 -> 0 E
+1 -> 1 1-E
+

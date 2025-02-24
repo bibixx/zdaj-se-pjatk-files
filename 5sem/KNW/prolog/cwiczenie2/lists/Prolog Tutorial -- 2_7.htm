@@ -1,0 +1,348 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0063)http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_7.html -->
+<HTML><HEAD><TITLE>Prolog Tutorial -- 2.7</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR></HEAD>
+<BODY bgColor=#fff5f0>
+<H2>2.7 Prolog lists and sequences</H2>
+<H3><I>Lists</I></H3>Prolog uses brackets [...] as a list builder. The notation 
+[X|Y] refers to a list whose first element is X and whose tail is Y. A finite 
+list can be explicitly enumerated, such as [1,2,3,4]. The following three 
+definitions should make sense to a Lisp programmer, where 'car' refers to the 
+first element of a list, 'cdr' refers to the tail or rest of the list, and 
+'cons' is the list constructor. 
+<BLOCKQUOTE><PRE>car([X|Y],X).
+
+cdr([X|Y],Y).
+
+cons(X,R,[X|R]).
+
+</PRE></BLOCKQUOTE>meaning ... 
+<BLOCKQUOTE>
+  <LI><I>The head (car) of [X|Y] is X.</I> 
+  <LI><I>The tail (cdr) of [X|Y] is Y.</I> 
+  <LI><I>Putting X at the head and Y as the tail constructs (cons) the list 
+  [X|R].</I> </LI></BLOCKQUOTE>However, we will see that these explicit 
+definitions are unneeded. A list whose head is X and whose tail is Y can just be 
+referred to using the Prolog term [X|Y]. Conversely, if the list can be unified 
+with the Prolog term '[X|Y]' then the first element of the list is bound to 
+(unified with) X and the tail of the list is bound to Y. 
+<P>Many of the predicates discussed in this section are "built-in" for many 
+Prolog interpreters. 
+<P>Consider the following definition of the predicate 'member/2'. 
+<BLOCKQUOTE><PRE>member(X,[X|R]).
+member(X,[Y|R]) :- member(X,R).</PRE></BLOCKQUOTE>One can read the clauses the 
+following way, respectively: 
+<BLOCKQUOTE>
+  <LI><I>X is a member of a list whose first element is X.</I> 
+  <LI><I>X is a member of a list whose tail is R if X is a member of R.</I> 
+</LI></BLOCKQUOTE>This program can be used in numerous ways. One can test 
+membership: 
+<BLOCKQUOTE><PRE>?- member(2,[1,2,3]).
+Yes</PRE></BLOCKQUOTE>One can generate members of a list: 
+<BLOCKQUOTE><PRE>?- member(X,[1,2,3]).
+X = 1 ;
+X = 2 ;
+X = 3 ;
+No</PRE></BLOCKQUOTE>Here is a derivation tree showing how this last goal 
+generated all of the answers. 
+<CENTER>
+<P><IMG height=321 src="Prolog Tutorial -- 2_7_files/f2_7.gif" width=414> 
+<BR>Fig. 2.7</CENTER>
+<P>Each left branch corresponds to a match (unification) against the first 
+clause for 'member' and each right branch corresponds to a match against the 
+second clause. The subgoal 'member(X,[])' on the lowest right branch will not 
+match the head of any 'member' clause. In particular '[]' will not unify with a 
+pattern of the form '[X|R]' because the latter represents a list with at least 
+one element. 
+<P>We will find many other uses for 'member'. This example query ... 
+<BLOCKQUOTE><PRE>?- member([3,Y], [[1,a],[2,m],[3,z],[4,v],[3,p]]).
+Y = z ;
+Y = p ;
+No</PRE></BLOCKQUOTE>... suggests a use where one intends to search in order to 
+find elements paired with a specified element. Here is another, finding elements 
+of a list which satisfy some constraint: 
+<BLOCKQUOTE><PRE>?- member(X,[23,45,67,12,222,19,9,6]), Y is X*X, Y &lt; 100.
+X = 9&nbsp;&nbsp; Y = 81 ;
+X = 6&nbsp;&nbsp; Y = 36 ;
+No</PRE></BLOCKQUOTE>The definition for 'member' is usually written 
+<BLOCKQUOTE><PRE>member(X,[X|_]).
+member(X,[_|R]) :- member(X,R).</PRE></BLOCKQUOTE>where '_' (underscore) 
+designates a "don't-care" variable, usually called anonymous variables. In 
+general, such variables have names whose first character is the underscore. In 
+effect, they match any Prolog term, but no variable binding results from the 
+free match. Notice that this is consistent with the original intentions of the 
+definition of 'member'. Not having to bind values to anonymous variables saves a 
+little run-space and run-time. 
+<P>Related to 'member' is the following definition for 'takeout'. 
+<BLOCKQUOTE><PRE>takeout(X,[X|R],R).
+takeout(X,[F|R],[F|S]) :- takeout(X,R,S).</PRE></BLOCKQUOTE>These clauses can be 
+paraphrased in English as follows: 
+<BLOCKQUOTE>
+  <LI><I>When X is taken out of [X|R], R results.</I> 
+  <LI><I>When X is taken out of the tail of [X|R], [X|S] results, where S is the 
+  result of taking X out of R.</I> </LI></BLOCKQUOTE>For example, 
+<BLOCKQUOTE><PRE>?- takeout(X,[1,2,3],L).
+X=1&nbsp; L=[2,3] ;
+X=2&nbsp; L=[1,3] ;
+X=3&nbsp; L=[1,2] ;
+No</PRE></BLOCKQUOTE>Notice that it would not be appropriate to use any 
+anonymous variables in the definition of 'takeout'. Here is a program clause 
+tree showing that 'takeout(3,[1,2,3],[1,2])' is a consequence of the definition. 
+Pay particular attention to exactly how the clauses are used to construct the 
+tree. 
+<CENTER><PRE>takeout(3,[1,2,3],[1,2])
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+takeout(3,[2,3],[2])
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+takeout(3,[3],[])
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; true</PRE></CENTER>The following goal, 
+<BLOCKQUOTE><PRE>?- takeout(3,W,[a,b,c]).
+W = [3,a,b,c] ;
+W = [a,3,b,c] ;
+W = [a,b,3,c] ;
+W = [a,b,c,3] ;
+No</PRE></BLOCKQUOTE>shows that 'takeout(X,Z,W)' can also be interpreted as 
+"insert X into W to produce Z". That is, 'takeout' got its name from just one of 
+its uses. Of course, one could define 
+<BLOCKQUOTE><PRE>putin(X,L,R) :- takeout(X,R,L).</PRE></BLOCKQUOTE>Here is a definition for 
+appending, or concatenating, two Prolog lists. 
+<BLOCKQUOTE><PRE>append([X|Y],Z,[X|W]) :- append(Y,Z,W).
+append([],X,X).</PRE></BLOCKQUOTE>Several kinds of goals are possible: 
+<BLOCKQUOTE><PRE>?- append([1,2,3],[4,5],[1,2,3,4,5]).
+Yes
+
+?- append([1,2,3],[4,5],A).
+A = [1,2,3,4,5]
+
+?- append([1,2,3],W,[1,2,3,4,5]).
+W = [4,5]
+
+... and so on.</PRE></BLOCKQUOTE><I>Exercise 2.7.1</I> Consider the following 
+alternate definition for member: 
+<BLOCKQUOTE><PRE>member(X,[_|R) :- member(X,R).
+member(X,[X|_]).</PRE></BLOCKQUOTE>(a) Show that this program would have exactly 
+the same consequences as the original version. (b) Explain, however, how and why 
+this version could produce different Prolog goal behavior. 
+<P><I>Exercise 2.7.2</I> Draw a Prolog derivation tree for the goal '?- 
+append([1,2],[a,b,c],A)' . Explain how it is that the first value '[1,2]' is 
+copied in order to compute the result A. 
+<P>Reversing a list can be done with 
+<BLOCKQUOTE><PRE>reverse([X|Y],Z,W) :- reverse(Y,[X|Z],W).
+reverse([],X,X).</PRE></BLOCKQUOTE>This program illustrates Prolog's approach to 
+an important strategy -- using an accumulating parameter (the middle variable) 
+-- to accumulate a list answer until the computation is finished. For example, 
+consider the following (partial) derivation tree 
+<CENTER><PRE>?- reverse([1,2,3],[],A)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp; reverse([2,3],[1],A)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp; reverse([3],[2,1],A)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp; reverse([],[3,2,1],A)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; true&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A = [3,2,1]</PRE></CENTER>where the first 
+'reverse' clause is use three times, and then the second 'reverse' clause is 
+used to "capture" the answer by matching the second and third arguments. One 
+could use the following definition to "hide" the accumulating parameter. 
+<BLOCKQUOTE><PRE>reverse(A,R) :- reverse(A,[],R).</PRE></BLOCKQUOTE><I>Exercise 2.7.3</I> 
+Write a two-parameter version of 'reverse' that does not use the accumulating 
+parameter idea. Use 'append' instead, for example, where one rule would be 
+paraphrased like this ... 
+<BLOCKQUOTE>reverse list [X|R] by reversing R to get T, then append T to 
+[X]</BLOCKQUOTE>What about the efficiency of this version? Compare it to the 
+given 'reverse' above. 
+<P>Here is an interesting definition designed to produce all possible 
+permutations of a list. 
+<BLOCKQUOTE><PRE>perm([X|Y],Z) :- perm(Y,W), takeout(X,Z,W).&nbsp;&nbsp;&nbsp;
+perm([],[]).</PRE></BLOCKQUOTE>Think of 'takeout(X,Z,W)' as being used in the "X 
+put into W yields Z" sense here. Then the definitions could paraphrased as 
+follows: 
+<BLOCKQUOTE>
+  <LI><I>Z is a permutation of [X|Y] provided W is a permutation of Y and then X 
+  is put into W to produce Z .</I> 
+  <LI><I>[] is the (only) permutation of [].</I> </LI></BLOCKQUOTE>Here is a 
+sample goal for 'perm': 
+<BLOCKQUOTE><PRE>?- perm([1,2,3],P).
+P = [1,2,3] ;
+P = [2,1,3] ;
+P = [2,3,1] ;
+P = [1,3,2] ;
+P = [3,1,2] ;
+P = [3,2,1] ;
+No</PRE></BLOCKQUOTE>The user should try the goal '?- perm(P,[1,2,3]).' 
+<P><I>Exercise 2.7.4</I> Construct a program clause tree having all true leaves 
+for 'perm([a,b,c],[c,b,a])'. 
+<P>It is common to represent sets as Prolog lists. This representation has some 
+flaws, such as the fact that Prolog lists are inherently ordered (sets are not), 
+and a list can have multiple occurrences of a particular element (sets do not). 
+However, the list representation is very convenient. Set membership can be 
+computed using the 'member' relation for lists previously discussed. Subsets can 
+be tested using 
+<BLOCKQUOTE><PRE>subset([X|R],S) :- member(X,S), subset(R,S).
+subset([],_).</PRE></BLOCKQUOTE>Goals like 
+<BLOCKQUOTE><PRE>?- subset([4,3],[2,3,5,4]).
+Yes</PRE></BLOCKQUOTE>work fine. Why would '?- subset([1,2],W)' and '?- 
+subset(A,[1,2,3])' not be reasonable goals? 
+<P>Union and intersection can be approximated using the following Prolog list 
+versions: 
+<BLOCKQUOTE><PRE>union([X|Y],Z,W) :- member(X,Z),&nbsp; union(Y,Z,W).
+union([X|Y],Z,[X|W]) :- \+ member(X,Z), union(Y,Z,W).
+union([],Z,Z).
+&nbsp;
+intersection([X|Y],M,[X|Z]) :- member(X,M), intersection(Y,M,Z).
+intersection([X|Y],M,Z) :- \+ member(X,M), intersection(Y,M,Z).
+intersection([],M,[]).</PRE></BLOCKQUOTE>These are intended to be used for goals 
+where the first two variables already have a list value. Sometimes this 
+intention is indicated by writing something like 'union(+,+,-)' to indicate the 
+intended variable profile. For example, 
+<BLOCKQUOTE><PRE>?- union([1,2,3,4],[1,a,b,4],A).
+A = [2,3,1,a,b,4]
+&nbsp;
+?- intersection([1,2,3,4],[1,a,b,4],B).
+B = [1,4]</PRE></BLOCKQUOTE>Why would goals like '?- union(X,[2,3],[1,3,a,2])' 
+cause difficulty? 
+<P>Some run-time inefficiency results from having to rematch the heads of 
+clauses for both of the definitions. Here is an alternate version of union, 
+using ! instead: 
+<BLOCKQUOTE><PRE>union([X|Y],Z,W) :-&nbsp;
+&nbsp; member(X,Z),&nbsp;
+&nbsp; !,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* do not&nbsp; use next clauses */
+&nbsp; union(Y,Z,W).&nbsp;
+union([X|Y],Z,[X|W]) :- union(Y,Z,W).
+union([],Z,Z).</PRE></BLOCKQUOTE><I>Exercise 2.7.5</I> Design and test 
+'delete(X,L,R)' which is intended to delete all occurrences of X from list L to 
+produce result R. 
+<P><I>Exercise 2.7.6</I> Design and test 'prune(A,B)' which is intended to 
+remove multiple occurrences of elements from A to produce result B. For example, 
+
+<BLOCKQUOTE><PRE>?- prune([a,1,b,2,a,3,a,4,b],B).
+B = [a,1,b,2,3,4]</PRE></BLOCKQUOTE>Try to make it so that B has remaining 
+elements in the order that they occurred in A. 
+<P><I>Exercise 2.7.7</I> Design and test 'prefix(A,B)' which tests to see if A 
+is a list prefix of B, and which can generate prefixes of a given list. For 
+example, 
+<BLOCKQUOTE><PRE>?- prefix([1,2,3],[1,2,3,4,5]).
+yes
+
+?- prefix([1,2],[1,a,2,3]).
+No&nbsp;
+
+?- prefix(W,[1,2,3]).
+W = [] ;
+W = [1] ;
+W = [1,2] ;
+W = [1,2,3] ;
+No</PRE></BLOCKQUOTE>Draw a program clause tree showing that 
+'prefix([1,2],[1,2,3])' is a consequence of your program. 
+<P><I>Exercise 2.7.8</I> Design a Prolog predicate 'segment', that tests whether 
+its first list argument is a contiguous segment contained anywhere within the 
+second list argument. For example, 
+<BLOCKQUOTE><PRE>?- segment([a,b,c],[1,c,a,b,c,3]).
+Yes
+&nbsp;
+?- segment([a,b],[c,a,c,b]).
+No</PRE></BLOCKQUOTE>Draw a clause tree showing that 
+'segment([a,b,c],[1,c,a,b,c,3])' is a consequence of your program. 
+<P>Various sorting strategies can be implemented using lists in prolog. Here is 
+a Prolog version of merge sort, with intended profile mergesort(+,-). 
+<BLOCKQUOTE><PRE>mergesort([],[]).&nbsp;&nbsp;&nbsp; /* covers special case */
+mergesort([A],[A]).
+mergesort([A,B|R],S) :-&nbsp;&nbsp;
+&nbsp;&nbsp; split([A,B|R],L1,L2),
+&nbsp;&nbsp; mergesort(L1,S1),
+&nbsp;&nbsp; mergesort(L2,S2),
+&nbsp;&nbsp; merge(S1,S2,S).
+
+split([],[],[]).
+split([A],[A],[]).
+split([A,B|R],[A|Ra],[B|Rb]) :-&nbsp; split(R,Ra,Rb).
+
+merge(A,[],A).
+merge([],B,B).
+merge([A|Ra],[B|Rb],[A|M]) :-&nbsp; A =&lt; B, merge(Ra,[B|Rb],M).
+merge([A|Ra],[B|Rb],[B|M]) :-&nbsp; A &gt; B,&nbsp; merge([A|Ra],Rb,M).</PRE></BLOCKQUOTE>Here 
+is a sample goal: 
+<BLOCKQUOTE><PRE>?- mergesort([4,3,6,5,9,1,7],S).
+S=[1,3,4,5,6,7,9]</PRE></BLOCKQUOTE>Prolog list sorting routines suffer all of 
+the relative space and time inefficiencies related with sorting dynamic 
+structures, but often have very cogent specifications in Prolog. 
+<P><I>Exercise 2.7.9</I> Design a Prolog implementation of selection sort for 
+lists of numbers. Test your program using various sample runs. 
+<P><I>Exercise 2.7.10</I> Design a Prolog implementation of insertion sort for 
+lists of numbers. Test your program using various sample runs. 
+<H3><B><I>Sequences</I></B></H3>The kind of sequences most used in Prolog are 
+"comma" sequences. There is no empty sequence (unlike for lists). The shortest 
+sequence has one element. Longer sequences have elements separated by commas 
+",". An appropriate declaration for the comma operator would be 
+<BLOCKQUOTE><PRE>:- op(1000,xfy,',').</PRE></BLOCKQUOTE>meaning that comma is 
+right-associative with precedence 1000. (The comma operator is actually 
+built-in.) Here is some Prolog behavior. 
+<BLOCKQUOTE><PRE>?- (H,T) = (1,2,3,4).
+H = 1
+T = 2,3,4&nbsp;
+
+?- (a) = a.&nbsp;
+Yes
+
+?- (H,T) = (a).
+No
+
+?- (A,B,C) = (1,2,3,4,5).
+A = 1
+B = 2
+C = 3,4,5</PRE></BLOCKQUOTE>Prolog clauses use comma sequences. 
+<BLOCKQUOTE><PRE>?- assert((a(X) :- b(X),c(X),d(X))). %% Note parens around clause
+X = G1056
+
+?- clause(a(X),Body), Body=(First,Next).
+First = b(G1176)
+Next = c(G1176), d(G1176)
+Body = b(G1176), c(G1176), d(G1176)
+X = G1176</PRE></BLOCKQUOTE>Procesing sequences is similar to processing lists, 
+except that the base case for sequences is a unit sequence (one element), 
+whereas for lists the base case is for the empty list. For example, here is a 
+program to append comma sequences ... 
+<BLOCKQUOTE><PRE>sequence_append((X,R),S,(X,T)) :-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; !,&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sequence_append(R,S,T).
+sequence_append((X),S,(X,S)).</PRE></BLOCKQUOTE>Note the use of cut (!) to make 
+sure that the second clause is not available as a alternate choice for 
+multi-element sequences. 
+<BLOCKQUOTE><PRE>?- sequence_append((1,2,3),(a,b,c,d),S).
+S = 1, 2, 3, a, b, c, d</PRE></BLOCKQUOTE><I>Exercise 2.7.11</I> Write a Prolog 
+program to reverse a comma sequence. 
+<P><I>Exercise 2.7.12</I> Write a Prolog program to prune a comma sequence 
+(delete repeated top-level elements, keeping first, left-most, occurrence). 
+<P><I>Exercise 2.7.13</I> Write a Prolog program to test for membership in a 
+comma sequence (similar to member for lists). 
+<P>Other kinds of sequences can be defined by the user. For example, to make 
+left-associative sequences separated by '#', one might use an operator 
+declaration like this ... 
+<BLOCKQUOTE><PRE>?- op(500,yfx,'#').
+Yes
+
+?- (A#B) = 1#2#3#4.
+B = 4
+A = 1 # 2 # 3</PRE></BLOCKQUOTE>Notice how left-associativity was what 
+determined the bindings in the second goal! 
+<P><I>Exercise 2.7.14</I> Write a Prolog program to test for membership in a # 
+sequence, as defined above. What is the main point of this exercise? 
+<P>
+<HR>
+Prolog <A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_7pl.txt">Code</A> 
+for this section. <BR>Prolog Tutorial <A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/contents.html#2">Contents</A>.&nbsp; 
+
+<HR>
+</BODY></HTML>

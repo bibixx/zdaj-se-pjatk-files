@@ -1,0 +1,82 @@
+(if (war)
+   wart
+   warf
+)
+
+(if (= x 5)
+    (- x 1)
+    (+ x 1)
+)
+
+(cond ((p1) e1)
+      ((p2) e2)
+      ((pn) en)
+      (else ee))
+
+
+(define (funkcja arg)
+ (cialo)
+)
+
+(define (add2 x)
+ (+ x 2)
+)
+
+_? <- boolean
+null?
+pair?
+odd?
+even?
+string?
+
+_! <- zmiana warto¶ci
+set!
+
+quote <- zwracanie bez interpretacji
+'(...)
+
+cons <- sklejanie list
+(cons 'a '())
+
+(cons 'a (cons 'b (cons 'c (cons 'd))))
+
+(append '(abc) '(def))
+
+(list 'a)
+
+(reverse 'a)
+
+(member 'a '(a b c d))
+
+(define (member? atom lista)
+ (cond (( null? lista) #f)
+  (eq? atom (car lista) #t)
+  (else (member? atom (cdr lista)))))
+
+(define (app l1 l1)
+ (cond ((null? l1) l2)
+  (else (cons (car l1) (app (cdr l1)l2)))))
+
+(define (len2 lista)
+ (cond ((null? lista) 0)
+  (else (+ 1 (len2 (cdr lista))))))
+
+(define (aplikuj f l)
+ (cond ((null? l) 'l))
+ (else (cons (f (car l))
+        (aplikuj f (cdr l)))))
+
+(let ((zmienna1 wartosc1) (zmienna2 wartosc2)) dowolne operacje na zmiennych)
+
+(let ((a 2) (b 3)) (+ a b))
+(let ((a 2) (b 3)) ((lambda (a b) (+ a b)) 2 3))
+
+(define (weird-square n)
+ (letrec ((square (lambda (x) (x (add1 x) x )))
+          (add1   (lambda (x) (+ x 1))))
+  (square n)))
+
+(define-struct nazwa (element1 element2 element3))
+
+make-nazwa
+

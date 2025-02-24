@@ -1,0 +1,16 @@
+Cieniowanie Gourauda (zwane te¿ cieniowaniem na zasadzie interpolowania jasnoœci) polega na przypisywaniu punktom cieniowanego wielok¹ta jasnoœci obliczonej poprzez interpolacjê wartoœci odpowiednich dla ka¿dego wierzcho³ka (w odró¿nieniu od cieniowania Phonga, polegaj¹cego na interpolacji wektora normalnego).
+
+Jest metod¹ u¿ywan¹ w grafice komputerowej do symulacji ró¿nych efektów œwiat³a i koloru na powierzchni obiektu. W odró¿nieniu cieniowania p³askiego cieniowanie Gourauda zapewnia p³ynn¹ zmianê stopnia jasnoœci ca³ego obiektu.
+
+Metodê opracowa³ francuski in¿ynier i matematyk Henri Gouraud.
+[Edytuj]
+
+Cieniowania Gouarda w grafice 3D
+
+Trójwymiarowy obraz w pamiêci komputera modelowany jest jako zbiór wielok¹tów tworz¹cych bry³y. Pierwszym krokiem podczas cieniowania Gourauda jest obliczenie wektorów normalnych do wierzcho³ków tych wielok¹tów. Na tej podstawie mo¿liwe jest obliczenie k¹ta padania œwiat³a w danym miejscu bry³y. Pozwala to na obliczenie jasnoœci danego wierzcho³ka (czasem ten etap jest nazywany oœwietlaniem wielok¹ta).
+
+W nastêpnym kroku cieniowane s¹ wszystkie wielok¹ty. Ka¿dy wielok¹t jest cieniowany najpierw wzd³u¿ krawêdzi metod¹ interpolacji liniowej (w tym przypadku interpolowana jest jasnoœæ padanego œwiat³a), a nastêpnie wzd³u¿ kolejnych wierszy (równie¿ wykorzystuj¹c interpolacjê liniow¹).
+
+Algorytm ten mo¿na uogolniæ dopuszczaj¹c interpolacjê nie tylko jasnoœci, ale równie¿ poszczególnych barw.
+
+Algorytm cieniowania Gourauda traci informacje o k¹cie padania œwiat³a przed w³aœciwym rysowaniem wielok¹tów (i zamiast tego wykorzystuje informacje o jasnoœci œwiat³a w danym punkcie). Powoduje to powstawanie b³êdów, do których mo¿na zaliczyæ nieprawid³owe oœwietlenie wielok¹ta jeœli na jego œrodek pada jasne, punktowe œwiat³o, a wierzcho³ki s¹ ju¿ s³abo oœwietlone. W takim przypadku ca³y wielok¹t pozostanie ciemny, punktowe œwiat³o nie zostanie narysowane. Wady tej pozbawione jest cieniowania Phonga.

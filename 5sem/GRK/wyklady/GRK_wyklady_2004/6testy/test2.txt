@@ -1,0 +1,222 @@
+2. Krzywa Beziera jest okreœlona przez punkty kontrolne P0(2,1), P1(3,3), P2(5,3), P3(3,2) 
+a) punkt dla którego parametr bie¿¹cy u=0.5 ma wspó³rzêdne (2,2) (N) 
+b) punkt o wspó³rzêdnych (0,2) nale¿y do krzywej (N) 
+c) przynajmniej jeden punkt odcinka P2P3 nale¿y do krzywej (T) 
+
+3. Scena sk³ada siê z szeœcianu i odleg³ego Ÿród³a œwiat³a. Obserwator mo¿e byæ w dowolnym miejscu  poza szeœcianem 
+a) przy obliczaniu oœwietlenia sceny trzeba rozwi¹zaæ problem widocznoœci œcian ze Ÿród³a œw. (T) 
+b) obliczone barwy wszystkich œcian s¹ takie same (N) 
+c) w trakcie obliczeñ konieczne jest wyznaczenie normalnych do poszczególnych œcian 
+
+4. Zas³anianie 
+a) metoda badania normalnych do œcian obiektów jest uniwersaln¹ metod¹ rozwi¹zywania problemu przes³aniania (N) 
+b) w metodzie z-bufora konieczne jest sortowanie wielok¹tów (N) 
+c) w metodzie z-bufora przy wyznaczaniu barwy piksela o wspó³rzêdnych x,y zawsze pamiêta siê wspó³rzêdn¹ z ostatnio analizowanego punktu o wspó³rzêdnych x,y,z (N) 
+
+5. Przy modelowaniu obiektów 3D 
+a) metod¹ wielok¹tow¹ preferowane jest korzystanie z trójk¹tów (T) 
+b) metod¹ CSG bry³y tworzy siê w wyniku obracania zadanego przekroju wokó³ wybranej osi (N) 
+c) metod¹ octree dokonuje siê równomiernego podzia³u z zadan¹ dok³adnoœci¹ (N) 
+
+6. W modelach wyznaczania oœwietlenia 
+a) œwiat³o rozproszenia jest zwi¹zane z wybranym Ÿród³em œwiat³a (N) 
+b) œwiat³o rozproszenia pozwala okreœlaæ oœwietlenie dla punktów niewidocznych ze Ÿród³a œw. (T) 
+c) przy analizie odbicia zwierciadlanego wektor normalny jest skierowany do obserwatora (N) 
+
+7. Ró¿ne 
+a) przy opisie parametrycznym odcinka znaj¹c wartoœæ parametru bie¿¹cego mo¿na wyznaczyæ wspó³rzêdne odpowiedniego punktu na odcinku (T) 
+b) algorytm z-bufora jest wykorzystywany do wype³niania powierzchni wielok¹ta (N) 
+c) w metodzie œledzenia promieni otaczanie obiektów prostszymi bry³ami pozwala przyspieszyæ znajdowanie pierwszego obiektu napotkanego przez promieñ (T) 
+d) w standardzie MPEG przy kompresji sekwencji obrazów wykorzystuje siê kompresjê ka¿dego obrazu niezale¿nie kompresj¹ JPEG (N) 
+e) w formacie BMP mo¿na zapisywaæ obrazy o ró¿nych rozdzielczoœciach (T) 
+f) warping to jedna z metod kodowania obrazu (N) 
+
+9. Podstawowe informacje 
+a) kwadrat o wspó³rzêdnych wierzcho³ków (0,0), (1,0), (1,1), (0,1) zosta³ poddany operacji 
+skalowania ze wspó³czynnikami Sx=2, Sy=3 i przesuniête o wektor [2,3]. Wspó³rzêdne figury to (2,5) (N) 
+b) punkt o wspó³rzêdnych jednorodnych (5,4,3,1) w uk³adzie xyz ma wspó³rzêdne (5,4,3,1) (N) 
+c) w transformacji skalowania punk wzglêdem którego nastêpuje skalowanie musi pokrywaæ siê z pocz¹tkiem uk³adu wspó³rzêdnych (T)
+
+10.Bry³y 
+a) w metodzie Brep przy wektorowej reprezentacji bry³y s¹ definiowane i wyœwietlane tylko 
+wierzcho³ki i krawêdzie bry³y (T) 
+b) w metodzie wielomianowej (objêtoœciowej) dostêpne jest tylko info o wnêtrzu bry³y (T) 
+c) w metodzie CSG jest dostêpne tylko info o wnêtrzu bry³y 
+
+11.Przejœcie ze sceny 3D na 2D 
+a) w rzucie ukoœnym promienie rzutuj¹ce przecinaj¹ siê w jednym punkcie 
+b) z punktu widzenia realizmu generowanego obrazu 2D koñcowe rozwi¹zywanie problemu 
+widocznoœci bry³ 
+c) bry³a widzenia zawiera obiekty, które na pewno bêd¹ widoczne na ekranie (N) 
+
+14.Eliminowanie obiektów niewidocznych 
+a) Przy stosowaniu metody malarskiej konieczne jest wyznaczenie normalnych do wielok¹tów (N) 
+b) w algorytmie z-bufora konieczne jest wstêpne sortowanie wielok¹tów (N) 
+c) w metodzie œledzenia promieni do rozwi¹zania problemu widocznoœci wykorzystuje siê pomocnicze promienie (T) 
+
+15.Kompresja i przetwarzanie obrazów 
+a) Kompresja obrazu metod¹ RLE jest kompresj¹ stratn¹ (N) 
+b) W metodach stratnych kompresja ma wp³yw na jakoœæ obrazu (T) 
+c) Odbicie zwierc. obr. (w poziomie) mo¿na uzyskaæ zamieniaj¹c miejscami odpowiednie wzorce obr. (T) 
+d) w kompresji JPEG wykorzystuje siê tranformatê sinusow¹ (N) 
+e) kompresja Hufmana jest kompresj¹ stratn¹ (N) 
+f) wynik zastosowania maski [121, 242, 121] do zestawu pikseli [123, 321, 223] jest równy 1 (N) 
+g) kompresja liczby barw w obrazie jest kompresj¹ bezstratn¹ (N) 
+h) w przetwarzaniu obrazów wykorzystuje siê informacje zapisane w z-buforze 
+
+16.Dany jest obraz o rozdzielczoœci 640x480x24 (w innym zestawie: 1024x768x24) 
+a) do zapamiêtania obrazu (bez kompresji) potrzebna jest pamiêæ min. 0.5 MB (N) 
+b) przy czêstotliwoœci wyœwietlania obrazu 50 Hz czas dostêpny dla jednego piksela to 30 ns 
+(N?) 
+c) je¿eli korzystamy z modemu 56 kb/s to czas przesy³ania obrazu wynosi 6 s (N) 
+
+17.W krzywych beziera 
+a) pierwsze 3 punkty kontrolne musz¹ le¿eæ na jednej prostej (N) 
+b) stopieñ wielomianu zale¿y od liczby punktów kontrolnych (T) 
+c) zmiana po³o¿enia dowolnego punku kontrolnego powoduje zmianê wygl¹du ca³ej krzywej (T?) 
+
+18.Ile klatek nale¿y wygenerowaæ dla filmu animowanego wyœwietlanego z czêstotliwoœci¹ 24 klatek/s i trwaj¹cego 3 min? 
+a) 1090 
+b) 2880
+c) 4320 (T) 
+
+19.W ramce kluczowej k punkt A ma wspó³rzêdne (2,3). W ramce kluczowej k+1 A ma mieæ wspó³rzêdne (26,45). Zak³adamy, ¿e miêdzy ramkami kluczowymi ma byæ 5 klatek poœrednich. Punkt porusza siê ruchem jednostajnym po linii prostej. Okreœl wspó³rzêdne punktu A dla 4 ramki poœredniej. (18,31) 
+
+20.Zaproponuj koncepcjê programu ilustruj¹cego ruch pi³ki rzuconej pod k¹tem a > 45 st. do poziomu. Uwzglêdnij oœwietlenie s³oneczne. Wymieñ wykorzystane algorytmy z zakresu grafiki komputerowej. 
+
+21.Podaj koncepcjê programu wyjaœniaj¹cego metodê œledzenia promieni 
+22.Podaj koncepcjê programu pokazuj¹cego ró¿ne sposoby cieniowania 
+23.Zaproponuj algorytm ukrywania wybranego fragmentu obrazu 
+24.Zaproponowaæ strukturê plik dla pamiêtania informacji o obrazach nale¿¹cych do za³o¿onej klasy obrazów 
+
+25.Naszkicowaæ reprezentacjê wielok¹tow¹ walca oœwietlonego przez odleg³e Ÿród³o œwiat³a znajduj¹ce
+ siê na osi x (promienie biegn¹ce równolegle). Obserwator znajduje siê na osi x. 
+
+26.Dany jest przekrój bry³y o wspó³rzêdnych wierzcho³ków (0, 0, 0), (4, 0, 0), (4, 1, 0), (1, 1, 0), (1, 3, 0), (2, 3, 0), (2, 4, 0), (0, 4, 0). Przekrój ten zosta³ przesuniêty wzd³u¿ osi z o 5 jednostek. Naszkicowaæ uzyskan¹ bry³ê. Uznaæ ¿e powierzchnia bry³y jest nieprzezroczysta. 
+
+27.Teksturowanie 
+a) wzór tekstury jest zawsze odwzorowany bezpoœrednio na docelowy obiekt (N) 
+b) przy teksturowaniu barwa piksela zawsze jest okreœlana przez barwê jednego teksela (T) 
+c) teksel to odpowiednik piksela na p³aszczyŸnie (T) 
+d) przy odwzorowywaniu tekstury na z³o¿ony obiekt czasami stosuje siê odwzorowanie na 
+poœredni¹ powierzchniê (T) 
+e) metoda bump-mapping wprowadza zniekszta³cenie powierzchni obiektu (N) 
+f) w procesie teksturowania zawsze stosuje siê odwzorowywanie jeden teksel -> jeden piksel (N) 
+
+28.Animacja 
+a) zmiana kszta³tu obiektu w kolejnych ramkach to te¿ animacja (T) 
+b) w animacji zawsze przestrzega siê praw fizyki (N) 
+c) tor poruszania siê punktu musi byæ lini¹ prost¹ (N) 
+d) tor poruszania siê punku mo¿na opisaæ za pomoc¹ linii beziera (T) 
+e) w animacji wystêpuje pojêcie ramek kluczowych (T) 
+
+29.Kompresja obrazów 
+a) w metodach bezstratnych obraz po dekompresji mo¿e ró¿niæ siê od pierwotnego (N) 
+b) w metodzie RLE konieczne jest wyznaczenie histogramu (N) 
+c) w metodzie Huffmana kod przypisywany barwie zale¿y od czêstotliwoœci jej wystêpowania (T) 
+
+30.Metody cieniowania 
+a) w procesie cieniowania s¹ wyznaczane cienie rzucane przez obiekty (N) 
+b) w metodzie Phonga/Gorauda uwzglêdnia siê œwiat³o otoczenia (T)(T) 
+c) w obliczeniach zwi¹zanych z cieniowaniem uwzglêdnia siê wartoœæ sinusa k¹ta miêdzy 
+normaln¹ do powierzchni a wektorem skierowanym do Ÿród³a œwiat³a (N) 
+d) w metodzie Phonga uwzglêdnia siê œwiat³o odbijane zwierciadlanie (N) 
+e) metoda Phonga/Gorauda jest stosowana w odniesieniu do obiektów, których powierzchnie s¹ aproksymowane trójk¹tami (T)(T) 
+f) Metoda Gorauda jest stosowana w odniesieniu do obiektów 3D przed operacj¹ rzutowania na 
+p³aszczyznê ekranu (N) 
+g) przy analizie œwiat³a odbjanego zwierciadlanie uwzglêdnia siê po³o¿enie obserwatora (T) 
+h) w scenie zawieraj¹cej pojedynczy szeœcian o powierzchni barwy zielonej wystêpuje tylko 
+œwiat³o otoczenia. W wygenerowanym obrazie ka¿da œcianka bêdzie mia³a t¹ sam¹ barwê (T) 
+i) w metodzie Phonga przy wyznaczaniu barwy piksela wewn¹trz trójk¹ta korzysta siê z metody 
+podwójnej interpolacji barw wierzcho³kowych (T)
+j) w metodzie Phonga wnêtrze wielok¹ta jest zawsze wype³nione sta³¹ barw¹ (N) 
+k) w metodzie Phonga wykorzystuje siê podwójn¹ interpolacjê normalnych (T) 
+l) w metodzie Phonga/Gourauda mo¿liwe jest uzyskanie metody rozœwietlenia (T)(N) 
+
+31.Metoda œledzenia promieni 
+a) metoda jest wykorzystywana w odniesieniu do scen 2D uzyskanych po rzutowaniu scen 3D na 
+p³aszczyznê ekranu (N) 
+b) metoda ta pozwala rozwi¹zaæ problem cieni rzucanych przez obiekty 
+c) w tej metodzie ka¿dy analizowany promieñ musi dobiec do Ÿród³a œwiat³a (N) 
+d) przy wykorzystaniu tej metody wykorzystuje siê równoczeœnie metodê Phonga/Gourauda (N) 
+(N) 
+e) Ka¿dy analizowany promieñ jest œledzony tylko do pewnego napotkanego obiektu (N) 
+f) analizowane promienie biegn¹ prostopadle do ekranu (N) 
+g) pomocnicze promienie generowane w celu wyznaczenia cieni w scenie s¹ prowadzone z oka 
+obserwatora w kierunku Ÿróde³ œwiat³a (N/T??) 
+h) w tej metodzie œledzi siê bieg promieni zawsze do chwili wyjœcia poza scenê (N) 
+i) w celu wyznaczenia cieni wykorzystuje siê promienie pomocnicze (T) 
+j) najwiêcej czasu zajmuje wyznaczenie barw poszczególnych pikseli (N) 
+k) bry³a widzenia okreœla fragment sceny 3D potencjalnie widoczny na ekranie (T) 
+l) bry³a widzenia musi byæ wyznaczona w metodzie œledzenia promieni (N) 
+m)bry³a widzenia w rzucie perspektywicznym jest ostros³upem œciêtym (T) 
+
+32.Eliminowanie powierzchni niewidocznych 
+a) metoda œledzenia promieni zapewnia eliminowanie powierzchni niewidocznych (T) 
+b) metoda z-bufora wymaga wstêpnego zapisu w pamiêci obrazu i z-bufora samych zer (N) 
+c) w metodzie malarskiej konieczna jest znajomoœæ wektorów normalnych do poszczególnych
+ wielok¹tów (N) 
+d) metoda malarska/z-bufora wymaga korzystania z pomocniczego bufora pamiêci okreœlonej 
+przez rozdzielczoœæ ekranu (N)(T) 
+e) metoda wektora normalnego pozwala eliminowaæ powierzchnie niewidoczne w obiektach 
+typu prostopad³oœcian z wyciêtym wewn¹trz otworem (N) 
+f) metoda z-bufora jest wykorzystywana w grafice 2D (N) 
+g) w algorytmie z-bufora/malarskim konieczne jest wstêpne sortowanie wielok¹tów (N)(T) 
+h) w metodzie œledzenia promieni do rozwi¹zania problemu widocznoœci wykorzystuje siê 
+pomocnicze promienie (T) 
+i) algorytm z-bufora jest wykorzystywany do wype³niania powierzchni wielok¹tów (N) 
+
+33.Stereoskopia 
+a) dla uzyskania efektu widzenia przestrzennego potrzebna jest para identycznych obrazów (N) 
+b) okulary z ciek³ymi kryszta³ami u³atwiaj¹ ogl¹danie obrazu z du¿ych odleg³oœci (N) 
+c) przy wyznaczaniu par obrazów uwzglêdnia siê rozstaw oczu obserwatora/odleg³oœæ 
+obserwatora od ekranu (N)(N) 
+d) w stereoskopii zawsze korzysta siê z 2 monitorów (N) 
+
+34.Podstawowe algorytmy rastrowe 
+a) w algorytmie Bresenhama rysowania odcinka w ka¿dym cyklu obliczeñ korzysta siê z 
+równania linii prostej (N) 
+b) aliasing jest to efekt bêd¹cy skutkiem stosowania niew³aœciwych algorytmów (N) 
+c) w metodzie wype³niania z punktów pocz¹tkowych obszar wype³niony musi byæ domkniêty (T) 
+d) dwa przecinaj¹ce siê odcinki mog¹ nie mieæ wspólnego odcinka (T) 
+e) dwa przecinaj¹ce siê odcinki mog¹ mieæ wiêcej ni¿ jeden piksel wspólny (T) 
+f) odcinek o wspó³rzêdnych koñcowych (2,0), (5,6) / (2,6), (4,1) narysowany przy 
+wykorzystaniu algorytmu Bresenhama sk³ada siê z 6 pikseli (N)(T) 
+g) efekt aliasingu mo¿na usun¹æ korzystaj¹c z metody Gourauda (N) 
+h) w algorytmie obcinania odcinków wyró¿nia siê etap wstêpnej eliminacji odcinków (T) 
+i) w algorytmie ODA/Bresenhama rysowania odcinka nie korzysta siê z równania linii prostej na
+ której le¿y odcinek (N)(T) 
+j) algorytm wype³niania z pkt pocz¹tkowym i 4 s¹siadami umo¿liwia wype³nienie figur 
+wypuk³ych (T) 
+k) dwa przecinaj¹ce siê odcinki mog¹ nie mieæ wspólnego piksela (T) 
+
+35.Barwa w grafice komputerowej 
+a) w modelu HSV sk³adowa nasycenia jest okreœlana w stopniach (N) 
+b) w CIE xyz barwa uzyskana po zmieszaniu dwóch barw jest reprezentowana przez pkt bêd¹cy na przed³u¿eniu odcinka ³¹cz¹cego punkty reprezentuj¹ce barwy sk³adowe (N) 
+c) barwa C6500 oznacza barwê czarn¹ (T) 
+d) w modelu CIE xyz reprezentowane s¹ wszystkie barwy widzialne (T) 
+e) w modelu HSV barwa bia³a le¿y na powierzchni bocznej ostros³upa (N) 
+f) w modelu barw RGB w przypadku korzystania z systemu “full color” ka¿da ze sk³adowych jest reprezentowana przez 32 / 512 poziomów (N)(N) 
+g) w modelu CMY odcienie szaroœci s¹ reprezentowane przez pkt le¿¹ce na osi Y (N) 
+h) w modelu HSV sk³adowa S reprezentuje nasycenie barwy (T) 
+i) w modelu CIE XYZ barwy nasycone znajduj¹ siê na obwiedni wykresu chrominacji we 
+wspó³rzêdnych XY (T) 
+j) w modelu barw HLS barwa bia³a le¿y na powierzchni bocznej ostros³upa (N) 
+k) w modelu RGB przy reprezentacji barwy za pomoc¹ 24 bitów barwa czarna ma wspó³rzêdne
+(255, 255, 255) (N) 
+l) w systemie full-color ka¿da sk³adowa barwy jest reprezentowana przez 10 bitów (N) 
+
+36.Rzutowanie 
+a) w rzucie perspektywicznym bry³a widzenia jest prostopad³oœcianem (N) 
+b) w rzucie ukoœnym promienie rzutuj¹ce s¹ do siebie równoleg³e (T) 
+c) w rzucie perspektywicznym odcinki równoleg³e do siebie i równoleg³e do p³aszczyzny rzutu
+ przecinaj¹ siê w jednym punkcie (N) 
+d) w rzucie ukoœnym perspektywicznym / równoleg³ym bry³a widzenia jest ostros³upem (N)(T) 
+e) w rzucie równoleg³ym ortogonalnym odcinki równoleg³e do siebie pozostaj¹ równoleg³e po 
+wykonaniu rzutowania na p³aszczyznê ekranu (T) 
+f) bry³a widzenia zwiera obiekty które na pewno bêd¹ widoczne na ekranie (N) 
+37.Przekszta³canie obrazów 
+a) operacja morphingu pozwala przekszta³caæ jeden obraz w drugi (T) 
+b) obrót obrazu o 90 stopni wymaga zamiany miejscami odpowiednich wierszy i kolumn (T) 
+c) korzystaj¹c z metod progowania mo¿na zmieniæ obraz z odcieniami szaroœci w obraz 
+dwubarwny (T)

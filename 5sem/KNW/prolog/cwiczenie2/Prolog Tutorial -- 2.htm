@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0061)http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2.html -->
+<HTML><HEAD><TITLE>Prolog Tutorial -- 2</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR></HEAD>
+<BODY bgColor=#fff5f0>
+<H2>2. Sample Prolog Programs</H2>In this chapter we provide several sample 
+Prolog programs. The programs are given in a progression from fairly simple 
+programs to more complex programs. The key goals of the presentation are to show 
+several important methods of knowledge representation in Prolog and the 
+declarative programming methodology of Prolog. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_1.html">2.1</A> 
+Map colorings</H3>This section uses a famous mathematical problem -- that of 
+coloring planar maps -- to motivate logical representations of facts and rules 
+in Prolog. The prolog program developed provides a representation for adjacent 
+regions in a map, and shows a way to represent colorings, and a definition of 
+when the colorings in conflict; that is, when two adjacent regions have the same 
+coloring. The section introduces the concept of a semantic program clause tree 
+-- to motivate the issue of semantics for logic-based programming. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_2.html">2.2</A> 
+Two factorial definitions</H3>This section introduces the student to 
+computations of mathematical functions using Prolog. Various built-in arithmetic 
+operators are discussed. Also discussed is the concept of a Prolog derivation 
+tree, and how derivation trees are related to tracings of Prolog. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_3.html">2.3</A> 
+Towers of Hanoi puzzle</H3>This famous puzzle is formulated in Prolog. The 
+discussion concerns both the declarative and the procedural meanings of the 
+program. The program write puzzle solutions to the screen. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_4.html">2.4</A> 
+Loading programs, editing programs</H3>Examples show various ways to load 
+programs into Prolog, and an example of a program calling a system editor is 
+given. The reader is encouraged to read sections 3.1 an 3.2 on How Prolog Works 
+before continuing with section 2.5 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_5.html">2.5</A> 
+Negation as failure</H3>The section gives an introduction to Prolog's 
+negation-as-failure feature, with some simple examples. Further examples show 
+some of the difficulties that can be encountered for programs with negation as 
+failure. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_6.html">2.6</A> 
+Tree data and relations</H3>This section shows Prolog operator definitions for a 
+simple tree structure. Tree processing relations are defined and corresponding 
+goals are studied. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_7.html">2.7</A> 
+Prolog lists</H3>This section contains some of the most useful Prolog list 
+accessing and processing relations. Prolog's primary dynamic structure is the 
+list, and this structure will be used repeatedly in later sections. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_8.html">2.8</A> 
+Change for a dollar</H3>A simple change maker program is studied. The important 
+observation here is how a Prolog predicate like 'member' can be used to generate 
+choices, the choices are checked to see whether they solve the problem, and then 
+backtracking on 'member' generates additional choices. This fundamental generate 
+and test strategy is very natural in Prolog. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_9.html">2.9</A> 
+Map coloring redux</H3>We take another look at the map coloring problem 
+introduced in Section 2.1. This time, the data representing region adjacency is 
+stored in a list, colors are supplied in a list, and the program generates 
+colorings which are then checked for correctness. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_10.html">2.10</A> 
+Simple I/O</H3>This section discusses opening and closing files, reading and 
+writing of Prolog data. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_11.html">2.11</A> 
+Chess queens challenge puzzle.</H3>This familiar puzzle is formulate in Prolog 
+using a permutation generation program from Section 2.7. Backtracking on 
+permutations produces all solutions. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_12.html">2.12</A> 
+Set of answers</H3>Prolog's 'setof' and 'bagof' predicates are presented. An 
+implementation of 'bagof' using 'assert' and 'retract' is given. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_13.html">2.13</A> 
+Truth table maker</H3>This section designs a recursive evaluator for infix 
+Boolean expressions, and a program which prints a truth table for a Boolean 
+expression. The variables are extracted from the expression and the truth 
+assignments are automatically generated. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_14.html">2.14</A> 
+DFA parser</H3>A generic DFA parser is designed. Particular DFAs are represented 
+as Prolog data. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_15.html">2.15</A> 
+Graph structures and paths</H3>This section designs a path generator for graphs 
+represented using a static Prolog representation. This section serves as an 
+introduction to and motivation for the next section, where dynamic search grows 
+the search graph as it works. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_16.html">2.16</A> 
+Search</H3>The previous section discussed path generation in a static graph. 
+This section develops a general Prolog framework for graph searching, where the 
+search graph is constructed as the search proceeds. This can be the basis for 
+some of the more sophisticated graph searching techniques in A.I. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_17.html">2.17</A> 
+Animal identification game</H3>This is a toy program for animal identification 
+that has appeared in several references in some form or another. We take the 
+opportunity to give a unique formulation using Prolog clauses as the rule 
+database. The implementation of verification of askable goals (questions) is 
+especially clean. This example is a good motivation for expert systems, which 
+are studied in Chapter 6. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_18.html">2.18</A> 
+Clauses as data</H3>This section develops a Prolog program analysis tool. The 
+program analyses a Prolog program to determine which procedures (predicates) 
+use, or call, which other procedures in the program. The program to be analyzed 
+is loaded dynamically and its clauses are processed as first-class data. 
+<H3><A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/2_19.html">2.19</A> 
+Actions and plans</H3>An interesting prototype for action specifications and 
+plan generation is presented, using the toy blocks world. This important subject 
+is continued and expanded in Chapter 7. 
+<P>
+<HR>
+Prolog Tutorial <A 
+href="http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/contents.html#2">Contents&nbsp;</A> 
+
+<HR>
+</BODY></HTML>

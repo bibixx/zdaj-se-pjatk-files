@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Rozdział 1. Dokument definicji wymagań</title><meta name="generator" content="DocBook XSL Stylesheets V1.62.4" /><link rel="home" href="index.html" title="Linia Lotnicza" /><link rel="up" href="index.html" title="Linia Lotnicza" /><link rel="previous" href="index.html" title="Linia Lotnicza" /><link rel="next" href="dzialania.html" title="Rozdział 2. Plan działań" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Rozdział 1. Dokument definicji wymagań</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="index.html">Poprzedni</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="dzialania.html">Następny</a></td></tr></table><hr /></div><div class="chapter" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title"><a id="wymagania"></a>Rozdział 1. Dokument definicji wymagań</h2></div></div><div></div></div><div class="toc"><p><b>Spis treści</b></p><dl><dt><span class="sect1"><a href="wymagania.html#id2496770">Cel projektu</a></span></dt><dt><span class="sect1"><a href="wymagania.html#id2496778">Zakres projektu</a></span></dt><dt><span class="sect1"><a href="wymagania.html#id2454056">Wymagania funkcjonalne</a></span></dt><dt><span class="sect1"><a href="wymagania.html#id2454167">Wymagania niefunkcjonalne</a></span></dt></dl></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2496770"></a>Cel projektu</h2></div></div><div></div></div>
+         Usprawnienie pracy linii lotniczych
+      </div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2496778"></a>Zakres projektu</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  Wspomaganie działu obsługi klienta 
+               </p></li><li><p>
+                  Obsługa sprzedaży i rezerwacji biletów 
+               </p></li><li><p>
+                  Prezentacja informacji
+               </p></li><li><p>
+                  Pozyskiwanie informacji z bazy danych
+               </p></li><li><p>
+                  Wspomaganie zarządzania lotami
+               </p></li><li><p>
+                  Wymiana danych z innymi liniami lotniczymi
+               </p></li><li><p>
+                  Wspomaganie obsługi naziemnej
+               </p></li><li><p>
+                  Zarządzanie personelem
+               </p></li><li><p>
+                  Obsługa testów kwalifikacyjnych
+               </p></li><li><p>
+                  System do mierzenia wydajności pracy
+               </p></li><li><p>
+                  Obsługa limitów bezpieczeństwa dla pracowników
+               </p></li></ul></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2454056"></a>Wymagania funkcjonalne</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  Przechowywanie informacji o lotach, personelu i sprzęcie
+               </p></li><li><p>
+                  Publikowanie informacji o lotach, wolnych miejscach i cenach
+                  na terminalach lotniskowych i stronie internetowej 
+               </p></li><li><p>
+                  Automatyczne wysyłanie zamówień do firm cateringowych
+                  dostarczających posiłki 
+               </p></li><li><p>
+                  Rezerwacja biletów przez internet, telefonicznie lub
+                  osobiście w placówkach handlowych
+               </p></li><li><p>
+                  Powiadamianie odpowiednich pracowników o konieczności
+                  odnowienia umów z lotniskami
+               </p></li><li><p>
+                  Udostępnianie informacji placówkom handlowym
+               </p></li><li><p>
+                  Wspomaganie procesu rekrutacji personelu poprzez
+                  rejestrowanie zgłoszeń oraz szacowanie dopasowania osoby do
+                  stanowiska na podstawie wyników testów kwalifikacyjnych
+               </p></li><li><p>
+                  Przypisywanie pilotów do lotów na podstawie aktualnej
+                  lokalizacji z uwzględnieniem limitów bezpieczeństwa długości
+                  pracy pilota
+               </p></li><li><p>
+                  Analiza ilości niezbędnego personelu w stosunku do ilości
+                  obsługiwanych lotów.
+               </p></li></ul></div></div><div class="sect1" lang="pl" xml:lang="pl"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id2454167"></a>Wymagania niefunkcjonalne</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><p>
+                  W celu zmniejszenia kosztów, system powinien pracować pod
+                  kontrolą systemu Linux; mimo to, ze względu na wysoki stopień
+                  rozproszenia systemu, niezbędne jest zapewnienie
+                  wieloplatformowości
+               </p></li><li><p>
+                  Baza danych powinna być archiwizowana raz dziennie
+               </p></li><li><p>
+                  System powinien pracować w trybie replikacji, aby w wypadku
+                  awarii głównego systemu, system zapasowy automatycznie
+                  przejął kontrolę
+               </p></li><li><p>
+                  Baza serwerowa systemu powinna mieć zapewnioną ciągłość
+                  zasilania poprzez zastosowanie systemu UPS z baterią
+                  zapewniającą przynajmniej 8 godzin pracy, oraz generatora z
+                  paliwem na kolejne 24 godziny
+               </p></li><li><p>
+                  Dane przekazywane między serwerem systemu a aplikacjami
+                  klienckimi powinny być przekazywane kanałami szyfrowanymi
+               </p></li><li><p>
+                  Aplikacja kliencka powinna być przygotowana w wersji
+                  graficznej oraz tekstowej
+               </p></li></ul></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="index.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="dzialania.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">Linia Lotnicza </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> Rozdział 2. Plan działań</td></tr></table></div></body></html>

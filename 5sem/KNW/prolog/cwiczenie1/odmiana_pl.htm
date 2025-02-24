@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0047)http://www.ceti.pl/~gralinski/lik320/odmiana.pl -->
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-2">
+<META content="MSHTML 6.00.2737.800" name=GENERATOR></HEAD>
+<BODY><PRE>/* 
+   Odmiana nieosobowych rzeczowników męskożywotnych (np. 'baran', 'słoń',
+   'rak', 'lew', 'tygrys'...).
+  
+   Aby wywolać program, należy zadać cel 'zacznij'.
+*/
+
+/* Informujemy interpreter, że predykaty forma i temat są
+   dynamiczne, tzn. mogą być dolączane do bazy i usuwane z niej. */
+:- dynamic forma/4.
+:- dynamic temat/2.
+
+/* W wyrazie W zamienia końcówkę K1 na K2. Wynikiem jest nowy wyraz U.
+   Np. dla celu zamien_koncowke('koń', 'ń', 'nia', U) U przyjmie 
+   wartość 'konia'.
+   Predykat w ogóle się nie powodzi, jeśli K1 nie jest końcówką W. */
+
+zamien_koncowke(W, K1, K2, U) :-
+    atom_length(K1, DK1),      /* DK1 to długość końcówki K1 */
+    sub_atom(W, LiczbaZnakowBezK1, DK1, 0, K1),
+    sub_atom(W, 0, LiczbaZnakowBezK1, _, Poczatek), 
+                         /* Poczatek to wyraz W bez końcówki K1 */
+    concat(Poczatek, K2, U). /* Łączymy wyraz z nową końcówką.*/
+
+
+/* Wyznacza temat T dla rzeczownika W */
+temat(W, T) :-
+    ( zamien_koncowke(W, 'ć', 'ci', T), ! ;
+      zamien_koncowke(W, 'ń', 'ni', T), ! ;  /* np. 'koni' dla 'koń' */
+      zamien_koncowke(W, 'ś', 'si', T), ! ;
+      T = W ).
+
+
+/* forma(P, L, W, F) - F jest formą rzeczownika W dla przypadku P
+   i liczby L */
+
+forma(dopełniacz, liczba_pojedyncza, W, F) :-
+    temat(W, T), concat(T, 'a', F).  /* do tematu dodajemy końcówkę 'a' */
+
+forma(celownik, liczba_pojedyncza, W, F) :-
+    temat(W, T), concat(T, 'owi', F).
+
+forma(narzędnik, liczba_pojedyncza, W, F) :-
+    temat(W, T), concat(T, 'em', F).
+
+forma(miejscownik, liczba_pojedyncza, W, F) :-
+    temat(W, T),
+    /* miękkotematowe (których temat kończy się na 'i') mają w miejscowniku
+       końcówkę 'iu' */
+    (zamien_koncowke(T, 'i', 'iu', F), ! ;   
+     concat(T, 'ie', F)).
+
+forma(mianownik, liczba_mnoga, W, F) :-
+    temat(W, T),
+    (zamien_koncowke(T, 'i', 'ie', F), !;
+     concat(T, 'y', F)).
+
+forma(dopełniacz, liczba_mnoga, W, F) :-
+    temat(W, T),
+    (zamien_koncowke(T, 'i', 'i', F), !;
+     concat(T, 'ów', F)).
+
+forma(celownik, liczba_mnoga, W, F) :-
+    temat(W, T), concat(T, 'om', F).
+
+forma(narzędnik, liczba_mnoga, W, F) :-
+    temat(W, T), concat(T, 'ami', F).
+
+forma(miejscownik, liczba_mnoga, W, F) :-
+    temat(W, T), concat(T, 'ach', F).
+
+
+/* różne ogólne reguły */
+forma(mianownik, liczba_pojedyncza, W, W).
+
+/* biernik lp. jest równy dopełniaczowi lp. */
+forma(biernik, liczba_pojedyncza, W, F) :-
+    forma(dopełniacz, liczba_pojedyncza, W, F).
+
+forma(wołacz, liczba_pojedyncza, W, F) :-
+    forma(miejscownik, liczba_pojedyncza, W, F).
+
+forma(biernik, liczba_mnoga, W, F) :-
+    forma(mianownik, liczba_mnoga, W, F).
+
+forma(wołacz, liczba_mnoga, W, F) :-
+    forma(mianownik, liczba_mnoga, W, F).
+
+
+menu :-
+    nl,
+    write('f - sprawdź formę fleksyjną'),nl,
+    write('w - wprowadź wyjątek'),nl,
+    write('t - wprowadź specjalny temat'),nl,
+    write('k - koniec działania'),nl.
+
+wykonaj(102 /* f */) :-
+    write('podaj wyraz, przypadek i liczbę - każdy wprowadzany atom zakończ kropką i ENTEREM'), nl,
+    read(W),
+    read(P),
+    read(L),
+    ( forma(P, L, W, U), !, write('znaleziona forma to: '), write(U) ;
+      write('nie znaleziono formy (być może wpisałeś mnoga zamiast liczba_mnoga?)')), nl.
+    
+wykonaj(119 /* w */) :-
+    write('podaj wyraz, przypadek, liczbę i właściwą formę'), nl,
+    read(W),
+    read(P),
+    read(L),
+    read(F),
+    asserta(forma(P, L, W, F) :- !).
+
+wykonaj(116 /* t */) :-
+    write('podaj wyraz i właściwy temat'), nl,
+    read(W),
+    read(T),
+    asserta(temat(W, T)).
+
+zacznij :-
+    repeat,
+    menu,
+    get_single_char(C),
+    (C = 107 /* k */; wykonaj(C), fail).
+
+
+
+
+
+
+
+
+
+
+
+</PRE></BODY></HTML>

@@ -1,0 +1,13 @@
+JPEG
+
+Najbardziej powszechniejszym algorytmem kompresji obrazów jest JPEG. Wiele rozwi¹zañ u¿ytych w JPEG jest u¿ywanych tak¿e w innych algorytmach, wiêc warto je tutaj omówiæ. Kolejne kroki algorytmu JPEG to:
+
+    * zamiana przestrzeni kolorów z RGB na kana³ jasnoœci i dwa kana³y koloru. Ludzie znacznie dok³adniej postrzegaj¹ drobne ró¿nice jasnoœci od drobnych ró¿nic barwy, a wiêc u¿yteczne jest tutaj u¿ycie ró¿nych parametrów kompresji. Krok nie jest obowi¹zkowy.
+    * obni¿enie rozdzielczoœci kana³ów koloru, zwykle odrzuca siê co drug¹ wartoœæ wzd³u¿ osi poziomej, i ka¿d¹ na pionowej, choæ mo¿liwe s¹ te¿ inne ustawienia. Tak radykalne ciêcie danych nieznacznie wp³ywa na jakoœæ, poniewa¿ rozdzielczoœæ postrzegania kolorów przez ludzkie oko jest s³aba. Krok nie jest obowi¹zkowy.
+    * podzielenie ka¿dego kana³u obrazka na bloki 8x8. W przypadku kana³ów kolorów, jest to 8x8 aktualnych danych, a wiêc zwykle 16x8.
+    * transformata kosinusowa ka¿dego z bloków. Zamiast wartoœci pikseli mamy teraz œredni¹ wartoœæ wewn¹trz bloku oraz czêstotliwoœci zmian wewn¹trz bloku, obie wyra¿one przez liczby zmiennoprzecinkowe. Transformata DCT jest odwracalna, wiêc na razie nie tracimy ¿adnych danych.
+    * Zast¹pienie œrednich wartoœci bloków przez ró¿nice wobec wartoœci poprzedniej. Poprawia to w pewnym stopniu wspó³czynnik kompresji.
+    * Kwantyzacja, czyli zast¹pienie danych zmiennoprzecinkowych przez liczby ca³kowite. To w³aœnie tutaj wystêpuj¹ straty danych. Zale¿nie od parametrów kompresora, odrzuca siê mniej lub wiêcej danych. Zasadniczo wiêksza dok³adnoœæ jest stosowana do danych dotycz¹cych niskich czêstotliwoœci ni¿ wysokich.
+    * Kompresja algorytmem bezstratnym, w tym przypadku algorytmem Huffmana.
+
+U¿yta transformata powoduje efekty blokowe w przypadku mocno skompresowanych obrazków.

@@ -1,0 +1,31 @@
+Lukasz Maslak
+masko@pjwstk.edu.pl
+masko@ipipan.waw.pl
+
+2 programy do napisania
+
+1 program - korzysta z 1 albo 2 funkocjnalnosci wczesniej omowionej
+Kazdy robi jeden program (max. 2 osoby dostana to samo)
+Program niby na max 2h. Oba programy w C.
+
+2 program (projekt) - 2 tematy do wyboru
+a) program zaliczeniowy (na 3?)
+b) program bardziej skomplikowany (moze zwolnic z egzaminu), wymaga echo uzyciu kilku wiekszych funkcjonalnosci
+
+
+Brak kolokwium. Egzamin jest glownie z wykladow. 
+
+--------------------------------------------
+Cwiczenia 1 - sygnaly linuksowe.
+
+
+
+
+void obsluga_sygnalu(int parametr);
+do rejestracji sygnalu -> void* signal(int signo, void* sig_handler)
+
+SIG_IGN - ignoruje sygnal
+SIG_DFL 
+
+int kill(int pid, int singo)
+  

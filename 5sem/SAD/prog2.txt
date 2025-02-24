@@ -1,0 +1,24 @@
+ data  pom;
+
+do i=1 to 300;
+x=normal(123);
+y=normal(456);
+g1=rangam(1,0.5);
+g11=rangam(1,0.5);
+g2=rangam(1,1.5);
+gm=5.0 - rangam(5,2);
+u=ranuni(789);
+if u<0.7 then z=normal(222);
+else  z=5+normal(333);
+u1=ranuni(11);
+if u<0.4 then z2=normal(22);
+else if u<0.7 then z2=5+normal(44);
+else z2=12+normal(55);
+u=ranuni(77);
+if u<0.5 then z3=normal(655);
+else  z3=1.5+normal(38);
+
+
+output;
+end;
+run;

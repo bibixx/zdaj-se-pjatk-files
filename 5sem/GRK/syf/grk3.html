@@ -1,0 +1,483 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1250">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Win32)">
+	<META NAME="AUTHOR" CONTENT="Leszek Krupinski">
+	<META NAME="CREATED" CONTENT="20040122;22112400">
+	<META NAME="CHANGEDBY" CONTENT="Leszek Krupinski">
+	<META NAME="CHANGED" CONTENT="20040123;10581882">
+	<STYLE>
+	<!--
+		@page { size: 21cm 29.7cm; margin: 2cm }
+		P { margin-bottom: 0.21cm }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="pl-PL" DIR="LTR">
+<OL>
+	<LI><P STYLE="margin-bottom: 0cm">Podstawowe algorytmy techniki
+	rastrowe</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">dwa przecinajace sie odcinki moga
+		nie miec wsp&oacute;lnego piksela (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">odcinek o wsp&oacute;lrzednych
+		koncowych (2,0), (5,6) narysowany przy wykorzystaniu algorytmu
+		Bresenhama sklada sie z 6 pikseli (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">efekt aliasingu mozna usunac
+		korzystajac z metody Goraur (N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Krzywa Beziera jest okreslona
+	przez punkty kontrolne P0(2,1), P1(3,3), P2(5,3), P3(3,2)</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">punkt dla kt&oacute;rego parametr
+		biezacy u=0.5 ma wsp&oacute;lrzedne (2,2) (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">punkt o wsp&oacute;lrzednych
+		(0,2) nalezy do krzywej (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">przynajmniej jeden punkt odcinka
+		P2P3 nalezy do krzywej (T)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Scena sklada sie z szescianu i
+	odleglego zr&oacute;dla swiatla. Obserwator moze byc w dowolnym
+	miejscu poza szescianem</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">prz obliczaniu oswietlenia sceny
+		trzeba rozwiazac problem widocznosci scian ze zr&oacute;dla swiatla
+		(T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">obliczone barwy wszystkich scian
+		sa takie same (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w trakcie obliczen konieczne jest
+		wyznaczenie normalnych do poszczeg&oacute;lnych scian</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Zaslanianie</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">metoda badania normalnych do
+		scian obiekt&oacute;w jest uniwersalna metoda rozwiazywania
+		problemu przeslaniania (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie z-bufora konieczne
+		jest sortowanie wielokat&oacute;w (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie z-bufora przy
+		wyznaczaniu barwy piksela o wsp&oacute;lrzednych x,y zawsze pamieta
+		sie wsp&oacute;lrzedna z ostatnio analizowanego punktu o
+		wsp&oacute;lrzednych x,y,z (N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Przy modelowaniu obiekt&oacute;w
+	3D</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">metoda wielokatowa prefeorwane
+		jest korzystanie z tr&oacute;jkat&oacute;w (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">metoda CSG bryly tworzy sie w
+		wyniku obracania zadanego przekroju wok&oacute;l wybranej osi (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">metoda octree dokonuje sie
+		r&oacute;wnomiernego podzialu z zadana dokladnoscia (N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">W modelach wyznaczania oswietlenia</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">swiatlo rozproszenia jest
+		zwiazane z wybranym zr&oacute;dlem swiatla (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">swiatlo rozproszenia pozwala
+		okreslac oswietlenie dla punkt&oacute;w niewidocznych ze zr&oacute;dla
+		swiatla (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">przy analizie odbicia
+		zwierciadlanego wektor normalny jest skierowany do obserwatora (N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">R&oacute;zne</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">przy opisie parametrycznym
+		odcinka znajac wartosc parametru biezacego mozna wyznaczyc
+		wsp&oacute;lrzedne odpowiedniego punktu na odcinku (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">algorytm z-bufora jest
+		wukorzystywany do wypelniania powierzchni wielokata (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie sledzenia promieni
+		otaczanie obiekt&oacute;w prostszymi brylami pozwala przyspieszyc
+		znajdowanie pierwszego obiektu napotkanego przez promien (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w standardzie MPEG przy kompresji
+		sekwencji obraz&oacute;w wykorzystuje sie kompresje kazdego obrazu
+		niezaleznie kompresja JPEG (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w formacie BMP mozna zapisywac
+		obrazy o r&oacute;znych rozdzielczosciach (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">warping to jedna z metod
+		kodowania obrazu (N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Barwa w grafice komputerowej</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">w modelu CMY odcienie szarosci
+		reprezentowane sa przez punkty lezace na osi Y (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w modelu HSV skladowa S
+		reprezentuje nasycenie barwy (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w modelu CIE XYZ barwy nasycone
+		znajduja sie na obwiedni wykresu chrominacji we wsp&oacute;lrzednych
+		xy (T)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Podstawowe informacje</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">kwadrat o wsp&oacute;lrzednych
+		wierzcholk&oacute;w (0,0), (1,0), (1,1), (0,1) zostal poddany
+		operacji skalowania ze wsp&oacute;lczynnikami Sx=2, Sy=3 i
+		przesuniete o wektor [2,3]. Wsp&oacute;lrzedne figury to (2,5) (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">punkt o wsp&oacute;lrzednych
+		jednorodnych (5,4,3,1) w ukladzie xyz ma wsp&oacute;lrzedne
+		(5,4,3,1) (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w transformacji skalowania punk
+		wzgledem kt&oacute;rego nastepuje skalowanie musi pokrywac sie z
+		poczatkiem ukladu wsp&oacute;lrzednych (T)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Bryly</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie Brep przy wektorowej
+		reprezentacji bryly sa definiowane i wyswietlane tylko wierzcholki
+		i krawedzie bryly (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie wielomianowej
+		(objetosciowej) dostepne jest tylko info o wnetrzu bryly (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie CSG jest dostepne
+		tylko info o wnetrzu bryly</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Przejscie ze sceny 3D na 2D</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">w rzucie ukosnym promienie
+		rzutujace przecinaja sie w jednym punkcie</P>
+		<LI><P STYLE="margin-bottom: 0cm">z punktu widzenia realizmu
+		generowanego obrazu 2D koncowe rozwiazywanie problemu widocznosci
+		bryl</P>
+		<LI><P STYLE="margin-bottom: 0cm">bryla widzenia zawiera obiekty,
+		kt&oacute;re na pewno beda widoczne na ekranie (N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Cieniowanie</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">przy analizie swiatla odbijanego
+		zwierciadlanie uwzglednia sie polozenie obserwatora (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w scenie zawierajacej pojedynczy
+		szescian o powierzchni barwy zielonej wystepuje tylko swiatlo
+		otoczenia. W wygenerowanym okresie kazda widoczna scianka bedzie
+		miala te sama barwe (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie Phong przy wyznaczaniu
+		barwy piksela wewnatrz tr&oacute;jkata korzysta sie z metody
+		podw&oacute;jnej interpolacji barw wierzcholkowych (T)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Metoda sledzenia promieni</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">kazdy analizowany promien jest
+		prowadzony tylko do pewnego napotkanego obiektu (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">analizowane promienie biegna
+		prostopadle do ekranu (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">pomocnicze promienie generowane w
+		celu wyznaczenia cieni w scenie sa prowadzone z oka obserwatora w
+		kierunku zr&oacute;del swiatla (T)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Eliminowanie obiekt&oacute;w
+	niewidocznych</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">Przy stosowaniu metody malarskiej
+		konieczne jest wyznaczenie normalnych do wielokat&oacute;w (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w algorytmie z-bufora konieczne
+		jest wstepne sortowanie wielokat&oacute;w (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie sledzenia promieni do
+		rozwiazania problemu widocznosci wykorzystuje sie pomocnicze
+		promienie (T)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Kompresja i przetwarzanie obraz&oacute;w</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">Kompresja obrazu metoda RLE jest
+		kompresja stratna (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">W metodach stratnych kompresja ma
+		wplyw na jakosc obrazu (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">Odbicie zwierciadlane obrazu (w
+		poziomie) mozna uzyskac zamieniajac miejscami odpowiednie wzorce
+		obrazu (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w kompresji JPEG wykorzystuje sie
+		tranformate sinusowa (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">kompresja Hufmana jest kompresja
+		stratna (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">wynik zastosowania maski [121,
+		242, 121] do zestawu pikseli [123, 321, 223] jest r&oacute;wny 1
+		(N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">kompresja liczby barw w obrazie
+		jest kompresja bezstratna (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w przetwarzaniu obraz&oacute;w
+		wykorzystuje sie informacje zapisane w z-buforze</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Dany jest obraz o rozdzielczosci
+	640x480x24 (w innym zestawie: 1024x768x24)</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">do zapamietania obrazu (bez
+		kompresji) potrzebna jest pamiec min. 0.5 MB (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">przy czestotliwosci wyswietlania
+		obrazu 50 Hz czas dostepny dla jednego piksela to 30 ns (N?)</P>
+		<LI><P STYLE="margin-bottom: 0cm">jezeli korzystamy z modemu 56
+		kb/s to czas przesylania obrazu wynosi 6 s (N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">W krzywych beziera</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">pierwsze 3 punkty kontrolne musza
+		lezec na jednej prostej (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">stopien wielomianu zalezy od
+		liczby punkt&oacute;w kontrolnych (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">zmiana polozenia dowolnego punku
+		kontrolnego powoduje zmiane wygladu calej krzywej (T?)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Ile klatek nalezy wygenerowac dla
+	filmu animowanego wyswietlanego z czestotliwoscia 24 klatek/s i
+	trwajacego 3 min?</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">1090</P>
+		<LI><P STYLE="margin-bottom: 0cm">2880</P>
+		<LI><P STYLE="margin-bottom: 0cm">4320 (T)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">W ramce kluczowej k punkt A ma
+	wsp&oacute;lrzedne (2,3). W ramce kluczowej k+1 A ma miec
+	wsp&oacute;lrzedne (26,45). Zakladamy, ze miedzy ramkami kluczowymi
+	ma byc 5 klatek posrednich. Punkt porusza sie ruchem jednostajnym po
+	linii prostej. Okresl wsp&oacute;lrzedne punktu A dla 4 ramki
+	posredniej. (18,31)</P>
+	<LI><P STYLE="margin-bottom: 0cm">Zaproponuj koncepcje programu
+	ilustrujacego ruch pilki rzuconej pod katem a &gt; 45 st. do
+	poziomu. Uwzglednij oswietlenie sloneczne. Wymien wykorzystane
+	algorytmy z zakresu grafiki komputerowej.</P>
+	<LI><P STYLE="margin-bottom: 0cm">Podaj koncepcje programu
+	wyjasniajacego metode sledzenia promieni</P>
+	<LI><P STYLE="margin-bottom: 0cm">Podaj koncepcje programu
+	pokazujacego r&oacute;zne sposoby cieniowania</P>
+	<LI><P STYLE="margin-bottom: 0cm">Zaproponuj algorytm ukrywania
+	wybranego fragmentu obrazu</P>
+	<LI><P STYLE="margin-bottom: 0cm">Zaproponowac strukture plik dla
+	pamietania informacji o obrazach nalezacych do zalozonej klasy
+	obraz&oacute;w</P>
+	<LI><P STYLE="margin-bottom: 0cm">Naszkicowac reprezentacje
+	wielokatowa walca oswietlonego przez odlegle zr&oacute;dlo swiatla
+	znajdujace sie na osi x (promienie biegnace r&oacute;wnolegle).
+	Obserwator znajduje sie na osi x.</P>
+	<LI><P STYLE="margin-bottom: 0cm">Dany jest przekr&oacute;j bryly o
+	wsp&oacute;lrzednych wierzcholk&oacute;w (0, 0, 0), (4, 0, 0), (4,
+	1, 0), (1, 1, 0), (1, 3, 0), (2, 3, 0), (2, 4, 0), (0, 4, 0).
+	Przekr&oacute;j ten zostal przesuniety wzdluz osi z o 5 jednostek.
+	Naszkicowac uzyskana bryle. Uznac ze powierzchnia bryly jest
+	nieprzezroczysta.</P>
+	<LI><P STYLE="margin-bottom: 0cm">Teksturowanie</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">wz&oacute;r tekstury jest zawsze
+		odwzorowany bezposrednio na docelowy obiekt (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">przy teksturowaniu barwa piksela
+		zawsze jest okreslana przez barwe jednego teksela (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">teksel to odpowiednik piksela na
+		plaszczyznie (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">przy odwzorowywaniu tekstury na
+		zlozony obiekt czasami stosuje sie odwzorowanie na posrednia
+		powierzchnie (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">metoda bump-mapping wprowadza
+		znieksztalcenie powierzchni obiektu (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w procesie teksturowania zawsze
+		stosuje sie odwzorowywanie jeden teksel -&gt; jeden piksel (N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Animacja</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">zmiana ksztaltu obiektu w
+		kolejnych ramkach to tez animacja (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w animacji zawsze przestrzega sie
+		praw fizyki (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">tor poruszania sie punktu musi
+		byc linia prosta (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">tor poruszania sie punku mozna
+		opisac za pomoca linii beziera (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w animacji wystepuje pojecie
+		ramek kluczowych (T)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Kompresja obraz&oacute;w</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">w metodach bezstratnych obraz po
+		dekompresji moze r&oacute;znic sie od pierwotnego (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie RLE konieczne jest
+		wyznaczenie histogramu (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie Huffmana kod
+		przypisywany barwie zalezy od czestotliwosci jej wystepowania (T)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Metody cieniowania</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">w procesie cieniowania sa
+		wyznaczane cienie rzucane przez obiekty (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie Phonga/Gorauda
+		uwzglednia sie swiatlo otoczenia (T)(T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w obliczeniach zwiazanych z
+		cieniowaniem uwzglednia sie wartosc sinusa kata miedzy normalna do
+		powierzchni a wektorem skierowanym do zr&oacute;dla swiatla (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie Phonga uwzglednia sie
+		swiatlo odbijane zwierciadlanie (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">metoda Phonga/Gorauda jest
+		stosowana w odniesieniu do obiekt&oacute;w, kt&oacute;rych
+		powierzchnie sa aproksymowane tr&oacute;jkatami (T)(T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">Metoda Gorauda jest stosowana w
+		odniesieniu do obiekt&oacute;w 3D przed operacja rzutowania na
+		plaszczyzne ekranu (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">przy analizie swiatla odbjanego
+		zwierciadlanie uwzglednia sie polozenie obserwatora (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w scenie zawierajacej pojedynczy
+		szescian o powierzchni barwy zielonej wystepuje tylko swiatlo
+		otoczenia. W wygenerowanym obrazie kazda scianka bedzie miala ta
+		sama barwe (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie Phonga przy
+		wyznaczaniu barwy piksela wewnatrz tr&oacute;jkata korzysta sie z
+		metody podw&oacute;jnej interpolacji barw wierzcholkowych (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie Phonga wnetrze
+		wielokata jest zawsze wypelnione stala barwa (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie Phonga wykorzystuje
+		sie podw&oacute;na interpolacje normalnych (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie Phonga/Gourauda
+		mozliwe jest uzyskanie metody rozswietlenia (T)(N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Metoda sledzenia promieni</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">metoda jest wykorzystywana w
+		odniesieniu do scen 2D uzyskanych po rzutowaniu scen 3D na
+		plaszczyzne ekranu (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">metoda ta pozwala rozwiazac
+		problem cieni rzucanych przez obiekty</P>
+		<LI><P STYLE="margin-bottom: 0cm">w tej metodzie kazdy analizowany
+		promien musi dobiec do zr&oacute;dla swiatla (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">przy wykorzystaniu tej metody
+		wykorzystuje sie r&oacute;wnoczesnie metode Phonga/Gourauda (N)(N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">Kazdy analizowany promien jest
+		sledzony tylko do pewnego napotkanego obiektu (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">analizowane promienie biegna
+		prostopadle do ekranu (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">pomocnicze promienie generowane w
+		celu wyznaczenia cieni w scenie sa prowadzone z oka obserwatora w
+		kierunku zr&oacute;del swiatla (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w tej metodzie sledzi sie bieg
+		promieni zawsze do chwili wyjscia poza scene (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w celu wyznaczenia cieni
+		wykorzystuje sie promienie pomocnicze (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">najwiecej czasu zajmuje
+		wyznaczenie barw poszczeg&oacute;lnych pikseli (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">bryla widzenia okresla fragment
+		sceny 3D potencjalnie widoczny na ekranie (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">bryla widzenia musi byc
+		wyznaczona w metodzie sledzenia promieni (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">bryla widzenia w rzucie
+		perespektywicznym jest ostroslupem scietym (T)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Eliminowanie powierzchni
+	niewidocznych</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">metoda sledzenia promieni
+		zapewnia eliminowanie powierzchni niewidocznych (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">metoda z-bufora wymaga wstepnego
+		zapisu w pamieci obrazu i z-bufora samych zer (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie malarskiej konieczna
+		jest znajomosc wektor&oacute;w normalnych do poszczeg&oacute;lnych
+		wielokat&oacute;w (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">metoda malarska/z-bufora wymaga
+		korzystania z pomocniczego bufora pamieci okreslonej przez
+		rozdzielczosc ekranu (N)(T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">metoda wektora normalnego pozwala
+		eliminowac powierzchnie niewidoczne w obiektach typu
+		prostopadloscian z wycietym wewnatrz otworem (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">metoda z-bufora jest
+		wykorzystywana w grafice 2D (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w algorytmie z-bufora/malarskim
+		konieczne jest wstepne sortowanie wielokat&oacute;w (N)(T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie sledzenia promieni do
+		rozwiazania problemu widocznosci wykorzystuje sie pomocnicze
+		promienie (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">algorytm z-bufora jest
+		wykorzystywany do wypelniania powierzchni wielokat&oacute;w (N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Stereoskopia</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">dla uzyskania efektu widzenia
+		przestrzennego potrzebna jest para identycznych obraz&oacute;w (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">okulary z cieklymi krysztalami
+		ulatwiaja ogladanie obrazu z duzych odleglosci (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">przy wyznaczaniu par obraz&oacute;w
+		uwzglednia sie rozstaw oczu obserwatora/odleglosc obserwatora od
+		ekranu (N)(N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w stereoskopii zawsze korzysta
+		sie z 2 monitor&oacute;w (N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Podstawowe algorytmy rastrowe</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">w algorytmie Bresenhama rysowania
+		odcinka w kazdym cyklu obliczen korzysta sie z r&oacute;wnania
+		linii prostej (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">aliasing jest to efekt bedacy
+		skutkiem stosowania niewlasciwych algorytm&oacute;w (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w metodzie wypelniania z punkt&oacute;w
+		poczatkowych obszar wypelniony musi byc domkniety (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">dwa przecinajace sie odcinki moga
+		nie miec wsp&oacute;lnego odcinka (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">dwa przecinajace sie odcinki moga
+		miec wiecej niz jeden piksel wsp&oacute;lny (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">odcinek o wsp&oacute;lrzednych
+		koncowych (2,0), (5,6)  /  (2,6), (4,1) narysowany przy
+		wykorzystaniu algorytmu Bresenhama sklada sie z 6 pikseli (N)(T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">efekt aliasingu mozna usunac
+		korzystajac z metody Gourauda (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w algorytmie obcinania odcink&oacute;w
+		wyr&oacute;znia sie etap wstepnej eliminacji odcink&oacute;w (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w algorytmie ODA/Bresenhama
+		rysowania odcinka nie korzysta sie z r&oacute;wnania linii prostej
+		na kt&oacute;rej lezy odcinek (N)(T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">algorytm wypelniania z pkt
+		poczatkowym i 4 sasiadami umozliwia wypelnienie figur wypuklych (T)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Barwa w grafice komputerowej</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">w modelu HSV skladowa nasycenia
+		jest okreslana w stopniach (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w CIE xyz barwa uzyskana po
+		zmieszaniu dw&oacute;ch barw jest reprezentowana przez pkt bedacy
+		na przedluzeniu odcinka laczacego punkty reprezentujace barwy
+		skladowe (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">barwa C<SUB>6500</SUB> oznacza
+		barwe czarna (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w modelu CIE xyz reprezentowane
+		sa wszystkie barwy widzialne (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w modelu HSV barwa biala lezy na
+		powierzchni bocznej ostroslupa (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w modelu barw RGB w przypadku
+		korzystania z systemu &ldquo;full color&rdquo; kazda ze skladowych
+		jest reprezentowana przez 32 / 512 poziom&oacute;w (N)(N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w modelu CMY odcienie szarosci sa
+		reprezentowane przez pkt lezace na osi Y (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w modelu HSV skladowa S
+		reprezentuje nasycenie barwy (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w modelu CIE XYZ barwy nasycone
+		znajduja sie na obwiedni wykresu chrominacji we wsp&oacute;lrzednych
+		XY (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w modelu barw HLS barwa biala
+		lezy na powierzchni bocznej ostroslupa (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w modelu RGB przy reprezentacji
+		barwy za pomoca 24 bit&oacute;w barwa czarna ma wsp&oacute;lrzedne
+		(255, 255, 255) (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w systemie full-color kazda
+		skladowa barwy jest reprezentowana przez 10 bit&oacute;w (N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Rzutowanie</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">w rzucie perespektywicznym bryla
+		widzenia jest prostopadloscianem (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w rzucie ukosnym promienie
+		rzutujace sa do siebie r&oacute;wnolegle (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w rzucie perespektywicznym
+		odcinki r&oacute;wnolegle do siebie i r&oacute;wnolegle do
+		plaszczyzny rzutu przecinaja sie w jednym punkcie (N)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w rzucie ukosnym
+		perespektywicznym / r&oacute;wnoleglym bryla widzenia jest
+		ostroslupem (N)(T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">w rzucie r&oacute;wnoleglym
+		ostogonalnym odcinki r&oacute;wnolegle do siebie pozostaja
+		r&oacute;wnolegle po wykonaniu rzutowania na plaszczyzne ekranu (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">bryla widzenia zwiera obiekty
+		kt&oacute;re na pewno beda widoczne na ekranie (N)</P>
+	</OL>
+	<LI><P STYLE="margin-bottom: 0cm">Przeksztalcanie obraz&oacute;w</P>
+	<OL TYPE=a>
+		<LI><P STYLE="margin-bottom: 0cm">operacja morphingu pozwala
+		przeksztalcac jeden obraz w drugi (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">obr&oacute;t obrazu o 90 stopni
+		wymaga zamiany miejscami odpowiednich wierszy i kolumn (T)</P>
+		<LI><P STYLE="margin-bottom: 0cm">korzystajac z metod progowania
+		mozna zmienic obraz z odcieniami szarosci w obraz dwubarwny (T)</P>
+	</OL>
+</OL>
+</BODY>
+</HTML>

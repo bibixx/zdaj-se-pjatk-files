@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0057)http://kti.ms.mff.cuni.cz/~bartak/prolog/first_steps.html -->
+<HTML><HEAD><TITLE>Prolog Guide - First Steps</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250"><!--This file created 26.9.1998 17:39 by Claris Home Page version 3.0 30 Day Trial-->
+<META content=file:///C|/My%20Documents/Web%20Sites/www/MyProject.vpp 
+name=VPSiteProject>
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR><X-CLARIS-WINDOW 
+RIGHT="627" LEFT="97" BOTTOM="744" TOP="49"><X-CLARIS-TAGVIEW 
+MODE="minimal"></HEAD>
+<BODY bgColor=#ffffff>
+<P>
+<SCRIPT language=JavaScript>
+<!--
+document.write("<IMG SRC=\"http://www.monitor.cz:8080/cgi-bin/stat?id=roman&ref=" + top.document.referrer+'&'+Math.round(Math.random()*10000)+ "\" WIDTH=1 HEIGHT=1>");
+// --></SCRIPT>
+<NOSCRIPT><IMG height=1 src="Prolog Guide - First Steps_files/stat.gif" width=1 
+align=bottom> </NOSCRIPT></P>
+<H3>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" bgColor=#ffffcc border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>
+      <P><FONT face="Times New Roman,Times"><I>Guide to Prolog 
+      Programming</I></FONT></P></TD>
+    <TD vAlign=top width=150>
+      <P align=right><FONT face="Times New Roman,Times"><I>© Roman Barták, 
+      1998</I></FONT></P></TD></TR>
+  <TR>
+    <TD vAlign=bottom>
+      <P><A href="http://kti.ms.mff.cuni.cz/~bartak/prolog/index.html"><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif size=-1>Home</FONT></A><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif size=-1><BR></FONT><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/learning.html"><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif size=-1>Prolog in 
+      Examples</FONT></A></P></TD>
+    <TD vAlign=bottom width=150>
+      <P align=right><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/intro.html"><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif size=-1>Previous</FONT></A><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif size=-1> | </FONT><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/contents.html"><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif size=-1>Contents</FONT></A><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif size=-1> | </FONT><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/genealogy.html"><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif size=-1>Next</FONT></A></P></TD></TR>
+  <TR>
+    <TD vAlign=bottom colSpan=2>
+      <H3><FONT face=Arial,Helvetica,Geneva,SansSerif>First Steps in Prolog 
+      <HR noShade>
+      </FONT></H3></TD></TR></TBODY></TABLE></H3>
+<P><FONT face=Arial,Helvetica,Geneva,SansSerif>In this chapter we will go 
+through few examples to show basic ideas behind Prolog programming. But first, 
+just few notes about using Prolog systems.</FONT></P>
+<P><FONT face=Arial,Helvetica,Geneva,SansSerif size=-1>A Prolog program is a set 
+of procedures (the order is indifferent), each procedure consists of one or more 
+clauses (the order of clauses is important). There are two types of clauses: 
+facts and rules, you will understand the difference soon. The program must be 
+written in advance in some text processor like Emacs. Only some Prolog systems 
+contain IDE (Integrated Development Environment). When the Prolog system is 
+started, you will see a prompt, usually in the following form:</FONT></P>
+<BLOCKQUOTE><PRE><FONT size=-1>?-</FONT></PRE></BLOCKQUOTE>
+<P><FONT face=Arial,Helvetica,Geneva,SansSerif size=-1>The system is waiting for 
+your commands/questions. First, the program should be loaded to the Prolog 
+database. You can load a program into the database by using the <FONT 
+face="Courier New, Courier, mono">consult</FONT> command in the following way 
+(do not forget the dot at the end!):</FONT></P>
+<BLOCKQUOTE><PRE><FONT size=-1>?-consult('name_of_the_file_with_the_program').</FONT></PRE></BLOCKQUOTE>
+<P><FONT face=Arial,Helvetica,Geneva,SansSerif size=-1>The consult command adds 
+the clauses and facts from the specified text file to the clauses and facts 
+already stored in the Prolog database. Thus you can load more programs into the 
+database but be careful whether the programs do not use the procedures with the 
+same name. Otherwise, because of cumulating of clauses, these procedures could 
+behave incorrectly.</FONT></P>
+<P><FONT face=Arial,Helvetica,Geneva,SansSerif size=-1>You can also use the 
+<FONT face="Courier New, Courier, mono">reconsult</FONT> command to load the 
+program</FONT></P>
+<BLOCKQUOTE><PRE><FONT size=-1>?-reconsult('name_of_file_with_the_program').</FONT></PRE></BLOCKQUOTE>
+<P><FONT face=Arial,Helvetica,Geneva,SansSerif size=-1>that behaves like the 
+consult command (it adds procedures into the database) but if there is a 
+procedure in the database with the same name as any procedure in the reconsulted 
+file, then the former procedure is replaced by the new definition. You will 
+usually use the reconsult command to update the Prolog database after change of 
+the program.</FONT></P>
+<P><FONT face=Arial,Helvetica,Geneva,SansSerif size=-1>It is possible to find 
+out the actual contents of the Prolog database by using the <FONT 
+face="Courier New, Courier, mono">listing</FONT> command:</FONT></P>
+<BLOCKQUOTE><PRE><FONT size=-1>?-listing.</FONT></PRE></BLOCKQUOTE>
+<P><FONT face=Arial,Helvetica,Geneva,SansSerif size=-1>Your Prolog program is 
+started by calling some procedure of the program in the following 
+way:</FONT></P>
+<BLOCKQUOTE><PRE><FONT size=-1>?-procedure_name(parameters).</FONT></PRE></BLOCKQUOTE>
+<P><FONT face=Arial,Helvetica,Geneva,SansSerif size=-1>Note, that you have 
+already called a procedure when you consulted or reconsulted the file. "Calling 
+a procedure" is called "asking a question" in Prolog.</FONT></P>
+<P><FONT face=Arial,Helvetica,Geneva,SansSerif size=-1>And how do you stop the 
+Prolog system? Simply use the command <FONT 
+face="Courier New, Courier, mono">halt</FONT> (again with the dot at the 
+end):</FONT></P>
+<BLOCKQUOTE><PRE><FONT size=-1>?-halt.</FONT></PRE></BLOCKQUOTE>
+<P>
+<TABLE cellSpacing=0 cellPadding=3 width="100%" bgColor=#ffffcc border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=bottom align=right colSpan=2>
+      <P>
+      <HR noShade>
+
+      <P></P></TD></TR>
+  <TR>
+    <TD vAlign=top>
+      <P><FONT face="Times New Roman,Times"><I>Designed and maintained by 
+      </I></FONT><A href="mailto:bartak@kti.mff.cuni.cz"><FONT 
+      face="Times New Roman,Times"><I>Roman Barták</I></FONT></A></P></TD>
+    <TD vAlign=top width=150>
+      <P align=right><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/intro.html"><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif size=-1>Previous</FONT></A><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif size=-1> | </FONT><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/contents.html"><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif size=-1>Contents</FONT></A><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif size=-1> | </FONT><A 
+      href="http://kti.ms.mff.cuni.cz/~bartak/prolog/genealogy.html"><FONT 
+      face=Arial,Helvetica,Geneva,SansSerif 
+  size=-1>Next</FONT></A></P></TD></TR></TBODY></TABLE>
+<P></P></BODY></HTML>

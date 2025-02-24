@@ -1,0 +1,413 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0052)http://www.ceti.pl/~gralinski/lik320/lik-prolog2.htm -->
+<HTML><HEAD><TITLE>LIK320 / Prolog</TITLE><LINK 
+href="LIK320 - Prolog2_files/lik.css" type=text/css rel=stylesheet>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-2">
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR></HEAD>
+<BODY>
+<H1>Lingwistyka komputerowa 320</H1>
+<H2>Programowanie w Prologu - powtórzenie</H2>
+<H3>Ćwiczenia 2. Tryb pracy mechanizmu wnioskowania, funktory, listy</H3>
+<P>Integralną częścią języka Prolog jest tzw. mechanizm wnioskowania. Działanie 
+mechanizmu wnioskowania omówimy na następującym przykładzie:</P><PRE>/* dziadek(A,B) - A jest dziadkiem B	*/
+/* ojciec(A,B)  - A jest ojcem B	*/
+/* dziecko(A,B) - A jest dzieckiem B	*/
+
+dziadek(X,Y) :- ojciec(X,Z), dziecko(Y,Z).     /* (k1) */
+dziadek(karol,maurycy).                        /* (k2) */
+
+ojciec(karol,elzbieta).                          /* (k3) */
+ojciec(karol,august).                          /* (k4) */
+
+dziecko(henryk,elzbieta).                        /* (k5) */
+dziecko(teofil,august).                        /* (k6) */
+</PRE>
+<P>Cel:</P><PRE>?-dziadek(karol,W). 
+</PRE>
+<P>Poniżej podano schematyczne przedstawienie kilku pierwszych kroków mechanizmu 
+wnioskowania przy realizacji celu <TT>dziadek(karol,W)</TT>.</P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD>(zn1)</TD>
+    <TD><TT>dziadek(karol,Y)</TT></TD>
+    <TD>(k1)</TD>
+    <TD><TT>X=karol,Y=W</TT></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD><B><TT>&nbsp;ojciec(karol,Z)</TT></B></TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD><TT>&nbsp;dziecko(Y,Z)</TT></TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <CAPTION align=bottom>realizacja pierwszego podcelu</CAPTION></TABLE>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD>(zn1)</TD>
+    <TD><TT>dziadek(karol,Y)</TT></TD>
+    <TD>(k1)</TD>
+    <TD><TT>X=karol,Y=W</TT></TD></TR>
+  <TR>
+    <TD>(zn2)</TD>
+    <TD><TT>ojciec(karol,elzbieta)</TT></TD>
+    <TD>(k3)</TD>
+    <TD><TT>Z=elzbieta</TT></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD><B><TT>&nbsp;dziecko(Y,elzbieta)</TT></B></TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <CAPTION align=bottom>realizacja drugiego podcelu</CAPTION></TABLE>
+<TABLE border=1>
+  <CAPTION align=bottom>odpowiedź pierwsza <TT>W=henryk</TT>, nawrót do 
+  (zn3)</CAPTION>
+  <TBODY>
+  <TR>
+    <TD>(zn1)</TD>
+    <TD><TT>dziadek(karol,Y)</TT></TD>
+    <TD>(k1)</TD>
+    <TD><TT>X=karol,Y=W</TT></TD></TR>
+  <TR>
+    <TD>(zn2)</TD>
+    <TD><TT>ojciec(karol,elzbieta)</TT></TD>
+    <TD>(k3)</TD>
+    <TD><TT>Z=elzbieta</TT></TD></TR>
+  <TR>
+    <TD>(zn3)</TD>
+    <TD><TT>dziecko(henryk,elzbieta)</TT></TD>
+    <TD>(k5)</TD>
+    <TD><TT>Y=W=henryk</TT></TD></TR></TBODY></TABLE>
+<TABLE border=1>
+  <CAPTION align=bottom>porażka, usunięcie (zn3) i przejście do (zn2)</CAPTION>
+  <TBODY>
+  <TR>
+    <TD>(zn1)</TD>
+    <TD><TT>dziadek(karol,Y)</TT></TD>
+    <TD>(k1)</TD>
+    <TD><TT>X=karol,Y=W</TT></TD></TR>
+  <TR>
+    <TD>(zn2)</TD>
+    <TD><TT>ojciec(karol,august)</TT></TD>
+    <TD>(k4)</TD>
+    <TD><TT>Z=elzbieta</TT></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD><B><TT>&nbsp;dziecko(Y,august)</TT></B></TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR></TBODY></TABLE><!--
+
+<table border="1">
+<caption align="bottom">odpowiedź trzecia <tt>W=maurycy</tt>, koniec</captioN>
+<tr><td>(zn1)</td><td><tt>dziadek(karol,maurycy)</tt></td>
+<td>(k2)</td><td><tt>W=maurycy</tt></td></tr>
+</table>
+
+-->
+<H4>Sterowanie mechanizmem wnioskowania</H4>
+<P>Działanie mechanizmu wnioskowania można modyfikować używając m.in. predykatów 
+wbudowanych <TT>cut</TT> i <TT>fail</TT>.</P>
+<H5><TT>cut</TT></H5>
+<P>Standardowy bezargumentowy predykat <TT>cut</TT> (predykat odcięcia), 
+alternatywnie oznaczany jako <TT>!</TT>, jest interpretowany logicznie jako 
+zawsze prawdziwy i służy do ograniczania nawrotów. Realizacja tego predykatu, 
+występującego jako jeden z podcelów w ciele klauzuli, uniemożliwia nawrót do 
+któregokolwiek z poprzedzających go podcelów przy próbie znajdowania rozwiązań 
+alternatywnych. Wszystkie zmienne, które zostały ukonkretnione podczas 
+realizacji poprzedzających odcięcie podcelów w ciele klauzuli zostają 
+"zamrożone" (zachowują nadane im wartości). Przykład:</P><PRE>ojciec(jan, staś).
+ojciec(jan, marek).
+dziecko(kasia, staś).
+dziecko(marysia, staś).
+dziecko(joasia, marek).
+
+/* I możliwość */
+dziadek(X, Z):- ojciec(X, Y), dziecko(Z, Y).
+/* ?- dziadek (jan, X). znajduje 3 rozwiązania */
+
+/* II możliwość */
+/* dziadek(X, Z):- ojciec(X, Y), !, dziecko(Z, Y). */
+/* ?- dziadek (jan, X). znajduje 2 rozwiązania */
+
+/* III możliwość */
+/* dziadek(X, Z):- ojciec(X, Y),  dziecko(Z, Y), !. */
+/* ?- dziadek (jan, X). znajduje 1 rozwiązanie */
+</PRE>
+<H5><TT>fail</TT></H5>
+<P>Drugim predykatem modyfikującym standardowy proces poszukiwania rozwiązań 
+jest bezargumentowy predykat <TT>fail</TT>. Wykonanie tego predykatu zawsze 
+zawodzi. Najczęściej jest on używany w celu wymuszenia nawrotów. Użyty w 
+kombinacji z predykatem <TT>cut</TT> (w kolejności: <TT>!, fail</TT>) zapobiega 
+użyciu innej klauzuli przy próbie znalezienia rozwiązań alternatywnych, co 
+oznacza niepowodzenie wykonania całej procedury.</P>
+<P>Przykład:</P><PRE>pyt :- matka(X, maria), write(X), fail. 
+
+pyt.
+</PRE>
+<P>Predykat <TT>fail</TT> zawsze zawodzi - będąc jednym z podcelów powoduje więc 
+porażkę celu głównego <TT>pyt</TT>. Oznacza to, że zmienna <VAR>X</VAR> 
+ukonkretniona w czasie realizacji celu głównego pozostaje ostatecznie 
+niezwiązana. Wbudowany predykat <TT>write</TT> umożliwia wypisywanie 
+"chwilowych" wartości zmiennej <VAR>X</VAR>. Predykat <TT>fail</TT> wymusza 
+nawroty, umożliwiając sukcesywne ukonkretnianie zmiennej <VAR>X</VAR> 
+wartościami z bazy danych (nastąpi wypisanie wszystkich matek mających córkę o 
+imieniu Maria). Druga klauzula <TT>pyt</TT> gwarantuje ostateczny sukces celu 
+głównego <TT>pyt</TT> (dzięki czemu interpreter odpowiada w końcu <TT>Yes</TT> 
+zamiast <TT>No</TT>).</P>
+<H4>Funktory</H4>
+<P>Obiekty mogą być reprezentowane przez stałe lub <EM class=term>termy 
+złożone</EM> (struktury). Term złożony ma postać 
+<TT><I>f</I>(<I>arg1</I>,...,<I>argn</I>)</TT>, gdzie <I>f</I> jest <EM 
+class=term>funktorem</EM> o arności <I>n</I>.</P>
+<P>Mylące może być to, że termy złożone zapisywane są podobnie jak relacje. 
+Należy jednak pamiętać, że obiekty reprezentowane przez funktory mogą być 
+argumentami predykatów, natomiast niedopuszczalne jest, aby argumentem predykatu 
+był inny predykat (z wyjątkiem pewnych predykatów specjalnych np. 
+<TT>call</TT>):</> 
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD><TT>posiada(osoba(jan, kowalski), samochód(opel, astra, 1997))</TT></TD>
+    <TD><I>dobrze</I></TD>
+  <TR>
+    <TD><TT>ojciec(jan, janek).<BR>matka(halina, ojciec(jan, janek)).</TT>
+    <TD><I>źle!</I></TD></TR></TBODY></TABLE>
+<P>Jeśli zapiszemy w programie fakt <TT>samochód(opel, astra, 1997)</TT>, to 
+<TT>samochód</TT> jest interpretowany jako predykat i nie może już być 
+argumentem innego predykatu.</P>
+<H4>Listy</H4>
+<P>Lista jest podstawową strukturą rekurencyjną w języku Prolog. Jest ona 
+ciągiem złożonym z dowolnej liczby elementów, którymi mogą być termy tj. stałe, 
+zmienne i struktury. Jako że lista jest strukturą (termem złożonym), do jej 
+konstrukcji użyto dwuargumentowego funktora <TT>.</TT> (tzw. operator 
+<I>cons</I>). Poniżej podano przykłady list zapisanych przy pomocy tego 
+operatora.</P><IMG src="LIK320 - Prolog2_files/listy.png"> 
+<P>(Ogólnie dla listy zawierającej <I>n</I> elementów należy użyć operatora 
+<TT>.</TT> <I>n</I> razy. Koniec listy jest zaznaczany przy użyciu specjalnego 
+atomu <TT>[]</TT>, który oznacza też listę pustą.)</P>
+<P>Aby uniknąć uciążliwego zapisu za pomocą funktora <TT>.</TT>, przyjęto 
+zamiast niego używać nawiasów kwadratowych, zaś elementy listy odzielać 
+przecinkami. Każdą listę można podzielić na dwie części: <I>głowę</I> 
+(<I>head</I>) i <I>ogon</I> (<I>tail</I>). W przypadku użycia funktora 
+<TT>.</TT>, głową jest zawsze pierwszy argument, zaś ogonem - drugi. W zapisie 
+przy użyciu nawiasów kwadratowych głową jest pierwszy element listy, ogonem 
+natomiast pozostała część listy (bez głowy). Uwaga: Lista pusta (tj. 
+<TT>[]</TT>) nie posiada ani głowy, ani ogona. Podział listy na głowę i ogon 
+jest w zasadzie jedyną operacją, za pomocą której można rekurencyjnie 
+przetwarzać listy. Istnieje symbol <TT>|</TT> reprezentujący tę operację, więc 
+zapis <TT>[X|Y]</TT> oznacza listę, której głową jest <VAR>X</VAR>, zaś ogonem - 
+<VAR>Y</VAR>, np. zapytanie <TT>[X|Y]=[1,2,3]</TT> da następujące wiązania 
+zmiennych: <TT>X=1</TT>,<TT>Y=[2,3]</TT>.</P>
+<P>Przykład podziału listy na głowę i ogon:</P>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TH>lista</TH>
+    <TH>głowa</TH>
+    <TH>ogon</TH></TR>
+  <TR>
+    <TD><TT>[a,b,c,d]</TT></TD>
+    <TD><TT>a</TT></TD>
+    <TD><TT>[b,c,d]</TT></TD></TR>
+  <TR>
+    <TD><TT>[a,b,[c,d]]</TT></TD>
+    <TD><TT>a</TT></TD>
+    <TD><TT>[b,[c,d]]</TT></TD></TR>
+  <TR>
+    <TD><TT>[]</TT></TD>
+    <TD><I>brak</I></TD>
+    <TD><I>brak</I></TD></TR>
+  <TR>
+    <TD><TT>[elemencik]</TT></TD>
+    <TD><TT>elemencik</TT></TD>
+    <TD><TT>[]</TT></TD></TR>
+  <TR>
+    <TD><TT>[[1,2],[3,4],5]</TT></TD>
+    <TD><TT>[1,2]</TT></TD>
+    <TD><TT>[[3,4],5]</TT></TD></TR></TBODY></TABLE>
+<H4>Zmienne anonimowe</H4>
+<P>Jeżeli w klauzuli zmienna jest użyta tylko raz, to w zasadzie oznacza to, że 
+jej użycie jest bezsensowne. SWI-Prolog zgłasza w takim wypadku ostrzeżenie 
+podczas kompilacji. Zmienną występującą tylko raz lepiej jest zapisywać jako 
+specjalną zmienną anonimową o postaci <TT>_</TT> (znak podkreślenia). 
+Przykłady:</P><PRE>/* Fragment definicji procedury multiply(X,Y,Z) (X pomnożone przez Y
+   daje Z) */
+multiply(0, _, 0).   /* 0 pomnożone przez dowolną liczbę daje 0 */
+
+/* Fragment definicji procedury member(E, L) (E jest elementem listy L) */
+member(W, [X | _]) :- W = X.
+</PRE>
+<H3>Zadania z ćwiczeń 2</H3>
+<P><B>Zadanie 1</B> Zmodyfikować przy pomocy odcięcia poniższą procedurę 
+<TT>objętość</TT> (nie usuwając żadnego faktu z bazy), aby przy realizacji celu 
+<TT>objętość(Z)</TT> uzyskać (a) jedną, (b) dwie, (c) cztery, (d) osiem 
+odpowiedzi.</P><PRE>dlugość(10).
+dlugość(20).
+szerokość(1).
+szerokość(2).
+wysokość(5).
+wysokość(6).
+objetość(X):-
+	dlugość(A),
+	szerokość(B),
+	wysokość(C),
+	X is A*B*C.
+objetość(30).
+</PRE>
+<P><B>Zadanie 2</B> Opisać powiązania między członkami rodziny (np. własnej) 
+stosując funktor <TT>osoba</TT> zamiast stałych. Termy z takim funktorem mogą 
+mieć następującą postać: <TT>osoba(imię, nazwisko, wiek, 
+miejsce_zamieszkania)</TT>. Przykłady faktu: <TT>ojciec(osoba(jan, kowalski, 50, 
+poznań), osoba(janek, kowalski, 20, warszawa))</TT>. Wykonać kilka celów typu: 
+odszukać wujka osoby o imieniu jan zamieszkałego w Poznaniu. Utworzyć procedurę, 
+który wypisuje wszystkie osoby spełniające pewien warunek.</P>
+<P><B>Zadanie A</B> Utworzyć krótką bazę danych wypożyczalni filmów składającą 
+się z filmów (o pewnych parametrach, m.in. ograniczenia wiekowego) i osób o 
+pewnych danych (między innymi: wiek). Napisać predykat dwuargumentowy 
+<TT>może_pożyczyć</TT>, który sprawdza, czy osoba reprezentowana przez pierwszy 
+argumente może pożyczyć film będący drugim argumentem.</P>
+<P><B>Zadanie 3</B> Sprawdzić wyniki, jakie daje SWI-Prolog dla następujących 
+zapytań (nie trzeba wprowadzać do bazy danych żadnych faktów):</P><PRE>?- [ala,  ma, kota] = [kota, ma, ala].
+?- [1,2,3] = [X,Y].
+?- [1,2,3,osiem] = [1|Ogon].
+?- [1|[2|[3|[osiem]]]] = [1|Ogon].
+?- [[0,1,2],[3,4],[5]] = [Glowa|Ogon].
+?- [ala,ma,kota,a,ola,ma,psa] = [ala,ma,kota,a|X].
+?- [alfa(1,2), alfa(3,4), alfa(5,6)] = [alfa(X,2)|Ogon].
+</PRE>
+<P><B>Zadanie 4</B> Zdefiniować predykat <TT>pisz_listę(L)</TT>, który wypisuje 
+na ekranie wszystkie elementy listy <VAR>L</VAR>. Skorzystać z predykatu 
+jednoargumentowego <TT>write</TT>. Wskazówka: napisać dwie reguły dla predykatu 
+<TT>pisz_listę(X)</TT> - (1) wypisanie listy pustej, (2) wypisanie listy, 
+składającej się z głowy i ogona (z wywołaniem rekurencyjnym).</P>
+<P><B>Zadanie 5</B> Zdefiniować predykat <TT>należy(E, L)</TT> - element 
+<VAR>E</VAR> należy do listy <VAR>L</VAR>. Wskazówka: sformułować dwie reguły - 
+(1) <VAR>E</VAR> jest głową listy, (2) <VAR>E</VAR> należy do ogona listy.</P>
+<P><B>Zadanie 6</B> (dodatkowe) Zdefiniować predykat <TT>dopasuj(L, W, Z)</TT>, 
+który dla listy <VAR>L</VAR> zwraca jej podlistę <VAR>Z</VAR> pasującą do 
+zadanego wzorca <VAR>W</VAR>. Wzorzec jest listą, której elementami mogą być 
+następujące stałe:</P>
+<UL>
+  <LI><TT>n</TT> - pasuje do liczby, 
+  <LI><TT>a</TT> - pasuje do atomu, 
+  <LI><TT>l</TT> - pasuje do elementu będącego (dowolną) listą, 
+  <LI><TT>.</TT> - pasuje do dowolnego elementu, 
+  <LI><TT>*</TT> - pasuje do podlisty o dowolnej długości (także pustej). 
+</LI></UL>
+<P>Np. wzorzec <TT>[n,n]</TT> oznacza podlistę złożoną z dwóch liczb, zaś 
+wzorzec <TT>[a,*,n]</TT> - podlistę zaczynającą się atomem i kończącą się 
+liczbą.</P>
+<P>Wskazówka: użyć predykatów wbudowanych <TT>atom</TT>, <TT>integer</TT>.</P>
+<P>Przykład oczekiwanego działania predykatu:</P><PRE>?- dopasuj([x,a,15,101,ala,ma,kota,[1,2],a,b,c],[n,n,*,l,.],Z).
+
+Z = [15, 101, ala, ma, kota, [1,2], a]
+
+Yes
+</PRE>
+<P><B>Zadanie B</B> (dodatkowe) Zdefiniować predykat <TT>pomiędzy(A, B, X)</TT>, 
+który daje wszystkie liczby naturalne nie mniejsze od <VAR>A</VAR> i nie większe 
+od <VAR>B</VAR>. Przykład oczekiwanego działania predykatu:</P><PRE>?- pomiędzy(3, 5, X).
+
+X = 3; [naciśnięto średnik]
+
+X = 4; 
+
+X = 5;
+
+No
+</PRE>
+<P>Nie używać operatora <TT>is</TT>. Wskazówka: użyć predykatu wbudowanego 
+<TT>succ</TT>.</P>
+<P><B>Zadanie C</B> (dodatkowe) Napisać predykat, w którym trzeci argument 
+będzie połączeniem list-dwóch pierwszych argumentów. Wskazówka: sformułować dwie 
+reguły - (1) pierwsza lista jest pusta, (2) pierwsza lista składa się z głowy i 
+ogona.</P>
+<P><B>Zadanie 7</B> Znaleźć ostatni element listy (zdefiniować predykat 
+<TT>ostatni(E, L)</TT>).</P>
+<P><B>Zadanie D</B> (dodatkowe) Sprawdzić, czy pierwsza lista jest początkiem 
+drugiej listy (zdefiniować predykat <TT>początek(Lista1,Lista2)</TT>).</P>
+<P><B>Zadanie E</B> (dodatkowe) Zdefiniować predykat <TT>podziel (ListaWej, 
+Liczba, ListaMniejsze, ListaWiększe)</TT> dzielący listę <VAR>ListaWej</VAR> na 
+dwie listy: <VAR>ListaMniejsze</VAR> jest listą tych liczb z 
+<VAR>ListyWej</VAR>, które są mniejsze od <VAR>Liczby</VAR>, a 
+<VAR>ListaWiększe</VAR> jest listą tych liczb z <VAR>ListyWej</VAR>, które są 
+większe od <VAR>Liczby</VAR>.</P>
+<P><B>Zadanie F</B> (dodatkowe) Dla danej liczby uzyskać listę odwróconą. 
+Wskazówka: można np. utworzyć predykat trójargumentowy <TT>odwróć_liste(Lista, 
+ListaOdwrocona, ListaPomoc)</TT>.</P>
+<P><B>Zadanie G</B> (dodatkowe) Zdefiniować parę predykatów, które wyznaczają 
+składniki listy na odpowiednio parzystych i nieparzystych pozycjach.</P>
+<P><B>Zadanie H</B> (dodatkowe) Zdefiniować predykat (trójargumentowy), który 
+usuwa dany element z listy.</P>
+<P><B>Zadanie I</B> (dodatkowe) Zdefiniować predykat (czteroargumentowy), który 
+w danej liście zamienia wszystkie wystąpienia danego elementu na inny dany 
+element.</P>
+<P><B>Zadanie J</B> (dodatkowe) Zdefiniować predykat (dwuargumentowy), który 
+sprawdza czy lista podana jako drugi argument jest permutacją listy podanej jako 
+pierwszy argument. Na podstawie tego predykatu zdefiniować predykat, który 
+wypisuje wszystkie permutacje danej listy.</P>
+<P><B>Zadanie K</B> (dodatkowe) Rozwiązać (przy użyciu Prologu) następujący 
+kryptarytm:</P>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD></TD>
+    <TD></TD>
+    <TD>E</TD>
+    <TD>A</TD>
+    <TD>R</TD>
+    <TD>T</TD>
+    <TD>H</TD></TR>
+  <TR>
+    <TD></TD>
+    <TD></TD>
+    <TD></TD>
+    <TD></TD>
+    <TD>A</TD>
+    <TD>I</TD>
+    <TD>R</TD></TR>
+  <TR>
+    <TD></TD>
+    <TD></TD>
+    <TD></TD>
+    <TD>F</TD>
+    <TD>I</TD>
+    <TD>R</TD>
+    <TD>E</TD></TR>
+  <TR>
+    <TD>+</TD>
+    <TD></TD>
+    <TD>W</TD>
+    <TD>A</TD>
+    <TD>T</TD>
+    <TD>E</TD>
+    <TD>R</TD></TR>
+  <TR>
+    <TD colSpan=7>
+      <HR width="100%">
+    </TD></TR>
+  <TR>
+    <TD></TD>
+    <TD>N</TD>
+    <TD>A</TD>
+    <TD>T</TD>
+    <TD>U</TD>
+    <TD>R</TD>
+    <TD>E</TD></TR></TBODY></TABLE>
+<P>Różnym literom odpowiadają różne cyfry. Żadna liczba nie może zaczynać się 
+zerem.</P>
+<P><B>Zadanie L</B> (dodatkowe) Dla danej listy znaleźć listę bez powtórzeń 
+elementów.</P>
+<P><B>Zadanie M</B> (dodatkowe) Listę bez powtórzeń będziemy interpretować jako 
+zbiór. Skonstruować predykaty sprawdzające inkluzję, równość i różnicę 
+zbiorów.</P>
+<P><B>Zadanie N</B> (dodatkowe) Dla danego zbioru wypisać jego zbiór potęgowy 
+(wszystkie podzbiory).</P>
+<P><B>Zadanie P</B> (dodatkowe) Zdefiniować predykat <TT>sortuj(L, P)</TT>, 
+który dla listy liczb L daje posortowaną niemalejąco listę <TT>P</TT>.</P>
+<P><B>Zadanie Q</B> (dodatkowe, zadanie jest pracochłonne i wymaga dobrego 
+zaznajomienia się z predykatami standardowymi Prologu) Dany ciąg wejściowy 
+znaków zamienić na listę słów.</P></BODY></HTML>

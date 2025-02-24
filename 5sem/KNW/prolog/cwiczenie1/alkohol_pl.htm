@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0047)http://www.ceti.pl/~gralinski/lik320/alkohol.pl -->
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-2">
+<META content="MSHTML 6.00.2737.800" name=GENERATOR></HEAD>
+<BODY><PRE>/* 
+   "Zgadywanka"
+
+   Aby wywolac program, nalezy zadac cel 'zacznij'.
+
+   W bazie danych zawarte są informacje o cechach pewnych alkoholi.
+   Uzytkownik wybiera swoj ulubiony alkohol (z zaproponowanej listy), 
+   a "sztuczna inteligencja" poprzez zadawanie pytan probuje odgadnac, 
+   jaki wybrano alkohol.
+   
+   Odpowiedzi na pytania dolaczane sa do bazy wiedzy: jesli odpowiedz byla 
+   tweirdzaca dolaczany jest fakt xpositive(X, Y), gdzie X, Y stanowia
+   informacje o alkoholu. W przypadku odpowiedzi negatywnej dolaczany jest
+   fakt xnegative(X, Y).
+   
+   Poniewaz odpowiedzi są zapamietywane, program nie pyta sie dwa razy
+   o to samo.
+   */
+
+/* Informujemy interpreter, ze predykaty xnegative i xpositive sa
+   dynamiczne, tzn. moga byc dolaczane do bazy i usuwane z niej. */
+:- dynamic xnegative/2.
+:- dynamic xpositive/2.
+
+/* Baza danych regul */
+
+   alkohol_to(drink):-
+        negative(jest, 'mocny (powyzej 30%)'),
+        negative(jest, 'slaby (ponizej 5%)'),
+        negative(jest, 'robiony z owocow'),
+        negative(jest, slodki).
+
+   alkohol_to(koniak):-
+        positive(jest, 'mocny (powyzej 30%)'),
+        positive(ma, 'francuska nazwe').
+
+   alkohol_to(winiak):-
+        positive(jest, 'mocny (powyzej 30%)'),
+        negative(ma, 'francuska nazwe'),
+        negative(jest, 'polska specjalnoscia').
+
+   alkohol_to('wodka czysta'):-
+        typ_alkoholu(wodka),
+        positive(ma, 'jasny kolor').
+
+   alkohol_to('wodka kolorowa') :-
+        typ_alkoholu(wodka),
+        positive(ma, 'ciemny kolor').
+
+   alkohol_to(likier) :-
+        negative(jest, 'slaby (ponizej 5%)'),
+        negative(jest, 'mocny (powyzej 30%)'),
+        negative(jest, 'robiony z owocow'),
+        positive(jest, slodki).
+
+   alkohol_to('wino nasze') :-
+        typ_alkoholu(wino),
+        positive(jest, 'polska specjalnoscia').
+
+   alkohol_to('wino biale wytrawne') :-
+        typ_alkoholu(wino),
+        positive(ma, 'jasny kolor'),
+        negative(jest, slodki).
+
+    alkohol_to('wino czerwone wytrawne') :-
+        typ_alkoholu(wino),
+        negative(ma, 'jasny kolor'),
+        negative(jest, slodki).
+
+    alkohol_to('wino biale slodkie'):-
+        typ_alkoholu(wino),
+        positive(ma, 'jasny kolor'),
+        positive(jest, slodki).
+
+    alkohol_to('wino czerwone slodkie'):-
+        typ_alkoholu(wino),
+        negative(ma, 'jasny kolor'),
+        positive(jest, slodki).
+
+    alkohol_to(szampan):-
+        typ_alkoholu(wino),
+        positive(ma, 'francuska nazwe').
+
+    alkohol_to('piwo jasne'):-
+        positive(jest, 'slaby (ponizej 5%)'),
+        positive(ma, 'jasny kolor').
+
+    alkohol_to('piwo ciemne'):-
+        positive(jest, 'slaby (ponizej 5%)'),
+        negative(ma, 'jasny kolor').
+
+    typ_alkoholu(wino) :-
+        positive(jest, 'robiony z owocow').
+
+    typ_alkoholu(wodka):-
+        positive(jest, 'mocny (powyzej 30%)'),
+        positive(jest, 'polska specjalnoscia').
+
+/* Koniec bazy danych */
+
+/* Sprawdź, czy nie dołączono już informacji pozytywnej podczas odpytywania
+   (aby nie powtorzyc zadanego przedtem pytania). */
+
+    positive(X,Y):- xpositive(X,Y),!.
+
+/* Sprawdź, czy nie dołączono już informacji negatywnej podczas odpytywania
+   (aby nie powtorzyc zadanego przedtem pytania). Jesli nie, to
+   zadaj pytanie. */
+
+    positive(X,Y):-
+        not(xnegative(X,Y)),
+	pytanie(X,Y,tak).
+
+/* Analogicznie do positive */
+
+    negative(X,Y):- xnegative(X,Y),!.
+
+/* Analogicznie do positive */
+
+    negative(X,Y):-
+	not(xpositive(X,Y)),
+        pytanie(X,Y,nie).
+
+/* Pytanie w oczekiwaniu na odpowiedz twierdzaca */
+
+    pytanie(X,Y,tak):-
+         write('Czy ten alkohol '),
+ 	 write(X),write(' '), write(Y), write('?'), nl,
+         get_single_char(Char),
+	 Char = 116,	%t
+         asserta(xpositive(X,Y)), !.
+
+
+/* Nie nacisnieto 't'... */
+    pytanie(X,Y,tak):- asserta(xnegative(X,Y)), fail.
+
+/* Pytanie w oczekiwaniu na odpowiedz negatywna */
+
+    pytanie(X,Y,nie):-
+         write('Czy ten alkohol '),
+	 write(X), write(' '), write(Y), write('?'),nl,
+         get_single_char(Char),
+	 Char  = 110, %n
+	 asserta(xnegative(X,Y)), !.
+
+/* Nie nacisnieto 'n'... */
+    pytanie(X,Y,nie) :- asserta(xpositive(X,Y)), fail.
+
+/*Predykat glowny. Wywolanie programu nastepuje przez cel 'zacznij'. */
+
+    zacznij :-
+         write('Oto jest spis roznych alkoholi'),nl,
+         write('Wybierz swoj ulubiony trunek'),nl,
+         write(' a ja postaram sie go zgadnac. '),nl,
+         write(' koniak, winiak , wodka biala , wodka kolorowa'),nl,
+         write(' wino nasze, wino biale(slodkie lub wytrawne) , wino'), nl,
+         write(' czerwone(slodkie lub wytrawne), likier  '), nl,
+         write(' piwo(ciemne lub jasne)  , drink.'), nl,
+         write(' Jesli juz wiesz , to nacisnij Enter.'),nl,
+	 get0(_),
+/* Proba podstawienia zmiennej X pod kolejne trunki z bazy danych */
+         alkohol_to(X), !,
+         write('Twoj ulubiony alkohol to  '), write(X), write('!'),
+         nl,nl,
+         usun_fakty.
+
+     zacznij :-
+         write(' Nie wiem. '),nl,nl,
+         usun_fakty.
+
+/* Usuniecie odpowiedzi z bazy danych przed nastepna sesja zabawy */
+
+    usun_fakty :-
+         retract(xpositive(_,_)),fail.
+    usun_fakty :-
+         retract(xnegative(_,_)),fail.
+    usun_fakty :-
+          write('Nacisnij klawisz '),nl,
+          get_single_char(_).
+</PRE></BODY></HTML>
