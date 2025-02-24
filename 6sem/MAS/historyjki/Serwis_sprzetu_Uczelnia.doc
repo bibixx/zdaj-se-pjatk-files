@@ -1,0 +1,144 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033\deftab144{\fonttbl{\f0\froman\fcharset0 Times New Roman;}{\f1\froman\fcharset238{\*\fname Times New Roman;}Times New Roman CE;}{\f2\fnil\fcharset2 Symbol;}}
+{\stylesheet{ Normal;}{\s1 heading 1;}{\s2 heading 2;}{\s3 heading 3;}{\s4 heading 4;}{\s5 heading 5;}{\s6 heading 6;}{\s7 heading 7;}}
+\viewkind4\uc1\pard\keepn\s7\qj\lang1045\b\f0\fs28 Serwis sprz\f1\'eatu domowego\par
+\pard\fi720\qj\par
+\pard\qj\b0\f0\fs24 Serwis sprz\f1\'eatu domowego zatrudnia serwisant\'f3w (imi\'ea, nazwisko, data ur., adres, telefon). Ka\'bfdy serwisant ma przydzielony samoch\'f3d s\'b3u\'bfbowy (marka, typ, nr rej.) i korzysta z niego wsp\'f3lnie z dwoma innymi kolegami. Dla ka\'bfdego zg\'b3oszenia s\'b9 zapami\'eatywane: data i godzina przyj\'eacia zg\'b3oszenia, dane osobowe klienta (imi\'ea i nazwisko, adres, telefon). Na podstawie ulicy z adresu zg\'b3oszenia ustalany jest rejon miasta, do kt\'f3rego nale\'bfy wys\'b3a\'e6\f0  serwisanta. Ka\f1\'bfdy rejon zawiera opis, kt\'f3ry okre\'9cla, jakie ulice obejmuje. Miasto jest podzielone na strefy. Rejon wchodzi w sk\'b3ad dok\'b3adnie jednej strefy. W sk\'b3ad jednej strefy mo\'bfe wchodzi\'e6\f0  kilka rejon\'f3w. Strefy r\'f3\f1\'bfni\'b9 si\'ea wielko\'9cci\'b9 op\'b3at strefowych (powi\'b9zanych z konieczno\'9cci\'b9 dojazdu). Zapami\'eatywane jest tak\'bfe, o kt\'f3rej godzinie i kt\'f3remu serwisantowi przydzielone zosta\'b3o zg\'b3oszenie. Ka\'bfdy serwisant obs\'b3uguje co najmniej jeden rejon miasta. Rejony mog\'b9 by\'e6\f0  obs\f1\'b3ugiwane przez r\'f3\'bfn\'b9 liczb\'ea serwisant\'f3w, ale nie istniej\'b9 rejony, kt\'f3re nie mia\'b3yby zapewnionego serwisu.\par
+\pard\fi720\qj\b\f0\par
+\par
+\pard\keepn\s7\qj\fs28 Uczelnia (wersja \f1\'b3at\f0 wiejsza)\par
+\pard\qj\b0\fs20\par
+\pard{\pntext\f1 1.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart1\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\fs24 W systemie bazy danych uczelni zawarte s\f1\'b9 informacje o studentach, profesorach, prowadzonych wyk\'b3adach, wydzia\'b3ach, salach i budynkach.\par
+\pard{\pntext\f0 2.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfdy student jest opisany nast\'eapuj\'b9cymi informacjami: imi\'ea, nazwisko, data urodzenia, miejsce urodzenia (mias\f0 to, wojew\'f3dztwo), miejsce zamieszkania (miasto, wojew\'f3dztwo), aktualny semestr, numer identyfikacyjny.\par
+\pard{\pntext\f1 3.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart3\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360 Ka\f1\'bfdy student przechodzi pewien cykl przedmiot\'f3w w czasie ca\'b3ego okresu studi\'f3w. Ka\'bfdy zaliczony przedmiot ko\'f1czy si\'ea wystawieniem oceny ko\'f1cowej.\par
+\pard{\pntext\f1 5.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart5\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Studenci, kt\'f3rzy s\f1\'b9 dyplomantami, tzn. zaliczyli wszystkie przedmioty, pisz\'b9 prac\'ea dyplomow\'b9, kt\'f3rej tytu\'b3 musi by\'e6\f0  zapami\f1\'eatany.\par
+\pard{\pntext\f1 6.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart6\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Praca dyplomowa prowadzona jest pod opiek\f1\'b9 jednego z profesor\'f3w uczelni. Po zdaniu egzaminu dyplomowego informacje o studencie uzupe\'b3niane s\'b9 o dat\'ea obrony pracy oraz ocen\'ea ko\'f1cow\'b9.\par
+\pard{\pntext\f0 9.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart9\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfdy profesor pracuj\'b9cy na uczelni zwi\'b9zany jest z jednym wydzia\'b3em (kt\'f3rego nazwa, adres i telefon musz\'b9 by\'e6\f0  znane) oraz opisywany jest nast\f1\'eapuj\'b9cymi informacjami: specjalno\'9c\'e6\f0 , tytu\f1\'b3, imi\'ea, nazwisko, data \f0 urodzenia, miejsce urodzenia  (miasto, wojew\'f3dztwo).\par
+\pard{\pntext\f1 11.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart11\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360 Uczelnia zatrudnia r\'f3wnie\f1\'bf profesor\'f3w kontraktowych. W takim przypadku dodatkowo nale\'bfy pami\'eata\'e6\f0  daty rozpocz\f1\'eacia i zako\'f1czenia kontraktu.\par
+\pard{\pntext\f1 13.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart13\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfdy profesor mo\'bfe prowadzi\'e6\f0  dowoln\f1\'b9 liczb\'ea dyplomant\'f3w.\par
+\pard{\pntext\f0 15.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart15\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfdy profesor prowadzi od 1 do 3 r\'f3\'bfnych przedmiot\'f3w, przy czym ten sam przedmiot mo\'bfe by\'e6\f0  prowadzony przez tylko jednego profesora.\par
+\pard{\pntext\f1 16.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart16\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360 Ka\f1\'bfdy wyk\'b3ad z konkretnego przedmiotu ma okre\'9clony numer, temat (nazwa), dzie\'f1 roku, godz. rozpocz\'eacia i zako\'f1czenia oraz odbywa si\'ea w jednej z wielu sal uczelni, kt\'f3re znajduj\'b9 si\'ea w r\'f3\'bfnych budynkach uczelni. \par
+\pard{\pntext\f1 17.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart17\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfda sala jest opisana nast\'eapuj\'b9cymi informacjami: numer, liczba miejsc.\par
+\pard{\pntext\f0 18.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart18\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Sale podzielone s\f1\'b9 w zale\'bfno\'9cci od przeznaczenia na sale og\'f3lnego przeznaczenia, laboratoria j\'eazyk\f0 owe, laboratoria inne (np. fizyczne, chemiczne), itp.\par
+\pard{\pntext\f1 19.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart19\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360 Ka\f1\'bfda sala posiada odpowiednie wyposa\'bfenie.\par
+\pard\fi720\qj\par
+\pard\keepn\s7\qj\b\f0\fs28\par
+Uczelnia (wersja trudniejsza)\par
+\pard\fi720\qj\b0\fs20\par
+\pard{\pntext\f1 1.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart1\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\fs24 W systemie bazy danych uczelni zawarte s\f1\'b9 informacje o studentach, pracownikach dydaktycznych, prowadzonych zaj\'eaciach, wydzia\'b3ach, salach i budynkach.\par
+\pard{\pntext\f0 2.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfdy student jest opisany nast\'eapuj\'b9cymi informacjami: imi\'ea, nazwisko, data urodzenia, miejsce urodzenia (miasto, wojew\'f3dztwo), miejsce zamieszkania (miasto, wojew\'f3dztwo), nazwa wydzia\'b3u (zak\'b3adamy, \'bfe studiuje na jednym wydziale)\f0 , aktualny semestr (1-szy, 2-gi, itd.), numer identyfikacyjny.\par
+\pard{\pntext\f1 3.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart3\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360 Ka\f1\'bfdy student przechodzi pewien cykl przedmiot\'f3w w czasie ca\'b3ego okresu studi\'f3w, ale nie wi\'eacej ni\'bf 7 w ci\'b9gu jednego semestru. Ka\'bfdy przedmiot posiada unikatow\'b9 nazw\'ea. Pami\'eatane jest, na kt\'f3rym semestrze (zimowym czy letnim) i w kt\'f3rym roku kalendarzowym student zajmowa\'b3 si\'ea danym przedmiotem. Zdarza si\'ea, \'bfe student zajmuje si\'ea danym przedmiotem przez kilka semestr\'f3w i to niekoniecznie kolejno po sobie nast\'eapuj\'b9cych. Ka\'bfdy zaliczony przedmiot (dotyczy to jednego semestru) ko\'f1czy si\'ea wystawieniem oceny. \par
+\pard{\pntext\f1 6.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart6\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Studenci, kt\'f3rzy s\f1\'b9 dyplomantami, tzn. uzyskali pozytywne oceny (co najmniej 3) z ka\'bfdego z przedmiot\'f3w, kt\'f3rymi zajmowali si\'ea (je\'9cli zajmowali si\'ea kilkakrotnie to ocen te\'bf musi by\'e6\f0  kilka), pisz\f1\'b9 prac\'ea dyplomow\'b9, kt\'f3rej tytu\'b3 musi by\'e6\f0  zapami\f1\'eatany.\par
+\pard{\pntext\f1 8.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart8\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Praca dyplomowa prowadzona jest pod opiek\f1\'b9 jednego z pracownik\'f3w dydaktycznych uczelni  (co najmniej w stopniu doktora) - pami\'eatane jest od kiedy do kiedy dyplomant pozostawa\'b3 pod opiek\'b9 danego pracownika. Jeden pracownik nie mo\'bfe prowadzi\'e6\f0  jednocze\f1\'9cnie wi\'eacej ni\'bf 10 dyplomant\'f3w.\par
+\pard{\pntext\f1 9.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart9\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Po zdaniu egzaminu dyplomowego (data egzaminu, stopie\f1\'f1) informacje o studencie uzupe\'b3niane s\'b9 o dat\'ea obrony pracy oraz ocen\'ea ko\'f1cow\'b9.\par
+\pard{\pntext\f1 12.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart12\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfdy pracownik dydaktyczny pracuj\'b9cy na uczelni zwi\'b9zany jest z jednym wydzia\'b3em (kt\'f3rego nazwa, adres, telefon, budynki, kt\'f3re zajmuje - musz\'b9 by\'e6\f0  znane) oraz opisywany jest nast\f1\'eapuj\'b9cymi informacjami: imi\'ea, nazwisko, data urodzenia, miejsce urodzenia  (miasto, wojew\'f3dztwo), stopie\'f1 naukowy, specjalno\'9c\'e6\f0  (czy te\f1\'bf specjalno\'9cci).\par
+\pard{\pntext\f1 14.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart14\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Uczelnia zatrudnia r\'f3wnie\f1\'bf pracownik\'f3w kontraktowych. W takim przypadku dodatkowo nale\'bfy pami\'eata\'e6\f0  daty rozpocz\f1\'eacia i zako\'f1czenia kontraktu.\par
+\pard{\pntext\f0 19.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart19\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfdy pracownik mo\'bfe prowadzi\'e6\f0  od 1 do 3 r\'f3\f1\'bfnych przedmiot\'f3w - przedmiot musi by\'e6\f0  prowadzony przez osob\f1\'ea, kt\'f3ra posiada odpowiedni\'b9 specjalno\'9c\'e6\f0 . Jeden przedmiot mo\f1\'bfe by\'e6\f0  prowadzony przez kilku pracownik\'f3w.\par
+\pard{\pntext\f1 22.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart22\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360 Ka\f1\'bfde zaj\'eacia z okre\'9clonego przedmiotu s\'b9 opisywane nast\'eapuj\'b9cymi danymi: rodzaj zaj\'eacia (\'e6\f0 wiczenie, wyk\f1\'b3ad, laboratorium, lektorat, egzamin, itp.), temat, data, godz. rozpocz\'eacia i zako\'f1czenia). Pami\'eatane jest czy zaj\'eacia si\'ea odby\'b3y (nie odbywaj\'b9 si\'ea, gdy nie zg\'b3osi si\'ea przynajmniej 3 student\'f3w). O ile zaj\'eacia s\'b9 rodzaju \'84egzamin\rdblquote  pami\'eatana jest ocena, kt\'f3r\'b9 student otrzyma\'b3. Zaj\'eacia odbywaj\'b9 si\'ea (zgodnie z grafikiem ustalanym przed rozpocz\'eaciem ka\'bfdego semestru) w jednej z wielu sal danego wydzia\'b3u, kt\'f3re znajduj\'b9 si\'ea w r\'f3\'bfnych budynkach uczelni. W jednym budynku mo\'bfe mie\'9cci\'e6\f0  si\f1\'ea kilka wydzia\'b3\'f3w. S\'b9 budynki, kt\'f3re nie zawieraj\'b9 sal przeznaczonych na zaj\'eacia.\par
+\pard{\pntext\f1 23.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart23\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfda sala jest opisana nast\'eapuj\'b9cymi informacjami: numer, liczba miejsc.\par
+\pard{\pntext\f1 24.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart24\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Sale podzielone s\f1\'b9 w zale\'bfno\'9cci od przeznaczenia na: sale og\'f3lnego przeznaczenia, laboratoria j\'eazykowe, laboratoria inne (np. fizyczne, chemiczne),  itp.\par
+\pard{\pntext\f1 25.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart25\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfda sala (inna ni\'bf og\'f3lnego przeznaczenia) posiada odpowiednie wyposa\'bfenie.\par
+\pard\qj\par
+\pard\fi720\qj\par
+\pard\qj\par
+\f0 Chcemy mie\f1\'e6\f0  mo\f1\'bfliwo\'9c\'e6\f0 :\par
+\par
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent360{\pntxtb\'B7}}\fi-360\li360\qj\tx360 dla ka\f1\'bfdego ze student\'f3w - uzyskiwania listy ocen z przedmiot\'f3w (w danym semestrze),\par
+\f0{\pntext\f2\'B7\tab}ustanowienia rankingu student\'f3w z konkretnego przedmiotu (w danym semestrze),\par
+{\pntext\f2\'B7\tab}znalezienie 5 student\'f3w z najwy\f1\'bfsz\'b9 \'9credni\'b9 (w danym semestrze na danym wydziale),\par
+\f0{\pntext\f2\'B7\tab}znalezienie 5 student\'f3w z najwy\f1\'bfsz\'b9 \'9credni\'b9 (w danym semestrze na uczelni),\par
+\f0{\pntext\f2\'B7\tab}podanie listy pracownik\'f3w wydzia\f1\'b3u,\par
+\f0{\pntext\f2\'B7\tab}dla ka\f1\'bfdego z pracownik\'f3w (w stopniu co najmniej doktor\f0 a) - podanie aktualnej liczby dyplomant\'f3w,\par
+{\pntext\f2\'B7\tab}znalezienie wolnej sali (w zadanym terminie),\par
+{\pntext\f2\'B7\tab}uszeregowanie wojew\'f3dztw odpowiednio do liczby student\'f3w, kt\'f3rzy z nich pochodz\f1\'b9.\par
+\pard\qj\par
+\pard\fi720\qj\par
+\pard\keepn\s7\qj\b\f0\fs28 Pomaturalne studium hotelarskie\fs24\par
+\pard\fi720\qj\b0\fs20\par
+\pard{\pntext\f1 1.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart1\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\fs24 W systemie bazy danych pomaturalnego studium hotelarskiego zawarte s\f1\'b9 informacje o uczniach, nauczycielach, prowadzonych zaj\'eaciach, specjalizacjach, salach i budynkach.\par
+\pard{\pntext\f0 2.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart2\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfdy ucze\'f1 jest opisany nast\'eapuj\'b9cymi informacjami: imi\'ea, nazwisko, data urodzenia, miejsce urodzenia (miasto, wojew\'f3dztwo), miejsce zam\f0 ieszkania (miasto, wojew\'f3dztwo), aktualny semestr, numer identyfikacyjny.\par
+\pard{\pntext\f1 4.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart4\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360 Ka\f1\'bfdy ucze\'f1 przechodzi pewien cykl zaj\'ea\'e6\f0  w czasie ca\f1\'b3ego okresu nauki.\par
+\pard{\pntext\f1 5.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart5\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfde zaliczone zaj\'eacia ko\'f1cz\'b9 si\'ea wystawieniem oceny ko\'f1cowej.\par
+\pard{\pntext\f1 7.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart7\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Uczniowie, kt\'f3rzy s\f1\'b9 dyplomantami, tzn. uko\'f1czyli wszystkie zaj\'eacia pisz\'b9 prac\'ea ko\'f1cow\'b9, kt\'f3rej tytu\'b3 musi by\'e6\f0  zapami\f1\'eatany.\par
+\pard{\pntext\f1 8.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart8\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Praca ko\f1\'f1cowa prowadzona jest pod opiek\'b9 jednego z nauczycieli szko\'b3y.\par
+\pard{\pntext\f1 9.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart9\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Po zdaniu egzaminu ko\f1\'f1cowego informacje o uczniu uzupe\'b3niane s\'b9 o dat\'ea obrony pracy oraz ocen\'ea ko\'f1cow\'b9.\par
+\pard{\pntext\f0 12.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart12\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfdy nauczyciel pracuj\'b9cy w szkole zwi\'b9zany jest z jedn\'b9 specjalizacj\'b9 (dla kt\'f3rej nazwa i telefon jej sekretariatu musz\'b9 by\'e6\f0  znane) oraz opisywany jest nast\f1\'eapuj\'b9cymi informacjami: specjalno\'9c\'e6\f0 , tytu\f1\'b3, imi\'ea, nazwisko, data urodzenia, miejsce urodzenia  (miasto\f0 , wojew\'f3dztwo).\par
+\pard{\pntext\f1 14.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart14\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360 Szko\f1\'b3a zatrudnia r\'f3wnie\'bf nauczycieli kontraktowych. W takim przypadku dodatkowo nale\'bfy pami\'eata\'e6\f0  daty rozpocz\f1\'eacia i zako\'f1czenia kontraktu.\par
+\pard{\pntext\f1 16.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart16\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfdy nauczyciel mo\'bfe prowadzi\'e6\f0  dowoln\f1\'b9 liczb\'ea dyplomant\'f3w.\par
+\pard{\pntext\f0 18.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart18\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfdy nauczyciel prowadzi od 1 do 3 r\'f3\'bfnych  przedmiot\'f3w, przy czym te same przedmioty mog\'b9 by\'e6\f0  prowadzone przez tylko jednego nauczyciela.\par
+\pard{\pntext\f1 19.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart19\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360 Ka\f1\'bfde zaj\'eacia z konkretnego przedmiotu maj\'b9 okre\'9clony numer, temat (nazwa), dzie\'f1 roku, godz. rozpocz\'eacia i zako\'f1czenia oraz odbywaj\'b9 si\'ea w jednej z wielu sal szko\'b3y, kt\'f3re znajduj\'b9 si\'ea w r\'f3\'bfnych budynkach szko\'b3y. \par
+\pard{\pntext\f1 20.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart20\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ka\f1\'bfda sala jest opisana nast\'eapuj\'b9cymi informacjami: numer, liczba miejsc.\par
+\pard{\pntext\f0 21.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart21\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Sale podzielone s\f1\'b9 w zale\'bfno\'9cci od przeznaczenia na sale og\'f3lnego przeznaczenia, laboratoria j\'eazykowe, laboratoria inne (np. \f0 kuchnia, recepcja), itp.\par
+\pard{\pntext\f1 22.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart22\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360 Ka\f1\'bfda sala posiada odpowiednie wyposa\'bfenie.\par
+\pard\fi720\qj\par
+\pard\keepn\s7\qj\b\f0\par
+\fs28 Biblioteka osiedlowa\par
+\pard\fi720\qj\par
+\pard{\pntext\f1 1.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart1\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\b0\fs24 W systemie bazy danych biblioteki osiedlowej na jednym z warszawskich osiedli zawarte s\f1\'b9 informacje o czytelnikach, bibliotekarzach i ksi\'b9\'bfkach.\par
+\pard{\pntext\f1 2.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart2\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Z biblioteki korzystaj\f1\'b9 zar\'f3wno dzieci, m\'b3odzie\'bf, jak  i doro\'9cli. Ka\'bfdy czytelnik jest opisany nast\'eapuj\'b9cymi informacjami: imi\'ea, nazwisko, miejsce zamieszkania (dok\'b3adny adres), telefon domowy, numer identyfikacyjny.\par
+\pard{\pntext\f0 4.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart4\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 W przypadku dzieci i m\f1\'b3odzie\'bfy konieczna jest znajomo\'9c\'e6\f0  daty urodzenia danego czytelnika oraz imienia i nazwiska jednego z rodzic\'f3w .\par
+\pard{\pntext\f1 6.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart6\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360 W przypadku os\'f3b doros\f1\'b3ych przechowywa\'e6\f0  chcemy r\'f3wnie\f1\'bf telefon s\'b3u\'bfbowy oraz nazw\'ea i adres zak\'b3adu pracy (o ile nie jest to rencista, czy te\'bf emeryt).\par
+\pard{\pntext\f1 8.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart8\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 W bibliotece zatrudnione s\f1\'b9 dwie panie bibliotekarki, opisane nast\'eapuj\'b9cymi informacjami: imi\'ea, nazwisko, adres, telefon domowy, ilo\'9c\'e6\f0  przepracowanych nadgodzin w danym miesi\f1\'b9cu.\par
+\pard{\pntext\f1 9.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart9\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ca\f1\'b3y ksi\'eagozbi\'f3r biblioteki podzielony jest na dwie cz\'ea\'9cci (mamy jakby dwa typy ksi\'eagozbioru): ksi\'eagozbi\'f3r dla dzieci i m\'b3odzie\'bfy oraz ksi\'eagozbi\'f3r dla doros\'b3ych. W ksi\'eagozbiorze dla doros\'b3ych mamy kilka dzia\'b3\'f3w: beletrystyka, powie\'9cci historyczne, dzienniki, itp.\par
+\pard{\pntext\f1 11.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart11\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 W bibliotece mo\f1\'bfe by\'e6\f0  kilka egzemplarzy tej samej ksi\f1\'b9\'bfki. \par
+\pard{\pntext\f1 12.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart12\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Ksi\f1\'b9\'bfka opisywana jest nast\'eapuj\'b9cymi danymi: tytu\'b3, imi\'ea i nazwisko autora, rok wydania, nazwa wydawnictwa, typ ksi\'eagozbioru, ew. nazwa dzia\'b3u, numer katalogowy.\par
+\pard{\pntext\f0 14.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart14\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Opr\'f3cz przechowywania danych opisanych powy\f1\'bfej, chcemy zna\'e6\f0  liczb\f1\'ea czytelnik\'f3w, kt\'f3rzy wypo\'bfyczyli jak\'b9kolwiek ksi\'b9\'bfk\'ea w zadanym ok\f0 resie czasu.\par
+\pard{\pntext\f1 15.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart15\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360 Istotna jest informacja o liczbie wypo\f1\'bfyczonych ksi\'b9\'bfek przez konkretnego czytelnika - w zadanym okresie czasu.\par
+\pard{\pntext\f1 17.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart17\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 W przypadku dzieci i m\f1\'b3odzie\'bfy chcemy zna\'e6\f0  wiek ka\f1\'bfdego czytelnika (chodzi o konkursy czytelnicze).\par
+\pard{\pntext\f1 19.\tab}{\*\pn\pnlvlbody\pnf1\pnindent360\pnstart19\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Chcemy zna\f1\'e6\f0  liczb\f1\'ea ksi\'b9\'bfek nale\'bf\'b9cych do poszczeg\'f3lnych ksi\'eagozbior\'f3w i dzia\'b3\'f3w oraz liczb\'ea egzemplarzy ka\'bfdej z ksi\'b9\'bfek.\par
+\pard{\pntext\f0 20.\tab}{\*\pn\pnlvlbody\pnf0\pnindent360\pnstart20\pndec{\pntxta.}}
+\fi-360\li360\qj\tx360\f0 Biblioteka zawiera sprz\f1\'eat audio-wizualny, lecz informacje na jego temat zostan\'b9 u\'9cci\'9clone w dalszej fazie ustalania wymaga\'f1.\f0\fs20\par
+}
+ 

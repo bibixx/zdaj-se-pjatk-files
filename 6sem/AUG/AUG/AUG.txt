@@ -1,0 +1,127 @@
+Poni¿ej umieszczam pytania z przyk³adowego egzaminu
+wraz z rozwi¹zaniami, które by³y przedstawione na ostatnim
+wyk³adzie z AUG. Jesli ktoœ ma podobne materia³y np. z
+poprzednich lat to prosi³bym o podzielenie siê nimi.
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. Uszereguj jêzyki:
+
+a) (zbiór pusty)
+b ) {0,1}*
+c) {e}
+d) {w E {a,b}*: d³ugosæ "w" jest liczb¹ parzyst¹}
+e) {10}*
+
+--------------------------------------------------------------
+Odp: a), c), e), d), b )
+
+2. Dopasuj automaty skoñczone do wyra¿eñ:
+(poni¿ej s¹ tabelki z ju¿ przyporzadkowanymi wyra¿eniami
+
+a)
+___|a|b
+_>1|1|2 = a*bb*
+__f2|_|2
+
+b )
+___|a|b
+>f1|1|2 = (aub)*
+_ f2|1|2
+
+c)
+___|a|b
+>f1|1|2 = a*b*
+_f2|_ |2
+
+d)
+___|a|b
+>f1|2|2 = e
+__2|2|2
+
+e)
+___|a|b
+>f1|2|2 = ((aub)(aub))*
+__2|1|1
+
+3.Gramatyki
+
+- czy nastêpuj¹ca gramatyka jest jednoznaczna?
+S->aSb|bSa|e (TAK)
+- czy w nastêpujacej gramatyce mo¿na wyprowadziæ
+s³owo puste? S->abS|Sba|aa (NIE)
+- czy jêzyk gramatyki jest skoñczony?
+S->abS|bSa|a (NIE)
+- czy w gramatyce mo¿na wyprowadziæ "abab"?
+S->SabS|e (TAK)
+- czy gramatyka generuje pusty jêzyk?
+S->aSb|bSa|SS (TAK)
+
+4.Jêzyki
+
+- Suma jêzyków bezkontekstowych jest
+bezkontekstowa. (TAK)
+- Przeciêcie jêzyków regularnych jest jêzykiem
+regularnym. (TAK)
+- Jeœli gramatyka jest jednoznaczna to ka¿de
+s³owo, które mo¿na z niej wyprowadziæ ma tylko
+jedno drzewo wyprowadzeñ. (TAK)
+- Jeœli gramatyka jest jednoznaczna to ka¿de
+s³owo, które mozna z niej wyprowadziæ ma tylko
+jedno wyprowadzenie. (NIE)
+- Ka¿dy jêzyk regularny jest
+bezkontekstowy. (NIE)
+- Dla ka¿dego jêzyka regularnego istnieje
+rozpoznaj¹cy go automat skoñczony. (TAK)
+
+5.¯eby gramatyka by³a:
+
+- (S)LR(1) to musi byæ jednoznaczna. (TAK)
+- (S)LR(1) to musi zawieraæ jednostronn¹
+rekursjê. (NIE)
+- LL(1) to musi siê daæ w niej wyprowadziæ
+s³owo puste e. (NIE)
+- LL(1) to nale¿y j¹ poddaæ lewostronnej
+faktoryzacji. (TAK)
+- LL(1) to nie mo¿e zawieraæ lewostronnej
+rekursji. (TAK)
+
+6.W parserach:
+
+- LL(1) komórki zawieraj¹ (prawe strony)
+produkcji do rozwiniêcia. (TAK)
+- LL(1) zawartoœæ stosu odpowiada temu, co ma
+byæ jeszcze wczytane z wejœcia. (TAK)
+- LL(1) na stosie mog¹ znajdowaæ siê terminale
+i nieterminale. (TAK)
+- (S)LR(1) drzewo wyprowadzenia jest
+konstruowane w kolejnosci prefiksowej. (NIE)
+- LL(1) drzewo wyprowadzenia jest
+konstruowane w kolejnosci prefiksowej. (TAK)
+
+
+
+
+
+
+mam egzamin z zesz³ego roku (niestety nie rozwi¹zany). Zebralem z niego oraz egzaimnu powy¿ej wczystkie pytania z zadañ 5 i 6. (niektore by³y na obu). oto wszystkie mozliwe ptania jakie by³y, na 3 z nich nie jestem pewien odpwiedzi, macie mo¿e jakies pomys³y? Cala reszta jest na 100% dobrze:
+
+- LL(1) - gramatyka musi byc jednoznaczna
+- LL(1) - nie mo¿e zawieraæ lewostronnej rekursji
+- LL(1) - drzewo wyprowadzane jest PREfixowo
+- LL(1) trzeba poddac faktoryzacji jesli prawe strony zaczynaja sie tak samo
+- LL(1) to NIE musi siê daæ w niej wyprowadziæ s³owa pustego e
+- LL(1) komórki zawieraj¹ (prawe strony) produkcji do rozwiniêcia
+- LL(1) zawartoœæ stosu odpowiada temu, co mabyæ jeszcze wczytane z wejœcia.
+- LL(1) na stosie mog¹ znajdowaæ siê terminale i nieterminale.
+
+
+- (S)LR(1) - gramatyka musi byc jednoznaczna
+- (S)LR(1) - drzewo wyprowadzane jest POSTfixowo
+- (S)LR(1) - NIE nale¿y poddawaæ lewostronej faktoryzacji,
+- (S)LR(1) - NIE musi zawieraæ jednostronn¹ rekursjê.
+- (S)LR(1) - komóki tablicy parsera ZAWIERAJ¥ akcje shift i reduce
+- (S)LR(1) - na stosie mog¹ znajdowaæ siê stany automatu, terminale i nieterminale. / wydaje mi sie ze stany automatu nie maja tu nic wspolnego
+- (S)LR(1) - zawartoœæ stosu odpowiada temu, co zosta³o wczytane z wejcia / NIE WIEM
+- (S)LR(1) to MO¯E siê daæ w niej wyprowadziæ s³owo puste / nie jestem pewien
+
+

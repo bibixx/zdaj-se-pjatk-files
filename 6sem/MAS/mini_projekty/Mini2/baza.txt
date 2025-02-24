@@ -1,0 +1,183 @@
+create database if not exists imprezogenerator;
+use imprezogenerator;
+
+drop table if exists ADMIN;
+drop table if exists UZYTKOWNIK;
+drop table if exists POTRAWAIMPREZY;
+drop table if exists OSOBA;
+drop table if exists IMPREZA;
+drop table if exists PRACOWNIK;
+drop table if exists KLIENT;
+drop table if exists ORGANIZATOR;
+drop table if exists GODZINYPRACY;
+drop table if exists KELNER;
+drop table if exists SLUB;
+drop table if exists KAPELA;
+drop table if exists SLUBOCHRZCINY;
+drop table if exists SYLWESTER;
+drop table if exists CHRZCINY;
+drop table if exists MIEJSCE;
+drop table if exists MIEJSCEIMPREZY;
+drop table if exists POTRAWA;
+
+
+
+create table KAPELA(
+ID_KAPELA int auto_increment primary key,
+NAZWA_KAPELI varchar(20) not null
+);
+
+create table SLUB(
+ID_SLUB int auto_increment primary key,
+NAZWA_KOSCIOLA varchar(40) not null,
+NAZWA_SAMOCHODU varchar(20) not null,
+ID_KAPELA int,
+index(ID_KAPELA),
+foreign key(ID_KAPELA) references KAPELA(ID_KAPELA)
+);
+
+create table SYLWESTER(
+ID_SYLWESTER int auto_increment primary key,
+FAJERWERKI varchar(40) not null,
+REPERTUAR varchar(100) not null,
+KOSTIUMY bool not null
+);
+
+create table CHRZCINY(
+ID_CHRZCINY int auto_increment primary key,
+NAZWA_KOSCIOLA varchar(40) not null
+);
+
+create table ORGANIZATOR(
+ID_ORGANIZATOR int auto_increment primary key,
+SPECJALIZACJA varchar(40) not null
+);
+
+create table IMPREZA(
+ID_IMPREZA int auto_increment primary key,
+DATA_ROZP DATE not null,
+DATA_ZAK DATE not null,
+NUMER_IMPREZY char (7) not null,
+CENA double not null,
+ID_SLUB int,
+index(ID_SLUB),
+foreign key(ID_SLUB) references SLUB(ID_SLUB),
+ID_CHRZCINY int,
+index(ID_CHRZCINY),
+foreign key(ID_CHRZCINY) references CHRZCINY(ID_CHRZCINY),
+ID_SYLWESTER int,
+index(ID_SYLWESTER),
+foreign key(ID_SYLWESTER) references SYLWESTER(ID_SYLWESTER),
+ID_ORGANIZATOR int,
+index(ID_ORGANIZATOR),
+foreign key(ID_ORGANIZATOR) references ORGANIZATOR(ID_ORGANIZATOR)
+);
+
+create table POTRAWA(
+ID_POTRAWA int auto_increment primary key,
+NAZWA_POTRAWA varchar(20) not null
+);
+
+create table POTRAWAIMPREZY(
+ID_POTRAWA int,
+index(ID_POTRAWA),
+foreign key(ID_POTRAWA) references POTRAWA(ID_POTRAWA),
+ID_IMPREZA int,
+foreign key(ID_IMPREZA) references IMPREZA(ID_IMPREZA)
+);
+
+create table MIEJSCE(
+ID_MIEJSCE int auto_increment primary key,
+NAZWA_MIEJSCE varchar(20) not null
+);
+
+create table MIEJSCEIMPREZY(
+ID_MIEJSCE int,
+index(ID_MIEJSCE),
+foreign key(ID_MIEJSCE) references MIEJSCE(ID_MIEJSCE),
+ID_IMPREZA int,
+index(ID_IMPREZA),
+foreign key(ID_IMPREZA) references IMPREZA(ID_IMPREZA)
+);
+
+
+create table KELNER(
+ID_KELNER int auto_increment primary key,
+STAWKA double not null,
+CZY_CERTYFIKOWANY bool not null
+
+);
+
+
+
+create table KLIENT(
+ID_KLIENT int auto_increment primary key,
+NUMER char (7) not null
+);
+
+create table PRACOWNIK(
+ID_PRACOWNIK int auto_increment primary key,
+PENSJA double not null,
+ID_ORGANIZATOR int,
+index(ID_ORGANIZATOR),
+foreign key(ID_ORGANIZATOR) references ORGANIZATOR(ID_ORGANIZATOR),
+ID_KELNER int,
+index(ID_KELNER),
+foreign key(ID_KELNER) references KELNER(ID_KELNER)
+);
+
+create table OSOBA (
+ID_OSOBA int auto_increment primary key,
+IMIE varchar(20) not null,
+NAZWISKO varchar(20) not null,
+MIASTO varchar(20) not null,
+ULCA varchar(20) not null,
+KOD char(6) not null,
+PESEL char (11) not null,
+ID_KLIENT int,
+index(ID_KLIENT),
+foreign key(ID_KLIENT) references KLIENT(ID_KLIENT),
+ID_PRACOWNIK int,
+index(ID_PRACOWNIK),
+foreign key(ID_PRACOWNIK) references PRACOWNIK(ID_PRACOWNIK)
+);
+
+create table UZYTKOWNIK (
+
+ID_UZYTKOWNIK int auto_increment primary key,
+LOGIN varchar(20) not null,
+PASSWORD varchar(20) not null,
+ID_OSOBA int not null,
+index(ID_OSOBA),
+foreign key(ID_OSOBA) references OSOBA(ID_OSOBA)
+);
+
+create table ADMIN (
+
+ID_ADMIN int auto_increment primary key,
+LOGIN varchar(20) not null,
+PASSWORD varchar(20) not null,
+ID_OSOBA int not null,
+index(ID_OSOBA),
+foreign key(ID_OSOBA) references OSOBA(ID_OSOBA)
+); 
+
+create table GODZINYPRACY(
+GODZ_OD varchar (5) not null,
+GODZ_DO varchar (5) not null,
+ID_KELNER int,
+index(ID_KELNER),
+foreign key(ID_KELNER) references KELNER(ID_KELNER),
+ID_IMPREZA int,
+index(ID_IMPREZA),
+foreign key(ID_IMPREZA) references IMPREZA(ID_IMPREZA)
+);
+
+create table SLUBOCHRZCINY(
+ID_CHRZCINY int,
+index(ID_CHRZCINY),
+foreign key(ID_CHRZCINY) references CHRZCINY(ID_CHRZCINY),
+ID_SLUB int,
+index(ID_SLUB),
+foreign key(ID_SLUB) references SLUB(ID_SLUB)
+);

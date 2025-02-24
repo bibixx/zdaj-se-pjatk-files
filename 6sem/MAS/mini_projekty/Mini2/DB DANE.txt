@@ -1,0 +1,16 @@
+INSERT INTO KAPELA VALUES (null,"Grajcy");
+INSERT INTO SLUB VALUES (null, "Marii Magdaleny","SuperLimo",1);
+INSERT INTO SYLWESTER VALUES (null, "Fajerwerki ogniste","Repertuar jest bardzo fajny",1);
+INSERT INTO CHRZCINY VALUES (null, "Jozefa");
+INSERT INTO ORGANIZATOR VALUES (null,"sluby");
+INSERT INTO IMPREZA VALUES(null,"2010-05-12","2010-05-17",1,1234);
+INSERT INTO OSOBA VALUES(null,"tomek","kolodziejak","warszawa","szeroka",09-098,88888888888,null,null);
+INSERT INTO UZYTKOWNIK VALUES(null,"tomek","tomek",1);
+
+
+INSERT INTO IMPREZA VALUES(null,"2010-06-04","2010-07-24",1,5000,null,null,null,null);
+INSERT INTO IMPREZA VALUES(null,"2010-02-03","2010-02-21",12,1000,null,null,null,null);
+INSERT INTO OSOBA VALUES(null,"adrian","parol","warszawa","szaserow",09-056,99999999999,null,null);
+INSERT INTO ORGANIZATOR VALUES (null,"chrzciny");
+INSERT INTO ORGANIZATOR VALUES (null,"chrzciny");
+INSERT INTO ORGANIZATOR VALUES (null,"sylwestry");

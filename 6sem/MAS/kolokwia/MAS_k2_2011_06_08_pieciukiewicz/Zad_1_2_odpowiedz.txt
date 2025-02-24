@@ -1,0 +1,23 @@
+A - Dziedziczenie dynamiczne: Całość dodajemy w nadklasie i dodajemy dyskryminator (EnumSet) lub Agregacja/Kompozycja z XOR'em
+Sprytne kopiowanie obiektów, kopiowanie z referncją do poprzedniego obiektu i przekopiowanie wartosci z nadklasy.
+ 
+B - Asocjacja kwalifikowana: Implementujemy TreeMap/HashMap i na podstawie jednego z atrybutów mamy dostęp do asocjacji
+ 
+ 
+C - Atrybut powtarzalny - Implementujemy za pomocą kontenera, np. ArrayListy
+ 
+D - Atrybut unikalny - Konstruktor private, metoda utwórz(), sprawdzająca czy nie ma identycznej wartości atrybutu.
+ 
+ 
+E - Agregacja rekurencyjna - W klasie umieszczone 2 kontenery, po jednej dla każdej z ról. 
+ 
+ 
+F - Dziedziczenie - dodajemy słowo extends i nazwę klasy, z której dziedziczymy
+ 
+ 
+G - Ograniczenie ordered - Wstawiamy kontener, który gwarantuje nam sortownie po odpowiedniej wartości. Wektor dla ekstensji, HashMap dla powiązań
+ 
+ 
+H - Asocjacja z atrybutem - Należy stworzyć klasę pośredniczącą i połączyć asocjacją
+ 
+Zadanie 2: N, N, T, N, N, T, T, T

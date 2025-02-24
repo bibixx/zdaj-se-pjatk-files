@@ -1,0 +1,11 @@
+Plik baza.txt zawiera konstrukcjê bazy danych któr¹ nalezy uruchomiæ za pomoc¹ MySql
+Plik DB DANE zawiera instrukcje do uzupe³nienia kilku tabel w bazie danych
+Projekt kozysta z biblioteki jenkov butterfly (l¿ejszy od Hybernate a obs³uguje bazê danych)
+
+Ogólnie projekt pozwala sie zalogowac (dane do logowania pobierane z bazy danych tabela uzytkownik).
+po zalogowaniu mozna zobaczyc tabele IMPREZA i tabele ORGANIZATOR. Mo¿na przydzieliæ organizatora do imprezy.
+Przypadek uzycia opisany w dokumentacji.
+
+1. odpaliæ baze danych
+2. zaimportowac projekt do eclipsa
+3. uruchomic klase LOGOWANIE
