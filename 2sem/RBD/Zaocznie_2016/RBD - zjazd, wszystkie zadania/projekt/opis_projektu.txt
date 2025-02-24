@@ -1,0 +1,26 @@
+Model relacyjnej bazy danych o filmach zawiera nastêpuj¹ce informacje:
+1. Twórcy filmów (w tym aktorzy):
+	- Imiê
+	- Nazwisko
+	- Data urodzenia
+2. U¿ytkownicy serwisu:
+	- Nazwa u¿ytkownika
+	- E-mail u¿ytkownika
+Ka¿dy u¿ytkownik mo¿e oceniaæ dowolne filmy ocen¹ dziesiêtn¹ w skali 0-1
+3. Gatunki filmowe:
+	- Nazwa gatunku
+	- Opis gatunku
+4. Nagrody dla filmów:
+	- Nazwa nagrody
+	- Film otrzymuj¹cy nagrodê
+	- Rok uzyskania nagrody
+	- Kategoria, w której film uzyska³ nagrodê
+5. Filmy:
+	- Tytu³
+	- Data premiery
+	- Opis
+	- Czas trwania (w min.)
+	- Kraj produkcji
+	- Gatunek
+
+Baza umo¿liwia sprawdzenie kto wystawi³ jakie oceny filmom, jakie oceny uzyska³ film, jakie nagrody uzyska³ film oraz jakiefilmy otrzyma³y nagrody. Jeden film mo¿e uzyskaæ wybran¹ nagrodê tylko raz. Ponadto, dla ka¿dego filmu mo¿na sprawdziæ jego pe³n¹ obsadê, jak równie¿ mo¿na zweryfikowaæ przy jakich filmach pracowa³ dany twórca.

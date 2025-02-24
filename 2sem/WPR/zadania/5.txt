@@ -1,0 +1,162 @@
+package jbPack;
+
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+
+class Polka{
+    private String nazwa;
+    private int rozmiar;
+    private int zajete;
+    private Vector lista;
+    
+    public Polka(){
+        this("", 0);
+        lista = new Vector();
+    }
+    
+    public Polka(String n){
+        this(n, 0);
+        lista = new Vector();
+    }
+    
+    public Polka(int r){
+        this("", r);
+        lista = new Vector();
+    }
+    
+    public Polka(String n, int r){
+        rozmiar = r;
+        nazwa = n;
+        lista = new Vector();
+    }
+    
+    public void setNazwa(String n){
+        nazwa = n;
+    }
+    
+    public void setRozmiar(int r){
+        rozmiar = r;
+    }
+    
+    public boolean czyMiejsce(){
+        if(rozmiar > zajete)
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean wstaw(Ksiazka k){
+        if(this.czyMiejsce()){
+            lista.add(k);
+            k.naPolke(this);
+            System.out.println("Wstawiam na polke "+nazwa);
+            zajete++;
+            return true;
+        } else {
+            System.out.println("Nie mam miejsca");
+            return false;
+        }
+    }
+    
+    public String getNazwa(){
+        return nazwa;
+    }
+    
+    public boolean zdejmij(Ksiazka k){
+        zajete--;
+        if(lista.remove(k)){
+            k.naPolke(null);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public void listuj(){
+        Ksiazka temp;
+        System.out.println(nazwa);
+        for(int i = 0; i<lista.size(); i++){
+            temp = (Ksiazka)lista.get(i);
+            System.out.println(temp);
+        }
+    }
+    
+}
+
+class Ksiazka {
+    String autor;
+    String tytul;
+    Polka polka;
+    
+    public Ksiazka(String t, String a){
+        autor = a;
+        tytul = t;
+    }
+    
+    public boolean naPolke(Polka p){
+        if(this.polka == null){
+            this.polka = p;
+            return true;
+        } else 
+            return false;
+    }
+    
+    public boolean zPolki(){
+        if(polka != null){
+            System.out.println("Zdejmuje z polki " + polka.getNazwa());
+            polka.zdejmij(this);
+            polka = null;
+            return true;
+        } else
+            return false;
+    }
+    
+    public void naKtorej(){
+        String retVal = "Ksiazka jest ";
+        if(polka != null){
+            retVal += "na polce "+polka.getNazwa();
+        } else
+            retVal += "luzem";
+        System.out.println(retVal);
+    }
+    
+    public String getTytul(){
+        return this.tytul;
+    }
+    
+    public String getAutor(){
+        return this.autor;
+    }
+    
+    public String toString(){
+        return this.autor+": "+this.tytul;
+    }
+    
+}
+
+public                      
+class Program {
+    public static void main(String[] args)
+    {
+        new Program(args);
+    }
+
+    public Program(String[] args)
+    {
+        Ksiazka ks1 = new Ksiazka("Nad niemnem", "Orzeszkowa");
+        Ksiazka ks2 = new Ksiazka("Nad niemnem2", "Orzeszkowa");
+        Ksiazka ks3 = new Ksiazka("Nad niemnem3", "Orzeszkowa");
+        Ksiazka ks4 = new Ksiazka("Nad niemnem4", "Orzeszkowa");
+        ks1.naKtorej();
+        Polka p1 = new Polka("Polka1", 2);
+        Polka p2 = new Polka("Polka2", 2);
+        p1.wstaw(ks1);
+        p1.wstaw(ks2);
+        p1.wstaw(ks3);
+        p2.wstaw(ks3);
+        p1.listuj();
+        p2.listuj();
+        ks1.naKtorej();
+    }
+}

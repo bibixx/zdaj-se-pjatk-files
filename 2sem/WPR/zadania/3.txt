@@ -1,0 +1,76 @@
+package jbPack;
+
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+
+class Complex{
+    private double im, re;
+    
+    public Complex(double r, double i){
+        this.im = i;
+        this.re = r;
+    }
+
+    public Complex(double r){
+        this(r, 0.0);
+    }
+        
+    public Complex(){
+        this(0.0, 0.0);
+    }
+    
+    public Complex(Complex c){
+        this(c.getRe(), c.getIm());
+    }
+    
+    public double getIm(){
+        return this.im;
+    }
+    
+    public double getRe(){
+        return this.re;
+    }
+    
+    public String toString(){
+        return "Czêœæ rzeczywista: "+this.re+"\nCzêœæ urojona: "+this.im+"\n";
+    }
+    
+    public Complex multiply(double a){
+        Complex temp = new Complex(this.re*a, this.im*a);
+        return temp;
+    }
+    
+    public Complex multiply2(Complex c){
+        Complex temp = new Complex( (this.re*c.getRe() - this.im*c.getIm()),
+            (this.re*c.getIm() + this.im*c.getRe()) );
+        return temp;
+    }
+    
+    public Complex divide(double a){
+        Complex temp;
+        if(a != 0.0)
+            temp = new Complex( this.re/a, this.im/a );
+        else
+            temp = new Complex( 0.0, 0.0 );
+        return temp;
+    }
+}
+
+public                      
+class Program {
+
+    public static void main(String[] args)
+    {
+        new Program(args);
+    }        
+
+    public Program(String[] args)
+    {
+        Complex c1 = new Complex(2.0, 3.0);
+        Complex c2;
+        System.out.println(c1.toString());
+        c2 = c1.divide(0.0);
+        System.out.println(c2.toString());
+    }
+}

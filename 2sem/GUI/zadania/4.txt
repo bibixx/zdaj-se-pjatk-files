@@ -1,0 +1,63 @@
+package jbPack;
+
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+
+class Counter{
+    private int state;
+    public static int op;
+    
+    public Counter(){
+        state = 0;
+    }
+    
+    public int state(){
+        op++;
+        return state;
+    }
+    
+    public Counter inc(){
+        op++;
+        state++;
+        return this;
+    }
+    
+    public Counter dec(){
+        op++;
+        state--;
+        return this;
+    }
+    
+    public void reset(){
+        op++;
+        state=0;
+    }
+}
+
+public                      
+class Program {
+
+    public static void main(String[] args)
+    {
+        new Program(args);
+    }        
+
+    public Program(String[] args)
+    {
+        Counter c = new Counter();
+        c.inc();
+        c.inc();
+        c.inc();
+        c.inc();
+        System.out.println(c.state());
+        System.out.println(c.op);
+        Counter d = new Counter();
+        d.inc();
+        d.inc();
+        d.dec();
+        System.out.println(d.state());
+        System.out.println(d.op);
+    }
+}
+

@@ -1,0 +1,268 @@
+package jbPack;
+
+import javax.swing.*;
+import java.awt.*;
+
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+import java.text.*;
+
+import java.awt.geom.*;
+import java.awt.image.*;
+import java.awt.font.*;
+import java.net.*;
+import java.util.zip.*;
+import java.lang.reflect.*;
+import java.applet.*;
+
+import javax.swing.event.*;
+import javax.swing.border.*;
+import javax.swing.tree.*;
+import java.beans.*;
+
+public
+class Program
+    extends JFrame {
+
+    private static final
+        String caption = "Swing Application";  // tytu-
+
+    public static final
+        int width = 400, height = 400;         // rozmiary
+
+    public static final
+        Point location = new Point(150, 150);  // po-o¬enie
+
+    private String lookAndFeel =               // wygl¦d
+        UIManager.getSystemLookAndFeelClassName();
+
+    private Object paintLock = new Object();
+    private boolean isScreenVisible;
+
+    private ContentPane contentPane;
+
+    public static void main(String[] args)
+    {
+        new Program();
+    }
+
+    public Program()
+    {
+            // okrelenie napisu na pasku tytu-owym
+        setTitle(caption);
+
+           // uniemo¬liwienie zmiany rozmiar¡w okna
+        setResizable(false);
+
+            // okrelenie wygl¦du aplikacji
+        try {
+            UIManager.setLookAndFeel(lookAndFeel);
+        }
+        catch(Exception e) {
+        }
+
+            // utworzenie odnonika do pulpitu
+        contentPane = new ContentPane();
+
+            // wymiana domylnego pulpitu na w-asny
+        setContentPane(contentPane);
+
+            // okrelenie po-o¬enia okna
+        setLocation(location);
+
+            // okrelenie rozmiar¡w pulpitu
+        JComponent jContent = (JComponent)contentPane;
+        String system = System.getProperty("os.name");
+        int delta = system.indexOf("98") > -1 ||
+                    system.indexOf("95") > -1 ? 0 : 2;
+        jContent.setPreferredSize(
+            new Dimension(width-delta, height-delta)
+        );
+
+            // okrelenie koloru t-a okna i pulpitu
+        setBackground(Color.white);
+        contentPane.setBackground(Color.white);
+
+            // obs-uga zamkniàcia okna
+        addWindowListener(
+            new WindowAdapter() {
+                public void
+                windowClosing(WindowEvent evt)
+                {
+                    System.exit(0);
+                }
+            }
+        );
+
+            // upakowanie okna
+        pack();
+
+            // zrealizowanie Naczelnej Zasady
+        SwingUtilities.invokeLater(
+            new Runnable() {
+                public void run()
+                {
+                        // wykonanie czynnoci inicjuj¦cych
+                    contentPane.initPane();
+
+                        // wywietlenie okna i pulpitu
+                    show();
+                }
+            }
+        );
+
+        synchronized(paintLock) {
+            while(!isScreenVisible)
+                try {
+                    paintLock.wait();
+                }
+                catch(InterruptedException e) {}
+        }
+
+            // zrealizowanie Naczelnej Zasady
+        SwingUtilities.invokeLater(
+            new Runnable() {
+                public void run()
+                {
+                        // nastawienie celownika na pulpit
+                    contentPane.requestFocus();
+
+                        // nastawienie celownika na komponent
+                        // albo m.in. wykonanie dispose();
+                    contentPane.initFocus();
+                }
+            }
+        );
+    }
+
+        // klasa pomocnicza
+    class Content
+        extends JPanel {
+
+        void initPane()  {}
+        void initFocus() {}
+
+        public void paintComponent(Graphics gDC)
+        {
+            super.paintComponent(gDC);
+
+            synchronized(paintLock) {
+                isScreenVisible = true;
+                paintLock.notify();
+            }
+        }
+    }
+
+// ====== pod-aplikacja ================================= //
+
+    public
+    class ContentPane
+        extends Content {
+        
+        Vector v;
+
+        public void initPane()
+        {
+            
+            try
+            {
+                PrintStream out = 
+                    new PrintStream(
+                        new FileOutputStream(
+                                "d:\\out.txt"));
+                System.setOut(out);
+            }catch(IOException ex){}
+            
+            try
+            {
+                PrintStream out2 = 
+                    new PrintStream(
+                        new FileOutputStream(
+                                "d:\\err.txt"));
+                System.setErr(out2);
+            }catch(IOException ex){}
+           
+           
+            Graphics g = getGraphics();
+            v = new Vector();
+            
+            //wczytanie danych z pliku
+            //po jednej linijce
+            int tab [] = new int [3];
+            try
+            {
+                FileReader fr = new FileReader("d:\\dane.txt");
+                BufferedReader br = new BufferedReader(fr);
+                String temp = br.readLine();
+                while (temp != null)
+                {
+                    int p = 0;
+                    StringTokenizer st = new StringTokenizer(temp);
+                    while (st.hasMoreTokens())
+                    {
+                        tab[p] = Integer.parseInt(st.nextToken());
+                        p++;
+                    }
+                    if (p == 3)
+                    {
+                        kolo k = new kolo(tab[0],tab[1],tab[2]);
+                        //k.rysuj(g);
+                        v.add(k);
+                        System.out.println(tab[0] + " " + tab[1] + " " + tab[2]);
+                    }
+                    
+                    temp = br.readLine();
+                }
+            }catch(Exception ex)
+            {
+            }
+        }
+
+        public void paintComponent(Graphics gDC)
+        {
+            super.paintComponent(gDC);
+            
+            int a = v.size();
+            
+            for (int x = 0; x < a ; x++)
+            {
+                ((kolo)v.get(x)).rysuj(gDC);
+            }         
+            
+        }
+    }
+
+    
+// ====================================================== //
+
+}
+class kolo
+    {
+        private int x;
+        private int y;
+        private int r;
+        
+        kolo(int x, int y, int r)
+        {
+            this.x = x;
+            this.y = y;
+            this.r = r;
+        }
+        
+        kolo()
+        {
+            System.out.println("Nieprawidlowa skladnia");
+        }
+        
+        kolo(int x, int y)
+        {
+            System.out.println("Nieprawidlowa skladnia");
+        }
+        
+        public void rysuj(Graphics gDC)
+        {
+            //super.paintComponent(gDC);
+            gDC.drawOval(x,y,r,r);
+        }
+    }

@@ -1,0 +1,36 @@
+package jbPack;
+
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+import java.awt.*;
+
+public                      
+class Program extends Frame {
+
+    public static void main(String[] args)
+    {
+        new Program(args);
+    }        
+
+    public Program(String[] args)
+    {
+        Frame f = new Frame(); 
+        f.setLayout(null);
+        f.setSize(200,200);
+        f.setResizable(false);
+        System.out.println(f.getInsets());
+        for(int i=0; i<=7; i++){
+            Button b = new Button("B");
+            b.setBounds(3+i*25,22+i*22,20,20);
+            f.add(b);
+        }   
+        f.show();
+        System.out.println(f.getInsets());
+    
+    }
+    
+}
+
+
+

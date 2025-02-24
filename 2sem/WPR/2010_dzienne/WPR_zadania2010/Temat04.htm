@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta name="Author" content="TLL">
+  <meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+  <title>POJ 04</title>
+</head>
+<body>
+<b><font size="+1">Proste typy sparametryzowane (generics)</font></b><br>
+<br>
+<b><u>Zadanie 8</u> (7p)</b><br>
+<span style="font-style: italic;"></span><b><br>
+Stworzyæ klasê </b><span style="font-style: italic;">Box</span><b>
+reprezentujac± obiekty-zestawy elementów porównywalnych wraz operacjami
+na nich. Elementy zestawu s± jednego, ale dowolnego typu. </b><span
+ style="font-weight: bold;">W danym zestawie, ka¿dy element zajmuje
+okre¶lon±, unikaln±&nbsp; pozycjê. </span><b>Porz±dek miêdzy
+elementami (obiektami) danego typu (klasy) jest okre¶lany przez implementacjê
+</b><span style="font-style: italic;">sparametryzowanej</span><b>
+wersji&nbsp; interfejsu </b><span style="font-style: italic;">Comparable</span><b>
+w klasie obiektów (zob. dokumentacjê
+klasy<span style="font-style: italic;"> </span></b><span
+ style="font-style: italic;">java.lang.Comparable</span><b>). <br>
+<br>
+Klasa </b><span style="font-style: italic;">Box</span><b> powinna
+posiadaæ miêdzy innymi nastêpuj±ce metody:<br>
+a. </b><span style="font-style: italic;">add</span><b> - dodaje
+element do zestawu, o ile nie by³o go w zestawie przed operacj±,<br>
+b. </b><span style="font-style: italic;">addAll</span><b> - dodaje
+elementy podanej tablicy elementów do zestawu, o ile nie by³o ich w
+zestawie przed operacj±,<br>
+c. </b><span style="font-style: italic;">delete</span><b> - usuwa
+element z zestawu, o ile wystapi³ on w zestawie przed operacj±,<br>
+d. </b><span style="font-style: italic;">swap</span><b> - zamiana
+elementów w zestawie na dwóch podanych pozycjach,<br>
+e. </b><span style="font-style: italic;">min</span><b> (</b><span
+ style="font-style: italic;">max</span><b>) - znajdowanie (bez
+sortowania) minimum (maksimum) zestawu zgodnie ze zdefiniowanym
+porz±dkiem,<br>
+f. </b><span style="font-style: italic;">search</span><b> -
+sprawdzanie, czy podany element znajduje siê w zestawie,<br>
+g. </b><span style="font-style: italic;">print</span><b> - wy¶wietla
+wszystkie elementy&nbsp; zestawu.<br>
+<br>
+W celu testowania, uczyniæ elementy typu </b><span
+ style="font-style: italic;">Osoba</span><b> (z zadania 3) oraz</b> <span
+ style="font-style: italic;">Figura</span><b> (z zadañ 4-5)
+porównywalnymi wed³ug nastêpuj±cych kryteriów uporz±dkowania:<br>
+</b><b>a. w¶ród elementów typu </b><span style="font-style: italic;">Osoba</span><b>
+porównujemy najpierw nazwiska, w dalszej kolejno¶ci wiek, <br>
+b. w¶ród elementów typu </b><span style="font-style: italic;">Figura</span><b>
+porównujemy najpierw warto¶ci pola, w dalszej kolejno¶ci warto¶ci
+obwodu.<br>
+</b><b><br>
+<span style="text-decoration: underline;">Test</span><br>
+<br>
+Wykonaæ test wszystkich metod klasy </b><span
+ style="font-style: italic;">Box</span><b>. Przyk³adowo, poni¿szy kod
+powinien siê kompilowaæ oraz dawaæ poprawne wyniki.</b><span
+ style="font-family: monospace;"></span><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Box&lt;Osoba&gt;&nbsp; bo =
+new Box&lt;Osoba&gt;();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bo.add(new Osoba("Kowalski",
+19));&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // nazwisko, wiek<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bo.add(new Student("Kowalska",
+18, 100));&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// nazwisko, wiek, grupa<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bo.add(new Student("Kowalska",
+20, 200));<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;Osoba[] to = new Osoba[] {new
+Osoba("Nowak", 21), new Student("Nowak", 22, 200)};<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bo.addAll(to);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bo.print();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;System.out.println(bo.min());&nbsp;&nbsp; // Student 1: Kowalska,
+18, 100<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Box&lt;Figura&gt; bf = new
+Box&lt;Figura&gt;();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bf.add(new Kolo(10,10,40));<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bf.add(new
+Prostokat(10,10,40,40));<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;Figura[] tf = new Figura[]{new
+Prostokat(0,0,50,50), new Kolo(0,0,50)};<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bf.addAll(tf);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bf.print();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(bf.max());&nbsp;&nbsp; &nbsp;// Kolo - srodek (0,0),
+promien 50<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Box&lt;Integer&gt; bi = new
+Box&lt;Integer&gt;();<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;Integer[] ti = new Integer[] {new
+Integer(1), 2, 3};<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bi.addAll(ti);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bi.print();&nbsp;&nbsp; &nbsp;//
+1, 2, 3<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Box&lt;String&gt; bs = new
+Box&lt;String&gt;(); <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;String[] ts = new String[]
+{"cpp", new String("java")};<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bs.addAll(ts);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bs.swap(0,1);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; bs.print();&nbsp;&nbsp; &nbsp;//
+java, cpp<b></b><br>
+<p></p>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+   <meta name="Author" content="Krzysztof Barteczko">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (OS/2; U) [Netscape]">
+   <title>Krzysztof Barteczko - Java, wyjatki</title>
+</head>
+<body>
+
+<center><b><font size=+1>WYJĄTKI</font></b></center>
+
+<p><br>
+<br>
+<p><b>Tradycyjna obsługa błędów</b>
+<ul>
+<li>
+return true | false | int</li>
+
+<li>
+ustawianie flag (argumenty, obiekty globalne)</li>
+</ul>
+Problemy
+<ul>
+<li>
+pamiętać, żeby sprawdzić</li>
+
+<li>
+nie ma standardowych, zunifikowanych środków</li>
+
+<li>
+można pominąć sprawdzanie</li>
+</ul>
+
+<center>
+<p><br><b>PROSTY SCHEMAT OBSŁUGI WYJĄTKÓW W JAVIE</b></center>
+
+<p>Wyjątek powstaje na skutek jakiegoś nieoczekiwanego błędu.
+<br>Wyjątek jest <b>zgłaszany</b>.
+<br>Wyjątek jest <b>obsługiwany</b>.
+<p>int a, b, c;
+<br>String s;
+<br>try {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// w bloku <b>try</b> ujmujemy instrukcje, które mogą spowodować wyjątek
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a = b/c;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// jeżeli np. c = 0, zostanie zgłoszony wyjątek ArithmeticException
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s = Integer.toString(a);
+<br>} catch(ArithmeticException ex) {&nbsp; // wyjątek jest obsługiwany
+w bloku <b>catch</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp; s = "*" ;
+<br>&nbsp;&nbsp;&nbsp;&nbsp; }
+<p>Uwaga: w przypadku operacji na liczbach rzeczywistych przy dzieleniu
+przez 0 wyjątek nie zostanie zgłoszony, a wartość wyniku będzie POSITIVE_INFINITY
+(lub NEGATIVE_INFINITY), co po przeskztałceniu w String da napis "Infinity"
+("-Infinity").
+<center>
+<p><b>KLASY WYJĄTKÓW</b></center>
+
+<p><b>Wyjątki są obiektami klas wyjątków</b>.
+<p><img SRC="../images/jexcept.gif" height=428 width=553>
+<br><b><font size=-1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(Żródło: Peter Haggar, Java Exception Handling, IBM 1999)</font></b>
+<br>&nbsp;
+<br>&nbsp;
+<br>
+<br>
+<center>
+<p><b>WYJĄTKI KONTROLOWANE I NIEKONTROLOWANE</b></center>
+
+<ul>
+<li>
+Są dwa rodzaje wyjątków: <b>kontrolowane</b> i <b>niekontrolowane</b></li>
+
+<li>
+Wyjątki pochodne od klas RuntimeException i Error są niekontrolowane</li>
+
+<ul>
+<li>
+oznaczają one błędy fazy wykonania (mniej poważne i poważne)</li>
+
+<li>
+mogą wystąpić w dowolnym miejscu kodu</li>
+</ul>
+
+<li>
+Pozostałe wyjątki są kontrolowane, co oznacza, że:</li>
+
+<ul>
+<li>
+metody zgłaszające te wyjątki wymieniają je jawnie w swojej deklaracji
+w klauzuli <b>throws</b></li>
+
+<li>
+metody te mogą zgłaszać tylko wymienione w klauzuli <b>throws</b>&nbsp;
+wyjątki lub wyjątki ich podklas</li>
+
+<li>
+odwołania do tych metod wymagają jawnej obsługi ew. zgłaszanych wyjątków:</li>
+
+<ul>
+<li>
+poprzez konstrukcje try - catch</li>
+
+<li>
+poprzez wymienienie wyjątku w klauzuli throws naszej metody (tej która
+odwołuje się do metody, która może zgłosić wyjątek) i "przesunąć" obsługę
+wyjątku do miesca wywołania naszej metody.</li>
+</ul>
+</ul>
+</ul>
+
+<p><br>Przykład:
+<p>&nbsp;FileInputStream in&nbsp; = null;
+<br>&nbsp;FileOutputStream out = null;
+<p>&nbsp;try {
+<br>&nbsp;&nbsp; in&nbsp; = new FileInputStream(args[0]);
+<br>&nbsp;&nbsp; out = new FileOutputStream(args[1]);
+<br>&nbsp;&nbsp; int c = 0;
+<br>&nbsp;&nbsp; while ((c = in.read()) != -1) out.write(c);
+<p>&nbsp;} catch(FileNotFoundException exc) {
+<br>&nbsp;&nbsp; System.out.println("Plik " + args[0] + " nie istnieje.");
+<br>&nbsp;&nbsp; System.exit(1);
+<p>&nbsp;} catch(IOException exc) {
+<br>&nbsp;&nbsp; System.out.println(exc.getMessage());
+<br>&nbsp;&nbsp; System.exit(1);
+<p>Gdybyśmy napisali metodę kopiującą strumienie:
+<p>public static void copyStream(InputStream in, OutputStream out)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+throws IOException {
+<p>&nbsp; int c = 0;
+<br>&nbsp; while ((c = in.read()) != -1) out.write(c);
+<br>}
+<p>to obsługa wyjątku IOException, który może powstać przy read() musiałaby
+być prowadzona w miejscu wywołania metody:
+<p>try {
+<br>&nbsp;&nbsp; .....
+<br>&nbsp;&nbsp; copyStream(in, out);
+<br>} catch(IOException exc) { ...&nbsp; }
+<br>&nbsp;
+<br>&nbsp;
+<br>
+<br>
+<br>
+<center>
+<p><b>SEKWENCJA DZIAŁANIA</b></center>
+
+<ul>
+<li>
+Wykonywane są kolejne instrukcje bloku try.</li>
+
+<li>
+Jeśli powstanie wyjątek, wykonanie bloku try jest przerywane</li>
+
+<li>
+Sterowanie przekazywane jest do <b>pierwszej w kolejności</b> klauzuli
+catch, której argument (typ wyjątku) pasuje do typu powstalego wyjątku:</li>
+
+<ul>
+<li>
+Stąd ważny wniosek: <b>najpierw podawać BARDZIEJ SZCZEGÓŁOWE TYPY WYJĄTKÓW</b></li>
+</ul>
+
+<li>
+Inne klauzule catch nie są "uruchamiane"</li>
+
+<li>
+Obsługująca wyjątek klauzula catch może zrobić wiele rzeczy: m.in. zmienić
+sekwencję sterowania (np. poprzez return lub zgłoszenie nowego wyjątku
+za pomocą instrukcji <b>throw</b>). Jeśli nie zmienia sekwencji sterowania
+to wykonanie programu jest kontynuowane w klauzuli finally lub jeśli jej
+nie ma - od następnej instrukcji po instrukcji try (czyli po ostatniej
+klauzuli-bloku catch).</li>
+</ul>
+
+<center>
+<p><br><b>KLAUZULA FINALLY</b></center>
+
+<p>Klauzula finally służy do wykonania kodu niezależnie od tego czy wystąpił
+wyjątek czy nie.
+<p>boolean metoda(...) {
+<br>try {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // instrukcje, które mogą spowodować
+wyjątek
+<br>}
+<br>catch(Exception e) {&nbsp; return false; }
+<br>finally {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // uporządkowanie, np. zamknięcie
+pliku
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>return true;
+<br>}
+<p>Jeśli powstał wyjątek - uruchamiana jest klauzula catch.
+<br>Mimo, iż zmienia ona sekwencję sterowania (zwraca false na znak, iż
+nastąpiło niepowodzenie), sterowanie przekazywane jest do klauzuli finally.
+I dopiero potem zwracany jest wynik - false.
+<br>Jeśli nie było wyjątku, po zakończeniu instrukcji w bloku try sterowanie
+od razu wchodzi do klauzuli finally, a po jej zakończeniu zwracany jest
+wynik true (wykonywana jest ostatnia instrukcja metody).
+<br>&nbsp;
+<p><br>
+<center>
+<p><b>WŁASNE WYJĄTKI</b></center>
+
+<p>Wyjątki są obiektami klas pochodnych od Throwable.
+<br>Żeby stworzyć własny wyjątek należy zdefiniować odpowiednią klasę.
+<br>Zgodnie z konwencją dziedziczymy podklasę Throwable - klasę Exception.
+<p>class NaszWyj extends Exception {
+<br>...
+<br>}
+<p>Zwykle w naszej klasie wystarczy umieścić dwa konstruktory: bezparametrowy
+oraz z jednym argumentem = komunikat o przyczynie powstania wyjątku.
+<p>Użycie wyjątku:
+<ul>
+<li>
+jakaś nasza metoda ma sygnalizować wyjątek NaszWyj -- musi podać w deklaracji,
+że może to zrobić:</li>
+
+<ul>
+<li>
+void naszaMetoda() <b>throws </b>NaszWyj</li>
+</ul>
+
+<li>
+nasza metoda sprawdza warunki powstania błędu</li>
+
+<li>
+jeśli jest błąd - tworzy wyjątek (new NaszWyj(...)) i sygnalizuje go za
+pomocą instrukcji <b>throw</b> :</li>
+
+<ul>
+<li>
+throw new NaszWyj(ew_param_konstruktora_z_info_o_błędzie)</li>
+</ul>
+</ul>
+
+<br>&nbsp;
+</body>
+</html>

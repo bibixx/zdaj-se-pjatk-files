@@ -1,0 +1,44 @@
+package jbPack;
+
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+
+public                      
+class Program {
+
+    public static void main(String[] args)
+    {
+        new Program(args);
+    }        
+
+    public Program(String[] args)
+    {
+    String text = "";
+    ArrayList list=new ArrayList();
+    do {
+        text = JOptionPane.showInputDialog("Wprowadz text");
+        if (text != null){
+            list.add(text);
+    		Collections.sort(list); //16b
+  			System.out.println(list);
+        }	
+    }while(text != null);
+//    Collections.sort(list, new MyComparator());
+    JOptionPane.showMessageDialog(null,list);
+    System.exit(0);
+    }
+    
+}
+
+/*class MyComparator implements Comparator {
+    public int compare(Object obj1,Object obj2)
+    {
+        String t1,t2;
+        int res = 0;
+        t1 = (String)obj1;
+        t2 = (String)obj2;
+        return t1.compareTo(t2);
+    }
+}   
+*/

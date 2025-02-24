@@ -1,0 +1,1129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+
+
+<title>Rachunek kwantyfikatorów</title>
+<meta name="description" content="Rachunek kwantyfikatorów">
+<meta name="keywords" content="skrypt">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-2">
+<meta name="Generator" content="LaTeX2HTML v2002-2-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+
+<link rel="STYLESHEET" href="node8_pliki/skrypt.css">
+
+<link rel="next" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/node9.html">
+<link rel="previous" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/node7.html">
+<link rel="up" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/skrypt.html">
+<link rel="next" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/node9.html">
+</head><body>
+
+<div class="navigation"><!--Navigation Panel-->
+<a name="tex2html111" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/node9.html">
+<img alt="next" src="node8_pliki/next.html" height="24" width="37" align="bottom" border="0"></a> 
+<a name="tex2html109" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/skrypt.html">
+<img alt="up" src="node8_pliki/up.html" height="24" width="26" align="bottom" border="0"></a> 
+<a name="tex2html103" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/node7.html">
+<img alt="previous" src="node8_pliki/prev.html" height="24" width="63" align="bottom" border="0"></a>   
+<br>
+<b> Next:</b> <a name="tex2html112" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/node9.html">Relacje porządku</a>
+<b> Up:</b> <a name="tex2html110" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/skrypt.html">Wstęp do matematyki</a>
+<b> Previous:</b> <a name="tex2html104" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/node7.html">Kwantyfikatory</a>
+<br>
+<br></div>
+<!--End of Navigation Panel-->
+
+<h1><a name="SECTION00800000000000000000">
+Rachunek kwantyfikatorów</a>
+</h1>
+W rachunku zdań tworzyliśmy formuły
+zdaniowe, które mogły oznaczać różne zdania w zależności od
+interpretacji zmiennych zdaniowych wchodzących w ich skład.
+W rachunku kwantyfikatorów przy pomocy symboli oznaczających funkcje
+zdaniowe, symbolu równości <span class="MATH"><img src="node8_pliki/img568.png" alt="$=$" height="15" width="15" align="bottom" border="0"></span>, kwantyfikatorów, spójników logicznych, zmiennych i nawiasów
+tworzymy wyrażenia oznaczające nowe funkcje zdaniowe lub zdania (w
+zależności od tego, czy wszystkie zmienne w tych wyrażeniach są
+związane, czy nie). Wyrażenia takie nazywamy
+formułami rachunku kwantyfikatorów, lub krótko formułami. Przykładowo rozważmy formułę
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+(*)\ \ \forall x(\varphi(x,y)\Rightarrow\exists
+y(\psi(x,y)\land\neg\varphi(x,y))).
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img569.png" alt="\begin{displaymath}(*)\ \ \forall x(\varphi(x,y)\Rightarrow\exists
+y(\psi(x,y)\land\neg\varphi(x,y))).\end{displaymath}" height="28" width="288" border="0">
+</div>
+<br clear="all">
+<p></p>
+W formule tej symbole <span class="MATH"><img src="node8_pliki/img489.png" alt="$\forall$" height="14" width="12" align="bottom" border="0"></span> i <span class="MATH"><img src="node8_pliki/img494.png" alt="$\exists$" height="14" width="12" align="bottom" border="0"></span> odczytujemy jako ``dla
+każdego'' i ``istnieje''. Symbole <span class="MATH"><img src="node8_pliki/img537.png" alt="$\varphi(x,y)$" height="32" width="50" align="middle" border="0"></span> i <span class="MATH"><img src="node8_pliki/img570.png" alt="$\psi(x,y)$" height="32" width="51" align="middle" border="0"></span>
+mogą być tu interpretowane jako konkretne funkcje zdaniowe na wiele
+sposobów. Wyjątek czynimy dla symbolu równości <span class="MATH"><img src="node8_pliki/img568.png" alt="$=$" height="15" width="15" align="bottom" border="0"></span>, który zawsze
+interpretujemy jak prawdziwą równość. Gdy <span class="MATH"><img src="node8_pliki/img571.png" alt="$\varphi,\psi$" height="30" width="31" align="middle" border="0"></span> oznaczają konkretne funkcje zdaniowe, gdzie
+wspólnym zakresem zmiennych <span class="MATH"><img src="node8_pliki/img458.png" alt="$x,y$" height="29" width="28" align="middle" border="0"></span> jest jakaś przestrzeń <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>,
+formuła <span class="MATH"><img src="node8_pliki/img67.png" alt="$(*)$" height="32" width="23" align="middle" border="0"></span> również oznacza funkcję zdaniową zmiennej <span class="MATH"><img src="node8_pliki/img70.png" alt="$y$" height="29" width="11" align="middle" border="0"></span> o
+zakresie <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>. Jeśli na przykład poprzedzimy ją kwantyfikatorem
+<span class="MATH"><img src="node8_pliki/img572.png" alt="$\exists y$" height="30" width="20" align="middle" border="0"></span> (wiążącym zmienną <span class="MATH"><img src="node8_pliki/img70.png" alt="$y$" height="29" width="11" align="middle" border="0"></span>), stanie się ona
+zdaniem. Dlatego formuły, w których wszystkie zmienne są związane
+przez kwantyfikatory, nazywamy formułami domkniętymi lub (niezbyt
+poprawnie) zdaniami. 
+
+<p>
+W formule <span class="MATH"><img src="node8_pliki/img67.png" alt="$(*)$" height="32" width="23" align="middle" border="0"></span> kwantyfikator <span class="MATH"><img src="node8_pliki/img539.png" alt="$\forall x$" height="14" width="21" align="bottom" border="0"></span> odnosi się do formuły
+<br></p><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\varphi(x,y)\Rightarrow\exists
+y(\psi(x,y)\land\neg\varphi(x,y)),
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img573.png" alt="\begin{displaymath}\varphi(x,y)\Rightarrow\exists
+y(\psi(x,y)\land\neg\varphi(x,y)),\end{displaymath}" height="28" width="228" border="0">
+</div>
+<br clear="all">
+<p></p>
+nie zaś tylko do jej części <span class="MATH"><img src="node8_pliki/img537.png" alt="$\varphi(x,y)$" height="32" width="50" align="middle" border="0"></span>. Podobnie kwantyfikator
+<span class="MATH"><img src="node8_pliki/img572.png" alt="$\exists y$" height="30" width="20" align="middle" border="0"></span> odnosi się do formuły
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\psi(x,y)\land\neg\varphi(x,y),
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img574.png" alt="\begin{displaymath}\psi(x,y)\land\neg\varphi(x,y),\end{displaymath}" height="28" width="127" border="0">
+</div>
+<br clear="all">
+<p></p>
+nie zaś do jej części <span class="MATH"><img src="node8_pliki/img570.png" alt="$\psi(x,y)$" height="32" width="51" align="middle" border="0"></span>. Dlatego w obu przypadkach
+formuły te dodatkowo ograniczyliśmy nawiasami. Gdyby tych nawiasów
+nie było, formułę <span class="MATH"><img src="node8_pliki/img67.png" alt="$(*)$" height="32" width="23" align="middle" border="0"></span> domyślnie należałoby odczytywać jako
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+(\forall
+x\varphi(x,y))\Rightarrow(\exists y\psi(x,y))\land\neg\varphi(x,y).
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img575.png" alt="\begin{displaymath}(\forall
+x\varphi(x,y))\Rightarrow(\exists y\psi(x,y))\land\neg\varphi(x,y).\end{displaymath}" height="28" width="256" border="0">
+</div>
+<br clear="all">
+<p></p>
+Wtedy obie zmienne w <!-- MATH
+ $\neg\varphi(x,y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img576.png" alt="$\neg\varphi(x,y)$" height="32" width="61" align="middle" border="0"></span> pozostałyby niezwiązane
+(inaczej: wolne).
+
+<p>
+Gdy w formule <span class="MATH"><img src="node8_pliki/img67.png" alt="$(*)$" height="32" width="23" align="middle" border="0"></span> za symbole <span class="MATH"><img src="node8_pliki/img577.png" alt="$\varphi$" height="29" width="13" align="middle" border="0"></span> i <span class="MATH"><img src="node8_pliki/img578.png" alt="$\psi$" height="30" width="14" align="middle" border="0"></span> podstawimy konkretne
+funkcje zdaniowe, stanie się ona sama (złożoną) funkcją zdaniową. Na
+przykład, niech <span class="MATH"><img src="node8_pliki/img537.png" alt="$\varphi(x,y)$" height="32" width="50" align="middle" border="0"></span> oznacza funkcję zdaniową <!-- MATH
+ $x\mid
+y,x,y\in\mathbb{N}$
+ -->
+<span class="MATH"><img src="node8_pliki/img579.png" alt="$x\mid
+y,x,y\in\mathbb{N}$" height="32" width="96" align="middle" border="0"></span> (tzn: ``<span class="MATH"><img src="node8_pliki/img56.png" alt="$x$" height="13" width="12" align="bottom" border="0"></span> dzieli <span class="MATH"><img src="node8_pliki/img70.png" alt="$y$" height="29" width="11" align="middle" border="0"></span>''), zaś <span class="MATH"><img src="node8_pliki/img570.png" alt="$\psi(x,y)$" height="32" width="51" align="middle" border="0"></span> oznacza
+funkcję zdaniową <!-- MATH
+ $y\mid x,x,y\in\mathbb{N}$
+ -->
+<span class="MATH"><img src="node8_pliki/img580.png" alt="$y\mid x,x,y\in\mathbb{N}$" height="32" width="96" align="middle" border="0"></span>. Wówczas <span class="MATH"><img src="node8_pliki/img67.png" alt="$(*)$" height="32" width="23" align="middle" border="0"></span> staje się
+funkcją zdaniową:
+<br></p><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+(\forall x\in\mathbb{N})(x\mid \dot{y}\Rightarrow(\exists
+y\in\mathbb{N})(y\mid x\land\neg x\mid y)),
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img581.png" alt="\begin{displaymath}(\forall x\in\mathbb{N})(x\mid \dot{y}\Rightarrow(\exists
+y\in\mathbb{N})(y\mid x\land\neg x\mid y)),\end{displaymath}" height="28" width="293" border="0">
+</div>
+<br clear="all">
+<p></p>
+którą dla uproszczenia będziemy teraz oznaczali przez <span class="MATH"><img src="node8_pliki/img582.png" alt="$\chi(y)$" height="32" width="34" align="middle" border="0"></span>, gdyż
+w tej funkcji zdaniowej <span class="MATH"><img src="node8_pliki/img70.png" alt="$y$" height="29" width="11" align="middle" border="0"></span> występuje jako zmienna wolna. To
+wolne wystąpienie zmiennej <span class="MATH"><img src="node8_pliki/img70.png" alt="$y$" height="29" width="11" align="middle" border="0"></span> w formule <span class="MATH"><img src="node8_pliki/img582.png" alt="$\chi(y)$" height="32" width="34" align="middle" border="0"></span> zaznaczyliśmy
+kropką, pozostałe wystąpienia zmiennej <span class="MATH"><img src="node8_pliki/img70.png" alt="$y$" height="29" width="11" align="middle" border="0"></span> w tej formule sa związane
+przez kwantyfikatory. Zakres zmienności zmiennej <span class="MATH"><img src="node8_pliki/img70.png" alt="$y$" height="29" width="11" align="middle" border="0"></span> w tej funkcji
+zdaniowej to <span class="MATH"><img src="node8_pliki/img583.png" alt="$\mathbb{N}$" height="14" width="15" align="bottom" border="0"></span>.
+Sprawdźmy dla przykładu, czy formuła <span class="MATH"><img src="node8_pliki/img582.png" alt="$\chi(y)$" height="32" width="34" align="middle" border="0"></span> jest prawdziwa dla
+<span class="MATH"><img src="node8_pliki/img584.png" alt="$y=1$" height="29" width="41" align="middle" border="0"></span>, tzn. czy <span class="MATH"><img src="node8_pliki/img585.png" alt="$\chi(1)$" height="32" width="33" align="middle" border="0"></span> jest zdaniem prawdziwym. Jest to zdanie
+następujące:
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+(\forall x\in\mathbb{N})(x\mid 1\Rightarrow(\exists
+y\in\mathbb{N})(y\mid x\land\neg x\mid y)).
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img586.png" alt="\begin{displaymath}(\forall x\in\mathbb{N})(x\mid 1\Rightarrow(\exists
+y\in\mathbb{N})(y\mid x\land\neg x\mid y)).\end{displaymath}" height="28" width="292" border="0">
+</div>
+<br clear="all">
+<p></p>
+(Powstało ono z <span class="MATH"><img src="node8_pliki/img582.png" alt="$\chi(y)$" height="32" width="34" align="middle" border="0"></span> przez podstawienie liczby <span class="MATH"><img src="node8_pliki/img4.png" alt="$1$" height="13" width="11" align="bottom" border="0"></span> za każde wolne
+wystąpienie zmiennej <span class="MATH"><img src="node8_pliki/img70.png" alt="$y$" height="29" width="11" align="middle" border="0"></span>.) Zdanie to mówi, że 
+<blockquote>
+dla każdej liczby naturalnej <span class="MATH"><img src="node8_pliki/img56.png" alt="$x$" height="13" width="12" align="bottom" border="0"></span>, jeśli <span class="MATH"><img src="node8_pliki/img56.png" alt="$x$" height="13" width="12" align="bottom" border="0"></span> dzieli <span class="MATH"><img src="node8_pliki/img4.png" alt="$1$" height="13" width="11" align="bottom" border="0"></span>, to <!-- MATH
+ $(\exists
+y\in\mathbb{N})(y\mid x\land \neg x\mid y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img587.png" alt="$(\exists
+y\in\mathbb{N})(y\mid x\land \neg x\mid y)$" height="32" width="166" align="middle" border="0"></span>.
+
+</blockquote>
+Nie jest to prawda, gdyż np. liczba <span class="MATH"><img src="node8_pliki/img588.png" alt="$x=1$" height="13" width="41" align="bottom" border="0"></span> dzieli <span class="MATH"><img src="node8_pliki/img4.png" alt="$1$" height="13" width="11" align="bottom" border="0"></span> oraz dla <span class="MATH"><img src="node8_pliki/img588.png" alt="$x=1$" height="13" width="41" align="bottom" border="0"></span>
+formuła <!-- MATH
+ $(\exists
+y\in\mathbb{N})(y\mid x\land \neg x\mid y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img587.png" alt="$(\exists
+y\in\mathbb{N})(y\mid x\land \neg x\mid y)$" height="32" width="166" align="middle" border="0"></span> jest fałszywa.
+
+<p>
+Można sprawdzić, że dla każdego <!-- MATH
+ $n\in\mathbb{N}$
+ -->
+<span class="MATH"><img src="node8_pliki/img589.png" alt="$n\in\mathbb{N}$" height="30" width="44" align="middle" border="0"></span>, zdanie <span class="MATH"><img src="node8_pliki/img590.png" alt="$\chi(n)$" height="32" width="35" align="middle" border="0"></span>
+jest fałszywe, czyli <!-- MATH
+ $(\forall y\in\mathbb{N})\neg\chi(y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img591.png" alt="$(\forall y\in\mathbb{N})\neg\chi(y)$" height="32" width="105" align="middle" border="0"></span>.
+
+</p><p>
+</p><p>
+</p><div><b>Definicja  <span class="arabic">7</span>..<span class="arabic">1</span></b> &nbsp; 
+<i>Formułę domkniętą nazywamy tautologią (rachunku kwantyfikatorów), gdy jest
+zdaniem prawdziwym przy dowolnym rozumieniu występujących w niej
+symboli funkcji zdaniowych.</i></div><p></p>
+Przykładem tautologii jest formuła
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\forall x(\varphi(x)\lor\neg\varphi(x)).
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img592.png" alt="\begin{displaymath}\forall x(\varphi(x)\lor\neg\varphi(x)).\end{displaymath}" height="28" width="126" border="0">
+</div>
+<br clear="all">
+<p></p>
+Ogólniej, jeśli <span class="MATH"><img src="node8_pliki/img78.png" alt="$\alpha(p,q,r)$" height="32" width="63" align="middle" border="0"></span> jest tautologią rachunku zdań,
+to formuła
+<br><!-- MATH
+ $\forall x\alpha(p(x),q(x),r(x))$
+ -->
+<span class="MATH"><img src="node8_pliki/img593.png" alt="$\forall x\alpha(p(x),q(x),r(x))$" height="32" width="145" align="middle" border="0"></span> jest tautologią
+rachunku kwantyfikatorów, gdzie symbole <!-- MATH
+ $p(x),q(x),r(x)$
+ -->
+<span class="MATH"><img src="node8_pliki/img594.png" alt="$p(x),q(x),r(x)$" height="32" width="105" align="middle" border="0"></span> oznaczają
+teraz funkcje zdaniowe zmiennej <span class="MATH"><img src="node8_pliki/img56.png" alt="$x$" height="13" width="12" align="bottom" border="0"></span>.
+
+<p>
+Podobnie jak w rachunku zdań, wiele tautologii rachunku
+kwantyfikatorów ma postać równoważności. Pozwalają one
+przekształcać w sposób równoważny zdania tak, by uzyskać jak
+najprostszą formę.
+</p><p>
+</p><div><b>Definicja  <span class="arabic">7</span>..<span class="arabic">2</span></b> (1)  &nbsp; 
+<i>Mówimy, że dwie funkcje zdaniowe <span class="MATH"><img src="node8_pliki/img595.png" alt="$\alpha(x)$" height="32" width="35" align="middle" border="0"></span> i
+<span class="MATH"><img src="node8_pliki/img596.png" alt="$\beta(x)$" height="32" width="34" align="middle" border="0"></span> (o wspólnym zakresie zmiennej <span class="MATH"><img src="node8_pliki/img56.png" alt="$x$" height="13" width="12" align="bottom" border="0"></span>) są równoważne, gdy
+mają ten sam wykres. Innymi słowy, gdy <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span> oznacza wspólny zakres
+zmiennej <span class="MATH"><img src="node8_pliki/img56.png" alt="$x$" height="13" width="12" align="bottom" border="0"></span> w tych funkcjach, znaczy to, że
+</i>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\{x\in X:\alpha(x)\}=\{x\in X:\beta(x)\}.
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img597.png" alt="\begin{displaymath}\{x\in X:\alpha(x)\}=\{x\in X:\beta(x)\}.\end{displaymath}" height="28" width="231" border="0">
+</div>
+<br clear="all">
+<p></p><i>
+(2) Mówimy, że dwie formuły domknięte <span class="MATH"><img src="node8_pliki/img104.png" alt="$\alpha$" height="13" width="13" align="bottom" border="0"></span> i <span class="MATH"><img src="node8_pliki/img111.png" alt="$\beta$" height="30" width="13" align="middle" border="0"></span> są
+równoważne, gdy formuła <!-- MATH
+ $\alpha\Leftrightarrow\beta$
+ -->
+<span class="MATH"><img src="node8_pliki/img112.png" alt="$\alpha\Leftrightarrow\beta$" height="30" width="48" align="middle" border="0"></span> jest tautologią. </i></div><p></p>
+Podobnie definiujemy równoważność funkcji zdaniowych większej
+liczby zmiennych. 
+<p>
+</p><div><b>Uwaga  <span class="arabic">7</span>..<span class="arabic">3</span></b> &nbsp; 
+<i>Dwie funkcje zdaniowe <span class="MATH"><img src="node8_pliki/img595.png" alt="$\alpha(x)$" height="32" width="35" align="middle" border="0"></span> i <!-- MATH
+ $\beta(x),x\in X$
+ -->
+<span class="MATH"><img src="node8_pliki/img598.png" alt="$\beta(x),x\in X$" height="32" width="84" align="middle" border="0"></span>
+są równoważne wtedy i tylko wtedy, gdy zdanie <!-- MATH
+ $\forall
+x(\alpha(x)\Leftrightarrow\beta(x))$
+ -->
+<span class="MATH"><img src="node8_pliki/img599.png" alt="$\forall
+x(\alpha(x)\Leftrightarrow\beta(x))$" height="32" width="121" align="middle" border="0"></span> jest prawdziwe.</i></div><p></p>
+
+<em>Dowód.</em> Niech <span class="MATH"><img src="node8_pliki/img1.png" alt="$p$" height="29" width="11" align="middle" border="0"></span> oznacza zdanie 
+<blockquote>
+<span class="MATH"><img src="node8_pliki/img595.png" alt="$\alpha(x)$" height="32" width="35" align="middle" border="0"></span> i <span class="MATH"><img src="node8_pliki/img596.png" alt="$\beta(x)$" height="32" width="34" align="middle" border="0"></span> są równoważne.
+
+</blockquote>
+zaś <span class="MATH"><img src="node8_pliki/img2.png" alt="$q$" height="29" width="11" align="middle" border="0"></span> zdanie
+<blockquote>
+Zdanie  <!-- MATH
+ $\forall
+x(\alpha(x)\Leftrightarrow\beta(x))$
+ -->
+<span class="MATH"><img src="node8_pliki/img599.png" alt="$\forall
+x(\alpha(x)\Leftrightarrow\beta(x))$" height="32" width="121" align="middle" border="0"></span> jest prawdziwe.
+
+</blockquote>
+By udowodnić równoważność obu zdań korzystamy z
+faktu, że zdanie <!-- MATH
+ $p\Leftrightarrow q$
+ -->
+<span class="MATH"><img src="node8_pliki/img24.png" alt="$p\Leftrightarrow q$" height="29" width="43" align="middle" border="0"></span> jest równoważne koniunkcji
+dwóch implikacji <!-- MATH
+ $p\Rightarrow q$
+ -->
+<span class="MATH"><img src="node8_pliki/img27.png" alt="$p\Rightarrow q$" height="29" width="43" align="middle" border="0"></span> i <!-- MATH
+ $q\Rightarrow p$
+ -->
+<span class="MATH"><img src="node8_pliki/img28.png" alt="$q\Rightarrow p$" height="29" width="43" align="middle" border="0"></span>. Wystarczy
+więc udowodnić każdą z tych implikacji.
+
+<p>
+<!-- MATH
+ $p\Rightarrow q$
+ -->
+<span class="MATH"><img src="node8_pliki/img27.png" alt="$p\Rightarrow q$" height="29" width="43" align="middle" border="0"></span>. Wystarczy udowodnić zdanie <span class="MATH"><img src="node8_pliki/img2.png" alt="$q$" height="29" width="11" align="middle" border="0"></span> zakładając, że
+<span class="MATH"><img src="node8_pliki/img1.png" alt="$p$" height="29" width="11" align="middle" border="0"></span> jest prawdziwe. Załóżmy, że <span class="MATH"><img src="node8_pliki/img1.png" alt="$p$" height="29" width="11" align="middle" border="0"></span> jest prawdziwe, to znaczy
+funkcje zdaniowe <span class="MATH"><img src="node8_pliki/img595.png" alt="$\alpha(x)$" height="32" width="35" align="middle" border="0"></span> i <span class="MATH"><img src="node8_pliki/img596.png" alt="$\beta(x)$" height="32" width="34" align="middle" border="0"></span> są równoważne. Znaczy to,
+że <!-- MATH
+ $\{x\in X:\alpha(x)\}=\{x\in X:\beta(x)\}$
+ -->
+<span class="MATH"><img src="node8_pliki/img600.png" alt="$\{x\in X:\alpha(x)\}=\{x\in X:\beta(x)\}$" height="32" width="232" align="middle" border="0"></span>. Oznaczmy przez <span class="MATH"><img src="node8_pliki/img352.png" alt="$Y$" height="14" width="16" align="bottom" border="0"></span> ten zbiór.
+Dlatego dla każdego <span class="MATH"><img src="node8_pliki/img475.png" alt="$a\in X$" height="30" width="45" align="middle" border="0"></span> mamy, że zdania <span class="MATH"><img src="node8_pliki/img601.png" alt="$\alpha(a)$" height="32" width="34" align="middle" border="0"></span> i
+<span class="MATH"><img src="node8_pliki/img602.png" alt="$\beta(a)$" height="32" width="34" align="middle" border="0"></span> mają tę samą wartość logiczną (a mianowicie są oba
+fałszywe, gdy <span class="MATH"><img src="node8_pliki/img603.png" alt="$a\not\in Y$" height="30" width="44" align="middle" border="0"></span> i oba prawdziwe, gdy <span class="MATH"><img src="node8_pliki/img604.png" alt="$a\in Y$" height="30" width="44" align="middle" border="0"></span>).
+Dlatego dla każdego <span class="MATH"><img src="node8_pliki/img475.png" alt="$a\in X$" height="30" width="45" align="middle" border="0"></span> zdanie
+<!-- MATH
+ $\alpha(a)\Leftrightarrow\beta(a)$
+ -->
+<span class="MATH"><img src="node8_pliki/img605.png" alt="$\alpha(a)\Leftrightarrow\beta(a)$" height="32" width="89" align="middle" border="0"></span> jest prawdziwe. Oznacza 
+to, że
+prawdziwe jest zdanie <!-- MATH
+ $\forall x(\alpha(x)\Leftrightarrow\beta(x))$
+ -->
+<span class="MATH"><img src="node8_pliki/img599.png" alt="$\forall
+x(\alpha(x)\Leftrightarrow\beta(x))$" height="32" width="121" align="middle" border="0"></span>, czyli <span class="MATH"><img src="node8_pliki/img2.png" alt="$q$" height="29" width="11" align="middle" border="0"></span>.
+
+</p><p>
+<!-- MATH
+ $q\Rightarrow p$
+ -->
+<span class="MATH"><img src="node8_pliki/img28.png" alt="$q\Rightarrow p$" height="29" width="43" align="middle" border="0"></span>. Tu dowód pozostawiamy jako
+ćwiczenie. <span class="MATH"><img src="node8_pliki/img183.png" alt="$\Box$" height="14" width="15" align="bottom" border="0"></span>
+</p><p>
+<br>
+
+</p><p>
+Podamy teraz przykłady prostych tautologii rachunku
+kwantyfikatorów. Wiele z nich ma postać równoważności.
+
+</p><ol>
+<li><!-- MATH
+ $\neg\forall x\varphi(x)\Leftrightarrow\exists x\neg\varphi(x)\ 
+,\ \neg\exists x\varphi(x)\Leftrightarrow\forall x\neg\varphi(x)$
+ -->
+<span class="MATH"><img src="node8_pliki/img606.png" alt="$\neg\forall x\varphi(x)\Leftrightarrow\exists x\neg\varphi(x)\
+,\ \neg\exists x\varphi(x)\Leftrightarrow\forall x\neg\varphi(x)$" height="32" width="312" align="middle" border="0"></span>
+<br>(prawa de Morgana rachunku kwantyfikatorów)
+</li>
+<li><!-- MATH
+ $\forall x\forall y\varphi(x,y)\Leftrightarrow\forall y\forall
+x\varphi(x,y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img607.png" alt="$\forall x\forall y\varphi(x,y)\Leftrightarrow\forall y\forall
+x\varphi(x,y)$" height="32" width="193" align="middle" border="0"></span> (przemienność dużych kwantyfikatorów)
+</li>
+<li><!-- MATH
+ $\exists x\exists y\varphi(x,y)\Leftrightarrow\exists y\exists
+x\varphi(x,y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img608.png" alt="$\exists x\exists y\varphi(x,y)\Leftrightarrow\exists y\exists
+x\varphi(x,y)$" height="32" width="193" align="middle" border="0"></span> (przemienność małych kwantyfikatorów)
+</li>
+<li><!-- MATH
+ $\exists x\forall y\varphi(x,y)\Rightarrow\forall y\exists
+x\varphi(x,y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img609.png" alt="$\exists x\forall y\varphi(x,y)\Rightarrow\forall y\exists
+x\varphi(x,y)$" height="32" width="193" align="middle" border="0"></span>
+</li>
+<li><!-- MATH
+ $\forall x(\varphi(x)\land\psi(x))\Leftrightarrow\forall
+x\varphi(x)\land\forall x\psi(x)$
+ -->
+<span class="MATH"><img src="node8_pliki/img610.png" alt="$\forall x(\varphi(x)\land\psi(x))\Leftrightarrow\forall
+x\varphi(x)\land\forall x\psi(x)$" height="32" width="258" align="middle" border="0"></span> (rozdzielność <span class="MATH"><img src="node8_pliki/img489.png" alt="$\forall$" height="14" width="12" align="bottom" border="0"></span> względem <span class="MATH"><img src="node8_pliki/img8.png" alt="$\land$" height="13" width="14" align="bottom" border="0"></span>)
+</li>
+<li><!-- MATH
+ $\exists x(\varphi(x)\lor\psi(x))\Leftrightarrow\exists
+x\varphi(x)\lor\exists x\psi(x)$
+ -->
+<span class="MATH"><img src="node8_pliki/img611.png" alt="$\exists x(\varphi(x)\lor\psi(x))\Leftrightarrow\exists
+x\varphi(x)\lor\exists x\psi(x)$" height="32" width="258" align="middle" border="0"></span> (rozdzielność <span class="MATH"><img src="node8_pliki/img494.png" alt="$\exists$" height="14" width="12" align="bottom" border="0"></span> względem
+<span class="MATH"><img src="node8_pliki/img19.png" alt="$\lor$" height="13" width="14" align="bottom" border="0"></span>)
+</li>
+<li><!-- MATH
+ $\exists x(\varphi(x)\land\psi(x))\Rightarrow\exists
+x\varphi(x)\land\exists x\psi(x)$
+ -->
+<span class="MATH"><img src="node8_pliki/img612.png" alt="$\exists x(\varphi(x)\land\psi(x))\Rightarrow\exists
+x\varphi(x)\land\exists x\psi(x)$" height="32" width="258" align="middle" border="0"></span>
+</li>
+<li><!-- MATH
+ $\forall x\varphi(x)\lor\forall x\psi(x)\Rightarrow\forall
+x(\varphi(x)\lor\psi(x))$
+ -->
+<span class="MATH"><img src="node8_pliki/img613.png" alt="$\forall x\varphi(x)\lor\forall x\psi(x)\Rightarrow\forall
+x(\varphi(x)\lor\psi(x))$" height="32" width="258" align="middle" border="0"></span>
+</li>
+<li><!-- MATH
+ $\forall x(\varphi(x)\Rightarrow\psi(x))\Rightarrow(\exists
+x\varphi(x)\Rightarrow\exists x\psi(x))$
+ -->
+<span class="MATH"><img src="node8_pliki/img614.png" alt="$\forall x(\varphi(x)\Rightarrow\psi(x))\Rightarrow(\exists
+x\varphi(x)\Rightarrow\exists x\psi(x))$" height="32" width="284" align="middle" border="0"></span>
+</li>
+</ol>
+Przed dowodem zauważmy, że intuicyjnie formuły te istotnie
+zawsze oznaczają zdania prawdziwe.
+<br><em>Dowód.</em> Udowodnimy niektóre punkty.
+(1) Udowodnimy, że <!-- MATH
+ $\neg\forall
+x\varphi(x)\Leftrightarrow\exists x\neg\varphi(x)$
+ -->
+<span class="MATH"><img src="node8_pliki/img615.png" alt="$\neg\forall
+x\varphi(x)\Leftrightarrow\exists x\neg\varphi(x)$" height="32" width="149" align="middle" border="0"></span> jest tautologią. W
+tym celu rozważmy dowolną konkretną funkcję zdaniową <!-- MATH
+ $\varphi(x),x\in
+X$
+ -->
+<span class="MATH"><img src="node8_pliki/img479.png" alt="$\varphi(x),x\in X$" height="32" width="85" align="middle" border="0"></span>. Wystarczy pokazać, że zdania <!-- MATH
+ $\neg(\forall x\in X)\varphi(x)$
+ -->
+<span class="MATH"><img src="node8_pliki/img616.png" alt="$\neg(\forall x\in X)\varphi(x)$" height="32" width="110" align="middle" border="0"></span>
+i <!-- MATH
+ $(\exists x\in X)\neg\varphi(x)$
+ -->
+<span class="MATH"><img src="node8_pliki/img617.png" alt="$(\exists x\in X)\neg\varphi(x)$" height="32" width="110" align="middle" border="0"></span> są równoważne. Niech 
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+A=\{x\in X:\varphi(x)\}\mbox{\ \ i\ \ }B=\{x\in
+X:\neg\varphi(x)\}.
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img618.png" alt="\begin{displaymath}A=\{x\in X:\varphi(x)\}\mbox{\ \ i\ \ }B=\{x\in
+X:\neg\varphi(x)\}.\end{displaymath}" height="28" width="314" border="0">
+</div>
+<br clear="all">
+<p></p>
+Zatem <span class="MATH"><img src="node8_pliki/img106.png" alt="$A$" height="14" width="15" align="bottom" border="0"></span> i <span class="MATH"><img src="node8_pliki/img213.png" alt="$B$" height="14" width="16" align="bottom" border="0"></span> są rozłączne (prawo sprzeczności) i w sumie dają
+cały zbiór <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span> (prawo wyłączonego środka). Korzystając z
+definicji kwantyfikatorów dostajemy ciąg zdań równoważnych
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\neg(\forall x\in X)\varphi(x)
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img619.png" alt="\begin{displaymath}\neg(\forall x\in X)\varphi(x)\end{displaymath}" height="28" width="105" border="0">
+</div>
+<br clear="all">
+<p></p>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\Updownarrow
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img156.png" alt="\begin{displaymath}\Updownarrow\end{displaymath}" height="28" width="10" border="0">
+</div>
+<br clear="all">
+<p></p>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+A\neq X
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img620.png" alt="\begin{displaymath}A\neq X\end{displaymath}" height="27" width="47" border="0">
+</div>
+<br clear="all">
+<p></p>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\Updownarrow
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img156.png" alt="\begin{displaymath}\Updownarrow\end{displaymath}" height="28" width="10" border="0">
+</div>
+<br clear="all">
+<p></p>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+B\neq\emptyset
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img621.png" alt="\begin{displaymath}B\neq\emptyset\end{displaymath}" height="27" width="41" border="0">
+</div>
+<br clear="all">
+<p></p>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\Updownarrow
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img156.png" alt="\begin{displaymath}\Updownarrow\end{displaymath}" height="28" width="10" border="0">
+</div>
+<br clear="all">
+<p></p>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+(\exists x\in X)\neg\varphi(x),
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img622.png" alt="\begin{displaymath}(\exists x\in X)\neg\varphi(x),\end{displaymath}" height="28" width="109" border="0">
+</div>
+<br clear="all">
+<p></p>
+który świadczy o żądanej równoważności.
+
+<p>
+(2) Obie strony równoważności mówią, że <!-- MATH
+ $\{\langle x,y\rangle\in
+   X\times X:\varphi(x,y)\}=X\times X$
+ -->
+<span class="MATH"><img src="node8_pliki/img623.png" alt="$\{\langle x,y\rangle\in
+X\times X:\varphi(x,y)\}=X\times X$" height="32" width="254" align="middle" border="0"></span>, dlatego są równoważne.
+
+</p><p>
+(4) Podobnie jak w punkcie (1) interpretujemy najpierw <span class="MATH"><img src="node8_pliki/img537.png" alt="$\varphi(x,y)$" height="32" width="50" align="middle" border="0"></span>
+    jako funkcję zdaniową na jakiejś (dowolnej) przestrzeni
+    <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>. Mamy pokazać, że przy tej interpretacji zdanie 
+ <br></p><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+(**)\ \ (\exists x\in X)(\forall y\in X)\varphi(x,y)\Rightarrow(\forall y\in X)(\exists
+x\in X)\varphi(x,y)
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img624.png" alt="\begin{displaymath}(**)\ \ (\exists x\in X)(\forall y\in X)\varphi(x,y)\Rightarrow(\forall y\in X)(\exists
+x\in X)\varphi(x,y)\end{displaymath}" height="28" width="410" border="0">
+</div>
+<br clear="all">
+<p></p>
+jest prawdziwe.
+
+<p>
+Niech <!-- MATH
+ $A\subseteq X\times X$
+ -->
+<span class="MATH"><img src="node8_pliki/img625.png" alt="$A\subseteq X\times X$" height="30" width="84" align="middle" border="0"></span> oznacza wykres funkcji zdaniowej
+<span class="MATH"><img src="node8_pliki/img537.png" alt="$\varphi(x,y)$" height="32" width="50" align="middle" border="0"></span>. Zatem <span class="MATH"><img src="node8_pliki/img74.png" alt="$(**)$" height="32" width="31" align="middle" border="0"></span> oznacza dokładnie, że
+</p><blockquote>
+jeśli pewne cięcie pionowe zbioru <span class="MATH"><img src="node8_pliki/img106.png" alt="$A$" height="14" width="15" align="bottom" border="0"></span> jest całym <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>,
+to każde cięcie poziome zbioru <span class="MATH"><img src="node8_pliki/img106.png" alt="$A$" height="14" width="15" align="bottom" border="0"></span> jest niepuste.
+
+</blockquote>
+ By to udowodnić, załóżmy, że <span class="MATH"><img src="node8_pliki/img475.png" alt="$a\in X$" height="30" width="45" align="middle" border="0"></span> oraz <span class="MATH"><img src="node8_pliki/img626.png" alt="$A_a=X$" height="30" width="58" align="middle" border="0"></span>. Znaczy to,
+ że każda para postaci <!-- MATH
+ $\langle a,y\rangle$
+ -->
+<span class="MATH"><img src="node8_pliki/img627.png" alt="$\langle a,y\rangle$" height="32" width="39" align="middle" border="0"></span>, gdzie <span class="MATH"><img src="node8_pliki/img628.png" alt="$y\in X$" height="30" width="45" align="middle" border="0"></span>, należy
+ do <span class="MATH"><img src="node8_pliki/img106.png" alt="$A$" height="14" width="15" align="bottom" border="0"></span>. Wobec tego dla każdego <span class="MATH"><img src="node8_pliki/img629.png" alt="$b\in X$" height="30" width="44" align="middle" border="0"></span> mamy <!-- MATH
+ $A^b\neq\emptyset$
+ -->
+<span class="MATH"><img src="node8_pliki/img630.png" alt="$A^b\neq\emptyset$" height="35" width="51" align="middle" border="0"></span>,
+ gdyż <!-- MATH
+ $\langle a,b\rangle\in A$
+ -->
+<span class="MATH"><img src="node8_pliki/img631.png" alt="$\langle a,b\rangle\in A$" height="32" width="69" align="middle" border="0"></span>, więc <span class="MATH"><img src="node8_pliki/img632.png" alt="$a\in A^b$" height="35" width="49" align="middle" border="0"></span>.
+
+<p>
+</p><div align="center">
+<!-- MATH
+ $\epsffile{skryptrys9.eps}$
+ -->
+<img src="node8_pliki/img633.png" alt="\epsffile{skryptrys9.eps}" height="281" width="429" align="bottom" border="0">
+</div>
+
+<p>
+W tym miejscu zwróćmy uwage, że implikacja odwrotna do (4)
+<br></p><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\forall y\exists
+x\varphi(x,y)\Rightarrow\exists x\forall y\varphi(x,y)
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img634.png" alt="\begin{displaymath}\forall y\exists
+x\varphi(x,y)\Rightarrow\exists x\forall y\varphi(x,y)\end{displaymath}" height="28" width="188" border="0">
+</div>
+<br clear="all">
+<p></p>
+nie jest
+tautologią. Świadczy o tym przykład o dudku z rozdziału
+5. Podobnie implikacje odwrotne do (7),(8),(9) nie
+są tautologiami.
+
+<p>
+(5) Jak wyżej, rozważamy funkcje zdaniowe <span class="MATH"><img src="node8_pliki/img480.png" alt="$\varphi(x)$" height="32" width="35" align="middle" border="0"></span> i
+    <!-- MATH
+ $\psi(x),x\in X$
+ -->
+<span class="MATH"><img src="node8_pliki/img565.png" alt="$\psi(x),x\in X$" height="32" width="85" align="middle" border="0"></span>. Mamy pokazać, że zdania
+<br></p><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+(\forall x\in X)(\varphi(x)\land \psi(x))\mbox{\ i\ }(\forall x\in
+X)\varphi(x)\land(\forall x\in X)\psi(x)
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img635.png" alt="\begin{displaymath}(\forall x\in X)(\varphi(x)\land \psi(x))\mbox{\ i\ }(\forall x\in
+X)\varphi(x)\land(\forall x\in X)\psi(x)\end{displaymath}" height="28" width="381" border="0">
+</div>
+<br clear="all">
+<p></p>
+są równoważne. 
+W tym celu oznaczmy przez <span class="MATH"><img src="node8_pliki/img106.png" alt="$A$" height="14" width="15" align="bottom" border="0"></span> wykres funkcji zdaniowej <span class="MATH"><img src="node8_pliki/img480.png" alt="$\varphi(x)$" height="32" width="35" align="middle" border="0"></span>,
+zaś przez <span class="MATH"><img src="node8_pliki/img213.png" alt="$B$" height="14" width="16" align="bottom" border="0"></span> wykres funkcji zdaniowej <span class="MATH"><img src="node8_pliki/img636.png" alt="$\psi(x)$" height="32" width="35" align="middle" border="0"></span>. Wówczas zbiór
+<span class="MATH"><img src="node8_pliki/img380.png" alt="$A\cap B$" height="14" width="46" align="bottom" border="0"></span> jest wykresem funkcji zdaniowej
+<!-- MATH
+ $\varphi(x)\land\psi(x)$
+ -->
+<span class="MATH"><img src="node8_pliki/img637.png" alt="$\varphi(x)\land\psi(x)$" height="32" width="85" align="middle" border="0"></span>. Dlatego mamy następujący ciąg zdań
+równoważnych.
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+(\forall x\in X)(\varphi(x)\land \psi(x))
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img638.png" alt="\begin{displaymath}(\forall x\in X)(\varphi(x)\land \psi(x))\end{displaymath}" height="28" width="155" border="0">
+</div>
+<br clear="all">
+<p></p>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\Updownarrow
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img156.png" alt="\begin{displaymath}\Updownarrow\end{displaymath}" height="28" width="10" border="0">
+</div>
+<br clear="all">
+<p></p>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+A\cap B=X
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img639.png" alt="\begin{displaymath}A\cap B=X\end{displaymath}" height="24" width="77" border="0">
+</div>
+<br clear="all">
+<p></p>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\Updownarrow
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img156.png" alt="\begin{displaymath}\Updownarrow\end{displaymath}" height="28" width="10" border="0">
+</div>
+<br clear="all">
+<p></p>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+A=X\land B=X
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img640.png" alt="\begin{displaymath}A=X\land B=X\end{displaymath}" height="24" width="113" border="0">
+</div>
+<br clear="all">
+<p></p>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\Updownarrow
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img156.png" alt="\begin{displaymath}\Updownarrow\end{displaymath}" height="28" width="10" border="0">
+</div>
+<br clear="all">
+<p></p>
+<br><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+(\forall x\in
+X)\varphi(x)\land(\forall x\in X)\psi(x),
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img641.png" alt="\begin{displaymath}(\forall x\in
+X)\varphi(x)\land(\forall x\in X)\psi(x),\end{displaymath}" height="28" width="213" border="0">
+</div>
+<br clear="all">
+<p></p>
+co kończy dowód.
+
+<p>
+Dowody pozostałych punktów jedną z powyższych metod pozostawiamy
+jako ćwiczenie. <span class="MATH"><img src="node8_pliki/img183.png" alt="$\Box$" height="14" width="15" align="bottom" border="0"></span>
+</p><p>
+<br>
+
+</p><p>
+Należy tu zaznaczyć, że chociaż dowody, że powyższe formuły są
+tautologiami, są dość łatwe, ogólnie nie istnieje algorytm (tzn. przepis) sprawdzania, czy dana
+formuła jest tautologią. Jak pamiętamy, algorytm taki istnieje w
+przypadku tautologii rachunku zdań (tabelka).
+
+</p><p>
+Z uwagi na przemienność kwantyfikatorów stosujemy konwencję łączenia sąsiednich dużych
+i sąsiednich małych kwantyfikatorów, tzn. zamiast <!-- MATH
+ $\forall x\forall
+y\varphi(x,y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img642.png" alt="$\forall x\forall
+y\varphi(x,y)$" height="32" width="86" align="middle" border="0"></span> piszemy <!-- MATH
+ $(\forall x,y)\varphi(x,y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img643.png" alt="$(\forall x,y)\varphi(x,y)$" height="32" width="96" align="middle" border="0"></span> i podobnie dla
+<span class="MATH"><img src="node8_pliki/img494.png" alt="$\exists$" height="14" width="12" align="bottom" border="0"></span>.
+
+</p><p>
+Warto tu wspomnieć o tym, że niekiedy w matematyce traktuje się
+duży kwantyfikator jako kwantyfikator domyślny. Jest tak na
+przykład w zdaniach typu:
+</p><blockquote>
+W przestrzeni <!-- MATH
+ ${\mathbb{R}}^2$
+ -->
+<span class="MATH"><img src="node8_pliki/img644.png" alt="${\mathbb{R}}^2$" height="16" width="22" align="bottom" border="0"></span> prawdziwa jest równość <span class="MATH"><img src="node8_pliki/img645.png" alt="$x+y=y+x$" height="29" width="98" align="middle" border="0"></span>.
+
+</blockquote>
+Oczywiście równość <span class="MATH"><img src="node8_pliki/img645.png" alt="$x+y=y+x$" height="29" width="98" align="middle" border="0"></span> nie jest zdaniem, w tym przypadku
+jednak domyślnie rozumie się, że chodzi tu o prawdziwość zdania
+<!-- MATH
+ $(\forall x,y)x+y=y+x$
+ -->
+<span class="MATH"><img src="node8_pliki/img646.png" alt="$(\forall x,y)x+y=y+x$" height="32" width="144" align="middle" border="0"></span>, duży kwantyfikator jest tu domyślny. W
+niniejszym wykładzie ze względów dydaktycznych będziemy jednak
+unikać tej konwencji.
+
+<p>
+Aby uzasadnić, że formuła nie jest tautologią, trzeba podać
+przykład (tzn. interpretację tej formuły jako konkretnego zdania),
+w którym jest ona zdaniem fałszywym. W tym celu potrzebujemy dużo
+przykładów funkcji zdaniowych. Dostarczają ich nam
+relacje. 
+</p><p>
+<br>
+
+</p><p>
+<b>Relacje.</b> Relacja oznacza określony związek między obiektami
+jakiegoś typu. Przykładowo niech <span class="MATH"><img src="node8_pliki/img647.png" alt="$M$" height="14" width="20" align="bottom" border="0"></span> oznacza zbiór mężczyzn,
+zaś <span class="MATH"><img src="node8_pliki/img648.png" alt="$K$" height="14" width="18" align="bottom" border="0"></span> zbiór kobiet. Na
+zbiorach tym rozważamy relację <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> bycia synem, tzn. fakt, że
+mężczyzna <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span> i kobieta <span class="MATH"><img src="node8_pliki/img352.png" alt="$Y$" height="14" width="16" align="bottom" border="0"></span> są w relacji <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> oznacza dokładnie,
+że  <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>
+jest synem <span class="MATH"><img src="node8_pliki/img352.png" alt="$Y$" height="14" width="16" align="bottom" border="0"></span>. 
+ Zwróćmy uwagę, że relacja <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> jest w pełni opisana przez zbiór
+<br></p><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+\{\langle X,Y\rangle\in M\times K: X\mbox{ jest w relacji }R\mbox{ z }Y\}
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img650.png" alt="\begin{displaymath}\{\langle X,Y\rangle\in M\times K: X\mbox{ jest w relacji }R\mbox{ z }Y\}\end{displaymath}" height="28" width="300" border="0">
+</div>
+<br clear="all">
+<p></p>
+(podobnie jak spójnik logiczny jest w pełni określony przez
+tabelkę wartości logicznych). W przypadku spójników logicznych
+definiowaliśmy również abstrakcyjne spójniki, nie mające
+odpowiednika w języku potocznym, poprzez właśnie zadanie tabelki
+wartości. Podobnie możemy postąpić w przypadku relacji.
+
+<p>
+</p><p>
+</p><div><a name="rel"><b>Definicja  <span class="arabic">7</span>..<span class="arabic">4</span></b></a> &nbsp; 
+<i>Relacją R na zbiorach <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span> i <span class="MATH"><img src="node8_pliki/img352.png" alt="$Y$" height="14" width="16" align="bottom" border="0"></span> nazywamy dowolny
+podzbiór produktu kartezjańskiego <span class="MATH"><img src="node8_pliki/img651.png" alt="$X\times Y$" height="30" width="50" align="middle" border="0"></span>. W tym przypadku
+fakt, że elementy <span class="MATH"><img src="node8_pliki/img384.png" alt="$x\in X$" height="30" width="46" align="middle" border="0"></span> i <span class="MATH"><img src="node8_pliki/img472.png" alt="$y\in Y$" height="30" width="44" align="middle" border="0"></span> są w relacji zapisujemy na
+dowolny z poniższych sposobów.
+</i>
+<ol>
+<li><!-- MATH
+ $\langle x,y\rangle\in R$
+ -->
+<span class="MATH"><img src="node8_pliki/img652.png" alt="$\langle x,y\rangle\in R$" height="32" width="72" align="middle" border="0"></span> (sposób teoriomnogościowy)
+</li>
+<li><span class="MATH"><img src="node8_pliki/img653.png" alt="$R(x,y)$" height="32" width="52" align="middle" border="0"></span>
+</li>
+<li><span class="MATH"><img src="node8_pliki/img654.png" alt="$x\ R\ y$" height="30" width="43" align="middle" border="0"></span>
+</li>
+</ol></div><p></p>
+
+<p>
+Zwróćmy uwagę, że każdy ze sposobów 1-3 z definicji <a href="#rel">7.4</a>
+jest symbolicznym sposobem zapisu funkcji zdaniowej ``<span class="MATH"><img src="node8_pliki/img56.png" alt="$x$" height="13" width="12" align="bottom" border="0"></span> i <span class="MATH"><img src="node8_pliki/img70.png" alt="$y$" height="29" width="11" align="middle" border="0"></span> są w
+relacji <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span>'', gdzie zakres <span class="MATH"><img src="node8_pliki/img56.png" alt="$x$" height="13" width="12" align="bottom" border="0"></span> to <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>, zaś zakres <span class="MATH"><img src="node8_pliki/img70.png" alt="$y$" height="29" width="11" align="middle" border="0"></span> to
+<span class="MATH"><img src="node8_pliki/img352.png" alt="$Y$" height="14" width="16" align="bottom" border="0"></span>. Relacja <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span>, jako podzbiór produktu <span class="MATH"><img src="node8_pliki/img651.png" alt="$X\times Y$" height="30" width="50" align="middle" border="0"></span>, jest natomiast
+wykresem tej funkcji zdaniowej. W ten sposób dostajemy mnóstwo
+przykładów funkcji zdaniowych.
+
+</p><p>
+W definicji <a href="#rel">7.4</a> wprowadziliśmy pojęcie relacji
+dwuargumentowej (binarnej). Rozważa się również relacje o innej
+liczbie argumentów. Mianowicie, dla <span class="MATH"><img src="node8_pliki/img161.png" alt="$k\geq 1$" height="30" width="41" align="middle" border="0"></span> relacja <span class="MATH"><img src="node8_pliki/img44.png" alt="$k$" height="14" width="12" align="bottom" border="0"></span>-argumentowa
+na zbiorach <span class="MATH"><img src="node8_pliki/img655.png" alt="$X_1,\dots,X_k$" height="30" width="80" align="middle" border="0"></span> to dowolny podzbiór <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> produktu
+kartezjańskiego <!-- MATH
+ $X_1\times\dots\times X_k$
+ -->
+<span class="MATH"><img src="node8_pliki/img656.png" alt="$X_1\times\dots\times X_k$" height="30" width="102" align="middle" border="0"></span>. Dla <span class="MATH"><img src="node8_pliki/img657.png" alt="$k=1$" height="14" width="41" align="bottom" border="0"></span> relację <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span>
+ nazywamy też relacją unarną. W przypadku, gdy
+<br></p><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+X_1=\dots=X_k=X,
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img658.png" alt="\begin{displaymath}X_1=\dots=X_k=X,\end{displaymath}" height="27" width="141" border="0">
+</div>
+<br clear="all">
+<p></p>
+mówimy, że jest to relacja <span class="MATH"><img src="node8_pliki/img44.png" alt="$k$" height="14" width="12" align="bottom" border="0"></span>-argumentowa na
+zbiorze <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>. Funkcję zdaniową ``<span class="MATH"><img src="node8_pliki/img659.png" alt="$x_1,\dots,x_k$" height="29" width="72" align="middle" border="0"></span> są w relacji <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span>''
+w przypadku <span class="MATH"><img src="node8_pliki/img657.png" alt="$k=1$" height="14" width="41" align="bottom" border="0"></span> zapisujemy  w sposób 2. z definicji <a href="#rel">7.4</a>, w
+przypadku <span class="MATH"><img src="node8_pliki/img660.png" alt="$k&gt;2$" height="30" width="41" align="middle" border="0"></span> zapisujemy ją w sposób 1. lub 2.
+Jeśli nie określamy jawnie liczby argumentów relacji <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> (tzn. jej
+arności), to w domyśle zakładamy, że jest to relacja binarna.
+
+<p>
+W przypadku relacji binarnej <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> na zbiorach <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span> i <span class="MATH"><img src="node8_pliki/img352.png" alt="$Y$" height="14" width="16" align="bottom" border="0"></span> definiujemy
+dziedzinę i obraz relacji <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> jako zbiory
+<br></p><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+Dom(R)=\{x\in X:(\exists y\in Y) R(x,y)\}\mbox{\ i\ }Rng(R)=\{y\in
+Y:(\exists x\in X)R(x,y)\}.
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img661.png" alt="\begin{displaymath}Dom(R)=\{x\in X:(\exists y\in Y) R(x,y)\}\mbox{\ i\ }Rng(R)=\{y\in
+Y:(\exists x\in X)R(x,y)\}.\end{displaymath}" height="28" width="541" border="0">
+</div>
+<br clear="all">
+<p></p>
+Zauważmy, że wtedy <!-- MATH
+ $R\subseteq Dom(R)\times Rng(R)$
+ -->
+<span class="MATH"><img src="node8_pliki/img662.png" alt="$R\subseteq Dom(R)\times Rng(R)$" height="32" width="170" align="middle" border="0"></span>, czyli <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> jest
+też relacją na zbiorach <span class="MATH"><img src="node8_pliki/img663.png" alt="$Dom(R)$" height="32" width="63" align="middle" border="0"></span> i <span class="MATH"><img src="node8_pliki/img664.png" alt="$Rng(R)$" height="32" width="58" align="middle" border="0"></span>. Widzimy też, że w
+istocie <span class="MATH"><img src="node8_pliki/img663.png" alt="$Dom(R)$" height="32" width="63" align="middle" border="0"></span> to rzut <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> na pierwszą oś, a <span class="MATH"><img src="node8_pliki/img664.png" alt="$Rng(R)$" height="32" width="58" align="middle" border="0"></span> to rzut <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span>
+na drugą oś<a name="tex2html6" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/footnode.html#foot411"><sup><span class="arabic">7</span>.<span class="arabic">1</span></sup></a>.
+
+<p>
+Definiujemy też relację odwrotną <span class="MATH"><img src="node8_pliki/img665.png" alt="$R^{-1}$" height="16" width="32" align="bottom" border="0"></span> do relacji <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> wzorem
+<br></p><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+R^{-1}=\{\langle y,x\rangle:R(x,y)\}.
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img666.png" alt="\begin{displaymath}R^{-1}=\{\langle y,x\rangle:R(x,y)\}.\end{displaymath}" height="28" width="168" border="0">
+</div>
+<br clear="all">
+<p></p>
+Mamy zatem dla wszystkich <!-- MATH
+ $x,y,\ R(x,y)\Leftrightarrow
+R^{-1}(y,x)$
+ -->
+<span class="MATH"><img src="node8_pliki/img667.png" alt="$x,y,\ R(x,y)\Leftrightarrow
+R^{-1}(y,x)$" height="34" width="180" align="middle" border="0"></span>. <span class="MATH"><img src="node8_pliki/img665.png" alt="$R^{-1}$" height="16" width="32" align="bottom" border="0"></span> jest więc relacją na zbiorach <span class="MATH"><img src="node8_pliki/img352.png" alt="$Y$" height="14" width="16" align="bottom" border="0"></span> i <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>.
+
+<p>
+Gdy <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> jest relacją na zbiorze <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span> oraz <span class="MATH"><img src="node8_pliki/img352.png" alt="$Y$" height="14" width="16" align="bottom" border="0"></span> jest podzbiorem <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>, to
+definiujemy ograniczenie (obcięcie) relacji <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> do zbioru <span class="MATH"><img src="node8_pliki/img352.png" alt="$Y$" height="14" width="16" align="bottom" border="0"></span> wzorem
+<br></p><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+R|_Y=R\cap (Y\times Y).
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img668.png" alt="\begin{displaymath}R\vert _Y=R\cap (Y\times Y).\end{displaymath}" height="28" width="139" border="0">
+</div>
+<br clear="all">
+<p></p>
+
+<p>
+W przypadku relacji <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> na zbiorach skończonych <span class="MATH"><img src="node8_pliki/img239.png" alt="$X,Y$" height="30" width="36" align="middle" border="0"></span> wygodnie jest
+przedstawiać ją graficznie w postaci diagramu. Strzałka od <span class="MATH"><img src="node8_pliki/img420.png" alt="$a$" height="13" width="11" align="bottom" border="0"></span> do
+<span class="MATH"><img src="node8_pliki/img421.png" alt="$b$" height="14" width="10" align="bottom" border="0"></span> oznacza <span class="MATH"><img src="node8_pliki/img669.png" alt="$R(a,b)$" height="32" width="50" align="middle" border="0"></span>.
+</p><div align="center">
+<!-- MATH
+ $\epsffile{skryptrys10.eps}$
+ -->
+<img src="node8_pliki/img670.png" alt="\epsffile{skryptrys10.eps}" height="194" width="338" align="bottom" border="0">
+</div>
+Poniżej zamieszczamy przykład diagramu relacji na zbiorze <span class="MATH"><img src="node8_pliki/img671.png" alt="$X=\{a,b,c\}$" height="32" width="91" align="middle" border="0"></span>.
+<div align="center">
+<!-- MATH
+ $\epsffile{skryptrys11.eps}$
+ -->
+<img src="node8_pliki/img672.png" alt="\epsffile{skryptrys11.eps}" height="209" width="286" align="bottom" border="0">
+</div>
+<b>Przykłady.</b> 1. Relacja pusta <span class="MATH"><img src="node8_pliki/img673.png" alt="$R=\emptyset$" height="32" width="44" align="middle" border="0"></span> jest <span class="MATH"><img src="node8_pliki/img44.png" alt="$k$" height="14" width="12" align="bottom" border="0"></span>-argumentowa
+dla wszystkich <span class="MATH"><img src="node8_pliki/img161.png" alt="$k\geq 1$" height="30" width="41" align="middle" border="0"></span>.
+
+<p>
+2. Relacja porządku <span class="MATH"><img src="node8_pliki/img674.png" alt="$x\leq y$" height="29" width="42" align="middle" border="0"></span> na zbiorze liczb rzeczywistych.
+
+</p><p>
+3. Relacja równoległości <!-- MATH
+ $l_1\parallel l_2$
+ -->
+<span class="MATH"><img src="node8_pliki/img675.png" alt="$l_1\parallel l_2$" height="32" width="44" align="middle" border="0"></span> na zbiorze prostych <span class="MATH"><img src="node8_pliki/img676.png" alt="$L$" height="14" width="14" align="bottom" border="0"></span>
+   na płaszczyźnie.
+
+</p><p>
+4. Relacja podzielności <span class="MATH"><img src="node8_pliki/img677.png" alt="$n\mid m$" height="32" width="40" align="middle" border="0"></span> na zbiorze liczb naturalnych
+<br><!-- MATH
+ ${\bf
+   N}=\{0,1,2,3,\dots\}$
+ -->
+<span class="MATH"><img src="node8_pliki/img678.png" alt="${\bf
+N}=\{0,1,2,3,\dots\}$" height="32" width="133" align="middle" border="0"></span>.
+
+</p><p>
+5. Relacja inkluzji <span class="MATH"><img src="node8_pliki/img377.png" alt="$\subseteq$" height="29" width="15" align="middle" border="0"></span> na zbiorze potęgowym <span class="MATH"><img src="node8_pliki/img679.png" alt="${\cal P}(X)$" height="32" width="42" align="middle" border="0"></span>
+   dla ustalonego zbioru <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>.
+
+</p><p>
+Jak już wspomnieliśmy, relacji można używać do definiowania
+funkcji zdaniowych wskazujących, że pewne formuły nie są
+tautologiami.
+Przykładowo zrobimy to dla formuły 
+<br></p><p></p>
+<div class="mathdisplay" align="center">
+<!-- MATH
+ \begin{displaymath}
+(\dagger)\ \ \forall x\exists y\varphi(x,y)\Rightarrow\exists y\forall
+x\varphi(x,y).
+\end{displaymath}
+ -->
+
+<img src="node8_pliki/img680.png" alt="\begin{displaymath}(\dagger)\ \ \forall x\exists y\varphi(x,y)\Rightarrow\exists y\forall
+x\varphi(x,y).\end{displaymath}" height="28" width="220" border="0">
+</div>
+<br clear="all">
+<p></p>
+W tym przypadku przyjmujemy <span class="MATH"><img src="node8_pliki/img681.png" alt="$X=\{0,1\}$" height="32" width="78" align="middle" border="0"></span> i definiujemy <!-- MATH
+ $R=\{\langle
+0,1\rangle,\langle 1,0\rangle\}$
+ -->
+<span class="MATH"><img src="node8_pliki/img682.png" alt="$R=\{\langle
+0,1\rangle,\langle 1,0\rangle\}$" height="32" width="130" align="middle" border="0"></span> (sugerujemy narysowanie diagramu
+relacji <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span>).
+Wtedy zdanie <!-- MATH
+ $(\forall x\in X)(\exists y\in X)R(x,y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img683.png" alt="$(\forall x\in X)(\exists y\in X)R(x,y)$" height="32" width="180" align="middle" border="0"></span> jest prawdziwe,
+zaś <!-- MATH
+ $(\exists y\in X)(\forall x\in X)R(x,y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img684.png" alt="$(\exists y\in X)(\forall x\in X)R(x,y)$" height="32" width="180" align="middle" border="0"></span> jest fałszywe. Zatem
+implikacja
+<!-- MATH
+ $(\forall x\in X)(\exists y\in X)R(x,y)\Rightarrow (\exists y\in
+X)(\forall x\in X)R(x,y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img685.png" alt="$(\forall x\in X)(\exists y\in X)R(x,y)\Rightarrow (\exists y\in
+X)(\forall x\in X)R(x,y)$" height="32" width="381" align="middle" border="0"></span> jest fałszywa, co pokazuje, że <span class="MATH"><img src="node8_pliki/img286.png" alt="$(\dagger)$" height="32" width="22" align="middle" border="0"></span>
+nie jest tautologią rachunku kwantyfikatorów.
+<p>
+<br>
+
+</p><p>
+Rozważa się różne własności relacji <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> na zbiorze <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>.
+</p><p>
+</p><div><b>Definicja  <span class="arabic">7</span>..<span class="arabic">5</span></b> &nbsp; 
+<i>Załóżmy, że <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> jest relacją na zbiorze <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>.
+</i>
+<ol>
+<li><span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> jest zwrotna <!-- MATH
+ $\Leftrightarrow (\forall x\in X)( xRx)$
+ -->
+<span class="MATH"><img src="node8_pliki/img686.png" alt="$\Leftrightarrow (\forall x\in X)( xRx)$" height="32" width="130" align="middle" border="0"></span>.
+</li>
+<li><span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> jest przechodnia (tranzytywna) <!-- MATH
+ $\Leftrightarrow\\(\forall x,y,z\in
+X)(xRy\land yRz\Rightarrow xRz)$
+ -->
+<span class="MATH"><img src="node8_pliki/img687.png" alt="$\Leftrightarrow\\ (\forall x,y,z\in
+X)(xRy\land yRz\Rightarrow xRz)$" height="32" width="261" align="middle" border="0"></span>.
+</li>
+<li><span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> jest symetryczna <!-- MATH
+ $\Leftrightarrow(\forall x,y\in
+X)(xRy\Rightarrow yRx)$
+ -->
+<span class="MATH"><img src="node8_pliki/img688.png" alt="$\Leftrightarrow(\forall x,y\in
+X)(xRy\Rightarrow yRx)$" height="32" width="199" align="middle" border="0"></span>.
+</li>
+<li><span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> jest antysymetryczna <!-- MATH
+ $\Leftrightarrow(\forall x,y\in X)(xRy\land
+yRx\Rightarrow x=y)$
+ -->
+<span class="MATH"><img src="node8_pliki/img689.png" alt="$\Leftrightarrow(\forall x,y\in X)(xRy\land
+yRx\Rightarrow x=y)$" height="32" width="256" align="middle" border="0"></span>.
+</li>
+<li><span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> jest spójna <!-- MATH
+ $\Leftrightarrow (\forall x,y\in X)(xRy\lor
+yRx)$
+ -->
+<span class="MATH"><img src="node8_pliki/img690.png" alt="$\Leftrightarrow (\forall x,y\in X)(xRy\lor
+yRx)$" height="32" width="192" align="middle" border="0"></span>.
+</li>
+</ol></div><p></p>
+
+<p>
+Jako ćwiczenie pozostawiamy stwierdzenie, jak przy pomocy diagramu
+relacji <span class="MATH"><img src="node8_pliki/img649.png" alt="$R$" height="14" width="15" align="bottom" border="0"></span> rozpoznać powyższe własności.
+
+</p><p>
+W powyższych przykładach relacji, relacja pusta <span class="MATH"><img src="node8_pliki/img274.png" alt="$\emptyset$" height="32" width="11" align="middle" border="0"></span> jest
+przechodnia, symetryczna, antysymetryczna, lecz nie jest zwrotna ani
+spójna (na niepustym zbiorze <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span>).
+
+</p><p>
+Relacja <span class="MATH"><img src="node8_pliki/img691.png" alt="$\leq$" height="29" width="15" align="middle" border="0"></span> na zbiorze <span class="MATH"><img src="node8_pliki/img261.png" alt="$\mathbb{R}$" height="14" width="15" align="bottom" border="0"></span> jest zwrotna, przechodnia,
+antysymetryczna i spójna.
+
+</p><p>
+Relacja równoległości na zbiorze prostych na płaszczyźnie <span class="MATH"><img src="node8_pliki/img676.png" alt="$L$" height="14" width="14" align="bottom" border="0"></span>
+jest zwrotna, symetryczna i przechodnia, lecz nie jest antysymetryczna
+ani spójna.
+
+</p><p>
+Relacja podzielności na zbiorze <span class="MATH"><img src="node8_pliki/img583.png" alt="$\mathbb{N}$" height="14" width="15" align="bottom" border="0"></span> jest zwrotna, przechodnia,
+antysymetryczna, lecz nie jest symetryczna ani spójna.
+
+</p><p>
+Relacja inkluzji na zbiorze <span class="MATH"><img src="node8_pliki/img679.png" alt="${\cal P}(X)$" height="32" width="42" align="middle" border="0"></span> jest zwrotna, przechodnia,
+antysymetryczna, lecz nie jest spójna ani symetryczna (gdy <span class="MATH"><img src="node8_pliki/img265.png" alt="$X$" height="14" width="17" align="bottom" border="0"></span> ma
+więcej niż jeden element). 
+
+</p><p>
+W następnych dwóch rozdziałach poznamy
+najważniejsze rodzaje relacji: relacje porządkujące i relacje równoważności.
+
+</p><p>
+
+</p><div class="navigation"><hr>
+<!--Navigation Panel-->
+<a name="tex2html111" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/node9.html">
+<img alt="next" src="node8_pliki/next.html" height="24" width="37" align="bottom" border="0"></a> 
+<a name="tex2html109" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/skrypt.html">
+<img alt="up" src="node8_pliki/up.html" height="24" width="26" align="bottom" border="0"></a> 
+<a name="tex2html103" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/node7.html">
+<img alt="previous" src="node8_pliki/prev.html" height="24" width="63" align="bottom" border="0"></a>   
+<br>
+<b> Next:</b> <a name="tex2html112" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/node9.html">Relacje porządku</a>
+<b> Up:</b> <a name="tex2html110" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/skrypt.html">Wstęp do matematyki</a>
+<b> Previous:</b> <a name="tex2html104" href="http://www.math.uni.wroc.pl/%7Enewelski/dydaktyka/wdm-A/skrypt3/skrypt/node7.html">Kwantyfikatory</a></div>
+<!--End of Navigation Panel-->
+<address>
+Ludomir Newelski
+2006-08-29
+</address>
+</body></html>

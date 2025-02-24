@@ -1,0 +1,29 @@
+
+import java.awt.*;
+
+public class Program
+{
+    public static void main(String [] args)
+    {
+        // Deklaracje wielkoœci
+        Frame frame = new Frame();
+        int szerokosc = (int)(frame.getToolkit().getScreenSize().getWidth());
+        int wysokosc = (int)(frame.getToolkit().getScreenSize().getHeight());
+        int wielkosc = 600;
+        int wielkosc2 = 200;
+        int poloz = (int)((wielkosc * Math.sqrt(2)) / 2);
+        frame.setSize(wielkosc, wielkosc);
+        frame.setLocation((szerokosc / 2 - (wielkosc / 2)), (wysokosc / 2 - (wielkosc / 2)));                    
+        Frame s = new Frame();
+        Window w = (Window)s;
+        s.setBounds((szerokosc / 2 - (wielkosc2 / 2)), (wysokosc / 2 - (wielkosc2 / 2)),
+            wielkosc2, wielkosc2);
+        w.setBounds((szerokosc / 2 - (wielkosc2 / 2)), (wysokosc / 2 - (wielkosc2 / 2)),
+            wielkosc2, wielkosc2);
+        s.setVisible(true);    
+        frame.setVisible(true);
+        w.show();
+        s.show();
+        
+    }
+}

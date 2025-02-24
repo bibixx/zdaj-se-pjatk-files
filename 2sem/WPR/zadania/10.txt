@@ -1,0 +1,285 @@
+package jbPack;
+
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+
+class Wypozyczenie{
+    public Osoba osoba;
+    public Date data;
+}
+
+class Osoba{
+    private String imie;
+    private String nazwisko;
+    private String adres;
+    private String telefon;
+    int limit;
+    private boolean czyZamowil;
+
+    public Osoba(String i, String n, String a, String t){
+        imie = i;
+        nazwisko = n;
+        adres = a;
+        telefon = t;
+        limit = 2;
+    }
+    
+    void zamowil(){
+        czyZamowil = true;
+    }
+    
+    boolean getZamowil(){
+        return czyZamowil;
+    }
+    
+    int getLimit(){
+        return limit;
+    }
+    
+    void zmniejszLimit(){
+        limit--;
+    }
+    
+    void zwiekszLimit(){
+        limit++;
+    }
+    
+    void status(){
+        System.out.println(imie + " " + nazwisko);
+        System.out.println("Pozosta³y limit: " + limit);
+        if(czyZamowil){
+            System.out.println("Ma zamówion¹ ksi¹¿kê");
+        }
+    }
+}
+
+class Student extends Osoba {
+    private int rokStudiow;
+    private int numerLegitymacji;
+    public Student(String i, String n, String a, String t, int rok, int nl){
+        super(i, n, a, t);
+        rokStudiow = rok;
+        numerLegitymacji = nl;
+        limit = 5;
+    }
+    
+    void status(){
+        super.status();
+        System.out.println("Student nr " + numerLegitymacji + " na roku " + rokStudiow);
+    }
+}
+
+class Pracownik extends Osoba {
+    private String stanowisko;
+    public Pracownik(String i, String n, String a, String t, String st){
+        super(i, n, a, t);
+        stanowisko = st;
+        limit = 10;
+    }
+    void status(){
+        super.status();
+        System.out.println("Pracownik na stanowisku" + stanowisko);
+    }
+}
+
+class Polka{
+    private String nazwa;
+    private int rozmiar;
+    private int zajete;
+    private Vector lista;
+    
+    public Polka(){
+        this("", 0);
+        lista = new Vector();
+    }
+    
+    public Polka(String n){
+        this(n, 0);
+        lista = new Vector();
+    }
+    
+    public Polka(int r){
+        this("", r);
+        lista = new Vector();
+    }
+    
+    public Polka(String n, int r){
+        rozmiar = r;
+        nazwa = n;
+        lista = new Vector();
+    }
+    
+    public void setNazwa(String n){
+        nazwa = n;
+    }
+    
+    public void setRozmiar(int r){
+        rozmiar = r;
+    }
+    
+    public boolean czyMiejsce(){
+        if(rozmiar > zajete)
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean wstaw(Ksiazka k){
+        if(this.czyMiejsce()){
+            lista.add(k);
+            k.naPolke(this);
+            System.out.println("Wstawiam na polke "+nazwa);
+            zajete++;
+            return true;
+        } else {
+            System.out.println("Nie mam miejsca");
+            return false;
+        }
+    }
+    
+    public String getNazwa(){
+        return nazwa;
+    }
+    
+    public boolean zdejmij(Ksiazka k){
+        zajete--;
+        if(lista.remove(k)){
+            k.naPolke(null);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public void listuj(){
+        Ksiazka temp;
+        System.out.println(nazwa);
+        for(int i = 0; i<lista.size(); i++){
+            temp = (Ksiazka)lista.get(i);
+            System.out.println(temp);
+        }
+    }
+    
+}
+
+class Ksiazka {
+    private String autor;
+    private String tytul;
+    private Polka polka;
+    private Date dataWypozyczenia;
+    private Osoba wypozyczona;
+    private Osoba zamowiona;
+    private Vector historia;
+    
+    public Ksiazka(String t, String a){
+        historia = new Vector();
+        autor = a;
+        tytul = t;
+    }
+    
+    public boolean naPolke(Polka p){
+        if(this.polka == null){
+            this.polka = p;
+            return true;
+        } else 
+            return false;
+    }
+    
+    public boolean zPolki(){
+        if(polka != null){
+            System.out.println("Zdejmuje z polki " + polka.getNazwa());
+            polka.zdejmij(this);
+            polka = null;
+            return true;
+        } else
+            return false;
+    }
+    
+    public void naKtorej(){
+        String retVal = "Ksiazka jest ";
+        if(polka != null){
+            retVal += "na polce "+polka.getNazwa();
+        } else
+            retVal += "luzem";
+        System.out.println(retVal);
+    }
+    
+    public String getTytul(){
+        return this.tytul;
+    }
+    
+    public String getAutor(){
+        return this.autor;
+    }
+    
+    public String toString(){
+        return this.autor+": "+this.tytul;
+    }
+    
+    public boolean zamow(Osoba o){
+        if(o.getZamowil())
+            return false;
+        if(zamowiona == null){
+            o.zamowil();
+            zamowiona = o;
+            return true;
+        } else
+            return false;
+    }
+    
+    public boolean wypozycz(Osoba o){
+        if(wypozyczona == null && o.getLimit() > 0){
+            Wypozyczenie temp = new Wypozyczenie();
+            temp.osoba = o;
+            temp.data = new Date();
+            historia.add(temp);
+            this.zPolki();
+            wypozyczona = o;
+            o.zmniejszLimit();
+            return true;
+        } else
+            return false;
+    }
+    
+    void status(){
+        System.out.println(this);
+        if(wypozyczona != null)
+            System.out.println("Wypozyczona");
+        if(zamowiona != null)
+            System.out.println("Zamowiona");
+    }
+    
+}
+
+public                      
+class Program {
+    public static void main(String[] args)
+    {
+        new Program(args);
+    }
+
+    public Program(String[] args)
+    {
+        Ksiazka ks1 = new Ksiazka("Nad niemnem", "Orzeszkowa");
+        Ksiazka ks2 = new Ksiazka("Nad niemnem2", "Orzeszkowa");
+        Ksiazka ks3 = new Ksiazka("Nad niemnem3", "Orzeszkowa");
+        Ksiazka ks4 = new Ksiazka("Nad niemnem4", "Orzeszkowa");
+        Pracownik wacek = new Pracownik("Wacek", "Bubel", "Kijowa", "997", "Sprz¹tacz");
+        ks1.naKtorej();
+        Polka p1 = new Polka("Polka1", 2);
+        Polka p2 = new Polka("Polka2", 2);
+        p1.wstaw(ks1);
+        p1.wstaw(ks2);
+        p1.wstaw(ks3);
+        p2.wstaw(ks3);
+        p1.listuj();
+        p2.listuj();
+        ks1.naKtorej();
+        wacek.status();
+        ks2.wypozycz(wacek);
+        wacek.status();
+        ks2.zamow(wacek);
+        ks2.status();
+    }
+}

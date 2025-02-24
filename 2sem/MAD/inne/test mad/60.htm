@@ -1,0 +1,403 @@
+
+<html>
+
+<head>
+<SCRIPT TYPE="text/javascript" LANGUAGE="JavaScript">
+<!--
+
+	var oLastBtn=0;
+	bIsMenu = false;
+	//No RIGHT CLICK************************
+	// ****************************
+	if (window.Event) 
+	document.captureEvents(Event.MOUSEUP); 
+	function nocontextmenu()
+	{ 
+	event.cancelBubble = true 
+	event.returnValue = false; 
+	return false; 
+	} 
+	function norightclick(e) 
+	{ 
+	if (window.Event) 
+	{ 
+	if (e.which !=1) 
+	return false; 
+	} 
+	else 
+	if (event.button !=1) 
+	{ 
+	event.cancelBubble = true 
+	event.returnValue = false; 
+	return false; 
+	} 
+	} 
+	document.oncontextmenu = nocontextmenu; 
+	document.onmousedown = norightclick; 
+	//**************************************
+	// ****************************
+	// Block backspace onKeyDown************
+	// ***************************
+
+
+function onKeyDown() {
+if ( ((event.keyCode == 8) && (event.srcElement.type != "text"  &&	event.srcElement.type != "textarea" && event.srcElement.type != "password")) 
+	|| ((event.ctrlKey) && ((event.keyCode == 78) || (event.keyCode == 82)) ) || (event.keyCode == 116)) {
+        	 		event.keyCode = 0;
+        	 		event.returnValue = false;
+        	 	}		
+if (event.altKey) {
+	event.keyCode = 0;
+	event.returnValue = false;
+    }
+}
+
+function blok() {
+		 if(event.button == 2) {
+		 window.event.cancelBubble = true;
+ 	   return false;
+				}else{
+
+		  }
+}
+
+//-->
+</SCRIPT>
+
+
+<title>System egzaminacyjny</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<link rel="stylesheet" href="../css/styl.css" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" onkeydown="onKeyDown();">
+<SCRIPT language=JavaScript src="../java_scripts/flyout.js" type=text/javascript></SCRIPT>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td width="750" class="smallb" bgcolor="#f5f5f5">&nbsp;&nbsp;System do przeprowadzania
+      egzaminów w internecie - Modu³ studenta ::..</td>
+    <td width="113" bgcolor="#f5f5f5" class="small"> ..::
+      16-02-2005      ::.. </td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td background="../pics/01-01.gif" height="26" width="190">&nbsp;</td>
+    <td background="../pics/01-02.jpg" width="900" height="26" class="small" colspan = 3>    </td>
+
+  </tr>
+  <tr>
+    <td background="../pics/02-01.jpg" width="190" height="102">&nbsp;</td>
+    <td width="640" height="102" background="../pics/02-02.jpg">&nbsp;</td>
+
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td background="../pics/03-01.gif" width="32" height="31">&nbsp;</td>
+    <td height="31" background="../pics/03-02.jpg" width="139" valign="bottom" align="right">MENU&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td height="31" background="../pics/03-03.gif" width="21">&nbsp;</td>
+    <td height="31" background="../pics/03-04.gif" width="900" valign="bottom">Zalogowany
+      jako:
+	<b><FONT SIZE=2 COLOR=#003399>s3361</FONT></b></td>
+    <td height="31" background="../pics/03-05.gif" width="33">&nbsp;</td>
+  </tr>
+  <tr>
+    <td background="../pics/04-01.gif" width="32" height="22">&nbsp;</td>
+    <td height="22" bgcolor="#cbcbcb" width="139" valign="top">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td colspan="5">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="smallb" colspan="5">
+            <a href=student.php?sesid=lv3P647DCUK_F9DLH50U7o35.71V80tT6Vr2glxy3.U3y01d>Posortuj testy</a>		  </td>
+        </tr>
+        <tr>
+          <td class="small" colspan="5">&nbsp;&nbsp;&nbsp;
+            <a href=student.php?sesid=lv3P647DCUK_F9DLH50U7o35.71V80tT6Vr2glxy3.U3y01d> - wed³ug daty</a>          </td>
+        </tr>
+        <tr>
+          <td class="small" colspan="5">&nbsp;&nbsp;&nbsp;
+            <a href=student.php?sesid=lv3P647DCUK_F9DLH50U7o35.71V80tT6Vr2glxy3.U3y02d> - wed³ug przedmiotu</a>          </td>
+        </tr>
+        <tr>
+          <td class="small" colspan="5">&nbsp;&nbsp;&nbsp;
+            <a href=student.php?sesid=lv3P647DCUK_F9DLH50U7o35.71V80tT6Vr2glxy3.U3y03d> - wed³ug tytu³u</a>          </td>
+        </tr>
+        <tr>
+          <td colspan="5">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="smallb" colspan="5">
+            <a href=student.php?sesid=lv3P647DCUK_F9DLH50U7o35.71V80tT6Vr2glxy3.U3y08d>Napisz test</a>          </td>
+        </tr>
+         <tr>
+		  <td colspan="5">&nbsp;</td>
+		   </tr>
+		   
+		 <tr>
+		   <td class="smallb" colspan="5">
+		   </td>
+        </tr>
+        <tr>
+          <td class="smallb" colspan="5">
+            <a href=student.php?sesid=lv3P647DCUK_F9DLH50U7o35.71V80tT6Vr2glxy3.U3y09d>Zmiana has³a</a>	  </td>
+        </tr>
+		         <tr>
+		  <td colspan="5">&nbsp;</td>
+		   </tr>
+		            <tr>
+		  <td colspan="5">&nbsp;</td>
+		   </tr>
+        <tr>
+          <td align="center" colspan="5">
+            <a href=../close.php?sesid=lv3P647DCUK_F9DLH50U7o35.71V80tT6Vr2glxy3.U3y00d>Wyloguj siê</A>          </td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </td>
+    <td height="22" background="../pics/04-03.gif" width="21">&nbsp;</td>
+    <TD ALIGN="CENTER" VALIGN="TOP" WIDTH="900" HEIGHT="22" BGCOLOR="#EBEBEB"><br>
+
+	<b><FONT SIZE=2 COLOR=#003399>2966 Ko³odyñski Punkty: 14</FONT></b><TABLE  cellPadding=2 cellSpacing=1 class="datadisp1" BORDER=1><TBODY>
+<TR>
+<TD bgColor=#cbcbcb ><FONT color=#000000 SIZE=2>&nbsp;&nbsp;Test&nbsp;&nbsp;</FONT></TD>
+<TD bgColor=#cbcbcb><FONT color=#000000 SIZE=2>&nbsp;&nbsp;Egzamin koñcz±czy kurs z MAD 2003&nbsp;&nbsp;</TD>
+<TD bgColor=#cbcbcb><FONT color=#000000 SIZE=2>&nbsp;&nbsp;2003-06-09&nbsp;&nbsp;</TD>
+</TR>
+<TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;1&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Czy nastêpuj±ce stwierdzenia s± prawdziwe dla ka¿dego zbioru A, B, C?
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>A  <IMG SRC="..\matma\rirjtlakbusnamx.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\cup">  (A  <IMG SRC="..\matma\akimikljbteiycr.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\cap">  B) = A
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>(A <IMG SRC="..\matma\pgtiykojforrsrc.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\setminus">  B)  <IMG SRC="..\matma\azwbdbijahhfpjw.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\cup">  B = A
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\owkiripixwbzxab.gif"  BORDER=0 ALIGN="MIDDLE" ALT =" (A\cup B)\setminus B=A"></TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;2&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Niech <IMG SRC="..\matma\yktchibjniahjrd.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="X"> bêdzie zbiorem n-elementowym. Ile elementów ma zbiór <IMG SRC="..\matma\uijhnthamsbvedb.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="P(X) \cap\{\emptyset\}">:
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>3
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>n
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>1
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;3&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Niech X bêdzie zbiorem n elementowym. Ile elementów ma zbiór {X,<IMG SRC="..\matma\rpgonujfiddvnxv.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\emptyset">, {X,<IMG SRC="..\matma\rpgonujfiddvnxv.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\emptyset">}}:
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>3
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>2n
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>2</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;4&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Czy dla dowolnych zbiorów A, B i C:
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>(A <IMG SRC="..\matma\cagtpthmcpdhjfn.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\cap"> B) <IMG SRC="..\matma\kljoqnkqfkprbte.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\setminus"> B = <IMG SRC="..\matma\qnajgiraxnntocc.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\emptyset">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\ruizlsuvuwbtcei.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="A \setminus (B \setminus C) = A \cap  (-B \cup C)">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\fjxrljoarphxiiv.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="A\setminus B = A \cap (-B)"></TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;5&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Czy nastêpuj±ce wyra¿enia s± tautologiami rachunku zdañ?
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\yycnfimtfcozlie.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="p \rightarrow  (p  \lor q)">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\rtnolfgmsichgzz.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="q \rightarrow (p  \rightarrow p)">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\ajrgkpjgysbmlhz.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="p \rightarrow  (p  \land q)">
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;6&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Czy nastêpuj±ce wyra¿enia s± tautologiami rachunku zdañ?
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2><IMG SRC="..\matma\fdyxtnwemtlnodb.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="p \rightarrow (q \rightarrow p)">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2><IMG SRC="..\matma\cenhtjilqipbbcw.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="(p \rightarrow p) \rightarrow p">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2><IMG SRC="..\matma\ykqjdnsrjxjmbtf.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="(p \land q) \rightarrow p">
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;7&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Dana jest formu³a <IMG SRC="..\matma\yuyipaocfnbkgsr.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="A = a \leftrightarrow (b \leftrightarrow c)">. Które z nastêpuj±cych formu³ s± równowa¿ne z formu³± A:
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\jujcknbdklxoovl.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="(a \land b) \leftrightarrow c">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\inotxlksivcarie.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="b \leftrightarrow (a \leftrightarrow c)">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\vqocgfbaiibqksk.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="(a \leftrightarrow b) \leftrightarrow c">
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;8&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Niech f bêdzie funkcj± odwzorowuj±c± zbiór liczb rzeczywistych <IMG SRC="..\matma\bhwyvlzijibxfcr.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="R"> w <IMG SRC="..\matma\bhwyvlzijibxfcr.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="R">, <IMG SRC="..\matma\navgmanyjlbbpeb.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="f(x) = x^2 -x -2">. Czy:
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\glbkcfsendwkkmb.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="f^{-1}(\{0\}) = \{0\}">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>f nie jest "1-1" i nie jest "na"
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\pasuaaatficdvsl.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="f((-1,2))\subseteq f([-1,2])"></TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;9&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Ustal prawdziwo¶æ nastêpuj±cych zdañ:
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>Ka¿dy element najwiêkszy w zbiorze uporz±dkowanym jest elementem maksymalnym 
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>Kres górny dowolnego zbioru jest elementem tego zbioru
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>W ka¿dym zbiorze uporz±dkowanym istnieje co najwy¿ej jeden element maksymalny
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;10&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Niech r  <IMG SRC="..\matma\uooodpbjjgdtlid.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\subseteq">  R <IMG SRC="..\matma\ibfxktzmppekoau.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\times">  R. Czy nastêpuj±ce relacje s± funkcjami
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2><IMG SRC="..\matma\mxnokjondcipmhk.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="x\ r\ y"> wttw., gdy <IMG SRC="..\matma\cbqpxwiciuzzofr.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="x^{2} = y +1">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\qezcxoxfuifsxiv.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="x\ r\ y"> wttw., gdy <IMG SRC="..\matma\plikuncchaikqkx.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="x^{2} < y^{2}">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2><IMG SRC="..\matma\gtbdpjihglcinea.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="x\ r\ y"> wttw., gdy <IMG SRC="..\matma\hdsyloibtuphbsx.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="x+y = 3">
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;11&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Niech A = {1, 2, 3, 4, 5}. Niech S bêdzie zbiorem wszystkich podzbiorów A. 
+Definiujemy na S relacjê r nastêpuj±co: X r  Y  wttw.,gdy X  <IMG SRC="..\matma\vftaalwzabytrgc.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\cap"> {1,2,5} = Y <IMG SRC="..\matma\vftaalwzabytrgc.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\cap"> {1,2,5}. 
+Czy wynika z tego, ¿e
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>r jest relacj± zwrotn±
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>r jest relacj± antysymetryczn±
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>r jest relacj± przechodni±
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;12&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Niech A = {1, 2, 3, 4, 5}. Niech S bêdzie zbiorem wszystkich podzbiorów A. Definiujemy w S relacjê r : 
+X r Y  wttw., gdy X <IMG SRC="..\matma\luwicnrojccfamj.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\cap"> Y = {1,2,3}. Czy nastêpuj±ce stwierdzenia s± prawdziwe?
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>r  jest relacj± zwrotn±
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>r  jest relacj± antysymetryczn±
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>r jest relacj± przechodni±
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;13&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Niech A = {1, 2, 3, 4, 5}. Niech S bêdzie zbiorem wszystkich podzbiorów A. Definiujemy w S relacjê r : 
+X r Y  wttw., gdy X <IMG SRC="..\matma\bluocylkbjvpgtv.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="\cap"> Y = {1,2,4}. Czy nastêpuj±ce stwierdzenia s± prawdziwe?
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>r jest relacj± przeciwzwrotn±
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>r jest relacj± symetryczn±
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>r jest relacj± spójn±
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;14&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Niech A = {0,1,2,3,4,5}. Relacja <IMG SRC="..\matma\dchifhopjizhbjw.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="r \subseteq A\times A"> jest okre¶lona nastêpuj±co: x r y wttw, gdy <IMG SRC="..\matma\mpneeoyqwxdbidm.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="xy\ mod\ 5 = 1">. 
+Czy nastêpuj±ce zdania s± prawdziwe?
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>r jest zwrotna
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>r jest symetryczna
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>r jest spójna
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;15&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Liczba funkcji ró¿nowarto¶ciowych ze zbioru {1,2,3,4} w {1,2,3,4,5,6} jest równa
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2><IMG SRC="..\matma\lczjzdvjukpyanx.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="10.6^{2 }">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>6!
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2><IMG SRC="..\matma\bcqbjsayydrupnc.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="6^{4 }"></TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;16&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Rozwa¿my ci±gi bitów zerojedynkowych o d³ugo¶ci 10. Czy nastêpuj±ce stwierdzenia s± prawdziwe?
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>Ci±gów, które zawieraj± co najmniej 3 zera jest <IMG SRC="..\matma\yiuivlxpbufeaks.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="2^{7 }">
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>Ci±gów, które zawieraj± dok³adnie 4 zera jest 210
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>Liczba wszystkich takich ci±gów jest równa <IMG SRC="..\matma\olqpngjiusliuls.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="2^{10 }">
+
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;17&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Zbadamy ci±gi bitów zerojedynkowych o d³ugo¶ci 10. Czy nastêpuj±ce stwierdzenia s± prawdziwe?
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>Ci±gów zawieraj±cych tyle samo jedynek co zer jest <IMG SRC="..\matma\yljfbljvfbbhwbn.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="2^{5 }"></TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>Ci±gów niemalej±cych jest 11  
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>Ci±gów zaczynaj±cych siê od bitów 10011 jest <IMG SRC="..\matma\vdjsrpgsujooemh.gif"  BORDER=0 ALIGN="MIDDLE" ALT ="2^{5 }">
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;18&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Rzucono dwiema kostkami symetrycznymi.
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>Prawdopodobieñstwo tego, ¿e szóstka nie wypada jednocze¶nie na obu kostkach wynosi 25/36
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>Prawdopodobieñstwo tego, ¿e na pierwszej kostce wypada wiêcej oczek ni¿ na drugiej jest równe 15/36
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>Prawdopodobieñstwo tego, ¿e suma oczek na obu kostkach jest wiêksza ni¿ 4, wynosi 2/3
+</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;19&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;W urnie s± 4 bia³e i 3 czerwone kule. Wyci±gano z urny 2 razy po jednej kuli ze zwracaniem
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>Prawdopodobieñstwo tego, ¿e kule s± ró¿nego koloru, jest mniejsze ni¿ 1/2
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>Prawdopodobieñstwo tego, ¿e pierwsza wylosowana kula jest bia³a, wynosi 4/7</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>Prawdopodobieñstwo tego, ¿e kule s± jednakowego koloru, jest mniejsze ni¿ 1/2</TD><TR  bgColor = #ffffff>
+<TD bgColor=#ffffff><FONT color=#000000 SIZE=2>&nbsp;&nbsp;20&nbsp;&nbsp;</TD>
+<TD bgColor=#ffffff COLSPAN =2><FONT color=#ff0000 SIZE=2>&nbsp;&nbsp;Niech A, B, C, D bêd± zbiorami nieskoñczonymi, oraz  X = {A,B,C,D}.
+&nbsp;&nbsp;</TD>
+</TR>
+<TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>Zbiór X jest nieskoñczony
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX disabled checked NAME = >&nbsp;</TD>
+							     <TD COLSPAN = 2>Zbiór P(X) ma 4^4 elementów
+</TD><TR><TD class=datadisp1><INPUT TYPE=CHECKBOX  disabled NAME = >&nbsp;</TD>
+								<TD COLSPAN = 2>Zbiór {P(X),X,A,B,C,D} jest nieskoñczony
+</TD></TBODY></TABLE><BR>
+<FONT SIZE="2"><STRONG><A HREF=javascript:history.back()>Powrót</A></STRONG></FONT>    </td>
+    <td height="22" background="../pics/04-05.gif" width="33">&nbsp;</td>
+  </tr>
+  <tr>
+    <td background="../pics/05-01.gif" width="32" height="21">&nbsp;</td>
+    <td height="21" bgcolor="#cbcbcb" width="139" background="../pics/05-02.gif">&nbsp;</td>
+    <td height="21" background="../pics/05-03.gif" width="21">&nbsp;</td>
+    <td height="21" width="640" bgcolor="#ebebeb" background="../pics/05-04.gif">&nbsp;</td>
+    <td height="21" background="../pics/05-05.gif" width="33">&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

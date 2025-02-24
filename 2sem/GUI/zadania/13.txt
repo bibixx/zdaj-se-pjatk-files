@@ -1,0 +1,199 @@
+package jbPack;
+
+import javax.swing.*;
+import java.awt.*;
+
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+import java.text.*;
+
+import java.awt.geom.*;
+import java.awt.image.*;
+import java.awt.font.*;
+import java.net.*;
+import java.util.zip.*;
+import java.lang.reflect.*;
+import java.applet.*;
+
+import javax.swing.event.*;
+import javax.swing.border.*;
+import javax.swing.tree.*;
+import java.beans.*;
+
+public
+class Program
+    extends JFrame {
+
+    private static final
+        String caption = "Swing Application";  // tytu³
+
+    public static final
+        int width = 400, height = 400;         // rozmiary
+
+    public static final
+        Point location = new Point(150, 150);  // po³o¿enie
+
+    private String lookAndFeel =               // wygl¹d
+        UIManager.getSystemLookAndFeelClassName();
+
+    private Object paintLock = new Object();
+    private boolean isScreenVisible;
+
+    private ContentPane contentPane;
+
+    public static void main(String[] args)
+    {
+        new Program();
+    }
+
+    public Program()
+    {
+            // okreœlenie napisu na pasku tytu³owym
+        setTitle(caption);
+
+           // uniemo¿liwienie zmiany rozmiarów okna
+        setResizable(false);
+
+            // okreœlenie wygl¹du aplikacji
+        try {
+            UIManager.setLookAndFeel(lookAndFeel);
+        }
+        catch(Exception e) {
+        }
+
+            // utworzenie odnoœnika do pulpitu
+        contentPane = new ContentPane();
+
+            // wymiana domyœlnego pulpitu na w³asny
+        setContentPane(contentPane);
+
+            // okreœlenie po³o¿enia okna
+        setLocation(location);
+
+            // okreœlenie rozmiarów pulpitu
+        JComponent jContent = (JComponent)contentPane;
+        String system = System.getProperty("os.name");
+        int delta = system.indexOf("98") > -1 ||
+                    system.indexOf("95") > -1 ? 0 : 2;
+        jContent.setPreferredSize(
+            new Dimension(width-delta, height-delta)
+        );
+
+            // okreœlenie koloru t³a okna i pulpitu
+        setBackground(Color.white);
+        contentPane.setBackground(Color.white);
+
+            // obs³uga zamkniêcia okna
+        addWindowListener(
+            new WindowAdapter() {
+                public void
+                windowClosing(WindowEvent evt)
+                {
+                    System.exit(0);
+                }
+            }
+        );
+
+            // upakowanie okna
+        pack();
+
+            // zrealizowanie Naczelnej Zasady
+        SwingUtilities.invokeLater(
+            new Runnable() {
+                public void run()
+                {
+                        // wykonanie czynnoœci inicjuj¹cych
+                    contentPane.initPane();
+
+                        // wyœwietlenie okna i pulpitu
+                    show();
+                }
+            }
+        );
+
+        synchronized(paintLock) {
+            while(!isScreenVisible)
+                try {
+                    paintLock.wait();
+                }
+                catch(InterruptedException e) {}
+        }
+
+            // zrealizowanie Naczelnej Zasady
+        SwingUtilities.invokeLater(
+            new Runnable() {
+                public void run()
+                {
+                        // nastawienie celownika na pulpit
+                    contentPane.requestFocus();
+
+                        // nastawienie celownika na komponent
+                        // albo m.in. wykonanie dispose();
+                    contentPane.initFocus();
+                }
+            }
+        );
+    }
+
+        // klasa pomocnicza
+    class Content
+        extends JPanel {
+
+        void initPane()  {}
+        void initFocus() {}
+
+        public void paintComponent(Graphics gDC)
+        {
+            super.paintComponent(gDC);
+
+            synchronized(paintLock) {
+                isScreenVisible = true;
+                paintLock.notify();
+            }
+        }
+    }
+
+// ====== pod-aplikacja ================================= //
+
+    public
+    class ContentPane
+        extends Content {
+            
+            Vector vec;
+
+        public void initPane()
+        {
+            vec = new Vector();
+            String linia = "";
+            try{
+                FileReader fr = new FileReader("d:\\plik_testowy.txt");
+                BufferedReader bfr = new BufferedReader(fr);
+                while((linia = bfr.readLine()) != null){
+                    vec.add(linia);
+                }
+             } catch( IOException ex ){
+                System.out.println("B³¹d przy operacji na pliku: "+ex);
+             }
+        }
+
+        public void paintComponent(Graphics gDC)
+        {
+            int x;
+            int y;
+            int r;
+            StringTokenizer st;
+            super.paintComponent(gDC);
+            for(int i = 0; i< vec.size(); i++){
+                st = new StringTokenizer((String)vec.get(i));
+                x = Integer.parseInt(st.nextToken());
+                y = Integer.parseInt(st.nextToken());
+                r = Integer.parseInt(st.nextToken());
+                gDC.drawOval( x, y, r, r);
+            }
+        }
+    }
+
+// ====================================================== //
+
+}

@@ -1,0 +1,12 @@
+#include <iostream>#include <stdlib.h>
+using namespace std;
+int strlen(char* napis);int main(int argc, char *argv[]){
+  char tab[100]="Ala ma kota";  char *ptr = & tab[0];  cout << *ptr << (int) *ptr << endl;  int* ptr2 =  (int*)&tab[0];  cout << *ptr2 << endl;  system("PAUSE");	  return 0;}
+
+int strlen(char* napis){
+  int i = 0;
+  while (*napis++) i++;
+  return i;
+  system("PAUSE");	
+  return 0;
+}

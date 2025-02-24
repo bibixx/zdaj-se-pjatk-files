@@ -1,0 +1,55 @@
+package jbPack;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Program
+{
+    static int klik = 0;
+    static JLabel label = new JLabel("", JLabel.CENTER);
+    
+    public static void main(String [] args)
+    {
+        wyswietl();
+        
+    }
+    
+    public static void wyswietl()
+    {
+        JFrame frame = new JFrame();
+        frame.setSize(300,300);
+        frame.setDefaultCloseOperation(3);
+        
+        Container cp = frame.getContentPane();
+        cp.setLayout(new GridLayout(3,1));
+        
+        JButton click = new JButton("Click!");
+        cp.add(click);
+        
+        label.setText("" + klik + "times.");
+        cp.add(label);
+        
+        JButton reset = new JButton("Reset");
+        cp.add(reset);
+        
+        click.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e)   {
+              klik++;
+              label.setText("" + klik + " times.");
+            }
+       });
+
+       reset.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e)   {
+              klik = 0;
+              label.setText("" + klik + " times.");;
+            }
+       });
+
+        
+        frame.setVisible(true);
+        
+    }
+    
+}

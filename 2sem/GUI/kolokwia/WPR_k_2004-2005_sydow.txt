@@ -1,0 +1,28 @@
+#######################################################
+ZADANIA NA KOLOKWIUM Z WPR W ROCZNIKU 2004/2005 (sydow)
+#######################################################
+
+A) Interfejs z dwoma metodami:
+	- getText bez argumentów zwracaj¹cy Stringa.
+	- linesCount bez argumentów, zwracaj¹cy liczbê lini Stringa zwróconego przez poprzedni¹ metodê.
+
+B) Klasa "FileTextSource" implementuj¹ca podany interfejs
+	- konstruktor bierze jeden argument bêd¹cy nazw¹ pliku txt
+	- obiekt tej klasy "should give access to the textual content of e text file"
+	- tak ma³o publicznych metod jak mozliwe
+	- jakakolwiek publiczna metoda moze byc wzywana wiele razy (za kazdym razem ten sam rezultat)
+
+C) Design and define class "Word Statistics" z nastepujacymi metodami:
+	-  kontruktor bierze jeden String argument, multi line text, on wchih statistics are computed
+	- showStatistics() - liczy ile razy  wystapily slowa
+	- "update statistics" - bierze string , dodaje ten string do poprzedniego i liczy nowe statystyki dla po³¹czonego tekstu
+	
+D) Zdefiniuj klasê TextClass Statistics
+
+	In main use code from A - C to show the statistics of words in a file "sampleText.txt" in the current directory. 
+	Wszystkie klasy sa w jednym pliku zrodlowym
+
+
+p.s.
+to wszystko :) jesli sie powtórz¹ to mi dobro gorzale stawiacie, i nie wkurwiajcie sie ze tak pozno bo to cud ze ten kawalek papieru znalazlem :D:D:D
+//i okaza³o sie, ze jednak bylo to samo ;D

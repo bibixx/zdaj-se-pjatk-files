@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta name="Author" content="TLL">
+  <meta name="GENERATOR"
+ content="Mozilla/4.76 [en] (Win98; U) [Netscape]">
+  <title>WPR 05</title>
+</head>
+<body>
+<b><font size="+1">W±tki</font></b>
+<br>
+<br>
+<p><b><u>Zadanie 9</u> (4p)</b>
+</p>
+<p><b>Napisaæ program symuluj±cy grê w losowanie liczb miêdzy dwoma
+graczami.
+Jeden ruch ka¿dego gracza polega na wylosowaniu jednej liczby
+ca³kowitej
+z przedzia³u [1, 100]. Miêdzy kolejnymi ruchami gracza nale¿y stosowaæ
+opó¼nienia czasowe (równie¿ losowe). Arbiter daje sygna³ rozpoczêcia
+gry
+i mierzy czas. Wygrywa ten, który po up³ywie okre¶lonego czasu otrzyma
+wiêkszy rezultat bêd±cy sum± wszystkich swoich wylosowanych liczb.</b>
+</p>
+<p><b>Arbiter jest obiektem klasy </b><i>Referee </i><b>(np.
+rozszerzaj±cej
+</b><i>Thread</i><b>),
+przy tworzeniu obiektu okre¶lony jest czas gry. Gracze s± obiektami
+klasy </b><i>Player
+</i><b>(np. rozszerzaj±cej </b><i>Thread</i><b>) i posiadaj±
+identyfikatory-nazwy.
+W metodzie </b><i>main(...) </i><b>klasy testuj±cej nale¿y uruchomiæ
+w±tki
+arbitra i graczy.<br>
+<br>
+</b></p>
+<p><b><u>Zadanie 10</u></b><span style="font-weight: bold;">
+(6p)</span><br>
+<b>(Producent - konsument)</b>
+</p>
+<p><b>Producent produkuje produkty i umieszcza je w buforze, a
+konsument
+pobiera je stamt±d.</b>
+</p>
+<p><b><u>Szczegó³y:</u></b>
+</p>
+<p><b>Produkty s± liczbami ca³kowitymi wygenerowanymi (wyprodukowanymi)
+losowo przez producenta.</b>
+</p>
+<p><b>Bufor jest obiektem klasy </b><i>Buffer</i><b> zawieraj±cej
+miêdzy
+innymi metody </b><i>get() </i><b>- pobiera liczbê z bufora i </b><i>put(int
+n)</i><b> - wstawia liczbê do bufora. Bufor (np. w postaci tablicy) ma
+ograniczon± pojemno¶æ. W danej chwili dostêp do bufora mo¿e mieæ albo
+producent,
+albo konsument.</b>
+</p>
+<p><b>Producent jest obiektem klasy </b><i>Producer</i><b> (np.
+rozszerzaj±cej
+</b><i>Thread)</i><b>.
+Konstruktor </b><i>Producer(Buffer b)</i><b> tworzy nowy
+obiekt-producent,
+który produkuje i umieszcza produkty w buforze </b><i>b</i><b>.
+Przedefiniowana metoda
+</b><i>run()</i><b>
+zawiera nieskoñczon± pêtlê:</b><i> </i><b>1. Generuje losowo jedn±
+liczbê
+ca³kowit±; 2. Umieszcza j± w buforze za pomoc± metody </b><i>put(int);</i><b>
+3. Zasypia na losowy wybrany czas z przedzia³u od 0 do 2s.</b>
+</p>
+<p><b>Konsument jest obiektem klasy </b><i>Consumer</i><b> (np.
+rozszerzaj±cej
+</b><i>Thread).</i><b>
+Konstruktor </b><i>Consumer(Buffer b)</i><b> tworzy nowy
+obiekt-konsument,
+który pobiera produkty z bufora </b><i>b</i><b> i konsumuje je.
+Przedefiniowana metoda
+</b><i>run()</i><b>
+zawiera nieskoñczon± pêtlê:</b><i> </i><b>1. Pobiera jedn± liczbê z
+bufora
+za pomoc± metody </b><i>int get();</i><b> 2. Konsumuje liczbê, czyli
+wyprowadza
+j± na konsolê; 3. Zasypia na okre¶lony sta³y czas 1s.</b>
+</p>
+<p><b><u>Testowanie:</u></b>
+</p>
+<p><b>1. Utworzyæ obiekt klasy </b><i>Buffer</i><span
+ style="font-style: italic; font-weight: bold;">,</span><br>
+<b>2. Utworzyæ obiekty klas </b><i>Producer</i><b>, </b><i>Consumer</i><b>
+i uruchomiæ w±tki, które symuluj± dzia³anie producenta oraz konsumenta
+na danym buforze,</b>
+<br>
+<b>3. Program zakoñczy dzia³anie po okre¶lonym czasie 30s.</b>
+</p>
+<p></p>
+</body>
+</html>

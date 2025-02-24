@@ -1,0 +1,67 @@
+ls -l -> list files and dir / -a -> list all files and dir (also hidden)
+mkdir -> make directory
+rmdir -> remove directory
+mv -> move directory
+cd -> change directory
+gedit
+head -n -> get first n lines
+tail -n -> get last n lines
+tr -> transform/translate 
+
+example: 
+echo "Hello World" | tr "A-Za-z" "a-zA-Z"
+hELLO wORLD
+
+example 2:
+echo "wiki wiki" | tr -d "ki"
+w w
+
+cut
+
+example: 
+ls -l | tr -s " " (deletes more than one whitespace) | cut -f 5,9 -d " " | sort -n 
+(this shows files form the biggest size to the smallest, cut -f 5,9 selects filelds delimited by whitespace)
+
+sort
+uniq
+grep -> selects text having exactly the same pattern
+
+example:
+ls -l | grep "^-" | wc -l
+(counts files in directory, "^-" means that first char of the line must be - )
+
+Patterns in grep:
+
+grep smug files		{search files for lines with 'smug'}
+grep '^smug' files	{'smug' at the start of a line}
+grep 'smug$' files	{'smug' at the end of a line}
+grep '^smug$' files	{lines containing only 'smug'}
+grep '\^s' files	{lines starting with '^s', "\" escapes the ^}
+grep '[Ss]mug' files	{search for 'Smug' or 'smug'}
+grep 'B[oO][bB]' files	{search for BOB, Bob, BOb or BoB }
+grep '^$' files	{search for blank lines}
+grep '[0-9][0-9]' file	{search for pairs of numeric digits}
+
+grep '[a-zA-Z]'			{any line with at least one letter}
+grep '[^a-zA-Z0-9]		{anything not a letter or number}
+grep '[0-9]\{3\}-[0-9]\{4\}'	{999-9999, like phone numbers}
+grep '^.$'			{lines with exactly one character}
+grep '"smug"'			{'smug' within double quotes}
+grep '"*smug"*'			{'smug', with or without quotes}
+grep '^\.'			{any line that starts with a Period "."}
+grep '^\.[a-z][a-z]'		{line start with "." and 2 lc letters}
+
+cat -> opens a file and reads
+wc -> word count / -l counts lines/ -w prints only the word counts / -c prints char counts
+
+(cmd) > (file) - stores output to the file
+(cmd) >> (file) - appends output to the file
+< (file) - reads data from file name
+
+a=5
+b=3
+echo $a
+echo $[a*b]
+
+"something" - string
+`cmd` - performs command

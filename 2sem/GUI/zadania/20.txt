@@ -1,0 +1,58 @@
+package jbPack;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.*;
+import java.io.*;
+
+class GuiAWT extends Frame {
+    
+    GuiAWT(String [] args) {
+        super("Guziczki");
+        int chr = args[0].charAt(0);
+        chr -= 'A';
+        System.out.println(chr);
+        switch(chr){
+            case 0:
+                setLayout(new BorderLayout());
+                break;
+            case 1:
+                setLayout(new FlowLayout());
+                break;
+            case 2:
+                setLayout(new FlowLayout(FlowLayout.LEFT));
+                break;
+            case 3:    
+                setLayout(new FlowLayout(FlowLayout.RIGHT));
+                break;
+            case 4:
+                setLayout(new GridLayout(1, 5));
+                break;
+            case 5:    
+                setLayout(new GridLayout(5, 1));
+                break;
+            case 6:    
+                setLayout(new GridLayout(3, 2));
+                break;
+            }
+        Button b1 = new Button("Przycisk1");
+        Button b2 = new Button("Przycisk2");
+        Button b3 = new Button("Przycisk3");
+        Button b4 = new Button("Przycisk4");
+        Button b5 = new Button("Przycisk5");
+        add(b1);
+        add(b2);
+        add(b3);
+        add(b4);
+        add(b5);
+        pack();
+        show();
+    }
+    
+    public static void main(String[] args) {
+        // w metodzie main tworzymy
+        //obiekt naszej klasy
+        // i wywo³ujemy konstruktor
+        new GuiAWT(args);
+    }
+}

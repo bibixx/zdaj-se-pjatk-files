@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta name="Author" content="TLL">
+  <meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+  <title>WPR 02</title>
+</head>
+<body>
+<b><font size="+1">Obiektowo¶æ Javy 2</font></b><br>
+<p><b><br>
+</b><b><u>Zadanie 3</u> (3p)</b>
+</p>
+<p>
+<b>Zaprojektowaæ klasê </b><i>Osoba </i><b>z polami opisuj±cymi
+nazwisko i wiek. Klasa powinna byæ wyposa¿ona w konstruktory, metody
+ustalaj±ce/pobieraj±ce dane osoby oraz metodê </b><span
+ style="font-style: italic;">toString()</span><b> zwracaj±c± informacje
+o danej osobie. Nastêpnie, zdefiniowaæ klasê </b><span
+ style="font-style: italic;">Student</span><b> rozszerzaj±c± klasê </b><span
+ style="font-style: italic;">Osoba</span><b> z dodatkowym polem
+opisuj±cym numer grupy, do której nale¿y student. Klasê </b><span
+ style="font-style: italic;">Student</span><b> wyposa¿yæ w potrzebne
+konstruktory i metody, które korzystaj±, tam gdzie jest to mo¿liwe, z
+konstruktorów oraz metod nadklasy.</b> <b>Ka¿dy student powinien mieæ
+swój unikalny
+numer</b> <b>(zaczynaj±c od 1), nadany automatycznie przy jego
+tworzeniu.</b><br>
+<span style="text-decoration: underline;"><span
+ style="font-weight: bold;"><br>
+<br>
+</span></span><b><u>Zadanie 4</u> (3p)</b>
+</p>
+<p><b>Zaprojektowaæ </b><b>klasê abstrakcyjn± </b><i>Figura </i><b>oraz
+dwie klasy </b><i>Kolo</i><b>, </b><i>Prostokat</i><b>:</b>
+</p>
+<p><b>Klasa abstrakcyjna </b><i>Figura</i><b>:</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Pola: &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </b><i>protected
+int x, y</i><b>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; // okre¶laj± po³o¿enie figury</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; </b><i>protected String fig =
+"Jeszcze nie wiadomo";&nbsp;</i><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// okre¶la nazwê figury z warto¶ci± pocz±tkow±</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Konstruktor: </b><i>public Figura(int x, int
+y)</i><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// konstruuje figurê na podstawie podanego po³o¿enia</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Metoda: </b><i>public void pokaz()</i><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// wypisuje nazwê figury i po³o¿enie</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Metoda abstrakcyjna: </b><i>public abstract void
+pozycja(int x, int y)</i><b>&nbsp; // wypisuje komunikat, czy punkt (x,
+y) le¿y wewn±trz figury</b>
+</p>
+<p><b>Klasy </b><i>Kolo</i><b>, </b><i>Prostokat</i><b> rozszerzaj±
+klasê
+</b><i>Figura</i><b>:</b>
+</p>
+<p><i>Kolo</i><b>:</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Dodatkowe pole: </b><i>private int promien;</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Konstruktor: </b><i>public Kolo(int x, int y,
+int r)</i><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// konstruuje ko³o o ¶rodku w punkcie </b><i>(x, y)</i><b> i&nbsp;
+promieniu
+</b><i>r</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Implementacja metody abstrakcyjnej: </b><i>public
+void pozycja(int x, int y)</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Przedefiniowanie metody: </b><i>public void
+pokaz()</i><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// wypisuje dodatkowo promieñ ko³a</b>
+</p>
+<p><i>Prostokat</i><b>:</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Dodatkowe pola: </b><i>private int szer, wys;</i><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; // szeroko¶æ i wysoko¶æ prostok±ta</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Konstruktor: </b><i>public Prostokat(int x, int
+y, int s, int w)</i><b>&nbsp;&nbsp; // konstruuje prostok±t (o bokach
+równoleg³ych do osi uk³adu wspó³rzêdnych)<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; // z podanym
+po³o¿eniem
+lewego</b> <b>górnego wierzcho³ka </b><i>(x, y)</i><b>, szeroko¶ci± </b><i>s,</i><b>
+wysoko¶ci± </b><i>w</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Implementacja metody abstrakcyjnej: </b><i>public
+void pozycja(int x, int y)</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Przedefiniowanie metody: </b><i>public void
+pokaz()</i><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// wypisuje dodatkowo parametry </b><i>szer</i><b>, </b><i>wys</i>
+</p>
+<p><b>Testowanie:</b>
+</p>
+<p><b>Funkcja g³ówna publicznej klasy</b>
+</p>
+public static void main(String[] args)
+<br>
+{ <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Figura fig[] = new Figura[2];<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp; fig[0] = new Kolo(200, 200, 50);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // polimorficzne
+wywo³anie metod
+z klasy Kolo, a nie z klasy
+Figura&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp; fig[0].pokaz();
+&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp; fig[0].pozycja(200, 200);
+&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp; fig[1] = new Prostokat(200, 200, 50,
+50);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // polimorficzne
+wywo³anie metod z klasy Prostokat, a nie z klasy
+Figura<br>
+&nbsp;&nbsp;&nbsp;&nbsp; fig[1].pokaz(); <br>
+&nbsp;&nbsp;&nbsp;&nbsp; fig[1].pozycja(210, 300);
+<br>
+}
+<p><b>Wynik dzia³ania programu powinien wygl±daæ nastêpuj±co:</b>
+</p>
+<p>Kolo
+<br>
+Srodek - (200, 200)
+<br>
+Promien - 50
+<br>
+Punkt (200, 200) lezy wewnatrz kola
+</p>
+<p>Prostokat
+<br>
+Lewy gorny - (200, 200)
+<br>
+Szerokosc: 50, Wysokosc: 50
+<br>
+Punkt (210, 300) lezy na zewnatrz prostokata<br>
+</p>
+<br>
+<b><u>Zadanie 5</u></b> <span style="font-weight: bold;">(2p)</span><br>
+<b>(Rozbudowaæ zadanie 4)</b><b><br>
+<br>
+Zdefiniowaæ interfejs </b><i>Obliczenie</i><b> zawieraj±cy metody </b><b>obliczaj±ce
+pole i obwód figury. </b><b>Zaimplementowaæ interfejs </b><span
+ style="font-style: italic;">Obliczenie</span>
+<b>w klasach </b><i>Figura, Kolo</i><b>,
+</b><i>Prostokat</i><b> oraz testowaæ w/w metody.<br>
+</b>&nbsp;
+<p><b><u>Zadanie 6</u> (7p)</b>
+</p>
+<p><b>Rozbudowaæ zadanie 2 o dodatkowe klasy obs³uguj±ce banki oraz
+bankomaty:</b>
+</p>
+<b>
+Ka¿dy bank ma m. in. nazwê, unikalny identyfikator, listê kont oraz
+aktualn± stopê procentow± - wspóln± dla wszystkich kont.<br>
+Ka¿de konto ma m. in. w³a¶ciciela, unikalny idenyfikator, stan konta,
+limit debetu oraz bank, do którego nale¿y konto. Dostêpne s± trzy
+operacje na koncie: wp³ata, wyp³ata oraz obliczenie stanu konta po
+dodaniu odsetek (w skali rocznej).<br>
+Ka¿da transakcja bankowa (przelew) posiada m. in. informacjê o kontach
+w niej uczestnicz±cych oraz kwotê.&nbsp;&nbsp; <br>
+Bankomat obs³uguje konta niektórych banków. U¿ytkownik powinien mieæ
+mo¿liwo¶æ </b><b>zmodyfikowania</b><b> listy obs³ugiwanych banków
+przez dany bankomat. Bankomat
+wydaje pieni±dze z
+konta, o ile stan konta na to pozwala, w banknotach o okre¶lonych
+nomina³ach. U¿ytkownik powinien mieæ mo¿liwo¶æ zmodyfikowania stanu
+bankomatu, dotyczy to ilo¶ci pieniêdzy dostêpnych w bankomacie, w
+jakich nomina³ach oraz dla ka¿dego nomina³u w jakiej ilo¶ci.<br>
+<br>
+</b><b>Dla uproszczenia mo¿na za³o¿yæ, ¿e ka¿da w/w operacja, o ile
+mo¿liwe
+jest jej wykonanie w danym
+momencie, powinna mieæ skutek natychmiastowy. Dotyczy to aktualnych
+stanów wszystkich "podmiotów" uczestnicz±cych w operacji.<br>
+</b>
+<p></p>
+</body>
+</html>

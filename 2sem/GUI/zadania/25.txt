@@ -1,0 +1,63 @@
+package jbPack;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+class Handler implements ActionListener {
+        public void actionPerformed(ActionEvent e)   {
+            System.out.println("Wyst¹pi³o zdarzenie!");  
+        }
+}
+
+public class Program
+{
+    
+    public static void main(String [] args)
+    {
+        wyswietl(args);
+        
+    }
+    
+    public static void wyswietl(String [] args)
+    {
+        int chr = args[0].charAt(0);
+        chr -= 'A';
+        JFrame frame = new JFrame();
+        frame.setSize(300,300);
+        frame.setDefaultCloseOperation(3);
+        Container cp = frame.getContentPane();
+        BoxLayout bx = new BoxLayout(cp, BoxLayout.Y_AXIS);
+        cp.setLayout(bx);              
+        JButton temp = new JButton("");
+        for(int i = 0; i<5; i++){
+            String test = "";
+            for(int j = 0; j<=i; j++)
+                test += ""+j;
+            temp = new JButton(test);
+            switch(chr){
+                case 1:
+                    temp.setAlignmentX(Component.CENTER_ALIGNMENT);
+                    break;
+                case 2:
+                    temp.setAlignmentX(Component.CENTER_ALIGNMENT);
+                    cp.add(Box.createRigidArea(new Dimension(10, 10)));
+                    break;
+                case 3:   
+                    temp.setAlignmentX(Component.CENTER_ALIGNMENT);
+                    cp.add(Box.createGlue());
+                    break;
+                case 4:
+                    temp.setMaximumSize(new Dimension(300, 60));
+                    break;
+                default:
+                    break;
+            }
+            cp.add(temp);
+        }
+        
+        frame.setVisible(true);
+        
+    }
+    
+}

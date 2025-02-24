@@ -1,0 +1,129 @@
+Seria zadan przedkolokwialnych.
+Oznaczenia symboli wystepujacych zaraz po tresci zadania:
+(-) oznacza zadanie nadzwyczaj proste
+() zadanie zwykle
+(+) zadanie troche fajniejsze od poprzedniego
+(*) moze wam sprawic klopoty (i pewnie sprawi)
+Wsk. - wskazowka
+
+Oznaczenia w tekscie (nie mam zadnego edytora poza notatnikiem, 
+a jakos musze to zapisac)
+x \in X oznacza: x nalezy do X. 
+X (suma) Y oznacza ... wiadomo co
+X (przeciecie) Y ...
+-X dopelnienie.
+czasami przez 0 oznacze zbior pusty (napisze wtedy)
+wtw - wtedy i tylko wtedy (rownowazne)
+
+
+Zad 1 (-) Obliczyc zbiory:
+{{3,{6}},2,pies,{22}} \ {22,{{3},6},8}
+({1,2,{3},4,7} (przeciecie) {1,2,3,4,5}) (suma) {2,20}
+
+Wsk. najpierw wskazac elemenyt z poszczegolnych zbiorow, 
+a nastepnie zobaczyc definicje roznicy, sumy i przeciecia.
+
+Zad 2 () Pokazac, ze zachodza rownosci zbiorow:
+a)() -(A (suma) B) = (-B) (przeciecie) (-A)
+b)(+) (B (przeciecie) (-((-A) (suma) B))) (przeciecie) 
+(C (suma) D) = 0
+gdzie 0 oznacza zbior pusty
+
+Wsk. Pokazywac to stopniowo. 
+Mozna to zrobic dwoma metodami - albo pokazac, ze x nalezy do 
+zbioru po jednej stronie wtw nalezy do zbioru po drugiej stronie, 
+albo przy zastosowaniu jakiegos tam diagramu rysunkowego.
+Nalezy zobaczyc definicje rownosci dwoch zbiorow, zobaczyc 
+definicje tego, ze element x nalezy do sumy dwoch zbiorow 
+(to samo do przeciecia i dopelnienia), zobaczyc definicje 
+zbioru pustego.
+Mozna stosowac prawa logiczne. Te prawa dowodzi sie sprawdzajac 
+"podstawienia 0 i 1 za p i q".
+
+Zad 3 () Mamy relacje dwuargumentowe: OJCIEC, MATKA oraz relacje 
+jednoargumentowa: MEZCZYZNA (x OJCIEC y -oznacza x jest ojcem y, 
+itd.), relacje te sa okreslone na wszystkich ludziach, ktorzy 
+kiedykolwiek zyli (do kwadratu dla relacji dwuargumentowych).
+a) () powiedziec czym jest (tak po ludzku) i uzasadnic:
+(OJCIEC (suma) MATKA)
+(OJCIEC (suma) MATKA)^(-1) (do minus pierwszej, lub inaczej 
+relacja odwrotna)
+(OJCIEC (suma) MATKA) (zlozone) (OJCIEC (suma) MATKA)
+(OJCIEC (suma) MATKA) (zlozone) (OJCIEC (suma) MATKA)^(-1)
+b) () zdefiniowac relacje:
+-) dwuargumentowa: BRAT x BRAT y wtw jesli x jest bratem y
+czy ta relacje jest zwrotna, przechodnia, symetryczna?
+-) jednoargumentowa: BABCIA BABCIA x wtw jesli x jest 
+czyjas babcia.
+c) () co sie stanie, jesli naszym swiatem (tym na czym okreslone 
+sa relacje i po ktorym moga przebiegac x \in wszystko) beda 
+jedynie zywi ludzie?
+
+Wsk. Relacja dwuargumentowa to zbior par, suma dwoch relacji 
+jest suma tych zbiorow par. Zobaczyc definicje zlozenia relacji, 
+relacji odwrotnej. Pamietajcie tez o popelnianym bledzie, w ktorym 
+przyjmowaliscie, np. ze dziadek moze byc tylko ze strony ojca.
+
+Zad 4 (+)
+a) N={0,1,2,3,4,....} - liczby naturalne, < - relacja 
+dwuargumentowa na N*N (iloczyn kartezjanski) (normalnie okreslona)
+() Zdefiniowac za jej pomoca relacje dwuargumentowa = (x=y wtw x 
+jest rowny y) 
+czy ta relacja jest zwrotna, przechodnia i symetryczna?
+(+) Zdefiniowac relacje jednoargumentowa NAJMN taka, ze NAJMN x 
+wtw gdy x jest najmniejsza liczba naturalna (nie stosowac = i tak 
+zwanych stalych: 0,1,2,3,..... nie moze byc zadnych konkretnych cyfr)
+(+) czym jest relacja < (zlozenie) <
+
+b)(+,*) N liczby naturalne, trojargumentowa + zdefiniowana 
+nastepujaco:
++(x,y,z) wtw gdy x+y=z. 
+zdefiniowac przy jej pomocy relacje:
+(*) NAJMN
+(+) <
+
+Zad 5 () (st) - oznacza strzalke
+Niech:
+f:R (st) R f(x)=2x+1
+g:R (st) R g(x)=x*x*x-x
+h:N (st) R h(x)=(0.5)x+1
+Narysowac ich wykresy, obliczyc funkcje:
+f+g zdefiniowana (f+g)(x)=f(x)+g(x)
+f*g
+f (zlozone) g zdefiniowane (f (zlozone) g)(x)=f(g(x))
+g (zlozone) f
+f (zlozone) (g (zlozone) h)
+f^(-1) f do minus pierwszej, odwrotna
+(f+f)^(-1)
+Jakie problemy wystapia jesli wezmiemy:
+h (zlozone) f
+niech funkcja j:N (st) N okreslona: j(x)=2x+3 
+czy istnieja funkcje z N w N okreslone: j-4, (0.5)*j
+
+Wsk. zobaczyc definicje funkcji, zlozenia funkcji, funkcji 
+odwrotnej.
+
+Tego ponizej mozecie nie czytac, zobaczcie lepiej to co bylo 
+na wykladzie o funkcji odwrotnej (nie potrafie tego wyjasnic 
+bez rysunkow). Opowiem to w skrocie (jak zainstaluje sobie 
+skaner, to dostaniecie pelna wersje):
+jesli mamy obliczyc funkcje odwrotna do 
+f(x)=3x-7 
+to robimy tak:
+z powyzszego wzoru wiemy, ze x (ten po lewej stronie; z dziedziny) 
+przechodzi na 3x-7. Czyli dla danego x, para (x,3x-7) 
+nalezy do funkcji. Szukajac funkcji odwrotnej, chcemy zobaczyc 
+co przeszlo na x po prawej stronie (troche niejasno napisalem)
+f(x)=y
+y=3x-7
+(y+7)/3=x
+zamieniamy x z y
+(x+7)/3=y=f^(-1)(x)
+na element x w obrazie funkcji f, przeszedl element (x+7)/3.
+
+
+Milych snow. Mozecie przesylac pytania na moj adres, ale nie 
+przesadzajcie z ich dlugoscia. Za duzo kaza mi sie uczyc i 
+jestem troche zmeczony.
+
+Arek

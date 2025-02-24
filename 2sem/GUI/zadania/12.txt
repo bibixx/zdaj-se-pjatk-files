@@ -1,0 +1,37 @@
+package jbPack;
+
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+
+public                      
+class Program {
+
+    public static void main(String[] args)
+    {
+        new Program(args);
+    }        
+
+    public Program(String[] args)
+    {
+        String str="";
+        String szukaj = "aaa";
+        int kod=-1;
+        int zlicz=0;
+        int x=0;
+        do {
+            try {
+                kod = System.in.read();
+                char znak=(char)kod;
+                if (kod != 10 && kod != 13)
+                    str += znak;
+            } catch(Exception ex) {
+                System.out.println("Wyj¹tek");
+            }
+        } while (kod != 10);
+        while (( x = str.indexOf(szukaj, x) + 1 ) != 0){
+            zlicz++;
+        }
+        System.out.println(zlicz);
+    }
+}

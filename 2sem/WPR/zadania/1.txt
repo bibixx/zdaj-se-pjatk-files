@@ -1,0 +1,98 @@
+package jbPack;
+
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+
+abstract
+class Figura {
+    protected int x, y;
+    protected String fig = "Jeszcze nie wiadomo" ;
+    
+    public Figura(int p1, int p2){
+        this.x = p1;
+        this.y = p2;
+    }
+    
+    public void pokaz(){
+        System.out.println(this.fig);
+        System.out.println("Srodek - ("+this.x+","+this.y+")");
+    }
+    
+    public abstract void pozycja(int x, int y);
+}
+
+
+class Kolo extends Figura {
+    private int promien;
+    protected String fig = "Kolo";
+    
+    public Kolo(int x, int y, int r) {
+        super(x, y);
+        this.promien = r;
+    }
+    
+    public void pozycja(int x, int y){
+        if(Math.sqrt((x-this.x)*(x-this.x) + (y-this.y)*(y-this.y)) < this.promien ){
+            System.out.println("Nalezy");
+        } else {
+            System.out.println("Nie nalezy");
+        }
+    }
+    
+    public void pokaz(){
+        System.out.println(this.fig);
+        System.out.println("Srodek - ("+this.x+","+this.y+")");
+        System.out.println("Promieñ: "+this.promien);
+    }
+    
+}
+
+class Prostokat extends Figura {
+    private int wys, szer;
+    protected String fig = "Prostokat";
+    
+    public Prostokat(int x, int y, int szer, int wys) {
+        super(x, y);
+        this.szer = szer;
+        this.wys = wys;
+    }
+    
+    public void pozycja(int x, int y){
+        if(x > this.x - (szer/2) && x < this.x + (szer/2) &&
+            y > this.y - (wys/y) && y < this.y + (wys/2) ){
+            System.out.println("Nalezy");
+        } else {
+            System.out.println("Nie nalezy");
+        }
+    }
+    
+    public void pokaz(){
+        System.out.println(this.fig);
+        System.out.println("Srodek - ("+this.x+","+this.y+")");
+        System.out.println("Szerokoœæ: "+this.szer);
+        System.out.println("Wysokoœæ: "+this.wys);
+    }
+    
+}
+
+
+public                      
+class Program {
+
+    public static void main(String[] args)
+    {
+        new Program(args);
+    }        
+
+    public Program(String[] args)
+    {
+        Kolo k = new Kolo(200, 200, 50);
+        k.pokaz();
+	k.pozycja(200, 200);	
+	Figura p = new Prostokat(200, 200, 50, 50);
+	p.pokaz();	// wywo³anie metody z klasy Prostokat, a nie z klasy Figura
+	p.pozycja(210, 300);
+    }
+}
+

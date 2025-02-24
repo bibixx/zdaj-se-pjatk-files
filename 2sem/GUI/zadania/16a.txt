@@ -1,0 +1,42 @@
+package jbPack;
+
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+
+public                      
+class Program {
+
+    public static void main(String[] args)
+    {
+        new Program(args);
+    }        
+
+    public Program(String[] args)
+    {
+    String text = "";
+    ArrayList list=new ArrayList();
+    int s = 0;
+    int loc = 0;
+    do {
+        text = JOptionPane.showInputDialog("Podaj tekst:");
+        if (text != null) {
+            loc = sort(list, text);
+            list.add((loc), text);
+        }    
+        System.out.println(list);
+    }while(text != null);
+    JOptionPane.showMessageDialog(null,list);
+    System.exit(0);
+    }
+    
+
+    public int sort(ArrayList list, String text)
+    {
+        int i = 0;
+        for(i = 0; i < list.size(); i++)
+            if (((String)list.get(i)).compareTo(text) >= 0)
+                break;
+        return i;
+    }
+}    

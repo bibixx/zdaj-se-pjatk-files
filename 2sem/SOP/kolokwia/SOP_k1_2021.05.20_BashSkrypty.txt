@@ -1,0 +1,887 @@
+WSZYSTKIE ZADANIA TROCHE CHAOTYCZNIE SKOPIOWANE (RAZEM Z PSEUDONIMAMI I NICKAMI) ALE WSZYSTKIE* 
+
+Napisz skrypt, który zapisze do pliku P te spośród swoich argumentów, które są nazwami pustych plików zwykłych, do których mamy prawo zapisu lub pustych katalogów (newat bez plików ukrytych). Nazwa pliku P musi być podana jako ostatni argument, a poprzedzajace ją argumentów są to argumenty, które testujemy i które być może będziemy zapisywać do pliku P.
+
+EloKurwa™® — Dziś o 19:19
+Napisz skrypt, który pobierze trzy argumenty. Jeżeli pierwsze dwa są nazwami plików do odczytu, a trzeci jest nazwą pliku do zapisu (trzeba to obowiązkowo sprawdzić) to do pliku o nazwie 3-go argumentu zapisujemy wszystkie linie z pliku 1, których nie ma w pliku 2. Linie mają być zapisane od końca, a wszystkie znaki w linii mają byc odwrócone równiez odwrócone. Skrypt ma wyświetlić liczbę takich linii.
+
+Vladyslav — Dziś o 19:19
+Napisz skrypt, który zapisze do pliku P te spośród swoich argumentów, które są nazwami pustych plików zwykłych, do których mamy prawo zapisu lub pustych katalogów (newat bez plików ukrytych). Nazwa pliku P musi być podana jako ostatni argument, a poprzedzajace ją argumentów są to argumenty, które testujemy i które być może będziemy zapisywać do pliku P.
+
+1
+
+iNTERO — Dziś o 19:20
+Napisz skrypt, który zapisze do pliku P te spośród swoich argumentów, które są nazwami niepustych plików zwykłych. W pliku P powinniśmy zapisać W JEDNEJ lini nazwę pliku, liczbę znaków w pliku i uprawnienia, które posiadamy do tego pliku w formacie "rwx". Nazwa pliku P musi być podana z klawiatury.
+
+Indy — Dziś o 19:20
+Napisz skrypt, który zapisze do pliku P te spośród swoich argumentów, które są nazwami pustych plików zwykłych, do których mamy prawo zapisu lub pustych katalogów (newat bez plików ukrytych). Nazwa pliku P musi być podana jako ostatni argument, a poprzedzajace ją argumentów są to argumenty, które testujemy i które być może będziemy zapisywać do pliku P.
+
+!Eryczkee — Dziś o 19:20
+Napisz skrypt, który pobierze dwa argumenty. Jeżeli oba są plikami do odczytu to porównujemy ich zawartość. Jeżeli ich zawartość pod każdym względem (liczba znaków, liczba słów, liczba linii i ich zawartość) jest identyczna, to wyświetlamy OK, a jeżeli się czymś różnią to wyświetlamy pierwszą linię, którą się różnią i kończymy skrypt. Do porównywania zawartości plików nie używamy poleceń zewnętrznych typu cmp lub diff.
+
+................. — Dziś o 19:21
+Napisz skrypt, który pobierze trzy argumenty. Jeżeli pierwsze dwa są nazwami plików do odczytu, a trzeci jest nazwą pliku do zapisu (trzeba to obowiązkowo sprawdzić) to do pliku o nazwie 3-go argumentu zapisujemy wszystkie linie z pliku 1, których nie ma w pliku 2. Linie mają być zapisane od końca, a wszystkie znaki w linii mają byc odwrócone równiez odwrócone. Skrypt ma wyświetlić liczbę takich linii.
+
+WASTE — Dziś o 19:21
+Napisz skrypt, który zapisze do pliku P te spośród swoich argumentów, które są nazwami pustych plików zwykłych, do których mamy prawo zapisu lub pustych katalogów (newat bez plików ukrytych). Nazwa pliku P musi być podana jako ostatni argument, a poprzedzajace ją argumentów są to argumenty, które testujemy i które być może będziemy zapisywać do pliku P.
+
+aleksandrakosmowska — Dziś o 19:22
+Napisz skrypt, który pobierze trzy argumenty. Jeżeli pierwsze dwa są nazwami plików do odczytu, a trzeci jest nazwą pliku do zapisu to do pliku o nazwie 3-go argumentu zapisujemy wszystkie linie z pliku 1, które są w pliku 2. Skrypt ma wyświetlić liczbę znaków w każdej takiej linii, oraz liczbę spacji w każdej linii (zakładamy, że nie ma dwóch spacji obok siebie) oraz licznę linii w której wystepuje literka a lub A.
+
+Qubamas — Dziś o 19:40
+Mamy PLIKWEJSCIOWY jak poniżej:
+
+1 2 3 5 8
+
+9 2 32
+
+1 2 a
+
+9 2 13
+
+Napisz skrypt, który pobierze dwa argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY, a następnie zapisuje do PLIKWYJSCIOWY informacje jak poniżej
+
+Liczba 1 jest liczbą Fibonacciego, Liczba wystąpień 2
+
+Liczba 2 jest liczbą Fibonacciego, Liczba wystąpień 4
+
+Liczba 3 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Liczba 5 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Liczba 8 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Liczba 9 nie jest liczbą Fibonacciego
+
+Liczba 32 nie jest liczbą Fibonacciego
+
+Liczba a nie jest liczbą
+
+Liczba 13 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+aleksandrakosmowska — Dziś o 19:41
+W pliku, którego nazwa została podana z klawiatury, mamy listę plików jak np.:
+
+Plik1.txt plik2.txt plik3.txt
+
+nieplik.txt plik5.txt
+
+Plik6.txt
+
+Napisz skrypt, który przeanalizuje plik o takiej zawartości i wyświetli, informacje jak poniżej:
+
+W pliku Plik1.txt mamy 10 słów i 4 linie i 4 liczby.
+
+W pliku plik2.txt mamy 200 słów i 3 linie i 0 liczb.
+
+W pliku plik3.txt mamy 100 słów i 34 linie i 3 liczby.
+
+Nazwa nieplik.txt to nie jest nazwa pliku
+
+W pliku plik5.txt mamy 20 słów i 4 linie i 3 liczby.
+
+W pliku Plik6.txt mamy 3 słów i 3 linie i 3 liczby.
+
+W sumie mamy 333 słowa i 48 linii i 13 liczb.
+
+W sumie długość wszystkich plików w bajtach to 10000
+
+Uwaga lista plików może się zmieniać. Struktura pliku składa się z linii, w których mamy słowa oddzielone od siebie białym znakiem lub enterem. Każde słowo może zawierać albo tylko cyfry, albo tylko litery.
+
+................. — Dziś o 19:43
+Oto Twoje zadanie, ale masz niewiele czasu na jego wykonanie od 19.35 do 19.55 plus dwie minuty na przesłanie pod adres prowadzącego(ej) ćwiczenia, zrobienie zdjęcia i wstawienie go jako odpowiedź. W emailu umieść treść zadania. Wyślij emaila obowiązkowo z emaila szkolnego. Pomyłki nie będą akceptowane. Powodzenia.
+W pliku, którego nazwa została podana z klawiatury, mamy listę plików jak np.:
+
+Plik1.txt plik2.txt plik3.txt
+
+nieplik.txt plik5.txt
+
+Plik6.txt
+
+Napisz skrypt, który przeanalizuje plik o takiej zawartości i wyświetli, informacje jak poniżej:
+
+W pliku Plik1.txt mamy 10 słów i 4 linie i 4 liczby.
+
+W pliku plik2.txt mamy 200 słów i 3 linie i 0 liczb.
+
+W pliku plik3.txt mamy 100 słów i 34 linie i 3 liczby.
+
+Nazwa nieplik.txt to nie jest nazwa pliku
+
+W pliku plik5.txt mamy 20 słów i 4 linie i 3 liczby.
+
+W pliku Plik6.txt mamy 3 słów i 3 linie i 3 liczby.
+
+W sumie mamy 333 słowa i 48 linii i 13 liczb.
+
+W sumie długość wszystkich plików w bajtach to 10000
+
+Uwaga lista plików może się zmieniać. Struktura pliku składa się z linii, w których mamy słowa oddzielone od siebie białym znakiem lub enterem. Każde słowo może zawierać albo tylko cyfry, albo tylko litery.
+
+Destin🐢 — Dziś o 19:44
+Napisz skrypt, który pobierze n argumentów. Pierwszy argument to nazwa pliku wyjściowego.
+
+Kolejne n-1 argumentów to nazwy plików z danymi, a ostatni argument to nazwa plik wyjściowego. Skrypt ma za zadanie scalić pliki wejściowe jak poniżej:
+
+PLIKA
+
+1
+
+2 3
+
+1 33
+
+3
+
+PLIKB
+
+2 3
+
+9 b
+
+a l a
+
+PLIKC
+
+4 5
+
+3
+
+i o l a
+
+1
+
+PLIKWYJSCIOWY
+
+1 2 3 4 5
+
+2 3 9 b 3
+
+1 33 a l a i o l a
+
+3 1
+
+Przydatne polecenia: tail -10 plik odczytuje 10 ostatnich linii z pliku plik, head -10 plik odczytuje 10 pierwszych linii z pliku plik, tail -10 plik | head -1 odczytuje 10 od końca linię z pliku plik. Oprócz utworzenia pliku wyjściowego, sktypt ma wyświetlić jego długość w bajtach.
+
+
+vNapisz skrypt, który pobierze dwa argumenty. Jeżeli oba są katalogami do odczytu to porównujemy ich zawartość. Jak ich zawartość jest taka sama to wyświetlamy 1 - uwaga porównujemy liczbę plików, ich nazwy i ich zawartość. Uwaga: aby porównać zawartość dwóch plików użyjmy polecenia cmp plik1 plik2. Jeżeli pliki te są takie same to cmp nic nie wyświetli i zwróci wartość 0. Jeżeli katalog 1 nie zawiera ani jednego pliku z katalogu 2 to wyświetlamy 2. Jak zawiera przynajmniej jeden plik to wyświetlamy 3.
+
+Micah — Dziś o 19:30
+Jeżeli ich zawartość pod każdym względem (ilość plików, nazwy plików i ich zawartość) jest identyczna, to wyświetlamy OK, a jeżeli się czymś różnią to wyświetlamy czym się różnią, czy ilością plików, nazwami plików czy zawartością plików i kończymy skrypt. JAK TO ZROBIC XDDD
+
+hi_am_lejzer — Dziś o 19:31
+Napisz skrypt, który pobierze dwa argumenty. Jeżeli oba są plikami do odczytu to porównujemy ich zawartość. Jeżeli ich zawartość pod każdym względem (liczba znaków, liczba słów, liczba linii i ich zawartość) jest identyczna, to wyświetlamy OK, a jeżeli się czymś różnią to wyświetlamy pierwszą linię, którą się różnią i kończymy skrypt. Do porównywania zawartości plików nie używamy poleceń zewnętrznych typu cmp lub diff.
+
+................. — Dziś o 19:32
+Napisz skrypt, który pobierze trzy argumenty. Jeżeli pierwsze dwa są nazwami plików do odczytu, a trzeci jest nazwą pliku do zapisu (trzeba to obowiązkowo sprawdzić) to do pliku o nazwie 3-go argumentu zapisujemy wszystkie linie z pliku 1, których nie ma w pliku 2. Linie mają być zapisane od końca, a wszystkie znaki w linii mają byc odwrócone równiez odwrócone. Skrypt ma wyświetlić liczbę takich linii.
+
+MORTAL_WOMBAT — Dziś o 19:40
+Mamy PLIKWEJSCIOWY jak poniżej:
+
+1 2 3 5 8
+
+9 2 32
+
+1 2 a
+
+9 2 13
+
+Napisz skrypt, który pobierze dwa argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY, a następnie zapisuje do PLIKWYJSCIOWY informacje jak poniżej
+
+Liczba 1 jest liczbą Fibonacciego, Liczba wystąpień 2
+
+Liczba 2 jest liczbą Fibonacciego, Liczba wystąpień 4
+
+Liczba 3 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Liczba 5 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Liczba 8 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Liczba 9 nie jest liczbą Fibonacciego
+
+Liczba 32 nie jest liczbą Fibonacciego
+
+Liczba a nie jest liczbą
+
+Liczba 13 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+StepBrother — Dziś o 19:40
+Napisz skrypt, który pobierze trzy argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY1, PLIKWYJSCIOWY2, i przepisze wszystkie linie zawierające wyłącznie słowa o parzystej liczbie znaków do PLIKWYJSCIOWY1, o pozostałe do PLIKWYJSCIOWY2.
+
+Skrypt ma wyświetlić ile linii zostało zapisanych do pliku wyjściowego 1 i pliku wyjściowego 2.
+
+Skrypt ma sprawdzać błędy. Wyświetl daty modyfikacji plików wyjściowych.
+
+Przykład:
+
+Mamy PLIKWEJSCIOWY:
+
+12323 332 33w 434 532
+
+4332 23 32
+
+1333 2ewe 2a
+
+9r 23
+
+Ala ma kota
+
+PLIKWYJSCIOWY1
+
+9332 23 32
+
+1333 2ewe 2a
+
+9r 23
+
+PLIKWYJSCIOWY2
+
+12323 332 33w 434 532
+
+Ala ma kota
+
+whoami — Dziś o 19:40
+Napisz skrypt, który pobierze trzy argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY1, PLIKWYJSCIOWY2. Jak argumenty sa poprawne to skrypt ma przepisać wszystkie linie zawierajace ciągi rosnące do PLIKWYJSCIOWY1, o ciągi malejące do PLIKWYJSCIOWY2. Linie które nie są poprawnymi ciągami rosnacymi lub malejącymi ignorujemy, ale wyświetlamy ile takich ciągów było. Podaj wielkość plików wyjściowych w bajtach.
+
+Przykład:
+
+Mamy PLIKWEJSCIOWY jak poniżej:
+
+1 2 3 a 4 5
+
+1 2 3 4 5
+
+9 2 3 b
+
+54 45 33
+
+1 2 a l a i o l a
+
+9 2 c
+
+5 5 5
+
+1 2 3 4
+
+4 3 2 1
+
+1 1 1 2
+
+Przykład:
+
+PLIKWYJSCIOWY1
+
+1 2 3 4 5
+
+1 2 3 4
+
+PLIKWYJSCIOWY2
+
+54 45 33
+
+4 3 2 1
+
+Frogalo — Dziś o 19:40
+Napisz skrypt, który pobierze trzy argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY1, PLIKWYJSCIOWY2. Jak argumenty sa poprawne to skrypt ma przepisać wszystkie linie zawierajace ciągi rosnące do PLIKWYJSCIOWY1, o ciągi malejące do PLIKWYJSCIOWY2. Linie które nie są poprawnymi ciągami rosnacymi lub malejącymi ignorujemy, ale wyświetlamy ile takich ciągów było. Podaj wielkość plików wyjściowych w bajtach.
+
+Przykład:
+
+Mamy PLIKWEJSCIOWY jak poniżej:
+
+1 2 3 a 4 5
+
+1 2 3 4 5
+
+9 2 3 b
+
+54 45 33
+
+1 2 a l a i o l a
+
+9 2 c
+
+5 5 5
+
+1 2 3 4
+
+4 3 2 1
+
+1 1 1 2
+
+Przykład:
+
+PLIKWYJSCIOWY1
+
+1 2 3 4 5
+
+1 2 3 4
+
+PLIKWYJSCIOWY2
+
+54 45 33
+
+4 3 2 1
+
+anonimowystudent — Dziś o 19:40
+W pliku, którego nazwa została podana z klawiatury, mamy listę plików jak np.:
+
+Plik1.txt plik2.txt plik3.txt
+
+nieplik.txt plik5.txt
+
+Plik6.txt
+
+Napisz skrypt, który przeanalizuje plik o takiej zawartości i wyświetli, informacje jak poniżej:
+
+W pliku Plik1.txt mamy 10 słów i 4 linie i 4 liczby.
+
+W pliku plik2.txt mamy 200 słów i 3 linie i 0 liczb.
+
+W pliku plik3.txt mamy 100 słów i 34 linie i 3 liczby.
+
+Nazwa nieplik.txt to nie jest nazwa pliku
+
+W pliku plik5.txt mamy 20 słów i 4 linie i 3 liczby.
+
+W pliku Plik6.txt mamy 3 słów i 3 linie i 3 liczby.
+
+W sumie mamy 333 słowa i 48 linii i 13 liczb.
+
+W sumie długość wszystkich plików w bajtach to 10000
+
+Uwaga lista plików może się zmieniać. Struktura pliku składa się z linii, w których mamy słowa oddzielone od siebie białym znakiem lub enterem. Każde słowo może zawierać albo tylko cyfry, albo tylko litery.
+
+WASTE — Dziś o 19:40
+Mamy PLIKWEJSCIOWY jak poniżej:
+
+1 2 3 5 8
+
+9 2 32
+
+1 2 a
+
+9 2 13
+
+Napisz skrypt, który pobierze dwa argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY, a następnie zapisuje do PLIKWYJSCIOWY informacje jak poniżej
+
+Liczba 1 jest liczbą Fibonacciego, Liczba wystąpień 2
+
+Liczba 2 jest liczbą Fibonacciego, Liczba wystąpień 4
+
+Liczba 3 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Liczba 5 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Liczba 8 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Liczba 9 nie jest liczbą Fibonacciego
+
+Liczba 32 nie jest liczbą Fibonacciego
+
+Liczba a nie jest liczbą
+
+Liczba 13 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Vladyslav — Dziś o 19:40
+Napisz skrypt, który pobierze trzy argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY1, PLIKWYJSCIOWY2. Jak argumenty sa poprawne to skrypt ma przepisać wszystkie linie zawierajace ciągi rosnące do PLIKWYJSCIOWY1, o ciągi malejące do PLIKWYJSCIOWY2. Linie które nie są poprawnymi ciągami rosnacymi lub malejącymi ignorujemy, ale wyświetlamy ile takich ciągów było. Podaj wielkość plików wyjściowych w bajtach.
+
+Przykład:
+
+Mamy PLIKWEJSCIOWY jak poniżej:
+
+1 2 3 a 4 5
+
+1 2 3 4 5
+
+9 2 3 b
+
+54 45 33
+
+1 2 a l a i o l a
+
+9 2 c
+
+5 5 5
+
+1 2 3 4
+
+4 3 2 1
+
+1 1 1 2
+
+Przykład:
+
+PLIKWYJSCIOWY1
+
+1 2 3 4 5
+
+1 2 3 4
+
+PLIKWYJSCIOWY2
+
+54 45 33
+
+4 3 2 1
+
+kolonowski — Dziś o 19:40
+Napisz skrypt, który pobierze trzy argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY1, PLIKWYJSCIOWY2, i przepisze wszystkie linie zawierające wyłącznie słowa o parzystej liczbie znaków do PLIKWYJSCIOWY1, o pozostałe do PLIKWYJSCIOWY2.
+
+Skrypt ma wyświetlić ile linii zostało zapisanych do pliku wyjściowego 1 i pliku wyjściowego 2.
+
+Skrypt ma sprawdzać błędy. Wyświetl daty modyfikacji plików wyjściowych.
+
+Przykład:
+
+Mamy PLIKWEJSCIOWY:
+
+12323 332 33w 434 532
+
+4332 23 32
+
+1333 2ewe 2a
+
+9r 23
+
+Ala ma kota
+
+PLIKWYJSCIOWY1
+
+9332 23 32
+
+1333 2ewe 2a
+
+9r 23
+
+PLIKWYJSCIOWY2
+
+12323 332 33w 434 532
+
+Ala ma kota
+
+GodBlessRNG — Dziś o 19:40
+
+
+ngez — Dziś o 19:41
+W pliku, którego nazwa została podana z klawiatury, mamy listę plików jak np.:
+
+Plik1.txt plik2.txt plik3.txt
+
+nieplik.txt plik5.txt
+
+Plik6.txt
+
+Napisz skrypt, który przeanalizuje plik o takiej zawartości i wyświetli, informacje jak poniżej:
+
+W pliku Plik1.txt mamy 10 słów i 4 linie i 4 liczby.
+
+W pliku plik2.txt mamy 200 słów i 3 linie i 0 liczb.
+
+W pliku plik3.txt mamy 100 słów i 34 linie i 3 liczby.
+
+Nazwa nieplik.txt to nie jest nazwa pliku
+
+W pliku plik5.txt mamy 20 słów i 4 linie i 3 liczby.
+
+W pliku Plik6.txt mamy 3 słów i 3 linie i 3 liczby.
+
+W sumie mamy 333 słowa i 48 linii i 13 liczb.
+
+W sumie długość wszystkich plików w bajtach to 10000
+
+Uwaga lista plików może się zmieniać. Struktura pliku składa się z linii, w których mamy słowa oddzielone od siebie białym znakiem lub enterem. Każde słowo może zawierać albo tylko cyfry, albo tylko litery.
+[19:41]
+xD
+
+@whoami
+Napisz skrypt, który pobierze trzy argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY1, PLIKWYJSCIOWY2. Jak argumenty sa poprawne to skrypt ma przepisać wszystkie linie zawierajace ciągi rosnące do PLIKWYJSCIOWY1, o ciągi malejące do PLIKWYJSCIOWY2. Linie które nie są poprawnymi ciągami rosnacymi lub malejącymi ignorujemy, ale wyświetlamy ile takich ciągów było. Podaj wielkość plików wyjściowych w bajtach.  Przykład:  Mamy PLIKWEJSCIOWY jak poniżej:  1 2 3 a 4 5  1 2 3 4 5  9 2 3 b  54 45 33  1 2 a l a i o l a  9 2 c  5 5 5  1 2 3 4  4 3 2 1  1 1 1 2  Przykład:  PLIKWYJSCIOWY1  1 2 3 4 5  1 2 3 4  PLIKWYJSCIOWY2  54 45 33  4 3 2 1
+
+Huragan — Dziś o 19:41
+bardzo ladnie prosze o wykonanie tego zadania
+
+hi_am_lejzer — Dziś o 19:41
+Napisz skrypt, który pobierze dwa argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY.
+
+W pliku wejściowym mamy dane liczby lub słowa. Dla wszystkich liczb dodatnich powinna zostać wyznaczoba silnia tej liczby Słowa i liczby ujemne mają być zignorowane. Mamy dodatkowo policzyć i wyświetlić liczbę znaków we wszyskich wyznaczonych silniach.
+
+PLIKWEJSCIOWY:
+
+1 2 3 ala
+
+4 5 6 ola
+
+-1 7 8
+
+PLIKWYJSCIOWY
+
+1 2 6 ala
+
+24 120 720 ola
+
+-1 5040 40320
+
+Liczba cyfr w liczbach które sa silniami to: 20
+
+Liczba liczb ujemnych to: 1
+[19:41]
+Napisz skrypt, który pobierze dwa argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY.
+
+W pliku wejściowym mamy dane liczby lub słowa. Dla wszystkich liczb dodatnich powinna zostać wyznaczoba silnia tej liczby Słowa i liczby ujemne mają być zignorowane. Mamy dodatkowo policzyć i wyświetlić liczbę znaków we wszyskich wyznaczonych silniach.
+
+PLIKWEJSCIOWY:
+
+1 2 3 ala
+
+4 5 6 ola
+
+-1 7 8
+
+PLIKWYJSCIOWY
+
+1 2 6 ala
+
+24 120 720 ola
+
+-1 5040 40320
+
+Liczba cyfr w liczbach które sa silniami to: 20
+
+Liczba liczb ujemnych to: 1
+[19:41]
+Napisz skrypt, który pobierze dwa argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY.
+
+W pliku wejściowym mamy dane liczby lub słowa. Dla wszystkich liczb dodatnich powinna zostać wyznaczoba silnia tej liczby Słowa i liczby ujemne mają być zignorowane. Mamy dodatkowo policzyć i wyświetlić liczbę znaków we wszyskich wyznaczonych silniach.
+
+PLIKWEJSCIOWY:
+
+1 2 3 ala
+
+4 5 6 ola
+
+-1 7 8
+
+PLIKWYJSCIOWY
+
+1 2 6 ala
+
+24 120 720 ola
+
+-1 5040 40320
+
+Liczba cyfr w liczbach które sa silniami to: 20
+
+Liczba liczb ujemnych to: 1
+[19:41]
+Napisz skrypt, który pobierze dwa argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY.
+
+W pliku wejściowym mamy dane liczby lub słowa. Dla wszystkich liczb dodatnich powinna zostać wyznaczoba silnia tej liczby Słowa i liczby ujemne mają być zignorowane. Mamy dodatkowo policzyć i wyświetlić liczbę znaków we wszyskich wyznaczonych silniach.
+
+PLIKWEJSCIOWY:
+
+1 2 3 ala
+
+4 5 6 ola
+
+-1 7 8
+
+PLIKWYJSCIOWY
+
+1 2 6 ala
+
+24 120 720 ola
+
+-1 5040 40320
+
+Liczba cyfr w liczbach które sa silniami to: 20
+
+Liczba liczb ujemnych to: 1
+[19:41]
+Napisz skrypt, który pobierze dwa argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY.
+
+W pliku wejściowym mamy dane liczby lub słowa. Dla wszystkich liczb dodatnich powinna zostać wyznaczoba silnia tej liczby Słowa i liczby ujemne mają być zignorowane. Mamy dodatkowo policzyć i wyświetlić liczbę znaków we wszyskich wyznaczonych silniach.
+
+PLIKWEJSCIOWY:
+
+1 2 3 ala
+
+4 5 6 ola
+
+-1 7 8
+
+PLIKWYJSCIOWY
+
+1 2 6 ala
+
+24 120 720 ola
+
+-1 5040 40320
+
+Liczba cyfr w liczbach które sa silniami to: 20
+
+Liczba liczb ujemnych to: 1
+
+3
+
+3
+
+Zielu — Dziś o 19:41
+
+
+aleksandrakosmowska — Dziś o 19:43
+W pliku, którego nazwa została podana z klawiatury, mamy listę plików jak np.:
+
+Plik1.txt plik2.txt plik3.txt
+
+nieplik.txt plik5.txt
+
+Plik6.txt
+
+Napisz skrypt, który przeanalizuje plik o takiej zawartości i wyświetli, informacje jak poniżej:
+
+W pliku Plik1.txt mamy 10 słów i 4 linie i 4 liczby.
+
+W pliku plik2.txt mamy 200 słów i 3 linie i 0 liczb.
+
+W pliku plik3.txt mamy 100 słów i 34 linie i 3 liczby.
+
+Nazwa nieplik.txt to nie jest nazwa pliku
+
+W pliku plik5.txt mamy 20 słów i 4 linie i 3 liczby.
+
+W pliku Plik6.txt mamy 3 słów i 3 linie i 3 liczby.
+
+W sumie mamy 333 słowa i 48 linii i 13 liczb.
+
+W sumie długość wszystkich plików w bajtach to 10000
+
+Uwaga lista plików może się zmieniać. Struktura pliku składa się z linii, w których mamy słowa oddzielone od siebie białym znakiem lub enterem. Każde słowo może zawierać albo tylko cyfry, albo tylko litery.
+
+aleksandrakosmowska
+W pliku, którego nazwa została podana z klawiatury, mamy listę plików jak np.:  Plik1.txt plik2.txt plik3.txt  nieplik.txt plik5.txt  Plik6.txt  Napisz skrypt, który przeanalizuje plik o takiej zawartości i wyświetli, informacje jak poniżej:  W pliku Plik1.txt mamy 10 słów i 4 linie i 4 liczby.  W pliku plik2.txt mamy 200 słów i 3 linie i 0 liczb.  W pliku plik3.txt mamy 100 słów i 34 linie i 3 liczby.  Nazwa nieplik.txt to nie jest nazwa pliku  W pliku plik5.txt mamy 20 słów i 4 linie i 3 liczby.  W pliku Plik6.txt mamy 3 słów i 3 linie i 3 liczby.  W sumie mamy 333 słowa i 48 linii i 13 liczb.  W sumie długość wszystkich plików w bajtach to 10000  Uwaga lista plików może się zmieniać. Struktura pliku składa się z linii, w których mamy słowa oddzielone od siebie białym znakiem lub enterem. Każde słowo może zawierać albo tylko cyfry, albo tylko litery.
+
+aleksandrakosmowska — Dziś o 19:43
+Ktoś coś pomoże?
+
+StepBrother — Dziś o 19:44
+Napisz skrypt, który pobierze trzy argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY1, PLIKWYJSCIOWY2, i przepisze wszystkie linie zawierające wyłącznie słowa o parzystej liczbie znaków do PLIKWYJSCIOWY1, o pozostałe do PLIKWYJSCIOWY2.
+
+Skrypt ma wyświetlić ile linii zostało zapisanych do pliku wyjściowego 1 i pliku wyjściowego 2.
+
+Skrypt ma sprawdzać błędy. Wyświetl daty modyfikacji plików wyjściowych.
+
+Przykład:
+
+Mamy PLIKWEJSCIOWY:
+
+12323 332 33w 434 532
+
+4332 23 32
+
+1333 2ewe 2a
+
+9r 23
+
+Ala ma kota
+
+PLIKWYJSCIOWY1
+
+9332 23 32
+
+1333 2ewe 2a
+
+9r 23
+
+PLIKWYJSCIOWY2
+
+12323 332 33w 434 532
+
+Ala ma kota
+
+hi_am_lejzer — Dziś o 19:44
+Napisz skrypt, który pobierze dwa argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY.
+
+@aleksandrakosmowska
+Ktoś coś pomoże?
+
+StepBrother — Dziś o 19:44
+spoko
+
+hi_am_lejzer — Dziś o 19:45
+Mamy PLIKWEJSCIOWY:
+
+12323 332 33w 434 532
+
+4332 23 32
+
+1333 2ewe 2a
+
+9r 23
+
+Ala ma kota
+
+PLIKWYJSCIOWY1
+
+9332 23 32
+
+1333 2ewe 2a
+
+9r 23
+
+Napisz skrypt, który wypisze liczbę wszystkich plików w tych katalogach z katalogu podanego jako argument, w których są przynajmniej trzy pliki z rozszerzeniem exe, które można uruchomić, ale których nazwy nie są palindromami (Palindrom, wyraz, który tak samo brzmi od tyłu jak i od przodu np.: kajak).
+
+WASTE — Dziś o 19:07
+Napisz skrypt, który wypisze liczbę wszystkich plików w tych katalogach z katalogu podanego jako argument, w których są przynajmniej trzy pliki z rozszerzeniem exe, które można uruchomić, ale których nazwy nie są palindromami (Palindrom, wyraz, który tak samo brzmi od tyłu jak i od przodu np.: kajak).
+
+boronek — Dziś o 19:08
+Napisz skrypt, który wypisze trzecią linię od końca z tych plików, które są w katalogach podanych jako argumenty, w których treści i w nazwie nie ma dwóch cyfr obok siebie.
+
+dawinczielo — Dziś o 19:08
+Napisz skrypt, który wyświetli liczbę słów w nazwach plików z katalogu domowego bieżącego użytkownika, w których ani w nazwie ani w treści nie ma żadnej dużej litery.
+
+pyrzan — Dziś o 19:09
+Napisz skrypt, który wypisze trzecią linię od końca z tych plików, które są w katalogach podanych jako argumenty, w których treści i w nazwie nie ma dwóch cyfr obok siebie.
+
+aleksandrakosmowska — Dziś o 19:10
+Napisz skrypt, który wypisze nazwy tych katalogów z katalogu podanego jako argument, w których są przynajmniej trzy pliki zaczynające się na dużą literę z rozszerzeniem exe lub sh lub bez rozszerzenia, które można uruchomić.
+
+StepBrother — Dziś o 19:19
+Napisz skrypt, który zapisze do pliku P te spośród swoich argumentów, które są nazwami niepustych plików zwykłych. W pliku P powinniśmy zapisać W JEDNEJ lini nazwę pliku, liczbę znaków w pliku i uprawnienia, które posiadamy do tego pliku w formacie "rwx". Nazwa pliku P musi być podana z klawiatury.
+
+1
+
+pyrzan — Dziś o 19:20
+Napisz skrypt, który pobierze dwa argumenty. Jeżeli oba są plikami do odczytu to porównujemy ich zawartość. Jeżeli plik 2 zawiera wszystkie linie z pliku 1 i ma jakieś linie dodatkowe to wyświetlamy 1 – kolejność linii nie ma znaczenia. Jak ich zawartość jest dokładnie taka sama to wyświetlamy 2, a w innym przypadku 0. Jeżeli zawartość pliku 1 jest odwrotnością zawartości pliku 2 to wyświetlamy 3.
+
+1
+
+Huragan — Dziś o 19:21
+mózgi, to jest kanał na skrypty a nie na polecenia do napisania ich
+
+2
+
+@Huragan
+mózgi, to jest kanał na skrypty a nie na polecenia do napisania ich
+
+bmikolaj — Dziś o 19:22
+up
+
+@pyrzan
+Napisz skrypt, który pobierze dwa argumenty. Jeżeli oba są plikami do odczytu to porównujemy ich zawartość. Jeżeli plik 2 zawiera wszystkie linie z pliku 1 i ma jakieś linie dodatkowe to wyświetlamy 1 – kolejność linii nie ma znaczenia. Jak ich zawartość jest dokładnie taka sama to wyświetlamy 2, a w innym przypadku 0. Jeżeli zawartość pliku 1 jest odwrotnością zawartości pliku 2 to wyświetlamy 3.
+
+tedi18 — Dziś o 19:22
+@pyrzan masz odp do tego?
+
+@StepBrother
+Napisz skrypt, który zapisze do pliku P te spośród swoich argumentów, które są nazwami niepustych plików zwykłych. W pliku P powinniśmy zapisać W JEDNEJ lini nazwę pliku, liczbę znaków w pliku i uprawnienia, które posiadamy do tego pliku w formacie "rwx". Nazwa pliku P musi być podana z klawiatury.
+
+Evenem — Dziś o 19:22
+masz odp?
+
+WASTE — Dziś o 19:26
+Napisz skrypt, który zapisze do pliku P te spośród swoich argumentów, które są nazwami pustych plików zwykłych, do których mamy prawo zapisu lub pustych katalogów (newat bez plików ukrytych). Nazwa pliku P musi być podana jako ostatni argument, a poprzedzajace ją argumentów są to argumenty, które testujemy i które być może będziemy zapisywać do pliku P.
+
+rymcymcym — Dziś o 19:27
+mordo koorwa tu nie wysłaj
+
+8
+
+Tomasz Michałczewski — Dziś o 19:33
+prosze o spokoj bo bede musial wam wyszorować ręce mydłem
+
+3
+
+hi_am_lejzer — Dziś o 19:36
+Napisz skrypt, który pobierze dwa argumenty. Jeżeli oba są plikami do odczytu to porównujemy ich zawartość. Jeżeli ich zawartość pod każdym względem (liczba znaków, liczba słów, liczba linii i ich zawartość) jest identyczna, to wyświetlamy OK, a jeżeli się czymś różnią to wyświetlamy pierwszą linię, którą się różnią i kończymy skrypt. Do porównywania zawartości plików nie używamy poleceń zewnętrznych typu cmp lub diff.
+
+StepBrother — Dziś o 19:37
+Napisz skrypt, który zapisze do pliku P te spośród swoich argumentów, które są nazwami niepustych plików zwykłych. W pliku P powinniśmy zapisać W JEDNEJ lini nazwę pliku, liczbę znaków w pliku i uprawnienia, które posiadamy do tego pliku w formacie "rwx". Nazwa pliku P musi być podana z klawiatury.
+[19:37]
+ktos 2 zadanie?
+
+hi_am_lejzer — Dziś o 19:37
+ma ktos 1 ?
+
+@StepBrother
+Napisz skrypt, który zapisze do pliku P te spośród swoich argumentów, które są nazwami niepustych plików zwykłych. W pliku P powinniśmy zapisać W JEDNEJ lini nazwę pliku, liczbę znaków w pliku i uprawnienia, które posiadamy do tego pliku w formacie "rwx". Nazwa pliku P musi być podana z klawiatury.
+
+WASTE — Dziś o 19:37
+тшу
+[19:37]
+nie
+
+Indy — Dziś o 19:40
+Napisz skrypt, który pobierze n argumentów. Pierwszy argument to nazwa pliku wyjściowego.
+
+Kolejne n-1 argumentów to nazwy plików z danymi, a ostatni argument to nazwa plik wyjściowego. Skrypt ma za zadanie scalić pliki wejściowe jak poniżej:
+
+PLIKA
+
+1
+
+2 3
+
+1 33
+
+3
+
+PLIKB
+
+2 3
+
+9 b
+
+a l a
+
+PLIKC
+
+4 5
+
+3
+
+i o l a
+
+1
+
+PLIKWYJSCIOWY
+
+1 2 3 4 5
+
+2 3 9 b 3
+
+1 33 a l a i o l a
+
+3 1
+
+Przydatne polecenia: tail -10 plik odczytuje 10 ostatnich linii z pliku plik, head -10 plik odczytuje 10 pierwszych linii z pliku plik, tail -10 plik | head -1 odczytuje 10 od końca linię z pliku plik. Oprócz utworzenia pliku wyjściowego, sktypt ma wyświetlić jego długość w bajtach.
+
+WASTE — Dziś o 19:40
+Mamy PLIKWEJSCIOWY jak poniżej:
+
+1 2 3 5 8
+
+9 2 32
+
+1 2 a
+
+9 2 13
+
+Napisz skrypt, który pobierze dwa argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY, a następnie zapisuje do PLIKWYJSCIOWY informacje jak poniżej
+
+Liczba 1 jest liczbą Fibonacciego, Liczba wystąpień 2
+
+Liczba 2 jest liczbą Fibonacciego, Liczba wystąpień 4
+
+Liczba 3 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Liczba 5 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Liczba 8 jest liczbą Fibonacciego, Liczba wystąpień 1
+
+Liczba 9 nie jest liczbą Fibonacciego
+
+Liczba 32 nie jest liczbą Fibonacciego
+
+Liczba a nie jest liczbą
+
+Liczba 13 jest liczbą Fibonacciego, Liczba wystąpień 1
+

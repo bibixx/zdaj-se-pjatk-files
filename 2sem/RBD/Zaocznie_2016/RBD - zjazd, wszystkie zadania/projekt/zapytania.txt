@@ -1,0 +1,147 @@
+SQL1: Zapytania z jednej tabeli z warunkami Where (minimum 2)
+
+1. Wypisz filmy wyprodukowane po 1985 roku
+SELECT f.TYTUL
+FROM A_FILM f
+WHERE EXTRACT(YEAR FROM DATA_PREMIERY) > 1985;
+
+2. ZnajdŸ u¿ytkownika, który ma email w domenie mail.ru
+SELECT u.NAZWA_UZYTK
+FROM A_UZYTKOWNIK u
+WHERE u.EMAIL LIKE '%MAIL.RU';
+----------------------------------------------------------------------------------------------------
+SQL2: Zapytania z wielu tabel  z warunkami where  nie tylko z³aczeniowymi (minimum 4)
+
+1. Wyœwietl wszystkie oceny wystawione przez u¿ytkowników, których konta email koñcz¹ siê na .pl
+SELECT o.UZYTKOWNIK, f.TYTUL, '0'||o.OCENA||'/1' OCENA
+FROM A_FILM_OCENA o, A_FILM f, A_UZYTKOWNIK u
+WHERE f.ID_FILM = o.FILM AND o.UZYTKOWNIK = u.NAZWA_UZYTK AND UPPER(u.EMAIL) LIKE '%.PL';
+
+2. Wypisz d³ugoœci filmów ocenionych przez u¿ytkownika spamer69
+SELECT f.DLUGOSC
+FROM A_FILM_OCENA o, A_FILM f
+WHERE f.ID_FILM = o.FILM AND o.UZYTKOWNIK = 'SPAMER69';
+
+3. Wybierz filmy, które otrzyma³y Oscara
+SELECT f.tytul, a.rok, a.kategoria, n.nazwa_nagrody
+FROM A_FILM_NAGRODA a INNER JOIN A_FILM f ON a.id_film = f.id_film 
+INNER JOIN A_NAGRODA n ON a.id_nagroda = n.id_nagroda
+WHERE n.nazwa_nagrody='OSCAR';
+
+4. SprawdŸ, jakie filmy otrzyma³y nagrodê w 1984 roku
+SELECT f.tytul
+FROM A_FILM_NAGRODA a INNER JOIN A_FILM f ON a.id_film = f.id_film
+WHERE EXTRACT(YEAR FROM a.rok)=1984;
+------------------------------------------------------------------------------------------------------
+SQL3 Zapytania grupuj¹ce (minimum 4):
+
+na jednej tabeli z warunkiem where  i having:
+1. Wybierz kraje, w których wyprodukowano tylko jeden film
+SELECT f.kraj_produkcji, COUNT(*)
+FROM A_FILM f
+WHERE f.dlugosc>100
+GROUP BY f.KRAJ_PRODUKCJI
+HAVING COUNT(*)=1;
+
+na wielu tabelach  z dodatkowym (innym ni¿ z³¹czeniowy) warunkami where:
+2. Wypisz ile nagród otrzyma³ ka¿dy z filmów wyprodukowany w USA, który otrzyma³ co najmniej 3 nagrody
+SELECT f.tytul, COUNT(*)
+FROM a_film_nagroda a INNER JOIN a_film f ON a.id_film=f.id_film
+WHERE f.kraj_produkcji='USA'
+GROUP BY f.tytul
+HAVING COUNT(*)>=3;
+
+na wielu tabelach z warunkami having
+3. Wybierz œrednie oceny filmów, które oceni³o co najmniej 3 u¿ytkowników
+SELECT f.tytul, AVG(o.ocena)
+FROM a_film f INNER JOIN a_film_ocena o ON f.id_film=o.film
+GROUP BY f.tytul
+HAVING COUNT(*)>=3;
+
+na wielu tabelach  z warunkami where (innym ni¿ z³¹czeniowy) i having
+4. SprawdŸ, ile razy wrêczono ka¿d¹ nagrodê. Pomiñ nagrody, które wrêczono mniej ni¿ 2 razy. Wyniki pogrupuj i posortuj wed³ug nagrody
+SELECT n.nazwa_nagrody, COUNT(*)
+FROM a_film_nagroda a
+INNER JOIN a_nagroda n ON a.id_nagroda=n.id_nagroda
+GROUP BY n.nazwa_nagrody
+HAVING COUNT(*)>=2
+ORDER BY n.nazwa_nagrody ASC;
+------------------------------------------------------------------------------------------------------
+SQL4 Podzapyatnia zwyk³e (minimum 8) w tym:
+
+Zapytanie z podzapytaniem w warunku where
+1. ZnajdŸ filmy, które s¹ starsze ni¿ film nr 4
+SELECT f.tytul
+FROM a_film f
+WHERE f.data_premiery < (SELECT data_premiery FROM a_film  WHERE id_film=4);
+
+2. ZnajdŸ najkrótszy film
+SELECT f.tytul
+FROM a_film f
+WHERE f.dlugosc = (SELECT MIN(dlugosc) FROM a_film);
+
+Zapytanie z podzapytaniem w klauzuli from
+3. Podaæ tytu³y i czas trwania filmów, które trwaj¹ wiêcej ni¿ œredni czas trwania filmu w ich gatunku
+SELECT f.tytul, f.dlugosc
+FROM a_film f, (SELECT AVG(dlugosc) dl, a_film.id_gatunek gat FROM a_film GROUP BY a_film.id_gatunek) sr
+WHERE f.dlugosc > sr.dl AND sr.gat = f.id_gatunek;
+
+Zapytanie z podzapytaniem w warunku having
+4. Wybraæ gatunki, dla których œredni czas trwania filmu jest wiêkszy ni¿ dla gatunku 3
+SELECT f.id_gatunek, AVG(f.dlugosc)
+FROM a_film f
+GROUP BY f.id_gatunek
+HAVING AVG(f.dlugosc) > (SELECT AVG(dlugosc) FROM a_film WHERE id_gatunek = 3 GROUP BY id_gatunek);
+
+Zapytanie na wielu tabelach z podzapytaniem w warunku where 
+5. ZnajdŸ oceny filmów d³u¿szych od filmu Mroczny rycerz
+SELECT f.tytul, AVG(o.ocena)
+FROM a_film f INNER JOIN a_film_ocena o ON f.id_film = o.film
+WHERE f.dlugosc > (SELECT dlugosc FROM a_film WHERE tytul = 'MROCZNY RYCERZ')
+GROUP BY f.tytul;
+
+6. ZnajdŸ twórców, którzy wyprodukowali film Teksanska masakra pila mech.
+SELECT t.imie, t.nazwisko
+FROM a_tworca t INNER JOIN a_film_tworca a ON t.id_tworca = a.id_tworca INNER JOIN a_film f ON f.id_film = a.id_film
+WHERE a.id_film = (SELECT id_film FROM a_film WHERE tytul = 'TEKSANSKA MASAKRA PILA MECH.');
+
+Zapytanie na wielu tabelach z podzapytaniem w klauzuli from
+7. Wypisz nazwy gatunków filmów, które otrzyma³y nagrodê w 2004 roku
+SELECT g.nazwa_gatunku
+FROM a_film f INNER JOIN (SELECT id_film FROM a_film_nagroda WHERE EXTRACT(YEAR FROM rok) = 2004) n ON f.id_film = n.id_film
+INNER JOIN a_gatunek g ON g.id_gatunek=f.id_gatunek;
+
+Zapytanie na wielu tabelach z podzapytaniem w warunku having
+8. ZnajdŸ gatunek, który uzyska³ najni¿sz¹ œredni¹ ocenê
+SELECT f.id_gatunek, AVG(o.ocena)
+FROM a_film f INNER JOIN a_film_ocena o ON f.id_film = o.film
+GROUP BY f.id_gatunek
+HAVING AVG(o.ocena) = (SELECT MIN(AVG(a.ocena)) FROM a_film_ocena a INNER JOIN a_film b ON a.film = b.id_film GROUP BY b.id_gatunek);
+
+------------------------------------------------------------------------------------------------------
+SQL5: Podzapyatnia skorelowane (minimum 8) w tym:
+
+Zapytanie z podzapytaniem skorelowanym w warunku where
+1. ZnajdŸ 2 najd³u¿sze filmy
+SELECT f.tytul, f.dlugosc
+FROM a_film f
+WHERE 2>(SELECT COUNT(*) FROM a_film WHERE f.dlugosc<dlugosc);
+
+2. ZnajdŸ najnowszy film
+SELECT f.tytul, f.data_premiery
+FROM a_film f
+WHERE 1>(SELECT COUNT(*) FROM a_film WHERE f.data_premiery<data_premiery);
+
+Zapytanie z podzapytaniem skorelowanym w warunku having 
+3. Wypisz nazwy u¿ytkowników, których œrednia wystawionych ocen jest jedn¹ z dwóch najwy¿szych
+
+
+Zapytanie na wielu tabelach z podzapytaniem skorelowanym w warunku where
+6. Wypisz tytu³y filmów, które otrzyma³y mniej ni¿ 2 nagrody
+
+
+7. ZnajdŸ gatunki, do których nie nale¿y ¿aden film
+
+
+Zapytanie na wielu tabelach z podzapytaniem skorelowanym w warunku having
+8. Wypisz nazwê i email u¿ytkowników, których œrednia ocen jest jedn¹ z dwóch nani¿szych œrednich. Wynik posortuj wed³ug œredniej.

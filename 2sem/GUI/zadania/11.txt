@@ -1,0 +1,41 @@
+package jbPack;
+
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+
+public                      
+class Program {
+
+    public static void main(String[] args)
+    {
+        new Program(args);
+    }        
+
+    public Program(String[] args)
+    {
+        Vector vec = new Vector();
+        String linia = "";
+        try{
+            FileReader fr = new FileReader("d:\\plik_testowy.txt");
+            BufferedReader bfr = new BufferedReader(fr);
+            while((linia = bfr.readLine()) != null){
+                vec.add(linia);
+            }
+        } catch( IOException ex ){
+            System.out.println("B³¹d przy operacji na pliku: "+ex);
+        }
+	try{
+	   FileOutputStream wyjscie = new FileOutputStream("d:\\plik_testowy.txt");
+           for(int i = vec.size() - 1; i>=0; i--){
+	      linia = (String)vec.get(i);
+	      for(int i=0; i < linia.length(); i++){
+		wyjscie.write( linia.charAt(i) );
+	      }
+           }
+	   wyjscie.close();
+	}catch(IOException ex){
+	   System.out.println("Blad zwiazany z zapisem do pliku. "+ex);
+        }
+    }
+}

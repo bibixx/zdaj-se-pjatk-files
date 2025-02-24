@@ -1,0 +1,115 @@
+package jbPack;
+
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+
+class Punkt {
+    private int x,y;
+    
+    public Punkt(int a, int b){
+        x = a;
+        y = b;
+    }
+
+    public Punkt(){
+        this(1, 1);
+    }
+        
+    public int dajX(){
+        return x;
+    }
+    
+    public int dajY(){
+        return y;
+    }
+    
+    public double odl(Punkt p2){
+        return Math.sqrt((x-p2.x)*(x-p2.x)+(y-p2.y)*(y-p2.y));
+    }
+    
+    public boolean naLinii(Punkt p1, Punkt p2){
+        if((double)(y - p1.y) == (double)(p2.y - p1.y) * (double)(x - p1.x) / (double)(p2.x - p1.x))
+            return true;
+        else
+            return false;
+    }
+    
+}
+
+class Kolo{
+    private Punkt s;
+    private int r;
+    private static int nr;
+    
+    public Kolo(int r){
+        this.r = r;
+        this.nr++;
+    }
+    
+    public Kolo(Punkt p, int r){
+        this(r);
+        this.s = p;
+        this.nr++;
+    }
+    
+    public Kolo(Kolo k){
+        this(k.dajS(), k.dajR());
+        this.nr++;
+    }
+    
+    public Punkt dajS(){
+        return this.s;
+    }
+    
+    public int dajR(){
+        return this.r;
+    }
+    
+    public static int dajNr(){
+        return nr;
+    }
+    
+    public boolean wew(Punkt p){
+        if(p.odl(this.s) <= (double)this.r)
+            return true;
+        else
+            return false;
+    }
+    
+    public Kolo wieksze(Kolo k){
+        if(this.r > k.r)
+            return this;
+        else
+            return k;
+    }
+    
+    public boolean przeciecie(Kolo k){
+        Punkt s1 = k.dajS();
+        int r1 = k.dajR();
+        if(s1.odl(this.s) <= r1+this.r)
+            return true;
+        else
+            return false;
+    }
+}
+
+public                      
+class Program {
+
+    public static void main(String[] args)
+    {
+        new Program(args);
+    }        
+
+    public Program(String[] args)
+    {
+        Punkt p1 = new Punkt(1, 1);
+        Punkt p2 = new Punkt(3, 3);
+        Punkt p3 = new Punkt(2, 2);
+        if(p3.naLinii(p1, p2))
+            System.out.println("Tak");
+        else
+            System.out.println("Nie");
+    }
+}

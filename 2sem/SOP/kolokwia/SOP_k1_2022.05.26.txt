@@ -1,0 +1,94 @@
+===SOP EGZAMIN 26.05.2022=== prowadzacy: asymk
+
+Mamy PLIKWEJSCIOWY jak poniżej:
+
+1 2 3 5 8
+
+9 2 32
+
+1 2 a 32
+
+9 2 13 a b c
+
+Napisz skrypt, który pobierze dwa argumenty PLIKWEJSCIOWY, PLIKWYJSCIOWY, a następnie zapisuje do PLIKWYJSCIOWY informacje jak:
+
+Liczba 1 występuje 2 razy
+
+Liczba 2 występuje 4 razy
+
+Liczba 3 występuje 1 raz
+
+Liczba 5 występuje 1 raz
+
+Liczba 8 występuje 1 raz
+
+Liczba 13 występuje 1 raz
+
+Liczba 32 występuje 2 razy
+
+Litera a występuje 2 razy
+
+Litera b występuje 1 raz
+
+Litera c występuje 1 raz
+
+Jeżeli liczba 1 wystęuje na przyklad 2 razy to wpis w pliku wyjściowy ma się pojawić raz i mają być posortowane.
+====================================================
+Napisz skrypt, który wyswietli liczbe slow w nazwach plików z katalogu domowego bieżącego uzytkownika i z katalogow podanych jako argumenty, w ktorych ani w nazwie ani w treści nie ma zadnej duzej litery ani cyfry
+=================================================
+Napisz skrypt, ktory pobierze N argumentow. Jeżeli argument jest katalogiem do odczytu to porownujemy jego zawartosc z zawartoscia katalogu biezacego. Jeżeli ich zawartość pod każdym względem (liczba plikow, nazwy plików i ich zawartość) jest identyczna, to wyświetlamy OK, a jeżeli się czyms różnią to wyświetlamy czym się różnią, czy liczbą plikow, nazwami plików czy zawartościa plików i kończymy skrypt. Uwaga: aby porownać zawartość dwóch plików uzyjmy polecenia cmp plik1 plik2. Jeżeli pliki te są takie same to cmp nic nie wyswietli i zwróci wartość 0 jako kod błędów. Oczywiście porownujemy wszystkie argumenty z katalogiem biezacym.
+=============================================
+Napisz skrypt, który zapisze do pliku P te spośród swoich argumentów, które są nazwami niepustych plików zwykłych. W pliku P powinnismy zapisać W JEDNEJ lini nazwe pliku, liczbę znakow w pliku i uprawnienia, ktore posiadamy do tego pliku w formacie "rwx". Nazwa pliku P musi być podana z klawiatury. Format zapisu musi być następujący: "plik.txt 141 -rx" - plik o nazwie plikt.txt 141 znakach, który możemy odczytać i uruchomić.
+======================================
+Napisz skrypt, który pobierze trzy argumenty. Jeżeli pierwsze dwa są nazwami plików do odczytu, a trzeci jest nazwą pliku do zapisu to do pliku o nazwie 3-go argumentu zapisujemy wszystkie linie z pliku 1, których nie ma w pliku 2. Skrypt ma wyświetlić liczbę znakow w każdej takiej linii, oraz liczbę spacji w każdej linii (zakladamy, że nie ma dwoch spacji obok siebie) oraz liczne linii w której wystepuje literka a lub A.
+==================================
+Napisz skrypt, ktory wypisze liczbe wszystkich plikow w tych katalogach podanych jako argumenty, w ktorych przynajmniej 3 linki, ktore mozna uruchomic, ale ktorych nazwy nie maja literki a i nazwy dluzszej niz 7 znakow.
+============================
+Napisz skrypt, ktory pobierze dowolna liczbe argumentow. Dla wszystkich argumentow ktore sa nazwami plikow do odczytu, mamy utworzyc jeden plik o nazwie, ktora jest sklejeniem nazw wszystkich plikow podanych jako argumenty. Zawartosc tego pliku bedzie sklejeniem linii wszystkich plikôw podanych jako argumenty, czyli zalozmy ze mamy 3 pliki: pi o zawartosci AAA\nBBB, p2 o zawartosci CCC\nDDD i p3 o zawartosci EEE\nFFF, to ma powstac plik plp2p3 o zawartosci AAA\ncCC\nEEE\nBBB\nDDD\nFFF, gdzie \n to enter.
+=====================================
+
+Napisz skrypt, ktory zapisze do pliku P te sposrod swoich argumentow, ktore nazwami pustych plikow zwyklych, do ktorych mamy prawo uruchomienia. Kazdy taki plik powinien byc
+uruchomiony i do pliku P musi rôwniez zostac zapisany kod bledu tego uruchomienia. Nazwa pliku P musi byc podana jako ostatni argument, a poprzedzajace ja argumentow to argumenty, ktore testujemy i ktore byc moze bedziemy zapisywac do pliku P.
+=================================================
+Napisz skrypt. ktory pobierze dwa argumenty plikwejsciowy, PLIKWYJSCIOWY. Jezeli plikwejsciowy zawiera macierz prostokatna lub kwadratowa to skrypt ma wykonac transpozycje takiej macierzy i zapisac ja do PLIKWYJSCIOWY.
+Skrypt ma porownac wielkosci plikow wyjsciowych w bajtach i wyswietlic ktory z plikow jest w1ekszy. pierwszy czy drugi.
+Przyklad:
+PLIKWEJSCIOWY:
+1 2 3 4
+a b e d
+qq ww ee rr
+
+PLIKWYJSCIOWY
+1 a qq
+2 b vi w
+3 c ee
+4 d rr
+=============================
+Napisz skrypt, ktory pobierze n argumentow. Pierwszy argument to nazwa pliku wyjsciowego.
+Kolejne n-1 argumentow to nazwy plikow z danymi, a ostatni argument to nazwa plik wyjsciowego. Skrypt ma za zadanie scalic pliki wejsciowe jak ponizej:
+PLIK A
+1
+2 3
+1 34
+3
+
+PLIK B
+2 3
+9 b
+a l a
+PLIK C
+4 5
+3
+i o l a
+1
+PLIKWYJSCIOWY
+1 2
+a 1 o i a 1 a 34 1
+3 b 9 3 2
+5 4 3 2 1
+
+Plik wyjsciowy ma zawierac posklejane linie z plikow wejsciowych, ale w odwrotnej kolejnosci, zarowno pod wzglenym wierszy jak kolejnosci elementow w wierszach.
+Przydatne polecenia: tail -10 plik odczytuje 10 ostatnich linii z pliku plik, head -10 plik odczytuje 10 pierwszych 1inii z pliku plik, tail -10 plik
+plik. Oprocz utworzenia pliku wyjsciowego, sktypt ma wyswietlic jego dlugosc w bajtach.
+head -1 odczytuje 10 od konca linie z pliku
+

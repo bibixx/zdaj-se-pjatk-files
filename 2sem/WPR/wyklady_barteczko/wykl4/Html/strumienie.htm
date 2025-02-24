@@ -1,0 +1,888 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+   <meta name="Author" content="Krzysztof Barteczko">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (OS/2; U) [Netscape]">
+   <title>Krzysztof Barteczko - Java, strumienie</title>
+</head>
+<body>
+
+<center><b><font size=+1>STRUMIENIE</font></b>
+<p><b>AGENDA</b></center>
+
+<p><br>
+<blockquote>
+<blockquote>
+<blockquote>&nbsp;</blockquote>
+</blockquote>
+</blockquote>
+
+<ol>
+<ol>
+<ol>
+<ol>
+<li>
+<a href="#KONCEPCJA STRUMIENIA">Koncepcja strumienia</a></li>
+
+<li>
+<a href="#KLASY STRUMIENIOWE">Klasy strumieniowe w Javie</a></li>
+
+<li>
+<a href="#KLASY PRZEDMIOTOWE">Klasy przedmiotowe</a></li>
+
+<li>
+<a href="except.htm">Wyjątki (na marginesie)</a></li>
+
+<li>
+<a href="#KLASY PRZETWARZAJACE">Klasy przetwarzające</a></li>
+
+<li>
+<a href="#KODOWANIE">Kodowanie</a></li>
+
+<li>
+<a href="#STRUMIENIE Z INTERNETU">Strumienie z Internetu</a></li>
+
+<li>
+<a href="#SERIALIZACJA">Serializacja</a></li>
+
+<li>
+<a href="#INNE">Inne klasy we-wy</a></li>
+</ol>
+</ol>
+</ol>
+</ol>
+
+<p>
+<hr SIZE=4 WIDTH="100%">
+<center>
+<p><a NAME="KONCEPCJA STRUMIENIA"></a><b><font size=+1>KONCEPCJA STRUMIENIA</font></b></center>
+
+<p><br>
+<ul>
+<li>
+Koncepcja strumienia</li>
+
+<ul>
+<li>
+związany ze źródłem lub odbiornikiem danych</li>
+
+<li>
+źródło-odbiornik: plik, pamięć, URL, socket, potok ...</li>
+
+<li>
+strumień służy do przesyłania=odczytywania informacji - dowolnych danych</li>
+
+<li>
+program:</li>
+
+<ul>
+<li>
+kojarzy strumień z zewnętrznym źródłem/odbiornikiem</li>
+
+<li>
+otwiera strumień</li>
+
+<li>
+dodaje lub pobiera dane ze strumienia</li>
+
+<li>
+zamyka strumień</li>
+</ul>
+</ul>
+</ul>
+
+<hr WIDTH="100%">
+<center>
+<p><a NAME="KLASY STRUMIENIOWE"></a><b><font size=+1>KLASY STRUMIENIOWE</font></b></center>
+
+<p><b>W Javie do obsługi strumieni służą klasy z pakietu java.io</b>
+<p><b>Klasy te można podzielić na grupy wg następujących kryteriów:</b>
+<ul>
+<li>
+<b>klasy dla strumieni bajtowych -&nbsp; klasy dla strumienie znakowych</b></li>
+
+<ul>
+<li>
+strumienie znakowe realizują przesyłanie znaków, które w Javie są znakami
+unikodu (2 bajty)</li>
+</ul>
+
+<li>
+<b>klasy przetwarzające - klasy przedmiotowe</b></li>
+
+<ul>
+<li>
+klasy przetwarzające implementują określone rodzaje przetwarzania strumieni,
+niezależnie od źródła/odbiornika</li>
+
+<li>
+klasy przedmiotowe są związane z konkretnymi rodzajami źródła/odbiornika</li>
+</ul>
+
+<li>
+<b>klasy wejściowe - klasy wyjściowe</b></li>
+</ul>
+Na poniższych rysunkach pokazano hierarchię klas znakowych i strumieniowych.
+<br>Zaciemnione elementy oznaczają klasy przedmiotowe (związane z konkretnym
+źródłem/odbiornikiem), jasne - klasy przetwrazające (realizujące określone
+rodzaje orzetwarzania).
+<p>Klasy dla strumieni bajtowych
+<p><img SRC="../images/bsclass.gif" height=199 width=458>
+<p><img SRC="../images/bsclass2.gif" height=142 width=459>
+<p>Żródło: Java Tutorial, JavaSoft
+<br>&nbsp;
+<p>Klasy dla strumieni znakowych
+<p><img SRC="../images/csclass.gif" height=170 width=462>
+<br><img SRC="../images/csclass2.gif" height=198 width=462>
+<p>Żródło: Java Tutorial, JavaSoft
+<br>&nbsp;
+<p><b>UWAGA: Przy przetwarzaniu tekstowym należy korzystać ze strumieni
+znakowych, bowiem tylko one zapewniają poprawne przetwarzanie unikodu.</b>
+<p>Nadklasy, z których wywodzą się wszystkie inne klasy strumieniowe (czyli
+nadklasy InputStream, OutputStream, Reader, Writer) są abstrakcyjne i zawierają
+deklaracje podstawowych metod przetwarzania strumieni, które podklasy winny
+implementować.
+<ul>
+<li>
+Przy tworzeniu obiektu-strumienia strumień jest automatycznie otwierany.
+Poza tym istnieje metoda <b>open.</b></li>
+
+<li>
+Do czytania ze strumienia służą metody <b>read</b>() (jest ich kilka)</li>
+
+<li>
+Do pisania służą metody <b>write()</b> -też kilka</li>
+
+<li>
+Strumień można zamknąć za pomocą metody <b>close().</b> Nie zamknięty strumień
+jest zamykany przy niszczeniu obiektu przez odśmiecacz. Należy jednak zawsze
+jawnie zamykać strumienie.</li>
+</ul>
+
+<hr WIDTH="100%">
+<center>
+<p><a NAME="KLASY PRZEDMIOTOWE"></a><b><font size=+1>KLASY PRZEDMIOTOWE</font></b>
+<br><b>(związane z konkretnym źródłem/odbiornikiem)</b></center>
+
+<p><br>
+<br>&nbsp;
+<br>&nbsp;
+<center><table BORDER CELLPADDING=5 >
+<tr>
+<th>Źródło/odbiornik</th>
+
+<th>Strumienie znakowe</th>
+
+<th>Strumienie bajtowe</th>
+</tr>
+
+<tr>
+<td ROWSPAN="2"><b>Pamięć</b></td>
+
+<td><b>CharArrayReader,</b>
+<br><b>CharArrayWriter</b></td>
+
+<td><b>ByteArrayInputStream,</b>
+<br><b>ByteArrayOutputStream</b></td>
+</tr>
+
+<tr>
+<td><b>StringReader,</b>
+<br><b>StringWriter</b></td>
+
+<td><b>StringBufferInputStream</b></td>
+</tr>
+
+<tr>
+<td><b>Potok</b></td>
+
+<td><b>PipedReader,</b>
+<br><b>PipedWriter</b></td>
+
+<td><b>PipedInputStream,</b>
+<br><b>PipedOutputStream</b></td>
+</tr>
+
+<tr>
+<td><b>Plik</b></td>
+
+<td><b>FileReader,</b>
+<br><b>FileWriter</b></td>
+
+<td><b>FileInputStream,</b>
+<br><b>FileOutputStream</b></td>
+</tr>
+</table></center>
+
+<center>Źródło: Java Tutorial</center>
+
+<p>Przykład:
+<br>kopiowanie plików bajt po bajcie.
+<p>import java.io.*;
+<p>public class Copy1 {
+<p>public static void main(String[] args) {
+<br>&nbsp;
+<p>&nbsp;if (args.length != 2) {
+<br>&nbsp;&nbsp;&nbsp; System.out.println("Syntax: in out");
+<br>&nbsp;&nbsp;&nbsp; System.exit(1);
+<br>&nbsp;&nbsp;&nbsp; }
+<p>&nbsp;FileInputStream in&nbsp; = null;
+<br>&nbsp;FileOutputStream out = null;
+<p>&nbsp;try {
+<br>&nbsp;&nbsp; in&nbsp; = new FileInputStream(args[0]);
+<br>&nbsp;&nbsp; out = new FileOutputStream(args[1]);
+<br>&nbsp;&nbsp; int c = 0;
+<br>&nbsp;&nbsp; while ((c = in.read()) != -1) out.write(c);
+<p>&nbsp;} catch(FileNotFoundException exc) {
+<br>&nbsp;&nbsp; System.out.println("Plik " + args[0] + " nie istnieje.");
+<br>&nbsp;&nbsp; System.exit(1);
+<p>&nbsp;} catch(IOException exc) {
+<br>&nbsp;&nbsp; System.out.println(exc.getMessage());
+<br>&nbsp;&nbsp; System.exit(1);
+<p>&nbsp;} finally {
+<br>&nbsp;&nbsp; try {
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if (in != null) in.close();
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if (out != null) out.close();
+<br>&nbsp;&nbsp; } catch (IOException exc) { System.out.println(""+exc);
+}
+<p>&nbsp;}
+<p>}
+<blockquote><b>Przy tej okazji omówimy <a href="except.htm">wyjątki</a>.</b></blockquote>
+
+<p><br>
+<hr WIDTH="100%">
+<center>
+<p><a NAME="KLASY PRZETWARZAJACE"></a><b><font size=+1>KLASY PRZETWARZAJĄCE</font></b>
+<br><b>(implementujące "abstrakcyjne" przetwarzanie)</b></center>
+
+<p><br>
+<center><table BORDER CELLPADDING=5 >
+<tr>
+<th>Rodzaj przetwarzania&nbsp;</th>
+
+<th>Strumienie znakowe</th>
+
+<th>Strumienie bajtowe</th>
+</tr>
+
+<tr>
+<td>Buforowanie</td>
+
+<td><tt>BufferedReader</tt>,
+<br><tt>BufferedWriter</tt></td>
+
+<td><tt>BufferedInputStream</tt>,
+<br><tt>BufferedOutputStream</tt></td>
+</tr>
+
+<tr>
+<td>Filtrowanie</td>
+
+<td><tt>FilterReader</tt>,
+<br><tt>FilterWriter</tt></td>
+
+<td><tt>FilterInputStream</tt>,
+<br><tt>FilterOutputStream</tt></td>
+</tr>
+
+<tr>
+<td>Konwersja: bajty-znaki</td>
+
+<td><tt>InputStreamReader</tt>,
+<br><tt>OutputStreamWriter</tt></td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>Konkatenacja</td>
+
+<td>&nbsp;</td>
+
+<td><tt>SequenceInputStream</tt></td>
+</tr>
+
+<tr>
+<td>Serializacja obiektów</td>
+
+<td>&nbsp;</td>
+
+<td><tt>ObjectInputStream</tt>,
+<br><tt>ObjectOutputStream</tt></td>
+</tr>
+
+<tr>
+<td>Konwersje danych</td>
+
+<td>&nbsp;</td>
+
+<td><tt>DataInputStream</tt>,
+<br><tt>DataOutputStream</tt></td>
+</tr>
+
+<tr>
+<td>Zliczanie wierszy</td>
+
+<td><tt>LineNumberReader</tt></td>
+
+<td><tt>LineNumberInputStream</tt></td>
+</tr>
+
+<tr>
+<td>Podglądanie</td>
+
+<td><tt>PushbackReader</tt></td>
+
+<td><tt>PushbackInputStream</tt></td>
+</tr>
+
+<tr>
+<td>Drukowanie</td>
+
+<td><tt>PrintWriter</tt></td>
+
+<td><tt>PrintStream</tt></td>
+</tr>
+</table></center>
+
+<center>Żródło: Java Tutorial</center>
+
+<p><b>Komentarze:</b>
+<ul>
+<li>
+buforowanie ogranicza liczbę fizycznych odwołań do urządzeń zewnętrznych</li>
+
+<li>
+klasy Filter... są klasami abstrakcyjnymi, definiującymi interfejs dla
+rzeczywistych filtrów. Filtrami są:</li>
+
+<ul>
+<li>
+DataInputStream i DataOutputStream</li>
+
+<li>
+BufferedInputStream i BufferedOutputStream</li>
+
+<li>
+LineNumberInputStream</li>
+
+<li>
+PushbackInputStream</li>
+
+<li>
+PrintStream</li>
+
+<li>
+można tworzyć własne filtry</li>
+</ul>
+
+<li>
+konwersje bajty-znaki</li>
+
+<ul>
+<li>
+InputStreamReader czyta bajty ze strumienia definiowanego przez InputStream
+(strumień bajtowy) i zamienia je na znaki (16 bitowe), używając domyślnej
+lub podanej strony kodowej</li>
+
+<li>
+OutputStreamWriter wykonuje przy zapisie konwersję odwrotną</li>
+</ul>
+
+<li>
+konkatenacja strumieni wejściowych pozwala połączyć strumienie i traktować
+je jak jeden strumień</li>
+
+<li>
+serializacja służy do "utrwalania" obiektów po to, by odtworzyć je w innym
+kontekście (przy ponownym uruchomieniu programu lub w innym miejscu (np.
+programie działającym w innym miejscu sieci po przekazaniu "utrwalonego"
+obiektu</li>
+
+<li>
+DataInputStream i DataOutputStream pozwalają czytać/pisać dane prostych
+javowych typów (np. liczby rzeczywiste). Niekiedy nazywa się to we/wy z
+formatowaniem. Strumienie są tutaj strumieniami binarnymi, w związku z
+tym koniec strumienia rozpoznaje się jako wyjątek EOFException.</li>
+
+<li>
+LineNumber... zlicza wiersze strumienia przy czytaniu (i pozwala w każdym
+momencie uzyskać informację o numerze wiersza)</li>
+
+<li>
+PushBack.. pozwala pdoglądnąć następny znak w strumieniu</li>
+
+<li>
+Klasy Print...&nbsp; zawierają wygodne metody wyjścia (np. println). Nie
+koniecznie oznacza to drukowanie fizyczne, często wykorzystywane jest w
+powiązaniu z innymi strumieniami po to by łatwo wyprowadzać informacje.</li>
+</ul>
+Przykład:
+<br>przy czytaniu dużych plików tekstowych należy unikać bezpośredniego
+czytania za pomocą klasy FileReader, bowiem każde odczytanie znaku powoduje
+fizyczne odwołanie do pliku (to samo dotyczy zapisu i klasy FileWriter).
+<br>Można zastosować klasę BufferedReader (buforowanie)
+<br>Ale klasa ta jest klasą przetwarzającą, wobec tego nie pozwala bezpośrednio
+podać fizycznego źródła danych.
+<br>Żródło to podajemy przy konstrukcji obiektu typu FileReader, a po to,
+żeby uzyskać buforowanie, "opakowujemy" FileReadera BufferedReaderem.
+<br>Wygląda to tak:
+<p>FileReader fr = new FileReader("plik.txt");&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// tu powstaje związek z fizycznym źródłem
+<br>BufferedReader br = new BufferedReader(fr); // tu dodajemy "opakowanie",
+umożliwiające buforowanie
+<br>//...&nbsp; teraz wszelkie odwołania czytania itp. kierujemy do obiektu
+br
+<p>Przykładowy program: stworzyć metodę umożliwiającą określenie czy w
+pliku podanym jako argument występuje którekolwiek z podanych słów.
+<p>Zarys czytania:
+<p>&nbsp; try {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String line;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileReader fr = new FileReader(fname);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// fname jest nazwą pliku
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BufferedReader br = new BufferedReader(fr);
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while&nbsp; ((line = br.readLine()) !=
+null) {&nbsp;&nbsp; // kolejny wiersz pliku: metoda <b>readLine</b>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // tu stwierdzenie,
+czy w wierszu występuje któreś ze słów
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; br.close();&nbsp; // zamknięcie strumienia
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp;&nbsp; catch (IOException e) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.err.println(e);
+<br>&nbsp;&nbsp;&nbsp; }
+<p>Przy okazji tego programu użyjemy&nbsp; trzech&nbsp; ważnych klas Javy:
+<ul>
+<li>
+Hashtable</li>
+
+<ul>
+<li>
+tablica asocjacyjna, zawierająca pary klucz-wartość (obie typu Object).
+Dodanie do tablicy ht pary: metoda ht.put(key,&nbsp; value). Pobranie wartości
+odpowiadającej podanemu kluczowi (dostaniemy Object):&nbsp; ht.get( key).
+Uzyskanie zbioru wszystkich kluczy:&nbsp; ht.keys() - dostaniemy obiekt
+typu Enumeration.</li>
+</ul>
+
+<li>
+Enumeration</li>
+
+<ul>
+<li>
+"wyliczenie" - zbiór elementów. Możemy go przeglądać korzystając z metod
+hasMoreElements()&nbsp; (czy coś jeszcze jest) i nextElement() - podający
+następny element (jako Object)</li>
+</ul>
+
+<li>
+StringTokenizer</li>
+
+<ul>
+<li>
+klasa, umożliwiająca uproszczone rozbijanie podanego Stringu na symbole.
+Co jest traktowane jako "wyłuskiwany" symbol zależy od podanych przez nas
+ograniczników (symbolem jest ciąg znaków, nie zawierający żadnego z ograniczników).
+<b>UWAGA:
+w pakiecie java.io znajduje się klasa StreamTokenizer urzeczywistniająca
+parsowanie strumieni, przy czym możliwości parsowania są dużo większe niż
+w klasie StringTokenizer.</b></li>
+</ul>
+</ul>
+Klasa pozwalająca na przeszukiwanie pliku ma następującą postać
+<p>public class Search {
+<p>&nbsp;public boolean hasAnyWord(String fname, Hashtable wordtab) {
+<p>&nbsp; boolean result = false;
+<br>&nbsp; try {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String line;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileReader fr = new FileReader(fname);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BufferedReader br = new BufferedReader(fr);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; search:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while&nbsp; ((line = br.readLine())
+!= null) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; StringTokenizer st = new
+StringTokenizer(line, " ,.:;()\t\r\n");
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (st.hasMoreTokens())
+{
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String
+word = st.nextToken();
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (wordtab.get(word)
+!= null) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+result = true;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+break search;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; br.close();
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp;&nbsp; catch (IOException e) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.err.println(e);
+<br>&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;return result;
+<br>&nbsp;}
+<br>}
+<p>Jest tu jedna metoda - hasAnyWord - stwierdzająca, czy plik podany jako
+jej pierwszy argument zawiera którekolwiek ze słów, zapisanych w tablicy
+asocjacyjnej wordtab. Użycie tej tablicy przyspiesza wyszukiwanie, bowiem
+słów może być dużo, a gdy są one zapisane jako klucze (jakichś) wartości
+w tablicy asocjacyjnej, to stwierdzenie czy jakieś słowo w niej występuje
+jest błyskawiczne: odwołanie wordtab.get(word) (wynik jest null jeśli nie
+ma, jeśli jest dostajemy Object skojarzony z danym kluczem; tu nieważny).
+<br>A co to są słowa? Tu traktujemy je jako ciągi znaków nie zawierające
+" ,.:;()\t\r\n" i używamy StringTokenizera do ich wyodrębnienia (konstruktor
+StringTokenizer ma za argumentu String na którym ma dzialać oraz ograniczniki
+definiujące jakie symbole będą wyodrębniane).
+<p>Testująca klasa ma następującą postać:
+<p>public class Test {
+<p>&nbsp;&nbsp; public static void main(String[] args) {&nbsp; // argumenty:
+nazwa_pliku slowo1 slowo2 ... slowoN
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if (args.length &lt; 2) System.exit(1);
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Object dummy = new Object();
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Hashtable words = new Hashtable();
+<p>&nbsp;&nbsp;&nbsp;&nbsp; for (int i = 1; i&lt;args.length; i++) words.put(args[i],
+dummy);&nbsp; // wartość nas nie obchodzi, tylko klucz
+<p>&nbsp;&nbsp;&nbsp;&nbsp; Search srch = new Search();
+<br>&nbsp;&nbsp;&nbsp;&nbsp; boolean result = srch.hasAnyWord(args[0],
+words);
+<p>&nbsp;&nbsp;&nbsp;&nbsp; String msg = " nie zawiera żadnego ze słów:";
+<br>&nbsp;&nbsp;&nbsp;&nbsp; if (result) msg = " zawiera któreś ze słów:";
+<p>&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("Plik "+args[0]+msg);
+<br>&nbsp;&nbsp;&nbsp;&nbsp; Enumeration en = words.keys();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// uzyskujemy wszystkie klucze tablicy
+<br>&nbsp;&nbsp;&nbsp;&nbsp; while (en.hasMoreElements()) {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// ... i przebiegamy je po kolei
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String word = (String) en.nextElement();
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(word);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp; }
+<br>}
+<br>&nbsp;
+<p>
+<hr WIDTH="100%">
+<center>
+<p><a NAME="KODOWANIE"></a><b><font size=+1>KODOWANIE</font></b></center>
+
+<p>Java posługuje się znakami w formacie Unicode (UTF8). Są to - ogólnie
+- wielkości 16-bitowe.
+<br>Środowiska natywne (np. Windows) najczęściej zapisują teksty jako sekwencje
+bajtów (z przyjętą stroną kodową).
+<br>Jak pogodzić najczęściej bajtowy charakter plików natywnych ze znakowymi
+strumieniami?
+<br>Otóż strumienie znakowe potrafią - niewidocznie dla nas -&nbsp; przekształcać
+bajtowe źródła w znakowe strumienie i odwrotnie. "Pod pokrywką" tego procesu
+znajdują się dwie klasy: <b>InputStreamReader</b> i <b>OutputStreamWriter</b>,
+które dokonują właściwych konwersji w trakcie czytania/pisania.
+<br>Klasy te możemy wykorzystać również samodzielnie.
+<br>Jeśli w konstruktorach tych klas nie podamy enkodowania przy konwersjach
+zostanie przyjęte domyślne.
+<br>Aby się dowiedzieć, jakie jest domyślne enkodowanie można użyć następującego
+programiku:
+<p>public class DefaultEncoding {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public static void main(String args[])
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String p = System.getProperty("file.encoding");
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(p);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>}
+<p>W zależności od ustawień na danej platformie otrzymamy różne wyniki.
+Np. ibm-852 lub Cp852 (Latin 2) albo Cp1252 (Windows Western Europe / Latin-1).
+<p>Inna wersja konstruktorów pozwala na podanie enkodowania.
+<br>Napiszmy program wykonujący konwersje plików z-do dowolnych (dopuszczalnych
+przez Javę) formatów kodowania.
+<br>Dopuszczalne symbole enkodowania można znaleźć na stronie:
+<br><b>http://java.sun.com/products/jdk/1.1/docs/guide/intl/encoding.doc.html</b>
+<p>import java.io.*;
+<br>&nbsp;
+<p>public class Convert {
+<p>public static void main(String[] args) {
+<p>if (args.length != 4) {
+<br>&nbsp;&nbsp; System.out.println("Syntax: in in_enc out out_enc");
+<br>&nbsp;&nbsp; System.exit(1);
+<br>&nbsp;&nbsp; }
+<p>String infile&nbsp; = args[0],&nbsp;&nbsp;&nbsp;&nbsp; // plik wejściowy
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in_enc&nbsp; = args[1],&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// wejściowa strona kodowa
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; outfile = args[2],&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// plik wyjściowy
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out_enc = args[3];&nbsp;&nbsp;&nbsp;
+// wyjściowa strona kodowa
+<p>try {
+<br>&nbsp;FileInputStream fis = new FileInputStream(infile);
+<br>&nbsp;BufferedReader in = new BufferedReader(new InputStreamReader(fis,
+in_enc));
+<br>&nbsp;FileOutputStream fos = new FileOutputStream(outfile);
+<br>&nbsp;BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos,
+out_enc));
+<br>&nbsp;String line;
+<br>&nbsp;while ((line = in.readLine()) != null) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out.write(line);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out.newLine();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// zapis znaku końca wiersza
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;in.close();
+<br>&nbsp;out.close();
+<br>&nbsp;}
+<br>&nbsp;catch (IOException e) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.err.println(e);
+<br>&nbsp;}
+<p>}
+<p>Przykładowe wykorzystanie do konwersji pliku zle.htm (zapisanego w Windows
+1250) na plik dobrze.htm ( ISO-8859-2):
+<blockquote>&nbsp;java Convert zle.htm Cp1250 dobrze.htm ISO8859_2
+<br>&nbsp;
+<br>&nbsp;</blockquote>
+
+<p><br>
+<hr WIDTH="100%">
+<center><a NAME="STRUMIENIE Z INTERNETU"></a><b><font size=+1>STRUMIENIE
+Z INTERNETU</font></b></center>
+
+<p>Abstrakcyjny strumień (np. InputStream) może być związany z zasobem
+sieci, oznaczanym przez URL.
+<br>To co dostaniemy w rezultacie czytania takiego strumienia zależy od
+tego w jaki sposób serwer definiuje przesyłanie informacji dotyczących
+tego zasobu.
+<p>Dwa sposoby działania:
+<br>&nbsp;
+<ul>
+<li>
+stworzyć URL i uzyskać związany z nim strumień wejściowy (umożliwia tylko
+czytanie),</li>
+
+<li>
+stworzyć URL, uzyskać połączenie, a następnie odpowiednie strumienie (umożliwa
+czytanie i pisanie np. automatyczne wypełnianie formularzy)</li>
+</ul>
+
+<p><br>Przykład - czytanie&nbsp; z Internetu dokumentów html, których adresy
+(np. w postaci: http://....) zapisane są w pliku podanym jako argument
+programu.
+<p>import java.net.*;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // konieczne
+do posługiwania się klasą URL
+<br>import java.io.*;
+<br>import java.util.*;
+<p>public class URLReader {
+<p>&nbsp;public static void main(String[] args) throws Exception {
+<br>&nbsp;&nbsp; BufferedReader list = new BufferedReader(
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+new FileReader(args[0]));
+<br>&nbsp;&nbsp; String urlString;
+<br>&nbsp;&nbsp; while ((urlString = list.readLine()) != null) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println("Trying to read "+
+urlString);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; readAndSave(new URL(urlString));&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// tworzony nowy obiekt klasy URL
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp; list.close();
+<br>&nbsp;&nbsp; System.exit(0);
+<p>&nbsp;}
+<br>&nbsp;
+<p>&nbsp;static void readAndSave(URL url) throws Exception {
+<p>&nbsp;&nbsp; BufferedReader in = new BufferedReader(
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+new InputStreamReader(url.openStream()));&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// url.openStream() zwraca InputStream
+<p>&nbsp;&nbsp; String fname = null;
+<br>&nbsp;&nbsp; StringTokenizer st = new StringTokenizer(url.getFile(),
+"/");
+<br>&nbsp;&nbsp; while (st.hasMoreTokens()) fname = st.nextToken();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// pobieramy nazwę pliku pod którą ma być zachowany
+<p>&nbsp;&nbsp; BufferedWriter out = new BufferedWriter(new FileWriter(fname));
+<p>&nbsp;&nbsp; String s;
+<br>&nbsp;&nbsp; while ((s = in.readLine()) != null) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out.write(s);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out.newLine();
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp; in.close();
+<br>&nbsp;&nbsp; out.close();
+<br>&nbsp;&nbsp; }
+<p>}
+<br>&nbsp;
+<p>
+<hr WIDTH="100%">
+<center>
+<p><a NAME="SERIALIZACJA"></a><b><font size=+1>SERIALIZACJA (SZEREGOWANIE)</font></b></center>
+
+<p>Serializacja polega na zapisywaniu <b>obiektów</b> do strumienia.
+<br>Zapisywany jest pełny stan obiektu (w tym - rekursywnie - obiektów
+składowych).
+<br><b>Nie</b> są zapisywane <b>pola statyczne</b> oraz pola deklarowane
+z identyfikatorem
+<b>transient</b>.
+<p>Wykorzystanie:
+<ul>
+<li>
+komunikacja pomiędzy obiektami/aplikacjami poprzez gniazdka (sockets)</li>
+
+<li>
+zachowanie obiektu (jego stanu i właściwości) do późniejszego wykorzystania
+przez tę samą lub inną aplikację.</li>
+</ul>
+
+<p><br>Do zapisywania/odczytywania obiektów służą klasy ObjectOutputStream
+oraz ObjectInputStream.
+<p>Przykład: tablica asocjacyjna kolorów, umożliwiająca odwoływanie się
+do kolorów przez nazwy.
+<p>import java.io.*;
+<br>import java.awt.*;
+<br>import java.util.*;
+<p>public class Kolory {
+<p>&nbsp;&nbsp; public static void main(String[] args) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Hashtable c = new Hashtable();
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c.put("black", Color.black);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c.put("blue", Color.blue);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c.put("red", Color.red);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c.put("yellow", Color.yellow);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c.put("white", Color.white);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; try {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileOutputStream out = new FileOutputStream("KOLORY.SER");
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ObjectOutputStream s = new ObjectOutputStream(out);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s.<b>writeObject</b>(c);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s.flush();
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; catch(IOException exc) { System.out.println(exc);
+}
+<p>&nbsp;&nbsp; }
+<br>&nbsp;
+<p>W jakiejkolwiek innej aplikacji możemy teraz wybrać kolor z zapisanej
+tablicy, używając jego nazwy np.:
+<p>FileInputStream in = new FileInputStream("KOLORY.SER");
+<br>ObjectInputStream ois = new ObjectInputStream(in);
+<br>Hashtable ht = (Hashtable) ois.<b>readObject()</b>;&nbsp; // zapamiętany
+obiekt Hashtable - odtworzony
+<br>&nbsp;Color c = (Color) ht.get(nazwa_koloru);
+<br>&nbsp;
+<p>Aby obiekt jakiejś klasy mógł być zapisany do strumienia, klasa ta <b>musi
+implementować interfejs Serializable</b>.
+<br>Standardowe klasy Javy implementują ten interfejs.
+<br>W naszych klasach musimy zapewnić tę implementację (co nie jest trudne,
+bowiem interfejs <b>jest pusty</b>).
+<p>Przykład:
+<br>Serializowalna klasa Slist stanowi okno z listą i przyciskiem "Save",
+który pozwala zapamiętać bieżący stan obiektu (zawartość listy, kolory,
+pismo etc.) w pliku SLIST.SER.
+<p>import java.io.*;
+<br>import java.awt.*;
+<br>import java.util.*;
+<p>class Slist extends Frame implements <b>Serializable</b>, ActionListener
+{
+<p>&nbsp; List list = new List();
+<br>&nbsp; Button b = new Button("Save");
+<p>&nbsp; Slist() {
+<br>&nbsp;&nbsp;&nbsp; b.addActionListener(this);
+<br>&nbsp;&nbsp;&nbsp; add(list, "Center");
+<br>&nbsp;&nbsp;&nbsp; add(b, "South");
+<br>&nbsp; }
+<p>&nbsp; public List getList() { return list; }
+<p>&nbsp; public void actionPerformed(ActionEvent e)&nbsp; {
+<br>&nbsp;&nbsp; try {
+<br>&nbsp;&nbsp;&nbsp; FileOutputStream out = new FileOutputStream("SLIST.SER");
+<br>&nbsp;&nbsp;&nbsp; ObjectOutputStream s = new ObjectOutputStream(out);
+<br>&nbsp;&nbsp;&nbsp; s.writeObject(this);
+<br>&nbsp;&nbsp;&nbsp; s.flush();
+<br>&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp;&nbsp;&nbsp; catch(IOException exc) { System.out.println(exc);
+}
+<br>&nbsp; }
+<p>}
+<br>&nbsp;
+<p>Następująca aplikacja:
+<blockquote>
+<ul>
+<li>
+uruchomiona z argumentami nazwa_koloru elt1 elt2 .. elt3 tworzy i pokazuje
+listę o tym kolorze i elementach</li>
+
+<li>
+uruchomiona bez żadnych argumentów wczytuje i pokazuje zapamiętany obiekt
+(lista, elementy, kolory)</li>
+</ul>
+</blockquote>
+import java.io.*;
+<br>import java.awt.*;
+<br>import java.util.*;
+<br>&nbsp;
+<p>public class Serial {
+<p>&nbsp;&nbsp; public static void main(String[] args)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+throws IOException, ClassNotFoundException {
+<br>&nbsp;&nbsp;&nbsp; Slist sl = null;
+<br>&nbsp;&nbsp;&nbsp; if (args.length == 0) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileInputStream in = new
+FileInputStream("SLIST.SER");
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ObjectInputStream s = new
+ObjectInputStream(in);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sl = (Slist) s.readObject();
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp;&nbsp;&nbsp; else {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileInputStream in = new
+FileInputStream("KOLORY.SER");
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ObjectInputStream ois =
+new ObjectInputStream(in);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Hashtable ht = (Hashtable)
+ois.readObject();
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Color c = (Color) ht.get(args[0]);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sl = new Slist();
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sl.getList().setBackground(c);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int i = 0; i &lt; args.length
+- 1; i++) sl.getList().add(args[i+1]);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<p>&nbsp;&nbsp;&nbsp; if (sl != null) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sl.pack();
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sl.setVisible(true);
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+<br>&nbsp;&nbsp; }
+<p>}
+<br>&nbsp;
+<p>
+<hr WIDTH="100%">
+<center><a NAME="INNE"></a><b><font size=+1>INNE KLASY WE-WY</font></b></center>
+
+<ul>
+<li>
+<b>File - </b>pozwala uzyskiwać różnorodne informacje o plikach i katalogach,
+jak również wykonywać działania na systemie plikowym</li>
+
+<ul>
+<li>
+&nbsp;klasę File wykorzystujemy np. do uzyskiwania informacji czy plik
+istnieje, jakie są jego charakterystyki (wielkość, data modyfikacji), do
+listowania katalogów; istnieję konstruktory plikowych klas strumieniowych
+z argumentem typu File.</li>
+</ul>
+
+<li>
+<b>FileNameFilter i FileFilter</b> - interfejsy umożliwiające wybiórcze,
+wg dowolnie konstruowanych kryteriów, listowanie plików</li>
+
+<li>
+<b>RandomAccessFile</b> - pliki o dostępie swobodnym</li>
+
+<li>
+<b>DeflaterOutputStream</b> i <b>InflaterInputStream</b>&nbsp; - kompresja/dekompresja
+strumieni</li>
+
+<li>
+<b>GZIPInputStream</b> i <b>GZIPOutputStream</b>&nbsp; - czytanie/zapisywanie
+w formacie GZIP</li>
+
+<li>
+<b>ZipInputStream</b> i <b>ZipOutputStream</b>&nbsp; - czytanie/zapisywanie
+w formacie ZIP</li>
+
+<li>
+W pakiecie AWT znajdziemy klasę <b>FileDialog</b> - dialog wyboru plików
+(również może korzystać z FileNameFilter)</li>
+
+<li>
+W Swingu mamy lepszy&nbsp; <b>JFileChooser</b></li>
+</ul>
+
+<br>&nbsp;
+</body>
+</html>

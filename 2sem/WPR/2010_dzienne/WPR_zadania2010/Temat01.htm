@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta name="Author" content="TLL">
+  <meta name="GENERATOR"
+ content="Mozilla/4.76 [en] (Win98; U) [Netscape]">
+  <title>WPR 01</title>
+</head>
+<body>
+<b><font size="+1">Obiektowo¶æ Javy 1</font></b><br>
+<p><b><u><br>
+Zadanie 1</u> (3p)</b>
+</p>
+<b>Zaprojektowaæ i testowaæ klasê </b><i>Odcinek</i><b> (odcinki na
+p³aszczy¼nie) zawieraj±c± m. in. nastêpuj±ce metody:</b><br>
+<i><br>
+double dlugosc()</i><b>: oblicza d³ugo¶æ </b><i>naszego</i><b>
+odcinka,</b><br>
+<i>double odleglosc(int x, int y)</i><b>: oblicza odleg³o¶æ od
+¶rodka
+</b><i>naszego</i><b> odcinka do punktu </b><i>(x,y)</i><b>,</b><br>
+<i>boolean dluzszy(Odcinek od)</i><b>: sprawdza, czy </b><i>nasz</i><b>
+odcinek jest d³u¿szy ni¿ odcinek </b><i>od</i><b>,</b><i><br>
+Odcinek rzutX()</i><b>, </b><i>Odcinek rzutY()</i><b>:</b><i> </i><b>zwracaj±
+rzuty
+</b><i>naszego</i><b> odcinka na os. X, Y,<br>
+</b><span style="font-style: italic;">public String toString()</span><b>:
+</b><b>wyprowadza informacje o odcinku (</b><b>przedefiniowanie metody </b><span
+ style="font-style: italic;">toString()</span><b> z klasy </b><span
+ style="font-style: italic;">Object</span><b>).<br>
+<br>
+</b><b>Ka¿dy odcinek powinien mieæ swój unikalny
+numer</b> <b>(zaczynaj±c od 1), nadany automatycznie przy tworzeniu.</b><b><br>
+</b><br>
+<p><b><u>Zadanie 2</u> (6p)<br>
+</b></p>
+<p><b>Napisaæ program symuluj±cy operacje na prostych kontach
+bankowych.<br>
+Ka¿de konto (obiekt klasy </b><span style="font-style: italic;">Account</span><b>)
+ma w³a¶ciciela (obiekt klasy
+</b><span style="font-style: italic;">Person</span><b>), stan konta,
+limit debetu. Dostêpne s± cztery
+operacje na koncie: wp³ata, wyp³ata, przelew oraz obliczenie stanu
+konta po
+dodaniu odsetek, w skali rocznej. A</b><b>ktualna stopa procentowa -
+wspólna dla wszystkich kont jest ustalona statycznie w klasie </b><span
+ style="font-style: italic;">Account</span><b>.
+</b><br>
+<span style="font-weight: bold;"><br>
+Stworzyæ klasy </span><span style="font-style: italic;">Person</span><span
+ style="font-weight: bold;">, </span><span style="font-style: italic;">Account</span><span
+ style="font-weight: bold;"> w taki sposób, aby nastêpuj±cy program:</span><b><br>
+</b></p>
+<p>public class Test {</p>
+<p>&nbsp;&nbsp;&nbsp; public static void main(String[] args)<br>
+&nbsp;&nbsp; &nbsp;{<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Person klient1
+= new Person("prg1"), klient2 = new Person("wpr");<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Account&nbsp;
+acc1 = new Account(klient1), acc2 = new Account(klient2);<br>
+<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+acc1.setDebit(0); <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+acc2.setDebit(-100);<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+acc1.deposit(500);<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+acc2.deposit(900);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+acc2.withdraw(300);<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+acc1.transfer(acc2, 200);<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(acc1);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+System.out.println(acc2);<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+acc2.transfer(acc1, 950);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+Account.setInterest(2);<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+acc1.addInterest();<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+acc2.addInterest();<br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+System.out.println(acc1);<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+System.out.println(acc2);<br>
+&nbsp;&nbsp; &nbsp;}<br>
+}<br>
+</p>
+<p><span style="font-weight: bold;">wyprowadzi³ na konsolê poni¿sze
+wyniki:</span><br>
+</p>
+<p>prg1, stan konta: 300.0<br>
+wpr, stan konta: 800.0<br>
+Operacja niedozwolona: przelew!<br>
+prg1, stan konta: 306.0<br>
+wpr, stan konta: 816.0<b><br>
+</b></p>
+<p></p>
+</body>
+</html>
