@@ -1,0 +1,466 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index35.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index37.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 3"></A><div class="tytulpunktu">3. Typy zmiennych. Deklaracje</div>
+<a name="W5.3"></a>
+
+<p>W przeciwieństwie do literałów typy zmiennych i stałych programista musi podać sam w <b>deklaracjach</b>. <br>
+<br><A NAME="EDU.skorowidz.termin deklaracja_zmiennej 36_340"></A> 
+
+<div class="def"><b>Deklaracja</b> zmiennej (stałej) polega na określeniu nazwy zmiennej (stałej),
+jej typu oraz ew. pewnych innych właściwości, które są istotne wtedy, gdy
+zmienna jest polem klasy</div>
+
+<br>
+
+<p>Składnię deklaracji zmiennej - w uproszczeniu - można przedstawić w następujący sposób:<br>
+<br>
+
+<div align="Center"><i><b>nazwa_typu    nazwa_zmiennej;</b></i><br></div>
+
+<br>
+
+<p>Na przykład:<br>
+<br>
+
+
+int a;        // deklaracja zmiennej całkowitotoliczbowej a<br>
+
+
+
+
+
+char c;  // deklaracja zmiennej, która może zawierać znaki Unikodu <br>
+
+
+double price; // deklaracja zmiennej typu double o nazwie <b><i>price</i></b><br>
+<br>
+<br>
+
+
+Przy okazji deklarowania zmiennych można ustalać ich wartości, co nazywa się inicjacją.<br>
+<br><A NAME="EDU.skorowidz.termin inicjacja_zmiennej 36_341"></A> 
+<div class="def"><b>Inicjacja</b> zmiennej - to ustalenie jej wartości przy okazji deklaracji</div>
+
+<br>
+
+<p>Deklarację z inicjację zapisujemy w formie:<br>
+<br>
+
+<div align="Center"><i><b>nazwa_typu    nazwa_zmiennej = wyrażenie;</b></i><br></div>
+
+<br>
+<p>
+Na przykład:<br>
+<br>
+
+
+int a = 3;        <br>
+<br>
+
+
+co jest skróconą formą od:<br>
+<br>
+
+
+int a;<br>
+
+
+a = 3;<br>
+<br>
+
+
+W tym przypadku wyrażeniem inicjującym był literał. Ogólnie może być to dowolne wyrażenie (w tym wywołanie metody) <br>
+<br>
+
+
+Np.<br>
+
+
+int a = 3;<br>
+
+
+int b = a + 1;  // deklaracja zmiennej b i ustalenie wartości na 4<br>
+<br>
+
+
+Zauważmy, że użycie zmiennej <i><b>a</b></i> w wyrażeniu inicjującym wartośc zmiennej <i><b>b</b></i> było możliwe tylko dlatego, że deklaracja zmiennej <i><b>a</b></i> wystąpiła przed użyciem jej w tym wyrażeniu.<br>
+<br>
+
+
+Do deklarowania stałych używamy słowa kluczowego <b>final</b>.<br>
+<br><A NAME="EDU.skorowidz.termin stała 36_342"></A> 
+
+<div class="def">Wartość <b>stałej</b> można ustalić tylko raz i poźniej ta wartość nie  może być już zmieniona</div><br>
+<br>
+
+
+<p>Piszemy:<br>
+<br><A NAME="EDU.skorowidz.termin final 36_343"></A> 
+<div align="Center"><b>final <i>nazwa_typu nazwa_stałej</i>  [  =  <i>wyrażenie</i>  ]</b><br></div>
+
+<br>
+
+
+<p>przy czym inicjacja (podana w nawiasach kwadratowcyh) jest tu opcjonalna,
+bowiem istotne jest tylko to by wartość stałej została ustalona tylko raz.
+Najczęściej jednak wartość tę ustalać będziemy w momencie deklaracji.<br>
+<br>
+
+
+Np. <br>
+<br>
+
+
+final int NUM = 55;<br>
+
+
+final double PI_SMALL = 3.14;<br>
+
+
+final char C;<br>
+
+
+...<br>
+
+
+C = 'c';<br>
+<br>
+<br>
+
+
+Deklaracje zmiennych i stałych, które oznaczają obiekty zapisujemy w analogiczny sposób. Zobaczmy. <br>
+
+
+Jeżeli int ma być typem zmiennej x (która oznacza liczbę całkowitą) to piszemy: <br>
+<br>
+
+
+            int x;<br>
+<br>
+
+
+Podobnie jeżeli s jest nazwą zmiennej, która oznacza obiekt klasy String, to piszemy:<br>
+<br>
+
+
+            String s;<br>
+<br>
+
+
+To samo ze zmiennymi, które oznaczają obiekty każdej innej klasy (np.
+z zestawu "klas standardowych", dostarczanych wraz ze środowiskiem Java 2
+SDK lub też klas, które sami zdefiniujemy):<br>
+<br>
+
+
+Button b;  // zmienna  b  oznacza obiekt klasy Button<br>
+
+
+Frame frame; // zmienna frame  oznacza obiekt klasy Frame<br>
+<br><br>
+
+
+<div class="notel33">
+Reguły dobrego stylu programowania w zasadzie nakazują umieszczanie
+deklaracji każdej zmiennej w odrębnym wierszu programu wraz z dodatkowym komentarzem
+opisującym przeznaczenie zmienenej, gdy nazwa zmiennej nie mówi całkowicie
+wyraźnie co dana zmienna oznacza.</div>
+
+<div class="ddd">
+<br>
+Zauważmy jeszcze, że dopuszczalne jest
+deklarowanie kilku zmiennych tego samego typu w jednej deklaracji
+poprzez wymienienie ich (wraz z ew. inicjatorami) na liście rozdzielonej
+przecinkami np.
+<br>
+
+int num = 1, count, ff = 10;<br>
+
+
+    Button b1, b2, b3; <br>
+</div>
+
+<br clear="all">
+
+<br>
+
+<p>Trzeba koniecznie pamętać, że  <b>wszystkie zmienne w programie muszą być zadeklarowane.</b><br>
+<br><A NAME="EDU.skorowidz.termin deklaracja 36_344"></A> 
+
+<div class="important"><b>Deklaracje</b> obowiązkowo <b>muszą poprzedzać użycie zmiennych</b> i stałych w innych
+instrukcjach programu.<br>
+
+
+Nie znaczy to jednak, że deklaracje muszą poprzedzać wszystkie instrukcje programu.<br>
+
+
+Wręcz przeciwnie: zmienne i stałe deklarujemy <b>zwykle</b> możliwie najbliżej miejsca ich użycia, co zwiększa czytelność kodu.<br>
+
+
+</div> 
+
+<br>
+<p>
+
+
+Zobaczmy przykład podobny do obliczania ceny komputera w początkowych wykładach:<br>
+
+<pre>
+public class CompPrice {
+
+  public static void main(String[] args) {
+
+    int cProc = 700;   // cena procesora
+    int cPly  = 500;   // ... płyty
+    int cPam = 300;    // innych składnikow ...
+    int cDysk = 400;
+    int cInn = 500;
+
+    final double VAT = 1.22;  // narzut podatku VAT
+
+    // Liczymy cenę komputera bez monitora
+    // wyrażenie sumujące składniki zapisując
+    // jako wyrażenie inicjującę zmienną cKomp
+
+    double cKomp = (cProc + cPly + cPam + cDysk + cInn) * VAT;
+
+    System.out.println("Cena komputera bez monitora wynosi :");
+    System.out.println(cKomp);
+
+    int cMon = 1100;             // cena monitora netto
+    cKomp = cKomp + cMon * VAT;  // i nowa cena komputera z monitorem
+
+    System.out.println("Cena komputera z monitorem wynosi :");
+    System.out.println(cKomp);
+
+ }
+}
+
+</pre>
+
+<p>Zauważmy: gdybyśmy zapomnieli dodać słówko int przed cMon - zmienna cMon byłaby niezadeklarowana.<br>
+
+<pre>
+    cMon = 1100;                 // cena monitora netto
+    cKomp = cKomp + cMon * VAT;  // i nowa cena komoutera z monitorem
+</pre>
+
+
+<p>Kompilator wykryje tę sytuację i poinformuje nas o błędzie<br><br>
+
+
+<div class="listing100"><br>
+
+
+CompPrice.java:19: cannot resolve symbol<br>
+
+
+symbol  : variable cMon<br>
+
+
+location: class CompPrice<br>
+
+
+    cMon = 1100;                 // cena monitora netto<br>
+
+
+    ^<br>
+
+
+CompPrice.java:20: cannot resolve symbol<br>
+
+
+symbol  : variable cMon<br>
+
+
+location: class CompPrice<br>
+
+
+    cKomp = cKomp + cMon * VAT;  // i nowa cena komputera z monitorem<br>
+
+
+                    ^<br>
+
+
+2 errors<br>
+
+
+</div>
+<br>
+<p>
+
+
+Na marginesie,<A NAME="EDU.skorowidz.termin komunikat_cannot_resolve_symbol 36_345"></A> z komunikatem "cannot resolve symbol" będziemy się spotykać
+dość często. Oznacza on (zwykle), że używamy jakiejś nazwy, której kompilator
+nie może zidentyfikowac (np. niezadeklarowanej zmiennej). </p>
+
+
+<div class="notel"><br>Java <b>rozróżnia wielkie i male litery</b> w nazwach zmiennych, stałych,
+metod, klas<br><br>
+</div>
+
+<div class="ddd">
+<br>
+Jednym z typowych źródeł takich błędów są błędy w pisowni,
+a szczególnie mylenie wielkich i małych liter w nazwach.  O ile z własnymi
+programami zwykle nie będziemy mieli tutaj wielkich problemow (ostatecznie
+sami wymyśliliśmy nazwy), to nazwy stosowane w standardowych pakietach Javy
+mogą nam sprawiać więcej kłopotu.
+</div>
+<br clear="all">
+
+
+<p>Stosowana jest tutaj dość klarowna konwencja nazewnicza, która bardzo nam
+pomoże, ale na początku często nie będziemy jeszcze pewni jak pisać np. HashTable
+czy Hashtable? <br>
+<br>
+
+
+<div class="important"><br><A NAME="EDU.skorowidz.termin identyfikator 36_346"></A> 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Identyfikatory</b><br>
+<br>
+
+Nazwy zmiennych, stałych, metod, klas - nazywają się identyfikatorami.<br>
+
+Identyfikatory muszą zaczynać się od litery lub podkreślenia (znaku _) i
+mogą składać się z dowolnego ciągu znaków alfanumerycznych (liter i cyfr)
+i/lub znaków podkreśleń.<br><A NAME="EDU.skorowidz.termin słowo_zarezerwowane_Javy 36_347"></A> 
+Jako identyfikatorów nie wolno używać zarezerwowanych słów języka - <br>
+
+<a href="javascript:popUp('dodatki/W4ResKeyw.htm',75,75)">zob. spis słów zarezerwowanych Javy</a><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Konwencje nazewnicze:</b><br>
+<br>
+<ul>
+<li>nazwy zmiennych i metod - zaczynam małą literą, każdy składnik wyróżniamy
+rozpoczynając go dużą literą (np. x, price, numOfAllOccurs, liczbaDzieciMlodszych,
+increment(),  getBackground())</li><li>nazwy stalych - piszemy dużymi literami, składniki nazwy rozróżniając za pomocą znaku podkreślenia (np. NUM, EXIT_ON_CLOSE)</li><li>nazwy klas zaczynamy dużą literą, i dalej wyrózniamy poszczególne składniki nazwy - też dużą literą (np. Frame, ArrayList)</li>
+</ul>
+<i>Uwaga: konwencja wyróżniania składników nazwy poprzez rozpoczynanie ich dużą literą nazywa się notacją węgierską</i><br>
+
+</div>
+
+<br>
+
+<p>Na zakończenie warto jeszcze raz zastanowić się jaki jest sens<A NAME="EDU.skorowidz.termin typ pojęcie 36_348"></A> pojęcia typu.<br>
+
+
+Na "niskim poziomie" (instrukcji maszynowych) każda jednostaka danych rzeczywiście
+musi mieć typ. Wynika to ze znanego już nam faktu, że każda informacja (instrukcje
+maszynowe, dane) jest przedstawiana w pamięci komputera za pomocą ciągów
+bitów o wartościach 1 lub 0.  Nazwa zmiennej oznacza zaś obszar pamięci,
+w którym znajduje się oznaczana przez tę zmienną wartość.<br>
+
+
+
+
+Np. jeśli mamy zmienne x i y, to nazwy te (jakoś) odsyłają do początków obszarów, w których zapisane są jakieś ciągi bitowe:<br>
+<br>
+
+
+
+
+x      1   1   0   0   1   0   1   1  ....<br>
+
+
+
+
+y      1  ... 0  1  1  0  0  1  0  0  1  ...<br>
+<br>
+
+Jak w takiej sytuacji komputer ma zinterpretować wyrażenie x + y ? Gdzie
+kończą się wartości x i y ? Co oznacza operacja + ? Odpowiedzi na te pytania
+wynikają właśnie z typów zmiennych x i y, i dlatego typy te muszą być określone.<br>
+<br>
+
+
+  Przykładowo: jeśli zmienne x i y są typu int, to do przechowywania wartości
+tych zmiennych  zostaną wydzielone obszary pamięci o określonej długości
+(4 bajty), a instrukcja dodawania będzie skutkować w wygenerowaniu odpowiednich
+instrukcji maszynowych, które w sumie umożliwią dodanie do siebie dwóch wartości
+z tych obszarów przy zastosowaniu arytmetyki stałopozycyjnej. Gdyby zmienne
+x i y były typu float, to obszary zajmowanej przez nie pamięci byłyby inne
+(8 bajtów), a dodawanie realizowane w arytmetyce zmiennopozycyjnej.<br>
+<br>
+
+
+Dlaczego jednak w programie pisanym w Javie, która przecież jest językiem
+wysokiego poziomu (abstrahującym - choć jak widzimy nie do końca - od "szczegółow
+technicznych")  programista zawczasu musi deklarować zmienne, określając
+przy tym ich typy?<br>
+<br>
+
+
+Są języki, które tego nie wymagają. Zazwyczaj są to języki interpretowane,
+bo okazuje się, że stworzenie kompilatora dla języka bez typów jest niezwykle
+trudne (choć nie niemożliwe, bo już są takie kompilatory, aczkolwiek raczej
+o charakterze eksperymentalnym, nie szerokodostępnym).<br>
+<br>
+
+
+Mamy więc pierwszą odpowiedź na nasze pytanie: trudności stworzenia kompilatora<br>
+
+
+(Java jest językiem nie tylko interpretowanym, ale również kompilowanym,
+a prawdziwy powód oraz kontekst tego ostatniego za chwilę wyjasnimy). <br>
+<br>
+
+Jest też inny argument, dotyczący szczególnie typów numerycznych. Dane
+różnych typów numerycznych (jak widzieliśmy) zajmują różną objętość pamięci.
+Mając do wyboru kilka typów liczbowych programista może więc lepiej sterować
+zajętością pamięci i efektywnością programu.<br>
+
+
+Jeśli np. musi przechowywać w pamięci 10 tys. liczb i wie, że wszystkie one
+mogą być tylko całkowite, a ich wielkości mieszczą się 4 bajtach, to używając
+typu int zamiast typu double oszczędza 40 tys. bajtów oraz znacznie zwiększa
+efektywność programu, gdyż działania na liczbach całkowitych wykonują się
+zazwyczaj wielokrotnie szybciej niż na liczbach rzeczywistych.<br>
+
+
+Powiedzmy jednak szczerze: ten kontekst jest bardzo ważny w zastosowaniach
+naukowych, przy dużych obliczeniach itd., natomiast na skutek postępu w sprzęcie
+oszczędności rzędu 1 MB pamięci czy kilka milionów operacji w programie  dla codziennych
+powszechnych zastosowań oprogramowania nie są już tak istotne.<br>
+<br>
+
+
+Dochodzimy więc do chyba najbardziej właściwej odpowiedzi na pytanie o sens deklarowania zmiennych i określania ich typów.<br>
+
+
+Otóż określanie typów danych (nawet tych najbardziej elementarnych) w deklaracjach
+umożliwia  kompilatorowi kontrolę poprawności programu np. stwierdzenie czy
+zmienne określonych typów stosujemy we właściwych kontekstach albo czy przekazujemy
+funkcjom (metodom) argumenty właściwych typów. Nazywa się to kontrolą zgodności
+typów (przez kompilator) i często pomaga wykrywać błędy w programie już w
+fazie kompilacji.<br>
+<br><A NAME="EDU.skorowidz.termin kontrola_zgodności_typów ścisła_ 36_349"></A> Java jest językiem ze <b>ścisłą kontrolą zgodności typów</b> i temu głównie służy wybrany przez twórców Javy sposób kompilowania programów, skutkujący w składni języka.<br>
+<br>
+
+
+<div class="def">Ścisła kontrola zgodności typów oznacza, że typ wyniku  każdego wyrażenia znany jest już w fazie kompilacji</div>
+<br>
+<p>
+
+ Przeświadczenie o tym, że ścisła kontrola zgodności typów chroni przed
+błędami, żywione przez twórców Javy, chyba najbardziej zaważyło na tym, iż w
+Javie trzeba deklarować zmienne i w deklaracjach określać ich typy, a stosując
+literały trzeba pamiętać o konwencjach traktowania literalnie podanych danych.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index35.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index37.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

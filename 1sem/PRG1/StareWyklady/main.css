@@ -1,0 +1,463 @@
+BODY {
+	 FONT-FAMILY: verdana, arial; BACKGROUND-COLOR: whitesmoke;
+ FONT-SIZE: 13px; line-height: 16px; text-align: justify;
+}
+
+
+P {COLOR: black; FONT-FAMILY: verdana, arial, Helvetica; FONT-SIZE: 13px; line-height: 16px; text-align: justify;}
+
+
+P.tyt {COLOR: black; FONT-FAMILY: verdana, arial, Helvetica; FONT-SIZE: 14px; line-height: 16px; text-align: left;}
+
+H1 {COLOR: black; FONT-WEIGHT: bold;FONT-FAMILY: Trebuchen MS, Helvetica; FONT-SIZE: 17px; line-height: 19px; text-align: left;}
+
+H2 {COLOR: black; FONT-WEIGHT: bold;FONT-FAMILY: Trebuchen MS, Helvetica; FONT-SIZE: 16px; line-height: 15px; text-align: left;}
+
+H3 {COLOR: black; FONT-WEIGHT: bold;FONT-FAMILY: Trebuchen MS, Helvetica; FONT-SIZE: 15px; line-height: 17px; text-align: left;}
+
+TD {
+	COLOR: black; FONT-FAMILY: verdana, arial; FONT-SIZE: 13px; line-height: 16px; 
+}
+
+
+DIV.TYTA {
+	FONT-FAMILY: verdana, arial; FONT-WEIGHT: bold;
+	FONT-SIZE: 14px; text-align: left; color: brown;
+}
+
+DIV.TYTB {
+	FONT-FAMILY: verdana, arial; FONT-WEIGHT: normal;
+	FONT-SIZE: 13px; text-align: left; color: brown; font-weight: bold;
+}
+
+DIV.TYT2 {
+	FONT-FAMILY: verdana, arial; FONT-WEIGHT: bold;
+	FONT-SIZE: 14px; text-align: center; color: brown;
+}
+
+DIV.SKOR {
+	FONT-FAMILY: verdana, arial; FONT-WEIGHT: normal;
+	FONT-SIZE: 14px; text-align: center; color: blue; background-color: white;
+}
+DIV.TYT {
+	FONT-FAMILY: verdana, arial; FONT-WEIGHT: bold;
+	FONT-SIZE: 14px; text-align: center; color: blue;
+	background-color: honeydew;
+}
+
+
+LI, OL, UL {
+	FONT-FAMILY: verdana, arial; COLOR: #000000; TEXT-DECORATION: none; FONT-SIZE: 13px; line-height: 16px; text-align: left;}
+
+
+A, A:link, A:visited {
+	COLOR: red; TEXT-DECORATION: none; FONT-SIZE: 12px; line-height: 17px; 
+}
+
+A:hover {
+	COLOR: orange; TEXT-DECORATION: underline; FONT-SIZE: 12px; line-height: 17px; 
+}
+TD.nawig {
+	background-color:#e6f0eb;FONT-FAMILY: verdana, arial; COLOR: black; TEXT-DECORATION: none; FONT-SIZE: 13px; text-align: center;
+}
+
+A.NAWIGACJA, A.NAWIGACJA:link, A.NAWIGACJA:visited {
+	background-color:#e6f0eb;FONT-FAMILY: verdana, arial; COLOR: gray; TEXT-DECORATION: none; FONT-SIZE: 10px; text-align: left;
+}
+A.NAWIGACJA:hover {
+	background-color: #e6f0eb;FONT-FAMILY: verdana, arial; COLOR: black; TEXT-DECORATION: none; FONT-SIZE: 10px;text-align: left;
+}
+
+A.SKOR, A.SKOR:link, A.SKOR:visited  {
+	FONT-FAMILY: VERDANA; COLOR: blue; TEXT-DECORATION: none; FONT-SIZE: 13px; text-align: left; line-height:14px; cursor: default;
+}
+
+A.SKOR:hover {
+	FONT-FAMILY: VERDANA; COLOR: black; TEXT-DECORATION: none; FONT-SIZE: 13px; text-align: left;  line-height: 14px; cursor: default;
+}
+
+DIV.GLOS {
+	COLOR: brown; background-color: "lightyellow"; TEXT-DECORATION: none; FONT-SIZE: 17px; FONT-WEIGHT: bold; FONT-FAMILY: VERDANA; text-align: center;
+}
+
+DIV.LITERKA {
+	COLOR: blue; background-color: lightgreen; TEXT-DECORATION: none; FONT-SIZE: 14px; FONT-WEIGHT: bold; FONT-FAMILY: VERDANA; text-align: center;
+}
+
+A.GLOSSARY, A.GLOSSARY:link, A.GLOSSARY:visited,  {
+	COLOR: white; background-color: "brown"; TEXT-DECORATION: none; FONT-SIZE: 16px; FONT-WEIGHT: bold; FONT-FAMILY: VERDANA;
+}
+
+A.GLOSSARY:hover {
+	COLOR: "3a473e"; background-color: white; TEXT-DECORATION:none; FONT-SIZE: 16px;FONT-WEIGHT: bold; FONT-FAMILY: VERDANA;
+}
+
+A.SKOROWIDZ, A.SKOROWIDZ:link, A.SKOROWIDZ:visited,  {
+	COLOR: white; background-color: "blue"; TEXT-DECORATION: none; FONT-SIZE: 14px; FONT-WEIGHT: bold; FONT-FAMILY: VERDANA;
+}
+
+A.SKOROWIDZ:hover {
+	COLOR: "3a473e"; background-color: white; TEXT-DECORATION:none; FONT-SIZE: 14px;FONT-WEIGHT: bold; FONT-FAMILY: VERDANA;
+}
+
+
+.tytul {
+ color:#000000;
+ FONT-FAMILY: VERDANA;
+ font-weight: bold;
+ FONT-SIZE: 15px;
+ line-height: 17px;
+}
+
+td.tytulpunktu {
+ color:#000000;
+ FONT-FAMILY: VERDANA;
+ font-weight: bold;
+ FONT-SIZE: 14px;
+ line-height: 17px;
+}
+
+.tytulpunktu, A.tytulpunktu, A.tytulpunktu:visited {
+ color:#000000;
+ FONT-FAMILY: VERDANA;
+ font-weight: bold;
+ FONT-SIZE: 14px;
+ line-height: 17px;
+}
+
+A.tytulpunktu:hover {
+ color:red;
+ FONT-FAMILY: VERDANA;
+ font-weight: bold;
+ FONT-SIZE: 14px;
+ line-height: 17px;
+ text-decoration: underline;
+}
+
+input.GUZIK
+{
+	font-family: Verdana, Sans-serif; 
+	font-size: 11px; 
+	color: red; 				
+	background-color: ivory; 
+	text-align: center;
+}
+
+A.ODP {
+	COLOR: red; background-color: ivory;TEXT-DECORATION: underline; FONT-SIZE: 12px;
+}
+A.ODP:link {
+	COLOR: red; background-color: ivory;TEXT-DECORATION: underline; FONT-SIZE: 12px;
+}
+A.ODP:visited {
+	COLOR: red background-color: ivory;TEXT-DECORATION: underline; FONT-SIZE: 12px;
+}
+A.ODP:hover {
+	COLOR: blue; background-color: ivory;TEXT-DECORATION: underline; FONT-SIZE: 12px;
+}
+
+div.pomoc
+{
+ color:black;
+ border:1px solid white;
+ padding:0em;
+ width:100%;
+ text-align: left;
+ FONT-FAMILY: verdana;
+ FONT-SIZE: 13px;
+} 
+
+
+PRE
+{
+ background-color: #fffff7;
+ color:black;
+ display:block;
+ white-space:pre;
+ border:1px solid #800000;
+ padding:1em;
+ text-align: left;
+ FONT-FAMILY: COURIER;
+ FONT-SIZE: 13px;
+}
+
+div.notec
+{
+ background-color: #fffff7;
+ color:black;
+ border:1px solid #800000;
+ padding:1em;
+ width:75%;
+ text-align: left;
+ FONT-FAMILY: verdana;
+ FONT-SIZE: 13px;
+}
+
+
+div.notel
+{
+ background-color: #fffff7;
+ color:black;
+ border:1px solid #800000;
+ font-size: 13px;
+ padding:1em;
+ width:25%;
+ float:right;
+ text-align: left; 
+ FONT-FAMILY: verdana;
+ margin-left: 10px;
+}
+
+div.noter
+{
+ background-color: #fffff7;
+ color:black;
+ border:1px solid #800000;
+ font-size: 13px;
+ padding:1em;
+ width:25%;
+ float:left;
+ text-align: left;
+ FONT-FAMILY: verdana;
+}
+
+div.wlas
+{
+ background-color: mistyrose;
+ color:black;
+ border:1px solid plum;
+ FONT-SIZE: 13px;
+ padding:1em;
+ width:99%;
+ text-align: left;
+ FONT-FAMILY: verdana;
+} 
+
+div.def1
+{
+ background-color: floralwhite;
+ color:black;
+ border:1px solid red;
+  FONT-SIZE: 13px;
+ padding:1em;
+ width:90%;
+ text-align: left;
+ FONT-FAMILY: verdana;
+} 
+
+div.def
+{
+ background-color: floralwhite;
+ color:black;
+ border:2px solid red;
+ padding:1em;
+ width:90%;
+ text-align: left;
+ FONT-FAMILY: verdana;
+ FONT-SIZE: 13px;
+} 
+
+div.lemat
+{
+ background-color: aliceblue;
+ color:black;
+ border:1px solid blue;
+ padding:1em;
+ width:99%;
+ text-align: left;
+ FONT-FAMILY: verdana;
+ FONT-SIZE: 13px;
+} 
+
+div.twier
+{
+ background-color: mintcream;
+ color:black;
+ border:1px solid green;
+ padding:1em;
+ width:99%;
+ text-align: left;
+ FONT-FAMILY: verdana;
+ FONT-SIZE: 13px;
+} 
+
+div.przyk
+{
+ background-color: mistyrose;
+ color:black;
+ border:1px solid red;
+ padding:1em;
+ width:90%;
+ text-align: left;
+ FONT-FAMILY: verdana;
+ FONT-SIZE: 13px;
+} 
+
+div.wzor
+{
+ background-color: whitesmoke;
+ color:black;
+ border:1px solid gray;
+ padding:1em;
+ width:90%;
+ text-align: left;
+ FONT-FAMILY: verdana;
+ FONT-SIZE: 13px;
+} 
+
+div.important
+{
+ background-color: #FFFFCC;
+ color:#CC0000;
+ border:3px solid #CC0000;
+ width:90%;
+ padding:1em;
+ text-align: left;
+ FONT-FAMILY: verdana;
+ FONT-SIZE: 13px;
+}
+
+
+div.ddd
+{
+ color:black;
+ width:99%;
+ text-align: justify;
+ FONT-FAMILY: Verdana;
+ FONT-SIZE: 13px;
+ line-height: 17px;
+} 
+
+div.notel_a
+{
+ color:black;
+ width:2%;
+ float:right;
+ text-align: left; 
+ FONT-SIZE: 13px;
+ line-height: 17px;
+ }
+
+
+div.notel33
+{
+ background-color: #fffff7;
+ color:black;
+ border:1px solid #800000;
+ padding:1em;
+ width: 33%;
+ float:right;
+ FONT-FAMILY: Verdana;
+ FONT-SIZE: 13px;
+ line-height: 16px;
+ margin-left: 10px;
+}
+
+div.notel55
+{
+ background-color: #fffff7;
+ color:black;
+ border:1px solid #800000;
+ padding:1em;
+ width: 55%;
+ float:right;
+ FONT-FAMILY: Verdana;
+ FONT-SIZE: 13px;
+ line-height: 16px;
+}
+
+div.noter33
+{
+ background-color: #fffff7;
+ color:black;
+ border:1px solid #800000;
+ padding:1em;
+ width:33%;
+ float:left;
+ FONT-FAMILY: Verdana;
+ FONT-SIZE: 13px;
+ line-height: 16px;
+}
+
+
+div.listing25r
+{
+ background-color: #333399;
+ color: white;
+ border:4px ridge aliceblue;
+ font-family: monospace;
+ padding:1em;
+ width:25%;
+ float:right;
+ FONT-SIZE: 13px;
+ line-height: 16px;
+  margin-left: 10px;
+}
+
+div.listing25l
+{
+ background-color: #333399;
+ color: white;
+ border:4px ridge aliceblue;
+ font-family: monospace;
+ padding:1em;
+ width:25%;
+ float:left;
+ FONT-SIZE: 13px;
+ line-height: 16px;
+  margin-right: 10px;
+}
+
+
+div.listing33r
+{
+ background-color: #333399;
+ color: white;
+ border:4px ridge aliceblue;
+ font-family: monospace;
+ padding:1em;
+ width:33%;
+ float:right;
+ FONT-SIZE: 13px;
+ line-height: 16px;
+ margin-left: 10px;
+}
+
+div.listing33l
+{
+ background-color: #333399;
+ color: white;
+ border:4px ridge aliceblue;
+ font-family: monospace;
+ padding:1em;
+ width:33%;
+ float:left;
+ FONT-SIZE: 13px;
+ line-height: 16px;
+}
+
+
+
+div.listing50
+{
+ background-color: #333399;
+ color: white;
+ border:4px ridge aliceblue;
+ font-family: monospace;
+ padding:1em;
+ width:50%;
+ FONT-SIZE: 13px;
+ line-height: 16px;
+}
+
+div.listing100
+{
+ background-color: #333399;
+ color: white;
+ border:4px ridge aliceblue;
+ font-family: monospace;
+ padding:1em;
+ width:90%;
+ FONT-SIZE: 13px;
+ line-height: 16px;
+}

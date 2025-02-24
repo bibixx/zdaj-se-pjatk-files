@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index50.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index52.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Definiowanie atrybutów obiektów (pola)</div>
+<a name="W7.2"></a>
+
+<p><A NAME="EDU.skorowidz.termin element_obiektu 51_461"></A> Pola klasy określają z jakich elementów będą składać się obiekty tej klasy.<br>
+Na przykład obiekty-pary liczb całkowitych składają się z dwóch liczb całkowitych.<br>
+<br>
+W definicji klasy Para trzeba to jakoś zapisać. Naturalnym sposobem jest zadeklarowanie zmiennych odpowiednich typow<br>
+<br>
+public class Para {<br>
+<br>
+        int a;<br>
+        int b;<br>
+<br>
+// dalej będą następować definicje konstruktorów i metod klasy.... <br>
+<br>
+}<br>
+<br>
+Taki zapis oznacza, że każdy z obiektów klasy Para będzie zawierał  dwie
+liczby całkowite. Będzie się składał z dwóch elementów - liczb całkowitych. 
+Identyfikatory zmiennych (a i b) są oczywiście dowolne, a potrzebne są po
+to, by do tych liczb móc odwoływać się w metodach klasy.<br>
+<br>
+Pamiętamy, że jedną z ważnych cech programowania obiektowego jest<A NAME="EDU.skorowidz.termin hermetyzacja 51_462"></A> hermetyzacja.
+Polega ona (między innymi) na tym, że działając na obiektach jakiejś klasy
+powinniśmy wyłącznie posługiwac się dostępnymi dla nas jej metodami, a nie
+grzebać w "środku obiektów".<br>
+Dlatego pola klasy deklaruje się zwykle ze<A NAME="EDU.skorowidz.termin specyfikator_dostępu 51_463"></A> specyfikatorem dostępu<A NAME="EDU.skorowidz.termin private 51_464"></A> <b>private</b>, co oznacza, że dostęp do nich możliwy jest tylko z wnętrza danej klasy
+(m.in z jej metod), a odwołania spoza klasy są niedopuszczalne.<br>
+<br>
+
+<div class="syntax">Definiowanie pól klasy<br>
+<br>
+[<b>public</b>] <b>class</b> <i><b>NazwaKlasy</b></i> {<br>
+<br>
+    [ <i><b>specyfikator_dostępu </b></i>] <i><b>nazwa_typu</b></i> <i><b>nazwa_zmiennej</b></i> [ <i><b>inicjator</b></i> ]; <br>
+    //....         <br>
+<br>
+}<br>
+uwaga:<br>
+<ul>
+  <li>nawiasy kwadratowe oznaczają opcjonalność elementów definicji</li>
+  <li>specyfikator dostępu to zwykle <b>private</b><br>
+  </li>
+  <li>inicjator ma znaną nam postać wyrażenia po znaku =; więcej na ten temat w podpunkcie dotyczącym jawnych inicjacji</li>
+</ul>
+</div>
+
+<br><p>
+<a href="javascript:popUp('dodatki/W7Prb1.htm',50,50)"><img src="images/Problem.jpg" alt="Problem" width="137" height="84" border="1" align="Right"></a> Na przykład:<br>
+<br>
+public class Para {<br>
+    private int a;<br>
+    private int b;<br>
+    // ...<br>
+}<br>
+<br>
+Polami klasy mogą być zmienne obiektowe (zmienne oznaczające obiekty; ściślej
+powiemy: zmienne typów referencyjnych). Zobaczmy jak mógłby wyglądać fragment
+definicji klasy Book, która opisuje książki:<br>
+<br><p>
+<a href="javascript:popUp('dodatki/W7Prb2.htm',50,50)"><img src="images/Problem.jpg" alt="Problem" width="137" height="84" border="1" align="Right"></a>public class Book {<br>
+    private String author;  // autor<br>
+    private String title;      // tytuł<br>
+    private double price;   // cena<br>
+    // ....<br>
+}<br>
+<br>
+Zmienne typu String są referencjami, będą wskazywać na odpowiednie obiekty - łańcuchy znakowe.<br>
+<br>
+
+<div class="notel">Pojęcie <b>pola</b> dotyczy klasy, pojęcie <b>elementu</b> - dotyczy obiektu.
+Dla uproszczenia będziemy jednak czasem mówić "pole obiektu".</div>
+
+<div class="ddd"><br><A NAME="EDU.skorowidz.termin pole_klasy 51_465"></A> Należy wyraźnie
+dostrzegać różnicę pomiędzy definicją pól klasy,<A NAME="EDU.skorowidz.termin element_obiektu 51_466"></A> a elementami obiektów. Zestaw
+pól klasy określa jakie elementy mogą mieć obiekty tej klasy. Elementy są
+natomiast konkretnymi obszarami pamięci alokowanymi "w środku" konkretnych
+obiektów.
+</div>
+
+<br><p>
+Np. definicja klasa Para mówi o tym, że każdy jej obiekt zawiera dwa elementy
+- liczby całkowite. Po utworzeniu obiektu i jego inicjacji (bądż np. użyciu
+metody set, ustalającej wartość pary) obiekt będzie zawierał dwa elementy
+- liczby całkowite o konkretnych wartościach. Inny obiekt klasy Para  będzie
+też zawierał dwie liczby całkowite, ale (być może) o innych wartościach niż
+ten pierwszy.<br><br>
+<div>
+<img src="images/Pola7.jpg" alt="Rys" width="514" height="358" border="1">
+</div>
+
+<br><p>
+Co się stanie, jeśli - ani za pomocą konstruktora, ani w inny sposób - nie
+ustalimy przy tworzeniu obiektu wartości jego elementów? <br><A NAME="EDU.skorowidz.termin obiekt wartości_domyślne_elementów 51_467"></A> Elementy obiektu będą miały <b>wartości domyślne</b>.<br>
+<br>
+
+<div class="important">Domyślnie, przy tworzeniu obiektów, pola klasy otrzymują wartość ZERO, co<br>
+<ul>
+  <li>
+dla typów całkowitych oznacza liczbę całkowitą 0,</li>
+  <li>
+dla typów rzeczywistych oznacza wartość rzeczywistą 0.</li>
+  <li>
+dla typu boolean oznacza wartość <b>false</b>,</li>
+  <li>
+dla typów referencyjnych oznacza wartość <b>null</b> (referencja nie wskazuje na żaden obiekt)</li>
+</ul>
+</div>
+
+<br>
+
+<p>
+Np. przy takiej definicji klasy:<br>
+<br>
+class Person {<br>
+    private String name;<br>
+    private int age;<br>
+    private boolean isEmployee;<br>
+}<br>
+<br>
+po utworzeniu obiektu tej klasy, jego elementy odpowiadające polom name,
+age i isEmployee będą miały wartości - odpowiednio - null, 0 i false.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index50.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index52.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

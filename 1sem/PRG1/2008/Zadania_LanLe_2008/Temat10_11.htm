@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta name="Author" content="TLL">
+  <meta name="GENERATOR"
+ content="Mozilla/4.72 [en] (Win98; I) [Netscape]">
+  <title>PRG1 - Temat 10_11</title>
+</head>
+<body>
+<b><font size="+1">Obiekty i klasy 2</font></b><br>
+&nbsp;
+<br>
+<p><b><u>Zadanie 28</u> (1p)</b>
+</p>
+<p><b>Dodefiniowaæ nastêpuj±ce konstrukcje do klasy </b><i>Circle</i><b>
+z
+zadania 27 i przetestowaæ:</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Pole&nbsp;
+statyczne:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>static int nr</i><b> - ilo¶æ tworzonych kó³ do chwili obecnej</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Metoda
+statyczna:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>static int dajNr()</i><b> - zwraca liczbê tworzonych kó³ do
+chwili
+obecnej<br>
+<br>
+</b></p>
+<p>
+</p>
+<p><b><u>Zadanie 29</u> (3p)</b>
+</p>
+<p><b>Zaprojektowaæ i testowaæ klasê </b><i>Counter</i><b>
+reprezentuj±c±
+liczniki:</b>
+</p>
+<p><b>&nbsp;&nbsp;&nbsp; Pole: </b><i>private int state</i><b> - stan
+licznika</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Konstruktor: </b><i>public Counter()</i><b> -
+ustaw pocz±tkowy stan = 0</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Metody: </b><i>public int state()</i><b> - zwróæ
+aktualny stan licznika</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>public Counter inc()</i><b> - zwiêksz o 1 i zwraca&nbsp; licznik</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>public Counter dec()</i><b> - zmniejsz o 1 i zwraca licznik</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>public void reset()</i><b> - zeruj licznik</b>
+<br>
+<br>
+</p>
+<p><b><u>
+Zadanie 30</u> (1p)</b>
+</p>
+<p><b>Rozbudowaæ klasê </b><i>Counter </i><b>z zadania 29 o dodatkowe
+pole:
+</b><i>private
+static int op</i><b> - rejestruje ilo¶æ operacji wyk. na obiektach
+klasy
+</b><i>Counter</i><b>
+do chwili obecnej.</b>
+</p>
+<p><b></b></p>
+<p>
+</p>
+<b><u><br>
+Zadanie 31</u> (5p)</b>
+<p></p>
+<p><b>Zaprojektowaæ i testowaæ klasê </b><i>Complex</i><b>
+reprezentuj±c±
+liczby zespolone:</b>
+</p>
+<p><b>&nbsp;&nbsp;&nbsp;
+Pola:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>private double&nbsp; im, re</i><b> - czê¶æ rzeczywista i zesplona</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Konstruktory:&nbsp;&nbsp;&nbsp;&nbsp; </b><i>public
+Complex()</i><b> - konstruuje liczbê zespolon±: </b><i>0 + i*0</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>public&nbsp; Complex(double re, double im)</i><b> - konstruuje
+liczbê zespolon±: </b><i>re + i*im</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>public&nbsp; Complex(double re)</i><b> - konstruuje liczbê
+zespolon±:
+</b><i>re
++ i*0</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>public Complex(Complex c)</i><b> - konstruktor "kopiuj±cy",
+tworzy identyczn± kopiê </b><i>c</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp;
+Metody:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>public double getRe()</i><b> - zwraca </b><i>re</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>public double getIm()</i><b> - zwraca </b><i>im</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>public String toString()</i><b> - wypisuje komunikat o liczbie
+zespolonej</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>public Complex multiply1(double a)</i><b> - mno¿y przez liczbê
+rzeczywist±
+</b><i>a</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>public Complex multiply2(Complex c)</i><b> - mno¿y przez liczbê
+zespolon± </b><i>c</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b><i>public Complex divide(double a)</i><b> - dzieli przez liczbê
+rzeczywist±
+</b><i>a</i><br>
+</p>
+<p></p>
+</body>
+</html>

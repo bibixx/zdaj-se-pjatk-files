@@ -1,0 +1,35 @@
+import java.io.*;
+public class zadanie1 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) throws Exception {
+		InputStreamReader inputReader = new java.io.InputStreamReader( System.in );
+		BufferedReader buffInputReader = new java.io.BufferedReader( inputReader );
+		
+		int liczba=-1;
+		long wynik=1;
+		int i=1;
+		while(liczba <0){
+			System.out.println("Podaj liczbe: ");
+			liczba = Integer.parseInt(buffInputReader.readLine());
+		}
+		
+		
+		if(liczba==1 || liczba==0){
+			wynik=1;
+		}else{
+			for(; i<=liczba; i++){
+				if(Long.MAX_VALUE-(wynik*i) >0){
+					wynik*=i;
+				}else break;
+		
+			}
+			if(i-1<liczba)
+			System.out.println("Przekroczono rozmiar typu long przy liczbie "+ (i-1)+" wynik: "+wynik);
+			else System.out.println(liczba+"! = "+wynik);
+		}
+	}
+
+}

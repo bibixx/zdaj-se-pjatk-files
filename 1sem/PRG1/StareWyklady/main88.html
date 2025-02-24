@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index89.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 1"></A><div class="tytulpunktu">1. Pojęcie tablicy. Realizacja tablic w Javie</div>
+
+<a name="W11.1"></a>
+
+<p>
+Dane w programie mogą  być organizowane w różny sposób. W szczególności 
+jako zestawy (powiązanych i/lub w okreslony sposób uporządkowanych) wartości.
+W tym kontekście mówimy o<A NAME="EDU.skorowidz.termin struktury_danych 88_634"></A> <b>strukturach danych</b>.<br>
+Jednym z ważnych rodzajów struktur danych - są<A NAME="EDU.skorowidz.termin tablica 88_635"></A> <b>tablice</b>.<br>
+<br>
+
+<div class="def">
+<b>Tablice</b> są zestawami elementów (wartości) <b>tego samego typu</b>, ułożonych na określonych
+<b>pozycjach</b>. Do każdego z tych elementów mamy <b>bezpośredni</b> (<b>
+swobodny</b> - nie wymagający przeglądania innych elementów zestawu) dostęp
+poprzez <b>nazwę tablicy</b> i pozycję elementu w zestawie, określaną przez
+<b>indeks</b> lub indeksy tablicy.</div>
+
+<br>
+<p>
+Na przykład, tablica czterech liczb całkowitych może wyglądać tak.<br><br>
+
+<div>
+<img src="images/tab1-10.jpg" alt="Rys" width="347" height="82" border="1">
+</div>
+
+<br><p>
+Pierwszy element - liczba 21 ma indeks 0, drugi - liczba 13 indeks 1 itd.<br>
+Do elementów tablicy odwołujemy się za pomocą nazwy tablicy oraz  indeksu umieszczonego w nawiasach kwadratowych.<br>
+Jeżeli ta tablica ma nazwę tab, to do pierwszego elementu odwołujemy się
+poprzez nazwę tablicy i indeks 0: tab[0], do drugiego - tab[1] itd. Jak widać,
+odwołanie np. do 3-go elementu - nie wymaga przeglądania innych elementów.<br>
+<br>
+<br><A NAME="EDU.skorowidz.termin tablica jako_obiekt 88_636"></A> <b>W Javie tablice są obiektami</b>, a nazwa tablicy jest nazwą zmiennej,
+będącej referencją do obiektu-tablicy. Obiekt-tablica zawiera elementy tego
+samego typu. Może to być dowolny z typów pierwotnych lub referencyjnych.
+Zatem, w szczególności elementami tablic mogą być referencje do innych tablic. Mamy wtedy do czynienia z odpowiednikiem tablic <b>wielowymiarowych</b> (<a href="javascript:popUp('dodatki/Tablice.htm', 75,75)">zob. uwagi o<A NAME="EDU.skorowidz.termin tablica wielowymiarowa 88_637"></A> tablicach wielowymiarowych</a>). <br>
+<br>
+Tak samo jak wszystkie inne zmienne - tablice musimy deklarować przed użyciem ich nazw w programie. <br>
+<br><A NAME="EDU.skorowidz.termin tablica deklaracja 88_638"></A> 
+<div class="syntax">Deklaracja tablicy składa się z:<br>
+<ul>
+  <li>nazwy typu elementów tablicy,</li>
+  <li>pewnej liczby par nawiasów kwadratowych (liczba par okresla liczbę wymiarów tablicy),</li>
+  <li>nazwy zmiennej, która identyfikuje tablicę.</li>
+</ul>
+Np.<br>
+        int[]  arr;   // jest deklaracją tablicy liczb całkowitych (typu int),<br>
+        String[] s;  // jest deklarację tablicy referencji do obiektów klasy String<br>
+        Button[] b; // jest deklarację tablicy referencji do obiektów klasy Button<br>
+        double[][] d;  // jest deklaracją dwuwymiarowej tablicy liczb rzeczywistych<br>
+<br>Ściślej można powiedzieć, że deklarowane są tu <b>zmienne tablicowe</b>.<br>
+Typ takiej zmiennej jest typem referencyjnym, a jego nazwa składa się z nazwy
+typu elementów tablicy i nawiasów kwadratowych. W powyższych przykładach:<br>
+    zmienna arr jest typu int[]<br>
+    zmienna s jest typu String[]<br>
+    zmienna d jest typu double[][]<br>
+</div>
+
+<br>
+<p><A NAME="EDU.skorowidz.termin tablica rozmiar 88_639"></A> <b><font color="#cc0000">Uwaga: rozmiar tablicy nie stanowi składnika deklaracji tablicy.</font></b><br><br>
+
+Np. taka deklaracja:<br>
+    int[5] arr;  <br>
+jest niedopuszczalna.<br>
+<br>
+
+<div class="notel">Skoro tablice są obiektami - to jakich klas? Otóż w trakcie kompilacji
+programu niejawnie tworzone są definicje klas dla tablic. Klasy te mają specjalne
+nazwy - tylko dla potrzeb JVM (np. klasa opisująca jednowymiarową tablicę
+liczb całkowitych ma nazwę [I) i jedno pole - stałą typu int o wartości równej
+liczbie elementów tablicy</div>
+
+<div class="ddd"><br>
+Jeżeli oswoimy się z myślą, że tablice są obiektami,
+to - przez analogię do innych obiektów - będzie nam łatwo zrozumieć różnicę
+pomiędzy deklaracją i utworzeniem tablicy.
+</div>
+<br clear="all">
+
+<br>
+<p>
+Deklaracja tablicy tworzy referencję. <br>
+ <br>
+int[] arr;   // arr jest referencją <br>
+               // arr jest zmienną typu int[], który jest typem referencyjnym<br>
+<br>
+<b>Taka deklaracja nie alokuje pamięci dla samej tablicy! </b><br>
+<br>
+
+<div class="important">Pamięć jest alokowana dynamicznie albo w wyniku inicjacji za pomocą nawiasów klamrowych albo w wyniku użycia wyrażenia new. </div>
+
+<br><A NAME="EDU.skorowidz.termin tablica inicjacja 88_640"></A> 
+<div class="syntax"><br>
+Inicjacja tablicy za pomocą nawiasów klamrowych może wystąpić wyłącznie w wierszu deklaracji tablicy i ma postać:<br>
+<br>
+        { <i><b>element_1, element_2, .... element_N </b></i>}<br>
+<br>
+gdzie: <br>
+            <i><b>element_i</b></i>  - i-ty element tablicy (wartość)<br>
+</div>
+
+<br>
+<p>
+Np.<br>
+<br>
+        int[] arr = { 1, 2, 7, 21 };<br>
+<br>
+deklaruje tablicę o nazwie arr, tworzy ją i inicjuje jej elementy; kolejno:<br>
+<ol>
+  <li>Wydzielana jest pamięć dla zmiennej arr, która będzie przechowywać referencję do obiektu-tablicy.</li>
+  <li>Wydzielana jest pamięć (dynamicznie, na stercie) potrzebna do przechowania 4 liczb całkowitych (typu int).</li>
+  <li>Kolejne wartości 1,2,7,21 są zapisywane kolejno w tym obszarze pamięci.</li>
+  <li>Adres tego obszaru (referencja) jest przypisywany zmiennej arr. </li>
+</ol>
+
+<p><A NAME="EDU.skorowidz.termin tablica utworzenie 88_641"></A> Drugi sposób utworzenia tablicy polega na zastosowaniu wyrażenia new.<br>
+<br>
+
+<div class="syntax"> <br>
+Tworzenie tablicy za pomocą wyrażenia new ma postać<br>
+<br>
+            <b>new <i>T</i>[<i>n</i>];</b><br>
+<br>
+gdzie:<br>
+<ul>
+  <li><i><b>T</b></i>  - typ elementów tablicy</li>
+  <li><i><b>n</b></i>  -  rozmiar tablicy (liczba elementów tablicy)<br>
+  </li>
+</ul>
+</div>
+
+<br>
+
+<div class="notel">Uwaga: nawiasy są kwadratowe, a nie okrągłe, jak w przypadku użycia new z konstruktorem jakiejś klasy</div>
+
+<div class="ddd"><br>
+Na przykład:<br>
+<br>
+ int[] arr;               // deklaracja tablicy<br>
+ arr = new int[4];   // utworzenie tablicy 4 elementów typu int<br>
+<br>
+Można to też zapisać od razu w wierszu deklaracji:<br>
+<br>
+ int[] arr = new int[4]; <br>
+<br>
+Mechanizm działania jest tu identyczny jak w przypadku innych obiektów.<br>
+Przypomina go poniższy rysunek.</div>
+<br clear="all">
+<br>
+
+<div>
+<img src="images/tab2-10.jpg" alt="Rys" width="333" height="175" border="1">
+</div>
+
+<br>
+<p><A NAME="EDU.skorowidz.termin tablica rozmiar 88_642"></A> Zauważmy, że rozmiar tablicy może być ustalony dynamicznie, w fazie wykonania programu. Np.<br>
+<br>
+int n;<br>
+//... n uzyskuje wartość <br>
+// np. na skutek obliczeń opartych na wprowadzonych przez użytkownika danych<br>
+//...<br>
+int[] tab = new int[n];<br>
+<br>
+<b><font color="#ff0000">Ale - uwaga - po ustaleniu rozmiar nie może być zmieniony.</font></b> <br>
+<br>
+Jak już wspomniano do elementów tablic odwołujemy się za pomocą indeksów.<br>
+<br><A NAME="EDU.skorowidz.termin tablica indeks 88_643"></A> 
+<div class="important">
+Indeksy tablicy mogą być wyłącznie wartościami typu int.<br><br>
+Mogą być dowolnymi wyrażeniami, których wyliczenie daje wartość typu int.<br>
+<br>
+Tablice zawsze indeksowane są poczynając od 0.<br>
+Czyli np. pierwszy element n-elementowej tablicy ma indeks 0, <br>
+a ostatni - indeks n-1.</div>
+
+<br>
+<p>
+Ze względu na to, że wartości typu byte, char i short są w wyrażeniach "promowane"
+(przekształcane) do typu int), to również wartości tych typów możemy używać
+przy indeksowaniu tablic. Niedoposzczalne natomiast jest użycie wartości
+typu long.<br>
+<br>
+
+<div class="syntax">Odwołanie do <i><b>i</b></i>-go elementu tablicy o nazwie <i><b>tab</b></i> ma postać:<br>
+<br>
+                <b><i>tab</i>[<i>i</i>]</b><br>
+<br>
+Ta konstrukcja składniowa traktowana jest jako zmienna, stanowi nazwę zmiennej
+- zatem możemy tej zmiennej przypisywać wartości innych wyrażeń oraz możemy
+używać jej wartości w innych wyrażeniach</div>
+
+<br>
+
+<p>
+Na przykład:<br>
+int[] a = new int[3];<br>
+a[1] = 1;  // nadanie DRUGIEMU elementowi tablicy <i><b>a</b></i> wartości 1<br>
+int c = a [1] + 1;  // c będzie miało wartość 2<br>
+int i = 1, j = 1;<br>
+a[i +j] = 7;  // nadanie elementowi o indeksie i+j (=2) wartości 7<br>
+<br>
+Odwołania do elementów tablic są przez JVM sprawdzane w trakcie wykonania
+programu pod względem<A NAME="EDU.skorowidz.termin indeks poprawność 88_644"></A> poprawności indeksów. Java nie dopuści do odwołania
+się do nieistniejącego elementu tablicy lub podania indksu mniejszego od 0. Próba takiego odwołania spowoduje
+powstanie wyjątku (czyli sygnału o błędzie) o nazwie <b>ArrayIndexOutOfBoundsException</b>
+, na skutek czego zostanie wyprowadzony odpowiedni komunikat i wykonanie programu
+zostanie przerwane (ew. taki wyjątek możemy obsłużyć - czyli w wybrany przez
+siebie sposób zareagować na jego powstanie, o czym w następnych wykladach).<br>
+Zobaczmy przykład.<br>
+
+<pre>
+public class Test {
+
+  public static void main(String[] args) {
+    int[] a = {1, 2, 3, 4 };
+    System.out.println(a[4]);
+    System.out.println(a[3]);
+    System.out.println(a[2]);
+    System.out.println(a[1]);
+  }
+
+} </pre>
+
+<p>
+Zauważmy - mamy tu tablicę składającą się z 4 liczb całkowitych. Chcemy po
+kolei wyprowadzić jej elementy od ostatniego poczynając. Częstym błędem jest
+zapominanie o tym, że tablice indeksowane są od zera: w tym programie
+zapomniano o tym i próbowano odwołać się do ostatniego elementu tablicy <i><b>a</b></i> za pomocą <i><b>a</b></i>
+[4] (ktoś pomyślał: skoro są cztery elementy - to ostatni jest a[4]). Tymczasem
+jest to odwołanie poza zakres tablicy, do nieistniejącego 5-go elementu!
+Ten błąd zostanie wykryty, na konsoli pojawi się komunikat i program zostanie
+przerwany.<br>
+<br>
+
+<div class="listing100">Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException<br>
+        at Test.main(Test.java:5)<br>
+</div>
+
+<br>
+<p>
+<font color="#cc0000">Proszę skompilować ten program, przekonać się jak działa w tej wersji, po czym:<br>
+</font>
+<ul>
+  <li><font color="#cc0000">odwrócić kolejność wypisywania elementów tablicy
+(a[1], a[2], a[3], a[4]) i zobaczyć co teraz się stanie przy wykonaniu tego
+programu</font></li>
+  <li><font color="#cc0000">poprawić program, tak by bezbłędnie wypisywał kolejne elementy tablicy<br>
+    </font></li>
+</ul>
+
+<p>
+W powyższym przykładzie było nieco żmudne wypisywanie kolejnych elementów
+tablicy. W naturalny sposób powinniśmy to robić w pętli.<br>
+<br>
+Może tak?<br>
+<br>
+
+<pre>
+public class Test {
+
+  public static void main(String[] args) {
+    int[] a = {1, 2, 3, 4 };
+    for (int i=3; i&gt;=0; i--) System.out.println(a[i]);
+  }
+
+}
+</pre>
+
+<p>
+Mhm, a co się stanie gdy zmienimy rozmiar tablicy dodając kilka nowych elementów
+w inicjacji? Będziemy musieli od nowa  policzyć elementy i zmienić inicjację
+licznika pętli. Trochę niewygodne, a do tego naraża nas na błędy. A przecież
+rozmiar tablicy znany jest JVM, niech zatem "liczeniem" elementów zajmuje
+się komputer.<br>
+<br><A NAME="EDU.skorowidz.termin length 88_645"></A> 
+<div class="syntax">Zawsze możemy uzyskać informacje o rozmiarze (liczbie elementów) tablicy za pomocą odwołania:<br>
+ <br>
+                <i><b>nazwa_tablicy</b></i><b>.length </b><br>
+<br>
+Uwaga: częstym błędem jest traktowanie tego wyrażenia jako wywołania metody.
+W tym przypadku length nie jest nazwą metody (lecz pola niejawnie stworzonej klasy, opisującej tablicę), dlatego <b>NIE STAWIAMY</b> po nim nawiasów okrągłych</div>
+
+<br>
+<p>
+Zatem poprzedni program można by zapisać tak:
+
+<pre>
+public class Test {
+
+  public static void main(String[] args) {
+    int[] a = {1, 2, 3, 4 };
+    for (int i=a.length-1; i&gt;=0; i--) System.out.println(a[i]);
+  }
+
+}
+</pre>
+
+<div><a href="javascript:popUp('dodatki/W11Prb1.htm',50,50)"><img src="images/Problem.jpg" alt="Problem" hspace="15" width="137" height="84" border="1" align="Right"></a> </div>
+
+<br><p>
+Spróbujmy teraz odwrócić kolejność wypisywania elementów tablicy (czyli po kolei od pierwszego poczynając).<br>
+Jak powinna wyglądać pętla for?<br>
+
+<br>
+
+<div class="important"><br>
+Przed lekturą dalszego tekstu proszę rozwiązać to zadanie samodzielnie
+<br>
+<br>
+</div>
+
+<br>
+<p>
+Rozwiązanie:<br>
+
+<pre>
+public class Test {
+
+  public static void main(String[] args) {
+    int[] a = {1, 2, 3, 4 };
+    for (int i=0; i&lt;a.length; i++) System.out.println(a[i]);
+  }
+
+}
+</pre>
+
+<br>
+
+<div class="important">
+Przebięgając w pętli przez wszystkie (poczynając od pierwszego) elementy tablicy <i><b>tab</b></i> musimy zmieniać indeksy od <b>0</b> do <b><i>tab</i>.length-1</b>, czyli zastosować następującą postać pętli for:<br>
+<br>
+<div align="Center"><b>for (int i = 0; i &lt; tab.length; i++) ... tab[i] ... ;</b><br>
+</div>
+</div>
+
+<br>
+<p>
+Użycie length wobec tablicy jest szczególnie wygodne w metodach, które otrzymują
+jako argumenty referencje do tablic: możemy w ten sposób pisać uniwersalne
+metody działające na tablicach o różnych rozmiarach.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index89.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

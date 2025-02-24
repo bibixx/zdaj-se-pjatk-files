@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><A NAME="EDU.wyklad.zadania"></A><div class="tytulpunktu">Zadania i ćwiczenia</div>
+
+<a name="W12.7"></a>
+
+<ol>
+<li>Napisać program, który pobiera w dialogu wejściowym łańcuch znakowy i:
+  <ul>
+    <li>podaje na konsoli długość łańcucha, </li>
+	
+    <li>wyprowadza pierwszy i ostatni znak, </li>
+	
+    <li>wyprowadza podłańcuch od 3 znaku do ostatniego znaku, </li>
+	
+    <li>wyprowadza podłańcuch od 3 znaku do przedostatniego znaku, </li>
+	
+    <li>wyprowadza informacje o tym ile razy w wejściowym łańcuchu występuje
+zadany podłańcuch (np. ile razy w łańcuchu "podstołeczne tramwaje miały postoje
+po sto razy dziennie" wystepuje podłancuch "sto") </li>
+
+    <li>jeżeli wejściowy łańcuch (pomijając spacje na końcu!) kończy się
+napisem ".JAVA" (bez względu na wielkość liter) - wyprowadzić ten łańcuch
+z zamianą wielkich liter w napisie "JAVA" na małe; jeśli - nie to wyprowadzić
+wejściowy łańcuch z zamianą małych liter na duże. </li>
+
+    <li>wyprowadzić w oddzielnych wierszach wszystkie słowa łańcucha (słowa
+= zestawy znaków rozdzielone spacjami, przecinkiami, kropkami i średnikami)</li>
+
+<br><br>
+
+  </ul>
+
+
+<li>Napisać metodę, która umożliwia podanie częstości występowania słów o
+różnej długości (np. 1, 2, 3, ... 60, więcej niż 60) w łancuchu znakowym.
+Przetestować ją na przykładzie łańcucha tworzonego z wprowadzanych przez użytkownika
+kolejnych "wierszy" podawanych w kolejnych dialogach wejściowych. W ćwiczeniach
+do następnych wykładów zastosujemy ją do tekstów wczytywanych z plików.</li><br>
+<br>
+
+<li>Napisać metodę przekształcającą napisową (znakową) reprezentację liczby
+całkowitej na jej binarną postać (oczywiście nie korzystamy z parseInt!)</li><br>
+<br>
+
+<li>Wybrać dowolną złożoną funkcję matematyczną i stworzyć metodę wyliczania
+jej wartości na podstawie wartości zmiennej przekazywanej jako argument.
+Wybrać taką funkcję, która wymaga użycia możliwie dużej liczby metod z klasy
+Math. Uzyskać wartości w wybranym przedziale zmienności funkcji (dla ciekawości
+wynik przenieśc do programu pozwalajacego na robienie wykresów; w przyszłym
+semestrze wykresy będziemy robić w Javie).</li><br>
+<br>
+
+<li>Zbadać zjawisko zaokrągleń, powstających przy operacjach na liczbach rzeczywistych.
+Mianowicie jaką wartość będzie miała zmienna wynik w następującym kontekście:<br>
+    double p = sqrt(2);<br>
+    double wynik = p*p - 2;<br>
+Zastanowić się jak można zatem porównywać w programie dwie liczby rzeczywiste
+np. p*p oraz 2.0 w powyższym przykładzie? Jak porównywać liczby bardzo duże?</li><br>
+<br>
+
+<li>Zbadać działanie metod zaokrąglania wartości liczb rzeczywistych (round) oraz metod ceil i floor z klasy Math. Porównać i zruzumieć różnice ich działania.</li><br>
+<br>
+
+<li>Ciekawe problemy powstają przy przesyłaniu informacji. Naturalne wydaje
+się kodowanie informacji w taki sposób, by nie tylko nie ulegała przekłamaniom,
+ale i była kondensowana. Mniej użyteczne zdają się być schematy kodowania
+zapisujące informację za pomocą większej liczby bajtów niż liczy "oryginał".
+<br>
+Tymczasem potrzeba taka pojawia się np. przy przesyłaniu informacji binarnej
+poprzez pocztę elektroniczną (tzw. mailery), która umożliwia transmisję pomiędzy
+różnymi sieciami, ale - w wielu istniejących na świecie wersjach - może to
+robić tylko z informacją tekstową. <br>
+Trzeba więc informację binarną (reprezentowaną w alfabecie złożonym ze wszystkich
+możliwych wartości dających się zapisać w 1 bajcie) zakodować w postaci tekstowej
+(a więc korzystającej z dużo "mniejszego" alfabetu niż 256 znaków). <br>
+Dodatkowo należy uwzględnić, że węzły sieci mogą być obsługiwane przez komputery
+tzw. host z tablicami kodowymi różniącymi się od ASCII i że przy transmisji
+lokalnej pomiędzy PC-tem a komputerem host mogą zachodzić przekłamania przy
+tłumaczeniu niektórych znaków z jednej tablicy kodowej do drugiej. <br>
+Wiadomo, że wśród bezpiecznych znaków są na pewno wszystkie litery i cyfry.
+Dodając do tego jeszcze dwa "bezpieczne" znaki np. + oraz -  otrzymamy w
+sumie 64 znaki. <br>
+W rezultacie każdy tekst zapisany w alfabacie 256-znakowym trzeba przetłumaczyć na tekst zapisany w alfabecie 64-znakowym.<br>
+Aby zrobić to w miarę sprytnie nie wolno oczywiście zastępować każdego bajtu
+oryginalnej (binarnej) informacji dwoma bajtami zakodowanej. Ponieważ mamy
+do dyspozycji 64-znakowy alfabet, to każdy jego znak może być zapisany w
+6 bitach.<br><br>
+
+Stworzyć metodę kodującą informację binarną (ciąg bajtów) w alfabecie 64-znakowym - czyli zapisującą każde 3 bajty oryginalnej informacji w 4 bajtach wyjściowej.</li>
+
+</ol>
+
+<p><br></td>
+</tr>
+</table>
+</body>
+</html>

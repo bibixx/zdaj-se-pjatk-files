@@ -1,0 +1,381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index80.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index82.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Warunkowe pętle iteracyjne: instrukcje while i do..while</div>
+
+<a name="W10.2"></a><A NAME="EDU.skorowidz.termin instrukcja_while 81_612"></A> 
+<div class="syntax">Instrukcja while ma następującą postać:<br>
+<br>
+        <b>while</b> (<i><b>wyr</b></i>) <i><b>ins</b></i><br>
+<br>
+gdzie:<br>
+<ul>
+  <li>wyr - wyrażenie, dające w wyniku wartość typu boolean</li>
+  <li>ins - dowolna instrukcja (w tym grupująca)<br>
+  </li>
+</ul>
+</div>
+
+<br>
+<p><A NAME="EDU.skorowidz.termin pętla_while działanie 81_613"></A> Działanie pętli while jest następujące. Wyrażenie wyr reprezentuje podobny
+"warunek" jak w instrukcji if : jego wartość jest wyliczana i jeśli jest
+równa true to wykonywana jest instrukcja ins, w przeciwnym razie sterowanie
+przekazywane jest do pierwszej instrukcji po pętli while. <br>
+Po wykonaniu instrukcji ins ponownie "sprawdzany jest warunek" zawarty w
+wyrażeniu wyr i jeśli jest prawdziwy całą operacja znów jest powtarzana.
+Ta petla kończy działanie gdy wyrażenie wyr równe jest false lub gdy w instrukcji
+ins zawarto instrukcję <b>break</b>, lub <b>return</b>, które wyprowadzają sterowanie poza pętlę.<br>
+<br>
+
+<div class="notel">Przypomnienie: znaki można traktować jak liczby, bo są w komputerze reprezentowane
+za pomocą kodów liczbowych</div>
+
+<div class="ddd"><br>Na przykład poniższy fragment wyprowadza wszystkie
+małe litery alfabetu angielskiego (będzie on działał prawidłowo dla wszystkich
+tablic kodowych, w których małe litery alfabetu angielskiego zajmują ciągłą
+przestrzeń tzn. po a następuje b, po b c - itd; "następowanie po" oznacza,
+że kod następnego znaku jest o 1 większy od kodu znaku poprzedniego).
+</div>
+<br clear="all">
+
+<br>
+
+<pre>
+        char c = 'a';              
+        while (c &lt;= 'z') System.out.print(c++);
+</pre>
+
+<p>
+<b><font color="#ff0000">Proszę sprawdzić działanie tego fragmentu we własnym programie.</font></b><br>
+<br>
+Jak widać dla prawidłowego zakończenia pętli ważne jest aby w jej wnętrzu
+następowały zmiany (modyfikacje wartości zmiennych) wpływające na "warunek"
+reprezentowany przez wyrażenie w nawiasach while.<br>
+Warunki mogą być oczywiście złożone. Aby wyprowadzić "od końca" m ostatnich liter możemy napisać<br>
+
+<pre>
+        int n = 0;
+        char c = 'z';
+        while(c &gt;= 'a' &amp;&amp; n &lt; m)  {
+          System.out.println(c--);
+          n++;
+        }
+</pre>
+
+<p>
+<b><font color="#ff0000">Proszę sprawdzić działanie tego fragmentu we własnym programie (dla wybranych wartości m).</font></b><br>
+<br>
+Dajemy tu podwójny warunek, nie wiadomo bowiem czy m nie przekroczy liczby małych liter w tablicy kodowej.<br>
+Jeszcze inaczej to samo można napisać w następujący sposób:<br>
+<br>
+int m = ...;<br>
+char c = 'z';<br>
+while(m-- &gt; 0) {<br>
+    if (c  &lt;  'a') break;<br>
+    System.out.println(c--);<br>
+}<br>
+<br>
+Przed niedopuszczalnymi wartościami m zabezpieczamy się wewnątrz pętli; gdy
+kolejny kod znaku przekroczy zakres kodów dla małych liter (będzie mniejszy
+od kodu litery a) instrukcja <b>break</b> spowoduje przerwanie pętli.<br>
+<br>
+Baczny Czytelnik zauważył zapewne tu dwa ciekawe zjawiska. <br>
+Po pierwsze w pętli while możemy stosować licznik iteracji i wykonywać jakąś
+zadaną ich liczbę (tę rolę pełniły w powyższych przykładach najpiewr zmienna
+n, a później m).<br>
+Po drugie, pętla może nie wykonać "pełnej liczby" iteracji.  Gdy m ma wartość
+większą od liczby małych liter w alfabecie angielskim ostatnia iteracja wykonywana
+jest "w połowie": z dwóch instrukcji zapisanych w pętli wykonana zostanie
+tylko pierwsza (if...) i na skutek break sterowanie opuści pętlę.<br>
+Pętla i pół" (po angielsku "loop and half") jest typowym przypadkiem przy
+wprowadzaniu jakichś danych i wykonywaniu na nich operacji w pętli,<br>
+<br>
+Np. w poniższym programie w pętli wprowadzamy i sumujemy liczby całkowite
+dopóki ich suma nie osiagnie lub nie przekroczy podanego limitu. Dodatkowo
+w każdej chwili użytkownik może zakończyć sumowanie (przed osiagnięciem limitu),
+jeśli tylko zrezygnuje z wprowadzenia danych w dialogu przez wybór Cancel.<br>
+
+<pre>
+import javax.swing.*;
+
+public class Sumowanie {
+
+  public static void main(String[] args) {
+
+    final int LIMIT = 200;
+    int sum = 0;
+
+    while(sum &lt; LIMIT)  {
+      String data = JOptionPane.showInputDialog("Podaj liczbę całkowitą:");
+      if (data == null) break;
+      sum += Integer.parseInt(data);
+    }
+    System.out.println("Suma: " + sum);
+    System.exit(0);
+  }
+ }
+</pre>
+
+<p>
+<a href="javascript:popUp('dodatki/W10Prb3.htm', 80,30)"><img src="images/Problem.jpg" alt="Problem" hspace="15" width="137" height="84" border="1" align="Right"></a>Komentarze - przypomnienia:<br>
+<ul>
+  <li>stałe deklarujemy jako final, używamy ich zamiast "ważnych" literałów (takich jak np limit sumowania,  liczba powtórzeń, etc)</li>
+  <li>jeśli zrezygnowano z wprowadzania danych (np. poprzez wybranie Cancel
+w okienku dialogowym), to metoda showInputDialog zwraca null</li>
+  <li>instrukcja break służy do przerywania pętli</li>
+  <li>liczby całkowite wprowadzone w dialogu są napisami - trzeba je przekształcić
+na postać binarną i do tego służy statyczna metoda parseInt z klasy Integer</li>
+  <li>moglibyśmy napisać int a = Integer.parseInt(data); sum = sum + a; jednak
+krócej to samo zapisujemy jako: sum += Integer.parseInt(data);<br>
+    <br>
+  </li>
+</ul>
+</p>
+
+<br clear="all">
+
+<p>
+<a href="javascript:popUp('dodatki/W10Prb2.htm', 80,50)"><img src="images/Problem.jpg" alt="Problem" hspace="15" width="137" height="84" border="1" align="Right"></a><br>W tym momencie warto poświęcić czas na rozwiązanie
+trochę większego zadania, którego opis pojawi się po kliknięciu ikonki "Problem
+do rozwiązania".</p>
+<br clear="all">
+<br>
+<p>
+Nieco inne podejście do sterowania wykonaniem pętli while można zrealizować za pomocą tzw. zmiennej sterującej:<br>
+<br>
+
+<pre>
+boolean again = true;
+while(again) {
+  .....
+  if (/*warunek zakończenia pętli*/) again = false;
+}
+</pre>
+
+<p>
+Ten sam przykład można zapisać za pomoca pętli nieskończonej i z użyciem break:<br>
+<br>
+while (true) {<br>
+    ...<br>
+    if (/*warunek zakończenia petli*/) break;<br>
+}<br>
+<br><A NAME="EDU.skorowidz.termin pętla instrukcja_do...while 81_614"></A> 
+<div class="syntax">Instrukcja do ... while jest bardzo podobna do while. <br>
+Ma ona postać:<br>
+<br>
+                <b>do</b> <i><b>ins</b></i> <b>while</b> (<i><b>wyr</b></i>)<br>
+</div>
+
+<br>
+<p>
+Znaczenie ins i wyr jest takie samo jak w przypadku instrukcji while. Jedyna
+(zaznaczana zresztą przez zapis) różnica w stosunku do instrukcji while polega
+na tym, że warunek określony przez wyrażenie wyr jest sprawdzany po każdym
+wykonaniu pętli (instrukcji ins), a nie przed (jak to jest w przypadku while).<br>
+<br>
+
+<div class="important">Pętla while może więc nie wykonać się ani razu, natomiast pętla do ... while zawsze wykona się przynajmniej raz.</div>
+
+<br>
+<p><A NAME="EDU.skorowidz.termin pętla_while 81_615"></A> Podsumujmy. Pętle while lub do..while stosujemy <b>zwykle</b> wtedy, gdy
+kontynuacja działania pętli zależy od jakieś warunku, a liczba iteracji nie
+jest z góry znana lub łatwa do określenia.<br>
+<br><A NAME="EDU.skorowidz.termin instrukcja_while praktyczny_przykład 81_616"></A> Zobaczmy teraz bardziej praktyczny przykład zastosowania instrukcji while.<br>
+Będziemy symulować zmiany stanu konta bankowego.<br>
+Warunki są takie:<br>
+<ul>
+  <li>konto ma jakiś dany stan (ilość pieniędzy na koncie)</li>
+  <li>co miesiąc na konto wpływa zadana suma i wypłacana jest z niego inna zadana suma</li>
+  <li>suma na koncie jest oprocentowana w skali rocznej wg podanej stopy procentowej</li>
+  <li>odsetki są doliczane do tej sumy co miesiąc, na początku miesiąca, przed zaksięgowaniem miesięcznego wpływu i wydatku</li>
+</ul>
+
+<p>
+Należy stworzyć klasę Konto (Account) o podanych charakterystykach i dostarczyć
+w niej metody np. o nazwie getMonthsToBalance, która (za pomocą symulacji
+miesięcznych zmian konta) pozwala odpowiedzieć po ilu miesiącach suma na
+koncie osiągnie podaną jako argument docelową wielkośc<br>
+<br>
+Testowanie klasy Account może wyglądac tak: <br>
+<br>
+// Tworzymy obiekt konto ze stanem 2000, wpłatami 2400, wypłatami 1800 i oprocentowaniem 10% w skali roku<br>
+<br>
+Account ac = new Account(2000, 2400, 1800, 10); <br>
+<br>
+// ile miesięcy zajmie uzyskanie na koncie  sumy co najmniej 10000<br>
+<br>
+int lMies =   ac.getMonthsToBalance(10000);<br>
+<br>
+
+<div class="important"><br>
+
+<b>Przed lekturą dalszego tekstu proszę spróbować samodzielnie rozwiązać to zadanie.</b><br>
+<br>
+</div>
+
+<br>
+<p>Jedno z możliwych rozwiązań jest następujące:<br>
+
+<pre>
+public class Account {
+
+  private double balance;          // stan konta
+  private double monthIncome;      // stałe miesięczne wpływy (dochód)
+  private double monthExpend;      // stałe miesięczne wydatki
+  private double interest;         // stopa oprocentowania (roczna)
+
+  // Konstruktor
+
+  public Account(double s, double wpl, double wypl, double p) {
+    balance = s;
+    monthIncome = wpl;
+    monthExpend = wypl;
+    interest = p;
+  }
+
+  // Metoda - zwraca aktualny stan konta
+
+  public double getBalance() {
+    return balance;
+  }
+
+  // Metoda - zwraca liczbę miesięcy potrzebnych
+  // by stan konta osiągnął wartość targetBalance
+
+  public int getMonthsToBalance(double targetBalance) {
+
+    int n = 0;                                // miesiące
+    double diff = targetBalance - balance;    // różnica między aktualnym
+                                              // i docelowym stanem
+    while (diff &gt; 0) {         // dopóki jest TA różnica -
+                               // symulujemy upływ miesięcy i zmiany konta
+      n++;
+      balance *= (1 + (interest/100)/12);     // doliczenie odsetek
+      balance += monthIncome - monthExpend;   // dochody, wydatki
+      double prevDiff = diff;                 // poprzednia różnica
+      diff = targetBalance - balance;         // bieżąca różnica
+      if (prevDiff &lt;= diff) return -1;        // jeżeli różnica się
+    }                                         // nie zmniejsza - nie ma szans
+    return n;                                 // osiagnięcia docelowego stanu
+  }
+
+
+}
+
+// Klasa testująca konto
+
+class TestKonta {
+
+  public static void main(String[] args) {
+
+    Account ac = new Account(2000, 2400, 1800, 10);
+    double cel = 10000;
+    int m =  ac.getMonthsToBalance(cel);
+    System.out.println("Miesiace do osiagniecia co najmniej " + cel + ":");
+    System.out.println(m + " --- stan konta " + ac.getBalance());
+  }
+
+
+}
+</pre>
+
+<p>Wynik działania programu:<br><br>
+
+<div class="listing100">Miesiace do osiagniecia co najmniej 10000.0:<br>
+13 --- stan konta 10430.006715578125</div>
+
+<br>
+<p>
+Klasa jest suto komentowana, zwróćmy więc uwagę tylko na to, że staramy się
+tu zabezpieczyć przed nieosiągalnymi docelowymi stanami konta (np. kiedy
+wydatki są większe od dochodów, a - w którymś momencie - oprocentowanie nie pokryje tej różnicy,
+to docelowy stan, który jest większy od aktualnego nigdy nie zostanie osiagnięty).
+Innymi słowy staramy się zapewnić  zakończenie pętli while. W tym programie
+robimy to  sprawdzając w pętli - czy z każdą  iteracją różnica pomiędzy stanem
+docelowym i aktualnym zmniejsza się. Jeśli nie, to nie ma szansy na osiągnięcie
+stanu docelowego i metoda zwraca -1 jako liczbę miesięcy.<br><br>
+Zauważmy dalej, że unikając głębszego zastanawiania się nad kształtowaniem
+comiesięcznego stanu konta, rozbiliśmy wyliczenia na dwa kroki: naliczenie
+odsetek i dodanie "czystego" dochodu:<br>
+<br>
+     balance *= (1 + (interest/100)/12);     // doliczenie odsetek<br>
+     balance += monthIncome - monthExpend;   // dochody, wydatki<br>
+ <br>
+Mamy tu dwa przypisania, a możemy miec jedno. Możemy zapisać:<br>
+<br>
+balance  +=  ((interest/100)/12)*balance + monthIncome - monthExpend;<br>
+<br>
+W istocie, dotknęliśmy tu problemu<A NAME="EDU.skorowidz.termin optymalizacja_struktury_programu 81_617"></A> <b>optymalizacji struktury programu</b> pod względem zwiększenia
+szybkości jego wykonania. Niegdyś kwestia ta zajmowała wiele uwagi programistów.
+Dzisiaj - ze względu na dużą moc obliczeniową współczesnego sprzętu komputerowego
+zeszła jakby na plan dalszy. <br>
+Poza tym same kompilatory (w jakimś zakresie) starają się optymalizowac program.<br>
+Czy warto więc o tym myśleć?<br>
+Sądzę, że - do pewnego przynajmniej stopnia - tak. <br>
+<br>
+Sprawa dotyczy szczególnie instrukcji zawartych w pętlach iteracyjnych. Faktycznie
+wykonują się one wielokrotnie, czasami miliony razy - zatem ich optymalizacja
+ma istotny sens.<br>
+<br>
+Optymalizacji należy jednak dokonywać rozsądnie.<br>
+<br>Oto staraliśmy się przyspieszyć działanie pętli poprzez usunięcie instrukcji
+przypisania ( podwójne przypisywanie wartości zmiennej balance), gdy tymczasem znacznie bardziej obciążające
+czasowo jest wyliczanie wspołczynnika naliczania odsetek:  (interest/100)/12.<br>
+Jest on wyliczany w każdej iteracji, a przecież można go policzyć tylko raz
+- przed pętlą. Istotnie, jego wartość jest dla każdej iteracji stała.<br>
+Powinniśmy więc raczej napisać:<br>
+<br>
+double wspOds  = (interest/100)/12;<br>
+while (...) {<br>
+    ....<br>
+    balance += wspOds*balance + monthIncome - monthExpend;<br>
+    ....<br>
+}<br>
+<br>
+
+<div class="important"><br>
+Przed lekturą dalszego tekstu proszę samodzielnie od podstaw przygotować
+ostateczną, uwzględniającą uwagi o optymalizacji instrukcji wykonywanych
+w pętli, wersję metody monthsToBalance i przetestowac jej działanie w klasie
+Account<br>
+<br>
+</div>
+
+<br>
+<p>
+Ostatecznie więc metodę monthsToBalance moglibyśmy zapisać następująco.<br>
+<br>
+
+<pre>
+  public int getMonthsToBalance(double targetBalance) {
+    double wspOds = (interest/100)/12;
+    double diff = targetBalance - balance;
+    int n = 0;
+    while (diff &gt; 0) {
+      n++;
+      balance += wspOds*balance +  monthIncome - monthExpend;
+      double prevDiff = diff;
+      diff = targetBalance - balance;
+      if (diff &gt;= prevDiff) return -1;
+    }
+    return n;
+  }
+</pre>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index80.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index82.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

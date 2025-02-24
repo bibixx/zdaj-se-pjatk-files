@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index11.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index13.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 3"></A><div class="tytulpunktu">3. Dane w programie (literały i zmienne)</div>
+
+<a name="W2.3"></a>
+
+<p>Program przetwarza<A NAME="EDU.skorowidz.termin dane 12_106"></A> dane. Zatem dane trzeba jakoś w programie
+    zapisać    lub do programu dostarczyć. <br>
+                Dane w programie mogą być reprezentowane na dwa sposoby:<br>
+
+<ul>
+        <li><A NAME="EDU.skorowidz.termin literał 12_107"></A> za pomocą literalów</li>
+        <li><A NAME="EDU.skorowidz.termin zmienna 12_108"></A> za pomocą zmiennych<br>
+        </li>
+
+</ul>
+                <div class="def"> <b>Literał </b>- to napis reprezentujący w sposób bezpośredni
+    wartość    danej </div>
+
+<br>
+<p>Mamy do dyspozycji <b>literały liczbowe</b>, <b>literały
+znakowe</b>            i  <b>  literały łańcuchowe</b>.<br>
+      <br><A NAME="EDU.skorowidz.termin literał_liczbowy 12_109"></A> <b>Literał liczbowy</b> to bezpośredni zapis konkretnej liczby.<br>
+ 
+ <div class="notel"><b>Uwaga1</b>. Zapisując liczby rzeczywiste w programach
+ stosujemy     jako  separator miejsc dziesiętnych  kropkę (a nie przecinek).
+ Wiodące  zero   możemy  pominąć<br>
+      <b>Uwaga 2</b>. W różnych językach programowania w różny sposób można
+ zapisywać       oprócz liczb dziesiętnych liczby szesnastkowe i ósemkowe,
+ a czasami nawet      dwójkowe.<br>
+      <b>Uwaga 3</b>. W różnych językach programowania w literałach liczbowych
+    mogą  być stosowane dodatkowe symbole, oznaczające rodzaj liczby np.
+długa     całkowita lub rzeczywista. Dodatkowe dostępne są formy zapisu liczb
+w tzw.    notacji naukowej np. 3.1e-12 oznacza 3.1 pomnożone przez 10 do
+potęgi -12    </div>
+
+<div class="ddd">
+                Na przykład:<br>
+                      3<br>
+                    10<br>
+                    101.3<br>
+                    10356789.12796<br>
+                     0.3<br>
+                     .3<br>
+      <br><A NAME="EDU.skorowidz.termin literał_znakowy 12_110"></A> <b>Literał znakowy</b> określa jeden bezpośrednio zapisany w programie
+  znak.       Do zapisania znaku będziemy stosować apostrofy. <br>
+                Na przykład:<br>
+      <br>
+                    'a'<br>
+                    'b'<br>
+                    'z'<br>
+                    'X'<br>
+                    'ć'<br>
+                    '5'<br>
+      <br>
+      <b>Literały łańcuchowe</b> - to bezpośrednio zapisane w programie ciągi
+  znaków     (napisy), które chcemy traktować jako teksty, a nie elementy
+języka.   Ciągi takie ujmujemy w cudzysłów.  <a href="javascript:popUp('dodatki/W2RexxString.htm',40,25)">Uwaga o REXX-ie.</a> <br>
+                Na przykład:<br>
+      <br>
+                "ala ma kota"<br>
+                "say"
+</div>
+
+<br clear="all">
+<p>Dlaczego musimy zapisywać<A NAME="EDU.skorowidz.termin znak 12_111"></A> znaki i ciągi znaków w apostrofach/cudzysłowie?<br>
+                Zobaczmy. Gdybyśmy umieścili bezpośrednio w programie napis
+ <b><i>      say</i></b>, to mógłby on zostać potraktowany jako instrukcja.
+   Zatem  jeżeli chcemy    go traktować jako tekst do przetwarzania, musimy
+  umieścić  go w cudzysłowie.    Np. poniższy wiersz wyprowadza na konsolę
+ napis say:<br>
+
+<pre>
+say "say";
+</pre>
+
+<p>W ogóle, nieujęte w cudzysłów  napisy i nieujęte w apostrof
+ znaki   alfabetyczne    traktowane są jako nazwy zmiennych lub słowa kluczowe
+ (oznaczające   instrukcje    lub inne elementy języka). Np. <br>
+
+<pre>
+a = b;
+</pre>
+
+<p>będzie traktowane jako przypisanie zmienej a wartości zmiennej
+   b.  Jeśli    chcemy przypisać zmiennej a znak b, musimy napisać:<br>
+
+<pre>
+a = 'b';
+</pre>
+
+<p>a taki napis:<br>
+
+<pre>
+x = if;
+</pre>
+
+<p>będzie potraktowany jako błąd składniowy, gdy if jest tzw.
+<b>   słowem    zarezerwowanym</b>    .<br>
+      <br>
+
+<div class="def"><A NAME="EDU.skorowidz.termin słowo_kluczowe_języka 12_112"></A> <b>Słowa kluczowe języka</b> - to słowa, które mają specjalne
+   znaczenie     (np. oznaczają instrukcje sterujące). <br><A NAME="EDU.skorowidz.termin słowo_zarezerwowane 12_113"></A> Słowa kluczowe mogą być <b>zarezerwowane</b> i wtedy nie mogą
+  być   używane    w innych kontekstach poza znaczeniem opisanym przez składnię
+  języka.  <br>
+
+<a href="javascript:popUp('dodatki/W2REXXkeyw.htm',50,25)">(zob. więcej nt. słów   zarezerwowanych)</a><br>
+</div>
+			   
+<br>
+<p>Oczywiście, samo użycie literałów nie wystarcza by napisać
+sensowny     program.   Tak naprawdę programowanie polega na posługiwaniu
+się <b>zmiennymi</b>         .<br>
+      <br>
+
+<div class="def"><A NAME="EDU.skorowidz.termin zmienna 12_114"></A> <b>Zmienna</b> jest symbolem w programie, oznaczającym
+obszar    w  pamięci    komputera, w którym mogą być zapisywane różne dane.
+<br><br>
+               Czyli:<br>
+
+<ul>
+        <li>zmienna ma nazwę (użyty w programie symbol nazywa się<A NAME="EDU.skorowidz.termin nazwa_zmiennej 12_115"></A> <b>nazwą
+ zmiennej</b>),</li>
+        <li>przez tę nazwę odwołujemy się do konkretnego obszaru pamięci,
+w  którym      chcemy przechowywać wartości jakiejś danej,</li>
+        <li>zawartość tego obszaru<A NAME="EDU.skorowidz.termin wartość_zmiennej 12_116"></A> (<b>wartość zmiennej</b>) możemy zmieniać
+  w   trakcie wykonania programu</li>
+
+</ul>
+
+</div><br>
+
+<p>Przypomnijmu sobie problem obliczenia ceny komputera. W bardzo
+  prostej    formie  (niejako powielającej doświadczenia stosowania arkuszy
+  kalkulacyjnych)    moglibyśmy  jego rozwiązanie zapisać jako jedną instrukcję
+  wyprowadzającą    na konsolę sumę zapisanych literalnie cen składników (załóżmy,
+  że poslugujemy    się następującymi informacjami: cena procesora, cena
+płyty   głównej, cena   pamięci, cena dysku, cena monitora, sumaryczna cena
+innych   składników komputera   i jakimiś wartościami tych cen).<br>
+      <br>
+
+<pre>
+say "Cena komputera wynosi:";
+say 700 + 500 + 350 + 440 + 1100 + 400;
+</pre>
+
+<p>W wyniku otrzymamy:<br><br>
+
+<div class="listing33l">Cena komputera wynosi:<br>
+3490
+</div>
+  
+<br clear="all"><br>
+
+<p><b><font color="#ff6600"> Proszę zapisać ten program i uruchomić na własnym komputerze.</font></b>
+
+<br>
+
+<p>Nie jest to dobry sposób programowania. Zmieniając ceny (dla
+ jakiejś     innej   konfiguracji) musimy pamiętać, w którym  miejscu w programie
+ wpisaliśmy     ceny  poszczególnych składników. Poza tym gdybyśmy kiedykolwiek
+ w tym programie      chcieli policzyć również procentowe udziały cen składników
+ w sumarycznej     cenie musielibyśmy dwukrotnie wpisywać każdą cenę oraz
+jeszcze raz przeprowadzić      całe sumowanie.<br>
+              Zatem nawet w tak prostym programie nie możemy uniknąć stosowania
+   zmiennych.<br>
+            Nieco lepsza wersja tego programu możę wyglądać tak:<br>
+      <br>
+
+<pre>
+/* Obliczenie ceny komputera */
+
+cProc = 700;
+cPly  = 500;
+cPam = 300;
+cDysk = 400;
+cMon = 1100;
+cInn = 500;
+cKomp = cProc + cPly + cPam + cDysk + cMon + cInn;
+
+say "Początkowo cena komputera wynosi :" cKomp;
+say "Udział ceny procesora :" cProc/cKomp;
+
+cProc = 300;
+cPly = 400;
+cKomp = cProc + cPly + cPam + cDysk + cMon + cInn;
+
+say "Po zmianie cen procesora i plyty";
+say "Cena komputera wynosi :" cKomp;
+say "Udział ceny procesora :" cProc/cKomp;
+</pre>
+
+<p><b><font color="#ff6600">Proszę zapisać ten program i uruchomić na własnym komputerze.</font></b><br><br>
+
+<div class="notel"><br>Dobierając nazwy zmiennych należy:
+
+<ul>
+        <li>stosować się do ograniczeń danego języka,
+		<li>wiedzieć czy wielkie i małe litery są w nazwach zmiennych
+    rozróżniane,
+        <li>wybierać takie nazwy które są czytelne i mają merytoryczne znaczenie.       </ul>
+</div>
+
+<div class="ddd">
+<br><A NAME="EDU.skorowidz.termin zmienne dobór_nazw 12_117"></A> Wszystkie ceny przypisujemy zmiennym. Nazwy zmiennych możemy
+ sami   dobierać,   ale każdy język wprowadza jakieś restrykcje w tym względzie
+  (np.  nazwa zmiennej   nie może zaczynać się cyfrą i może zawierać tylko
+ znaki alfanumeryczne; długość  nazwy zmiennej może być ograniczona). Niektóre
+ języki nie rozróżniają wielkich  i małych liter w nazwach zmiennych (np.
+nazwa x oznacza tę samą zmienną, co nazwa X), inne (np. Java) - rozrózniają
+(x jest całkiem inną zmienną niż X).
+</div>
+
+<br clear="all">
+
+<p>Przejdźmy teraz do semantyki. Zapis:<br>
+      <br>
+                cProc = 500;<br>
+      <br>
+            oznacza, że zmienna cProc uzyskuje wartość wyrażoną literalnie
+ jako   liczba   500. Mówimy też "przypisanie wartości zmiennej" lub "podstawienie
+   wartości   na zmienną".<br>
+            Od tego momentu cProc oznacza to samo co 500. Jeżeli napiszemy
+ say   cProc    - to wyprowadzona zostanie wartość zmiennej cProc czyli liczba
+ 500.<br>
+            Wartość tę możemy w każdej chwili zmienić i w naszym programie
+ robimy    to  ustalając nową wartość ceny procesora: cProc = 300;.<br>
+      <br>
+            Ale co to jest przypisanie? Co oznacza zapis: cKomp = cProc +
+cPly   +  cPam   + cDysk + cMon +cInn?<br>
+            Dlaczego możemy napisać: say cProc i jak to jest interpretowane?
+  Co  oznacza   (dziwny może) zapis cProc/cKomp?<br>
+            Odpowiedzi na te pytania dostarczy nam następny podpunkt.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index11.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index13.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

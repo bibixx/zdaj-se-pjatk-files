@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index53.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index55.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><div class="tytulpunktu">5. Przykład</div>
+
+<a name="W7.5"></a>
+
+<p>Jako podsumowanie powyższych rozważań przeanalizujemy
+pełny przykład definicji klasy. Mimo, że już od dwóch wykładów posługujemy
+się fragmentami (różnych) definicji klasy Para (<b>są one zawarte w programach przykładowych do wykładów w katalogu samples</b>)  - dokładne poznanie tej klasy
+pozostawimy do następnego wykładu,  bowiem nadaje się ona doskonale do sczegółowego
+prześledzenia co dzieje się przy tworzeniu obiektów i  wywoływaniu metod.
+Ta szczegółowa analiza potrzebna jest dla pełnego zrozumienia przede wszystkim
+właśnie sposobu poslugiwania się metodami. <br>
+Na razie potrzebne jest nam dosyć intuicyjne rozumienie tych wszystkich kwestii, a podany dalej przykład powinien je ugruntować.<br>
+Zobaczymy przy okazji, że definiowanie klas jest bardzo łatwe, czasem nawet trochę nudnawe, choć może być też i zabawne.<br>
+<br>
+Wyobraźmy sobie, że prowadzimy księgarnię. Księgarnia zajmuje się sprzedażą
+publikacji (książek, czasopism, płyt CD itp.). Zatem głównym obiektem naszego
+zainteresowania będą publikacje.<br>
+
+<div class="notel">
+Zauważmy, że budując klasę publikacji, staramy się znaleźć wspólne atrybuty
+wszystkich publikacji. Zatem np. właściwość "autor" zostaje tu pominięta,
+bo nie wszystkie publikacje (np. czasopisma) mają autorów</div>
+
+<div class="ddd"><br>
+O każdej publikacji
+powinniśmy wiedzieć:<br>
+jaki jest jej tytuł,<br>
+kto ją wydał,<br>
+rok wydania,<br>
+jaki jest jej numer identyfikacyjny (ISBN, ISSN, jakiś inny),<br>
+jaka jest cena (powiedzmy hurtowa).<br>
+ile egzemplarzy tej publikacji posiada księgarnia.</div>
+<br clear="all">
+
+<p>Te wszystkie atrybuty - w naturalny sposób - będą stanowić pola klasy.<br>
+
+<pre>
+public class Publication {
+
+  private String title;
+  private String publisher;
+  private int year;
+  private String ident;
+  private double price;
+  private int quantity;
+...
+}
+</pre>
+
+<p>Każda publikacja może pojawić się jako obiekt w naszym programie, gdy użyjemy
+wyrażenia new. Obiekt ten powinien być jakoś zainicjowany - dlatego musimy
+dostarczyć odpowiedni konstruktor, który będzie inicował podanymi argumentami
+elementy obiektu. <br>
+
+<pre>
+public class Publication {
+
+  private String title;
+  private String publisher;
+  private int year;
+  private String ident;
+  private double price;
+  private int quantity;
+
+  public Publication(String t, String pb, int y,
+                     String i, double pr, int q)
+  {
+    title = t;        // pole title uzyskuje wartość parametru t
+    publisher = pb;   // pole publisher uzyskuje wartość parametru pb
+    year = y;  
+    ident = i;        // itd...
+    price = pr;
+    quantity = q;
+  }
+...
+}
+</pre>
+
+<p>Teraz - w innej klasie ( np. w metodzie main umieszczonej w innej klasie)
+możemy stworzyć obiekt - książkę pt. "Psy", wydaną przez wydawnictwo "Dog
+&amp; Sons", o cenie  21 zł. Na razie nie mamy jeszcze żadnego egzemplarza
+tej książaki.<br>
+
+<pre>
+    Publication b = new Publication("Psy", "Dog &amp; Sons", 2002,
+                                    "ISBN6789", 21.0, 0);
+
+</pre>
+
+<p>Co możemy robić z publikacjami?<br>
+Możemy je kupować, możemy sprzedawać, możemy wreszcie uzyskać informacje
+o każdej publikacji: jej dane bibliograficzne (tytuł, wydawca, rok, identyfikator),
+jej aktualną cenę, liczbę egzemplarzy, znajdujących się w księgarni. Może
+się także okazać, że cena publikacji uległa zmianie, musimy zatem mieć jakiś
+sposob by zmienić ten element obiektu- publikacji.<br>
+<br>
+Te wszystkie "operacje" na publikacjach zdefiniujemy jako metody klasy.<br>
+
+<pre>
+public class Publication {
+
+  ...
+  // Metody klasy
+
+  // Zwraca tytuł
+
+  public String getTitle() {
+    return title;
+  }
+
+  // Zwraca wydawcę
+
+  public String getPublisher() {
+    return publisher;
+  }
+
+  // Zwraca rok wydania
+
+  public int getYear() {
+    return year;
+  } 
+
+  // Zwraca numer identyfikacyjny
+
+  public String getIdent() {
+    return ident;
+  }
+
+  // Zwraca cenę
+
+  public double getPrice() {
+    return price;
+  }
+
+  // Zmienia cenę
+
+  public void setPrice(double p) {
+    price = p;
+  }
+
+  // Zwraca liczbę egzemplarzy
+
+  public int getQuantity() {
+    return quantity;
+  }
+
+  // Zakup n egzemplarzy
+
+  public void buy(int n) {
+    quantity += n;
+  }
+
+  // Sprzedaż n egzemplarzy
+
+  public void sell(int n) {
+    quantity -= n;
+  }
+
+}
+</pre>
+
+<p>
+Mając gotową klasę Publikacji możemy przetestować jej działanie.<br>
+Powiedzmy, że testowanie odbywać się będzie w klasie TestPub (tradycyjnie w metodzie main, zawartej w tej klasie)<br>
+<br>
+
+<pre>
+class PubTest {
+
+  public static void main(String[] args) {
+
+    // Tworzenie obiektu - publikacji
+
+    Publication b = new Publication("Psy", "Dog &amp; Sons", 2002,
+                                    "ISBN6789", 21.0, 0);
+
+    int n = 10;  // kupimy n = 10 egzemplarzy
+    b.buy(n);
+
+    // łatwo policzyć koszt zakupu
+    double koszt = n * b.getPrice();
+
+    System.out.println("Na zakup " + n + " publikacji:");
+    System.out.println(b.getTitle());
+    System.out.println(b.getPublisher());
+    System.out.println(b.getYear());  
+    System.out.println(b.getIdent());
+    System.out.println("---------------\nwydano: " + koszt);
+
+    // teraz sprzedamy 4 egzemplarze i zobaczymy ile zostało
+    b.sell(4);
+    System.out.println("Po sprzedaży zostało " + b.getQuantity() + " pozycji");
+  }
+}
+
+</pre>
+
+<br>
+
+<div class="listing33r">Na zakup 10 publikacji:<br>
+Psy<br>
+Dog &amp; Sons<br>
+2002<br>
+ISBN6789<br>
+---------------<br>
+wydano: 210.0<br>
+---------------<br>
+Po sprzedaży zostało 6 pozycji</div>
+
+<div class="ddd"><br>Program wyprowadzi na konsolę następujące dane:</div><br clear="all">
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index53.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index55.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

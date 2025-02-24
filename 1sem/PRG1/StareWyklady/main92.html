@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index91.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><div class="tytulpunktu">5. Tablice wielowymiarowe</div>
+
+<a name="W11.6"></a>
+
+<p>Bardzo krótko i syntetycznie omówimy teraz<A NAME="EDU.skorowidz.termin tablica wielowymiarowa 92_657"></A> tablice wielowymiarowe.<br>
+Tablice wielowymiarowe w Javie realizowane są jako tablice elementów, będących referencjami do tablic.<br>
+Liczba wymiarów  określana jest przez liczbę nawiasów [ ]. <br>
+<br>
+Przykładowe sposoby deklaracji i inicjacji: <br>
+<br>
+a. inicjalizacja w nawiasach klamrowych <br>
+<br>
+<b>        int[ ][ ] mac1 = { { 1, 2, 3, }, { 4, 5, 6, } }; </b><br>
+<br>
+b. dynamicznie <br>
+<br>
+<b>        int[ ][ ] mac2 = new int[n][m]; </b><br>
+<br>
+c. tablica składa się z wektorów o różnych rozmiarach, zadawanych  przez tablicę <i><b>w</b></i><br>
+<br>
+
+<pre>
+public class MultiArr {
+
+ public static void main(String[] arg) {
+   int w[] = { 2, 3, 4 };
+   int n = 3;
+   int[][] m3 = new int[n][];    // rozmiary wierszy
+                                 // będą zmienne dynamicznie
+   for(int i = 0; i &lt; m3.length; i++) {
+     m3[i] = new int[w[i]];
+     for (int j = 0; j &lt; m3[i].length; j++) m3[i][j] = i + j;
+   }
+
+   for (int i = 0; i &lt; m3.length; i++) {
+     System.out.println("Rozmiar " + i + "-go wiersza " + m3[i].length);
+     String out = " ";
+     for(int j = 0; j &lt; m3[i].length; j++) out += " " + m3[i][j];
+     System.out.println(out);
+   }
+
+ }
+
+}
+</pre>
+
+<p>
+Programik wyprowadzi następujące napisy:<br>
+Rozmiar 0-go wiersza 2 <br>
+  0 1 <br>
+Rozmiar 1-go wiersza 3 <br>
+  1 2 3 <br>
+Rozmiar 2-go wiersza 4 <br>
+  2 3 4 5 <br>
+</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index91.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

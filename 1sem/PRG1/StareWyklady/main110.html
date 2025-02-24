@@ -1,0 +1,296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index109.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><div class="tytulpunktu">5. Pliki - krótkie wprowadzenie</div>
+
+<a name="W14.5"></a>
+
+<p>
+Operacje wprowadzania danych z plików i zapisywania danych do plików są
+realizowane w Javie za pomocą tzw. klas strumieniowych z pakietu java.io. Omówimy
+je dokładnie w przyszłym semestrze. Teraz zajmiemy się wycinkiem tej problematyki,
+skrótowo i niejako czysto "instruktażowo".<br>
+
+<br><A NAME="EDU.skorowidz.termin plik 110_781"></A> 
+<div class="def">Plik - to ciąg bajtów zapisanych na dysku lub w innej fizycznie trwałej formie</div>
+
+<br>
+<p>
+Zauważmy: informacja którą przetwarzają programy - to ciągi bajtów. W trakcie
+wykonania programu informacja taka jest umieszczona w pamięci operacyjnej.
+Po zakończeniu programu - zajmowana pamięć udostępniana jest innym programom.
+Informacja ginie. Sposobem na jej bardziej trwałe zapamiętanie jest właśnie
+zapis do pliku. Zapisana informacja może być później odtworzona - przez odczytanie
+jej z pliku.<br>
+<br><A NAME="EDU.skorowidz.termin FileInputStream 110_782"></A> Ogólnie, pliki <b>jako ciągi bajtów </b>(powiemy: pliki bajtowe) są w Javie reprezentowane przez obiekty
+klas FileInputStream (<A NAME="EDU.skorowidz.termin pliki_wejściowe 110_783"></A> pliki wejściowe - z których wczytujemy dane) i<A NAME="EDU.skorowidz.termin FileOutputStream 110_784"></A> FileOutputStream
+(<A NAME="EDU.skorowidz.termin pliki_wyjściowe 110_785"></A> pliki wyjściowe - do których zapisujemy dane).<br>
+<br><A NAME="EDU.skorowidz.termin plik otwarcie 110_786"></A> Przygotowanie pliku do przetwarzania przez program nazywa się <b>otwarciem</b> pliku.<br>
+ W Javie pliki są otwierane automatycznie przy<A NAME="EDU.skorowidz.termin tworzeniu_obiektów_plikowych 110_787"></A> tworzeniu obiektów plikowych
+(czyli obiektów oznaczających pliki, w tym obiektów wspomnianych wyżej klas FileInputStream
+i FileOutputStream).<br>
+Obiekty-pliki <b>bajtowe</b> możemy tworzyć za pomocą konstruktorów klas
+FileInputStream i
+FileOutputStream, podając jako argument nazwę pliku.<br>
+<br>
+Np. <br>
+FileInputStream in = new FileInputStream("Program1.java");<br>
+FileOutputStream in = new FileOutputStream("Program2.java");<br>
+<br><A NAME="EDU.skorowidz.termin plik czytanie 110_788"></A> Z plików bajtowych możemy czytać bajty za pomocą metody<A NAME="EDU.skorowidz.termin read 110_789"></A> <b>int read() </b>i możemy do nich<A NAME="EDU.skorowidz.termin plik zapis 110_790"></A> zapisywać bajty za pomocą metody<A NAME="EDU.skorowidz.termin write 110_791"></A> <b>write(int)</b>.<br>
+Zwróćmy uwagę - bajty doskonale mieszczą się w zmiennej typu byte, ale read()
+zwraca wartość typu int, gdyż  przy próbie czytania bajtów spoza końca pliku 
+musi jakoś poinformować o końcu pliku. Umownie zwraca wtedy wartość -1 (typu
+int), co oczywiście jest zupełnie inną wartością niż wszelkie możliwe wartości
+bajtów. <br>
+<br><A NAME="EDU.skorowidz.termin plik zamknięcie 110_792"></A> Po wykonaniu operacji na pliku powinniśmy plik <b>zamknąć</b>, co np. powoduje
+ostateczny, fizyczny zapis informacji, być może do tego momentu będącej jeszcze
+w buforach systemowych oraz inne działania porządkowe na poziomie systemu
+operacyjnego (niekiedy np. związane z możliwością udostępnienia pliku innym
+programom, lub z umożliwieniem otwarcia przez nasz program innych plików).
+<br>
+<br><A NAME="EDU.skorowidz.termin close 110_793"></A> Do zamykania plików służy metoda <b>close()</b>.<br>
+<br>
+Możemy teraz napisać program, który - bajt po bajcie - kopiuje dowolny plik
+wejściowy do dowolnego pliku wyjściowego. Nazwy plików podajemy jako argumenty
+wywołania programu.<br>
+<br>
+
+<pre>
+import java.io.*;
+
+public class CopyFile {
+
+  public static void main(String[] args) {
+
+    FileInputStream in;       // plik wejściowy
+    FileOutputStream out;     // plik wyjściowy
+
+    try {
+
+      in  = new FileInputStream(args[0]);
+      out = new FileOutputStream(args[1]);
+      int c;
+      while ((c = in.read()) != -1) out.write(c);  // kopiowanie
+      in.close();
+      out.close();
+
+    } catch(ArrayIndexOutOfBoundsException exc) { // brak argumentu
+        System.out.println("Syntax: CopyFile in out");
+        System.exit(1);
+    } catch(FileNotFoundException exc) {  // nieznany plik
+        System.out.println("Plik " + args[0] + " nie istnieje.");
+        System.exit(2);
+    } catch(IOException exc) {   // inny błąd wejścia- wyjścia
+        System.out.println(exc.toString());
+        System.exit(3);
+    }
+
+  }
+
+}
+</pre>
+
+<p>
+Każdy plik jest sekwencją bajtów. Ale znaczenie bajtów może być bardzo różne.
+Mogą to być np. binarne reprezentacje jakichś liczb, albo mogą to być znaki
+(wtedy będziemy mówić o plikach tekstowych).<br>
+<br><A NAME="EDU.skorowidz.termin Unicod 110_794"></A> Zwróćmy jednak uwagę, że w Javie
+ znaki są przedstawiane w Unicodzie (czyli
+jako wartości dwubajtowe). Jeżeli tekst w pliku zapisany jest w ten właśnie sposób
+- to nie ma problemu. Ale często pliki tekstowe zapisywane są w różnych systemach
+kodowania, niekoniecznie w Unicodzie. Sposób kodowania znaków tekstu nazywa
+się<A NAME="EDU.skorowidz.termin strona_kodowa 110_795"></A> stroną kodową. Np. wiele polskich dokumentów HTML zapisanych jest z wykorzystaniem
+strony  kodowej ISO8859-2, inne - z wykorzystaniem strony Cp1250 (inaczej
+zwanej Windows 1250). To oczywiście nie jest Unicode - znaki zajmują 1 bajt.<br><br>
+W każdym systemie operacyjnym  możemy też ustawić<A NAME="EDU.skorowidz.termin strona_kodowa domyślna 110_796"></A> tzw. domyślną stronę kodową,
+która będzie wykorzystywana np. przy wczytywaniu i zapisie plików przez systemowe
+edytory tekstu. Np. w systemie Windows taką domyślną stroną kodową najczęsciej jest - w polskich warunkach - Cp1250.<br>
+Przy wczytywaniu Java musi dokonać przekodowania plików zapisanych w domyślnej
+stronie kodowej na Unicode, a przy zapisie wykonać operację odwrotną - przekodowania
+z Unicodu do domyślnej strony kodowej.<br>Metody klas FileInputStream i FileOutputStream
+- nie wykonują tego zadania (czytają i piszą bajt po bajcie, co w przypadku
+plików tekstowych może powodować utratę informacji).<br>
+Zobaczmy przykład.<br>
+Poniższy program.<br>
+
+<pre>
+import java.io.*;
+
+public class ReadBytesAsChars {
+
+  public static void main(String[] args) {
+    StringBuffer cont = new StringBuffer();
+
+    try {
+      FileInputStream in  = new FileInputStream(args[0]);
+      int c;
+      while ((c = in.read()) != -1) cont.append((char) c);
+      in.close();
+     } catch(Exception exc) {
+       System.out.println(exc.toString());
+       System.exit(1);
+     }
+    String s = cont.toString();
+    System.out.println(s);
+  }
+
+}
+</pre>
+
+<p>
+czyta plik tekstowy i zapisuje jego zawartość w łańcuchu znakowym (String),
+po czym wypisuje na konsoli  ten łancuch znakowy. Jeśli przeczytaliśmy z
+pliku zapisanego w Cp1250 następujący tekst:<br>
+<br>
+Początek <br>
+pogłębienia <br>
+znajomości <br>
+Javy<br>
+<br>
+to na konsoli uzyskamy:<br>
+<br>
+Pocz?tek<br>
+pog??bienia<br>
+znajomo?ci<br>
+Javy<br>
+<br><A NAME="EDU.skorowidz.termin FileReader 110_797"></A> Takich strat informacji nie będzie, jeśli do czytania plików wykorzystamy
+obiekt klasy <b>FileReader</b>, a do zapisywania -<A NAME="EDU.skorowidz.termin FileWriter 110_798"></A> <b>FileWriter</b>, bowiem klasy te zapewniają<A NAME="EDU.skorowidz.termin konwersja_między_domyślną_stroną_kodową_systemu_operacyjnego_i_Unicodem 110_799"></A> konwersje między domyślną stroną kodową systemu operacyjnego i  Unicodem<br>
+<br><A NAME="EDU.skorowidz.termin przetwarzanie_plików_tekstowych 110_800"></A> 
+<div class="important">Do przetwarzania plików tekstowych należy wykorzystywać klasy FileReader i FileWriter</div>
+
+<br>
+<p>
+Poprzedni przykład możemy teraz zapisać tak:<br>
+
+<pre>
+import java.io.*;
+
+public class ReadByReader {
+
+  public static void main(String[] args) {
+    StringBuffer cont = new StringBuffer();
+
+    try {
+      FileReader in  = new FileReader(args[0]);
+      int c;
+      while ((c = in.read()) != -1) cont.append((char) c);
+      in.close();
+     } catch(Exception exc) {
+       System.out.println(exc.toString());
+       System.exit(1);
+     }
+    String s = cont.toString();
+    System.out.println(s);
+  }
+
+}
+</pre>
+
+<p>
+Przy przetwarzaniu plików zetkniemy się także z kwestią efektywności.<br>
+Np. przy czytaniu dużych plików tekstowych należy unikać bezpośredniego
+czytania za pomocą klasy FileReader, bowiem każde odczytanie znaku może powodować
+fizyczne odwołanie do pliku (to samo dotyczy zapisu i klasy FileWriter).
+<br>
+Operacje fizycznych odwołań do pliku (dysku) są czasochłonne.<br><A NAME="EDU.skorowidz.termin buforowanie 110_801"></A> Aby je ograniczyć - stosujemy tzw. buforowanie.<br> W pamięci operacyjnej
+wydzielany jest duży obszar pamięci, który zapełniany jest przez jednorazowe
+fizyczne odwołanie do pliku. Instrukcje czytania pliku pobierają informacje
+z tego<A NAME="EDU.skorowidz.termin bufor 110_802"></A> bufora. Gdy bufor jest pusty - następuje kolejne jego wypełnienie poprzez
+fizyczne odwołanie do pliku. W ten sposób liczba fizycznych odwołań do pliku
+(do dysku) jest mniejsza niż liczba zapisanych w programie instrukcji czytania
+danych.<br>
+<br>
+W Javie do buforowania wejściowych plików tekstowych stosujemy klasę<A NAME="EDU.skorowidz.termin BufferedReader 110_803"></A> BufferedReader. <br>
+Ale klasa ta nie pozwala - przy tworzeniu obiektów - bezpośrednio, w konstruktorze,
+podawać źródła danych (np. nazwy pliku).
+<br>
+Żródło to podajemy przy tworzeniu obiektu typu FileReader, a po to,
+żeby uzyskać buforowanie, "opakowujemy" FileReader -  BufferedReaderem.
+<br><br>
+Wygląda to tak:
+
+<p>// tu powstaje związek z fizycznym źródłem<br>
+<b>FileReader fr = new FileReader("plik.txt"); </b> </p>
+<p>// tu dodajemy "opakowanie",
+umożliwiające buforowanie
+  
+<br><b>BufferedReader br = new BufferedReader(fr); </b></p>
+<p>//...  teraz wszelkie odwołania czytania itp. kierujemy do obiektu
+br
+</p>
+<p>Dodatkowo w klasie BufferedReader zdefiniowano wygodną metodę czytania wierszy pliku: </p>
+<p>        readLine() </p>
+<p>która zwraca kolejny wiersz jako String lub null jeśli wystąpił koniec pliku<br>
+</p>
+
+<p>Zarys czytania:
+</p>
+<p>  try {
+<br>      String line;
+<br>      FileReader fr = new FileReader(fname);         
+// fname jest nazwą pliku
+<br>      BufferedReader br = new BufferedReader(fr);
+</p>
+<p>      while  ((line = br.readLine()) !=
+null) {   // kolejny wiersz pliku: metoda <b>readLine</b><br>         ...
+<br>         // tu robimy coś z wierszami pliku<br>        }
+<br>      br.close();  // zamknięcie pliku
+<br>      }
+<br>    catch (IOException e) {
+<br>      System.err.println(e);
+<br>    }
+</p>
+<p>Np. metodę main w programie przykładowym z wykładu 12 (klasa TocTest,
+testująca odnajdywanie nagłówków umieszczonych pomiędzy znacznikami &lt;h2&gt;
+i &lt;/h2&gt; za pomocą klasy Toc) możemy teraz napisać w takiej formie,
+która umożliwi przetworzenie w ten sposób  pliku HTML podanego jako argument
+wywołania programu:<br>
+<br>
+
+<pre>
+import java.io.*;
+
+class TocTest {
+
+  public static void main(String[] args) {
+    final String ls = System.getProperty("line.separator");
+    StringBuffer doc = new StringBuffer();
+    try {
+     FileReader fr = new FileReader(args[0]);
+     BufferedReader br = new BufferedReader(fr);
+     String line;
+     while ((line = br.readLine()) != null) doc.append(line).append('\n');
+     br.close();
+    } catch (Exception exc) { System.out.println(exc); System.exit(1); }
+
+    System.out.println(new Toc(doc.toString()).getToc());
+  }
+}
+</pre>
+
+<p>
+<b><font color="#ff6600">Proszę samodzielnie połączyć nową klasę TocTest
+z klasą Toc przedstawioną w wykładzie 12 i zobaczyć jak działa na przykładzie
+różnych (prostych!) dokumentów HTML</font></b>.<br>
+<br>
+Wszystko co powiedziano o buforowaniu tekstowych plików
+wejściwych dotyczy również buforowania tekstowych plików wyjściowych. <br>
+W tym przypadku stosujemy klasę<A NAME="EDU.skorowidz.termin BufferedWriter 110_804"></A> <b>BufferedWriter</b>.<br>
+<br>
+<b><font color="#ff0000">Proszę zapoznać się w dokumentacji Javy z klasami FileReader, FileWriter, BufferedReader i BufferedWriter. </font></b></p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index109.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

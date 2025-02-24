@@ -1,0 +1,388 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index54.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 6"></A><div class="tytulpunktu">6. Pojęcie dziedziczenia</div>
+
+<a name="W7.6"></a>
+
+<p>Zajmiemy się teraz krótko pojęciem dziedziczenia. Pełna dyskusja tej tematyki
+przewidziana jest na drugi semestr, Tutaj zwrócimy uwagę na te elementy, które
+będą nam potrzebne w najbliższych wykladach. <br>
+<br>
+
+<div class="def"><A NAME="EDU.skorowidz.termin dziedziczenie 55_495"></A> 
+<b>Dziedziczenie</b> polega na przejęciu właściwości i funkcjonalności
+obiektów innej klasy i  ewentualnej ich  modyfikacji i/lub uzupelnieniu w taki sposób, by były
+one bardziej wyspecjalizowane.</div>
+<br>
+<p>Omawiana wyżej  klasa Publication opisuje właściwości publikacji, które
+kupuje i sprzedaje księgarnia.  Zauważmy, że za pomocą tej klasy nie możemy
+w pełni opisać książek. Książki są szczegołną, "wyspecjalizowaną" wersją
+publikacji, oprócz tytułu, wydawcy, ceny itd - mają jeszcze jedną właściwość
+- autora (lub autorów).<br>
+Gdybyśmy w programie chcieli opisywać zakupy i sprzedaż książek - to powinniśmy
+stworzyć nową klasę opisującą książki o nazwie np. Book.<br>
+Moglibyśmy to robić od podstaw (definiując w klasie Book pola author, title,
+ident, price i wszystkie metody operujące na nich, jak również metody sprzedaży
+i kupowania).<br>
+Ale po co? Przecież klasa Publication dostarcza już większość potrzebnych nam pól i metod.<br>
+Odziedziczymy ją zatem w klasie Book i dodamy tylko te nowe właściwości (pola
+i metody), których nie ma w klasie Publication, a powinny charakteryzować
+książki.<br>
+<br><A NAME="EDU.skorowidz.termin extends 55_496"></A> 
+<div class="syntax"><br>
+Słowo kluczowe extends służy do wyrażenia relacji dziedziczenia jednej klasy przez drugą.<br>
+Piszemy:<br>
+                class B extends A {<br>
+                    ...<br>
+                }<br>
+co oznacza, że klasa B dziedziczy (rozszerza) klasę A.<br>
+Mówimy:<br>
+<ul>
+  <li><A NAME="EDU.skorowidz.termin nadklasa 55_497"></A> klasa A jest bezpośrednią  nadklasą,<A NAME="EDU.skorowidz.termin superklasa 55_498"></A> superklasą,<A NAME="EDU.skorowidz.termin klasa_bazowa 55_499"></A> klasą bazową klasy B</li>
+
+  <li><A NAME="EDU.skorowidz.termin podklasa 55_500"></A> klasa B jest bezpośrednią podklasą,<A NAME="EDU.skorowidz.termin klasa_pochodna 55_501"></A> klasą pochodną klasy A</li>
+</ul>
+</div>
+
+<br>
+<p>
+Zapiszmy zatem:<br>
+<br>
+
+<pre>
+public class Book extends Publication {
+// definicja klasy Book
+}
+</pre>
+
+<p>
+Co należy podać w definicji nowej klasy?<br>
+Takie właściwości jak tytuł, wydawca, rok wydania, identyfikator, cena, liczba
+publikacji "na stanie", metody uzyskiwania informacji o tych cechach obiektów
+oraz metody sprzedaży i zakupu - przejmujemy z klasy Publication. Zatem nie
+musimy ich na nowo definiować.<br>
+Pozostało nam tylko zdefiniować nowe pole, opisujące autora (niech nazywa
+się author) oraz metodę, która umożliwia uzyskanie informacji o autorze (powiedzmy
+getAuthor()).<br>
+<br>
+
+<pre>
+class Book extends Publication {
+
+  private String author;
+
+  public String getAuthor() {
+    return author;
+  }
+}
+</pre>
+
+<p>
+Czy to wystarczy?<br>
+Nie, bo jeszcze musimy powiedzieć w jaki sposób mają być inicjowane obiekty klasy Book. Aha, potrzebny jest konstruktor.<br>
+Naturalnie, utworzenie obiektu-książki wymaga podania:<br>
+<ul>
+  <li>autora,</li>
+  <li>tytułu,</li>
+  <li>wydawcy,</li>
+  <li>roku wydania,</li>
+  <li>identyfikatora (numeru ISBN),</li>
+  <li>ceny,</li>
+  <li>liczby książek aktualnie "na stanie".<br>
+  </li>
+</ul>
+
+<p>Czyli konstruktor powinien mieć postać:<br>
+<pre>
+  public Book(String aut, String tit, String pub, int y, String id,
+              double price, int quant) {
+    ....
+  }
+</pre>
+
+<p>Zwróćmy jednak uwagę: pola tytułu, wydawcy, roku, identyfikatora, ceny i
+ilości - są prywatnymi polami klasy Publication. Z klasy Book nie mamy do
+nich dostępu.<A NAME="EDU.skorowidz.termin inicjacja_pól_nadklasy 55_502"></A> Jak je zainicjowac?<br>
+<br>
+
+<div class="important">Pola nadklasy (klasy bazowej) inicjujemy za pomocą wywołania z konstruktora
+klasy pochodnej konstruktora klasy bazowej (nadklasy)</div>
+
+<br>
+
+<div class="syntax"><br>
+Użycie  w konstruktorze następującej konstrukcji składniowej:<br>
+<br>
+       <A NAME="EDU.skorowidz.termin super 55_503"></A> <b>super(<i>lista_argumentów</i>); </b><br>
+<br>
+oznacza wywołanie konstruktora klasy bazowej z argumentami <b><i>lista_argumentów</i></b> . <br>
+Jeśli występuje - MUSI być pierwszą instrukcją konstruktora klasy pochodnej. <br>
+Jeśli nie występuje - przed utworzeniem obiektu klasy pochodnej zostanie wywołany konstruktor bezparametrowy klasy bazowej.<br>
+</div>
+
+<br>
+<p>
+Konstruktor klasy Book musi więc wywołać konstruktor nadklasy, po to by zainicjować
+jej pola, a następnie zainicjować pole author.<br>
+<br>
+
+<pre>
+  // Konstruktor klasy Book
+  // argumenty: aut - autor, tit - tytuł, pub - wydawca, y - rok wydania
+  //            id - ISBN, price - cena, quant - ilość   
+  public Book(String aut, String tit, String pub, int y, String id,
+              double price, int quant) {
+    super(tit, pub, y, id, price, quant);
+    author = aut;
+  }
+</pre>
+
+<p>
+Teraz można podać już pełną definicję klasy Book.<br>
+<br>
+
+<pre>
+public class Book extends Publication {
+
+  private String author;
+
+  public Book(String aut, String tit, String pub, int y, String id,
+              double price, int quant) {
+    super(tit, pub, y, id, price, quant);
+    author = aut;
+  }
+
+ public String getAuthor() {
+   return author;
+ }
+
+}
+</pre>
+
+<p>
+Zwróćmy uwagę: wykorzystanie klasy Publication (poprzez jej odziedziczenie)
+oszczędziło nam wiele pracy. Nie musieliśmy ponownie definiować pól i metod
+z klasy Publication w klasie Book.<br>
+<br>
+Przy tak zdefiniowanej klasie Book możemy utworzyć jej obiekt:<br>
+<br>
+
+<pre>
+    Book b = new Book("James Gossling", "Moja Java", "WNT", 2002,
+                      "ISBN6893", 51.0, 0);
+</pre>
+
+<p>Ten obiekt zawiera:<br>
+<ul>
+  <li>elementy określane przez pola klasy dziedziczonej (Publication) - czyli: title, publisher, year, ident, price, quantity</li>
+  <li>element określany przez pole klasy Book - author<br>
+  </li>
+</ul>
+
+<div>
+<img src="images/Inherit7.jpg" alt="r" width="466" height="154" border="1">
+</div>
+
+<br>
+<p>Podkreślmy: jest to jeden obiekt klasy Book.<br>
+Wiemy na pewno, że możemy użyć na jego rzecz metody z klasy Book - getAuthor().<br>
+<br>
+
+<div class="important">Ale ponieważ klasa Book dziedziczy klasę Publication to obiekty klasy Book
+mają również wszelkie właściwości obiektów klasy Publication , a zatem możemy
+na ich rzecz używać również metod zdefiniowanych w klasie Publication.</div>
+
+<br>
+<p>
+Nic zatem nie stoi na przeszkodzie, by napisać taki program:<br>
+
+<pre>
+class TestBook {
+
+  public static void main(String[] args) {
+
+    Book b = new Book("James Gossling", "Moja Java", "WNT", 2002,
+                      "ISBN6893", 51.0, 0);
+    int n = 100;
+    b.buy(n);
+    double koszt = n * b.getPrice();
+    System.out.println("Na zakup " + n + " książek:");
+    System.out.println(b.getAuthor());
+    System.out.println(b.getTitle());
+    System.out.println(b.getPublisher());
+    System.out.println(b.getYear());
+    System.out.println(b.getIdent());
+    System.out.println("---------------\nwydano: " + koszt);
+    b.sell(90);
+    System.out.println("---------------");
+    System.out.println("Po sprzedaży zostało " + b.getQuantity() + " pozycji");
+  }
+
+}
+</pre>
+
+<div class="listing33r">Na zakup 100 książek:<br>
+James Gossling<br>
+Moja Java<br>
+WNT<br>
+2002<br>
+ISBN6893<br>
+---------------<br>
+wydano: 5100.0<br>
+---------------<br>
+Po sprzedaży zostało 10 pozycji</div>
+
+<div class="ddd"><br>który skompiluje się i wykona poprawnie dając w wyniku pokazany listing.
+</div>
+
+<br clear="all"><br>
+
+<div class="important">Możemy powiedzieć, że obiekty klasy Book są również obiektami klasy Publication<br>
+(w tym sensie, że mają wszelkie właściwości obiektów klasy Publication)
+</div>
+
+<br clear="all">
+
+<p>
+Dzięki temu referencje do obiektów klasy Book możemy przypisywać zmiennym,
+oznaczającym obiekty klasy Publication (zawierającym referencje do obiektów
+klasy Publication). Np.<br>
+<br>
+Book b = new Book(...);<br>
+Publication p = b;  <br>
+<br>
+Nazywa się to<A NAME="EDU.skorowidz.termin referencyjna_konwersja_rozszerzająca 55_504"></A> <b>referencyjną konwersją rozszerzającą</b> (ang. widening reference
+conversion). Słowo konwersja oznacza, że dochodzi do przekształcenia  z jednego
+typu do innego typu (np. z typu Book do typu Publication). Konwersja jest
+<b>rozszerzająca</b>, bowiem, przekształcamy typ "pochodny" (referencja do
+obiektu podklasy) do typu "wyższego" (referencja do obiektu nadklasy). A
+ponieważ chodzi o typy referencyjne - mówimy o <b>referencyjnej</b> konwersji rozszerzającej,<br>
+<br><A NAME="EDU.skorowidz.termin obiektowa_konwersja_rozszerzająca 55_505"></A> 
+<div class="notec">Nieco mniej precyzyjnie, ale za to podkreślając, że chodzi o operowanie
+na obiektach, będziemy mówić o takich konwersjach jako o <b>obiektowych konwersjach rozszerzających</b> (ang. "upcasting" - up - bo w górę hierarchii dziedziczenia).</div>
+
+<br>
+<p>
+Obiektowe konwersje rozszerzające dokonywane są automatycznie przy:<br>
+<ul>
+  <li>przypisywaniu zmiennej-referencji  odniesienia do obiektu klasy pochodnej,</li>
+  <li>przekazywaniu argumentów metodzie, gdy parametr metody jest typu "referencja do obiektu nadklasy argumentu", </li>
+  <li>zwrocie wyniku, gdy wynik podstawiamy na  zmienną będącą  referencją do obiektu nadklasy zwracanego wyniku</li>
+</ul>
+
+<p>
+Ta zdolność obiektów Javy do "stawania się" obiektem swojej nadklasy jest niesłychanie użyteczna.<br>
+<br>
+Wyobraźmy sobie np. że oprócz klasy Book - z klasy Publication wyprowadziliśmy jeszcze klasę Journal  (czasopisma)<br>
+Klasa Journal dziedziczy klasę Publication i dodaje do niej - zamiast pola,
+opisującego autora - pola opisujące wolumin i numer wydania danego czasopisma.<br>
+Być może będziemy mieli jeszcze inne rodzaje publikacji - np. muzyczne, wydane
+na płytach CD (powiedzmy klasę CDisk, znowu dziedziczącą klasę Publication,
+i dodającą jakieś właściwe dla muzyki informacje, np. czas odtwarzania).<br>
+<br>
+Możemy teraz np. napisać uniwersalną metodę pokazującą różnicę w dochodach
+ze sprzedaży wszystkich zapasów dowolnych dwóch publikacji.<br>
+<br>
+
+<pre>
+public double incomeDiff(Publication p1, Publication p2) {
+  double income1 = p1.getQuantity() * p1.getPrice();
+  double income2 = p2.getQuantity() * p2.getPrice();
+  return income1 - income2;
+} 
+</pre>
+
+<p>
+i wywoływać ją dla dowolnych (różnych rodzajów) par publikacji<br>
+<br>
+
+<pre>
+Book b1 = new Book(...);
+Book b2 = new Book(...);
+Journal j = new Journal(...);
+CDisk cd1 = new CDisk(...);
+CDisk cd2 = new CDisk(...);
+
+double diff = 0;
+diff = incomeDiff(b1, b2);
+diff = incomeDifg(b1, j);
+diff = inocmeDiff(cd1, b1);
+</pre>
+
+<p>
+Gdyby nie było obiektowych konwersji rozszerzających, to dla każdej mozliwej
+kombinacji "rodzajowej" par - musielibyśmy napisać inną metodę incomeDiff
+np.<br>
+double incomeDiff(Book, Book), double incomeDiff(Book, Journal), double incomeDiff(Book, CDisk) itd.<br>
+<br>
+Zwróćmy uwagę, że w przedstawionej metodzie incomeDiff można wobec p1 i p2
+użyć metod klasy Publication (bo tak są zadeklarowane parametry), ale nie
+można używać metod klas pochodnych, nawet wtedy, gdy p1 i p2 wskazują na
+obiekty klas pochodnych. Np. <br>
+<br>
+....<br>
+{<br>
+Book b1 = new Book(...);<br>
+Book b2 = new Book(...);<br>
+jakasMetoda(b1,b2);<br>
+....<br>
+}<br>
+<br>
+void jakasMetoda(Publication p1, Publication p2) {<br>
+String autor = p1.getAuthor();  // <b><font color="#ff6600">Błąd kompilacji</font></b> - niezgodność typów<br>
+ ...                                          // na rzecz obiektu klasy Publication<br>
+ ...                                          // nie wolno użyć metody getAuthor()<br>
+}                                            // bo takiej metody nie ma w klasie Publication <br>
+<br>
+Więcej na temat konwersji dowiemy się w przyszłych wykładach, a jeśli chodzi
+o pełne zrozumienia znaczenia dziedziczenia i roli konwersji referencyjnych
+- to uzyskamy je w drugim semestrze, gdzie zagadnienia obiektowości będą
+szczególnie akcentowane.<br>
+<br>
+Na koniec krótkiego, wstępnego, mającego raczej instrumentalny dla dalszych
+wykładów tego semestru charakter, wprowadzenia do dziedziczenia, należy zaznaczyć
+bardzo ważną właściwość Javy.<br>
+<br><A NAME="EDU.skorowidz.termin dziedziczenie hierarchia 55_506"></A> 
+
+<div class="important">W Javie każda klasa może bezpośrednio odziedziczyć tylko jedną klasę. <br>
+Ale pośrednio może mieć dowolnie wiele nadklas, co wynika z hierarchii dziedziczenia. <br>
+Ta hierarchia zawsze zaczyna się na klasie Object (której definicja znajduje się w zestawie stanardowych klas Javy). <br>
+Zatem w Javie wszystkie klasy pochodzą pośrednio od klasy Object. <br>
+Jeśli definiując klasę nie użyjemy słowa extends (nie zażądamy jawnie dziedziczenia),
+to i tak nasza klasa domyślnie będzie dziedziczyć klasę Object (tak jakbyśmy
+napisali class A extends Object). </div>
+
+<br>
+<p>
+Wobec tego hierarchia dziedziczenia omawianych tu klas wygląda następująco:<br><br>
+
+<div>
+<img src="images/Inhier7.jpg" alt="r" width="310" height="178" border="1">
+</div>
+
+<br>
+
+<div class="notec">Z tego wynika, że: <br>
+<br>
+referencję do obiektu dowolnej klasy można przypisać zmiennej typu Object (zawierającej referencję do obiektu klasy Object).</div>
+
+<br>
+<p>
+Z właściwości tej korzysta wiele "narzędziowych" metod zawartych w klasach standardu Javy.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index54.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

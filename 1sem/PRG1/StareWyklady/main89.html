@@ -1,0 +1,364 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index88.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index90.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Zmienne tablicowe jako argumenty i wyniki metod. Użycie zmiennych tablicowych w przypisaniach</div>
+
+<a name="W11.2"></a><A NAME="EDU.skorowidz.termin tablica jako_argument_metody 89_647"></A> 
+
+<div class="notel">Zmiennej tablicowej typu typA[] można przypisać wartość zmiennej tablicowej
+typu typB[] pod warunkiem, że dopuszczalne jest przypisanie wartości typu
+B zmiennej typu A.<br>
+Każdej zmiennej tablicowej - jak każdej zmiennej zawierającej referencję - można przypisać wartość <b>null</b>
+</div>
+
+<div class="ddd"><br><A NAME="EDU.skorowidz.termin tablica w_przypisaniach 89_648"></A> Ponieważ zmienna oznaczająca tablicę zawiera referencje do tablicy, to -
+pod pewnymi warunkami -  możemy jej przypisać referencję do innej tablicy.
+</div>
+<br clear="all">
+
+<br><p>
+W bardzo naturalny sposób możemy przypisywać referencje w przypadku gdy mamy do
+czynienia z tym samym typem tablic (a zatem - z tym samym typem elementów
+oraz z tą samą liczbą wymiarów). <br>
+<br>
+
+<div class="important">Tak samo jak w przypadku innych obiektów - nie należy mylić przypisania
+zmiennych tablicowych (czyli referencji)  z kopiowaniem zawartości tablic.</div>
+
+<br>
+<p>
+Na przykład poniższy program:<br>
+
+<pre>
+public class Test {
+
+  public static void main(String[] args) {
+    byte[] b1 = {1, 2, 3 };
+    byte[] b2 = {1, 2, 3, 5, 5 };
+    byte[] b = b2;
+    b2 = b1;
+    b2[0] = 77;
+    b[0] = 99;
+    System.out.print("\nTablica \"b1\":");
+    for (int i=0; i &lt; b1.length; i++) System.out.print(" " + b1[i]);
+    System.out.print("\nTablica \"b2\":");
+    for (int i=0; i &lt; b2.length; i++) System.out.print(" " + b2[i]);
+    System.out.print("\nTablica \"b\":");
+    for (int i=0; i &lt; b.length; i++) System.out.print(" " + b[i]);
+  }
+
+}
+</pre>
+
+<br>
+
+<div class="listing33r">Tablica "b1": 77 2 3<br>
+Tablica "b2": 77 2 3<br>
+Tablica "b": 99 2 3 5 5</div>
+
+<div class="ddd">Wyprowadzi pokazane obok wyniki.</div>
+<br clear="all">
+
+<p>Zwróćmy uwagę:<br>
+<ul>
+  <li>na początku b1 oznaczało tablicę {1,2,3} a b2 tablicę {1,2,3,5,5}</li>
+  <li>po przypisaniu b2 = b1; b2 oznacza tablicę {1, 2, 3}</li>
+  <li>zatem przypisanie b2[0] = 77 zmieni w tej tablicy pierwszy element</li>
+  <li>ale na tę samą tablicę nadal wskazuje b1, dlatego wypisanie elementów tablicy "b1" da 77 2 3</li>
+  <li>zmiennej b przypisano wcześniej referencję do tablicy oznaczanej przez
+b2 {1,2,3,5,5} - dlatego za pomocą b możemy zmienić jej pierwszy element
+i wypisać wszystkie: 99 2 3 5 5<br>
+  </li>
+</ul>
+
+<p>
+W tym przykładzie przez chwilę mogło dziwić, że "na tablicę" b2 "podstawiamy
+tablicę" (o innych rozmiarach!) - b1. Nie przeczy to jednak zasadzie, że
+- po ustaleniu - rozmiary tablic nie mogą być zmieniane. No, tak - przecież
+przypisanie dotyczy referencji do tablic, a nie samych tablic. W przypadku
+referencji różne rozmiary tablic na które one wskazują nie są żadną przeszkodą
+przy przypisaniu - rozmiary tablic pozostają bez zmian.<br>
+I druga ważna kwestia, wymagająca jeszcze raz szczególnego podkreślenia:
+na jedną tablicę może wskazywać kilka zmiennych tablicowych. Za pomocą każdej
+z nich (i operacji indeksowania) możemy zmieniać wartości elementów tej jednej
+tablicy, a odwolania do tej tablicy poprzez inne zmienne będą - oczywiście
+- uwzględniać te zmiany (np. pokazywać zmienione wartości).<br>
+<br>
+Przekazanie argumentów metodzie i zwrot jej wyniku mogą być traktowane jako szczególny rodzaj operacji przypisania.<br>
+Zatem metody mogą działać na tablicach, do których  referencje otrzymują w postaci
+parametrów i mogą zwracać wyniki - referencje do tablic. <br>
+<br>
+W przypadku tablic jednowymiarowych typem zmiennych "tablicowych" (inaczej referencji do tablic) jest <i><b>T</b></i>
+ [], gdzie T - nazwa typu elementów tablicy. Zatem w nagłówku metod - parametry
+(które mają oznaczać tablice; są referencjami do tablic) deklarujemy właśnie
+za pomocą takich nazw typu. Oczywiście, gdy wywołujemy metodę - to na liście
+argumentów podajemy nazwy zmiennych tablicowych (już bez nawiasowych kwadratowych).
+<br>
+Jeśli metoda zwraca wynik - referencję do tablicy, to typem wyniku jest również odpowiedni typ tablicowy.<br>
+<br>
+Np. metoda o nazwie dblVal, która zwraca referencję do nowoutworzonej tablicy
+liczb całkowitych, wartości elementów której są podwojonymi wartościami elementów
+tablicy liczb całkowitych, do której referencja przekazana została metodzie
+jako argument, może być zdefiniowana i użyta tak:<br>
+<br>
+
+<pre>
+public class Test {
+
+  Test() {
+    int[] a = {1, 2, 3, 4 };
+    int[] wynik = <b><font color="#3366ff">dblVal(a)</font></b>;
+    for (int i=0; i &lt; wynik.length; i++)
+      System.out.print(" " + wynik[i]);
+  }
+
+  <b><font color="#3366ff">int[] dblVal(int[] tab)</font></b> {
+    int[] w = new int[tab.length];  // utworzenie tablicy "pod wynik"
+                                    // jej rozmiary muszą być równe
+                                    // rozmiarom tablicy-argumentu
+    for (int i=0; i &lt; w.length; i++) w[i] = tab[i]*2;
+    return w;
+  }
+
+  public static void main(String[] args) {
+    new Test();
+  }
+
+}
+</pre>
+
+<p>
+Dobremu zrozumieniu<A NAME="EDU.skorowidz.termin przekazywanie_argumentów_tablicowych 89_649"></A> przekazywania argumentów tablicowych i zwracania tablicowych wyników powinien sprzyjać poniższy rysunek:<br><br>
+
+<div>
+<img src="images/tab3-10.jpg" alt="R" width="568" height="485" border="1">
+</div>
+
+<br>
+<p>
+Proszę zwrócić uwagę jak niezręczny był opis działania metody dblVal:<br>
+"zwraca referencję do nowoutworzonej tablicy
+liczb całkowitych, wartości elementów której są podwojonymi wartościami elementów
+tablicy liczb całkowitych, do której referencja przekazana została metodzie
+jako argument"<br>
+Aby podkreślić <b>sens</b> metody dblVal powinniśmy raczej powiedzieć - nie tylko nieprecyzyjnie, ale nawet nieprawdziwie:<br>
+"Metoda dblVal zwraca tablicę, wartości elementów której są podwojonymi wartościami
+elementów tablicy przekazanej jako argument".<br>
+<br>
+
+<div class="notec">Często dla uproszczenia będziemy mówić, że metoda otrzymuje jako argument
+- tablicę i zwraca jako wynik - tablicę. Jest to skrót myślowy: pamiętajmy,
+że zawsze chodzi o referencje do tablic</div>
+
+<br>
+<p>
+Pamiętamy, że w Javie argumenty przekazywane są metodom przez wartość.<br>
+Gdy argumentem jest zmienna tablicowa - przekazywana jest referencja do tablicy
+- i tej oczywiście w metodzie nie jesteśmy w stanie efektywnie zmienić. Nic
+jednak nie stoi na przeszkodzie, by zmienić elementy przekazanej tablicy.<br>
+<br>
+Obrazuje to poniższy program.<br>
+
+<pre>
+public class Test3 {
+
+  public static void main(String[] args) {
+    new Test3();
+  }
+
+  Test3() {
+    int[] tab = { 2, 5, 7 };
+    chgTab1(tab);
+    showTab("Po wywołaniu metody chgTab1 tablica oznaczana przez tab", tab);
+    chgTab2(tab);
+    showTab("Po wywołaniu metody chgTab2 tablica oznaczana przez tab", tab);
+  }
+
+  void chgTab1(int[] tab) {
+    int[] nowa = { 3, 6, 8 };
+    tab = nowa;
+    showTab("W metodzie chgTab1 tablica oznaczana przez tab", tab);
+  }
+
+  void chgTab2(int[] tab) {
+    for (int i=0; i &lt; tab.length; i++) tab[i]++;
+  }
+
+  void showTab(String s, int[] tab) {
+    System.out.println(s);
+    for (int i=0; i &lt; tab.length; i++) System.out.print(" " + tab[i]);
+    System.out.print('\n');
+  }
+
+}
+</pre>
+
+<p>
+który da następujący wynik:<br>
+<br>
+
+<div class="listing100">W metodzie chgTab1 tablica oznaczana przez tab<br>
+ 3 6 8<br>
+Po wywołaniu metody chgTab1 tablica oznaczana przez tab<br>
+ 2 5 7<br>
+Po wywołaniu metody chgTab2 tablica oznaczana przez tab<br>
+ 3 6 8</div>
+
+<br>
+
+<p>
+Pora na bardziej praktyczne ćwiczenia.<br>
+ Zadanie. Napisać program-klasę, w którym dostarczane są metody operujące na tablicach liczb całkowitych:<br>
+<ul>
+  <li>sum - zwracająca sumę wszystkich elementów przekazanej tablicy</li>
+  <li>max - zwracająca maksymalny element przekazanej tablicy</li>
+  <li>min - zwracająca minimalny element w przekazanej tablicy</li>
+  <li>average -zwracająca średnią arytmetyczną elementów przekazanej tablicy</li><li>increase - zwiększająca wartości elementów przekazanej tablicy</li>
+  <li>decrease - zmneijszająca wartości elementów przekazanej tablicy</li>
+  <li>add - zwracająca tablicę, której elementy są sumą elementów dwóch przekazanych tablic<br>
+  </li>
+
+</ul>
+
+<p>
+Przetestować działanie metod za pomocą dwóch tablic inicjowanych w tekście programu.<br>
+<br>
+
+<div class="important"><br>
+Przed lekturą dalszego tekstu proszę rozwiązać to zadanie samodzielnie<br>
+<br>
+</div>
+
+<br>
+<p>
+Rozwiązanie:<br>
+
+<pre>
+public class IntTab {
+
+  public int sum(int[] a) {
+    int sum = 0;
+    for (int i=0; i &lt; a.length; i++) sum += a[i];
+    return sum;
+  }
+
+  public int max(int[] a) {
+    int max = a[0];
+    for (int i=1; i &lt; a.length; i++)
+      if (a[i] &gt; max) max = a[i];
+    return max;
+  }
+
+  public int min(int[] a) {
+    int min = a[0];
+    for (int i=1; i &lt; a.length; i++)
+      if (a[i] &lt; min) min = a[i];
+    return min;
+  }
+
+  public double average(int[] a) {
+    double l = a.length;          <font color="#3333ff">// a dlaczego tak ?</font>
+    return sum(a)/l;              // - by dzielenie dało wynik typu double
+  }
+
+  public void increase(int[] a) {
+    for (int i=0; i &lt; a.length; i++) a[i]++;
+  }
+
+  public void decrease(int[] a) {
+    for (int i=0; i &lt; a.length; i++) a[i]--;
+  }
+
+  public int[] add(int[] a, int[] b) {
+    if (a.length != b.length) {
+       System.out.println("Rozmiary tablic muszą być takie same");
+       return null;
+    }
+    int[] suma = new int[a.length];
+    for (int i=0; i &lt; a.length; i++) suma[i] = a[i] + b[i];
+    return suma;
+  }
+
+
+  public static void main(String[] args) {
+    new IntTab();
+   }
+
+  public IntTab() {
+    int[] x = { 1, 3, 5 };
+    int[] y = { 2, 4, 6 };
+    showScalar("Suma x", sum(x) );
+    showScalar("Suma y", sum(y) );
+    showScalar("Max x", max(x) );
+    showScalar("Max y", max(y) );
+    showScalar("Min x", min(x) );
+    showScalar("Min y", min(y) );
+    showScalar("Srednia x", average(x) );
+    showScalar("Srednia y", average(y) );
+    increase(x);
+    increase(y);
+    showArr("x po zwiekszeniu", x);
+    showArr("y po zwiekszeniu", y);
+    decrease(x);
+    decrease(y);
+    showArr("x po zmniejszeniu", x);
+    showArr("y po zmniejszeniu", y);
+    showArr("x + y", add(x,y));
+ }
+
+ private void showScalar(String s, int v) {   <font color="#3333ff">// metoda przeciążona</font>
+    System.out.println(s + " = " + v);
+ }
+
+ private void showScalar(String s, double v) { <font color="#3333ff">// metoda przeciążona</font>
+    System.out.println(s + " = " + v);
+ }
+
+ private void showArr(String s, int[] a) {
+   System.out.println(s + ":");
+   for (int i=0; i &lt; a.length; i++) System.out.print(" " + a[i]);
+   System.out.print('\n');
+ }
+
+}
+</pre>
+
+<p>
+Wynik działania programu:<br><br>
+
+<div class="listing100">
+Suma x = 9<br>
+Suma y = 12<br>
+Max x = 5<br>
+Max y = 6<br>
+Min x = 1<br>
+Min y = 2<br>
+Srednia x = 3.0<br>
+Srednia y = 4.0<br>
+x po zwiekszeniu:<br>
+ 2 4 6<br>
+y po zwiekszeniu:<br>
+ 3 5 7<br>
+x po zmniejszeniu:<br>
+ 1 3 5<br>
+y po zmniejszeniu:<br>
+ 2 4 6<br>
+x + y:<br>
+ 3 7 11<br>
+</div><p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index88.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index90.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

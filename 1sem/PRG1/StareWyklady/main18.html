@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index19.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 1"></A><div class="tytulpunktu">1. Podejmowanie decyzji</div>
+
+<a name="W3.1"></a>
+
+<P><A NAME="EDU.skorowidz.termin decyzja 18_150"></A> Często sekwencja wykonania instrukcji programu zależy od jakichś<A NAME="EDU.skorowidz.termin warunek 18_151"></A> warunków.     Na podstawie sprawdzenia tych warunków podejmujemy decyzje
+ o tym jakie  instrukcje   mają być wykonane.<br>
+      <br>
+            Do podejmowania decyzji służy przede wszystkim<A NAME="EDU.skorowidz.termin instrukcja_sterująca_if 18_152"></A> instrukcja sterująca
+    <b>   if</b> . <br>
+            Ma ona postać (w Javie pomijamy słówko then):<br>
+      <br>
+
+<div class="syntax">
+         <b>if ( </b><i>warunek</i><b> ) then </b><i>instrukcja</i>       ;<br>
+<br>
+            gdzie:
+<ul>
+        <li>warunek - dowolne wyrażenie relacyjne lub logiczne</li>
+        <li>instrukcja - instrukcja, która będzie wykonana tylko wtedy, gdy
+ warunek     okaże się spełniony</li>
+
+</ul>
+</div>
+
+<br>
+<p>Bardzo użytecznym rozszerzeniem tej instrukcji jest<A NAME="EDU.skorowidz.termin instrukcja_if-else 18_153"></A> instrukcja
+ if-else.<br>
+      <br>
+	  
+<div class="syntax">
+
+        <b>if</b> ( warunek ) <b>then</b> instrukcja1;    <b><br>
+      else</b> instrukcja2;<br>
+        <br>
+     która działa w następujący sposób: jeżeli <i>warunek</i> jest spełniony,
+  wykonywana jest <i>instrukcja1</i>, w przeciwnym razie wykonywana jest
+<i>    instrukcja2</i>
+</div>
+
+         <br>
+         <br>
+             <div class="notel">Uwaga: w Javie pomijamy słówko <b>then</b></div>
+
+<p>Rozważmy proste przykłady.
+
+<br clear="all"><br><br>
+
+<table cellpadding="6" cellspacing="2" border="1" width="100%">
+               <tr>
+               <td valign="Top" nowrap="true">c = 1;<br>
+             if (a &lt; b) then c = a + b;<br>
+             d = c + 1;<br>
+               </td>
+               <td valign="Top">Gdy a = 10, b = 11 (warunek spełniony) zmienna
+   c   uzyskuje wartość 21, zmienna d wartość 22.<br>
+             Gdy a = 2, b = 1 (warunek nie spełniony) instrukcja c = a +
+b  nie   jest   wykonywana  i zmienna d uzyskuje wartość 2.<br>
+               </td>
+             </tr>
+             <tr>
+               <td valign="Top" nowrap="true">if (a = b) then c = 1;<br>
+             else c = 2;<br>
+             d = c + 1;<br>
+               </td>
+               <td valign="Top">Jeżeli a = b (warunek spełniony) c uzyskuje
+ wartość      1, instrukcja zapisana w else nie jest wykonywana i d ma wartość
+ 2.<br>
+             Jeżeli a jest różne do b (warunek niespełniony) wykonywana jest
+  instrukcja     w else (c= 2), po czym w wyniku d = c+1 uzyskujemy wartość
+  3.<br>
+               </td>
+             </tr>
+             <tr>
+               <td valign="Top">if (a &gt; b) then max = a;<br>
+             else max = b;<br>
+               </td>
+               <td valign="Top">Znajduje maksimum z liczb a i b i podstawia
+ je  na   zmienną max.<br>
+               </td>
+             </tr>
+             <tr>
+               <td valign="Top" nowrap="true">if (a &gt; b) then txt = "a
+&gt;   b";<br>
+             else if (a &lt;b) then txt = "a &lt; b";<br>
+                   else txt = "a = b";<br>
+             say txt;<br>
+               </td>
+               <td valign="Top">Wypisuje na konsoli komunikat czy a jest
+większe,       mniejsze czy równe b. <br>
+               </td>
+             </tr>
+</table>
+         <br>
+<p>Teraz już możemy napisać program realizujący omawiany wcześniej
+  algorytm     wyliczenia podatku.<br>
+         <br>
+
+<pre>
+/* Wyliczenie podatku */
+
+say "Podaj dochód po odliczeniach:";
+doch = linein();
+
+if (doch &gt; 74048) then pod = 17048.44 + 0.4 * (doch - 74048);
+else if (doch &gt; 37024) then pod = 6541.24 + 0.3 * (doch - 37024);
+     else pod = 0.19 * doch - 493.32;
+
+say "Podatek:" pod;
+</pre>
+<br>
+	
+<div class="notel"><b>Uwaga!</b> w Javie do grupowania instrukcji służą nawiasy
+ klamrowe       <b>{</b> i <b>} </b>
+</div>
+ 
+<div class="ddd">
+<br>
+Instrukcja w if i else może być tzw.<A NAME="EDU.skorowidz.termin instrukcja_grupująca 18_154"></A> instrukcją grupującą, zawierającą
+    nie  jedną a wiele instrukcji. Istotnie, przecież często przy spełnieniu
+ jakiegoś warunku będziemy chcieli wykonać kilka instrukcji, a nie jedną.
+</div>
+
+<br clear="all">
+
+<p>Grupujemy instrukcje za pomocą słów kluczowych <b>do</b> i <b>
+ end</b>.
+ <br>
+ <br>
+ Ma to naturalne znaczenie:<br><br>
+
+<table cellpadding="6" cellspacing="2" border="1" width="100%">
+           <tbody>
+             <tr>
+               <td valign="Top">
+      <div align="Center">Piszemy np.<br>
+               </div>
+               </td>
+               <td valign="Top">
+      <div align="Center">i jest to praktycznie kod w metajęzyku<br>
+               </div>
+               </td>
+             </tr>
+             <tr>
+               <td valign="Top">if (a &gt; b) then do<br>
+                &nbsp;&nbsp;&nbsp;suma = a + b;<br>
+                &nbsp;&nbsp;&nbsp;rozn  = a - b;<br>
+                &nbsp;&nbsp;&nbsp;ilocz = a * b;<br>
+             end  <br>
+               
+               </td>
+               <td valign="Top">jeżeli (a &gt; b) to wykonaj<br>
+                &nbsp;&nbsp;&nbsp;suma = a + b;<br>
+                &nbsp;&nbsp;&nbsp;rozn  = a - b;<br>
+                &nbsp;&nbsp;&nbsp;ilocz = a * b;<br>
+            koniec wykonania     <br>
+               
+               </td>
+             </tr>
+
+  </tbody>
+</table><p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index19.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

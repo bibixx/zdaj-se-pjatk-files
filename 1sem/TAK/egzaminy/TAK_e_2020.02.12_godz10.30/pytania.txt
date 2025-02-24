@@ -1,0 +1,373 @@
+Komputer Eniac
+był zrealizowany w technologli lampowej +
+miał wbudowany assembler umożliwiający automatyczna kompilacjcję -
+pracowal w systemie dwójkowym +
+korzystał z zewnętrznych pamięci magnetycznych na taśmach +
+miał rejestry w procesorze +
+===================================================================
+Aby zaimplementować mechanizm rekursji używa się
+buforôw -
+przerwan -
+===================================================================
+Liczba cylindrów na dyskach jest
+
+zależna od opcji formatowania +
+taka sama jak liczba ścieżek na powierzchni talerza +
+dwa razy wieksza niż liczba talerzy -
+równa dwa -
+ustalana przez producenta +
+===================================================================
+Procesory używają rejestrôw do
+zapamiętywania częsciowych wynikôw złozonych operacji arytmentycznych +
+komunikowania się z pamięcią RAM +
+optymalizacji pętli +
+
+archiwizacji uzyskanych rezultatów -
+===================================================================
+11 Is In binary 00000011 -
+89 is In binary 10001001 +
+C0 is in binary 11000000 +
+===================================================================
+Aby zaimplementować mechanizm rekursji używa się
+rekordôw aktywacji +
+stosu systemowego +
+przerwań -
+buforów -
+kopca systemowego -
+===================================================================
+Pamięć wirtualna, to koncepcja pozwalająca na
+uzywanie większej ilosci pamięci, niz się faktycznie miesci w RAM +
+oprogramowanie rzeczywistosci wirtualnej -
+uzywanie chmury obliczeniowej -
+
+korzystanie z zewnętrznych nośników pamięci w celu rozszerzenia pamięci operacyjnej +
+===================================================================
+Pesymistyczną zlozoność czasową algorytmôw
+uzalezniamy od prędkosci przesyłu danych po magistrali -
+odnosimy do rozmiaru najbardziej zlosliwych danych +
+mierzymy w sekundach -
+
+===================================================================
+Podstawowymi problemami Charlesa Babbage'a byly
+kobieta -
+niedostatek technologii i niedoszacowanie problemôw inzynierskich +
+trudny Charakter +
+===================================================================
+Prędkość pracy twardego dysku jest zalezna od
+zgodnosci parametrôw dysku z czasem odswiezania pamiçci +
+liczby cylindrôw -
+liczby talerzy -
+
+prędkosci przesuwu glowic -
+zgodności parametrôw dysku z czasem odswieżania pamięci +
+prędkosci kątowej talerzy -
+===================================================================
+Program szachowy zwyciężył w meczu mistrza swiata w szachach
+ponad 15 lat temu +
+w ciągu ostatnich 5 lat -
+w ciągu ostatnich 10 lat -
+===================================================================
+Rolą kopca systemowego jest
+efektywna rezerwacja i zwalnianie zaalokowanej pamięci dynamicznej, +
+wybór odpowiedniego fragmentu wolnej pamiçci do dynamicznej alokacji +
+udzielanie odpowiedzi na zapytanie o dostępnosci segmentu pamięci o ządnej wielkosci, +
+
+archiwizacja danych -
+optymalizacja przesyłu danych z pamięci do procesora -
+===================================================================
+Sieć otwarta, to sieć
+która łączy komputery wewnątrz przedsiębiorstwa -
+do ktôrej uzytkownicy mogq siç wpinac na zasadzie dostępu publicznego +
+nieodporna na ataki -
+===================================================================
+Turek - automat szachowy von Kempelena
+wykonywał fizycznie ruchy na szachownicy  +
+wymagal operatora dobrze grajqcego w szachy +
+był pierwszą maszyną umiejqcą samodzielnie podejmowac decyzje -
+===================================================================
+Uniwersalna maszyna Turinga
+potrafi wykonac kod dowolnej maszyny Turinga dla dowolnych danych +
+potrafi rozwiązac kazdy problem algorytmiczny -
+rozumie programy napisane w dowolnym języku programowania -
+potrafi wykonać swój własny kod +
+===================================================================
+Duza złozoność algorytmôw lub problemôw algorytmicznych
+moze być przyczyną ich praktycznej bezuzytecznosci +
+moze się przelozyc na pogorszenie dokladnosci obliczen na liczbach rzeczywistych +
+moze być zaletą umozliwiającą np. szyfrowanie informacji +
+===================================================================
+Fragmentacja pamięci nie dotyczy
+pamięci RAM -
+pendriveow +
+twardych dysków -
+
+dysków SSD +
+===================================================================
+Algorytm Euklides3, z wykorzystaniem testu parzystości ma zlozonosć
+kwadratową ze względu na rozmiar argumentôw +
+szescienną ze względu na rozmiar argumentôw -
+wykładniczą ze względu na rozmiar argumentôw -
+===================================================================
+Ktore z poniższych ciągów binarnych najlepiej przybliżają podane wartosci w systemie zmiennopozycyjnym z wykladu (3bity cechy + 4 mantysy U2)?
+100 0110 najlepiej przybliza l/21 +
+100 0110 najlepiej przybliza l/23 +
+101 0111 najlepiej przybliza 1/11 -
+
+101 0111 najlepiej przybliża 1/9 +
+===================================================================
+w kodowaniu liczb rzeczywistych w kodzie uzupełnieniowym do 2
+instrukcja y=-x; może spowodować błąd +
+instrukcja y=x-y; może spowodować błąd przepełnienia +
+instrukcja y=x-y+y; może spowodować błąd +
+
+instrukcja y=(x-x)*y; moze spowodowac bląd -
+instrukcja y=-x może spowodować błąd +
+===================================================================
+Arytmometr procesora z pamięcią komunikuje się przez
+rejestry +
+===================================================================
+pesymistyczną złożność czasową algorytmów
+uzależniamy od prędkości zegara procesora -
+wyrażamy w liczbie wykonań instrukcji dominującej +
+odnosimy do rozmiaru najbardziej złośliwych danych +
+===================================================================
+Pierwowzorem współczesnych komputerów było
+zaprojektowana przez Charlesa Babbage'a maszyna analityczna +
+zaprojektowany przez Hermana Holleritha tabulator -
+zaprojektowana przez charlesa babbage pierwsza maszyna różnicowa -
+===================================================================
+Metoda ściezki krytycznej sluży do
+okreslania minimalnego czasu potrzebnego do zakonczenia dzialania systemu wspolbieznego +
+wykrywania blędów w obwodach logicznych przez namierzanie obszaru zaklocen sygnalu -
+znajdowania najkrótszej drogi w grafie -
+===================================================================
+Następujqce dzialania w kodzie uzupelnieniowym są poprawnie wykonane dla liczb calkowitych 8-bitowych
+11110000 + 10001111 = 11111111 -
+10000000 + 00000001 = 10000001 +
+11111111 + 00000001 = 00000000 +
+01111111 + 01111111 = 11111110 -
+===================================================================
+Tworcą kalkulatorôw mechanicznych byli
+Blaise Pascal +
+Heron -
+Eratostenes -
+===================================================================
+C.A.R. Hoare jest autorem
+instrukcji wyboru +
+algorytmu quicksort +
+koncepcji rekordu +
+===================================================================
+O marszrucie pakietu przez siéć decyduje
+router +
+nadawca -
+sam pakiet -
+
+odbiorca -
+===================================================================
+Notacja 0
+pozwala uprościc obliczenia zlozonosci przez podanie asymptotycznego ograniczenia dolnego +
+definiuje konkretną funkcję ze zbioru liczb naturalnych w zbiór liczb rzeczywistych nieujemnych. -
+pozwala uprościć obliczenia zlozoności przez podanie asymptotycznego ograniczenia zarówno górnego, jak i dolnego +
+
+definiuje konkretnq funkcjç ze zbioru liczb naturalnych w zbiôr liczb rzeczywistych nieujemnych.  -pozwala uproscic obliczenia ztozonosci przez podanie asymptotycznego ograniczenia dolnego -
+pozwala uproscic obliczenia zlozonosci przez podanie asymptotycznego ograniczenia górnego +
+===================================================================
+1 MB, to jest dokładnie
+10^6 bajtów  -
+1048576 bajtów +
+2^20 bajtów +
+===================================================================
+Prędkość pobierania danych z twardego dysku zalezy od
+szybkosci magistrali +
+stopnia i sposobu jego zapełnienia +
+prędkosci obrotowej dysku +
+
+częstotliwości zegara procesora -
+szybkości ruchu ramienia głowic +
+===================================================================
+Pesymistyczną złożność czasową algorytmów
+mierzymy w sekundach -
+odnosimy do rozmiaru najbardziej zlosliwych danych +
+uzalezniamy od prędkosci przesylu danych po magistrali -
+===================================================================
+Programowanie obiektowe
+
+pozwala wdrozyc mechanizm dziedziczenia w definicjach klas +
+umozliwia niezalezną kompilację obiektów +
+wymaga istnienia programu nadzorującego, który decyduje, któremu obiektowi pozwolic na wykonanie kolejnej instrukcji -
+
+nadaje się do oprogramowania procesów współbieżnych +
+===================================================================
+Następujące dzialania są poprawne w jednobajtowym kodzie uzupełnieniowym
+11111111+00000001=00000000 +
+11111111+11111111=11111110 +
+01010101+01010101=10101010 -
+
+10101010 + 10101010 = 11010100 -
+10000000 + 00000001 = 10000001 +
+01111111 + 01111111 = 11111110 -
+===================================================================
+Heksadecymalnie
+81, to dziesiçtnie 129 +
+FA to binarnie 11111010 +
+89, to binarnie 10001001 +
+
+11 to binarnie 00000011 -
+C0 to binarnie 11000000 +
+2F to binarnie 11111111 -
+===================================================================
+W omawianym na wykładzie procesorze o 3 bitach cechy i 4 mantysy
+010 0101 + 010 0101 = 011 0101 +
+5/l6 ma reprezentacjç 111 0101 +
+001 0111 + 101 0111 = 001 0111 +
+
+największą liczbą reprezentowaną jest 7 a najmniejszą -8 +
+2 ma postać 000 0010 -
+001 0111 + 101 0111 = 001 0111 +
+===================================================================
+Pamięć flash na dyskach SSD nie wymaga
+zasilania, aby przecijowac dane +
+optymalizacji pod kątem szybkosci dostępu +
+buforôw przy transmisji -
+defragmentacji +
+===================================================================
+Mechanizm przerwań
+moze bye uruchomiony przez program  +
+umozliwia wieloprocesowość +
+korzysta z kolejki priorytetowej +
+jest częścią systemu operacyjnego +
+===================================================================
+Notacja OMEGA
+definiuje nieskohczonq klasę funkcji ze zbioru liczb naturalnych w zbiôr liczb rzeczywistych nieujemnych. +
+pozwala uprościć obliczenia złożoności przez podanie asymptotycznego ograniczenia gôrnego -
+definiuje konkretną funkcję ze zbioru liczb naturalnych w zbiôr liczb rzeczywistych nieujemnych. -
+===================================================================
+Reprezentujemy liczby rzeczywiste za pomocq 1 bajtu cechy i 7 bajtôw mantysy w kodzie U2 z ukrytym jednym bitem.
+wszystkie liczby calkowite w zakresie reprezentowalności są reprezentowane dokladnie -
+dodając do liczby drugą, której cecha jest mniejsza o 50, uzyskamy wynik rôwny tej pierwszej -
+dodając do liczby drugą, której cecha jest mniejsza o 60, uzyskamy wynik rôwny tej pierwszej +
+miedzy kazdymi dwiema liczbami istnieje liczba dokładnie reprezentowana i różna od nich -
+===================================================================
+Stosując strategie alfa-beta
+dostajemy ten sam wynik co w strategii minimaksowej tyle że szybciej +
+uzyskujemy zawsze optymalne ruchy w grze -
+korzystamy ze statycznej funkcji oceny pozycji +
+===================================================================
+Reprezentujemy liczby rzeczyswiste za pomocą 1 bajtu cechy i 7 bajtów mantysy w kodzie U2 z ukrytym jednym bitem
+wszystkie liczby całkowite w zakresie reprezentowalności są reprezentowane dokładnie -
+Największa reprezentowana liczba jest większa od najmniejszej dodatniej ponad 10^30 razy +
+między każdymi dwiema liczbami istnieje liczba dokładnie reprezentowana i różna od nich -
+===================================================================
+Buforów używa się przy transmisji danych z dysku
+tylko wtedy, gdy moze to przyspieszyc transmisję -
+zawsze +
+tylko wtedy, gdy uzytkownik to wyraénie wyspecyfikuje -
+===================================================================
+Dodawanie zmiennopozycyjne
+daje zawsze ten sam wynik, jak gdy podamy oba argumenty w odwrotnej kolejnosci +
+moze dac wynik rôwny jednemu z argumentow, mimo ze zaden nie jest zerem +
+jest rozdzielne względem mnozenia -
+
+moze wymagac denormalizacji obu argumentów -
+===================================================================
+Reprezentujemy liczby rzeczywiste za pomocą 1 bajtu cechy i 7 bajtów mantysy w kodzie U2 z ukrytym jednym bitem
+wszystkie liczby całkowite w zakresie reprezentowalności są reprezentowane dokładnie -
+===================================================================
+Przerwania
+mogą być generowane przez procesy +
+mają priorytety +
+stosuje się przy obsludze urządzeń zewnętrznych +
+===================================================================
+Maszynę Turinga programujemy
+za pomocą tasm perforowanych -
+za pomocq kart perforowanych Holleritha -
+definiujqc graf stanôw i przejsc między nimi +
+
+w ogóle nie trzeba programować maszyny turinga -
+===================================================================
+W arytmetyce zmiennopozycyjnej procesora przy każdym ustalonym kodowaniu
+istnieje najmniejsza liczba rzeczywista +
+najmniejsza liczba jest zero -
+liczba liczb rzeczywistych reprezentowanych dokładnie jest skończona +
+===================================================================
+Metoda której użył Babbage do obliczania tablic metematycznych w swoich maszynach różnicowych
+polegała na szybkim obliczaniu wielu wartości wielomianów +
+wymagała wielu dodawań - co najmniej tylu ile wartości chcieliśmy wyznaczyć +
+mogła być zastosowana do wyznaczenia wartości funkcji trygonometrycznych +
+===================================================================
+Błędy numeryczne popełniane przez komputery biorą się z
+konieczności dopasowania cech co powoduje utrate paru bitów mantysy jednej z liczb +
+używania kodu znak-moduł prosty do reprezentacji liczb całkowitych -
+===================================================================
+Gdy dodajemy dwie liczby zmiennopozycyjne może się zdarzyć że
+dodając dwie liczby ujemne dostaniemy wynik dodatni -
+wynik zależy od tego którą liczbę denormalizujemy -
+wynik bedzie rowny jednej z nich mimo ze druga nie jest zerem +
+wynik bedzie zalezal od tego ktory z argumentów bedzie podany jako pierszy -
+===================================================================
+Najstarsze znane i uzywane do dziś powszechne algorytmy pochodzą ze
+Starożytności +
+XIX wieku -
+średniowiecza -
+===================================================================
+cylindry na dysku twardym to
+równooddalone do środka fragmenty powierzchni na różnych talerzach powstałe w czasie formatowania +
+spieralnie ułożone fragmenty powierzchni nad którymi przesuwaja sie głowice -
+urządzenia o bardzo małym tarciu w którym kręci się oś dysku -
+===================================================================
+Sposród konstruktorów kalkulatorów wybitnymi filozofami byli
+Gotfried Withelm Leibniz +
+Blaise Pascal +
+Abraham Stern -
+===================================================================
+AI Chwarizmi
+opracowal teorię rozwiqzywania rôwnań algebralcznych +
+utrzymywal siç z nauki +
+pisal pierwsze programy komputerowe -
+===================================================================
+Podstawowym zadaniem karty sieciowej jest
+udostępnienie ściany przeciwogniowej -
+wzmocnienle sygnalu -
+konwersja formatôw danych między komputerem, a siecią +
+===================================================================
+Do magistrali podlącza się
+pamięć +
+twardy dysk +
+wentylator -
+===================================================================
+Cylindry na twardym dysku, to
+równooddalone od środka fragmenty powierzchni na różnych talerzach powstale w czasie formatowania +
+splralnie ułożone fragmenty powierzchni, nad ktôrymi przesuwają się glowice -
+urządzenla o bardzo malym tarciu, w których kręci się oś dysku -
+===================================================================
+Za pomocą algorytmu Eratostenesa możemy
+wyznaczyć wszystkie liczby pierwsze mniejsze od n uzywając dodatkowej pamiçci liniowej względem rozmiaru liczby n -
+wyznaczyć liczbę liczb pierwszych nieprzekraczających danej wartości +
+wyznaczyc wszystkie liczby pierwsze mniejsze od n uzywając dodatkowej pamięci wykladniczej względem rozmiaru liczby n +
+===================================================================
+W kodzie znak-modul odwrotny dla liczb calkowitych
+można zanegować kaidq liczbç negujqc wszystkie bity +
+istnieją dwie reprezentacje zera +
+dodawanie jest łączne -
+===================================================================
+W czasie kompilacji modułów
+ukonkretnia siç znaczenie wszystkich identyfikatorôw wystçpujqcych w module +
+powstaje kod wynikowy -
+ustala się adresy względne alokacji wszystkich zmiennych zadeklarowanych wewnątrz modułu +
+===================================================================
+szybkość poboru danych z dysku SSD może zależeć od
+zgrania częstotliwości odświeżania pamięci z prędkością transmisji danych narzucaną przez kontroler +
+rozmieszczenie danych na powierzchni dysku -
+miejsca wpięcia dysku w płytę główną +
+===================================================================
+Algorytm Euklidesa służy do
+znajdowania najmniejszego wspólnego dzielnika -
+okreslania czy liczba jest pierwsza -
+znajdowania największego wspólnego dzielnika +
+===================================================================
+algorytm euklides2 okazał się
+istotnie szybszy od algorytmu euklides1 dzieki temu ze liczby fabboliciego rosą  wykłądniczo szybko +
+istotnie szybszy od algorytmu euklides1z odejmowaniem dzieki temu ze indeksy liczb fiboliciego rosną logarytmicznie wolno ze wzgledu na ich wartość +
+istotnie szybszy od algorytmu euklides1z odejmowaniem dzieki temu ze indeksy liczb fiboliciego rosną wykładniczo szybko ze wzgledu na ich wartość -
+===================================================================
+

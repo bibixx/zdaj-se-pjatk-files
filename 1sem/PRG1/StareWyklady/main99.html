@@ -1,0 +1,333 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index98.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index100.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 3"></A><div class="tytulpunktu">3. Opakowanie typów pierwotnych</div>
+
+<a name="W12.3"></a><A NAME="EDU.skorowidz.termin opakowanie_typów_pierwotnych 99_682"></A> 
+<p>Widzieliśmy już w praktyce, że znakowa reprezentacja liczb  (napisy  reprezentujące
+liczby) - to zupelnie co innego niż ich wewnętrzna, binarna postać.<br>
+Właśnie dlatego uporczywie musieliśmy używać metody parseInt z klasy Integer
+do przekształcania znakowej (napisowej) postaci liczb całkowitych na ich
+binarną wewnętrzną postać.<br>
+Powstaje pytanie: co to za klasa Integer? I co robić z innymi typami liczb: np. rzeczywistymi ?<br>
+Otóż bardzo często występuje potrzeba traktowania liczb jako obiektów. Tymczasem
+liczby są reprezentowane przez typy pierwotne (i nie są obiektami). Dlatego
+w standardowym pakiecie java.lang umieszczono specjalne klasy, opakowujące
+liczby (w ogóle wszystkie typy pierwotne) i czyniące z nich obiekty.<br>
+Należą do nich następujące klasy:<br>
+<ul>
+  <li><A NAME="EDU.skorowidz.termin Integer 99_683"></A> Integer</li>
+  <li><A NAME="EDU.skorowidz.termin Short 99_684"></A> Short</li>
+  <li><A NAME="EDU.skorowidz.termin Byte 99_685"></A> Byte</li>
+  <li><A NAME="EDU.skorowidz.termin Long 99_686"></A> Long</li>
+  <li><A NAME="EDU.skorowidz.termin Float 99_687"></A> Float</li>
+  <li><A NAME="EDU.skorowidz.termin Double 99_688"></A> Double</li>
+</ul>
+
+<p>
+Obiekty tych klas reprezentują (w sposób obiektowy) liczby odpowiednich typów.<br>
+Np. obiektowy odpowiednik liczby 5 typu int możemy uzyskać tworząc obiekt klasy Integer:<br>
+<br>
+Integer a = new Integer(5);<br>
+<br>
+Mówimy o opakowaniu liczby 5, bowiem liczba ta jest umieszczana "w środku" obiektu klasy Integer, jako jego element.<br>
+<br>
+Klasy opakowujące nie dostarczają żadnych metod do wykonywania operacji na
+liczbach. Z obiektu takiej klasy musimy liczbę "wyciągnąć" za pomocą odpowiednich
+metod, np.<br>
+<br>
+int i = a.intValue(); // zwraca wartość typu int, "zawartą" w obiekcie a<br>
+<br>
+Podobnie:<br>
+<br>
+Double dd = new Double(7.1);<br>
+double d = dd.doubleValue(); // d == 7.1 <br>
+<br>
+Po co to wszystko? Po co takie opakowanie może być potrzebne? Pamiętamy z wykladów o klasach i tablicach, że:<br>
+<ol>
+  <li>każda klasa w Javie dziedziczy pośrednio (lub bezpośrednio) klasę Object</li>
+  <li>zatem referencji do obiektu klasy Object możemy przypisac referencję do obiektu dowolnej innej klasy</li>
+  <li>tablice mogą zawierać referencje do dowolnych obiektów<br>
+  </li>
+</ol>
+
+<p>
+Wyobraźmy sobie teraz, że mamy jakąś tablicę, w kolejnych elementach której
+chcemy zapisywać dowolne informacje. Czy to możliwe? Ależ tak - właśnie dzięki
+wymienionym wyżej trzem właściwościom - pod warunkiem jednak, że informacja
+ta będzie przedstawiana w sposób obiektowy (jako obiekty).<br>
+Możemy zatem stworzyć tablicę, za pomocą której jednocześnie będziemy rejestrować
+np. i napisy (łańcuchy znakowe) i liczby. Te ostatnie jednak musimy "opakować"
+odpowiednimi klasami: Integer, Double itd.<br>
+<br>
+Na przykład:<br>
+<br>
+Object[] tab = new Object[4];<br>
+tab[0] = "Kowalski";<br>
+tab[1]  = new Integer(28);<br>
+tab[2] = "Kowalska";<br>
+tab[3] = new Integer(30);<br>
+<br>
+W łatwy sposób możemy pokazać wszystkie elementy tablicy.<br>
+<br><A NAME="EDU.skorowidz.termin toString 99_689"></A> 
+
+<div class="syntax">
+Metoda <b>toString()</b> zastosowana wobec obiektu dowolnej klasy zwraca
+napis, będący znakową reprezentacją tego obiektu. Definicje tej metody w
+klasach okreslają jak obiekty tych klas są przedstawiane w postaci napisów<br>
+</div>
+
+<br>
+<p>
+W przypadku powyższego przykładu wypisanie wszystkich elementów tablicy wygląda tak:<br>
+<br>
+for (int i=0; i&lt;tab.length; i++) <br>
+    System.out.println(tab[i].toString());<br>
+<br>
+co da napisy:<br>
+Kowalski<br>
+28<br>
+Kowalska<br>
+30<br>
+<br>
+Jednak, gdybyśmy wobec obiektów zarejestrowanych w tablicy chcieli użyć metod
+ich klas (albo - wobec obiektów klasy String - operatora konkatenacji łańcuchów
+znakowych), to natkniemy się na dwa problemy.<br>
+<br>
+Po pierwsze, po to by zastosować metody jakiejś klasy musimy rozpoznać właściwe obiekty, stwierdzić do jakiej klasy należą. <br>
+Operujemy przecież elementami typu Object. W naszym przykładzie każdy z nich
+może wskazywać na obiekt klasy Integer albo obiekt klasy String.<br>
+<br><A NAME="EDU.skorowidz.termin instanceof operator 99_690"></A> 
+<div class="syntax">
+    Stwierdzeniu do jakiej klasy należy obiekt służy operator <b>instanceof</b>.<br>
+<br>
+Wyrażenie:<br>
+<br>
+        <b><i>nazwa_zmiennej</i>  instanceof  <i>nazwa_klasy</i></b><br>
+<br>
+ma wartość true, jeśli zmienna <b><i>nazwa_zmiennej</i></b>   jest referencją do obiektu klasy <b><i>nazwa_klasy</i></b><br>
+</div>
+
+<br>
+<p>
+Np. jeśli:<br>
+<br>
+Object[] tab = { "Kowalski", new Integer(28) };<br>
+<br>
+to<br>
+        tab[0] instanceof String   - ma wartość true<br>
+        tab[0] instanceof Integer  - ma wartość false<br>
+        tab[1] instanceof String    -  ma wartość false<br>
+        tab[1] instanceof Integer  - ma wartość true<br>
+<br>
+Drugi problem polega na tym, że dla kompilatora wszystkie elementy tablicy
+tab w omawianym przykładzie są typu Object. Jak pamiętamy, kompilator sprawdza
+zgodność typów. Zatem w kontekście:<br>
+<br>
+Object[] tab = { "Kowalski", new Integer(28) };<br>
+<br>
+takie zapisy:<br>
+<br>
+String s = "";<br>
+if (tab[0] instanceof String) s += tab[0];<br>
+<br>
+int i;<br>
+if (tab[1] instanceof Integer) i += tab[1].intValue();<br>
+<br>
+spowodują błędy w kompilacji, bowiem:<br>
+<ol>
+  <li>tab[1] jest typu Object, a wobec Object nie możemy stosować operatora +</li>
+  <li>tab[2] jest typu Object, a w klasie Object nie ma  metody intValue</li>
+</ol>
+
+<p>
+Ale przecież wewnątrz obiektów oznaczanych przez tab[1] i tab[2]  "siedzą"
+naprawdę (odpowiednio) - obiekt klasy String i obiekt klasy Integer. Mówi
+nam o tym wynik zastosowania operatora instanceof, który w obu przypadkach
+jest true. Możemy o tym powiedzieć kompilatorowi za pomocą<A NAME="EDU.skorowidz.termin zawężająca_konwersja_referencyjna 99_691"></A> zawężającej konwersji
+referencyjnej (lub - inaczej mówiąc - obiektowej).<br>
+<br>
+
+<div class="syntax">
+Jeśli klasa B dziedziczy klasę A, to po:<br>
+<br>
+<b>    B b = new B();<br>
+    A a = b;<br>
+</b><br>
+możemy poinformować kompilator, że <i><b>a</b></i> wskazuje na obiekt klasy B za pomocą jawnej konwersji zawężającej:<br>
+<br>
+    <b>B c = (B) a;</b><br>
+<br>
+po czym wobec zmiennej <i><b>c</b></i> będziemy mogli używać metod klasy B<br>
+</div>
+
+<br>
+<p>
+W naszym przypadku powinniśmy więc zapisać:<br>
+<br>
+Object[] tab = { "Kowalski", new Integer(28) };<br>
+<br>
+String s = "Jan";<br>
+
+if (tab[0] instanceof String) s +=  (String) tab[0];<br>
+<br>
+
+int i = 200;<br>
+if (tab[1] instanceof Integer)  {<br>
+    Integer liczba = (Integer) tab[1];<br>
+    i += liczba.intValue();<br>
+}<br>
+ <br>
+i w tym momencie zarówno kompilacja jak i wykonaie programu będą pomyślne, dając: <br>
+s == "JanKowalski"<br>
+i == 228;<br>
+<br>
+Zadanie: w dwóch tablicach zapisane są imiona graczy (w jakąś grę) oraz punkty przez nich uzyskane:<br>
+    String[] name = { "Ala", "Ela", "Jan"};<br>
+    int[]  points = { 10, 12, 11 };<br>
+<br>
+Stworzyć <b>jedną</b> tablicę <i><b>tab</b></i>, w której będzie zapisana sekwencja wyników: imię, punkty, imię, punkty...<br>
+po czym, korzystając tylko z tablicy <i><b>tab</b></i>, w kolejnych wierszach
+wypisać zestawy imię - punkty, podać (w jednym wierszu) imiona wszystkich
+graczy, a następnie sumę punktów, którą uzyskali.<br>
+Przykładowy wydruk:<br><br>
+
+<div class="listing100">
+W grze punkty uzyskali: <br>
+Ala 10<br>
+Ela 12<br>
+Jan 11<br>
+Grali:  Ala Ela Jan<br>
+Zdobyli łącznie: 33 pkt.<br>
+</div>
+
+<br>
+
+<div class="important">
+<br>
+Przed lekturą dalszego tekstu proszę to zadanie rozwiązać samodzielnie
+<br>
+<br>
+
+
+
+
+
+</div>
+
+<br>
+
+<p>
+Możliwe rozwiązanie:<br>
+
+<pre>
+public class Wrap {
+
+  public static void main(String[] args) {
+
+
+    String[] name = { "Ala", "Ela", "Jan"};
+    int[]  points = { 10, 12, 11 };
+    Object[] tab = new Object[name.length*2];
+
+    int k = 0;
+    for (int i=0; i&lt;name.length; i++) {
+      tab[k++] = name[i];
+      tab[k++] = new Integer(points[i]);
+    }
+
+   System.out.println("W grze punkty uzyskali: ");
+   for (int i=0; i &lt;tab.length; i+=2)
+     System.out.println(tab[i].toString() + " " + tab[i+1].toString());
+
+   String players = "";
+   int pointSum = 0;
+
+   for (int i=0; i &lt; tab.length; i++) {
+     if (tab[i] instanceof String)
+       players += " " + (String) tab[i];
+     else if ( tab[i] instanceof Integer)
+       pointSum += ((Integer) tab[i]).intValue();
+   }
+
+   System.out.println("Grali: " + players);
+   System.out.println("Zdobyli łącznie: " + pointSum + " pkt.");
+
+  }
+
+}
+</pre>
+
+<p>
+Niejako przy okazji, w klasach opakowujących typy pierwotne zdefiniowano statyczne metody:<br>
+<br>
+
+<div class="syntax">
+<b>            public static <i>ttt</i>  parse<i>Ttt</i>(String </b><i>s</i><b>)</b><br>
+<br>
+
+zwracające wartości typu <i><b>ttt</b></i> reprezentowane przez napis <i><b>s</b></i><br>
+<br>
+
+gdzie: <i><b>ttt</b></i> nazwa typu pierwotnego (np. int, double), Ttt - ta sama nazwa z kapitalizowaną pierwszą literą (np. Int, Double)<br>
+
+</div>
+
+<br>
+<p>
+A więc, po to by przekstałcić napis <i><b>s</b></i> reprezentujący liczbę rzeczywistą do typu double należy napisać:<br>
+<br><A NAME="EDU.skorowidz.termin Double.parseDouble 99_692"></A> double d = Double.parseDouble(s); <br>
+<br>
+np.<br>
+<br>
+String s = "12.4";<br>
+double d = Double.parseDouble(s);  // d == 12.4<br>
+<br>
+Użytecznych dodatkowych metod dostarcza<A NAME="EDU.skorowidz.termin Character klasa 99_693"></A> klasa Character (opakowujaca typ char).<br>
+Należą do nich metody stwierdzania rodzaju znaku np.:<br>
+<br><A NAME="EDU.skorowidz.termin isDigit 99_694"></A> isDigit()             // czy znak jest znakiem cyfry<br><A NAME="EDU.skorowidz.termin isLetter 99_695"></A> isLetter()           // czy znak jest znakiem litery<br><A NAME="EDU.skorowidz.termin isLetterOrDigit 99_696"></A> isLetterOrDigit() // litera klub cyfra<br><A NAME="EDU.skorowidz.termin isWhiteSpace 99_697"></A> isWhiteSpace()   // czy to "biały" znak (spacja, tabulacja etc.)<br><A NAME="EDU.skorowidz.termin isUpperCase 99_698"></A> isUpperCase();  // czy to duża litera   <br><A NAME="EDU.skorowidz.termin isLowerCase 99_699"></A> isLowerCase();  // czy to mała litera<br>
+
+<br>
+Metody te zwracają wartości true lub false.<br>
+<br>
+<b><font color="#ff6600">Proszę zapoznać się z dokumentacją klasy Character</font></b>.<br>
+
+<br>
+W klasach opakowujących typy numeryczne zdefiniowano także wiele użytecznych
+statycznych stałych. Należą do nich stałe zawierające<A NAME="EDU.skorowidz.termin maksymalne_i_minimalne_wartości_danego_typu 99_700"></A> maksymalne i minimalne
+wartości danego typu.<br>
+Mają one nazwy<A NAME="EDU.skorowidz.termin MAX_VALUE 99_701"></A> MAX_VALUE i<A NAME="EDU.skorowidz.termin MIN_VALUE 99_702"></A> MIN_VALUE.<br>
+Dzięki temu nie musimy pamiętać zakresów wartości danego typu.<br>
+Możemy np. zsumować wszystkie dodatnie liczby typu short:<br>
+<br>
+
+<pre>
+public class MaxVal {
+
+  public static void main(String[] args) {
+
+    long sum = 0;
+    for (int i=1; i &lt;= Short.MAX_VALUE; i++) sum +=i;
+    System.out.println(sum);
+
+  }
+
+}
+</pre>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index98.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index100.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

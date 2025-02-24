@@ -1,0 +1,462 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index18.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index20.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Iteracje</div>
+
+<a name="W3.2"></a>
+
+<p>Bardzo często pewne instrukcje lub grupy instrukcji będziemy
+chcieli    wykonywać   wielokrotnie.<br>
+            Na przykład określoną liczbę razy. Lub dopóki spełniony jest
+jakiś    warunek.<br>
+         <br><A NAME="EDU.skorowidz.termin pętla_iteracyjna 19_156"></A> Zapewniają to instrukcje sterujące nazywane <b>instrukcjami pętli
+  iteracyjnych</b>. <br>
+            Rozważymy dwie formy takich instrukcji.<br>
+         <br>
+            Pierwsza służy do wykonywania instrukcji określoną liczbę razy,
+ jednocześnie     zmieniając wartość zmiennej, nazywanej licznikiem. Ma ona postać:<br>
+         <br>
+
+<div class="syntax">         <br>
+        <b>do</b><i> licznik</i> = <i>wart_pocz</i><b> to</b><i> wart_konc</i>
+     [ <b>by</b><i> krok</i>  ]<br>
+     <i>        ins1;</i><br>
+     <i>        ins2;</i><br>
+     <i>        ...</i><br>
+     <i>        insN;</i> <b><br>
+        end</b><br>
+    <br>
+    gdzie:<br>
+
+<ul>
+               <li><A NAME="EDU.skorowidz.termin licznik 19_157"></A> licznik - nazwa zmiennej będącej licznikiem</li>
+               <li>    wart_pocz - początkowa wartość licznika</li>
+               <li>    wart_konc - końcowa wartość licznika</li>
+               <li>    krok - o ile zwiększa się w każdej iteracji wartość
+ licznika;  gdy nie podano klauzuli by, przyjmuje się krok = 1</li>
+               <li>    instrukcja1,... instrukcjaN - instrukcje wykonywane
+ w  pętli</li>
+
+</ul>
+
+</div>
+
+<br>
+<p>Pętla ta wykonywana jest w następujący sposób: 
+
+<div class="notel"> Zmienne oznaczające
+   liczniki pętli nazywamy zwykle krótko: i, j, k, l
+</div>
+
+<div class="ddd">
+
+<ol>
+               <li>Zmiennej <i>licznik</i> przypisywana jest wartość wyrażenia<i>
+         wart_pocz</i></li>
+               <li>Sprawdzany jest warunek: <i>licznik</i> &lt;=  <i>wart_konc</i>. Jeżeli warunek jest prawdziwy to wykonywane są instrukcje zawarte
+   w  pętli  (do napotkania słowa end - a więc <i>ins1, ins2.. insN</i>).
+W  przeciwnym   razie (jeżeli <i>licznik &gt; wart_konc</i>) sterowanie opuszcza
+  pętle i  jest przekazywane do instrukcji po słowie end.</li>
+               <li>Zmienna <i>licznik</i> zostaje zwiększona o wartość wyrażenia
+             <i>    krok</i>. Wracamy do punktu 2</li>
+
+</ol>
+</div>
+<br clear="all">
+
+<p>Rozpatrzmy przykłady. Poniższy program wypisuje na konsoli kwadraty
+   liczb   całkowitych od 1 do 100.<br>
+
+<pre>
+/* Kwadraty liczb całkowitych od 1 do 100 */
+
+do i = 1 to 100
+   say i i*i;
+end
+</pre>
+
+<p>Zmiennej <i><b>i</b></i> nadawana jest wartość 1. Wartość ta
+mniejsza    jest od 100, zatem wykonywana jest instrukcja w pętli (say ...),
+wyprowadzająca    na konsolę wartość zmiennej <i><b>i</b></i> oraz - po spacji
+- jej kwadrat.    Przy napotkaniu słowa end sprawdzany jest warunek kontynuacji
+pętli (czy        <i><b>i</b></i> &lt;= 100). Warunek jest prawdziwy, zatem
+<i><b>i</b></i>        zwiększa się o 1  a instrukcje pętli wykonywane są znowu
+(wypisywana  jest  wartość <i><b>i</b></i> oraz jej kwadrat:  2  4. </p>
+
+<div class="notel">Terminem <b>sterowanie</b> określamy kolejność wykonania instrukcji
+   programu. Sformułowanie "sterowanie przekazywane jest do instrukcji <i>
+  ins</i>    " oznacza, że kolejną wykonywaną instrukcją w programie będzie
+ <i>ins</i>    .</div>
+ 
+ <div class="ddd">
+ <br><A NAME="EDU.skorowidz.termin sterowanie 19_158"></A> I tak dalej: dopóki wartość <i><b>i</b></i> nie osiągnie
+ 101. W tym  momencie warunek kontynuacji pętli (i &lt;= 100) nie jest spełniony
+ i sterowanie  przekazywane jest do instrukcji po słowie end. Ponieważ nie
+ ma już żadnych  instrukcji - program kończy działanie.
+ </div>
+
+<br clear="all">
+<br>
+<p>Inny przykładowy program symuluje spłaty kredytu. Podajemy na
+wejściu: wielkość kredytu, liczbę lat kredytu oraz jego oprocentowanie
+(w %). Oprocentowanie pobierane jest wraz z miesięczną ratą i obliczane
+ jako miesięczne oprocentowanie      niespłaconej części kredytu. Program
+wyprowadza dla kolejnych miesięcy   okresu   kredytowania należne spłaty,
+a w podsumowaniu sumę spłat i  informację   o  ile (na skutek oprocentowania)
+przekroczy ona wielkość kredytu.
+
+<pre>
+/* Symulacja splaty kredytu */
+
+/*---------------------- Wprowadzanie danych */
+say "Kredyt?";
+kredyt = linein();
+say "Liczba lat kredytu?";
+lata = linein();
+say "Oprocentowanie w skali rocznej?"
+proc = linein();
+
+/*---------------------- Obliczenia i wyniki */
+
+proc = (proc/100)/12;   /* odsetki miesięczne */
+lrat = lata * 12;       /* liczba rat */
+rata = kredyt / lrat;   /* wielkość raty */
+
+doSplaty = kredyt;      /* ile pozostało do spłaty */
+
+sumaSplat = 0;          /* ile splacono: raty + oprocentowanie */
+
+do i = 1 to lrat
+   splata = rata + proc*doSplaty; /* splata = rata + nalezne odsetki */
+   doSplaty = doSplaty - rata;
+   sumaSplat = sumaSplat + splata;
+   say i ':' splata;                 /* informacja o splacie dla i-go miesiąca */
+end
+
+say "Suma spłat   =" sumaSplat;
+say "Ponad kredyt =" sumaSplat - kredyt;
+
+</pre>
+
+<p>W  tym programie pętla <b><i>do...</i></b>
+   wykonywana jest tyle razy ile wynosi  liczba rat do spłacenia. Zmienna
+<i><b>  i</b></i> oznacza numer raty (miesiąca  spłaty). Za każdym razem wyliczana
+jest spłata (która wynosi wielkość raty  + miesięczna wielkość odsetek od
+niespłacanej jeszcze części kredytu). Na  konsolę wyprowadzany jest numer
+miesiąca oraz przypadająca na ten miesiąc   spłata. Gdy <b><i> i = lrat</i></b>
+  (oststni miesiąc spłaty) po raz ostatni   obliczana i wyprowadzana jest
+informacja o spłacie. Następnie<b><i>  i </i></b>    zwiększa się o 1 i wynosi
+<i><b>lrat +1</b></i>. Warunek kontynuacji pętli   nie jest spełniony, zatem
+sterowanie opuszcza pętlę (przekazywane jest do   instrukcji po słowie kluczowym
+end - czyli say "Suma splat..."). Na konsolę   wyprowadzane są informacje
+wyjściowe i program kończy działanie.<br>
+<br>
+
+
+<div class="listing33r"><i>Wydruk działania programu:</i><br><br>
+             Kredyt?<br>
+             10000<br>
+             Liczba lat kredytu?<br>
+             1<br>
+             Oprocentowanie w skali rocznej?<br>
+             20<br>
+             1 : 1000.00000<br>
+             2 : 986.111111<br>
+             3 : 972.222222<br>
+             4 : 958.333333<br>
+             5 : 944.444445<br>
+             6 : 930.555556<br>
+             7 : 916.666667<br>
+             8 : 902.777778<br>
+             9 : 888.888889<br>
+             10 : 875.000000<br>
+             11 : 861.111111<br>
+             12 : 847.222223<br>
+             Suma spłat   = 11083.3333<br>
+             Ponad kredyt = 1083.3333
+</div>
+			 
+
+
+<div class="ddd">
+<br>Zwróćmy uwagę na zastosowany w tym programie sposób sumowania spłat.
+  Sumę  spłat uzyskamy w zmiennej sumaSplat. Na początku jej wartość równa
+ jest 0.  W pierwszej iteracji do sumaSplat dodawana jest wartośc pierwszej
+ spłaty  (w tej chwili sumaSplat równa jest pierwszej spłacie). W każdej
+następnej    iteracji poprzednia suma spłat jest zwiększana o bieżącą spłatę,
+a wynik   znowu zapisywany w zmiennej sumaSplat. <br>
+        Jest to powszechny sposób sumowania (akumulowania) różnych wartości.
+  Może  on być zastosowany nie tylko do wartości numerycznych, ale również
+ w innych  przypadkach, np. do kumulatywnego łączenia łańcuchów znakowych.<br>
+ </div>
+ <br clear="all">
+ 
+<p>Np. w poniższym programiku wypisujemy napis składający się z n-razy
+kolejno   łączonych słów "Ala" i "kot".<br>
+
+<pre>
+/* Łączenie napisów w pętli */
+
+word1 = "Ala";
+word2 = "kot";
+
+n = 8;
+string = "";
+
+do i = 1 to n
+  if ( i // 2 = 0 ) then string = string||word2;
+  else string = string||word1;
+end
+
+say string;
+</pre>
+
+<br>
+
+<div class="listing33r"><i>Wydruk działania programu</i><br>
+       AlakotAlakotAlakotAlakot</div>
+	   
+<div class="ddd">
+<br>
+Na początku zapisujemy  do zmiennej string
+  pusty  łańcuch znakowy (""). Następnie w pętli na przemian  dodajemy do
+bieżącej zawartości zmiennej string albo słowo word1, albo słowo  word2.
+</div>
+<br clear="all">
+<p>Sposób naprzemiennego dodawania jest następujący: jeśli numer iteracji
+  (wartość  zmiennej i) jest parzysty, dodajemy zmienną word2, a jeśli jest
+  nieparzysty  - zmienną word1. <br>
+
+<div class="notel"><b>Uwaga!</b> W Javie operatorem reszty z dzielenia jest <b>%</b><br><br>
+</div>
+
+<br>
+
+<div class="ddd">
+<br><A NAME="EDU.skorowidz.termin operator_reszty_z_dzielenia 19_159"></A> Parzystość   sprawdzamy za pomocą użycia operatora reszty z dzielenia
+(który w  REXXie oznaczany jest //). Reszta z dzielenia przez 2 dla liczb
+parzystych równa jest 0,  a dla nieparzystych ma inną wartość niż 0. Zwróćmy
+też uwagę, że wykorzystaliśmy   priorytety operatorów: priorytety operatorów
+arytmetycznych (w tym: reszty   z dzielania) są wyższe niż priorytet operatora
+równości =, dlatego w wyrażenie   i // 2 = 0  najpierw jest stosowany operator
+//, a później dopiero operator   =,  porównujący wynik wyrażenia i // 2 z
+zerem.
+</div>
+<br clear="all">
+
+<font color="#ff6600"><b>Proszę zapisać i uruchomić omawiane wyżej programy na własnym komputerze. </b></font><br>
+
+<p>Drugą, przedstawianą tu, formę pętli iteracyjnej realizuje instrukcja
+         <b>   do while</b><br>
+             <br>
+           Ma ona postać:<br>
+             <br>
+
+<div class="syntax">
+        <b>    do while</b> ( warunek )<br>
+                ins1;<br>
+                ins2;<br>
+                ...<br>
+                insN;<br>
+           <b>        end</b><br>
+    <br>
+    Instrukcje w pętli (ins1, ins2, ... insN) wykonywane są <b>o ile i dopóki
+  </b>warunek jest prawdziwy.
+</div>
+
+<br>
+<p>Poniższy program służy do testowania działania pętli <b>do while</b>.<br>
+
+<pre>
+say "Podaj a: ";
+a = linein();
+say "Podaj b: ";
+b = linein();
+say "a = " a  "b = " b;
+
+n = 0
+do while ( a &gt; b)
+   a = a - 1;
+   n = n + 1
+end
+
+say "Pętla została wykonana: " n "razy."
+say "a = " a  "b = " b;
+</pre>
+
+<br>
+
+<div class="listing33r"> <i>Przykładowy wydruk działania programu</i><br>
+                 Podaj a:<br>
+                 1078.1<br>
+                 Podaj b:<br>
+                 23.5<br>
+                 a =  1078.1 b =  23.5<br>
+                 Pętla zostala wykonana:  1055 razy.<br>
+                 a =  23.1 b =  23.5
+</div>
+
+<div class="ddd">
+<br>
+Podajemy w nim wartości zmiennych a i b. Pętla do while zawiera
+warunek    (a &gt; b) zatem: 
+
+<ul>
+                   <li>jej wykonanie rozpocznie się tylko wtedy, gdy warunek
+  jest  spełniony  (a &gt; b)</li>
+                   <li>w pętli a ulegnie zmniejszeniu o 1</li>
+                   <li>jeśli nadal będzie większe od b, to instrukcje petli
+ zostaną    powtórzone</li>
+                   <li>będą one powtarzane <b>dopóki</b> a będzie większe
+od  b</li>
+                   <li>gdy a stanie się równe lub mniejsze od b, pętla zakończy
+   działanie<br>
+                   </li>
+
+</ul>
+</div>
+
+<br clear="all">
+
+<p><font color="#ff6600"><b>Proszę zapisać i uruchomić omawiany wyżej program na własnym komputerze. </b></font><br>
+<br>
+Pętle iteracyjne (do..., do while) jak również instrukcje if  mogą być dowolnie zagnieżdżone.<br>
+<br>
+
+<div class="def"><A NAME="EDU.skorowidz.termin zagnieżdżenie_konstrukcji_językowych 19_160"></A> Zagnieżdżenie konstrukcji językowych oznacza umieszczanie ich jedna -
+w - drugiej
+</div>
+<br>
+
+<p>Na przykład, całkiem dopuszczalny jest taki schemat:<br>
+<pre>
+do while (a &gt; b)
+  do i = 1 to N
+    ....
+    do j = 1 to M
+       .....
+       do while (s = "")
+          ...
+       end
+    end
+  end
+end
+</pre>
+
+<p>Istotną sprawą przy zagnieżdżaniu instrukcji sterujących jest "dopasowanie"
+ich początków i końców (w naszym przypadku każdemu otwierającemu <b>do</b> musi odpowiadać zamykające <b>end</b>).<br>
+Przy takim dopasowaniu pomaga nam odpowiednie formatowanie kodu programu (wcinanie wierszy). <br>
+W powyższym przykładzie widac jeden ze sposobów wykonywania "wcięć".<br>
+<br>
+<div class="important"><A NAME="EDU.skorowidz.termin wcięcie 19_161"></A> Wcięcia w kodzie programu zwiększają jego czytelność i pozwalają łatwiej odnajdywać błędy.<br>
+Wcięcia są jednym z elementów tzw.<A NAME="EDU.skorowidz.termin styl_programowania 19_162"></A> <b>stylu programowania</b>, czyli sposobu formatowania kodu tak by był przejrzysty.
+</div>
+<br>
+<p>Należy jednak pamiętać, że sposób formatowania kodu programu nie ma nic wspólnego
+z jego poprawnością składniową i semantyką. Żaden kompilator i żaden interpreter
+nigdy nie stara się odczytać intencji programisty na podstawie zastosowanych
+wcięć.<br>
+Np. jeżeli napiszemy:<br>
+<br>
+if  (a &gt; b) then  <br>
+        if ( c &gt; d) then  x = y;<br>
+else x = z;<br>
+<br>
+to być może - w intencji, dającej się odczytać z wcięcia else (podpisanie
+go pod pierwszym if) - miało to oznaczać wykonanie instrukcji else gdy warunek
+(a &gt; b) jest niespełniony.<br>
+Oczywiście tak się wcale nie stanie i else dotyczyć będzie drugiego if.<br>
+<br>
+
+<center><div class="important"> Wcięcia nie mają nic wspólnego z semantyką programu.</div>
+</center>
+
+<br>
+<p>Możemy zmieniać naturalne działanie pętli iteracyjnych za pomocą instrukcji:<br>
+<ul>
+  <li><A NAME="EDU.skorowidz.termin przerwanie_działania_pętli 19_163"></A> przerwania działania pętli</li>
+  <li><A NAME="EDU.skorowidz.termin kontynuacja_działania_pętli 19_164"></A> kontynuacji działania pętli<br>
+  </li>
+</ul>
+
+<div class="notel">W Javie służy temu instrukcja <b>break</b><br><br></div>
+
+<div class="ddd">Przerwanie działania pętli uzyskujemy w REXXie za pomocą instrukcji <b>leave</b> (opuść pętlę). Przerywana jest najbardziej wewnętrzna pętla, lub jeśli w instrukcji leave użyjemy etykiety (<b>leave <i>jakasEtykieta</i></b>) - pętla oznaczona tą etykietą.
+</div>
+
+<br clear="all">
+
+<p>Np.<br>
+
+<pre>
+do i = 1 to 100000
+   n = i * i;
+   if (n &gt; 20000) then leave;
+end
+say i n;
+</pre>
+
+<div class="listing25l">Wynik<br>
+142 20164
+</div>
+
+<p>Pętla wykonała się 142 razy (a nie 100000 jak wskazuje górna wartość
+licznika), ponieważ gdy n jest większe od 20000 przerywamy działanie pętli
+za pomocą instrukcji leave (sterowanie zostaje przekazane poza end kończące
+pętlę).<br>
+<br>
+Kontynuacja działania pętli polega na natychmiastowym przekazaniu sterowania na koniec pętli, co inicjuje nową iterację. <br><br>
+
+<div class="notel">W Javie mamy tu instrukcję <b>continue</b><br><br></div>
+
+<div class="ddd"><br>W Rexxie służy temu instrukcja <b>iterate</b> (tak samo jak leave może dotyczyć najbardziej wewnętrznej z zagnieżdżonych pętli lub pętli oznaczonej podaną etykietą).
+</div>
+
+<br clear="all">
+<p>Na przykład w poniższym programie wczytujemy z konsoli wszystkie wprowadzone
+przez użytkownika napisy, pomijając puste wiersze (np. spacje lub samo ENTER),
+łączymy je w jeden łańcuch znakowy i wyprowadzamy po wprowadzeniu przez użytkownika
+słowa quit, kończąc na tym działanie programu.<br>
+<br>
+
+<pre>
+out = '';
+
+do forever
+  txt = linein();
+  if ( txt = "" ) then iterate;
+  if ( txt = "quit" ) then leave;
+  out = out txt;
+end
+say out;
+</pre>
+
+<br>
+<div class="notel">W Javie taką nieskończoną pętlę możemy zapisać jako <b>while ( true )</b> {...}</div>
+
+<div class="ddd"><br>Warto tu zwrócić uwagę na składniową konstrukcję <b>do forever</b>, oznaczającą pętlę nieskończoną (wykonuje się wiecznie; oczywiście zawsze
+trzeba mieć jakiś sposób, warunek przerwania takiej pętli).
+</div>
+
+<br clear="all"><br>
+
+<p>Generalnie, warto szczególnie podkreślić problem właściwego kończenia wykonywania
+pętli iteracyjnych. Niezwykle często bowiem na skutek błędów w programie
+pętle nie kończą działania i program wykonuje się bez końca. Czasami jedynym
+sposobem jego zatrzymania jest zakończenie procesu z poziomu systemu operacyjnego.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index18.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index20.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

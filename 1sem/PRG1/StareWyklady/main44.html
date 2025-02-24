@@ -1,0 +1,438 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index43.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index45.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Wyjątkowa klasa String</div>
+
+<a name="W6.2"></a>
+
+<p>Oczywiście,<A NAME="EDU.skorowidz.termin łańcuch_znakowy 44_414"></A> łańcuchy znakowe są obiektami klasy<A NAME="EDU.skorowidz.termin String 44_415"></A> String, zatem wszystko co
+dotąd powiedziano o obiektach i referencjach dotyczy także obiektów klasy
+String.<br>
+
+
+Dodatkowo jednak, ponieważ<A NAME="EDU.skorowidz.termin operacja_na _łańcuchach_znakowych 44_416"></A> operacje na łańcuchach znakowych są w programowaniu
+dość częste, kompilator dostarcza nam tu pewnych udogodnień (specjalnych
+właściwości), które - niestety - powodują też trochę zamieszania pojęciowego.<br>
+<br>
+
+
+Powtórzmy sobie znowu. <br>
+
+
+Gdy napiszemy<br>
+<br>
+
+String napis;<br>
+<br>
+
+
+to w tym momencie  nie będzie jeszcze żadnego łańcucha znakowego, jedynie
+zmienną napis, która może zawierać referencję do obiektu (ale jeszcze nie
+zawiera).<br>
+<p>
+Tak jak w przypadku każdej innej klasy obiekty klasy String musimy
+bezpośrednio tworzyć.<br><br>
+
+
+<div class="notel33">
+Mówimy tu o "sztuczkach kompilatora", gdyż omawiane tu wyjątkowe właściwości
+klasy String są zapewnianie dzięki niewidocznemu dla programisty przekształceniu
+przez kompilator fragmentów kodu w inne (od zastosowanych) konstrukcje składniowe
+Javy</div>
+
+
+
+
+<div class="ddd"><br>
+Pierwsza <b>"sztuczka" kompilatora</b> polega na tym, że zamiast:<br><br>
+
+String s = new String("Ala ma kota");<br><br>
+
+możemy napisać:<br><br>
+
+String s = "Ala ma kota";
+</div>
+
+<br clear="all">
+
+<p>Zapis ten spowoduje:<br>
+<ul>
+<li>stworzenie obiektu klasy String z zawartością "Ala ma kota"</li><li>przypisanie referencji do tego obiektu zmiennej s</li>
+</ul>
+
+<p>
+Zatem, <b>wyjątkowo</b>, tworząc obiekty klasy String nie musimy używać wyrażenia new.<br>
+<br>
+<br><A NAME="EDU.skorowidz.termin konkatenacja_łańcuchów_znakowych 44_417"></A> 
+Innym (wyjątkowym) udogodnieniem przy korzystaniu z łańcuchów znakowych jest
+możliwość użycia operatora + w znaczeniu konkatenacji (łączenia łańcuchów
+znakowych).<br>
+
+
+Np.<br>
+
+<pre>
+String s1 = "Ala ma kota";
+String s2 = " szaroburego";
+String s3;
+s3 = s1 + s2;
+</pre>
+
+<p>
+spowoduje, że:<br>
+<ul>
+<li>wyrażenie s1 + s2 stworzy obiekt klasy String, który jest połączeniem napisów oznaczanych przez zmienne s1 i s2</li><li>referencja do nowoutworzonego obiektu zostanie przypisana zmiennej s3</li><li>s3 będzie teraz oznaczać napis "Ala ma kota szaroburego"<br></li>
+</ul>
+<br>
+
+<p>
+Takie zastosowanie operatora + jest wyjątkowe, gdyż (wizualnie) stosujemy
+go wobec referencji (np. s1 + s2), co jest niedozwolone. Ale <b>"druga sztuczka"</b>
+ kompilatora (i tylko kompilatora, bo definicja klasy String w żaden sposób
+nie umożliwia takiego zastosowania) powoduje, że możemy to zrobić.<br>
+<br>
+
+
+Co więcej, za pomocą operatora + do łańcuchów znakowych możemy dołączać innego
+rodzaju dane, np. liczby (a także dane reprezentujące obiekty dowolnych klas).
+<br>
+
+
+Na przykład:<br>
+<br>
+
+<pre>
+String s1 = "Ala ma kota";
+String s2 = " szaroburego";
+String s3;
+s3 = s1 + s2 + " w wieku " + 3 + " lat ";
+</pre>
+
+
+<p>Teraz zmienna s3 będzie oznaczać napis "Ala ma kota szaroburego w wieku 3 lat".<br>
+
+
+Oczywiście, nic nie stoi na przeszkodzie, by w konkatenacji zamiast literału 3 pojawiła się zmienna typu int o wartości 3. Np.<br>
+<br>
+
+
+int lata = 3;<br>
+
+
+...<br>
+
+
+s3 = s1 + s2 + " w wieku " + lata + " lat ";<br>
+<br>
+
+
+Zwróćmy uwagę, zmienna <b><i>lata</i></b> lub literał 3 w wyrażeniu konkatenacji
+łańcuchów znakowych są typu int. Przy opracowaniu wyrażenia (wyliczeniu jego
+wyniku) następuje przekształcenie wartości zmiennej lub literału (dziesiętne
+3, binarne 00000011 - to jest tzw. wewnętrzna reprezentacja wartości) w kod
+znaku Unicodu (dziesiętnie 33) i dzięki temu znak cyfry ('3') pojawi się
+w łańcuchu znakowym (znak cyfry 3 jest znakową reprezentacją wartości 3).<br>
+
+
+To samo dotyczy innych wartości numerycznych (typów float, double, itp.)<br>
+
+ Jest to trzecia sztuczka kompilatora, bowiem składnia języka nie umożliwia
+wykonywania takich przekształceń w innych niż przy okazji konkatenacji łańcuchow
+znakowych kontekstach.<br>
+<br>
+
+
+Jeśli w wyrażeniu konkatenacji łańcuchow znakowych wystąpi referencja do
+obiektu jakiejś klasy, to również obiekt (dane zawarte w obiekcie) zostaną
+przekształcone do postaci znakowej i dołączone do łańcucha. Znowu jest to
+udogodnienie ze strony kompilatora, ale sposób reprezentacji danych obiektu
+określa definicja klasy (jest to bardzo wygodna właściwość; o tym dlaczego
+i w jaki sposob jest możliwa i jak z niej korzystać - dowiemy się później).<br>
+<br>
+
+
+Na przykład jeśli napiszemy:<br>
+<br>
+
+
+Date data = new Date();<br>
+
+
+String s = "Teraz jest " + data;<br>
+<br>
+
+
+to zostanie utworzony obiekt klasy Date (jedna ze standardowych klas Javy;
+jej obiekty opisują daty), który "w środku" zawiera dane (w postaci binarnej)
+opisujące bieżącą datę i czas. Po konkatenacji, zmienna s będzie oznaczać
+napis, w którym data i czas są podane w postaci znakowej np. "Teraz jest
+: Mon Jul 01 05:55:25 CEST 2002".<br>
+<br><A NAME="EDU.skorowidz.termin operator_+ jako_operator_konkatenacji 44_418"></A> Należy także zwrócić uwagę na dwie ważne kwestie:<br>
+<br>
+
+
+<div class="notec"><b>Operator +</b> jest traktowany jako operator konkatenacji łańcuchów znakowych tylko wtedy, gdy jeden z jego argumentów jest typu String</div>
+
+<br>
+<p>
+
+
+Zatem np. takie fragmenty będą niepoprawne:<br>
+<br>
+
+
+String s = 1 + 3; <br>
+
+
+wynikiem prawej strony operatora przypisania jest liczba 4 (typ int), a danej
+typu int nie można podstawić na zmienną typu referencyjnego (którą jest s)<br>
+<br>
+
+
+int a = 1, b = 3;<br>
+
+
+String s = a + b;<br>
+
+
+j.w.<br>
+<br>
+
+<div class="notec">Przy konkatenacji należy baczną uwagę zwracać na kolejność opracowywania wyrażeń</div>
+
+<br>
+<p>
+
+
+Np.<br>
+<br>
+
+
+String s = "Nr " + 1 + 2;<br>
+<br>
+
+
+da napis "Nr 12", bo: najpierw zostanie wyliczone wyrażenie "Nr " + 1, co
+w wyniku da napis "Nr 1", po czym drugi operator + dołączy do tego napisu
+napis "2" (znakową wartość liczby 2). <br>
+<br>
+
+
+Natomiast:<br>
+<br>
+
+
+String s = 100 + " Nr " + (1 +2);<br>
+<br>
+
+
+da napis "100 Nr 3", bo:<br>
+<ul>
+<li>najpierw będzie opracowane wyrażenie 100 + " Nr " (jego wynik - napis " 100 Nr ")</li><li>następnie zostanie opracowane wyrażenie  1 + 2 (ponieważ nawiasy zmieniają
+kolejność opracowania wyrażeń), a jego wynikiem będzie liczba 3</li><li>
+w końcu zostanie zastosowany drugi operator +, który do wyniku pierwszego
+wyrażenia (napisu "100 Nr ") dołączy przeksztalconą do postaci znakowej wartość
+drugiego wyrażenia (liczbę 3)</li>
+</ul>
+<br>
+
+<p>
+Przy operowaniu na łańcuchach znakowych trzeba szczególnie pamiętać, że dostęp
+do nich uzyskujemy za pomocą referencji, co ma swoje konsekwencje przy operacjach
+porównania na równość - nierówność.<br>
+<br>
+
+
+Jeszcze raz:<br>
+<br>
+
+
+<div class="important"> Operatory równości (==) i nierówności (!=) zastosowane wobec zmiennych
+oznaczających obiekty , porównują referencje do obiektów, a nie zawartość
+obiektów</div>
+
+<br>
+<p>
+
+
+Zatem poniższy fragment:<br>
+<pre>
+String s1 = "Al";
+String s2 = "a";
+String s3 = s1 + s2;
+String s4 = "Ala";
+System.out.println(s3 + " " + s4);
+if (s3 == s4) System.out.println("To jest Ala");
+else System.out.println("To nie Ala"
+</pre>
+
+
+<p>wyprowadzi (wbrew intuicyjnym oczekiwaniom):<br>
+
+
+Ala Ala<br>
+
+
+To nie Ala<br>
+<br>
+
+
+Zwróćmy uwagę: zawartością obiektu oznaczanego przez s3 jest napis "Ala".<br>
+
+
+Również - zawartością obiektu oznaczanego przez s4 jest taki sam napis "Ala".<br>
+
+
+Ale porównanie obu zmiennych da wartość false, bo s3 wskazuje na inny obiekt niż s4.<br>
+
+
+Porównanie byłoby prawdziwe tylko wtedy, gdyby s3 wskazywało na ten sam obiekt co s4.<br>
+<br><A NAME="EDU.skorowidz.termin łańcuchy_znakowe porównywanie 44_419"></A> 
+<div class="important">Do porównywania łąńcuchów znakowych (ich zawartości) <b>nie należy</b> używać operatorów == i != </div>
+
+<br>
+<p>
+
+
+Zamiast operatorów == i != używamy metody (polecenia) equals.<br>
+<br>
+
+
+<div class="syntax">Aby porównać dwa napisy reprezentowane przez zmienne typu String s1 i s2 piszemy:<br>
+<br><A NAME="EDU.skorowidz.termin equals 44_420"></A> 
+<div align="Left">                s1.equals(s2)<br></div>
+<br>
+
+
+Aby porównać napis reprezentowany przez zmienną s typu String z literałem łańcuchowym piszemy:<br>
+<br>                s.equals(<i><b>literał_łańcuchowy</b></i>)<br>
+<br>
+
+
+Wynikiem jest wartość <b>true</b> jeśli oba napisy są takie same i <b>false</b> w przeciwnym razie.</div>
+
+<br>
+<p>
+
+
+Poniższy przykładowy program pokazuje różne niuanse operowania na łańcuchach znakowych.<br>
+
+<pre>
+public class Strings1 {
+
+  public static void main(String[] args) {
+
+    String napis = "Waga ";
+    double w = 10.234;
+    System.out.println(napis + w + " kg");
+
+    String txt = napis + w + 10 + " kg";
+    System.out.println(txt);               // dlaczego 10.23410?
+    txt = napis + (w + 10) + " kg";
+    System.out.println(txt);               // a tu  20.234?
+    txt = napis + w * 10 + " kg";          // w*10 bez nawiasów ?..
+    System.out.println(txt);               // ... i dobrze - dlaczego?
+                                           // (pomoc: priorytety operatorow)
+
+    String bzdura = "Bzdura";
+    bzdura = napis;
+    System.out.println(bzdura);  // dlaczego wyprowadzi "Waga " a nie "Bzdura"
+
+    txt = napis;
+    txt = txt + "Ali ?";
+    System.out.println(txt);      // a tu inaczej:
+    System.out.println(napis);    // dlaczego napis jest "Waga "?
+                                  // a nie "Waga Ali ?"
+
+    System.out.println( napis == bzdura );           // dlaczego true?
+    System.out.println( txt == napis );              // dlaczego false?
+    System.out.println( txt == "Waga Ali ?");        // dlaczego false?
+    System.out.println( txt.equals("Waga Ali ?") );  // dlaczego true?
+
+    // a teraz coś dziwnego:
+    napis = "Ala";
+    System.out.println( napis == "Ala");      // true czy false???
+
+  }
+}
+</pre>
+
+
+<div class="listing33r">Waga 10.234 kg<br>
+
+Waga 10.23410 kg<br>
+
+
+Waga 20.234 kg<br>
+
+
+Waga 102.34 kg<br>
+
+
+Waga<br>
+
+
+Waga Ali ?<br>
+
+
+Waga<br>
+
+
+true<br>
+
+
+false<br>
+
+
+false<br>
+
+
+true<br>
+
+
+true</div>
+
+<div class="ddd">
+<br>
+Działanie programu przedstawia wydruk (obok). Warto  zauważyć, że
+jako informację do wyprowadzenia przez println  (argument w nawiasach okrągłych)
+możemy podawać również wyrażenia (dodajmy, że dowolnego typu!). Fenomen ten
+wyjaśnimy sobie w następnych wykładach.<br><br>
+
+<b><font color="#ff0000">Proszę dokładnie przeanalizować tekst programu i przy okazji, odpowiadając
+na pytania zawarte w komentarzach, sprawdzić swoje rozumienie materialu wykladu.</font></b>
+</div>
+
+<br clear="all">
+<p>
+Ostatni fragment programu pokazuje kolejne "odchylenie" Javy od prostych
+reguł. Okazuje się oto, że wszystkie literały łańcuchowe mające ten sam tekst
+są jednym i tym samym obiektem. W instrukcji:   napis = "Ala"; jest tworzony
+nowy obiekt, zawierający napis "Ala". Przy każdym kolejnym użyciu literału
+"Ala" w miejsce literału podstawiona będzie referencja do tego obiektu (a
+nie do ew. nowotworzonego innego obiektu zawierającego napis "Ala"; taki obiekt nie będzie ponownie tworzony).<br>
+
+
+Dlatego ostatnie porównanie da wartość true.<br>
+<br>
+
+
+<div class="important">Jednak nie należy wykorzystywać tej właściwości języka i zawsze, zamiast operatora ==,  należy stosować polecenie equals</div>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index43.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index45.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

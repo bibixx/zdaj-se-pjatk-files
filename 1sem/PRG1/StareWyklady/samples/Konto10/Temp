@@ -1,0 +1,13 @@
+    while (true) {
+     String in = JOptionPane.showInputDialog("Stan Proc Doch Wyd Cel");
+     if (in == null) break;
+     StringTokenizer st = new StringTokenizer(in);
+     double bal = Double.parseDouble(st.nextToken());
+     double interest = Double.parseDouble(st.nextToken());
+     double doch = Double.parseDouble(st.nextToken());
+     double wyd = Double.parseDouble(st.nextToken());
+     double cel = Double.parseDouble(st.nextToken());
+
+     Account ac = new Account(bal, doch, wyd, interest);
+     int m = ac.getMonthsForBalance(cel);
+}

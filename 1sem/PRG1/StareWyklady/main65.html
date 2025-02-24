@@ -1,0 +1,380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index64.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 6"></A><div class="tytulpunktu">6. Struktura programu. Działanie aplikacji</div>
+
+<a name="W8.7"></a><A NAME="EDU.skorowidz.termin program struktura 65_555"></A> <p>
+Jak wiemy, program w Javie jest zestawem definicji klas.<br>
+<br><A NAME="EDU.skorowidz.termin aplikacja działanie 65_556"></A> 
+
+<div class="important">Poza ciałem klasy nie może być żadnego kodu programu - oprócz dyrektywy package, dyrektyw importu oraz komentarzy.</div>
+
+<br>
+<p>
+Strukturę programu obrazuje poniższy schemat.<br>
+
+<pre>
+package ...   // deklaracja pakietu (niekonieczna)
+import ...    // deklaracje importu; zwykle, ale nie zawsze potrzebne
+import ...
+
+
+// To jest klasa A
+
+public class A {
+...
+}
+
+
+// To jest klasa B
+
+class B {
+...
+}
+...
+
+
+</pre>
+
+<p>
+Dyrektywa package służy do "umieszczenia" kompilowanych klas w nazwanym pakiecie
+(w tym semestrze nie będziemy sią nią jednak zajmować). Znaczenie importów
+- poznaliśmy przed chwilą.<br>
+<br><A NAME="EDU.skorowidz.termin program w_Javie 65_557"></A> 
+Program  może być zapisany w jednym lub wielu<A NAME="EDU.skorowidz.termin plik_źródłowy 65_558"></A> plikach źródłowych (.java) <br>
+(w szczególności: wszystkie klasy składające się na program można umieścić
+w jednym pliku albo każdą klasę można umieścić w odrębnym pliku).<br>
+<br>
+Nie ma kodu poza klasą... A z drugiej strony wiemy też, że klasa jest swoistym
+wzorcem, szablonem określającym właściwości obiektów.<br>
+<br>
+Jak zatem możliwe jest w ogóle działanie programu napisanego w Javie? Gdzie i jak zaczyna się wykonanie?<br>
+Powtórzmy sobie najpierw to wszystko co już wiemy <br>
+<br>
+Oczywiście, najpierw jest kompilacja do B-kodu. <br>
+Wszystkie wybrane pliki żródłowe .java podlegają kompilacji za pomocą kompilatora
+Javy (javac.exe). Z każdej klasy w pliku(ach) źródłowym powstaje plik B-kodu
+o rozszerzeniu .class <br>
+<br>
+Mamy teraz trzy możliwości: albo nasz program jest aplikacją, albo apletem,
+albo serwletem. Zostańmy na razie przy pierwszej (dwie pozostałe omówimy
+w przyszłym semestrze). <br>
+ <br>
+Jeżeli nasz program jest aplikacją, to jedna z  klas musi zawierać metodę: <br>
+<br>
+   <A NAME="EDU.skorowidz.termin main 65_559"></A> <b>public static void main(String[ ] args) </b><br>
+<br>
+Np. spójrzmy na klasę Work i klasę Inna zdefiniowane w pliku Work.java <br>
+<br>
+public class Work { <br>
+ public static void main(String[] args) { <br>
+    ... <br>
+  } <br>
+... <br>
+} <br>
+class Inna { <br>
+... <br>
+} <br>
+  <br>
+// Koniec pliku Work.java <br>
+<br>
+Po kompilacji (javac Work.java) powstają dwa pliki: <br>
+Work.class <br>
+Inna.class <br>
+  <br>
+Maszyna wirtualna Javy jest wywołana za pomocą polecenia java z argumentami: <br>
+<ul>
+  <li>nazwa_pliku_class_zawierającego_metodę_main (bez rozszerzenia .class)</li>
+  <li>argumenty_wołania </li>
+</ul>
+<p>
+ java Work [ew. argumenty przekazywane do main jako String[ ] args] <br>
+<br>
+<b>Klasa Work zostaje załadowana przez JVM i sterowanie zostaje przekazane
+do metody main. W tej metodzie zaczyna się "życie": tworzenie obiektów, odwołania
+do innych klas aplikacji. <br>
+</b><br>
+Zauważmy jednak szczególnie jedną ważną rzecz: metoda main jest metodą statyczną.
+Wobec tego - działanie (jakiegoś) programu nie wymaga wcale by istniały lub
+były tworzone obiekty (o ile posługujemy się w metodzie main tylko zmiennymi
+typów pierwotnych).<br>
+Nawet jeśli posługujemy się obiektami (takimi jak łańcuchy znakowe) - nie
+musimy tworzyć obiektu klasy, w której zawarta jest metoda main.<br>
+<br>
+Takie podejście jest jednak możliwe tylko wtedy, gdy nasz program jest stosunkowo
+niewielki. Większe programy powinniśmy co najmniej dobrze strukturyzować
+(rozbić na funkcje - metody).<br>
+<br>
+Zobaczmy bardzo prosty przykład. Mamy trzy liczby i powinniśmy policzyć i
+wyprowadzić ich sumę oraz średnią, po czym wszystkie trzy liczby dwa razy
+zwiększyć o 1, za każdym razem wyprowadzając nową sumę i średnią.<br>
+<br>
+Bardzo złe rozwiązanie tego problemu może wyglądac tak.<br>
+
+<pre>
+public class Main1 {
+
+  public static void main(String[] args) {
+    double a = 12.0,
+           b = 14.0,
+           c =  4.0;
+    double sum = a + b + c;
+    double avg = (a + b + c)/3;
+    System.out.println("Suma " + sum);
+    System.out.println("Srednia " + avg);
+    a++;
+    b++;
+    c++;
+    sum = a + b + c;
+    avg = (a + b + c)/3;
+    System.out.println("Suma " + sum);
+    System.out.println("Srednia " + avg);
+    a++;
+    b++;
+    c++;
+    sum = a + b + c;
+    avg = (a + b + c)/3;
+    System.out.println("Suma " + sum);
+    System.out.println("Srednia " + avg);
+
+  }
+</pre>
+
+<p>
+Oczywiście na myśl przychodzi od razu podział programu na metody.<br>
+Być może, długo nie zastanawiając się napiszemy tak:<br>
+
+<pre>
+public class Main2 {
+
+ double sum(double a, double b, double c) {
+   return a + b + c;
+ }
+
+ double average(double a, double b, double c) {
+   return (a + b + c)/3;
+ }
+
+ void report(double a, double b, double c) {
+    System.out.println("Suma " + sum(a, b, c));
+    System.out.println("Srednia " + average(a, b, c));
+ }
+
+
+  public static void main(String[] args) {
+    double a = 12.0,
+           b = 14.0,
+           c =  4.0;
+    report(a, b, c);
+    a++;
+    b++;
+    c++;
+    report(a, b, c);
+    a++;
+    b++;
+    c++;
+    report(a, b, c);
+  }
+} 
+</pre>
+
+<p>Chociaż wielkość programu zmieniła się nieznacznie, to jednak klarowne wyodrębnienie
+pewnych powtarzalnych czynności w postaci metod czyni go bardziej czytelnym
+i elastycznym (latwiej modyfikowalnym).<br>
+Niestety, spotka nas rozczarowanie...<br>
+Kompilator zgłosi:<br><br>
+
+<div class="listing100"> <br>
+Main2.java:21: non-static method report(double,double,double) cannot be referenced from a static context<br>
+    report(a, b, c);<br>
+    ^<br>
+Main2.java:25: non-static method report(double,double,double) cannot be referenced from a static context<br>
+    report(a, b, c);<br>
+    ^<br>
+Main2.java:29: non-static method report(double,double,double) cannot be referenced from a static context<br>
+    report(a, b, c);<br>
+    ^<br>
+3 errors<br>
+</div>
+
+<br>
+<p>
+Aha, przecież metoda main jest statyczna! Nie możemy odwoływac się z jej
+wnętrza do niestatycznych składowych klasy Main2 (a taką jest metoda report).<br>
+<br>
+Gdy uczynimy ją statyczną:<br>
+<br>
+    <b>static void report(...)</b><br>
+<br>
+problem przeniesie się w inne miejsce: ze statycznej metody report nie możemy wywołać niestatycznych metod sum i average. <br>
+Możemy uczynić je wszystkie statycznymi - i wtedy nasz program zadziała.<br>
+Albo - pozostawiając wszystkie metody niestatycznymi  - w metodzie main utworzyć
+obiekt klasy i na jego rzecz wywołać metodę report().<br>
+Może to wyglądać tak:<br>
+
+<pre>
+public class Main3 {
+
+ double sum(double a, double b, double c) {
+   return a + b + c;
+ }
+
+ double average(double a, double b, double c) {
+   return (a + b + c)/3;
+ }
+
+ void report(double a, double b, double c) {
+    System.out.println("Suma " + sum(a, b, c));
+    System.out.println("Srednia " + average(a, b, c));
+  }
+
+
+  public static void main(String[] args) {
+    double a = 12.0,
+           b = 14.0,
+           c =  4.0;
+
+    Main3 m = new Main3(); // utworzenie obiektu
+    m.report(a, b, c);
+    a++;
+    b++;
+    c++;
+    m.report(a, b, c);
+    a++;
+    b++;
+    c++;
+    m.report(a, b, c);
+
+  }
+
+}
+</pre>
+
+<p>
+Ale skoro już tworzymy obiekt klasy, to nadajmy jej jakiś istotny sens. Na
+przykład - niech jej obiekty będą trójkami liczb rzeczywistych.<br>
+<br>
+
+<pre>
+public class Trojka {
+
+ double a, b, c;
+
+ Trojka(double x, double y, double z) {
+   a = x;
+   b = y;
+   c = z;
+ }
+
+ double sum() {
+   return a + b + c;
+ }
+
+ double average() {
+   return (a + b + c)/3;
+ }
+
+ void increase() {
+   a++;
+   b++;
+   c++;
+ }
+
+ void report() {
+    System.out.println("Suma " + sum());
+    System.out.println("Srednia " + average());
+  }
+
+
+  public static void main(String[] args) {
+    Trojka t = new Trojka(12, 14, 4);
+    t.report();
+    t.increase();
+    t.report();
+    t.increase();
+    t.report();
+  }
+
+}
+
+</pre>
+
+<p>
+Główna "procedura" main (zauważmy zresztą, że umieszczona w klasie Trojka;
+metoda main może przecież znajdowac się w dowolnej klasie) stała sie dzięki
+temu jeszcze bardziej klarowna, a cały program jeszcze łatwiejszy do modyfikacji
+i uzupełnień, bowiem dane (zmienne a, b, c - zdefiniowane jako pola) stały
+się teraz dostępne dla wszystkich metod klasy i jednocześnie zachowują swoje
+wartości pomiędzy wywołaniami metod, co wykorzystaliśmy definiując metodę
+increase(), zwiększającą o1  wszystkie trzy dane.<br>
+<br>
+Rozpatrując różne warianty strukturyzacji program warto podkreślić, że bardzo
+często obiekt klasy programu nie jest nam wcale potrzebny. "Praca" zapisywana
+jest w konstruktorze i w metodzie main (rozpoczynającej działanie programu)
+wystarczy samo wywołanie konstruktora. Czyni się tak szczegolnie często,
+gdy konstruktor tworzy graficzny interfejs użytkownika.<br>
+W naszym przypadku sumowania i uśredniania trzech liczb takie rozwiązanie jest raczej sztuczne, ale dla porządku można je podać.<br>
+
+<pre>
+public class Main4 {
+
+ double a = 12, b = 14, c = 4;
+
+ Main4() {
+   report();
+   increase();
+   report();
+   increase();
+   report();
+ }
+
+ double sum() {
+   return a + b + c;
+ }
+
+ double average() {
+   return (a + b + c)/3;
+ }
+
+ void increase() {
+   a++;   b++;   c++;
+ }
+
+ void report() {
+    System.out.println("Suma " + sum());
+    System.out.println("Srednia " + average());
+  }
+
+  public static void main(String[] args) {
+    new Main4();
+  }
+}
+</pre>
+
+<p>
+Zauważmy: <br>
+<ul>
+  <li>ponieważ odwołania do metod report i increase umieściliśmy w konstruktorze,
+to nie musimy specyfikowac obiektu do którego się odnoszą (niejawnie jest
+to obiekt oznaczany przez <i><b>this</b></i>)</li>
+  <li>metoda main służy tylko do utworzenia obiektu (i wywołania konstruktora);
+niepotrzebna jest nam tu żadna do niego referencja - dlatego wynik opracowania
+wyrażenia new nie podstawiamy na żadną zmienną.<br>
+  </li>
+</ul><p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index64.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

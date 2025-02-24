@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index52.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index54.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 4"></A><div class="tytulpunktu">4. Definiowanie sposobu tworzenia obiektów (konstruktory)</div>
+
+<a name="W7.4"></a>
+
+<p>Specjalną operacją jest operacja tworzenia obiektu. <br>
+<br><A NAME="EDU.skorowidz.termin wyrażenie_new 53_489"></A> Jak wiemy, wykonywana jest ona za pomocą wyrażenia<A NAME="EDU.skorowidz.termin new 53_490"></A> new. <br>
+Okazuje się, że to co w nim zapisujemy oznacza wywołanie <b>konstruktora</b> klasy.<br>
+<br><A NAME="EDU.skorowidz.termin konstruktor 53_491"></A> 
+<div class="important">Konstruktor służy (głównie) do inicjowania pól obiektów.<br>
+O konstruktorze można myśleć jako o specjalnej metodzie, która:<br>
+<ul>
+  <li>zawsze ma nazwę taką samą jak nazwa klasy</li>
+  <li>nie ma żadnego typu wyniku (nawet void!)</li>
+  <li>ma listę parametrów (w szczególności może być pusta)<br>
+  </li>
+</ul>
+</div>
+
+<br>
+<p>
+Podobnie jak przy definicji metod - w definicji konstruktora możemy podać
+specyfikator dostępu, który określa czy konstruktor może być wywołany spoza
+klasy.<br>
+<br>
+
+<div class="syntax">Postać definicji konstruktora:<br>
+    <br>
+[ <b>public</b>] class nazwa_klasy {<br>
+<br>
+    // Definicja konstruktora<br>
+    [ specyfikator_dostępu ] nazwa_klasy(lista_parametrów) {<br>
+        // czynności wykonywane przez konstruktor<br>
+    }          <br>
+}<br>
+</div>
+
+<br>
+<p>
+W klasie Para możemy mieć np. takie konstruktory: <br>
+<br>
+
+<pre>
+public class Para {
+  private int a;
+  private int b;
+
+  public Para(int x, int y) {  // Nadaje polom a i b wartości
+    a = x;                     // przekazane konstruktorowi jako
+    b = y;                     // argumenty
+  }
+  ...
+}
+</pre>
+
+<p>
+albo: <br>
+<br>
+
+<pre>
+public class Para {
+   private int a, b;
+   public Para(int x) {    // Konstruktor ma jeden parametr:
+      a = x;               // oba pola są nim inicjowane
+      b = x;
+   }
+...
+}
+</pre>
+
+<p>
+<a href="javascript:popUp('dodatki/W7Prb4.htm', 50, 50)"><img src="images/Problem.jpg" alt="Problem" width="137" hspace="15" height="84" border="1" align="Right"></a>Możemy też w tej samej klasie mieć kilka konstruktorów,
+które różnią się listą parametrów (np. oba w/w konstruktory w klasie Para).
+Jest to jak gdyby odpowiednik przeciążania metod.</p>
+
+<br>
+<p>Mając tak zdefiniowane dwa konstruktory w klasie Para, możemy teraz łatwo tworzyć obiekty-pary o zadanych wartościach np.<br>
+<br>
+Para p1 = new Para(10,11);  // para 10, 11<br>
+Para p2 = new Para(2);         // para 2, 2<br>
+<br>
+<br>
+
+<div class="important">Konstruktory zawsze są wywoływane za pomocą wyrażenia new</div>
+
+<br>
+<p>
+Szczególnym rodzajem konstruktora jest<A NAME="EDU.skorowidz.termin konstruktor bezparametrowy 53_492"></A> konstruktor bezparametrowy.<br> Jest
+on automatycznie dodawany do definicji klasy, gdy nie zdefiniowano żadnego
+konstruktora (przy czym jego ciało jest puste). Zatem jeśli nie dostarczymy
+w klasie żadnego konstruktora, to przy tworzeniu obiektu zostanie wywołany
+automatycznie dodany konstruktor bezparametrowy (który nie robi nic). <br>
+<br>
+Uwaga: konstruktor bezparametrowy nie jest dodawany, gdy w klasie zdefiniowano jakikolwiek konstruktor.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index52.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index54.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

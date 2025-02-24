@@ -1,0 +1,468 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index108.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index110.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 4"></A><div class="tytulpunktu">4. Wyjątki</div>
+
+<a name="W14.4"></a>
+
+<p>Jak wiemy, programowanie w Javie sprowadza się tak naprawdę do tworzenia
+obiektów i wywoływania na ich rzecz metod (albo też - gdy nie mamy obiektów
+- wywoływania metod statycznych). W trakcie wykonania metody może powstać
+jakiś błąd. <br>
+W wielu innych językach (np. w C czy C++) błędy powstają w trakcie wykonywania funkcji. <br>
+Informacja o tym, że wystąpił błąd winna być dostępna dla innych (korzystających
+z danej funkcji czy metody) części programu i służyć powinna do odpowiedniego
+reagowania na powstały błąd np. poinformowania użytkownika o błędzie lub
+próby jego poprawienia (poprzez zmianę jakichś wartości) bądź też do przerwania
+programu.<br><A NAME="EDU.skorowidz.termin obsługa_błędów 109_758"></A> Sposoby w jaki błędy są sygnalizowane innym częściom programu, a także  decyzje
+i działania, które programista zapisuje w programie jako reakcje na powstałe
+błędy nazywają się <b>obsługą błędów</b>.<br>
+</p>
+
+<p><A NAME="EDU.skorowidz.termin obsługa_błędów tradycyjna 109_759"></A> Tradycyjna obsługa błędów (a raczej ich sygnalizowanie)  polegało na:</p>
+
+<ul>
+<li>zwracaniu przez funkcję wartości true | false | int, świadczących o tym,
+czy wykonanie zakończyło się sukcesem, czy też powstał błąd (i jaki ew. jest
+jego kod),</li><li> ustawianiu przez funkcję, w trakcie wykonania której
+pojawił się błąd, flag błędów, dostępnych z innych funkcji (w Javie flagi
+takie moglibyśmy definiować jako pola klasy).</li>
+</ul>
+
+<p>Problemy, które występują przy takim podejściu:
+
+<ul>
+<li>
+trzeba pamiętać, żeby sprawdzić, czy wystąpił błąd (np. pamiętać o sprawdzeniu wyniku metody),</li><li>
+nie ma standardowych, zunifikowanych środków sygnalizowania błędów i różni programiści robią to w różny sposób,</li><li>
+można pominąć sprawdzanie czy wystąpił błąd.</li>
+</ul>
+
+<p>W Javie (poszerzającej doświadczenia języka C++) zaproponowany nowy sposób obsługi<br>
+ błędów - za pomocą obsługi wyjątków.<br>
+</p>
+<p><A NAME="EDU.skorowidz.termin wyjątek 109_760"></A> 
+<div class="def">Wyjątek - to sygnał o błędzie w trakcie wykonania programu</div>
+
+</p>
+<p>Wyjątek powstaje na skutek jakiegoś nieoczekiwanego błędu.
+<br>Wyjątek jest <b>zgłaszany</b> (lub mówiąc inaczej - sygnalizowany).
+<br>Wyjątek jest (może lub musi być) <b>obsługiwany</b>.</p><A NAME="EDU.skorowidz.termin obsługa_wyjątku schemat 109_761"></A> 
+
+<div class="notec">Prosty schemat obsługi wyjątków<br>
+<br>
+    <b>try {</b><br>
+        //<A NAME="EDU.skorowidz.termin blok_try 109_762"></A> ... w bloku <b>try</b> ujmujemy instrukcje, które mogą spowodować wyjątek
+<br>
+    }<A NAME="EDU.skorowidz.termin catch 109_763"></A> catch(<i><b>TypWyjątku</b></i> exc)  { <br>
+        // ... w klauzuli catch umieszczamy obsługę wyjątku<br>
+    } <br>
+     <br>
+Gdy w wyniku wykonania instrukcji w bloku try powstanie wyjątek typu <i><b>TypWyjątku</b></i>  to sterowanie zostanie przekazane do kodu umieszczonego w w/w klauzuli catch<br>
+</div>
+
+<br>
+
+<p>
+Przykłady.<br>
+<br>
+a) Brak jawnej obsługi wyjątku - powstały błąd (wyjątek) powoduje zakończenie
+programu, a JVM wypisuje komunikat o jego przyczynie.<br>
+
+<pre>
+public class NoCatch {
+
+  public static void main(String[] args) {
+    int a = 1, b = 0, c = 0;
+    c = a/b;
+    System.out.println(c);
+  }
+
+}
+</pre>
+
+<br>
+
+<div class="listing100">
+Exception in thread "main" java.lang.ArithmeticException: / by zero<br>
+        at NoCatch.main(NoCatch.java:6)<br>
+</div>
+
+<br>
+<p>
+b) Zabezpieczamy się przed możliwymi skutkami całkowitoliczbowego dzielenia przez zero, obsługując<A NAME="EDU.skorowidz.termin ArithmeticException 109_764"></A> wyjątek ArithmeticException<br>
+<br>
+
+<pre>
+public class Catch1 {
+
+  public static void main(String[] args) {
+    int a = 1, b = 0, c = 0;
+    String wynik;
+    try {
+      c = a/b;
+      wynik = "" + c;
+    } catch (ArithmeticException exc) {
+        wynik = "***";
+    }
+    System.out.println(wynik);
+  }
+
+}
+</pre>
+
+<p>
+W tym przypadku, wykonanie instrukcji c = a/b; spowoduje powstanie wyjątku
+(dzielenie przez zero), a ponieważ instrukcja ta znajduje się w bloku try,
+do którego "podczepiona" jest klauzula catch z odpowiednim typem wyjątku,
+to sterowanie zostanie przekazane do kodu w catch, zmienna wynik uzyska wartość
+"***", i wynik ten zostanie wyprowadzony na konsolę. Gdyby zmienna b nie
+miała wartości zero, wyjątek by nie powstał, kod w klauzuli catch nie został
+by wykonany i na konsolę wyprowadzony by został wynik dzielenia a/b.<br>
+<br>
+Mechanizm obsługi wyjątków może być wykorzystywany w bardzo różny i elastyczny sposób.<br>
+Typowym przykładem jest<A NAME="EDU.skorowidz.termin weryfikacja_wprowadzanych_przez_użytkownika_danych 109_765"></A> weryfikacja wprowadzanych przez użytkownika danych.<br>
+Wielokrotnie w dotąd omawianych przykładowych programach żądaliśmy od użytkownika
+wprowadzania liczb całkowitych, a następnie za pomocą metody parseInt
+przeksztalcaliśmy ich znakową reprezentację na binarną. Jak wiemy, jeśli
+przy tym wprowadzony napis nie reprezentuje liczby całkowitej, to powstaje
+wyjątek<A NAME="EDU.skorowidz.termin NumberFormatException 109_766"></A> NumberFormatException. Powinniśmy go zawsze obsługiwać.<br>
+Możemy więc teraz  zmodyfikować np. program wykonywania operacji arytmetycznych na liczbach całkowitych:<br>
+
+<pre>
+import java.util.*;
+import javax.swing.*;
+
+public class Oper {
+
+  public static void main(String[] args) {
+
+    String normalQuest = "Liczba1 op Liczba2",
+           errorQuest = "Wadliwe dane. Jeszcze raz.\n" + normalQuest,
+           quest = normalQuest;
+
+    String expr;
+    int num1 = 0, num2 = 0, res = 0;
+
+    while ((expr = JOptionPane.showInputDialog(quest)) != null) {
+
+      StringTokenizer st = new StringTokenizer(expr);
+
+      if (st.countTokens() != 3) {
+          quest = errorQuest;
+          continue;
+      }
+
+      String snum1 = st.nextToken(),
+             sop  = st.nextToken(),
+             snum2 = st.nextToken();
+
+     <font color="#3366ff"><b> try {
+        num1 = Integer.parseInt(snum1);
+        num2 = Integer.parseInt(snum2);
+      } catch (NumberFormatException exc) {
+          quest = errorQuest;
+          continue;</b>
+      <b>}</b></font>
+
+      char op = sop.charAt(0);
+
+      switch (op) {
+        case '+' : res = num1 + num2; break;
+        case '-' : res = num1 - num2; break;
+        case '*' : res = num1 * num2; break;
+        case '/' : res = num1 / num2; break;
+        default: {
+          quest = errorQuest;
+          continue;
+        }
+      }
+      JOptionPane.showMessageDialog(null, "Wynik = " + res);
+      quest = normalQuest;
+    }
+    System.exit(0);
+
+  }
+
+}
+</pre>
+
+<p>
+A cóż to jest NumberFormatException albo ArithmeticExcception? I dlaczego
+w klauzuli catch używamy takich nazw z dodatkiem czegoś, co wygląda jak zmienna np. catch (NumberFormatException exc) ...<br>
+
+<br><A NAME="EDU.skorowidz.termin wyjątek 109_767"></A> Otóż <b>wyjątki są obiektami<A NAME="EDU.skorowidz.termin klasa_wyjątków 109_768"></A> klas wyjątków</b>.<br><br>
+
+
+<div><img src="images/jexcept.gif" hspace="15" height="428" width="553" alt="r" border="1"></div>
+<p><b><font size="-1">            
+(Żródło: Peter Haggar, Java Exception Handling, IBM 1999)</font></b>
+
+<p>Zatem nazwy NumberFormatException, ArithmeticException itd. sa nazwami
+klas, a zmienna exc we wczesniejszych przykładach jest faktycznie zmienną
+- zawiera referencję do obiektu odpowiedniej klasy wyjątku.</p>
+
+<p>Wobec tej zmiennej możemy np. użyć metody toString() uzyskując jako wynik
+jej zastosowania opis wyjątku, taki jaki daje JVM, gdy wyjątek jest nieobsługiwany.
+<br>
+<br>
+Nie zawsze jednak możemy uniknąć obsługi wyjątku. <br><A NAME="EDU.skorowidz.termin wyjątki_kontrolowane 109_769"></A> <p><b>WYJĄTKI KONTROLOWANE I<A NAME="EDU.skorowidz.termin wyjątki_niekontrolowane 109_770"></A> NIEKONTROLOWANE</b></p>
+
+<ul>
+<li>
+Są dwa rodzaje wyjątków: <b>kontrolowane</b> i <b>niekontrolowane</b></li>
+
+<li><A NAME="EDU.skorowidz.termin RuntimeException 109_771"></A> Wyjątki pochodne od klas RuntimeException i<A NAME="EDU.skorowidz.termin Error 109_772"></A> Error są niekontrolowane:</li><ul><li>
+oznaczają one błędy fazy wykonania (mniej poważne i poważne),</li>
+<li>
+mogą wystąpić w dowolnym miejscu kodu.</li></ul>
+<li>
+Pozostałe wyjątki są kontrolowane, co oznacza, że:</li><ul><li>
+metody zgłaszające te wyjątki wymieniają je jawnie w swojej deklaracji
+w<A NAME="EDU.skorowidz.termin klauzula_throws 109_773"></A> klauzuli <b>throws,</b></li><li>
+metody te mogą zgłaszać tylko wymienione w klauzuli <b>throws</b> 
+wyjątki lub wyjątki ich podklas,</li><li>
+odwołania do tych metod wymagają jawnej obsługi ew. zgłaszanych wyjątków:</li><ul><li>
+poprzez konstrukcje try - catch,</li><li>
+poprzez wymienienie wyjątku w klauzuli <b>throws</b> naszej metody (tej która
+odwołuje się do metody, która może zgłosić wyjątek) i "przesunąć" obsługę
+wyjątku do miesca wywołania naszej metody.</li></ul></ul>
+</ul>
+
+<p>Wiele razy natkniemy się na sytuację, w której musimy obslugiwać wyjątki, które mogą powstać
+ przy wywołaniau jakichś metod ze standardowych klas Javy. Jeśli tego nie
+zrobimy, kompilator wykaże błąd w programie. Sytuacja taka dotyczy, na przykład,
+metod ze standardowego pakietu  java.io, zawierającego klasy do operowania
+na strumieniach danych (m.in. plikach).</p>
+<p>Przykład (jeśli okaże się niezrozumiały, proszę wrócić do niego po lekturze następnego punktu - o plikach) :</p>
+
+<p>
+ String inFname = ...;  // nazwa pliku wejściowego<br>
+ String outFname = ... ; // nazwa pliku wyjściowego<br>
+
+
+ FileInputStream in;
+       // pik wejściowy<br>
+ FileOutputStream out;     // plik wyjściowy
+
+<br>
+ try {
+<br>
+   in  = new FileInputStream(inFname);
+<br>
+   out = new FileOutputStream(outFname);
+<br>
+   int c = 0;
+<br>
+   while ((c = in.read()) != -1) out.write(c);   // czytanie <i><b>in</b></i> bajt po bajcie<br>
+                                                                // zapis kolejnych bajtów do <i><b>out
+</b></i>
+<br>
+<br>
+ } catch(FileNotFoundException exc) {
+ // obsługa błędu:  nieznany plik<br>
+     System.out.println("Plik " + inFname + " nie istnieje.");
+<br>
+     System.exit(1);
+
+<br>
+ }<br>
+ } catch(IOException exc) {
+  // obsługa błędu:  inny błąd wejścia-wyjścia<br>
+     System.out.println(exc.toString());
+// <br>
+     System.exit(1);<br>
+ }  <br>
+
+<p>Gdybyśmy napisali metodę kopiującą strumienie i nie obsługiwali w niej
+wyjątków wejścia-wyjścia - to musielibyśmy zaznaczyć, że przy wywołanie takiej
+metody moga powstać wyjątki klasy IOException: </p>
+<p>public static void copyStream(InputStream in, OutputStream out)
+<br>             
+<b><font color="#3333ff">throws IOException</font></b> {
+</p>
+<p>  int c = 0;
+<br>  while ((c = in.read()) != -1) out.write(c);
+<br>}
+</p>
+<p>a obsługa wyjątku IOException, który może powstać przy wywołaniu read() musiałaby
+być prowadzona w miejscu wywołania metody copyStream(...):
+</p>
+<p>try {
+<br>   .....
+<br>   copyStream(in, out);
+<br>} catch(IOException exc) { ...  } </p>
+<p><br>
+Warto zwrócić w tym momencie uwagę na to, że w poprzednim przykładzie pojawiło
+się kilka klauzuli catch odpowiadających jednemu blokowi try.<br> </p>
+<p></p><A NAME="EDU.skorowidz.termin try-catch sekwencja_działania 109_774"></A> <p><b>SEKWENCJA DZIAŁANIA try-catch</b></p>
+
+<ul>
+<li>
+Wykonywane są kolejne instrukcje bloku try.</li><li>
+Jeśli w którejś instrukcji wystąpi błąd (na skutek czego powstanie wyjątek), wykonanie bloku try jest przerywane <b>w miejscu wystąpienia błędu</b>.</li><li>
+Sterowanie przekazywane jest do <b>pierwszej w kolejności</b> klauzuli
+catch, w której podana w nawiasach okrągłych po słowie catch klasa wyjątku <b>pasuje</b> do typu powstałego wyjątku:</li><ul><li>
+Stąd ważny wniosek: <b>najpierw podawać BARDZIEJ SZCZEGÓŁOWE TYPY WYJĄTKÓW </b>np. najpierw FileNotFoundException, a później IOException, bo klasa FileNotFoundException jest pochodna od IOException</li></ul><li>
+Inne klauzule catch nie są wykonywane.</li><li>
+Obsługująca wyjątek klauzula catch może zrobić wiele rzeczy: m.in. zmienić
+sekwencję sterowania (np. poprzez return lub zgłoszenie nowego wyjątku
+za pomocą instrukcji <b>throw</b>). Jeśli nie zmienia sekwencji sterowania
+to wykonanie programu jest kontynuowane od następnej instrukcji <b>po bloku</b> try.</li>
+</ul><A NAME="EDU.skorowidz.termin finally klauzula 109_775"></A> <p><br><b>KLAUZULA FINALLY</b></p>
+
+<p>Klauzula finally służy do wykonania kodu niezależnie od tego czy wystąpił
+wyjątek czy nie.
+</p>
+<p>boolean metoda(...) {
+<br>try {
+<br>       // instrukcje, które mogą spowodować
+wyjątek
+<br>}
+<br>catch(Exception e) {  return false; }
+<br>finally {
+<br>       // uporządkowanie, np. zamknięcie
+pliku
+<br>       }
+<br>return true;
+<br>}
+</p>
+<p>Jeśli powstał wyjątek - wykonywana jest klauzula catch.
+<br>Mimo, iż zmienia ona sekwencję sterowania (zwraca false na znak, iż
+nastąpiło niepowodzenie), sterowanie przekazywane jest do klauzuli finally.
+I dopiero potem zwracany jest wynik - false.
+<br>Jeśli nie było wyjątku, po zakończeniu instrukcji w bloku try sterowanie
+od razu wchodzi do klauzuli finally, a po jej zakończeniu zwracany jest
+wynik true (wykonywana jest ostatnia instrukcja metody).
+<br> 
+</p>
+<p></p><A NAME="EDU.skorowidz.termin wyjątek własny 109_776"></A> <p><b>WŁASNE WYJĄTKI</b></p>
+
+<p><A NAME="EDU.skorowidz.termin Throwable 109_777"></A> Wyjątki są obiektami klas pochodnych od Throwable.
+<br>Żeby stworzyć własny wyjątek należy zdefiniować odpowiednią klasę.
+<br><A NAME="EDU.skorowidz.termin Exception 109_778"></A> Zgodnie z konwencją dziedziczymy podklasę Throwable - klasę Exception.
+</p>
+<p>class NaszWyj extends Exception {
+<br>...
+<br>}
+</p>
+<p>Zwykle w naszej klasie wystarczy umieścić dwa konstruktory: bezparametrowy
+oraz z jednym argumentem typu String (komunikat o przyczynie powstania wyjątku).
+W konstruktorach tych nalezy wywołać konstruktor nadklasy (za pomocą odwołania
+<b>super(...)</b>, w drugim przypadku z argumentem String).
+</p>
+<p>Użycie wyjątku:
+</p><A NAME="EDU.skorowidz.termin instrukcja_throw 109_779"></A> 
+<ul>
+<li>
+jakaś nasza metoda ma sygnalizować wyjątek NaszWyj -- musi podać w deklaracji,
+że może to zrobić:</li><ul><li>
+void naszaMetoda() <b>throws </b>NaszWyj</li></ul><li>
+nasza metoda sprawdza warunki powstania błędu</li><li>
+jeśli jest błąd - tworzy wyjątek (new NaszWyj(...)) i sygnalizuje go za
+pomocą instrukcji <b>throw</b> :</li><ul><li>
+throw new NaszWyj(ew_param_konstruktora_z_info_o_błędzie)</li></ul>
+</ul>
+
+<p>
+Poniższy przykład ilustruje wyżej powiedziane.<br>
+W klasie ZipAsk zdefiniowano metodę wprowadzania kodu pocztowego (getZip).
+W metodzie tej sprawdzana jest poprawność struktury wprowadzonego kodu (nn-nnn,
+gdzie n - cyfry). Jeżeli kod nie jest poprawny, zgłaszany jest wyjątek własnej
+klasy NotValidZipException. Metoda main klasy ZipAskTest służy do przetestowania
+działania: obsługujemy w niej wyjątek NotValidZipException, zmuszając użytkownika
+programu do wprowadzenia trzech poprawnych kodów (lub ew. rezygnacji z działania
+poprzez wybór Cancel w dialogu).<br>
+<br>
+
+<pre>
+ import javax.swing.*;
+
+class NotValidZipException extends Exception {   // Klasa wyjątku
+
+    NotValidZipException() {
+      super();
+    }
+
+    NotValidZipException(String s)  {
+      super(s+ "\nPoprawny kod ma postać: nn-nnn");
+    }
+}
+
+
+public class ZipAsk {
+
+ public ZipAsk() { }
+
+ public String getZip() throws NotValidZipException {
+
+    final int N = 6,        // długość kodu
+              P = 2;        // pozycja na której występuje kreska
+
+    String zip = JOptionPane.showInputDialog("Podaj kod pocztowy:");
+    if (zip == null) return zip;
+
+    boolean valid = true;   // czy kod poprawny?
+
+    char[] c = zip.toCharArray(); // tablica znaków w podanym kodzie
+
+    // jeżeli struktura wadliwa: nie ta długość, brak kreski
+    if (c.length != N || c[P] != '-') valid = false;
+
+    // czy w kodzie występują tylko cyfry?
+    for (int i = 0; i&lt;N &amp;&amp; valid; i++) {
+         if (i==P) continue;
+         if (!Character.isDigit(c[i])) valid = false;
+         }
+    // w tej chwili wiemy już, czy kod jest poprawny
+    // jeśli nie:
+    // - tworzymy i zgłaszamy wyjątek
+    if (!valid) throw new NotValidZipException("Wadliwy kod: " + zip);
+
+    // w przeciwnym razie zwracamy kod
+    return zip;
+    }
+}
+
+class ZipAskTest {
+
+  public static void main(String[] args) {
+
+    JOptionPane.showMessageDialog(null, "Podaj trzy prawidłowe kody pocztowe");
+
+    ZipAsk zask = new ZipAsk();
+    String zip = null;
+    int n = 3;
+
+    while (n &gt; 0) {
+      try {
+        zip = zask.getZip();
+        if (zip == null) break;
+        n--;
+      } catch (NotValidZipException exc) {
+          JOptionPane.showMessageDialog(null, exc.getMessage());
+          continue;
+      }
+      System.out.println("Kod " + (3-n) + " : " + zip);
+    }
+    System.exit(0);
+
+  }
+
+} </pre><p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index108.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index110.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

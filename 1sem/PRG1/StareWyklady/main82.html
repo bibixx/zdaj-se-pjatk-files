@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index81.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index83.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 3"></A><div class="tytulpunktu">3. Pętle iteracyjne o danej liczbie powtórzeń: instrukcja for</div>
+
+<a name="W10.3"></a><A NAME="EDU.skorowidz.termin pętle_iteracyjne_o_danej_liczbie_powtórzeń 82_619"></A> 
+<p>Instrukcja for ma następującą postać.<br>
+<br>
+
+<div class="syntax"><br>
+<b>            for</b> (<b><i>init</i></b>; <b><i>wyr</i></b>; <b><i>upd</i></b>) <b><i>ins</i></b><br>
+
+gdzie:<br>
+<ul>
+  <li>część init -  może nie występować albo może być deklaracją jednej lub
+wielu zmiennych lub wyrażeniem lub listą wyrażeń rozdzielonych przecinkami.</li>
+  <li>część wyr - jest wyrażeniem o wartości typu boolean (lub może nie występować),</li>
+  <li>część upd  - jest wyrażeniem lub listą wyrażeń rozdzielonych przecinkami (lub może nie występować).</li>
+  <li>ins - jest instrukcją wykonywaną w pętli (w szczególności może to być instrukcja grupująca)</li>
+</ul>
+  </div>
+
+<p><A NAME="EDU.skorowidz.termin instrukcja_for 82_620"></A> Instrukcja for tworzy pętlę, która działa w następujący sposób:<br>
+<ol>
+  <li>Opracowywana jest deklaracja lub lista wyrażeń w części <i><b>init</b></i>  (jeśli występuje).</li>
+  <li>Wyliczane jest wyrażenie <i><b>wyr</b></i>. Jeżeli jego wartość równa jest false, to instrukcja for kończy działanie, w przeciwnym razie (lub gdy <i><b>wyr</b></i> jest pominięte) działanie instrukcji for jest kontynuowane (krok 3).</li>
+  <li>Wykonywana jest instrukcja <i><b>ins</b></i> (jeśli jest to instrukcja
+grupująca i w jej "środku" znajduje się instrukcja break lub return  przekazująca
+sterowanie poza blok tej instrukcji grupującej, to instrukcja for kończy
+działanie) </li>
+  <li>Obliczane są  wyrażenia w części <i><b>upd</b></i> (jeśli występuje). Działanie jest wznawiane od kroku 2.</li>
+</ol>
+
+<p>
+Porównując instrukcję for z instrukcją while można wskazać, że taki sam efekt jak za pomocą instrukcji:<br>
+                        for (init; wyr; upd)  <br>
+możemy uzyskać zapisując następujący fragment za pomocą instrukcji while:
+<pre>
+init;
+while (wyr) {
+  ins;
+  upd;
+}
+</pre>
+
+<br>
+
+<div class="notel">Dobry styl programowania nakazuje używać instrukcji for wyłącznie w tym
+celu.</div>
+
+<div class="ddd"><br>
+Najprostsze zastosowanie ma instrukcja for przy organizacji pętli
+iteracyjnych ze znanym zakresem iteracji. W tym przypadku częśc init inicjuje
+licznik, wyrażenie wyr kontroluje granice licznika, część upd zmienia bieżącą
+wartość licznika.
+</div>
+<br clear="all">
+
+
+<p>
+Krótkie przykłady<br>
+
+<br>
+int n = ...;<br>
+int sum = 0;<br>
+for (int i = 1; i &lt;= n; i++) sum += i;<br>
+<br>
+(sumuje n pierwszych dodatnich liczb całkowitych)<br>
+<br>
+for (int i = 2; i &lt;= n; i+=2) sum += i;<br>
+<br>
+(sumuje n pierwszych dodatnich liczb parzystych)<br>
+<br>
+for (int i = 1000; i  &gt;= 990; i--) System.out.println(i);<br>
+<br>
+(wyprowadza na konsolę kolejne liczby od 1000 do 990)<br>
+<br>
+for (char c = 'a';  c &lt;= 'z';  c++) System.out.print(c);<br>
+<br>
+(wyprowadza na konsolę kolejne małe litery od a do z)<br>
+
+<br>
+W części init może wystąpić deklaracja kilku zmiennych (ale jedna deklaracja, zatem muszą być to zmienne tego samego typu). Np.<br>
+<br>
+for (int i =1, j = 2; i &lt;=n &amp;&amp; j &lt;= m; i++, j++)  System.out.println(i+j);<br>
+<br><A NAME="EDU.skorowidz.termin zasięg_zmiennych_deklarowanych_w_części_inicjacyjnej_instrukcji_for 82_621"></A> 
+<div class="important">Zasięg zmiennych deklarowanych w części inicjacyjnej  instrukcji for zaczyna się od miejsca deklaracji i <b>kończy wraz z końcem instrukcji for</b></div>
+
+<br>
+<p>
+Obrazuje to poniższy rysunek:<br><br>
+
+<div>
+<img src="images/insfor10.jpg" alt="Rys" width="447" height="144" border="1">
+</div>
+
+<br><p>
+Na przykład:<br>
+int a =0, n = 10;<br>
+for (int i = 0; i &lt; n; i++) a += i;<br>
+for (int j = i; j &lt; n*2; j++) a+=j; &lt;--- <b><font color="#ff6600">błąd!</font></b> zmienna <i><b>i</b></i> jest nieznana<br>
+<br>
+System.out.println(i);  &lt;--- <b><font color="#ff6600">błąd!</font></b> zmienna <i><b>i</b></i> jest nieznana<br>
+<br>
+for (int i = n; i&lt; n*2; i++) a+=i;  &lt;--- OK, nowa zmienna i<br>
+<br>
+for (int i = 0; i &lt; n; i++)  {         &lt;--- OK, nowa zmienna i<br>
+      a += i;                                       używana w bloku <br>
+      System.out.println(i + " " + a)<br>
+} <br>
+<br>
+for (int i = 0; i &lt; n; i++)  {         &lt;--- OK, nowa zmienna i<br>
+
+      int i = 1;                             &lt;--- <b><font color="#ff6600">błąd!</font></b>  redeklaracja zmiennej i<br>
+      ...<br>
+} <br>
+
+<div class="notel33">Terminem redeklaracja określamy ponowną deklarację zmiennej lokalnej
+w jej zasięgu, tzn. w bloku. Przypomnijmy: każda zmienne lokalna może być
+deklarowana tylko raz w bloku i nie jest dopuszczalne przesłanianie nazw
+zmiennych lokalnych w blokach wewnętrznych. Nazwy zmiennych, opisujących
+pola klasy mogą być w blokach metod przesłaniane.</div>
+
+<div class="ddd"><br><A NAME="EDU.skorowidz.termin redeklaracja 82_622"></A> Oczywiście, wcale nie musimy deklarować zmiennych w części inicjacyjnej instrukcji
+for, ale - pamiętajmy, że zgodnie z ogólną zasadą - każda zmienna musi być
+przed użyciem zadeklarowana:
+<br><br>
+int a =0, n = 10, i;<br>
+
+for (i=0; i &lt; n; i ++) a+=i;        // Ok<br>
+for (i=n; i &lt; n*2; i++) a+=i;      // Ok<br>
+</div>
+<br clear="all">
+
+<br><p>
+Ale nie wolno pisać tak:<br>
+<br>
+int i = 0;<br>
+for (int i = 0; i&lt; 10; i++) ... //  <font color="#ff6600"><b>błąd!</b></font> redeklaracja i<br>
+<br>
+<br><A NAME="EDU.skorowidz.termin instrukcja_for praktyczne_zastosowania 82_623"></A> Przejdżmy teraz do praktycznych zastosowań instrukcji for.<br>
+Pierwsze zadanie: za pomocą instrukcji for policzyć n-tą potęgę (n&gt;=0) podanej liczby całkowitej <i><b>a</b></i>.<br>
+<br>
+
+<div class="important"><br>
+
+Przed lekturą dalszego tekstu, proszę
+samodzielnie wykonać to zadanie, definiując odpowiednią metodę w klasie Liczba,
+którą mieliśmy opracować w poprzednim podpunkcie.<br>
+<br>
+</div>
+
+<br>
+
+<p>
+Możliwe rozwiązanie - metoda pow w klasie Liczba, która może być użyta na rzecz dowolnej liczby całkowitej:<br>
+<br>
+
+<pre>
+public class Liczba {
+
+  int a;
+
+  public Liczba(int liczba) {  // konstruktor
+    a = liczba;
+  }
+
+//...
+
+  public double pow(int n) {
+
+    if (n &lt; 0) {        // warunek konieczny: n &gt;=0
+       System.out.println("Niedopuszczalna wartość wykładnika");
+       return -0.1;
+    }
+    double wynik = 1;
+    for (int i = 1; i &lt;= n; i++) wynik *= a;
+    return wynik;
+  }
+</pre>
+
+<p>
+Zauważmy, że w pętli for zastosowaliśmy zmiany licznika od 1 do n (włącznie).
+Ten sam efekt moglibyśmy osiągnąć pisząc: for (i=0; i&lt;n; i++).<br>
+<br>
+
+<div class="important">Instrukcje w następujących pętlach for zostaną wykonane n - razy<br>
+<br>
+        for (int i = 1; i &lt;= n; i++) ....<br>
+<br>
+        for (int i = 0; i &lt; n; i++) ....<br>
+<br>
+i pod względem liczby "obrotów" pętli obie instrukcje for są równoważne</div>
+
+<br>
+<p>
+Drugi praktyczny przykład zastosowania instrukcji for polega na rozwiązaniu następującego zadania.<br>
+W zbudowanej i omówionej wcześniej  klasie Account dostarczyć metody:<br>
+double getBalanceAfter(int n), która zwraca stan konta po n miesiącach.<br>
+<br>
+
+<div class="important"><br>
+
+<b>Przed lekturą dalszego tekstu proszę spróbować samodzielnie rozwiązać to zadanie.</b><br>
+<br>
+</div>
+
+<br>
+
+<p>
+Możliwe rozwiązanie:<br>
+
+<pre>
+  public double getBalanceAfter(int n) {
+     double wspOds = (interest/100)/12;
+     for (int i = 1; i &lt;= n; i++)
+       balance += wspOds*balance +  monthIncome - monthExpend;
+     return balance;
+  }
+</pre>
+
+<p>
+Ogólnie, instrukcja for jest bardzo elastyczna. Spełniając reguły składniowe możemy pisać dosyć dziwne programy.<br>
+Np. poniższy program pyta o tekst, który ma okalać podawane następnie w pętli
+teksty i wyprowadza (w pętli) napisy z tym "ozdobnikiem" do chwili, gdy użytkownik
+nie wciśnie Cancel w dialogu wejściowym lub dopóki nie zostanie wyprowadzone
+LIMIT napisów.<br>
+Wszystko to realizowane jest w nawiasach pętli for (instrukcją wykonywaną
+w pętli jest instrukcja pusta - co oznaczamy pojedynczym średnikiem). <br>
+
+<pre>
+import javax.swing.*;
+
+public class Napisy {
+
+  final int LIMIT = 10;
+
+  public static void main(String[] args) {
+     new Napisy();
+  }
+
+  public Napisy() {
+    String ozdoba = null,
+           txt = null;
+    int n = 0;
+
+    for (ozdoba = ask("Co wokół?");
+         n &lt;= LIMIT &amp;&amp; ozdoba != null &amp;&amp; (txt = ask("Napis?")) != null;
+         n++, System.out.println(n + ": " + ozdoba + txt + ozdoba) );
+
+   System.exit(1);
+  }
+
+  private String ask(String txt) {
+    return JOptionPane.showInputDialog(txt);
+  }
+
+
+}
+</pre>
+
+<p>
+<font color="#ff6600">Proszę skompilowac i wykonać ten program - tak by widzieć efekty jego działania.</font><br>
+<br>
+Choć można tak programować, to jest to raczej niewskazane, gdyż program jest mało czytelny i narażony na błędy. <br>
+Podkreślić też warto, że części (init, wyr,  upd) instrukjci for są nieobowiązkowe
+(każda z nich może być pominięta). Przy tym jednak nie wolno pomijać średników
+rozdzielających te części.<br>
+W szczególności, za pomocą for w następujący sposób można zapisać odpowiednik pętli nieskończonej while(true):<br>
+<br>
+for(;;) {<br>
+...<br>
+}<br>
+<br>
+Oczywiście, wewnętrz takich nieskończonych pętli nalezy przewidzieć i umieścić
+warunki ich zakończenia za pomocą instrukcji break lub return.<br>
+<br>
+
+<div class="important">Ogólnie jednak: używajmy instrukcji for wyłącznie do konstruowania pętli
+ze znaną liczbą lub zakresem iteracji, czyli w postaci:<br>
+<br>
+        <b>for ( i = ?; i &lt;?; i = i ą ?) ...</b><br>
+<br>
+wszystkie inne przypadki programując za pomoca instrukcji while lub do..while</div>
+
+<br>
+<p>
+Na koniec warto zwrócić uwagę na to, że pętle iteracyjne mogą być dowolnie<A NAME="EDU.skorowidz.termin zagnieżdżane pętle_iteracyjne 82_624"></A> zagnieżdżane.<br>
+Przecież <i><b>ins</b></i> w instrukcjach <b>while, do..while</b> i <b>for</b> - to dowolne instrukcje, w tym instrukcje sterujące.<br>
+<br>
+Nic nie stoi na przeszkodzie, by np. zapisać taki fragment:<br>
+<br>
+
+<pre>
+public class Nested {
+
+  public static void main(String[] args) {
+     String out = null;
+     char c = 'a';
+     while (c &lt;= 'd') {
+       for (int i=1; i&lt;=2; i++) {
+         out = "Dla " + c + " " + i + " mamy j =";
+         for (int j = i; j &lt;= i + 3; j++) out += " " + j;
+         System.out.println(out);
+       }
+       c++;
+     }
+   }
+
+}
+</pre>
+
+<p>
+i uzyskać wydruk:<br><br>
+
+<div class="listing100">Dla a 1 mamy j = 1 2 3 4<br>
+Dla a 2 mamy j = 2 3 4 5<br>
+Dla b 1 mamy j = 1 2 3 4<br>
+Dla b 2 mamy j = 2 3 4 5<br>
+Dla c 1 mamy j = 1 2 3 4<br>
+Dla c 2 mamy j = 2 3 4 5<br>
+Dla d 1 mamy j = 1 2 3 4<br>
+Dla d 2 mamy j = 2 3 4 5</div>
+
+<br>
+<p>
+Proszę przeanalizować wyniki i odpowiedzieć na pytanie: dlaczego sekwencje<br>
+litera nr<br>
+powtarzają się (tj dlaczego mamy <i><b>a 1</b></i> i <i><b>b 1</b></i>, <i><b>a 2</b></i> i <i><b>b 2</b></i>)<br>
+oraz dlaczego powtarzają się sekwencje <i><b>j = 1 2 3 4 , j = 2 3 4 5</b></i><br>
+</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index81.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index83.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

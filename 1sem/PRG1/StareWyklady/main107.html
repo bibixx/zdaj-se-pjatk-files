@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index106.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index108.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Kilka słów o niezmiennikach pętli iteracyjnych</div>
+
+<a name="W14.2"></a>
+
+<p>W tym podpunkcie zajmiemy się krótko zagadnieniem,
+które jest istotne m.in. w dowodzeniu poprawności algorytmów. Ta problematyka
+będzie szczegółowo i znacznie bardziej formalnie przedstawiona w ramach przedmiotu
+"Algorytmy i struktury danych". Tutaj w sposób możliwie najmniej formalny
+zwrócona zostanie uwaga na pojęcie niezmienników pętli iteracyjnych i to
+raczej pod kątem lepszego rozumienia działania (czy nawet sprawniejszego
+formułowania) pętli iteracyjnych niż dowodzenia ich poprawności.<br><br>
+
+Rozpatrzymy najpierw pętlę while (jak już wiemy - pętle for łatwo sprowadzić
+do pętli while), po czym zobaczymy w jaki sposób, można bezpośrednio formułować
+niezmienniki dla pętli for.<br>
+<br>
+Ogólną postać pętli while można zapisać jako:<br>
+<br>
+<b><i>inicjacja_zmiennych_używanych_w_pętli</i><br>
+while (<i>warunek_kontynuacji_pętli</i>) {<br>
+    <i>ciało_pętli</i><br>
+}<br>
+</b><br>
+gdzie przez <i><b>ciało_pętli</b></i> rozumiemy instrukcje wykonywane w pętli<br>
+<br><A NAME="EDU.skorowidz.termin niezmiennik_pętli 107_747"></A> 
+
+<div class="def">Niezmiennikiem pętli <i><b>while</b></i> nazywamy relację pomiędzy
+wartościami zmiennych programu, która jest prawdziwa tuż przed rozpoczęciem
+pętli, przed każdym wykonaniem i po każdym wykonaniu ciała pętli w kolejnych
+iteracjach  <b>oraz</b> zaraz po zakończeniu pętli iteracyjnej;
+przy czym przynajmniej niektóre z wartości zmiennych, uczestniczących w tej
+relacji, zmieniają się w trakcie wykonywania iteracji pętli. <br>
+(Uwaga: jest to definicja nieformalna; formalne definicje będą przedstawione w ramach przedmiotu ASD). <br>
+</div>
+
+<br>
+<p>
+Jeśli przez K oznaczymy wyrażenia-warunek kontynuacji pętli, a przez N -
+wyrażenie-niezmiennik pętli, to prawidłowa konstrukcja pętli powinna wyglądać następująco:<br>
+<br>
+
+<div class="notec">
+    // N jest prawdziwe<br>
+    while (K) {<br>
+        // N i K jest prawdziwe<br>
+        ciało pętli<br>
+        // N jest prawdziwe<br>
+     }<br>
+    // N jest prawdziwe i jednocześnie K nie jest prawdziwe<br>
+<br>
+przy czym instrukcje ciała pętli powinny zapewniać (w którymś momencie) zanegowanie
+wyrażenia K (po to, by pętla mogła zakończyć działanie).<br>
+</div>
+
+<br>
+<p>
+Uwaga: w pętli takiej może zdarzyć się, że od początku K nie jest prawdziwe
+(wtedy pętla nie wykona się ani razu, ale powinny zachodzić pierwszy i ostatni
+warunki podane w komentarzach).<br>
+<br>
+
+Spójrzmy na przykład znajdowania minimalnego elementu tablicy <i><b>n</b></i> liczb całkowitych. <br>
+<br>
+
+<pre>
+ static int getMin(int[] a) {
+   int n = a.length;
+   int vmin = a[0];
+   int i = 1;
+   while (i &lt; n) {
+     if (a[i] &lt; vmin) vmin = a[i];
+     i++;
+   }
+   return vmin;
+ }
+</pre>
+
+<p>
+Zauważmy, że po zakończeniu pętli chcemy, by spełniony był warunek:<br>
+wartość zmiennej <i><b>vmin</b></i> jest wartością minimalnego elementu tablicy <i><b>a</b></i> czyli minimalną wartością spośród wartości zmiennych a[0], a[1], ... a[n-1].<br><br>
+Inaczej mówiąc wartością wyrażenia (zapisanego w pseudokodzie):<br>
+<br>
+<b>vmin == minimum (a[0], ... ,a[n-1])</b><br>
+<br>
+winno być <b>true</b>.<br>
+<br> Na tej podstawie możemy łatwo wydedukować niezmiennik (który - w tym
+przypadku - bezpośrednio pomaga nam zbudować algorytm działania pętli).
+<br>
+<br>
+
+<div class="notec">
+<b>Niezmiennik</b>: dla  każdego <i><b>i</b></i> = 1, ... n :  <b>vmin == minimum ( a[0], .., a[i-1] )</b>.<br>
+</div>
+
+<br><p>Miejsca w którym warunek ten powinien być spełniony pokazano poniżej
+za pomocą komentarza  N z dodatkową liczbą 0, 1, 2, 3 - rozróżniającą umiejscowienie
+warunku:<br>
+<br>
+
+<pre>
+ static int getMin(int[] a) {
+   int n = a.length;
+   int vmin = a[0];
+   int i = 1;
+   <b><font color="#ff6600">// N0</font></b>
+   while (i &lt; n) {
+     <b><font color="#ff6600">// N1</font></b>
+     if (a[i] &lt; vmin) vmin = a[i];
+     i++;
+     <font color="#ff6600"><b>// N2</b></font>
+   }
+   <font color="#ff6600"><b>// N3</b></font>
+   return vmin;
+ }
+</pre>
+
+<p>
+Niezmiennik ten wyraża określoną relację pomiędzy zmiennymi <i><b>vmin</b></i>, <i><b>a</b></i> oraz <i><b>i</b></i>. Zwróćmy uwagę, że niektóre z tych zmiennych (vmin oraz i) zmieniają swoje
+wartości  w trakcie iteracji, a jednak wartość wyrażenia stanowiącego niezmiennik
+powinna być w każdej iteracji taka sama (stąd nazwa niezmiennik!). <br> Jeżeli
+możemy teraz wykazać, że wybrany jako niezmiennik warunek jest prawdziwy
+we wszystkich pokazanych miejscach, pętla kończy działanie, a po jej zakończeniu 
+z niezmiennika możemy wyprowadzić zamierzony wynik działania pętli, to -
+nasza pętla jest poprawna (gwoli ścisłości: trzeba jeszcze zapewnić spełnienie
+jakichś warunków początkowych, w naszym przykładzie będzie to <i><b>n &gt; 0</b></i>).<br>
+<br> Faktycznie, przed wejściem w pętlę, i=1, vmin = a[0], zatem <i><b>vmin</b></i> jest minimum
+z (a[0]...a[i-1]), bo zbiór ten zawiera tylko jedną liczbę a[0]. Wobec tego
+w miejscu N0 niezmiennik jest prawdziwy. Jeżeli w miejscu N0 niezmiennik
+jest prawdziwy, to w pierwszej iteracji - w miejscu N1 również będzie prawdziwy
+(bo wyrażenie stanowiące warunek kontynuacji nie zmienia wartości <i><b>i</b></i>, <i><b>vmin</b></i>, oraz elementów tablicy <i><b>a</b></i>).<br>
+Dalej możemy łatwo wykazać że, jeżeli w jakiejkolwiek iteracji niezmiennik
+jest prawdziwy w miejscu N1, to będzie również prawdziwy w miejscu N2. Weźmy
+i-tą iterację. W miejscu N1 zachodzi  <i><b>vmin ==
+minimum (a[0], ... a[i-1])</b></i>. Następnie wartość <i><b>a[i]</b></i> porównywana jest z wartością <i><b>vmin</b></i>, jeśli jest mniejsza, to <i><b>vmin = a[i]</b></i>, w przeciwnym
+razie minimum się nie zmienia i w obu przypadkach w miejscu N2 (po zwiększeniu <i><b>i</b></i> o 1) znowu zachodzi  <i><b>vmin == minimum(a[0],
+ ... . a[i-1])</b></i>.<br>Jeśli niezmiennik jest prawdziwy w miejscu N2,
+to - przy kontynuacji pętli - jest również prawdziwy w miejscu N1. Natomiast
+gdy warunek kontynuacji nie jest spełniony - prawdziwość w N2 implikuje prawdziwość
+niezmiennika w N3.<br>
+Pętla na pewno skończy działanie, bowiem w każdej iteracji <i><b>i</b></i> jest zwiększane, aż osiągnie wartość <i><b>n</b></i>.<br>
+W miejscu N3 wyrażenie stanowiącc niezmiennik bezpośrednio określa poprawność
+zamierzonego wyniku działania pętli: otrzymaliśmy minimum ze wszystkich elementów
+tablicy. <br>
+<br>
+Zobaczmy więc: niezmiennik dobraliśmy tak by "prowadził nas" do końcowego wyniku.
+Byłoby raczej bez sensu użyć tu jakiegoś innego niezmiennika.<br>Nie zawsze
+uda się osiągnąć tak bezpośredni efekt, ale na podstawie dobrze dobranego
+niezmiennika pętli można znacznie sobie ułatwić  stworzenie poprawnego algorytmu
+rozwiązania jakiegoś problemu.<br>
+<br>
+No, dobrze, ale czy zawsze musimy przekształcać pętle for do pętli while - by poprowadzić rozumowanie za pomocą niezmienników?<br>
+Niekoniecznie. Bardzo często w pętlach for, w których mamy do czynienia z
+prostą zmianą licznika iteracji  możemy tego nie robić.<br>
+Ze względu na konstrukcję takich pętli  (przypomnijmy: inicjacja licznika
+wykonywana jest raz, warunek kontynuacji sprawdzany jest przed każdym wykonaniem
+iteracji, a wyrażenie zmieniające licznik wykonywane jest po wykonaniu instrukcji
+pętli) niezmiennik można "umieścić" na początku każdej iteracji oraz po pętli:<br>
+<br>
+for (.....) {<br>
+    // Niezmiennik<br>
+    instrukcje pętli<br>
+}<br>
+// Niezmiennik<br>
+      
+<br>W naszym przypadku poszukiwania minimum z elementów tablicy moglibyśmy zapisać:<br>
+<br>
+
+<pre>
+  static int getMin(int[] a) {
+    int vmin = a[0];
+    for (int i=1; i &lt; a.length; i++) {
+      <b><font color="#ff6600">// NIEZMIENNIK: vmin == minimum (a[0],.. a[i-1])</font></b>
+      if (a[i] &lt; vmin) vmin = a[i];
+    }
+    <b><font color="#ff6600">// NIEZMIENNIK: vmin == minimum (a[0],.. a[i-1])</font></b>
+   return vmin;
+     
+  }
+</pre>
+
+<p>
+Łatwo zobaczyć, że niezmiennik jest prawdziwy w każdej iteracji oraz po zakończeniu pętli.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index106.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index108.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

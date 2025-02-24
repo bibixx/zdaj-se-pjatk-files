@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index26.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index28.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Wprowadzenie do obiektowości</div>
+
+<a name="W4.14"></a>
+
+<p><A NAME="EDU.skorowidz.termin programowanie_obiektowe 27_265"></A> Języki obiektowe posługują się pojęciem <b>obiektu i klasy</b>.<br>Dokładne
+definicje tych pojęć poznamy później. Teraz zamiast rozmyślania nad abstrakcyjnymi
+sformułowaniami spróbujmy uruchomić wyobraźnię i intuicję, licząc się z tym
+(i nie przerażając się tym), że niektóry rzeczy zostaną w pełni wyjaśnione
+dopiero w toku dalszej nauki.</p>
+<p>Cóż to jest<A NAME="EDU.skorowidz.termin obiekt 27_266"></A> "obiekt" ? Intuicyjnie czujemy, że to coś w rodzaju "przedmiotu",
+czegoś co można wyodrębnić, nazwać, określić jego właściwości.<br>
+Na przykład obiektami będą: rower, samochód, pies, człowiek.</p>
+<p>Każdy z tych obiektów ma inne właściwości. Np. człowiek ma imię, jest
+w określonym wieku. Samochód ma kolor i może też np. być charakteryzowany
+mocą silnika czy liczbą drzwi. <br>
+Dwa samochody mają ten sam zestaw właściwości (<b>atrybutów</b>) np. markę,
+kolor i moc silnika. I choć marki i kolory mogą być różne i różna może być
+moc silników - to w pewnym sensie samochody te są podobne (bo opisujemy je
+za pomocą takich samych cech). Powiemy, że obiekty-samochody są obiektami
+tej samej <b>klasy</b>.<br><br>
+
+A<A NAME="EDU.skorowidz.termin klasa 27_267"></A> <b>klasa</b> stanowi opis takich cech grupy podobnych obiektów, które są dla
+nich niezmienne.<br>
+</p>
+<p>Zauważmy dalej, że obiekty mogą wykonywać jakieś czynności.<A NAME="EDU.skorowidz.termin usługa 27_268"></A> Powiemy: udostępniają jakieś <b>usługi</b>. Inne obiekty mogą "poprosić" je o wykonanie tych usług.<br>
+Np. obiekt-kierowca może "zlecić" obiektowi-samochodowi. by ten ruszył lub
+zatrzymał się (poprzez włączenie silnika i naciśnięcie na pedał gazu lub
+za pomocą wciśniecia hamulca).<br>
+</p>
+<p>Powiemy, że do obiektów posyłane są<A NAME="EDU.skorowidz.termin komunikat 27_269"></A> <b>komunikaty</b>, żądające od nich wykonania określonych usług.</p>
+<p>Obiekty nie mogą wykonywać dowolnych czynności (świadczyć dowolnych usług).
+Samochód może ruszyć lub stanąć, ale nie zacznie śpiewać.<br>
+Można powiedzieć, że to, jakie usługi udostępniają obiekty,  jakie komunikaty
+możemy do nich posyłąć, prosząc je o wykonanie jakichś czynności - również
+jest jakąś ich cechą.</p>
+<p>Zatem klasa będzie opisywac nie tylko takie wspólne cechy grupy podobnych obiektów jak kolor, czy wiek, czy waga, ale również zestawy usług, które obiekty tej klasy mogą świadczyć. A więc i komunikaty, które do tych obiektów można posłać.<br>
+</p>
+
+<p>Rozumowanie powyższe stanowią abstrakcyjne odzwierciedlenie cech
+rzeczywistości.</p>
+<p>Gdybyśmy mieli w języku programowania podobne pojęcia, to moglibyśmy ujmować
+projekt rozwiązania rzeczywistego problemu i jego oprogramowanie w języku
+adekwatnym do problemu. <br><A NAME="EDU.skorowidz.termin języki_obiektowe 27_270"></A> I to zapewniają języki obiektowe. Jest to ich bardzo
+ważna cecha, znacznie ułatwiająca tworzenie oprogramowania.</p>
+
+<p>Możemy mieć np. klasę urządzeń elektrycznych o następujących atrybutach:
+szerokość, wysokość, stan (włączone-wyłączone) oraz udostępniających usługi:
+włączania i wyłączania.<br>Tak jest w rzeczywistości. I tak samo możemy
+to zapisać w (na razie wyimaginowanym) języku obiektowym, w którym za pomocą
+definicji klasy opiszemy atrybuty urządzeń elektrycznych oraz zestaw usług,
+przez nie udostępnianych - mający odzwierciedlenie w komunikatach, które
+można posłać do tych obiektów. Ten ostatni  - w wielu językach obiektowych
+- nazywany jest zestawem <b>metod</b> klasy (metoda jest czymś bardzo podobnym do funkcji).<br>
+
+<pre>
+class ElDev {
+  width, height; &lt;-- atrybuty: szerokość, wysokość, stan
+  isOn;
+================= Interfejs komunikatów
+  method on()
+   isOn = true; &lt;--- usługa on (włącz), inaczej: metoda o nazwie on
+
+  method off()
+   isOn = false; &lt;--- usługa off (wyłacz),inaczej: metoda o nazwie on
+}
+</pre>
+
+
+
+<p>Gdy mamy dwa obiekty - egzemplarze klasy urządzeń elektrycznych, oznaczane a
+i b, to możemy symulować w programie sekwencję działań: włączenie urządzenia a,
+właczenie urządzenia b, wyłączenie urządzenia a, za pomocą komunikatów
+posyłanych do obiektów (inaczej wywołania metod na rzecz obiektów), np. w Javie (czy C++):</p>
+
+<pre>
+a.on();  // komunikat: obiekcie a włącz się
+b.on();  // obiekcie b włącz się
+a.off(); // obiekcie a wyłącz się
+</pre>
+
+<p>Oprócz odzwierciedlenia w programie "języka problemu"<A NAME="EDU.skorowidz.termin abstrakcja_obiektowa 27_271"></A> abstrakcja obiektowa
+ma jeszcze jedną ważną przewagę nad ujęciami nieobiektowymi.</p>
+<p>Mianowicie, zwykle atrybuty obiektu nie są bezpośrednio dostępne. W
+programie z obiektami "rozmawiamy" za pomocą komunikatów, obiekty same "wiedzą
+najlepiej" jak zmieniać swoje stany. Dzięki temu nie możemy nic nieopatrznie
+popsuć, co więcej nie możemy zażądać od obiektu usługi, której on nie
+udostępnia.</p>
+
+<div class="important">Dane (atrybuty) są (powinny być) ukryte i są traktowane jako <b>nierozdzielna całość z
+usługami</b> - metodami.</div>
+
+<p><A NAME="EDU.skorowidz.termin hermetyzacja 27_272"></A> Nazywa się to <b>hermetyzacją</b><A NAME="EDU.skorowidz.termin enkapsulacja 27_273"></A> (enkapsulacją) i oznacza znaczne
+zwiększenie odporności programu na błędy.</p>
+
+<p><A NAME="EDU.skorowidz.termin podejście_obiektowe 27_274"></A> Podejście obiektowe umożliwia ponowne wykorzystanie już gotowych klas przy
+tworzeniu klas nowych, co znacznie oszczędza pracę przy kodowaniu, a także
+chroni przed błędami.<br>
+
+Jest to również odzwierciedlenie rzeczywistych sytuacji.</p>
+<p>Np. komputer jest niewątpliwie urządzeniem elektrycznym. Jest obiektem klasy
+ElDev. Ale komputery (oprócz okreslonych w klasie ElDev atrybutów: wysokość,
+szerokość, stan: włączony-wyłączony) mają jakieś swoje specyficzne,
+wyspecjalizowane cechy.<br>
+Stanowią więc podklasę klasy urządzeń elektrycznych.<br>
+Tak jest w rzeczywistości. A w programie możemy to odzwierciedlić za pomocą
+koncepcji<A NAME="EDU.skorowidz.termin dziedziczenie_klas 27_275"></A> <b>dziedziczenia</b> klas. Klasa dziedzicząca inną przejmuje jej
+właściwości i ew. dodaje własne, wyspecjalizowane. Dzięki temu w klasie
+dziedziczącej możemy skupić się na specyficznych cechach jej obiektów, wiedząc,
+że podstawowe atrybuty i funkcjonalność zostały już określone w klasie
+dziedziczonej.<br>
+Np. tworząc klasę Komputer, dziedziczącą klasę urządzeń elektrycznych nie
+musimy od nowa zapisywać wszelkich cech i operacji na urządzeniu elektrycznym
+(np. nie musimy oprogramowywać metod on() czy off()). Musimy tylko dodać cechy
+wyspecjalizowane np. dla komputera - usługę wykonania jakiegoś programu.</p>
+<p>Oczywiście program będzie obiektem klasy Program, a w komunikacie do
+obiektu-komputera powinniśmy podać jako argument obiekt-program do
+wykonania.<br>
+Dziedziczenie klasy ElDev przez klasę Komputer i dostarczenie nowej usługi
+(metody) run możemy zapisać (jeszcze nie w w Javie) tak (słowo extends oznacza tu
+dziedziczenie):</p>
+
+<pre>
+class Komputer extends ElDev {
+    method run(Program p)
+       if (isOn()) wykonanie_programu_p;
+}
+</pre>
+<p>a następnie użyć nowej klasy Komputer w programie:</p>
+<pre>
+Komputer a, b, c;
+Program x, y, z;
+...
+a.on(); a.run(x); ... a.off();
+</pre>
+
+<p>Tyle wprowadzenia, o charakterze bardzo wstępnym i raczej intuicyjnym.
+<br>
+Chodziło w nim o to, by zrozumieć pewne ważne cechy podejścia obiektowago na
+poziomie ogólnym, nie wchodząc jeszcze w szczegóły składni Javy. Dokładnie
+cechy podejścia obiektowego będziemy omawiać przez całe dwa semestry. <br>
+Już za chwilę jednak zobaczymy - przy okazji aplikacji powitalnych w jaki
+sposób w Javie operuje się na obiektach.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index26.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index28.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

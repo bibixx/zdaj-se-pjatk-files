@@ -1,0 +1,338 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index61.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 1"></A><div class="tytulpunktu">1.  Odwołania do składowych klasy. Zmienna this</div>
+<a name="W8.1"></a>
+
+<p><A NAME="EDU.skorowidz.termin składowa_klasy odwołanie 60_512"></A> Nareszcie nadeszła pora na szczegółowe omówienie konstrukcji klasy Para. <br>
+ Teraz (na chwilę) nie będziemy zwracać uwagi na specyfikatory dostępu
+(dla omawianego przykładu nie mają one znaczenia). Klasę Para zdefiniujemy
+też troszkę inaczej niż dotychczas (w programach przykładowych z katalogu
+samples do poprzednich wykładów), tak by móc rozważać różne ciekawe sytuacje.<br>
+<br>
+
+<pre>
+class Para {
+
+    int a;    // To są "dane" (zwane polami klasy).
+              // Określają one z jakich elementów składać się
+    int b;    // będą obiekty tej klasy.
+              // a = pierwszy składnik pary, b - drugi
+
+
+ Para(int x, int y) {   // konstruktor: nadaje wartość parze
+   a = x  ;             // na podstawie przekazanych wartości x i y
+   b = y;
+ }
+
+ Para(int x) {          // inny konstruktor: nadaje obu składnikom pary
+   a = b = x;                  // (a i b) tę samą wartość x
+ }
+
+
+ void set(Para p)  {    // metoda ustalenia wartości pary
+   a = p.a;             // na podstawie składników przekazanej pary
+   b = p.b;
+ }
+
+
+ Para add(Para p) {             // metoda dodawania dwóch par
+   Para wynik = new Para(a, b);
+   wynik.a += p.a;
+   wynik.b += p.b;
+   return wynik;
+ }
+
+                               // metoda pokazująca parę
+ void show(String s)  {
+   System.out.println(s + " ( " + a + " , " + b + " )" );
+ }
+
+}
+</pre>
+
+<p>
+W innej klasie możemy użyć klasy Para, np. tak:<br>
+<br>
+
+<pre>
+class ParaTest {
+
+  public static void main(String[] args) {
+    Para para1 = new Para(1,5);
+    Para para2 = new Para(2,4);
+    para1.show("Para 1 =");
+    para2.show("Para 2 =");
+    Para sumaPar = para1.add(para2);
+    sumaPar.show("Suma par =");
+    para1.set(para2);
+    para1.show("Teraz para 1 = ");
+
+  }
+
+}
+</pre>
+
+<br>
+
+<div class="listing33r">Para 1 = ( 1 , 5 )<br>
+Para 2 = ( 2 , 4 )<br>
+Suma par = ( 3 , 9 )<br>
+Teraz para 1 =  ( 2 , 4 )<br>
+ </div>
+
+<div class="ddd"><br>
+Powyższy program wyprowadzi na konsolę następujące wyniki. <br>
+Zobaczmy co się naprawdę dzieje.
+</div>
+<br clear="all">
+
+<p>
+Gdy piszemy: <br>
+Para para1 = new Para(1, 5);<br>
+wyrażenie new tworzy obiekt tzn.: <br>
+<ul>
+  <li>wydziela miejsce w pamięci do przechowania obiektu-pary (miejsce na dwie liczby całkowite)</li>
+  <li>elementy pary odpowiadają polom a i b zadeklarowanym w klasie</li>
+  <li>elementy te otrzymają wartość 0 (domyślna inicjacja)</li>
+  <li>wywoływany jest konstruktor klasy Para z argumentami 1 i 5, a jego
+wykonanie powoduje, że elementy utworzonej pary odpowiadające polom a i b
+otrzymują odpowiednio wartości 1 i 5 </li>
+  <li>wyrażenie new zwraca referencję do nowoutworzonego obiektu</li>
+  <li>referencja ta podstawiana jest na zmienną para1 (w tej chwili zmienna
+para1 zawiera referencję - inaczej odniesienie - do nowoutworzonej pary)</li>
+</ul>
+
+<p>
+Podobnie możemy napisać:<br>
+<br>
+Para para2 = new Para(2,4);<br>
+<br>
+Mamy teraz dwa obiekty para1 i para2. <br>
+<pre>
+para1 "wygląda" tak        para2 "wygląda" tak
+
+Pola:                      Pola:
+
+  int a; ( = 1)              int a; ( = 2)
+  int b; ( = 5)              int b; ( = 4)
+---------------------------------------------
+Metody:                    Metody:
+
+  void set(...)              void set(...)
+  Para add(...)              Para add(...)
+  void show(...)             void show(...)
+
+</pre>
+
+<p>
+Identyfikatory pól i metod są takie same! <br>
+Zatem trzeba ich używać "na rzecz" konkretnego obiektu (para1 albo para2). <br>
+<br>
+Do tego rozróżniania służy kropka (nareszcie naocznie widać jej użyteczność): <br>
+<br>
+para1.a - oznacza element a obiektu para1 <br>
+para2.a - oznacza element a obiektu para2 <br>
+<br>
+To samo z metodami: <br>
+<br>
+para1.show();  // obiektowi oznaczonemu para1 wysyłamy komunikat show (pokaż się) <br>
+                      // co oznacza wywołanie metody show na rzecz obiektu para1 <br>
+<br>
+para2.show();  // obiektowi oznaczonemu para2 wysyłamy komunikat show (pokaż się) <br>
+                      // co oznacza wywołanie metody show na rzecz obiektu para2 <br>
+<br>
+
+<div class="notec"><i><b>Uwagi:<br>
+</b></i>
+<ul>
+  <li><i><b>o ile elementy obiektów (odpowiadające polom) są zawarte
+w obiektach, to metody - są "wspólne" dla wszystkich obiektów klasy; podpisanie
+ich pod każdym obiektem oznacza tylko, że mogą one być używane dla tego obiektu,
+a nie, że zajmują jakieś miejsce "w obiekcie"</b></i></li>
+
+  <li><i><b>w opisie użyto "skrótu myślowego" dla uproszczenia tekstu;
+mówiąc o obiektach para1 i para2 pamiętamy, że tak naprawde zmienne te są
+referencjami do obiektów.</b></i></li>
+</ul>
+</div>
+
+<br>
+<p>
+Zajrzyjmy teraz do wnętrza klasy. Skąd wiadomo co konkretnie oznacza a i b w konstruktorze albo w metodzie set?<br>
+Rozważmy konstruktor<br>
+<br>
+class Para {<br>
+   int a, b; <br>
+<br>
+public Para(int x, int y) {   // słowo public - niekonieczne<br>
+   a = x  ;                             <br>
+   b = y;<br>
+}<br>
+....<br>
+}
+
+<!-- @ -->
+
+<p>
+Wyrażenie new najpierw
+tworzy obiekt, a później wywoływany jest konstruktor. Zatem w momencie rozpoczęcia
+działania konstruktora obiekt już istnieje (jest mu przydzielona pamięć na
+przechowanie dwóch liczb całkowitych,  ich wartości  zostały inicjalnie określone,
+w naszym przypadku jako zera). Wykonanie konstruktora dotyczy właśnie tego
+nowoutworzonego  obiektu. W konstruktorze dostępna jest referencja do tego
+obiektu w postaci niejawnie zdefiniowanej zmiennej o nazwie<A NAME="EDU.skorowidz.termin this 60_513"></A> <b>this</b>. (this = TEN).</p>
+
+<div class="notel">Słowo <b>this</b> jest słowem kluczowym języka</div>
+
+<div class="ddd"><br>
+Zatem this.a i this.b - zgodnie z interpretacją znaczenia kropki to pola
+a i  b tego obiektu,  którego dotyczą inicjacje wykonywane przez konstruktor.</div>
+<br clear="all">
+
+<br>
+
+<div>
+<img src="images/new8.jpg" alt="Rys" width="553" height="449" border="1">
+</div>
+
+<br>
+<div class="important">Ponieważ i tak wiadomo, że samo a i b dotyczy pól (elementów) tego obiektu,
+dla którego akurat wołany jest konstruktor, to słowo <b>this</b> możemy pominąć.</div>
+
+<br>
+<p>
+To samo dotyczy<A NAME="EDU.skorowidz.termin metoda wywoływanie_na_rzecz_obiektu 60_514"></A> metod wywoływanych na rzecz obiektów.<br>Wyobraźmy sobie, że na rzecz obiektu para1 wywołano metodę set z argumentem  para2.<br>
+Działanie metody set ma polegać na przepisaniu zawartości pary para2 do pary para1.<br>
+<br>
+"Algorytm" metody set jest taki:<br>
+<ol>
+  <li>polu a tego obiektu na rzecz którego wywołano metodę przypisz wartość pola a obiektu przekazanego jako argument </li>
+
+  <li>polu b tego obiektu na rzecz którego wywołano metodę przypisz wartość pola b obiektu przekazanego jako argument </li>
+</ol>
+<p>TEN obiekt na rzecz którego wywołano metodę jest wewnątrz metody reprezentowany słowem kluczowym<A NAME="EDU.skorowidz.termin this 60_515"></A> <b>this</b>.<br><br>
+
+<div>
+<img src="images/set8.jpg" alt="Rys" width="499" height="184" border="1">
+</div>
+
+<br>
+<p>
+I znowu możemy pominąć słówko this, bo tu jasne jest z kontekstu.<br>
+<br>
+<p>
+<a href="javascript:popUp('dodatki/W8Prb1.htm',50,50)"><img src="images/Problem.jpg" alt="Problem" hspace="15" width="137" height="84" border="1" align="Right"></a> <br>
+void set(Para p) {<br>
+   a = p.a;<br>
+   b = p.b;<br>
+}</p>
+<br clear="all">
+
+<p>
+Zobaczmy teraz jak działa metoda dodawania dwóch par.<br>
+<br>
+
+<div class="important">Po pierwsze: mamy dwie pary, które chcemy dodać - wobec tego silna jest
+pokusa by użyć metody z dwoma argumentami. Ale przecież programujemy obiektowo:
+pierwsza z par do której dodajemy drugą będzie obiektem do którego poślemy
+polecenie add:<br>
+<br>
+    para1.add(para2);</div>
+
+<br>
+<p>
+Po drugie: co zrobić z wynikiem dodawania?<br>
+W rezultacie dodawania powinna powstać nowa para - suma dwóch dodanych par.<br>
+Ta nowa para winna być stworzona w metodzie add, a referencja do niej zwrócona jako wynik tej metody. Dlatego:<br><br>
+
+<div>
+<img src="images/add8.jpg" alt="Rys" width="527" height="204" border="1">
+</div>
+
+<p>
+<a href="javascript:popUp('dodatki/W8Prb2.htm',50,50)"><img src="images/Problem.jpg" alt="Problem" hspace="15" width="137" height="84" border="1" align="Right"></a> <br>
+
+Zauważmy też, że wszystko co analizowaliśmy dotąd na przykładzie pól - dotyczy również metod.
+<br clear="all">
+<p>
+Gydbyśmy w klasie Para mieli na przykład dwie metody getA() i getB(), które
+zwracają odpowiednie składniki pary, to w innej metodzie klasy (np. metodzie
+sumującej składniki pary) moglibyśmy się do nich odwołać:<br>
+<br>
+class Para {<br>
+    int a, b;<br>
+    ...<br>
+    int getA() { return a; }<br>
+    int getB() { return b; }<br>
+<br>
+    int sum() {<br>
+        int pierwsza = this.getA();<br>
+        int druga = this.getB();<br>
+        return pierwsza + druga;<br>
+    }<br>
+}<br>
+<br>
+co oznaczałoby, że wywołujemy metody getA i getB na rzecz tego obiektu, na rzecz którego została wywywołana metoda sum.<br>
+Ponieważ jest to jasne z kontekstu, możemy napisac prościej:<br>
+<br>
+int sum() {<br>
+    return getA() + getB();<br>
+}<br>
+    <br>
+<br>
+Są przypadki, kiedy użycie słowa kluczowego<A NAME="EDU.skorowidz.termin this 60_516"></A> this jest istotne. Na przykład, gdy identyfikatory
+parametrów przesłaniają (są takie same jak) identyfikatory pól klasy.<br>
+<br>
+class Para {<br>
+    int a, b; <br>
+<br>
+Para (int a,  int b) {<br>
+     a = ... //<font color="#ff0000"> o które a chodzi: parametr czy pole???</font><br>
+...<br>
+}<br>
+<br>
+void set(int a, int b) {<br>
+    a = ... // <font color="#ff0000">o które a chodzi: parametr czy pole???</font><br>
+}<br>
+}<br>
+<br>
+Dla rozróżnienia należy użyć słowa this.<br>
+Zapis <b>this.a</b> zawsze oznacza pole a obiektu inicjowanego przez konstruktor
+lub tego na rzecz którego wywołano metodę. Zatem w powyższym kontekście piszemy:<br>
+
+<pre>
+class Para {
+  int a;
+  int b;
+
+  Para(int a, int b) {
+    this.a = a;    // polu a obiektu przypisz wartość parametru a
+    this.b = b;    // polu b obiektu przypisz wartość parametru b
+  }
+
+  void set(int a, int b) {
+    this.a = a;
+    this.b = b;
+  }
+}
+</pre>
+
+<p>
+Więcej na temat przesłaniania identyfikatorów pod koniec wykładu.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index61.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

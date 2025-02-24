@@ -1,0 +1,66 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-2">
+<meta name="GENERATOR" content="Microsoft FrontPage Express 2.0">
+<title>Rozwi±zanie</title>
+<link rel="stylesheet" type="text/css"
+href="style/common.css">
+</head>
+
+<body bgcolor="#EFEFEF">
+<script language="JavaScript1.2" type="text/javascript"
+src="js/dodatki.js">
+  </script>
+
+<p align="center"><b>Rozwi±zanie</b> </p>
+
+<hr>
+
+<pre>import javax.swing.*; 
+public class Town {
+
+  private String[] town = { &quot;Warszawa&quot;, &quot;Poznañ&quot;, &quot;Kraków&quot;, &quot;Gdañsk&quot; }; 
+  
+  Town() {
+    show(&quot;Na pocz±tku&quot;);
+    exchange(0, town.length -1);
+    show(&quot;Po przestawienieu pierwszego i ostatniego&quot;);
+    exchange(1,2);
+    show(&quot;Po przestawienieu drugiego i trzeciego&quot;);
+    String s = JOptionPane.showInputDialog(&quot;Podaj nazwc miasta&quot;);
+    if (s != null) {
+      String msg = &quot;Nie ma takiego miasta&quot;;
+      int ind = getIndex(s);
+      if (ind != -1) msg = &quot;Miasto &quot; + s + &quot; indeks &quot; + ind;
+      System.out.println(msg);
+    }
+    System.exit(0);
+  }
+
+  public void show(String s) {
+    System.out.println(s);
+    for (int i=0; i&lt;town.length; i++) System.out.println(town[i]);
+  }
+
+  public void exchange(int first, int last) {
+    String temp = town[last];
+    town[last] = town[first];
+    town[first] = temp;
+  }
+
+  public int getIndex(String s) {
+    for (int i=0; i&lt;town.length; i++) if (town[i].equals(s)) return i;
+    return -1;
+  }
+
+
+  public static void main(String[] args) {
+     new Town();
+  } 
+ 
+}
+</pre>
+</body>
+</html>

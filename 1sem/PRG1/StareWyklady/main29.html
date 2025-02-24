@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index28.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 4"></A><div class="tytulpunktu">4. Instalacja Javy,  pierwszy program i kilka elementów składni</div>
+
+<a name="W4.16"></a>
+
+<p>Instrukcje instalacyjne Javy dla różnych systemów można znaleźć tu:<br><br>
+
+<a href="javascript:popUp('dodatki/W3LinInst.htm',30,30)">dla Linuxa</a><br>
+<a href="javascript:popUp('dodatki/W3WinInst.htm',40,40)">dla Windows</a> <br>
+<a href="javascript:popUp('dodatki/W3OS2Inst.htm',50,30)">dlaOS/2</a><br>
+<br>
+Pisząc programy możemy korzystać ze<A NAME="EDU.skorowidz.termin zintegrowane_środowisko_programowania 29_282"></A> zintegrowanych środowisk programowania<A NAME="EDU.skorowidz.termin IDE 29_283"></A> (IDE) zob.<a href="http://www.javaworld.com/javaworld/tools/jw-tools-index.html"> listę miesięcznika JavaWorld</a>
+, a także <a href="javascript:popUp('dodatki/W3IDE.htm',50,50)">IDE polecane na I semestr dla Windows</a>  lub
+po prostu używać wybranego edytora i w sesjach znakowych (terminalach, oknach
+DOS) uruchamiać kompilator i maszynę wirtualną Javy.<br>
+<br>
+
+<div class="notec">Jeśli nie korzystamy z IDE to:<br>
+<ul>
+  <li>powinniśmy zapewnić, by katalog, w którym program instalacyjny umieścił 
+kompilator Javy (javac.exe) oraz interpreter - maszynę wirtualną Javy (java.exe)
+znajdował się na ścieżce dostępu (PATH),</li>
+  <li><A NAME="EDU.skorowidz.termin Java program_źródłowy 29_284"></A> program źródłowy Javy zapisujemy w pliku źródłowym za pomocą dowolnego edytora (np. w pliku Test.java),</li>
+  <li>plik źródłowy np. Test.java<A NAME="EDU.skorowidz.termin Java kompilacja 29_285"></A> kompilujemy za pomocą polecenia <b>javac (np. javac Test.java)</b></li>
+  <li>w rezultacie kompilacji otrzymamy plik(i) klasowe (z rozszerzeniem .class) (np. Test.class)</li>
+  <li><A NAME="EDU.skorowidz.termin Java wykonanie_programu 29_286"></A> wykonanie programu uruchamiamy za pomocą polecenia <b>java (np. java Test)</b></li>
+</ul>
+</div>
+
+
+<br>
+<p>Uwagi:<br>
+<ol>
+  <li>Program źródłowy może być zapisany w wielu plikach z rozszerzeniem
+.java; w każdym pliku musi występować pełna definicja jednej lub kilku klas.</li>
+
+  <li>Nazwa pliku powinna być dokładnie (a więc uwzględniając wielkie i małe
+litery) taka sama jak nazwa publicznej  klasy zdefiniowanej w tym pliku (czyli klasy z kwalifikatorem <b>public</b>; co
+to jest klasa publiczna - dowiemy się później). W  pliku źródłowym może wystąpić tylko jedna klasa publiczna.</li>
+
+  <li>Uruchamiając maszynę wirtualną (polecenie <b>java</b>) podajemy jako argument nazwę klasy, w której jest
+zdefiniowana metoda main. Nie podajemy rozszerzenia pliku (".class") czyli:
+java Test a nie java Test.class.</li>
+
+</ol>
+
+<p>Nasz pierwszy program może wyglądać tak:<br>
+<br>
+
+<pre>
+<font color="#3333ff"><b>public class</b></font> Test <font color="#ff0000"><b>{</b></font><font color="#3333ff"><b>
+
+   public static void</b></font> main( String[] args ) <b><font color="#33cc00">{
+      </font></b>System.out.println( "Dzień dobry!")<b>;</b>
+   <b><font color="#33cc00">}</font></b> 
+<b><font color="#ff0000">
+}</font></b>
+</pre>
+
+<p>Komentarze:<br>
+<ol>
+
+  <li>Słowa kluczowe języka zaznaczono na niebiesko.<br>
+</li><li>Na razie nie przejmujemy się dziwnymi słowami (public, void itp.). Dowiemy się o nich z następnych wykładów.<br>
+  </li>
+  <li>Program w Javie zawsze składa się  z definicji klas. Tu mamy zdefiniowaną
+jedną klasę o nazwie Test. Do definiowania klas służy słowo kluczowe <b>class</b>. Samą definicję klasy podajemy w następujących potem nawiasach klamrowych. Nawiasy te zaznaczono na czerwono.</li>
+
+  <li>W klasie Test została zdefiniowana metoda o nazwie  main (czyli coś bardzo podobnego do funkcji)</li>
+
+<li>Ciało metody zapisujemy w nawiasach klamrowych (zaznaczone na zielono).<br>
+  </li>
+
+  <li>Wykonanie programu zacznie się właśnie od metody main, ale musi ona
+mieć dokładnie taki nagłówek jak podano (public static void main(String[ ]
+args)), z tym wyjatkiem, że słowo args możemy zastąpić innym (jest to nazwa
+zmiennej).</li>
+
+<li>Jak widać, metoda main ma parametr o nazwie args. Oznacza
+on tablicę łańcuchów znakowych (obiektów typu String) - która zawiera argumenty
+przekazane przy uruchomieniu programu (np. podane w wierszu poleceń sesji
+znakowej). W naszym programie nie korzystamy z tych argumentów.<br>
+  </li>
+
+  <li>W metodzie main wywołujemy metodę <i><b>println</b></i> (już dla nas
+przygotowaną i znajdującą się w "bibliotece" standardowych klas języka),
+która wyprowadza przekazany jej argument na konsolę. Wywołanie metody stanowi
+wyrażenie. Kończąc je średnikiem przekształciliśmy je w <b>instrukcję</b> programu
+"do wykonania".</li>
+  <li>Na razie nie przejmujemy się tym po co i dlaczego trzeba pisać System.out.println. Dowiemy się tego później.</li>
+  <li>Argument podany w wywołaniu metody println - to literał łańcuchowy
+(napis podany literalnie). Pojęcie literału łancuchowego znamy już z poprzedniego wykładu.</li>
+  <li>Zapisany program musimy skompilować: javac Test.java (lub środkami IDE)</li>
+  <li>W rezultacie otrzymamy plik Test.class</li>
+  <li>Uruchamiamy program ( w IDE lub  pisząc: java Test). Program wyprowadzi na konsolę napis "Dzień dobry!" <br>
+  </li>
+</ol>
+<br>
+
+<div class="notel">Trzeba jednak pamiętać, że obowiązuje nas przejrzysty <b>styl programowania</b>. Elementy stylu będziemy poznawać sukcesywnie przy omawianiu języka. W omawianym
+przykładzie zastosowaliśmy wcięcia i odpowiednie rozmieszczenie nawiasów
+klamrowych
+</div>
+
+<div class="ddd">
+<br><A NAME="EDU.skorowidz.termin Java styl_programowania 29_287"></A> Przy kompilacji programu znaki spacji, tabulacji, końca wiersza
+(tzw. whitespaces) występujące <b>pomiędzy</b> konstrukcjami składniowymi
+języka (takimi jak nazwy zmiennych, metod, słowa kluczowe, literały itp.)
+są pomijane. Zatem możemy dowolnie "formatować" kod programu (dzielić na
+wiersze, umieszczać dodatkowe spacje np. po nawiasie otwierającym listę argumentów
+wywołania metody).
+</div>
+
+<br clear="all">
+
+<p>Przy kompilacji pomijane są również komentarze.<br><A NAME="EDU.skorowidz.termin Java komentarz 29_288"></A> W Javie mamy trzy rodzaje komentarzy:<br>
+<ul>
+  <li>teksty umieszczone w jednym wierszu programu po znakach <b>//</b> (komentarze jednowierszowe; cały tekst po znakach // do końca wiersza traktowany jest jako komentarz),</li>
+  <li>teksty umieszczone pomiędzy znakami /* i */ (teksty te mogą obejmować kilka wierszy),</li>
+  <li>teksty umieszczone pomiędzy znakami /** i */ (komentarze dokumentacyjne,
+które sa przetwarzane przez oprogramowanie tworzące dokumentację, np. javadoc;
+mogą obejmować kilka wierszy).</li>
+</ul>
+
+<p>Przykład:<br>
+<br>
+
+<pre>
+/**
+ Klasa TestComm pokazuje
+ użycie komentarzy
+ (to jest komentarz dokumentacyjny)
+*/
+
+public class TestComm {
+
+  /*
+     to jest komentarz
+     wielowierszowy
+  */
+
+  /* to też jest
+     komentarz */
+
+  // a to komentarz jednowierszowy
+
+   public static void main( String[] args ) {
+      // i tu też komentarz
+      System.out.println( "Zob. komentarze" );   // i tu też
+   }
+
+}
+</pre>
+
+<p>Oczywiście, komentarze nie mogą rozdzielać jednolitych konstrukcji składniowych
+(np. znajdować się "w środku" nazwy zmiennej czy metody).<br>
+<br><A NAME="EDU.skorowidz.termin Java błędy_w_kompilacji 29_289"></A> W trakcie kompilacji programu sprawdzana jest jego składniowa poprawność.
+Kompilacja może więc zakończyć się niepowodzeniem (wtedy nie dostaniemy pliku
+.class), a kompilator powiadomi nas o tym gdzie i jakie błędy wystąpiły.<br>
+Np. gdybyśmy w naszym programie testowym zapomnieli zamknąć nawias okrągły w wywołaniu metody println: <br>
+
+<pre>
+System.out.println( "Dzień dobry!"<b>;</b>
+</pre>
+
+<p>to kompilator wyprowadziłby następujący komunikat:<br><br>
+
+<div class="listing100">
+Test.java:4: ')' expected<br>
+      System.out.println( "Dzień dobry!";<br>                                        ^<br>
+1 error
+</div>
+
+<br>
+<p>Mamy tu wyraźnie powiedziane, że błąd wystąpił w 4 wierszu pliku Test.java,
+że oczekiwany był okrągły nawias zamykający (a zabrakło go), przy czym miejsce
+w którym wystąpił problem wskazane jest znakiem ^.<br>
+<br>
+Nie zawsze komunikaty z kompilacji będą tak klarowne. Czasami błąd  nie będzie
+dokładnie zlokalizowany (informacja będzie wskazywać na inny wiersz niż ten,
+w którym wystąpił błąd). Musimy wtedy głębiej zastanowić się nad przyczyną
+błędu i przeanalizować poprawność poprzedzających wierszy programu.<br>
+<br>
+Program, który przeszedł etap kompilacji jest poprawny składniowo, ale jego
+wykonanie niekoniecznie musi być poprawne. Mogą w nim bowiem wystąpić tzw.<A NAME="EDU.skorowidz.termin Java błędy_fazy_wykonania 29_290"></A> błędy fazy wykonania.<br>
+Na przykład, poniższy program kompiluje się bezbłędnie,<br>
+<br>
+
+<pre>
+public class TestRTE {
+
+   static String napis;
+
+   public static void main( String[] args ) {
+      System.out.println( napis.length()  );
+   }
+</pre>
+
+<p>
+ale przy jego wykonaniu wystąpi błąd:<br>
+<br>
+
+<div class="listing100">Exception in thread "main" java.lang.NullPointerException<br>
+        at TestRTE.main(TestRTE.java:7)</div>
+
+<br>
+<p>bowiem próbujemy pobrać długość łańcucha znakowego (napis), który
+nie istnieje. Zresztą przyczyna nie jest tu istotna, teraz ważne jest tylko
+byśmy wiedzieli, że  błąd wykonania może wystąpić mimo pomyślnej kompilacji).<br>
+Zwrócmy uwagę, że Java nazywa takie błędy<A NAME="EDU.skorowidz.termin wyjątek 29_291"></A> <b>wyjątkami</b> (<i><b>exception</b></i>) i że JVM podaje jaki rodzaj wyjątku wystąpił, w jakiej klasie i w jakiej metodzie i który wiersz w programie go spowodował.<br>
+<br>
+W końcu warto jeszcze raz podkreślić oczywistą prawdę, że nawet jeśli program
+nie ma błędów składniowych (kompilacja pomyślna) i nie występują błędy fazy
+wykonania - to jeszcze nie znaczy, że jest on poprawny.<br>
+Na przykład taki program przejdzie pomyślnie kompilację i wykona się bez błędów (zgłaszanych przez JVM):<br>
+
+<pre>
+public class TestBad {
+
+   public static void main( String[] args ) {
+      System.out.println("2 + 2 = " + (2 - 2) );
+   }
+
+}
+</pre>
+
+<br>
+
+<div class="listing25r">2 + 2 = 0</div>
+
+<div class="ddd"><br>
+ale wyprowadzi (raczej) niepoprawny wynik, bo wygląda na to,
+że programista pomylił się i zamiast operatora + użył operatora -.</div>
+<br clear="all">
+<p>
+Takie błędy są najtrudniejsze do wykrycia, a ich unikanie (czy walka z nimi) wymaga:<br>
+<ul>
+  <li>tworzenia poprawnych algorytmów,</li>
+  <li>starannego ich zapisu w języku programowania,</li>
+  <li>pieczołowitego testowania gotowego programu, przy różnych danych wejściowych
+i oceny czy wyniki podawane przez program są poprawne.<br>
+  </li>
+</ul><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index28.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

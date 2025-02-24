@@ -1,0 +1,46 @@
+BODY {
+	FONT-FAMILY: verdana; BACKGROUND-COLOR: #e6f0eb;
+}
+
+A.MENU0,A.MENU0:link, A.MENU0:visited  {
+	FONT-FAMILY: verdana; COLOR: darkslategray; TEXT-DECORATION: none; FONT-SIZE: 11px; text-align: left; line-height:12px;
+}
+
+A.MENU0:hover {
+	FONT-FAMILY: verdana; COLOR: black; TEXT-DECORATION: underline; FONT-SIZE:11px; text-align: left;  line-height: 12px;
+}
+
+A.MENU1,A.MENU1:link, A.MENU1:visited  {
+	FONT-FAMILY: verdana; COLOR: darkslategray; TEXT-DECORATION: none; FONT-SIZE: 11px; text-align: left; line-height:12px;
+}
+
+A.MENU1:hover {
+	FONT-FAMILY: verdana; COLOR: #000000; TEXT-DECORATION: underline; FONT-SIZE:11px; text-align: left;  line-height: 12px;
+}
+
+
+A.MENU11,A.MENU11:link, A.MENU11:visited  {
+	FONT-FAMILY: verdana; COLOR: darkslategray; TEXT-DECORATION: none; FONT-SIZE: 11px; text-align: left; line-height:12px; font-style: normal; font-weight: normal;
+}
+
+A.MENU11:hover {
+	FONT-FAMILY: verdana; COLOR: #000000; TEXT-DECORATION: underline; FONT-SIZE:11px; line-height: 12px; font-weight: normal;
+}
+
+.menunow {
+	FONT-FAMILY: verdana; COLOR: #0000CC; TEXT-DECORATION: none; FONT-SIZE:8pt;  line-height: 9pt; font-weight: normal;
+}
+A.menunow, A.menunow:link, A.menunow:visited {
+	FONT-FAMILY: verdana; COLOR: #0000CC; TEXT-DECORATION: underline; FONT-SIZE:8pt;  line-height: 9pt; font-weight: normal;
+}
+A.menunow:hover {
+	FONT-FAMILY: verdana; COLOR: #00CC00; TEXT-DECORATION: underline; FONT-SIZE:8pt; line-height: 9pt; font-weight: normal;
+}
+.menulink,A.menulink,A.menulink:link, A.menulink:visited  {
+	FONT-FAMILY: verdana; COLOR: darkslategray; TEXT-DECORATION: none; FONT-SIZE: 8pt; line-height:9pt; font-style: normal; font-weight: normal;
+}
+A.menulink:hover {
+	FONT-FAMILY: verdana; COLOR: #000000; TEXT-DECORATION: underline; FONT-SIZE:8pt; line-height: 9pt; font-weight: normal;
+}
+
+

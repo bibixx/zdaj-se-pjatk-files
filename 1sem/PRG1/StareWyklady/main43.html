@@ -1,0 +1,665 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index44.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 1"></A><div class="tytulpunktu">1. Obiekty i referencje</div>
+
+<a name="W6.1"></a>
+
+<p><A NAME="EDU.skorowidz.termin obiekt 43_397"></A> Za wyjątkiem operacji na liczbach, programowanie w Javie - tak naprawdę -
+polega na posługiwaniu się obiektami. Jak pamiętamy z wykładu 4 obiekty są
+egzemplarzami klas. <br><A NAME="EDU.skorowidz.termin łańcuch_znakowy 43_398"></A> Np. łańcuchy znakowe (napisy) są egzemplarzami klasy<A NAME="EDU.skorowidz.termin String 43_399"></A> String, a klasa ta definiuje
+wspólne właściwości tego rodzaju obiektów (napisów). Klasa String jest jedną
+z wielu klas "standardowych", dostarczonych wraz ze środowiskiem Java 2 SDK,
+już gotową do wykorzystania przez programistę. Klasy możemy definiować sami
+(za chwilę zobaczymy jak), możemy także korzystać z klas, które przygotowali
+jacyś inni programiści (i które nie wchodzą w skład klas "standardowych").<br>
+
+
+Przypomnijmy sobie również, że na obiektach operujemy wydając im polecenia
+(komunikaty do obiektów), a wydawanie poleceń nazywane jest wywoływaniem
+metod (odpowiednika pojęcia funkcji) na rzecz obiektów.<br>
+<br>
+
+
+Wyobraźmy sobie teraz, że ktoś przygotował dla nas klasę o nazwie Para  i
+że jej obiekty są parami liczb całkowitych tzn. każdy obiekt składa się z
+dwóch elementów -  liczb całkowitych (pierwszego składnika pary i drugiego
+składnika pary). <br>
+
+
+To co możemy robić z obiektami klasy Para określone jest przez zestaw metod
+tej klasy (poleceń, które można wydawać obiektom-parom liczb całkowitych).
+Wyobraźmy sobie dalej, że w klasie Para są zdefiniowane następujące polecenia
+(metody):<br>
+<ul>
+<li>o nazwie set  - ustalająca wartość pary (obu składników pary)</li><li>i o nazwie show - pokazująca parę (wyprowadzająca na konsolę oba składniki pary) <br></li>
+</ul>
+
+<p>Ta informacja wystarczy nam teraz by posługiwać się obiektami klasy Para (jej budowę poznamy w następnych wykładach).<br>
+<br>
+Co trzeba zrobić, żeby ustalić wartość pary i wyprowadzić ją na konsolę?<br>
+<br>
+
+
+Po pierwsze, musimy mieć zmienną, która będzie oznaczać obiekt- parę.<br>
+
+
+Po drugie, musimy utworzyć obiekt-parę.<br>
+
+
+Po trzecie, temu obiektowi trzeba wydać polecenia set i show.<br>
+<br>
+
+
+Może to wyglądać w następujący sposób:<br>
+
+<pre>
+public class ParaSetAndShow {
+
+  public static void main(String[] args) {
+
+    Para para1 = new Para(); // 1
+    para1.set( 1, 2 );       // 2
+    para1.show();            // 3
+
+  }
+}
+</pre>
+
+<br>
+
+<div class="listing33r">Wydruk działania programu:<br>
+( 1 , 2 )</div>
+
+<div class="ddd">Po kolei:</DIV><br clear="all"><br>
+
+<ul>
+<li>w wierszu oznaczonym 1 deklarujemy zmienną o nazwie para1 i <b>tworzymy obiekt</b> parę za pomocą <b>wyrażenia new</b> (jak widać <b><i>wyrażenie new</i></b> składa się ze słowa kluczowego <b>new</b>
+  i następującej po nim nazwie klasy obiektu oraz nawiasów okrągłych, w których
+- jak się można domyslić - podawane mogą być - jako argumenty - informacje
+niezbędne do tworzenia obiektu. Tu nie podajemy takich informacji. Po następnym
+wykładzie będziemy dobrze rozumieć dlaczego wyrażenie new ma taką formę);</li>
+
+<li>teraz mamy już (jeden) obiekt-parę i zmienną (o nazwie para1) za pomocą której będziemy na tym obiekcie operować;</li>
+
+<li>w wierszu // 2 do obiektu oznaczanego przez zmienną para1 posyłamy
+polecenie set. Aby posłać polecenie musimy wybrać jakiego konkretnie obiektu
+ma ono dotyczyć. Temu wyborowi służy kropka (.), nazywana <b>selektorem</b>
+. Gdy piszemy para1. - znaczy to, że następujące po kropce polecenie ma być
+wysłane do obiektu oznaczanego przez zmienną para1.  Poleceniem tym jest
+set. W nawiasach okrągłych podajemy jego argumenty (dodatkową informację,
+która ma być uwzględniona przy wykonaniu polecenia). W tym przypadku pierwszy
+argument jest wartością, która ma być nadana pierwszemu składnikowi pary,
+a drugi - drugiemu. W sumie para1.set( 1, 2); znaczy:  ustalić wartość pierwszego
+elementu obiektu (składnika pary) oznaczanego przez zmienną para1 na 1, a
+drugiego elementu (składnika pary) - na 2;</li><li>w wierszu // 3 do obiektu, oznaczanego przez para1 posylamy komunikat
+show ("pokaż się") i w rezultacie na konsolę wyprowadzana jest "wartość pary",
+w tym przypadku podana jako ( wartość_pierwszego_skladnika , wartość_drugiego_skladnika
+) czyli ( 1 , 2 );<br></li>
+</ul>
+
+<p>
+Nieco niepokojące jest w tym opisie ciagłe używanie sformułowania "obiektu
+oznaczanego przez  (zmienną) para1". Czyż nie łatwiej byłoby mowić: obiektu para1, tak
+jak mówimy np liczby calkowitej x? I w ogóle czym jest, tak naprawdę, zmienna
+para1?<br>
+
+
+Widzimy wyraźnie, że została ona zadeklarowana, ale jednocześnie pojawił się nieco dziwny punkt o tworzeniu obiektu.<br>
+
+
+Co by się stało gdybyśmy po prostu napisali:<br>
+<br>
+
+
+Para para1;<br>
+
+
+para1.set( 1, 2 );<br>
+
+
+para1.show();<br>
+<br>   Jak już było powiedziane, deklaracje zmiennych, które oznaczają obiekty
+zapisujemy w analogiczny sposób jak deklaracje zmiennych typów pierwotnych.<br>
+<br>
+
+
+int x;      // deklaracja zmiennej typu int<br>
+
+
+Para p; // deklaracja zmiennej p, za pomocą której możemy operować na obiektach klasy Para<br>
+
+
+Pomiędzy tymi deklaracjami występuje jednak subtelna różnica znaczeniowa.<br>
+<br><A NAME="EDU.skorowidz.termin deklaracja_zmiennej 43_400"></A> Otóż, deklaracja zmiennej x wydziela pamięć dla przechowywania liczby całkowitej
+(cztery bajty). W tym momencie x jest synonimem jednostki danych - liczby
+całkowitej.<br>
+
+
+Piszemy np.  x = 4; i do miejsca pamięci oznaczanego przez zmienną x wpisywana jest liczba 4. Wygląda to mniej więcej tak:<br><br>
+
+<div>
+<img src="images/IntDcl.jpg" alt="Rys" width="500" height="143" border="1">
+</div>
+<br>
+
+
+<div class="notel">W innych językach programowania (np. C++) mówi się, że jest to deklaracja wraz z definicją
+</div>
+
+<div class="ddd">
+<br>
+Zatem sama deklaracja zmiennej calkowitoliczbowej x tworzy "obiekt" - liczbę
+całkowitą (przed ustaleniem wartości zmiennej liczba ta ma jakąś domyślną
+wartość, być może 0).
+</div>
+
+<br clear="all">
+
+
+<p><A NAME="EDU.skorowidz.termin deklaracja_zmiennej 43_401"></A> W przypadku deklaracji zmiennej, która może oznaczać obiekt jakiejś klasy
+sytuacja jest zupełnie inna. Deklaracja nie tworzy obiektu (nie wydziela
+pamięci do przechowywania obiektu klasy).<br><A NAME="EDU.skorowidz.termin obiekt tworzenie 43_402"></A> <b>Sam obiekt musi być dopiero utworzony - za pomocą wyrażenia <big>new</big>.</b><br>
+
+
+Jego zastosowanie powoduje przydzielenie pamięci dla obiektu w dynamicznej
+(zmieniającej się w trakcie działania programu) części pamięci, zwanej <b>stertą</b>.<br>
+
+
+Wynikiem wyrażenia new jest adres (lokalizacja) miejsca w pamięci, przydzielonego
+obiektowi. Ten adres możemy przypisać zmiennej, za pomocą której chcemy na
+danym obiekcie operować.<br>
+<br>
+
+
+Np. deklaracja: <br>
+<br>
+
+
+            Para p;<br>
+<br>
+<b>nie tworzy</b> obiektu klasy Para.<br>
+<br>
+
+ A jeśli nie ma obiektu, to nie możemy posłać do niego żadnego komunikatu
+(wydać polecenia, wywołać na jego rzecz metody). Zatem, w tym kontekście,
+p.set(...) i p.show() będą niepoprawnymi odwołaniami.<br>
+<br>
+
+
+Zatem zmienna p nie zawiera obiektu Para.<br>
+
+
+Może natomiast zawierać jego lokalizację (adres w pamięci) - inaczej nazywaną <b>referencją</b> do obiektu.<br>
+<br><A NAME="EDU.skorowidz.termin referencja 43_403"></A> 
+
+<div class="def"><b>Referencja</b> to wartość, która oznacza lokalizację (adres) obiektu w pamięci </div>
+<br>
+<p>
+
+Obiekt klasy Para możemy utworzyć używając wyrażenia new Para(), a przypisując
+wartość tego wyrażenia zmiennej p, uzyskujemy możliwość operowania na tym obiekcie:<br>
+<br>
+
+
+
+Para p;<br>
+
+
+p = new Para();<br>
+<br>
+
+
+co wcześniej, w skrócie, zapisywaliśmy stosując inicjację przy deklaracji:<br>
+<br>
+
+
+Para p = new Para(); <br>
+<br>
+<br>
+
+
+Dokładnego wyjaśnienia dostarcza poniższy ideowy schemat <br><br>
+<div>
+<img src="images/Reference.jpg" alt="Rys" width="484" height="266" border="1">
+</div>
+
+<br>
+
+<div class="notel33">W literaturze polskiej rozróżnia się czasem dwa pojęcia:<br>
+<ul>
+<li>odniesienie - to co tutaj nazywamy referencją do obiektu, lokalizacją, adresem obiektu.</li>
+<li>odnośnik - zmienną, której wartością jest odniesienie</li>
+</ul>
+
+Nota bene, w niniejszych wykladach będziemy posługiwać się czasem terminem "referencja" na
+oznaczenie obu tych pojęć.. Różnice będą zawsze jasne z kontekstu.  <br>
+
+</div>
+
+<div class="ddd">
+<br><A NAME="EDU.skorowidz.termin odniesienie 43_404"></A> gdzie:<br>
+<ol>
+<li>Przydzielenie pamięci zmiennej p do przechowania referencji do obiektu.
+Referencja jest nieustalona, ma wartość null, co oznacza, że nie odnosi się
+do żadnego obiektu.</li>
+
+<li><A NAME="EDU.skorowidz.termin odnośnik 43_405"></A> Opracowanie wyrażenia new powoduje przydzielenie pamięci dla obiektu
+klasy Para na stercie pod jakimś wolnym adresem (tu symbolicznie 1304). Wielkość
+przydzielonego obszaru jest wystarczająca, by zmieścić dwie liczby całkowite
+(składniki pary). W tym momencie oba skladniki pary równe są 0.</li><li>Wartością wyrażenia new jest referencja (adres 1304). Jest ona umieszczana w uprzednio przydzielonym zmiennej p obszarze pamięci</li><li>Zmienna p ma teraz wartość = referencji do obiektu klasy Para, któremu w kroku 2 przydzialono pamięć na stercie (adres 1304). <br></li>
+</ol>
+</div>
+<br clear="all">
+
+
+<p>Zatem zmienna p w naszym przykładzie zawiera (w końcu) referencję do obiektu klasy Para. Powiemy też "<b>wskazuje na obiekt</b>". Powiemy też czasem w skrócie: <b>jest referencją</b>. <br>
+
+
+I: "referencja wskazuje na obiekt".  <br>
+
+
+Mówiliśmy wcześniej: "zmienna p <b>może oznaczać</b>
+ obiekt klasy Para" w tym właśnie sensie, iż może zawierać referencję do obiektu
+klasy Para (zatem jakoś go "oznaczać", ale na pewno nie zawierać). A dlaczego
+<i><b>może</b></i>? Bo nie zawsze zawiera referencję do obiektu, czasami
+(np. zaraz po deklaracji bez inicjacji) nie zawiera referencji do żadnego
+obiektu (bo żaden nie został jeszcze utworzony).   <br>
+<br>
+
+
+ Powstaje pytanie - jakiego typu jest zmienna p i wszystkie podobne zmienne, te o których mówiliśmy, że mogą oznaczać obiekty?<br>
+<br><A NAME="EDU.skorowidz.termin typ_referencyjny 43_406"></A> Otóż w Javie oprócz typów numerycznych i typu boolowskiego istnieje jeszcze tylko jeden typ - <b>typ referencyjny</b>.<br>
+<br>
+
+
+<div class="important">
+Wszystkie zmienne deklarowane z nazwą klasy w miejscu nazwy typu są zmiennymi
+typu referencyjnego. Zmienne te mogą zawierać referencje do obiektów lub
+nie zawierać żadnej referencji (nie wskazywać na żaden obiekt).</div>
+<br>
+<p>
+
+
+Wartość zmiennej typu referencyjnego, która nie zawiera referencji do obiektu równa jest <b>null</b>. Słowo null jest słowem kluczowym języka<br>
+<br>
+
+
+Zatem dopuszczalne wartości zmiennych typu referencyjnego - to referencje
+do obiektów lub wartość<A NAME="EDU.skorowidz.termin null 43_407"></A> <i><b>null</b></i>. Tak samo jak <i><b>1</b></i> jest literałem typu int - <i><b>null</b></i>
+jest literałem typu referencyjnego.<br>
+<br>
+
+<div class="notel33">Referencje są bardzo podobne do wskaźników w C, z tą istotną
+różnicą, że nie ma w Javie arytmetyki "na referencjach". Dzięki temu programowanie
+w Javie jest bardziej odporne na błędy.  Arytmetyka wskaźnikowa w C  jest
+częstą przyczyną błędów, gdyż pozwala sięgać do dowolnego miejsca w pamięci
+(np. poprzez zwiększanie wskaźnika, który wskazuje na obszar przydzielony
+jakiejś zmiennej). </div>
+
+<div class="ddd">
+<br><A NAME="EDU.skorowidz.termin referencja porównywanie 43_408"></A> Dla wartości typów referencyjnych (które to wartości
+w istocie są liczbami, bo adresy obiektów są liczbami) nie są dopuszczalne
+operacje arytmetyczne.<A NAME="EDU.skorowidz.termin referencja przypisanie 43_409"></A> Możemy natomiast:<br>
+<ul>
+<li>porównywać referencje na równość (==) lub nierówność (!=),</li><li>przypisywać im wartości innych referencji oraz wartość <i><b>null</b></i><br></li>
+</ul>
+</div>
+
+<br clear="all">
+
+<p>Musimy zawsze pamiętać, że operacje te (wykonywane na zmiennych, oznaczających
+obiekty) dotyczą referencji, a nie obiektów (na obiektach, ich wnętrzu operujemy
+za pomocą metod, poleceń posyłanych do obiektów za pośrednictwem referencji
+i  za pomocą "operatora" kropka).<br>
+<br>
+
+
+Wyobraźmy sobie, że na dwóch "danych" - liczbach całkowitych i na dwóch "danych"
+- obiektach klasy Para wykonujemy podobne operacje:<br>
+<ol>
+<li>Nadanie wartości pierwszej danej, nadanie wartości drugiej danej,</li>
+
+<li>Przypisanie <b>zmiennej</b> oznaczającej drugą daną <b>wartości zmienej</b> oznaczającej pierwszą daną,</li>
+
+<li>Zmianę wartości drugiej danej,</li>
+
+<li>Porównanie <b>zmiennych</b>, oznaczających obie dane.</li>
+</ol>
+
+
+<p>A dodatkowo (w obu przypadkach) wprowadzimy trzecią daną, której wartość ustalimy na wartość drugiej i porównamy <b>zmienne</b> oznaczające te dane (drugą i trzecią). <br>
+
+
+Program mógłby wyglądać tak:<br>
+<br>
+
+<pre>
+public class Roznica {
+
+  public static void main(String[] args) {
+
+    // Operacje na zmiennych typów pierwotnych
+    int x, y, z;
+    x = 3;
+    y = 4;
+    x = y;
+    y = 5;
+    z = 5;
+    System.out.println("x = " + x);
+    System.out.println("y = " + y);
+    System.out.println("z = " + z);
+    if (x == y) System.out.println ("x i y równe.");
+    else  System.out.println ("x i y nierówne.");
+    if (y == z) System.out.println ("y i z równe.");
+    else  System.out.println ("y i z nierówne.");
+
+
+    // Podobne operacje na zmiennych typu referencyjnego
+    Para px = new Para(), py = new Para(), pz = new Para();
+    px.set( 3, 3 );
+    py.set( 4, 4 );
+    pz.set( 5, 5 );
+    px = py;
+    py.set( 5, 5 );
+    System.out.print("Para px: "); px.show();
+    System.out.print("Para py: "); py.show();
+    System.out.print("Para pz: "); pz.show();
+    if (px == py) System.out.println ("px i py równe.");
+    else  System.out.println ("px i py nierówne.");
+    if (py == pz) System.out.println ("py i pz równe.");
+    else  System.out.println ("py i pz nierówne.");
+
+  }
+}
+</pre>
+
+<br>
+
+<div class="listing33r">x = 4<br>
+
+
+y = 5<br>
+
+
+z = 5<br>
+
+
+x i y nierówne.<br>
+
+
+y i z równe.<br>
+
+
+Para px: ( 5 , 5 )<br>
+
+
+Para py: ( 5 , 5 )<br>
+
+
+Para pz: ( 5 , 5 )<br>
+
+
+px i py równe.<br>
+
+
+py i pz nierówne.<br>
+
+
+</div>
+
+<div class="ddd">
+<br>
+Wynik działania programu (obok) może wyglądać zaskakująco dla kogoś, kto nie uświadomi sobie <b>braku</b>
+ różnicy pomiędzy operacjami na zmiennych typów pierwotnych i referencyjnych
+(myśląc że zmienne typów referencyjnych zawierają obiekty).  Otrzymany rezultat
+wynika z następujących faktów:<br>
+<ul>
+<li>wyrażenie new Para() zwraca referencję do nowoutworzonego obiektu klasy
+Para; uzyskiwane referencje przypisywane są zmiennym typu Para (który jest
+typem referencyjnym)<br></li>
+
+<li>użycie metody (polecenia) set  ustala wartości danych w obiekcie klasy
+Para; do obiektu odwołujemy się przez referencję, która na niego wskazuje
+(np. px.set(...)</li>
+
+<li>przypisanie px = py powoduje skopiowanie referencji (wskazującej na obiekt-parę o składnikach (4, 4)) do zmiennej
+ px (dotąd wskazującej na obiekt-parę o wartościach (3,3). Od tej chwili
+px i py oznaczają ten sam obiekt (który jest parą o wartościach (4,4)). Do
+obiektu-pary (3,3) nie mamy już w tej chwili żadnego dostępu. </li>
+
+<li>ponieważ
+za pomocą referencji py ustalamy nowe wartości składników pary (py.set(5,5)),
+na którą wskazuje zarówna zmnenna py jak i px, to odwolania show wobec tych
+zmiennych pokażą identyczne wartości (skladniki pary o wartościach 5, 5)<br></li>
+
+<li>
+dalej porównanie referencji px i py da wartość true (bo referencje wskazują
+na ten sam obiekt, a nie dlatego, że wskazują na dwa obiekty o tych samych
+wartościach elementów - składników pary)</li>
+
+<li>o czym dobitnie się przekonujemy porównując zmienne py i pz. Zmienne te
+ wskazują na dwa różne obiekty (zatem wartości tych zmiennych są różne) i
+dlatego wynik porównania jest false, mimo, że wartości elementów obu tych obiektów (składniki pary) są takie same (5, 5).</li>
+</ul>
+</div>
+
+<p>
+Przy okazji warto zastanowić się, co dzieje się obiektem-parą o wartościach
+(3,3) na którą wskazywała najpierw referencja px. Obiekt  ten został utworzony
+na stercie (px = new Para()), a więc zajmuje jakiś obszar pamięci. Następnie
+ustalono wartości jego elementów (składników pary) - px.set(3,3) - a więc
+te wartości zostały wpisane do tego obszaru. Po czym zmiennej px przypisano
+wartość zmiennej py i w ten sposób w programie nie mamy już żadnej referencji
+do tego obiektu. A ponieważ na obiektach możemy dzialać tylko za pomocą referencji,
+to jest on już dla nas bezużyteczny i wyłącznie "zaśmieca pamięć". Czy musimy
+się tym martwić? Gdyby np. takich zaśmiecających pamięć obiektów pojawiło
+się w naszym programie tysiące, to czy nie spowodowołoby to przepełnienia
+pamięci?<br>
+<br>
+
+
+ <div class="notel33">Jest to istotne ułatwienie w porównaniu z takimi językami jak C czy
+C++, gdzie dynamicznie alokowane przez programistę (za pomocą operatorów
+lub funkcji) obszary pamięci muszą być przez programistę świadomie zwalniane</div>
+
+<div class="ddd">
+<br>
+Na szczęście - nie. Bezużyteczne obiekty są automatycznie usuwane z pamięci
+(bez konieczności żadnej ingerencji programisty), mimo, że powstały one na
+skutek wykonania odpowiednich instrukcji zapisanych przez programistę w programie
+(np. Para py = new Para();).
+</div>
+<br clear="all">
+
+<br>
+
+<div class="notec"><A NAME="EDU.skorowidz.termin odśmiecianie 43_410"></A> Obiekty, na które w programie nie wskazuje już żadna referencja są automatycznie usuwane z pamięci. Nazywa się to <b>automatycznym odśmiecaniem</b> (garbage collecting)</div>
+<br>
+<p>
+
+
+Podsumujmy najważniejsze fakty.<br>
+<br>
+
+
+<div class="important"> <br>
+<ul>
+<li><A NAME="EDU.skorowidz.termin obiekt 43_411"></A> obiekty musimy tworzyć za pomocą wyrażenia new ...</li>
+</ul>
+
+<ul>
+<li>na obiektach operujemy za pomocą referencji (które na nie wskazują) i poleceń (metod) zdefiniowanych w klasie obiektów</li>
+</ul>
+
+<ul>
+<li><A NAME="EDU.skorowidz.termin referencja 43_412"></A> referencje nie są obiektami - są adresami obiektów</li>
+</ul>
+
+<ul>
+<li>zmienne typów referencyjnych musimy (tak samo jak zmienne innych typów) deklarować przed ich użyciem w programie</li>
+</ul>
+
+<ul>
+<li>deklaracja zmiennej-referencji nie tworzy obiektu</li>
+</ul>
+
+
+</div>
+
+<br>
+<p>
+
+Programując w Javie, w wielu przypadkach, można nawet nie zdawać sobie z
+tego wszystkiego sprawy. Można pokazać wiele programów obiektowych w Javie,
+które działają poprawnie i wykonują przewidziane dla nich zadania, a zostały
+napisane bez uświadomienia sobie różnicy pomiędzy referencjami i obiektami.
+Dobrym przykładem są aplikacje powitalne z poprzedniego wykładu: można je
+napisać nic nie wiedząc o referencjach i myśląc (błędnie), że zmienne zadeklarowane
+tam jako Frame czy Label zawierają obiekty.<br>
+
+
+Jednak w wielu nawet prostych przypadkach (np. poprzedni program porównujący
+działania na liczbach i na obiektach-parach) brak wiedzy o referencjach może
+doprowadzić do poważnych błędów w programie. Na pewno zaś do napisania nieco
+bardziej skomplikowanych programów uświadomienie sobie różnicy pomiędzy obiektami
+i referencjami jest bardzo istotne. Dlatego poświęciliśmy tej kluczowej sprawie
+sporo miejsca już na początku: byłoby chyba niedobrze zaczynać od  prostszej,
+może bardziej zrozumiałej (nie wspominającej o referencjach), ale z gruntu
+fałszywej interpretacji języka, aby potem - ze zdziwieniem - musieć przestawiać
+swoje myślenie na całkiem inne tory. <br>
+
+
+Dlatego - mimo, że podany tu materiał może wydać się nieco skomplikowany
+- warto mu poświęcić i czas i wysiłek. Nie odkładając tego na poźniej.<br>
+<br>
+
+
+Powiedzmy też szczerze, że model przyjęty przez twórców Javy, jest trudny
+w opisie. Precyzyjne opisy działania programu (ściśle zgodne z modelem) muszą
+roić się od słabo czytelnych zbitek.<br>
+
+
+Na przykład, opis jednej prostej instrukcji:<br>
+<br>
+
+
+  Color x = y.getBackground();<br>
+<br>
+
+
+powinien wyglądac tak:<br>
+<br>
+
+
+ "zmiennej x przypisujemy referencję do obiektu klasy Color zwróconą przez
+metodę getBackground(), wywołaną na rzecz obiektu, do którego referencję
+zawiera zmienna y". <br>
+<br>
+
+
+Sytuacji w niczym nie poprawia użycie terminologii odnośnik i odniesienie: <br>
+<br>
+
+
+"odnośnikowi x przypisujemy odniesienie do obiektu klasy Color, zwrócone
+przez metodę getBackground(), wywołaną na rzecz obiektu, do którego odniesienie
+zawiera odnośnik y".<br>
+<br>
+
+
+Dlatego w dalszej części wykładów będziemy się starali używać uproszczonego języka, stosując swoiste skróty myślowe.<br>
+<br>
+
+
+<div class="important">
+Zawsze pamiętając o różnicy między referencją, zmienną zawierającą referencję
+oraz obiektem będziemy czasem (dla uproszczenia opisów) mówić:<br>
+<ul>
+<li>referencja - nazywając  tak zarówno  adres obiektu, jak i zmienną go zawierającą</li>
+
+<li>obiekt -  mając na myśli referencję do obiektu</li>
+</ul>
+
+
+</div>
+
+<br>
+<p>
+
+
+Na przykład <u>w kontekście</u>:<br>
+<br>
+
+
+JakasKlasa x; <br>
+
+
+...<br>
+
+
+powiemy czasem "referencja x" (gdy będziemy chcieli uwypuklić "wskaźnikowy" charakter zmiennej x)<br>
+<br>
+
+
+a czasem: "obiekt x" (gdy będziemy chcieli podkreślić operowanie na obiekcie, wskazywanym przez referencję zawartą w x)<br>
+<br>
+<u>W kontekście</u> :<br>
+<br>
+
+
+String txt;<br>
+
+
+...<br>
+
+
+powiemy czasem: "łańcuch znakowy txt". <br>
+<br>
+
+
+a w kontekście:<br>
+<br>
+
+
+Frame v;<br>
+
+
+...<br>
+
+
+powiemy czasem "okno v ..." .<br>
+<br>
+<u>Albo w kontekście:</u><br>
+<br>
+
+
+ Color x = y.getBackground();<br>
+<br>
+
+
+powiemy czasem: "uzyskanie koloru tła obiektu y"<br>
+<br>
+<br>
+
+
+Należy pamiętać, że będą to wszystko skróty myślowe, służące do bardziej
+klarownego przedstawienia treści, istoty, wysokopoziomowej semantyki programów.<br>
+<br>
+<font color="#ff0000"><b>I - mimo tych skrótów - zawsze należy pamiętać o różnicy pomiędzy referencjami i obiektami.</b></font></p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index44.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

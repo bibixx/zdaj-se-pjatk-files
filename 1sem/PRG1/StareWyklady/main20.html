@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index19.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index21.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 3"></A><div class="tytulpunktu">3. Tablice</div>
+
+<a name="W3.3"></a>
+
+<p>Często dane w programie będziemy chcieli grupować w pewne zestawy, które
+stanowią logiczną całość, choć składają się z poszczególnych elementów. Taki
+zestaw powinien mieć jedną nazwę (bo przecież oznacza logiczną całość), a
+poszczególne jego elementy powinny być dostępne przez tę nazwę oraz jakąś
+dodatkową informację, pozwalającą odnaleźć element w zestawie.  <br>
+Szczególnym przypadkiem takich zestawów danych są <b>tablice</b>.<br>
+<br><A NAME="EDU.skorowidz.termin tablica 20_166"></A> 
+
+<div class="def"><b>Tablice</b> są zestawami<A NAME="EDU.skorowidz.termin tablica element 20_167"></A> elementów danych, ułożonych na określonych
+<b>pozycjach</b>. Do każdego z tych elementów mamy <b>bezpośredni</b> (<b>
+swobodny</b> - nie wymagający przeglądania innych elementów zestawu) dostęp
+poprzez <b>nazwę tablicy</b> i pozycję elementu w zestawie, określaną przez<A NAME="EDU.skorowidz.termin tablica indeks 20_168"></A> <b>indeks</b> lub indeksy.</div>
+
+<br>
+<p>Wyobraźmy sobie np., że chcemy posługiwać się zestawem dni tygodnia.<br>
+Zestaw ten - tablicę - nazwiemy <b><i>dni</i></b>.<br>
+Kolejne jego elementy (kolejne dni tygodnia) ponumerujemy za pomocą indeksów
+(jedynka będzie oznaczać poniedziałek, dwójka - wtorek itd.).<br>
+Musimy mieć jeszcze jakąś konstrukcję składniową, która pozwoli oznaczać
+kolejne elementy tablicy.<br> W naszym uproszczonym języku (bazującym na
+REXXie) taką konstrukcją - podobnie jak w Javie (C i C++) - będą nawiasy
+kwadratowe, w których umieszczać będziemy indeksy (uwaga: jest to zmiana
+składniowa w stosunku do klasycznego REXXa, zastosowana w uproszczonej, zmodyfikowanej
+wersji tego języka, którą się posługujemy w naszych ćwiczeniach).<br><br>
+Możemy zatem zapisać:<br>
+<br>
+dni[1] = "poniedziałek";<br>
+dni[2] = "wtorek";<br>
+dni[3] = "środa";<br>
+dni[4] = "czwartek";<br>
+dni[5] = "piątek";<br>
+dni[6] =  "sobota";<br>
+dni[7] =  "niedziela";<br>
+<br>
+Jak widać elementy tablic możemy traktować jako zmienne. Zmiennym tym (tak
+jak każdym innym zmiennym) poprzez przypisanie nadawane są podane wartości.<br>
+Nie jest to jedyny sposób ustalenia wartości elementów tablicy.<br>
+<br>
+
+<div class="notel33">Uwaga! W uproszczonym Rexx-ie inicjacja tablicy za pomocą nawiasów klamrowych
+musi znajdować się w jednym wierszu programu i może dotyczyć tylko tablic
+jednowymiarowych.<br>
+Nie wolno przy tym zapomnieć o umieszczeniu pustych nawiasów <b>[ ]</b> po
+nazwie tablicy.</div>
+
+<div class="ddd">
+<br><A NAME="EDU.skorowidz.termin tablica inicjacja 20_169"></A> Tablice możemy <b>inicjować</b> w szybszy sposób za pomocą specjalnych konstrukcji
+syntaktycznych. W naszym uproszczonym, zmodyfikowanym REXXie, inicjacja tablic 
+będzie dokonywana (podobnie jak w Javie) za pomoca nawiasów klamrowych:<br>
+<br>
+dni[] = {"poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota",
+"niedziela" };
+</div>
+
+<br clear="all">
+
+<p>Ten zapis oznacza dokładnie to samo, co poprzedni: elementowi
+z indeksem 1 tablicy <i><b>dni</b></i> nadawana jest wartość "poniedziałek",
+elementowi z indeksem 2 - wartość "wtorek" itd.<br>
+<br>
+Oczywiście, możemy nie tylko ustalać, ale  również pobierać wartości elementów
+tablicy.<br>
+W poniższym programie wypisujemy aktualny dzień tygodnia, korzystając przy
+tym z wbudowanej funkcji <b>date</b>().<br>
+<br>
+
+<pre>
+/* Podaje aktualny dzień tygodnia */
+
+dni[]={"poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota", "niedziela"};
+ldni = date('B'); /* liczba dni od 1 stycznia 0001 */
+nrDnia = ldni // 7 + 1;
+say 'Dzisiaj jest :' dni[nrDnia];
+</pre>
+
+<p>Wbudowana funkcja <i><b>date</b></i> wywołana z argumentem 'B' zwraca liczbę
+dni, które minęły od 1 stycznia 0001 roku (kalendarza gregoriańskiego) do
+wczoraj włącznie. Ponieważ wiadomo, że wtedy była niedziela, to reszta z
+dzielenia tej liczby dni przez 7 da: dla poniedziałku 0, dla wtorku 1,...
+dla niedzieli 6. Dodając do tego wyniku 1 uzyskamy odpowiedni indeks naszej
+tablicy dni.<br>
+<br>
+<font color="#ff6600"><b>Proszę zapisać i uruchomić omawiany wyżej program na własnym komputerze. </b></font><br>
+<br>
+Inny przykład: znów trochę lepsza wersja liczenia ceny komputera. Tym razem
+nazwy składowych komputera i odpowiadające im ceny będziemy przechowywać
+w tablicach. Dzięki temu modyfikacje programu (np. wyszczególnienie większej
+liczby składników) będą bardzo łatwe. Ponadto uzyskamy łatwą (przy poprzednim
+sposobie oprogramowania nieosiagalną ) możliwość interakcyjnej zmiany ceny
+dowolnego wybranego składnika.<br>
+
+<pre>
+/* Obliczenie ceny komputera */
+
+N = 6 /* liczba składników */
+
+/* Tablica nazw składników */
+elt[] = { "Procesor", "Płyta", "Pamięć", "Dysk", "Monitor", "Inne" };
+
+/*
+   Pobieramy ceny każdego składnika
+   i liczymy ich sumę
+*/
+suma = 0
+do i = 1 to N
+   say elt[i] "- podaj cenę: ";
+   cena[i] = linein();
+   suma = suma + cena[i];
+end
+
+say "Cena komputera wynosi :" suma;
+say "Udział ceny procesora :" cena[1]/suma;
+
+/*
+   Dajemy użytkownikowi możliwość
+   zmiany ceny dowolnego składnika
+*/
+say "Którą cenę chcesz zmienić ? Wybierz";
+do i = 1 to n
+   say i '-' elt[i];
+end
+say "Podaj wybrany numer:"
+nr = linein();
+
+/*
+   Podany numer musi zawierać się
+   w zakresie od 1 do N - liczby składników
+*/
+
+if (nr &lt; 1 | nr &gt; N) then do
+   say "Zły wybór";
+   exit;
+end
+
+/* zachowujemy starą cenę wybranego składnika */
+stara_cena = cena[nr];
+
+/*
+   Pobieramy nową cenę wybranego skladnika
+   i obliczamy nową cenę komputera
+*/
+
+say elt[nr] " - wprowadz nową cenę";
+cena[nr] = linein();
+suma = suma - stara_cena + cena[nr];
+
+say "Cena komputera wynosi :" suma;
+say "Udział ceny procesora :" cena[1]/suma;
+</pre>
+
+<br>
+
+<div class="listing33r">
+<i>Przykładowy wydruk działania programu</i><br>
+Procesor - podaj cenę:<br>
+500<br>
+Płyta - podaj cenę:<br>
+500<br>
+Pamięć - podaj cenę:<br>
+500<br>
+Dysk - podaj cenę:<br>
+500<br>
+Monitor - podaj cenę:<br>
+1000<br>
+Inne - podaj cenę:<br>
+500<br>
+Cena komputera wynosi : 3500<br>
+Udział ceny procesora : 0.142857143<br>
+Którą cenę chcesz zmienić ? Wybierz<br>
+1 - Procesor<br>
+2 - Płyta<br>
+3 - Pamięć<br>
+4 - Dysk<br>
+5 - Monitor<br>
+6 - Inne<br>
+Podaj wybrany numer:<br>
+1<br>
+Procesor  - wprowadz nową cenę<br>
+700<br>
+Cena komputera wynosi : 3700<br>
+Udział ceny procesora : 0.189189189
+</div>
+
+<div class="ddd">
+<br>
+W tym programie warto zwrócić uwagę
+na zastosowanie zmiennej o nazwie N dla oznaczenia liczby skladników. Moglibyśmy
+jej nie używać, pisząc <i><b>do i = 1 to 6</b></i>. Ale wtedy zmiana liczby składników pociągałaby za sobą konieczność zmian
+kodu w wielu miejscach programu. Mając <i><b>N</b></i> i pisząc zawsze <i><b>
+do i =1 to N</b></i>, możemy zmienić wartość <i><b>N</b></i> tylko raz, w
+jednym miejscu i w ten sposób mamy zarówno mniej pracy jak i w mniejszym
+stopniu narażeni jesteśmy na błędy.<br>
+<br>
+<font color="#ff6600"><b>Proszę zapisać i uruchomić omawiany wyżej program na własnym komputerze. </b></font>
+</div>
+
+<br clear="all">
+
+<p>Dotąd posługiwaliśmy się tablicami jednowymiarowymi. Nic nie stoi na przeszkodzie,
+by tworzyć i używać<A NAME="EDU.skorowidz.termin tablica_wielowymiarowa 20_170"></A> tablic wielowymiarowych. W naszym uproszczonym REXXie
+odwołania do tablic wielowymiarowych będę miały postać:<br>
+<br>
+                a[i][j][k]...<br>
+<br>
+gdzie kolejne nawiasy kwadratowe służą indeksowaniu w każdym z wymiarów.<br>
+<br>
+Typowym przykładem tablicy dwuwymiarowej jest<A NAME="EDU.skorowidz.termin macierz 20_171"></A> macierz (czyli tablica liczb,
+ułożonych w wierszach i kolumnach).<br>
+Poniższy program realizuje algorytm mnożenia macierzy (dla uproszczenia:
+kwadratowych). Element i-go wiersza i j-ej kolumny macierzy C, będącej iloczynem
+macierzy A i macierzy B,  jest sumą iloczynów elementów i-go wiersza macierzy
+A przez elementy j-ej kolumny macierzy B.<br>
+<br>
+
+<pre>
+/* Mnożenie macierzy kwadratowych */
+
+N = 2;
+
+a[1][1] = 1;  b[1][1] = 2;
+a[1][2] = 2;  b[1][2] = 2;
+a[2][1] = 3;  b[2][1] = 3;
+a[2][2] = 7;  b[2][2] = 2;
+
+do i = 1 to N;
+  do j = 1 to N;
+    c[i][j] = 0;
+    do k = 1 to N;
+       c[i][j] = c[i][j] + a[i][k] * b[k][j];
+    end
+  end
+end
+
+say 'Wynik'
+do i = 1 to N
+  out = '';
+  do j = 1 to N
+    out = out right(c[i][j], 8);
+  end
+  say out;
+end
+</pre>
+
+<br>
+
+<div class="listing33r"> Wynik:<br>
+        8        6<br>
+       27       20
+<br><br>
+</div>
+
+<div class="ddd">
+<br>
+Wynik podajemy "wierszami", składając elementy każdego
+wiersza w zmiennej out. Funkcja right umieszcza swój pierwszy argument (w
+tym przypadku c[i][j] w polu o rozmiarach, podanych jako drugi argument (8)
+z wyrównaniem do prawej strony. Dzięki temu uzyskujemy "ładny" wydruk.
+</div>
+
+<br clear="all">
+
+<p>W tym intuicyjnym wprowadzeniu do tablic pominęliśmy sporo istotnych szczegółów:<br>
+
+<ul>
+  <li>jakie wartości mogą przybierać indeksy?</li><li>czy pierwszy element tablicy zawsze ma ustalony indeks i - jeśli tak - to jaki?<br>
+  </li>
+
+  <li>czy rozmiary tablicy mogą być ustalane w trakcie wykonania programu?</li>
+  <li>czy rozmiary te mogą w trakcie wykonania programu zmieniać się?</li>
+  <li>w jaki sposób tablice są lokowane w pamięci komputera?<br>
+  </li>
+</ul>
+
+<p>Każdy język programowania odpowiada nieco inaczej na te pytania.<br>
+W szczególności w REXXie (również w naszej uproszczonej i zmodyfikowanej
+wersji tego języka) indeksy mogą przybierać dowolne wartości, a tablice są tworzone dynamicznie w trakcie
+działania programu i mogą dynamicznie się rozszerzać. <br><br>
+Natomiast w Javie: <br>
+
+<ul>
+  <li>
+indeksy
+mogą przybierać tylko nieujemne wartości całkowitoliczbowe,</li>
+  <li>
+tablice zawsze są indeksowane od 0 - pierwszy element tablicy ma indeks 0
+(jest to kolejne świadectwo niskopoziomowej składni Javy, przejętej od C:
+nienaturalne zero odzwierciedla techniczne właściwości implementacyjne -
+jest wartością, którą trzeba dodać do adresu początku tablicy by uzyskać
+dostęp do pierwszego jej elementu),</li>
+  <li>
+rozmiary tablicy
+mogą być dynamicznie podane przy jej tworzeniua, </li>
+  <li>
+ale potem nie mogą się już
+zmieniać. </li>
+</ul>
+
+<p>Należy dodać, że do odzwierciedlania bardziej zaawansowanych przypadków - np. dynamicznie
+rozszerzalnych tablic - służą w Javie  inne niż tablice struktury danych, (o czym będziemy mówić w drugim semestrze).
+</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index19.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index21.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

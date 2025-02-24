@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>PRG1 - Temat 06_07</title>
+</head>
+<body>
+<b><font size="+1">Java i podej&#347;cie <a
+ href="../Programy/Code/Obiekty.java">obiektowe</a></font></b>
+<br>
+&nbsp;
+<p><b><u>Zadanie 20</u> (1p)</b>
+</p>
+<p><b>Scharakteryzowa&#263; (na papierze) klas&#281; obiekt&oacute;w
+reprezentuj&#261;cych
+osoby
+(atrybuty-cechy, komunikaty).</b>
+</p>
+<p><b><u>Zadanie 21</u> (1p)</b>
+</p>
+<p><b>Scharakteryzowa&#263; (na papierze) klas&#281; obiekt&oacute;w
+reprezentuj&#261;cych
+student&oacute;w.
+Czy widzisz zale&#380;no&#347;&#263; mi&#281;dzy t&#261; klas&#261;, a klas&#261; z zadania 20?</b>
+</p>
+<p><b><u>Zadanie 22</u> (2p)</b>
+</p>
+<p><b>Scharakteryzowa&#263; (na papierze) klasy obiekt&oacute;w
+reprezentuj&#261;cych na
+p&#322;aszczy&#378;nie:</b>
+</p>
+<p><b>&nbsp;&nbsp;&nbsp; 1. prostok&#261;ty</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 2. okr&#281;gi</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 3. tr&oacute;jk&#261;ty</b>
+</p>
+<p><b>Czy mo&#380;emy zdefiniowa&#263; bardziej og&oacute;lne klasy?</b>
+</p>
+<p><b><u>Zadanie 23</u> (2p)</b>
+</p>
+<p><b>Jakie warto&#347;ci wypisze na konsol&#281; nast&#281;puj&#261;cy fragment programu. </b><b>Odpowiedzie&#263;
+bez pisania programu.</b>
+</p>
+<p><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String s1 = "a";</i>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String s2&nbsp; ="b";</i>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; String s3 = "ab";</i>
+</p>
+<p><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(s1+s2);</i>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.out.println(s3);</i>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(s3==s1+s2);</i>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(s3.equals(s1+s2));</i>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(s3=="a"+"b");</i>
+</p>
+<p><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s1="1";</i>
+</p>
+<p><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(s1+2+3);</i>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println((s1+2)+3);</i>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(s1+(2+3));</i>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(s1+(2/3));</i>
+<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+System.out.println(s1+2/3);</i>
+</p>
+<p><b>Sprawdzi&#263; swoj&#261; odpowied&#378;
+pisz&#261;c
+program, kt&oacute;ry pokazuje wyniki operacji.</b>
+<br>
+&nbsp;
+</p>
+<p><b><u>Zadanie 24</u> (4p)</b>
+</p>
+<p><b>Dane s&#261; 2 klasy: </b><i>Point</i><b> (reprezentuje punkty na
+p&#322;aszczy&#378;nie) oraz </b><i>Circle</i><b> (reprezentuje ko&#322;a na
+p&#322;aszczy&#378;nie). Dost&#281;pne
+s&#261;
+nast&#281;puj&#261;ce metody (komunikaty-us&#322;ugi):</b>
+</p>
+<p><b>Klasa </b><i>Point</i><b>:</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 1.&nbsp;&nbsp;&nbsp; </b><i>int getX()</i><b>:
+zwraca wsp&oacute;&#322;rz&#281;dn&#261; x</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp; </b><i>int getY()</i><b>:
+zwraca wsp&oacute;&#322;rz&#281;dn&#261; y</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp; </b><i>void setX(int a)</i><b>:
+ustawia warto&#347;&#263; wsp&oacute;&#322;rz. x</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp; </b><i>void setY(int b)</i><b>:
+ustawia warto&#347;&#263; wsp&oacute;&#322;rz. y</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp; </b><i>void show()</i><b>:
+wyprowadza informacj&#281; o punkcie</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp; </b><i>double
+distance(Point
+p)</i><b>: zwraca odleg&#322;o&#347;&#263; mi&#281;dzy
+</b><i>naszym</i><b> punktem a punktem&nbsp;
+</b><i>p</i>
+</p>
+<p><b>Obiekty tej klasy tworzy si&#281; nast&#281;puj&#261;co:</b>
+</p>
+<p><i>Point p = new&nbsp; Point(x, y);&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp;&nbsp;&nbsp;
+x</i><b>&nbsp; i&nbsp; </b><i>y</i><b>&nbsp; s&#261; wsp&oacute;&#322;rz&#281;dnymi
+ca&#322;kowitymi
+punktu&nbsp; </b><i>p</i>
+</p>
+<p><b>Klasa </b><i>Circle</i><b>:</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 1.&nbsp;&nbsp;&nbsp;&nbsp; </b><i>Point
+getCenter()</i><b>:
+zwraca &#347;rodek ko&#322;a</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 2.&nbsp;&nbsp;&nbsp;&nbsp; </b><i>int getRadius()</i><b>:
+zwraca promie&#324; ko&#322;a</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 3.&nbsp;&nbsp;&nbsp;&nbsp; </b><i>void
+setCenter(Point
+c)</i><b>: ustawia &#347;rodek ko&#322;a</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 4.&nbsp;&nbsp;&nbsp;&nbsp; </b><i>void
+setRadius(int
+r)</i><b>: ustawia promie&#324; ko&#322;a</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 5.&nbsp;&nbsp;&nbsp;&nbsp; </b><i>void show()</i><b>:
+wyprowadza informacj&#281; o kole</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 6.&nbsp;&nbsp;&nbsp;&nbsp; </b><i>boolean
+inside(Point
+p)</i><b>: sprawdza, czy punkt
+</b><i>p</i><b> le&#380;y wewn&#261;trz </b><i>naszego
+</i><b>ko&#322;a</b>
+<b></b><br>
+<b>&nbsp;&nbsp;&nbsp; 7.&nbsp;&nbsp;&nbsp;&nbsp; </b><i>boolean
+isBigger(Circle
+c)</i><b>: sprawdza, czy </b><i>nasze</i><b> ko&#322;o jest wi&#281;ksze ni&#380;
+ko&#322;o
+</b><i>c</i>
+<br>
+<b>&nbsp;&nbsp;&nbsp; 8.&nbsp;&nbsp;&nbsp;&nbsp; </b><i>double area()</i><b>:
+zwraca pole ko&#322;a</b>
+</p>
+<p><b>Obiekty tej klasy tworzy si&#281; nast&#281;puj&#261;co:</b>
+</p>
+<p><i>Point p = new Point(x,y);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+//&nbsp;&nbsp;&nbsp;&nbsp;
+x</i><b>&nbsp; i&nbsp; </b><i>y</i><b>&nbsp; s&#261; wsp&oacute;&#322;rz&#281;dnymi
+ca&#322;kowitymi
+punktu&nbsp; </b><i>p</i>
+<br>
+<i>Circle c = new Circle(p, r);&nbsp;&nbsp;&nbsp; //&nbsp;&nbsp; <b>ko&#322;o
+</b>c <b>ma
+</b></i><b>&#347;<i>rodek w punkcie </i></b><i>p<b> i </b></i><b>promie&#324;
+ca&#322;kowity
+</b><i>r</i>
+</p>
+<p><b>Korzystaj&#261;c z <a href="Figure.jar">dostarczonych
+definicji klas</a> </b><i>Point</i><b>, </b><i>Circle</i><b>&nbsp;
+napisa&#263; program, kt&oacute;ry tworzy obiekty tych klas i testuje
+dzia&#322;ania
+WSZYSTKICH
+metod.&nbsp; Dane wej&#347;ciowe (wsp&oacute;&#322;rz&#281;dne, promienie) poda&#263; w
+oknach
+dialogowych.</b>
+</p>
+<p><span
+ style="text-decoration: underline; font-style: italic; font-weight: bold;">Uwaga:</span><span
+ style="font-style: italic; font-weight: bold;"> W &#347;rodowisku Eclipse,
+archiwum zawieraj&#261;ce
+klasy </span><span style="font-style: italic;">Point.class</span><span
+ style="font-style: italic; font-weight: bold;"> i </span><span
+ style="font-style: italic;"></span><i style="font-style: italic;">Circle.class</i><span
+ style="font-style: italic; font-weight: bold;"> <a
+ href="../Programy/Soft/Java/Eclipse/javaShow04.htm">nale&#380;y</a>
+umie&#347;ci&#263; w bibliotece do&#322;&#261;czonej do projektu. <br>
+<br>
+</span></p>
+<p><b><u>Zadanie 25</u> (2p)</b>
+</p>
+<b>Zdefiniowa&#263; (i przetestowa&#263; w g&#322;&oacute;wnej funkcji </b><i>main</i><b>)
+metod&#281;:<br>
+<br>
+</b><a href="../Programy/Code/Zad25.java"><span
+ style="font-style: italic;">boolean intersection(Circle c1,
+Circle c2)</span></a><b><br>
+<br>
+kt&oacute;ra otrzymuje jako </b><b>argumenty dwa ko&#322;a typu </b><span
+ style="font-style: italic;">Circle</span><span
+ style="font-weight: bold;"> (z zadania 24</span><b>) oraz zwraca jako
+wynik: </b><span style="font-style: italic;">true</span><b> je&#347;i
+podane ko&#322;a przecinaj&#261; si&#281;, </b><span style="font-style: italic;">false</span><b>
+w przeciwnym przypadku.</b>
+</body>
+</html>

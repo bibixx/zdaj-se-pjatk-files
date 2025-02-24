@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index34.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index36.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Literały</div>
+
+<a name="W5.2"></a>
+
+<p>O typy<A NAME="EDU.skorowidz.termin literał 35_325"></A> literałów troszczy się sam kompilator, stosując przy tym pewne reguły, mianowicie:
+
+<ul>
+<li>każda liczba całkowita zapisana literalnie (np. 100) traktowana jest jako liczba typu <b>int</b>.</li><li>
+każda liczba rzeczywista zapisana literalnie (z kropką dziesiętną - np. 1.2,
+albo w notacji naukowej np. 1e+9) traktowana jest jako liczba typu <b>double</b>,</li><li>każdy literał znakowy (znak w apostrofach) jest typu <b>char</b></li><li>każdy napis <b>true</b> lub <b>false</b> jest literałem logicznym (typ boolean); <b><font color="#ff0000">słowa true i false są słowami zarezerwowanymi języka</font></b>.<br></li>
+</ul>
+
+<p>W niektórych przypadkach programista może zmienić interpretację<A NAME="EDU.skorowidz.termin literał_liczbowy 35_326"></A> literałów <b>liczbowych</b>, stosując specjalne<A NAME="EDU.skorowidz.termin modyfikator 35_327"></A> <b>modyfikatory</b>, mianowicie:<br>
+<ul>
+<li>użycie litery L lub l jako przyrostka liczby całkowitej sprawia, że
+liczba ta będzie traktowana jako typu long (np. 3L - będzie literałem typu
+long)</li><li>użycie f lub F spowoduje, że liczba rzeczywista będzie traktowana jako typu float (np. 0.3f)<br></li>
+</ul>
+
+<p><A NAME="EDU.skorowidz.termin liczba_całkowita 35_328"></A> Liczby całkowite mogą być zapisywane:<br>
+<ul>
+<li>w systemie dziesiętnym - w naturalny sposób (np. 3 lub 121),</li><li>w systemie ósemkowym - poprzez poprzedzenie liczby znakiem 0 (np. 03),</li><li>
+w systemie szesnastkowym - poprzez poprzedzenie liczby znakami 0x lub 0X
+(np. 0x1a, 0X11, 0xFF - zwróćmy uwagę, że cyfry szesnastkowe powyżej 9 mogą
+być zapisywane dużymi lub małymi literami)</li>
+</ul>
+
+
+
+<p><A NAME="EDU.skorowidz.termin liczba_rzeczywista 35_329"></A> Liczby rzeczywisty mogą być zapisywane w notacji naukowej (inżynierskiej)
+z wykorzystaniem litery e lub E np. 2e+9 oznacza 2 pomnożone przez 10 do potęgi 9, 3e-11
+oznacza 3 pomnożone przez 10 do potęgi -11. <br>
+<br>
+
+
+Po co są te wszystkie dodatkowe napisy (przyrostki, modyfikatory) ? Sprawa
+jest oczywista w przypadku zmiany podstawy systemu liczbowego. Literał 10
+jest traktowany jako zapis w sytemie dziesiętnym ( i ma wartość 10). Jeżeli
+chcemy "dać znać", że chodzi nam o liczbę 10 zapisaną w systemie szesnastkowym
+(a jej wartośc dziesiętnie jest już zupelnie inna - 16), to musimy użyć jakiejś
+konwencji (w przypadku Javy przedrostka 0x lub 0X). <br>
+
+
+Ale modyfikatory L czy F - po co?<br>
+
+
+Otóż, niestety kompilator Javy przypisując typ literałom liczbowym nie kieruje
+się wartością zapisanych literalnie liczb. Jak powiedziano - wszystkie literały
+całkowitoliczbowe traktuje jako typu int, a rzeczywiste (czyli z kropką dziesiętną
+lub zapisane w notacji naukowej) - jako double. <br>
+
+
+Zwróćmy jednak uwagę: dane typu int zajmują tylko 4 bajty w pamięci i największa
+liczba, którą można zapisać  w tych czterech bajtach - to 2147483647 (dlaczego
+właśnie taka - wyjaśnimy sobie w jednym z następnych wykładów). Jeśli zatem
+zapiszemy w programie literał 2147483649, to będzie on potraktowany jako
+liczba typu int, tylko niestety nie zmieści się ona w obszarze przeznaczonym
+na przechowywanie takich liczb. Kompilator rozpozna tę sytuację i zgłosi
+błąd. Powinniśmy zatem zapisać literał jako 2147483649L.<br>
+<br>
+
+
+Gorszy przypadek: jeśli zapiszemy operację dodawania dwóch literałów 2147483647
++ 10, to obie liczby będą typu int (i faktycznie zmieszczą się w obszarach
+4 bajtowych). Kompilator nie potrafi przeprowadzić sumowania, wie tylko,
+że dodawane są dwie liczby typu int i zakłada, że wynik będzie też typu int.
+Zatem wydziela "pod wynik" <b>tego wyrażenia</b> obszar 4 bajtowy. A w 4 bajtach wynik się nie
+mieści i dostaniemy nieprawidłowy, bardzo dziwny, rezultat (bez żadnego błędu
+w kompilacji ani w fazie wykonania). Aby tego uniknąć znowu musimy podać
+przyrostek L.<br>
+<br>
+
+
+A co zrobić z wyrażeniem 10/3 - obie liczby są traktowano jako typu int,
+zatem przeprowadzone będzie dzielenie całkowitoliczbowe, które da w wyniku
+3 (a nie 3.33333...). Jeśli chodzi nam o operację na liczbach rzeczywistych,
+to musimy albo użyć przyrostka d (wskazując, że chodzi nam o literał typu
+double, albo podać explicite kropkę dziesiętne w zapisie którejś z liczb
+np. 10.)<br>
+<br>
+
+
+Omówione przypadki pokazuje testowy program.<br>
+<br>
+
+<pre>
+public class LitLicz {
+
+  public static void main(String[] args) {
+
+    System.out.println( 10 + 0x10 );
+    System.out.println( 10/3 );
+    System.out.println( 10./3 );
+    System.out.println( 10d/3);
+    System.out.println( 2147483648L );
+    System.out.println( 2147483647 + 1 );
+    System.out.println( 2147483647L + 1 );
+
+  }
+}
+</pre>
+
+<br>
+
+<div class="listing33r">
+
+
+26<br>
+
+
+3<br>
+
+
+3.3333333333333335<br>
+
+
+3.3333333333333335<br>
+
+
+2147483648<br>
+
+
+-2147483648<br>
+
+
+2147483648<br>
+
+
+</div>
+
+<div class="ddd">Wynik działania programu pokazuje listing obok.</div><br clear="all"><br><A NAME="EDU.skorowidz.termin operacja_na_liczbach_rzeczywistych 35_330"></A> <p>Zanotujmy (do pełniejszego wyjaśnienia w przyszłości) dwie obserwacje:<br>
+<ul>
+<li>Operacje na liczbach rzeczywistych są niedokładne. </li><li>W wyrażeniach podanych w programie wystarczyło zmodyfikować tylko jeden
+z literałów biorących udział w operacji, by otrzymać pożądany wynik(nie pisaliśmy
+10d/3d, wystarczyło napisac 10d/3). Intuicyjnie możemy to rozumieć w ten
+sposób, że typ wyniku operacji określany jest przez "większy" (określający większe możliwe wartości)  z typów biorących
+w niej udział argumentów (w tym przypadku literałów).</li>
+</ul>
+
+<p><A NAME="EDU.skorowidz.termin literał_znakowy 35_331"></A> <b>Literały znakowe</b> (typ char) zapisujemy jako pojedyncze znaki w apostrofach np. 'a' , '+' itp., a<A NAME="EDU.skorowidz.termin literał_łańcuchowy 35_332"></A> <b>literały łańcuchowe</b> (napisy) - jako ciagi znaków w cudzysłowie (np. "ala ma kota").<br>
+<br>
+
+<center>
+<div class="important">Literały łańcuchowe oznaczają obiekty klasy <b>String</b>.</div>
+</center>
+<br>
+
+
+<p>Użycie<A NAME="EDU.skorowidz.termin ukośnik 35_333"></A> lewego ukośnika (backslash) - nazywanego też<A NAME="EDU.skorowidz.termin symbol_ucieczki 35_334"></A> symbolem ucieczki (<A NAME="EDU.skorowidz.termin escape_character 35_335"></A> escape
+character) - pozwala na zapisywanie w literałach znakowych i łańcuchowych
+specjalnych znaków.<br><br>
+
+
+<div class="notel"> Uwaga: ze względu na wczesne opracowywanie literałów niedopuszczalne jest
+stosowanie bezpośrednich kodów Unicode dla znaków LF (\u000a) i CR (\u000d),
+gdyż spowoduje to podział kodu programu, a nie wytworzenie literałow, odpowiadających
+znakom LF i CR. Zamiast tego należy stosowac znaki \n i \r.</div>
+
+<div class="ddd"><A NAME="EDU.skorowidz.termin znaki_specjalne 35_336"></A> 
+<table border="1" cellpadding="4" cellspacing="1">
+<tbody><tr><td width="354"><div align="Center">Znaki specjalne</div></td><td align="Center" width="118">Zapis</td></tr><tr><td width="354">Przejście do  nowego wiersza (Line feed - LF)</td><td align="Center" width="118">\n </td></tr><tr><td width="354">Tabulacja (Tab)</td><td align="Center" width="118">\t </td></tr><tr><td width="354">Backspace (BS)</td><td align="Center" width="118">\b </td></tr><tr><td width="354">Powrót karetki (carriage return - CR)</td><td align="Center" width="118">\r</td></tr><tr><td
+ width="354">Nowa strona (form feed - FF)</td><td align="Center" width="118">\f </td></tr><tr><td width="354">Apostrof</td><td align="Center" width="118">\' </td></tr><tr><td width="354">Cudzysłów</td><td align="Center" width="118">\" </td></tr><tr><td width="354">Lewy ukośnik (backslash) </td><td align="Center" width="118">\\ </td></tr><tr><td valign="Top">Dowolny znak o kodzie NNNN (gdzie N - cyfra szesnastkowa) w Unicodzie<br></td><td valign="Top"><div align="Center"><br>
+\uNNNN<br></div></td></tr></tbody>
+</table>
+</div>
+
+<br clear="all">
+
+<br>
+
+<div class="notel">
+Należy zawsze pamiętać, że dwu- lub 6-znakowa (w tekście programu) sekwencja zapisana
+w apostrofach (lub wewnątrz zestawu znaków ujętych w cudzysłowy) i zaczynająca
+się od ukośnika tak naprawdę (czyli tak jak ją widzi kompilator) jest jednym
+znakiem.
+</div>
+
+
+<div class="ddd">
+<br>Uwaga:<br>
+<ul>
+<li>literał znakowy - w apostrofach - to zawsze jeden znak,</li>
+<li>literał łańcuchowy - w cudzysłowie - to zero lub dowolna liczba znaków;
+jeśli w cudzysłowie nie podamy żadnego znaku - to mamy pusty łańcuch znakowy</li>
+</ul>
+</div>
+
+<br clear="all">
+
+<p>Niektóre znaki specjalne są przydatne przy wyprowadzaniu informacji, a ich
+dziwnie brzmiące czasem nazwy związane są z czasami gdy jedynym urządzeniem
+wyjściowym była drukarka (np. powrót karetki to przesunięcie głowicy drukarki
+na pierwszą pozycję w wierszu - jeśli urządzeniem wyjściowym jest konsola,
+to wyprowadzenie tego znaku powoduje przejście kursora do pierwszzej pozycji
+linii ekranu, w której aktualnie się znajduje).<br>
+<br>
+
+
+A skąd na tej liście<A NAME="EDU.skorowidz.termin cudzysłów 35_337"></A> cudzysłów i<A NAME="EDU.skorowidz.termin apostrof 35_338"></A> apostrof poprzedzone ukosnikiem?  Odpowiedź
+jest prosta. Skoro znaki ujmujemy w apostrofy, a  łańcuchy znakowe w cudzysłowy,
+to jak zapisać znak apostrofu lub cudzysłów ? Do tego właśnie służy ukośnik
+- piszemy więc '\'' i '\"'. <br>
+
+
+W końcu - czasem będziemy chcieli podać literalnie znak \. Trzeba go wtedy wpisać podwójnie.<br>
+<br>
+
+
+Poniższy program testujący pokazuje kilka przykładów użycia literałów znakowych
+i łańcuchowych. Przy okazji poznamy też inną metodę wyprowadzania danych
+na konsolę: o ile System.out.println(...) wyprowadza podane jako argument
+dane w bieżącym wierszu konsoli z następującym potem przejściem do nowego wiersza, to System.out.print(...)
+- robi to samo, ale bez przejścia do nowego wiersza.<br>
+<br>
+
+<pre>
+public class LitZn {
+
+  public static void main(String[] args) {
+
+    System.out.print('a');
+    System.out.print('\u0061');
+    System.out.print('\\');
+    System.out.print('\'');
+    System.out.print(" Ala ma kota ");
+    System.out.println("Pierwszy\nDrugi\nTrzeci");
+    System.out.println("c:\\util\\bak");
+    System.out.println("");
+    System.out.println("\"");
+    System.out.print("abcd\r12\n1234\rab");
+  }
+}
+</pre>
+
+
+
+<div class="listing33r"><br>
+aa\' Ala ma kota Pierwszy<br>
+Drugi<br>
+Trzeci<br>
+c:\util\bak<br>
+<br>
+
+
+"<br>
+
+
+12cd<br>
+
+
+ab34<br>
+
+</div>
+
+<div class="ddd">
+<br>
+Wydruk działania programu przedstawiono obok. Zwróćmy uwagę:<br>
+
+'\u0061' oznacza (heksadecymalnie) kod znaku 'a' 
+znak apostrofu i lewy ukośnik w literale znakowym oznaczamy \' i \\ 
+znaki specjalne zupełnie naturalnie wstawiamy do łańcuchów znakowych: w napise
+"Pierwszy\nDrugi\nTrzeci" \n oznazca znak nowego wiersza, wobec tego napisy
+Drugi i Trzeci zostanie wyprowadzony w  kolejnych wierszach,
+aby wyprowadzić napis zawierający ukosniki musieliśmy je w tym napisie powtarzać  
+aby wyprowadzic cudzysłów w łańcuchu znakowym poprzedziliśmy go znakiem \ 
+a działanie ostatniej instrukcji programu jest następujące: wyprowadzany jest napis abcd
+po czym następuje cofnięcie karetki (kursora) (znak \r) do początku wiersza,
+po czym w miejsce ab wpisywany jest napis 12 i następuje przejście do nowego
+wiersza (znak \n), w którym wyprowadzany jest napis 1234 po czym - po cofnięciu
+kursora 12  nadpisywane jest napisem ab.
+</div>
+<br clear="all"></p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index34.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index36.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

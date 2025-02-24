@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ 
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+  <title>Języki z typami i jęzki beztypowe</title>
+  
+  <link rel="stylesheet" type="text/css" href="style/common.css">
+</head>
+ <body bgcolor="floralwhite">
+<p>Większość języków (w tym Java) wymaga, aby programista określił w programie
+<b>typy</b> zmiennych. Np. czy dana zmienna będzie reprezentować liczbą całkowitą,
+rzeczywistą, znak czy może łańcuch znakowy.<br>
+Takie wymaganie wynika z kilku przyczyn, m.in. z odzwierciedlania w programie
+architektury sprzętowej (dane różnych typów zajmują różne miejsce w pamięci)
+oraz z przeświadczenia, że sprawdzanie zgodności typów (czy np. na zmienną
+typu całkowitoliczbowego nie staramy się podstawić łańcucha znakowego) w
+trakcie kompilacji prowadzi do szybszego tworzenia niezawodnych programów.
+Obie te przesłanki są raczej słabe: pierwsza niepotrzebnie zaprząta umysł
+programisty szczegółami technicznymi, druga jest ostatnio mocno podważana
+w nurcie tzw. Extreme Programming. <br>
+Naprawdę ważne zastosowanie pojęcie typu zmiennej  znajduje  natomiast w
+programowaniu obiektowym, gdzie programista może tworzyć własne typy danych.<br>
+REXX nie jest językiem obiektowym i Mike Cowlishow wybrał doskonałe rozwiązanie:
+dane w programie nie mają ustalonych typów, są natomiast - zależnie od kontekstu
+- traktowane jako liczby bądź łańcuchu znakowe. W operacjach arytmetycznych
+napisy (i wartości zmiennych), które mogą być traktowane jako liczby - są
+traktowane jako liczby, w operacjach na łańcuchach znakowych (np. konkatenacji
+lub przeglądaniu znaków łańcucha) wszystkie dane (czy to o charakterze liczbowym,
+czy to tekstowym) są traktowane jako napisy.  <br>
+<script language="JavaScript1.2" src="../js/dodatki.js"></script>  
+</body>
+</html>

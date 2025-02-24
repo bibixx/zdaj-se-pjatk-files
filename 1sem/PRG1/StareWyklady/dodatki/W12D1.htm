@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN"><html><head>
+	<meta http-equiv="CONTENT-TYPE" content="text/html; charset=iso-8859-2"><title>Własciwości systemowe</title>
+	
+	<link rel="stylesheet" type="text/css"
+href="style/common.css">
+
+	<meta name="GENERATOR" content="OpenOffice.org 1.0  (Win32)">
+	<meta name="CREATED" content="20020725;17284456">
+	<meta name="CHANGEDBY" content="Krzysztof Barteczko">
+	<meta name="CHANGED" content="20020725;17350937">
+	<script language="JavaScript1.2" src="../js/dodatki.js"></script></head>
+
+<body bgcolor="mintcream">
+<p>Właściwości systemowe pobieramy za pomocą odwołania:</p>
+<p>System.getProperty(key);</p>
+<p>Argumentem jest nazwa właściwości  klucz (napis, typ
+String).<br>Metoda zwraca wartość właściwości  jako String.</p>
+<p>Możliwe wartości kluczy i ich znaczenie:</p>
+<table bgcolor="ivory" cellpadding="1" cellspacing="1" border="1">
+	<tbody><tr>
+		<th>
+			<p>Klucz</p>
+		</th>
+		<th>
+			<p>Opis wartości</p>
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.version</code></p>
+		</td>
+		<td>
+			<p>Java Runtime Environment version</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.vendor</code></p>
+		</td>
+		<td>
+			<p>Java Runtime Environment vendor</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.vendor.url</code></p>
+		</td>
+		<td>
+			<p>Java vendor URL</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.home</code></p>
+		</td>
+		<td>
+			<p>Java installation directory</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.vm.specification.version</code></p>
+		</td>
+		<td>
+			<p>Java Virtual Machine specification version</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.vm.specification.vendor</code></p>
+		</td>
+		<td>
+			<p>Java Virtual Machine specification vendor</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.vm.specification.name</code></p>
+		</td>
+		<td>
+			<p>Java Virtual Machine specification name</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.vm.version</code></p>
+		</td>
+		<td>
+			<p>Java Virtual Machine implementation version</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.vm.vendor</code></p>
+		</td>
+		<td>
+			<p>Java Virtual Machine implementation vendor</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.vm.name</code></p>
+		</td>
+		<td>
+			<p>Java Virtual Machine implementation name</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.specification.version</code></p>
+		</td>
+		<td>
+			<p>Java Runtime Environment specification version</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.specification.vendor</code></p>
+		</td>
+		<td>
+			<p>Java Runtime Environment specification vendor</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.specification.name</code></p>
+		</td>
+		<td>
+			<p>Java Runtime Environment specification name</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.class.version</code></p>
+		</td>
+		<td>
+			<p>Java class format version number</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.class.path</code></p>
+		</td>
+		<td>
+			<p>Java class path</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.library.path</code></p>
+		</td>
+		<td>
+			<p>List of paths to search when loading libraries</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.io.tmpdir</code></p>
+		</td>
+		<td>
+			<p>Default temp file path</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.compiler</code></p>
+		</td>
+		<td>
+			<p>Name of JIT compiler to use</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>java.ext.dirs</code></p>
+		</td>
+		<td>
+			<p>Path of extension directory or directories</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>os.name</code></p>
+		</td>
+		<td>
+			<p>Operating system name</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>os.arch</code></p>
+		</td>
+		<td>
+			<p>Operating system architecture</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>os.version</code></p>
+		</td>
+		<td>
+			<p>Operating system version</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>file.separator</code></p>
+		</td>
+		<td>
+			<p>File separator ("/" on UNIX)</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>path.separator</code></p>
+		</td>
+		<td>
+			<p>Path separator (":" on UNIX)</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>line.separator</code></p>
+		</td>
+		<td>
+			<p>Line separator ("\n" on UNIX)</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>user.name</code></p>
+		</td>
+		<td>
+			<p>User's account name</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>user.home</code></p>
+		</td>
+		<td>
+			<p>User's home directory</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p><code>user.dir</code></p>
+		</td>
+		<td>
+			<p>User's current working directory</p>
+		</td>
+	</tr>
+</tbody></table>
+<p><br><br>
+</p>
+<p><br><br>
+</p>
+<p><br><br>
+</p>
+<p><br><br>
+</p>
+</body></html>

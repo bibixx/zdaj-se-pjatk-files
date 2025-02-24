@@ -1,0 +1,488 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index04.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Algorytmy i języki programowania</div>
+
+<a name="W1.2"></a>
+
+<p>Instrukcje zapisane w programie  powinny łącznie realizować jakieś zadanie,
+rozwiązywać  jakiś problem. Jest oczywiście możliwe napisanie programu,
+który  składa  się z jakichś przypadkowych instrukcji, ale nie ma w tym za
+wiele sensu. <br>
+<br>
+     Powinniśmy zatem spojrzeć na pojęcie programu z innego (niż "techniczny",
+  związany z wykonywaniem przez procesor instrukcji) punktu widzenia.<br>
+<br>
+     Skoro programy służą do rozwiązywania jakichś problemów, realizacji zadań, to punktem wyjścia programowania
+   powinno być sformułowanie problemu lub zadania, sposobu jego rozwiązania,
+  kroków prowadzących do realizacji celu. Innymi słowy - sformułowanie <b>
+   algorytmu</b>   rozwiązania problemu lub wykonania zadania.<br>
+<br>
+
+<center>
+<div class="def"><A NAME="EDU.skorowidz.termin algorytm 5_20"></A> <b>ALGORYTM</b>  to  przepis postępowania prowadzący
+  do rozwiązania określonego zadania; zbiór poleceń dotyczących pewnych obiektów
+  (danych) - ze wskazaniem kolejności, w jakiej mają być wykonane; wykonawcą
+  jest układ, który na sygnały reprezentujące polecenia reaguje ich realizowaniem
+  - może nim być człowiek lub urządzenie automatyczne, np. komputer.<br>
+     (<i>źródło: Encyklopedia PWN</i>) </div>
+</center>
+
+<p>
+     Algorytmy możemy wyrazić w różny sposób: w języku naturalnym, graficznie
+  - w postaci<A NAME="EDU.skorowidz.termin schemat_blokowy 5_21"></A> schematu blokowego lub też w tzw.<A NAME="EDU.skorowidz.termin pseudo-kod 5_22"></A> <b>pseudo-kodzie</b> (wybranym
+  języku opisu algorytmów, który jest niezależny od konkretnych, dostępnych
+  języków programowania).<br>
+<br>
+     Wyobraźmy sobie np., że zamierzamy kupić nowy komputer i stoi przed
+nami   zadanie skonfigurowania go i policzenia całkowitej ceny (wg dostępnego
+cennika   części). <br>
+    W pierwszym przybliżeniu najprostszy algorytm realizacji tego zadania
+możemy  opisać w kolejnych krokach<br>
+
+<pre>
+<ol>
+<li>Wybierz  z cennika procesor, zapisz jego cenę</li><li>Wybierz z cennika pamięć RAM, zapisz jej cenę</li><li>Wybierz z cennika płytę główną, zapisz jej cenę</li><li>Wybierz z cennika kartę graficzną, zapisz jej cenę
+</li><li>Wybierz z cennika dysk twardy, zapisz jego cenę</li><li>Wybierz z cennika CDROM lub DVD, zapisz jego  cene</li><li>Wybierz z cennika kartę dźwiękową, zapisz jej cenę</li><li>Wybierz obudowę i potrzebne akcesoria, zapisz ich ceny</li><li>Zsumuj wszystkie ceny</li></ol>
+</pre>
+
+<p>Jest to zapis w języku naturalnym. Graficznie algorytm ten (z pewnymi
+ skrótami,  ale bez zmniejszenia ogólności) moglibyśmy przedstawić w następujący
+ sposób.<br>
+<br>
+
+<img src="images/Alg_cena.jpg" alt="Rysunek - alg 1" width="401" height="661" align="Right" hspace="10" vspace="10" border="1">
+
+    Widzimy tu ściśle określoną sekwencję kolejnych kroków  Algorytm ma swój
+  początek, jego wykonalność i zakończenie pracy są gwarantowane, może być
+ także wykonywany wielokrotnie, z różnymi danymi - w naszym przypadku różnymi
+ opcjami, dotyczącymi konfiguracji komputera.<br>
+<br>
+    Ten algorytm jest dla nas zrozumiały. Potrafimy go wykonać, choćby z
+ołówkiem   i kartką papieru.<br>
+    Powstaje pytanie, w jaki sposób zadanie wyliczenia ceny można powierzyć
+ komputerowi?<br>
+<br>
+    Oczywiście, domyślamy się, że algorytm należy zapisać w jakimś<A NAME="EDU.skorowidz.termin język_programowania 5_23"></A> języku
+programowania  (otrzymamy wtedy<A NAME="EDU.skorowidz.termin program_źródłowy 5_24"></A> <b>program w postaci źródłowej</b>), przetłumaczyć
+na język  zrozumiały dla procesora (<A NAME="EDU.skorowidz.termin program_wykonywalny 5_25"></A> <b>program w postaci wykonywalnej</b>
+ ), następnie  ten "wykonywalny" program  uruchomić. <br>
+<br>
+    Od razu jednak natkniemy się  na pewien podstawowy problem: co tak naprawdę
+  znaczy sformułowanie "wybierz ..., zapisz cenę."; kogo ma dotyczyć ta sekwencja
+  instrukcji do wykonania - tylko komputera, czy również nas samych - jako
+ użytkowników programu realizującego dany algorytm?<br>
+<br>
+    Skoro na podstawie algorytmu mamy stworzyć program, a program ma być
+wykonywany   przez komputer, to <b>algorytm powinniśmy formułować w kategoriach
+czynności   wykonywanych przez komputer</b>.<br>
+<br>
+    Zauważmy więc, że w ogólnym sensie omawiany algorytm realizuje <b>przetwarzanie</b>
+     jakichś<A NAME="EDU.skorowidz.termin dana_wejściowa 5_26"></A> <b>danych wejściowych</b> (podawanych przez użytkownika) w<A NAME="EDU.skorowidz.termin dana_wyjściowa 5_27"></A> <b>
+  dane  wyjściowe</b> (wynik działania algorytmu).<br>
+    Musimy sprecyzować: jakie dane i kiedy ma podawać użytkownik i co z tymi
+  danymi ma robić komputer.<br>
+    Mamy co najmniej trzy możliwości:<br>
+<ul>
+  <li>użytkownik podaje konkretne ceny, program wylicza ich sumę;</li>
+  <li>użytkownik podaje charakterystyki składników, program odszukuje np.
+  w jakiejś internetowej  bazie danych ich ceny i sumuje je;<br>
+  </li>
+  <li>użytkownik podaje kryteria wyboru konfiguracji sprzętowej, program
+według tych kryteriów dokonuje wyboru konkretnych opcji sprzętowych i sumuje
+ich ceny.</li>
+</ul>
+
+<p>W pierwszym przypadku nasz algorytm tylko nieco się zmieni. Pamiętajmy:
+ formułujemy go w kategoriach czynności wykonywanych przez komputer.<br>
+ 
+<pre>
+1. Zapytaj użytkownika o cenę procesora
+2. Zapytaj użytkownika o cenę płyty głównej
+...
+n-1. Zsumuj podane ceny
+n.   Podaj użytkownikowi wynik (cenę komputera)
+</pre>
+
+<p>Inne, przedstawione wyżej przypadki,  prowadzą do algorytmów znacznie
+bardziej  skomplikowanych. <br>
+<br>
+    Zauważmy jeszcze, że ten prosty algorytm ma bardzo ogólną postać. Przełożenie
+  go na jakiś język programowania wymaga podjęcia wielu decyzji, np.<br>
+<ul>
+  <li> w jaki sposób ma odbywać się interakcja z użytkownikiem: w jaki sposób
+  pytać go o dane wejściowe i jak pokazywać wynik (dane wyjściowe) ?</li>
+  <li>w jaki sposób wykonywać sumowanie: czy przechowywać ceny poszczególnych
+  składników, czy składać je inkrementalnie mając na wyjściu do dyspozycji
+ tylko wynikową, sumaryczną cenę?</li>
+  <li>w jaki sposób reagować na błędy danych ?<br>
+  </li>
+</ul>
+
+<p>Decyzje te dotyczą zaprojektowania tzw.<A NAME="EDU.skorowidz.termin interfejs_użytkownika 5_28"></A> <b>interfejsu użytkownika</b>
+ (czyli  sposobu komunikowania się programu z użytkownikiem) oraz przemyślenia
+ struktury  algorytmu pod względem <b>odporności na błędy</b> i  <b>łatwości
+ modyfikacji</b>. Np. w naszym algorytmie powinniśmy sprawdzać, czy użytkownik
+nie wprowadził  czasem danych, które nie są liczbą  i zastanowić się, czy
+ nie przechowywać  cen poszczególnych składników komputera, bo być może za
+jakiś czas zmienimy  zestaw danych wyjściowych i będziemy chcieli pokazać
+użytkownikowi  "raport  z obliczeń", przedstawiający, oprócz sumarycznej ceny,
+ ceny poszczególnych  składników, a może nawet ich procentowy udział w łącznym
+koszcie.<br>
+<br>
+    Już tylko reagowanie na błędy danych zmieni sekwencję kroków
+naszego  algorytmu.<br>
+    Zazwyczaj zresztą  rozwiązanie jakiegoś problemu lub wykonanie jakiegoś
+ zadania wymaga - oprócz jakichś prostych sekwencji kroków: :<br>
+<ul>
+  <li>sprawdzania jakichś warunków i na tej podstawie <b>podejmowania decyzji</b>
+   o wyborze dalszych  kroków algorytmu</li>
+   
+  <li><A NAME="EDU.skorowidz.termin iteracja 5_29"></A> <b>iteracyjnego wykonania</b> jakichś fragmentów algorytmu (powtarzania
+ich   wykonania wielokrotnie, zadaną liczbę razy lub dopóki spełnione sa
+jakieś   warunki)</li>
+</ul>
+
+<p>Uwzględniając możliwe błędy przy podawaniu danych przez użytkownika oraz
+  potrzebę przechowywania danych o podanych cenach składników, algorytm
+wyliczenia  ceny komputera może wyglądac tak:<br>
+<br>
+
+<pre>
+1. Zapytaj użytkownika o cenę procesora
+2. Jeżeli podana cena nie jest liczbą,
+   powiadom użytkownika o błędzie
+   i wróć do kroku 1
+3. Zapisz cenę procesora (do ew. późniejszego użycia)
+4. Zapytaj użytkownika o cenę płyty głównej
+5. Jeżeli podana cena nie jest liczbą,
+   powiadom użytkownika o błędzie
+   i wróć do kroku 4
+6. Zapisz cenę płyty głównej (do ew. późniejszego użycia)
+... inne składniki
+... inne składniki
+n-1. Wylicz sumę cen składników
+n.   Pokaż wyniki
+</pre>
+
+<p><A NAME="EDU.skorowidz.termin schemat_blokowy 5_30"></A> Na schematach blokowych podejmowanie decyzji przedstawia się w postaci rombu.<br>
+ Przykład: schemat blokowy algorytmu obliczania podatku.<br><br>
+
+<center>
+<img src="images/Alg_pod.jpg" alt="Rysunek - algorytm 2" width="641" height="749" border="1">
+</center>
+
+<br clear="all">
+
+<p>Algorytmy możemy zapisywać również w<A NAME="EDU.skorowidz.termin pseudo-kod 5_31"></A> <b>pseudo-kodzie</b>, czyli skróconej i
+do pewnego stopnia sformalizowanej  formie języka naturalnego, niezależnej
+od konkretnego języka programowania. Pseudo-kod jest znacznie bliższy
+językom programowania niż język naturalny  i łatwiej jest przekładać go na
+program zapisany w konkretnym języku programowania. W różnych podręcznikach
+programowania znaleźć można różne formy pseudo-kodu, sami możemy także opracować
+dla siebie własny pseudo-kod.<br>
+
+W pseudo-kodzie możemy  posługiwać się pojęciem<A NAME="EDU.skorowidz.termin zmienna 5_32"></A> <b>zmiennej</b>, czyli symbolicznego
+oznaczenia danych (więcej o pojęciu zmiennej w następnym wykładzie; teraz
+możemy traktować je nieco podobnie jak w matematyce).<br>
+
+Operacje na zmiennych możemy zapisać skrótowo za pomocą<A NAME="EDU.skorowidz.termin operator 5_33"></A> <b>operatorów</b>
+ czyli symboli dodawania, odejmowania, mnożenia, porównania itp. (więcej
+o operatorach w następnym wykładzie).<br>
+W pseudo-kodzie muszą znajdować się także słowa i  wyrażenia, precyzyjnie okreslające
+znaczenie fragmentów algorytmu (czynności, instrukcje do wykonania).  Np.
+podejmowanie<A NAME="EDU.skorowidz.termin decyzja 5_34"></A> decyzji może być zapisane w postaci: <br><br>
+
+<center><div class="ddd"><b>jeżeli</b> (warunek)  <b>to</b> ...<br>
+<br>
+albo<br>
+<br>
+<b>jeżeli</b> (warunek)  <b>to</b> ...<br>
+<b> w przeciwnym razie</b> ...
+</div>
+</center>
+
+<p>
+a<A NAME="EDU.skorowidz.termin pętla_iteracyjna 5_35"></A> pętle iteracyjne (czyli powtarzanie fragmentów algorytmu):<br><br>
+
+<center><div class="ddd"><b>wykonuj dopóki</b> (warunek) ...<br>
+<br>
+<b>wykonuj zmieniając wartość zmiennej <i>i</i> od <i>p</i> do <i>l</i></b> ...</div>
+</center>
+
+<p>Natomiast wprowadzanie i wyprowadzanie danych  można wyrazić np. za pomocą
+słów <b>czytaj</b>, <b>pisz</b>. <br>
+<br>
+Używając symboli +, - i * dla wyrażenia operacji dodawania, odejmowania i
+mnożenia, nawiasów (jak w matematyce) do grupowania operacji i specjalnych
+słów dla wyrażenia czynności i<A NAME="EDU.skorowidz.termin decyzja 5_36"></A> decyzji, algorytm wyliczenia podatku możemy
+teraz zapisać jako:<br>
+<br>
+
+<pre>
+<b>czytaj</b> dochód
+<b>jeżeli</b> (dochód &gt; 74048) <b>to</b> podatek = 17048.44 + 0.4 * (dochód - 74048)
+<b>w przeciwnym razie</b> <b>jeżeli</b> (dochód &gt; 37024) <b>to</b>
+   podatek = 6541.24 + 0.3 * (dochód - 37024)
+<b>w przeciwnym razie</b> podatek = 0.19 * dochód - 493.32
+<b>pisz</b> podatek
+</pre>
+
+<p>Przy zapisie w ten sposób algorytmu obliczenia ceny komputera natkniemy się
+jednak na dwa problemy.<br>
+<br>
+Po pierwsze, błąd przy  wprowadzaniu danych zmienia sekwencję kroków algorytmu
+i powoduje powrót do kroku wczytywania danych. W pseudo-kodzie moglibyśmy to
+zapisać jako instrukcję przejścia do konkretnego fragmentu algorytmu (<b>
+idż do ..</b>), oznaczonego jakąś etykietą (etykieta będzie słowem zakończonym
+dwukropkiem). Przy okazji, wprowadzimy do naszego pseudo-kodu nawiasy klamrowe,
+które będą<A NAME="EDU.skorowidz.termin grupowanie 5_37"></A> grupować czynności; np.  w kontekście:<br>
+<br>
+
+<dir><p><b>jeżeli (warunek) to {</b><br>
+  czynność 1<br>
+  czynność 2<br>
+  <b>}</b>
+  </dir>
+  
+<p>przy zajściu warunku zostaną wykonane po kolei czynności podane w nawiasach
+klamrowych.<br>
+<br>
+  
+<pre>
+pobieranieDanych1:
+  <b>pisz</b> "Podaj cenę procesora"
+  <b>czytaj</b> cenaProcesora
+  <b>jeżeli</b> (cenaProcesora nie jest liczbą) <b>to {
+     pisz </b>"Wadliwe dane"
+     <b>idź do</b> pobieranieDanych1
+  <b>}</b>
+pobieranieDanych2:
+  <b>pisz</b> "Podaj cenę płyty głównej"
+  <b>czytaj</b> cenaPłyty
+  <b>jeżeli</b> (cenaPłyty nie jest liczbą) <b>to {
+</b><b>     pisz </b>"Wadliwe dane"
+<b>     idź do</b> pobieranieDanych2
+  <b>}</b>
+...
+
+cenaWynikowa = suma cen części
+
+<b>pisz</b> cenaWynikowa  
+
+</pre>
+
+<p>Taki sposób zapisu powoduje jednak, że algorytmy (i programy) stają się trudno
+czytelne, a ich logika zawikłana i  narażona na błędy. <br>
+
+Dlatego w większości języków programowania nie ma już<A NAME="EDU.skorowidz.termin instrukcja_goto 5_38"></A> instrukcji <b>goto</b>
+ ( idź do). Zamiast tego stosowane są  instrukcje iteracyjne. Jest to również
+powód dla którego straciły na popularności schematy blokowe (okazuje się
+bowiem, że schematy blokowe nie zawsze, a zawsze niezbyt bezpośrednio przekładają
+się na "programowanie bez goto"). <br>
+Algorytm wyliczenia ceny komputera  powinniśmy więc wyrazić w inny sposób,
+np. wprowadzając zmienną logiczną o nazwie trzebaPobraćDane, która może przyjmować
+dwie symboliczne wartości <b>tak</b> i <b>nie, </b> oraz używając instrukcji
+iteracyjnych.<br>
+<br>
+
+<pre>
+trzebaPobraćDane = <b>tak</b>
+<b>wykonuj dopóki</b> (trzebaPobraćDane) <b>{</b>
+  <b>pisz</b> "Podaj cenę procesora"
+  <b>czytaj</b> cenaProcesora
+  <b>jeżeli</b> (cenaProcesora nie jest liczbą) <b>to</b> <b>pisz</b> "Wadliwe dane"
+  <b>w przeciwnym razie</b> trzebaPobraćDane = <b>nie</b>
+<b>}</b>  
+
+trzebaPobraćDane = <b>tak</b>
+<b>wykonuj dopóki</b> (trzebaPobraćDane) <b>{</b>
+  <b>pisz</b> "Podaj cenę płyty głównej"
+  <b>czytaj</b> cenaPłyty
+  <b>jeżeli</b> (cena
+Płyty nie jest liczbą) <b>to</b> <b>pisz</b> "Wadliwe dane"
+  <b>w przeciwnym razie</b> trzebaPobraćDane = <b>nie</b>
+<b>}</b>  
+...
+cenaWynikowa = suma cen części
+<b>pisz</b> cenaWynikowa
+
+</pre>
+
+<p>Na początku zmienna trzebaPobraćDane ma wartość <b>tak </b>i  warunek w <b>
+wykonuj dopóki</b> jest prawdziwy, zatem rozpoczyna się wykonanie instrukcji
+w nawiasach klamrowych. Jeżeli wprowadzone dane (cenaProcesora) nie są liczbą,
+to wypisywany jest komunikat "Wadliwe dane", wartość zmiennej trzebaPobraćDane
+nie zmienia się i czynności zapisane w nawiasach klamrowych wykonywane są
+ponownie (bowiem warunek w <b>wykonuj dopóki </b>nadal jest prawdziwy). W
+przeciwnym razie (jeśli cenaProcesora jest liczbą),  zmienna trzebaPobraćDane 
+przybiera wartość <b>nie</b>, wobec czego warunek w <b>wykonuj dopóki</b>
+ przestaje być prawdziwy i  czynności w nawiasach klamrowych nie są kolejny
+raz wykonywane, a algorytm kontynuuje działanie  od miejsca po zamykającym
+nawiasie klamrowym - rozpoczyna pobieranie danych dotyczących ceny płyty
+głównej.<br>
+  <br>
+Drugi problem, związany z tym algorytmem polega na  powielaniu bardzo podobnych
+(niemal identycznych) czynności. Zwróćmy uwagę: pobieranie cen dla  procesora,
+płyty, innych komponentów - wygląda praktycznie tak samo. Moglibyśmy więc
+wyodrębnić te czynności i zapisać je jeden raz w postaci tzw.<A NAME="EDU.skorowidz.termin procedura 5_39"></A> <b>procedury
+  </b>lub<A NAME="EDU.skorowidz.termin funkcja 5_40"></A> <b>funkcji</b>, a jednokrotnie zapisane w niej czynności wykonywać
+wielokrotnie  dla różnych komponentów komputera. <br>
+Oznacza to, że dzielimy nasz problem obliczenia ceny komputera na dwa podproblemy:
+podproblem wprowadzania i  weryfikacji danych oraz główny problem właściwych
+obliczeń.  Każdy z tych problemów możemy rozwiązywać w dużym stopniu  niezależnie,
+skupiać się każdorazowo na specyficznych w danym kontekście cechach.  <br>
+
+Ten sposób tworzenia algorytmów i programów nazywa się<A NAME="EDU.skorowidz.termin programowanie_strukturalne 5_41"></A> <b>programowaniem
+strukturalnym</b>.<br>
+  <br>
+W następnych wykładache poznamy bliżej pojęcie funkcji i zastosujemy je w 
+praktyce.<br>
+  <br>
+  
+Podsumujmy:
+
+  <ul>
+    <li>programy piszemy po to, by rozwiązywać jakieś problemy lub realizować jakieś zadania;</li>
+
+    <li>zanim napiszemy program, który realizuje jakieś zadanie, musimy opracować
+algorytm postępowania, prowadzącego do realizacji tego zadania;</li>
+
+    <li>algorytm jest  przepisem, zbiorem poleceń wykonywanych na danych,
+opisem sposobu przekształcenia danych wejściowych w dane wyjściowe;</li>
+
+    <li>program jest zapisem algorytmu <b>oraz danych</b> w konkretnym<A NAME="EDU.skorowidz.termin język_programowania 5_42"></A> języku
+programowania;</li>
+
+    <li>po to by program mógł być wykonany przez komputer jego zapis w konktretnym
+języku programowania musi być przetłumaczony na język instrukcji rozumianych
+przez procesor; takiego tłumaczenia dokonują specjalne programy nazywane translatorami,
+kompilatorami i interpreterami.<br>
+    </li>
+  </ul>
+  
+<p>Zwróćmy szczególną uwagę na to, że w programach nie tylko odzwierciedlamy
+kroki ( polecenia, czynności) algorytmów, ale również musimy w jakiś sposób
+przedstawiać dane, których czynności te dotyczą.   Dane mogą  być obrazowane
+w różny sposób - mogą  być opisywane jako pojedyncze egzamplarze albo jako
+zestawy, (powiązanych i/lub w okreslony sposób uporządkowanych) danych. W
+tym kontekście mówimy o<A NAME="EDU.skorowidz.termin struktury_danych 5_43"></A> <b>strukturach danych</b>.<br>
+  <br>
+Możemy zatem podać inną  od poprzedniej definicję programu (autorstwa N.
+Wirtha).<br><br>
+
+<center>
+<div class="def"><A NAME="EDU.skorowidz.termin program 5_44"></A> <b>PROGRAM</b> - to skonkretyzowane sformułowanie
+abstrakcyjnego algorytmu na podstawie określonej reprezentacji i struktury
+danych.</div>
+</center>
+
+<p>Obie definicje nie są sprzeczne. Pierwsza, przytoczona na wstępie tego wykładu
+("program jako zestaw instrukcji wykonywanych przez procesor") akcentuje
+działanie, druga ("program jako konkretny zapis algorytmu") akcentuje tworzenie
+programu. <br>
+
+<br>
+Tekst programu zapisujemy w wybranym języku programowania. <br>
+Każdy język programowania  posiada swój<A NAME="EDU.skorowidz.termin alfabet_języka_programowania 5_45"></A> <b>alfabet</b>, czyli zbiór znaków
+(liter i cyfr) z których mogą być konstruowane symbole języka (ciągi znaków).<A NAME="EDU.skorowidz.termin reguły_składniowe 5_46"></A> <b>Reguły składniowe</b> definiują dopuszczalne sposoby tworzenia  symboli
+oraz  dopuszcalne porządki ich występowania w programie, zaś<A NAME="EDU.skorowidz.termin semantyka 5_47"></A> <b>semantyka</b>
+ języka okresla znaczenie wybranych symboli. Np. w jakimś języku programowania
+możemy się posługiwać alfabetem składającym się z liter, cyfr, znaków specjalnych
+(alfabet języka);  z liter i cyfr możemy tworzyć nazwy zmiennych, niektóre
+ciągi znaków (np. if ) mogą być zarezerwowane i oznaczają instrukcje języka,
+sposób łączenia ze sobą symboli jest określony (np. napis if (a == b) a =
+0; będzie poprawny składniowo, a napis if a = b  a = 0 będzie niepoprawny);
+znaczenie ciągów symboli jest okreslone np. a = 3 oznacza przypisanie zmiennej
+a wartości 3). <br>
+<br>
+
+Istnieje wiele (dziesiątki tysięcy)<A NAME="EDU.skorowidz.termin język_programowania 5_48"></A> języków programowania. Można je klasyfikować
+według różnych kryteriów.<br>
+Niewatpliwie najwazniejszym jest logiczna struktura języka i sposób tworzenia programów w danym
+języku.<br>
+  <b><br><A NAME="EDU.skorowidz.termin język_imperatywny 5_49"></A> Języki imperatywne </b> wymagają od programisty wyspecyfikowania konkretnej
+sekwencji kroków realizacji zadania, natomiast<A NAME="EDU.skorowidz.termin język_deklaratywny 5_50"></A> <b>języki deklaratywne</b>
+ - opisują  relacje pomiędzy danymi w kategoriach funkcji<A NAME="EDU.skorowidz.termin język_funkcyjny 5_51"></A> (<b>języki funkcyjne</b>
+) lub reguł<A NAME="EDU.skorowidz.termin język_relacyjny 5_52"></A> (<b>języki relacyjne</b>,<A NAME="EDU.skorowidz.termin język_programowania_logicznego 5_53"></A> <b>języki programowania logicznego</b>
+), a wynik działania programu uzyskiwany jest poprzez zastosowanie wobec
+opisanych relacji określonych gotowych,  wbudowanych "w język" algorytmów. <A NAME="EDU.skorowidz.termin podejście_obiektowe 5_54"></A> <b>Podejście obiektowe</b> polega przede wszystkim na łącznym rozpatrywaniu
+danych i możliwych operacji na nich, dając możliwość tworzenia i używania
+w programie nowych typów danych, odzwierciedlających dziedzinę problemu,<A NAME="EDU.skorowidz.termin programowanie_proceduralne 5_55"></A> <b>programowanie proceduralne</b> (czasami kojarzone z imperatywnym) rozdziela
+dane i funkcje i nie dostarcza sposobów prostego adekwatnego odzwierciedlenia
+dziedziny rozwiązywanego problemu w strukturach danych, używanych w programie.<br>
+  <br>
+
+<center>
+  <img src="images/Jezyki.jpg" alt="Rysunek - jezyki" width="700" height="210" border="1">
+</center>
+
+<br>
+<p>Przykładami języków proceduralnych są:<A NAME="EDU.skorowidz.termin ALGOL 5_56"></A> ALGOL,<A NAME="EDU.skorowidz.termin FORTRAN 5_57"></A> FORTRAN,<A NAME="EDU.skorowidz.termin PL/I 5_58"></A> PL/I,<A NAME="EDU.skorowidz.termin C 5_59"></A> C. Języki obiektowe
+to np.<A NAME="EDU.skorowidz.termin SmallTalk 5_60"></A> SmallTalk,<A NAME="EDU.skorowidz.termin Java 5_61"></A> Java,<A NAME="EDU.skorowidz.termin C++ 5_62"></A> C++,<A NAME="EDU.skorowidz.termin C# 5_63"></A> C#. Najbardziej znanym językiem funkcyjnym jest
+Haskell, zaś językiem programowania logicznego -<A NAME="EDU.skorowidz.termin Prolog 5_64"></A> Prolog.<br><br>
+
+Inny podział dotyczy sposobu w jaki tekst programu przekształcany jest na
+instrukcje dla procesora.<br>
+Mamy tu podział na <A NAME="EDU.skorowidz.termin język_kompilowany 5_65"></A> <b>języki kompilowane i interpretowane</b>.<br>
+
+<div class="notel"> <b>Kompilator</b> tłumaczy program źródłowy na instrukcje, które mogą
+być wykonane przez procesor  i jednocześnie sprawdza składniową poprawność
+programu, sygnalizując wszelkie błędy. Proces kompilacji jest więc nie tylko
+porcesem tłumaczenia, ale również weryfikacji składniowej poprawności programu.</div>
+
+<div class="ddd">
+<br>
+W <b>językach kompilowanych</b> tekst programu (<A NAME="EDU.skorowidz.termin program_źródłowy 5_66"></A> <b>program źródłowy</b>)
+tłumaczony jest na<A NAME="EDU.skorowidz.termin kod_binarny_(pośredni) 5_67"></A> <b>kod binarny (pośredni)</b> przez specjalny program
+nazywany<A NAME="EDU.skorowidz.termin kompilator 5_68"></A> <b>kompilatorem</b>.  Zazwyczaj inny program zwany <b>linkerem </b>
+- generuje z kodu pośredniego gotowy do działania binarny <A NAME="EDU.skorowidz.termin kod_wykonywalny 5_69"></A> <b>kod wykonywalny</b>
+ i zapisuje go na dysku w postaci pliku typu wykonywalnego (np. z rozszrzeniem 
+EXE lub z nadanym atrybutem "zdolny do wykonywania"). W ten sposób działają
+takie języki jak C czy C++. Czasem kompilator produkuje symboliczny  kod
+binarny, który jest wykonywany za pomocą<A NAME="EDU.skorowidz.termin interpretacja 5_70"></A> <b>interpretacji</b> przez program
+zwany<A NAME="EDU.skorowidz.termin interpreter 5_71"></A> <b>interpreterem</b>. Tak właśnie dzieje się w przypadku języka Java.
+</div>
+
+<br clear="all">
+<br>
+
+<div class="notel"> <b>Interpreter</b> wykonuje bezpośrednio tekst programu. Zatem składniowa
+poprawność jest sprawdzana zazwyczaj dopiero w trakcie działania programu,
+aczkolwiek niektóre języki interpretowane udostępniają fazę symbolicznej
+kompilacji do kodu pośredniego, podczas której sprawdzana jest poprawność
+źródła.</div>
+
+<div class="ddd">
+<br>
+W<A NAME="EDU.skorowidz.termin język_interpretowany 5_72"></A> <b>językach interpretowanych</b> kod programu (źródłowy lub
+pośredni) jest odczytywany przez specjalny program zwany <b>interpreterem.</b>
+ który na bieżąco - w zależności od przeczytanych fragmentów programu - przesyła
+odpowiednie  polecenia procesorowi i w ten sposób wykonuje program. <br>
+Przykładami języków interpretowanych są:<A NAME="EDU.skorowidz.termin REXX 5_73"></A> REXX,<A NAME="EDU.skorowidz.termin ObjectREXX 5_74"></A> ObjectREXX,<A NAME="EDU.skorowidz.termin Perl 5_75"></A> Perl,<A NAME="EDU.skorowidz.termin PHP 5_76"></A> PHP.
+</div>
+
+<br clear="all">
+  
+<br>
+<p>Reasumując, proces programowania można przedstawić na poniższym rysunku za pomocą następującego algorytmu.<br><br>
+  <center>
+  <img src="images/Programowanie.jpg" alt="Rysunek - programowanie" width="561" height="617" border="1">
+  </center>
+</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index04.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

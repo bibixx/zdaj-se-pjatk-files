@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index27.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index29.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 3"></A><div class="tytulpunktu">3. Aplikacje powitalne</div>
+
+<a name="W4.15"></a>
+
+<p>W tym podpunkcie przedstawione zostaną dwa programy "powitalne". Zawierają
+one elementy, które szczegółowo będą omaiwane dopiero w drugim semestrze.
+Proszę się więc nie zrażać, jeśli coś w opsie tych programów będzie niezrozumiałe.<br>
+Warto na nie jednak spojrzeć, choćby po to, by  przekonać się, że programując
+w Javie posługujemy się obiektami (mamy więc dodatkową ilisutrację poprzednich
+treści).<br>
+Jest to również zachęta do nauki. Zobaczymy tu bowiem, że w Javie bardzo
+łatwo tworzy się  znane, lubiane, codziennie "używane"  elementy tzw. graficznego
+interfejsu użytkownika - czyli sposobu komunikowania się z programami za
+pomocą okienek, przycisków, itp.<br>
+</p>
+<p>
+Program w Javie jest zawsze zestawem klas. Wyróżniamy:<A NAME="EDU.skorowidz.termin aplikacja 28_277"></A> aplikacje (wykonywane
+przez JVM zainstalowaną na naszym komputerze) oraz<A NAME="EDU.skorowidz.termin aplet 28_278"></A> aplety (wykonywane przez
+środowisko przeglądarki).</p>
+
+<p>Działanie aplikacji zaczyna się od metody:</p>
+<p style="font-weight: bold; text-align: center; ">public static void
+main(String[ ] args)</p>
+<p>umieszczonej w jednej z klas pliku źródłowego.</p>
+<p style="font-weight: bold; "><A NAME="EDU.skorowidz.termin AWT 28_279"></A> Aplikacja AWT</p>
+<b></b>
+<p></p>
+
+<pre>
+import java.awt.*;
+
+class Napis1 {
+  public static void main(String[] arg) {
+    Frame frame = new Frame("Test 1");
+    Label label = new Label("Witaj Javo!");
+    Font font = new Font("TimesRoman", Font.BOLD, 24);
+    label.setFont(font);
+    label.setBackground(Color.red);
+    label.setForeground(Color.yellow);
+    frame.add(label);
+    frame.pack();
+    frame.show();
+  }
+}
+</pre>
+
+<p><img src="images/napis1.jpg" alt="Java1" width="141" height="68" hspace="15"  align="Right">
+Korzystamy tu z obiektów klas Frame (okno tamowe - czyli z paskiem tytułu, ikonkami systemowymi itp.), Label (etykieta), Font
+(pismo) i niejawnie - Color i String.</p>
+<br clear="all">
+
+<p>Obiekty tworzy się za pomocą wyrażenia new ... , np.:</p>
+<p>Frame frame = new Frame("Test1");<br>
+ tworzy obiekt typu Frame - okno z tytułem "Test1", zmienna frame oznacza ten
+obiekt.</p>
+<p>Tak samo tworzymy etykietę label z podanym napisem. Napisy - tu literały
+łańcuchowe - są w Javie obiektami klasy String.</p>
+<p>Dla etykiety Label ustalamy pismo (metoda setFont z argumementem typu Font) i  kolory (za pomocą metod, komunikatów:
+setForeground i setBackground z argumentem typu Color, który tu jest oznaczany
+przez odpowiednie stałe z klasy Color o samoobjaśniających sie nazwach).</p>
+<p>Wreszcie, mówimy naszemu oknu frame: dodaj do siebie etytkietę oznaczaną
+przez label (frame.add(label)), "spakuj się" - frame.pack() (tzn. zajmij tyle
+miejsca ile wymaga uwidocznienie etykiety) i pokaż się -
+frame.show().</p>
+
+<p style="font-weight: bold; "><A NAME="EDU.skorowidz.termin SWING 28_280"></A> Aplikacja Swing</p>
+<p>W podobny sposób oprogramujemy aplikację korzystająca z możliwości
+Swingu.</p>
+
+<p>
+<img src="images/napis2.jpg" align="Right" width="345" hspace="15" height="151" alt="Java2">
+<br>
+Różnice polegają na tym, że okno jest typu JFrame (wobec czego dodanie
+etykiety do okna wymaga użycia metody getContentPane()), a etykieta jest typu
+JLabel (i umożliwia wyświetlanie tekstu HTML). Poza tym jawnie użyjemy klasy
+String i operatora +, który zastowany wobec łańcuchów znakowych oznacza ich
+konkatenację.</p>
+<br clear="all">
+<br>
+
+<pre>
+import javax.swing.*;
+
+class SwingLab {
+
+ public static void main(String[] args) {
+   JFrame frame = new JFrame("SwingLabel with HTML");
+   String htmlText = "&lt;html&gt;&lt;FONT SIZE=+3&gt;" +
+                     "Witaj &lt;i&gt;imiła &lt;/i&gt;&lt;font color=blue&gt;Javo!&lt;br&gt;" +
+                     "... A witaj!&lt;/font&gt;&lt;font&gt;&lt;/html&gt;";
+
+   JLabel label = new JLabel(htmlText);
+   frame.getContentPane().add(label);
+   frame.pack();
+   frame.show();
+ }
+}
+</pre>
+
+<p>Pracę z komponentami AWT i Swingu poznamy dokładnie w trakcie wykładów w drugim semestrze.<br><br>
+
+<i>Uwaga1.  Aby zakończyć
+działanie w/w programów należy przerwać proces (Ctrl-c lub jakiś odpowiednik
+Stop w środowisku uruchomieniowym - IDE). <br><br>
+
+Uwaga2. znaczenie dyrektywy import - poznamy w następnym wykładzie.<br>
+</i></p>
+<p>A teraz pora zaczynać od podstaw. Zanim jednak  zaczniemy - zainstalujmy
+środowisko Javy i spróbujmy uruchomić w nim oba przedstawione wyżej programiki
+oraz  napisać najpierwszy, najprostszy, ale własny program.<br>
+</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index27.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index29.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

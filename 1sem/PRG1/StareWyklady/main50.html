@@ -1,0 +1,317 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index51.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 1"></A><div class="tytulpunktu">1. Do czego służą klasy?</div>
+
+<a name="W7.1"></a>
+
+<p>W programowaniu obiektowym posługujemy się<A NAME="EDU.skorowidz.termin obiekt 50_441"></A> obiektami.<br>
+
+Jak wiemy (por, jeszcze raz  pkt. 4.2),<A NAME="EDU.skorowidz.termin atrybut 50_442"></A> obiekty<A NAME="EDU.skorowidz.termin usługa 50_443"></A> charakteryzują<A NAME="EDU.skorowidz.termin polecenie 50_444"></A> się<A NAME="EDU.skorowidz.termin komunikat 50_445"></A> : <br>
+<ul>
+<li>cechami (inaczej - atrybutami lub stanami)</li><li>operacjami, które na nich można wykonywać (inaczej - usługami, które
+są obowiązane świadczyć; inaczej - poleceniami czy komunikatami, które można
+im wydawać czy do nich posylac)</li>
+</ul>
+
+
+<p>
+Obiekty w programie odzwierciedlają rzeczywiste obiekty, które mogą być konkretne (fizyczne) lub abstrakcyjne.<br>
+<br>
+
+Na przykład, gdyby nasz program symulował ruch uliczny to musielibyśmy zapewne
+odzwierciedlić w nim takie konkretne obiekty jak samochody. <br>
+
+Każdy z obiektów- samochodów ma jakieś cechy (atrybuty, stany) np. <br>
+<ul>
+<li>ciężar, </li><li>wysokość, </li><li>aktualną prędkość jazdy </li>
+</ul>
+
+<p>
+oraz udostępnia jakieś usługi, wykonanie których możemy mu zlecić za pomocą odpowiednich poleceń np.<br>
+<ul>
+<li>włącz się do ruchu,</li><li>zatrzymaj się,</li><li>zwiększ prędkość</li><li>skręć w lewo itp.</li>
+</ul>
+
+<p>
+Gdybyśmy zatem mieli w programie dwa obiekty-samochody, to każdy z nich można by było opisać przez wartości jego atrybutów:<br>
+<br>
+<table cellpadding="2" cellspacing="2" border="1" width="100%">
+<tbody><tr><td valign="Top">Samochód A (oznaczony w programie samA)<br></td><td valign="Top">Samochód B (oznaczony w programie samB)<br></td></tr><tr><td valign="Top">ciężar = 1000<br>
+wysokość = 1.5<br>
+aktualna prędkość = 0<br></td><td valign="Top">ciężar = 1000<br>
+
+wysokość = 1.5<br>
+
+aktualna prędkość = 60<br></td></tr></tbody>
+</table>
+
+<br>
+
+<div class="notel">Przypomnienie: polecenia do obiektów posyłamy za pomocą kropki</div>
+
+<div class="ddd">
+<br>
+Do każdego z nich moglibyśmy też posłać komunikat (polecenie) np.<br>
+<br>
+
+samA.włącz_się do_ruchu();<br>
+<br>
+
+samB.zatrzymaj_się();<br>
+</div>
+
+<br clear="all">
+
+<p>Skąd wiemy jakie atrybuty mają obiekty-samochody? Skąd wiemy jakie polecenia możemy do nich posyłać? <br>
+<br><A NAME="EDU.skorowidz.termin klasa definicja 50_446"></A> O tym decyduje definicja<A NAME="EDU.skorowidz.termin klasa 50_447"></A>  <b>klasy</b> samochodów, którą nasz program musi albo skądś pobrać albo sam dostarczyć.
+
+<br><br>
+
+<div class="def">
+<b>Klasa -</b> to opis takich cech grupy podobnych obiektów, które są dla
+nich niezmienne (np. zestaw atrybutów i  usług, ktore mogą
+świadczyć)</div>
+
+<p>
+
+Można by więc symbolicznie zapisać coś takiego:<br>
+<br>
+
+<div class="notec">Klasa Samochod <br>
+<br>
+<i><b>    atrybuty:</b></i><br>
+<br>        ciężar<br>        wysokość<br>        akualna prędkość<br>
+<br>
+<b><i>    usługi - operacje:</i></b><br>
+<br>        włącz_się_do_ruchu<br>        zatrzymaj_się<br>        zwiększ_prędkość<br>        skręć_w_lewo<br>
+
+</div>
+
+<br>
+<p>
+
+Dopiero teraz będziemy wiedzieć co charakteryzuje każdy obiekt-samochód w
+naszym programie i co możemy z każdym takim obiektem robić.<br>
+<br>
+
+Nie należy myśleć, że np. definicja klasy samochodów jest "naturalnie" ustalona, jedyna, dana raz na zawsze.<br>
+
+Konkretne obiekty samochody możemy przecież w naszych programach opisywać
+bardzo różnie w zależności od tego jaki problem ma do rozwiązania nasz program.<br>
+
+Np. w przypadku symulacji ruchu ulicznego nie będzie pewnie nas interesować
+taka cecha samochodu jak kolor (zatem ten atrybut nie znajdzie się w definicji
+klasy jako wspólna cecha wszystkich obiektów samochodów). <br>
+
+Ale być może gdyby nasz program zajmował się zagadnieniem sprzedaży samochodów,
+to cecha "kolor" znalazłaby się jako istotny atrybut w definicji klasy. A
+zamiast operacji: <b>włącz się_do ruchu </b>itp. potrzebne byłyby całkiem inne operacje na obiektach (np. <b>sprzedaj</b>). <br>
+<br>
+
+W przypadku konkretnych, fizycznych obiektów to wszystko jest chyba dość
+zrozumiałe. A co z obiektami abstrakcyjnymi, co to takiego, po co w ogóle
+mogą być nam potrzebne?<br>
+<br>
+
+Przypomnijmy sobie pary liczb całkowitych z poprzedniego wykładu.<br><A NAME="EDU.skorowidz.termin obiekt_abstrakcyjny 50_448"></A> Niewątpliwie taka para liczb jest obiektem abstrakcyjnym (bowiem nie istnieje fizycznie).<br>
+
+W naszym programie odzwierciedlamy właściwości tych abstrakcyjne obiektów za pomocą definicji klasy par liczb całkowitych.<br>
+
+Atrybuty pary są naturalne: pierwsza liczba i druga liczba pary.<br>
+
+W poprzednim wykładzie wykorzystywaliśmy tylko dwie z możliwych operacji
+na parze: ustalenie jej wartości (tzn. wartości pierwszego i drugiego składnika
+pary) oraz pokazanie pary (wyprowadzenie na konsolę obu liczb). Mogą być
+i inne operacje np.: dodawanie par, odejmowanie par. Zestaw możliwych operacji
+możemy więc - taka samo jak w przypadku odzwierciedlania obiektów fizycznych
+- dostosowywać do potrzeb naszych programów poprzez odpowiednią definicję
+klasy.<br>
+
+Na przykład:<br>
+<br>
+
+<div class="notec">Klasa Para <br>
+<br>
+<i><b>    atrybuty:</b></i><br>
+<br>        pierwsza_liczba_pary<br>        druga_liczba_pary<br>
+<br>
+<b><i>    usługi - operacje:</i></b><br>
+<br>        set             // ustal wartość pary<br>        add            // dodaj pary<br>        substract    // odejmij pary<br>        show         // pokaż parę</div>
+
+<br><br>
+
+<div class="notel33">Uwaga: to że stosujemy angielskie słowa do nazywania operacji na parach
+nie ma żadnego specjalnego znaczenia; ogólnie jednak lepiej jest stosować
+w programach identyfikatory w języku angielskim, gdyż w ten sposób tekst
+programu wygląda bardziej naturalnie (słowa kluczowe i tak są słowami języka
+angielskiego) i staje się powszechnie zrozumiały. Tę zasadę będziemy wprowadzać
+w naszych przykładowych programach stopniowo, aby teksty były bardziej naturalne
+i zrozumiałe dla nie znających języka angielskiego, a jednocześnie powoli
+pojawiały się w nich ważne w informatyce słowa angielskie (np. add czy show).</div>
+
+<div class="ddd"><br>
+Znowu:
+ta definicja nie określa wartości cech pojedynczego obiektu. Możemy mieć
+wiele obiektów par-liczb całkowitych, każdy z których ma podane atrybuty
+(ale np. różne ich wartości) oraz nad każdym z których możemy wykonywac podane
+operacje (set,add itd). Przy czym niekiedy możemy zdefiniować klasę Para
+w taki sposób, że dopuszczalne jest odejmowanie par; a innym razem ta operacja
+akurat będzie nam niepotrzebna - i wtedy definicja klasy nie będzie jej zawierać.
+</div>
+<br clear="all">
+
+<p>Zobaczmy teraz na co w ogóle może się przydać definicja klasy Para. Wyobrażmy
+sobie, że w programie mamy zapisać dodawanie par liczb całkowitych. Możemy
+to oczywiście zrobić, korzystając z pierwotnych typów danych:<br>
+
+    int a1 = 1;<br>
+
+    int a2 = 2;<br>
+
+    int b1 = 3;<br>
+
+    int b2 = 4;<br>
+
+    int c1;<br>
+
+    int c2;<br>
+
+    c1 = a1 + b1;<br>
+
+    c2 = a2 + b2;<br>
+<br>
+
+Jednak mając definicję klasy Para możemy zapisać tę operację w dużo prostszy i bardziej zrozumiały sposób:<br>
+<br>
+
+Para a = new Para();  // przypomnienie: w Javie obiekty tworzymy za pomoca wyrażenia<br>
+
+Para b = new Para(); //  new, o którym za chwilę dowiemy się wszystkiego<br>
+
+a.set(1, 1);                <br>
+
+b.set(3, 4)<br>
+
+Para c = a.add(b);<br>
+<br>
+
+Zatem nie tylko opis fizycznych właściwości  obiektów (które nie mają żadnych
+odpowiedników w składni języka) za pomocą definicji klas może być przydatny;
+również klasy obiektów abstrakcyjnych (czasem łatwiej opisywalnych za pomocą
+danych typów pierwotnych) są w programowaniu bardzo przydatne.<br>
+ <br>
+Porównując powyższe fragmenty kodów warto zwrócić uwagę na  pewną różnicę:
+oto wartości zmiennych całkowitych (a1, a2, b1, b2) inicjowaliśmy przy ich
+deklaracji, natomiast obiekty-pary (a i b) - tworzyliśmy, ale zamiast inicjacji
+używana była operacja set. <br>
+Czy nie można by "załatwić" takiej inicjacji przy okazji tworzenia obiektu?<br>
+Ależ tak - o ile tylko definicja klasy to przewiduje.<br>
+<br><A NAME="EDU.skorowidz.termin obiekt inicjacja 50_449"></A> Każda klasa może zdefiniować specjalną operację inicjacji obiektu, której można użyć "w trakcie" jego tworzenia.<br>
+<br>
+Wyobraźmy sobie, że operacja taka zdefiniowana jest w klasie Para, a jej
+użycie polega na podaniu w wyrażeniu new po napisie Para - w nawiasach okrągłych argumentów,
+których wartości zostaną przypisane składnikom pary - nowotworzonego obiektu.<br>
+Zadanie dodania dwóch par (1,2) i (3,4) można by wtedy zapisać jeszcze prościej:<br>
+<br>
+Para a = new Para(1,2);<br>
+Para b = new Para(3,4);<br>
+Para c = a.add(b);<br>
+<br>
+Podkreślmy: to, że akurat można użyć takiego zapisu - zależy od definicji klasy Para. <br>
+<br><A NAME="EDU.skorowidz.termin klasa definicja 50_450"></A> Zatem:<br><br>
+
+<div class="def">
+Definicja klasy określa:<br>
+<ul>
+  <li>zestaw cech (atrybutów) obiektów klasy,</li>
+  <li>zestaw operacji, które można wykonywac na obiektach klasy</li>
+  <li>specjalne operacje, które pozwalają na inicjowanie obiektów przy ich tworzeniu.</li>
+</ul>
+  </div>
+
+<br><br><A NAME="EDU.skorowidz.termin pole_klasy 50_451"></A> 
+<div class="important"><A NAME="EDU.skorowidz.termin klasa pole 50_452"></A> W wielu językach obiektowych (w tym w Javie):<br>
+<ul>
+  <li>wspólne cechy (atrybuty) obiektów nazywają się <b>polami</b> klasy</li>
+  <li><A NAME="EDU.skorowidz.termin metoda 50_453"></A> operacje (polecenia) - nazywają się<A NAME="EDU.skorowidz.termin klasa metoda 50_454"></A> <b>metodami</b>,</li>
+  <li><A NAME="EDU.skorowidz.termin klasa konstruktor 50_455"></A> specjalne operacje inicjacji - nazywają się<A NAME="EDU.skorowidz.termin konstruktor 50_456"></A> <b>konstruktorami</b></li>
+</ul>
+Definicja klasy stanowi zatem definicję:<br>
+<ul>
+  <li>pól</li>
+  <li>metod</li>
+  <li>i konstruktorów</li>
+</ul>
+Klasę winniśmy traktować jako swoisty wzorzec, szablon opisujący powstawanie
+obiektów (konstruktory), ich cechy (pola) oraz sposób komunikowania się z
+obiektami (metody).</div>
+
+<br><p>
+W Javie do definiowania klas używa się słowa kluczowego <b>class</b>. Samą
+definicję umieszcza się w następujących po nim nawiasach klamrowych. Kod
+definicji (pomiędzy nawiasami klamrowymi) nazywa się<A NAME="EDU.skorowidz.termin ciało_klasy 50_457"></A> <b>ciałem klasy</b>.<br>
+<br>
+
+<div class="syntax"> <br>
+        [ <font color="#3333ff"><b>public</b></font> ] <font color="#3333ff"><b>class</b></font> <i>NazwaKlasy</i>  <b><font color="#ff0000">{</font></b><br>
+<br>
+                // definicje pól<br>
+                // definicje konstruktorów<br>
+                // definicje metod<br>
+        <b><font color="#ff0000">}</font></b> <br>
+<br>
+gdzie: <br>
+<ul>
+  <li>słowo kluczowe public jest nieobowiązkowe (dlatego w nawiasach kwadratowych)
+i określa dostępność klasy dla innych programów (klasa  zdefiniowana ze słowem
+public jest dostępna zewsząd) </li>
+  <li>nazwa klasy musi spełniać ograniczenia dotyczące identyfikatorów i (zgodnie
+z konwencjami nazewniczymi) powinna zaczynać się od dużej litery i być pisana
+w notacji węgierskiej</li>
+</ul>
+</div>
+
+<br>
+
+
+<p>
+Przykłady "szablonów" definicji klas:<br>
+<br>
+public class Para {  / definicja klasy par liczb całkowitych<br>
+<br>
+// ciało klasy<br>
+<br>
+}<br>
+<br>
+public class Car  {<br>
+// ciało klasy<br>
+}<br>
+<br>
+<br>
+class TestPara {<br>
+// ciało klasy<br>
+}<br>
+<br><A NAME="EDU.skorowidz.termin pole 50_458"></A> 
+<div class="important">Pola i<A NAME="EDU.skorowidz.termin metoda 50_459"></A> metody klasy nazywają się składowymi klasy.<br>
+<br>
+        Składowe klasy = pola  + metody<br>
+</div>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index51.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

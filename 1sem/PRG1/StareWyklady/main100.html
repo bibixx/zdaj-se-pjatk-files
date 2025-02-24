@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index99.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index101.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 4"></A><div class="tytulpunktu">4. Działania matematyczne</div>
+
+<a name="W12.4"></a>
+
+<p>
+Wiemy już dość dużo o operacjach arytmetycznych. Warto jednak zwrócić krótko uwagę na dwie kwestie:<br>
+<ul>
+  <li>specjalne wartości dla liczb typu double,</li>
+  <li>"bibliotekę" funkcji matematycznych.</li>
+
+</ul>
+
+<p>Jeżeli zdarzy się nam w programie podzielić liczbę całkowitą przez całkowite
+zero, to powstanie wyjątek (sygnał o błędzie) ArithmeticException.<br>
+Całkiem inaczej jest w przypadku liczb rzeczywistych.<br>
+Dzielenie przez zero nie powoduje błędu, ale daje w wyniku specjalną wartość,
+reprezentującą nieskończoność. Wartości +- nieskończoność są dostępne jako
+statyczne stałe klasy Double:<A NAME="EDU.skorowidz.termin Double.POSITIVE_INFINITY 100_704"></A> Double.POSITIVE_INFINITY i<A NAME="EDU.skorowidz.termin Double.NEGATIVE_INFINITY 100_705"></A> Double.NEGATIVE_INFINITY.<br>
+Dzięli temu łatwo możemy wykryć przypadek dzielenia przez zero.<br>
+Inną specjalną wartością typu rzeczywistego jest NaN<A NAME="EDU.skorowidz.termin Not-a-Number 100_706"></A> ("Not-a-Number" - nie-liczba.
+liczba nie zdefiniowana). Reprezentuje ona wyniki pewnych operacji arytmetycznych
+(takich jak np. 0.0 / 0.0). W klasie Double zdefiniowano stałą statyczną<A NAME="EDU.skorowidz.termin NaN 100_707"></A> NaN. Ale nie powinna ona być wykorzystywana do sprawdzania czy wynik operacji
+jest "Not-a-Number", bowiem wartości Nan mają ciekawą własciwość: NaN !=
+Nan.<br>
+Do sprawdzania czy wartość jest Nan czy nie należy używac metody isNan z klasy Double.<br>
+<br>
+ Przykładowy program ilustruje wyżej powiedziane:<br><br>
+
+<pre>
+public class InfNan {
+
+  public static void main(String[] args) {
+
+    double d = 1.0 / 0.0;
+    System.out.println("d = " + d);
+    if (d == Double.POSITIVE_INFINITY)
+     System.out.println("to jest + nieskończoność");
+    d = -1.0 / 0.0;
+    System.out.println("d = " + d);
+    if (d == Double.NEGATIVE_INFINITY)
+     System.out.println("to jest - nieskończoność");
+    d = 0.0 / 0.0;
+    System.out.println("d = " + d);
+    if (d == Double.NaN)
+     System.out.println("to nie jest liczba");
+    else System.out.println("to jest liczba");
+    Double dd = new Double(d);
+    System.out.println("naprawdę: to nie jest liczba ? - " + dd.isNaN());
+
+  }
+
+}
+</pre>
+
+<p>
+Wynik działania programu:<br><br>
+
+<div class="listing100">
+d = Infinity<br>
+to jest + nieskończoność<br>
+d = -Infinity<br>
+to jest - nieskończoność<br>
+d = NaN<br>
+to jest liczba<br>
+naprawdę: to nie jest liczba ? - true<br>
+</div><br>
+
+<p><A NAME="EDU.skorowidz.termin Math klasa 100_708"></A> W klasie Math pakietu java.lang zdefiniowano <b>statyczne</b> metody matematyczne.<br>
+Między innymi:<br>
+<br>
+
+<table border="1" width="100%" cellpadding="2" cellspacing="2">
+<tbody><tr>
+      <td valign="Top" rowspan="1" colspan="2" width="50%">
+      <div align="Center"><b>Metody matematyczne </b><br>
+      </div>
+      </td>
+    </tr>
+<tr><td width="50%">int abs(int arg)</td><td>wartość bezwzględna argumentu</td></tr><tr><td width="50%">double abs(double arg)</td><td valign="Top"><br>
+      </td>
+</tr><tr><td width="50%">int min(int arg1, int arg2)</td><td>minimum z arg1, arg2</td></tr><tr><td width="50%">double min(double arg1, double arg2)</td><td>minimum z arg1, arg2</td></tr><tr><td width="50%">int max(int arg1, int arg2)</td><td> maksimum z arg1, arg2</td></tr><tr><td width="50%">double max(double arg1, double arg2)</td><td>maksimum z arg1, arg2</td></tr><tr><td width="50%">double sqrt(double arg)</td><td>pierwiastek kwadratowy arg<br>
+</td></tr><tr><td width="50%">double exp(double arg)</td><td>zwraca potęgę o podstawie e i wykładniku arg</td></tr><tr><td width="50%">double pow(double base, double exp)</td><td>zwraca potęgę o podstawie base i wykładniku
+exp. Jeśli base ma wartość 0, a exp jest ujemne albo niecałkowite, to zwraca
+NaN.</td></tr><tr><td width="50%">double log(double arg)</td><td>zwraca logarytm naturalny arg. Jeśli argument nie jest dodatni, tozwraca NaN.</td></tr><tr><td width="50%">double sin(double arg)</td><td>zwraca sinus argumentu podanego w radianach.</td></tr><tr><td width="50%">double cos(double arg)</td><td>cosinus</td></tr><tr><td width="50%">double tan(double arg)</td><td>tangens</td></tr></tbody>
+</table>
+
+<br><p>
+<b><font color="#ff6600">Proszę zapoznać się z dokumentacją klasy Math.</font></b><br>
+<br>
+W klasie Math znajduje się również generator liczb pseudolosowych - metoda
+random. Jej użycie jest jednak mniej wygodne niż użycie <b>niestatycznych</b> metod klasy Random, znajdującej się w pakiecie java.util.<br>
+<br><A NAME="EDU.skorowidz.termin generator_liczb_pseudolosowych 100_709"></A> Generator liczb pseudolowowych należy najpierw zainicjować za pomocą konstruktorów<A NAME="EDU.skorowidz.termin klasa_Random 100_710"></A> klasy Random:<br>
+<br>
+<b>Random()</b> // inicjuje generator na podstawie aktualnego czasu w milisekundach<br>
+<b>Random(long seed)</b> // inicjuje generator na podstawie podanej liczby<br>
+<br>
+Następnie można generować kolejne liczby pseudolosowe za pomocą odpowiednich <b>niestatycznych</b> metod np:<br>
+<br>
+<b>double nextDouble() </b><br>
+zwraca kolejną pseudolosową liczbę rzeczywistą z równomiernego rozkładu w przedziale [0,1]<br>
+<br>
+<b>int nextInt(int n) </b><br>
+zwraca kolejną pseudolosową liczbę całkowitą z równomiernego rozkładu w przedziale [0, 1) tj. 0 &lt;= nextInt(n) &lt; n.<br>
+<br>
+Zadanie: napisać program do losowania liczb w totolotku (6 z 49).<br>
+Umożliwić - na życzenie - inicjowania generatora na podstawie sumy podanych przez użytkownika liczb.<br>
+Uwaga: uwzględnić to, że w jednym losowaniu liczby nie mogą się powtarzać.<br>
+<br>
+
+
+
+
+
+<div class="important"><br>
+Przed lekturą dalszego tekstu proszę to zadanie rozwiązać samodzielnie
+<br>
+<br>
+
+
+
+
+
+
+</div>
+
+<br>
+
+<p>
+Możliwe rozwiązanie.<br>
+<pre>
+import javax.swing.*;
+import java.util.*;
+
+public class Toto {
+
+  public static void main(String[] args) {
+    String msg = "Podaj magiczne liczby,\n" +
+                 "nic nie wpisuj = automatyczna inicjacja,\n" +
+                 "lub wybierz Cancel, by skończyć losowania";
+    Random rand;
+
+    boolean[] isDrawn = new boolean[49];  // i-ty element tablicy
+                                          // ma wartość true
+                                          // gdy liczba i została wylosowana
+
+    String inp;
+    while ((inp = JOptionPane.showInputDialog(msg)) != null) {
+
+      if (!inp.equals("")) {  // inicjacja generatora sumą podanych liczb
+         StringTokenizer st = new StringTokenizer(inp);
+         long sum = 0;
+         while (st.hasMoreTokens()) {
+           String slicz = st.nextToken();
+           sum += Integer.parseInt(slicz);
+         }
+         rand = new Random(sum);
+      }
+      else rand = new Random();  // gdy nic nie podano - inicjacja czasem
+
+      // Losowanie
+
+      // Jeszcze żadna liczba nie została wylosowana:
+      for (int i=0; i &lt; isDrawn.length; i++) isDrawn[i] = false;
+
+      final int ILE = 6;  // liczb do wylosowania
+      int k = 0;          // licznik niepowtarzających się liczb
+
+      System.out.print('\n');
+      while (k &lt; ILE) {
+        int n = rand.nextInt(49);  // losowanie:  0 &lt;= n &lt; 49
+        if (isDrawn[n]) continue;  // jeżeli ta liczba już była wylosowana
+        else {                     // nie była - bierzemy ją!
+          k++;                     // licznik wziętych + 1
+          isDrawn[n] = true;       // teraz jest naprawdę wylosowana
+          System.out.print(" " + (n+1)); // n+1, bo mamy mieć od 1 do 49
+        }
+      }
+    }
+    System.exit(0);
+  }
+
+}
+</pre>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index99.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index101.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

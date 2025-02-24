@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index71.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index73.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 3"></A><div class="tytulpunktu">3. Operatory i wyrażenia logiczne</div>
+
+<a name="W9.3"></a>
+
+<p>Do zapisywania złożonych warunków służą (m.in) warunkowe<A NAME="EDU.skorowidz.termin operator logiczny 72_576"></A> operatory logiczne:<br>
+
+<ul>
+<li>jednoargumentowy operator negacji logicznej oznaczany przez ! ("nie"),</li><li>dwuargumentowy operator koniunkcji oznaczany przez &amp;&amp; ("i"),</li><li>dwuargumentowy operator alternatywy oznaczany przez || ("albo").</li>
+</ul>
+
+<p>
+Przypuścmy, że chcemy sprawdzić czy zachodzi warunek: wielkość n znajduje
+się w przedziale [1, 10] - to znaczy, czy n jest większe lub równe 1 i jednocześnie
+mniejsze lub rowne 10. <br>
+
+Jak już wiemy, zapis: if (1 &lt;= n &lt;= 10) będzie błędny (bo operatory
+relacyjne są stosowane tylko wobec typów numerycznych, a wyrażenie 1 &lt;=
+n ma wynik typu boolean).<br>
+
+Nie znając operatorów logicznych i wiedząc, że w instrukcji if możemy umieścić
+inną instrukcję if, warunek moglibyśmy sprawdzić za pomocą takiego zapisu:<br>
+
+if (n &gt;= 1)<br>
+
+   if (n &lt;= 10) ... ; <br>
+<br>
+
+Nie jest to jednak ani elegancka, ani zbyt czytelna forma.<br>
+
+Na szczęście mamy operator koniunkcji logicznej,<br>
+
+Chodzi nam o to czy równocześnie spelnione są dwa warunki <br>
+<br>
+
+    n &gt;= 1  <b>I</b>  n &lt;= 10.<br>
+<br>
+
+W Javie zapisujemy to jako:<br>
+<br>
+
+    n &gt;= 1 &amp;&amp; n &lt;= 10<br>
+<br>
+
+i stosujemy np. w instrukcji if:<br>
+<br>
+
+    if (n &gt;= 1 &amp;&amp; n &lt;= 10) ...;<br>
+<br>
+
+Podobnie możemy chcieć sprawdzić czy wartość n znajduje się poza przedziałem [1, 10]. Aby tak było n musi być mniejsze od 1 <b>lub</b> większe od 10.<br>
+
+Do zapisu takiego warunku stosuje się operator logicznej alternatywy ||:<br>
+<br>
+
+     if (n &lt; 1 || n &gt; 10) ..<br>
+<br>
+
+Trzeci operator logiczny - negacji - służy do zaprzeczania warunkom.<br>
+
+Na przykład, jeżeli chcemy podjąc jakieś działania, jeżeli łańcuch znakowy txt nie jest napisem "Ala", to piszemy:<br>
+<br>
+
+    if (<b>!</b>txt.equals("Ala")) ... ;<br>
+<br>
+
+Argumentami operatorów logicznych mogą być <b>tylko</b> wyrażenia typu <b>boolean</b>, zaś rezultatem jest wartość typu <b>boolean</b>, która może być równa true lub false, zgodnie z następującą tablicą:<br>
+<br>
+
+<table cellpadding="2" cellspacing="2" border="1" width="100%">
+<tbody><tr><td valign="Top" rowspan="1" colspan="5" align="Center"><b>Warunkowe operatory logiczne</b><br></td></tr><tr><td valign="Top" align="Center"><b>a<br></b></td><td valign="Top" align="Center"><b>b<br></b></td><td valign="Top" align="Center"><b>a &amp;&amp; b<br></b></td><td valign="Top" align="Center"><b>a || b<br></b></td><td valign="Top" align="Center"><b>!a<br></b></td></tr><tr><td valign="Top" align="Center">true<br></td><td valign="Top" align="Center">true<br></td><td valign="Top" align="Cente
+r">true<br></td><td valign="Top" align="Center">true<br></td><td valign="Top" align="Center">false<br></td></tr><tr><td valign="Top" align="Center">false<br></td><td valign="Top" align="Center">true<br></td><td valign="Top" align="Center">false<br></td><td valign="Top" align="Center">true<br></td><td valign="Top" align="Center">true<br></td></tr><tr><td valign="Top" align="Center">true<br></td><td valign="Top" align="Center">false<br></td><td valign="Top" align="Center">false<br></td><td valign="Top" align=
+"Center">true<br></td><td valign="Top" align="Center"><br></td></tr><tr><td valign="Top" align="Center">false<br></td><td valign="Top" align="Center">false<br></td><td valign="Top" align="Center">false<br></td><td valign="Top" align="Center">false<br></td><td valign="Top" align="Center"><br></td></tr></tbody>
+</table>
+
+<br>
+
+<div class="notec">Operator &amp;&amp; daje wartość true tylko wtedy, gdy <b>oba</b> jego argumenty są wartościami <b>true</b>, a wartość false zawsze, gdy którykolwiek z argumentów jest false.  <br>
+
+Operator || daje wartość true zawsze, gdy <b>którykolwiek </b>z jego argumentów jest <b>true</b> i wartość false tylko wtedy, gdy oba argumenty są false
+</div>
+
+
+<br>
+<p>
+
+Operatory logiczne mają niższy priorytet od operatorów relacyjnych i równości-nierówności,
+zatem bez użycia dodatkowych nawiasów możemy pisać np:<br>
+<br>
+
+    if ( a == 1 &amp;&amp; b &gt; 3) c = a + b;<br>
+<br>
+
+uzyskując efekt, o który nam chodzi (tu: wyliczenie c, gdy a równe 1 i b &gt; 3).<br>
+<br>
+
+<div class="important">
+Uwaga: operator negacji logicznej ma wyższy priorytet niż inne operatory
+logiczne, wobec tego należy używać nawiasów dla zapewnienia właściwej kolejności obliczania wartości wyrażeń</div>
+
+<br>
+
+<div class="notel33">
+Sprawne posługiwanie się warunkami logicznymi wymaga podstawowej
+wiedzy z zakresu logiki matematycznej. Warto więc sięgnąć po jakiś prosty,
+początkowy opis rachunku zdań logicznych i przeczytać z niego kilka pierwszych
+stron.<br>
+
+Nota bene, zadziwiająco często mylone są w programowaniu operacje koniunkcji i alternatywy
+logicznej. Zawsze więc - wybierając operację do zastosowania - zastanówmy
+się troszkę dłużej nad tym czy ma to być koniukcja czy alernatywa</div>
+
+<div class="ddd"><br>
+Np. jeżeli
+chcemy wykonać jakieś czynności jeżeli <b>nie</b> zachodzi warunek:
+"łańcuch znakowy nie jest napisem "Ala" i - jednocześnie - zmienna lata ma
+wartość większą od 1", to nie wolno nam napisać:<br>
+<br>
+
+if (! txt.equals("Ala") &amp;&amp; lata &gt; 1) ...<br>
+<br>
+
+bo to oznaczałoby konieczność równoczesnego spełnienia dwóch warunków:<br>
+
+- napis txt nie jest ala,<br>
+
+- i lata są większe od 1<br>
+
+(a przecież nie o to nam chodziło)<br>
+<br>
+
+Piszemy za to:<br>
+<br>
+
+if (!( txt.equals("Ala") &amp;&amp; lata &gt; 1)) ...<br>
+
+</div>
+
+<br clear="all">
+
+<p>
+Użycie dodatkowych nawiasów zmienia kolejność opracowania wyrażenia i uzyskujemy pożądany efekt.<br>
+<br>
+
+Omawiane dotąd operatory nazywają się<A NAME="EDU.skorowidz.termin operator logiczny warunkowy 72_577"></A> warunkowymi operatorami logicznymi, bowiem<br>
+
+obliczanie wartości wyrażeń logicznych, konstruowanych za ich pomocą ma bardzo ważną
+właściwość: obliczane są one od lewej do prawej (wiązania operatorów logicznych
+- oprócz operatora negacji - są lewostronne), ale proces obliczeń kończy
+się już w momencie gdy tylko wiadomo jaki będzie rezultat całego wyrażenia.
+<br>
+
+Oznacza to, że wyrażenie nie musi być wcale opracowywane do końca; wystarczy,
+że jego część jednoznacznie wskazuje wynik. Na przykład w wyrażeniu:<br>
+<br>
+
+            a &amp;&amp; (b &gt; 0 || c == 1)<br>
+<br>
+
+jeśli a jest rowne false, to wyrażenie w nawiasach nie będzie obliczone,
+bowiem wynik całego wyrażenia nie zależy już od tego co jest w nawiasach
+(przy a = false zawsze będzie false). <br>
+
+Ma to ogromnie ważne konsekwencje, bowiem jeśli oprzemy logike programu na
+efektach ubocznych generowanych przy obliczaniu wyrażeń, które - właśnie
+ze względu na tę właściwość operatorów logicznych - mogą w ogóle nie podlegać
+opracowaniu, to może nas spotkać bardzo przykra niespodzianka. <br>
+<br>
+
+<p><a href="javascript:popUp('dodatki/W9Prb3.htm',75,75)"><img src="images/Problem.jpg" alt="Problem" hspace="15" width="137" height="84" border="1" align="Right"></a>Zobaczmy to na przykładzie poniższego programu.
+Programista, który go napisał chciał osiagnąć następujący efekt: zapytać
+w dialogach wejściowych o nazwisko i imię użytkownika, jeśli podano obie
+informacje - wyprowadzić połączone nazwisko i imię, jeśli zaś zabrakło ktorejś
+z nich - wyprowadzić napis "Niepełna informacja"; następnie pokazać dokładnie
+co jest nazwiskiem (może być null) a co imieniem (też może być null, jeśli
+nie wprowadzone). Pokusa zwięzłego napisania kodu sprawiła, że nasz programista
+sięgnął po połączenie warunków za pomocą operatora &amp;&amp;: jeżeli wprowadzono
+nazwisko i wprowadzono imię to txt = nazwisko + imie.
+</p>
+<br clear="all">
+
+<pre>
+import javax.swing.*;
+
+public class EfUb {
+
+  public static void main(String[] args) {
+
+    String nazwisko;
+    String imie = null;
+    String txt;
+
+    if ((nazwisko = JOptionPane.showInputDialog("Podaj nazwisko")) != null
+         &amp;&amp; (imie = JOptionPane.showInputDialog("Podaj imie")) != null
+       )
+       txt = nazwisko + " " + imie;
+    else txt = "Niepełna informacja";
+    System.out.println(txt);
+    System.out.println("Imie :" + imie);
+    System.out.println("Nazwisko :" + nazwisko);
+    System.exit(0);
+  }
+
+}
+</pre>
+
+<p>
+Jednak raczej  wbrew intencjom programisty w tym programie może nie dojść do zapytania o imię (bowiem
+wartość pierwszego składnika wyrażenia połączonego koniunkcją &amp;&amp;
+może być false - jeśli przy pytaniu o nazwisko użytkownik anulował dialog).<br>
+<br>
+
+W Javie są również<A NAME="EDU.skorowidz.termin operator logiczny bezwarunkowy 72_578"></A> bezwarunkowe  operatory logiczne (zwane czasem po prostu operatorami logicznymi):<br>
+<ul>
+<li><b>&amp;</b> koniunkcja</li><li><b>|</b>  alternatywa</li><li><b>^</b> "wyłączające albo"</li><li><b>~</b> negacja</li>
+</ul>
+
+<p>
+Bezwarunkowe operatory logicznej koniunkcji (&amp;) i alternatywy ( |) mają
+te same właściwości co operatory &amp;&amp; i || z jednym wyjątkiem: oba
+wyrażenia-argumenty operatorów są zawsze opracowywane (dlatego mówimy, że
+operatory są bezwarunkowe).<br>
+<br>
+
+<div class="notec">Dodatkowo, wśród logicznych operatorów bezwarunkowych,  zdefiniowano
+operator "wykluczające albo" (znak ^), który daje wynik <b>true</b>  gdy wartości obu argumentów operatora są różne (czyli true i false lub false i true) oraz <b>false</b> w każdym innym przypadku.</div>
+
+<br>
+<p>
+
+Operatory logiczne (bezwarunkowe) są stosowane wyłącznie wobec argumentow typu boolean.<br>
+
+Niestety, te same symbole operatorów ( &amp;, |, ^, ~) sa również używane
+w operatorach bitowych, stosowanych wobec liczb całkowitych (i umożliwiających
+operowanie na bitach liczb całkowitych), co powoduje trochę zamieszania.<br>
+
+Problemem są także błędy: np. często początkujący (i nie tylko) programiści
+zamiast &amp;&amp; piszą &amp;, a zamiast || - |. Kompilator nie wykryje
+takich błędów, a efekt opracowywania takich wyrażeń logicznych może być inny
+od spodziewanego przez programistę. <br>
+<br>
+
+<div class="important">Generalnie więc: <br>
+ nie należy mieszać w wyrażeniach użycia operatorów
+warunkowych i bezwarunkowych (ze względu na inny sposób działania oraz inne
+priorytety (por. tablicę priorytetów operatorów)).<br>
+<br>
+
+Dobrą regułą "na początek" jest:<br>
+<ul>
+<li>stosować wyłącznie operatory warunkowe, </li><li>a przy tym nie zakładać, że wyrażenia logiczne będą opracowywane w sposób warunkowy (!)</li>
+</ul>
+
+</div><p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index71.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index73.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index81.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 1"></A><div class="tytulpunktu">1. Pojęcie pętli iteracyjnej</div>
+
+<a name="W10.1"></a>
+
+<p><A NAME="EDU.skorowidz.termin pętla_iteracyjna 80_601"></A> Często instrukcję lub grupę instrukcji trzeba wykonać wielokrotnie, powtarzając
+je znowu i znowu, aż do chwili, gdy zostanie spełniony jakiś warunek (w szczególności
+np. dotyczący liczby powtórzeń). Każde powtórzenie instrukcji lub ich grupy
+nazywa się<A NAME="EDU.skorowidz.termin iteracja 80_602"></A> <b>iteracją</b>, a językowa konstrukcja pozwalająca na ich powtarzanie - <b>pętlą iteracyjną</b>.<br>
+<br>
+Wyobraźmy sobie np., że trzeba policzyć sumę i iloczyn kolejnych dodatnich 
+liczb całkowitych. Nie znając pojęcia pętli iteracyjnej musielibyśmy zapisać
+to w następujący sposob:<br>
+<br>
+int suma = 0;<br>
+int iloczyn = 1;<br>
+int i = 1;<br>
+suma += i;<br>
+iloczyn *= i;<br>
+i++;<br>
+suma += i;<br>
+
+iloczyn *= i;<br>
+
+i++;<br>
+suma += i;<br>
+
+iloczyn *=i;<br>
+...<br>
+<br>
+Widzimy tu wielokrotnie powtarzające się fragmenty kodu. Oczywiście powinniśmy je umieścić w pętli.<br><br>
+
+Przy tym jednak istotne jest, aby dobrze sformułować<A NAME="EDU.skorowidz.termin pętla warunek_zakończenia 80_603"></A> <b>warunki zakończenia</b>
+ działania pętli. Przecież nie możemy próbować sumować i mnożyć wszystkich
+liczb całkowitych, bo nasz program nie zakończyłby nigdy działania.<br>
+Ogólnie, warunki zakończenia działania pętli można podać w dwojaki sposób:<br>
+
+<ul>
+  <li>jako liczbę iteracji do wykonania (liczbę powtórzeń instrukcji umieszczonych
+w pętli) - np. zsumowac i pomnożyć 20 pierwszych dodatnich liczb całkowitych</li>
+  <li>jako jakiś inny warunek - np. sumować i mnożyć kolejne liczby aż do
+chwili, gdy ich iloczyn stanie się równy lub większy od 100000.</li>
+</ul>
+
+<p>W instrukcjach sterujących, które wprowadzają pętle, ze względu na lepszą czytelność programu  podaje się<A NAME="EDU.skorowidz.termin pętla warunek_kontynuacji 80_604"></A> <b>warunki kontynuacji</b>
+, a nie zakończenia pętli. Wykonanie pętli można jednak przerwać w jej środku
+- i wtedy warunek, który sprawdzimy, by przerwać pętlę - będzie<A NAME="EDU.skorowidz.termin pętla warunek_zakończenia 80_605"></A> <b>warunkiem zakończenia</b> działania pętli. Na to rozróżnienie warto początkowo zwracać baczną uwagę,<br>
+<br>
+Na samym początku lepszemu zrozumieniu działania pętli sprzyja obrazowanie
+ich za pomocą schematów blokowych. Działanie bardziej skomplikowanych pętli
+dodatkowo należy prześledzić - iteracja po iteracji (oczywiście nie wszystkie,
+np. kilka poczatkowych iteracji i kilka końcowych).<br>
+<br>
+Zobaczmy to na przykładzie  podnoszena do potęgi podanej liczby całkowitej. <br>
+Naszym pierwszym zadaniem jest policzenie n-tej potęgi (n&gt;=0) podanej liczby całkowitej <i><b>a</b></i>.<br><br>
+
+<div class="notel">Pętle o znanej liczbie iteracji zapisujemy zwykle za pomoca instrukcji <b>for (...)</b></div>
+
+<div class="ddd"><br><A NAME="EDU.skorowidz.termin pętla instrukcja_for 80_606"></A> W naturalny sposób możemy zapisać to jako n-krotne mnożenie tej liczby przez
+samą siebie: a*a*a...<A NAME="EDU.skorowidz.termin pętla o_znanej_liczbie_iteracji 80_607"></A> Będziemy mieli n - iteracji. W każdej i-ej iteracji
+(1&lt;= i &lt;=n) zmienna <b><i>wynik</i></b> będzie miała wartość <i><b>a</b></i> w potędze <i><b>i</b></i>.
+</div>
+<br clear="all">
+
+<p>
+Sposób działania takiej pętli iteracyjnej ilustruje poniższy schemat blokowy.<br>
+<br>
+
+<div>
+<img src="images/petla1.jpg" alt="Rys" width="352" height="477" border="1">
+</div>
+
+<br><p>
+Możemy sprawdzić działanie pętli "z kartką i ołówkiem" dla jakiegoś zestawu danych wejściowych, np. a = 2 i n = 5.<br>
+<br>
+
+<table border="1" width="100%" cellpadding="2" cellspacing="2">
+<tbody><tr><td valign="Top">Iteracja<br>
+      </td>
+<td>Wartość<br>
+zmiennej i</td><td>Wartość warunku<br>
+kontynuacji pętli </td><td>Wartość zmiennej wynik</td></tr><tr><td valign="Top">1<br>
+      </td>
+<td>1</td><td>true</td><td>2</td></tr><tr><td valign="Top">2<br>
+      </td>
+<td>2</td><td>true</td><td>4</td></tr><tr><td valign="Top">3<br>
+      </td>
+<td>3</td><td>true</td><td>8</td></tr><tr><td valign="Top">4<br>
+      </td>
+<td>4</td><td>true</td><td>16</td></tr><tr><td valign="Top">5<br>
+      </td>
+<td>5</td><td>true</td><td>32</td></tr><tr><td valign="Top">-<br>
+      </td>
+<td>6</td><td><b><font color="#ff0000">false (pętla kończy działanie)</font></b></td><td>32</td></tr></tbody>
+</table>
+
+<br>
+<p>
+Zwróćmy uwagę, że w tym algorytmie - po zakończeniu pętli - zmienna <i><b>i</b></i>
+ będzie miała wartość o jeden większą od liczby wykonanych iteracji (chociaż
+traktowaliśmy ją jako<A NAME="EDU.skorowidz.termin licznik_iteracji 80_608"></A> licznik iteracji, to nie możemy powiedzieć, że pętla
+wykonała się i-razy).<br>
+Czy jesteśmy pewni poprawności tego algorytmu? Czy dobrze dobraliśmy wartość początkową<i><b> i </b></i>oraz rodzaj warunku kontynuacji? <br>
+Nie wystarczy rozpatrzeć tylko jednego, wybranego przebiegu obliczeń. Warto przyjrzeć się także  <b>warunkom brzegowym</b>
+ zadania. Mamy podnosić dowolną liczbę całkowitą do potęgi całkowitej n &gt;=
+0. Co się zatem stanie, gdy n = 0? Pętla nie wykona się ani razu (bo i =
+1 jest mniejsze od n = 0), ale wynik będzie poprawny (bo zmienną <i><b>wynik</b></i> zainicjowaliśmy wartością 1).<br>
+Ten sam efekt (poprawnego działania) można uzyskać gdyby zamiast<i><b> i = 1</b></i> napisać <i><b>i = 0</b></i>, a zamiast <b><i>i &lt;= n</i></b> napisać <i><b>i &lt; n</b></i>. (oczywiście zwróćmy uwagę, że algorytm jest poprawny tylko dla n &gt;= 0).<br><br>
+
+<div class="notel"><br>Częstym błędem przy konstrukcji pętli iteracyjnych jest wykonywanie iteracji
+o jeden raz za dużo lub jeden raz za mało<br><br></div>
+
+<div class="ddd"><br>
+Ale nie możemy oczywiście całkiem
+dowolnie, na wyczucie stosować znaku &lt; zamiast &lt;= lub inicjowac zmiennej
+<i><b>i</b></i> zerem lub jedynką. Nie ma tu złotych reguł - dobór zależy
+od starannej analizy poprawności algorytmu. W przypadku tak prostego zadania
+o jakim była mowa przed chwilą nie ma tu większych problemów, ale w bardziej
+złożonych przypadkach właściwy dobór liczby iteracji może sprawiać kłopoty.
+</div>
+<br clear="all">
+
+<br><p>
+Rozważmy teraz inne zadanie. Mamy oto określić do jakiej <b>parzystej</b> potęgi <i><b>n</b></i> (<i><b>n&gt;=0</b></i>) należy podnieść podaną liczbę całkowitą <i><b>a (a &gt; 1)</b></i>, aby osiągnąć wynik <b>co najmniej</b> równy  zadanej wielkości (którą określimy jako wartość całkowitą <i><b>cel</b></i>).<br>
+<br>
+<div class="important"><br>
+
+<b>Przed lekturą dalszego tekstu proszę spróbować samodzielnie zbudować schemat blokowy rozwiązania tego zadania.</b><br>
+<br>
+
+</div>
+
+<br><p>
+Rozpatrujemy parzyste potęgi <i><b>n</b></i> liczby <i><b>a</b></i>. Niech <i><b>w</b></i> oznacza wynik potęgowania.<br>
+Dla n = 2 w = a*a.<br>
+Dla n = 4 w = a*a*a*a.<br>
+Dla n = 6 w = a*a*a*a*a*a<br>
+Itd.<br>
+A zatem jeśli  na początku w = 1, to następnie w pętli możemy uzyskiwać kolejne potęgi za pomocą wyrażenia:<br>
+w = w *a * a<br>
+<br>
+Nie wiemy jednak z góry ile razy powinna wykonać się pętla. Naszym celem jest przecież określenie liczby <i><b>n</b></i>, a nie podniesienie <i><b>a</b></i> do znanej potęgi <i><b>n</b></i>.<br>
+Warunkiem kontynuacji pętli powinno być porównanie uzyskiwanych wartości <i><b>w</b></i> z zadaną liczbą <i><b>cel</b></i>.<br>
+Powiedziano: "osiągnąć wynik <b>co najmniej</b> równy  zadanej wielkości <i><b>cel</b></i>". A to oznacza, że pętla ma być kontynuowana dopóki <b><i>w</i> jest mniejsze od <i>cel</i></b>. Proszę zwrócić uwagę: nie równe lub mniejsze, ale <b>mniejsze</b>!<br>
+W samej pętli musimy nie tylko wyliczać bieżący wynik potęgowania, ale również
+zwiększać n (i to zawsze o 2, bo potęgi mają być parzyste).<br>
+A jaką początkową wartość powinno mieć n? <br>
+Oczywiście 0, bowiem takie są warunki zadania (<b><i>cel</i></b> - jest dowolną
+liczbą całkowitą,  n zaś może być &gt;=0). Zatem np. dla cel &lt;= 1, właściwą
+odpowiedzią jest n = 0 (bo zmienna <i><b>w</b></i> początkowo rowna jest 1, co jest większe lub równe wartości zmiennej <i><b>cel</b></i>,  pętla nie wykona się ani razu, ale dowolne <i><b>a</b></i> podniesione do potęgi 0 jest równe 1).<br>
+<br>
+Pokazuje to następujący schemat blokowy.<br><br>
+
+<div>
+<img src="images/petla2.jpg" alt="Rys" width="352" height="511" border="1">
+</div>
+
+<br>
+
+<div class="notel">Warunkowe pętle iteracyjne zapisujemy zwykle za pomocą instrukcji <b>while</b>
+</div>
+
+<div class="ddd"><br><A NAME="EDU.skorowidz.termin instrukcja_while 80_609"></A> Mamy tu zatem pętlę, która kończy działanie nie na skutek wyczerpania
+limitu iteracji, ale ze względu na niespełnienie warunku, który z liczbą
+iteracji nie ma nic wspólnego. Takie pętle możemy nazwać<A NAME="EDU.skorowidz.termin pętla_iteracyjna warunkowa 80_610"></A> warunkowymi pętlami
+iteracyjnymi.
+</div>
+<br clear="all">
+
+<p>
+Bardzo ważną sprawą przy programowaniu pętli jest zagwarantowanie zakończenia
+ich działania. Często - przy niezbyt starannej analizie warunków zadania,
+przy jakichś konkretnych wartościach danych, możemy uzyskać pętle działające
+w nieskończoność.<br>
+<br>
+Np. prawidłowe działanie obu omówionych wyżej algorytmów zależy od konkretnej
+reprezentacji liczb w języku. Jeżeli wyniki potęgowania będziemy przedstawiać
+jako liczby typu int, to pierwszy algorytm (przy dużych <i><b>a</b></i> i <i><b>n</b></i>
+) nie da prawidłowych wyników, a drugi może się zapętlić (tzn, petla będzie
+wykonywana w nieskończoność). Wynika to z tego, że w którymś momecie (przy
+dużych a i n) wynik potęgowania nie będzie mieścił się w obszarze pamięci
+przeznaczonym do przechowywania liczb typu int.<br>
+<br>
+
+<p>
+<a href="javascript:popUp('dodatki/W10Prb1.htm', 50, 50)"><img src="images/Problem.jpg" alt="Problem" hspace="15" width="137" height="84" border="1" align="Right"></a><br>Zauważmy też, że formułując drugie zadanie (znaleźć parzyste nieujemne <i><b>n</b></i>, takie, że <i><b>a</b></i> podniesione do potęgi<i><b> n </b></i>jest co najmniej równe <i><b>cel</b></i> ) podano warunek <i><b>a&gt;1</b></i>.</p>
+
+<br clear="all">
+<br>
+<p>
+Co się stanie, gdy uchylimy ten warunek i powiemy, że <i><b>a</b></i> może być dowolną liczbą całkowitą? Czy dla każdego <i><b>a</b></i>  (przy dowolnym całkowitym <i><b>cel</b></i>) pętla będzie miała zagwarantowane zakończenia?<br>
+Proszę sprobować samodzielnie rozwiązać tę zagadkę, a później spojrzeć na rozwiązanie.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index81.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index107.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 1"></A><div class="tytulpunktu">1. Proste sortowanie i wyszukiwanie</div>
+
+<a name="W14.1"></a>
+
+<p>
+Wielokrotnie zetkniemy się z potrzebą uporządkowania informacji, ułożenia
+danych w określonej kolejności. W uporządkowanych zestawach informacji łatwiej
+jest odnajdywać dane, zresztą samo uporządkowanie może być niezbędną cechą
+jakiegoś zbioru danych. Najprostsze przykłady:<br>
+<ul>
+  <li>lista plików uporządkowanych
+według nazw lub według daty ostatniej modyfikacji, </li>
+  <li>lista 10 pierwszych zawodników,
+którzy zdobyli najwięcej punktów.</li>
+</ul>
+
+<p>
+Ułożenie danych w określonej kolejności oznacza jakiś ich porządek. Zwykle przy takim układaniu
+będziemy posługiwać się tutaj rosnącymi (lub malejącymi) wartościami jakiejś
+cechy danych. Np. lista 10 zawodników, którzy zdobyli największą liczbę punktów
+powinna być uporządkowana według liczby punktów - od największej do najmniejszej
+(wtedy będziemy mogli stwierdzić kto wygrał zawody i  jakie miejsca zajęli
+poszczególni zawodnicy)<br>
+
+Samo porządkowanie zbioru danych nazywa się sortowaniem.<A NAME="EDU.skorowidz.termin sortowanie 106_734"></A> Będziemy mówić więc o sortowaniu w porządku rosnącym lub malejącym.<br>
+<br> Istnieje wiele algorytmów sortowania. Studenci poznają je w trakcie
+zajęć z przedmiotu "Algorytmy i struktury danych". Tutaj postaramy się przedstawić
+najprostszy (ale za to mało efektywny - czyli wolny) z tych algorytmów  zwany
+po angielsku<A NAME="EDU.skorowidz.termin selection_sort 106_735"></A> <i><b>selection sort</b></i> (co możemy przetłumaczyć jako<A NAME="EDU.skorowidz.termin sortowanie_przez_wybór 106_736"></A> "sortowanie przez
+wybór").<br>
+<br> Załóżmy, że mamy tablicę 5 liczb całkowitych i chcemy je ułożyć w porządku
+niemalejącym (czyli w kolejności wzrostu liczb - od najmniejszej do największej
+- z uwzględnieniem tego, że niektóre liczby w tablicy mogą być takie same
+i wtedy znajdą się na kolejnych pozycjach, mimo, że nie występuje ich wzrost).<br>
+<br>
+Przykładowo możemy mieć taką tablicę.<br>
+<br>
+int[] a = {  52, 3, 33, 56, 14 };<br>
+<br>
+Na ostatniej pozycji w tablicy powinna znaleźć się największa liczba. Możemy
+ją znaleźć przeglądając tablicę od początku do ostatniego elementu tablicy
+i określając na której pozycji znajduje się wielkość maksymalna. Aha, maksymalną
+liczbą jest 56 i znajduje się na pozycji 4 (indeks 3). Powinna znaleźć się
+na ostatniej pozycji (pozycja 5, indeks 4), Ale tam stoi liczba 14. Gdybyśmy po prostu
+zapisali: a[4] = a[3] - stracilibyśmy liczbę 14. Musimy tę liczbę gdzieś
+zapisać. Musi ona być uwzględniona przy dalszym porządkowaniu tablicy, zatem
+nie może być zapisana gdzieś poza tablicą. Jeśli liczbę 56 zapiszemy z pozycji
+4 na pozycję 5, to pozycja 4 będzie wolna i tam właśnie możemy umieścić liczbę
+14. Oznacza to, że musimy przestawić elementy tablicy np. tak:<br>
+int temp = a[3];<br>
+a[3] = a[4];<br>
+a[4] = temp;<br>
+<br>
+W tej chwili nasza tablica będzie wyglądać tak:<br>
+<br>
+52 3 33 14 56<br>
+<br>
+i kawałek tej tablicy jest już uporządkowany (ostatni element zawiera właściwą,
+największą, liczbę). Teraz poszukamy kolejnego największego elementu. Szukamy
+od początku tablicy, ale nie musimy już brać pod uwagę ostatniego elementu
+(bo już jest właściwie umiejscowiony i na pewno nie będziemy go przestawiać).
+Tym razem przeszukiwanie tablicy zakończymy na przedostatnim elemencie. Znaleziony
+element maksymalny to 52 i ma indeks 0. Powinien znaleźć się w tablicy jako
+jej przedostatni element. Zatem znowu dokonujemy przestawienia (14 &lt;-&gt;
+52) i otrzymujemy tablicę:<br>
+<br>
+14 3 33 52 56<br>
+<br>
+W tej tablicy we własciwym porządku są już dwa ostatnie elementy, zatem dalsze
+kroki ograniczamy do trzech pierwszych elementów: znowu wyszukujemy największy.
+Tym razem okazuje się, że jest to 33 i że już znajduje się na właściwej pozycji.
+Uporządkowana część tablicy zwiększyła się do trzech elementów. Pozostało
+zobaczyć, który z pierwszych dwóch elementów jest większy i ewentualnie je
+przestawić. Zamieniamy miejscami 14 i 3. Tablica jest posortowana.<br>
+<br>
+Kolejne kroki  ilustruje poniższy rysunek na którym kolorem żółtym zaznaczono
+nieposortowaną część tablicy, kolorem niebieskim - już posortowaną, a niebieskim
+kółkiem - maksymalny element odszukiwany w każdym kroku w nieposortowanej
+części tablicy.<br><br>
+
+<div>
+<img src="images/Selsort.jpg" alt="r" width="399" height="351" border="1">
+</div>
+
+<br>
+
+<div class="important">
+Zadanie: przed lekturą dalszego tekstu proszę spróbować samodzielnie
+napisać metodę void selectionSort(int[] a), sortującą w porządku niemalejącym
+tablicę przekazaną jako argument>
+<br>
+</div>
+
+<br>
+
+<p>
+Możliwe rozwiązanie:<br>
+<br>
+
+<pre>
+  public void selectionSort(int[] a) {
+
+    // toInd - oznacza ostatni indeks nieposortowanej części tablicy
+    // na początku jest to ostatni indeks tablicy
+    // w kolejnych krokach toInd będzie zmniejszany o 1
+    // bo zmniejszają się rozmiary nieposortowanej częsci tablicy
+
+    // Gdy toInd osiągnie wartość 0 - "nieposortowany" będzie pierwszy
+    // element. Ale nie mamy go już gdzie przestawić, faktycznie znajduje się
+    // on na własciwym miejscu.
+    // Zatem nie musimy dokonywać żadnego przestawienia.
+    // Tablica jest posortowana. Kończymy pętle.
+
+    for (int toInd=a.length-1; toInd&gt;0; toInd--) {
+
+      int indMax = 0;   // indeks maksymalnego elementu
+                        // w nieposortowanej części tablicy
+
+      // szukamy tego indeksu, przeglądając nieposortowaną część tablicy
+      for (int k=1; k &lt;= toInd; k++)
+ 	if (a[indMax] &lt; a[k]) indMax = k;
+
+      // Przestawiamy elementy:
+      // maksymalny element idzie na ostatnią pozycję w nieposortowanej
+      // części tablicy; a liczba spod tego indeksu jest zapisywana
+      // w miejscu okupowanym poprzednio przez max element
+
+      int temp = a[toInd];
+      a[toInd] = a[indMax];
+      a[indMax] = temp;
+    }
+  }
+
+</pre>
+
+<p>
+Do przetestowania napisanej metody możemy użyć następującej klasy:<br>
+<br>
+
+<pre>
+import java.util.*;
+
+public class SelSort {
+
+  public SelSort(int n, int m) {
+
+    Random rand = new Random();
+
+    int[] a = new int[n];
+    for (int i=0; i &lt; n; i++) {
+      a[i] = rand.nextInt(m+1);
+      System.out.print(" " + a[i]);
+    }
+    selectionSort(a);
+    System.out.print('\n');
+    for (int i=0; i &lt; n; i++) System.out.print(" " + a[i]);
+  }
+
+  public void selectionSort(int[] a) {
+    // ...
+  }
+
+
+  public static void main(String[] args) {
+     new SelSort(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+   }
+
+}
+</pre>
+
+<p>Jako argumenty wywołania podajemy rozmiar tablicy oraz maksymalną liczbę,
+jaka może znaleźć się w tablicy (powiedzmy max). Wartości elementów tablicy
+zostaną utworzone przez generator liczb pseudolosowych (0 &lt;= a[i] &lt;=
+max). Następnie wywołana zostanie metoda selectionSort.<br>
+Wydruk programu pokazuje tablicę nieposortowaną oraz posortowaną np. <br><br>
+
+<div class="listing100">
+ 5 72 58 39 75 18 92 79 35 63<br>
+ 5 18 35 39 58 63 72 75 79 92<br>
+</div>
+
+<br>
+<p>
+Algorytm sortowania przez wybór należy do najwolniejszych algorytmów sortowania.<br>
+Jest wiele innych, lepszych algorytmów.<br>
+
+<div class="notel">Jednak w <b>nauce programowania</b> opanowanie różnych algorytmow sortowania
+ jest bardzo istotne, bowiem wyrabia umiejętność myślenia i rozwiązywania
+problemów programistycznych oraz umożliwia późniejszą adaptację standardowych algorytmów
+sortowania do specyficznych sytuacji</div>
+
+<div class="ddd"><br><A NAME="EDU.skorowidz.termin Arrays klasa 106_737"></A> W praktycznym programowiu nikt nie
+pisze algorytmow sortowania - korzysta się zwykle z gotowego oprogramownia.
+Również Java dostarcza  oprogramowanych algorytmów w postaci gotowych metod.
+Poznamy je bliżej przy okazji omawiania  kolekcji w drugim semestrze.<br>
+Teraz może warto powiedzieć tylko, że w pakiecie java.util istnieje klasa <b>Arrays</b>, w której zdefiniowano<A NAME="EDU.skorowidz.termin sort metoda 106_738"></A> metody <b>sort</b>
+, umożliwiające sortowanie m.in. tablic liczb całkowitych i rzeczywistych.
+Dla ciekawości możemy sprawdzić jaka jest różnica czasowa zastosowania algorytmu
+selection sort oraz tego, który poslużył do sformułowania metod sort w klasie
+Arrays<A NAME="EDU.skorowidz.termin quicksort algorytm 106_739"></A> (jest to zmodyfikowany algorytm quicksort; studenci poznają go na
+zajęciach z przedmiotu "Algorytmy i struktury danych").
+</div>
+<br clear="all">
+
+<br>
+
+<pre>
+import java.util.*;
+
+class QTimer {
+
+   private final long start;
+
+   public QTimer() {
+     start = System.currentTimeMillis();
+   }
+
+   public long getElapsed() {
+      return System.currentTimeMillis() - start;
+   }
+}
+
+
+public class SelSort1 {
+
+static public void selectionSort(int[] a) {
+// ... jak na poprzednim wydruku
+}
+
+
+  public static void main(String[] args) {
+     int n = Integer.parseInt(args[0]);
+     Random rand = new Random();
+     int[] a = new int[n];
+     int[] b = new int[n];
+     for (int i=0; i &lt; n; i++) {
+        a[i] = rand.nextInt(n*10);
+        b[i] = a[i];
+     }
+    System.out.println("Liczba elementów tablicy " + n);
+    QTimer qt = new QTimer();
+    selectionSort(a);
+    System.out.println("Czas selection sort: " + qt.getElapsed());
+    qt = new QTimer();
+    Arrays.sort(b);
+    System.out.println("Czas quicksort: " + qt.getElapsed());
+  }
+}
+</pre>
+
+<p>
+Przykładowo, dla losowo wygenerowanych tablic 50000 liczb całkowitych moglibyśmy uzyskać następujący wynik:<br><br>
+
+<div class="listing100">
+Liczba elementów tablicy 50000<br>
+Czas selection sort: 43830<br>
+Czas quicksort: 110<br>
+</div>
+
+<br><p>
+Widzimy więc, że dobry algorytm sortowania może być - przy dużej liczbie
+elementów tablicy - nawet  kilkaset razy szybszy niż bardzo proste, ale wolne
+sortowanie przez wybór.<br>
+<br><A NAME="EDU.skorowidz.termin napisy sortowanie 106_740"></A> A jak posortować napisy? <br>
+<br>
+
+<div class="important"> <br>
+Zadanie:  napisać metodę sortującą tablicę łańcuchów znakowych w porządku niemalejącym.<br>
+Przed lekturą dalszego tekstu - proszę wykonać to zadanie samodzielnie
+<br>
+<br>
+</div>
+
+<br>
+<p><A NAME="EDU.skorowidz.termin compareTo metoda 106_741"></A> Oczywiście - powinniśmy skorzystać z metody compareTo z klasy String.<br>
+
+<pre>
+public class SortString {
+
+  static public void selectionSort(String[] s) {
+    for (int toInd=s.length-1; toInd&gt;0; toInd--) {
+      int indMax = 0;
+      for (int k=1; k &lt;= toInd; k++)
+ 	if (s[indMax].compareTo(s[k]) &lt; 0) indMax = k;
+      String temp = s[toInd];
+      s[toInd] = s[indMax];
+      s[indMax] = temp;
+    }
+  }
+
+
+  public static void show(String[] s) {
+    System.out.print('\n');
+    for (int i=0; i &lt; s.length; i++) System.out.print(" " + s[i]);
+  }
+
+
+  public static void main(String[] args) {
+    String[] s =  {"A", "Z", "C", "B", "1", "3", "2", "A", "C" };
+    show(s);
+    selectionSort(s);
+    show(s);
+  }
+
+}
+</pre>
+
+<p>
+Wydruk programu:<br><br>
+
+<div class="listing100">
+ A Z C B 1 3 2 A C<br>
+ 1 2 3 A A B C C Z<br>
+</div>
+
+<br>
+<p>
+Często też w programowaniu będziemy stykać się z problemem odnalezienia konkretnego elementu tablicy.<br>
+W najprostszy sposób możemy to zrobić przeglądając po kolei wszystkie elementy
+tablicy, dopóki nie natrafiimy na poszukiwaną wartość.<br>
+Np. odnaleźć w tablicy liczb całkowitych  podaną liczbę, a następnie - jeśli
+występuje - zwrócić jej indeks, a jeśli takiej liczby w tablicy nie ma -
+zwrócić -1.<br>
+<br>
+
+<pre>
+public class Search {
+
+  public static int linearSearch(int[] tab, int v) {
+    for (int i=0; i &lt; tab.length; i++)
+      if (tab[i] == v) return i;
+    return -1;
+  }
+
+}
+</pre>
+
+<p><A NAME="EDU.skorowidz.termin wyszukiwanie 106_742"></A> Taki sposób wyszukiwania nazywany jest<A NAME="EDU.skorowidz.termin wyszukiwanie_liniowe 106_743"></A> wyszukiwaniem liniowym.<br>
+<br>
+
+<div class="def">Wyszukiwanie liniowe polega na przeglądaniu kolejnych elementów tablicy i porównywaniu ich  z poszukiwaną wartością</div>
+
+<br>
+<p>
+Wyszukiwanie liniowe może okazać się  bardzo wolne. Jeśli np. szukany element
+znajduje się w tablicy na ostatniej pozycji, to liczba wykonanych iteracji
+i porównań będzie równa liczbie elementów tablicy, co przy bardzo dużych
+tablicach prowadzi do długiego działania programu.<br>
+<br><A NAME="EDU.skorowidz.termin wyszukiwanie_binarne 106_744"></A> Istnieje  nieco lepszy sposób przeszukiwania tablic nazywany wyszukiwaniem binarnym.<br>
+Rozważmy przykład.<br>
+Mamy posortowaną w porządku niemalejącym tablicę liczb całkowitych.<br>
+2 3 4 5 7 11 14 20<br>
+<br>
+Będziemy szukać w tej tablicy liczby 14.<br>
+Podzielmy tablicę na dwie połowy. Ostatni element w lewej połowie = 5, jest
+mniejszy od szukanej liczby. Oznacza to, że (ponieważ tablica jest posortowana)
+szukana liczba znajduje się w prawej połowie tablicy. Podzielmy tę połowę
+znowu na dwie.  Ostatni element w "nowej" lewej połowie to 11 - znowu mniejszy
+od 14. Zatem szukana liczba znajduje się w "nowej" prawej połowie. Dzielimy
+ją znowu na dwie (w tym przypadku w każdej nowej połówce znajduje się jedna
+liczba) i odkrywamy że nowa "jednoliczbowa" lewa połówka zawiera poszukiwaną
+wartość<br>
+Ilsutruje to poniższy rysunek:<br><br>
+
+<div>
+<img src="images/binSrch.jpg" alt="r" width="563" height="213" border="1">
+</div>
+
+<br><p>
+Gdybyśmy natomiast szukali liczby 4, to sekwencja kroków byłaby następująca:<br>
+<br>
+
+<div>
+<img src="images/binSrch2.jpg" alt="r" width="540" height="196" border="1">
+</div>
+
+<br><p>
+Zwróćmy uwagę, że w każdym kroku binarnego wyszukiwania porównujemy poszukiwaną
+wartość z  wartością elementu znajdującego się na pozycji "dzielącej" tablicę
+na kolejne połówki (element ten na rysunkach zaznaczany jest na żółto, pokazano
+też jego indeks).<br>
+Można powiedzieć, że zawsze jest to "środkowy" element kolejnych podziałów.<br>
+Jeśli w tablicy znajduje się szukana wartość, to w ostatnim kroku binarnego
+wyszukiwania ten "środkowy" element będzie jej równy. Jeśli nie, jeśli jej nie ma -
+to okaże się, że nie można już więcej dzielić tablicy na kolejne połówki;
+stwierdzamy więc, że tablica nie zawiera poszukiwanej wartości.<br>
+<br>
+Zatem możemy zdefiniowac następującą metodę binarnego wyszukiwania:<br>
+<br>
+
+<pre>
+public class Search {
+
+  // v - poszukiwana wartość w tablicy tab
+  static public int binarySearch(int[] tab, int v)   {
+    int low = 0;                // lewy skrajny indeks "aktualnej" połówki
+    int high = tab.length - 1;  // prawy skrajny indeks "aktualnej" połowki
+
+    // dopóki możemy dzielić tablicę
+    while (low &lt;= high) {
+      int mid = (low + high) / 2;  // indeks środkowego elementu
+                                   // zakresu low..high
+
+      if (v  &lt; tab[mid])         // jeżeli wartość jest w lewej połówce:
+        high = mid - 1;          // zmodyfikować skrajny prawy indeks
+      else if (v &gt; tab[mid])     // w przeciwnym razie jeżeli w prawej połówce:
+              low = mid + 1;     // zmodyfikować skrajny lewy indeks
+           else return mid;      // w przeciwnym razie: zanleziony!
+    }
+    return -1;                    // w tablicy nie znaleziono wartości v
+  }
+</pre>
+
+<br><A NAME="EDU.skorowidz.termin wyszukiwanie_binarne 106_745"></A> 
+<div class="def">Binarne wyszukiwanie jest szybkim algorytmem odnajdywania informacji
+w posortowanych tablicach. W każdym jego kroku zakres rozpatrywanych elementów
+tablicy zmniejsza się o połowę</div>
+
+<br>
+<p>
+Należy wyraźnie podkreślić, że binarne wyszukiwanie wymaga posortowanych
+danych. Często jednak opłaca się najpierw posortować dane, by później móc
+szybko odnajdywać wśród nich potrzebną informację.<br>
+<br>
+Jako praktyczny przykład rozważymy nowe podejście do wycieczek (przykład
+z wykładu 12). Wycieczki będziemy przedstawiać jako obiekty klasy Travel,
+zawierające cel podróży oraz cenę wycieczki.<br>
+<br>
+
+<pre>
+public class Travel {
+
+   private String dest;
+   private double price;
+
+   public Travel(String s, double p) {
+     dest = s;
+     price = p;
+   }
+
+   public String getDest() { return dest; }
+   public double getPrice() { return price; }
+
+}
+</pre>
+
+<p>
+Stworzymy następnie klasę TravelSearcher, której obiekty będą zawierać tablicę
+wycieczek. Z tablicy tej można będzie za pomocą metody search uzyskiwać referencję
+do obiektu-wycieczki, której cel podano jako argument.<br>
+<br>
+
+<pre>
+public class TravelSearcher {
+
+  private Travel[] travel;
+
+  public TravelSearcher(Travel[] t) {
+    travel = new Travel[t.length];
+    for (int i=0; i &lt; t.length; i++) travel[i] = t[i];
+    sortByDest();
+  }
+
+
+  public Travel search(String dest) {
+    int low = 0;
+    int high = travel.length - 1;
+    while (low &lt;= high) {
+      int mid = (low + high) / 2;
+      int compRes = dest.compareToIgnoreCase(travel[mid].getDest());
+      if (compRes &lt; 0) high = mid - 1;
+      else if (compRes &gt; 0) low = mid + 1;
+           else return travel[mid];
+    }
+    return null;
+  }
+
+ public Travel[] getTravels() { return travel; }
+
+ private void sortByDest() {
+   for (int to=travel.length-1; to&gt;0; to--) {
+      int i = 0;
+      for (int k=1; k &lt;= to; k++)
+ 	if (travel[i].getDest().compareTo(travel[k].getDest()) &lt; 0) i = k;
+      Travel temp = travel[to];
+      travel[to] = travel[i];
+      travel[i] = temp;
+    }
+  }
+
+}
+</pre>
+
+<p>
+Komentarze:<br>
+<ul>
+  <li>przy inicjacji obiektu przepisujemy podaną jako argument konstruktora
+tablicę wycieczek (referencji do obiektów klasy Travel) do  nowej tablicy
+i sortujemy tę tablicę. W ten sposób oryginalna (przekazana) tablica nie
+będzie posortowana. Stało by się tak gdybyśmy w konstruktorze, zmiennej travel
+przypisali referencję do tablicy przekazanej jako argument. Posortowaną tablicę
+zawsze można uzyskać poprzez odwołanie getTravels().</li>
+
+  <li>tablicę sortujemy po to, by zastosować binarne wyszukiwanie. W trakcie
+wyszukwania nie rozróżniamy małych i wielkich liter (metoda compareToIgnoreCase
+ z klasy String), bowiem nie ma znaczenia czy użytkownik napisał np. "zanzibar"
+czy "ZANZIBAR" czy może "Zanzibar", aby odnaleźć w tablicy wycieczkę do Zanzibaru.</li>
+</ul>
+
+<p>I wreszcie klasa testująca (z niewielką przykładową liczbą wycieczek,
+ale można ją zwiększyć wczytując np. wycieczki z jakiegoś pliku).<br>
+W klasie tej - użytkownik podaje w dialogu cel podróży, po czym otrzymuje informację ile taka wycieczka może kosztować.<br>
+Dialogi wyglądają w następujący sposób:<br><br>
+
+<div>
+<img src="images/trav141.jpg" alt="r" width="293" height="119" border="1" align="Left">
+<img src="images/trav142.jpg" alt="r" width="268" height="113" border="1" align="Right">
+</div>
+
+<br clear="all"><br>
+
+<pre>
+import javax.swing.*;
+public class Test {
+
+  public static void main(String[] args) {
+    String[] dest  = { "Bali", "Cypr", "Ibiza", "Kenia", "Kuba" };
+    double[] price = { 5000, 2500, 2800, 4500, 6000 };
+    Travel[] t = new Travel[dest.length];
+    for (int i = 0; i &lt; t.length; i++) t[i] = new Travel(dest[i], price[i]);
+    TravelSearcher ts = new TravelSearcher(t);
+    String d;
+    while((d=JOptionPane.showInputDialog("Podaj cel podróży:")) != null) {
+      Travel trav = ts.search(d);
+      String msg;
+      if (trav == null) msg = "Nie znaleziono takiej podróży";
+      else msg = trav.getDest() + " - cena: " + trav.getPrice();
+      JOptionPane.showMessageDialog(null, msg);
+    }
+    System.exit(0);
+  }
+
+}
+</pre>
+
+<p>Zauważmy jeszcze, że dla tablic referencji do obiektów klasy Travel
+musieliśmy zdefiniować specjalne, tylko dla nich ważne, metody sortowania
+i wyszukiwania.<br>
+<br>
+O bardziej ogólnym podejściu do sortowania i wyszukiwania tablic dowolnych
+obiektów będziemy mówić w drugim semestrze przy okazji omawiania kolekcji.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index107.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

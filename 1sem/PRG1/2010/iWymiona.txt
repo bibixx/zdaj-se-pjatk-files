@@ -1,0 +1,94 @@
+// plik mleczarnia.java
+public class mleczarnia {
+
+	public static void main(String[] args) {
+
+		Krowa k1 = new Krowa(4);					// (odnosnik #4) tworzymy krowe k1 z czterema wymionami
+		System.out.println("krowa k1:");
+		System.out.println("ma wymion:");
+		System.out.println(k1.getIWymion());		// (odnosnik #3) pobieranie liczby wymion krowy k1
+		System.out.println("-> zmieniamy ilosc wymion na jakas inna:");
+		k1.setIWymion(7);							// ustawienie liczby wymion krowy k1 na siedem (7)
+		System.out.println(k1.getIWymion());		// (odnosnik #3) pobieranie liczby wymion krowy k1
+		System.out.println("-> ucinamy wymie:");
+		k1.utnijWymie();							// ucinamy wymiono
+		System.out.println(k1.getIWymion());		// (odnosnik #3) pobieranie liczby wymion krowy k1
+
+		System.out.println("\n\nile krowa MIN musi miec wymion?");
+		System.out.println(Krowa.MIN_WYMION);		// pobiera MIN liczbe wymion
+		System.out.println("zrobmy bez wymion");
+		Krowa k2 = new Krowa(0);					// (odnosnik #4) robimy krowe k2 bez wymion (0)
+		System.out.println(k2.getIWymion());		// (odnosnik #3) pobieranie liczby wymion krowy k1
+													/* utworzylismy krowe z jednym wymionem,
+													 * bo taki zrobilismy warunek (odnosnik #1)
+													 * */
+		
+		System.out.println("\n\nile krowa MAX moze miec wymion?");
+		System.out.println(Krowa.MAX_WYMION);		// pobiera MAX liczbe wymion
+		System.out.println("zrobmy z 9 wymionami");
+		Krowa k3 = new Krowa(9);					// (odnosnik #4) robimy krowe k3 z dziewiecioma wymionami (9)
+		System.out.println(k3.getIWymion());		// (odnosnik #3) pobieranie liczby wymion krowy k3
+													/* utworzylismy krowe z osmioma wymionami,
+													 * bo taki zrobilismy warunek (odnosnik #2)
+													 * */
+
+	}
+
+}
+
+// plik Krowa.java
+// .
+
+public class Krowa {
+
+	private int iWymion; 					// musimy miec jakas liczbe (ilosc, dlatego iWymion)
+	//private boolean dajemleko = true;		// TODO: bedziemy sprawdzac czy krowa daje mleko (status krowy)
+
+	public static final int MIN_WYMION = 1;	// MIN po co krowa bez wymion?
+	public static final int MAX_WYMION = 8; // MAX maksymalnie moze miec 8 wymion
+
+	public Krowa(int x) {					// (odnosnik #4) tworzac nowa krowe bedzie trzeba podac liczbe wymion
+	
+		setIWymion(x);						// to bedzie ustawialo liczbe wymion
+		// setDajemleko(dajemleko);			// TODO: status krowy
+
+	}
+
+	public void setIWymion(int y) {			// ustawienie liczby wymion
+
+		if (y < MIN_WYMION) {				// sprawdzenie czy liczba wymion nie jest mniejsza od 1
+			this.iWymion = MIN_WYMION;		// (odnosnik #1) jesli jest - ustawia krowie jedno wymiono
+		} else if (y > MAX_WYMION) {		// sprawdzenie czy liczba wymion nie jest wieksza od 8
+			this.iWymion = MAX_WYMION;		// (odnosnik #2) jesli jest - ustawia krowie osiem wymion
+		} else								// jesli wszystko jest w porzadku
+			this.iWymion = y;				// ustawia krowie tyle wymion, ile podalismy
+
+	}
+
+	public int getIWymion() {				/* pobieranie liczby wymion
+											 * -> public - zeby bylo dalej przekazane,
+											 * int - zwraca liczbe calkowita
+											 * */
+		return this.iWymion;				// dla danej krowy pobiera ilosc wymion
+
+	}
+
+	public void utnijWymie() {				// ucinamy wymiono
+		//if(iWymion==1){
+			// TODO: usmierc na mieso, bo po co nam krowa bez wymion
+		//}
+		this.iWymion = iWymion - 1;			// obecna liczba wymion - 1
+	
+	}
+
+	/*
+	 * public void setDajemleko(boolean zmienstatus) {
+	 * 
+	 * if (zmienstatus && !dajemleko) { this.dajemleko = false; // ustaw: nie
+	 * dajemleka // dajamleko++; } else if (!zmienstatus && dajemleko) {
+	 * this.dajemleko = true; // ustaw: dajemleko // licznik--; }
+	 * 
+	 * }
+	 */
+
+}

@@ -1,0 +1,346 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index97.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index99.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Rozbiór tekstów</div>
+
+<a name="W12.2"></a><A NAME="EDU.skorowidz.termin rozbiór_tekstów 98_676"></A> 
+<p>Bardzo często w programowaniu występują sytuacje, gdy trzeba rozbić, rozłożyć
+jakiś tekst (napis) na poszczególne występujące w nim symbole (np. słowa).<br>
+<br>
+
+Wyobraźmy sobie np., że<A NAME="EDU.skorowidz.termin łańcuch_znakowy 98_677"></A> łańcuch znakowy zawiera napisy reprezentujące liczbę
+całkowitą, dowolną liczbę spacji,  znak operacji arytmetycznej, dowolną liczbę
+spacji i napis reprezentujący drugą liczbę cłakowitą. Naszym zadaniem jest
+"wyłuskanie" z całego napisu napisów-liczb, przekształcenie ich do postaci
+binarnej  i wykonanie na nich podanej operacji.<br>
+<br>
+<p>
+<img src="images/symbole.jpg" alt="r" hspace="15" width="195" height="158" border="1" align="Right">
+
+Napis taki może wyglądać następująco: "21 + 21"<br>
+<br>
+
+Wyłuskiwane symbole są rozdzielone <b>separatorami</b>.
+</p>
+<br clear="all">
+<br>
+<p>
+W przykładzie z liczbami separatorami będą spacje.<br>
+
+Dowolny ciąg znaków, który nie zawiera spacji - będzie symbolem.<br>
+
+Dowolna liczba spacji będzie oddzielać symbole od siebie.<br>
+<br>
+
+<div class="syntax"><br>
+
+Do wyłuskiwania symboli  z łańcuchów znakowych służy klasa StringTokenizer z pakietu java.util.<br>
+
+</div>
+
+<br>
+<p>
+
+Po to by dokonać rozbioru tekstu - tworzymy obiekt klasy StringTokenizer,
+podając jako argument konstruktora - tekst do rozbioru np.<br>
+<br>
+
+<pre>
+String expr = "21 + 21";
+StringTokenizer st = new StringTokenizer(expr);
+</pre>
+
+<p>
+Ta postać konstruktora zakłada domyślnie, że separatorami są znaki z następującego zestawu <code>" \t\n\r\f"</code>
+ (czyli znak spacji, tabulacji, przejścia do nowego wiersza, powrotu karetki,
+nowej strony). W tym przypadku symbolami będą ciągi znaków, które nie zawierają
+żadnego z wymienionych separatorów.<br>
+<br>
+
+Obiektu klasy StringTokenizer możemy teraz zapytać o to ile symboli zawiera przekazany konstruktorowi napis:<br>
+<pre>
+
+<p>
+int n = st.countTokens();  // n = 3</pre>
+
+<p>
+
+Wyłuskiwanie symboli odbywa się sekwencyjnie poczynając od początku łańcucha. Służy temu metoda <b>nextToken()</b>, która zwraca kolejny symbol jako String. Pierwsze wywołanie tej metody
+zwróci pierwszy symbol, następne - będą zwracać kolejne symbole łańcucha.
+<br>
+
+<pre>
+String s1 = st.nextToken(); // napis "21"
+String s2 = st.nextToken(); // napis "+"
+String s3 = st.nextToken(); // napis "21"
+</pre>
+
+<p>
+Gdy nie ma już symboli "do zwrotu" - wywołanie nextToken() spowoduje powstanie<A NAME="EDU.skorowidz.termin NoSuchElementException 98_678"></A> wyjątku NoSuchElementException.<br>
+<br>
+
+Zatem zawsze przeglądamy łańcuch od początku i  "wyłuskując" symbole przesuwamy
+się do jego końca (uwaga: kolejne symbole są zwracane, ale oczywiście - nie
+są usuwane z łańcucha).<br>
+<br>
+
+Do stwierdzenia, czy w łańcuchu znakowym są jeszcze symbole do zwrotu służy metoda hasMoreTokens().<br>
+
+Metoda hasMoreTokens() zwraca true, jeśli w łańcuchu znakowym są jeszcze
+nie "wyluskane" symbole i false w przeciwnym razie. Inaczej mówiąc: hasMoreTokens()
+zwraca true, jeśli następne odwołanie do nextToken() zwróci kolejny symbol
+i zwraca false, gdy ew. następne odwołanie do nextToken() spowoduje wyjątek
+NoSuchElementException.<br>
+<br>
+
+Łatwo zapisać pętle, w której będziemy pobierać kolejne symbole:
+
+<pre>
+while (st.hasMoreTokens()) {
+  Sring s = st.nextToken();
+  // ... tu coś robimy z s
+}
+</pre>
+
+<p>
+
+Wiedząc to wszystko można teraz napisać program, który w oknie dialogowym
+prosi użytkownika o wprowadzeia liczby cąłkowitej, spacji, operatora, spacji
+i drugiej liczby i wykonuje żądaną operację arytmetyczną na tych dwóch liczbach.<br>
+<br>
+
+<div class="important"><br>
+Przed lekturą dalszego tekstu proszę to zadanie rozwiązać samodzielnie
+<br>
+<br>
+
+
+
+</div>
+
+<br>
+<p>
+
+Rozwiązanie:<br>
+<br>
+<pre>
+import java.util.*;
+import javax.swing.*;
+
+public class Oper {
+
+  public static void main(String[] args) {
+
+    String normalQuest = "Liczba1 op Liczba2",
+           errorQuest = "Wadliwe dane. Jeszcze raz.\n" + normalQuest,
+           quest = normalQuest;
+
+    String expr;
+
+    while ((expr = JOptionPane.showInputDialog(quest)) != null) {
+
+      StringTokenizer st = new StringTokenizer(expr);
+
+      if (st.countTokens() != 3) {
+          quest = errorQuest;
+          continue;
+      }
+
+      String snum1 = st.nextToken(),
+             sop  = st.nextToken(),
+             snum2 = st.nextToken();
+
+      int num1 = Integer.parseInt(snum1),
+          num2 = Integer.parseInt(snum2),
+          res = 0;
+
+      char op = sop.charAt(0);
+
+      switch (op) {
+        case '+' : res = num1 + num2; break;
+        case '-' : res = num1 - num2; break;
+        case '*' : res = num1 * num2; break;
+        case '/' : res = num1 / num2; break;
+        default: {
+          quest = errorQuest;
+          continue;
+        }
+      }
+      JOptionPane.showMessageDialog(null, "Wynik = " + res);
+      quest = normalQuest;
+    }
+    System.exit(0);
+
+  }
+
+}
+</pre>
+
+<p>
+
+Inna postać<A NAME="EDU.skorowidz.termin StringTokenizer 98_679"></A> konstruktora klasy StringTokenizer pozwala na określenie zbioru
+separatorów, które będą służyć do wyróżniania symboli.<br>
+
+Jeżeli napiszemy np.<br>
+<br>
+
+StringTokenizer st = new StringTokenizer(s, "., " - to separatorami będą kropka, przecinek i spacja.<br>
+<br>
+
+Zadanie:<br>
+ Stworzyć klasę Words, której obiekty będą zawierać tablicę
+słów napisu przekazanego jako argument konstruktora. Za słowa uznajemy ciągi
+znaków rozdzielonych spacjami i znakami punktuacji (oraz może innymi - zastanowić
+się jakimi).<br>
+
+W klasie dostarczyć metod:<br>
+
+getWordsCount() - zwraca liczbę słów<br>
+
+getWord(int i) - zwraca i-te słowo napisu (i =1,2, ... n; gdzie n liczba słów w napisie)<br>
+
+getWords() - zwraca tablicę słów<br>
+
+getMaxLenWord() - zwraca najdłuższe słowo<br>
+
+getMinLenWord() - zwraca najkrótsze słowo<br>
+<br>
+
+<div class="important"><br>
+Przed lekturą dalszego tekstu proszę to zadanie rozwiązać samodzielnie
+<br>
+<br>
+
+
+
+
+</div>
+
+<br>
+<p>
+
+Możliwe rozwiązanie:<br>
+<br>
+
+<pre>
+import java.util.*;
+
+public class Words {
+
+  private String[] words;      // tablica slów
+  private String maxLenWord;   // słowo o max długości
+  private String minLenWord;   // słowo o minimalnej długości
+
+  // Konstruktro
+  public Words(String txt) {
+
+    // Uwzględniamy bogaty zestaw separatorów słów
+
+    StringTokenizer st = new StringTokenizer(txt, " \t\n\r\f.,:;()[]\"'?!-{}");
+
+    words = new String[st.countTokens()];  // utworzenie tablicy słów
+    int maxL = 0;                          // max dlugość
+    int minL = 10000;                      // min długość
+    int i = 0;                             // indeks w tablicy
+
+    while (st.hasMoreTokens()) {   // dopóki są słowa
+      String s = st.nextToken();
+      int len = s.length();
+      if (len &gt; maxL) {            // maksymalna długość ?
+         maxL = len;
+         maxLenWord = s;
+      }
+      if (len &lt; minL) {            // minimalna długość ?
+        minL = len;
+        minLenWord = s;
+      }
+      words[i++] = s;              // słowo -&gt; do tablicy; zwiększenie indeksu
+    }
+  }
+
+  // Zwraca liczbę słów
+  public int getWordsCount() {
+    return words.length;
+  }
+
+  // Zwraca i-te słowo (liczymy od 1)
+  // jeśli podano wadliwy indeks - zwraca null
+  public String getWord(int i) {
+    return (i &lt; 1 || i &gt; words.length) ? null : words[i-1];
+  }
+
+  // Zwraca tablicę slów
+  public String[] getWords() {
+    return words;
+  }
+
+  // Zwraca słowo o max długości
+  public String getMaxLenWord() {
+    return maxLenWord;
+  }
+  // Zwraca słowo o min długości
+  public String getMinLenWord() {
+    return minLenWord;
+  }
+
+
+}
+</pre>
+
+<p>
+
+I klasa testująca:<br>
+<br>
+
+<pre>
+import javax.swing.*;
+
+class TestWords {
+
+  public static void main(String[] args) {
+    String txt;
+    while ((txt = JOptionPane.showInputDialog("Wpisz tekst")) != null) {
+      Words w = new Words(txt);
+      int n = w.getWordsCount();
+      say("Liczba słów: " + n);
+      say("Kolejne słowa: ");
+      for (int i=1; i &lt;= n; i++) say(w.getWord(i));
+      say("Słowo o numerze n+1: " + w.getWord(n+1));
+      say("Kolejne słowa: ");
+      String[] wrds = w.getWords();
+      for (int i=0; i &lt; wrds.length; i++) say(wrds[i]);
+      say("Najdluższe słowo: " + w.getMaxLenWord());
+      say("Najkrótsze słowo: " + w.getMinLenWord());
+    }
+    System.exit(0);
+  }
+
+  static void say(String s) {
+    System.out.println(s);
+  }
+
+}
+</pre>
+
+<p><A NAME="EDU.skorowidz.termin StringTokenizer 98_680"></A> Klasa StringTokenizer dostarcza programiście jeszcze pewnych dodatkowych
+możliwości (np. zmianę separatorów pomiędzy kolejnymi operacjami wyłuskiwania
+symboli;  zwracanie nie tylko symboli, ale i separatorów w wyniku odwołania
+nextToken()).<br>
+<br>
+<b><font color="#ff6600">Proszę zapoznać się z dokumentacją klasy StringTokenizer</font></b>.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index97.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index99.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

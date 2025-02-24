@@ -1,0 +1,415 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index63.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index65.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><div class="tytulpunktu">5. Zasięg identyfikatorów. Zmienne lokalne. Czas życia danych. Specyfikatory dostępu</div>
+
+<a name="W8.6"></a><A NAME="EDU.skorowidz.termin zasięg_identyfikatorów 64_543"></A> <p>Gdy definiujemy jakąś klasę  niebagatelną kwestią okazuje się pytanie o
+możliwości działania na określonych zmiennych.  Zwykle sprawia to początkującym
+w Javie programistom wiele trudności.<br>
+<br>
+Zacznijmy od pewnego banalnego (ale wcale nie tak oczywistego dla  kogoś kto zaczyna przygodę z Javą) stwierdzenia. <br>
+<br>
+
+<div class="important">Wszystkie instrukcje (oprócz deklaracji) można umieszczać wyłącznie w metodach klasy</div>
+
+<br><p>
+(jest od tego wyjątek: blok statyczny, ale w tym momencie go pominiemy)<br>
+<br>
+W samych metodach możemy mieć jednak pewne niejasności: kiedy  możemy się odwoływać do określonych zmiennych i innych metod?<br>
+<br>
+Jak pamiętamy - nazwy zmiennych, stałych, metod, klas są identyfikatorami. <br>
+<br>
+
+<div class="def"><b>Zasięgiem</b> identyfikatora jest fragment programu, w którym może on
+być używany (w którym identyfikator jest rozpoznawany przez kompilator).</div>
+
+<br>
+<div class="important">W każdej metodzie klasy możemy zawsze odwołać się do identyfikatorów składowych klasy (pól i metod), <b>niezależnie od tego w którym miejscu klasy występuje deklaracja tych pól i metod</b>.<br>
+W inicjatorach zawartych w deklaracjach pól klasy możemy odwoływac się do
+wcześniej inicjowanych (por. punkt o inicjacji) identyfikatorów pól klasy</div>
+
+<br>
+<div class="notel">Przypomnijmy: ciało metody czyli jej kod ujmowany jest w nawiasy klamrowe. Ujęty w nawiasy klamrowe kod nazywa się również <b>blokiem</b></div>
+
+<div class="ddd"><br>W każdej metodzie możemy deklarować nowe zmienne (lub stałe). Zasięg ich identyfikatorów jest <b>lokalny</b> - rozciąga się od miejsca deklaracji do końca metody (końca bloku stanowiącego
+ciało metody) w której zostały zadeklarowane. Mówimy o nich<A NAME="EDU.skorowidz.termin zmienna_lokalna 64_544"></A> <b>zmienne (stałe) lokalne</b>. 
+</div><br clear="all">
+
+<p>Dotyczy to również parametrów (których deklaracje występują w nagłówku
+metody). Tak naprawdę, parametry są zmiennymi lokalnymi o zasięgu od miejsca
+deklaracji do końca bloku obejmującego ciało metody.<br>
+Również wewnątrz<A NAME="EDU.skorowidz.termin blok_lokalny 64_545"></A> <b>bloków lokalnych</b> (zestawu instrukcji ujętych w nawiasy
+klamrowe wewnątrz metody) możemy wprowadzać deklaracje zmiennych. Ich zasięg
+obejmuje obszar od miejca deklaracji do końca bloku w którym zostały zadeklarowane.<br>
+<br>
+Zatem, jeśli mamy następującą klasę:<br>
+
+<pre>
+class A {
+
+    int a;
+
+    void metoda1() {
+        int b;
+        ... 
+       }
+
+    void metoda2() {
+        int c;
+        ...
+         }
+ }
+
+</pre>
+
+<p>to w metodzie metoda1 możemy odwoływać się do zmiennej a, zmiennej b, oraz
+metody metoda2(), a w metodzie metoda2() możemy odwoływac się do zmiennej
+a, zmiennej c i metody metoda1. Blędem natomiast będzie próba odwołania się
+z metody1 do zmiennej c i z metody2 do zmiennej b.<br>
+<br><A NAME="EDU.skorowidz.termin przesłanianie_zmiennych 64_546"></A> W konstruktorach i metodach możemy przesłaniać identyfikatory pól klasy.<br>
+Np. <br>
+<br>
+
+<pre>
+class A {
+
+     int a;
+
+     void metoda() {
+         int a = 0;     // przesłonięcie identyfikatora pola
+         a = a + 10;    // dotyczy zmiennej lokalnej;
+         this.a++;      // dotyczy pola
+     }
+
+}
+</pre>
+
+<p>
+Tutaj w metodzie metoda() wprowadziliśmy zmiennę lokalną o tej samej nazwie
+co pole klasy (przesłonięcie identyfikatora). Samo odwołanie <i><b>a</b></i>
+ będzie dotyczyć tej zmiennej lokalnej. Jak pamiętamy, przy takim przesłonięciu
+możemy odwolać się do pola używając zmiennej this.<br>
+<br>
+<div class="important">W Javie nie wolno przesłaniać zmiennych lokalnych w blokach wewnętrznych.</div><br>
+<p>
+Np. konstrukcja:<br>
+class A {<br>
+ ....<br>
+  void metoda() {<br>
+     int a;<br>
+     { <br>
+       int a;<br>
+         ...<br>
+     }<br>
+  }<br>
+}<br>
+<br>
+jest niedopuszczalna.<br>
+<br>
+Ważna kwestia dotyczy<A NAME="EDU.skorowidz.termin inicjacja_zmiennych_lokalnych 64_547"></A> inicjacji zmiennych lokalnych. Otóż w przeciwieństwie
+do pól klasy, zmienne lokalne nie mają zagwarantowanej inicjacji i jeśli
+nie nadamy im wartości (czy to w jawnej inicjacji, czy za pomocą przypisania)
+ich wartość jest nieokreślona.<br>
+ <br>
+
+<div class="important">Zmienne lokalne muszą mieć <b>na pewno</b> nadane wartości. W przeciwnym razie wystąpi błąd w kompilacji, związany z naruszeniem tzw. "definite assignment rule"</div>
+
+<br>
+<p>
+Np. poniższy program:<br>
+<br>
+
+<pre>
+import javax.swing.*;
+
+public class DefAssgnm {
+
+  public static void main(String[] args) {
+    int len;
+    String s = JOptionPane.showInputDialog("Napis?");
+    if (s != null) len = s.length();
+    System.out.println("Długosc napisu : " + len);
+  }
+
+
+</pre>
+
+<p>nie skompiluje się poprawnie, a kompilator powiadomi nas, że:<br>
+<br>
+
+<div class="listing100">DefAssgnm.java:9: variable len might not have been initialized<br>
+    System.out.println("Długosc napisu : " + len);<br>
+                                             ^<br>
+1 error</div>
+
+<br>
+<p>
+ponieważ zmienna len jest lokalna w metodzie main i w programie uzyska wartość
+tylko warunkowo (gdy s != null). Zatem może się zdarzyć, że nie będzia miała
+przypisanej żadnej wartości.<br>
+<br>
+Rozwiązaniem tego problemu, jest zainicjowanie zmiennej len w deklaracji:<br>
+<br>
+    int len = -1;<br>
+<br>
+lub też w inny sposób zagwarantowanie, że w każdym przypadku będzie ona miała wartość. Np.<br>
+
+<pre>
+import javax.swing.*;
+
+public class DefAssgnm {
+
+  public static void main(String[] args) {
+    int len;
+    String s = JOptionPane.showInputDialog("Napis?");
+    if (s != null) len = s.length();
+    else len = -1;
+    System.out.println("Długosc napisu : " + len);
+  }
+
+}
+</pre>
+
+<p>
+Z zasięgiem identyfikatorów wiąże się w pewnym sensie<A NAME="EDU.skorowidz.termin czas_życia_danych 64_548"></A> <b>czas życia danych</b>, ale nie są to pojęcia tożsame.<br><br>
+
+<div class="def">Czas życia danych to okres od momentu wydzielenia pamięci dla ich przechowywania do momentu zwolnienia tej pamięci.</div>
+
+<br>
+<p>
+Zmienne lokalne są powoływane do życia w momencie deklaracji (automatyczne
+wydzielenie pamięci na stosie) i likwidowane przy wyjściu sterowania z bloku,
+w którym zostału zadeklarowane (automatyczne zwolnienie pamięci). Dotyczy
+to również tych zmiennych, które są referencjami do obiektów.<br>
+<br>
+
+<div class="important">Wartości zmiennych lokalnych są tracone po wyjściu sterowania z bloku - np. zakończeniu działania metody</div>
+
+<br>
+<p>
+Ta oczywista prawda niekiedy jest niedostrzegana i niektórzy starają się
+np za pomocą zmiennych lokalnych zliczać liczbę wywołań jakiejś metody (usiłują
+wymyślić sposob na to, a przecież to niemożliwe).<br>
+<br>
+Natomiast pola klasy zachowują się inaczej. Stanowią one przecież elementy
+obiektów. Obiekty zaś są tworzone w momencie wykonania operacji new. Pamięć
+dla nich wydzielana jest dynamicznie - na stercie i zostanie zwolniona automatycznie
+tylko wtedy gdy żadna referencja nie odnosi się już do danego obiektu.<br>
+Zwalnianiem pamięci zajmuje się odśmiecacz (garbage collector), który według
+okreslonej strategii zarządza pamięcią. My tym zarządzaniem nie musimy się
+martwić.<br>
+<br>
+Zatem pola klasy mogą stanowić coś w rodzaju "zmiennych globalnych", które zachowują swoje wartości pomiędzy wywołaniami metod.<br>
+Na przykład, poniższy program:<br>
+
+<pre>
+public class Count {
+
+  private int counter;
+
+  public void increase() {
+    counter++;
+  }
+
+  public void show() {
+    System.out.println(counter);
+  }
+}
+
+class Test {
+
+  public static void main(String[] args) {
+    Count c = new Count();
+    c.increase();
+    c.increase();
+    c.increase();
+    c.show();
+  }
+
+}
+</pre>
+
+<p>
+<a href="javascript:popUp('dodatki/W8Prb5.htm',50,50)"><img src="images/Problem.jpg" alt="Problem" hspace="15" width="137" height="84" border="1" align="Right"></a>wyprowadzi na konsolę liczbę 3.</p>
+<br clear="all">
+
+<p>Różnicę pomiędzy życiem zmiennych lokalnych i obiektów dobrze ilustruje poniższy przykład:<br>
+
+<pre>
+class Pies {
+
+  String s;
+
+  void nowyPies() {
+    String pies =  new String("pies główny");
+    s = pies;
+  }
+
+  void jakieMamyPsy() {
+    System.out.println("Jest " + s);
+    String pies2 = pobierzInnegoPsa();
+    System.out.println("Jest też " + pies2);
+  }
+
+  String pobierzInnegoPsa() {
+    String p = new String("inny pies");
+    return p;
+  }
+
+}
+
+class Test {
+
+  public static void main(String[] args) {
+    Pies p =  new Pies();
+    p.nowyPies();
+    p.jakieMamyPsy();
+  }
+}
+</pre>
+
+<div class="listing33r">Jest pies główny<br>
+Jest też inny pies</div>
+<div class="ddd"><br>Program wyprowadzi następującą informację, gdyż</div><br clear="all">
+
+<ul>
+  <li>obiekt "pies główny" został stworzony w metodzie nowyPies(). Lokalna zmienna <i><b>pies,</b></i>
+ zawierająca referencję do tego obiektu, po zakończeniu działania tej metody
+przestaje istnieć. Ale ponieważ w metodzie przypisaliśmy jej wartość  zmiennej
+s  (polu klasy), to ta nadal wskazuje na obiekt "pies główny" i obiekt nadal
+istnieje. Odwolamy się do niego za pomoca zmiennej s w metodzie jakieMamyPsy().</li>
+
+  <li>w metodzie  pobierzInnegoPsa() tworzymy obiekt "inny pies" i przypisujemy referencję do niego zmiennej p. Instrukcja <i><b>return p</b></i>
+ powoduje przypisanie tej wartości zmiennej p na zmienną pies2 w metodzie
+jakieMamyPsy  (w miejscu wywołania metody pobierzInnegoPsa). Zatem mimo,
+że po zakończeniu działania metody pobierzInnegoPsa() lokalna zmienna p przestaje
+istnieć, to obiekt "inny pies" nadal istnieje, bo wskazuje na niego zmienna
+pies2 w metodzie jakieMamyPsy.</li>
+
+  <li>po zakończeniu działania metody jakieMamyPsy obiekt "inny pies" zostanie
+usunięty z pamięci, bowiem nie wskazuje na niego już żadna referencja. <br>
+  </li>
+</ul>
+<p>
+A jak wygląda sytuacja z dostępem do pól i metod danej klasy w innej klasie?<br>
+Destęp ten regulują tzw. specyfikatory dostępu, których używamy w deklaracjach
+zmiennych, stałych i metod ( i które już cześciowo poznaliśmy).<br>
+<br>
+Każda składowa klasy może być:<br>
+<ul>
+  <li><A NAME="EDU.skorowidz.termin składowa_klasy prywatna 64_549"></A> prywatna - dostępna tylko w danej klasie (specyfikator <b>private</b>)</li>
+
+  <li><A NAME="EDU.skorowidz.termin składowa_klasy o_dostępie_pakietowym 64_550"></A> zaprzyjaźniona - dostępna ze wszystkich klas danego pakietu; mówi
+się tu też o dostępie pakietowym lub domyślnym - domyślnym dlatego, iż ten
+rodzj dostępności występuje wtedy, gdy w deklaracji składowej nie użyjemy
+żadnego specyfikatora.</li>
+
+  <li><A NAME="EDU.skorowidz.termin składowa_klasy chroniona 64_551"></A> chroniona lub zabezpieczona - dostępna z danej  klasy, wszystkich klas
+ją dziedziczących oraz klas będących w tym samym pakiecie co dana klasa (specyfikator
+    <b>protected</b>)</li>
+	
+  <li><A NAME="EDU.skorowidz.termin składowa_klasy publiczna 64_552"></A> publiczna - dostępna zewsząd (specyfikator <b>public</b>)</li>
+</ul>
+<p>
+Pewne powody stosowania specyfikatorów dostępu już omawialiśmy (zabronienie
+bezpośredniego dostępu do "wnętrza" obiektów, udostępnienie użytkownikom
+klasy okreslonego zestawu metod publicznych). Więcej o specyfikatorach dostępu
+dowiemy się w następnym semestrze, teraz zauwazmy tylko, że stanowią one
+prawdziwe restrykcje.<br>
+<br>
+Np. następujący program:<br>
+
+<pre>
+import javax.swing.*;
+
+public class Para {
+
+  private int a;
+  private int b;
+  public String nazwa;
+
+  public Para(int x, int y) {
+    a = x;
+    b = y;
+  }
+
+  private String makeString() {
+    return nazwa + " " + a + " i " + b;
+  }
+
+  public void show() {
+    JOptionPane.showMessageDialog(null, makeString()); // 6
+  }
+}
+
+
+class Test {
+
+  public static void main(String[] args) {
+    Para p = new Para(17,20);
+    p.nazwa = "Para liczb";               // 1
+
+    p.a = 1;                              // 3
+    System.out.println(p.makeString());   // 4
+
+    p.show();                             // 5
+
+  }
+
+}
+</pre>
+
+<p>Spowoduje błędy w kompilacji:<br><br>
+
+<div class="listing100">Para.java:30: a has private access in Para<br>
+    p.a = 1;                              // 3<br>
+     ^<br>
+Para.java:31: makeString() has private access in Para<br>
+    System.out.println(p.makeString());   // 4<br>
+                        ^<br>
+2 errors</div>
+
+<p>przy czym:<br>
+<ul>
+  <li>wiersz oznaczony //1 jest prawidłowy, bo pole nazwa jest publiczne
+(ale, jak wspomniano uprzednio, nie należy deklarować pól jako publicznych)</li>
+  <li>wiersze oznaczone // 3 i // 4 powodują błędy, bo nie mamy prawa dostępu do ptrywatnych składowych klasy z innej klasy</li>
+  <li>wiersz oznaczony // 5 jest poprawny, bo odwołujemy się do publicznej metody </li>
+  <li>wiersz // 6 jest poprawny, bo z klasy możemy się odwoływac do jej prywatnych składowych<br>
+  </li>
+</ul>
+<p>
+Mamy też w Javie pojęcie klas publicznych i pakietowych. Klasa pakietowa jest
+dostępna tylko z klas pakietu. Klasa publiczna jest dostępna zewsząd (z innych
+pakietów).<br>
+<br>
+Klasę publiczną deklarujemy ze specyfikatorem public:. <br>
+<br>
+ public class Para { <br>
+ ... <br>
+ } <br>
+<br><A NAME="EDU.skorowidz.termin klasa publiczna 64_553"></A> 
+<div class="important">W pliku źródłowym może być zdefiniowana tylko jedna klasa publiczna (ale
+nie musi być). Jeśli w pliku źródłowym jest zdefiniowana klasa publiczna,
+to plik musi mieć taką samą nazwę jak ta klasa - z dokładnością do wielkości
+liter</div>
+
+<br>
+<p>
+Definicji klas pakietowych (bez specyfikatora public) może być w jednym pliku wiele.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index63.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index65.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

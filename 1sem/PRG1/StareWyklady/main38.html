@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index37.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><div class="tytulpunktu">5. Konwersje arytmetyczne</div>
+
+<a name="W5.5"></a>
+
+<p>Ogólnie, jeżeli zmienna jest typu A to nie można jej przypisać wartości typu
+B. Np. taki zapis w programie spowoduje błąd w kompilacji:<br>
+<br>
+int a = "Ala ma kota";<br>
+<br>
+gdyż <i><b>a</b></i> jest zmienną typu int, a wyrażenie "Ala ma kota" jest literałem łańcuchowym i  jest typu  String.<br>
+<br>
+Byłoby jednak nierozumnie stosować tę zasadę w całej rozciągłości wobec typów
+arytmetycznych. Przecież to są liczby i często chcielibyśmy jakąś wartość
+liczbową przypisać zmiennej typu arytmetycznego nie bacząc na typy. <br>
+<br>
+
+<div class="def">
+Zmiana typu wyrażenia nazywa się konwersją lub - inaczej - rzutowaniem (ang. cast)</div>
+<br>
+<p>
+Te konwersje arytmetyczne, które nie mogą doprowadzić do utraty informacji
+reprezentowanej przez wartość wyrażenia dokonywane są w sposób niejawny,
+niejako automatyczny.<br>
+Możemy np. bez przeszkód przypisać zmiennej typu double wartość zmiennej typu int:<br>
+<br>
+int a = 10;<br>
+double d = a;<br>
+<br>
+bowiem każda wartość zmiennej typu int "zmieści się" w zmiennej typu double.<br>
+<br>
+Takie<A NAME="EDU.skorowidz.termin konwersja rozszerzająca 38_388"></A> konwersje nazywają się rozszerzającymi, bo przekształcane są "węższe"
+typu do "szerszych" (mogących reprezentować większe spektrum wartości).<br>
+<br>
+Gdybyśmy jednak chcieli wykonać operację odwrotną:<br>
+<br>
+double d = 10.1;<br>
+...<br>
+int a = d;<br>
+<br>
+to kompilator będzie sygnalizował błąd. Taki zapis jest niedopuszczalny,
+ponieważ przy  okazji takiego przypisania możemy stracić informację zawartą
+w zmiennej "szerszego" typu. <br>
+Konwersja w tym przypadku nazywa się<A NAME="EDU.skorowidz.termin konwersja zwężająca 38_389"></A> konwersją zawężającą i możliwa jest
+do wykonania tylko pod warunkiem użycia operatora konwersji. Mówimy, że konwersje
+zawężające muszą być wykonywane jawnie, za pomocą operatora konwersji. Użycie
+operatora konwersji oznacza, że programista świadomie decyduje się na przekształcenie
+typów, przy którym może nastąpić strata informacji. Że nie jest to przypadkowy
+błąd w programie.<br>
+<br><A NAME="EDU.skorowidz.termin operator konwersji 38_390"></A> 
+<div class="syntax"> Operator konwersji (rzutowania) ma postać:<br>
+<br>
+        <b>(<i>nazwa_typu</i>)</b> <i><b>wyrażenie</b></i><br>
+<br>
+gdzie <i><b>nazwa_typu</b></i> - typ do jakiego przekształcany jest aktualny typ <i><b>wyrażenia</b></i> <br>
+</div>
+
+<br>
+<p>
+W poprzednim przykładzie powinniśmy więc napisać:<br>
+<br>
+double d = 10.9;<br>
+...<br>
+int a = (int) d;<br>
+<br>
+i teraz kompilator pozwoli nam na pozostawienie takiego zapisu w programie.<br>
+<br>
+Warto zwrócić uwagę, że przy tej okazji może faktycznie nastąpić utrata informacji. W naszym przykładzie zmienna <i><b>a</b></i>
+  będzie miała wartość 10 - straciliśmy całą część ułamkową liczby. Podkreślmy:
+to nie jest zaokrąglenie, część ulamkowa jest po prostu odrzucana. Oczywiście
+nie zawsze informacja będzie tracona (gdy d = 10.0, to a = 10 i mamy praktycznie
+to samo).<br>
+<br>
+Bardzo często przy operowaniu na znakach (typo char) i ich kodach liczbowych potrzebne jest wykonywanie konwersji.<br>
+Obrazuje to poniższy program:<br>
+<br>
+
+<pre>
+public class Char {
+
+  public static void main(String[] args) {
+
+     char c = 'a';
+     int kod = c;
+     System.out.println("Kod znaku " + c + " = " + kod);
+     kod = 77;
+     c = (char) kod;
+     System.out.println("Kod znaku " + c + " = " + kod);
+
+     // Czasem trzeba użyć jawnej konwersji rozszerzającej
+     System.out.println("Kod znaku " + '*' + " = " + (int) '*');
+
+     // Oczywiście - zawężające zawsze trzeba podawać jawnie
+     System.out.println("Kod znaku " + (char) 66 + " = " + 66);
+
+  }
+
+}
+</pre>
+
+<br>
+
+<div class="listing33r">Kod znaku a = 97<br>
+Kod znaku M = 77<br>
+Kod znaku * = 42<br>
+Kod znaku B = 66
+</div>
+
+<div class="ddd">
+<br>który wyprowadzi na konsolę następującą informację:
+</div>
+<br clear="all">
+
+<p>
+W trakcie wyliczania wartości wyrażeń arytmetycznych dokonywane są automatyczne konwersje nazywane<A NAME="EDU.skorowidz.termin promocja_numeryczna 38_391"></A> promocjami numerycznymi.<br>
+<br>
+
+<div class="def">
+<b>Promocja</b> numeryczna polega na przekształceniu typów argumentów operatorów arytmetycznych do typu <b>wspólnego</b> dla ich argumentów</div>
+
+<br>
+<p>
+Odpowiedź na pytanie jaki jest ten wspólny typ daje następująca reguła.<br>
+<br>
+
+<div class="syntax"><br>Promocje argumentów operatorów dwuargumentowych są wykonywane w następujący sposób:<br>
+<ul>
+  <li>jeżeli jeden z argumentów jest typu double, drugi przekształcany jest do typu double,</li>
+  <li>w przeciwnym razie, jeżeli jeden z argumentów jest typu float, drugi przekształcany jest do typu float,</li>
+  <li>w przeciwnym razie, jeżeli jeden z argumentów jest typu long, drugi przekształcany jest do typu long,</li>
+  <li>w przeciwnym razie oba argumenty przekształcane są do typu int.</li>
+</ul>
+ </div>
+</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index37.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

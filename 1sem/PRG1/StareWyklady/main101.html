@@ -1,0 +1,449 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index100.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><div class="tytulpunktu">5. Operacje na bitach</div>
+<a name="W12.5"></a><A NAME="EDU.skorowidz.termin operacje_na_bitach 101_712"></A> <p><A NAME="EDU.skorowidz.termin liczby_całkowite 101_713"></A> Liczby całkowite (typów byte, short, int, long) są reprezentowane w pamięci
+komputera w postaci binarnej jako ciągi bitów. Bit, który znajduje się w
+takim zapisie najbardziej z lewej strony nazywa się<A NAME="EDU.skorowidz.termin bit najbardziej_znaczący 101_714"></A> bitem najstarszym (najbardziej znaczącym), a
+ten najbardziej  z prawej -<A NAME="EDU.skorowidz.termin bit najmniej_znaczący 101_715"></A> najmłodszym (najmniej znaczącym).<br>
+
+Najstarszy bit jest<A NAME="EDU.skorowidz.termin bit znaku 101_716"></A> tzw. bitem znaku - jeśli jest ustawiony (ma wartość
+1) to liczba jest ujemna, a jeśli nie (ma wartość 0) - to liczba jest dodatnia.
+<br><br>
+
+<div>
+<img src="images/bity.jpg" alt="r" width="402" height="196" border="1">
+</div>
+<br>
+
+<p>
+
+Jak pamiętamy z wykładu 1 - dziesiętną wartość liczby zapisaną w systemie
+dwójkowym możemy uzyskać sumując kolejne iloczyny wartości bitów (1 lub 0)
+i odpowiednich potęg 2.  Uwzględnienie liczb ujemnych wymaga, by wartość
+bitu znaku "brana była" z minusem. Dlatego na powyższym rysunku:<br>
+
+7 = -0*2<sup>7</sup> + 0*2<sup>6</sup> + 0*2<sup>5</sup> + 0*2<sup>4</sup> +0*2<sup>3</sup> + 1*2<sup>2</sup> + 1*2<sup>1</sup> + 1*2<sup>0</sup><br>
+
+-7 = -1*2<sup>7</sup> + 1*2<sup>6</sup> + 1*2<sup>5</sup> + 1*2<sup>4</sup> +1*2<sup>3</sup> + 0*2<sup>2</sup> + 0*2<sup>1</sup> + 1*2<sup>0</sup><br>
+<br>
+
+<div class="notel"><br>Taki zapis liczb całkowitych nazywa się zapisem <b>z uzupełnieniem do dwóch</b><br><br>
+</div>
+
+<div class="ddd"><br><A NAME="EDU.skorowidz.termin uzupełnienie_do_dwóch 101_717"></A> Łatwo dostrzec, że z tego powodu wartość bezwzględna największej całkowitej liczby
+ujemnej jest zawsze większa od wartości bezwględnej największej całkowitej liczby dodatniej.
+W przypadku wartości typu byte najmniejsza możliwa wartość równa jest 100000000,
+czyli -1*2<sup>7</sup> = - 128, natomiast największa możliwa licznba dodatnia równa jest 01111111 = 127.
+</div>
+<br clear="all">
+
+<br>
+<p>
+Pamiętamy też, że wartości typu char<A NAME="EDU.skorowidz.termin znak 101_718"></A> (reprezentujące znaki) mogą być traktowane
+jak liczby całkowite. W tym przypadku jednak najstarszy bit nie jest traktowany
+jako bit znaku - zatem wartości typu char (zajmujące 2 bajty) mogą kształtować
+się w przedziale od 0 do 65536.<br>
+<br>
+
+Na bitach wartości wszystkich całkowitych typów numerycznych (w tym bitach wartości typu  char) możemy wykonywać operacje.<br>
+
+Do operowania na bitach liczb całkowitych służą następujące operatory:<br>
+<ul>
+<li><A NAME="EDU.skorowidz.termin operator uzupełnienia_jedynkowego 101_719"></A> jednoargumentowy operator uzupełnienia jedynkowego ~ , </li>
+
+<li><A NAME="EDU.skorowidz.termin operator przesunięcia_bitowego 101_720"></A> dwuargumentowe operatory przesunięcia bitowego &gt;&gt; (w prawo) i
+&lt;&lt; (w lewo) oraz operator  przesunięcia bitowego w prawo bez propagacji
+bitu znakowego (&gt;&gt;&gt;),</li>
+
+<li><A NAME="EDU.skorowidz.termin operator koniunkcji_bitowej 101_721"></A> dwuragumentowy operator koniunkcji bitowej &amp;, </li>
+
+<li><A NAME="EDU.skorowidz.termin operator bitowej_różnicy_symetrycznej 101_722"></A> dwuargumentowy operator bitowej różnicy symetrycznej ^ (wykluczające ALBO), </li>
+
+<li><A NAME="EDU.skorowidz.termin operator alternatywy_bitowej 101_723"></A> dwuargumentowy operator alternatywy bitowej | .</li>
+</ul>
+
+<p>
+Każdy z argumentów wszystkich wymienionych operatorów bitowych musi być typu całkowitego.<br>
+
+Operatory przesunięcia bitowego powodują<A NAME="EDU.skorowidz.termin przesunięcie_bitów 101_724"></A> przesunięcie bitów swojego lewego
+argumentu o liczbę pozycji specyfikowaną przez prawy argument w lewo (operator
+&lt;&lt;), lub w prawo (operator &gt;&gt;). Przy przesuwaniu w lewo, młodsze
+(zwalniane) bity zapełniane są zerami; przy przesunięciu w prawo zwalniane
+bity zapełniane są wartością bitu znakowego (najstarszego). co nazywa się
+propagację bitu znakowego. W przypadku użycia operatora &gt;&gt;&gt; taka
+propagacja nie występuje i niezależnie od wartości bitu znaku zwalniane bity
+są zapełniane zerami.<br>
+<br>
+
+Rozpatrzmy przykłady:<br>
+<br>
+
+byte b = 1; -&gt; bitowa reprezentacja: 00000001  (1)<br>
+
+b &lt;&lt; 1       -&gt;                                 00000010  (2)<br>
+
+b &lt;&lt; 4       -&gt;                                 00010000  (16)<br>
+<br>
+ A zatem w przypadku, gdy a jest którąś z potęg dwójki, kolejne przesunięcie
+w lewo mnoży wartość a przez 2. A co się stanie gdy będziemy chcieli przesunąć
+w lewo bity największej z możliwych liczb danego typu?<br>
+
+Warto wiedzieć, że lewy argument operatora &lt;&lt;  (jeśli był typu byte,
+short lub char) jest promowany do typu int i całe wyrażenie ma wartość typu
+int (jeśli argument był typu long   - wartość wyrażenia jest typu long).<br>
+
+Zatem taki program:<br>
+
+<pre>
+public class Test {
+
+  public static void main(String[] args) {
+    byte b = Byte.MAX_VALUE;
+    System.out.println(b + " " + (b &lt;&lt; 1));
+    System.out.println(b + " " + (byte) (b &lt;&lt; 1));
+    int i = Integer.MAX_VALUE;
+    System.out.println(i + " " + (i &lt;&lt; 1));
+  }
+
+}
+</pre>
+
+<p>
+wyprowadzi:<br>
+
+127 254<br>
+
+127 -2<br>
+
+2147483647 -2<br>
+<br>
+
+Pierwszy wynik jest faktycznie rezultatem mnożenia wartości b przez dwa tylko
+dlatego, że nastąpiła promocja wartości b do typu int i typem wyniku wyrażenia
+b &lt;&lt; 1 jest int.<br>
+
+Trzeci wynik pokazuje, że przesunięcie bitów może doprowadzić do zmiany bitu
+znaku z 0 na 1. W tym przypadku nie było miejsca na promocję (czyli faktycznie
+zwiększenie liczby bitów zajmowanych przez liczbę) w konsekwencji bit znaku
+stał się 1 i otrzymaliśmy liczbę ujemną. <br>
+
+Pośredni, drugi wynik uwidacznia dokładnie to samo. Dokonaliśmy tu konwersji
+do typu byte, zatem rezultat jest taki jakbyśmy operowali na wartościach typu
+byte (bez promocji):<br>
+<br>
+
+127 =  01111111<br>
+<br>
+
+a po przesunięciu bitów o jedno miejsce, otrzymujemy:<br>
+<br>
+
+11111110<br>
+<br>
+
+co jest równe dokładnie -2.<br>
+<br>
+
+Zobaczmy jak działa operator &gt;&gt; (przesunięcie bitów w prawo - z propagacją znaku)<br>
+<br>
+
+byte b = 127;     -&gt;  01111111<br>
+
+b &gt;&gt; 1               -&gt;  00111111 (63)<br>
+
+b &gt;&gt; 2               -&gt;  00011111 (31)<br>
+
+b &gt;&gt; 3               -&gt;  00001111 (15)<br>
+<br>
+
+Operacja a &gt;&gt; n dla liczb całkowitych jest równoważna całkowitoliczbowemu
+dzieleniu (dającemu w rezultacie całkowitą część rezultatu dzielenia) a/2<sup>n</sup>.<br>
+<br>
+
+Dla liczb ujemnych wygląda to w następujący sposób:<br>
+
+byte b = -64; -&gt;    11000000<br>
+
+b &gt;&gt; 1          -&gt;    11100000  (-32)<br>
+
+b &gt;&gt; 2          -&gt;    11110000  (-16)<br>
+
+b &gt;&gt; 3          -&gt;    11111000  (-8)<br>
+
+c &gt;&gt; 4          -&gt;    11111100  (-4)<br>
+<br>
+
+(zwalniane bity są zapełniane wartością bitu znakowego tj. 1)<br>
+
+Zauważmy więc, że jeśli b = -1 (11111111), to przesunięcie bitów w prawo da wynik -1.<br>
+
+<br><A NAME="EDU.skorowidz.termin operator_bitowy logiczny 101_725"></A> Logiczne operatory bitowe ( ~,^, &amp;, |) służą do ustalania wartości
+bitów rezultatu za pomocą wartości bitów argumentów. Operator uzupełnienia
+jedynkowego ~ zamienia w swoim jedynym argumencie wszystkie zerowe bity na
+1, a 1 na 0. Sposób w jaki określane są bity rezultatu pozostałych logicznych
+operacji bitowych obrazuje poniższa tablica, w której a1 i a2 oznaczają argumenty
+operatorów bitowych.<br>
+<br>
+
+<table border="1" width="100%" cellpadding="1" cellspacing="1">
+<tbody><tr valign="Top"><td rowspan="2">
+      <div align="Center">Wartość
+bitu<br>
+w a1</div>
+</td><td rowspan="2">
+      <div align="Center">Wart. odpo-<br>
+wiadajęcego<br>
+mu bitu w
+a2</div>
+</td><td colspan="3">
+      <div align="Center">Wart. odpowiadającego bitu rezultatu
+oper.</div>
+</td></tr><tr valign="Top"><td>
+      <div align="Center"><strong>a1 &amp; a2</strong></div>
+</td><td>
+      <div align="Center"><strong>a1 ^ a2</strong></div>
+</td><td>
+      <div align="Center"><strong>a1 | a2</strong></div>
+</td></tr><tr valign="Top"><td align="Center"><font face="Courier">0</font></td><td align="Center"><font face="Courier">0</font></td><td align="Center"><font face="Courier">0</font></td><td align="Center"><font face="Courier">0</font></td><td align="Center"><font face="Courier">0</font></td></tr><tr valign="Top"><td align="Center"><font face="Courier">1</font></td><td align="Center"><font face="Courier">0</font></td><td align="Center"><font face="Courier">0</font></td><td align="Center"><font face="Courier"
+>1</font></td><td align="Center"><font face="Courier">1</font></td></tr><tr valign="Top"><td align="Center"><font face="Courier">0</font></td><td align="Center"><font face="Courier">1</font></td><td align="Center"><font face="Courier">0</font></td><td align="Center"><font face="Courier">1</font></td><td align="Center"><font face="Courier">1</font></td></tr><tr valign="Top"><td align="Center"><font face="Courier">1</font></td><td align="Center"><font face="Courier">1</font></td><td align="Center"><font face=
+"Courier">1</font></td><td align="Center"><font face="Courier">0</font></td><td align="Center"><font face="Courier">1</font></td></tr></tbody>
+</table>
+
+<p>Np. jeśli a1 = 5, a2 = 7, to logiczne operacje bitowe są
+przeprowadzane w następujący sposób:</p>
+
+<table border="1" width="100%" cellpadding="1" cellspacing="1">
+<tbody><tr valign="Top"><td><tt>a1 &amp; a2 =  ...0101<br>
+        &amp; ...0111<br>
+         ---------<br>
+          ...0101
+= 5</tt></td><td><tt>a1 ^ a2 =  ...0101<br>
+        ^ ...0111<br>
+         ---------<br>
+          ...0010
+= 2</tt></td><td><tt>a1 | a2 =  ...0101<br>
+        | ...0111<br>
+        ---------<br>
+          ...0111
+= 7</tt></td></tr></tbody>
+</table>
+
+<br><p>
+Zwróćmy uwagę, że operacje te dotyczą tylko najmłodszych 3 bitów, niezależnie
+od tego jakiego są typu i ile miejsca w pamięci zajmują argumenty a1 i a2.
+<br>
+Np. aby wyzerować najmłodszy bit całkowitej zmiennej x - niezależnie od jej typu  możemy napisać:<br>
+<br>
+x = x &amp; ~0x1;  <br>
+<br>
+zerowe bity stałej 0x1 staną się 1, a jedyny bit o wartości 1 - zerem; w
+rezultacie w x zerowany będzie najmłodszy bit - niezależnie od tego jakiego
+typu jest i ile miejsca zajmuje x.<br>
+<br><A NAME="EDU.skorowidz.termin operacja_bitowa zastosowanie 101_726"></A> Operacje bitowe są właśnie najbardziej przydatne do ustawiania i testowania
+wartości bitów. Często w programowaniu wykorzystuje się<A NAME="EDU.skorowidz.termin flaga 101_727"></A> tzw. flagi - znaczniki,
+których wartości określają np. charakterystyki jakiegoś zdarzenia, albo jaki
+jest stan jakiegoś obiektu. Flagi mają zwykle charakter zero-jedynkowy -
+szkoda więc byłoby na każdą z nich tracić 8 bitów, gdy wystarczy 1. Zestawy
+flag zapisujemy więc zwykle jako bity wartości jakiejś zmiennej - typu byte (8 flag),
+albo int (32 flagi), albo long (64 flagi). Za pomocą operatorów bitowych
+możemy sprawdzać które z flag przechowywanych w tych zmiennych są ustawione
+i modyfikować ich ustawienie.<br>
+<br>
+Popatrzmy na następujący przykładowy program (wykorzystamy w nim statyczną
+metodę getBits(wart) z klasy Unspec, która zwraca tablicę znaków
+0 - 1, pokazujących bitową reprezentację przekazanej jako argument wartości;
+klasę tę za chwilę zbudujemy i omówimy).<br>
+
+<pre>
+public class Flags {
+
+  public static void main(String[] args) {
+
+    final int  FL1 = 0x01,    // stałe pokazujące które bity (flagi) mają
+               FL2 = 0x02,    // być testowane lub ustawiane
+               FL3 = 0x04,
+               FL4 = 0x08;
+
+    int flags = 0;
+    flags = flags | FL1;                   // ustawia flagę 1 (najmłodszy bit)
+    show("flags = flags | FL1",
+          flags);
+    flags = 0;
+    flags =  flags | FL3;                  // ustawia flagę 3 (trzeci bit)
+    show("flags = flags | FL3",
+          flags);
+    flags = 0;
+    flags = flags | (FL1 | FL4);           // ustawia 1 i 4 flagę
+    show("flags = flags | (FL1 | FL4)",
+          flags);
+
+   // czy flaga 1 ustawiona
+   if ((flags &amp; FL1) &gt; 0) System.out.println("Flaga 1 ustawiona");
+   else System.out.println("Flaga 1 NIE ustawiona");
+
+   // czy flaga 2 ustawiona
+   if ((flags &amp; FL2) &gt; 0) System.out.println("Flaga 2 ustawiona");
+   else System.out.println("Flaga 2 NIE ustawiona");
+
+   // czy flagi 1 i 4 ustawione (jednoczesnie)
+   int mask = FL1 | FL4;
+   if ((flags  &amp;  mask) ==  mask) System.out.println("Flagi 1 i 4 ustawione");
+   else System.out.println("Flagi 1 i 4 NIE ustawione");
+
+   // czy flagi 1 i 2 ustawione (jednoczesnie)
+   mask = FL1 | FL2;
+   if ((flags &amp; mask) == mask) System.out.println("Flagi 1 i 2 ustawione");
+   else System.out.println("Flagi 1 i 2 NIE ustawione");
+
+  }
+
+  static void show(String s, int flags) {
+    System.out.println(s);
+    char[] bits =  Unspec.getBits(flags);
+    System.out.println(new String(bits) + "   --- val: " + flags);
+  }
+
+}
+</pre>
+
+<p>
+Program wyprowadzi następujące informacje:<br><br>
+
+<div class="listing100">
+flags = flags | FL1<br>
+00000000000000000000000000000001   --- val: 1<br>
+flags = flags | FL3<br>
+00000000000000000000000000000100   --- val: 4<br>
+flags = flags | (FL1 | FL4)<br>
+00000000000000000000000000001001   --- val: 9<br>
+Flaga 1 ustawiona<br>
+Flaga 2 NIE ustawiona<br>
+Flagi 1 i 4 ustawione<br>
+Flagi 1 i 2 NIE ustawione<br>
+</div><br>
+
+<p><b><font color="#ff6600">Proszę przeanalizować działanie programu i przetestować inne ustawienia flag.</font></b><br>
+<br>
+Znając już działanie operatorów bitowych możemy pokusić się o stworzenie
+klasy Unspec, która dostarczy następujących statycznych metod, zwracających
+w tablic<A NAME="EDU.skorowidz.termin bitowa_reprezentacje_wartości 101_728"></A> bitowe reprezentacje wartości różnych typów:<br>
+<br>
+public static char[]  getBits(byte)<br>
+public static char[]  getBits(char)<br>
+public static char[]  getBits(int)<br>
+public static char[]  getBits(long)<br>
+<br>
+
+
+
+<div class="important"><br>
+Przed lekturą dalszego tekstu proszę to zadanie rozwiązać samodzielnie
+<br>
+<br>
+
+</div>
+
+<br>
+<p>
+Możliwe rozwiązanie:<br>
+<br>
+
+<pre>
+public class Unspec {
+
+  public static char[] getBits(byte v)  {
+    return getBits(8, (long) v);
+  }
+
+  public static char[] getBits(char v)  {
+    return getBits(16, (long) v);
+  }
+
+
+  public static char[] getBits(int v)  {
+    return getBits(32, (long) v);
+  }
+
+
+  public static char[] getBits(long v)  {
+    return getBits(64, v);
+  }
+
+  private static char[] getBits(int n, long v)  {
+    char[] bits = new char[n];
+    long mask = 1;
+    for (int k = n-1; k &gt;= 0; k--) {
+      if ((v &amp; mask) != 0) bits[k] = '1';
+      else bits[k] = '0';
+      mask =  mask &lt;&lt; 1;
+    }
+    return bits;
+  }
+}
+</pre>
+
+<p>
+oraz program testujący, w którym - jako argumenty wywołania podajemy kolejno
+liczbę typu long, liczbę typu int, znak, liczbę typu byte:<br>
+<br>
+
+<pre>
+class Test {
+  public static void main(String[] args) {
+   long l = Long.parseLong(args[0]);
+   int i  = Integer.parseInt(args[1]);
+   char c = args[2].charAt(0);
+   byte b = Byte.parseByte(args[3]);
+   System.out.println("Wartość typu long " + l);
+   System.out.println(new String(getBits(l)));
+   l = Long.MAX_VALUE;
+   System.out.println("Maksymalna wartość typu long " + l);
+   System.out.println(new String(getBits(l)));
+   l = Long.MIN_VALUE;
+   System.out.println("Minimalna wartość typu long " + l);
+   System.out.println(new String(getBits(l)));
+   System.out.println("Wartość typu int " + i);
+   System.out.println(new String(getBits(i)));
+   System.out.println("Wartość typu char: znak " + "'" + c + "'" + ", kod " + (int) c);
+   System.out.println(new String(getBits(c)));
+   System.out.println("Wartość typu byte " + b);
+   System.out.println(new String(getBits(b)));
+  }
+}
+</pre>
+
+<p>
+Program ten - przy podanych argumentach: 1 -1 a -7 wyprowadzi:<br>
+<br>
+
+<div class="listing100">
+Wartość typu long 1<br>
+0000000000000000000000000000000000000000000000000000000000000001<br>
+Maksymalna wartość typu long 9223372036854775807<br>
+0111111111111111111111111111111111111111111111111111111111111111<br>
+Minimalna wartość typu long -9223372036854775808<br>
+1000000000000000000000000000000000000000000000000000000000000000<br>
+Wartość typu int -1<br>
+11111111111111111111111111111111<br>
+Wartość typu char: znak 'a', kod 97<br>
+0000000001100001<br>
+Wartość typu byte -7<br>
+11111001<br>
+</div><p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index100.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index71.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 1"></A><div class="tytulpunktu">1. Przegląd instrukcji sterujących</div>
+
+<a name="W9.1"></a>
+
+<div class="notel">W anglojęzycznej literaturze informatycznej pojęcie instrukcji określa się słowem <b>statement</b>
+</div>
+
+<div class="ddd"><br>
+Zanim zaczniemy omawiać instrukcje sterujące, warto wyraźnie powiedzieć
+co w ogóle znaczy pojęcie<A NAME="EDU.skorowidz.termin instrukcja 70_565"></A> <b>instrukcja</b>, tym bardziej, że w większości instrukcji
+sterujących występują inne instrukcje "do wykonania".
+</div>
+<br clear="all">
+
+<p>
+Np. z opisiu instrukcji  if :<br>
+<br>
+<b>    if</b> (<i><b>war</b></i>) <i><b>ins</b></i>;<br>
+<br>
+
+dowiemy się, że zostanie wykonana instrukcja <i><b>ins</b></i>, jeśli warunek <i><b>war</b></i> jest prawdziwy.<br>
+
+Czym zatem może być <i><b>ins</b></i> ?<br>
+<br>
+
+<div class="notel"> W różnych językach programowania jako instrukcje traktowane są różne
+konstrukcje gramatyczne - różne składniowo i semantycznie zapisy w programie</div>
+
+<div class="ddd"><br>
+Intuicyjnie można sobie wyobrażać, że instrukcje są "czymś", co w trakcie
+działania programu "jest wykonywane". Instrukcje stanowią "motor" działania
+programu. Ich wykonanie powoduje odpowiednie przetwarzanie danych.<br>
+Zamiast
+kusić się o bardziej precyzyjną definicją powiemy raczej co w Javie jest
+instrukcją, a co nie.
+</div>
+<br clear="all">
+
+<p>
+W Javie instrukcjami są:<br>
+<br>
+
+<table cellpadding="2" cellspacing="2" border="1" width="100%" bgcolor="#ffffcc">
+<tbody><tr><td valign="Top" bgcolor="#ffcc33"><div align="Center"><b>Rodzaj instrukcji<br></b></div></td><td valign="Top" bgcolor="#ffcc33"><div align="Center"><b>Instrukcja<br></b></div></td><td valign="Top" bgcolor="#ffcc33"><div align="Center"><b>Przykład<br></b></div></td></tr><tr><td valign="Top"><b>Instrukcja pusta</b><br></td><td valign="Top">pojedynczy średnik<br></td><td valign="Top">;<br></td></tr><tr><td valign="Top" rowspan="7" colspan="1"><b>Instrukcje wyrażeniowa</b><br>
+uwaga: instrukcją<br>
+wyrażeniową jest jedno<br>
+z wymienionych obok wyrażeń<br><font color="#ff0000"><b>zakończone średnikiem</b></font><br><br><br><br><br><br><br></td><td valign="Top">przypisanie;<br></td><td valign="Top">a=b;<br></td></tr><tr><td valign="Top">preinkrementacja;<br></td><td valign="Top">++a;<br></td></tr><tr><td valign="Top">postinkremetacja;<br></td><td valign="Top">a++;<br></td></tr><tr><td valign="Top">predekrementacja;<br></td><td valign="Top">--a;<br></td></tr><tr><td valign="Top">postdekrementacja;<br></td><td valign="Top">a--;<br
+></td></tr><tr><td valign="Top">wywołanie metody;<br></td><td valign="Top">x.met();<br>
+met();<br></td></tr><tr><td valign="Top">wyrażenie new;<br></td><td valign="Top">new Para();<br></td></tr><tr><td valign="Top"><b>Instrukcja grupująca</b><br>
+uwaga:<br>
+po zamykającym nawiasie <font color="#ff0000"><b>nie stawiamy średnika</b></font><br></td><td valign="Top">dowolne instrukcje (i <b>deklaracje</b> zmiennych) ujęte w nawiasy klamrowe <br></td><td valign="Top">{<br>
+  a=b;<br>
+  c=b;<br>
+}<br></td></tr><tr><td valign="Top"><b>Instrukcja etykietowana</b><br></td><td valign="Top">etykieta:  dowolna instrukcja<br></td><td valign="Top" rowspan="8" colspan="1" bgcolor="#ccffff"><br>
+Konkretne<br>
+formy składniowe<br>
+i przykłady<br>
+poznamy zaraz <br><br><br><br><br><br><br><br></td></tr><tr><td valign="Top" rowspan="8" colspan="1" bgcolor="#ccffff"><b>Instrukcje sterujące</b><br><br><br><br><br><br><br><br></td><td valign="Top" bgcolor="#ccffff">if  <br></td></tr><tr><td valign="Top" bgcolor="#ccffff">if .. else<br></td></tr><tr><td valign="Top" bgcolor="#ccffff">switch<br></td></tr><tr><td valign="Top" bgcolor="#ccffff">while<br></td></tr><tr><td valign="Top" bgcolor="#ccffff">do ... while<br></td></tr><tr><td valign="Top" bgcolor="#
+ccffff">break<br></td></tr><tr><td valign="Top" bgcolor="#ccffff">continue<br></td></tr><tr><td valign="Top">return<br></td><td valign="Top">zobacz<br>
+wykład 7<br></td></tr><tr><td valign="Top"><b>Instrukcja throw</b><br></td><td valign="Top" rowspan="1" colspan="2">Zob. wykład na temat wyjątków<br></td></tr><tr><td valign="Top"><b>Instrukcja synchronized</b><br></td><td valign="Top" colspan="2" rowspan="1">Wsparcie dla programowania współbieżnego (II semestr)<br></td></tr></tbody>
+</table>
+
+
+<br>
+
+<div align="Center">
+
+<div class="important"> Żadna inna konstrukcja składniowa nie jest w Javie instrukcją
+
+</div>
+</div>
+<br>
+
+<p>Zatem np:<br>
+<ul>
+<li>deklaracja nie jest instrukcją, mimo, że kończy się średnikiem ( deklaracje
+nie są bowiem "wykonywane"; zauwazmy wszakże, że są poprawnym elementem składni,
+jeśli kończą się średnikiem;  w przypadku wystąpienia inicjacji przy deklaracji,
+będziemy mieli do czynienia z instrukcją, wykonywaną w częsci inicjacyjnej
+deklaracji, nie uczyni to jednak z deklaracji instrukcji! )</li>
+
+<li>wyrażenie a+b zakończone średnikiem (tak samo jak każde inne nie występujące
+na podanej wyżej liście instrukcji wyrażeniowych) - nie jest instrukcją (i
+spowoduje błąd w kompilacji; zatem gdy kompilator powie nam, że wjakimś wierszu występuję błąd nazwany <b>"not a statement"</b> - będziemy wiedzieć, że w nieparwidłowy sposón skonstruowaliśmy instrukcję programu) </li>
+</ul>
+
+<p>
+
+Szczególnym rodzajem instrukcji są<A NAME="EDU.skorowidz.termin instrukcja_sterująca 70_566"></A> <b>instrukcje sterujące</b>.<br>
+<br>
+
+<div class="important">Instrukcje sterujące odgrywają w programowaniu bardzo istotną rolę, bowiem
+pozwalają na zmianę sekwencji (kolejności) wykonania instrukcji programu.</div>
+
+<br>
+<p>
+
+Poniżej przedstawiono szybki przegląd instrukcji sterujących. Dalej omówimy je dokładnie.<br>
+<br>
+
+<table width="100%" border="1" cellspacing="0" bgcolor="#ccffff">
+<tbody><tr><td valign="Top" rowspan="1" colspan="2" bgcolor="#ccffff"><div align="Center"><b><br>
+Instrukcje sterujące<br></b></div><br></td></tr><tr><td width="32%" valign="Middle"><strong>if (</strong><em>wyr</em><strong>)</strong><em>ins</em></td><td width="68%" valign="Middle"><p>Jeżeli wyrażenie <em>wyr</em> daje w ywniku true, to wykonywana jest
+instrukcja <em>ins</em></p></td></tr><tr><td width="32%" valign="Middle"><strong>if (</strong><i>wyr</i><strong>)</strong><em>ins1</em><strong></strong><br><strong>else</strong><em>ins2</em><strong></strong></td><td width="68%" valign="Middle"><p>Jeżeli wyrażenie <em>wyr</em> daje w wyniku true, to wykonywana jest
+instrukcja <em>ins1</em>, w przeciwnym razie wykonywana jest instrukcja
+ins2</p></td></tr><tr><td width="32%" valign="Middle"><strong>switch (</strong><em>wyr</em><strong>)</strong><b>{</b><br><b>  case</b> ws1 : ins1
+
+[ break;]<br><b>  case</b> ws2 : ins2
+
+[ break;]<br>
+  ....
+
+<br><b>  case</b> wsN : insN
+
+[ break;]<br><b>  default</b> : insDef
+
+[ break;]<br><b>}</b></td><td width="68%" valign="Middle"><p>Instrukcja przeznaczona do wyboru z wielu wariantów.</p><p>Wyrażenie wyr musi być wyrażeniem całkowitym. Jego wynik jest porównywany po
+kolei z całkowitymi wyrażeniami stałymi (np. literałami lub stałymi), w przypadku
+zgodności wykonywana jest odpowiednia instrukcja po dwukropku. Jeśli żadne ze
+stałych wyrażeń nie pasuje do wyr wykonywana jest instrukcja w klauzuli
+default.</p></td></tr><tr><td width="32%" valign="Middle"><p><strong>while (</strong><em>wyr</em><strong>)</strong><em>ins</em></p></td><td width="68%" valign="Middle"><p>Instrukcja ins wykonywana jest w pętli dopóki wartość wyrażenia wyr jest
+true</p></td></tr><tr><td width="32%" valign="Middle"><p><strong>do</strong><em>ins</em><strong>while
+(</strong><em>wyr</em><strong>);</strong></p></td><td width="68%" valign="Middle"><p>Wykonywana jest instrukcja ins, następnie wyliczane wyrażenie wyr; jeśli
+daje wartość true - cały proces zaczyna się od nowa.</p></td></tr><tr><td width="32%" valign="Middle"><b>for</b> (<i>init</i>; <i>wyr</i>; <i>upd</i>) <i>ins</i><br><strong></strong><strong></strong></td><td width="68%" valign="Middle"><p>Dokonywana jest inicjacja <i>init</i> (może to być  deklaracja zmiennej
+lub opracowanie listy wyrażeń, rozdzielonych przecinkami ); następnie w pętli
+wykonywane są następujące czynności: wyliczane jest wyrażenie wyr i jeśli
+jego wartość jest true wykonywana jest instrukcja ins, po czym wykonywana
+jest modyfikacja mod (opracowanie wyrażenia lub listy wyrażeń rozdzielonych
+przecinkami).<br>
+Elementy init, wyr, upd są opcjonalne<br></p></td></tr><tr><td valign="Middle" width="32%"><b>continue</b> [ <i>etykieta</i> ];
+</td><td width="68%" valign="Middle"><p>Instrukcja ta przerywa wykonanie bieżącego kroku pętli for, while lub do..
+while i  rozpoczyna wykonanie kroku następnego, lub też przekazuje sterowanie do instrukcji opatrzonej
+etykietą (jeśli etykieta występuje)</p></td></tr><tr><td width="32%" valign="Middle"><b>break</b> [ <i>etykieta</i> ];<br></td><td width="68%" valign="Middle"><p>Instrukcja powoduje przerwanie wykonania pętli, oprócz tego stosowana jest w
+ramach instrukcji switch</p></td></tr><tr><td width="32%" valign="Middle"><p><strong>return</strong><em> wyr</em><strong>;</strong></p></td><td width="68%" valign="Middle"><p>Instrukcja powoduje powrót z metody, zwracając wartość wynikającą z
+wyliczenia wyrażenia wyr; wyrażenie wyr może być opuszczone jeśli metoda nie
+zwraca żadnych wartości</p></td></tr></tbody>
+</table>
+<br>
+
+<p>
+Instrukcje (i deklaracje zmiennych) mogą być grupowane w bloki poprzez ujęcie
+ciągu instrukcji w nawiasy klamrowe { i }. Jest to tak zwana instrukcja grupująca.
+W każdym miejscu programu, gdzie może wystąpić pojedyńcza instrukcja, może
+również wystąpić blok - instrukcja grupująca (np. we wszystkich miejscach
+instrukcji sterujących, gdzie przewiduje się użycie instrukcji). Jest on
+wtedy traktowany jak pojedyncza instrukcja. Przykładowo możemy grupować instrukcje,
+które mają być wszystkie wykonane w przypadku wystąpienia jakiegoś warunku:<br>
+<br>
+
+if (a &gt; b) {<br>
+
+    c = a + b;<br>
+
+    d = a - b;<br>
+
+    e = a*b; <br>
+
+}<br>
+<br>
+
+Jak widać, po nawiasie klamrowym, zamykającym grupowanie instrukcji nie potrzebny jest średnik. </p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index71.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

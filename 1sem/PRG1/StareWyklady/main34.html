@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index35.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 1"></A><div class="tytulpunktu">1. Pojęcie typu. Typy pierwotne</div>
+
+<a name="W5.1"></a>
+
+<p>Działanie każdego programu polega na przetwarzaniu danych. Dane są zapisywane
+w pamięci komputera. Aby kompilator mógł właściwie stworzyć odpowiedni kod binarny, który m.in. specyfikuje
+w jaki sposób dane są zapisywane w pamięci, ile zajmują miejsca, w jaki sposób są wykonywane operacje na danych, każdej
+jednostce danych trzeba przypisać <b>typ</b>. <br>
+<br>
+
+<div class="def"><A NAME="EDU.skorowidz.termin typ_danej 34_297"></A> <b>Typ danej</b> - to zbiór jej możliwych wartości plus zestaw operacji, które można nad nimi wykonywać.<br>
+
+Jednocześnie określa on rozmiar pamięci, potrzebny do przechowania danej oraz sposób zapisu danej w pamięci komputera</div>
+<br>
+<p>
+
+Np. dane typu całkowitoliczbowego mogą przybierać wartości całkowitoliczbowe
+z jakiegoś przedziału, który zależy od tego ile miejsca w pamięci zajmują
+dane tego typu oraz jak są w pamięci zapisywane.  Określone są też operacje,
+które możemy wykonywać na tych danych: np. dodawanie, mnożenie, dzielenie,
+reszta z dzielenia oraz sposób w jaki te operacje są wykonywane.<br>
+<br>
+
+
+
+
+Jak wiemy, dane w programie przedstawiamy za pomocą literałów i zmiennych oraz stałych.<br>
+
+
+
+
+Zatem typy dotyczą wartości zmiennych, stałych i literałów. <br>
+
+
+
+
+Mówimy: zmienna typu ..., stała typu ... literał typu ...<br><br>
+
+
+A ponieważ<A NAME="EDU.skorowidz.termin wyrażenie 34_298"></A> <b>wyrażenia </b>budowane są ze zmiennych, stałych, literałów i operacji
+na nich (definiowanych przez operatory) oraz z wywołań funkcji (metod) -
+to <b>wyniki opracowania</b> wyrażeń też mają określony typ (nt wyrażeń zobacz wykład 2 oraz koniec tego wykladu).<br>
+<br>
+
+
+
+
+Typy mają swoje nazwy.<br>
+
+
+
+
+W języku istnieje szereg tzw.<A NAME="EDU.skorowidz.termin typ_pierwotny 34_299"></A> <b>typów pierwotnych</b>, których nazwy stanowią <b>zarezerwowane słowa kluczowe języka</b>. <br>
+<br>
+
+<table width="100%" border="1" bordercolor="#000000" cellpadding="4" cellspacing="0" rules="Cols">
+
+<tbody><tr valign="Top"><td width="10%" align="Center"><p>Nazwa<br>
+typu</p></td><td width="10%"><p align="Center">Liczba bajtow</p></td><td width="40%" align="Center"><p>Dopuszczalne
+				<br>
+wartości</p></td><td width="40%" align="Center"><p>Znaczenie</p></td></tr></tbody><tbody><tr valign="Top"><td width="10%"><p><A NAME="EDU.skorowidz.termin typ_byte 34_300"></A> <b>byte</b></p></td><td width="10%"><p align="Center">1</p></td><td width="40%"><p>-128...127</p></td><td width="40%" rowspan="4" colspan="1">liczby
+				całkowite
+      <p><br></p>
+      <p><br></p>
+      <p><br></p>
+</td></tr><tr valign="Top"><td width="10%"><p><A NAME="EDU.skorowidz.termin typ_short 34_301"></A> <b>short</b></p></td><td width="10%"><p align="Center">2</p></td><td width="40%"><p>-32768...32767</p></td></tr><tr valign="Top"><td width="10%"><p><A NAME="EDU.skorowidz.termin typ_int 34_302"></A> <b>int</b></p></td><td width="10%"><p align="Center">4</p></td><td width="40%"><p>  -2147483648... 2147483647</p></td></tr><tr valign="Top"><td width="10%"><p><A NAME="EDU.skorowidz.termin typ_long 34_303"></A> <b>long</b></p></td><td width="10%"><p align="Center">8</p></td><td width="40%"><p>-9223372036854775808.<br>
+...9223372036854775807</p></td></tr></tbody><tbody><tr valign="Top"><td width="10%"><p><A NAME="EDU.skorowidz.termin typ_float 34_304"></A> <b>float</b></p></td><td width="10%"><p align="Center">4</p></td><td width="40%"><code></code><code>-3.4028234663852886E38...<br>
+      </code><code>...-1.401298464324817E-45</code><br>
+      <br>
+      <code>1.401298464324817E-45...</code><br>
+      <code>...3.4028234663852886E38</code><br>
+</td><td width="40%" rowspan="2" colspan="1"><p>  liczby rzeczywiste</p><br>
+</td></tr><tr valign="Top"><td width="10%"><p><A NAME="EDU.skorowidz.termin typ_double 34_305"></A> <b>double</b></p></td><td width="10%"><p align="Center">8</p></td><td width="40%"><code>-1.7976931348623157E308...<br>
+...-</code><code>4.9E-324</code><br>
+      <br>
+      <code>4.9E-324</code>...<br>
+...<code></code><code>1.7976931348623157E308</code><br>
+</td></tr></tbody><tbody><tr valign="Top"><td width="10%"><p><A NAME="EDU.skorowidz.termin typ_char 34_306"></A> <b>char</b></p></td><td width="10%"><p align="Center">2</p></td><td width="40%"><p>  0...65556</p></td><td width="40%"><p>  znaki Unicodu</p></td></tr></tbody><tbody><tr valign="Top"><td width="10%"><p><A NAME="EDU.skorowidz.termin typ_boolean 34_307"></A> <b>boolean</b></p></td><td width="10%"><p align="Center">1</p></td><td width="40%"><p>  true | false</p></td><td width="40%"><p>  wartości
+				logiczne:<br>
+ prawda lub fałsz</p></td></tr></tbody>
+</table>
+
+<br>
+
+<div class="notel">Przy okazji przedstawiania typów kilka słów powiemy o <b>niektórych</b> operacjach
+w których mogą brać udziała dane tych typow. Więcej na ten temat pod koniec wykładu</div>
+
+<div class="ddd">
+<br>Typy byte, short, int, long,
+float, double i char nazywane są<A NAME="EDU.skorowidz.termin typ_liczbowy 34_308"></A> typami <b>liczbowymi</b>
+lub numerycznymi, ponieważ dane tych typów reprezentują liczby. 
+</div>
+<br clear="all">
+
+<p>W
+szczególności<A NAME="EDU.skorowidz.termin znak 34_309"></A> znaki (typ char) reprezentowane są przez ich liczbowe, nieujemne
+całkowite, kody (zatem są nieujemnymi liczbami całkowitymi). Istnieją różne
+systemy kodowania znaków,<A NAME="EDU.skorowidz.termin kod_ASCII 34_310"></A> np. kod ASCII zawiera 256 kodów znaków (liczby
+od 0 do 255). W Javie używany jest<A NAME="EDU.skorowidz.termin Unicode 34_311"></A> tzw. Unicode, który okresla 65557 kodów
+znaków (nie wszystkie sa jeszcze zdefiniowane), dzięki czemu można przedstawić
+znaki niemal wszystkich języków (np. uproszczonego chińskiego). <br>
+
+Wartości typów liczbowych są używane w<A NAME="EDU.skorowidz.termin operacja_arytmetyczna 34_312"></A> operacjach arytmetycznych, a wartości typu char
+dodatkowo stanowią elementy łańcuchów znakowych (napisów).<br>   Operacje
+arytmetyczne, zapisywane za pomocą operatorów, to: dodawanie (+), mnożenie
+(*), odejmowanie (-), dzielenie (/). zwiększanie o 1 (operator ++) oraz zmniejszanie
+o 1 (--). W przypadku liczb cłakowitych operacja dzielenie jest<A NAME="EDU.skorowidz.termin dzielenie_całkowitoliczbowe 34_313"></A> dzieleniem
+całkowitoliczbowym (a więc zwraca wynik dzielenia po odrzuceniu  części ułamkowej
+np. 1/3 "tak naprawdę" równe jest jedna trzecia, ale wynikiem  tego wyrażenia
+będzie 0, gdyż biorą w nim udział dwie liczby całkowite i mamy tu dzielenie
+całkowitoliczbowe). Dla liczb całkowitych okreslona jest ponadto operacja
+reszty z dzielenia (operator %).<br>
+
+
+Na wartościch typów numerycznych możemy również wykonywać<A NAME="EDU.skorowidz.termin operacja_porównania 34_314"></A> operacje porównania, &lt;=,  == (równe?), != (nie równe?). <br>
+<br>
+
+
+Typ  boolean<A NAME="EDU.skorowidz.termin typ_logiczny 34_315"></A> (nazywany typem <b>logicznym</b>,<A NAME="EDU.skorowidz.termin typ_orzecznikowy 34_316"></A> orzecznikowym,<A NAME="EDU.skorowidz.termin typ_boolowski 34_317"></A> boolowskim)
+służy do przedstawiania  wartości logicznej o znaczeniu prawda lub fałsz.
+Wartości tego typu są używane w<A NAME="EDU.skorowidz.termin wyrażenie 34_318"></A> wyrażeniach  logicznych, są też ich wynikiem,
+jak również są wynikiem<A NAME="EDU.skorowidz.termin wyrażenie_relacyjne 34_319"></A> wyrażeń relacyjnych. Mogą być również wykorzystywane
+bezpośrednio w instrukcjach sterujących (jako warunki). <br>
+
+
+Np. wyrażenie a &gt; b będzie miało wartość typu boolean stwierdzającą czy
+wynik porównania jest prawdziwy czy fałszywy. Wyrażenie logiczne " x i y
+", zapisywane w Javie jako x &amp;&amp; y  będzie składniowo poprawne tylko
+wtedy, gdy x oraz y są typu boolean, a jego wartośc będzie wartością typu
+boolean, stwierdzającą czy predykat "x i  y" jest prawdziwy czy nie.<br>
+<br>
+<br>
+
+
+Wszystkie inne dane (poza liczbami, wartościami logicznymi oraz jednym
+wyjątkiem, o którym za chwilę)  są w Javie traktowane jako<A NAME="EDU.skorowidz.termin obiekt 34_320"></A> <b>obiekty</b>,  których atrybuty (a zatem możliwe "wartości" danych)
+oraz funkcjonalność (możliwe operacje na danych) definiują określone<A NAME="EDU.skorowidz.termin klasa 34_321"></A> <b>klasy</b>.
+<br>
+
+
+
+
+W pewnym uproszczeniu nazwę klasy można w tym przypadku traktować jako nazwę typu danego obiektu. <br>
+<br>
+
+
+
+
+W standardowym zestawie klas Javy występuje np. klasa<A NAME="EDU.skorowidz.termin string 34_322"></A> String. Definiuje ona
+wspólne własciwości i funkcjonalność obiektów, będących<A NAME="EDU.skorowidz.termin łańcuch_znakowy 34_323"></A> łańcuchami znakowymi
+(napisami). <br>
+
+
+Np. każdy łańcuch znakowy ma długość, niepuste łańcuchy znakowe mają znaki,
+obiekty klasy String są obowiązane "świadczyć usługi" polegające np. na odpowiedzi
+na nasze pytania: jaka jest długość łańcucha? czy łańcuch zawiera podany
+ciąg znaków? itp. - co możemy traktować jako pewne operacje na łańcuchach znakowych.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index35.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

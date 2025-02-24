@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index73.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index75.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><div class="tytulpunktu">5. Wielowariantowe wybory za pomocą instrukcji switch</div>
+
+<p>
+Zamiast wielokrotnych if - else if w niektórych przypadkach można zastosować<A NAME="EDU.skorowidz.termin instrukcja_wyboru_wielowariantowego_switch 74_587"></A> instrukcję wyboru wielowariantowego switch. Ma ona następującą ogólną postać<br>
+<br><A NAME="EDU.skorowidz.termin switch 74_588"></A> 
+<div class="syntax"><br>
+
+        switch (<i><b>wyr</b></i>) <i><b>blok_switch</b></i><br>
+<br>
+
+gdzie:<br>
+<ul>
+<li>wyrażenie <i><b>wyr</b></i> musi być typu <code>char</code>, <code>byte</code>, <code>short</code>, lub <code>int</code></li><li><i><b>blok_switch</b></i> ma szczególną postać. W jego wnętrzu (pomiędzy nawiasami klamrowymi) można używać etykiet o postaci:<br><b>case <i>wyr_stałe</i></b> : <i><b>ins</b></i><br>
+
+oraz<br><b>default</b> : <i><b>ins</b></i>   // UWAGA. Etykieta default może być tylko jedna <br></li>
+</ul>
+
+</div>
+
+<br>
+<p>
+
+Wyrażenie w nawiasach switch jest wyliczane, a jego wartość porównywana z
+wartościami wyrażeń stałych (zawartych w częściach oznaczanych przez etykiety
+case). Sterowanie jest przekazywane do tej instrukcji, którą poprzedza etykieta
+case z wyrażeniem stałym równym co do wartości wyrażeniu w nawiasach switch.<br>
+
+Od tego miejsca wykonanie programu przebiega dalej sekwencyjnie (po to by
+nie wykonywały się inne instrukcje oznaczone przez inne etykiety case, następujące
+po wybranej w rezultacie porównania, trzeba zastosować instrukcję break lub
+return).<br>
+
+Jeśli nie znajdzie się żadna etykieta "pasująca" do wartości wyrażenie w
+nawiasach switch, to sterowanie jest przekazywane do części oznaczanej przez<A NAME="EDU.skorowidz.termin etykieta default 74_589"></A> etykietę default, a jeśli jej nie ma, to - do instrukcji następującej w programie
+po switch.<br>
+<br>
+
+Rozważmy przykład klasy, która udostępnia metodę makeOp wykonania operacji
+arytmetycznych na elementach swoich obiektów - dwóch liczbach rzeczywistych.<br>
+
+<pre>
+public class SimpleCalc {
+
+  private double a;
+  private double b;
+
+  public SimpleCalc(double x, double y) {
+    a = x;
+    b = y;
+  }
+
+  public double makeOp(char op) {
+
+    double r = 0;
+
+    switch(op) {
+       case '+' : r = a + b; break;
+       case '-' : r = a - b; break;
+       case '*' : r = a * b; break;
+       case '/' : r = a / b; break;
+       default  : System.out.println("Nieznany kod operacji");
+    }
+
+    return r;
+  }
+
+}
+
+class SimplecalcTest {
+
+  public static void main(String[] args) {
+
+    SimpleCalc sc = new SimpleCalc(1.2, 3.7);
+    System.out.println( sc.makeOp('+'));
+    System.out.println( sc.makeOp('-'));
+    System.out.println( sc.makeOp('*'));
+    System.out.println( sc.makeOp('/'));
+
+  }
+}
+</pre>
+
+<p>
+W metodzie makeOp wartość zmiennej op (typu char) steruje obliczeniami (np. jeśli
+zawiera znak '+' to sterowanie jest przekazywane do miejsca oznaczonego etykietą
+case '+', wartość r jest wyliczana jako suma a i b, a instrukcja break pozwala
+opuścić dalsze instrukcje zawarte w bloku switch).<br>
+<br><A NAME="EDU.skorowidz.termin etykieta case 74_590"></A> 
+<div class="notec">Warto szczególnie podkreślić, że etykiety case są tworzone przez wyrażenia
+stałe.<A NAME="EDU.skorowidz.termin wyrażenie_stałe 74_591"></A> Wyrażenie stałe to takie, którego wartość jest znana w fazie kompilacji
+i nie może być zmieniona w fazie wykonania programu. Będzie to np. literał
+(taki jak '+'. '*' czy 1), nazwa stałej (zadeklarowanej jako final), wyrażenie
+składające się z literałów i nazw stałych  połączonych operatorami języka
+(np. LMAX + 3/LMIN, gdzie LMAX i LMIN - nazwy stałych). Wartość wyrażenia
+stałego musi być typu całkowitego i dać się przekształcić do typu wyrażenia
+w nawiasach switch.</div>
+
+<br>
+<p>
+
+Nie należy tez zapominać o umieszczeniu instrukcji we właściwym momencie
+przerywających sekwencje operacji zawartych w bloku swicth. <br>
+
+Np. poniższa sekwencja:<br>
+<br>
+
+double a = 0.1;<br>
+
+switch(n) {<br>
+
+   case 1 : a = a + 1;<br>
+
+   case 2 : a = a + 2;<br>
+
+   case 3 : a = a + 3;<br>
+
+}<br>
+
+System.out.prinln(a);<br>
+<br>
+
+wypisze: 6.1 (dla n = 1), 5.1 (dla n = 2) i 3.1 (dla n = 3), zaś dla innych
+wartości n inicjalną wartość zmiennej a (0.1). Jeśli chcemy uzyskać 1.1 dla
+n =1, 2.1 dla n=2 i 3.1 dla n=3 to po każdym wyliczeniu a należy wstawić<A NAME="EDU.skorowidz.termin instrukcja_break 74_592"></A> instrukcję break, przerywającą sekwencyjne wykonywanie instrukcji zawartych
+w bloku i przekazującą sterowanie do pierwszej instrukcji poza switch.<br>
+<br>
+
+Etykiety case i default mogą  występować w dowolnej kolejności, ale w  ramach
+jednego switch nie może być dwóch takich samych etykiet (nie może być dwóch
+wyrażeń stałych, które dają w rezultacie tę samą wartość np. 3 i 1 + 2 lub
+dwóch etykiet default). <br>
+<br>
+
+Co jednak, jeśli instrukcje switch są włożone ? Okazuje się, że etykiety
+case i default są kojarzone zawsze ze "swoim" switch, możemy więc pisać np.
+tak:<br>
+<br>
+
+    switch(i)    {<br>    case 1 : switch(testNum(i)) {<br>        case 1 : System.out.println("same one"); break;<br>        case 2 : System.out.println("double one"); break;<br>        default: System.out.println("other one"); break;<br>        }<br>        break;<br>
+
+          case 2 :  System.out.println("two"); break;<br>
+
+          default:  System.out.println("other two"); break;<br>
+
+    }<br>
+<br>
+
+(jeśli funkcja testNum zwraca podwojona wartość swojego argumentu, to wprowadzenie
+1 da na wyjściu napis "double one", zaś 2 - napis "two")<br>
+<br>
+
+Zwykła instrukcja break przerywa wykonanie tego bloku switch, w którym jest umieszczona.</p>
+
+<div class="notel">
+Etykieta w programie jest identyfikatorem z następującym znakiem :. Nie
+należy mylić ogólnego pojęcia etykiety ze specjalnym przypadkiem  "etykiety"
+case</div>
+
+<div class="ddd"><br><A NAME="EDU.skorowidz.termin etykieta 74_593"></A> Jeśli natomiast w instrukcji break podamy etykietę, to sterowanie
+może być przekazane z bloku switch do instrukcji wskazywanej przez tę etykietę.
+W ten sposób za pomocą break możemy wychodzić z głęboko zagnieżdżonych bloków
+switch.
+</div>
+<br clear="all">
+<br>
+
+<p>
+Uwaga: stosowanie etykiet w instrukcji break dla wychodzenia z zagnieżdżonych
+bloków dotyczy rózwnież instrukcji sterujących for, while i do_while. Stosowanie
+etykiet podlega pewnym ograniczeniom - zob. opis języka na stronie sun.java,com.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index73.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index75.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

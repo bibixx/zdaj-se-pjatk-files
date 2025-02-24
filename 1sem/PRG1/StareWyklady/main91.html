@@ -1,0 +1,562 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index90.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index92.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 4"></A><div class="tytulpunktu">4. Tablice &quot;obiektowe&quot;</div>
+
+<a name="W11.5"></a><A NAME="EDU.skorowidz.termin tablica referencje 91_653"></A> 
+<p>
+Jak wiemy już, i jak widzieliśmy przed chwilą - tablice mogą zawierać referencje do dowolnych obiektów.<br>
+Bardzo naturalnie wygląda to w przypadku tablic elementów typu String.<br>
+Możemy np. zadeklarować i stworzyć tablicę:<br>
+<br>
+String[] town = { "Warszawa", "Poznań", "Kraków", "Gdańsk" };<br>
+<br>
+i operować na jej elementach, np. wypisać je:<br>
+<br>
+for (int i=0; i&lt;town.length; i++) System.out.println(town[i]);<br>
+<br>
+albo przestawić miejscami pierwszy i ostatni element:<br>
+<br>
+String last = town[town.length -1];<br>
+town[town.length -1] = town[0];<br>
+town[0] = last;<br>
+<br>
+<p>
+<a href="javascript:popUp('dodatki/W11Prb2.htm',80,80)"><img src="images/Problem.jpg" alt="Problem" hspace="15" width="137" height="84" border="1" align="Right"></a> <font color="#cc0000">Proszę sprawdzić działanie
+tych fragmentów we własnym programie i - dodatkowo - rozwiązać zadanie, którego
+treść pojawi się po kliknięciu w ikonkę "Problem do rozwiązania".</font></p>
+
+<br>
+<p>Składniowo wygląda to identycznie jak operowanie na tablicach liczb
+całkowitych czy rzeczywistych. Wydaje się, że nie ma różnicy.<br>
+Jednak różnica jest, a niedostrzeganie jej prowadzi do częstych błędów, szczególnie w początkowej fazie nauki języka Java.<br>
+<br>
+Przypomnijmy sobie klasę Para z wykładu 8. Jej obiekty reprezentują pary liczb całkowitych.<br>
+Powiedzmy, że chcielibyśmy w programie operować na tablicy par liczb całkowitych.<br>
+<br>
+Przede wszystkim konieczna jest deklaracja:<br>
+<br>
+Para[] tabPar;<br>
+<br>
+Dobrze już wiemy, że taka deklaracja nie tworzy tablicy. <br>
+Zatem następny krok - stworzenie tablicy<br>
+<br>
+tabPar = new Para[10];<br>
+<br>
+Czy mamy już obiekty-pary? Czy możemy zobaczyć jak wyglądają "na samym początku"?<br>
+Zobaczmy.<br>
+
+<pre>
+public class TabPar {
+
+  public static void main(String[] args) {
+    Para[] tabPar = new Para[10];
+    for (int i=0; i &lt; tabPar.length; i++) tabPar[i].show("Para " + (i+1));
+   }
+
+}
+</pre>
+
+<p>Ten program skompiluje się bezbłędnie, ale przy jego wykonaniu otrzymamy następujący komunikat.<br>
+<br>
+
+<div class="listing100">Exception in thread "main" java.lang.NullPointerException<br>
+        at TabPar.main(TabPar.java:6)</div>
+
+<br>
+<p>
+Jest on skutkiem odwołania do nieistniejącego obiektu - wywołania metody
+show z klasy Para za pomocą referencji o wartości null.<br>
+<br>
+Faktycznie, <b>przecież obiekty trzeba tworzyć</b>! Stworzenie tablicy nie tworzy obiektów, które chcielibyśmy traktować jako jej elementy.  <br>
+<b><br>
+Tablica przechowuje referencje do obiektów</b>, czyli jej elementy na
+początku będą miały domyślne wartości null - a dopiero po stworzeniu obiektów
+i przypisaniu referencji (ich adresów) elementom tablicy będziemy mogli używać
+elementów tablicy w operacjach na obiektach.<br>
+<br>
+Powinniśmy zatem napisać coś w rodzaju:<br>
+
+<pre>
+public class TabPar {
+
+  public static void main(String[] args) {
+    Para[] tabPar = new Para[10];
+    for (int i=0; i &lt; tabPar.length; i++) tabPar[i] = new Para(i+1, i+2);
+    for (int i=0; i &lt; tabPar.length; i++) tabPar[i].show("Para " + (i+1));
+   }
+
+}
+</pre>
+
+<p>co w wyniku da następujący wydruk:<br>
+<br>
+
+<div class="listing100">Para 1 ( 1 , 2 )<br>
+Para 2 ( 2 , 3 )<br>
+Para 3 ( 3 , 4 )<br>
+Para 4 ( 4 , 5 )<br>
+Para 5 ( 5 , 6 )<br>
+Para 6 ( 6 , 7 )<br>
+Para 7 ( 7 , 8 )<br>
+Para 8 ( 8 , 9 )<br>
+Para 9 ( 9 , 10 )<br>
+Para 10 ( 10 , 11 )<br>
+</div>
+
+<br>
+<p>
+To co się dzieje wyjaśnia następujący rysunek.<br><br>
+
+<div>
+<img src="images/tabref10.jpg" alt="r" width="538" height="439" border="1">
+</div>
+
+<br><p>
+Można przypuszczać, że w przypadku takiej klasy jak Para nie zdarzy nam się
+błąd "braku obiektów" (bowiem zwykle będziemy chcieli mieć jakieś konkretne
+pary i będziemy pamiętać, że trzeba je stworzyć za pomocą wyrażenia new).<br>
+Jednak  nie jest to tak oczywiste w przypadku wielu klas zawartych w standardowych pakietcha Javy.<br>
+Np.  możemy mieć do czynienia z zestawami przycisków (klasy Button czy JButton).
+Naturalne jest myślenie o nich jako o tablicach przycisków (zresztą taki
+jest sens - i tak często będziemy opisywać programy). Zatem -  możemy pomyśleć,
+że po:<br>
+Button b = new Button[10];<br>
+już mamy 10 przycisków i możemy coś z nimi robić.<br>
+<br>
+Ale przycisków jeszcze nie ma i nasz program wpada w kłopoty.<br>
+<br>
+
+<div class="important"><br>
+<div align="Center">Tworzenie tablic z elementami oznaczającycmi obiekty - podsumowanie<br>
+
+(na przykładzie klasy Button)<br>
+<div align="Left">
+<ol>
+  <li>Deklaracja tablicy :  <b>Button[] b;</b></li>
+  <li>Utworzenie tablicy:  <b>b = new Button[n];</b></li>
+  <li>Tworzenie obiektów i przypisywanie referencji, które na nie wskazują - elementom tablicy, np.: <b>for (int i=0; i&lt;b.length; i++) b[i] = new Button(); </b></li>
+</ol>
+  </div>
+</div>
+</div>
+
+<br><p>
+Naturalnie, również w przypadku tablic referencji do obiektów możemy
+użyć inicjatorów klamrowych, które pozwalają - przy deklaracji - stworzyć
+i zanicjować tablicę. Robiliśmy to już zresztą przy okazji<A NAME="EDU.skorowidz.termin tablica inicjacja 91_654"></A> inicjacji tablicy
+miast literałami łańcuchowymi.<br>
+<br>
+Można podać przykłady takich inicjacji:<br>
+<br>
+    Para[] tabPara = { new Para(1,1), new Para(2,3), new Para(4,5) };<br>
+    Button[] b = { new Button("A"), new Button("B") };<br>
+    String[] s = { "Ala", "Kot", "Pies" };<br>
+    <br>
+    Para p1 = new Para(2,4);<br>
+    Para p2 = new Para(7,8);<br>
+    Para[] tabP = { p1, p2 };<br>
+<br>
+Tak naprawdę przykłady te nie różnią się między sobą. We wszystkich w/w inicjacjach
+zmiennych tablicowych w nawiasach klamrowych podajemy referencje do obiektów
+odpowiedniej klasy.   <br>
+<br>
+W tym miejscu warto przypomnieć klasę Publication z wykładu 7 i dziedziczące
+ją klasy Book, Journal i CDisk. Obiektowe konwersje rozszerzające pozwalają
+przypisywać zmiennym oznaczającym obiekty klasy bazowej referencje do obiektów
+klas pochodnych. A ponieważ elementy tablic "obiektowych" zawierają referencje
+- to na przykład w przypadku naszych klas opisujących publikacje  - elementom
+<b>jednej</b> tablicy typu Publication[] można przypisać wartości <b>różnych</b> typów: Publication, Book, Journal i CDisk.<br>
+<br>
+
+<div class="notec">Elementy tablicy mogą zawierać referencje wskazujące na obiekty różnych
+klas, pod warunkiem, że klasy te dziedziczą tę samą klasę - określającą ogólny,
+niejako wspólny dla wszystkich, typ elementów tablicy</div>
+
+<br>
+<p>
+Dość zawikłaną treść najlepiej wyjaśni schematyczny przykład:<br>
+<br>
+Publication[] p = new Publication[3];<br>
+p[0] = new Book(...);<br>
+p[1] = new Journal(...);<br>
+p[2] = new CDisk(...);<br>
+<br>
+Możemy powiedzieć (stosując skrót myślowy): pierwszy element tablicy publikacji
+jest książką, drugi czasopismem, a trzeci - płytą CD. Jest to możliwe dlatego,
+że i książka i czasopismo i płyta CD są publikacjami (to znaczy oprócz tego,
+że obiekty te są obiektami specyficznych klas Book, Journal i CDisk - mogą
+być również traktowane jako obiekty klasy Publication, ponieważ wszystkie
+trzy klasy dziedziczą klasę Publication).<br>
+<br>
+Oczywiście, inicjacje są przypisaniami, zatem możemy pisać:<br>
+<br>
+Publication[] p = { new Book(..), new Book(...), new Journal() };<br>
+<br>
+Również przekazywanie argumentów i zwracanie wyników metod jest swoistym przypisaniem. <br>
+W tym kontekście bardzo wygodną konstrukcją składniową Javy jest wyrażenie
+ad hoc tworzące i inicjujące tablicę referencji do obiektów.<br>
+<br>
+
+<div class="syntax">
+        Wyrażenie:<br>
+                            <b>new <i>klasaA</i>[] { <i>refB</i>, <i>refC</i>, ... }</b><br>
+<br>
+tworzy tablicę typu <b><i>klasaA</i>[] </b>i inicjuje ją referencjami podanymi w nawiasach klamrowych, przy czym każda z tych referencji może wskazywać obiekt klasy <i><b>klasaA</b></i> lub dowolnej klasy pochodnej od klasy <i><b>klasaA</b></i>.<br>
+Wynikiem opracowania tego wyrażenia jest referencja do zmiennej tablicowej typu <b><i>klasaA</i>[]</b><br>
+</div>
+
+<br>
+<p>
+Najczęściej wyrażenie to ma zastosowanie na liście argumentów wywołania
+metody, której parametrem jest tablica. W ten sposób możemy uzyskać efekt<A NAME="EDU.skorowidz.termin wywołanie_metody_ze_zmienną_liczbą_i_zmiennymi_typami_argumentów 91_655"></A> wywołania metody ze zmienną liczbą i (do pewnego stopnia) zmiennymi typami
+argumentów.<br>
+<br>
+Na przykład, metodę xyz , która jako parametr ma tablicę publikacji, możemy wywołać ze zmienną liczbą i typami publikacji tak:<br>
+<br>
+xyz( new Publication[] { new Book(...), new Book(...) , new Journal(...) } );<br>
+xyz( new Publication[] { new Journal(...),  new Journal(...) } );<br>
+Book b1 = new Book(...),<br>
+         b2 = new Book(...);<br>
+xyz( new Publication[] { b1, b2 } );<br>
+<br>
+Bardziej rozbudowany przykład prezentuje poniższy program.<br>
+<b><font color="#ff0000">Proszę go przeanalizowac pod kątem zastosowania omówionych wyżej reguł.</font></b><br>
+<br>
+
+<pre>
+public class VarArg {
+
+  public VarArg() {
+    // wywołanie metody "z dwoma" argumentami
+    showMsgs( new String[] { "Warszawa", "Kraków" } );
+    // wywołanie metody "z trzema" argumemntami
+    showMsgs( new String[] { "Ala", "Kot", "Pies" } );
+    // "trzy argumenty": dwie książki, jedno czasopismo
+    showIncome( new Publication[]
+                { new Book("P. Pies", "Psy", "WydPP", 2002, "ISBN01", 25, 100),
+                  new Book("K. Kot", "Koty", "WydPP", 2002, "ISBN02", 22, 90),
+                  new Journal(1, "Kwiaty", "WydAN", 2002, "ISSN03", 10, 200),
+                }
+              );
+
+    // "dwa argumenty": książka i czasopismo
+    showIncome( new Publication[]
+                { new Book("A. Koń", "Konie", "Tur", 2001, "ISBN01", 35, 50),
+                  new Journal(1, "Ryby", "W&amp;S", 2002, "ISSN03", 20, 100),
+                }
+              );
+  }
+
+  // Wypisuje w kolejnych wierszach napisy - elementy przekazanej tablicy
+  public void showMsgs(String[] s) {
+    for (int i=0; i&lt;s.length; i++) System.out.println(s[i]);
+  }
+
+  // Pokazuje dochód jaki można uzyskać ze sprzedaży publikacji
+  // przekazanych w tablicy
+ 
+  public void showIncome(Publication[] p) {
+    double d = 0;
+    String opis = "";
+    for (int i=0; i&lt;p.length; i++) {
+      opis += " " + p[i].getIdent();
+      d += p[i].getPrice() * p[i].getQuantity();
+    }
+    System.out.println("Dochód z pozycji " + opis);
+    System.out.println(d);
+  }
+
+
+  public static void main(String[] args) {
+    new VarArg();
+  }
+
+}
+</pre>
+
+<p>
+Wydruk działania programu:<br><br>
+
+<div class="listing100"><br>
+Warszawa<br>
+Kraków<br>
+Ala<br>
+Kot<br>
+Pies<br>
+Dochód z pozycji  ISBN01 ISBN02 ISSN03<br>
+6480.0<br>
+Dochód z pozycji  ISBN01 ISSN03<br>
+3750.0<br>
+</div>
+
+<br>
+<p>
+Zadanie.<br>
+W księgarni są półki. Każda półka ma numer i może pomieścić zadaną liczbę
+publikacji (książek, czasopism, płyt CD). Każda książka, czasopismo i płyta
+zajmują tyle samo miejsca. <br>
+Stworzyć klasę Bookshelf reprezentującą półki, na ktore można wstawiać publikacje.
+Jak pamiętamy każdy obiekt-publikacja przechowuje jako swój "stan" liczbę
+składowanych pozycji danej publikacji. Na półkę można wstawić cały taki komplet
+albo nic (jeśli brakuje już miejsca).<br>
+W klasie Bookshelf zapewnić metodę uzyskiwania informacji o zawartości półki.<br>
+Zmodyfikować klasę Publication w taki sposób, by o każdej publikacji można było się dowiedzieć na której półce stoi.<br>
+Dla uproszczenia: proces wstawiania na półki jest jednorazowy, nie ma zdejmowania z półek.<br>
+<br>
+W klasie testującej dostarczyć:<br>
+tablicę półek,<br>
+tablicę książek,<br>
+tablicę czasopism.<br>
+i po kolei wstawiać książki i czasopisma na półki. Obiekty półiki (elementy
+tablicy półek) tworzyć tylko w miarę potrzeby (np. jeśli tablica półek ma
+5 elementów, a książki i czasopisma mieszczą się na trzech półkach, to nie
+ma potrzeby tworzyć dwóch półek - ostatnich elementów tablicy półek).<br>
+
+Pokazać, "przebiegając po elementach" tablicy książek i tablicy czasopism
+- na jakich półkach stoją. Przebiegając zaś "po elementach" tablicy półek
+- wylistować jakie pozycje wydawnicze znajdują się na każdej z użytych półek.<br>
+<br>
+
+<div class="important"><br>
+Przed lekturą dalszego tekstu proszę rozwiązać to zadanie samodzielnie<br>
+<br>
+</div>
+
+<br>
+<p>
+Możliwe rozwiązanie.<br>
+<br>
+W klasie Publication dodamy pole, które będzie referencją do obiektu klasy
+Bookshelf i będzie oznaczać półkę na której stoją egzemplarze danej pozycji
+wydawniczej.<br>
+Inicjalnie (zgodnie z regulami inicjacji pól) - pole to będzie miało wartość
+null ( nie  na półce). Dodatkowa metoda setBookshelf - wywoływana przy wstawianiu
+egzemplarzy publikacji na półkę -  będzie ustalać wartość pola-półki (gdzie
+stoją). Metoda whereIs - zwróci tę wartość i w ten sposób będziemy mogli dowiadywać
+się na której półce stoją dane publikacje.<br>
+<br>
+
+<pre>
+// Modyfikacje klasy Publication
+public class Publication {
+
+  //...
+  private Bookshelf bs;  // refrencja do półki na której stoją te publikacje
+
+  // ustal półkę gdzie stoją (przy wstawianiu)
+  public void setBookshelf(Bookshelf b) {
+    bs = b;
+  }
+
+  // zwraca półkę, gdzie stoją te publikacje
+  public Bookshelf whereIs() {
+    return bs;
+  }
+
+// ...
+}
+</pre>
+
+<p>
+W klasie Bookshelf publikacje stojące na półce będziemy rejestrować w tablicy
+Publication[] pubs. Rozmiary tej tablicy określają ile można wstawić egzemplarzy
+różnych publikacji. Po wstawieniu egzemplarzy jakiejś publikacji - zmienna
+freeSpace (wartośc której inicjalnie równa jest rozmiarowi półki)  będzie
+zmniejszona o liczbę egzemplarzy. Przy wstawianiu egzemplarzy publikacji
+na półkę,  do tablicy pubs będziemy wpisywac referencję do wstawianej publikacji
+(da nam to informacje o tym jakie publikacje są na półce). takiego wpisu
+dokonujemy jednokrotnie dla publikacji (a nie dla każdego egzemplarza). W
+rezultacie większość miejsca w tablicy pubs będzie niewykorzystana (zakładamy
+przecież, że rozmiary tablicy określają ile można wstawić na półkę egzemplarzy).
+<br>
+<br>
+
+<pre>
+public class Bookshelf {
+
+  private int bsnr;             // numer półki
+  private Publication[] pubs;   // tablica publikacji
+  private int freeSpace;        // wolne miejcce
+
+  private int currIndex;        // bieżący indeks tablicy publikacji,
+                                // pod tym indeksem wpiszemy referencję
+                                // do publikacji umieszczanej w tablicy
+
+
+  Bookshelf(int nr, int size) {
+    pubs = new Publication[size];
+    freeSpace = size;
+    bsnr = nr;
+  }
+
+  // Zwraca numer półki
+  public int getNr() {
+    return bsnr;
+  }
+
+  // Umieszcza egzemplarze przekazanej jako argument publikacji
+  // na półce. Zwraca true, jeśli to się powiodło - w przeciwnym razie false
+
+  public boolean put(Publication p) {
+
+    // jeżeli już na półce - nie robimy nic
+    if (p.whereIs() != null) {
+      System.out.println("Publikacje już są na półce");
+      return false;
+    }
+
+    int n = p.getQuantity();  // ile egzemplarzy danej pozycji wyd.
+
+    if ( n &gt; freeSpace ) {    // gdy brak wolnego miejsca na półce
+      System.out.println("Brak miejsca na półce");
+      return false;
+    }
+
+    freeSpace -= n;        // zmniejszenie dostępnego miejsca na półce
+
+    // referencja do obiektu-publikacji jest wpisywana do tablicy publikacji
+    // indeks przesuwamy o 1 a nie o n, gdyż nie ma sensu powielać
+    // informacji o publikacji dla wszystkich jej egzemplarzy
+
+    pubs[currIndex++] = p;
+
+    // w obiekcie-publikacji zapisujemy referencję do półki na której
+    // znalazły się egzemplarze tej publikacji
+
+    p.setBookshelf(this);
+    return true;
+  }
+
+  // zwraca tablicę publikacji na półce
+  // tablica ta ma currIndex elementów
+  // gdyż nie powielamy informacji dla &gt; 1 egzemplarzy
+  // tej samej publikacji, wobec czego pozostałe elementy
+  // tablicy publikacji pubs są null i nie uwzględniamy ich
+
+  public Publication[] getPubs() {
+    Publication[] p = new Publication[currIndex];
+    for (int i=0; i &lt; currIndex; i++) p[i] = pubs[i];
+    return p;
+  }
+}
+</pre>
+
+<p>
+W klasie testującej posługujemy się tablicami półek, książek i czasopism.<br>
+Kolejne publikacje staramy się wstawić na "bieżącą" półkę. Jeżeli brakuje miejsca - to tworzymy nowy obiekt półkę.<br>
+<br>
+
+<pre>
+public class BookshelfTest {
+
+  public static void main(String[] args) {
+
+    final int BSNUM = 5;     // liczba półek, których można użyć
+    final int BSIZE = 100;   // rozmiar półki
+
+    Bookshelf[] bs = new Bookshelf[BSNUM];  // tablica półek;
+                                            // samych półek jeszcze nie ma
+
+    Book[] bk = { new Book("P. Pies", "Psy", "WydPP", 2002, "ISBN01", 25, 100),
+                  new Book("K. Kot", "Koty", "WydPP", 2002, "ISBN02", 22, 90),
+                  new Book("A. Koń", "Konie", "Tur", 2001, "ISBN01", 35, 50),
+                };
+
+    Journal[] jr = { new Journal(1, "Kwiaty", "WydAN", 2002, "ISSN03", 10, 20),
+                    new Journal(1, "Ryby", "W&amp;S", 2002, "ISSN03", 20, 100),
+                  };
+
+    bs[0] = new Bookshelf(1, BSIZE);  // pierwsza półka
+
+    int k = 0;  // bieżący indeks tablicy półek -
+                // daje nam tę półkę na którą mamy wstawiać publikacje
+
+
+    for (int i=0; i&lt;bk.length; i++) // wstawiamy po kolei wszystkie książki
+
+       // jeżeli nie udało się na półkę k - to bierzemy nową połkę (k+1)
+       while (!bs[k].put(bk[i]) &amp;&amp; k &lt; BSNUM ) {
+         k++;
+         bs[k] = new Bookshelf(k+1, BSIZE);
+       }
+
+    for (int i=0; i&lt;jr.length; i++) // wstawiamy po kolei wszystkie czasopisma
+
+       // jeżeli nie udało się na półkę k - to bierzemy nową połkę (k+1)
+       while (!bs[k].put(jr[i]) &amp;&amp; k &lt; BSNUM ) {
+         k++;
+         bs[k] = new Bookshelf(k+1, BSIZE);
+       }
+
+
+    // gdzie są książki ?
+    for (int i=0; i&lt;bk.length; i++) {
+       Bookshelf b = bk[i].whereIs();
+       String s = b == null ? " nie stoi na półce"
+                            : " jest na półce "+ b.getNr();
+       System.out.println( bk[i].getTitle() + s);
+    }
+
+    // gdzie są czasopisma ?
+    for (int i=0; i&lt;jr.length; i++) {
+       Bookshelf b = jr[i].whereIs();
+       String s = b == null ? " nie stoi na półce"
+                            : " jest na półce "+ b.getNr();
+
+       System.out.println(jr[i].getTitle() + s);
+    }
+
+    // co jest na półkach (tylko tych co zostały użyte)
+    for (int i=0; i &lt; bs.length; i++) {
+      if (bs[i] == null) break;
+      Publication[] p = bs[i].getPubs();
+      System.out.println("Półka nr " +  bs[i].getNr());
+      for (int j=0; j &lt; p.length; j++)  System.out.println(p[j].getTitle());
+    }
+
+
+  }
+
+}
+</pre>
+
+<p>
+Program wyprowadzi następujące wyniki.<br>
+<br>
+
+<div class="listing100">
+Brak miejsca na półce<br>
+Brak miejsca na półce<br>
+Brak miejsca na półce<br>
+Psy jest na półce 1<br>
+Koty jest na półce 2<br>
+Konie jest na półce 3<br>
+Kwiaty jest na półce 3<br>
+Ryby jest na półce 4<br>
+Półka nr 1<br>
+Psy<br>
+Półka nr 2<br>
+Koty<br>
+Półka nr 3<br>
+Konie<br>
+Kwiaty<br>
+Półka nr 4<br>
+Ryby<br>
+</div><p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index90.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index92.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

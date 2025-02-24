@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index44.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 3"></A><div class="tytulpunktu">3. Praktyczne przykłady</div>
+
+<a name="W6.3"></a>
+
+<p>Omawianie skomplikowanego tematu obiektów i referencji warto zakończyć kilkoma
+przykładami o nieco bardziej praktycznym charakterze, pokazującymi jednocześnie,
+że<A NAME="EDU.skorowidz.termin null 45_422"></A> słowo kluczowe null bardzo w programowaniu się przydaje, a referencja
+do pustego łańcucha znakowego jest czymś innym niż zmienna typu String, która
+nie wskazuje na żaden obiekt. <br>
+
+Przy okazji poznamy wstępnie pewne  możliwości<A NAME="EDU.skorowidz.termin interakcja_z_programem 45_423"></A> interakcji z programem: wprowadzanie danych w<A NAME="EDU.skorowidz.termin dialog_wejściowy 45_424"></A> dialogu wejściowym oraz pokazywania
+komunikatów<A NAME="EDU.skorowidz.termin dialog_komunikatów 45_425"></A> w dialogu komunikatów, a także sposób uzyskiwania ze znakowej
+(napisowej) reprezentacji liczby całkowitej - jej binarnej (wewnętrznej)
+wartości, na której można wykonywać operacje arytmetyczne.<br>
+<br>
+Zapis w programie:<br>
+<br>
+   <A NAME="EDU.skorowidz.termin JOptionPane.showInputDialog 45_426"></A> String s = JOptionPane.showInputDialog("Komunikat");<br>
+<br>
+spowoduje otwarcie okienka dialogowego z komunikatem "Komunikat", w którym
+będzie można wprowadzić jakiś tekst. Po kliknięciu w przycisk Ok wprowadzony
+łańcuch znakowy będzie dostępny za pomocą zmiennej s. Zamknięcie dialogu (np.
+przyciskiem Cancel) spowoduje, że zmienna s będzie miała wartośc null.<br>
+<br>
+Zapis:<br>
+<br>
+   <A NAME="EDU.skorowidz.termin JOptionPane.showMessageDialog 45_427"></A> JOptionPane.showMessageDialog(null, "Komunikat");<br>
+<br> pokaże okno dialogowe z komunikatem "Komunikat" (w tym zapisie null
+mówi m.in. o tym, że okno dialogowe ma być wycentrowany w obszarze pulpitu graficznego
+interfejsu systemu operacyjnego; zamiast null można podać referencję do obiektu-okna
+- innego od pulpitu)<br>
+<br>
+Aby korzystać z tych możliwości trzeba w pierwszym wierszu programu wpisać:
+import javax.swing.JOptionPane; (dzięki temu będzie można użyć<A NAME="EDU.skorowidz.termin JOptionPane 45_428"></A> nazwy JOptionPane,
+która jest nazwą klasy).<br>
+<br>
+Co konkretnie oznaczają te zapisy (oraz "import") dowiemy się w następnych wykładach, a szczegóły
+stosowania dialogów poznamy (niestety dopiero) w drugim semestrze.<br>
+Teraz istotne jest tylko to, że (może jeszcze nie bardzo wiedząc o co chodzi)
+będziemy mogli komunikować się w (w miarę) wygodnej formie z naszymi programami.<br>
+<br>
+Pierwszy przykładowy program jest kolejną wariacją na temat "Hello world" czy "Dzień dobry".<br>
+
+<pre>
+import javax.swing.JOptionPane;
+
+public class GreetMsg {
+
+  public static void main(String[] args) {
+
+    String name = JOptionPane.showInputDialog("Podaj swoje imię");
+    if (name == null) name = "";
+    JOptionPane.showMessageDialog( null, "Witaj " + name + "!");
+    System.exit(0);
+
+  }
+
+}
+</pre>
+
+<p>
+<img src="images/w6greet.jpg" alt="Rys" width="293" hspace="15" height="119" border="1" align="Right">Uwidoczni on dialog wejściowy, w którym będziemy mogli wprowadzić tekst.
+
+Gdy po wpisaniu tekstu klikniemy "Ok", to zmienna name będzie wskazywać na
+napis, który wprowadziliśmy w dialogu. Jeśli natomiast  zamkniemy dialog,
+albo klikniemy "Cancel", to wynikiem odwołania JOptionPane.showInputDialog(...)
+będzie null i tę właśnie wartość będzie miala zmienna name (oc oznacza, że
+nie wskazuje na żaden łańcuch znakowy).
+</p>
+<br clear="all">
+
+<p>W takim przypadku przypiszemy jej referencję do pustego łańcucha znakowego "".<br><br>
+
+<p>
+<img src="images/w6greet2.jpg" alt="Rys" hspace="15" width="268" height="113" border="1" align="Right">
+Następnie odwołanie JOptionPane.showMessageDialog(..) pokaże komunikat z powitaniem (z podanym imieniem lub bez). 
+</p>
+<br clear="all">
+
+<br>
+
+<p>Ciekawe, co by się stało, gdyby usunąć z programu instrukcję if (...) i pozwolić
+na to, by przy zamknięciu dialogu przez Cancel zmienna name miala wartośc
+null.<br>
+No, cóż dostalibyśmy niezbyt grzeczny komunikat "Witaj null!" ( konkatenacja przekształca wartość <i><b>null</b></i> na napis null).<br>
+Ale problem nie w grzeczności.<br>
+<br>
+Gdybyśmy dodali na końcu programu instrukcję wyprowadzającą na konsolę długość
+łańcucha znakowego, wskazywanego przez name (tę długość możemy uzyskać pytając
+o nią obiektu za pomocą polecenia length()):<br>
+<br>
+System.out.println("długość: " + name.length());<br>
+<br>
+to w przypadku usunięcia instrukcji if powstałby błąd wykonania, gdy zmienna name miałaby wartość null. <br>
+Istotnie pytalibyśmy wtedy niestniejącego obiektu  o długość napisu w nim zawartego.<br>
+Pozostawiając if - gwarantujemy, że name będzie wskazywac zawsze na jakiś
+obiekt. Gdy nie podano żadnego tektsu w dialogu lub wybrano Cancel - będzie
+to pusty łańcuch znakowy. O długości 0. W uzupełnionym programie uzyskamy wtedy na konsoli komunikat: długość 0.<br>
+<br><A NAME="EDU.skorowidz.termin łańcuch_znakowy pusty 45_429"></A> 
+
+<div class="important">Pusty łańcuch znakowy (nie zawierający żadnego znaku) jest takim samym
+obiektem jak każdy inny łańcuch znakowy. Należy odróżniać pusty łańcuch znakowy
+(o długości 0) od wartości null. Zmienna typu String, która ma wartość null
+nie wskazuje na żaden obiekt. Wtedy nie możemy jej używać do posyłania poleceń
+do obiektu.  Zmienna ta może jednak wskazywać na obiekt - pusty łańcuch znakowy
+i wtedy możemy wobec niego stosować metody (polecenia) zdefiniowane w klasie
+String.
+
+</div>
+<br>
+
+<p>
+<img src="images/w6mldlg.jpg" alt="Rys" hspace="15" width="268" height="208" border="1" align="Right">
+Drugi program przykładowy łączy wprowadzane w kolejno (w pętli) pojawiających
+się dialogach teksty w taki sposób, by pokazać je w dialogu jako komunikat
+składający się z wielu wierszy (każdy wprowadzony tekst = jeden wiersz komunikatu).<br>
+
+Wprowadzanie kończy się i wynikowy komunikat zostaje uwidoczniony tylko wtedy,
+gdy użytkownik zamknął (np. przez  Cancel)  dialog wejściowy. Program nie
+pozwala dołączyć do zbioru tekstów pokazywanytych w dialogu wynikowym pustego
+łańcucha znakowego. Jeżeli użytkownik nic nie wpisał w dialogu wejściowym
+(inp.equals("") zwraca true), to program przypomina o konieczności wprowadzenia
+tekstu (lub zrezygnowania z wprowadzania przez Cancel). Na rysunku obok pokazano
+wynik działania programu po wprowadzeniu w kolejnych dialogach kilku nazw
+zwierząt.
+</p>
+<br clear="all">
+
+<pre>
+import javax.swing.JOptionPane;
+
+public class ShowStrings {
+
+  public static void main(String[] args) {
+
+    String out = "";
+    String inp = null;
+
+    while ( (inp = JOptionPane.showInputDialog( "Wpisz coś" )) != null) {
+      if (inp.equals(""))
+         JOptionPane.showMessageDialog( null,
+                                       "Podaj dane lub zamknij dialog"
+                                      );
+      else out = out + '\n' + inp;
+    }
+
+    if (out.equals("")) out = "Nie wprowadzono żadnych danych";
+    JOptionPane.showMessageDialog(null, out);
+    System.exit(0);
+
+  }
+
+}
+</pre>
+
+<p>Warte podkreślenia:<br>
+<ul>
+  <li>w warunku while wykorzystano fakt, że przypisanie jest wyrażeniam o
+wartości lewej strony; przy tym jednak trzeba było uwzględnić niski priorytet
+operatora = i dlatego przypisanie jest ujęte w nawiasy</li>
+
+  <li>kolejne wiersze wynikowego komunikatu uzyskiwane są przez przyłączenie znaku '\n' (przejście do nowego wiersza)</li>
+
+  <li>porównanie zawartości łańcuchów znakowych - zawsze za pomocą equals</li>
+</ul>
+
+<p><A NAME="EDU.skorowidz.termin System.exit(0) 45_430"></A> W obu programach zastosowano na końcu odwołanie System.exit(0). Powoduje
+ono zakończenie działania programu (z podanym kodem wynikowym - w tym przypadku
+0).<br>
+<br>
+Normalnie program w Javie kończy swoje działanie, gdy zostaną wykonane wszystkie
+instrukcje w metodzie main. Nie jest to jednak prawdą, jeśli w programie
+korzystamy z elementów graficznego interfejsu użytkownika (powody tego zostaną
+wyjaśnione później). Ponieważ dialogi pokazywane przez showXXXDialog są elementami
+GUI, to trzeba było jawnie zakończyć działanie programu przez System.exit(...).<br>
+<br><A NAME="EDU.skorowidz.termin wprowadzanie_liczb 45_431"></A> A jak<A NAME="EDU.skorowidz.termin liczby wprowadzanie 45_432"></A> wprowadzić do programu liczby?<br>
+Gdy w polu tekstowym okna dialogowego wpiszemy jakąś liczbę, to będzie ona
+w programie dostępna jako napis (łancuch znakowy, String). Oczywiście nie
+możemy na takim napisie wykonywać operacji arytmetycznych.<A NAME="EDU.skorowidz.termin liczba przekształcenie_reprezentacji_znakowej_do_postaci_binarnej 45_433"></A> Do tego potrzebne
+jest przekształcenie znakowej (napisowej) reprezentacji liczby do postaci
+binarnej (takiej, w jakiej liczby są zapisywane w pamięci komputera).<br>
+<br><A NAME="EDU.skorowidz.termin Integer.parseInt 45_434"></A> 
+<div class="syntax">Do przekształcania napisów na liczby całkowite można wykorzystać następujące odwołanie:<br>
+<br>
+            liczba = Integer.parseInt(napis);<br>
+<br>
+gdzie:<br>
+        liczba - jest dowolną zmienną typu int,<br>
+        napis  - jest wyrażeniem typu String.<br>
+<br>
+</div>
+
+<br>
+<p>
+Oczywiście, nie każdy napis reprezentuje liczbę całkowitą. Jeśli np. w napisie
+znajdzie się znak litery lub kropka dziesiętna, to przy próbie przekształcenia
+napisu na liczbę całkowitą wystąpi błąd. W Javie taki błąd sygnalizowany
+jest za pomoca wyjątku, który nazywa się<A NAME="EDU.skorowidz.termin NumberFormatException 45_435"></A> NumberFormatException.<br>
+Dopóki (w ostatnim wykładzie) nie poznamy mechanizmu obsługi błędów (wyjątków)
+musimy się liczyć z tym, że w takim przypadku wykonanie programu zostanie
+przerwane.<br>
+<br>
+Przykład: program sumujący dwie wprowadzone w dialogach liczby.<br>
+<br>
+
+<pre>
+import javax.swing.*;
+
+public class ParseInt {
+
+  public static void main(String[] args) {
+
+    String s1 = JOptionPane.showInputDialog("Podaj pierwszą liczbę");
+    String s2 = null;
+    if (s1 != null) {
+      s2 = JOptionPane.showInputDialog("Podaj drugą liczbę");
+      if (s2 != null) {
+         int l1 = Integer.parseInt(s1);
+         int l2 = Integer.parseInt(s2);
+         JOptionPane.showMessageDialog(null, "Suma: " + (l1 + l2));
+      }
+    }
+
+    System.exit(1);
+  }
+
+}
+</pre>
+
+
+<p>Proszę wypróbować powyższy program przy różnych danych wejściowych, m.in.
+takich które nie stanowią napisów reprezentujących liczby całkowite (w tym
+- przy pustym łańcuchu znakowym, który zostanie wprowadzony, gdy wybierzemy
+w dialogu Ok, nie wpisując nic do jego pola tekstowego).</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index44.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

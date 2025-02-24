@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2"><title>Instalacja Rexx-a</title>
+
+<link rel="stylesheet" type="text/css" href="style/common.css"></head>
+<body bgcolor="ivory">
+<p><b>Instalacja REXXa 
+ i  środowiska do wykonywania programów w uproszczonym REXXie<br>
+<br>
+</b>
+
+<hr width="100%" size="2">
+
+<p>
+<b>Instalacja automatyczna</b><br>
+Prosty program instalacyjny z katalogu SOFT: <br>
+<br>
+     instal.bat <br>
+<br>
+wykonuje instalację.<br>
+<br>
+Należy go uruchomić w wierszu poleceń, np.<br>
+<br>
+<b>f:\...\soft &gt; instal</b><br>
+<br>
+Program kopiuje pliki do podanego przez użytkownika katalogu, który powinien
+znajdować się na systemowej ścieżce dostępu, definiowanej przez zmienną środowiskową
+PATH.<br>
+<br>
+<hr width="100%" size="2">
+
+<p><b>Instalacja ręczna</b><br>
+
+<p>
+Możliwa jest też ręczna instalacja - z pominięciem programu instal.<br>
+<br>
+Należy:<br>
+<br>
+skopiować pliki <br>
+<br>
+regina.exe<br>
+regina.dll<br>
+rexxutil.dll<br>
+prx.rexx<br>
+<br>
+do dowolnego  katalogu, który znajduje się na ścieżce dostępu (ew. stworzyć
+nowy katalog i dodać go do ścieżki dostępu np. poprzez zmianę PATH=... w
+pliku AUTOEXEC.BAT)<br>
+<br>
+Utworzyć w tym katalogu plik prx.bat o następującej postaci:<br>
+<br>
+@echo off<br>
+regina d:\kkk\prx.rexx %1 %2 %3 %4 %5 %6 %7<br>
+<br>
+gdzie: d:\\kkk - katalog, do którego skopiowano pliki regina.exe i prx.rexx<br>
+<br>
+<hr width="100%" size="2">
+
+<p>Uwaga:<br>
+
+<br>
+Regina REXX jest implementacją REXXa  autorstwa Marka Hesslinga.<br>
+Zobacz załączone pliki readme.<br>
+<script language="JavaScript1.2" src="../js/dodatki.js"></script>
+
+</body></html>

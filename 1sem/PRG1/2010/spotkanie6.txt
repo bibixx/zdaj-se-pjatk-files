@@ -1,0 +1,36 @@
+
+public class Spotkanie6_zadanie4 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] argumenty) {
+double bohenek=1.5;
+double bohenekK=3.60;
+double brzosI=1;
+double brzosK=3;
+double pyryI=1.5;
+double pyryK=2;
+double placekI=2;
+double placekK=4.50;
+
+double bohenekKoszt = bohenek*bohenekK;
+double boK = brzosI*brzosK;
+double pyrK = pyryI*pyryK;
+double placK = placekI*placekK;
+
+double kosztR=bohenekKoszt+boK+pyrK+placK;
+
+System.out.println("WITAMY W SKLEPIE U JADZI");
+
+System.out.println("================================");
+System.out.println("chleb, "+bohenek+" bochenka po "+bohenekK+" PLN/bochenek, kwota: "+bohenekKoszt+" PLN, "+(int)((bohenekKoszt/kosztR)*100)+" % lacznej kwoty");
+System.out.println("brzoskwinie, "+brzosI+"kg po "+brzosK+" PLN/kg, kwota: "+boK+" PLN, "+(int)((boK/kosztR)*100)+" % lacznej kwoty");
+System.out.println("ziemniaki, "+pyryI+"kg po "+pyryK+" PLN/kg, kwota: "+pyrK+" PLN, "+(int)((pyrK/kosztR)*100)+" % lacznej kwoty");
+System.out.println("pizza mrozona, "+placekI+" sztuki po "+placekK+" PLN/sztuka, kwota: "+placK+" PLN, "+(int)((placK/kosztR)*100)+" % lacznej kwoty");
+System.out.println("================================");
+System.out.println("Do zapłaty: "+kosztR+" PLN");
+System.out.println("Rozbij swoje zakupy na raty - pytaj o szczegóły u Jadzi !!!");
+
+}
+}

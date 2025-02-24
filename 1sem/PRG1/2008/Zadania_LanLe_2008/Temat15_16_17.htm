@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>Temat15_16_17</title>
+</head>
+<body>
+<b><font size="+1">Tablice</font></b><br>
+&nbsp;
+<p><b><u>Zadanie 41</u> (1p)</b>
+</p>
+<p><b>Napisa&#263; program, kt&oacute;ry pobiera z <a
+ href="../Programy/Soft/Java/Eclipse/javaShow03.htm"><span
+ style="font-style: italic;">linii wywo&#322;ania</span></a> 10
+argument&oacute;w o
+postaci liczb rzeczywistych i wyprowadza na konsol&#281; ilo&#347;&#263;
+argument&oacute;w wi&#281;kszych ni&#380; 0. Program
+wypisuje odpowiedni komunikat, je&#347;li liczba argument&oacute;w jest inna
+ni&#380; 10.</b>&nbsp;
+<br>
+</p>
+<b><u><br>
+Zadanie 42</u> (2p)</b>
+<p><b>Napisa&#263; program, kt&oacute;ry pobiera z </b><span
+ style="font-style: italic;">linii wywo&#322;ania</span><b> 10
+argument&oacute;w,
+umieszcza
+je we w&#322;asnej tablicy &#322;a&#324;cuch&oacute;w tekstowych i wypisuje na konsol&#281;
+ich
+konkatenacj&#281;
+oraz&nbsp; najwi&#281;kszy i najmniejszy element tablicy (stosujemy porz&#261;dek
+leksykograficzny).</b> <br>
+</p>
+<i><u>Pomoc:</u></i><b> Do por&oacute;wnania dw&oacute;ch
+&#322;a&#324;cuch&oacute;w tekstowych mo&#380;na skorzysta&#263; z&nbsp; metody </b><i>compareTo()</i><b>
+z klasy </b><i>String </i><b>(zob. dokumentacj&#281; Java)</b><b>: <br>
+</b><span style="font-style: italic;">s1.compareTo(s2)</span><b>
+zwraca:<br>
+&nbsp;&nbsp;&nbsp; * &nbsp;&nbsp;&nbsp; </b><span
+ style="font-style: italic;">liczb&#281; ujemn&#261;</span><b>, je&#380;eli &#322;a&#324;cuch
+tekstowy </b><span style="font-style: italic;">s1</span><b> znajduje,
+wed&#322;ug porz&#261;dku
+leksykograficznego, przed &#322;a&#324;cuchem tekstowym </b><span
+ style="font-style: italic;">s2</span><b>; <br>
+&nbsp;&nbsp;&nbsp; * &nbsp;&nbsp;&nbsp; </b><span
+ style="font-style: italic;">liczb&#281; dodatni&#261;</span><b>, je&#380;eli </b><span
+ style="font-style: italic;">s1</span><b> znajduje, wed&#322;ug porz&#261;dku
+leksykograficznym, po </b><span style="font-style: italic;">s2</span><b>;
+</b><span style="font-style: italic;"><br>
+&nbsp;&nbsp;&nbsp; * &nbsp;&nbsp;&nbsp; 0</span><b>, je&#347;li </b><span
+ style="font-style: italic;">s1</span><b> i </b><span
+ style="font-style: italic;">s2</span><b>&nbsp; s&#261; takie same. <br>
+Np. </b><span style="font-style: italic;">"ala".compareTo("ale") &lt; 0</span><b>,
+</b><span style="font-style: italic;">"2".compareTo("11") &gt; 0</span><b>,
+</b><span style="font-style: italic;">"java".compareTo("ja"+"v</span><span
+ style="font-style: italic;">a")</span><span style="font-style: italic;">
+= 0</span><b>.</b><b><br>
+</b>
+<p></p>
+<b><u><br>
+Zadanie 43</u> (3p)</b>
+<p><b>W g&#322;&oacute;wnym programie zainicjowa&#263; tablic&#281; </b><b>10
+elementow&#261; liczbami
+ca&#322;kowitymi</b><span style="font-weight: bold;">. N</span><b>apisa&#263;
+oraz testowa&#263;
+nast&#281;puj&#261;ce</b><b> metody:</b></p>
+<p><b>&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;&nbsp;</b><b> </b><i>void
+parzyste(int[] tab)</i><b>,</b><b> </b><b>kt&oacute;ra zwraca</b><b>
+liczby parzyste z podanej
+tablicy </b><span style="font-style: italic;">tab</span><b>,</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;&nbsp; </b><i>void
+nieParzyste(int[] tab)</i><b>, kt&oacute;ra zwraca</b><b> liczby
+nieparzyste z podanej
+tablicy </b><span style="font-style: italic;">tab</span><b>,</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp;&nbsp; </b><i>int
+sumaNieparzystych(int[] tab)</i><b>, kt&oacute;ra </b><b>zwraca sum&#281;
+liczb o indeksach
+nieparzystych z tablicy </b><span style="font-style: italic;">tab</span><b>.</b></p>
+<p><br>
+<b><u>Zadanie 44</u> (3p)</b>
+</p>
+<p><b>Napisa&#263; program, kt&oacute;ry wprowadza z okienek dialogowych
+elementy
+tablicy
+dwuwymiarowej 3x3 typu </b><i>int</i><b>&nbsp; i wypisuje na konsol&#281;:</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp; sum&#281;, iloczyn, element
+najmniejszy
+i element najwi&#281;kszy tej tablicy,</b>
+<br>
+<b>&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp; sum&#281; tych pocz&#261;tkowych
+element&oacute;w
+wszystkich wierszy tablicy, kt&oacute;re poprzedzaj&#261; element
+nie-dodatni.</b>
+<br>
+&nbsp;
+<br>
+</p>
+<p><b><u>Zadanie 45</u> (4p)<u> </u></b>
+</p>
+<p><b>Zaprojektowa&#263; i testowa&#263; klas&#281; </b><i>Wektor3W</i><b>
+reprezentuj&#261;c&#261;
+wektory tr&oacute;jwymiarowe i podstawowe operacje na nich: wy&#347;wielanie
+sk&#322;adowych
+wektora, ustawienie warto&#347;ci sk&#322;adowych, dodawanie dw&oacute;ch
+wektor&oacute;w,
+odejmowanie
+dw&oacute;ch wektor&oacute;w, mno&#380;enie wektora przez liczb&#281;, iloczyn
+skalarny
+2 wektor&oacute;w,
+sprawdzanie czy dwa wektory s&#261; r&oacute;wne, sprawdzanie czy dany
+wektor jest
+d&#322;u&#380;szy ni&#380; drugi. Ka&#380;dy wektor powinien mie&#263; sw&oacute;j unikalny
+numer (np.
+zaczynaj&#261;c od 1).</b>
+</p>
+<p><b>Dodatkowo, stworzy&#263; tablic&#281; 10 wektor&oacute;w klasy </b><i>Wektor3W</i><span
+ style="font-weight: bold;">,</span><b> zainicjowa&#263; </b><b>ich
+wsp&oacute;&#322;rz&#281;dne </b><b>losowymi liczbami </b><b>oraz poda&#263;
+najd&#322;u&#380;szy i
+najkr&oacute;tszy wektor.<br>
+</b>
+</p>
+<p><b><font size="+1"><br>
+</font></b></p>
+<p><b><font size="+1">Kolekcje</font><br>
+<u><br>
+Zadanie 46</u> (3p)<br>
+('Dynamiczne" sortowanie </b><b>kolekcji
+argument&oacute;w
+tekstowych</b><b>)<br>
+</b></p>
+<b>Kolejny argument tekstowy dostarcza si&#281; do kolekcji za
+po&#347;rednictwem okienka dialogowego. Po dodawaniu kolejnego argumentu do
+kolekcji, program wyprowadza </b><b>jej zawarto&#347;&#263;, posortowan&#261; wed&#322;ug
+porz&#261;dku leksykograficznego, </b><b>na konsol&#281;. Wyj&#347;cie z programu
+nast&#281;puje
+po naci&#347;ni&#281;ciu przycisku </b><i>"Cancel"</i><b>. </b><b>Dzia&#322;anie
+programu mog&#322;oby wygl&#261;da&#263; nast&#281;puj&#261;co:</b><br>
+<p>aaa
+<br>
+<i>[aaa]</i>
+<br>
+aca
+<br>
+<i>[aaa,aca]</i>
+<br>
+abc
+<br>
+<i>[aaa,abc,aca]</i>
+<br>
+c
+<br>
+<i>[aaa,abc,aca,c]</i>
+<br>
+b
+<br>
+<i>[aaa,abc,aca,b,c]</i>
+<br>
+<b>...<br>
+<br>
+</b></p>
+<p><b><u>Zadanie 47</u> (4p)</b>
+</p>
+<p><b>Napisa&#263; program, kt&oacute;ry wczytuje napisy podawane przez
+u&#380;ytkownika
+(dop&oacute;ki nie zrezygnuje on z ich wprowadzania), a nast&#281;pnie
+podaje
+liczb&#281;
+wyst&#261;pie&#324; wszystkich wprowadzonych napis&oacute;w. Np. po wprowadzeniu
+napis&oacute;w
+Aaa, Bbb, Aaa, Ccc, Aaa, Bbb powinni&#347;my otrzyma&#263; raport:</b>
+<b>Aaa 3, Bbb 2, Ccc 1.</b></p>
+</body>
+</html>

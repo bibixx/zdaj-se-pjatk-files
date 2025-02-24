@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index10.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index12.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Start: pierwszy program i kilka elementów składni</div>
+  
+<a name="W2.2"></a>
+
+<p>By móc wykonać napisane przez nas programy musimy zainstalować
+    interpreter      REXXa oraz specjalnie przygotowany preprocesor, umożliwiający
+pewne - potrzebne w tym wykładzie - zmiany składniowe, które uproszczą nam
+późniejsze przejście do języka Java.<br>
+        Instalacja jest bardzo prosta i szybka -
+<a href="javascript:popUp('dodatki/W2RexxInst.htm',80,80)">zob.    jak   zainstalować interpreter i preprocesor REXXa</a>.<br>
+        Programy piszemy w dowolnym edytorze tekstów i zapisujemy na dysku
+   jako    pliki tekstowe (czysty tekst, a nie format dokumentów procesorów
+  tekstu,     np. Worda!). Jako rozszerzenie pliku można przyjąć "rexx" lub
+  "rex".<br>
+        Następnie je uruchamiamy -
+<a href="javascript:popUp('dodatki/W2RexxRun.htm',50,50)">zob. jak uruchomić   program    napisany w uproszczonym zmodyfikowanym REXXie</a>.<br>
+      <br>
+                  Nasz pierwszy program będzie realizował następujący algorytm:<br>
+
+<div class="notel">Terminem <b>konsola</b> określa się znakowy terminal
+służący    do  interakcji    użytkownika z programami. W Windows jest to "okienko
+DOS".    O wprowadzanych    z konsoli danych mówi się jako o <b>standardowym
+strumieniu     wejściowym,</b>       wyprowadzane - tworzą <b> standardowy
+strumień wyjściowy,</b>          w skrócie   standardowe wejście i standardowe
+wyjście.</div>
+<div class="ddd"><br><ol>
+                      <li><A NAME="EDU.skorowidz.termin konsola 11_90"></A> Zapytaj o imię, wypisując na konsoli odpowiedni komunikat
+                      <li><A NAME="EDU.skorowidz.termin standardowy_strumień_wejściowy 11_91"></A> Odczytaj z konsoli podane imię
+                      <li><A NAME="EDU.skorowidz.termin standardowy_strumień_wyjściowy 11_92"></A> Jeżeli podano imię, to wypisz na konsoli powitanie
+ z  imieniem, w przeciwnym razie wypisz na konsoli powitanie
+bez   imienia
+                     <li>Podaj godzinę
+      </ol></div>
+<br clear="all">
+
+<p>Oto tekst programu:
+
+<pre>
+/* Pierwszy program:  powitanie */
+
+<font color="#6633ff"><b>say</b></font> "Jak się nazywasz?";     /* wypisz tekst na konsoli */
+
+name = <font color="#009900"><b>linein()</b></font>;             /* wczytaj dane z konsoli  */
+
+/*
+  jeżeli nie podano imienia, wypisz "Witaj"
+  w przeciwnym razie - Witaj, imie i wykrzyknik
+*/
+
+<font color="#3366ff"><b>if</b></font> name = "" <font color="#6633ff"><b>then say</b></font> "Witaj!";
+<font color="#6633ff"><b>else say</b></font> "Witaj," name "!";
+
+/* podaj godzine */
+<font color="#6633ff"><b>say</b></font> "Teraz jest godzina:" <font color="#009900"><b>time()</b></font>;
+</pre>
+
+<p><b><font color="#ff6600">Proszę zapisać ten program i uruchomić na własnym komputerze.</font></b><br>
+<br>
+<p>Mamy tu kilka elementów.</p>
+
+<div class="notel">W Javie oprócz stosowania znaków  /* */  mamy jeszcze
+ inne   sposoby     komentowania  programu  m.in. użycie znaków //</div>
+ 
+<div class="ddd">
+<br>Po pierwsze<A NAME="EDU.skorowidz.termin komentarz 11_93"></A>  komentarze:    tekst pomiędzy  znakami /* i */ traktowany jest jako komentarz,
+  który nie    stanowi części programu "do wykonania" i nie wpływa na działanie
+  programu.    Dobrą praktyką programistyczną jest komentowanie programu,
+wyjaśnianie  jaki   jest sens poszczególnych jego części. Nie należy z tym
+jednak przesadzać:     oczywistych rzeczy raczej się nie komentuje, a w powyższym
+przykładzie  zawarto   komentarze tylko po to by pokazać sposoby komentowania
+programu.
+</div>
+
+<br clear="all">
+<p>Na <b><font color="#3333ff">niebiesko</font></b> zaznaczono
+  słowa   kluczowe,  reprezentujące<A NAME="EDU.skorowidz.termin instrukcja_języka 11_94"></A> <b>instrukcje</b>  języka. Program jest
+  tekstem   składającym   się symboli - ciągów znaków, rozdzielonych separatorami
+  (takimi   jak spacje,   przecinki, średniki, nawiasy). Pomijając komentarze,
+  każdy  taki symbol (i  separator) ma  określone znaczenie dla działania
+programu   i nie może pojawić  się w całkiem  przypadkowym miejscu. Pewne,
+ściśle określone,    symbole-słowa  oznaczają instrukcje  do wykonania np.
+sprawdzenie warunku,    wykonanie iteracji.<br>
+               Generalnie każdy ciąg symboli programu <b>zakończony średnikiem</b>
+          traktowany   jest jako instrukcja.<br>
+               Już teraz zacznijmy się przyzwyczajać do kończenia wszystkich
+  instrukcji      średnikiem (choć nie jest to warunek konieczny w REXXie,
+ przyda nam się    to  przyzwyczajenie w Javie).</p>
+ 
+ <div class="notel">W więlu językach programowania, w tym w Javie, wprowadzanie
+  - wyprowadzanie danych z konsoli  realizowane jest za pomoca funkcji.
+   W REXXie w tym  celu możemy używać zarówno instrukcji, jak i funkcji</div>
+   
+<div class="ddd">
+<br>
+Pierwszy wykonywalny wiersz naszego programu jest właśnie
+ taką   instrukcją:<A NAME="EDU.skorowidz.termin instrukacja_say 11_95"></A> instrukcja <b><font color="#6600cc">say</font></b>
+    wyprowadza   podany w  niej   napis na konsolę. Napis podano w cudzysłowie,
+ literalnie   - stąd nazwa  takiej   konstrukcji językowej<A NAME="EDU.skorowidz.termin literał 11_96"></A> <b>literał</b>.
+ </div>
+ <br clear="all">
+ <br>
+<p>Niektóre napisy w programie określają<A NAME="EDU.skorowidz.termin zmienna 11_97"></A> <b>zmienne</b>. Zmienna
+   sluży    do  przechowywania  danych i zawsza ma nazwę. W naszym pierwszym
+   programie    mamy  zmienną o nazwie  <i><b>name</b></i>.  Przechowujemy
+ w  niej wprowadzone    z  konsoli imię. <br>
+                  Tego wprowadzenia dokonuje<A NAME="EDU.skorowidz.termin funkcja_linein 11_98"></A> funkcja <i><b>linein()</b></i>.  <b>   Funkcje</b> - to wyodrębnione fragmenty kodu, które
+wykonują   jakieś czynności   (w  tekście programu zaznaczone na <b><font color="#009900">
+      zielono</font></b>). Możemy   je wywołać, dopisując w tym celu
+  po  nazwie funkcji nawiasy    okrągłe  i ew.  umieszcając w tych nawiasach
+  informację,  która ma być przekazana    funkcji<A NAME="EDU.skorowidz.termin argumenty_funkcji 11_99"></A> (<b>argumenty</b>). Wywołanie
+funkcji  linein()  powoduje przekazanie sterowania    do  gotowego fragmentu
+kodu (treści tej  funkcji, zawartej w samym REXXie,    dlatego  funkcja nazywa
+ się "wbudowaną",  a jej kod nie jest dla nas widoczny).    Kod  ten czeka
+ na wpisanie wiersza  na konsoli. Kiedy użytkownik wciśnie  ENTER,   odczytuje
+ wprowadzony wiersz  i zwraca go do miejsca wywołania funkcji.   Zwrócona
+ wartość jest za pomocą  znaku = <b>przypisywana</b>      zmiennej
+ <i><b>name</b></i>   . Zatem jeżeli użytkownik programu w odpowiedzi   na
+pytanie  "Jak się nazywasz?"  wpisał na konsoli tekst "Ala" i wcisnął ENTER,
+ to napis  Ala będzie teraz  znajdował się w zmiennej name. Jeżeli natomiast
+ nie wpisał  nic, a tylko  wcisnął ENTER, to zmienna name zawiera pusty napis,
+ który w programie możemy  literalnie wyrazić jako 'nic' pomiędzy znakami
+cudzysłowu  : <b>""</b> .<br>
+      <br>
+                  Specjalnymi instrukcjami języka są<A NAME="EDU.skorowidz.termin instrukcja_sterująca 11_100"></A> <b>instrukcje sterujące</b>
+       .  Zmieniają     one przebieg wykonania programu. Do takich instrukcji
+  należy<A NAME="EDU.skorowidz.termin instrukcja_if 11_101"></A> instrukcja   <b>   if</b>, która służy do sprawdzania prawdziwości
+  jakichś  warunków i  podejmowania<A NAME="EDU.skorowidz.termin decyzja 11_102"></A> decyzji jakie instrukcje będą wykonane
+  jeśli warunek  okaże  się prawdziwy.<br>
+                  W naszym programie sprawdzamy czy zmienna name zawiera
+pusty    napis    (<i>    if  name = ""</i>) i jeśli tak wypisujemy na konsoli
+tylko    słowo   "Witaj!"   ( <i>  then say "Witaj!"</i>). W przeciwnym razie
+(<i>      else</i>     ) wyprowadzamy   napis  "Witaj," połączony z napisem
+zawartym    w zmiennej   name i znakiem "!"   (<i>else say  "Witaj!" name "!"</i>
+).<br>
+      <br>
+                  Ostatni wiersz programu wypisuje na konsoli aktualną godzinę,
+   korzystając      z wbudowanej funkcji time().<br>
+      <br>
+                  Pisząc program musimy posługiwać się<A NAME="EDU.skorowidz.termin reguła_składniowa_języka 11_103"></A> regułami składniowymi
+  języka,     które    określają jakie napisy w treści programu są dopuszczalne.
+  Na przykład,    nie   możemy w całkiem dowolny sposób nazywać zmiennych
+(np.  zamiast name    - 123)   ani wadliwie formułować instrukcji (if name
+= ""  else say "Witaj!")    albo  też zapomnieć o zamknięciu cudzysłowu lub
+nawiasu  (say "Witaj!). Wszystko     to będzie odebrane jako błąd składniowy.
+W językach  kompilowanych zostanie     on wykryty w trakcie kompilacji, w
+językach interpretowanych   - w trakcie    wykonania lub wcześniej za pomocą
+specjalnych programów sprawdzających    składnię.   W rezultacie nasz program
+nie będzie wykonany.<br>
+      <br>
+                  Informacja<A NAME="EDU.skorowidz.termin błąd 11_104"></A> o błędach jest podawana przez kompilatory lub
+ części    interpreterów,     sprawdzające składnię. <br>
+                  Dowiemy się z niej o prawdopobnej przyczynie błędu i o
+miejscu     w  którym    on wystąpił. Programowanie w dużej części polega
+na walce  z  błędami  składniowymi,     dlatego warto zwracać baczną uwagę
+na to co  mówią  kompilatory  lub inne  sprawdzacze   składni o naszym programie.<br>
+      <br>
+                  Np. gdybyśmy w naszym programie napisali: <br>
+      <br>
+                      say "Jak się nazywasz <br>
+      <br>
+                  to interpreter  mógłby podać następującą informację:<br>
+      <br>
+                  Error 6 running "Greet.rexx", line 3: Unmatched "/*" or
+quote<br>
+                  Error 6.3: Unmatched double quote (")<br>
+      <br>
+                  Błąd wystąpił w trzecim wierszu  programu i polega na tym,
+  że  zapomnieliśmy      zamknąć cudzysłów.<br>
+                  Dzięki tej informacji możemy ten błąd łatwo odszukać i
+poprawić.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index10.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index12.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

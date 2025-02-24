@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index60.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index62.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Składowe statyczne</div>
+
+<a name="W8.3"></a>
+
+<div class="notel">Składowe klasy to pola i metody.</div>
+
+<div class="ddd"><br><A NAME="EDU.skorowidz.termin składowa_klasy 61_518"></A> Pola i metody klasy mogą być statyczne
+i niestatyczne.</div>
+
+<br clear="all">
+
+<p>
+Dotąd poznaliśmy tylko jeden rodzaj składowych - składowe
+niestatyczne.<br>
+<br><A NAME="EDU.skorowidz.termin składowa_niestatyczna 61_519"></A> <b>Składowe niestatyczne</b> zawsze wiążą się z istnieniem jakiegoś obiektu
+(pola - reprezentują dane obiektu, metody muszą być wywoływane na rzecz obiektu, określają polecenia wysyłane do obiektu) <br>
+<br><A NAME="EDU.skorowidz.termin składowa_statyczna 61_520"></A> 
+<div class="def"><b>Składowe statyczne</b> (pola i metody): <br>
+<ul>
+<li>są deklarowane przy użyciu specyfikatora <b>static</b></li><li>mogą być używane nawet wtedy, gdy nie istnieje żaden obiekt klasy</li>
+</ul>
+
+</div>
+
+<br>
+
+<div class="syntax"> Do statycznych składowych możemy odwoływać się za pomocą konstrukcji:<br>
+<br>
+<div align="Center"><i><b>NazwaKlasy.NazwaSkładowej</b></i><br></div>
+
+</div>
+<br>
+<p>
+Np. w klasie System (dostarczanej jako klasa standardowa w dystrybucji Java
+SDK 2) jest statyczna metoda exit(int) kończąca działanie aplikacji i zwracająca
+podany kod powrotu (wynik działania aplikacji).<br>
+<br>
+
+Zatem, aby zakończyć działanie aplikacji z kodem powrotu 0 piszemy: <br>
+<br>
+
+<dir><p>System.exit(0);</dir>
+
+<p>
+
+Korzystaliśmy już z metod uwidaczniania dialogów. Otóż dziwne zapisy np:<br>
+<br>
+
+           <A NAME="EDU.skorowidz.termin JOptionPane.showInputDialog 61_521"></A> JOptionPane.showInputDialog("Podaj dane")<br>
+
+           <A NAME="EDU.skorowidz.termin JOptiomPane.showMessageDialog 61_522"></A> JOptiomPane.showMessageDialog(null, "Komuniakt")<br>
+<br>
+
+znajdują teraz proste wyjaśnienie: mamy oto klasę JOptionPane (również w
+standardzie Javy). Metody showInputDialog(...)  i showMessageDialog(..) sa
+w niej zdefiniowane jako metody statyczne (ze specyfikatorem static), zatem
+odwołanie do nich możliwe jest za pomocą nazwy klasy - JOptionPane.<br>
+<br>
+Z kolei metoda parseInt, służąca do przekształacania napisów na liczby całkowite
+jest statyczną metodą klasy Integer, dlatego pisaliśmy:<br>
+<br>
+           <A NAME="EDU.skorowidz.termin Integer.parseInt 61_523"></A> Integer.parseInt("123");<br>
+<br>
+
+No i najboleśniejsza zagadka (bolesna, bo jakże męczące jest pisanie<A NAME="EDU.skorowidz.termin System.out.println 61_524"></A> System.out.println(...).<br>
+
+W klasie System jest stała statyczna o nazwie out, która określa obiekt -
+konsolę (standardowe wyjście). Temu obiektowi możemy wydać polecenie println,
+co spowoduje wyprowadzenie podanego argumentu jako napisu na konsolę (println
+jest metodą z klasy PrintStream, a out oznacza obiekt-konsolę, który jest
+obiektem klasy PrintStream).<br>
+
+Co więcej, metody println(...) są w klasie PrintStream przeciążone tzn. mają
+te same nazwy ale inne typy argumentów (String, int, double itd.)<br>
+<br>
+
+Zobaczmy. Schematyczna deklaracja stalej statycznej out w klasie System wygląda tak:<br>
+<br>
+
+public class System { <br>
+
+       ... <br>
+
+       public final <b>static</b> PrintStream out; <br>
+
+       ... <br>
+
+} <br>
+<br>
+
+W klasie PrintStream (też dostępnej  jako jedna ze standardowych klas Javy)
+zdefiniowano metody println, która wypisuje do strumienia wyjściowego (PrintStream)
+podane argumenty.<br>
+<br>
+
+public class PrintStream  { <br>
+
+       ... <br>
+
+       public void println(String s) { <br>
+
+       ... <br>
+
+       } <br>
+<br>
+
+       public void println(int i) {<br>
+
+       ...<br>
+
+      }<br>
+
+} <br>
+<br>
+
+Zatem, po kolei:<br>
+<br>
+<ul>
+<li>System.out - jest statycznym polem klasy System o identyfikatorze out;
+zmienna ta zawiera referencję do standardowej konsoli - konkretnego obiektu
+klasy PrintStream </li><li>println - ozncza użycie metody na rzecz tego obiektu.</li>
+</ul>
+
+<p>W sumie: System.out.println(...). <br>
+<br>
+
+<div class="notel">Ze specyfikatorem static można deklarowac tylko zmienne, będące polami
+klasy</div>
+
+<div class="ddd"><br>Bardzo ważną kwestią jest uświadomienie sobie różnicy pomiędzy składowymi
+statycznymi i niestatycznymi.
+</div>
+
+<br clear="all">
+<p><A NAME="EDU.skorowidz.termin składowa_statyczna 61_525"></A> Można powiedzieć, że składowe statyczne stanowią właściwości całej klasy, a nie poszczególnych jej obiektów. <br><A NAME="EDU.skorowidz.termin pole_niestatyczne 61_526"></A> W przypadku pól rozróżnienie jest następujące:<br>
+<ul>
+  <li>pola niestatyczne istnieją (jako elementy) w każdym obiekcie klasy</li>
+  <li><A NAME="EDU.skorowidz.termin pole_statyczne 61_527"></A> pola statyczne - nie są zawarte w obiektach, dla każdej zmiennej statycznej
+wydzielany jest tylko jeden obszar pamięci na całą klasę<br>
+  </li>
+</ul>
+<p>Na przykład, w klasie opisującej dyski będziemy mieli pole statyczne vat
+(stawka vat) oraz pola niestatyczne model (opis modelu dysku), capacity (pojemność
+w MB), price (cenę netto). Każdy dysk będzie się różnił modelem, pojemnością
+i ceną netto (zatem te elementy będą stanowiły zawartość obiektów), natomiast
+stawka vat dla wszystkich dysków jest taka sama - nie ma więc sensu zapisywac
+jej w każdym obiekcie, będzie ona wspólną właściwością klasy, a jako zmienna
+statyczna - będzie zajmowac tylko 8 bajtów na całą klasę, niezależnie od
+tego czy w programie stworzymy 1 czy 10000 obiektów - dysków.<br>
+
+<pre>
+public class Disk  {
+
+  private <b>static </b>double vat;
+
+  private String model;
+  private int capacity;
+  private double price;
+
+  public Disk(String m, int c, double p) {
+    model = m;
+    capacity = c;
+    price = p;
+  }
+
+  public String getDescription() {
+    return model + " ," + capacity + " MB";
+  }
+
+  public double getBruttoPrice() {
+    return price * ( 1 +  vat/100 );
+  }
+
+  public <b>static</b> void setVat(double v) {
+    vat = v;
+  }
+
+}
+
+class Test {
+
+  public static void main(String[] args) {
+    Disk.setVat(22.0);
+    Disk d1 = new Disk("IBM598", 6040, 430.0);
+    System.out.println(d1.getDescription() + " - cena "
+                       + d1.getBruttoPrice() + " zł");
+  }
+
+</pre>
+
+<div class="listing33r"><br>IBM598 ,6040 MB - cena 524.6 zł<br><br>
+</div>
+
+<div class="ddd">
+<br>
+Zwróćmy uwagę, że metodę setVat wywołaliśmy
+przed stworzeniem jakiegokolwiek obiektu i pole vat uzyskalo wartość, mimo,
+że żaden obiekt nie istniał.
+</div>
+
+<br clear="all">
+<br><A NAME="EDU.skorowidz.termin metoda statyczna 61_528"></A> 
+
+<div class="important">Ze statycznych metod nie wolno odwoływać się do niestatycznych składowych
+klasy (obiekt może nie istnieć). Możliwe są natomiast odwołania do innych
+statycznych składowych, np. innych metod statycznych.</div>
+<br>
+<p><a href="javascript:popUp('dodatki/W8Prb3.htm',50,50)"><img src="images/Problem.jpg" alt="Problem" width="137" hspace="15" height="84" border="1" align="Right"></a>Zauważmy też, że<A NAME="EDU.skorowidz.termin metoda niestatyczna 61_529"></A> z metod niestatycznych możemy
+w sposób naturalny odwoływac się do składowych (pól i metod) statycznych,
+co widac wyraźnie w metodzie getBruttoPrice().</p>
+<br clear="all"><p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index60.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index62.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

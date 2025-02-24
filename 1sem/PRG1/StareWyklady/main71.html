@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index70.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index72.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><div class="tytulpunktu">2. Operatory i wyrażenia porównania</div>
+
+<a name="W9.2"></a>
+
+<p>W wielu instrukcjach sterujących będą występować<A NAME="EDU.skorowidz.termin warunek 71_568"></A> <b>warunki </b>podane jako<A NAME="EDU.skorowidz.termin wyrażenie_relacyjne 71_569"></A> wyrażenie relacyjne, konstruowane z<A NAME="EDU.skorowidz.termin operator_relacyjny 71_570"></A> zastosowaniem operatorów relacyjnych oraz operatorów równości - nierówności.<br>
+
+Np. w nawiasach instrukcji if  występuje <b>warunek</b>, który może być takim wyrażeniem:<br>
+<br>
+
+if (a &gt; b) ...<br>
+<br>
+
+Po części już omawialiśmy te operatory. Warto jednak usystematyzować podane wcześniej informacje oraz uzupełnić je o nowe fakty.<br>
+<br>
+
+Operatory relacyjne (&lt;, &lt;=, &gt;, &gt;=):<br>
+<ul>
+<li>są operatorami dwuargumentowymi</li><li>ich argumentami mogą być <b>wyłącznie</b> wyrażenia typów numerycznych (byte, char, short, int, long, float, double)</li><li>wyrażenia relacyjne (konstruowane z pomocą tych operatorów) dają <b>zawsze</b> w wyniku wartości typu <b>boolean</b> (true lub false)<br></li>
+</ul>
+
+<table cellpadding="2" cellspacing="2" border="1" width="100%">
+<tbody><tr><td valign="Middle" rowspan="1" colspan="2" align="Center"><b>Operatory relacyjne</b><br></td></tr><tr><td valign="Middle" align="Center">Wyrażenie<br>
+(a i b - dowolne wyrażenia, <br>
+ale <b>koniecznie</b><br>
+typu numerycznego)  <br></td><td valign="Middle" align="Center">Wynik<br></td></tr><tr><td valign="Middle" align="Center">a &gt; b<br></td><td valign="Top">true jeśli wartość a jest większa od b<br>
+false w przeciwnym razie<br></td></tr><tr><td valign="Middle" align="Center">a &gt;= b<br></td><td valign="Top">true jeśli wartość a jest większa lub równa b<br>
+
+false w przeciwnym razie<br></td></tr><tr><td valign="Middle" align="Center">a &lt; b<br></td><td valign="Top">true jeśli wartość a jest mniejsza od b<br>
+
+false w przeciwnym razie<br></td></tr><tr><td valign="Middle" align="Center">a &lt;= b<br></td><td valign="Top">true jeśli wartość a jest mniejsza lub równa b<br>
+
+
+false w przeciwnym razie<br></td></tr></tbody>
+</table>
+
+<br>
+<p>
+
+Przykłady: <br>
+<br>
+
+<table cellpadding="2" cellspacing="2" border="1" width="100%">
+<tbody><tr><td valign="Top">int a =1, b = 3;<br>
+if (a &gt; b) System.out.println("Większe");<br>
+else System.out.println("Mniejsze");<br></td><td valign="Top">Wyprowadzi napis:<br>
+Mniejsze<br></td></tr><tr><td valign="Top">int a =1, b = 3;<br>
+
+if (a + 1 &gt; b/3) System.out.println("Większe");<br>
+
+else System.out.println("Mniejsze");<br><br>
+uwaga: <font color="#ff0000">priorytet operatorów relacyjnych jest niższy od priorytetu operatorów arytmetycznych</font> - dzięki temu nie musimy pisać:<br>
+if ( (a + 1) &gt; (b/3) ) ...<br></td><td valign="Top">Wyprowadzi napis:<br>
+
+Większe<br></td></tr><tr><td valign="Top">int a = 1, b = 3;<br>
+boolean wynik1 = a &lt;= b;<br>
+boolean wynik2 = 1 &gt;= a;<br>
+boolean wynik3 = a &lt; 1;<br><br>
+uwaga: <font color="#ff0000">priorytet operatorów relacyjnych jest wyższy od priorytetu operatora przypisania</font> - dzięki temu nie musimy pisać:<br>
+boolean wynik = (a &lt;= b);<br></td><td valign="Top">Zmienne będą miały następujące wartości:<br>
+wynik1 == true<br>
+wynik2 == true<br>
+wynik3 == false<br></td></tr></tbody>
+</table>
+
+<br>
+<p>
+<a href="javascript:popUp('dodatki/W9Prb1.htm',50,50)"><img src="images/Problem.jpg" alt="Problem" hspace="15" width="137" height="84" border="1" align="Right"></a>
+</p>
+<br clear="all">
+<br>
+
+<div class="notel33">
+Częstym błędem jest stosowanie zamiast operatora równości == znaku =.
+Należy się go wystrzegać, choć zwykle kompilator wykryje ten błąd i zwróci
+nam na niego uwagę.
+</div>
+
+<div class="ddd"><br>
+Od grupy operatorów relacyjnych odróżnia się<A NAME="EDU.skorowidz.termin operator równości 71_571"></A> <b>dwuargumentowe operatory równości (==) i<A NAME="EDU.skorowidz.termin operator nierówności 71_572"></A> nierówności (!=)</b> - z dwóch powodów:
+</div>
+
+<br clear="all">
+
+<ul>
+<li>mają one niższy priorytet niż operatory relacyjne</li>
+
+<li>ich argumentami mogą być wartości <b>wszystkich</b> typów (numerycznych, logicznych, referencyjnych), pod warunkiem jednak, że:</li>
+
+<ul><li>jeżeli jeden z argumentów jest typu numerycznego - to drugi też musi być typu numerycznego, </li>
+
+<li>jeżeli jeden z argumentów jest typu boolean - to i drugi musi być tego typu, </li>
+
+<li>jeżeli jeden z argumentów jest typu referencyjnego, to drugi musi
+być typu referencyjnego dającego się przekształcić do typu pierwszego albo
+literałem <b>null</b> (o przekształceniach typów  będziemy mówić później;
+na razie możemy przyjąć, że obowiązuje nas ograniczenie porównywania na równość
+- nierówność tych samych typow referencyjnych np. referencji typu String
+lub referencji typu Para)<br></li>
+
+</ul>
+</ul>
+
+<p>Konstruowane za pomocą operatorów równości-nierówności wyrażenia mają zawsze wynik typu <b>boolean</b>.<br>
+<br>
+
+<table cellpadding="2" cellspacing="2" border="1" width="100%">
+<tbody><tr><td valign="Middle" rowspan="1" colspan="3" align="Center"><b>Operatory równości - nierówności</b><br></td></tr><tr><td valign="Middle" align="Center"><b>Wyrażenia<br></b></td><td valign="Middle" align="Center"><b>a == b<br></b></td><td valign="Middle" align="Center"><b>a != b</b><br></td></tr><tr><td valign="Top">a i b dowolnego typu numerycznego<br></td><td valign="Top"><b>true</b> jeśli wartość a jest równa wartości b<br><b>false</b> w przeciwnym razie<br></td><td valign="Top"><b>true</b> jeśl
+i wartość a nie jest równa wartości b<br><b>false</b> w przeciwnym razie<br></td></tr><tr><td valign="Top">a  i b typu boolean<br></td><td valign="Top"><b>true</b> jeśli a i b oba mają wartość true lub wartość false<br><b>false</b> w przeciwnym razie<br></td><td valign="Top"><b>true</b> jeśli a jest true, b false lub odwrotnie<br><b>false</b>, jeśli a i b są oba true lub oba false<br></td></tr><tr><td valign="Top">a i b typu referencyjnego<br></td><td valign="Top"><b>true</b> jeśli obie referencje wskazują
+ten sam obiekt lub jeśli obie mają wartość null<br><b>false</b> jeśli referencje odnoszą się do różnych obiektów, lub jedna z nich ma wartość null, a druga - nie<br></td><td valign="Top"><b>true</b> jeśli obie referencje odnoszą się do innych obiektów lub jeśli jedna z nich jest null, a druga nie<br><b>false</b> jeśli obie referencje wskazują ten sam obiekt lub jeśli obie mają wartość null<br></td></tr></tbody>
+</table>
+
+<br>
+<p>
+
+Przykład:<br>
+<br>
+<pre>
+int a = 2, b = a + 1;
+if ( a == b) System.out.println("tak");
+else System.out.println("nie");
+
+if ( a != --b) System.out.println("tak");   // 2
+else System.out.println("nie");
+
+int c = 4;
+if ( a &lt; b + 1 == b  &lt; c) System.out.println("tak");  //3
+else System.out.println("tak");
+
+</pre>
+
+<div class="listing25r">nie<br>
+
+nie<br>
+
+tak</div>
+
+<div class="ddd"><br>
+Ten fragment kodu wypisze na konsoli dane podane obok.
+</div>
+<br clear="all">
+
+<p>
+Uwagi: <br>
+
+<ol>
+<li>przedrostkowa forma operatora -- zapewnia, że wartość b w przykładzie
+2 będzie zmieniona przed użyciem w wyrażeniu porównania na nierówność; </li><li>
+w przykładzie 3 korzystamy z tego, że priorytet operatora == jest niższy od
+priorytetu operatorów relacyjnych, a te z kolei są niższe od priorytetów operatorów
+arytmetycznych (+); na równość porównywane są zatem dwie wartości typu boolean,
+a ponieważ obie są true, to wynik porównania też jest true <br></li>
+</ol>
+
+<p>
+<a href="javascript:popUp('dodatki/W9Prb2.htm', 75,75)"><img src="images/Problem.jpg" alt="Problem" width="137" height="84" border="1" align="Right"></a>
+</p>
+<br clear="all">
+<br>
+<p>
+Jednak - w zasadzie nie należy zapisywać w taki sposób jak w przykładzie
+oznaczonym // 3 złożonych wyrażeń. Raczej warto użyć nawiasów, które zwiększą
+czytelność kodu.<br>
+
+Zresztą porównywanie wartości boolowskich jest mało użyteczne, bo - w większości
+przypadków - zamiast niego należy stosować logiczne operatory koniunkcji
+czy alternatywy. <br>
+<br><A NAME="EDU.skorowidz.termin referencja porównywanie 71_573"></A> Przykład porównywania referencji:<br>
+<br>
+
+// Klasa Para - to znana nam już klasa par liczb całkowitych<br>
+
+Para p1 = new Para(1,1);<br>
+
+Para p2 = new Para(1,1);<br>
+
+Para p3 = p1; <br>
+<br>
+
+p1 == p2  // false, mimo że składniki par są takie same<br>
+
+p1 == p3  // true, bo wskazują na ten sam obiekt<br>
+<br>
+
+String s1 = "1,1";<br>
+
+p1 == s1  // bląd w kompilacji, bo p1 jest typu Para, a s1 typu String<br>
+<br>
+
+String s2 = "1," + 1;<br>
+
+s1 == s2         // false, bo są to referencje do różnych obiektów<br>
+
+s1 == null       // false, bo s1 wskazuje na jakiś obiekt<br>
+
+s1.equals(s2)   // true, bo zawartość łańcuchów znakowych jest taka sama.<br>
+<br>
+
+<div class="important">
+Przypomnienie: porównywanie zawartości obiektów (na równość - nierówność)
+odbywa się zawsze za pomocą metody equals, zdefiniowanej w klasie obiektów.</div>
+
+<br>
+<p>
+
+Uwaga: W przeciwieństwie do klasy String,  w klasie Para nie zdefiniowano
+metody equals. Jej użycie nie da zatem spodziewanych efektów. Tego w jaki
+sposób definiować metodę equals we własnych klasach - dowiemy się w przyszłym
+semestrze, wymaga to bowiem nieco bardziej zaawansowanej wiedzy "obiektowej",
+m.in. rozumienia pojęcia polimorfizmu.<br>
+<br>
+
+Na koniec omawiania porównań warto zwrócić uwagę na<A NAME="EDU.skorowidz.termin liczba_rzeczywista 71_574"></A> <b>liczby rzeczywiste</b>. Otóż wszystkie porównania są zawsze <b>dokładne</b>. Ale reprezentacja liczb rzeczywistych w komputerze <b>nie jest dokładna</b>. Dlatego przy porównaniu liczb rzeczywistych powinniśmy sprawdzać nie tyle
+czy są one dokładnie równe, ale czy ich wartości są dostatecznie sobie bliskie.
+Więcej o tym w wykładzie o liczbach.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index70.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index72.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

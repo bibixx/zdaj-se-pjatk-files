@@ -1,0 +1,344 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index107.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index109.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 3"></A><div class="tytulpunktu">3. Kilka słów o rekurencji</div>
+
+<a name="W14.3"></a>
+
+<p><A NAME="EDU.skorowidz.termin rekurencja 108_749"></A> 
+Z ciała (kodu) metody  możemy wywołać ją samą. Takie wywołanie nazywa się wywołaniem rekurencyjnym.<br>
+<br>
+
+<div class="def">Rekurencyjne wywołanie metody polega na wywołaniu tej metody z jej własnego ciała</div>
+
+<br>
+<p>
+Pojęcie rekurencji będzie bardziej obszernie, szczegółowo i w ciekawszych zastosowaniach omawiane w trakcie zajęć z przedmiotu
+"Algorytmy i struktury danych". Tutaj ograniczymy się tylko kilkoma uwagami,
+tak by można było czasem, na intuicyjnym poziomie, zastosowac odwołania rekurencyjne.<br>
+<br>
+Rozpatrzmy najprostsze przykłady.<br>
+<br>
+
+<pre>
+public class Recurs {
+
+  public static void show1(int i) {
+    System.out.println("show1 " + i);
+    if (i &gt; 10) return;
+    show1(i+1);
+  }
+
+  public static void main(String[] args) {
+    show1(1);
+ }
+
+}
+</pre>
+
+<br>
+
+<div class="listing33r">show1 1<br>
+show1 2<br>
+show1 3<br>
+show1 4<br>
+show1 5<br>
+show1 6<br>
+show1 7<br>
+show1 8<br>
+show1 9<br>
+show1 10<br>
+show1 11</div>
+
+<div class="ddd"><br>
+Tutaj sprawa jest dość prosta i do przewidzenia. Wywołanie show1(1)
+z metody main uruchamia łańcuch wywołań rekurencyjnych. Każde wywołanie wyprowadza
+przekazany argument, po czym sprawdzany jest warunek (i&gt;10), i dopóki 
+jest on nieprawdziwy ponownie wywoływana jest metoda show1 z powiększoną
+o 1 wartością argumentu. Np. po wypisaniu 1 (pierwsze wywołanie) wywoływana
+jest metoda show1 z argumentem 2 = 1+1, ten argument jest wypisywany, wywoływana
+jest metoda show1 z argumenten 3 (= 2+1),  ten jest wypisywany itd. aż w
+"wewnętrznym wywołaniu" show1 argument nie osiągnie wartości 11. Wtedy -
+po jej wypisaniu - warunek okaże się prawdziwy i dopiero teraz sterowanie
+zwrócone zostanie do metody main.
+</div>
+<br clear="all">
+
+<br><A NAME="EDU.skorowidz.termin rekurencja wywołania 108_750"></A> 
+<div class="important">Przy wywołaniach rekurencyjnych należy zapewnić warunek, którego spełnienie
+zakończy<A NAME="EDU.skorowidz.termin rekurencja łańcuch 108_751"></A> łańcuch rekurencji i spowoduje zwrócenie sterowania do miejsca,
+w którym po raz pierwszy wywołano metodę rekurencyjną</div>
+
+<br>
+<p>
+Zobaczmy drugi fragment kodu. Tym razem wywołamy z metody main - za pomocą odwołania show2(1) - następującą metodę.<br>
+<br>
+
+<pre>
+  public static void show2(int i) {
+    if (i &gt; 10) return;
+    show2(i+1);
+    System.out.println("show2 " + i);
+  }
+
+</pre>
+
+<div class="listing33r">
+show2 10<br>
+show2 9<br>
+show2 8<br>
+show2 7<br>
+show2 6<br>
+show2 5<br>
+show2 4<br>
+show2 3<br>
+show2 2<br>
+show2 1<br>
+</div>
+
+<div class="ddd"><br>Wynik działania tej metody może wydać się nieco zaskakujący.
+</div>
+<br clear="all">
+
+<p>
+Co się dzieje? Wywołanie show2(1) przekazuje jako argument 1, i z wnętrza
+show2 następuje wywołanie show2 z argumentem 2 (1+1). W tym momecie wykonanie
+dalszego kodu metody zostaje wstrzymane. Wykonanie zaczyna się od początku!
+Zaczyna działać jakby "nowy egzemplatrza" metody show2. Tym razem z nowym
+argumentem (2). I tak dalej. Gdy parametr <i><b>i</b></i> osiągnie wartość
+11 powinna zadziałać instrukcja return. Ale najpierw muszą być "dokończone"
+wszystkie poprzednie, "wstrzymane",  wykonania metody show2. Ostatnie było
+z argumentem 10. Zatem wyprowadzona zostanie liczba 10 i wykonanie "tego
+egzemplarza" metody zostanie zakończone. Poprzedzało go wywołanie show2 z
+argumentem 9 - zostanie więc dokończone itd., aż dojdziemy do pierwszego
+wywołania show2 (z argumentem 1). Po zakończeniu wykonania metody z tym argumentem
+zostanie wykonana instrukcja return i sterowanie wróci do main.<br>
+<br>
+Zauważmy, że w pierwszym przypadku mieliśmy tak naprawdę do czynienia z takim
+samym wstrzymywaniem wykonania kodu metody show1 inicjowanego przez kolejne
+wywołania rekurencyjne, tyle, że nie mogliśmy tego dostrzec, ponieważ wstrzymywanie
+następowało na ostatniej instrukcji metody, już po wyprowadzeniu liczby.<br>
+<br>
+Oczywiście metody rekurencyjne mogą zwracać wartości.<br>
+Zobaczmy, jak np. można rekurencyjnie zapisać zadanie sumowania dodatnich liczb całkowitych.<br>
+W istocie rekurencja oznacza "zdefiniowanie czegoś przez to samo coś".<br>
+Weźmy sumę 1 + 2 + 3 + 4 + 5.<br>
+Możemy powiedzieć tak: <br>
+suma(1..5) = 5 + suma(1..4) <br>
+suma(1..4) = 4 + suma(1..3)<br>
+<br>
+Definiujemy sumę przez sumę!<br>
+<br>
+Ogólnie, suma liczb od 1 do n  równa jest n + suma(1..n-1)<br>
+Zatem jeśli nasza metoda sumowania otrzymuje argument n (oznaczający, że
+mamy zsumować liczby od 1 do n), to moglibyśmy spróbować zapisać:<br>
+<br>
+int sum(int n) {<br>
+ return n + sum(n-1);<br>
+}<br>
+<br><A NAME="EDU.skorowidz.termin rekurencja nieskończona 108_752"></A> Łatwo jednak zauważyć, że wpadamy tu w "nieskończoną" rekurencję. Metoda <i><b>sum</b></i>
+  będzie wywoływana teoretycznie bez końca ze swojego wnętrza (praktycznym
+ograniczeniem będzie pamięć komputera - program skończy działanie z komunkatem
+"Stack overflow").<br>
+<br>
+Musimy zatem zapewnić jakiś<A NAME="EDU.skorowidz.termin warunek_zakończenia_wywołań_rekurencyjnych 108_753"></A> warunek zakończenia wywołań rekurencyjnych,<br>
+Uwzględnić jakiś szczególny przypadek wartości przekazanego argumentu, który przerwie nieskończone rekurencyjne wywołania.<br>
+W przypadku sumowania liczb od 1 do n, takim szczególnym przypadkiem jest wartość n = 1 (zwracamy wtedy 1).<br>
+<br>
+
+<pre>
+public class Recurs {
+
+  public static int sum(int n) {
+    if (n == 1) return 1;
+    else return n + sum(n-1);
+  }
+
+  public static void main(String[] args) {
+    System.out.println(sum(100));
+  }
+
+}
+</pre>
+
+<p>
+Wyprowadzi: 5050 (Gauss policzył to szybciej!) <br>
+<br>
+<b><font color="#ff6600">Proszę dokładnie przeanalizować działanie tej metody dla n = 5</font></b>
+, pamiętając, że kolejne zwroty wyników rekurencyjnego wywołania sum(...)
+są wstrzymywane dopóki n nie osiągnie wartości 1 i zauważając, że odtwarzanie
+tych wyników następuje w else, po kolei: 1, 2 + 1, 3 + (2 + 1), 4 + (3 +
+2 + 1), 5 + (4 + 3 + 2 +1) i ta ostatnia wartość jest właśnie zwracana do
+punktu wywołania sum(..) w metodzie main.<br>
+<br>
+Można się domyślić (choćby z przykładu sumowania), że rekurencyjne wywołania funkcji można zastąpić pętlami iteracyjnymi.<br><br><A NAME="EDU.skorowidz.termin rekurencja istota 108_754"></A> 
+<div class="notec">Bardzo często rekurencja będzie jednak prostsza do oprogramowania, bowiem
+odzwierciedla ona bezpośrednio pewien sposób rozumowania: nie wiemy jak rozwiązać
+cały problem, na którego rozwiązanie  składa się powiedzmy n kroków, ale
+wiemy jak wykonać jeden krok, gdy już n-1 poprzednich zostało wykonane. I
+to właśnie możemy (dość prosto) zapisać w postaci rekurencyjnej.</div>
+
+<br>
+<p><A NAME="EDU.skorowidz.termin rekurencja efektywność 108_755"></A> Trzeba jednak  też wiedzieć o tym, że nie zawsze podejście rekurencyjne prowadzi
+do efektywnych algorytmów; czasami iteracyjne wersje rozwiązania jakichś
+problemów są wielokrotnie szybsze od rekurencyjnych, a nawet - przy ograniczeniach
+na pamięć operacyjną i moc procesora - jedynie możliwe. Sztandarowym przykładem
+jest tu rekursywne oprogramowanie wyliczenia liczb ciągu Fibonacciego.<br><br><A NAME="EDU.skorowidz.termin ciąg_Fibonacciego 108_756"></A> Ciąg Fibonacciego dany jest za pomocą następującego równania, okreslającego wartości F<sub>n</sub> kolejnych liczb ciagu (dla n = 0, 1, 2, ...):<br>
+<br>F<sub>0</sub>   =  0,<br>
+F<sub>1</sub>   =  1,<br>
+F<sub>n</sub>  =   F<sub>n-2</sub>  + F<sub>n-1</sub>, dla n &gt; 1.<br>
+<br>
+Czyli jest to ciąg liczb zaczynający się od liczb 0 i 1, przy czym każda
+następna liczba ciągu (poczynając od trzeciej) jest sumą dwóch poprzednich
+liczb ciągu:
+
+<pre>
+0  1  1  2  3  5  8 13 21 34 55 89 144 233 377 610 987 ...
+</pre>
+
+<p>Liczby Fibonacciego mają niezwykle ciekawe właściwości. Nader często ciągi
+takich liczb obserwowane są w zjawiskach naturalnych, mają też intrygujące
+właściwości matematyczne. Więcej na ten temat zobacz na <a href="http://www.mcs.surrey.ac.uk/Personal/R.Knott/Fibonacci/fib.html">stronie Rona Knotta z Uniwersytetu w Surrey</a>. <br>
+<br>
+Jak widać. ciąg Fibonanciego jest ciagiem rekurencyjnym, zatem wyliczenie
+jego kolejnych wyrazów w naturalny sposob można zapisać w postaci rekurencyjnej.<br>
+<br>
+
+<pre>
+  int fib(int n) {
+    if (n &lt; 2) return n;
+    else return fib(n-1) + fib(n-2);
+  }
+</pre>
+
+<p>
+Jednak wraz ze zwiększaniem wartości <i><b>n</b></i> czas obliczeń za pomocą tej metody rośnie katastrofalnie.<br>
+Dzieje się tak dlatego, że katastrofalnie rośnie liczba rekurencyjnych wywołań metody fib.<br>
+Większą część czasu zajmuje obliczanie już policzonych wartości!<br>
+Zobaczmy.<br>
+Używając zmodyfikowanej postaci metody fib:<br>
+
+<pre>
+  int fib(int n) {
+    System.out.println("Wywołanie fib z argumentem " + n);
+    int wynik = 0;
+    if (n &lt; 2) wynik = n;
+    else wynik = fib(n-1) + fib(n-2);
+    System.out.println("Zwrot wyniku: " + wynik);
+    return wynik;
+  }
+</pre>
+
+<p>
+i analizując wydruk po wywołaniu tej metody z jakimś argumentem (np. 8) -
+zobaczymy, że wielokrotnie powtarzają się rekurencyjne wywołania metody fib
+z tymi samymi argumentami i wielokrotnie powtarzają się zwroty tych samych wyników.<br>
+<font color="#ff0000"><b><br>
+Proszę samodzielnie zbudować pełny program, który pozwala na taką analizę
+(wykorzystać podaną wyżej metodę oraz  przekierowanie standardowego wyjścia
+do pliku).</b><br>
+</font><br>
+Możemy też automatycznie policzyć liczbę wywołań z różnymi argumentami za pomocą np. takiego programu:<br>
+
+<pre>
+public class ShowFibRec {
+
+  int[] calls;
+
+  ShowFibRec(int n) {
+    calls = new int[n+1];
+    fib(n);
+    for(int i=0; i &lt;= n; i++)
+      System.out.println("Liczba wywołań fib z argumentem " + i
+                          + " " + calls[i]);
+  }
+
+  int fib(int n) {
+    calls[n]++;
+    if (n &lt; 2) return n;
+    else return fib(n-1) + fib(n-2);
+  }
+
+  public static void main(String[] args) {
+    int n = Integer.parseInt(args[0]);
+    new ShowFibRec(n);
+  }
+
+}
+</pre>
+
+<p>
+Po kompilacji, możemy porównać liczbę "powtórnych" wywołań dla różnych n podawanych jako argument wywołania, np. 8 i 20.<br>
+Uzyskamy następujące wyniki:<br><br>
+
+<table cellpadding="6" cellspacing="2" border="1" width="100%">
+  <tbody>
+    <tr>
+      <td valign="Top">Dla n = 8<br>
+      </td>
+      <td valign="Top">Dla n = 20<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="Top">Liczba wywołań fib z argumentem 0 13<br>
+Liczba wywołań fib z argumentem 1 21<br>
+Liczba wywołań fib z argumentem 2 13<br>
+Liczba wywołań fib z argumentem 3 8<br>
+Liczba wywołań fib z argumentem 4 5<br>
+Liczba wywołań fib z argumentem 5 3<br>
+Liczba wywołań fib z argumentem 6 2<br>
+Liczba wywołań fib z argumentem 7 1<br>
+Liczba wywołań fib z argumentem 8 1<br>
+      <br>
+      </td>
+      <td valign="Top">Liczba wywołań fib z argumentem 0 4181<br>
+Liczba wywołań fib z argumentem 1 6765<br>
+Liczba wywołań fib z argumentem 2 4181<br>
+Liczba wywołań fib z argumentem 3 2584<br>
+Liczba wywołań fib z argumentem 4 1597<br>
+Liczba wywołań fib z argumentem 5 987<br>
+Liczba wywołań fib z argumentem 6 610<br>
+Liczba wywołań fib z argumentem 7 377<br>
+Liczba wywołań fib z argumentem 8 233<br>
+Liczba wywołań fib z argumentem 9 144<br>
+Liczba wywołań fib z argumentem 10 89<br>
+Liczba wywołań fib z argumentem 11 55<br>
+Liczba wywołań fib z argumentem 12 34<br>
+Liczba wywołań fib z argumentem 13 21<br>
+Liczba wywołań fib z argumentem 14 13<br>
+Liczba wywołań fib z argumentem 15 8<br>
+Liczba wywołań fib z argumentem 16 5<br>
+Liczba wywołań fib z argumentem 17 3<br>
+Liczba wywołań fib z argumentem 18 2<br>
+Liczba wywołań fib z argumentem 19 1<br>
+Liczba wywołań fib z argumentem 20 1<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br><p>
+Ze względu na konstrukcję metody rekurencyjnej, liczba wielokrotnych wywołań metody z tym samym argumentem <i><b>i</b></i> , dla i =1,2...n, jest liczbą Fibonacciego: <b>F(n-i+1)</b> ! Zatem przy dużych n bardzo dużo czasu tracone jest na powtarzanie tych samych wywołań i zwracanie tych samych wyników.<br>
+<br>
+<b><font color="#ff0000">Zadanie do samodzielnego wykonania</font></b><br><br>
+
+Napisać iteracyjną wersję metody obliczającej wyrazy ciągu Fibonacciego.
+Za pomocą znanej nam już klasy QTimer porównać czas obliczeń wersji rekursywnej
+i iteracyjnej.<br>
+Po napisaniu programu porównać go z programem FibonTest.java znajdującym się w katalogu samples\Fibonacci14.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index107.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index109.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index12.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 4"></A><div class="tytulpunktu">4. Operacje na danych (operatory i wyrażenia)</div>
+
+<a name="W2.4"></a>
+
+<p><A NAME="EDU.skorowidz.termin operacja_na_danych 13_119"></A> Na danych programu (zmiennych i literałach)  możemy przeprowadzać
+  operacje. Są różne rodzaje tych operacji m.in.:<br>
+
+<ul>
+        <li><A NAME="EDU.skorowidz.termin operacja arytmetyczna 13_120"></A> arytmetyczne (np. dodawanie, odejmowanie, mnożenie, dzielenie,
+  dzielenie   calkowitoliczbowe, uzyskanie reszty z dzielenia)</li>
+        <li><A NAME="EDU.skorowidz.termin operacja przypisania 13_121"></A> przypisania (ustalenia wartości zmiennej)<br>
+        </li>
+        <li><A NAME="EDU.skorowidz.termin operacja relacyjna 13_122"></A> relacyjne (porównanie: czy coś jest równe, nierówne, większe,
+mniejsze      od czegoś innego)</li>
+        <li><A NAME="EDU.skorowidz.termin operacja logiczna 13_123"></A> logiczne (obliczanie wartości logicznych)</li>
+        <li><A NAME="EDU.skorowidz.termin konkatenacja_łańcuchów_znakowych 13_124"></A> konkatenacja łańcuchów znakowych (łączenie napisów)</li>
+
+</ul>
+
+<p>Operacje wyrażamy za pomocą operatorów języka.<br>
+      <br>
+
+<div class="def"><A NAME="EDU.skorowidz.termin operator 13_125"></A> Operator - to specjalny symbol języka służący do przeprowadzania
+   operacji    na danych
+</div><br>
+
+<p>Każdy język ma inny zestaw operatorów (symboli operacji). Dość
+ powszechne (takie same w większości języków) operatory pokazuje poniższa
+ tabela<br>
+      <br>
+
+<table border="1" width="100%" cellpadding="2" cellspacing="2" bgcolor="#cccccc">
+        <tbody>
+          <tr>
+            <td><b>*  </b></td>
+            <td><b>  mnożenie</b></td>
+          </tr>
+          <tr>
+            <td><b>/   </b></td>
+            <td><b> dzielenie</b></td>
+          </tr>
+          <tr>
+            <td><b>+  </b></td>
+            <td><b>  dodawanie</b></td>
+          </tr>
+          <tr>
+            <td><b>-   </b></td>
+            <td><b> odejmowanie</b></td>
+          </tr>
+          <tr>
+            <td><b>&lt;  </b></td>
+            <td><b>  mniejsze</b></td>
+          </tr>
+          <tr>
+            <td><b>&lt;=</b></td>
+            <td><b>  mniejsze lub równe</b></td>
+          </tr>
+          <tr>
+            <td><b>&gt;=</b></td>
+            <td><b>   większe lub rowne</b></td>
+          </tr>
+          <tr>
+            <td><b>&gt;  </b></td>
+            <td><b>  większe</b></td>
+          </tr>
+          <tr>
+            <td><b>=  </b></td>
+            <td><b>   przypisanie</b></td>
+          </tr>
+
+  </tbody>
+</table>
+      <br>
+<p>O wartościach biorących udział w operacji (łączonych przez operator)
+    mówimy   jako o<A NAME="EDU.skorowidz.termin argument_operatora 13_126"></A> <b>argumentach operatora</b>.<br>
+      <br>
+            Np. operacja  dodawania do zmiennej x wartości 1<br>
+      <br>
+
+<table cellpadding="2" cellspacing="2" border="1" width="100%" bgcolor="#ffffcc">
+        <tbody>
+          <tr>
+            <td valign="Top">
+      <div align="Center"><b>Lewy argument</b></div>
+            </td>
+            <td valign="Top">
+      <div align="Center"><b>Operator</b></div>
+            </td>
+            <td valign="Top">
+      <div align="Center"><b>Prawy argument</b></div>
+            </td>
+          </tr>
+          <tr>
+            <td valign="Top">
+      <div align="Center">x</div>
+            </td>
+            <td valign="Top">
+      <div align="Center">+</div>
+            </td>
+            <td valign="Top">
+      <div align="Center">1
+            </div>
+            </td>
+          </tr>
+
+  </tbody>
+</table>
+      <br>
+
+<p>Ze zmiennych, literałów i wywołań funkcji, za pomocą operatorów
+ i  nawiasów,    tworzymy<A NAME="EDU.skorowidz.termin wyrażenie 13_127"></A> <b>wyrażenia</b>. <br>
+             W trakcie działania programu wyrażenia<A NAME="EDU.skorowidz.termin opracowanie_wyrażeń 13_128"></A> są<A NAME="EDU.skorowidz.termin wyrażenie opracowanie 13_129"></A> "opracowywane" tzn.
+ określana      jest ich wartość (każde wyrażenie ma jakąś wartość).<br>
+      <br>
+             Załómy np., że zmienna x równa jest 100, zmienna a  ma wartość
+ 2<br><br>
+
+<table border="1" width="100%" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td>
+      <div align="Center">Wyrażenie</div>
+            </td>
+            <td>
+      <div align="Center"> Wartość wyrażenia</div>
+            </td>
+          </tr>
+          <tr>
+            <td>x</td>
+            <td> wartość zmiennej x czyli 100</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td> wartość literału 1 czyli 1</td>
+          </tr>
+          <tr>
+            <td>x + 1</td>
+            <td> 101</td>
+          </tr>
+          <tr>
+            <td>a * 2 + 3</td>
+            <td> 7</td>
+          </tr>
+
+  </tbody>
+</table>
+      <br>
+      <br>
+
+<div class="notel">Używajmy nawiasów dla określenia kolejności zastosowania operatorow
+     zawsze  wtedy, gdy nie jesteśmy calkowicie pewni co do priorytetów operatorów
+</div>
+
+<div class="ddd">
+<br><A NAME="EDU.skorowidz.termin priorytet_operatora 13_130"></A> Zestaw  operatorów charakteryzuje się priorytetami.<A NAME="EDU.skorowidz.termin operator priorytet 13_131"></A> <b>Priorytety</b>
+   mówią    o tym  w jakiej kolejności stosowane są operatory przy opracowywaniu
+ wyrażeń.    Te  operatory, które mają wyższy prirytet stosowane są najpiew.
+ Kolejność    stosowania  operatorow przy opracowaniu wyrażenia możemy zmienić
+ używając    nawiasów.
+</div>
+<br clear="all">
+<br>
+<p>Np. operator * ma wyższy priorytet niż operator + dlatego opracowanie
+    wyrażenia  a*2 +3 daje w yniku 7 (przy a = 2).  Jeśli chcemy zmienić
+kolejność     opracowania  wyrażenia - użyjmy nawiasów: <br>
+      <br>
+                a*(2+3)<br>
+      <br>
+            To wyrażenie opracowywane jest w następujący sposób. Operator
+*  ma  dwa   argumenty  lewym jest wyrażenie a (obliczana jest jego wartość;
+ rowna  jest   2), prawym  - wyrażenie 2+3 (obliczana jest jego wartość; równa
+ się  5). Wartość  lewego  argumentu mnożona jest teraz przez wartość prawego
+ argumentu.  W wyniku  otrzymamy  10.<br>
+      <br>
+      <br><A NAME="EDU.skorowidz.termin przypisanie 13_132"></A> Ważnym operatorem jest<A NAME="EDU.skorowidz.termin operator_przypisania 13_133"></A> <b>operator przypisania</b>. Pozwala on
+ ustalać     wartości  zmiennych. Np. <br>
+			
+<p>
+     <b>cBazowa = 500;</b>                           /* zmiennej
+  cBazowa nadajemy wartość    500 */<br>
+      <b>cProc = cBazowa;</b>                     /* zmiennej
+  cProc nadajemy wartość    zmiennej cBazowa (500)  */<br>
+      <b>cProc = cBazowa - 100;</b>   /* zmiennej cProc wartość
+  zm. cBazowa    pomniejszoną o 100 */<br>
+    <b>cProc = cProc + 200;</b>           /* cProc uzyskuje
+  nową wartość o   200 większą od poprzedniej jej wartości */  <b><br>
+      <br>
+      </b>W tej chwili cProc = 600<br>
+</p>
+
+<p>Teraz tekst programu wyliczającego cenę komputera powinien być
+ prawie    całkiem  zrozumiały. Widzimy tam przecież właśnie zastosowanie
+operatorów    arytmetycznych  (dodawanie i dzielenie) oraz przypisania. Pozostały
+do wyjaśnienia   tajemnicze  konstrukcje typu: <br>
+      <br>
+                say "Udział ceny procesora: " cProc/cKomp;<br>
+      <br>
+            Mamy tu do czynienia nie tylko z dzieleniem (które jest chyba
+zrozumiałe), ale również z konkatenacją (łączeniem)<A NAME="EDU.skorowidz.termin łańcuch_znakowy 13_134"></A> łańcuchów znakowych.
+<br><br>
+
+<div class="notel">
+Nie przyzwyczajajmy się za bardzo do operatorow konkatenacji
+ REXXa,    bowiem  w Javie konkatenacja łańcuchów znakowych jest znacznie
+uboższa i  wygląda nieco inaczej, choć są pewne podobieństwa. W szczególności,
+mamy  tam operator +, który dziala tak samo jak operator || w REXXie, a także
+  -  mimo, że Java jest językiem ze ścisłą kontrolą typów, możemy zmienne
+typu   łańcuchowego (napisowego) łączyć ze zmiennymi dowolnych innych typów
+i otrzymywać   w rezultacie łańcuchy znakowe.</div>
+
+<div class="ddd">
+<br>
+W REXXie<A NAME="EDU.skorowidz.termin konkatenacja_łańcuchów_znakowych 13_135"></A> konkatenacja łańcuchów znakowych może być realizowana na trzy sposoby:<br>
+
+<ul>
+        <li>za pomocą operatora ||  (do lewego argumentu dołączany jest prawy,
+    bez spacji między nimi)</li>
+        <li>za pomocą spacji pomiędzy dowolnymi wyrażeniami (do lewego argumentu
+      dołaczana jest spacja, a następnie prawy argument)</li>
+        <li>za pomocą "przytulenia" zmiennej do literału łańcuchowego (do
+literału      łańcuchowego dołączana jest zawartość zmiennej traktowana jako
+napis)<br>
+        </li>
+</ul>
+            przy czym wszystkie dane w REXXie (w tym liczby) traktowane są
+ przy   konkatenacji   jak łańcuchy znakowe (napisy).
+<a href="javascript:popUp('dodatki/W2RexxTyp.htm',50,60)">Zob. dodatkowe wyjaśnienia.</a>
+</div>
+
+<br clear="all">
+<p>Przykładowo, jeżeli zmienne liczbowe  a i b mają wartości 100
+i  50,  a  zmienna  łańcuchowa napis zawiera tekst "ala" to:
+<br>
+<br>
+
+<table cellpadding="2" cellspacing="2" border="1" width="100%">
+        <tbody>
+          <tr>
+            <td valign="Top">
+      <div align="Center">Wyrażenie w REXXie<br>
+            </div>
+            </td>
+            <td valign="Top">
+      <div align="Center">Wynik<br>
+            </div>
+            </td>
+            <td valign="Top">
+      <div align="Center">Jak to można zapisać w Javie<br>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td valign="Top">"kot"  a/b<br>
+            </td>
+            <td valign="Top">kot 2<br>
+            </td>
+            <td valign="Top">"kot" + " " +  a/b<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="Top">napis||a<br>
+            </td>
+            <td valign="Top">ala100<br>
+            </td>
+            <td valign="Top">napis + a<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="Top">a||b<br>
+            </td>
+            <td valign="Top">10050<br>
+            </td>
+            <td valign="Top">"" + a + b<br>
+            </td>
+          </tr>
+          <tr>
+            <td valign="Top">"kot"napis<br>
+            </td>
+            <td valign="Top">kotala<br>
+            </td>
+            <td valign="Top">"kot" + napis<br>
+            </td>
+          </tr>
+
+  </tbody>
+</table>
+
+<p>Wracając do wyjaśnienia działania instrukcji:<br>
+      <br>
+                say "Udział ceny procesora: " cProc/cKomp;<br>
+      <br>
+            możemy teraz stwierdzić, że instrukcja say ma postać:<br>
+      <br>
+      <b>say </b><i>wyrażenie</i>;<br>
+      <br>
+            gdzie <i>wyrażenie</i> jest dowolnym wyrażeniem, które zostaje
+ opracowane      a jego wynik (traktowany jako napis) wyprowadzony na konsolę.<br>
+            W naszym przykładzie do napisu w cudzysłowie dołączana jest spacja
+   a  po  niej napis reprezentujący wynik dzielenia wartości zmiennej cProc
+  przez  wartość  zmiennej cKomp.
+<br>
+<br><A NAME="EDU.skorowidz.termin operator_porównania 13_136"></A> <b>Operatory porównania (relacyjne)</b> mają szczególną właściwość.
+Wynikiem      ich zastosowania jest jedna z dwóch wartości <b>prawda</b> lub
+<b>fałsz</b>. W różnych językach stosowane są różne konwencje na
+oznaczenie  tych   wartości.   Czasami (jak w Javie) są to wartości specjalnego
+typu,  oznaczane   słowami  kluczowymi<A NAME="EDU.skorowidz.termin true 13_137"></A> <b>true</b> i<A NAME="EDU.skorowidz.termin false 13_138"></A> <b>false</b>. Czasami
+jak w  REXXie są to  wartości  1 (prawda) i 0 (falsz).<br>
+      <br>
+            Zastosowanie operatorów relacyjnych możemy kojarzyć z odpowiedzią
+  na  pytanie:   czy prawdziwy jest warunek przez nie opisywany.<br>
+      <br>
+
+<div class="notec">
+            Np.<br>
+            x &gt; 5<br>
+       pytanie: czy wartość zmiennej x jest większa od 5  <br>
+                         odpowiedź: tak/nie, podawana jako wynik 1/0 lub
+true/false<br>
+      <br>
+            x &lt;= y    <br>
+       pytanie: czy wartość zmiennej x jest mniejsza lub równa wartości
+ zmiennej   y<br>
+                         odpowiedź: tak/nie, podawana jako wynik 1/0 lub
+true/false<br>
+
+</div>
+
+<p>Szczególne operatory relacyjne:<A NAME="EDU.skorowidz.termin równość 13_139"></A> <b>równości i<A NAME="EDU.skorowidz.termin nierówność 13_140"></A> nierówności </b>
+ sprawiają     trochę kłopotu. Naturalnym bowiem sposobem zapisu tych operatorów
+jest   użycie   znaku '='. Tak robi to REXX.<br>
+      <br>
+            Piszemy więc a = b, by sprawdzić, czy wartość zmiennej a równa
+ się   wartości    zmiennej b? Ale zaraz, zaraz: przecież to jest również
+przypisanie!   Jak   je rozróżnić? <br>
+            W REXXie zależy to od kontekstu użycia.<br>
+            Jeżeli napiszemy w nowym wierszu, lub po średniku:<br>
+             a = b; <br>
+            to będzie to potraktowane jako instrukcja przypisania, a nie
+jako   wyrażenie,    które ma wynik.<br>
+            Jeżeli natomiast tego samego zapisu użyjemy w miejscu, gdzie
+oczekiwana      jest wartość jakiegoś wyrażenia np.<br>
+              if (a = b)<br>
+              say a = b<br>
+            to znak równości będzie potraktowany jako operator równości (nie
+  przypisania),     i wyrażenie a  = b da wynik 1 lub 0 (odpowiedż na pytanie
+  czy a jest równe     b - prawda to czy fałsz?).<br>
+      <br>
+            W innych językach (m.in. C, C++, Javie) wyraźnie rozróżnia się
+ operatory      przypisania i<A NAME="EDU.skorowidz.termin równość 13_141"></A> równości. Ten ostatni ma formę <big><b>==</b></big>
+   (dwa   znaki   równości). Dzięki temu semantyka języka jest (w tym kontekście)
+ jednolita:     przypisanie również jest wyrażeniem i ma wartość (prawej
+strony  operatora     przypisania).<br>
+            Niestety, ma to również swoje złe strony  (<a href="javascript:popUp('dodatki/W2EfUb.htm',40,40)">zobacz  o  efektach ubocznych</a>).
+
+<br><br><A NAME="EDU.skorowidz.termin operator_równości 13_142"></A> 
+
+<table cellpadding="2" cellspacing="2" border="1" width="100%">
+        <tbody>
+          <tr>
+            <td valign="Top" rowspan="1" colspan="2">
+
+      <div align="Center">Operator równości<br>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td valign="Top">
+      <div align="Center">W REXXie<br>
+            </div>
+            </td>
+            <td valign="Top">
+      <div align="Center">W Javie<br>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td valign="Top">
+      <div align="Center"><b><big>=</big><big><br>
+            </big></b></div>
+            </td>
+            <td valign="Top">
+      <div align="Center"><b><big>==</big></b><br>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td valign="Top">Przykład:<br>
+            a = b<br>
+            Znaczenie:<br>
+            czy a równa się b? <br>
+            wynik: 1 (tak), 0 (nie)<br>
+            </td>
+            <td valign="Top">Przykład:<br>
+             a == b<br>
+             Znaczenie:<br>
+             czy a równa się b? <br>
+             wynik: <b>true</b> (tak), <b>false</b> (nie)<br>
+            </td>
+          </tr>
+
+  </tbody>
+</table>
+      <br>
+<p><A NAME="EDU.skorowidz.termin operator_nierówności 13_143"></A> Operator <b>nierówności</b> uzyskamy stawiając znak negacji przed
+  znakiem    '='. W REXXie znakiem tym będzie \ (backslash), w C, C++, Javie
+   ! (wykrzyknik).<br>
+      <br>
+            Przykład:<br>
+      <br>
+            REXX: a \= b   (wynik: 1, jeśli a nie jest równe b, 0 w przeciwnym
+   przypadku)    <br>
+            Java:     a != b  (wynik: <b>true</b>, jeśli a nie jest równe
+b,  <b>   false</b>      w przeciwnym przypadku)  <br>
+      <br>
+            Znak negacji jest też samodzielnym operatorem logicznym, oznaczającym
+    logiczne  zaprzeczenie.<br>
+      <br><A NAME="EDU.skorowidz.termin operator_logiczny 13_144"></A> <b>Operatory logiczne</b> służą do konstruowania wyrażeń logicznych
+za  pomocą     łączników : i. lub.<br>
+W REXXie operator koniunkcji logicznej oznaczany jest przez &amp;, zaś alternatywa
+- przez | ( w C, C++, Javie stosowane są tu operatory &amp;&amp; i || - podwójne
+ &amp; i | )<br>
+            Więcej na ich temat (a także innych operatorów) przy okazji omawiania
+    wyrażeń  i operatorów Javy.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index12.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

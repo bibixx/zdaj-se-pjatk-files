@@ -1,0 +1,55 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-2">
+<meta name="GENERATOR" content="Microsoft FrontPage Express 2.0">
+<title>Rozwi±zanie</title>
+<link rel="stylesheet" type="text/css"
+href="style/common.css">
+</head>
+
+<body bgcolor="floralwhite">
+<script language="JavaScript1.2" type="text/javascript"
+src="js/dodatki.js">
+  </script>
+
+<p align="center"><b>Rozwi±zanie</b> </p>
+
+<hr>
+
+<p>Zmienne imie jest inicjowane w deklaracji, gdy¿ inaczej mo¿e
+nie mieæ ustalonej warto¶ci (gdy pierwsza czê¶æ warunku if
+jest niespe³niona tzn. u¿ytkownik zamkn±³ dialog z pytaniem o
+nazwisko np. wciskaj±c Cancel). Poniewa¿ zmienna jest lokalna,
+to brak gwarancji ustalenia jej warto¶ci (je¿eli w ogóle jest
+u¿ywana po deklaracji) - spowoduje b³±d kompilacji. Zmienne
+nazwisko i txt - zawsze uzyskuj± warto¶ci w trakcie dzia³ania
+programu.</p>
+
+<p>Wyra¿enie</p>
+
+<p>(nazwisko = JOptionPane.showInputDialog(&quot;Podaj
+nazwisko&quot;)) != null</p>
+
+<p>jest opracowywane w nastêpuj±cy sposób:</p>
+
+<p>wywo³ywana jest metoda showInputDialog; zwrócony wynik
+podstawiany jest na zmienn± nazwisko, a warto¶æ wyra¿enia
+przypisania (któr± jest warto¶æ zmiennej nazwisko)
+porównywana jest z warto¶ci± null. <br>
+</p>
+
+<p>Efektem opracowania wyra¿enia, jest uwidocznienie dialogu,
+przypisanie zmiennej nazwisko warto¶ci oraz obliczenie wyniku
+porównania. Wynikiem wyra¿enia jest true je¶li zmienna
+nazwisko (po podstawieniu na ni± warto¶ci zwróconej przez
+showInputDialog) nie jest równa null i false w przeciwnym razie.</p>
+
+<p>Nawiasy s± konieczne, bo priorytet operatora = jest ni¿szy
+od priorytetu operatora !=.</p>
+
+<p><br>
+</p>
+</body>
+</html>

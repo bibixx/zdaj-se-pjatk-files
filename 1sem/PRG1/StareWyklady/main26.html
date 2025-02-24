@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index27.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 1"></A><div class="tytulpunktu">1. Czym jest Java</div><A NAME="EDU.wyklad.punkt 1 1"></A><div class="tytulpunktu">1.1. Java jako uniwersalny język programowania</div>
+
+<a name="W4.1"></a>
+<a name="W4.2"></a>
+
+<p>Oczywiście, przede wszystkim Java jest uniwersalnym językiem
+programowania</p>
+<p><b><A NAME="EDU.skorowidz.termin Java a_C/C++ 26_199"></A> Składniowe podobieństwo do C/C++</b> czyni ten język łatwy do opanowania przez
+programistów znających te języki. Jednocześnie Java ma ambicje udoskonalania
+swoich wzorców. Programista Javy w zasadzie nie musi martwić się zarządaniem
+pamięcią (w Javie funkcjonuje <b>automatyczne odśmiecanie - "garbage
+collector", polegające na automatycznym 
+usuwaniu przydzielonych wcześniej a nieużywanych obszarów pamięci). Java</b>
+nie dopuszcza arytmetyki wskaźnikowej, która pozwala na odwoływanie się do
+dowolnych obszarów pamięci i jest częstą przyczyną błędów.</p>
+<p><b>Ścisła</b> kontrola typów na etapie kompilacji pozwala unikać prostych
+błędów, a <b>konwersje przeprowadzane w fazie wykonania są bezpieczne</b>,
+bowiem nigdy nie może powstać sytuacja przekształcenia danych do niewłaściwego
+dla nich typu (chodzi oczywiście o typy obiektowe, poprawność konwersji typów
+prostych jest gwarantowana przez kompilator).</p>
+<p><b>Wymuszana przez kompilator obsługa wyjątków </b>(inaczej mówiąc - błędów) czyni programowanie w
+Javie jeszcze bardziej bezpiecznym i niezawodnym, a <b>wbudowane w język
+podstawowe elementy współbieżności umożliwiają łatwe tworzenie i
+synchronizowanie równolegle działających wątków</b> (czyli równolegle wykonywanych fragmentów tego samego programu).</p>
+<p>Wszystkie wymienione wyżej - teraz może dość tajemniczo brzmiące - pojęcia będziemy szczegółowo poznawać w trakcie wykładów.<br></p>
+<p><b>
+ Niewątpliwie jednak najważniejszą cechą Javy jako "czystego języka" jest
+jej</b> obiektowość. Ogólnie, oznacza to, iż programy pisze się w Javie
+łatwiej i bardziej niezawodnie niż w językach nieobiektowych. Niestety, Java
+nie jest językiem w pełni obiektowym. Występują w niej bowiem konstrukcje
+nieobiektowe (np. typy proste), co powoduje pewne niespójności syntaktyczne
+i semantyczne. Już w tym wykładzie zaczniemy powoli oswajać się z podejściem
+obiektowym.</p>
+
+<p>Większość innych ważnych cech Javy, o których była mowa wyżej , wynika z
+wysokich wymogów bezpieczeństwa, stawianych językowi przez jego twórców. Coś za
+coś - często oznacza to pewne ograniczenie swobody i elastyczności programisty,
+a także (czasem nadmierne) zwiększanie pracochłonności pisania kodu.</p>
+<p>Zalety Javy jako czystego języka programowania mogą być dyskusyjne. Ale
+nie dlatego warto Javy się uczyć, że jest to język idealny (czy w ogóle są
+takie?).</p>
+<p>Dużo ważniejsza jest jej uniwersalność we wszelkich
+zastosowaniach informatycznych. Uniwersalność, zapewniana przez
+<b>wieloplatformowość</b> Javy oraz wynikającą stąd (zrealizowaną!) możliwośc stworzenia przebogatych
+standardowych "bibliotek" na tyle zintegrowanych z samą Javą, że praktycznie
+będących jej synonimem.</p><A NAME="EDU.wyklad.punkt 1 2"></A><div class="tytulpunktu">1.2. Wieloplatformowość Javy</div><A NAME="EDU.skorowidz.termin wieloplatformowość_Javy 26_201"></A> 
+<a name="W4.3"></a>
+
+<p><A NAME="EDU.skorowidz.termin Java jako_język_interpretowany 26_202"></A> Java jest językiem interpretowanym, co umożliwia wykonywanie "binarnych" kodów
+Javy bez rekompilacji praktycznie na wszystkich platformach systemowych.</p><A NAME="EDU.skorowidz.termin Java kod_źródłowy 26_203"></A> <p>Kod źródłowy (pliki z rozszerzeniem ".java") jest kompilowany przez
+kompilator Javy do<A NAME="EDU.skorowidz.termin kod_bajtowy 26_204"></A> kodu bajtowego (<A NAME="EDU.skorowidz.termin B-kod 26_205"></A> B-kodu, pliki z rozszerzeniem ".class"), ten
+ostatni zaś jest interpretowany przez tzw.<A NAME="EDU.skorowidz.termin wirtualna_maszyna_Javy 26_206"></A> wirtualną maszynę Javy -<A NAME="EDU.skorowidz.termin JVM 26_207"></A> JVM (jest
+to program i/lub odpowiednie biblioteki) , zainstalowaną na danej platformie
+systemowej lub wchodzącą w skład przeglądarki WWW.<br></p>
+<p>    kod            kompilacja                             ładowanie                       <b>JVM</b><br>
+żródłowy  -------------&gt;  B-kod   --------------&gt;   wykonanie (Win Unix
+OS/2 ...)</p>
+<p>(.java)       javac      (.class)  <br></p>
+<p>Oznacza to, teoretycznie, że raz napisany i skompilowany program będzie
+działal tak samo na wszystkich platformach systemowych. Idea wręcz doskonała
+(jak wiele wysiłku i kosztów pochłania przenoszenie programów z jednej
+platformy na drugą).</p>
+<p>Jej praktyczna realizacja (mimo wielu trudności) jest coraz bliższa i
+coraz bardziej kusząca (nieunikniona mniejsza efektywność i większa zasobożerność
+działania aplikacji Javy w porównaniu z apliakacjami natywnymi - czyli napisanymi
+"pod konkretny system operacyjny" - jest równoważona przez rozwój sprzętu).</p>
+
+<p>
+Sama wieloplatformowość języka interpretowanego nie jest czymś
+nadzwyczajnym. Ale twórcy Javy wyciągnęli z tej jej cechy bardzo konsekwentne
+wnioski. Stworzyli mianowicie bogaty zestaw <b>standardowych</b> bibliotek i
+narzędziowych interfejsów programistycznych<A NAME="EDU.skorowidz.termin API 26_208"></A> (API), które umożliwiają w
+jednolity, niezależny od platformy sposób programować graficzne interfejsy
+użytkownika (GUI), dostęp do baz danych, działania w sieci i wiele innych.</p>
+<p>Podstawowy (ogromny zresztą) zestaw takich bibliotek nazywa się<A NAME="EDU.skorowidz.termin Java_Core_API 26_209"></A> Java Core
+API (albo<A NAME="EDU.skorowidz.termin JDK 26_210"></A> JDK albo<A NAME="EDU.skorowidz.termin Java_2_SDK 26_211"></A> Java 2 SDK). Oprócz tego wprowadzono prosty mechanizm
+nazywany<A NAME="EDU.skorowidz.termin Java_Extension_Framework 26_212"></A> Java Extension Framework, który umożliwia rozszerzanie standardowego
+pakietu o nowe (też standardowe!) biblioteki.<br></p><A NAME="EDU.wyklad.punkt 1 3"></A><div class="tytulpunktu">1.3. Java jako uniwersalne środowisko programowania GUI</div>
+
+<a name="W4.4"></a>
+
+<p><A NAME="EDU.skorowidz.termin Java jako_uniwersalne_środowisko_programowania_GUI 26_214"></A> Java - w swoich standardowych bibliotekach - dostarcza łatwych w użyciu i
+niezależnych od platformy środków programowania graficznych interfejsów
+użytkownika.</p>
+<p>Proste, nieco surowe komponenty wizualne od wielu już lat można było łatwo
+uzyskać za pomocą części API Javy nazywanej<A NAME="EDU.skorowidz.termin AWT 26_215"></A> <b> AWT<A NAME="EDU.skorowidz.termin Abstract_Windowing_Toolkit 26_216"></A> (Abstract Windowing
+Toolkit).</b></p>
+<p>Były one jednak zbyt ubogie dla poważnych aplikacji, ponadto ich wygląd
+zależał od platformy systemowej. Pojawił się więc projekt<A NAME="EDU.skorowidz.termin Swing 26_217"></A> <b>Swing</b>, mający
+głównie na celu wzbogacenie istniejących i dodanie nowych elementów GUI oraz
+uniezależnienie wyglądu komponentów od platformy systemowej. Swing,
+zrealizowany początkowo jako dodatek do wersji Javy 1.1, następnie wszedł w
+skład tzw.<A NAME="EDU.skorowidz.termin J_F_C 26_218"></A> <b>J F C</b><b><A NAME="EDU.skorowidz.termin Swing 26_219"></A> (<A NAME="EDU.skorowidz.termin Java_Foundation_Classes 26_220"></A> Java Foundation Classes) -</b> integralnej częsci
+platformy Java 2 (wersje 1.2.x, 1.3 i 1.4). JFC obejmuje AWT wraz ze wzbogaconą
+grafiką dwuwymiarową (Graphics2D), Swing oraz mechanizmy "drag and drop"
+("przeciągnij i upuść") w aplikacjach Javy i na styku tych aplikacji z
+natywnymi aplikacjami platformy systemowej.</p><A NAME="EDU.wyklad.punkt 1 4"></A><div class="tytulpunktu">1.4. Java jako uniwersalne środowisko dostępu do baz danych</div>
+
+<a name="W4.5"></a>
+
+<p>
+ W skład standardu Javy wchodzi<A NAME="EDU.skorowidz.termin JDBC 26_222"></A> JDBC API<A NAME="EDU.skorowidz.termin Java_Database_Connectivity_API 26_223"></A> (Java Database Connectivity API) -
+zestaw środków, umożliwiających łączenie się aplikacji i apletów Javy z
+(niemal) dowolnymi relacyjnymi bazami danych (systemami zarządzania relacyjnymi
+bazami danych) i wykonywanie na nich operacji bazodanowych.</p>
+
+<p>Środki te są łatwe w użyciu, bazują bowiem na powszechnym standardzie<A NAME="EDU.skorowidz.termin SQL 26_224"></A> SQL -
+języka programowania relacyjnych baz danych.</p>
+
+<p>Niestandardowy pakiet<A NAME="EDU.skorowidz.termin JavaBlend 26_225"></A> <b>JavaBlend</b> udostępnia narzędzia łatwego
+tworzenia aplikacji biznesowych ,  integrujących obiekty Javy z relacyjnymi
+bazami danych. Umożliwia to realizację podejścia obiektowego w środowisku
+relacyjnych baz danych<br></p><A NAME="EDU.wyklad.punkt 1 5"></A><div class="tytulpunktu">1.5. Java jako uniwersalne środowisko programowania multimediów</div>
+
+<a name="W4.6"></a>
+
+<p>W Java Core API znajdziemy na pewno uniwersalne środki przetwarzania</p>
+<ul>
+<li><A NAME="EDU.skorowidz.termin Java przetwarzanie_grafiki_i_obrazów 26_227"></A> grafiki i obrazów (2D),</li>
+
+<li><A NAME="EDU.skorowidz.termin Java przetwarzanie_dżwięków_i_muzyki 26_228"></A> dżwięków i muzyki (m.in. pliki  WAV, AU, MIDI)<br></li>
+</ul>
+
+<p>Dotychczasowe standardowe rozszerzenia Javy:</p>
+<ul>
+<li><A NAME="EDU.skorowidz.termin Java_3D 26_229"></A> <b>Java 3D</b> (tworzenia i przetwarzania grafiki trójwymiarowej),</li>
+
+<li><A NAME="EDU.skorowidz.termin Java_Media_Framework 26_230"></A> <b>Java Media Framework</b> (przetwarzanie zaawansowanych formatów
+multimedialnych - m.in. filmy,  RealStream)</li>
+</ul>
+
+<p>powoli wchodzą do podstawowego standardowego API.</p>
+<p>Jeśli jako multimedia potraktować<A NAME="EDU.skorowidz.termin Java telewizja 26_231"></A> telewizję i<A NAME="EDU.skorowidz.termin Java telefon 26_232"></A> telefon - to i tu Java
+dostarcza odpowiednich interfejsów programistycznych:<A NAME="EDU.skorowidz.termin Java_TV_API 26_233"></A> <b>Java TV API</b> oraz<A NAME="EDU.skorowidz.termin JavaPhone_API 26_234"></A> <b>JavaPhone API, </b>umożliwiających oprogramowanie TV i telefonów komórkowych.</p><A NAME="EDU.wyklad.punkt 1 6"></A><div class="tytulpunktu">1.6. Java jako uniwersalne środowisko  programowania w sieci (klient-serwer)</div>
+
+<a name="W4.7"></a>
+
+<p><A NAME="EDU.skorowidz.termin Java jako_uniwersalne_środowisko_programowania_w_sieci_(klient-serwer) 26_236"></A> Java zawiera standardowe środki tworzenia:</p>
+<ul>
+<li><A NAME="EDU.skorowidz.termin aplet 26_237"></A> <b>apletów</b> - programów wykonywanych w środowisku przeglądarki i
+umożliwiających:</li>
+
+<ul><li>interakcję z użytkownikiem w rozbudowanym GUI,</li>
+
+<li>transakcje klient-serwer, w tym - poprzez JDBC - bazodanowe</li></ul>
+</ul>
+<ul>
+<li><A NAME="EDU.skorowidz.termin serwlet 26_238"></A> <b>serwletów</b>  - zapewniających obsługę i zarządzanie transakcjami po
+stronie serwera (standardowe rozszerzenie: Java Servlet API), w szczególności dynamiczne tworzenie stron WWW,</li>
+</ul>
+<ul>
+<li><A NAME="EDU.skorowidz.termin aplikacja 26_239"></A> <b>aplikacji</b> "wolnostojących" mogących sięgać do Inter- i intranetu za
+pomocą wbudowanych w Core API "bibliotek" sieciowych</li>
+</ul>
+<p>Istnieje również standardowe rozszerzenie Javy służące do<A NAME="EDU.skorowidz.termin Java poczta_elektroniczna 26_240"></A> obsługi poczty
+elektronicznej (<A NAME="EDU.skorowidz.termin JavaMail_API 26_241"></A> <b>JavaMail API</b>).</p>
+<p>Oparta na Javie technologia<A NAME="EDU.skorowidz.termin Java_Server_Pages 26_242"></A> <b>Java Server Pages (JSP)</b> umożliwia:</p>
+<ul>
+<li>tworzenie dynamicznych stron WWW,</li>
+
+<li>separację wyglądu stron od dynamicznie zmieniającej się treści,</li>
+
+<li>łatwe programowanie serwera, niezależne od sprzętu i platformy.</li>
+</ul><A NAME="EDU.wyklad.punkt 1 7"></A><div class="tytulpunktu">1.7. Java jako środowisko programowania w systemach
+rozproszonych</div>
+
+<a name="W4.8"></a>
+
+<p>W standardzie Javy zapewniono komunikację z rodzimymi programami platformy
+systemowej<A NAME="EDU.skorowidz.termin JNI 26_244"></A> (JNI -<A NAME="EDU.skorowidz.termin Java_Native_Interface 26_245"></A> Java Native Interface) oraz środki<A NAME="EDU.skorowidz.termin komunikowanie_się_obiektów_w_środowiskach_rozproszonych 26_246"></A> komunikowania się
+obiektów w środowiskach rozproszonych.</p>
+<p>Z kolei<A NAME="EDU.skorowidz.termin RMI 26_247"></A> RMI -<A NAME="EDU.skorowidz.termin Remote_Method_Invocation 26_248"></A> Remote Method Invocation - zapewnia komunikację pomiędzy
+obiektami napisanymi w Javie, funkcjonującymi w równoległych procesach wykonywanywanych w
+środowisku rozproszonym, np. na dwóch różnych komputerach sieci.</p>
+<p>Interakcja obiektów Javy i obiektów realizowanych w innych językach
+programowania zapewniona jest przez implementację przez Javę standardu<A NAME="EDU.skorowidz.termin CORBA 26_249"></A> CORBA
+(<A NAME="EDU.skorowidz.termin Common_Object_Request_Broker_Architecture 26_250"></A> Common Object Request Broker Architecture.</p>
+<p>Oznacza to, że Java może być językiem tworzenia tzw.<A NAME="EDU.skorowidz.termin middleware 26_251"></A> middleware -
+oprogramowania pośredniczącego i integrującego działanie aplikacji napisanych w
+różnych językach i na różnych platformach systemowych i sprzętowych.</p><A NAME="EDU.wyklad.punkt 1 8"></A><div class="tytulpunktu">1.8. Java jako środowisko budowanie programów z gotowych komponentów</div>
+
+<a name="W4.9"></a>
+
+<p><A NAME="EDU.skorowidz.termin Java jako_środowisko_budowanie_programów_z_gotowych_komponentów 26_253"></A> 
+Koncepcja budowania programu z gotowych cegiełek, komponentów "wilelokrotnego
+użycia" ("reusable components"), znalazła w Javie urzeczywistnienie w postaci
+specyfikacji<A NAME="EDU.skorowidz.termin JavaBeans 26_254"></A> <b>JavaBeans</b>. Bean - znaczy ziarno, a JavaBean jest właśnie
+komponentem ponownego użytku (ziarnem Javy). Komponenty takie (wizualne lub
+odzwierciedlające logikę) mogą być łatwo wykorzystywane przy budowie dużych
+aplikacji. Wbudowanie ziarna w aplikację odbywa się zwykle w pewnym srodowisku
+programistycznym, a programowanie polega na: umieszczeniu (załadowaniu) ziarna,
+połączeniu go z aplikacją i ew. dostosowaniu jego właściwości.</p>
+<p><A NAME="EDU.skorowidz.termin Enterprise_Java_Beans 26_255"></A> <b>Enterprise Java Beans<A NAME="EDU.skorowidz.termin EJB 26_256"></A> (EJB)</b> jest zestawem ziaren i środków
+implementacji logiki biznesowej, działających w systemach rozproszonych z
+obsługą transakcji bazodanowych i hurtowni danych. Przy budowie programów
+używane są gotowe ziarna ze składnic "problemowych" (np. ubezpieczenia, banki
+etc.) oraz środki EJB, umożliwiające łatwe tworzenie nowych ziaren
+"biznesowych".</p><A NAME="EDU.wyklad.punkt 1 9"></A><div class="tytulpunktu">1.9. Java jako środowisko przetwarzania dokumentów XML</div>
+
+<a name="W4.10"></a>
+
+<p><A NAME="EDU.skorowidz.termin XML 26_258"></A> XML - Extended Markup Language - jest rozszerzalnym językiem znacznikowym,
+pozwalającym na opisywanie struktury i treści dokumentów i separowanie treści
+od jej prezentacji (w przeciwieństwie HTML określa tylko wygląd dokumentu i nie
+może być rozszerzony - tzn. zestaw znaczników jest stały).<br>
+ XML staje się obecnie ważnym środkiem komunikacji biznesowej i wymiany
+dokumentów.</p>
+<p>Java okazała się - ze względu na swą obiektowosć i wieloplatformowość -
+doskonałym językiem do przetwarzania dokumentów XML.</p>
+<p>Gotowe środki przetwarzanie XML wchodzą w standard Javy (w wersji 1.4).</p><A NAME="EDU.wyklad.punkt 1 10"></A><div class="tytulpunktu">1.10. Mikro - Java</div>
+
+<a name="W4.11"></a>
+
+<p><A NAME="EDU.skorowidz.termin Mikro-Java 26_260"></A> Do oprogramowania obsługi sprzętu elektronicznego (np. urządzeń domowych,
+konsumpcyjnych) o słabych parametrach informatycznych stworzono w Javie
+standardową technologię JINI.<br>
+Jest to technologia połączeń "impromptu" - połączeń sieciowych pomiędzy
+składnikami bez instalacji i interwencji. Programy Javy są interpretowane
+przez niewielką, specjalną maszynę wirtualną Javy KJVM przeznaczoną dla
+urządzeń o   ekstremalnie słabych parametrach pamięciowych. Java do "maszynek
+do kawy" jest dostępna jako platforma Java 2 Micro Edition, przejmująca
+doświadczenia - także dalej rozwijanych - interfejsów programistycznych
+PersonalJava i EmbeddedJava.</p><A NAME="EDU.wyklad.punkt 1 11"></A><div class="tytulpunktu">1.11. Dlaczego warto uczyć się
+Javy?</div>
+
+<a name="W4.12"></a>
+
+<p>Cóż... Poznaliśmy co najmniej 10 odpowiedzi na to pytanie. Jeśli nawet
+uznamy sam "czysty język" za nieco niekonsekwentny czy uciążliwy, to zachętą do
+przezwyciężenia wszelkich obiekcji jest ogromna uniwersalność Javy. Jak
+wspomniałem wcześniej - jest to jedyny język programowania tak naprawdę
+zawierający standardowe i uniwersalne środki realizacji niemal wszelkich zadań
+informatycznych. To wielkie bogactwo możliwości niewątpliwie skłania do jego
+poznania.</p>
+<p>Oczywiście najpierw trzeba zaznajomić się z podstawami Javy. Na tej drodze -
+pewnie - dużą trudnością będzie obiektowość Javy. Dlatego już za chwilę -
+ogólnie, na poziomie koncepcyjnym - przyjrzymy się niektórym cechom podejścia
+obiektowego.</p>
+<p>Wcześniej jednak - niejako dla porządku - przedstawione zostanie nazewnictwo
+wersji Javy.</p><A NAME="EDU.wyklad.punkt 1 12"></A><div class="tytulpunktu">1.12. Wersje Javy</div>
+
+<a name="W4.13"></a>
+
+<p>Pierwsze, powszechnie dostępne<A NAME="EDU.skorowidz.termin Java wersje 26_263"></A> wersje Javy były numerowane 1.0.x.</p>
+<p>Ubogi zestaw komponentów GUI, zły model obsługi zdarzeń - to ich główne wady.<br>
+Pomyślane głównie jako środowisko budowy apletów, tak naprawdę nie nadawały
+się do budowy większych aplikacji (ani też jakichś bardziej użytecznych
+apletów).</p>
+<p>Nowe wersje numerowane 1.1.x wprowadziły kilka ogromnie ważnych zmian i
+dodatków, m.in.: nowy model obsługi zdarzeń, możliwości dynamicznego
+kształtowania działania programu (refleksja) oraz JavaBeans. Pojawił się też
+Swing z nowymi komponentami.<br>
+Wersje 1.1.x były prawdziwym przełomem.</p>
+<p>Następna generacja - Java 1.2.x - nie była już tak rewolucyjna. Faktycznie
+zintegrowała istniejące już i działające w Javie 1.1.x rozwiązania, dodając
+nowe, ciekawe, użyteczne (ale już nie tak rewolucyjne) elementy, m.in.
+Graphics2D i kolekcje.<br>
+Można jednak powiedzieć, że w tym momencie Java dojrzała, co wyraziło się w
+zmianie nazewnictwa.<br>
+Mówi się w tej chwili o platformie Java 2, a interfejs programistyczny
+zmienił swoją nazwę z JDK (Java Devoleper Kit) na Java 2 SDK (Software
+Developer Kit).<br>
+Platforma Java 2 ma swoje trzy edycje: standardową, biznesową i mikro. W
+każdej z nich mamy kolejne wersje Javy.</p>
+<p>Wygląda to mniej więcej tak:</p>
+
+<div><img src="images/Java2ver.jpg" alt="Java wersje" width="577" height="205" border="1" hspace="5" vspace="5">
+</div>
+<br clear="all"><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index27.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

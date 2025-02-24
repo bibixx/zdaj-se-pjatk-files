@@ -1,0 +1,485 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index72.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index74.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 4"></A><div class="tytulpunktu">4. Podejmowanie decyzji: instrukcje if oraz if-else</div>
+
+<a name="W9.4"></a><A NAME="EDU.skorowidz.termin decyzja podejmowanie 73_580"></A> <p>
+Znana nam już<A NAME="EDU.skorowidz.termin instrukcja_if 73_581"></A> instrukcja if ma postać:<br>
+
+<div class="syntax">
+<br>
+<br>
+<b>if</b>  (<i><b>war</b></i>)  <i><b>ins</b></i><br>
+<br>
+
+gdzie:<br>
+<ul>
+<li>wyr - warunek - dowolne wyrażenie, mające typ wyniku boolean</li><li>ins - dowolna instrukcja (w tym grupująca)<br></li>
+</ul>
+<b>Działanie</b>: instrukcja <i><b>ins</b></i> jest wykonywana wtedy i tylko wtedy, gdy wartością wyrażenia <i><b>war</b></i> jest true
+</div>
+
+<br>
+<p><A NAME="EDU.skorowidz.termin instrukcja_if-else 73_582"></A> Instrukcja if-else rozszerza działanie instrukcji if. Ma ona postać.<br>
+
+<div class="syntax"><br>
+<br>
+<b>if</b> (<i><b>war</b></i>) <i><b>ins1</b></i><br>
+<b>else</b><i><b>ins2</b></i><br>
+<br>
+
+gdzie:<br>
+<ul>
+<li>wyr - warunek - dowolne wyrażenie, mające typ wyniku boolean</li><li>ins1, ins2 - dowolne instrukcje (w tym grupujące)<br></li>
+</ul>
+<b>Działanie</b>: instrukcja <i><b>ins1</b></i> jest wykonywana wtedy i tylko wtedy, gdy wartością wyrażenia <i><b>war</b></i> jest true. Jeżeli wartością wyrażenia <b>war</b> jest <b>false</b> - wykonywana jest instrukcja <b>ins2</b>
+</div>
+
+<br>
+<p>
+
+Różnica pomiędzy zastosowaniem instrukcji if  oraz if-else można zobaczyć wyraźnie na<br>
+
+poniższych fragmentach kodu:<br>
+<br>
+
+if (a == b) c = d;<br>
+
+c = e;<br>
+
+System.out.println( a + " " + b  + " " + c + " " + d);<br>
+<br>
+
+oraz<br>
+<br>
+
+if (a == b) c = d;<br>
+
+else c = e;<br>
+
+System.out.println( a + " " + b  + " " + c + " " + d);<br>
+<br>
+
+W pierwszym fragmencie instrukcja c = d; wykonana zostanie tylko wtedy, gdy
+wartość zmiennej a będzie równa wartości zmiennej b. Niezależnie jednak od
+tego, czy warunek ten zajdzie czy nie - bezpośrednio po wykonaniu instrukcji
+if zmiennej c zostanie przypisana wartość zmiennej e (if jest więc tu bez
+sensu!). Następnie wyniki zostaną wyprowadzone na standardowe wyjście.<br>
+
+W drugim fragmencie zmienna c będzie miała rzeczywiście wartość zależną od
+tego czy a == b czy też nie (wykonane zostanie przypisanie albo c = d  albo
+c = e). Potem wyniki powędrują na wyjście.<br>
+
+Przykład ten nie znaczy oczywiście, że zawsze trzeba stosować instrukcję if-else, a samo if ma mniejsze znaczenie. <br>
+<br>
+
+Warto zauważyć, że instrukcjami ins1 i ins2 (w syntaktycznym opisie instrukcji
+if-else) mogą być również instrukcje if. Pozwala to sprawdzać rozgałęzione
+warunki np.<br>
+
+<pre>
+char op;
+double a, b, r;
+...
+if (op == '+') r = a + b;
+else if (op == '-') r = a - b;
+     else if (op == '*') r = a*b;
+          else if (op == '/') r = a/b;
+               else System.out.println("Błędny kod operacji");
+</pre>
+
+<p>
+Przy takich okazjach powstaje kwestia: które else odpowiada któremu if ?
+Zasada jest prosta: danemu else odpowiada pierwsze poprzedzające go i znajdujące
+się w tym samym bloku if nie mające jeszcze swojej "pary" w postaci else.
+Wcięcia - poprawiające czytelność - programu w żaden sposób nie decydują
+o odpowiedniości if i else.<br>
+
+Jeśli ktoś na przykład napisze:<br>
+<br>
+
+        if (a &gt;= 0) if (a &lt;= 100) System.out.println( "a w przedziale od 0 do 100");<br>
+
+        else System.out.println("a mniejsze od 0"); <br>
+<br>
+
+to będzie to oczywisty błąd.<br>
+<br>
+
+Taką konstrukcję można i należy oczywiście zaprogramować inaczej ( if (a
+&gt;= 0 &amp;&amp; a &lt;= 100) ... ), ale gdyby się ktoś uparł przy zastosowaniu
+podwójnego if, to należałoby to zapisać tak<br>
+<br>
+
+        if (a &gt;= 0) { <br>
+
+           if (a &lt;= 100) System.out.println("a w przedziale od 0 do 100"); <br>
+
+        }<br>
+
+        else System.out.println("a mniejsze od 0"); <br>
+<br>
+
+Zastosowanie nawiasów klamrowych (uczynienie bloku z drugiej instrukcji if)
+rozwiązuje problem, bowiem<A NAME="EDU.skorowidz.termin if-else dopasowanie 73_583"></A> dopasowanie if i else odbywa się zawsze tylko
+w ramach tego samego bloku.<br>
+<br><A NAME="EDU.skorowidz.termin częste_błędy_przy_stosowaniu_instrukcji_if_oraz_if-else 73_584"></A> 
+<div class="notec">Częste błędy przy stosowaniu instrukcji if oraz if -else, na które trzeba zwracać szczególną uwagę.<br>
+<br>
+
+A. Złe dopasowanie if i else w przypadku kilku instrukcji if (omówione przed chwilą)<br>
+<br>
+
+B. Stawianie średnika po nawiasie zamykającym warunek instrukcji if np. :<br>
+<br>
+
+    if (a &gt; b);<br>
+
+        System.out.println("a &gt; b"); // niezależnie od tego czy a&gt;b !<br>
+<br>
+
+C. Zapomnienie nawiasu zamykającego instrukcję grupującą np.<br>
+<br>
+
+    if (a &gt; b) {<br>
+
+       c = a + b;<br>
+
+       d = e + f;<br>
+
+    else  c = d + f;   <br>
+<br>
+
+</div>
+
+<br>
+
+<div class="important">Szczególnie częstym błędem przy sprawdzaniu wielu warunków (które mogą
+się na siebie "nakładać") jest stosowanie instrukcji if bez else, nie uwzględnienie
+wszystkich możliwości  lub nieprawidłowa kolejność sprawdzania warunków.
+<br>
+
+Błędy te są szczególnie niebezpieczne, gdyż dotyczą logiki programu i nie mogą być wykryte przez kompilator
+</div>
+
+<br>
+<p>
+
+Np. jeśli ktoś chce powiedzieć coś o liczbie a (czy jest duża, średnia, mała) to mógłby zapisać to w ten sposób:<br>
+
+<pre>
+     if (a &gt;= 1000) System.out.println("Duża liczba")
+     if (a &gt;= 100) System.out.println("Średnia liczba")
+     if (a &gt;= 10) System.out.println("Mała liczba")
+</pre>
+
+<div class="listing33r">Duża liczba<br>
+
+Średnia liczba<br>
+
+ Mała liczba</div>
+ 
+<div class="ddd"><br>
+co jest oczywistym błędem, bo jeśli a = 1000, ten fragment
+wyprowadzi na konsolę wzajemnie wykluczającą się informację.
+</div>
+
+<br>
+<p>
+Ach, potrzebne jest else, ale uwaga - kolejność sprawdzania warunków jest istotna.<br>
+
+Gdyby ktoś nie przywiązywał do niej istotnej wagi, mógłby zapisać:<br>
+
+<pre>
+     if (a &gt;= 10) System.out.println("Mała liczba");
+     else if (a &gt;= 100) System.out.println("Średnia liczba");
+          else  if (a &gt;= 1000) System.out.println("Duża liczba");
+</pre>
+
+<p>
+co znowu daje całkiem niepoprawny wynik dla a = 1000: napis "Mała liczba"<br>
+
+Dopiero zastosowanie else przy właściwej kolejności warunków da  (przy a = 1000) właściwy wynik "Duża liczba". <br>
+
+<pre>
+     if (a &gt;= 1000) System.out.println("Duża liczba");
+     else if (a &gt;= 100) System.out.println("Średnia liczba");
+          else if (a &gt;= 10) System.out.println("Mała liczba");
+
+</pre>
+
+<p>
+Zauważmy jednak, że temu fragmentowi brakuje "zupełności": co się stanie
+jeśli a równa się np. 1? Nie dostaniemy żadnej informacji! Potrzebne jest
+zatem jeszcze jedno ("zamykające") else, które będzie obsługiwać wszystkie
+nie uwzględnione warunki.<br>
+
+Na przykład:<br>
+
+<pre>
+     if (a &gt;= 1000) System.out.println("Duża liczba");
+     else if (a &gt;= 100) System.out.println("Średnia liczba");
+          else if (a &gt;= 10) System.out.println("Mała liczba");
+               else System.out.println("Liczba mikra, bo mniejsza od 10")
+
+</pre>
+
+<p>
+
+Czasem nie stosowanie else przy <b>wykluczających się</b> warunkach nie prowadzi
+do błędów w programie, ale - na pewno nalezy do złego stylu i powoduje niepotrzebne
+sprawdzanie warunków, o których już wiadomo, że są fałszywe.<br>
+<br>
+
+Na przykład jeśli tex jest typu String, to poniższy fragment programu:<br>
+<br>
+
+if (txt.equals("Ala")) a = 1;<br>
+
+if (txt.equals("kot")) a = 2;<br>
+
+if (txt.equals("koń")) a = 3;<br>
+<br>
+
+wykona się bezbłędnie i da prawidlowe wyniki, ale jeśli txt jest "Ala", to
+niepotrzebnie sprawdzane są pozostałe warunki ("kot" i "koń").<br>
+<br><A NAME="EDU.skorowidz.termin instrukcja_if praktyczny_przykład 73_585"></A> Rozważmy teraz praktyczny przykład zastosowania instrukcji if oraz if-else.<br>
+
+Spróbujemy zbudowac prostą klasę symulującą działanie bankomatu.<br>
+
+Bankomat:<br>
+<ul>
+<li>pyta o PIN</li><li>sprawdza czy podany PIN jest właściwy</li><li>jeśli tak - pyta o kwotę do wypłaty; jeśli nie - przerywa transakcję</li><li>sprawdza, czy kwota mieści się w limicie dziennym</li><li>jeśli tak - dokonuje wypłaty; jeśli nie - przerywa transakcję.<br></li>
+</ul>
+
+<p>
+Z punktu widzenia użytkownika bankomatu ważne jest tylko to, że bankomat
+pyta o PIN a następnie o kwotę do wypłaty i (ewentualnie) ją wypłaca.<br>
+
+Zatem klasa Bankomat pwoinna dostarczyć jej użytkownikom dwóch odpowiadających tym działaniom metod nazwijmy je: <b>askPin</b>  (zapytaj o pin) i <b>askAmmountAndWithdraw</b> (zapytaj o kwotę i wypłać).<br>
+<br>
+
+Wszelkie sprawdzenia poprawności wprowadzonych danych (oraz akceptacja kwoty
+do wypłaty) powinny się odbywać wewnętrz klasy Bankomat i nie obarczać użytkowników
+tej klasy. Ci powinni tylko móc użyć w/w metod i ew. móc sprawdzić, czy metody
+te zakończyły swoje działanie pomyślnie czy też nie (na skutek braku akceptacji
+PINu czy kwoty). Z tego sprawdzenia na razie nie będziemy korzystać, zatem
+program główny symulujący działanie bankomatu i korzystający z gotowej klasy
+Bankomat mógłby wyglądać tak:<br>
+<br>
+
+<pre>
+class BankomatTest {
+
+  public static void main(String[] args) {
+
+    Bankomat b = new Bankomat();
+
+    b.askPin();
+    b.askAmmountAndWithdraw();
+
+    System.exit(0);
+
+  }
+}
+</pre>
+
+<p>
+
+A jego działanie pokazuje następująca sekwencja dialogów (generowanych przez klasę Bankomat):<br>
+<p><img src="images/bankomat1-9.jpg" alt="Rys" width="293" height="119" border="1" align="Right">
+<br>
+<br>
+wprowadzanie numeru PIN:<br>
+<br clear="all">
+<br>
+
+<img src="images/bankomat2-9.jpg" alt="Rys" width="293" height="119" border="1" align="Right">
+<br>
+<br>
+wprowadzenie kwoty do wypłaty:<br>
+<br clear="all">
+<br>
+
+<img src="images/bankomat3-9.jpg" alt="Rys" width="268" height="113" border="1" align="Right">
+<br>
+<br>
+po jej zakceptowaniu - wypłata:<br>
+<br clear="all">
+<br>
+
+<p>
+
+Gdyby numer PIN okazał się nieprawidłowy - to klasa Bankomat powinna o tym
+poinformować w wywołaniu metody askPin (i oczywiście nie dopuścić do pytania
+o kwotę), a gdyby żądana kwota przekraczała limit - również poinformować
+i nie dopuścić do wypłaty:<br>
+<br>
+
+<p>
+<img src="images/bankomat4-9.jpg" alt="Rys" width="268" height="113" border="1" align="Left">
+<img src="images/bankomat5-9.jpg" alt="Rys" width="268" height="113" border="1" align="Right">
+<br clear="all">
+<br>
+
+<div class="notel">Uwaga. Nie możemy teraz sprawdzać, czy podana kwota do wypłaty jest liczbą
+całkowitą, bo jeszcze nie omówiliśmy zgadnień związanych z wyjątkami. Uzupełnimy
+to później
+</div>  
+
+<div class="ddd"><br>
+Istotną rolę będzie w niej odgrywać sprawdzanie poprawności wprowadzanych
+danych, które zapiszemy właśnie za pomocą instrukcji if-else.
+</div>
+<br clear="all">
+
+<br>
+
+<p>
+Zobaczmy teraz jak wygląda klasa Bankomat.<br>
+
+<p>
+Oczywiście, bankomat - sprawdzając dane - komunikuje się z jakimś "kartowym"
+czy bankowym, centrum. W naszym programie będzie go (w uproszczony sposób)
+reprezentować klasa CardIdent (na razie potraktujmy ją jako daną, bo jej
+konstrukcja wykracza poza omówiony dotąd materiał). <br>
+
+Dla naszej klasy Bankomat ważne jest, by rozpoczynając działanie nawiązała
+łacznośc z klasą CardIdent, co symulujemy w konstruktorze klasy Bankomat
+poprzez wywołanie statycznej metody klasy CardIdent - init().<br>
+<br>
+
+W metodzie <b>askPin()</b> - po pobraniu w dialogu wejściowym pin-u - bankomat
+zwraca się do klasy CardIdent o potwierdzenie numeru pin i o kwotę limitu
+związaną z daną kartą (skorzystamy tu ze statycznej metody <b>CardInit.getLimit()</b>, która zwraca aktualny limit lub -1, gdy numer pin jest wadliwy):<br>
+<br>
+
+       limit = CardInit.getInit()<br>
+<br>
+
+Jeżeli pin jest Ok, to zapisujemy dane: pin oraz bieżący limit w prywatnych polach klasy Bankomat (<b>currentPin</b> i <b>currentLimit</b>
+). Zwróćmy uwagę: informacje te są niedostępne dla żadnej innej klasy oprócz
+Bankomatu. Metoda askPin() zwraca wartośc true, jeśli wszystko się powiodło
+i false - jeśli klient zrezygnowal z transakcji lub wprowadził wadliwy pin.<br>
+<br>
+
+<div class="notel">Przypomnijmy, że uzyskana w dialogu kwota do wypłaty jest napisem. Musimy
+go przekształcić na liczbę za pomocą metody Integer.parseInt()
+</div>
+
+<div class="ddd"><br>
+Metoda askAmmountAndWithdraw
+pyta o kwotę do wyplaty - będzie ją przechowywac w zmiennej ammount (ale
+tylko w przypadku, gdy jest już ustalony pin; jeśli  pin był wadliwy, to
+pole currentPin zawiera null i metoda konczy działanie z wynikem false -
+nie będzie wyplaty; to zapewniamy w pierwszym wierszu metody, pisząc if (currentPin
+== null) return false;).
+</div>
+
+<br clear="all">
+
+<p>
+Jeśli kwota do wypłaty przekracza limit - to do wypłaty też nie dochodzi
+i pojawia się odpowiedni komunikat. W przeciwnym razie - kwota jest wypłacana,
+do centrum kartowego posyłany jest komunikat o wypłaconej kwocie po to, by
+ew. zmniejszyć dzienny limit (  CardIdent.changeLimit(currentPin, ammount);
+), a wartości pól currentPin i currentLimit są zerowane w przygotowaniu do
+następnej transakcji.<br>
+<br>
+
+<pre>
+import javax.swing.*;
+
+public class Bankomat {
+
+  private static String CANCEL_MSG = "Zrezygnowano z transakcji. Do widzenia";
+  private String currentPin;
+  private int  currentLimit;
+
+  public Bankomat() {
+    CardIdent.init();
+  }
+
+  public boolean askPin() {
+    String pin = ask("Wprowadz numer PIN:");
+    boolean pinOk = false;
+    int limit = 0;
+    if (pin == null)  say(CANCEL_MSG);
+    else {
+      limit =  CardIdent.getLimit(pin);
+      if (limit == -1) say("Wadliwy PIN");
+      else  {
+        pinOk = true;
+        currentPin = pin;
+        currentLimit = limit;
+      }
+    }
+    return pinOk;
+  }
+
+  public boolean askAmmountAndWithdraw() {
+    if (currentPin == null) return false;
+    boolean withdrawAccepted = false;
+    String request = ask("Podaj kwote do wyplaty:");
+    if (request == null) say(CANCEL_MSG);
+    else {
+      int ammount = Integer.parseInt(request);
+      if (ammount &gt; currentLimit) say("Limit przekroczony.");
+      else {
+        CardIdent.changeLimit(currentPin, ammount);
+        say("Wyplacam kwote : " + ammount + " zl");
+        withdrawAccepted = true;
+        }
+    }
+    currentPin = null;
+    return withdrawAccepted;
+  }
+
+  private String ask(String txt) {
+    return JOptionPane.showInputDialog(txt);
+  }
+
+  private void say(String txt) {
+    JOptionPane.showMessageDialog(null, txt);
+  }
+</pre>
+
+<p>Zwróćmy też uwagę na dwa elementy:<br>
+<ul>
+<li>dla ułatwienia sobie życia w klasie Bankomat zawarliśmy dwie metody
+dialogowe - ask i say; uczyniliśmy je jednak prywatnymi, bowiem mają znaczenie
+tylko dla klasy Bankomat i nie powinny być udostępnione użytkownikom tej
+klasy</li>
+
+<li>komunikat o rezygnacji z transakcji (który pojawia się gdy
+użytkownika zamyka okno dialogowe np. pzrycsikiem Cancel) uczyniliśmy stałą
+statyczną w klasie; stałą - ponieważ jest on wykorzystywany w dwóch miejscach
+(osczędność pisania i łatwość zmiany) i ponieważ nie ma sensu; statyczną
+- ponieważ nie ma sensu by był on zawarty w każdym obiekcie klasy Bankomat.<br></li>
+</ul>
+
+<p>
+W katalogu samples\bankomat9 znajdują się wszystkie omawiane klasy. <br>
+
+Informacje niezbędne do testowania programu:<br><br>
+
+<table cellpadding="2" cellspacing="2" border="1" width="100%">
+<tbody><tr><td valign="Top">Poprawne PINy<br></td><td valign="Top">Limit <br></td></tr><tr><td valign="Top">1234<br></td><td valign="Top">200<br></td></tr><tr><td valign="Top">2345<br></td><td valign="Top">300<br></td></tr><tr><td valign="Top">3456<br></td><td valign="Top">400<br></td></tr><tr><td valign="Top">4567<br></td><td valign="Top">500<br></td></tr><tr><td valign="Top">5678<br></td><td valign="Top">500<br></td></tr><tr><td valign="Top">6789<br></td><td valign="Top">500<br></td></tr></tbody>
+</table>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index72.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index74.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

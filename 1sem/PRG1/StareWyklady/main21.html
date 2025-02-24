@@ -1,0 +1,546 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index20.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 4"></A><div class="tytulpunktu">4. Funkcje</div>
+
+<a name="W3.4"></a>
+
+<p>Idea podziału programu na fragmenty, które mogą być opracowywane odrębnie
+od siebie, do kodu włączone jednokrotnie a wywoływane wielokrotnie jest zrealizowana
+(w taki czy inny sposób) chyba we wszystkich językach programowania.<br>
+ Takie wyodrębnione fragmenty nazywa się<A NAME="EDU.skorowidz.termin podprogram 21_173"></A> <b>podprogramami</b>,<A NAME="EDU.skorowidz.termin procedura 21_174"></A> <b>procedurami</b>
+  lub<A NAME="EDU.skorowidz.termin funkcja 21_175"></A> <b>funkcjami</b>. <br>
+ Różnice pojęciowe są tu raczej rozmyte. Niekiedy mówi się ogólnie o procedurach
+lub podprogramach (<b><i>procedure, subroutine</i></b>), funkcjami (<b><i>
+function</i></b>) nazywając specjalne ich przypadki, które zwracają wartości.<br>
+ Języki C i C++ operują wyłącznie pojęciem funkcji, nazywając tak oba rodzaje
+procedur.<br>
+Teraz zastosujemy własnie tę terminologię.<br>Należy dodać, że w innych niż C++ językach obiektowych (w tym w Javie) odpowiednikiem pojęcia funkcji jest pojęcie <b>metody</b>. O różnicy między funkcjami i metodami dowiemy się przy okazji omawiania podstaw programowania obiektowego.<br>
+ <br><A NAME="EDU.skorowidz.termin funkcja 21_176"></A> 
+ <div class="def"> <b>Funkcja</b> - to wyodrębniony opis czynności (zestaw instrukcji)
+zapisany we fragmencie kodu, który może być jednokrotnie połączony (przez
+wstawienie albo w fazie kompilacji lub wykonania) z programem źródłowym i
+wielokrotnie użyty za pomocą odwołań z innych fragmentów programu</div>
+<br>
+<p>Funkcje definiujemy w programie za pomocą dostarczenia:<br>
+<ul>
+<li><A NAME="EDU.skorowidz.termin funkcja nagłówek 21_177"></A> <b>nagłówka funkcji</b> (opisującego m.in. nazwę funkcji oraz informacje, które mogą być funkcji przekazane),</li>
+
+<li><<A NAME="EDU.skorowidz.termin funkcja ciało 21_178"></A> b>ciała funkcji</b> (samego kodu, opisującego czynności wykonywane przez funkcję).</li>
+</ul>
+
+<br>
+
+<div class="notel">Uwaga. W klasycznym REXXie występuje pojęcie procedury, a składnia jest
+zupełnie inna.</div>
+
+<div class="ddd">
+<br>
+W różnych językach w różny sposób definiuje się nagłówki i ogranicza ciało funkcji.
+</div>
+
+<br clear="all">
+
+<p>Umówmy się, że w naszym uproszczonym, zmodyfikowanym REXXie
+nagłówki funkcji będziemy oznaczać słowem <b>function</b>, występującym jako
+pierwsze słowo w wierszu, po którym następuje nazwa funkcji i w nawiasach
+okrągłych lista parametrów (opis informacji, przekazywanej do funkcji) a
+kod funkcji będzie się zawsze kończył<A NAME="EDU.skorowidz.termin instrukcja_return 21_179"></A> instrukcją <b>return</b>, która zwróci
+sterowanie do miejsca wywołania funkcji, ew. zwracając też wynik funkcji
+jako wartość wyrażenia podanego w instrukcji return.<br>
+<br>
+
+<div class="syntax"><br>
+        <b>function</b> <i><b>nazwa_funkcji </b></i><b>(</b> <i><b>lista_parametrów</b></i> <b>)</b><br>
+                <i>ins1</i><br>
+                <i>ins2</i><br>
+                ...<br>
+                <i>insN</i><br>
+                <b>return [</b> <b><i>wyrażenie</i></b> ]<br>
+<br>
+Uwagi: <br>
+<ul>
+  <li>nawiasy kwadratowe oznaczają, że wyrażenie w instrukcji return (zwrot wymiku) jest opcjonalne,</li>
+  <li><A NAME="EDU.skorowidz.termin lista_parametrów 21_180"></A> lista parametrów stanowi listę zmiennych, rozdzielonych przecinkami; lista może być pusta.</li>
+</ul>
+</div>
+
+<br>
+<p>Cóż to jest lista parametrów? <br>
+<br><A NAME="EDU.skorowidz.termin parametr 21_181"></A> <div class="def">Parametry są zmiennymi za pomocą których w ciele funkcji uzyskujemy
+dostęp do informacji przekazanych przy wywołaniu funkcji.</div>
+<br>
+<p>Zatem, żeby zrozumieć budowę funkcji musimy też wiedzieć w jaki sposób funkcję się wywołuje.<br>
+<br><A NAME="EDU.skorowidz.termin funkcja wywołanie 21_182"></A> 
+<div class="syntax"> Wywołanie funkcji jest <b>wyrażeniem</b> o następującej postaci:<br>
+    <br>
+            <i><b>nazwa_funkcji(lista_argumentów)</b></i><br>
+<br>
+Przy czym:<br>
+<ul>
+  <li>wyrażenie to ma wartość wyniku funkcji (wyrażenia w instrukcji return),
+jeśli funkcja zwraca wynik (jeśli jakieś wyrażenie w return jest podane);</li>
+
+  <li><A NAME="EDU.skorowidz.termin lista_argumentów 21_183"></A> lista argumentów jest listą wyrażeń, rozdzielonych przecinkami. Wyrażenia
+są opracowywane, a   ich wartości przekazywane funkcji i dostępne wewnętrz
+funkcji jako wartości parametrów znajdujących się na pozycjach odpowiadających
+pozycjom argumentów;</li>
+
+  <li><font color="#cc0000">nawias otwierający listę argumentów musi następować zaraz po nazwie funkcji</font> (bez rozdzielającej spacji). <i>Uwaga. Konieczność spełnienia tego wymagania zależy od języka programowania</i>. <br>
+  </li>
+</ul>
+</div>
+
+<br>
+<p>Np. możemy zdefiniować funkcję, której zadaniem będzie porównanie dwóch wartości.
+Każde wywołanie tej funkcji będzie jej przekazywać dwa argumenty - wartości
+do porównania. Będą one dostępne w funkcji poprzez nazwy odpowiednich parametrów.
+Po porównaniu funkcja zwróci wynik do miejsca wywołania (0 - wartości rózne,
+1, - pierwszy argument większy od drugiego, -1 - pierwszy mniejszy od drugiego).<br><br>
+
+<img src="images/Funkcja.jpg" alt="Funkcja" width="516" height="398" border="1" align="Right" hspace="15">
+Zobaczmy.<br>
+Nazwa funkcji: compare<br>
+Parametry: val1, val2<br>
+Wywołana najpierw z argumentami a i b (ich wartości są przekazywane funkcji i wchodzą "na miejsce" parametrów val1 i val2).<br>
+Kod funkcji stwierdza, że val1 (czyli wartość a) jest mniejsze od val2 (czyli
+wartości b) i stosownie do tego ustala wartość zmiennej r. Wartość ta jest
+zwracana do miejsca wywołania przez instrukcję return, a instrukcja przypisania
+podstawia ją na zmienną wynik.<br>
+Zauważmy dalej, że  funkcje tę:
+
+<ul>
+  <li>możemy z kodu programu wywoływać wielokrotnie (ostatnia instrukcja na rysunku - drugie wywołanie)</li>
+  <li>jako argumenty możemy podawać dowolne wyrażenia (np. y+1 lub wartość zwróconą przez inną funkcję)</li>
+</ul>
+<br clear="all">
+
+<br>
+
+<div class="notel">
+W innych językach będzie inaczej: np. w C  program składa się wyłącznie
+z definicji funkcji (oraz ew. z deklaracji tzw zmiennych globalnych), wśród
+których jedna - o nazwie main - jest wyróżniona i stanowi odpowiednik naszego
+"głównego programu". Java stanowi nieco inny przypadek, bowiem jest językiem
+obiektowym i operuje wyłącznie klasami.
+</div>
+
+<div class="ddd">
+<br>
+Definiując funkcje musimy wiedzieć
+nie tylko jak sformułować jej definicję, ale również w jaki sposób umieścić
+ją w strukturze całego programu. I znowu, różne języki stosują tutaj różne
+reguły.<br>
+<br>
+W naszym uproszczonym REXXie będziemy rozróżniać główny program i funkcje. <br>
+Główny program zaczynać się będzie w pierwszym wierszu pliku źródłowego i
+musi kończyć się instrukcją exit (koniec wykonania programu). Dopiero potem
+mogą następować definicje funkcji.
+</div>
+
+<br clear="all">
+
+<p>Zobaczmy przykład. Program korzystający ze zdefiniowanej funkcji compare
+i porównujący wartości wprowadzane przez użytkownika z konsoli. Przy okazji
+na tym przykładzie warto zaobserwować, że funkcja może być wywoływana
+z innej funkcji.<br>
+
+<pre>
+/* Test funkcji  */
+
+do forever
+  v1 = linein();
+  if (v1 = '') then exit;
+  v2 = linein();
+  if (v2 = '') then exit;
+  showComparison( v1, v2);
+end
+exit
+
+
+function compare ( val1, val2 )
+
+   if ( val1 &gt; val2 ) then return 1;
+   else if (val1 &lt; val2) then return -1;
+   else return 0;
+
+
+function showComparison ( val1, val2)
+
+   msg[1] = "większa od";
+   msg[0] = "rowna";
+   i = -1;
+   msg[i] = "mniejsza od";
+
+   r = compare( val1, val2 );
+   say "Wartość " val1 " jest " msg[r] "wartości " val2
+   return
+
+</pre>
+
+<p>Pętla <b><i>do forever</i></b> (słowo kluczowe języka) wykonywana jest w
+nieskończoność. W petli tej użytkownik wprowadza z konsoli po kolei dwie
+wartości (liczby lub napisy!). Wciśnięcie "pustego" ENTER przerywa działanie
+pętli (bowiem kończy program - instrukcja exit). Po wprowadzeniu wartości
+wołana jest funkcja showComparison, która sama z kolei woła funkcję compare
+i wyprowadza wyniki porównania. Wyprowadzane napisy ("mniejsze od", "równe",
+"większe od") umieściliśmy w tablicy, której indeksy odpowiadają wynikom
+porównania zwracanym przez funkcję compare (w ten sposób unikamy instrukcji
+if, które - jeśli są rozbudowane - stanowią częste źródło błędów logicznych
+w programie). Na marginesie: REXX dopuszcza dowolne wartości jako indeksy
+tablicy, ale wartości, które nie są nieujemnymi liczbami całkowitymi powinny
+być podawane jako zmienne, dlatego użyliśmy zmiennej <b><i>i</i></b> z nadaną wartością
+-1 do indeksowania elementu-napisu "mniejsze od". <br>
+<br>
+Zwróćmy też uwagę na to, że funkcja <i><b>showComparison</b></i> nie zwraca żadnych wartości. Kończy jej działanie instrukcja <i><b>return</b></i> bez podanego wyrażenia "do zwrotu".<br>
+<br>
+<font color="#ff6600"><b>Proszę zapisać i uruchomić omawiany wyżej program na własnym komputerze. </b></font><br>
+<br>
+Funkcje nie muszą mieć parametrów.<br>
+<br>
+
+<div class="important"> Jeżeli funkcja nie ma żadnych parametrów to w jej definicji  i tak trzeba podać po nazwie nawiasy okrągłe ().<br>
+Przy wywołaniu funkcji bez podawania jakichkolwiek argumentów - po nazwie funkcji również podajemy nawiasy okrągłe ()</div>
+
+<br>
+<p>Możemy teraz stwierdzić, że w wykorzystywanych przez nas wcześniej funkcjach
+linein(), time(), right() nie ma nic tajemniczego. Po prostu, niektóre użyteczne
+funkcje już zostały napisane i są udostępnione jako tzw.<A NAME="EDU.skorowidz.termin funkcja_wbudowana 21_184"></A> funkcje wbudowane
+(wbudowane w REXX). W innych językach mamy tzw.<A NAME="EDU.skorowidz.termin biblioteka_funkcji_standardowych 21_185"></A> biblioteki funkcji standardowych,
+które też już są gotowe do wykorzystania. Pakiety Javy (choć mają nieco inne
+znaczenie) możemy kojarzyć pod względem funkcjonalności z bibliotekami funkcji
+standardowych.<br>
+
+<br>
+
+<div class="def"><A NAME="EDU.skorowidz.termin funkcja_wbudowana 21_186"></A> Funkcje wbudowane lub<A NAME="EDU.skorowidz.termin funkcja_standardowa 21_187"></A> standardowe - to skompilowane, gotowe do wykorzystania
+w programach funkcje, spełniające wiele użytecznych zadań np. przetwarzanie
+łańcuchów znakowych, wejście-wyjście, funkcje matematyczne
+</div>
+
+<br clear="all">
+
+<div class="notel">Przez <b>definicję zmiennej</b> w REXXie będziemy rozumieli pierwsze jej
+użycie (np. przypisanie) jej wartości). W innych językach rozróżnia się deklarację
+i definicję zmiennej; o deklaracjach będziemy mówić ucząc się Javy</div>
+
+<div class="ddd">
+<br>
+Tworząc
+i używając funkcji musimy zdawać sobie sprawę z dwóch ważnych problemów:<br>
+<ul>
+  <li>po pierwsze, jakie są relacje pomiędzy zmiennymi <b>definiowanymi</b> w danej funkcji, a zmiennymi występującymi w programie poza tą funkcją (w "programie glównym", w innych funkcjach),</li>
+  <li>po drugie, <b>w jaki sposób przekazywane</b> są funkcji argumenty.<br>
+  </li>
+</ul>
+</div>
+
+<br clear="all">
+<br>
+
+<p>W większości języków programowania zmienne definiowane w kodzie funkcji są tak zwanymi <b>zmiennymi lokalnymi</b>. <br><br>
+
+<div class="notel33">
+W naszym uproszczonym REXXie mamy do czynienia tylko z lokalnymi blokami
+wprowadzanymi przez definicję funkcji. W innych językach możemy mieć zagnieżdżone
+bloki lokalne wprowadzane przez instrukcję grupującą, np. w C czy Javie -
+nawiasy klamrowe</div>
+
+<div class="ddd">
+<br>
+<br>
+<br>
+Ciało funkcji  jest szczególnym przypadkiem tzw.<A NAME="EDU.skorowidz.termin blok_lokalny 21_188"></A> bloku
+lokalnego. Istotnie, definicja funkcji grupuje kod (w REXXie między nagłowkiem
+funkcji  a słowem return włącznie)  - stąd nazwa "blok", natomiast słowo
+"lokalny" wiąże się z właściwościami tego bloku, m.in. z tym, że każda zmienna
+zdefiniowana w tym bloku ma charakter lokalny) czyli:
+</div>
+
+<br clear="all">
+
+<br><A NAME="EDU.skorowidz.termin zmienna_lokalna 21_189"></A> 
+<div class="def"> <b>Zmienna lokalna</b> jest zmienną zdefiniowaną w bloku lokalnym, widzianą
+(przez kompilator czy interpreter) i istniejącą tylko w tym bloku, od początku
+definicji zmiennej do końca bloku</div>
+
+<br>
+<p>Zobaczmy przykład:<br>
+<pre>
+a = 3;
+b = 5;
+func1();
+func2();
+say "main a =" a "b =" b;
+exit;
+
+function func1()
+  a = 7;
+  b = 10;
+  c = 12;
+  func2();
+  say "func1 a =" a "b = " b "c = " c;
+  return;
+
+function func2()
+  a = 100;
+  b = 101;
+  c = 101;
+  say "func2 a =" a "b = " b "c = " c;
+  return;
+</pre>
+
+<br>
+
+<div class="listing33r">
+<i>Wydruk z programu</i><br>
+func2 a = 100 b =  101 c =  101<br>
+func1 a = 7 b =  10 c =  12<br>
+func2 a = 100 b =  101 c =  101<br>
+main a = 3 b = 5<br><br>
+</div>
+
+<div class="ddd">
+<br>
+Ważne obserwacje:<br>
+<ul>
+  <li>mimo tych samych nazw zmienne a i b w funkcji func1 są innymi zmiennymi niż a i b w funkcji func2 oraz a i b w programie głównym</li>
+  <li>zmienna c jest znana w func1 i jest znana w func2 (ale tu mimo tej
+samej nazwy jest to inna zmienna), natomiast nie możemy odwołać się do c
+w programie głównym, bo tu ta zmienna jest nieznana (ściślej - jej wartość
+będzie nieokreślona) </li>
+</ul>
+</div>
+
+<br clear="all">
+
+<p>Widać tu wyraźnie,  że zmienne a, b, c są lokalne w funkcjach func1 i func2
+(a zatem za każdym razem istnieją tylko w ramach bloku danej funkcji). I
+co potwierdza  wydruk programu każda funkcja operuje na swoich lokalnych
+zmiennych a, b, c. Dlatego - mimo wywołania func2 z func1 - wartości zmiennych
+a, b, c na końcu func1 równe są 7, 10, 12 (a nie 100, 101,101). Tak samo
+a i b na końcu działania programu (już po wywołaniu func1) mają wartości
+nadane w dwóch pierwszych instrukcjach programu głównego.<br>
+<br>
+Czasami jednak - oprócz dostępu do informacji przekazanej jako argumenty
+wywołania - funkcja winna mieć dostęp do zmiennych zdefiniowanych poza jej
+kodem. <br><br>
+
+<div class="notel33">
+W języku C podobny efekt uzyskuje się za pomocą tzw. zmiennych globalnych,
+deklarowanych poza ciałem jakiejkolwiek funkcji. W Javie pewnym odpowiednikiem
+zmiennych globalnych są pola klasy.
+</div>
+
+<div class="ddd">
+<br>
+W REXXie mechanizm "dzielenia" zmiennych
+przez główny program i funkcje jest bardzo elastyczny. Dla każdej funkcji
+- indywidualnie - możemy w jej nagłówku podać jakie zmienne (w tym tablice)
+definiowane poza funkcją będą dostępne w jej ciele. Służy temu klauzula <b>expose</b>.
+</div>
+
+ <br clear="all">
+<br>
+
+<div class="syntax">
+            <b>function</b> (<i><b>lista_parametrów</b></i>) <b>expose</b> <i><b>lista_zmiennych</b></i> <br>
+<br>
+    gdzie:<br>
+<ul>
+  <li>lista_zmiennych  - lista nazw zmiennych (rozdzielonych spacjami)  zdefiniowanych poza funkcją, a do których
+funkcja będzie miała dostęp,</li>
+
+  <li>Uwaga. Zmienne oznaczające tablice zapisujemy podając bezpośrednio po nazwie zmiennej nawiasy klamrowe [ ]
+  </li>
+</ul>
+</div>
+
+<p>Drugi, istotny, wspomniany wcześniej, problem dotyczy<A NAME="EDU.skorowidz.termin funkcja przekazywanie_argumentów 21_190"></A> <b>sposobu przekazywania argumentów</b> przy wywołaniu funkcji.<br>
+<br>
+Generalnie możemy mieć dwa sposoby przekazywania argumentów: przez wartość i przez adres.<br>
+<br><A NAME="EDU.skorowidz.termin funkcja przekazywanie_argumentów_przez_wartość 21_191"></A> 
+<div class="def"> Mówimy, że argument przekazywany jest <b>przez wartość</b>, jeśli przy
+wywołaniu funkcji wartość argumentu kopiowana jest do zmiennej-parametru występującej w definicji funkcji na liście parametrów</div>
+
+<br>
+<p>Ma to poważne konsekwencje. Otóż parametry funkcji są zmiennymi lokalnymi.
+Zatem - przy przekazywaniu argumentów przez wartość - w funkcji mamy dostęp
+do wartości przekazanego argumentu (poprzez zmienną-parametr), ale zmiany
+tej wartości będą dotyczyć tylko zmiennej-parametru, a nie zmiennej - przekazanego
+argumentu.<br>
+<br>
+Zobaczmy:<br>
+
+<pre>
+a = 3;
+tryChange(a);
+say a;
+exit;
+
+function tryChange(a)
+   a = a + 1;
+   return;
+</pre>
+
+<p>Funkcja otrzymuje - jako parametr <i><b>a</b></i> - wartość zmiennej <i><b>a</b></i> zdefiniowanej w pierwszym wierszu.<br>
+Ale mamy tu przekazanie przez wartość, zatem wartość zmiennej <b><i>a</i></b> (3) jest kopiowana do zmiennej lokalnej - parametru <i><b>a</b></i> (przypadkowo nazywa się tak samo, ale jak już wiemy jest całkiem inną zmienną). Zatem wszystko co robimy w funkcji ze zmienną <i><b>a</b></i> ma lokalny charakter i nie dotyczy zmiennej <i><b>a</b></i> z programu głównego.<br>
+<br>
+
+<center>
+<div class="important"> Modyfikacje argumentów przekazanych przez wartość są nieskuteczne</div><br>
+</center>
+
+<br>
+
+<div class="notel">
+Ze względu na implementację tablic w C, C++ i Javie elementy przekazanych
+funkcji tablic mogą być modyfikowane (ale nie oznacza to, że argumenty są
+przekazywane przez adres). W naszym uproszczonym REXXie nie możemy przekazywac
+tablic jako argumentów, zamiast tego - dla udostępniania tablic funkcjom
+-  będziemy stosować klauzulę expose
+</div>
+
+<div class="ddd">
+<br><A NAME="EDU.skorowidz.termin funkcja przekazywanie_argumentów_przez_adres 21_192"></A> W niektórych językach programowania
+możliwe jest przekazywania argumentów przez adres (wtedy funkcja otrzymuje
+nie wartość, ale adres argumentu). Mając adres możemy oczywiście nie tylko
+pobrać dane spod tego adresu, ale i zapisać tam jakąś nową wartość. Ten sposób
+przekazywania argumentów nie jest jednak możliwy w Javie ani też w naszym
+uproszczonym REXXie, zatem pozostawimy go na boku.
+</div>
+
+<br clear="all">
+<br>
+
+<p>Po tej dawce dość skomplikowanych rozważań warto spojrzeć na omawiane zagadnienie bardziej ogólnie.  <br>
+Łatwo możemy sobie wyobrazić, że wprowadzenie funkcji do programu oszczędza
+nam pisaniny. Oto jakiś wielokrotnie powtarzany kod wyodrębniamy w funkcję
+i zapisujemy tylko raz, a wszędzie tam, gdzie poprzednio ten kod występował
+umieszczamy wywołanie tej funkcji.<br>
+Daje to nie tylko większą efektywność programowania, ale i zwiększa jego
+elastyczność. Przy modyfikacjach kodu odpowiedzialnego za jakieś zadanie
+trzeba zrobić to tylko raz - w funkcji, która go zawiera. <br>
+Ale nie tylko to sprawia, że stosowanie funkcji w programowaniu jest korzystne.<br>
+Przecież istotą tworzenia i użycia funkcji jest wyodrębnienie w ramach dużego
+problemu, który jest rozwiązywany przez nasz program - mniejszych podproblemów
+i zajęcie się każdym z nich niejako osobno, skupiając się wyłącznie na konkretnej
+specyfice danego zadania.<br>
+ <br>
+Wróćmy do problemu wyliczenia ceny procesora wg podanych przez użytkownika informacji.<br>
+Jak pamiętamy, zarysowując w pierwszym wykladzie różne możliwe algorytmy
+rozwiązania tego problemu, zwracaliśmy uwagę na potrzebę sprawdzania poprawności
+danych (czy wprowadzona cena jest liczbą). Uwzględnimy teraz ten warunek.
+W programie będziemy również chcieli dać użytkownikowi możliwość policzenia
+udziału w sumarycznej cenie ceny wybranego komponentu oraz zmiany ceny wybranego
+komponentu.<br>
+Nasz problem rozbijemy na następujące podproblemy:<br>
+<ul>
+  <li>wprowadzenie ceny i-tego komponentu komputera wraz ze sprawdzeniem jej poprawności</li>
+  <li>wyliczenie sumarycznej ceny komputera</li>
+  <li>wybór numeru komponentu z listy</li>
+  <li>policzenie udziału ceny komponentu</li>
+  <li>zmiany ceny komponentu.<br>
+  </li>
+</ul>
+
+<p>Trzy pierwsze zadania zrealizujemy jako funkcje (wprowadzenie ceny komponentu
+- inputData(..), obliczenie ceny komputera - sumPrices(), wybór numeru komponentu
+z listy - choose()). Pozostałe dwa, wraz z organizacją danych i kolejności
+wywołań funkcji będą stanowić treść programu głównego.<br>
+<br>
+Program główny będzie miał następującą postać:<br>
+<br>
+
+<pre>
+/* Tablica nazw składników */
+
+elt[0] = 6;  /* liczba skladnikow - w elemencie z indeksem 0 */
+elt[] = { "Procesor", "Płyta", "Pamięć", "Dysk", "Monitor", "Inne" };
+
+cena[0] = elt[0]  /* tyle samo cen ile skladnikow */
+
+do i = 1 to cena[0]             /* pobieranie cen i umieszczanie w tablicy cena */
+   cena[i] = <b>inputData</b>(elt[i]);
+end
+
+more = 1;                             /* czy powtarzać obliczenia i zmiany ? */
+do while (more = 1)
+   cenaOg = <b>sumPrices</b>();              /* obliczenie ceny komputera */
+   say "Cena komputera wynosi :" cenaOg;
+
+   nrSkl = <b>choose</b>("Wybierz składnik, którego udział w cenie chcesz policzyć");
+   if (nrSkl \= '') then do      /* jeżeli wybrano składnik  - licz udział */
+     udzial = cena[nrSkl]/cenaOg;
+     say "Udzial ceny skladnika" elt[nrSkl] "wynosi: " udzial;
+   end
+
+   nrSkl = choose("Wybierz skladnik, ktorego cene chcesz zmienic");
+   if (nrSkl = "") then more = 0; /* jeżeli zrezygnowano z wyboru - koniec działania*/
+   else cena[nrSkl] = <b>inputData</b>( elt[nrSkl] );
+
+end
+exit;
+
+</pre>
+
+<p>A funkcje:<br>
+
+<pre>
+function inputData(nazwaSkl)
+   say "Wprowadz cene dla: " nazwaSkl;
+   trzebaPobracDane = 1;
+   do while (trzebaPobracDane)
+      cena = linein()
+      if datatype(cena) = "NUM" then trzebaPobracDane = 0;
+   end
+   return cena;
+
+function sumPrices() expose cena[]
+  sum = 0;
+  do i = 1 to cena[0]      /* umowa: cena[0] zawiera liczbę elementów tablicy cena */
+    sum = sum + cena[i];
+  end
+  return sum;
+
+function choose(msg) expose elt[]
+  say msg;
+  do i = 1 to elt[0]         /* umowa: elt[0] zawiera liczbę elementów tablicy elt */
+    say i '-' elt[i];
+  end
+  do forever
+    say "Podaj wybrany numer lub samo ENTER by zrezygnowac:"
+    nr = linein();
+    if nr = "" then leave;
+    if (nr &lt; 1 | nr &gt; elt[0]) then say "Zły wybór.";
+    else leave;
+  end
+  return nr;
+
+</pre>
+
+<p>Uwagi: <br>
+<ol>
+  <li>w funkcji inputData sprawdzamy czy wprowadzona cena jest liczbą, jeśli
+nie - ponawiamy wprowadzania danych. Wykorzystujemy przy tym wbudowaną funkcję
+datatype(), która ma różne formy, a w zastosowanej tutaj (datatype(arg))
+zwraca napis "NUM", jeśli argument jest liczbą,</li>
+  <li>w funkcji choose zwracamy pusty łańcuch znakowy ("") gdy użytkownik zrezygnował z wyboru wciskając tylko ENTER.</li></ol>
+
+<p><font color="#ff6600"><b> Proszę zapisać i uruchomić omawiany wyżej program na własnym komputerze. </b></font></p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index20.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

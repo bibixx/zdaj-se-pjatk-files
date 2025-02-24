@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN"><html><head>
+ 	
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=iso-8859-2"><title>Tablice</title>
+  
+ 	 	
+  <meta name="GENERATOR" content="OpenOffice.org 1.0  (Win32)">
+ 	
+  <meta name="AUTHOR" content="Krzysztof Barteczko">
+ 	
+  <meta name="CREATED" content="20011102;4100000">
+ 	
+  <meta name="CHANGEDBY" content="Krzysztof Barteczko">
+ 	
+  <meta name="CHANGED" content="20020622;6480000">
+ 	
+	<link rel="stylesheet" type="text/css"
+href="style/common.css">
+
+  <meta name="author" content="Krzysztof Barteczko"></head>
+
+<body bgcolor="whitesmoke">
+ 
+<p>Tablica jest szczególnym przypadkiem zbioru danych wielowymiarowych.</p>
+ 
+<p>Dane w zbiorze danych wielowymiarowych mogą być traktowane
+jako punkty w k-wymiarowej (abstrakcyjnej) przestrzeni, z którymi skojarzona
+jest dodatkowa informacja. Każdy z wymiarów przedstawia jakąś cechę danych.
+Zestaw wartości cech konkretnej danej formuje punkt k-przestrzeni, a wartość
+danej jest konkretną informacją skojarzoną z tym punktem. </p>
+ 
+<p><b>Wielowymiarowy zbiór danych jest zatem zbiorem
+zestawów (K<span lang="en-US"><sub>1</sub>, K<sub>2</sub>, .... K<sub>k</sub>
+, I), </span></b></p>
+ 
+<p><b><span lang="en-US">gdzie K<sub>i</sub>  klucz
+w i-m wymiarze (wartość i-ej cechy danej), I  informacja (wartość samej
+danej).</span></b></p>
+  
+<p>Np. dane o dziennym utargu sieci sklepów mogą być
+przedstawione jako punkty dwuwymiarowej dyskretnej przestrzeni; wymiarami
+są  dni i lokalizacja, a informacja skojarzona z każdym punktem określa utarg.<br>
+<br>
+</p>
+ 
+<center>
+  <table width="615" border="1" bordercolor="#000000" cellpadding="5" cellspacing="0">
+  <col width="143"><col width="144"><col width="144"><col width="143"><tbody>
+    <tr valign="Top">
+      <td width="143" nowrap="true">
+      <p>Lokalizacja <b>&gt;&gt;</b></p>
+   
+      <p>Dni</p>
+   </td>
+      <td width="144">
+      <p>Warszawa</p>
+      </td>
+      <td width="144">
+      <p>Poznań</p>
+      </td>
+      <td width="143">
+      <p>Gdańsk</p>
+      </td>
+      </tr>
+    <tr valign="Top">
+      <td width="143">
+      <p>1 lipca</p>
+      </td>
+      <td width="144">
+      <p>10000</p>
+    </td>
+      <td width="144">
+      <p>8000</p>
+      </td>
+      <td width="143">
+      <p>9000</p>
+      </td>
+      </tr>
+    <tr valign="Top">
+      <td width="143">
+      <p>2 lipca</p>
+      </td>
+      <td width="144">
+      <p>12000</p>
+     </td>
+      <td width="144">
+      <p>7000</p>
+       			</big></td>
+      <td width="143"> 				
+      <p>10000</p>
+       			</td>
+      </tr>
+    <tr valign="Top">
+      <td width="143"> 				
+      <p>3 lipca</p>
+       			</td>
+      <td width="144"> 				
+      <p>9000</p>
+       			</td>
+      <td width="144"> 				
+      <p>6000</p>
+       			</td>
+      <td width="143"> 				
+      <p>13000</p>
+       			</td>
+      </tr>
+    </tbody>
+</table>
+ </center>
+  
+<p>Zauważmy więc, że to co ogólnie
+możemy traktować jako tablicę wielowymiarową, w teorii struktur danych nazywa
+się zbiorem danych wielowymiarowych (multidimensional data set)..</p>
+<p>Natomiast "programistyczne" pojęcie tablicy wielowymiarowej
+(multidimensional array) jest tego szczególnym przypadkiem </p>
+ 
+<p>Tablica wielowymiarowa  to szczególna postać zbioru
+danych wielowymiarowych, mianowicie taka, w której cechy danych opisywane
+są przez liczby całkowite (<b>w szczególności</b> nieujemne).
+  </p>
+  
+<p class="western" style="page-break-before: always; "><b>Tablica wielowymiarowa
+jest zatem zbiorem zestawów (i<sub>1</sub>, i<sub>2</sub>, ...  i<sub>n</sub>
+, v), </b> </p>
+ 
+<p><b>gdzie :  i<sub>k</sub> </b><b>należy do zbioru I<sub>k,   </sub>  I<sub>k</sub>  skończone zbiory liczb całkowitych
+(k =1,2..n), v  wartość danej</b>.  </p>
+ 
+<p><br>
+ </p>
+ 
+<p>Zauważmy: dane w wielowymiarowej tablicy reprezentują
+logiczną całość (np. utarg), a zatem w językach z typami będą <b>
+tego samego typu</b>. I  - co wyróżnia tablice spośród innych struktur danych  dostęp do danych
+jest swobodny (tzn. <b>nie wymaga uprzedniego dostępu do innych
+elementów zbioru</b>).  </p>
+  
+<p>Np. w przykładowej tablicy utargów pierwszy wymiar "dni"
+oznaczany jest indeksem  "i" z  możliwymi wartościami 0, 1, 2  oznaczającymi
+"1 lipca",  "2 lipca",  "3 lipca",. drugi wymiar "lokalizacja"  indeksem
+j z wartościami 0,1,2 oznaczającymi "Warszawa", "Poznań", "Gdańsk". Utarg
+sklepu w Gdańsku z 1 lipca znajduje się w tablicy na pozycji określanej przez
+indeksy 0  (w wymiarze dni) i 2 (w wymiarze lokalizacji).</p>
+ 
+<p><br>
+
+ </p>
+ 
+<p style="line-height: 150%; "><font size="2"><font size="3">Mając już najogólniejszą
+definicję tablicy  (<b>tablica jednowymiarowa jest szczególnym przypadkiem
+tablicy wielowymiarowej</b>) wypada się zastanowić czy i na ile pojęcie to
+zostało wdrożone w języki programowania.</font></font></p>
+  
+<p style="line-height: 150%; "><font size="2"><font size="3">Odpowiadając 
+na to pytanie trzeba wyraźnie rozgraniczyć <b>dwie sfery</b>:</font></font></p>
+ 
+<ul>
+ 	<li>
+    <p style="line-height: 150%; "><font size="2"><font size="3"><b>językową</b>
+ 	(co i w jaki sposób bezpośrednio możemy zapisać w tekście 	programu, czy
+logiczne, dotyczące dziedziny problemu, pojęcie 	tablicy wielowymiarowej
+możemy bezpośrednio odzwierciedlić w 	programie za pomocą środków języka?)</font></font></p>
+ 	</li>
+  <li>
+    <p style="line-height: 150%; "><font size="2"><font size="3"><b>implementacyjną</b>
+ 	(w jaki sposób tablice są technicznie realizowane?).</font></font></p>
+ </li>
+</ul>
+  
+<p style="line-height: 150%; "><font size="3">Zobaczmy, jak przykładową tablicę
+utargów można przedstawić w języku PL/I </font> </p>
+ 
+<p style="line-height: 150%; "><font size="3">Np.</font></p>
+ 
+<p style="line-height: 150%; "><font size="2"><font size="3">dcl utarg(3,3) 
+decimal fixed(12,1);   /* deklaracja tablicy */</font></font></p>
+ 
+<p style="line-height: 150%; "><font size="3">....</font></p>
+ 
+<p style="line-height: 150%; "><font size="3">    do i = 1 to 3;</font></p>
+ 
+<p style="line-height: 150%; "><font size="3">        do j = 1 to 3;</font></p>
+ 
+<p style="line-height: 150%; "><font size="3">            utarg(i,j) = ...;
+     /* odwołanie do  elementu */</font></p>
+ 
+<p style="line-height: 150%; "><font size="3">        end;</font></p>
+ 
+<p style="line-height: 150%; "><font size="3">    end;</font></p>
+ 
+<p style="line-height: 150%; "><br>
+ </p>
+ 
+<p style="line-height: 150%; "><font size="3">To samo możemy zrobić w Javie,
+za pomocą nieco innej składni</font></p>
+  
+<p style="line-height: 150%; "><font size="3">double[][] utarg = new double[3][3];</font></p>
+ 
+<p style="line-height: 150%; "><font size="2"><font size="3">for (i=0; i
+&lt; 3; i++)</font></font></p>
+ 
+<p style="line-height: 150%; "><font size="3">    for (j=0; j&lt;3; j++)</font></p>
+ 
+<p style="line-height: 150%; "><font size="3">        utarg[i][j] = ...;</font></p>
+ 
+<p style="line-height: 150%; "><font size="3">  </font> </p>
+ 
+<p style="line-height: 150%; "><br>
+ </p>
+ 
+<p style="line-height: 150%; "><font size="3">W języku Rexx tablica wielowymiarowa
+jest szczególnym przypadkiem tzw. "compound variable" (zmiennej złożonej).
+Możemy napisać:</font></p>
+ 
+<p style="line-height: 150%; "><font size="3">utarg.1.1 = 10000</font></p>
+ 
+<p style="line-height: 150%; "><font size="3">ale równie dobrze możemy napisać:</font></p>
+ 
+<p style="line-height: 150%; "><font size="3">loc = "Warszawa"</font></p>
+ 
+<p style="line-height: 150%; "><font size="3">day = "1 lipca"</font></p>
+ 
+<p style="line-height: 150%; "><font size="3">utarg.day.loc = 10000</font></p>
+  
+<p style="line-height: 150%; "><font size="3">co jest, oczywiście, dużo bardziej
+sensowne i odpowiadające ogólnemu pojęciu "tablicy".</font></p>
+  
+<p style="line-height: 150%; "><font size="3">Z kolei w języku NetRexx  który
+przejął z REXXa koncepcję pamięci asocjacyjnej - do tablicy "utarg" moglibyśmy
+odwołać się tak : utarg["1 lipca"]["Warszawa"]. </font> </p>
+ 
+<p style="line-height: 150%; "><font size="3">Oczywiście, nic nie stoi na 
+przeszkodzie (choć nie byłoby to rozsądne), by "pamiętać na boku", że "1
+lipca" ma indeks i = 0, a "Warszawa" indeks j = 0 i pisać (w NetRexxie utarg[0][0]
+)...</font></p>
+  
+<p style="line-height: 150%; "><font size="3">W każdym ze wspomnianych języków
+tablice wielowymiarowe implementowane są zupełnie inaczej.</font></p>
+  
+<p style="line-height: 150%; "><font size="3">W PL/I tablica wielowymiarowa
+jest realizowana jako struktura danych składająca się (w przypadku dynamicznym)
+z deskryptora tablicy (który określa wymiary i zakresy indeksów w każdym
+z wymiarów) oraz samych danych  ciągłej sekwencji elementów tablicy, ułożonych
+wierszami.</font></p>
+  
+<p style="line-height: 150%; "><font size="3">W Rexxie tablice wielowymiarowe
+( i jednowymiarowa) realizowane są na zasadzie pamięci asocjacyjnej (zmienna
+złożona składa się z rdzenia  stem  i kluczy, które następują po kolejnych
+kropkach  tail: praktycznie jest to implementowane jako odpowiednia struktura 
+drzewiasta).</font></p>
+  
+<p style="line-height: 150%; "><font size="3">NetRexx tłumaczy swoje tablice
+na język Javy. M.in. przy odwołaniach asocjacyjnych  na odpowiednie drzewa
+lub listy napisane w Javie, a jeśli tablica jest deklarowana  na proste
+tablice Javy.</font></p>
+  
+<p style="line-height: 150%; "><font size="3">W Javie (jak w C i C++) tablica
+wielowymiarowa implementowana jest jako swoista  "tablica tablic".<br>
+Zatem tak naprawdę (z technicznego punktu widzena) istnieją tu tylko tablice
+jednowymiarowe, a wielowymiarowość jest "symulowana" poprzez umieszczaniu
+w tablicy (jako jej elementów) wskazań na inne tablice (np. wiersze tablicy
+dwuwymiarowej).<br>
+</font></p>
+ 
+<div id="sdfootnote2">
+<p class="sdfootnote-western">  	</p>
+ </div>
+ 
+</body></html>

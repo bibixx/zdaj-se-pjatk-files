@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index62.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index64.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 4"></A><div class="tytulpunktu">4. Pakiety i importy</div>
+
+<a name="W8.5"></a>
+
+<p><A NAME="EDU.skorowidz.termin pakiet 63_535"></A> Pakiety są swoistymi bibliotekami klas. Każda taka biblioteka (pakiet) grupuje
+klasy, które mają jakąś wspólną funkcjonalność np. służą do operacji we-wy,
+budowy aplikacji sieciowych itp.<br>
+<br>
+Każda klasa należy do jakiegoś pakietu. <br>
+Klasy kompilowane z deklaracją pakietu<A NAME="EDU.skorowidz.termin package 63_536"></A> <b>package ...</b> należą do pakietu o nazwie podanej w deklaracji. <br>
+Klasy kompilowane bez deklaracji pakietu należę do pakietu "bez nazwy" (domyślnego). <br>
+Pakiet bez nazwy jest definiowany przez środowisku w którym działa Java (zwykle
+jest to bieżący katalog, ale może to być też jakaś tablica w bazie danych).
+<br>
+  <br>
+Pakiety mają hierarchiczna strukturę: <br>
+Pakiet <br>
+  podpakiet <br>
+    podpakiet <br>
+<br><A NAME="EDU.skorowidz.termin java.awt 63_537"></A> Np. pakiet o nazwie <b>java.awt</b> zawiera podpakiet o nazwie <b>java.awt.event</b>. <br>
+<br>
+Pakiet jest pojęciem logicznym. Hierarchiczna struktura pakietów może być
+odwzorowywana w różny fizyczny sposób. Typowym jest struktura katalogów (kolejne
+poziomy hierarchii katalogów odpowiadają kolejnym poziomom hierarchii pakietów).
+W katalogach "terminalnych" znajdują się pliki klasowe (.class) stanowiące
+użytkowe klasy danej "biblioteki". Ponieważ struktury katalogowe dają się
+łatwo archiwizować, to pakiety klas są zwykle przechowywane w plikach JAR
+lub ZIP.<br>
+Ale nie jest to jedyny możliwy sposób organizacji. Wszystko zależy od środowiska
+w którym działa Java. Pakiety klas mogą być (i bywają) przechowywane np.
+w bazach danych.<br>
+<p>
+<a href="javascript:popUp('dodatki/W8Prb4.htm', 75, 50)"><img src="images/Problem.jpg" alt="Problem" hspace="15" width="137" height="84" border="1" align="Right"></a>Java wyposażona jest  w ok. setki  pakietów (o
+których możemy myśleć jak o bibliotekach standardowych), które z kolei zawierają
+tysiące klas. Pakiety są  umieszczone w<A NAME="EDU.skorowidz.termin JAR 63_538"></A> plikach JAR (archiwach), zawartych
+w dystrubacjach Javy.</p>
+<br clear="all">
+
+<p><b>Po co są pakiety?</b><br>
+<br>
+Zadaniem pakietów jest nie tylko grupowanie klas wedlug ich funkcjonalności.<br>
+<br>
+Rozważmy przykład: <br>
+<br>
+class A { <br>
+    Button b = new Button("Ok");  // tworzymy obiekt klasy Button <br>
+.... <br>
+} <br>
+<br>
+Możliwe są dwa przypadki: klasa Button jest zdefiniowana w tym samym pliku
+lub w pliku z katalogu bieżącego ALBO klasa Button jest zewnętrzna.<br>
+W pierwszym przypadku kompilator (i JVM) mogą odnaleźć potrzebną klasę.<br>
+W drugim - powstaje problem gdzie jej szukać.<br>
+Co więcej, użycie nazwy Button może być niejednoznaczne (może chodzi o Button
+z bieżącego pliku, a może o Button skądś z zewnątrz). <br>
+Zatem pakiety, których zadaniem jest grupowanie klas pełnią rolę porządkującą 
+względem przestrzeni nazw klas i chronią przed kolizjami nazw.<br>
+ <br>
+<b>Nazwy kwalifikowane </b><br>
+<br><A NAME="EDU.skorowidz.termin klasa nazwa_kwalifikowana 63_539"></A> Kwalifikowana nazwa klasy (typu) znajdującej się w nazwanym pakiecie ma postać:<br>
+<br>
+
+<div class="syntax">        nazwa_pakietu.nazwa_klasy </div>
+
+<br>
+<p>
+np.   java.awt.Button <br>
+<br>
+class A { <br>
+ java.awt.Button b = new java.awt.Button("Ok"); <br>
+.... <br>
+} <br>
+<br>
+Klasy zdefiniowane w nienazwanym pakiecie (np. w pliku źródłowym) mają jako kwalifikowane swoje proste nazwy (czyli np. Para). <br>
+<br>
+Generalnie wszystkie nazwy klas użytych w programie winny być kwalifikowane.<br>
+Na szczęście,<A NAME="EDU.skorowidz.termin import 63_540"></A> deklaracja importu pozwala na użycie nazw uproszczonych <br>
+<br>
+import java.awt.Button;  // importuje nazwę klasy java.awt.Button <br>
+<br>
+class A { <br>
+ java.awt.Frame f = new java.awt.Frame("Tytuł"); <br>
+ Button b = new Button("Ok");  // użycie prostej nazwy klasy java.awt.Button <br>
+.... <br>
+} <br>
+<br>
+Powyżej po importowaniu nazwy klasy java.awt.Button możemy użyć jej uproszczonej
+nazwy Button. Ale ponieważ nie importowaliśmy nazwy klasy java.awt.Frame
+jesteśmy zmuszeni używać jej pełnej kwalifikowanej nazwy.<br>
+<br>
+Wygodna forma deklaracji importu pozwala importować nazwy wszystkich klas danego pakietu. Do tego służy gwiazdka.<br>
+<br>
+import java.awt.*;     // importuje wszystkie nazwy klas pakietu java.awt <br>
+class A { <br>
+     Frame f =  new Frame("Tytuł");     // teraz możemy użyć też prostej nazwy <br>
+                                                        // klasy java.awt.Frame <br>
+     Button b = new Button("Ok"); <br>
+.... <br>
+} <br>
+<br>
+Znaleźliśmy zatem wyjaśnienie tajemniczych napisów import... , które pojawiały
+się w aplikacjach powitalnych (wykład 4) oraz w przykładach wykorzystujących
+dialogi z klasy JOptionPane.<br>
+<br>
+A co z klasami String i System, których nazw często używamy w przykładach?<br><A NAME="EDU.skorowidz.termin java.lang 63_541"></A> 
+One też stanowią standardowe klasy Javy. I znajdują się w określonym pakiecie (java.lang).<br>
+<br>
+
+
+<div class="important"><b>Pakiet java.lang nie wymaga importu (m.in zawiera klasy String i System) <br>
+Nazwy klas tego pakietu są importowane domyślnie. </b></div>
+
+<br>
+
+<div class="notec">Uwaga. Importowanie nazw klas nie oznacza "wstawiania" ich definicji
+do naszego programu źródłowego. Wielkość programu nie zależy od liczby importowanych
+nazw, a import służy tylko i wyłącznie umożliwieniu posługiwania się skróconymi
+nazwami klas i stanowi sygnał dla kompilatora i JVM gdzie, w jakich pakietach
+szukać definicji tych klas.</div><p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left"><A HREF="index62.html" TARGET="_top"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;<A HREF="index64.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>

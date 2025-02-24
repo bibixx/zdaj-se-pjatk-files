@@ -1,0 +1,536 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="main.css">
+<script language="JavaScript" src="skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" cellspacing="4" cellpadding="4" border="0">
+<tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index98.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 1"></A><div class="tytulpunktu">1. Napisy</div>
+
+<p>
+W praktycznych programach bardzo często będziemy operować na<A NAME="EDU.skorowidz.termin łańcuch_znakowy 97_663"></A> łańcuchach
+znakowych (napisach). Wiemy doskonale, że są one reprezentowane przez obiekty
+klasy String. W klasie tej znajdziemy wiele użytecznych metod przeznaczonych
+do operowania na łańcuchach znakowych.<br>
+<br><A NAME="EDU.skorowidz.termin dokumentacja 97_664"></A> Dokumentację klas i ich metod standardowych pakietów Javy znajdziemy w podkatalogu
+docs katalogu instalacyjnego Java SDK. Jest ona w postaci HTML: klasy podzielone
+są według pakietów a także dostępna jest alfabetyczna lista wszystkich klas.<br>
+<b><font color="#ff6600"><br>
+
+Proszę koniecznie otworzyć dokumentację i oswoić się z metodami nawigacji pośród różnych pakietów, klas oraz ich metod.</font></b><br>
+<br>
+
+Dla wygody poniżej przedstawiono wybrane metody klasy String.<br>
+
+Zwróćmy uwagę, że:<br>
+<ul>
+<li>kolejne znaki napisów występują na pozycjach, które są indeksowane
+poczynając od 0: np. napis "Ala" ma trzy znaki na pozycjach 1, 2, 3; pierwsza
+pozycja ma indeks 0, druga - 1, trzecia 2. Możemy też powiedzicć, że pierwszy
+znak ma indeks 0, a ostatni - indeks o 1 mniejszy od długości napisu,</li><li>części napisów (łańcuchów znakowych) określa się terminem "podłańcuch" (substring),</li><li>większość z omawianych dalej metod (wszystkie metody niestatyczne)
+używana jest "na rzecz" obiektow klasy String; o obiekcie na rzecz którego
+wywołano metodę mówimy <i><b>ten</b></i> napis,<br></li><li>przedstawiono tu nie wszystkie metody klasy String, a jedynie te najbardziej
+użyteczne; o niektórych innych użytecznych metodach dowiemy się przy okazji
+omawiania wyrażeń regularnych w przyszłym semestrze.<br></li>
+</ul><A NAME="EDU.skorowidz.termin string wybrane_metody 97_665"></A> 
+<p>
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+<tbody><tr><td colspan="2"><div align="Center"><b>Wybrane metody klasy String</b><br></div></td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> char</code></font></td><td><code><b>charAt</b>(int index)</code><br>
+          Zwraca znak na pozycji, oznaczonej indeksem index. Pierwsza pozycja ma indeks 0.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> int</code></font></td><td><code><b>compareTo</b>(String anotherString)</code><br>
+          Porównuje dwa napisy: <i><b>ten</b></i>  (this) na rzecz którego użyto metody oraz przekazany jako argument.<br>
+Metoda zwraca 0, gdy napisy są takie same.<br>
+Jeżeli się różnią, to - gdy występują w nich różne znaki - zwracana jest wartość: <br>
+             this.charAt(k) - anotherString.charAt(k), <br>
+gdzie k - indeks pierwszej pozycji, na której występuje różnica znaków. Jeżeli
+długość napisów jest różna (a znaki napisów są takie same w części określanej
+przez dlugośc krótszego napisu) - zwracana jest różnica dlugości:<br>
+            this.length() - anotherString.length().<br><br>
+Oznacza to, że wynik jest ujemny, gdy <i><b>ten</b></i> (this) łańcuch poprzedza leksykograficznie (alfabetycznie) argument (anothetString) oraz dodatni - gdy <i><b>ten</b></i> łańcuch jest leksykograficznie większy od argumentu.<br></td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> int</code></font></td><td><code><b>compareToIgnoreCase</b>(String str)</code><br>
+           Porównuje leksykograficznie dwa napisy, bez rozróżnienia małych i wielkich liter.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> boolean</code></font></td><td><code><b>endsWith</b>(String suffix)</code><br>
+          Zwraca true, gdy napis kończy się łańcuchem znakowym podanym jako argument, false - w przeciwnym razie.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> boolean</code></font></td><td><code><b>equals</b>(Object anObject)</code><br>
+          Zwraca true gdy anObject jest takim samym co do zawartości napisem jak <i><b>ten</b></i> napis; w każdym innym przypadku - zwraca false.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> boolean</code></font></td><td><code><b>equalsIgnoreCase</b>(String anotherString)</code><br>
+          J.w. - ale bez rozróżniania małych i wielkich liter.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> int</code></font></td><td><code><b>indexOf</b>(String str)</code><br>
+           Zwraca indeks pozycji pierwszego wystąpienia w danym napisie napisu
+podanego jako argument str; jeżeli str nie występuje w tym napisie - zwraca
+-1</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> int</code></font></td><td><code><b>indexOf</b>(String str,
+        int fromIndex)</code><br>           Poszukuje pierwszego wystąpienia
+napisu str poczynając od pozycji oznaczonej przez indeks fromIndex; zwraca
+indeks pozycji na której zaczyna się str lub - 1 gdy str nie występuje w
+      <i><b>tym</b></i> napisie.<br>
+Jeśli fromIndex jest ujemne lub zero - przeszukiwany jest cały napis; jeśli
+fromIndex jest większe od długości napisu - zwracane jest -1.<br></td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> int</code></font></td><td><code><b>lastIndexOf</b>(String str)</code><br>
+          Jak indexOf - ale zwracany jest indeks pozycji ostatniego wystąpienia.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> int</code></font></td><td><code><b>lastIndexOf</b>(String str,
+            int fromIndex)</code><br>          J.w.<br>
+Uwaga: metody indexOf i lastIndexOf mają również swoje wersje dla argumentów - znaków (typu char).<br></td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> int</code></font></td><td><code><b>length</b>()</code><br>
+          Zwraca długość napisu.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> String</code></font></td><td><code><b>replace</b>(char oldChar,
+        char newChar)</code><br>
+          Zwraca nowy obiekt klasy String, w którym zastąpiono wszystkie wystąpienia znaku oldChar na znak newChar.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> boolean</code></font></td><td><code><b>startsWith</b>(String prefix)</code><br>
+          Zwraca true, gdy napis zaczyna się podanym jako argument łańcuchem znakowym; false - w przeciwnym razie.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> boolean</code></font></td><td><code><b>startsWith</b>(String prefix,
+           int toffset)</code><br>           Zwraca true, gdy podłańcuch
+tego łańcucha znakowego zaczynający się na pozycji o indeksie toffset zaczyna
+się napisem prefiks; zwraca false w przeciwnym razie, lub gdy toffset jest
+&lt; 0 albo większy od dlugości napisu.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> String</code></font></td><td><code><b>substring</b>(int beginIndex)</code><br>
+          Zwraca podłańcuch <i><b>tego</b></i> łańcucha znakowego zaczynający się na pozycji o indeksie beginIndex (do końca łańcucha).</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> String</code></font></td><td><code><b>substring</b>(int beginIndex,
+          int endIndex)</code><br>
+          Zwraca podłańcuch <i><b>tego</b></i> łańcucha jako nowy obiekt
+klasy String.  Podłańcuch zaczynay się na pozycji o indeksie beginIndex,
+a kończy (uwaga!) - na pozycji o indeksie endIndex-1. Długość podlańcucha
+równa jest endIndex - beginIndex.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> char[]</code></font></td><td><code><b>toCharArray</b>()</code><br>
+          Znaki łańcucha -&gt; do tablicy znaków (typ char[]).</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> String</code></font></td><td><code><b>toLowerCase</b>()</code><br>
+          Zamiana liter na małe.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> String</code></font></td><td><code><b>toUpperCase</b>()</code><br>          Zamiana liter na duże.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code> String</code></font></td><td><code><b>trim</b>()</code><br>
+           Usuwa znaki spacji, tabulacji, końca wiersza itp. tzw. biale znaki
+z obu końców łańcucha znakowego. Zwraca wynik jako nowy łańcuch.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code>static String</code></font></td><td><code><b>valueOf</b>(boolean b)</code><br>
+          Zwraca wartość boolowską (boolean) jako napis (String).</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code>static String</code></font></td><td><code><b>valueOf</b>(char c)</code><br>
+          Zwraca wartość typu char jako napis.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code>static String</code></font></td><td><code><b>valueOf</b>(char[] data)</code><br>
+         Zwraca napis złożony ze znakow tablicy. </td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code>static String</code></font></td><td><code><b>valueOf</b>(double d)</code><br>
+          Zwraca znakową treprezentację liczby typu double.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code>static String</code></font></td><td><code><b>valueOf</b>(float f)</code><br>
+          Zwraca znakową treprezentację liczby typu <code>float</code>.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code>static String</code></font></td><td><code><b>valueOf</b>(int i)</code><br>
+          Zwraca znakową treprezentację liczby typu <code>int</code>.</td></tr><tr><td align="Right" valign="Top" width="1%"><font size="-1"><code>static String</code></font></td><td><code><b>valueOf</b>(long l)</code><br>
+          Zwraca znakową reprezentację liczby typu <code>long</code>.</td></tr></tbody>
+</table>
+
+<br>
+<p>
+
+W pierwszym przykładowym programie wykorzystamy<A NAME="EDU.skorowidz.termin charAt metoda 97_666"></A> metodę charAt, zwracającą znak znajdujący się w napisie na podanej pozycji.<br>
+
+<p>
+<img src="images/wycieczki.jpg" alt="r" hspace="15" width="293" height="214" border="1" align="Right">
+Problem: napisać program, który prosi użytkownika o wybranie jednej z możliwych
+wycieczek oznaczanych dużymi literami A, B, C ..., po czym podaje cenę tej
+wycieczki. Miejsca docelowe wycieczek oraz ich ceny mają być zapisane w tablicach, np.:<br>
+<br>
+
+    String[] dest  = { "Bali", "Cypr", "Ibiza",<br>
+
+                               "Kenia", "Kuba" };<br>
+
+    double[] price = { 5000, 2500, 2800, 4500,<br>
+
+                                6000 };<br>
+<br>
+
+a program winien dawać użytkownikowi możliwość wyboru za pomocą pokazanego obok okna dialogowego.</p>
+<br clear="all">
+
+
+
+<div class="important">
+Przed lekturą dalszego tekstu proszę to zadanie rozwiązać samodzielnie<br>
+</div>
+
+<br>
+
+<p>
+
+A zatem użytkownik wprowadza napis, składający się z jednej litery "A" lub "B" lub "C', ... itd.<br>
+
+Dalsze działanie programu zależy od tego jaką literę wprowadzil.<br>
+
+Jeśli res oznacza wprowadzony napis, to moglibyśmy np. napisać:<br>
+<br>
+
+if (res.equals("A")) System.out.println(dest[0] + " - cena: " + price[0]);<br>
+
+else if (res.equals("B")) System.out.println(dest[1] + " - cena: " + price[1]);<br>
+
+      else if (res.equals("C")) ..<br>
+
+            else if (res.equals("D")) ...<br>
+
+                  else if (res.equals("E")) ..<br>
+
+                         else ...<br>
+<br>
+
+Ale jest to dość uciążliwe i nieeleganckie. Narażone na błędy. Trudne do modyfikacji.<br>
+<br>
+
+A przecież wprowadzona litera daje nam natychmiastowe odniesienie do odpowiednich
+elementów tablic dest i price. Litera to znak.<A NAME="EDU.skorowidz.termin kod_znaku 97_667"></A> Znak ma swój kod. Kod jest
+liczbą. Łatwo jest więc przekształcić znaki w odpowiednie indeksy tablic.
+<br>
+
+Znak A powinien dać indeks 0, znak B - indeks 1, znak C - indeks 2.<br>
+
+Zauważmy, że: 'A' - 'A' = 0 , 'B'- 'A' = 1, 'C' - 'A' = 2 ...<br>
+
+Zatem wyliczenie odpowiedniego indeksu można zapisac tak:<br>
+
+indeks = &lt;wprowadzony_znak&gt; - 'A'<br>
+<br>
+
+No, ale musimy jeszcze sięgnąć po ten znak. Z dialogu dostajemy napis (łańcuch
+znakowy). To jest dana typu String, a nie char. Napis ten składa się z jednego znaku,
+znajdującego się na pierwszej pozycji łańcucha (czyli pod indeksem 0). Znak
+ten otrzymamy stosując metodę <b>charAt</b> z klasy String.<br>
+<br>
+
+Jeśli res oznacza wprowadzony napis, to - zamiast poprzedniej "piętrowej" konstrukcji if-else możemy po prostu napisać:<br>
+<br>
+
+      int i = res.charAt(0) - 'A';<br>
+
+     System.out.println(dest[i] + " - cena: " + price[i]);<br>
+<br>
+
+Cały program pokazano poniżej.<br>
+
+<pre>
+import javax.swing.*;
+
+public class Wycieczki {
+
+  public static void main(String[] args) {
+
+    String[] dest  = { "Bali", "Cypr", "Ibiza", "Kenia", "Kuba" };
+    double[] price = { 5000, 2500, 2800, 4500, 6000 };
+
+    String msg = "Wybierz kierunek - " +
+                 " wpisując literę A-"+ (char) ('A'+dest.length-1)+ ":\n";
+
+    for (int i=0; i &lt; dest.length; i++)
+      msg += (char) ('A' + i) + " - " + dest[i] + '\n';
+
+    String res;
+    while ((res = JOptionPane.showInputDialog(msg)) != null) {
+      int i = res.charAt(0) - 'A';
+      if (i &lt; 0 || i &gt; dest.length -1) continue;
+      JOptionPane.showMessageDialog(null, dest[i] + " - cena: " + price[i]);
+    }
+   System.exit(0);
+
+  }
+
+}
+</pre>
+
+<p>
+Dodatkowe komentarze:<br>
+<ul>
+<li>w oknie dialogowym wprowadzania danych tekst komunikatu (msg) składa
+się z kilku wierszy; tekst dzielimy na wiersze za pomocą znaku '\n',</li><li>program napisano w taki sposób, że przy zmianie liczby wycieczek należy
+zmienić tylko inicjacje tablic dest i price; inne fragmenty kodu nie ulegną
+zmianie!,</li><li>przy tworzeniu komunikatu (msg) znowu wykorzystano możliwość traktowania
+znaków jako liczb (kody znaków); jednak operacje arytmetyczne na znakach
+dają w wyniku wartości typu int, a ponieważ chcemy pokazać znak , a nie jego
+kod (int) - to musimy jawnie przekształcić te wartości do typu char - stąd
+konieczność użycia operatora konwersji (char)</li><li>poprawność pierwszego znaku wprowadzonego napisu (czy mieści się w
+przedziale A-E) sprawdzamy za pomocą if; innym sposobem obsługi błędu byłaby
+obsługa wyjątku (ArrayIndexOutOfBoundsException).<br></li>
+</ul>
+
+<p>Spróbujmy teraz rozwiązać inne zadanie. Wyobraźmy sobie, że mamy dokument
+html o prostej strukturze, w którym kolejne tytuły punktów treści znajdują
+się między znacznikami &lt;h2&gt; ... &lt;/h2&gt; (tekst zawarty pomiędzy
+otwierającym znacznikiem &lt;h2&gt; i zamykającym znacznikiem &lt;/h2&gt;
+- traktowany jest jako nagłówek drugiego poziomu i odpowiednio do tego formatowany
+przy wyświetlaniu w przeglądarce).<br>
+
+Naszym zadaniem jest wypisanie wszystkich takich nagłówków. <br>
+
+<div class="notel">Uwaga. W tej chwili zajmujemy się najbardziej prymitywnym rozwiązaniem
+problemu, w oparciu o "tradycyjne" metody klasy String. Głównie po to, by
+przećwiczyć  stosowanie tych metod. Inne rozwązania mogą wykorzystywac parsery
+HTML lub wyrażenia regularne</div>
+
+<div class="ddd"><br>
+Na razie jeszcze nie umiemy wczytywac plików,
+ale możemy już przygotować i przetestować klasę, która pozwoli "wyłuskiwać"
+z dokumentu nagłówki drugiego poziomu.
+</div>
+<br clear="all">
+
+<br>
+<p>
+Niech ta klasa (trochę na wyrost) nazywa się  Toc. Przy tworzeniu obiektu
+tej klasy przekazujemy konstruktorowi cały dokument HTML w postaci łańcucha
+znakowego, a wywołanie metody String getToc() - ma zwrócić listę nagłówków
+drugiego pioziomu, rozdzielonych separatorami nowego wiersza. Listę tę możemy
+następnie wypisać na konsoli lub skierować standardowy strumień wyjściowy
+do pliku.<br>
+<br>
+
+Jak podejść do tego problemu?<br>
+
+W tekście dokumentu musimy kolejno znajdować początki nagłówków ("&lt;h2&gt;"),
+a następnie "wyłuskiwać" podłańcuchy, które są zawarte pomiędzy znacznikami
+"&lt;h2&gt;" i "&lt;/h2&gt;". Do znajdowania napisów w napisie służy<A NAME="EDU.skorowidz.termin indexOf metoda 97_668"></A> metoda
+indexOf, do "wyłuskiwania" podłacuchów metod  substring. Uwaga: powinniśmy
+zastosować tę wersję metody indexOf, która zaczyna poszukiwanie od podanej
+pozycji łańcucha i wraz z postępem przeszukiwania odpowiednio zmieniać tę
+pozycję.<br>
+<br>
+
+<div class="important"><br>
+Przed lekturą dalszego tekstu proszę to zadanie rozwiązać samodzielnie
+<br>
+<br>
+</div>
+
+<br>
+<p>
+
+Klasa Toc może wyglądać tak.<br>
+<br>
+
+<pre>
+import javax.swing.*;
+
+public class Toc {
+
+   private String doc;           // przekazany dokument
+   private String toc = "";      // wynikowy spis treści
+
+   // separator końca wiersza; ponieważ jest zależny od systemu
+   // pobieramy go jako wartość tzw. właściwości systemowej
+
+   private final String ls = System.getProperty("line.separator");
+
+   public Toc(String doc) { // Konstruktor
+     this.doc = doc;
+   }
+
+  public String getToc() {
+
+     int p = 0; // pozycja od której zaczynamy szukanie "&lt;h2&gt;"
+
+     while ((p = doc.indexOf("&lt;h2&gt;", p)) != -1) { // dopóki są "&lt;h2&gt;"
+
+       // poszukajmy znacznika zamykającego
+       // end jest indeksem pozycji na której on występuje
+
+       int end = doc.indexOf("&lt;/h2&gt;", p+4);
+
+       // jeżeli go nie ma ...
+
+       if (end == -1) return Emsg("Invalid document structure");
+
+       // w przeciwnym razie: wyłuskujemy nagłówek
+       toc += doc.substring(p+4, end) + ls;  // ls - separator wierszy
+
+       p = end + 5;  // i przesuwamy pozycję od której będziemy dalej szukać
+     }
+
+     return toc;
+  }
+
+  private String Emsg(String txt) {  // komunikat o błędzie
+    JOptionPane.showMessageDialog(null, txt);
+    return toc;
+  }
+  
+</pre>
+
+<p><i>
+Uwaga: powyższa wersja programu nie obsługuje przypadku wadliwej struktury
+dokumentu, gdy znacznik &lt;h2&gt; występuje pomiędzy znacznikami &lt;h2&gt;
+i &lt;/h2&gt;.<br>
+</i><br>
+Przy okazji tego programu wykorzystaliśmy możliwość pobierania<A NAME="EDU.skorowidz.termin systemowe właściwości 97_669"></A> właściwości systemowych. Za pomocą odwołania:<br>
+<br><A NAME="EDU.skorowidz.termin System.getProperty 97_670"></A> System.getProperty("line.separator") <br>
+<br>
+ zapytaliśmy Javy jaki na danej platformie systemowej obowiązuje separator
+wierszy (w plikach), Zauważmy, że różne systemy stosują różne separatory (np.
+pod Unixem jest to 0d , a pod Windows 0d0a - szesnastkowo). Ponieważ nasz
+spis treści chcemy zapisywać do pliku to musimy użyć znaku separatora wierszy.
+A zgodnie z założeniami Javy (wieloplatformowość) powinniśmy przygotować
+program tak by działal bez rekompilacji na każdej platformie. <br>
+
+<br>
+<div>
+[ <a href="javascript:popUp('dodatki/W12D1.htm',75,75)">więcej o właściwościach systemowych</a> ]</div>
+
+<br>
+<p>
+
+Klasę Toc możemy na razie przetestować na "sztywno" zadanym dokumencie. Za
+chwilę, gdy nauczymy się wczytywać pliki - zobaczymy jak działa na konkretnych
+plikach html.<br>
+<br>
+
+<pre>
+class TocTest {
+
+  public static void main(String[] args) {
+    String doc = "&lt;h2&gt;1.1. Punkt 1&lt;/h2&gt;" +
+                 "ble ble ble ble ble  " +
+                 "ble ble ble ble ble  " +
+                 "&lt;h2&gt;1.2. Punkt 2&lt;/h2&gt;" +
+                 "ble ble ble ble ble  " +
+                 "ble ble ble ble ble  " +
+                 "&lt;h2&gt;1.3. Punkt 3&lt;/h2&gt;" +
+                 "ble ble ble ble ble  " +
+                 "ble ble ble ble ble  " +
+                 "ble ble ble ble ble  " +
+                 "ble ble ble ble ble  " +
+                 "&lt;h2&gt;1.4. Punkt 4&lt;/h2&gt;" +
+                 "ble ble ble ble ble  " +
+                 "ble ble ble ble ble  " +
+                 "&lt;h2&gt;1.5. Punkt 5&lt;/h2&gt;" +
+                 "ble ble ble ble ble  " +
+                 "ble ble ble ble ble  " ;
+
+    System.out.println(new Toc(doc).getToc());
+  }
+}
+</pre>
+
+<p>
+Wydruk programu (możemy go przekierować do pliku np. tak: java TocTest &gt; out):<br><br>
+
+<div class="listing100">1.1. Punkt 1<br>
+
+1.2. Punkt 2<br>
+
+1.3. Punkt 3<br>
+
+1.4. Punkt 4<br>
+
+1.5. Punkt 5</div>
+
+<br>
+<p>
+
+Pewną zaskakującą może właściwością klasy<A NAME="EDU.skorowidz.termin string 97_671"></A> String jest to, że jej obiekty są <b>niemodyfikowalne</b> - to znaczy utworzonych za pomocą klasy String napisów  nie możemy zmieniać (np. do napisu dodać inny). <br>
+
+Jak to ??? Przecież wielokrotnie zajmowaliśmy się konkatenacją łańcuchów.<br>
+
+No tak, ale wynikowy napis, powstający z dodania do łańucha znakowego innego napisu, <b>jest nowym obiektem</b> i np. w takiej sekwencji:<br>
+<br>
+
+String s = "Ala";<br>
+
+s = s + " ma kota";<br>
+<br>
+
+tworzony jest nowy obiekt, zawierający napis "Ala ma kota" i referencja do
+niego przypisywana jest zmiennej s, która poprzednio zawierała referencję do napisu "Ala".<br>
+<br>
+
+Zwróćmy też uwagę, że w klasie String nie ma żadnych metod pozwalających modyfikować istniejący obiekt-napis. <br>
+<br><A NAME="EDU.skorowidz.termin StringBuffer klasa 97_672"></A> Czasami jednak zmiany obiektów napisów są potrzebne. <br>
+<br>
+
+<div class="important">Modyfikowalne obiekty-łańcuchy znakowe definiuje klasa <b>StringBuffer</b>.</div>
+
+<br>
+<p>
+
+Obiekty klasy StringBuffer to "bufory", które dynamicznie możemy wypełniać
+napisami. W szczególności możemy utworzyć pusty - na razie - bufor:<br>
+<br>
+
+StringBuffer sb = new StringBuffer();<br>
+<br>
+
+po czym wupelniać go zawartośćią dopisując do niego jakieś kolejne napisy:<br>
+<br>
+
+sb.append("jakiś napis 1");<br>
+
+sb.append("jakiś napis 2");<br>
+
+...<br>
+<br>
+
+Obiekt klasy StringBuffer łatwo można przekształćić w obiekt klasy String za pomocą metod toString():<br>
+<br>
+
+String s = sb.toString();<br>
+<br>
+<font color="#ff6600"><b>Proszę zapoznać się z dokumentacją klasy StringBuffer</b></font>.<br>
+<br>
+
+Wykorzystanie klasy StringBuffer zamiast String jest wskazane przy dużej liczbie<A NAME="EDU.skorowidz.termin kumulatywna_operacja_konkatenacji 97_673"></A> "kumulatywnych" operacji konkatenacji.<br>
+
+Jak już wspomniano, każda operacja konkatenacji obiektów klasy String zapisana
+za pomocą operatora + powoduje stworzenie nowego obiektu klasy String i skopiowanie
+do "jego wnętrza" znaków łączonych łańcuchów. Jest to dosyć czasochłonne.<br>
+<br>
+
+Różnicę pokazuje poniższy program (przygotowany w oparciu o materiały JDC TechTips - biuletynu Java Developer Connection).<br>
+
+Do<A NAME="EDU.skorowidz.termin mierzenie_czasu_operacji 97_674"></A> mierzenia czasu operacji korzystamy w nim z klasy QTimer, w której zdefiniowaliśmy
+metodę getElapsed() zwracającą upływ czasu od mometu utworzenia obiektu tej
+klasy. Czas mierzymy za pomocą statycznej metody klasy System currentTimeMillis(),
+która zwraca bieżący czas w milisekundach.<br>
+<br>
+
+<pre>
+import javax.swing.*;
+
+class QTimer {
+
+   private final long start;
+
+   public QTimer() {
+     start = System.currentTimeMillis();
+   }
+
+   public long getElapsed() {
+      return System.currentTimeMillis() - start;
+   }
+}
+
+public class Test {
+
+
+  public static void main(String args[]) {
+
+    int n = Integer.parseInt(JOptionPane.showInputDialog("Liczba operacji"));
+
+
+    QTimer t = new QTimer();
+    String strA = "";
+    for (int i = 1; i &lt;= n; i++)  strA += "A";
+    long etA = t.getElapsed();
+    System.out.println("String operator +;   Czas: " + etA  + " ms");
+
+
+    t = new QTimer();
+    StringBuffer sb = new StringBuffer();
+    for (int i = 1; i &lt;= n; i++) sb.append("B");
+    String strB = sb.toString();
+    long etB = t.getElapsed();
+    System.out.println("StringBuffer append. Czas: " +  etB + " ms");
+    System.out.println("Wykonano " + n + " operacji.");
+    System.out.println("Relacja A/B = " + (double) etA/etB);
+    System.exit(0);
+  }
+}
+
+</pre>
+
+<p>Wynik:<br><br>
+
+<div class="listing100"><br>
+
+String operator +;   Czas: 3900 ms<br>
+
+StringBuffer append. Czas: 60 ms<br>
+
+Wykonano 9000 operacji.<br>
+
+Relacja A/B = 65.0<br>
+
+</div>
+
+<br>
+<p>
+
+Jak widać, "kumulatywna" konkatenacja za pomocą klasy StringBuffer jest (przy
+9 tys. operacji konkatenacji) 65-krotnie szybsza niż za pomocą operatora
++.</p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="right">&nbsp;<A HREF="index98.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table></td>
+</tr>
+</table>
+</body>
+</html>
