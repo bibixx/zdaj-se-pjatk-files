@@ -1,0 +1,74 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font>
+<font color="#000000">03: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">04: </font><i><font color="#9A1900">   A layout manager that lays out components along a central axis</font></i>
+<font color="#000000">05: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">06: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> FormLayout <b><font color="#0000FF">implements</font></b> LayoutManager
+<font color="#000000">07: </font><font color="#FF0000">{</font>  
+<font color="#000000">08: </font>   <b><font color="#0000FF">public</font></b> Dimension <b><font color="#000000">preferredLayoutSize</font></b><font color="#990000">(</font>Container parent<font color="#990000">)</font>
+<font color="#000000">09: </font>   <font color="#FF0000">{</font>  
+<font color="#000000">10: </font>      Component<font color="#990000">[</font><font color="#990000">]</font> components <font color="#990000">=</font> parent<font color="#990000">.</font><b><font color="#000000">getComponents</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">11: </font>      left <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+<font color="#000000">12: </font>      right <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+<font color="#000000">13: </font>      height <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+<font color="#000000">14: </font>      <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> components<font color="#990000">.</font>length<font color="#990000">;</font> i <font color="#990000">+</font><font color="#990000">=</font> <font color="#993399">2</font><font color="#990000">)</font>
+<font color="#000000">15: </font>      <font color="#FF0000">{</font>
+<font color="#000000">16: </font>         Component cleft <font color="#990000">=</font> components<font color="#990000">[</font>i<font color="#990000">]</font><font color="#990000">;</font>
+<font color="#000000">17: </font>         Component cright <font color="#990000">=</font> components<font color="#990000">[</font>i <font color="#990000">+</font> <font color="#993399">1</font><font color="#990000">]</font><font color="#990000">;</font>
+<font color="#000000">18: </font>
+<font color="#000000">19: </font>         Dimension dleft <font color="#990000">=</font> cleft<font color="#990000">.</font><b><font color="#000000">getPreferredSize</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">20: </font>         Dimension dright <font color="#990000">=</font> cright<font color="#990000">.</font><b><font color="#000000">getPreferredSize</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">21: </font>         left <font color="#990000">=</font> Math<font color="#990000">.</font><b><font color="#000000">max</font></b><font color="#990000">(</font>left<font color="#990000">,</font> dleft<font color="#990000">.</font>width<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">22: </font>         right <font color="#990000">=</font> Math<font color="#990000">.</font><b><font color="#000000">max</font></b><font color="#990000">(</font>right<font color="#990000">,</font> dright<font color="#990000">.</font>width<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">23: </font>         height <font color="#990000">=</font> height <font color="#990000">+</font> Math<font color="#990000">.</font><b><font color="#000000">max</font></b><font color="#990000">(</font>dleft<font color="#990000">.</font>height<font color="#990000">,</font>
+<font color="#000000">24: </font>               dright<font color="#990000">.</font>height<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">25: </font>      <font color="#FF0000">}</font>      
+<font color="#000000">26: </font>      <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Dimension</font></b><font color="#990000">(</font>left <font color="#990000">+</font> GAP <font color="#990000">+</font> right<font color="#990000">,</font> height<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">27: </font>   <font color="#FF0000">}</font>
+<font color="#000000">28: </font>      
+<font color="#000000">29: </font>   <b><font color="#0000FF">public</font></b> Dimension <b><font color="#000000">minimumLayoutSize</font></b><font color="#990000">(</font>Container parent<font color="#990000">)</font>
+<font color="#000000">30: </font>   <font color="#FF0000">{</font>  
+<font color="#000000">31: </font>      <b><font color="#0000FF">return</font></b> <b><font color="#000000">preferredLayoutSize</font></b><font color="#990000">(</font>parent<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">32: </font>   <font color="#FF0000">}</font>
+<font color="#000000">33: </font>
+<font color="#000000">34: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">layoutContainer</font></b><font color="#990000">(</font>Container parent<font color="#990000">)</font>
+<font color="#000000">35: </font>   <font color="#FF0000">{</font>  
+<font color="#000000">36: </font>      <b><font color="#000000">preferredLayoutSize</font></b><font color="#990000">(</font>parent<font color="#990000">)</font><font color="#990000">;</font> <i><font color="#9A1900">// Sets left, right</font></i>
+<font color="#000000">37: </font>
+<font color="#000000">38: </font>      Component<font color="#990000">[</font><font color="#990000">]</font> components <font color="#990000">=</font> parent<font color="#990000">.</font><b><font color="#000000">getComponents</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">39: </font>
+<font color="#000000">40: </font>      Insets insets <font color="#990000">=</font> parent<font color="#990000">.</font><b><font color="#000000">getInsets</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">41: </font>      <font color="#009900">int</font> xcenter <font color="#990000">=</font> insets<font color="#990000">.</font>left <font color="#990000">+</font> left<font color="#990000">;</font>
+<font color="#000000">42: </font>      <font color="#009900">int</font> y <font color="#990000">=</font> insets<font color="#990000">.</font>top<font color="#990000">;</font>
+<font color="#000000">43: </font>
+<font color="#000000">44: </font>      <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> components<font color="#990000">.</font>length<font color="#990000">;</font> i <font color="#990000">+</font><font color="#990000">=</font> <font color="#993399">2</font><font color="#990000">)</font>
+<font color="#000000">45: </font>      <font color="#FF0000">{</font>
+<font color="#000000">46: </font>         Component cleft <font color="#990000">=</font> components<font color="#990000">[</font>i<font color="#990000">]</font><font color="#990000">;</font>
+<font color="#000000">47: </font>         Component cright <font color="#990000">=</font> components<font color="#990000">[</font>i <font color="#990000">+</font> <font color="#993399">1</font><font color="#990000">]</font><font color="#990000">;</font>
+<font color="#000000">48: </font>
+<font color="#000000">49: </font>         Dimension dleft <font color="#990000">=</font> cleft<font color="#990000">.</font><b><font color="#000000">getPreferredSize</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">50: </font>         Dimension dright <font color="#990000">=</font> cright<font color="#990000">.</font><b><font color="#000000">getPreferredSize</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">51: </font>
+<font color="#000000">52: </font>         <font color="#009900">int</font> height <font color="#990000">=</font> Math<font color="#990000">.</font><b><font color="#000000">max</font></b><font color="#990000">(</font>dleft<font color="#990000">.</font>height<font color="#990000">,</font> dright<font color="#990000">.</font>height<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">53: </font>
+<font color="#000000">54: </font>         cleft<font color="#990000">.</font><b><font color="#000000">setBounds</font></b><font color="#990000">(</font>xcenter <font color="#990000">-</font> dleft<font color="#990000">.</font>width<font color="#990000">,</font> y <font color="#990000">+</font> <font color="#990000">(</font>height 
+<font color="#000000">55: </font>               <font color="#990000">-</font> dleft<font color="#990000">.</font>height<font color="#990000">)</font> <font color="#990000">/</font> <font color="#993399">2</font><font color="#990000">,</font> dleft<font color="#990000">.</font>width<font color="#990000">,</font> dleft<font color="#990000">.</font>height<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">56: </font>
+<font color="#000000">57: </font>         cright<font color="#990000">.</font><b><font color="#000000">setBounds</font></b><font color="#990000">(</font>xcenter <font color="#990000">+</font> GAP<font color="#990000">,</font> y <font color="#990000">+</font> <font color="#990000">(</font>height 
+<font color="#000000">58: </font>               <font color="#990000">-</font> dright<font color="#990000">.</font>height<font color="#990000">)</font> <font color="#990000">/</font> <font color="#993399">2</font><font color="#990000">,</font> dright<font color="#990000">.</font>width<font color="#990000">,</font> dright<font color="#990000">.</font>height<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">59: </font>         y <font color="#990000">+</font><font color="#990000">=</font> height<font color="#990000">;</font>
+<font color="#000000">60: </font>      <font color="#FF0000">}</font>
+<font color="#000000">61: </font>   <font color="#FF0000">}</font>
+<font color="#000000">62: </font>
+<font color="#000000">63: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">addLayoutComponent</font></b><font color="#990000">(</font>String name<font color="#990000">,</font> Component comp<font color="#990000">)</font>
+<font color="#000000">64: </font>   <font color="#FF0000">{</font><font color="#FF0000">}</font>
+<font color="#000000">65: </font>
+<font color="#000000">66: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">removeLayoutComponent</font></b><font color="#990000">(</font>Component comp<font color="#990000">)</font>
+<font color="#000000">67: </font>   <font color="#FF0000">{</font><font color="#FF0000">}</font>
+<font color="#000000">68: </font>
+<font color="#000000">69: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> left<font color="#990000">;</font>
+<font color="#000000">70: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> right<font color="#990000">;</font>
+<font color="#000000">71: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> height<font color="#990000">;</font>
+<font color="#000000">72: </font>   <b><font color="#0000FF">private</font></b> <b><font color="#0000FF">static</font></b> <b><font color="#0000FF">final</font></b> <font color="#009900">int</font> GAP <font color="#990000">=</font> <font color="#993399">6</font><font color="#990000">;</font>
+<font color="#000000">73: </font><font color="#FF0000">}</font>
+</tt></pre>

@@ -1,0 +1,102 @@
+<pre><tt><font color="#000000">001: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">002: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>event<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">003: </font><b><font color="#000080">import</font></b> javax<font color="#990000">.</font>swing<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">004: </font>
+<font color="#000000">005: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">006: </font><i><font color="#9A1900">   Presents a phone GUI for the voice mail system.</font></i>
+<font color="#000000">007: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">008: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> Telephone
+<font color="#000000">009: </font><font color="#FF0000">{</font>
+<font color="#000000">010: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">011: </font><i><font color="#9A1900">      Constructs a telephone with a speaker, keypad,</font></i>
+<font color="#000000">012: </font><i><font color="#9A1900">      and microphone.</font></i>
+<font color="#000000">013: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">014: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#000000">Telephone</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">015: </font>   <font color="#FF0000">{</font>
+<font color="#000000">016: </font>      JPanel speakerPanel <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JPanel</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">017: </font>      speakerPanel<font color="#990000">.</font><b><font color="#000000">setLayout</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <b><font color="#000000">BorderLayout</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">018: </font>      speakerPanel<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <b><font color="#000000">JLabel</font></b><font color="#990000">(</font><font color="#FF0000">"Speaker:"</font><font color="#990000">)</font><font color="#990000">,</font>
+<font color="#000000">019: </font>            BorderLayout<font color="#990000">.</font>NORTH<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">020: </font>      speakerField <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JTextArea</font></b><font color="#990000">(</font><font color="#993399">10</font><font color="#990000">,</font> <font color="#993399">25</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">021: </font>      speakerPanel<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>speakerField<font color="#990000">,</font>
+<font color="#000000">022: </font>            BorderLayout<font color="#990000">.</font>CENTER<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">023: </font>
+<font color="#000000">024: </font>      String keyLabels <font color="#990000">=</font> <font color="#FF0000">"123456789*0#"</font><font color="#990000">;</font>
+<font color="#000000">025: </font>      JPanel keyPanel <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JPanel</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">026: </font>      keyPanel<font color="#990000">.</font><b><font color="#000000">setLayout</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <b><font color="#000000">GridLayout</font></b><font color="#990000">(</font><font color="#993399">4</font><font color="#990000">,</font> <font color="#993399">3</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">027: </font>      <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> keyLabels<font color="#990000">.</font><b><font color="#000000">length</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font> i<font color="#990000">+</font><font color="#990000">+</font><font color="#990000">)</font>
+<font color="#000000">028: </font>      <font color="#FF0000">{</font>
+<font color="#000000">029: </font>         <b><font color="#0000FF">final</font></b> String label <font color="#990000">=</font> keyLabels<font color="#990000">.</font><b><font color="#000000">substring</font></b><font color="#990000">(</font>i<font color="#990000">,</font> i <font color="#990000">+</font> <font color="#993399">1</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">030: </font>         JButton keyButton <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JButton</font></b><font color="#990000">(</font>label<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">031: </font>         keyPanel<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>keyButton<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">032: </font>         keyButton<font color="#990000">.</font><b><font color="#000000">addActionListener</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b>
+<font color="#000000">033: </font>            <b><font color="#000000">ActionListener</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">034: </font>            <font color="#FF0000">{</font>
+<font color="#000000">035: </font>               <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">actionPerformed</font></b><font color="#990000">(</font>ActionEvent event<font color="#990000">)</font>
+<font color="#000000">036: </font>               <font color="#FF0000">{</font>
+<font color="#000000">037: </font>                  connect<font color="#990000">.</font><b><font color="#000000">dial</font></b><font color="#990000">(</font>label<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">038: </font>               <font color="#FF0000">}</font>
+<font color="#000000">039: </font>            <font color="#FF0000">}</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">040: </font>      <font color="#FF0000">}</font>
+<font color="#000000">041: </font>
+<font color="#000000">042: </font>      <b><font color="#0000FF">final</font></b> JTextArea microphoneField <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JTextArea</font></b><font color="#990000">(</font><font color="#993399">10</font><font color="#990000">,</font><font color="#993399">25</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">043: </font>
+<font color="#000000">044: </font>      JButton speechButton <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JButton</font></b><font color="#990000">(</font><font color="#FF0000">"Send speech"</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">045: </font>      speechButton<font color="#990000">.</font><b><font color="#000000">addActionListener</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b>
+<font color="#000000">046: </font>         <b><font color="#000000">ActionListener</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">047: </font>         <font color="#FF0000">{</font>
+<font color="#000000">048: </font>            <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">actionPerformed</font></b><font color="#990000">(</font>ActionEvent event<font color="#990000">)</font>
+<font color="#000000">049: </font>            <font color="#FF0000">{</font>
+<font color="#000000">050: </font>               connect<font color="#990000">.</font><b><font color="#000000">record</font></b><font color="#990000">(</font>microphoneField<font color="#990000">.</font><b><font color="#000000">getText</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">051: </font>               microphoneField<font color="#990000">.</font><b><font color="#000000">setText</font></b><font color="#990000">(</font><font color="#FF0000">""</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">052: </font>            <font color="#FF0000">}</font>
+<font color="#000000">053: </font>         <font color="#FF0000">}</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">054: </font>
+<font color="#000000">055: </font>      JButton hangupButton <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JButton</font></b><font color="#990000">(</font><font color="#FF0000">"Hangup"</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">056: </font>      hangupButton<font color="#990000">.</font><b><font color="#000000">addActionListener</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b>
+<font color="#000000">057: </font>         <b><font color="#000000">ActionListener</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">058: </font>         <font color="#FF0000">{</font>
+<font color="#000000">059: </font>            <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">actionPerformed</font></b><font color="#990000">(</font>ActionEvent event<font color="#990000">)</font>
+<font color="#000000">060: </font>            <font color="#FF0000">{</font>
+<font color="#000000">061: </font>               connect<font color="#990000">.</font><b><font color="#000000">hangup</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">062: </font>            <font color="#FF0000">}</font>
+<font color="#000000">063: </font>         <font color="#FF0000">}</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">064: </font>
+<font color="#000000">065: </font>      JPanel buttonPanel <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JPanel</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">066: </font>      buttonPanel<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>speechButton<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">067: </font>      buttonPanel<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>hangupButton<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">068: </font>
+<font color="#000000">069: </font>      JPanel microphonePanel <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JPanel</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">070: </font>      microphonePanel<font color="#990000">.</font><b><font color="#000000">setLayout</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <b><font color="#000000">BorderLayout</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">071: </font>      microphonePanel<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <b><font color="#000000">JLabel</font></b><font color="#990000">(</font><font color="#FF0000">"Microphone:"</font><font color="#990000">)</font><font color="#990000">,</font>
+<font color="#000000">072: </font>            BorderLayout<font color="#990000">.</font>NORTH<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">073: </font>      microphonePanel<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>microphoneField<font color="#990000">,</font> BorderLayout<font color="#990000">.</font>CENTER<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">074: </font>      microphonePanel<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>buttonPanel<font color="#990000">,</font> BorderLayout<font color="#990000">.</font>SOUTH<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">075: </font>
+<font color="#000000">076: </font>      JFrame frame <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JFrame</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">077: </font>      frame<font color="#990000">.</font><b><font color="#000000">setDefaultCloseOperation</font></b><font color="#990000">(</font>JFrame<font color="#990000">.</font>EXIT_ON_CLOSE<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">078: </font>      frame<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>speakerPanel<font color="#990000">,</font> BorderLayout<font color="#990000">.</font>NORTH<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">079: </font>      frame<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>keyPanel<font color="#990000">,</font> BorderLayout<font color="#990000">.</font>CENTER<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">080: </font>      frame<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>microphonePanel<font color="#990000">,</font> BorderLayout<font color="#990000">.</font>SOUTH<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">081: </font>
+<font color="#000000">082: </font>      frame<font color="#990000">.</font><b><font color="#000000">pack</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">083: </font>      frame<font color="#990000">.</font><b><font color="#000000">setVisible</font></b><font color="#990000">(</font><b><font color="#0000FF">true</font></b><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">084: </font>   <font color="#FF0000">}</font>
+<font color="#000000">085: </font>
+<font color="#000000">086: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">087: </font><i><font color="#9A1900">      Give instructions to the mail system user.</font></i>
+<font color="#000000">088: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">089: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">speak</font></b><font color="#990000">(</font>String output<font color="#990000">)</font>
+<font color="#000000">090: </font>   <font color="#FF0000">{</font>
+<font color="#000000">091: </font>      speakerField<font color="#990000">.</font><b><font color="#000000">setText</font></b><font color="#990000">(</font>output<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">092: </font>   <font color="#FF0000">}</font>
+<font color="#000000">093: </font>
+<font color="#000000">094: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">run</font></b><font color="#990000">(</font>Connection c<font color="#990000">)</font>
+<font color="#000000">095: </font>   <font color="#FF0000">{</font>
+<font color="#000000">096: </font>      connect <font color="#990000">=</font> c<font color="#990000">;</font>
+<font color="#000000">097: </font>   <font color="#FF0000">}</font>
+<font color="#000000">098: </font>
+<font color="#000000">099: </font>   <b><font color="#0000FF">private</font></b> JTextArea speakerField<font color="#990000">;</font>
+<font color="#000000">100: </font>   <b><font color="#0000FF">private</font></b> Connection connect<font color="#990000">;</font>
+<font color="#000000">101: </font><font color="#FF0000">}</font>
+</tt></pre>

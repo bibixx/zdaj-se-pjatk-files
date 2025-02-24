@@ -1,0 +1,592 @@
+<!DOCTYPE HTML PUBLIC "-//SoftQuad//DTD HoTMetaL PRO 4.0::19971010::extensions to HTML 4.0//EN"
+ "hmpro4.dtd">
+
+<HTML>
+  
+  <HEAD>
+    <TITLE></TITLE>
+  </HEAD>
+  
+<body bgcolor=white background="images/bg-seal2.gif" bgproperties=fixed>
+    
+    <H1>Java Language Coding Guidelines</H1>
+    
+    <H2>1.&nbsp;&nbsp;Introduction</H2>
+    
+    <P>This coding style guide is a simplified version of one that has been
+      used with good success both in industrial practice and for college
+      courses. </P>
+    
+    <P>A style guide is a set of mandatory requirements for layout an d
+      formatting. Uniform style makes it easier for you to read code from your
+      instructor and classmates. You will really appreciate that if you do a
+      team project. It is also easier for your instructor and your grader to
+      grasp the essence of your programs quickly. </P>
+    
+    <P>A style guide makes you a more productive programmer because it <I>
+      reduces gratuitous choice.</I> If you don't have to make choices about
+      trivial matters, you can spend your energy on the solution of real
+      problems. </P>
+    
+    <P>In these guidelines, several constructs are plainly outlawed. That
+      doesn't mean that programmers using them are evil or incompetent. It does
+      mean that the constructs are not essential and can be expressed just as
+      well or even better with other language constructs. </P>
+    
+    <P>If you already have programming experience, in Java or another language,
+      you may be initially uncomfortable at giving up some fond habits. However,
+      it is a sign of professionalism to set aside personal preferences in minor
+      matters and to compromise for the benefit of your group. </P>
+    
+    <P>These guidelines are necessarily somewhat dull. They also mention
+      features that you may not yet have seen in class. Here are the most
+      important highlights: </P>
+    <UL>
+      <LI>Tabs are set every three spaces.</LI>
+      <LI>Variable and method names are lowercase, with occasional upperCase
+        characters in the middle.</LI>
+      <LI>Class names start with an Uppercase letter</LI>
+      <LI>Constant names are UPPERCASE, with an occasional UNDER_SCORE.</LI>
+      <LI>There are spaces after keywords and surrounding binary operators.</LI>
+      <LI>Braces must line up horizontally or vertically.</LI>
+      <LI>No magic numbers may be used.</LI>
+      <LI>Every method, except for <CODE>main</CODE> and overridden library
+        methods, must have a comment.</LI>
+      <LI>At most 30 lines of code may be used per method.</LI>
+      <LI>No <CODE>continue</CODE> or <CODE>break</CODE> is allowed.</LI>
+      <LI>All non-<CODE>final</CODE> variables must be private.</LI>
+    </UL>
+    
+    <H2>2.&nbsp;&nbsp;Source Files</H2>
+    
+    <P>Each Java program is a collection of one or more source files. The
+      executable program is obtained by compiling these files. Organize the
+      material in each file as follows: </P>
+    <UL>
+      <LI><b><CODE>package</CODE></b> statement, if appropriate</LI>
+      <LI><b><CODE>import</CODE></b> statements</LI>
+      <LI>A <b>comment</b> explaining the purpose of this file</LI>
+      <LI>A <b> <CODE>public</CODE></b> class</LI>
+      <LI><b>Other</b> classes, if appropriate</LI>
+    </UL>
+    
+    <P>The comment explaining the purpose of this file should be in the format
+      recognized by the <CODE>javadoc</CODE> utility. Start with a <CODE>/**</CODE>,
+      and use the <CODE>@author</CODE> and <CODE>@version</CODE> tags: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>/**
+ *  COPYRIGHT (C) 1997 Harry Hacker. All Rights Reserved.
+ *  Classes to manipulate widgets.
+ *  Solves CS101 homework assignment #3
+ *  @author Harry Hacker
+ *  @version 1.01 1997-02-15
+ */
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <H2>3.&nbsp;&nbsp;Classes</H2>
+    
+    <P>Each class should be preceded by a <b>class comment</b> explaining the purpose
+      of the class. </P>
+    
+    <P>First list all public features, then all private features. </P>
+    
+    <P>Within the public and private section, use the following order:</P>
+    <OL>
+      <LI>Static Fields</LI>
+      <LI>Instance Fields</LI>
+      <LI>Constructors</LI>
+      <LI>Methods</LI>
+      <LI>Inner classes</LI>
+    </OL>
+    
+    <P>Leave a blank line after every method. </P>
+    
+    <P>All non-<CODE>final</CODE> variables must be private. (However,
+      instance variables of a <CODE>private</CODE> inner class may be public.)
+      Methods and final variables can be either public or private, as
+      appropriate. </P>
+    
+    <P>All features must be tagged <CODE>public</CODE> or <CODE>private</CODE>.
+      Do not use the default visibility (that is, package visibility) or the
+      <CODE>protected</CODE> attribute. </P>
+    
+    <P>Avoid static variables (except <CODE>final</CODE> ones) whenever
+      possible. In the rare instance that you need static variables, you are
+      permitted one static variable per class. </P>
+	<p>When coding Java classes and interfaces, the following<b> formatting 
+	rules</b> should be followed: </p>
+	<ul>
+		<li>No space between a method name and the parenthesis &quot;(&quot; starting its 
+		parameter list
+		</li>
+		<li>Open brace &quot;{&quot; appears at the end of the same line as the 
+		declaration statement
+		</li>
+		<li>Closing brace &quot;}&quot; starts a line by itself indented to match its 
+		corresponding opening statement, except when it is a null statement the 
+		&quot;}&quot; should appear immediately after the &quot;{&quot; </li>
+	</ul>
+    
+    <H2>4.&nbsp;&nbsp;Methods</H2>
+    
+    <P>Every method (except for <CODE>main</CODE>) starts with a comment in
+      <CODE>javadoc</CODE> format. </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>/**
+ *  Convert calendar date into Julian day.
+ *  Note: This algorithm is from Press et al., Numerical Recipes
+ *  in C, 2nd ed., Cambridge University Press, 1992
+ *  @param day day of the date to be converted
+ *  @param month month of the date to be converted
+ *  @param year year of the date to be converted
+ *  @return the Julian day number that begins at noon of the
+ *  given calendar date.
+ */
+public static int dat2jul(int day, int month, int year) { 
+   . . .
+}
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Methods must have at most <b>30 lines of code</b>. The method signature,
+      comments, blank lines, and lines containing only braces are not included
+      in this count. This rule forces you to break up complex computations into
+      separate methods. </P>
+    
+    <H2>5.&nbsp;&nbsp;Variables and Constants</H2>
+    
+    <P>Do not define all variables at the beginning of a block: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>{  
+   double xold; // Don't
+   double xnew;
+   boolean more;
+   . . .
+}
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Define each variable just before it is used for the first time: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>{ 
+   . . .
+   double xold = Integer.parseInt(input);
+   boolean more = false;
+   while (more)
+   {  
+      double xnew = (xold + a / xold) / 2; // OK
+      . . .
+   }
+   . . .
+}
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Do not define two variables on the same line: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>int dimes = 0, nickels = 0; // Don't
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Instead, use two separate definitions:</P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>int dimes = 0; // OK
+int nickels = 0; 
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>In Java, constants must be defined with the keyword <CODE>final</CODE>.
+      If the constant is used by multiple methods, declare it as <CODE>static
+      final</CODE>. It is a good idea to define static final variables as
+      <CODE>private</CODE> if no other class has an interest in them. </P>
+    
+    <P>Do not use <I> <b>magic numbers</b>!</I> A magic number is a numeric constant
+      embedded in code, without a constant definition. Any number except -1, 0,
+      1, and 2 is considered magic: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>if (p.getX() &lt; 300) // Don't
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Use <CODE>final</CODE> variables instead: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>final double WINDOW_WIDTH = 300;
+. . .
+if (p.getX() &lt; WINDOW_WIDTH) // OK
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Even the most reasonable cosmic constant is going to change one day. You
+      think there are 365 days per year? Your customers on Mars are going to be
+      pretty unhappy about your silly prejudice. Make a constant </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>public static final int DAYS_PER_YEAR = 365;
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>so that you can easily produce a Martian version without trying to find
+      all the 365s, 364s, 366s, 367s, and so on, in your code. </P>
+    
+    <P>When declaring array variables, group the <TT>[]</TT> with the type,
+      not the variable. </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>int[] values; // OK
+int values[]; // Ugh--this is an ugly holdover from C
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <H2>6.&nbsp;&nbsp;Control Flow</H2>
+    
+    <H3>6.1&#151;The <CODE>if</CODE> Statement</H3>
+    
+    <P>Avoid the &quot;<CODE>if</CODE> ... <CODE>if</CODE> ... <CODE>else</CODE>&quot;
+      trap. The code </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>if ( ... )
+   if ( ... ) ...;
+else ...;
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>will not do what the indentation level suggests, and it can take hours
+      to find such a bug. Always use an extra pair of <CODE>{</CODE> ...
+      <CODE>}</CODE> when dealing with &quot;<CODE>if</CODE> ... <CODE>if</CODE>
+      ... <CODE>else</CODE>&quot;: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>if ( ... ) {  
+   if ( ... ) { ...</PRE>
+<PRE>   }
+} // {...} are necessary
+else { ...
+}</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <H3>6.2&#151;The <CODE>for</CODE> Statement</H3>
+    
+    <P>Use <CODE>for</CODE> loops only when a variable runs from somewhere to
+      somewhere with some constant increment/decrement: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>for (int i = 0; i &lt; a.length; i++) {
+   System.out.println(a[i]);
+}</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Do <b>not</b> use the <CODE>for</CODE> loop (<b>initialization; 
+	condition; update</b>) for <b>weird</b> constructs such as </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>for (a = a / 2; count &lt; ITERATIONS; System.out.println(xnew)); // Don't
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Make such a loop into a <CODE>while</CODE> loop. That way, the sequence
+      of instructions is much clearer. </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>a = a / 2;
+while (count &lt; ITERATIONS) { // OK
+   . . .
+   System.out.println(xnew);
+}
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <H3>6.3&#151;Nonlinear Control Flow</H3>
+    
+    <P>Avoid the <CODE>switch</CODE> statement, because it is easy to fall
+      through accidentally to an unwanted case. Use <CODE>if</CODE>/<CODE>else</CODE>
+      instead. </P>
+    
+    <P>Avoid the <CODE>break</CODE> or <CODE>continue</CODE> statements. Use
+      another <CODE>boolean</CODE> variable to control the execution flow. </P>
+    
+    <H3>6.4&#151;Exceptions</H3>
+    
+    <P>Do not tag a method with an overly general exception specification: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>Widget readWidget(Reader in)
+   throws Exception // Bad
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Instead, specifically declare any checked exceptions that your method
+      may throw: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>Widget readWidget(Reader in)
+   throws IOException, MalformedWidgetException // Good
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Do not &quot;squelch&quot; exceptions: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>try { 
+    double price = in.readDouble();
+}
+catch (Exception e) {} // Bad
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Beginners often make this mistake &quot;to keep the compiler happy&quot;.
+      If the current method is not appropriate for handling the exception,
+      simply use a <CODE>throws</CODE> specification and let one of its callers
+      handle it. </P>
+    
+    <H2>7.&nbsp;&nbsp;Lexical Issues</H2>
+    
+    <H3>7.1&#151;Naming Convention</H3>
+    
+    <P>The following rules specify when to use upper- and lowercase letters in
+      identifier names. </P>
+    <UL>
+      <LI>All variable and method names and all data fields of classes are in
+        lowercase (maybe with an occasional upperCase in the middle); for
+        example, <CODE>firstPlayer</CODE>.</LI>
+      <LI>All constants are in uppercase (maybe with an occasional
+        UNDER_SCORE); for example, <CODE>CLOCK_RADIUS</CODE>.</LI>
+      <LI>All class and interface names start with uppercase and are followed
+        by lowercase letters (maybe with an occasional UpperCase letter); for
+        example, <CODE>BankTeller</CODE>.</LI>
+    </UL>
+    
+    <P>Names must be reasonably long and descriptive. Use <CODE>firstPlayer</CODE>
+      instead of <CODE>fp</CODE>. No drppng f vwls. Local variables that are
+      fairly routine can be short (<CODE>ch</CODE>, <CODE>i</CODE>) as long as
+      they are really just boring holders for an input character, a loop
+      counter, and so on. Also, do not use <CODE>ctr</CODE>, <CODE>c</CODE>,
+      <CODE>cntr</CODE>, <CODE>cnt</CODE>, <CODE>c2</CODE> for variables in
+      your method. Surely these variables all have specific purposes and can be
+      named to remind the reader of them (for example, <CODE>current</CODE>,
+      <CODE>next</CODE>, <CODE>previous</CODE>, <CODE>result</CODE>, . . . ).
+    </P>
+    
+    <H3>7.2&#151;Indentation and White Space</H3>
+    
+    <P>Use tab stops every three columns. That means you will need to change
+      the tab stop setting in your editor! </P>
+    
+    <P>Use blank lines freely to separate parts of a method that are logically
+      distinct. </P>
+    
+    <P>Use a blank space around every binary operator: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>x1 = (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);  // Good
+
+x1=(-b-Math.sqrt(b*b-4*a*c))/(2*a);//Bad
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Leave a blank space after (and not before) each comma or semicolon. Do
+      not leave a space before or after a parenthesis or bracket in an
+      expression. Leave spaces around the <TT>( . . . )</TT> part of an <TT>if</TT>,
+      <TT>while</TT>, <TT>for</TT>, or <TT>catch</TT> statement.</P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>if (x == 0) {
+   y = 0;
+}
+
+f(a, b[i]);
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Every line must fit on 80 columns. If you must break a statement, add an
+      indentation level for the continuation: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>a[n] = ..................................................
+   + .................;
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Start the indented line with an operator (if possible). </P>
+    
+    <P>&nbsp;&nbsp;If the condition in an <CODE>if</CODE> or <CODE>while</CODE>
+      statement must be broken, be sure to brace the body in, <I> even if it
+      consists of only one statement:</I> </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>if ( .........................................................
+   &amp;&amp; ..................
+   || .......... ) {  
+   . . .
+}
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>If it weren't for the braces, it would be hard to separate the
+      continuation of the condition visually from the statement to be executed.
+    </P>
+    
+    <H3>7.3&#151;Unstable Layout</H3>
+    
+    <P>Some programmers take great pride in lining up certain columns in their
+      code: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>firstRecord = other.firstRecord;
+lastRecord  = other.lastRecord;
+cutoff      = other.cutoff;
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>This is undeniably neat, but the layout is not <b> <I> stable</I></b> under
+      change. A new variable name that is longer than the preallotted number of
+      columns requires that you move <I> all</I> entries around: </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>firstRecord = other.firstRecord;
+lastRecord  = other.lastRecord;
+cutoff      = other.cutoff;
+marginalFudgeFactor = other.marginalFudgeFactor;
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>This is just the kind of trap that makes you decide to use a short
+      variable name like <CODE>mff</CODE> instead. </P>
+    
+    <P>Do not use <CODE>//</CODE> comments for comments that extend for more
+      than two lines. You don't want to have to move the <CODE>//</CODE> around
+      when you edit the comment. </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>// comment &#151; don't do this
+// more comment
+// more comment
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>Use <CODE>/*</CODE> ... <CODE>*/</CODE> comments instead. </P>
+    <TABLE BORDER="0">
+      <TR>
+        <TD WIDTH="5%">&nbsp;</TD>
+        <TD>
+
+<PRE>/* comment&#151;don't do this
+ * more comment
+ * more comment
+ */
+</PRE></TD>
+      </TR>
+    </TABLE>
+    
+    <P>These comments are easier to maintain as your program changes.</P>
+  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70af09963548',t:'MTczOTIwNDU2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY>
+</HTML>

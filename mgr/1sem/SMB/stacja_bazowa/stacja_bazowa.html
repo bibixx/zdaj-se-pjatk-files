@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Symulator stacji bazowych - Mikołaj Bieńkowski (s6020)</title>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+
+		<div class='box'>
+		<h1>Symulator stacji bazowych</h1>
+		<form>
+			<label><span>Liczba kanałów (ch)</span>	<input class='input_text' type='text' name='ch' value='10'	/></label>
+			<label><span>Natężenie ruchu (&lambda;)</span> 	<input class='input_text' type='text' name='lamb' value='1.0'/></label>
+			<label><span>Średnia długość rozmowy (N)</span>	<input class='input_text' type='text' name='n' 	value='72'/></label>
+			<label><span>Odchylenie standardowe (&sigma;)</span> <input class='input_text' type='text' name='sigma'	value='30'/></label>
+			<label><span>Minimalna długość rozmowy (min)</span>	<input class='input_text' type='text' name='min' value='1'/></label>
+			<label><span>Maksymalna długość rozmowy (max)</span> <input class='input_text' type='text' name='max' value='150'/></label>
+			<label><span>Długość kolejki (queue)</span>	<input class='input_text' type='text' name='queue' value='10'/></label>
+			<label><span>Czas symulacji (s)</span> <input class='input_text' type='text' name='t' value='300'/></label>
+			<label><input type='submit' class='button' value='Uruchom' /></label>
+			<input type='hidden' name='count' value='1'/>  
+		</form>
+		</div>
+
+	<script src="js/highcharts.js"></script>
+	<script type="text/javascript" src="js/gray.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<br /> 
+	<div id="container" style="min-width: 400px; height: 0px; width: 90% ; margin: 0 auto"></div>
+	<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd6f0c9b0cbfc1',t:'MTczOTIwNDUwMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

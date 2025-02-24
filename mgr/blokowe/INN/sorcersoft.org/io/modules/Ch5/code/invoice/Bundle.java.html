@@ -1,0 +1,41 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>util<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font>
+<font color="#000000">03: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">04: </font><i><font color="#9A1900">   A bundle of line items that is again a line item.</font></i>
+<font color="#000000">05: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">06: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> Bundle <b><font color="#0000FF">implements</font></b> LineItem
+<font color="#000000">07: </font><font color="#FF0000">{</font>
+<font color="#000000">08: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">09: </font><i><font color="#9A1900">      Constructs a bundle with no items.</font></i>
+<font color="#000000">10: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">11: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#000000">Bundle</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#FF0000">{</font> items <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> ArrayList<font color="#990000">&lt;</font>LineItem<font color="#990000">&gt;</font><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font> <font color="#FF0000">}</font>
+<font color="#000000">12: </font>
+<font color="#000000">13: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">14: </font><i><font color="#9A1900">      Adds an item to the bundle.</font></i>
+<font color="#000000">15: </font><i><font color="#9A1900">      @param item the item to add</font></i>
+<font color="#000000">16: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">17: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">add</font></b><font color="#990000">(</font>LineItem item<font color="#990000">)</font> <font color="#FF0000">{</font> items<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>item<font color="#990000">)</font><font color="#990000">;</font> <font color="#FF0000">}</font>
+<font color="#000000">18: </font>
+<font color="#000000">19: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">double</font> <b><font color="#000000">getPrice</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">20: </font>   <font color="#FF0000">{</font>
+<font color="#000000">21: </font>      <font color="#009900">double</font> price <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+<font color="#000000">22: </font>
+<font color="#000000">23: </font>      <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>LineItem item <font color="#990000">:</font> items<font color="#990000">)</font>
+<font color="#000000">24: </font>         price <font color="#990000">+</font><font color="#990000">=</font> item<font color="#990000">.</font><b><font color="#000000">getPrice</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">25: </font>      <b><font color="#0000FF">return</font></b> price<font color="#990000">;</font>
+<font color="#000000">26: </font>   <font color="#FF0000">}</font>
+<font color="#000000">27: </font>
+<font color="#000000">28: </font>   <b><font color="#0000FF">public</font></b> String <b><font color="#000000">toString</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">29: </font>   <font color="#FF0000">{</font>
+<font color="#000000">30: </font>      String description <font color="#990000">=</font> <font color="#FF0000">"Bundle: "</font><font color="#990000">;</font>
+<font color="#000000">31: </font>      <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> items<font color="#990000">.</font><b><font color="#000000">size</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font> i<font color="#990000">+</font><font color="#990000">+</font><font color="#990000">)</font>
+<font color="#000000">32: </font>      <font color="#FF0000">{</font>
+<font color="#000000">33: </font>         <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>i <font color="#990000">&gt;</font> <font color="#993399">0</font><font color="#990000">)</font> description <font color="#990000">+</font><font color="#990000">=</font> <font color="#FF0000">", "</font><font color="#990000">;</font>
+<font color="#000000">34: </font>         description <font color="#990000">+</font><font color="#990000">=</font> items<font color="#990000">.</font><b><font color="#000000">get</font></b><font color="#990000">(</font>i<font color="#990000">)</font><font color="#990000">.</font><b><font color="#000000">toString</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">35: </font>      <font color="#FF0000">}</font>
+<font color="#000000">36: </font>      <b><font color="#0000FF">return</font></b> description<font color="#990000">;</font>
+<font color="#000000">37: </font>   <font color="#FF0000">}</font>
+<font color="#000000">38: </font>
+<font color="#000000">39: </font>   <b><font color="#0000FF">private</font></b> ArrayList<font color="#990000">&lt;</font>LineItem<font color="#990000">&gt;</font> items<font color="#990000">;</font>
+<font color="#000000">40: </font><font color="#FF0000">}</font>
+</tt></pre>

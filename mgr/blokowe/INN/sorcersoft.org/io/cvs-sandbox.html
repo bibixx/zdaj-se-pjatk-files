@@ -1,0 +1,116 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Install Eclipse and create sandb</title>
+<style>
+<!--
+ p.MsoNormal
+	{mso-style-parent:"";
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	margin-left:0pt; margin-right:0pt; margin-top:0pt}
+ li.MsoNormal
+	{mso-style-parent:"";
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	margin-left:0pt; margin-right:0pt; margin-top:0pt}
+-->
+</style>
+</head>
+
+<body>
+
+<h2><b>Create a Project from the CVS Repository </b></h2>
+<ol style="margin-top: 0pt; margin-bottom: 0pt" start="1" type="1">
+	<li class="MsoNormal">Download Eclipse from
+	<a style="color: blue; text-decoration: underline; text-underline: single" href="http://www.eclipse.org/downloads/index.php">
+	http://www.eclipse.org/downloads/</a>
+ 	<ol style="margin-top: 0pt; margin-bottom: 0pt" start="1" type="a">
+		<li class="MsoNormal">Choose appropriate platform and the version for <i>IDE for Java 
+		Developers</i></li>
+	</ol>
+	</li>
+	<li class="MsoNormal">Extract Eclipse SDK to appropriate directory</li>
+	<li class="MsoNormal">Run eclipse from the installation Eclipse 
+	Directory</li>
+	<li class="MsoNormal">Set Eclipse <b><i>workspace</i></b> directory
+ 	<ol style="margin-top: 0pt; margin-bottom: 0pt" start="1" type="a">
+		<li class="MsoNormal">E.g.:
+		<a href="file:///C:/users/%3Cusername%3E/workspace">
+		C:\users\&lt;username&gt;\workspace</a> (avoid C:\Documents and Settings on Wintels)</li>
+		<li class="MsoNormal">Check &quot;Use this as the default and do not ask 
+		again&quot;</li>
+	</ol>
+	</li>
+	<li class="MsoNormal">&nbsp;Select &quot;Go to the workbench&quot; at the top-right corner 
+	of the Eclipse window</li>
+	<li class="MsoNormal">Click on menu item <i>Project</i> and unselect <i>
+	Build Automatically</i></li>
+	<li class="MsoNormal">Select <i>File =&gt;New =&gt;Project</i>...</li>
+	<li class="MsoNormal">&nbsp;Selec<i>t CVS=&gt;Projects from CVS</i></li>
+	<li class="MsoNormal">&nbsp;Click <i>Next</i>,
+ 	<ol style="margin-top: 0pt; margin-bottom: 0pt" start="1" type="a">
+		<li class="MsoNormal">Set <i>Host: </i>&nbsp;<b><i>sorcersoft.org</i></b></li>
+		<li class="MsoNormal">Set <i>Repository path:</i> <strong>/Volumes/MRS/Users/ss-io/cvsrep</strong><br>
+		</li>
+		<li class="MsoNormal">Set <i>User</i> and <i>Password</i> for your <b>project: <br>
+		user: 
+	    ss-io<br>
+	    password: 
+	    pjwstk-io-ms.10</b></li>
+		<li class="MsoNormal">Set C<i>onnection type:</i> <b><i>extssh</i></b></li>
+		<li class="MsoNormal">Check in <i>Save Password</i></li>
+	</ol>
+	</li>
+	<li class="MsoNormal">Click <i>Next</i>
+ 	<ol style="margin-top: 0pt; margin-bottom: 0pt" start="1" type="a">
+		<li class="MsoNormal">Select <i>Use an existing module</i></li>
+		<li class="MsoNormal">Select <i>Yes</i> when prompted for <i>Continue 
+		Connecting</i></li>
+		<li class="MsoNormal">Select <i>Yes </i>for creation of ssh keys</li>
+		<li class="MsoNormal">Select <i>OK</i></li>
+		<li class="MsoNormal">Select your<i> <b>project</b></i> (module) <strong>CoffeeMakerStudent-PJWSTK</strong> and 
+		click <i>Next</i></li>
+		<li class="MsoNormal">Make sure&nbsp; &quot;check out as a project into workspace 
+		is selected&quot;</li>
+		<li class="MsoNormal">Click <i>Finish</i></li>
+	</ol>
+	</li>
+	<li class="MsoNormal">Open (click on +) <b><i>project</i></b> in Eclipse <i>
+	Navigator </i>(select this <i>Perspective</i> in the top-right cornet as <i>
+	Resource</i>)
+ 	</li>
+</ol>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal"><b><font size="5"><a name="share"></a>Share an Eclipse Project in the CVS 
+Repository </font></b></p>
+<ol>
+	<li>
+	<p class="MsoNormal">Select the project in the Navigator view, then in the 
+  popup menu select <i>Team=&gt;Share Project...</i></li>
+	<li>
+	<p class="MsoNormal">Select <i>Use existing repository location, </i>if 
+	defined in the step 9 above, otherwise<i> Create a new repository location</i></li>
+	<li>
+	<p class="MsoNormal">Click <i>Next</i></li>
+	<li>
+	<p class="MsoNormal">If <i>Create a new repository location</i> selected, 
+	then fill in the CVS server information as described in 9 above, otherwise 
+	select the existing one.</li>
+	<li>
+	<p class="MsoNormal">Click <i>Next</i></li>
+	<li>
+	<p class="MsoNormal">Provide a new module (project) name if desired, 
+	otherwise use project name as CVS module name.</li>
+	<li>
+	<p class="MsoNormal">Click <i>Next</i></li>
+</ol>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd6fe0bcf9eeaf',t:'MTczOTIwNDUzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

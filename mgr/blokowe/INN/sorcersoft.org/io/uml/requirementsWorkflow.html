@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Requirements Workflow</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-2">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Requirements Workflow</span><h2>Agenda</h2>
+<UL>
+<LI>Modeling and Simulation Model</LI>
+<LI>SW Requirements - Metamodel</LI>
+<LI>Finding Requirements</LI>
+<LI>Requirements Workflow Detail</LI>
+<LI>Use Case Workflow Detail</LI>
+<LI>Use Case Modeling</LI>
+<LI>Detail a Use Case</LI>
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Modeling and Simulation Model</h2>
+<p><a href="../modules/vva/index.html#sargent"><img border="0" src="images/objectModel.png" width="650" height="339"></a></p>
+<p>&nbsp;</p>
+<ul>
+	<li>A <b>referent</b> in software is usually defined by <b>a SW requirements 
+	model</b>.</li>
+</ul>
+<p>Ways of using UML</p>
+<ol>
+	<li>UML use case diagrams and use case realizations as <b>sketch</b> - 
+	result of use case analysis</li>
+	<li>UML use case diagrams and use case realizations as <b>blueprint</b> - 
+	result of a use case design process based on use case analysis</li>
+	<li>UML as <b>programming language</b> - UML diagrams are compiled directly 
+	to executable code</li>
+</ol>
+
+&nbsp;<hr align="left" width="100%" size="4" noshade>
+<h2><a name="SW_Requirements_-_Metamodel">SW Requirements - Metamodel</a></h2>
+<ul>
+	<li>Requirements tell us what we should build, not how we should build.</li>
+	<li>Use &quot;shall&quot; statements to capture requirements.</li>
+	<li>Functional requirements - what the system should do, e.g.,<ul>
+		<li>Customers</li>
+		<li>Products</li>
+		<li>Orders</li>
+		<li>Sales channels</li>
+		<li>Payments</li>
+	</ul>
+	</li>
+	<li>Non-functional requirement - a constraint on the system, e.g.,<ul>
+		<li>Performance (wydajność)</li>
+		<li>Capacity (przepustowość)</li>
+		<li>Availability (dostępność)</li>
+		<li>Compliance to standards</li>
+	</ul>
+	</li>
+</ul>
+<p>&nbsp;</p>
+<p><img border="0" src="reqs-images/3-3.png" width="795" height="484"></p>
+<p>In the requirements metamodel</p>
+<ul>
+	<li>UML packages are grouping mechanisms</li>
+	<li>small triangle indicates that the package contains a model</li>
+	<li>the anchor icon indicates that the thing at the circle end contains the 
+	thing at the other end of the line</li>
+	<li>The term <b>actor</b> is used to describe the <b><i>role</i></b> played 
+	by people or things that use the system.&nbsp; 
+<ul>
+	<li>A role is like a hat that something wears in a particular context. </li>
+</ul>
+	</li>
+	<li><SPAN 
+class=basicContent>A <b>use case</b> describes behavior that the system exhibits 
+	to benefit one or more actors.</li>
+</ul>
+<p>&nbsp;</p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Finding Requirements</h2>
+<p>Requirements come from the context of the system you are trying to model. 
+This context include:</p>
+<ul>
+	<li>direct users of the system</li>
+	<li>other stakeholders (inni udziałowiecy) (e.g., mangers, maintainers, installers)</li>
+	<li>other systems with which the system interacts</li>
+	<li>hardware devices with which the system interacts</li>
+	<li>legal and regulatory constraints</li>
+	<li>technical constraints</li>
+	<li>business goals</li>
+</ul>
+<p><img border="0" src="images/stakeholders.png" width="600" height="322"></p>
+<p>Stakeholders involved in system acquisition - modeling needs to improve 
+communication</p>
+<hr align="left" width="100%" size="4" noshade>
+<h2> Unified Process (UO) Workflow Detail</h2>
+<p>A <em>workflow detail</em> shows us the workers and activities involved in a particular workflow. A workflow detail specifies (details) the component tasks and related 
+  roles of a specific workflow.</p>
+<ul>
+  <li>UP workflows details are modeled as workers (roles) and activities. </li>
+  <li>Note that that this is only a approximation of the workflow in the 
+    &quot;average&quot; case and might not be a particular exact representation of what 
+    happens in practice.</li>
+  <li>In the real world, you can expect some tasks to be done in a different 
+    order or in parallel according to circumstances.</li>
+</ul>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Requirements Workflow Detail</h2>
+<p>&nbsp;</p>
+<p><img border="0" src="reqs-images/3-5.png" width="799" height="251"></p>
+<p>A<i> requirement model&nbsp; workflow detail</i> defining <b><i>functional 
+and non-functional requirements</i></b>.</p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Use Case Requirements Workflow Detail</h2>
+<p><map name="FPMap2">
+<area coords="160, 8, 349, 83" shape="rect" href="UML-borland-UCDs.html#Use_Cases">
+<area href="UML-borland-UCDs.html#Use_Case_Descriptions" shape="rect" coords="301, 219, 447, 302">
+<area href="images/31863/usecase.html" shape="rect" coords="470, 6, 688, 82">
+</map>
+<img border="0" src="reqs-images/3-4.png" width="700" height="403" usemap="#FPMap2"></p>
+<p>A<i> use case&nbsp;requirement workflow detail</i> defining <b><i>UML use cases</i></b>.
+</p>
+<hr align="left" width="100%" size="4" noshade>
+<h2><a name="Use_Case_Modeling">Use Case Modeling</a></h2>
+<p>Use case modeling typically proceeds as follow:</p>
+<ul>
+	<li>Find a candidate system boundary - a box drawn around the use cases to 
+	denote the edge of boundary of the system being modeled..</li>
+	<li>Find actors.
+<ul>
+	<li>To find actors ask: <b><i>Who or&nbsp; what uses or interacts with the 
+	system?</i></b></li>
+</ul>
+		</li>
+	<li>Find use cases:<ul>
+		<li>specify the use case</li>
+		<li>identify key alternative flows</li>
+	</ul>
+	</li>
+	<li>Iterate until use cases, actors, and system boundary are stable with 
+	meaningful relationships between actors and use cases.</li>
+</ul>
+		<p><map name="FPMap0">
+		<area coords="516, 20, 637, 146" shape="rect" href="UML-borland-UCDs.html#Use_Case_Diagrams">
+		<area coords="5, 16, 134, 139" shape="rect" href="../modules/4-blockers/index.html#What_is_a_4-blocker">
+		<area href="#SW_Requirements_-_Metamodel" shape="rect" coords="8, 155, 139, 262">
+		</map>
+		<img border="0" src="images/fig4-2.png" width="650" height="400" usemap="#FPMap0"></p>
+<p><b>Feature list </b>is a set of candidate requirements that might take the 
+form of a vision document or similar.</p>
+<p>Capture business language and jargon in the project <b>glossary</b>.</p>
+<hr align="left" width="100%" size="4" noshade>
+<h2><a name="Detail_a_Use_Case">Detail a Use Case</a></h2>
+<p><map name="FPMap1">
+<area href="UML-borland-UCDs.html#Use_Case_Descriptions" shape="rect" coords="518, 130, 646, 253">
+</map>
+<img border="0" src="images/fig4-7.png" width="650" height="368" usemap="#FPMap1"></p>
+		
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70bcfd6cc068',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

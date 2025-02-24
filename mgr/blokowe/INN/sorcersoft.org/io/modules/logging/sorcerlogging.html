@@ -1,0 +1,50 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>sorcer.logging</title>
+</head>
+
+<body>
+<pre>
+# SORCER Logging Configuration File
+# Default configuration for handlers associated with the root logger.
+# To use this configuration file, specify the parameter
+# java.util.logging.config.file on the command line, e.g.,
+# java -Djava.util.logging.config.file=sorcer.logging
+
+# Handlers installed for the root logger
+handlers=java.util.logging.ConsoleHandler, java.util.logging.FileHandler
+    
+# Level for the root logger - is used by any logger
+# that does not have its level set
+.level=INFO
+
+# Initialization class - the public default constructor 
+# of this class is called by the Logging framework
+config=sorcer.core.util.Log
+
+# Configure ConsoleHandler
+java.util.logging.ConsoleHandler.level=ALL
+java.util.logging.ConsoleHandler.formatter=java.util.logging.SimpleFormatter
+
+# Configure FileHandler
+java.util.logging.FileHandler.level=ALL
+java.util.logging.FileHandler.formatter=java.util.logging.SimpleFormatter
+java.util.logging.FileHandler.pattern=../logs/sorcer%g.log
+java.util.logging.FileHandler.limit=1000000
+java.util.logging.FileHandler.count=3
+
+# Set SORCER logger levels
+com.sun.jini.start.service.starter.level=INFO
+sorcer.level=SEVERE
+sorcer.core=SEVERE
+sorcer.core.security.level=INFO
+sorcer.core.provider.level=INFO
+sorcer.core.provider.ServiceProvider.level=INFO
+sorcer.test.level=FINER
+sorcer.random.level=SEVERE
+</pre>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd714f1acfee45',t:'MTczOTIwNDU5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

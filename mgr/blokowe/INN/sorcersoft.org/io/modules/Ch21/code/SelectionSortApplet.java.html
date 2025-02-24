@@ -1,0 +1,76 @@
+<pre>
+<tt>01: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>applet<font color=#990000>.</font>Applet<font color=#990000>;</font>
+02: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>awt<font color=#990000>.</font>Color<font color=#990000>;</font>
+03: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>awt<font color=#990000>.</font>Graphics<font color=#990000>;</font>
+04: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>awt<font color=#990000>.</font>Graphics2D<font color=#990000>;</font>
+05: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>awt<font color=#990000>.</font>event<font color=#990000>.</font>MouseEvent<font color=#990000>;</font>
+06: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>awt<font color=#990000>.</font>event<font color=#990000>.</font>MouseAdapter<font color=#990000>;</font>
+07: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>awt<font color=#990000>.</font>event<font color=#990000>.</font>MouseListener<font color=#990000>;</font>
+08: 
+09: <i><font color=#9A1900>/**</font></i>
+10: <i><font color=#9A1900>   This applet animates the selection sort algorithm.</font></i>
+11: <i><font color=#9A1900>*/</font></i>
+12: <b><font color=#0000FF>public</font></b> <b><font color=#0000FF>class</font></b> SelectionSortApplet <b><font color=#0000FF>extends</font></b> Applet
+13: <font color=#FF0000>{</font>
+14:    <i><font color=#9A1900>/**</font></i>
+15: <i><font color=#9A1900>      Constructs the applet and sets up the mouse handler.</font></i>
+16: <i><font color=#9A1900>      Click on the surface of the applet to start the animation.</font></i>
+17: <i><font color=#9A1900>   */</font></i>
+18:    <b><font color=#0000FF>public</font></b> <b><font color=#000000>SelectionSortApplet</font></b><font color=#990000>(</font><font color=#990000>)</font>
+19:    <font color=#FF0000>{</font>
+20:       <b><font color=#0000FF>class</font></b> MousePressListener <b><font color=#0000FF>extends</font></b> MouseAdapter
+21:       <font color=#FF0000>{</font>
+22:          <b><font color=#0000FF>public</font></b> <font color=#009900>void</font> <b><font color=#000000>mousePressed</font></b><font color=#990000>(</font>MouseEvent event<font color=#990000>)</font>
+23:          <font color=#FF0000>{</font>
+24:             <b><font color=#000000>if</font></b> <font color=#990000>(</font>animation <font color=#990000>!</font><font color=#990000>=</font> <b><font color=#0000FF>null</font></b> <font color=#990000>&amp;</font><font color=#990000>&amp;</font> animation<font color=#990000>.</font><b><font color=#000000>isAlive</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>)</font> 
+25:                animation<font color=#990000>.</font><b><font color=#000000>interrupt</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+26:             <b><font color=#000000>startAnimation</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+27:          <font color=#FF0000>}</font>
+28:       <font color=#FF0000>}</font>
+29: 
+30:       MouseListener listener <font color=#990000>=</font> <b><font color=#0000FF>new</font></b> <b><font color=#000000>MousePressListener</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+31:       <b><font color=#000000>addMouseListener</font></b><font color=#990000>(</font>listener<font color=#990000>)</font><font color=#990000>;</font>
+32:       <b><font color=#000000>setBackground</font></b><font color=#990000>(</font>Color<font color=#990000>.</font>lightGray<font color=#990000>)</font><font color=#990000>;</font>
+33: 
+34:       sorter <font color=#990000>=</font> <b><font color=#0000FF>null</font></b><font color=#990000>;</font>
+35:       animation <font color=#990000>=</font> <b><font color=#0000FF>null</font></b><font color=#990000>;</font>
+36:    <font color=#FF0000>}</font>
+37: 
+38:    <b><font color=#0000FF>public</font></b> <font color=#009900>void</font> <b><font color=#000000>paint</font></b><font color=#990000>(</font>Graphics g<font color=#990000>)</font>
+39:    <font color=#FF0000>{</font>
+40:       <b><font color=#000000>if</font></b> <font color=#990000>(</font>sorter <font color=#990000>=</font><font color=#990000>=</font> <b><font color=#0000FF>null</font></b><font color=#990000>)</font> <b><font color=#0000FF>return</font></b><font color=#990000>;</font>
+41:       Graphics2D g2 <font color=#990000>=</font> <font color=#990000>(</font>Graphics2D<font color=#990000>)</font>g<font color=#990000>;</font>
+42:       sorter<font color=#990000>.</font><b><font color=#000000>draw</font></b><font color=#990000>(</font>g2<font color=#990000>)</font><font color=#990000>;</font>
+43:    <font color=#FF0000>}</font>
+44: 
+45:    <i><font color=#9A1900>/**</font></i>
+46: <i><font color=#9A1900>      Starts a new animation thread.</font></i>
+47: <i><font color=#9A1900>   */</font></i>
+48:    <b><font color=#0000FF>public</font></b> <font color=#009900>void</font> <b><font color=#000000>startAnimation</font></b><font color=#990000>(</font><font color=#990000>)</font>
+49:    <font color=#FF0000>{</font>
+50:       <b><font color=#0000FF>class</font></b> AnimationThread <b><font color=#0000FF>extends</font></b> Thread
+51:       <font color=#FF0000>{</font>
+52:          <b><font color=#0000FF>public</font></b> <font color=#009900>void</font> <b><font color=#000000>run</font></b><font color=#990000>(</font><font color=#990000>)</font>
+53:          <font color=#FF0000>{</font>
+54:             <b><font color=#0000FF>try</font></b>
+55:             <font color=#FF0000>{</font>
+56:                sorter<font color=#990000>.</font><b><font color=#000000>sort</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+57:             <font color=#FF0000>}</font>
+58:             <b><font color=#000000>catch</font></b> <font color=#990000>(</font>InterruptedException exception<font color=#990000>)</font>
+59:             <font color=#FF0000>{</font>
+60:             <font color=#FF0000>}</font>
+61:          <font color=#FF0000>}</font>
+62:       <font color=#FF0000>}</font>
+63:       
+64:       <font color=#009900>int</font><font color=#990000>[</font><font color=#990000>]</font> values <font color=#990000>=</font> ArrayUtil<font color=#990000>.</font><b><font color=#000000>randomIntArray</font></b><font color=#990000>(</font><font color=#993399>30</font><font color=#990000>,</font> <font color=#993399>300</font><font color=#990000>)</font><font color=#990000>;</font>
+65:       sorter <font color=#990000>=</font> <b><font color=#0000FF>new</font></b> <b><font color=#000000>SelectionSorter</font></b><font color=#990000>(</font>values<font color=#990000>,</font> <b><font color=#0000FF>this</font></b><font color=#990000>)</font><font color=#990000>;</font>
+66:       animation <font color=#990000>=</font> <b><font color=#0000FF>new</font></b> <b><font color=#000000>AnimationThread</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+67:       animation<font color=#990000>.</font><b><font color=#000000>start</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+68:    <font color=#FF0000>}</font>
+69: 
+70:    <b><font color=#0000FF>private</font></b> SelectionSorter sorter<font color=#990000>;</font>
+71:    <b><font color=#0000FF>private</font></b> Thread animation<font color=#990000>;</font>
+72: <font color=#FF0000>}</font>
+73: 
+</tt>
+</pre>

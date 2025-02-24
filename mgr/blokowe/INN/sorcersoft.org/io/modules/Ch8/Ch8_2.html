@@ -1,0 +1,649 @@
+<TITLE>SE: Frameworks</TITLE>
+<HTML>
+<HEAD>
+<META name="keywords" content="Intro to Streams">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Frameworks </span><h2>Course Map</h2>
+
+<H2><img border="0" src="../../images/CourseMap22.png"></H2>
+<H2>Agenda</H2>
+<ul>
+  <li>Frameworks </li>
+  <li>Applets as a simple framework </li>
+  <li>The collections framework </li>
+	<li>A graph editor framework </li>
+	<li>Enhancing the graph editor framework</li>
+	<li><a href="../eventGen/index.html">Event handling framework</a></li>
+	<li><a href="../et/index.html">Exceptions, threads, finalizers</a></li>
+	<li><a href="../ServiceUI/index.html">Service UI framework</a></li>
+	<li><a href="fileEncryptor.html">File Encryptor</a></li>
+	<li><a href="../servlets-CS3365/servlets.html">Servlets</a></li>
+	<li><a href="DerbyGuide.pdf">Working with Apache Derby</a><br />
+	</li>
+</ul>
+<h2>Frameworks</h2>
+<ul>
+  <li>Set of cooperating classes </li>
+  <li>Structures the essential mechanisms of a problem domain </li>
+  <li>Example: Swing is a GUI framework </li>
+  <li>Framework != design pattern </li>
+  <li>Typical framework uses multiple design patterns </li>
+</ul>
+<h2>Application Frameworks</h2>
+<ul>
+  <li>Implements services common to a type of applications </li>
+  <li>Programmer forms subclasses of framework classes </li>
+  <li>Result is an application </li>
+  <li>Inversion of control: framework controls execution flow </li>
+</ul>
+<h2>Applets</h2>
+<ul>
+  <li>Applet: Java program that runs in a web browser </li>
+  <li>Programmer forms subclass of <tt>Applet</tt> or <tt>JApplet</tt>
+  </li>
+  <li>Overwrites<br />
+    <tt>init/destroy<br />
+start/stop<br />
+paint</tt> </li>
+</ul>
+<h2>Applets</h2>
+<img src="images/Ch8_01.jpg" title="" alt="." /><br />
+<br />
+<h2>Applets<br />
+</h2>
+<ul>
+  <li>Interacts with ambient browser<br />
+    <tt>getParameter<br />
+showDocument</tt> </li>
+  <li>HTML page contains applet tag and parameters<br />
+    <pre>&lt;applet code="BannerApplet.class" width="300" height="100"&gt; <br />   &lt;param name="message" value="Hello, World!"/&gt; <br />   &lt;param name="fontname" value="Serif"/&gt; <br />   &lt;param name="fontsize" value="64"/&gt; <br />   &lt;param name="delay" value="10"/&gt; <br />&lt;/applet&gt; <br /></pre>
+  </li>
+</ul>
+<h2>Example Applet</h2>
+<ul>
+  <li>Shows scrolling banner </li>
+  <li><tt>init</tt> reads parameters </li>
+  <li><tt>start/stop</tt> start and stop timer </li>
+  <li><tt>paint</tt> paints the applet surface </li>
+  <li><a href="code/applet/BannerApplet.java.html">Ch8/applet/BannerApplet.java</a>
+  </li>
+</ul>
+<h2>Example Applet</h2>
+<img alt="" src="images/Ch8_02.png" height="279" width="378" /><br />
+<br />
+<h2>Applets as a Framework</h2>
+<ul>
+  <li>Applet programmer uses inheritance </li>
+  <li>Applet class deals with generic behavior (browser interaction) </li>
+  <li>Inversion of control: applet calls <tt>init</tt>, <tt>start</tt>,<tt>stop</tt>,<tt>destroy</tt>
+  </li>
+</ul>
+<h2>Collections Framework<br />
+</h2>
+<ul>
+  <li>Java library supplies standard data structures </li>
+  <li>Supplies useful services (e.g. <tt>Collections.sort</tt>, <tt>Collections.shuffle</tt>)
+  </li>
+  <li>Framework: Programmers can supply additional data structures,
+services </li>
+  <li>New data structures automatically work with services </li>
+  <li>New services automatically work with data structures </li>
+</ul>
+<h2>Collections Framework: Interface Types<br />
+</h2>
+<ul>
+  <li><tt>Collection</tt>: the most general collection interface
+type&nbsp;&nbsp;<br />
+  </li>
+  <li><tt>Set</tt>: an unordered collection that does not permit
+duplicate elements&nbsp;&nbsp;<br />
+  </li>
+  <li><tt>SortedSet</tt>: a set whose elements are visited in sorted
+order&nbsp;&nbsp;<br />
+  </li>
+  <li><tt>List</tt>: an ordered collection </li>
+</ul>
+<h2>Collections Framework: Classes</h2>
+<ul>
+  <li><tt>HashSet</tt>: a set implementation that uses hashing to
+locate the set elements&nbsp;&nbsp;<br />
+  </li>
+  <li><tt>TreeSet</tt>: a sorted set implementation that stores the
+elements in a balanced binary tree&nbsp;&nbsp;<br />
+  </li>
+  <li><tt>LinkedList</tt> and <tt>ArrayList</tt>: two implementations
+of the List interface type<br />
+  </li>
+</ul>
+<h2>Collections Framework</h2>
+<img src="images/Ch8_03.jpg" title="" alt="." /><br />
+<br />
+<h2><tt>Collection&lt;E&gt;</tt> Interface Type<br />
+</h2>
+<ul>
+  <li>Collection holds elements in some way </li>
+  <li>Different data structures have different storage strategies </li>
+</ul>
+<pre>boolean add(E obj) <br />boolean addAll(Collection c) <br />void clear() <br />boolean contains(E obj) <br />boolean containsAll(Collection c) <br />boolean equals(E obj) <br />int hashCode() <br />boolean isEmpty() <br />Iterator iterator() <br />boolean remove(E obj) <br />boolean removeAll(Collection c) <br />boolean retainAll(Collection c) <br />int size() <br />E[] toArray() <br />E[] toArray(E[] a) <br /></pre>
+<h2><tt>Iterator&lt;E&gt;</tt>&nbsp; Interface Type<br />
+</h2>
+<ul>
+  <li>Iterator traverses elements of collection </li>
+</ul>
+<tt>boolean hasNext()<br />
+E next()<br />
+void remove()<br />
+</tt>
+<h2><tt>AbstractCollection</tt> Class</h2>
+<ul>
+  <li><tt>Collection</tt> is a hefty interface </li>
+  <li>Convenient for clients, inconvenientfor implementors<br />
+  </li>
+  <li>Many methods can be implemented from others (Template method!) </li>
+  <li>Example: <tt>toArray<br />
+    </tt> </li>
+</ul>
+<tt>public E[] toArray()<br />
+{<br />
+&nbsp;&nbsp; E[] result = new E[size()];<br />
+&nbsp;&nbsp; Iterator e = iterator();<br />
+&nbsp;&nbsp; for (int i = 0; e.hasNext(); i++)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; result[i] = e.next();<br />
+&nbsp;&nbsp; return result;<br />
+}</tt>
+<h2><tt>AbstractCollection</tt> Class</h2>
+<ul>
+  <li>Can't place template methods in interface </li>
+  <li>Place them in <tt>AbstractCollection</tt> class<br />
+  </li>
+  <li><tt>AbstractCollection</tt> convenient superclass for
+implementors </li>
+  <li>Only two methods undefined: <tt>size</tt>,<tt>iterator</tt><br />
+  </li>
+</ul>
+<h2>Adding a new Class to the Framework</h2>
+<ul>
+  <li>Use queue from chapter 3 </li>
+  <li>Supply an iterator (with do-nothing <tt>remove</tt> method) </li>
+  <li><tt>add</tt> method always returns <tt>true</tt> </li>
+  <li><a href="code/queue/Queue.java.html">Ch8/queue/Queue.java</a> </li>
+  <li><a href="code/queue/QueueTester.java.html">Ch8/queue/QueueTester.java</a>
+  </li>
+</ul>
+<h2>Adding a new Class to the Framework</h2>
+<img src="images/Ch8_04.jpg" title="" alt="."
+ style="width: 147px; height: 525px;" /><br />
+<br />
+<h2>Sets</h2>
+<ul>
+  <li><tt>Set</tt> interface adds no methods to <tt>Collection</tt>! </li>
+  <li>Conceptually, sets are a subtype of collections </li>
+  <li>Sets don't store duplicates of the same element </li>
+  <li>Sets are <i>unordered</i> </li>
+  <li>Separate interface: an algorithm can require a <tt>Set</tt> </li>
+</ul>
+<h2>Lists</h2>
+<ul>
+  <li>Lists are <i>ordered</i> </li>
+  <li>Each list position can be accessed by an integer index </li>
+  <li>Subtype methods: </li>
+</ul>
+<tt>boolean add(int index, E obj)<br />
+boolean addAll(int index, Collection c)<br />
+E get(int index)<br />
+int indexOf(E obj)<br />
+int lastIndexOf(E obj)<br />
+ListIterator listIterator()<br />
+ListIterator listIterator(int index)<br />
+E remove(int index)<br />
+E set(int index, int E)<br />
+List subList(int fromIndex, int toIndex)<br />
+</tt>
+<h2>List Iterators</h2>
+<ul>
+  <li>Indexing </li>
+  <li>Bidirectional behavior </li>
+  <li>Subtype methods:<br />
+  </li>
+</ul>
+<tt>int nextIndex()<br />
+int previousIndex()<br />
+boolean hasPrevious()<br />
+E previous()<br />
+void set(E obj)</tt><br />
+<h2>List Classes&nbsp;</h2>
+<ul>
+  <li><tt>ArrayList</tt> </li>
+  <li><tt>LinkedList</tt> </li>
+  <li>Indexed access of linked list elements is possible, but slow </li>
+  <li>Weakness in the design </li>
+  <li>Partial fix in Java 1.4: <tt>RandomAccess</tt> interface </li>
+</ul>
+<h2>List Classes&nbsp;</h2>
+<img src="images/Ch8_05.jpg" title="" alt="." /><br />
+<br />
+<h2>Optional Operations</h2>
+<ul>
+  <li>Many operations tagged as "optional" </li>
+  <li>Example: <tt>Collection.add</tt>, <tt>Collection.remove</tt> </li>
+  <li>Default implementation throws exception </li>
+  <li>Why have optional operations? </li>
+</ul>
+<h2>Views</h2>
+<ul>
+  <li>View = collection that shows objects that are stored elsewhere </li>
+  <li>Example: <tt>Arrays.asList<br />
+    </tt> </li>
+  <li><tt>String[] strings = { "Kenya", "Thailand", "Portugal" };<br />
+List view = Arrays.asList(strings)</tt> </li>
+  <li>Does not copy elements! </li>
+  <li>Can use view for common services<br />
+    <tt>otherList.addAll(view);</tt> </li>
+</ul>
+<h2>Views</h2>
+<ul>
+  <li><tt>get/set</tt> are defined to access underlying array </li>
+  <li><tt>Arrays.asList</tt> view has no <tt>add/remove</tt>
+operations </li>
+  <li>Can't grow/shrink underlying array </li>
+  <li>Several kinds of views:<br />
+read-only<br />
+modifyable<br />
+resizable<br />
+. . .<br />
+  </li>
+  <li>Optional operations avoid inflation of interfaces </li>
+  <li>Controversial design decision </li>
+</ul>
+<h2>Graph Editor Framework</h2>
+<ul>
+  <li>Problem domain: interactive editing of diagrams </li>
+  <li>Graph consists of nodes and edges </li>
+  <li>Class diagram:<br />
+nodes are rectangles<br />
+edges are arrows </li>
+  <li>Electronic circuit diagram:<br />
+nodes are transistors, resistors<br />
+edges are wires </li>
+</ul>
+<h2>Graph Editor Framework</h2>
+<ul>
+  <li>Traditional approach: programmer starts from scratch for every
+editor type </li>
+  <li>Framework approach: Programmer extends graph, node, edge classes </li>
+  <li>Framework handles UI, load/save, ... </li>
+  <li>Our framework is kept simple </li>
+  <li>Violet uses extension of this framework </li>
+</ul>
+<h2>User Interface</h2>
+<ul>
+  <li>Toolbar on top </li>
+  <li>Grabber button for selecting nodes/edges </li>
+  <li>Buttons for current node/edge type </li>
+  <li>Menu </li>
+  <li>Drawing area </li>
+</ul>
+<h2>User Interface</h2>
+<img alt="" src="images/Ch8_06.png" height="402" width="602" /><br />
+<h2>Mouse Operations</h2>
+<ul>
+  <li>Click on empty space: current node inserted </li>
+  <li>Click on node or edge: select it </li>
+  <li>Drag node when current tool an edge: connect nodes </li>
+  <li>Drag node when current tool not an edge: move node </li>
+</ul>
+<h2>Division of Responsibility</h2>
+<ul>
+  <li>Divide code between </li>
+  <li>
+    <ul>
+      <li>framework </li>
+    </ul>
+    <ul>
+      <li>specific application </li>
+    </ul>
+  </li>
+  <li>Rendering is app specific (e.g. transistor) </li>
+  <li>Hit testing is app specific (odd node shapes) </li>
+  <li>Framework draws toolbar </li>
+  <li>Framework does mouse listening </li>
+</ul>
+<h2>Adding Nodes and Edges</h2>
+<ul>
+  <li>Framework draws toolbar </li>
+  <li>How does it know what nodes/edges to draw? </li>
+  <li>App gives a list of nodes/edges to framework at startup </li>
+  <li>How does app specify nodes/edges? </li>
+  <li>
+    <ul>
+      <li>Class names? (<tt>"Transistor"</tt>) </li>
+      <li><tt>Class</tt> objects? (<tt>Transistor.class</tt>) </li>
+      <li><tt>Node</tt>, <tt>Edge</tt> objects? (<tt>new Transistor()</tt>)
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>Adding Nodes and Edges</h2>
+<ul>
+  <li>Objects are more flexible than classes </li>
+  <li><tt>new CircleNode(Color.BLACK)<br />
+new CircleNode(Color.WHITE)</tt> </li>
+  <li>When user inserts new node, the toolbar node is <i>cloned<br />
+    </i> <tt>Node prototype = <i>node of currently selected toolbar
+button</i>;<br />
+Node newNode = (Node) prototype.clone();<br />
+Point2D mousePoint = <i>current mouse position</i>;<br />
+graph.add(newNode, mousePoint);</tt> </li>
+  <li>Example of PROTOTYPE pattern<br />
+  </li>
+</ul>
+<h2>PROTOTYPE Pattern</h2>
+<h3>Context</h3>
+<ol>
+  <li>A system instantiates objects of classes that are not known when
+the system is built.<br />
+  </li>
+  <li>You do not want to require a separate class for each kind of
+object.<br />
+  </li>
+  <li>You want to avoid a separate hierarchy of classes whose
+responsibility it is to create the objects. </li>
+</ol>
+<h3>Solution</h3>
+<ol>
+  <li>Define a prototype interface type that is common to all created
+objects.<br />
+  </li>
+  <li>Supply a prototype object for each kind of object that the system
+creates.<br />
+  </li>
+  <li>Clone the prototype object whenever a new object of the given
+kind is required.&nbsp;<br />
+  </li>
+</ol>
+<h2>PROTOTYPE Pattern</h2>
+<img src="images/Ch8_unf01.jpg" title="" alt="." /><br />
+<br />
+<h2>PROTOTYPE Pattern</h2>
+<table style="text-align: left; width: 72%;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;">Name in
+Design Pattern<br />
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Actual name
+(graph editor)<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">
+Prototype<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;"> Node<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">
+ConcretePrototype1<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">
+CircleNode<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;"> Creator<br />
+      </td>
+      <td style="vertical-align: top;">The <tt>GraphPanel</tt> that
+handles the mouse operation for adding new nodes<br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<br />
+<h2>Framework Classes</h2>
+<ul>
+  <li>Framework programmer implements <tt>Node</tt>/<tt>Edge</tt>
+interfaces </li>
+  <li><tt>draw</tt> draws node/edge </li>
+  <li><tt>getBounds</tt> returns enclosing rectangle (to compute total
+graph size for scrolling) </li>
+  <li><tt>Edge.getStart</tt>, <tt>getEnd</tt> yield start/end nodes </li>
+  <li><tt>Node.getConnectionPoint</tt> computes attachment point on
+shape boundary </li>
+  <li><tt>Edge.getConnectionPoints</tt> yields start/end coordinates
+(for grabbers) </li>
+  <li><tt>clone</tt> overridden to be public </li>
+</ul>
+<h2>Node Connection Points</h2>
+<img src="images/Ch8_07.jpg" title="" alt="."
+ style="width: 674px; height: 427px;" /><br />
+<br />
+<h2>Framework Classes</h2>
+<ul>
+  <li><tt>AbstractEdge</tt> class for convenience </li>
+  <li>Programmer implements <tt>Node</tt>/<tt>Edge</tt> type or
+extends <tt>AbstractEdge</tt><br />
+  </li>
+  <li><a href="code/graphed/Node.java.html">Ch8/graphed/Node.java</a> </li>
+  <li><a href="code/graphed/Edge.java.html">Ch8/graphed/Edge.java</a> </li>
+  <li><a href="code/graphed/AbstractEdge.java.html">Ch8/graphed/AbstractEdge.java</a>
+  </li>
+</ul>
+<h2>Framework Classes</h2>
+<ul>
+  <li><tt>Graph</tt> collects nodes and edges </li>
+  <li>Subclasses override methods<br />
+    <tt>public abstract Node[] getNodePrototypes()</tt><br
+ style="font-family: monospace;" />
+    <tt>public abstract Edge[] getEdgePrototypes()</tt><br />
+  </li>
+  <li><a href="code/graphed/Graph.java.html">Ch8/graphed/Graph.java</a>
+  </li>
+</ul>
+<h2>Framework UI Classes</h2>
+<ul>
+  <li><tt>GraphFrame</tt>: a frame that manages the toolbar, the menu
+bar, and the graph panel.&nbsp;&nbsp;<br />
+  </li>
+  <li><tt>ToolBar</tt>: a panel that holds toggle buttons for the node
+and edge icons.&nbsp;&nbsp;<br />
+  </li>
+  <li><tt>GraphPanel</tt>: a panel that shows the graph and handles the
+mouse clicks and drags for the editing commands.<br />
+  </li>
+  <li>Application programmers need not subclass these classes<br />
+  </li>
+</ul>
+<h2>A Framework Instance</h2>
+<ul>
+  <li>Simple application </li>
+  <li>Draw black and white nodes </li>
+  <li>Join nodes with straight lines </li>
+</ul>
+<h2>Programmer responsibilities</h2>
+<ul>
+  <li>For each node and edge type, define a class that implements the <tt>Node</tt>
+or <tt>Edge</tt> interface type </li>
+  <li>Supply all required methods, such as drawing and containment
+testing.<br />
+  </li>
+  <li>Define a subclass of the <tt>Graph</tt> class and supply <tt>getNodePrototypes,</tt>
+    <tt>getEdgePrototypes</tt><br />
+  </li>
+  <li>Supply a class with a <tt>main</tt> method </li>
+</ul>
+<h2>A Framework Instance</h2>
+<img src="images/Ch8_08.jpg" title="" alt="." /><br />
+<h2>A Framework Instance</h2>
+<ul>
+  <li><a href="code/graphed/SimpleGraph.java.html">Ch8/graphed/SimpleGraph.java</a>
+  </li>
+  <li><a href="code/graphed/SimpleGraphEditor.java.html">Ch8/graphed/SimpleGraphEditor.java</a>
+  </li>
+  <li><a href="code/graphed/CircleNode.java.html">Ch8/graphed/CircleNode.java</a>
+  </li>
+  <li><a href="code/graphed/LineEdge.java.html">Ch8/graphed/LineEdge.java</a>
+  </li>
+</ul>
+<h2>Generic Framework Code<br />
+</h2>
+<ul>
+  <li>Framework frees application programmer from tedious programming </li>
+  <li>Framework can do significant work without knowing node/edge types<br />
+  </li>
+  <li>Analyze two scenarios </li>
+  <li>
+    <ul>
+      <li>Add new node </li>
+    </ul>
+    <ul>
+      <li>Add new edge </li>
+    </ul>
+  </li>
+</ul>
+<h2>Add New Node</h2>
+<pre>public void mousePressed(MouseEvent event)<br />{<br />   Point2D mousePoint = event.getPoint();<br />   Object tool = toolBar.getSelectedTool();<br />   ...<br />   if (tool instanceof Node)<br />   {<br />      Node prototype = (Node) tool;<br />      Node newNode = (Node)prototype.clone();<br />      graph.add(newNode, mousePoint);<br />   }<br />   ...<br />   repaint();<br />}<br /></pre>
+<h2>Add New Node</h2>
+<img src="images/Ch8_09.jpg" title="" alt="." /><br />
+<h2>Add New Edge</h2>
+<ul>
+  <li>First check if mouse was pressed inside existing node<br />
+    <tt>public Node findNode(Point2D p)</tt><br
+ style="font-family: monospace;" />
+    <tt>{</tt><br style="font-family: monospace;" />
+    <tt>&nbsp;&nbsp; for (int i = 0; i &lt; nodes.size(); i++)</tt><br
+ style="font-family: monospace;" />
+    <tt>&nbsp;&nbsp; {</tt><br style="font-family: monospace;" />
+    <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Node n = (Node) nodes.get(i);</tt><br
+ style="font-family: monospace;" />
+    <tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (n.contains(p)) return n;</tt><br
+ style="font-family: monospace;" />
+    <tt>&nbsp;&nbsp; }</tt><br style="font-family: monospace;" />
+    <tt>&nbsp;&nbsp; return null;</tt><br
+ style="font-family: monospace;" />
+    <tt>}</tt><br style="font-family: monospace;" />
+  </li>
+</ul>
+<h2>Add New Edge</h2>
+<ul>
+  <li><tt>mousePressed:</tt><br />
+  </li>
+  <li>
+    <ul>
+      <li>Check if mouse point inside node </li>
+    </ul>
+    <ul>
+      <li>Check if current tool is edge </li>
+    </ul>
+    <ul>
+      <li>Mouse point is start of rubber band<br />
+      </li>
+    </ul>
+  </li>
+  <li><tt>mouseDragged:</tt> </li>
+  <li>
+    <ul>
+      <li>Mouse point is end of rubber band; repaint </li>
+    </ul>
+  </li>
+  <li><tt>mouseReleased:</tt> </li>
+  <li>
+    <ul>
+      <li>Add edge to graph </li>
+    </ul>
+  </li>
+</ul>
+<h2>Add New Edge</h2>
+<h2><img src="images/Ch8_10.jpg" title="" alt="." /><br />
+</h2>
+<h2>Enhancing the Framework</h2>
+<ul>
+  <li>Edit node/edge properties </li>
+  <li>
+    <ul>
+      <li>Node colors </li>
+      <li>Edge styles (solid/dotted)<br />
+      </li>
+    </ul>
+  </li>
+  <li>Framework enhancement: Edit-&gt;Properties menu pops up property
+dialog </li>
+</ul>
+<h2>Enhancing the Framework</h2>
+<img alt="" src="images/Ch8_11.gif" height="400" width="600" /><br />
+<h2>Enhancing the Framework</h2>
+<ul>
+  <li>How to implement the dialog? </li>
+  <li>Solved in chapter 7--bean properties! </li>
+  <li><tt>CircleNode</tt> exposes <tt>color</tt> property:<br />
+    <tt>Color getColor()<br />
+void setColor(Color newValue)</tt> </li>
+  <li>Property editor automatically edits color! </li>
+</ul>
+<h2>Using the Framework Enhancement</h2>
+<ul>
+  <li>Add dotted lines </li>
+  <li>Define enumerated type <tt>LineStyle<br />
+    </tt> </li>
+  <li>Two instances <tt>LineStyle.SOLID, LineStyle.DOTTED</tt> </li>
+  <li>Add <tt>lineStyle</tt> property to <tt>LineEdge</tt><br />
+  </li>
+  <li><tt>LineStyle</tt> has method <tt>getStroke()</tt> </li>
+  <li><tt>LineEdge.draw</tt> calls <tt>getStroke()</tt> </li>
+  <li>Supply property editor for <tt>LineStyle</tt> type </li>
+  <li>Property editor now edits line style!<br />
+  </li>
+</ul>
+<h2>Another Framework Instance</h2>
+<ul>
+  <li>UML Class diagram editor </li>
+  <li>"Violet lite" </li>
+</ul>
+<img alt="." src="images/Ch8_12.png" height="402" width="602" /><br />
+<h2>Another Framework Instance</h2>
+<ul>
+  <li><tt>RectangularNode</tt> </li>
+  <li><tt>SegmentedLineEdge</tt> </li>
+  <li><tt>GeneralPathEdge</tt> uses general path for containment
+testing </li>
+  <li><tt>ArrowHead</tt>, <tt>BentStyle</tt> enumerate arrow and line
+styles </li>
+  <li><tt>MultiLineString</tt> property for class compartments </li>
+  <li><tt>ClassNode</tt>, <tt>ClassRelationshipEdge</tt>, <tt>ClassDiagramGraph</tt>
+  </li>
+  <li>No change to basic framework! </li>
+</ul>
+<h2>Edge Properties<br />
+</h2>
+<img alt="" src="images/Ch8_13.gif" height="400" width="600" /><br />
+<br />
+<h2>Enhancing the Framework II<br />
+</h2>
+<ul>
+  <li>Violet is based on an enhancement of the book's framework<br />
+  </li>
+  <li>Adds many options </li>
+  <li>
+    <ul>
+      <li>graphics export </li>
+    </ul>
+    <ul>
+      <li>grid </li>
+    </ul>
+    <ul>
+      <li>multiple windows </li>
+    </ul>
+  </li>
+  <li>Can add 3 simple graph editor classes to that framework </li>
+  <li>App tracks framework evolution at no cost to app programmer </li>
+</ul>
+<h2>Enhancing the Framework II</h2>
+<br />
+<img alt="" src="images/Ch8_15.png" />&nbsp;<br />
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c61f88eeb1',t:'MTczOTIwNDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0042)http://www.horstmann.com/ccj2/ccjapp3.html -->
+<HTML><HEAD><TITLE>Moving from Java to C++</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content="MSHTML 6.00.3790.2491" name=GENERATOR></HEAD>
+<BODY>
+<H1>Moving from Java to C++</H1>
+<P>This appendix explains how to transfer your Java programming skills to a 
+substantial subset of C++. This is necessary for students who take their first 
+programming course in Java and the second course in C++. Naturally, it would be 
+easiest if the second course were also offered in Java, but learning to move 
+from one language to another is a fact of life for today's software 
+professionals. Fortunately, C++ has many features in common with Java, and it is 
+easy for a Java programmer to gain a working knowledge of C++. Nevertheless, C++ 
+is a much more complex language than Java. This appendix does not attempt to 
+cover all features of C++. But if you master all of the constructs described in 
+this appendix, you will be able to use C++ effectively.</P>
+<P>We only cover the differences between Java and C++. In particular, control 
+flow (<TT>if</TT>, <TT>while</TT>, <TT>for</TT>) is essentially identical in C++ 
+and Java, and it is not covered here.</P>
+<P>This appendix describes ANSI C++. Some older C++ compilers lack essential 
+features described here. To use those compilers, you will need to learn more 
+about the parts of C++ that were inherited from C. That is beyond the scope of 
+this discussion.</P>
+<H2>A3.1. Data Types and Variables</H2>
+<P>The data types in C++ are similar to those in Java. Like Java, C++ has 
+<TT>int</TT> and <TT>double</TT> types. However, the range of the numeric types 
+such as <TT>int</TT> is machine-dependent. On 16-bit systems such as PCs running 
+DOS or Windows 3.x, <TT>int</TT> are 2-byte quantities with a much more limited 
+range than the 4-byte Java <TT>int</TT> type. On those machines, you need to 
+switch to <TT>long</TT> whenever the <TT>int</TT> range is not sufficient.</P>
+<P>C++ has <TT>short</TT> and <TT>unsigned</TT> types that can store numbers 
+more efficiently. It is best to avoid these types unless the added efficiency is 
+crucial.</P>
+<P>The Boolean type is called <TT>bool</TT> in C++. </P>
+<P>The C++ string type is called <TT>string</TT>. It is quite similar to the 
+Java <TT>String</TT> type. However, pay attention to these differences:</P>
+<P>1. C++ strings store ASCII characters, not Unicode characters</P>
+<P>2. C++ strings can be modified, whereas Java strings are immutable. </P>
+<P>3. The substring operation in C++ is called <TT>substr</TT>. The command 
+<TT>s.substr(i, n)</TT> extracts a substring of length <TT>n</TT> starting at 
+position <TT>i</TT>.</P>
+<P>4. You can only concatenate strings with other strings, not with arbitrary 
+objects.</P>
+<P>5. To compare strings, use the relational operators <TT>== != &lt; &lt;= &gt; 
+&gt;=</TT>. The last four operators perform lexicographic comparison. This is 
+actually more convenient than the use of <TT>equals</TT> and <TT>compareTo</TT> 
+in Java.</P>
+<H2>A3.2. Variables and Constants</H2>
+<P>In C++, local variables are defined just as in Java. </P>
+<P><TT>int n = 5;</TT></P>
+<P>There is, however, a major difference between C++ and Java. The C++ compiler 
+does not check whether all local variables are initalized before they are read. 
+It is quite easy to forget initializing a variable in C++. The value of the 
+variable is then the random bit pattern that happened to be in the memory 
+location that the local variable occupies. This is clearly a fertile source of 
+programming errors.</P>
+<P>As in Java, classes can have data fields and static variables. Furthermore, 
+variables can be declared outside functions and classes. These so-called 
+<I>global variables</I> can be accessed from any function in a program. That 
+makes them difficult to manage. C++ programs should avoid global variables.</P>
+<P>In C++, constants can be declared anywhere. (Recall that in Java, they had to 
+be static data of a class.) C++ uses the <TT>const</TT> keyword instead of 
+<TT>final</TT>.</P>
+<P><TT>const int DAYS_PER_YEAR = 365;</TT></P>
+<H2>A3.3. Classes</H2>
+<P>The definition of classes in C++ is somewhat different than in Java. Here is 
+an example: a C++ version of the <TT>Point</TT> class:</P>
+<P><TT>class Point /* C++ */</TT></P>
+<P><TT>{</TT></P>
+<P><TT>public:</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;Point();</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;Point(double xval, double yval);</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;void move(double dx, double dy);</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;double getX() const;</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;double getY() const;</TT></P>
+<P><TT>private:</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;double x;</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;double y;</TT></P>
+<P><TT>};</TT></P>
+<P>There are several essential differences.</P>
+<P>1. In C++, there are public and private <I>sections</I>, started by the 
+keywords <TT>public</TT> and <TT>private</TT>. In Java, each individual item 
+must be tagged with <TT>public</TT> or <TT>private</TT>.</P>
+<P>2. The class definition only contains the declarations of the methods. The 
+actual implementations are listed separately.</P>
+<P>3. Accessor methods are tagged with the keyword <TT>const</TT></P>
+<P>4. There is a semicolon at the end of the class</P>
+<P>The implementation of methods follows the class definition. Because the 
+methods are defined outside the classes, each method name is prefixed by the 
+class name. The <TT>::</TT> operator separates class and method name. Accessor 
+methods that do not modify the implicit parameter are tagged as 
+<TT>const</TT>.</P>
+<P><TT>Point::Point() { x = 0; y = 0; }</TT></P>
+<P><BR></P>
+<P><TT>void Point::move(double dx, double dy) </TT></P>
+<P><TT>{&nbsp;&nbsp;x = x + dx;</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;y = y + dy;</TT></P>
+<P><TT>}</TT></P>
+<P><BR></P>
+<P><TT>double Point::getX() const</TT></P>
+<P><TT>{&nbsp;&nbsp;return x;</TT></P>
+<P><TT>}</TT></P>
+<H2>A3.4. Objects</H2>
+<P>The major difference between Java and C++ is the behavior of object 
+variables. In C++, object variables hold <I>values</I>, not object references. 
+Note that the <TT>new</TT> operator is never used when constructing objects in 
+C++. You simply supply the construction parameters after the variable name.</P>
+<P><TT>Point p(1, 2); /* construct p */</TT></P>
+<P>If you do not supply construction parameters, then the object is constructed 
+with the default constructor.</P>
+<P><TT>Time now; /* construct now with Time::Time() */</TT></P>
+<P>This is very different from Java. In Java, this command would merely create 
+an uninitialized reference. In C++, it constructs an actual object.</P>
+<P>When one object is assigned to another, a copy of the actual values is made. 
+In Java, copying an object variable merely establishes a second reference to the 
+object. Copying a C++ object is just like calling <TT>clone</TT> in Java. 
+Modifying the copy does not change the original.</P>
+<P><TT>Point q = p; /* copies p into q */</TT></P>
+<P><TT>q.move(1, 1); /* moves q but not p */</TT></P>
+<P>In most cases, the fact that objects behave like values is very convenient. 
+There are, however, a number of situations where this behavior is 
+undesirable.</P>
+<P>1. When modifying an object in a function, you must remember to use call by 
+reference (see below)</P>
+<P>2. Two object variables cannot jointly access one object. If you need this 
+effect in C++, then you need to use pointers (see below)</P>
+<P>3. An object variable can only hold values of a particular type. If you want 
+a variable to hold objects from different subclasses, you need to use 
+pointers</P>
+<P>4. If you want a variable point to either null or to an actual object, then 
+you need to use pointers in C++</P>
+<H2>A3.5. Functions</H2>
+<P>In Java, every function must be an instance method or a static function of a 
+class. C++ supports instance methods and static functions of classes, but it 
+also permits functions that are not a part of any class. Such functions are 
+called <I>global functions</I>.</P>
+<P>In particular, every C++ function starts with the global function 
+<TT>main</TT>. </P>
+<P><TT>int main()</TT></P>
+<P><TT>{ . . .</TT></P>
+<P><TT>}</TT></P>
+<P>There is a second version of <TT>main</TT> that you can use to capture 
+command-line arguments, but it requires knowledge of C-style arrays and strings, 
+and we will not cover it here.</P>
+<P>By convention, the return value of <TT>main</TT> is zero if the program 
+completed succesfully, a non-zero integer otherwise.</P>
+<P>As in Java, function arguments are passed by value. In Java, functions were 
+nevertheless able to modify objects. However, since C++ object values are not 
+references to actual objects, a function receives a copy of the actual argument 
+and hence can never modify the original.</P>
+<P>Therefore, C++ has two parameter passing mechanisms, <I>call by value </I>(as 
+in Java) and <I>call by reference</I>. When a parameter is passed by reference, 
+the function can modify the original. Call by reference is indcated by an 
+<TT>&amp;</TT> behind the parameter type.</P>
+<P><TT>void raiseSalary(Employee&amp; e, double by)</TT></P>
+<P><TT>{ . . .</TT></P>
+<P><TT>}</TT></P>
+<P>Here is a typical function that takes advantage of call by reference. Note 
+that it would be impossible to write such a function in Java.</P>
+<P><TT>void swap(int&amp; a, int&amp; b)</TT></P>
+<P><TT>{&nbsp;&nbsp;int temp = a;</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;a = b;</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;b = temp;</TT></P>
+<P><TT>}</TT></P>
+<P>If this function is called as <TT>swap(x, y)</TT>, then the reference 
+parameters <TT>a</TT> and <TT>b</TT> refer to the locations of the arguments 
+<TT>x</TT> and <TT>y</TT>, not the values of these arguments. Hence the function 
+can actually swap the contents of these variables.</P>
+<P>In C++, you always use call by reference when a function needs to modify a 
+parameter.</P>
+<H2>A3.6. Vectors</H2>
+<P>The C++ vector construct combines the best features of arrays and vectors in 
+Java. A C++ vector has convenient element access, and it can grow dynamically. 
+If <TT>T</TT> is any type, then <TT>vector&lt;T&gt;</TT> is a dynamic array of 
+elements of type <TT>T</TT>. The instruction</P>
+<P><TT>vector&lt;int&gt; a;</TT></P>
+<P>makes an initially empty vector. The command </P>
+<P><TT>vector&lt;int&gt; a(100);</TT></P>
+<P>makes a vector that has initially 100 elements. You can add more elements 
+with the <TT>push_back</TT> method:</P>
+<P><TT>a.push_back(n);</TT></P>
+<P>The call <TT>a.pop_back()</TT> removes the last element from <TT>a</TT>. Use 
+the <TT>size</TT> method to find the current number of elements in <TT>a</TT>. 
+</P>
+<P>You access the elements with the familiar <TT>[]</TT> operator.</P>
+<P><TT>for (i = 0; i &lt; a.size(); i++) </TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;sum = sum + a[i];</TT></P>
+<P>As in Java, array indexes must be between 0 and <TT>a.size() - 1</TT>. 
+However, unlike Java, there is no runtime check for legal array indexes. 
+Accessing an illegal index can cause very serious errors. </P>
+<P>Just like all other C++ objects, vectors are values. If you assign one vector 
+to another, all elements are copied. </P>
+<P><TT>vector&lt;int&gt; b = a; /* all elements are copied */</TT></P>
+<P>Contrast that with the situation in Java. In Java, an array variable is a 
+reference to the array. Making a copy of the variable just yields a second 
+reference to the same array.</P>
+<P>For that reason, C++ functions that modify vectors must use reference 
+parameters.</P>
+<P><TT>void sort(vector&lt;int&gt;&amp; a)</TT></P>
+<P><TT>{ . . .</TT></P>
+<P><TT>}</TT></P>
+<H2>A3.7. Input and Output</H2>
+<P>In C++, the standard input and output stream are represented by the 
+<TT>cin</TT> and <TT>cout</TT> objects. You use the <TT>&lt;&lt;</TT> operator 
+to write output.</P>
+<P><TT>cout &lt;&lt; "Hello, World!";</TT></P>
+<P>You can print multiple items as well.</P>
+<P><TT>cout &lt;&lt; "The answer is " &lt;&lt; x &lt;&lt; "\n";</TT></P>
+<P>To read a number or a word from input, use the <TT>&gt;&gt;</TT> 
+operator.</P>
+<P><TT>double x;</TT></P>
+<P><TT>cout &lt;&lt; "Please enter x: ";</TT></P>
+<P><TT>cin &gt;&gt; x;</TT></P>
+<P><BR></P>
+<P><TT>string fname;</TT></P>
+<P><TT>cout &lt;&lt; "Please enter your first name: ";</TT></P>
+<P><TT>cin &gt;&gt; fname;</TT></P>
+<P>The <TT>getline</TT> method reads an entire line of input.</P>
+<P><TT>string inputLine;</TT></P>
+<P><TT>getline(cin, inputLine);</TT></P>
+<P>If the end of input has been reached, or if a number could not be read 
+correctly, the stream is set to a failed state. You can test for that with the 
+<TT>fail</TT> method.</P>
+<P><TT>int n;</TT></P>
+<P><TT>cin &gt;&gt; n;</TT></P>
+<P><TT>if (cin.fail()) cout &lt;&lt; "Bad input";</TT></P>
+<P>Once the stream state has failed, you cannot easily reset it. If your program 
+needs to handle bad input, you should use <TT>getline</TT> and then manually 
+process the input.</P>
+<H2>A3.8. Pointers</H2>
+<P>In C++, object variables hold object values. This is different from Java, 
+where an object variable only is a reference to an object value that is stored 
+elsewhere. There are circumstances where the same arrangement is required in 
+C++. In C++, a variable that can refer to an object is called a <I>pointer</I>. 
+If <TT>T</TT> is any type, then <TT>T*</TT> is a pointer to an object of type 
+<TT>T</TT>. </P>
+<P>Just as in Java, a pointer variable can be initialized with <TT>NULL</TT>, 
+with another pointer variable, or with a call to <TT>new</TT>. </P>
+<P><TT>Employee* p = NULL;</TT></P>
+<P><TT>Employee* q = new Employee("Hacker, Harry", 35000);</TT></P>
+<P><TT>Employee* r = q;</TT></P>
+<P>Actually, there is a fourth possibility. Pointers can be initialized with the 
+address of another object, by using the <TT>&amp;</TT> operator.</P>
+<P><TT>Employee boss("Morris, Melinda", 83000);</TT></P>
+<P><TT>Employee* s = &amp;boss;</TT></P>
+<P>This is usually not a good idea. As a rule of thumb, C++ pointers should only 
+refer to objects allocated wth <TT>new</TT>. </P>
+<P>So far, C++ pointers look very much like Java object variables. There is, 
+however, an essential syntactical difference. You must apply the <TT>*</TT> 
+operator to access the object to which a pointer points. If <TT>p</TT> is a 
+pointer to an <TT>Employee</TT> object, then <TT>*p</TT> refers to that 
+object.</P>
+<P><TT>Employee* p = . . .;</TT></P>
+<P><TT>Employee boss = <B>*p</B>;</TT></P>
+<P>You also need to refer to <TT>*p</TT> when you want to execute a method or 
+access a data field.</P>
+<P><TT>(*p).setSalary(91000);</TT></P>
+<P>The parentheses are necessary because the <TT>.</TT> operator has a higher 
+precedence than the <TT>*</TT> operator. The designers of C found this 
+sufficiently ugly that they provided an alternate <TT>-&gt; </TT>operator to 
+combine the <TT>*</TT> and <TT>.</TT> operators. The expression</P>
+<P><TT>p-&gt;setSalary(91000);</TT></P>
+<P>invokes the <TT>setSalary</TT> method on the object <TT>*p</TT>. You can 
+simply remember to use the <TT>.</TT> operator for objects, the <TT>-&gt;</TT> 
+operator for pointers.</P>
+<P>If you do not initialize a pointer, or if the pointer is NULL or refers to an 
+object that no longer exists, then it is an error to apply the <TT>*</TT> or 
+<TT>-&gt;</TT> operator. Unfortunately, the C++ runtime system does not check 
+against these errors. If you make such a mistake, your program can die a 
+horrible death or act flaky. </P>
+<P>In Java, these errors are not possible. You cannot have an uninitialized 
+reference. All objects are kept alive as long as there is a reference to it. 
+Hence you cannot have a reference to a deleted object. The runtime system checks 
+for null references and throws a null pointer exception if a null pointer is 
+accessed.</P>
+<P>There is another significant difference between C++ and Java. Java has a 
+<I>garbage collector</I> that automatically reclaims all objects that are no 
+longer needed. In C++, it is the responsibility of the programmer to manage 
+memory. </P>
+<P>Object variables are automatically reclaimed when they go out of scope. 
+However, objects created with <TT>new</TT> must be reclaimed manually with the 
+<TT>delete</TT> operator.</P>
+<P><TT>Employee* p = new Employee("Hacker, Harry", 38000);</TT></P>
+<P><TT>. . .</TT></P>
+<P><TT>delete p; /* no longer need this object */</TT></P>
+<P>If you forget to delete an object, then you can eventually exhaust all 
+memory. This is called a <I>memory leak</I>. More importantly, if you delete an 
+object and then continue to use it, you can overwrite data that no longer 
+belongs to you. If you overwrite any of the data fields that are used to manage 
+the recycled storage, the allocation mechanism can malfunction and cause subtle 
+errors that are very difficult to diagnose and fix. For this reason, it is best 
+if you minimize the use of pointers in C++.</P>
+<H2>A3.9. Inheritance</H2>
+<P>The basic syntax for inheritance is similar in C++ and Java. In C++, you use 
+<TT>: public</TT> instead of <TT>extends</TT> to denote inheritance. (C++ also 
+supports a concept called private inheritance, but it is not very useful.)</P>
+<P>By default, functions are not dynamically bound in C++. If you want which 
+dynamic binding for a particular function, you must declare it as 
+<TT>virtual</TT>.</P>
+<P><TT>class Manager : public Employee</TT></P>
+<P><TT>{ </TT></P>
+<P><TT>public:</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;Manager(string name, double salary, string 
+dept);</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;<B>virtual<I></I></B>void print() const;</TT></P>
+<P><TT>private:</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;string department;</TT></P>
+<P><TT>};</TT></P>
+<P>As in Java, there is special syntax for a constructor to invoke the 
+constructor of the superclass. Java uses the keyword <TT>super</TT>. In C++, you 
+must call the superclass constructor outside the body of the subclass 
+constructor. Here is an example.</P>
+<P><TT>Manager::Manager(string name, double salary, string dept)</TT></P>
+<P><TT><B>: Employee(name, salary) </B>/* call superclass constructor 
+*/</TT></P>
+<P><TT>{&nbsp;&nbsp;department = dept;</TT></P>
+<P><TT>}</TT></P>
+<P>Java also uses the <TT>super</TT> keyword when a subclass method calls the 
+superclass method. In C++, you use the name of the superclass and the 
+<TT>::</TT>operator instead.</P>
+<P><TT>void Manager::print() const</TT></P>
+<P><TT>{&nbsp;&nbsp;<B>Employee::print(); </B>/* call superclass method 
+*/</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;cout &lt;&lt; department &lt;&lt; "\n";</TT></P>
+<P><TT>}</TT></P>
+<P>A C++ object variable holds objects of a specific type. To exploit 
+polymorphism in C++, you need pointers. A <TT>T*</TT> pointer can point to 
+objects of type <TT>T</TT> or any subclass.of <TT>T</TT>. </P>
+<P><TT>Employee* e = new Manager("Morris, Melinda", 83000, "Finance");</TT></P>
+<P>You can collect multiple objects of a mixture of super- and subclasses in a 
+vector of pointers, and then apply a dynamically bound function.</P>
+<P><TT>vector&lt;Employee*&gt; staff;</TT></P>
+<P><TT>. . .</TT></P>
+<P><TT>for (i = 0; i &lt; staff.size(); i++)</TT></P>
+<P><TT>&nbsp;&nbsp;&nbsp;staff[i]-&gt;print();</TT></P><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70ae09ddee3c',t:'MTczOTIwNDU2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY></HTML>

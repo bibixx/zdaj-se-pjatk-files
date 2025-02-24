@@ -1,0 +1,53 @@
+<pre>
+<tt>
+01: <i><font color=#9A1900>/**</font></i>
+02: <i><font color=#9A1900>   A bank account has a balance that can be changed by </font></i>
+03: <i><font color=#9A1900>   deposits and withdrawals.</font></i>
+04: <i><font color=#9A1900>*/</font></i>
+05: <b><font color=#0000FF>public</font></b> <b><font color=#0000FF>class</font></b> BankAccount
+06: <font color=#FF0000>{</font>
+07:    <i><font color=#9A1900>/**</font></i>
+08: <i><font color=#9A1900>      Constructs a bank account with a zero balance</font></i>
+09: <i><font color=#9A1900>   */</font></i>
+10:    <b><font color=#0000FF>public</font></b> <b><font color=#000000>BankAccount</font></b><font color=#990000>(</font><font color=#990000>)</font>
+11:    <font color=#FF0000>{</font>
+12:       balance <font color=#990000>=</font> <font color=#993399>0</font><font color=#990000>;</font>
+13:    <font color=#FF0000>}</font>
+14: 
+15:    <i><font color=#9A1900>/**</font></i>
+16: <i><font color=#9A1900>      Deposits money into the bank account.</font></i>
+17: <i><font color=#9A1900>      @param amount the amount to deposit</font></i>
+18: <i><font color=#9A1900>   */</font></i>
+19:    <b><font color=#0000FF>public</font></b> <font color=#009900>void</font> <b><font color=#000000>deposit</font></b><font color=#990000>(</font><font color=#009900>double</font> amount<font color=#990000>)</font>
+20:    <font color=#FF0000>{</font>
+21:       System<font color=#990000>.</font>out<font color=#990000>.</font><b><font color=#000000>print</font></b><font color=#990000>(</font><font color=#FF0000>"Depositing "</font> <font color=#990000>+</font> amount<font color=#990000>)</font><font color=#990000>;</font>
+22:       <font color=#009900>double</font> newBalance <font color=#990000>=</font> balance <font color=#990000>+</font> amount<font color=#990000>;</font>
+23:       System<font color=#990000>.</font>out<font color=#990000>.</font><b><font color=#000000>println</font></b><font color=#990000>(</font><font color=#FF0000>", new balance is "</font> <font color=#990000>+</font> newBalance<font color=#990000>)</font><font color=#990000>;</font>
+24:       balance <font color=#990000>=</font> newBalance<font color=#990000>;</font>
+25:    <font color=#FF0000>}</font>
+26:    
+27:    <i><font color=#9A1900>/**</font></i>
+28: <i><font color=#9A1900>      Withdraws money from the bank account.</font></i>
+29: <i><font color=#9A1900>      @param amount the amount to withdraw</font></i>
+30: <i><font color=#9A1900>   */</font></i>
+31:    <b><font color=#0000FF>public</font></b> <font color=#009900>void</font> <b><font color=#000000>withdraw</font></b><font color=#990000>(</font><font color=#009900>double</font> amount<font color=#990000>)</font>
+32:    <font color=#FF0000>{</font>
+33:       System<font color=#990000>.</font>out<font color=#990000>.</font><b><font color=#000000>print</font></b><font color=#990000>(</font><font color=#FF0000>"Withdrawing "</font> <font color=#990000>+</font> amount<font color=#990000>)</font><font color=#990000>;</font>
+34:       <font color=#009900>double</font> newBalance <font color=#990000>=</font> balance <font color=#990000>-</font> amount<font color=#990000>;</font>
+35:       System<font color=#990000>.</font>out<font color=#990000>.</font><b><font color=#000000>println</font></b><font color=#990000>(</font><font color=#FF0000>", new balance is "</font> <font color=#990000>+</font> newBalance<font color=#990000>)</font><font color=#990000>;</font>
+36:       balance <font color=#990000>=</font> newBalance<font color=#990000>;</font>
+37:    <font color=#FF0000>}</font>
+38:    
+39:    <i><font color=#9A1900>/**</font></i>
+40: <i><font color=#9A1900>      Gets the current balance of the bank account.</font></i>
+41: <i><font color=#9A1900>      @return the current balance</font></i>
+42: <i><font color=#9A1900>   */</font></i>
+43:    <b><font color=#0000FF>public</font></b> <font color=#009900>double</font> <b><font color=#000000>getBalance</font></b><font color=#990000>(</font><font color=#990000>)</font>
+44:    <font color=#FF0000>{</font>
+45:       <b><font color=#0000FF>return</font></b> balance<font color=#990000>;</font>
+46:    <font color=#FF0000>}</font>
+47:    
+48:    <b><font color=#0000FF>private</font></b> <font color=#009900>double</font> balance<font color=#990000>;</font>
+49: <font color=#FF0000>}</font>
+</tt>
+</pre>

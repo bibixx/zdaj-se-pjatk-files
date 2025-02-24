@@ -1,0 +1,666 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CoffeeMaker Example Black Box Test Cases</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="tutorial.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<p class="title">CoffeeMaker Example Black Box Test Cases </p>
+<hr align="left" width="765">
+<span class="body"><a href="http://www.ncsu.edu">North Carolina State University<br>
+</a><a href="http://courses.ncsu.edu/csc326/">CSC 326</a> - Software Engineering<br>
+Laurie Williams, Dright Ho, <a href="/cdn-cgi/l/email-protection#b9cadccad4d0cdd18cf9d7dacacc97dcddcc86caccdbd3dcdacd84faeafa8a8b8f9c8b89f5d8db9c8b89edcccdd6cbd0d8d5ca9c8b89949c8b89fad6dfdfdcdcf4d8d2dccb9c8b89fcc1d8d4c9d5dc9c8b89eddccacdca">Sarah Smith</a></span>
+<p><a class="body" href="http://open.ncsu.edu/se/tutorials/eclipse/">Back to Software Engineering Tutorials</a></p>
+<hr align="left" width="765">
+<table width="765" border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <td class="body"><p>The tests outlined below are the black box and acceptance test cases for the Coffee Maker Example. The CoffeeMaker is a command line interface application that will server as the software of a Coffee Maker. <a href="index.htm">User Stories and Use Cases</a>. </p>
+      <p>To run the CoffeeMaker example, run the Main class. The Main class provides the command line interface functionality that is used for testing of the back end software. Later a new class will be written that interfaces with the actual CoffeeMaker hardware, based on the functionality of the Main class. </p>
+      <table width="765" border="1" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="91"><div align="center"><strong>Test ID </strong></div></td>
+        <td width="288"><div align="center"><strong>Description</strong></div></td>
+        <td width="288"><div align="center"><strong>Expected Results </strong></div></td>
+        <td width="88"><div align="center"><strong>Actual Results </strong></div></td>
+      </tr>
+      <tr>
+        <td>checkOptions1*</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+          Enter: 0
+        </p>          </td>
+        <td>Program Exits </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>checkOptions2</td>
+        <td>Precondition: Run CoffeeMaker <br>
+Enter: 1 </td>
+        <td>Add Recipe Functionality</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>checkOptions3</td>
+        <td>Precondition: Run CoffeeMaker <br>
+Enter: 2 </td>
+        <td>Delete Recipe Functionality </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>checkOptions4</td>
+        <td>Precondition: Run CoffeeMaker <br>
+Enter: 3 </td>
+        <td>Edit Recipe Functionality </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>checkOptions5</td>
+        <td>Precondition: Run CoffeeMaker <br>
+Enter: 4 </td>
+        <td>Add Inventory Functionality </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>checkOptions6</td>
+        <td>Precondition: Run CoffeeMaker <br>
+Enter: 5 </td>
+        <td>Inventory Displays </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>checkOptions7</td>
+        <td>Precondition: Run CoffeeMaker <br>
+Enter: 6 </td>
+        <td>Make Coffee Functionality </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe1*</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+  Enter: 1 <br>
+  Name: Coffee<br>
+  Price: 50<br>
+  Coffee: 3<br>
+  Milk: 1<br>
+  Sugar: 1<br>
+  Chocolate: 0<br>
+          </p>          </td>
+        <td>Coffee successfully added.<br>
+          Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe2</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+      Enter: 1 <br>
+      Name: Coffee<br>
+      Price: 50<br>
+      Coffee: 3<br>
+      Milk: 1<br>
+      Sugar: 1<br>
+      Chocolate: 0<br>
+        </p></td>
+        <td>Coffee could not be added.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe3</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+      Enter: 1 <br>
+      Name: Mocha <br>
+      Price: -50<br>
+        </p></td>
+        <td>Mocha could not be added. Price can not be negative. <br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe4</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+    Enter: 1 <br>
+    Name: Mocha <br>
+    Price: 60<br>
+    Coffee: -3
+    <br>
+              </p>
+          </td>
+        <td>Mocha could not be added. Units of coffee can not be negative. <br>
+  Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe5</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+    Enter: 1 <br>
+    Name: Mocha <br>
+    Price: 60<br>
+    Coffee: 3<br>
+    Milk: -2
+    <br>
+              </p>
+          </td>
+        <td>Mocha could not be added. Units of milk can not be negative. <br>
+  Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe6</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+    Enter: 1 <br>
+    Name: Mocha <br>
+    Price: 60<br>
+    Coffee: 3<br>
+    Milk: 2<br>
+    Sugar: -2
+    <br>
+              </p>
+          </td>
+        <td>Mocha could not be added. Units of sugar can not be negative. <br>
+  Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe7</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+    Enter: 1 <br>
+    Name: Mocha <br>
+    Price: 60<br>
+    Coffee: 3<br>
+Milk: 2<br>
+Sugar: 2<br>
+Chocolate: -3
+<br>
+        </p></td>
+        <td>Mocha could not be added. Units of chocolate can not be negative. <br>
+  Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe8</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+      Enter: 1 <br>
+      Name: Mocha <br>
+      Price: a <br>
+        </p></td>
+        <td>Please input an integer.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe9</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+      Enter: 1 <br>
+      Name: Mocha <br>
+      Price: 60<br>
+      Coffee: a <br>
+        </p></td>
+        <td>Please input an integer.. <br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe10</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+      Enter: 1 <br>
+      Name: Mocha <br>
+      Price: 60<br>
+      Coffee: 3<br>
+      Milk: a <br>
+        </p></td>
+        <td>Please input an integer.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe11</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+      Enter: 1 <br>
+      Name: Mocha <br>
+      Price: 60<br>
+      Coffee: 3<br>
+      Milk: 2<br>
+      Sugar: a <br>
+        </p></td>
+        <td>Please input an integer.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe12</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+      Enter: 1 <br>
+      Name: Mocha <br>
+      Price: 60<br>
+      Coffee: 3<br>
+      Milk: 2<br>
+      Sugar: 2<br>
+      Chocolate: a <br>
+        </p></td>
+        <td>Please input an integer.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe13</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+    Enter: 1 <br>
+    Name: Mocha <br>
+    Price: 60<br>
+    Coffee: 3<br>
+    Milk: 2<br>
+    Sugar: 2<br>
+    Chocolate: 3 <br>
+        </p></td>
+        <td>Coffee successfully added.<br>
+  Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe14</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+      Enter: 1 <br>
+      Name: Latte <br>
+      Price: 60<br>
+      Coffee: 3<br>
+      Milk: 3 <br>
+      Sugar: 2<br>
+      Chocolate: 0<br>
+        </p></td>
+        <td>Coffee successfully added.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addRecipe15</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+      Enter: 1 <br>
+      Name: Hot Chocolate<br>
+      Price: 60<br>
+      Coffee: 0 <br>
+      Milk: 2<br>
+      Sugar: 2<br>
+      Chocolate: 3 <br>
+        </p></td>
+        <td>Coffee could not be added.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>deleteRecipe1*</td>
+        <td><p>Precondition: addRecipe1 has run successfully<br>
+          Enter: 2<br>
+          Enter: 3
+          <br>
+</p>          </td>
+        <td><p>Successfully deleted<br>
+          Return to main menu
+        </p>          </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>deleteRecipe2</td>
+        <td>Precondition: Run CoffeeMaker<br>
+          Enter: 2 </td>
+        <td>There are no recipes to delete<br>
+          Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>editRecipe1*</td>
+        <td><p>Precondition: addRecipe1 has run successfully <br>
+      Enter: 3<br>
+      Enter: 3 <br>
+              Name: Coffee <br>
+              Price: 50<br>
+              Coffee: 3<br>
+              Milk: 1<br>
+              Sugar: 1<br>
+              Chocolate: 0 <br>
+          </p>          </td>
+        <td>Coffee successfully added.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>editRecipe2</td>
+        <td><p>Precondition: addRecipe1 has run successfully <br>
+Enter: 3<br>
+Enter: 3 <br>
+      Name: Coffee<br>
+      Price: 50<br>
+      Coffee: 3<br>
+      Milk: 1<br>
+      Sugar: 1<br>
+      Chocolate: 0<br>
+        </p></td>
+        <td>Coffee could not be added.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>editRecipe3</td>
+        <td><p>Precondition: addRecipe1 has run successfully <br>
+Enter: 3<br>
+Enter: 3 <br>
+      Name: Mocha <br>
+      Price: -50<br>
+        </p></td>
+        <td>Mocha could not be added. Price can not be negative. <br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>editRecipe4</td>
+        <td><p>Precondition: addRecipe1 has run successfully <br>
+Enter: 3<br>
+Enter: 3 <br>
+      Name: Mocha <br>
+      Price: 60<br>
+      Coffee: -3 </p></td>
+        <td>Mocha could not be added. Units of coffee can not be negative. <br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>editRecipe5</td>
+        <td><p>Precondition: addRecipe1 has run successfully <br>
+Enter: 3<br>
+Enter: 3 <br>
+      Name: Mocha <br>
+      Price: 60<br>
+      Coffee: 3<br>
+      Milk: -2 <br>
+        </p></td>
+        <td>Mocha could not be added. Units of milk can not be negative. <br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>editRecipe6</td>
+        <td><p>Precondition: addRecipe1 has run successfully <br>
+Enter: 3<br>
+Enter: 3 <br>
+      Name: Mocha <br>
+      Price: 60<br>
+      Coffee: 3<br>
+      Milk: 2<br>
+      Sugar: -2 <br>
+        </p></td>
+        <td>Mocha could not be added. Units of sugar can not be negative. <br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>editRecipe7</td>
+        <td><p>Precondition: addRecipe1 has run successfully <br>
+Enter: 3<br>
+Enter: 3 <br>
+      Name: Mocha <br>
+      Price: 60<br>
+      Coffee: 3<br>
+      Milk: 2<br>
+      Sugar: 2<br>
+      Chocolate: -3 <br>
+        </p></td>
+        <td>Mocha could not be added. Units of chocolate can not be negative. <br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>editRecipe8</td>
+        <td><p>Precondition: addRecipe1 has run successfully <br>
+Enter: 3<br>
+Enter: 3 <br>
+      Name: Mocha <br>
+      Price: a <br>
+        </p></td>
+        <td>Please input an integer.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>editRecipe9</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+      Enter: 1 <br>
+      Name: Mocha <br>
+      Price: 60<br>
+      Coffee: a <br>
+        </p></td>
+        <td>Please input an integer.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>editRecipe10</td>
+        <td><p>Precondition: Run CoffeeMaker <br>
+      Enter: 1 <br>
+      Name: Mocha <br>
+      Price: 60<br>
+      Coffee: 3<br>
+      Milk: a <br>
+        </p></td>
+        <td>Please input an integer.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>editRecipe11</td>
+        <td><p>Precondition: addRecipe1 has run successfully <br>
+Enter: 3<br>
+Enter: 3 <br>
+      Name: Mocha <br>
+      Price: 60<br>
+      Coffee: 3<br>
+      Milk: 2<br>
+      Sugar: a <br>
+        </p></td>
+        <td>Please input an integer.<br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>editRecipe12</td>
+        <td><p>Precondition: addRecipe1 has run successfully <br>
+Enter: 3<br>
+Enter: 3 <br>
+      Name: Mocha <br>
+      Price: 60<br>
+      Coffee: 3<br>
+      Milk: 2<br>
+      Sugar: 2<br>
+      Chocolate: a <br>
+        </p></td>
+        <td>Please input an integer. <br>
+    Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addInventory1*</td>
+        <td><p>Precondition: Run CoffeeMaker<br>
+          Enter: 4<br>
+          Coffee: 5<br>
+          Milk: 3<br>
+          Sugar: 7<br>
+          Chocolate: 2
+        </p>          </td>
+        <td><p>Inventory successfully added<br>
+          Return to main menu
+        </p>          </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addInventory2</td>
+        <td>Precondition: Run CoffeeMaker<br>
+          Enter: 4 <br>
+          Coffee: -1 </td>
+        <td>Cannot add inventory. Units of coffee can not be negative <br>
+          Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addInventory3</td>
+        <td>Precondition: Run CoffeeMaker<br>
+    Enter: 4 <br>
+    Coffee: 5 <br>
+    Milk: -1 </td>
+        <td>Cannot add inventory. Units of milk can not be negative <br>
+          Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addInventory4</td>
+        <td>Precondition: Run CoffeeMaker<br>
+    Enter: 4 <br>
+    Coffee: 5<br>
+    Milk: 3<br>
+    Sugar: -1 </td>
+        <td>Cannot add inventory. Units of sugar can not be negative <br>
+          Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addInventory5</td>
+        <td>Precondition: Run CoffeeMaker<br>
+    Enter: 4 <br>
+    Coffee: 5<br>
+    Milk: 3<br>
+    Sugar: 7<br>
+    Chocolate: -1 </td>
+        <td>Cannot add inventory. Units of chocolate can not be negative <br>
+          Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addInventory6</td>
+        <td>Precondition: Run CoffeeMaker<br>
+    Enter: 4 <br>
+    Coffee: a </td>
+        <td>Please input an integer. <br>
+          Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addInventory7</td>
+        <td>Precondition: Run CoffeeMaker<br>
+    Enter: 4 <br>
+    Coffee: 5 <br>
+    Milk: a </td>
+        <td>Please input an integer. <br>
+          Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addInventory8</td>
+        <td>Precondition: Run CoffeeMaker<br>
+    Enter: 4 <br>
+    Coffee: 5<br>
+    Milk: 3<br>
+    Sugar: a </td>
+        <td>Please input an integer. <br>
+          Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>addInventory9</td>
+        <td>Precondition: Run CoffeeMaker<br>
+    Enter: 4 <br>
+    Coffee: 5<br>
+    Milk: 3<br>
+    Sugar: 7<br>
+    Chocolate:a</td>
+        <td>Please input an integer. <br>
+          Return to main menu </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>checkInventory*</td>
+        <td>Precondition:Run CoffeeMaker<br>
+          Enter: 5 </td>
+        <td>Coffee: 15<br>
+          Milk: 15<br>
+          Sugar: 15 <br>
+          Chocolate: 15 </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>purchaseBeverage1*</td>
+        <td><p>Precondition: addRecipe1 has successfully run<br>
+          Enter: 6 <br>
+          Coffee Recipe: 3<br>
+          Amount: 60<br>
+        </p>          </td>
+        <td><p>Your change is 10.<br>
+          Return to main menu
+        </p>          </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>purchaseBeverage2</td>
+        <td><p>Precondition: addRecipe1 has successfully run<br>
+            Enter: 6<br>
+            Coffee Recipe: 3<br>
+          Amount: 40 <br>
+          Enter: 5
+</p>          </td>
+        <td><p>Your change is 40 <br>
+            Return to main menu<br>
+            Coffee: 15<br>
+            Milk: 15<br>
+          Sugar: 15<br>
+          Chocolate: 15
+        </p>          </td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>purcahse Beverage3 </td>
+        <td>Precondition: Run CoffeeMaker<br>
+          Enter: 1<br>
+          Name: Coffee<br>
+          Price: 50<br>
+          Coffee: 16<br>
+          Milk: 2<br>
+          Sugar: 3<br>
+          Chocolate: 5<br>
+          Enter: 6<br>
+          Coffee Recipe: 3<br>
+          Amount: 50 </td>
+        <td><p>Your change is 50<br>
+          Return to main menu
+        </p>          </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>      
+      <p>&nbsp;</p>
+    </td>
+  </tr>
+</table>
+<hr align="left" width="765">
+<table width="542" border="0" cellspacing="0" cellpadding="5">
+  <tr class="body">
+    <td width="143">Requirements</td>
+    <td width="217">Design</td>
+    <td width="152">Test</td>
+  </tr>
+  <tr class="body">
+    <td><a href="#user_stories">User Stories</a><br>
+        <a href="#use_cases">Use Cases</a> <br>
+        <a href="pictures/cm_usecase.gif">Use Case Diagram</a> </td>
+    <td><p><a href="pictures/cm_class.gif">Class Diagram</a><br>
+            <a href="pictures/cm_seq.gif">Sequence Diagram</a><br>
+        State Chart Diagram Solution <br>
+    </p></td>
+    <td>Acceptance Tests<br>
+      FIT Solution<br>
+      JUnit Solution </td>
+  </tr>
+</table>
+<hr align="left" width="765">
+<a class="body" href="http://open.ncsu.edu/se/tutorials/eclipse/">Back to Software Engineering Tutorials</a>
+<hr align="left" width="765">
+<span class="body">CoffeeMaker Example for CSC 326 Tutorials &copy;2003-2005<a href="http://www.ncsu.edu">North Carolina State University</a>, Laurie Williams, Dright Ho, Sarah Smith <br>
+Email <a href="/cdn-cgi/l/email-protection#0d7e687e60647965384d636e7e7823686978327e786f67686e79304e5e4e3e3f3b283f3d416c6f283f3d597879627f646c617e283f3d20283f3d4e626b6b6868406c66687f283f3d48756c607d6168283f3d59687e797e">Sarah Smith</a> with any questions or comments about this example.<br>
+Last Updated: <!-- #BeginDate format:fcAm1a -->Thursday, August 25, 2005 12:17 PM<!-- #EndDate --></span><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70852839ee45',t:'MTczOTIwNDU2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>Senior Project Design: Reliability with Assertions</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Senior Project Design</span><br>
+<span class="sts">Reliability with Assertions</span><BR>
+
+<H2>Course Map</H2>
+J2SE (Java 2 Platform, Standard Edition) 1.4 adds a simple assertion
+facility to Java. At the simplest level, an assertion checks a
+boolean-typed expression that a developer specifically proclaims must be
+true during program runtime execution. To support the new assertion
+facility in J2SE 1.4, the Java platform adds the keyword <code>assert</code>
+to the language, an <code>AssertionError</code> class, and a few
+additional methods to <code>java.lang.ClassLoader</code>.<br>
+<br>
+<b>Assertion</b> is a boolean expression that a developer specifically proclaims 
+to be true during program runtime execution. The simple idea of using assertions 
+can have an unexpected influence on a software program's design and 
+implementation. <br>
+<br>
+&nbsp;<img border="0" src="../../images/CourseMap24.png" width="603" height="495">
+
+<h2>Agenda</h2>
+<ul>
+<LI>Declaring Assertions
+<LI>Enabling assertions
+<li><code>java.lang.AssertionError</code>
+<li>Robustness and Correctness 
+<li>Using Assertions for Design by Contract (DBC)<li>Conclusions</ul>
+<body>
+<H2><br>
+Declaring Assertions</h2>
+You declare assertions with a Java language keyword, <code>assert</code>.
+An <code>assert</code> statement has two permissible forms: </font></p>
+  <p></p>
+  <blockquote>
+	<ol><font face="verdana, arial, helvetica" size="3">
+		<li><code>assert <em>expression<sub><font
+ size="-1">1</font></sub></em>;</code></li>
+		<li><code>assert <em>expression<sub><font size="-1">1</font></sub></em>
+: <em>expression<sub><font size="-1">2</font></sub></em>;</code></li></font>
+	</ol>
+</blockquote>
+  <p><font face="verdana, arial, helvetica" size="3">In each form, <code><em>expression<sub><font
+ size="-1">1</font></sub></em></code> is the boolean-typed expression
+being asserted. The expression represents a program condition that the
+developer specifically proclaims must be true during program execution.
+In the second form, <code><em>expression<sub><font size="-1">2</font></sub></em></code>
+provides a means of passing a <code>String</code> message to the
+assertion facility. The following are a few examples of the first form: </font></p>
+  <p></p>
+  <blockquote>
+	<ol><font face="verdana, arial, helvetica" size="3">
+		<li><code>assert 0
+&lt; value;</code></li>
+		<li><code>assert ref != null;</code></li>
+		<li><code>assert count == (oldCount + 1);</code></li>
+		<li><code>assert ref.m1(parm);</code></li></font>
+	</ol>
+</blockquote>
+<p>
+  <br>
+  As an example of
+using assertions, class <code>Foo</code> listed below contains a simple
+assertion in the method <code>m1(int)</code>: </p>
+<blockquote>
+<pre>
+public class Foo {
+    public void m1( int value )  {
+       assert<i> &lt;give any boolean expression of what you want to assert&gt;
+       </i>System.out.println( "OK" );
+    }
+
+public static void main( String[] args )  {
+    Foo foo = new Foo();
+    System.out.print( "foo.m1(  1 ): " );
+    foo.m1( 1 );
+    System.out.print( "foo.m1( -1 ): " );
+    foo.m1( -1 );
+  }
+} 
+</pre>
+</blockquote>
+<p><font face="verdana, arial, helvetica" size="3">Since <code>assert</code>
+is a new Java keyword, to see this example in action, you must compile
+the class with a J2SE 1.4-compliant compiler. Furthermore, the compiler
+requires a command-line option, <code>-source 1.4</code>, to signal
+source compilation using the assertion facility.<br><br></font><code>javac -source
+1.4 Foo.java</code></p>
+
+
+<h2>Enabling Assertions</h2>
+Command-line options to the <code>java</code> command allow enabling or
+disabling assertions down to the individual class level. The
+command-line switch <code>-enableassertions</code>, or <code>-ea</code>
+for short, enables assertions. The switch has the
+following permissible forms: </font></p>
+  <p></p>
+  <ol>
+    <font face="verdana, arial, helvetica" size="3"> <li><code>-ea&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+---&gt; </code><font face="verdana, arial, helvetica" size="3">enables
+assertions in all classes except system classes.</font></li>
+    <li><code>-ea:&lt;class name&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+---&gt; </code><font face="verdana, arial, helvetica" size="3">turns on
+assertions for the named class only.</font></li>
+    <li><code>-ea:...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+---&gt; </code><font face="verdana, arial, helvetica" size="3">enable
+assertions for </font><font face="verdana, arial, helvetica" size="3">for
+the default, or unnamed package.</font></li>
+    <li><code>-ea:&lt;package name&gt;... ---&gt; </code><font
+ face="verdana, arial, helvetica" size="3">enables assertions for the
+specified package name and all pkgs under.</font></li>
+    <li><font face="verdana, arial, helvetica" size="3"><small>-esa</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>
+---&gt;&nbsp; </small></font><font face="verdana, arial, helvetica"
+ size="3"><code></code><font face="verdana, arial, helvetica" size="3">enables
+assertions for system classes.</font></font></li>
+    </font>
+  </ol>
+<p>
+  <br>
+  <font face="verdana, arial, helvetica" size="3">The following
+shows the resulting output: <code></code></font></p>
+<pre>foo.m1(&nbsp;&nbsp;1 ): OK
+foo.m1( -1 ): Exception in thread &quot;main&quot; java.lang.AssertionError
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;at Foo.m1(Foo.java:6)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;at Foo.main(Foo.java:17)
+</pre>
+
+<h2>java.lang.AssertionError</h2>
+The assertion facility adds the class <code>AssertionError</code> to the <code>java.lang</code> package. 
+<code>AssertionError</code> contains a default constructor and seven single-parameter constructors. 
+The <code>assert</code> statement's single-expression form uses the default constructor, 
+whereas the two-expression form uses one of the seven single-parameter constructors. </pre>
+<p><font face="verdana, arial, helvetica" size="3">To understand
+which <code>AssertionError</code> constructor is used, consider how
+assertions are processed when enabled: </font></p>
+  <p><font face="verdana, arial, helvetica" size="3">Evaluate <code><em>expression<sub><font
+ size="-1">1</font></sub></em></code> </font></p>
+  <ul>
+    <font face="verdana, arial, helvetica" size="3"> <li>If true
+      <ul>
+        <li>No further action</li></ul></li><li>If false
+      <ul>
+        <li>And if <code><em>expression<sub><font size="-1">2</font></sub></em></code>
+exists
+          <ul>
+            <li>Evaluate <code><em>expression<sub><font size="-1">2</font></sub></em></code>
+and use the result in a single-parameter form of the <code>AssertionError</code>
+constructor</li></ul></li><li>Else
+          <ul>
+            <li>Use the default <code>AssertionError</code> constructor</li></ul></li></ul></li></font></ul><b>So the first form of assertions does not give any information about the error. Hence nor recommended.
+            <br>Excerise</b>: </span>Modify
+the previous code to use assertion of second form. 
+
+<h2>Robustness and Correctness </h2><ul><li><font face="verdana, arial, helvetica" size="3">Reliability
+can be categorized by two broad strokes: robustness and correctness.
+</font></li><li><font face="verdana, arial, helvetica" size="3">Robustness pertains to a system's ability to reasonably react to a wide
+variety of circumstances and possibly unexpected conditions. </font></li><li><font face="verdana, arial, helvetica" size="3">Correctness
+pertains to a system's adherence to an explicit or external
+specification.</font><font face="verdana, arial, helvetica" size="3"><font
+ size="+1"><strong><br></strong></font></font></li></ul><p> <b><font face="verdana, arial, helvetica" size="3">Robustness</font></b></p><ul><li><font face="verdana, arial, helvetica" size="3">Java's
+exception-handling facility addresses robustness. </font></li><li><font face="verdana, arial, helvetica" size="3">Exceptions provide a
+structured means of handling unusual circumstances during program
+execution. </font></li><li><font face="verdana, arial, helvetica" size="3">Specifically, the exception facility allows explicitly noting
+exceptional conditions and provides a mechanism for handling such
+exceptional conditions in specific code blocks. </font></li><li><font face="verdana, arial, helvetica" size="3">Java draws praise for
+building exceptions into the base language. </font></li></ul><p> <b><font face="verdana, arial, helvetica" size="3">Correctness</font></b></p><ul><li><font face="verdana, arial, helvetica" size="3">Correctness
+addresses a slightly different reliability concern. </font></li><li><font face="verdana, arial, helvetica" size="3">Whereas exceptions
+facilitate robustness through an ability to recover gracefully from a
+range of exceptional conditions, correctness deals with ensuring a
+program does the right thing during normal program flow. </font></li><li><font face="verdana, arial, helvetica" size="3">Since
+correctness pertains to normal conditions, Java's exception-handling
+facilities do not readily assist correct program creation. </font></li><li><font face="verdana, arial, helvetica" size="3">Assertions enforce valid
+runtime state at discrete checkpoints in an executing system. </font></li><li><font face="verdana, arial, helvetica" size="3">Perhaps
+just as importantly, assertions explicitly declare developer intent in
+the program text itself. </font></li><li><font face="verdana, arial, helvetica" size="3">Through assertions, developers can
+definitively mark the boundaries of correct program execution versus
+robust program execution, and provide valuable clues into expected
+system behavior.<br></font></li></ul><p><font face="verdana, arial, helvetica" size="3"><strong> Be
+assertive :&nbsp; </strong></font><font
+ face="verdana, arial, helvetica" size="3">Assertions <i>clearly and
+definitively document program expectation for normal execution</i>. The
+clearer, the better. </font></p>
+ 
+<h2>Using Assertions for Design by Contract (DBC)</h2><ul><li>Central to DBC is
+the notion of a contract between client and supplier.
+</li><li><font face="verdana, arial, helvetica" size="3">The interaction
+between software classes is viewed as analogous to a contract between
+two legal entities, each of which assumes specific responsibilities in
+exchange for certain expectations. </font></li><li><font face="verdana, arial, helvetica" size="3">For example, I might contract with a
+painting service to paint my house. The service assumes the
+responsibility to paint the house, and I assume the responsibility to
+pay for the service. </font></li><li><font face="verdana, arial, helvetica" size="3">I expect to have my house painted, and the painting
+service expects to be paid. There is a clear connection between
+expectation and responsibility. </font></li></ul><p> <font face="verdana, arial, helvetica" size="3">To form a
+software contract, DBC identifies three common uses for assertions: </font></p>
+  <p> </p>
+  <ol>
+    <font face="verdana, arial, helvetica" size="3"> <li>Preconditions:
+conditions that must be true when entering a method - <code>assert precondition();</code></li><li>Postconditions: conditions that must be true when exiting a
+method - <code>assert postcondition();</code></li><li>Invariants: conditions that must be true between all method
+calls (upon entry to the method and between leaving the method). 
+An effective invariant would be defined as a method, e.g. <code>invariant()</code> invoked after construction, 
+and at the beginning and end of each method: <code>assert invariant();
+</code></li></font></ol><big>Example</big><small> <br>
+  </small><table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; width: 72%;"><tbody>
+      <tr>
+        <td style="vertical-align: top;" ><pre>public void setSampleRate( int rate ) {
+&nbsp;&nbsp;&nbsp; this.rate = rate;
+}</pre>Suppose in the <code>Sensor</code> class the unit of measure for the variable
+<code>rate</code> is Hertz. As an engineering unit, Hertz cannot be negative, so the
+<code>setSampleRate()</code> method should not set the sample rate to a negative value. 
+Furthermore, sampling a sensor at too high a frequency could prove damaging.
+</td><td style="vertical-align: top;"><pre>
+&nbsp;&nbsp;public void setSampleRate( int rate )&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;throws IllegalArgumentException&nbsp; {
+&nbsp;&nbsp;&nbsp;&nbsp;if(rate &lt; MIN_HERTZ&nbsp;&nbsp;||&nbsp;&nbsp;MAX_HERTZ &lt; rate)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new IllegalArgumentException
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&quot;Illegal rate: &quot; + rate +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot; Hz is outside of range&nbsp;[&quot; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MIN_HERTZ + &quot;, &quot; + MAX_HERTZ + &quot; ]&quot;);
+&nbsp;&nbsp;&nbsp; this.rate = rate;
+&nbsp;&nbsp;}
+</pre></td></tr></tbody></table><ul><li><font face="verdana, arial, helvetica" size="3">Using exceptions as the enforcing mechanism, however, is questionable.
+</font></li><li><font face="verdana, arial, helvetica" size="3">Shift focus from the method supplier to a client object calling the
+method. </font></li><li><font face="verdana, arial, helvetica" size="3">Since <code>IllegalArgumentException</code> is an unchecked
+exception, the client can call the method without using a <code>try</code>/<code>catch</code>
+block. That is, the client can easily ignore the thrown exception and
+possibly unwittingly so if the client developer overlooks the <code>throws</code>
+clause in the supplier's method documentation. </font></li><li><font face="verdana, arial, helvetica" size="3">More commonly, developers
+can see the exception, think to themselves, "Well, I won't do that," and
+blithely omit a cumbersome <code>try</code>/<code>catch</code>
+construct.</font></li></ul><p>&nbsp; <font face="verdana, arial, helvetica" size="3"><code>setSampleRate(
+100 )</code> causes the system to halt with the message:</font></p><pre>
+&nbsp; Exception in thread "main" java.lang.IllegalArgumentException: Illegal
+&nbsp;&nbsp; rate: 100 Hz is outside of range [ 1, 60 ]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at tmp.Sensor.setSampleRate(Sensor.java:9)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at tmp.Sensor.main(Sensor.java:20)
+</pre><p> One solution for
+preventing this type of client developer neglect is to change the thrown
+exception to a checked exception named <code>SensorException</code> in
+place of the previously unchecked <code>IllegalArgumentException</code>:</font></p><p> </p>
+  <table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; width: 71%;"><tbody>
+      <tr>
+        <td style="vertical-align: top;" width="415"><pre>//PROVIDER
+public void setSampleRate( int rate )
+&nbsp; throws SensorException {
+&nbsp;&nbsp;&nbsp;&nbsp;if( rate &lt; MIN_HERTZ&nbsp;&nbsp;||&nbsp;&nbsp;MAX_HERTZ &lt; rate )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new SensorException
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( &quot;Illegal rate: &quot; + rate +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot; Hz is outside of range [ &quot; +
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MIN_HERTZ + &quot;, &quot; + MAX_HERTZ + &quot; ]&quot; );
+&nbsp;&nbsp;&nbsp; this.rate = rate;
+&nbsp;&nbsp;}</pre></td><td style="vertical-align: top;"><pre>//CLIENT
+
+&nbsp;&nbsp;try
+&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;sensor.setSampleRate( 100 );
+&nbsp;&nbsp;}
+&nbsp;&nbsp;catch( SensorException se )
+&nbsp;&nbsp;{//Do something sensible.</pre></td></tr></tbody></table><p> <font face="verdana, arial, helvetica" size="3">Although the
+supplier can't assume responsibility for the client's lack of effort,
+the above code is nonetheless troublesome. Sure, the call to <code>setSampleRate(
+100 )</code> doesn't set the sample rate to an invalid value, but
+neither does it sensibly report the attempt. The sample rate is
+unchanged, and program execution blithely continues, presumably with
+fingers crossed. </font></p>
+  <font face="verdana, arial, helvetica" size="3"
+ style="font-weight: bold;">The million-dollar question: what is the
+sensible thing do?</font><br style="font-weight: bold;">
+  <font face="verdana, arial, helvetica" size="3">The developer could
+perhaps, check the value, realize it was out of range, and attempt to
+gracefully handle the situation.</font><br>
+  <font face="verdana, arial, helvetica" size="3"
+ style="font-weight: bold;"><br>
+  </font><font face="verdana, arial, helvetica" size="3"
+ style="font-weight: bold;">why wait for a thrown exception before
+performing such checks? <br>
+  </font><font face="verdana, arial, helvetica" size="3">So if the
+developer doesn't check the variable <code>rate</code>'s value in the <code>catch</code>
+block, what should be done? The developer should question using the
+exception facility to handle a program correctness issue. During the <code>catch</code>
+block execution, it is simply too late to do anything sensible.<br>
+  </font><p> <font face="verdana, arial, helvetica" size="3">As an
+alternative, the following supplier code replaces the previous use of
+exceptions with an assertion: </font></p>
+  <pre>&nbsp; public void setSampleRate( int rate )&nbsp; {
+&nbsp;&nbsp;&nbsp;&nbsp;assert MIN_HERTZ &lt;= rate&nbsp;&nbsp;&amp;&amp;&nbsp;&nbsp;rate &lt;= MAX_HERTZ :
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Illegal rate: &quot; + rate + &quot; Hz is outside of range [ &quot; +MIN_HERTZ + &quot;, &quot; + MAX_HERTZ + &quot; ]&quot;;
+&nbsp;&nbsp;&nbsp; this.rate = rate;
+&nbsp;&nbsp;}
+</pre>Assertion throws <code>AssertionException</code>, which is a <code>RuntimeException</code> like 
+
+<code>IllegalArgumentException.</code>
+<br>So what's the difference?
+<br>There is, however, a significant philosophical shift in responsibility.
+Calling <code>setSampleRate()</code> with an invalid input is no longer documented or handled as an <em style="font-weight: bold;">unusual</em> condition, but as an <em style="font-weight: bold;">incorrect</em><span style="font-weight: bold;"> condition</span>. Client code can no longer mask an incorrect call to <code>setSampleRate()</code> with a no-op <code>catch</code> block. Having used an assertion, incorrect calls to <code>setSampleRate()</code> are now dutifully reported through the Java error-handling mechanism. Yes, Java's assertion facility can be disabled at runtime, but that's not really under the control of the client developer, who cannot now lazily or unwittingly use the supplier code incorrectly.
+
+</font></pre>
+<h2>Relaxing DBC </h2><p>Although he emphasizes the importance of being able to express preconditions, postconditions, and invariants, and the value of using these during development, Bertrand Meyer admits that it is not always practical to include all DBC code in a shipping product. You may relax DBC checking based on the amount of trust you can place in the code at a particular point.
+
+</p><p>Here is the order of relaxation, from safest to least safe:
+
+</p><ol><li>The invariant check at the beginning of each method may be disabled first, since the invariant check at the end of each method will guarantee that the object&#8217;s state will be valid at the beginning of every method call. That is, you can generally trust that the state of the object will not change between method calls. This one is such a safe assumption that you might choose to write code with invariant checks only at the end. </li><li>The postcondition check may be disabled next, if you have reasonable unit testing that verifies that your methods are returning appropriate values. Since the invariant check is watching the state of the object, the postcondition check is only validating the results of the calculation during the method, and therefore may be discarded in favor of unit testing. The unit testing will not be as safe as a run-time postcondition check, but it may be enough, especially if you have enough confidence in the code. </li><li>The invariant check at the end of a method call may be disabled if you have enough certainty that the method body does not put the object into an invalid state. It may be possible to verify this with white-box unit testing (that is, unit tests that have access to private fields, so they may validate the object state). Thus, although it may not be quite as robust as calls to invariant( ), it is possible to &#8220;migrate&#8221; the invariant checking from run-time tests to build-time tests (via unit testing), just as with postconditions. </li><li>Finally, as a last resort you may disable precondition checks. This is the least safe and least advisable thing to do, because although you know and have control over your own code, you have no control over what arguments the client may pass to a method. However, in a situation where (a) performance is desperately needed and profiling has pointed at precondition checks as a bottleneck and (b) you have some kind of reasonable assurance that the client will not violate preconditions (as in the case where you&#8217;ve written the client code yourself) it may be acceptable to disable precondition checks. </li></ol><p>You shouldn&#8217;t remove the code that performs the checks described here as you disable the checks. If a bug is discovered, you&#8217;ll want to easily turn on the checks so that you can rapidly discover the problem. </p><h2>Example: DBC + White-Box unit Testing</h2><p>A circular array - an array used in a circular fashion. 
+When the end of the array is reached, the class wraps back around to the beginning.
+<p>We can make a number of contractual definitions for this queue:</p><ol><li>Precondition (for a <b>put(&nbsp;)</b>): Null elements are not allowed to be added to the queue. 
+</li><li>Precondition (for a <b>put(&nbsp;)</b>): It is illegal to put elements into a full queue. 
+</li><li>Precondition (for a <b>get(&nbsp;)</b>): It is illegal to try to get elements from an empty queue. 
+</li><li>Postcondition (for a <b>get(&nbsp;)</b>): Null elements cannot be produced from the array. 
+</li><li>Invariant: The region in the array that contains objects cannot contain any null elements. 
+</li><li>Invariant: The region in the array that doesn&#8217;t contain objects must have only null values.</li></ol><p><a href="code/Queue.java">Queue.java</a><h2>Conclusions</h2>Assertions are a welcome addition to the Java programming language. </font></p><ul><li><font face="verdana, arial, helvetica" size="3">The language supports a developer distinguishing between
+the reliability issues of robustness and correctness. As a robustness
+technique, Java exceptions facilitate handling unexpected or unusual
+conditions. </font></li><li><font face="verdana, arial, helvetica" size="3">Java assertions, on the other hand, enable the explicit
+declaration of acceptable program state as a correctness technique.
+</font></li><li><font face="verdana, arial, helvetica" size="3">Prior to the introduction of assertions, both robustness and
+correctness techniques necessitated the use of the Java exception
+facility. </font></li><li><font face="verdana, arial, helvetica" size="3">Preconditions,
+conditions that must be true upon entering a method, are issues of
+correctness, not robustness.</font></li><li><font face="verdana, arial, helvetica" size="3">Correspondingly, preconditions are best
+handled via the assertion facility. As with parenting or teaching, you
+should not confuse the granting of leniency in exceptional circumstances
+with the misguided leniency of being nice all the time. A dose of
+discipline in the form of assertions provides valuable assistance in
+defining and maintaining the boundaries necessary to create reliable
+systems. </font></li><li><font face="verdana, arial, helvetica" size="3">Although certainly
+welcomed, assertions do not bring Design by Contract to Java. Assertions
+merely provide the bedrock on which DBC is built. </font></li><li><font face="verdana, arial, helvetica" size="3">Missing are the
+facilities to distinguish between important assertion uses and a
+mechanism to allow the inheritance of assertions in subclasses.</font><br><font face="verdana, arial, helvetica" size="3"></font><font
+ face="verdana, arial, helvetica" size="3"><a
+ href="http://www.javaworld.com/feedback" target="Feedback"><strong></strong></a></font></li></ul></blockquote>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c818e6bf36',t:'MTczOTIwNDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

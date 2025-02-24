@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Class Modeling</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts"><a target="_blank" href="UML2_1-classes-spec.pdf">Class Modeling</a></span><BR>
+
+<H2>Course Map</H2>
+<img border="0" src="CourseMap11.png" width="603" height="495">
+
+<h2>Agenda</h2>
+<ul>
+	<li>Class Diagrams</li>
+	<li>Object Diagrams</li>
+	<li>Aggregation and Composition</li>
+	<li>Composite Structure Diagrams
+	</li>
+	<li>Packages</li>
+	<li>Object Diagrams</li>
+	<li><a href="analysisWorkflow.html">The Analysis Workflow</a></li>
+	<li><a href="designWorkflow.html">The Design Workflow</a></li>
+	<li><a href="refineRelationships.html">Refining Analysis Relationships</a></li>
+	<li>Documenting Classes</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Class Diagrams</h2>
+	<p><font color="#990000"><b>A Class diagram</b></font> 
+		gives an overview of a system by showing its classes and the 
+		relationships among them. Class diagrams are static -- they display what 
+		interacts but not what happens when they do interact.</p>
+		<p>The class diagram below models a customer order from a retail 
+		catalog. The central class is the <b>Order</b>. Associated with it are 
+		the <b>Customer</b> making the purchase and the <b>Payment</b>. A <b>
+		Payment</b> is one of three kinds: <b>Cash</b>, <b>Check</b>, or <b>
+		Credit</b>. The order contains <b>OrderDetails</b> (line items), each 
+		with its associated <b>Item</b>.</p>
+		<p>
+		<img src="images/31863/classdiagramno3d.gif" height="383" width="773" hspace="5" vspace="15" alt="Class diagram"></p>
+		<p>UML class notation is a rectangle divided into three parts: class 
+		name, attributes, and operations. Names of abstract classes, such as <i><b>
+		Payment</b>,</i> are in italics. Relationships between classes are the 
+		connecting links.</p>
+	<p>In UML a<b> feature</b> characterizes the instances of a classifier or 
+	the classifier itself. </p>
+	<ul>
+		<li><b>Structural features</b> are <b>properties</b> 
+	(attributes, association ends, parts, roles) and <b>behavioral features</b> are
+		<b>operations</b> of a 
+	class.</li>
+		<li><b>Part </b>(see examples in Composite Structure Diagrams below)<br>An element representing a 
+		<b>set of instances</b> by composition that 
+		are owned by a containing classifier instance or role of a classifier (compare 
+		to role below). All such instances are destroyed when the containing 
+		classifier is destroyed. Parts may be joined by attached connectors and 
+		specify configurations of linked instances to be created within an 
+		instance of the containing classifier.</li>
+		<li><b>Role</b><br>The named set of features defined over a collection of entities 
+		participating in a particular context, usually&nbsp; specified by 
+		interfaces that will prescribe properties that the participating 
+		instances must exhibit.<br><i>Collaboration</i>: The named set of collaborating elements&nbsp; 
+		(roles) each performing a specialized function, which collectively 
+		accomplish some desired functionality.<br><i>Part</i>: a subset of a particular class which exhibits a subset of 
+		features possessed by the class<br><i>Associations</i>: A synonym for association end often referring to a 
+		subset of classifier instances that are participating in the 
+		association.</li>
+	</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Attributes</h2>
+<ul>
+			<li>The form of an attribute is:<font face="Courier New"> visibility 
+			/ name : prop-type [multiplicity] = default {prop-string, ...}</font></li>
+			<li>Only name is necessary</li>
+		</ul>
+		A <b>structural feature</b> of a classifier that characterizes instances 
+		of the classifier. An <b>attribute</b> relates an instance of a 
+		classifier to a <b>value</b> or <b>values</b> through a named 
+		relationship. 
+		<ul>
+			<li><font face="Courier New">visibility ::= { -, +, #, ~}<br>
+			</font><font face="Arial">private, public, protected, package</font></li>
+			<li><font face="Courier New">multiplicity ::= [lower..upper]<br>
+			</font>The multiplicity of an attribute specifies how many instances of the 
+	attribute's type are created when the owning class is instantiated.</li>
+			<li>/ denoted the attribute is <i>derived. </i>A derived attribute is simply 
+	one that can be computed from other attributes.</li>
+			<li>An example of this is: <font face="Courier New">&nbsp;- name: 
+			String [1] = &quot;Untitled&quot; {readonly}</font></li>
+		</ul>
+<p><b>Attributes by Relationship</b></p>
+<ul>
+	<li>Inlined attributes can be represented using the relationship notation. 
+	</li>
+	<li>It can provide greater detail for complex attribute types. </li>
+	<li>The relationship notation also conveys exactly how the attribute is 
+	contained within a class.</li>
+</ul>
+<p><img border="0" src="images/prop1.png" width="435" height="281"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+		<h2>Operations</h2>
+<ul>
+			<li>The form of an operation is:<font face="Courier New"> visibility 
+			name (parameter-list) : return-type {prop-string, ...}</font><br>
+			where parameters are written as:<br>
+			<font face="Courier New">direction parameter_name : type [ multiplicity ] = default_value 
+			{properties}</font></li>
+			<li>Only name is necessary</li>
+			<li><font face="Courier New">visibility ::= { -, +, #, ~}</font></li>
+			<li><font face="Courier New">direction ::= { in, out, inout}</font></li>
+			<li>An example of this is: <font face="Courier New">&nbsp;+ balanceOn 
+			(date : Date) : Money {query}</font></li>
+		</ul>
+<p>&nbsp;</p>
+
+<HR align="left" width="100%" size="4" noshade>
+		<h2>Relationships</h2>
+<p>Our customer order class diagram has three kinds of <b>relationships</b>.</p>
+		<ul>
+			<li><font color="#990000"><b>association</b></font> 
+			-- a relationship between two classes. There is an 
+			association between two classes if an instance of one class must 
+			know about the other in order to perform its work. In a diagram, an 
+			association is a link connecting two classes.
+			<li><font color="#990000"><b>aggregation</b></font> 
+			-- an association in which one class (the part-of) belongs to a collection 
+			(the whole). An aggregation has a diamond end pointing to the part containing the 
+			whole. In our diagram, <b>Order</b> has a collection of <b>
+			OrderDetails</b> so an instance of <b>
+			OrderDetail</b> is a part-of the collection within the class <b>Order</b>.<li>
+			<font color="#990000"><b>generalization</b></font> -- an inheritance link indicating one 
+			class is a superclass of the other. A generalization has a triangle 
+			pointing to the superclass. <i><b>Payment</b></i> is a superclass of
+			<b>Cash</b>, <b>Check</b>, and <b>Credit</b>.
+		</ul>
+		<p>An association has two ends. An end may have a <font color="#990000">
+		<b>
+		role name</b></font> to clarify the nature of the association. For 
+		example, an <b>OrderDetail</b> is a line item of each <b>Order</b>.</p>
+		<p>A <font color="#990000"><b>navigability</b></font> 
+		arrow on an association shows which direction the association can be 
+		traversed or queried. An <b>OrderDetail</b> can be queried about its <b>
+		Item</b>, but not the other way around. The arrow also lets you know who 
+		&quot;owns&quot; the association's implementation; in this case, <b>OrderDetail</b> 
+		has an <b>Item</b>. Associations with no navigability arrows are 
+		bi-directional.</p>
+		<p>The <font color="#990000"><b>multiplicity</b></font> 
+		of an association end is the number of possible instances of the class 
+		associated with a single instance of the other end. Multiplicities are 
+		single numbers or ranges of numbers. In our example, there can be only 
+		one <b>Customer</b> for each <b>Order</b>, but a <b>Customer</b> can 
+		have any number of <b>Orders</b>.</p>
+		<p>This table gives the most common multiplicities.</p>
+		<ul>
+			<p>
+			<table border="1" cellpadding="0" cellspacing="2" id="table1">
+				<tr>
+					<th bgcolor="#ffffcc">Multiplicities</th>
+					<th bgcolor="#ffffcc">Meaning</th>
+				</tr>
+				<tr>
+					<td><b>0..1</b></td>
+					<td>zero or one instance. The notation <i><b>n . . m</b></i> 
+					indicates <i><b>n</b></i> to<i> <b>m</b></i> instances.</td>
+				</tr>
+				<tr>
+					<td><b>0..*</b><i> &nbsp;or&nbsp; </i><b>*</b></td>
+					<td>no limit on the number of instances (including none).</td>
+				</tr>
+				<tr>
+					<td><b>1</b></td>
+					<td>exactly one instance</td>
+				</tr>
+				<tr>
+					<td><b>1..*</b></td>
+					<td>at least one instance</td>
+				</tr>
+			</table>
+		</ul>
+		<p>Every class diagram has classes, associations, and multiplicities. 
+		Navigability and roles are optional items placed in a diagram to provide 
+		clarity.</p>
+
+<HR align="left" width="100%" size="4" noshade>
+		<h2><a name="Generalization,_Association,_Aggregation,_and_Composition">Generalization, Association, Aggregation, and Composition</a></h2>
+<p>Each of UML relationships represents a different type of connection between 
+classes and has subtleties that aren't fully captured in the UML specification. 
+Be sure that your intended viewers understand what you are conveying with your 
+various&nbsp; relationships.</p>
+		<ul>
+			<li>
+			<p style="MARGIN: 0px 0px 10px">
+			<font class="Apple-style-span" face="Arial" size="4">
+			<span class="Apple-style-span" style="FONT-SIZE: 16px"><b>Dependency 
+			</b></span><span class="Apple-style-span" style="FONT-SIZE: 16px">
+			<b>(&quot;uses a&quot; 
+	relationship)</b></span><span class="Apple-style-span" style="FONT-SIZE: 16px"><b><br>
+			</b>The weakest relationship between classes. It means that one class uses, 
+	or has knowledge of another class. It is typically a transient relationship.</span><span class="Apple-style-span" style="FONT-SIZE: 16px">&nbsp; 
+	Dependencies are typically read as &quot;...uses a...&quot;. E.g., <i>
+			<font color="#FF0000">Window <b>uses a</b> WindowClosingEvent</font>. 
+			</i></span></font></p></li>
+			<li>
+			<p style="MARGIN: 0px 0px 10px">
+			<font class="Apple-style-span" face="Arial" size="4">
+			<span class="Apple-style-span" style="FONT-SIZE: 16px"><b>Association (&quot;has 
+	a&quot; relationship)</b><br>Associations are stronger then dependencies and typically indicate that one 
+	class retains a relationship to another class over an extended period of 
+	time. Usually each one can be destroyed without necessarily destroying each 
+	other. E.g., <i><font color="#FF0000">Window <b>has a</b> Cursor</font>.</i></span></font></p>
+			<ul>
+				<li>
+				<p style="MARGIN: 0px 0px 10px">
+				<font class="Apple-style-span" face="Arial" size="4">
+				<span class="Apple-style-span" style="FONT-SIZE: 16px"><b>Aggregation (&quot;owns 
+	a&quot; relationship)<br></b>In an aggregation 
+	relationship, the part may be independent of the whole but the whole 
+	requires the part (containment). E.g., <i><font color="#FF0000">Window <b>owns a</b> Rectangle</font>. 
+				</i>An aggregation relationship is indicated in the UML with 
+	an unfilled diamond. It can be considered as a shareable aggregation 
+	that denotes a weak ownership. That is, the part may be included in several 
+	aggregate &quot;owner&quot; classes.</span></font></p></li>
+				<li>
+				<p style="MARGIN: 0px 0px 10px">
+				<font class="Apple-style-span" face="Arial" size="4">
+				<span class="Apple-style-span" style="FONT-SIZE: 16px"><b>Composition (&quot;is 
+	part of&quot; relationship)<br></b>A composition 
+	relationship, also known as a composite aggregation, is a <b><i>stronger</i></b> 
+	form of aggregation where the part is created and destroyed with the whole. 
+	E.g., <i><font color="#FF0000">Titlebar <b>is part of</b> Window</font>.</i> A composition relationship is indicated in the UML with a filled diamond.
+	The <i>no sharing</i> rule is the key to composition.</span></font></p></li>
+			</ul>
+			</li>
+			<li>
+			<p style="MARGIN: 0px 0px 10px"><b>Generalization </b>
+			<font class="Apple-style-span" face="Arial" size="4">
+			<span class="Apple-style-span" style="FONT-SIZE: 16px"><b>(&quot;is a&quot; 
+	relationship)</b></span></font><br>A generalization relationship conveys that the target of the relationship is a 
+general, or less specific, version of the source class or interface. 
+			<font class="Apple-style-span" face="Arial" size="4">
+			<span class="Apple-style-span" style="FONT-SIZE: 16px">&nbsp;E.g.,
+			<font color="#FF0000"><i>Cat</i></font><i><font color="#FF0000"> <b>is an</b> 
+	Animal</font>. </i></span></font><br>&nbsp;</p></li>
+</ul>
+<p style="MARGIN: 0px 0px 10px">
+<font class="Apple-style-span" face="Arial" size="4">
+	<span class="Apple-style-span" style="FONT-SIZE: 16px">Notice that with both 
+	types of aggregation, the diamond is located on the side of the line 
+	pointing to the <i>aggregate class</i> which represents the &quot;whole&quot; in an 
+	aggregation (whole-part) relationship.</span></font></p>
+	<p style="MARGIN: 0px 0px 10px">
+	<font class="Apple-style-span" face="Arial" size="4">
+	<span class="Apple-style-span" style="FONT-SIZE: 16px; font-weight:700">The following is a 
+	handy short-cut guide:</span></font></p>
+	<table style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 6px; WIDTH: 829px; PADDING-TOP: 6px; BORDER-COLLAPSE: collapse" cellSpacing="0" cellPadding="0" width="829" id="table2">
+		<tr>
+			<td style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; WIDTH: 281px; PADDING-TOP: 0px" vAlign="bottom" align="center">
+			<b>Dependency</b></td>
+			<td style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; WIDTH: 259px; PADDING-TOP: 0px" vAlign="bottom">
+			<div style="MARGIN: 0px; TEXT-ALIGN: center">
+				<span class="Apple-style-span"><b><font face="Arial">Association</font></b></span></div>
+			</td>
+			<td style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; WIDTH: 271px; PADDING-TOP: 0px" vAlign="bottom">
+			<div style="MARGIN: 0px; TEXT-ALIGN: center">
+				<span class="Apple-style-span" style="BORDER-COLLAPSE: collapse">
+				<font class="Apple-style-span" face="Arial" size="4">
+				<span class="Apple-style-span" style="FONT-SIZE: 16px"><b>
+				Aggregation</b></span></font></span></div>
+			</td>
+			<td style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; WIDTH: 271px; PADDING-TOP: 0px" vAlign="bottom" align="center">
+				<span class="Apple-style-span" style="BORDER-COLLAPSE: collapse">
+				<font class="Apple-style-span" face="Arial" size="4">
+				<span class="Apple-style-span" style="FONT-SIZE: 16px"><b>
+				Composition</b></span></font></span></td>
+			<td style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; WIDTH: 281px; PADDING-TOP: 0px" vAlign="bottom">
+			<div style="MARGIN: 0px; TEXT-ALIGN: center">
+				<span class="Apple-style-span"><b><font face="Arial">
+				Generalization</font></b></span></div>
+			</td>
+		</tr>
+		<tr>
+			<td style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; WIDTH: 281px; PADDING-TOP: 0px" vAlign="center" align="center">
+	<font class="Apple-style-span" face="Arial" size="4">
+			<span class="Apple-style-span" style="FONT-SIZE: 16px">&quot;...uses 
+			a...&quot;</span></font></td>
+			<td style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; WIDTH: 259px; PADDING-TOP: 0px" vAlign="center">
+			<div style="MARGIN: 0px; TEXT-ALIGN: center">
+				<span class="Apple-style-span" style="BORDER-COLLAPSE: collapse">
+				<font class="Apple-style-span" face="Arial" size="4">
+				<span class="Apple-style-span" style="FONT-SIZE: 16px">&quot;...has 
+				a...&quot;</span></font></span></div>
+			</td>
+			<td style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; WIDTH: 271px; PADDING-TOP: 0px" vAlign="center">
+			<div style="MARGIN: 0px; TEXT-ALIGN: center">
+				<span class="Apple-style-span" style="BORDER-COLLAPSE: collapse">
+				<font class="Apple-style-span" face="Arial" size="4">
+				<span class="Apple-style-span" style="FONT-SIZE: 16px">&quot;...owns 
+				a...&quot;</span></font></span></div>
+			</td>
+			<td style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; WIDTH: 271px; PADDING-TOP: 0px" vAlign="center" align="center">
+			&quot;...is part of...&quot;</td>
+			<td style="PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; WIDTH: 281px; PADDING-TOP: 0px" vAlign="center">
+			<div style="MARGIN: 0px; TEXT-ALIGN: center">
+				<span class="Apple-style-span" style="BORDER-COLLAPSE: collapse">
+				<font class="Apple-style-span" face="Arial" size="4">
+				<span class="Apple-style-span" style="FONT-SIZE: 16px">&quot;...is 
+				a...&quot;</span></font></span></div>
+			</td>
+		</tr>
+	</table>
+
+<HR align="left" width="100%" size="4" noshade>
+		<h2>Object Diagrams</h2>
+	<p><font color="#990000"><b>Object diagrams</b></font> show instances instead of classes. They are useful for explaining small pieces with complicated relationships, especially recursive relationships.</p>
+		<p>This small class diagram shows that a university <b>Department</b> can contain lots of other <b>Departments</b>.</p>
+		<p>
+		<img src="images/31863/departmentno3d.gif" height="116" width="410" hspace="10" vspace="15" alt="Recursive class diagram"></p>
+		<p>The object diagram below instantiates the class diagram, replacing it by a concrete example.</p>
+		<p>
+		<img src="images/31863/objdiagno3d.gif" height="263" width="458" hspace="10" vspace="15" alt="Object diagram"></p>
+		<p>&nbsp;</p>
+
+		<p>Each rectangle in the object diagram corresponds to a single instance. Instance names are underlined in UML diagrams. Class or instance names may be omitted from object diagrams as long as the diagram meaning is still clear.</p>
+
+<HR align="left" width="100%" size="4" noshade>
+				
+		<h2>Composite Structure Diagrams</h2>
+	<p>A composite structure diagram depicts the internal structure of a 
+	classifier in terms of <b>parts</b>.</p>
+<p><b>Part </b><br>An element representing a 
+		<b>set of instances</b> by composition that 
+		are owned by a containing classifier instance or role of a classifier. All such instances are destroyed when the containing 
+		classifier is destroyed. Parts may be joined by attached connectors and 
+		specify configurations of linked instances to be created within an 
+		instance of the containing classifier.</p>
+	<p>&nbsp;</p>
+
+<HR align="left" width="100%" size="4" noshade>
+				
+	<h2>Properties in a class diagram and in a structure diagram</h2>
+<p>A property specifying an instance not owned by composition by the instance 
+	of the containing classifier is shown by a graphical nesting of a box symbol 
+	with a dashed outline.</p>
+	<p><img border="0" src="images/prop3.png" width="523" height="117"></p>
+	<p>Property examples<br>
+	The namestring of a part obeys the following syntax:
+	<font face="Courier New">&lt;name&gt;&#8216;:&#8217;&lt;classifiername&gt; [multiplicity]</font></p>
+	<p><img border="0" src="images/prop2.png" width="450" height="201"><br>
+	Properties in a structure diagram</p>
+
+<HR align="left" width="100%" size="4" noshade>
+				
+		<h2>Connectors and parts in a structure diagram</h2>
+<p><img border="0" src="images/parts1.png" width="650" height="286"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+				
+	<h2>Connectors and parts in a structure diagram using multiplicities</h2>
+	<p><img border="0" src="images/parts2.png" width="650" height="186"></p>
+	<p>&nbsp;</p>
+
+<HR align="left" width="100%" size="4" noshade>
+				
+		<h2>An instance of the Car class</h2>
+	<p><img border="0" src="images/parts3.png" width="650" height="323"></p>
+<p>The namestring of a role in an instance specification obeys the following 
+	syntax:<br>
+	<font face="Courier New">{&lt;name&gt; [&#8216;/&#8217; &lt;rolename&gt;] | &#8216;/&#8217; &lt;rolename&gt;} [&#8216;:&#8217; &lt;classifiername&gt; 
+	[&#8216;,&#8217; &lt;classifiername&gt;]*]</font><br>
+	The name of the instance specification may be followed by the name of the 
+	part that the instance plays. The name of the part may only be present if 
+	the instance plays a role.</p>
+		<p><a href="images/31863/classdiagram.html" target="_blank">
+		<img src="images/31863/more.gif" height="20" width="91" alt="More details" border="0"></a></p>
+		<p><a href="images/31863/q2frame.html" target="_blank">
+		<img src="images/31863/test.gif" height="20" width="64" alt="Self test" border="0"></a></p>
+				
+<HR align="left" width="100%" size="4" noshade>
+				
+		<h2>Packages</h2>
+<p>Examples of packages with members<br>
+&nbsp;</p>
+<p><img border="0" src="images/p-diagram2.png" width="650" height="184"></p>
+		<p>To simplify complex class diagrams, you can group classes into 
+		<font color="#990000"><b>packages</b></font>. A package is a collection of logically related UML elements. The diagram below is a business model in which the classes are grouped into packages.</p>
+		<p>&nbsp;
+		</p>
+				
+<HR align="left" width="100%" size="4" noshade>
+				
+		<h2>Packages and Dependencies</h2>
+<p><img border="0" src="images/p-diagram1.png" width="650" height="587"></p>
+		<p>Packages appear as rectangles with small tabs at the top. The package name is on the tab or inside the rectangle. The dotted arrows are <a name="dependency"></a><font color="#990000"><b>dependencies</b></font>. One package depends on another if changes in the other could possibly force changes in the first.</p>
+				
+<HR align="left" width="100%" size="4" noshade>
+				
+		<h2>Packaging Rules</h2>
+<p>How do you chose which classes to put in which package?</p>
+<ul>
+	<li>Common Closure Principle<ul>
+	<li>Classes in a package should need changing for similar reasons</li>
+</ul>
+				
+	</li>
+	<li>Common Reuse Principle<ul>
+	<li>Classes in a package should be reused together</li>
+</ul>
+				
+	</li>
+	<li>Acyclic Dependency Principle<ul>
+	<li>Avoid cycles in dependencies</li>
+</ul>
+				
+	</li>
+	<li>Stable Dependency Principle<ul>
+	<li>More dependencies coming into package the most stable package&#8217;s 
+	interface needs to be</li>
+</ul>
+				
+	</li>
+	<li>Stable Abstraction Principle<ul>
+	<li>Stable packages tend to have higher proportion of interfaces and 
+	abstract classes<br>&nbsp;</li>
+</ul>
+				
+	</li>
+</ul>
+				
+<HR align="left" width="100%" size="4" noshade>
+				
+		<h2>Public and Private Package Imports</h2>
+<p><img border="0" src="images/p-diagram3.png" width="650" height="201"><br>
+&nbsp;</p>
+				
+<HR align="left" width="100%" size="4" noshade>
+				
+		<h2>Packages - Comments</h2>
+<ul>
+	<li>Namespace for classes</li>
+	<li>The dependency relationships are not transitive</li>
+	<li>Indicate global dependency by &lt;&lt;global&gt;&gt;</li>
+	<li>Keep application&#8217;s dependencies under control</li>
+	<li>Reduce the interface of the package by exporting only a small subset of 
+	the operations (Facade DP) and make supporting classes private visibility</li>
+	<li>A compile-time grouping</li>
+	<li>For run-time grouping use component diagrams<br>
+&nbsp;</li>
+</ul>
+				
+<HR align="left" width="100%" size="4" noshade>
+				
+		<p><a href="images/31863/q3frame.html" target="_blank">
+		<img src="images/31863/test.gif" height="20" width="64" alt="Self test" border="0"></a></p>
+				
+<HR align="left" width="100%" size="4" noshade>
+				
+		<h2><a name="Documenting_Classes">Documenting Classes</a></h2>
+<ul>
+	<li><font face="Verdana">
+	<a href="../resources/style.html">Java Language 
+Coding Guidelines</a></font>
+	<li><font face="Verdana">
+	<a target="_blank" href="../codeconv/html/CodeConvTOC.doc.html">Code 
+	Conventions for the Java Programming Language</a></font><li>
+	<font face="Verdana">
+	<a href="http://java.sun.com/j2se/javadoc/writingdoccomments/">How 
+	to Write Doc Comments for the Javadoc Tool</a></font><li>
+	<font face="Verdana">Eclipse</font><ul>
+	<li>Coding Java Style<br>
+	<font face="Verdana"><b>Window&gt;Preferences&gt;Java&gt;Code Style<br>
+	</b>Formatting sources:<b> Ctrl+Shift+F </b>or<b> Source&gt;Format<br>
+	</b>Insert Javadoc comment:<b> Atl+Shift+J </b></font></li>
+	<li><font face="Verdana">Source code templates<br>
+	<b>Window&gt;Preferences&gt;Java&gt;Editor&gt;Templates</b></font><ul>
+	<li><font face="Verdana">Using templates<br>
+	type for example <code>&quot;for&quot;</code> and press <b>Ctrl+Space</b> to activate Content Assist</font></li>
+	<li><font face="Verdana">Press <b>Tab</b> key to move to the next template 
+	parameter</font></li>
+	<li><font face="Verdana"><b>Shift+Tab</b> to return to the previous 
+	parameter</font></li>
+	</ul></li>
+	<li><font face="Verdana">Spell Checker<br>
+	<b>Window&gt;General&gt;Editors&gt;Text Editor&gt;Spelling</b></font></li>
+	<li><font face="Verdana">Javadoc Content Assist</font><ul>
+	<li><font face="Verdana">A Java comment stars with <b>/**</b> and tags with
+	<b>@</b></font></li>
+	<li><font face="Verdana">HTML formatting</font></li>
+	<li><font face="Verdana">Activate Content Assist to get a list of standard 
+	HTML tags that can be inserted</font></li>
+	</ul>
+	</li>
+	<li><font face="Verdana">Javadoc View<br>
+	<b>Window&gt;Show View&gt;Other...&gt;Java&gt;Javadoc</b></font></li>
+	<li><font face="Verdana">Generate Javadoc<br>
+	  You may select a set of packages, source folders or projects for which you 
+	  want to generate Javadoc documentation before launching the wizard. The set 
+	  of elements to generate Javadoc for may also be chosen and modified after 
+	  the wizard is launched. <br>
+	  <br>
+	  Open the Export wizard by doing one of the following:</font><ul>
+	    <li><font face="Verdana">Selecting <b>Export</b> from the selection's pop-up 
+	      menu, then Java/Javadoc or </font></li>
+	    <li><font face="Verdana">Selecting <b>File&gt;Export</b> from the menu bar.
+	      </font></li>
+	    <li><strong>Project&gt;Generate Javadoc...</strong></li>
+	    </ul>
+	  </li>
+	</ul>
+	</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70bd79183bcd',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

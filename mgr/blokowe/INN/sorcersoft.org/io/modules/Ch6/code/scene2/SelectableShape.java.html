@@ -1,0 +1,30 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>geom<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">03: </font>
+<font color="#000000">04: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">05: </font><i><font color="#9A1900">   A shape that manages its selection state.</font></i>
+<font color="#000000">06: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">07: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">abstract</font></b> <b><font color="#0000FF">class</font></b> SelectableShape <b><font color="#0000FF">implements</font></b> SceneShape
+<font color="#000000">08: </font><font color="#FF0000">{</font>
+<font color="#000000">09: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">setSelected</font></b><font color="#990000">(</font><font color="#009900">boolean</font> b<font color="#990000">)</font>
+<font color="#000000">10: </font>   <font color="#FF0000">{</font>
+<font color="#000000">11: </font>      selected <font color="#990000">=</font> b<font color="#990000">;</font>
+<font color="#000000">12: </font>   <font color="#FF0000">}</font>
+<font color="#000000">13: </font>
+<font color="#000000">14: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">boolean</font> <b><font color="#000000">isSelected</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">15: </font>   <font color="#FF0000">{</font>
+<font color="#000000">16: </font>      <b><font color="#0000FF">return</font></b> selected<font color="#990000">;</font>
+<font color="#000000">17: </font>   <font color="#FF0000">}</font>
+<font color="#000000">18: </font>
+<font color="#000000">19: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">drawSelection</font></b><font color="#990000">(</font>Graphics2D g2<font color="#990000">)</font>
+<font color="#000000">20: </font>   <font color="#FF0000">{</font>
+<font color="#000000">21: </font>      <b><font color="#000000">translate</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">1</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">22: </font>      <b><font color="#000000">draw</font></b><font color="#990000">(</font>g2<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">23: </font>      <b><font color="#000000">translate</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">1</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">24: </font>      <b><font color="#000000">draw</font></b><font color="#990000">(</font>g2<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">25: </font>      <b><font color="#000000">translate</font></b><font color="#990000">(</font><font color="#990000">-</font><font color="#993399">2</font><font color="#990000">,</font> <font color="#990000">-</font><font color="#993399">2</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">26: </font>   <font color="#FF0000">}</font>
+<font color="#000000">27: </font>
+<font color="#000000">28: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">boolean</font> selected<font color="#990000">;</font>
+<font color="#000000">29: </font><font color="#FF0000">}</font>
+</tt></pre>

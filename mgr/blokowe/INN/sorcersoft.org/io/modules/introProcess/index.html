@@ -1,0 +1,2250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<TITLE>SE: Introduction to SW Development Processes</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<link rel="File-List" href="index_files/filelist.xml">
+
+<LINK rel="stylesheet" type="text/css" href="images/module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+ table.MsoNormalTable
+	{mso-style-parent:"";
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	}
+-->
+</style>
+<!--[if !mso]>
+<style>
+v\:*         { behavior: url(#default#VML) }
+o\:*         { behavior: url(#default#VML) }
+.shape       { behavior: url(#default#VML) }
+</style>
+<![endif]--><!--[if gte mso 9]>
+<xml><o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]-->
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Introduction to Software Processes</span><BR>
+
+<H2>Course Map</H2>
+<img border="0" src="images/CourseMap1.png">
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Goals</H2>
+<ol>
+	<LI>What is software?<LI>What is the difference between software engineering and computer science?<LI>What is a system?<LI>What is a software process?<LI>What is a software process model?<LI>What are the attributes of good software?<LI>What are the costs of software engineering?<LI>Professional and Ethical Responsibility<LI>Your Enemy 
+	#1: Complexity<LI>Importance of the Customer - Customer Service Maxims<LI>
+Software Project Fundamentals
+<ul>
+	<li>Technical</li>
+	<li>Technical-Management</li>
+	<li>&nbsp;QA</li>
+</ul>
+	<li>Why We Need Software Project Survival Skills?</li>
+	<li>Generic Software Process Models<ul>
+		<li>The waterfall model</li>
+		<li>Evolutionary development</li>
+		<li>Component-based software engineering</li>
+	</ul>
+	</li>
+	<li>Process Iteration<ul>
+		<li>Incremental delivery</li>
+		<li>Spiral development</li>
+	</ul>
+	</li>
+	<li>Code-and-Fix</li>
+	<li>Rational Unified Process (RUP)</li>
+	<li>Extreme Programming (XP)</li>
+	<li>Scrum and its Rules</li>
+	<li>Forming-storming-norming-performing</li>
+	<li>Situational Leadership Model</li>
+</ol>
+<HR align="left" width="100%" size="4" noshade>
+<h2>What is software?</h2>
+<ul>
+	<li>Computer programs and associated documentation such as requirements, 
+	design models and user manuals.</li>
+	<li>Software products may be developed for a particular customer or may be 
+	developed for a general market.<ul>
+		<li>Software products may be<ul>
+		<li>Generic - developed to be sold to a range of different customers 
+		e.g. PC software such as Excel or Word.</li>
+		<li>Bespoke (custom) - developed for a single customer according to their 
+	specification.</li>
+	</ul>
+		</li>
+	</ul>
+	</li>
+	<li>New software can be created by developing new programs, configuring 
+	generic software systems or reusing existing software.<br>
+&nbsp;</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>What is the difference between software engineering and computer science?</h2>
+<ul>
+	<li>Computer science is concerned with theory and fundamentals; software 
+	engineering is concerned with the practicalities of developing and 
+	delivering useful software.</li>
+	<li>Computer science theories are still insufficient to act as a complete 
+	underpinning for software engineering (unlike e.g. physics and electrical 
+	engineering).<br>
+&nbsp;</li>
+</ul>
+<ul>
+	<li><b><i>Software engineering</i></b> is an engineering discipline that is 
+	concerned with all aspects of software production.</li>
+	<li>Software engineers should adopt a systematic and organized approach to 
+	their work and use appropriate tools and techniques depending on the problem 
+	to be solved, the development constraints and the resources available.</li>
+</ul>
+<p>&nbsp;</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>What is a system?</h2>
+<ul>
+	<li>A purposeful collection of inter-related components working together to 
+	achieve some common objective. </li>
+	<li>A system may include software, mechanical, electrical and electronic 
+	hardware and be operated by people.</li>
+	<li>System components are dependent on other system components</li>
+	<li>The properties and behavior of system components are inextricably 
+	inter-mingled<br>
+&nbsp;</li>
+</ul>
+<p><b>System Categories</b></p>
+<ul>
+	<li><b>Technical computer-based systems</b><ul>
+		<li>Systems that include hardware and software but where the operators 
+		and operational processes are not normally considered to be part of the 
+		system. The system is not self-aware.</li>
+	</ul>
+	</li>
+	<li><b>Socio-technical systems</b><ul>
+		<li>Systems that include technical systems but also operational 
+		processes and people who use and interact with the technical system. 
+		Socio-technical systems are governed by organizational policies and 
+		rules, e.g., publishing system.</li>
+		<li>There were fewer than 10MB of SW in the US Apollo space program 
+		(1969), but there are about 100MB of SW in the control system of 
+		Columbus space station.</li>
+	</ul>
+	</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Systems Engineering</h2>
+<ul>
+	<li>Specifying, designing, implementing, validating, deploying and 
+	maintaining <b>socio-technical systems</b>.</li>
+	<li>Concerned with the <b>services provided</b> by the system, <b>constraints</b> on its 
+	construction and <b>operation and the ways</b> in which it is used.<br>
+&nbsp;</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>The Systems Engineering Process</h2>
+<p>&nbsp;</p>
+<p><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
+ coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+ filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_s1025" type="#_x0000_t75" style='width:516pt;
+ height:258pt'>
+ <v:imagedata src="index_files/image001.wmz" o:title=""/>
+</v:shape><![endif]--><![if !vml]><img border=0 width=688 height=344
+src="index_files/image002.gif" v:shapes="_x0000_s1025"><![endif]></p>
+<p>&nbsp;</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Interdisciplinary Involvement</h2>
+<p><img border="0" src="images/system2.gif" width="623" height="333"></p>
+<p>Air traffic control system</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>What is the difference between software engineering and system engineering?</h2>
+<ul>
+	<li>System engineering is concerned with all aspects of computer-based 
+	systems development including hardware, software and process engineering. 
+	Software engineering is part of this process concerned with developing the 
+	software infrastructure, control, applications and databases in the system.</li>
+	<li>System engineers are involved in system specification, architectural 
+	design, integration and deployment.<br>
+&nbsp;</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>What is a software process?</h2>
+<ul>
+	<li>A set of activities whose goal is the development or evolution of 
+	software.</li>
+	<li>Generic activities in all software processes are:<ul>
+		<li>Specification - what the system should do and its development 
+		constraints</li>
+		<li>Development - production of the software system</li>
+		<li>Validation - checking that the software is what the customer wants</li>
+		<li>Evolution - changing the software in response to changing demands.<br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>What is CASE (Computer-Aided Software Engineering)</h2>
+<ul>
+	<li><b>Software systems that are intended to provide automated support for 
+	software process activities. </b></li>
+	<li><b>CASE systems are often used for method support.</b></li>
+	<li><b>Upper-CASE</b><ul>
+		<li>Tools to support the early process activities of requirements and 
+		design;</li>
+	</ul>
+	</li>
+	<li><b>Lower-CASE</b><ul>
+		<li>Tools to support later activities such as programming, debugging and 
+		testing.</li>
+	</ul>
+	</li>
+	<li><b>Forward, reverse, and round-trip engineering CASE</b></li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>What are the attributes of good software?</h2>
+<ul>
+	<li><b>The software should deliver the required functionality and 
+	performance to the user and should be maintainable, dependable, efficient, and 
+	acceptable.</b><ul>
+	<li><b>Maintainability</b><ul>
+		<li>Software must evolve to meet changing needs;</li>
+	</ul></li>
+	<li><b>Dependability (Reliability)</b><ul>
+		<li>Software must be trustworthy;</li>
+	</ul></li>
+	<li><b>Efficiency</b><ul>
+		<li>Software should not make wasteful use of system resources;</li>
+	</ul></li>
+	<li><b>Acceptability</b><ul>
+		<li>Software must be accepted by the users for which it was designed. This 
+		means it must be understandable, usable and compatible with other 
+		systems.<br>&nbsp;</li>
+	</ul></li>
+</ul>
+	</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>What are the key challenges facing software engineering?</h2>
+<ul>
+	<li><b>Heterogeneity, delivery and trust.</b></li>
+	<li><b>Heterogeneity</b><ul>
+		<li>Developing techniques for building software that can cope with 
+		heterogeneous platforms and execution environments;</li>
+	</ul>
+	</li>
+	<li><b>Delivery</b><ul>
+		<li>Developing techniques that lead to faster delivery of software;</li>
+	</ul>
+	</li>
+	<li><b>Trust</b><ul>
+		<li>Developing techniques that demonstrate that software can be trusted 
+		by its users.<br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Professional and Ethical Responsibility</h2>
+<ul>
+	<li>Software engineering involves wider responsibilities than simply the 
+	application of technical skills.</li>
+	<li>Software engineers must behave in an honest and ethically responsible 
+	way if they are to be respected as professionals.</li>
+	<li>Ethical behavior is more than simply upholding the law.<br>
+&nbsp;</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Issues of Professional Responsibility</h2>
+<ul>
+	<li><b>Confidentiality</b>
+	<ul>
+		<li>Engineers should normally respect the confidentiality of their 
+		employers or clients irrespective of whether or not a formal 
+		confidentiality agreement has been signed.</li>
+	</ul>
+	</li>
+	<li><b>Competence</b>
+	<ul>
+		<li>Engineers should not misrepresent their level of competence. They 
+		should not knowingly accept work which is outside their competence.</li>
+	</ul>
+	</li>
+	<li><b>Intellectual property rights </b>
+	<ul>
+		<li>Engineers should be aware of local laws governing the use of 
+		intellectual property such as patents, copyright, etc. They should be 
+		careful to ensure that the intellectual property of employers and 
+		clients is protected.</li>
+	</ul>
+	</li>
+	<li><b>Computer misuse </b>
+	<ul>
+		<li>Software engineers should not use their technical skills to misuse 
+		other people&#8217;s computers. Computer misuse ranges from relatively trivial 
+		(game playing on an employer&#8217;s machine, say) to extremely serious 
+		(dissemination of viruses). <br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>ACM/IEEE Code of Ethics</h2>
+<ul>
+	<li>The professional societies in the US have cooperated to produce a code 
+	of ethical practice.</li>
+	<li>Members of these organizations sign up to the code of practice when they 
+	join.</li>
+	<li>The Code contains eight Principles related to the behavior of and 
+	decisions made by professional software engineers, including practitioners, 
+	educators, managers, supervisors and policy makers, as well as trainees and 
+	students of the profession. <br>
+	<br>
+	<b><font size="4">Preamble</font></b></li>
+	<li>The short version of the code summarizes aspirations at a high level of 
+	the abstraction; the clauses that are included in the full version give 
+	examples and details of how these aspirations change the way we act as 
+	software engineering professionals. Without the aspirations, the details can 
+	become legalistic and tedious; without the details, the aspirations can 
+	become high sounding but empty; together, the aspirations and the details 
+	form a cohesive code.</li>
+	<li>Software engineers shall commit themselves to making the analysis, 
+	specification, design, development, testing and maintenance of software a 
+	beneficial and respected profession. In accordance with their commitment to 
+	the health, safety and welfare of the public, software engineers shall 
+	adhere to the following Eight Principles:<br>
+	<br>
+	<b><font size="4">Code of ethics - principles</font></b></li>
+	<li><b>PUBLIC</b><ul>
+		<li>Software engineers shall act consistently with the public interest.</li>
+	</ul>
+	</li>
+	<li><b>CLIENT AND EMPLOYER</b>
+	<ul>
+		<li>Software engineers shall act in a manner that is in the best 
+		interests of their client and employer consistent with the public 
+		interest.</li>
+	</ul>
+	</li>
+	<li><b>PRODUCT</b>
+	<ul>
+		<li>Software engineers shall ensure that their products and related 
+		modifications meet the highest professional standards possible.</li>
+	</ul>
+	</li>
+	<li><b>JUDGMENT</b>
+	<ul>
+		<li>Software engineers shall maintain integrity and independence in 
+		their professional judgment.</li>
+	</ul>
+	</li>
+	<li><b>MANAGEMENT</b>
+	<ul>
+		<li>Software engineering managers and leaders shall subscribe to and 
+		promote an ethical approach to the management of software development 
+		and maintenance.</li>
+	</ul>
+	</li>
+	<li><b>PROFESSION</b>
+	<ul>
+		<li>Software engineers shall advance the integrity and reputation of the 
+		profession consistent with the public interest.</li>
+	</ul>
+	</li>
+	<li><b>COLLEAGUES</b>
+	<ul>
+		<li>Software engineers shall be fair to and supportive of their 
+		colleagues.</li>
+	</ul>
+	</li>
+	<li><b>SELF</b>
+	<ul>
+		<li>Software engineers shall participate in lifelong learning regarding 
+		the practice of their profession and shall promote an ethical approach 
+		to the practice of the profession.<br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Ethical Dilemmas</h2>
+<ul>
+	<li>Disagreement in principle with the policies of senior management.</li>
+	<li>Your employer acts in an unethical way and releases a safety-critical 
+	system without finishing the testing of the system.</li>
+	<li>Participation in the development of military weapons systems or nuclear 
+	systems.<br>
+&nbsp;</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Key Points</h2>
+<ul>
+	<li>Software engineering is an engineering discipline that is concerned with 
+	all aspects of software production.</li>
+	<li>Software products consist of developed programs and associated 
+	documentation. Essential product attributes are maintainability, 
+	dependability, efficiency and usability.</li>
+	<li>The software process consists of activities that are involved in 
+	developing software products. Basic activities are software specification, 
+	development, validation and evolution.</li>
+	<li>Methods are organized ways of producing software. They include 
+	suggestions for the process to be followed, the notations to be used, rules 
+	governing the system descriptions which are produced and design guidelines.</li>
+	<li>CASE tools are software systems which are designed to support routine 
+	activities in the software process such as editing design diagrams, checking 
+	diagram consistency and keeping track of program tests which have been run.</li>
+	<li>Software engineers have responsibilities to the engineering profession 
+	and society. They should not simply be concerned with technical issues.</li>
+	<li>Professional societies publish codes of conduct which set out the 
+	standards of behavior expected of their members.<br>
+&nbsp;</li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Importance of the Customer - Customer Service Maxims</h2>
+<ul>
+	<li>No organization can guarantee employment. Only the customer can do that.</li>
+	<li>Customer perspective is hard to gain and easy to lose.</li>
+	<li>Fulfilling the terms of a contract does not equal customer satisfaction.<br>
+	or<br>
+	Satisfying the contract is not enough, customer expects more than what is 
+	written.</li>
+	<li>A customer who is in the dark can't be seen leaving.</li>
+	<li>If you think you know what a customer wants but haven't asked, you're at 
+	least partially wrong.</li>
+	<li>If you want to gain customer perspective, go look in a mirror.<br>
+	or<br>
+	I have met the customers and they are me.</li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Process first, tools later!</h2>
+<p><img border="0" src="images/process1-a.gif" width="600" height="590"></p>
+<p><img border="0" src="images/process1-b.gif" width="600" height="590"></p>
+<p><img border="0" src="images/process2.gif" width="600" height="580"></p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Your Enemy #1: Complexity</h2>
+
+
+<p align="left"><img border="0" src="images/innovate-die.png" width="618" height="472"></p>
+<p align="left"><font size="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Innovate or Die</font></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2 align="left">Waves of Network Computing</h2>
+<p align="left">From ... to transfers, transactions, content, telemetry to 
+control</p>
+<p align="left">
+<img border="0" src="images/complexity-networks.png" width="650" height="487"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Influences on Architecture: Technical, Business, and Social</h2>
+<p><b><a target="_blank" href="http://www.tar.hu/softarchpract/index.html">
+Software Architecture in Practice, Second Edition</a></b></p>
+<p><img border="0" src="images/ArhitectInfluences.png" width="650" height="460"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2><a href="https://en.wikipedia.org/wiki/Vasa_(ship)">The Warship Vasa</a></h2>
+<h2><a href="../background/DoesNotCompute.html">Does Not Compute</a></h2>
+<p><img border="0" src="images/vasa.gif" width="622" height="340"></p>
+<p>Vasa Museum, Stockholm, Sweden</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Software Project Fundamentals</h2>
+<ul>
+	<li>CS + IT (Theory of Commuting, Programming, Tools, and HW)</li>
+	<li>Engineering (Analysis, Design, Implementation)</li>
+	<li>Project Management </li>
+</ul>
+<p><img border="0" src="images/process-intuiton.gif" width="841" height="606"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Engineering Fundamentals</h2>
+<ul>
+	<li>Requirements Development</li>
+	<li>Analysis</li>
+	<li>Design</li>
+	<li>Construction</li>
+	<li>Configuration Management</li>
+	<li>Individual/team QA</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Project Management Fundamentals</h2>
+<ul>
+	<li>Sizing</li>
+	<li>Estimating</li>
+	<li>Planning</li>
+	<li>Tracking</li>
+	<li>Measuring</li>
+	<li>Project QA </li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>QA Philosophy</h2>
+<p>All effective QA approaches are based on the reality that mistakes will be 
+made throughout the project. Project success depends on positioning the project 
+team to detect and correct these mistakes quickly and easily.<br>
+<br>
+<b>QA Fundamentals</b></p>
+<ul>
+	<li>QA Planning</li>
+	<li>Continuous Testing</li>
+	<li>Decriminalizing Errors</li>
+	<li>Reviews</li>
+</ul>
+<p>
+<img border="0" src="images/upstream-downstream.png" width="600" height="484"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Murphy's Law </h2>
+<ul>
+	<li>Murphy law is an 
+adage that broadly states that <i>things will go wrong in any 
+given situation, if you give them a chance</i>. </li>
+	<li>&quot;If there's more than one 
+possible outcome of a job or task, and one of those outcomes will result in 
+disaster or an undesirable consequence, then somebody will do it that way.&quot; 
+	</li>
+	<li>It 
+is most often cited as &quot;Whatever can go wrong, will go wrong&quot; </li>
+	<li>or, alternately, 
+&quot;Whatever can go wrong will go wrong, and at the worst possible time, in the 
+worst possible way&quot; </li>
+	<li>or, &quot;Anything that can go wrong, will,&quot; </li>
+	<li>or &quot;If anything can 
+go wrong, it will, and usually at the most inopportune moment&quot;). </li>
+</ul>
+<p><a href="../background/DoesNotCompute.html">Does Not Compute</a></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Statistics</h2>
+<p>People always underestimate the time required to develop software (Standish 
+Group <a target="_blank" href="chaos1994.pdf">CHAOS 
+report</a>,1995)</p>
+<ul>
+	<li>52.7% of all projects are cancelled</li>
+	<li>31.1 % of all projects are challenged</li>
+	<li>16.2% of all projects are successful</li>
+</ul>
+<p><a target="_blank" href="http://www.it-cortex.com/Stat_Failure_Rate.htm">Causes of software failure</a> (KPMG report &#8211; top 3 from list)</p>
+<ul>
+	<li>51% - project objectives not fully specified</li>
+	<li>48% - bad planning and estimation</li>
+	<li>45% - technology new to organization</li>
+	<li>42% - lack of project management methodology</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Causes of Software Failure: Standish Group <a href="chaos_report.pdf">CHAOS Report</a></h2>
+<ol>
+	<li>Incomplete Requirements (13%)</li>
+	<li>Lack of User Involvement (12%)</li>
+	<li>Lack of Resources (11%)</li>
+	<li>Unrealistic Expectations (10%)</li>
+	<li>Lack of Executive Support (9%)</li>
+	<li>Changing Requirements (9%)</li>
+	<li>Lack of Planning (8%)</li>
+	<li>Didn&#8217;t Need Software Any Longer (8%)</li>
+	<li>Lack of Technical Management (6%)</li>
+	<li>Technology Illiteracy (4%)</li>
+</ol>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Cone of Uncertainty (The metaphor of filling a jar )</h2>
+<ul>
+	<li>Early in the project, a project team addresses the large issues like 
+	whether to support Wintel and Macintosh and Unix or just Wintel.</li>
+	<li>In the middle of the project, medium size issues such as how many 
+	subsystems to have, how in general to handle error and exception handling.</li>
+	<li>Late in the project, small issues, such as which technical algorithm to 
+	uses and whether to allow the user to cancel operation when it's partway 
+	complete.</li>
+	<li>Decision-making on a SW project progresses from large grain to small 
+	grain.</li>
+	<li>The project team can't know&nbsp; much about the decisions to be made in 
+	a specific phase until it has completed most of the work for the phase that 
+	immediately proceeds it. </li>
+</ul>
+<p><img border="0" src="images/cone.png" width="650" height="504"></p>
+<ul>
+	<li>The person who claims to be able to <b>estimate</b> the impact of those 
+	myriad decisions before they are actually made is either a prophet or not 
+	very well informed about the intrinsic nature of SW development.</li>
+	<li><b>Early in the project you can have firm cost and schedule targets&nbsp; 
+	or a firm feature set, but not both.</b></li>
+</ul>
+<p>Steve McConnel - SW Project Survival Guide</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Stop and Listen</h2>
+<p>
+<img border="0" src="images/listen.png" width="600" height="555"></p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>But I don&#8217;t have time for SQA&#8230;</h2>
+<p>&#8220;If you can&#8217;t find the time to do it right, where are you going to find the 
+time to do it over?&#8221;<br>
+There is no magic bullet, even with good software development practices, things 
+can go bad.</p>
+<ul>
+	<li>&#8220;It&#8217;s easier to write my own code than to learn pre-existing code.&#8221;</li>
+	<li>&#8220;SQA slows down code development.&#8221;</li>
+	<li>&nbsp;&#8220;Some &#8216;process idiot&#8217; is going to tell me how to do my job.&#8221;</li>
+	<li>&quot;We do not have time to make mistakes.&quot;</li>
+</ul>
+<p>&nbsp;
+</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>We Want Agile Software not Fragile Software</h2>
+<p><img border="0" src="images/mess.png" width="525" height="327"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>&#8220;SQA slows down code development.&#8221;</h2>
+<p>&nbsp;</p>
+<p><img border="0" src="images/bomb.png" width="518" height="386"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>&quot;SQA takes too much time&#8230;&quot;</h2>
+<p><img border="0" src="images/see.png" width="587" height="367"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>&#8220;Some &#8216;process idiot&#8217; is going to tell me how to do my job.&#8221;</h2>
+<p><img border="0" src="images/stop.png" width="451" height="431"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>&quot;We do not have time to make mistakes.&quot;</h2>
+<p><img border="0" src="images/notMyJob-07.png" width="550" height="410"></p>
+<p>Winner of the &quot;Not My Job&quot; award 2007.</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Why We Need Software Project Survival Skills?</h2>
+<ul>
+	<li>Schedule overruns</li>
+	<li>Budget overruns</li>
+	<li>Quality underruns</li>
+	<li>Functionality underruns</li>
+	<li>Canceled projects</li>
+	<li>90/90 problem: lack of control and visibility throughout<br>
+	  &quot;The first 90% of the code accounts for the first 10% of the development time. The remaining 10% of the code accounts for the other 90% of the development time.&quot;	  <br>
+&nbsp;</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Future Plans to Prevent Runaways</h2>
+<ul>
+	<li>Improved project management (86%)</li>
+	<li>Feasibility study (84%)</li>
+	<li>More user involvement (68%)</li>
+	<li>More external advice (56%)</li>
+	<li>None of the above (4%)</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Optimist's View of Project Without &quot;Process&quot;</h2>
+<p><img border="0" src="images/process1.png" width="493" height="346"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Examples of &quot;Process&quot;</h2>
+<ul>
+	<li>Written requirements</li>
+	<li>Systematic change control</li>
+	<li>Technical reviews</li>
+	<li>Quality assurance planning</li>
+	<li>Implementation planning</li>
+	<li>Automated source code control</li>
+	<li>Estimation updates at major milestones</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Optimist's View of Effect of Adding &quot;Process&quot;</h2>
+<p><img border="0" src="images/process2.png" width="517" height="343"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Hard-Won View of Project Without Process</h2>
+<p><img border="0" src="images/process3.png" width="610" height="353"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Project Without Process: &quot;Trashing&quot;</h2>
+<ul>
+	<li>Requirements expand 25-50%, often unnoticed</li>
+	<li>Defects corrected late in the project, at great cost</li>
+	<li>Software redesigned and rewritten during testing</li>
+	<li>Known defects go uncorrected</li>
+	<li>Integration nightmares</li>
+	<li>Developers lose work without source code control</li>
+	<li>Ship-mode thrashing: reestimation, triage, etc.</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Hard Won View of Effect of Adding &quot;Process&quot;</h2>
+<p><img border="0" src="images/process4.png" width="578" height="371"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>The Software Process</h2>
+<ul>
+	<li>A structured set of activities required to develop a software system<ul>
+		<li>Specification</li>
+		<li>Design</li>
+		<li>Validation</li>
+		<li>Evolution</li>
+	</ul>
+	</li>
+	<li>A software process model is an abstract representation of a process. It 
+	presents a description of a process from some particular perspective.<br>
+&nbsp;</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>What is a software process model?</h2>
+<ul>
+	<li>A simplified representation of a software process, presented from a 
+	specific perspective.</li>
+	<li>Examples of process perspectives are<ul>
+		<li>Workflow perspective - sequence of activities;</li>
+		<li>Data-flow perspective - information flow;</li>
+		<li>Role/action perspective - who does what.</li>
+	</ul>
+	</li>
+	<li>Generic process models
+	(not mutually exclusive)<ul>
+		<li>Waterfall;</li>
+		<li>Evolutionary (Iterative) development;</li>
+		<li>Component-based software engineering.<br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>What are the costs of software engineering?</h2>
+<ul>
+	<li>Roughly 60% of costs are development costs, 40% are testing costs. For 
+	custom software, evolution costs often exceed development costs.</li>
+	<li>Costs vary depending on the type of system being developed and the 
+	requirements of system attributes such as performance and system 
+	reliability.</li>
+	<li>Distribution of costs depends on the development model that is used.<br>
+&nbsp;</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Product development costs</h2>
+<p><img border="0" src="images/cost1.gif" width="576" height="513"></p>
+<p><b>COTS</b></p>
+<p><img border="0" src="images/cost2.gif" width="864" height="120"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Generic Software Process Models</h2>
+<ul>
+	<li>The <b>waterfall model</b><ul>
+		<li>Separate and distinct phases of specification and development.</li>
+	</ul>
+	</li>
+	<li><b>Evolutionary development</b><ul>
+		<li>Specification, development and validation are interleaved.</li>
+	</ul>
+	</li>
+	<li><b>Component-based software engineering</b><ul>
+		<li>The system is assembled from existing components.</li>
+	</ul>
+	</li>
+	<li>There are many variants of these models e.g. <b>formal development</b> where a 
+	waterfall-like process is used but the specification is a formal 
+	mathematical specification that is refined through several stages to an implementable 
+	design (e.eg., Cleanroom process developed by IBM) - not widely used in SW 
+	development.<br>
+&nbsp;</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Waterfall Model</h2>
+<ul>
+	<li>The waterfall model is the most well-known lifecycle model and provides 
+	good development speed in some circumstances. </li>
+	<li>Other models often provide greater development speed. </li>
+	<li>The waterfall model performs well for product cycles in which you have a 
+	<b>stable product definition</b> and when you&#8217;re working <b>with well-understood 
+	technical methodologies</b>. </li>
+	<li>In such cases, the waterfall model helps you to find errors in the 
+	early, low-cost stages of a project rather than waiting until the end of the 
+	project to find them. </li>
+	<li>It provides the requirements stability that developers crave. </li>
+	<li>If you&#8217;re building a <b>well-defined maintenance release</b> of an existing 
+	product or porting an existing product to a new platform, a waterfall 
+	lifecycle might be the right choice for rapid development. </li>
+	<li>
+	<p class="MsoNormal">The disadvantages of the pure waterfall model arise 
+	from the difficulty of <b>fully specifying requirements at the beginning of the 
+	project</b>, before any design work has been done and before any code has been 
+	written. </li>
+</ul>
+<p class="MsoCaption">
+<img border="0" src="images/salmon.png" width="650" height="491"></p>
+<p class="MsoCaption">
+The salmon lifecycle model. It&#8217;s not impossible to back up 
+with the waterfall model, just hard. </p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Waterfall Model Problems</h2>
+<p class="MsoCaption">The main drawback of the waterfall model is the difficulty 
+of accommodating change after the process is underway. One phase has to be 
+complete before moving onto the next phase.</p>
+<ul>
+	<li>
+	<p class="MsoCaption">Inflexible partitioning of the project into distinct 
+	stages makes it difficult to respond to changing customer requirements.</p>
+	</li>
+	<li>
+	<p class="MsoCaption">Therefore, this model is only appropriate when the 
+	requirements are well-understood and changes will be fairly limited during 
+	the design process. </p></li>
+	<li>
+	<p class="MsoCaption">Few business systems have stable requirements.</p>
+	</li>
+	<li>
+	<p class="MsoCaption">The waterfall model is mostly used for large systems 
+	engineering projects where a system is developed at several sites with&nbsp; 
+	a stable product definition and when you&#8217;re working with well-understood 
+	technical methodologies. <br>
+&nbsp;</p></li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Evolutionary Development</h2>
+<ul>
+	<li>
+	Exploratory development
+	<ul>
+		<li>
+		Objective is to work with customers and to evolve 
+		a final system from an initial outline specification. Should start with 
+		well-understood requirements and add new features as proposed by the 
+		customer.</li>
+	</ul>
+	</li>
+	<li>
+	Throw-away prototyping
+	<ul>
+		<li>
+		Objective is to understand the system 
+		requirements. Should start with poorly understood requirements to 
+		clarify what is really needed.</li>
+	</ul>
+	</li>
+</ul>
+<p>
+<img border="0" src="images/evolutionaryModel.png" width="650" height="352"></p>
+<p>
+Evolutionary prototyping model. With evolutionary prototyping, you start by 
+designing and implementing the most prominent parts of the program in a 
+prototype and then adding to and refining the prototype until you&#8217;re done. The 
+prototype becomes the software that you eventually release. </p>
+<ul>
+	<li><b>Problems</b><ul>
+		<li>Lack of process visibility;</li>
+		<li>Systems are often poorly structured;</li>
+		<li>Special skills (e.g. in languages for rapid prototyping) may be 
+		required.</li>
+	</ul>
+	</li>
+	<li><b>Applicability</b><ul>
+		<li>For small or medium-size interactive systems;</li>
+		<li>For parts of large systems (e.g. the user interface);</li>
+		<li>For short-lifetime systems.</li>
+	</ul>
+	</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Component-based Software Engineering</h2>
+<ul>
+	<li>Based on systematic reuse where systems are integrated from existing 
+	components or COTS (Commercial-off-the-shelf) systems.<li>Process stages<ul>
+	<li>Component analysis;
+</li>
+	<li>Requirements modification;
+</li>
+	<li>System design with reuse;
+</li>
+	<li>Development and integration. </li>
+</ul>
+	<li>This approach is becoming increasingly used as component standards have emerged.
+</ul>
+<p>&nbsp;</p>
+<p><img border="0" src="images/componentModel.png" width="650" height="137"></p>
+<p>Reuse-oriented development</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Process Iteration</h2>
+<ul>
+	<li>System requirements ALWAYS evolve in the course of a project so process 
+	iteration where earlier stages are reworked is always part of the process 
+	for large systems.</li>
+	<li>Iteration can be applied to any of the generic process models.</li>
+	<li>Two (related) approaches<ul>
+		<li>Incremental delivery;</li>
+		<li>Spiral development.</li>
+	</ul>
+	</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Incremental Delivery</h2>
+<ul>
+	<li>Rather than deliver the system as a single delivery, the development and 
+	delivery is broken down into increments with each increment delivering part 
+	of the required functionality.<li>&nbsp;User requirements are prioritized and the highest priority requirements are 
+included in early increments.
+	<li>Once the development of an increment is started, the requirements are frozen 
+though requirements for later increments can continue to evolve.
+</ul>
+<p>
+<img border="0" src="images/incremantalDelivery.png" width="650" height="191"></p>
+<p><b>Incremental development advantages</b></p>
+<ul>
+	<li>Customer value can be delivered with each increment so system functionality 
+is available earlier.</li>
+	<li>Early increments act as a prototype to help elicit 
+requirements for later increments.</li>
+	<li>Lower risk of overall project failure.</li>
+	<li>The highest priority system services tend to receive the most testing.</li>
+	<li>Extreme programming<ul>
+		<li>An approach to development based on the development and delivery of 
+		very small increments of functionality.</li>
+		<li>Relies on constant code improvement, user involvement in the 
+		development team and pairwise programming.<br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Spiral Development</h2>
+<ul>
+	<li>Process is represented as a spiral rather than as a sequence of 
+	activities with backtracking.</li>
+	<li>Each loop in the spiral represents a phase in the process. </li>
+	<li>No fixed phases such as specification or design - loops in the spiral 
+	are chosen depending on what is required.</li>
+	<li>Risks are explicitly assessed and resolved throughout the process.</li>
+</ul>
+<p><img border="0" src="images/spiralProcess.png" width="650" height="443"></p>
+<p><b>Spiral model sectors</b></p>
+<ul>
+	<li>Objective setting<ul>
+		<li>Specific objectives for the phase are identified.</li>
+	</ul>
+	</li>
+	<li>Risk assessment and reduction<ul>
+		<li>Risks are assessed and activities put in place to reduce the key 
+		risks.</li>
+	</ul>
+	</li>
+	<li>Development and validation<ul>
+		<li>A development model for the system is chosen which can be any of the 
+		generic models.</li>
+	</ul>
+	</li>
+	<li>Planning<ul>
+		<li>The project is reviewed and the next phase of the spiral is planned.<br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Code-and-Fix</h2>
+<ul>
+	<li>
+	<p class="MsoNormal">The code-and-fix model is a model that is seldom 
+	useful, but that makes it nonetheless common.</li>
+	<li>
+	<p class="MsoNormal">If you haven&#8217;t explicitly chosen another lifecycle 
+	model, then you&#8217;re probably using code-and-fix by default. </li>
+	<li>
+	<p class="MsoNormal">If you haven&#8217;t done much project planning, then you&#8217;re 
+	undoubtedly using code-and-fix. </li>
+	<li>
+	<p class="MsoNormal">You might have a formal specification, or you might 
+	not. </li>
+	<li>
+	<p class="MsoNormal">You then use whatever combination of informal design, 
+	code, debug, and test methodologies suits you until you have a product 
+	that&#8217;s ready to release.</li>
+	<li>
+	<p class="MsoNormal">For tiny projects that you intend to throw away shortly 
+	after they&#8217;re built, this model can be useful&#8212;for small proof-of-concept 
+	programs, for short-lived demos, or throwaway prototypes. </li>
+	<li>
+	<p class="MsoNormal">For any other kind of project, this model is dangerous. 
+	It might have no overhead, but it also provides no means of assessing 
+	progress; you just code until you&#8217;re done. </li>
+	<li>
+	<p class="MsoNormal">In the end, this lifecycle model has no place on a 
+	rapid-development project, except for the small supporting roles indicated.
+	</li>
+</ul>
+<p class="MsoCaption">
+<img border="0" src="images/code-and-fix.png" width="650" height="291"></p>
+<p class="MsoCaption">The code-and-fix model. Code and fix is an informal model 
+that&#8217;s in common use because it&#8217;s simple, not because it works well.</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Rational Unified Process (<a target="_blank" href="https://en.wikipedia.org/wiki/Rational_Unified_Process">RUP</a>)</h2>
+<p class="MsoCaption">
+<img border="0" src="images/rup.png" width="650" height="427"></p>
+<HR align="left" width="100%" size="4" noshade>
+<p class="MsoCaption">
+<img border="0" src="ProcessModel-650.png" width="650" height="514"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Workflows</h2>
+<ul>
+	<li>A diagram below is a <i>workflow detail</i> as 
+it details the component tasks of a specific workflow. </li>
+	<li>UP workflows details are 
+modeled as workers (roles) and activities. </li>
+	<li>Note that that this is only a approximation of the workflow in the 
+	&quot;average&quot; case and might not be a particular exact representation of what 
+	happens in practice.</li>
+	<li>In the real world, you can expect some tasks t be done in a different 
+	order or in parallel according to circumstances.</li>
+</ul>
+<img border="0" src="images/workflow.png" width="650" height="419">
+<p>An example of a design workflow (see requirements workflows in the
+<a href="../../uml/UML-borland-UCDs.html">Use Cases module</a>)</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Agile Unified Process</h2>
+<p>Agile methods are a family of development processes, not a single approach to 
+software development. </p>
+<p>Some of the principles behind the
+<a target="_blank" href="http://agilemanifesto.org/principles.html">Agile 
+Manifesto</a><sup><a href="#_note-manifestoprinciples"> </a></sup>are:</p>
+<ul>
+	<li>Customer satisfaction by rapid, continuous delivery of useful software 
+	</li>
+	<li>Working software is delivered frequently (weeks rather than months) 
+	</li>
+	<li>Working software is the principal measure of progress 
+	</li>
+	<li>Even late changes in requirements are welcomed 
+	</li>
+	<li>Close, daily cooperation between business people and developers 
+	</li>
+	<li>Face-to-face conversation is the best form of communication 
+	</li>
+	<li>Projects are built around motivated individuals, who should be trusted 
+	</li>
+	<li>Continuous attention to technical excellence and good design 
+	</li>
+	<li>Simplicity 
+	</li>
+	<li>Self-organizing teams 
+	</li>
+	<li>Regular adaptation to changing circumstances </li>
+</ul>
+<p>In the RUP there are three disciplines<a href="#Footnote2"> </a>that 
+encompass modeling activities for a single project &#8211; Business Modeling, 
+Requirements, and Analysis &amp; Design.&nbsp; The AUP on the other hand, being a subset 
+of the RUP, combines the three modeling disciplines into a single Model 
+discipline.</p>
+<p><img border="0" src="images/lifecycleAgileUP.gif" width="676" height="338"></p>
+<HR align="left" width="100%" size="4" noshade>
+		<table cellSpacing="0" cellPadding="0" width="100%" border="0" id="table16">
+			<tr>
+				<td bgColor="white">
+				<h2>The lifecycle for the Enterprise Unified Process (EUP)</h2>
+				<p class="MsoNormal">All efforts, including modeling, is 
+				organized into disciplines in the UP and is performed in an 
+				iterative and incremental manner. The AUP is a subset of the RUP and the EUP a 
+				superset of the it.&nbsp; To some extent the UP is serial in the 
+				large and iterative in the small.&nbsp; The six phases of the EUP 
+				clearly occur in a serial manner over time, at the beginning of 
+				an UP project your focus is on project initiation activities 
+				during the Inception phase, once your
+				<a href="http://www.agilemodeling.com/essays/initialRequirementsModeling.htm">
+				initial scope</a> is understood your major focus becomes 
+				requirements analysis and architecture evolution during the 
+				Elaboration phase, then your focus shifts to building your 
+				system during the Construction phase, then you deliver your 
+				software during the Transition phase, you operate and support 
+				your software in the Production phase, and finally you remove it 
+				from production during the Retirement phase.&nbsp; However, on a 
+				day-to-day basis you are working in an iterative manner, perhaps 
+				doing some modeling, some implementation, some testing, and some 
+				management activities.</p>
+				In the RUP there are three disciplines<a href="#Footnote2"> </a>
+				that encompass modeling activities for a single project &#8211; 
+				Business Modeling, Requirements, and Analysis &amp; Design &#8211; and the 
+				EUP adds
+				<a href="http://www.enterpriseunifiedprocess.com/essays/enterpriseBusinessModeling.html">
+				Enterprise Business Modeling</a> and
+				<a href="http://www.enterpriseunifiedprocess.com/essays/enterpriseArchitecture.html">
+				Enterprise Architecture</a>.&nbsp; All six disciplines are described in
+				<a href="#Table1">the table below</a>.&nbsp; For a description of 
+				potential artifacts to create during these disciplines visit
+				<a href="http://www.agilemodeling.com/artifacts/">Agile Models 
+				Distilled</a>.<p>
+				<img border="0" src="images/eup_lifecycle.jpg" width="876" height="534"></p>
+				</p>
+			<HR align="left" width="100%" size="4" noshade>
+				<h2><a name="Table3">The Modeling Disciplines of the Unified 
+				Process</a></h2>
+				<table style="border-collapse: collapse; border: medium none" cellSpacing="0" cellPadding="0" border="1" id="table17">
+					<tr>
+						<td style="BORDER-RIGHT: windowtext 0.5pt solid; BORDER-TOP: windowtext 0.5pt solid; BORDER-LEFT: windowtext 0.5pt solid; WIDTH: 1.45in; BORDER-BOTTOM: windowtext 0.5pt solid" width="174">
+						<b>Discipline</b></td>
+						<td style="width: 5.7in; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: 0.5pt solid windowtext; border-bottom: 0.5pt solid windowtext" width="684">
+						<b>Purpose</b></td>
+					</tr>
+					<tr>
+						<td style="width: 1.45in; border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext" width="174">
+						<font size="2">Business Modeling</font></td>
+						<td style="width: 5.7in; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext" width="684">
+						<font size="2">The purpose of this discipline is to 
+						model the business context, the scope, of your system.&nbsp; 
+						Common modeling activities include the development of:</font><ul>
+							<li><font size="2">A context model (often a data 
+							flow diagram) &nbsp;showing how your system fits into its 
+							overall environment </li>
+							<li>A high-level business requirements model (often 
+							an essential use case model) </li>
+							<li>A glossary defining critical business terms 
+							</li>
+							<li>A domain model (often a class diagram or data 
+							diagram) depicting major business classes or 
+							entities </li>
+							<li>A business process model (often a data flow 
+							diagram or activity diagram) depicting a high-level 
+							overview of the business process to be supported by 
+							your system.&nbsp; This diagram is one level of detail 
+							greater than your context diagram </li>
+						</ul>
+						</font></td>
+					</tr>
+					<tr>
+						<td style="width: 1.45in; border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext" width="174">
+						<font size="2">Requirements</font></td>
+						<td style="width: 5.7in; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext" width="684">
+						<font size="2">The purpose of this discipline is to 
+						engineer the requirements for your project, including 
+						the identification, modeling, and documentation of those 
+						requirements.&nbsp; The main deliverable of this discipline 
+						is the Software Requirements Specification (SRS), also 
+						referred to as the Requirements Model, which encompasses 
+						the captured requirements.&nbsp;</font></td>
+					</tr>
+					<tr>
+						<td style="width: 1.45in; border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext" width="174">
+						<font size="2">Analysis &amp; Design</font></td>
+						<td style="width: 5.7in; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext" width="684">
+						<font size="2">The purpose of this discipline is to 
+						evolve a robust architecture for your system based on 
+						your requirements, to transform the requirements into a 
+						design, and to ensure that implementation environment 
+						issues are reflected in your design.&nbsp;&nbsp;</font></td>
+					</tr>
+					<tr>
+						<td style="width: 1.45in; border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext" width="174">
+						<font size="2">Model</font></td>
+						<td style="width: 5.7in; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext" width="684">
+						<font size="2">In the </font>
+						<a href="http://www.ambysoft.com/unifiedprocess/agileUP.html">
+						AUP</a><font size="2"> this is the combination of the 
+						Business Modeling, Requirements, and Analysis &amp; Design 
+						discipline.</font></td>
+					</tr>
+					<tr>
+						<td style="width: 1.45in; border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext" width="174">
+						<font size="2">Enterprise Business Modeling</font></td>
+						<td style="width: 5.7in; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext" width="684">
+						<span style="COLOR: black"><font size="2">The </font>
+						<a href="http://www.enterpriseunifiedprocess.com/essays/enterpriseBusinessModeling.html">
+						Enterprise Business Modeling discipline</a><font size="2"> 
+						extends business modeling to enable your organization to 
+						explicitly realize the benefits of doing so outside the 
+						context of a project. </font></span><font size="2">The 
+						goal of the Enterprise Business Modeling discipline, 
+						also sometimes referred to as enterprise requirements 
+						modeling, is to enable you to understand and effectively 
+						communicate the business that your organization is 
+						engaged in. It explores both the business process that 
+						your organization engages in as well as the overarching 
+						business requirements for the software applications that 
+						support it.</font></td>
+					</tr>
+					<tr>
+						<td style="width: 1.45in; border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext" width="174">
+						<font size="2">Enterprise Architecture</font></td>
+						<td style="width: 5.7in; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext" width="684">
+						<p class="MsoNormal"><font size="2">The </font>
+						<a href="http://www.enterpriseunifiedprocess.com/essays/enterpriseArchitecture.html">
+						Enterprise Architecture discipline</a><font size="2"> 
+						defines the enterprise architecture of an organization.&nbsp; 
+						It consists of models that define it, reference 
+						architectures, prototypes and working models that 
+						demonstrate how it works, and frameworks that make it 
+						easier to use. An enterprise architecture model is a 
+						representation of the structures and processes of an 
+						organization; a good one depicts the organization both 
+						as it is today and as it is envisioned in the future, 
+						and maps the various views representing the architecture 
+						to one another.&nbsp; These views include both 
+						business-oriented perspectives as well as technical 
+						perspectives.&nbsp; In many ways enterprise architecture 
+						models are a communication bridge between senior 
+						business stakeholders and senior IT professionals.</font></td>
+					</tr>
+				</table>
+						<hr align="left" width="100%" size="4" noshade>
+						<h2>
+						<a target="_blank" href="http://www.extemeprogramming.org">Extreme Programming (XP)</a></h2>
+				<p class="MsoNormal">
+				<A HREF="../ExtremeProgramming/map/iteration.html">
+
+
+<MAP Name="project">
+<AREA Shape="Rect" coords = "272,63,357,82"  HREF="../ExtremeProgramming/rules/functionaltests.html">
+<AREA Shape="Rect" coords = "358,181,383,202"  HREF="../ExtremeProgramming/map/iteration.html">
+<AREA Shape="Rect" coords = "135,15,488,48"  HREF="../ExtremeProgramming/start.html">
+<AREA Shape="Rect" coords = "170,244,227,272"  HREF="../ExtremeProgramming/rules/spike.html">
+<AREA Shape="Rect" coords = "353,209,432,233"  HREF="../ExtremeProgramming/rules/iterative.html">
+<AREA Shape="Rect" coords = "559,154,628,199"  HREF="../ExtremeProgramming/rules/releaseoften.html">
+<AREA Shape="Rect" coords = "416,154,505,198"  HREF="../ExtremeProgramming/rules/functionaltests.html">
+<AREA Shape="Rect" coords = "540,326,613,362"  HREF="../ExtremeProgramming/rules/iterative.html">
+<AREA Shape="Rect" coords = "365,109,418,136"  HREF="../ExtremeProgramming/rules/bugs.html">
+<AREA Shape="Rect" coords = "0,-2,113,67"  HREF="../ExtremeProgramming/index.html">
+<AREA Shape="Rect" coords = "221,111,310,129"  HREF="../ExtremeProgramming/rules/velocity.html">
+<AREA Shape="Rect" coords = "221,97,316,115"  HREF="../ExtremeProgramming/rules/userstories.html">
+<AREA Shape="Rect" coords = "654,190,751,235"  HREF="../ExtremeProgramming/rules/functionaltests.html">
+<AREA Shape="Rect" coords = "294,164,368,189"  HREF="../ExtremeProgramming/map/iteration.html">
+<AREA Shape="Rect" coords = "236,148,291,186"  HREF="../ExtremeProgramming/rules/commit.html">
+<AREA Shape="Rect" coords = "165,152,235,199"  HREF="../ExtremeProgramming/rules/planninggame.html">
+<AREA Shape="Rect" coords = "0,154,96,201"  HREF="../ExtremeProgramming/rules/spike.html">
+<AREA Shape="Rect" coords = "96,152,156,187"  HREF="../ExtremeProgramming/rules/metaphor.html">
+<AREA Shape="Rect" coords = "2,99,99,127"  HREF="../ExtremeProgramming/rules/userstories.html">
+</MAP>
+
+				<IMG SRC="../ExtremeProgramming/map/images/project.gif" WIDTH="627" HEIGHT="271" ALIGN="BOTTOM" BORDER="0" USEMAP="#project"></A></p>
+						<hr align="left" width="100%" size="4" noshade>
+			<h2>
+			The Rules and Practices of Extreme Programming</h2>
+				<P>
+			&nbsp;<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="10" WIDTH="690" id="table20">
+				<TR>
+					<TD WIDTH="300" VALIGN="TOP">
+						<H3 ALIGN="CENTER">Planning</H3>
+						<P>
+						<A HREF="../ExtremeProgramming/rules/userstories.html" onMouseOver="imageOn('stories')" onMouseOut="imageOff('stories')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="stories"> User stories</A> are written.<BR>
+						<A HREF="../ExtremeProgramming/rules/planninggame.html" onMouseOver="imageOn('game')" onMouseOut="imageOff('game')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="game"></A> 
+						<A HREF="../ExtremeProgramming/rules/planninggame.html" onMouseOver="imageOn('game')"
+						onMouseOut="imageOff('game')">Release planning</A> creates the schedule.<BR>
+						<A HREF="../ExtremeProgramming/rules/releaseoften.html" onMouseOver="imageOn('releaseoften')" onMouseOut="imageOff('releaseoften')">
+						<IMG
+						SRC="../ExtremeProgramming/images/xplinktn.gif" WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="releaseoften"></A> Make
+						frequent 
+						<A HREF="../ExtremeProgramming/rules/releaseoften.html" onMouseOver="imageOn('releaseoften')" onMouseOut="imageOff('releaseoften')">small
+						releases</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/velocity.html" onMouseOver="imageOn('load')" onMouseOut="imageOff('load')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="load"></A> The 
+						<A HREF="../ExtremeProgramming/rules/velocity.html" onMouseOver="imageOn('load')"
+						onMouseOut="imageOff('load')">Project Velocity</A> is measured.<BR>
+						<A HREF="../ExtremeProgramming/rules/iterative.html" onMouseOver="imageOn('iterative')" onMouseOut="imageOff('iterative')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="iterative"></A> The project is divided into 
+						<A HREF="../ExtremeProgramming/rules/iterative.html"
+						onMouseOver="imageOn('iterative')" onMouseOut="imageOff('iterative')">iterations</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/iterationplanning.html" onMouseOver="imageOn('iteration')" onMouseOut="imageOff('iteration')">
+						<IMG
+						SRC="../ExtremeProgramming/images/xplinktn.gif" WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="iteration"></A> 
+						<A HREF="../ExtremeProgramming/rules/iterationplanning.html"
+						onMouseOver="imageOn('iteration')" onMouseOut="imageOff('iteration')">Iteration planning</A> starts each iteration.<BR>
+						<A HREF="../ExtremeProgramming/rules/movepeople.html" onMouseOver="imageOn('move')" onMouseOut="imageOff('move')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="move"> Move people around</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/standupmeeting.html" onMouseOver="imageOn('stand')" onMouseOut="imageOff('stand')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="stand"></A> A 
+						<A HREF="../ExtremeProgramming/rules/standupmeeting.html"
+						onMouseOver="imageOn('stand')" onMouseOut="imageOff('stand')">stand-up meeting</A> starts each day.<BR>
+						<A HREF="../ExtremeProgramming/rules/fixit.html" onMouseOver="imageOn('fix')" onMouseOut="imageOff('fix')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="fix"> Fix XP</A> when it breaks.
+						<H3 ALIGN="CENTER">Designing</H3>
+						<P>
+						<A HREF="../ExtremeProgramming/rules/simple.html" onMouseOver="imageOn('simple')" onMouseOut="imageOff('simple')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="simple"> Simplicity</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/metaphor.html" onMouseOver="imageOn('metaphor')" onMouseOut="imageOff('metaphor')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="metaphor"></A> Choose a 
+						<A HREF="../ExtremeProgramming/rules/metaphor.html"
+						onMouseOver="imageOn('metaphor')" onMouseOut="imageOff('metaphor')">system metaphor</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/crccards.html" onMouseOver="imageOn('crc')" onMouseOut="imageOff('crc')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="crc"></A> Use 
+						<A HREF="../ExtremeProgramming/rules/crccards.html" onMouseOver="imageOn('crc')"
+						onMouseOut="imageOff('crc')">CRC cards</A> for design sessions.<BR>
+						<A HREF="../ExtremeProgramming/rules/spike.html" onMouseOver="imageOn('spike')" onMouseOut="imageOff('spike')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="spike"></A> Create 
+						<A HREF="../ExtremeProgramming/rules/spike.html" onMouseOver="imageOn('spike')"
+						onMouseOut="imageOff('spike')">spike solution</A>s to reduce risk.<BR>
+						<A HREF="../ExtremeProgramming/rules/early.html" onMouseOver="imageOn('early')" onMouseOut="imageOff('early')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="early"></A> No functionality is 
+						<A HREF="../ExtremeProgramming/rules/early.html"
+						onMouseOver="imageOn('early')" onMouseOut="imageOff('early')">added early</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/refactor.html" onMouseOver="imageOn('refactor')" onMouseOut="imageOff('refactor')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="refactor"> Refactor</A> whenever and wherever possible.
+					</TD>
+					<TD WIDTH="360" VALIGN="TOP">
+						<H3 ALIGN="CENTER">Coding</H3>
+						<P>
+						<A HREF="../ExtremeProgramming/rules/customer.html" onMouseOver="imageOn('customer')" onMouseOut="imageOff('customer')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="customer"></A> The customer is 
+						<A HREF="../ExtremeProgramming/rules/customer.html"
+						onMouseOver="imageOn('customer')" onMouseOut="imageOff('customer')">always available</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/standards.html" onMouseOver="imageOn('standard')" onMouseOut="imageOff('standard')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="standard"></A> Code must be written to agreed 
+						<A
+						HREF="../ExtremeProgramming/rules/standards.html" onMouseOver="imageOn('standard')" onMouseOut="imageOff('standard')">standards</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/testfirst.html" onMouseOver="imageOn('first')" onMouseOut="imageOff('first')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="first"></A> Code the 
+						<A HREF="../ExtremeProgramming/rules/testfirst.html"
+						onMouseOver="imageOn('first')" onMouseOut="imageOff('first')">unit test first</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/pair.html" onMouseOver="imageOn('pair')" onMouseOut="imageOff('pair')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="pair"></A> All code is 
+						<A HREF="../ExtremeProgramming/rules/pair.html"
+						onMouseOver="imageOn(')" onMouseOut="imageOff('pair')">pair programmed</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/sequential.html" onMouseOver="imageOn('sequence')" onMouseOut="imageOff('sequence')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT=0IOTTOM
+
+" ALT=" " BORDER="0" NAME="sequence"></A> Only one pair 
+						<A HREF="../ExtremeProgramming/rules/sequential.html"
+						onMouseOver="imageOn('sequence')" onMouseOut="imageOff('sequence')">integrates code at a time</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/integraf.html" onMouseOver="imageOn('integrateoften')" onMouseOut="imageOff('integrateoften')">
+						<IMG
+						SRC="../ExtremeProgramming/images/xplinktn.gif" WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="integrateoften"> Integrate
+						often</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/collective.html" onMouseOver="imageOn('collective')" onMouseOut="imageOff('collective')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="collective"></A> Use 
+						<A HREF="../ExtremeProgramming/rules/collective.html"
+						onMouseOver="imageOn('collective')" onMouseOut="imageOff('collective')">collective code ownership</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/optimize.html" onMouseOver="imageOn('optimize')" onMouseOut="imageOff('optimize')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="optimize"></A> Leave 
+						<A HREF="../ExtremeProgramming/rules/optimize.html"
+						onMouseOver="imageOn('optimize')" onMouseOut="imageOff('optimize')">optimization</A> till last.<BR>
+						<A HREF="../ExtremeProgramming/rules/overtime.html" onMouseOver="imageOn('over')" onMouseOut="imageOff('over')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="over"></A> No 
+						<A HREF="../ExtremeProgramming/rules/overtime.html" onMouseOver="imageOn('over')"
+						onMouseOut="imageOff('over')">overtime</A>.
+						<H3 ALIGN="CENTER">Testing</H3>
+						<P>
+						<A HREF="../ExtremeProgramming/rules/unittests.html" onMouseOver="imageOn('alltested')" onMouseOut="imageOff('alltested')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="alltested"></A> All code must have 
+						<A HREF="../ExtremeProgramming/rules/unittests.html"
+						onMouseOver="imageOn('alltested')" onMouseOut="imageOff('alltested')">unit tests</A>.<BR>
+						<A HREF="../ExtremeProgramming/rules/unittests.html" onMouseOver="imageOn('pass')" onMouseOut="imageOff('pass')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="pass"></A> All code must pass all 
+						<A HREF="../ExtremeProgramming/rules/unittests.html"
+						onMouseOver="imageOn('pass')" onMouseOut="imageOff('pass')">unit tests</A> before it <BR>
+						<IMG SRC="../ExtremeProgramming/images/pixel.gif" WIDTH="30" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">can be released.<BR>
+						<A HREF="../ExtremeProgramming/rules/bugs.html" onMouseOver="imageOn('bug')" onMouseOut="imageOff('bug')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="bug"></A> When 
+						<A HREF="../ExtremeProgramming/rules/bugs.html" onMouseOver="imageOn('bug')"
+						onMouseOut="imageOff('bug')">a bug is found</A> tests are created.<BR>
+						<A HREF="../ExtremeProgramming/rules/functionaltests.html" onMouseOver="imageOn('func')" onMouseOut="imageOff('func')">
+						<IMG SRC="../ExtremeProgramming/images/xplinktn.gif"
+						WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" NAME="func"> Acceptance tests</A> are run often and the
+						score<BR>
+						<IMG SRC="../ExtremeProgramming/images/pixel.gif" WIDTH="30" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">is published.
+					</TD>
+				</TR>
+				</TABLE>
+
+<HR align="left" width="100%" size="4" noshade>
+						<h2>RUP Phases vs. XP <br>
+&nbsp;<table border="1" id="table21" width="689">
+							<tr>
+								<th align="middle">RUP Phase</th>
+								<th align="middle" width="552">XP Notion</th>
+							</tr>
+							<tr>
+								<td>Inception:</td>
+								<td width="552">
+								<li>
+								User Stories 
+								</li>
+								<li>Metaphor 
+								</li>
+								<li>initial spike.</li>
+								</td>
+							</tr>
+							<tr>
+								<td>Elaboration</td>
+								<td width="552">
+								<li>More
+								User Stories. 
+								</li>
+								<li>Establishing the metaphor, or other 
+								architecture. 
+								</li>
+								<li>Some spikes, some production code. 
+								</li>
+								<li>Calibration of estimation (Load Factor / 
+								Velocity)</li>
+								</td>
+							</tr>
+							<tr>
+								<td>Construction</td>
+								<td width="552">
+								<li>More
+								User Stories 
+
+								</li>
+								<li>Adding iterations onto the existing code, 
+								fleshing out the architecture. 
+								</li>
+								<li>Refinement of process 
+								</li>
+								<li>Refinement of estimation. 
+								</li>
+								<li>First delivery to production, at a very 
+								early development phase. (If possible)</li>
+								</td>
+							</tr>
+							<tr>
+								<td>Transition</td>
+								<td width="552">
+								<li>Continued iterations, adding more and more 
+								features to production system. 
+								</li>
+								<li>If necessary, old system runs in parallel 
+								with new system while new system takes over more 
+								and more duties. 
+								</li>
+								<li>Performance Tuning.</li>
+								</td>
+							</tr>
+						</table>
+						
+				<p>&nbsp;</p>
+						
+<HR align="left" width="100%" size="4" noshade>
+						<h2><a name="Fit">How Good is the Fit Between AM and UP?</a></h2>
+						<p class="MsoNormal">Now that we understand the basics 
+						of how modeling in the UP works, we can examine how well 
+						AM fits in with it.&nbsp; Luckily many of AM&#8217;s principles and 
+						practices are arguably a part of the UP already, 
+						although perhaps not as explicitly as I would like.&nbsp; The
+						<a href="#Table2">table below</a> presents an 
+						examination of how well each individual AM practice is 
+						currently implemented in the UP, if at all, and 
+						discusses how to adopt the practice within the scope of 
+						the UP.&nbsp; My experience is that it is relatively 
+						straightforward for UP teams to adopt AM practices if 
+						they choose to do so.&nbsp; This is because the UP is very 
+						flexible, one of its underlying principles is that you 
+						should tailor it to meet your unique needs, making it 
+						easy to merge AM practices into the UP.</p>
+						<p class="MsoNormal"><b><a name="Table2">The Fit Between 
+						UP and AM</a></b></p>
+						<table style="border-collapse: collapse; border: medium none" cellSpacing="0" cellPadding="0" border="1" id="table18">
+							<tr>
+								<td style="BORDER-RIGHT: windowtext 0.5pt solid; PADDING-RIGHT: 5.4pt; BORDER-TOP: windowtext 0.5pt solid; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: 0in; BORDER-LEFT: windowtext 0.5pt solid; WIDTH: 72.9pt; PADDING-TOP: 0in; BORDER-BOTTOM: windowtext 0.5pt solid" vAlign="top" width="122">
+								<p class="MsoNormal"><b>Practice</b></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: 0.5pt solid windowtext; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><b>Fit</b></td>
+							</tr>
+							<tr>
+								<td style="width: 72.9pt; border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="122">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/essays/activeStakeholderParticipation.htm">
+								Active Stakeholder Participation</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">AM has a 
+								wide definition for project stakeholders, 
+								including users, management, operations staff, 
+								and support staff to name a few that are 
+								compatible with the UP.&nbsp; The UP clearly includes 
+								project stakeholders, such as users and 
+								customers, throughout most of it disciplines.&nbsp; 
+								To be successful UP project teams should allow 
+								project stakeholders to take on modeling roles 
+								such as Business Process Designer and 
+								Requirements Specifier as appropriate, there is 
+								nothing in the RUP preventing this by the way.&nbsp; 
+								The more active project stakeholders are the 
+								less of a need there will be for </font>
+								<a href="http://www.agilemodeling.com/essays/modelReviews.htm">
+								reviews</a><font size="2">, management 
+								presentations, and other overhead activities 
+								that reduce your team&#8217;s development velocity.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#ApplyModelingStandards">
+								Apply Modeling Standards</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">The 
+								application of modeling standards, in particular 
+								the diagrams of the </font>
+								<a href="http://www.agilemodeling.com/essays/umlDiagrams.htm">
+								Unified Modeling Language (UML)</a><font size="2">, 
+								is a significant part of the UP.&nbsp; Furthermore 
+								the RUP product includes guidelines for the 
+								creation of many modeling artifacts, guidelines 
+								that your teams should consider adopting and 
+								following as appropriate, and explicitly 
+								suggests that you tailor the guidelines that 
+								they provide for your exact needs.&nbsp; To remain 
+								agile, however, UP teams should recognize that 
+								you often need to bend the guidelines and 
+								standards &#8211; in other words, don&#8217;t let them 
+								become a straight jacket.&nbsp; There are </font>
+								<a href="http://www.agilemodeling.com/style/">
+								detailed UML modeling guidelines</a><font size="2"> 
+								posted at this site.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#ApplyPatternsGently">
+								Apply Patterns Gently</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">UP teams are 
+								free to apply modeling patterns, the RUP product 
+								describes many common modeling patterns, as part 
+								of their efforts for any of the modeling 
+								disciplines.&nbsp; This practice enhances the UP with 
+								its advice to ease into the application of a 
+								pattern, the UP does not make this concept as 
+								explicit as it could.&nbsp;</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#ApplyTheRightArtifacts">
+								Apply the Right Artifact(s)</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">One of the 
+								strengths of the UP is that provides some advice 
+								for when to create each type of model, and 
+								recent incarnations of the RUP product includes 
+								significant advice for non-UML artifacts such as 
+								data models and user interface storyboards (UI 
+								flow diagrams).</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#CollectiveOwnership">
+								Collective Ownership</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">AM&#8217;s concept 
+								of collective ownership can be used to enhance 
+								the efforts on UP projects, assuming that the 
+								team culture supports the concept of open and 
+								honest communication.&nbsp; The UP supports 
+								collective ownership with its strong focus on 
+								configuration management issues, it has a 
+								discipline dedicated to this task, although its
+								</font>
+								<a href="http://www.agilemodeling.com/essays/changeManagement.htm">
+								change management</a><font size="2"> processes 
+								may potentially get in your way if developers 
+								and project stakeholders are unable to 
+								distinguish when to formalize change control and 
+								when not to.&nbsp; To be fair, this is a problem 
+								regardless of when you apply AM on an UP 
+								project, or on any type of project for that 
+								matter.&nbsp; UP teams should turn the configuration 
+								management dial up a few notches and allow 
+								anyone on the project to access and work on any 
+								artifact that they wish, including models and 
+								documents.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#CreateSeveralModelsInParallel">
+								Create Several Models in Parallel</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">The UP 
+								clearly includes this concept, one only has to 
+								look at the activity diagrams depicting each 
+								discipline to see that several artifacts are 
+								potentially being worked on in parallel.&nbsp; 
+								However, this concept could be communicated 
+								better because the near-serial flow in its 
+								activity diagrams presented for each major 
+								modeling activity doesn&#8217;t communicate this 
+								concept well.&nbsp; There is a larger issue as well 
+								when you consider the lifecycle as a whole.&nbsp; 
+								Because the UP has organized its modeling 
+								efforts into separate disciplines, for very good 
+								reasons, it isn&#8217;t as apparent that not only 
+								could you work on several business modeling 
+								artifacts in parallel but you could also work on 
+								requirements-oriented artifacts, 
+								analysis-oriented artifacts, architecture 
+								artifacts, and design artifacts too.&nbsp; UP teams 
+								can turn the dial up a few notches by reading 
+								between the lines of the discipline activity 
+								diagrams and the UP lifecycle diagram and 
+								choosing to perform activities from several 
+								disciplines simultaneously when it makes sense 
+								to do so.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#CreateSimpleContent">
+								Create Simple Content</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">This 
+								practice is a choice made by the modeler(s), 
+								albeit one that must be implicitly supported by 
+								the rest of the development team.&nbsp; UP teams will 
+								need to adopt modeling guidelines that allow 
+								models that are just good enough and the 
+								customers of those models (including 
+								programmers, project stakeholders, and 
+								reviewers) must also be willing to accept simple 
+								models.&nbsp; This is a cultural issue, one that is 
+								often difficult for many organizations to adopt.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#DepictModelsSimply">
+								Depict Models Simply</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">See Create 
+								Simple Content.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#DiscardTemporaryModels">
+								Discard Temporary Models</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">Modelers on 
+								UP teams are free to discard anything that they 
+								wish.&nbsp; As with the simplicity practices your 
+								organization&#8217;s culture must accept the concept 
+								of traveling light, of developing and 
+								maintaining just enough models and documents and 
+								no more.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#DisplayModelsPublicly">
+								Display Models Publicly</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">UP teams are 
+								free to follow this practice.&nbsp; UP teams can turn 
+								the communication dial up a notch by following 
+								the principle of Open and Honest Communication 
+								by making all artifacts available to everyone as 
+								well as to publicly display the critical models 
+								used by the project team.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#FormalizeContractModels">
+								Formalize Contract Models</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">The UP 
+								includes the concept of integrating with 
+								external systems, these systems are typically 
+								identified on use case models and the RUP 
+								suggests introducing &#8220;boundary classes&#8221; to 
+								implement the interface to these systems. At the 
+								time of this writing the RUP appears weak with 
+								respect to activities such as legacy system 
+								analysis and enterprise application integration 
+								(EAI).&nbsp; The explicit adoption of this practice 
+								clearly strengthens the UP&#8217;s integration 
+								activities and fits in well with it&#8217;s concepts 
+								of use case realizations &#8211; the interaction 
+								between systems could be specified with one or 
+								more use cases and then the corresponding use 
+								case realization would be the formalized 
+								contract model.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#IterateToAnotherArtifact">
+								Iterate to Another Artifact</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">This 
+								practice can be easily adopted by an UP team.&nbsp; 
+								As mentioned previously, the unfortunate 
+								depiction of UP modeling activities as 
+								quasi-serial processes and the division of 
+								modeling activities into separate disciplines 
+								can hinder the iterative mindset required of 
+								agile modelers.&nbsp;&nbsp;</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#ModelInSmallIncrements">
+								Model in Small Increments</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">This 
+								practice is clearly an aspect of the UP &#8211; the 
+								UP&#8217;s support for iterations implies that you 
+								will be incrementally developing your model 
+								throughout your project.&nbsp; UP teams can easily 
+								turn the iterative and incremental dial up a few 
+								notches by preferring smaller, simpler models 
+								that quickly lead to implementation and testing.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#ModelWithOthers">
+								Model With Others</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">The UP 
+								implicitly includes this practice.&nbsp; Every 
+								modeling discipline clearly includes several 
+								roles, each role being filled by one or more 
+								people. UP teams can turn the communication dial 
+								up a few notches by adopting tools that support 
+								team modeling, such as whiteboards and 
+								collaborative modeling tools (see the </font>
+								<a href="http://www.agilemodeling.com/essays/communication.htm">
+								Communication</a><font size="2"> article) over 
+								single-user modeling tools.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#ProveItWithCode">
+								Prove it With Code</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">The UP 
+								explicitly includes this practice.&nbsp; At the end 
+								of every iteration, except perhaps for the ones 
+								during the Inception phase, the UP specifically 
+								states that you should have a working 
+								prototype.&nbsp; Furthermore, the UP insists that you 
+								have a working end-to-end prototype at the end 
+								of the Elaboration phase that proves your 
+								architecture.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#ReuseExistingResources">
+								Reuse Existing Resources</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">Reuse is an 
+								implicit part of the UP, and reuse management is 
+								an explicit part of the Enterprise Unified 
+								Process (EUP).&nbsp; UP teams can turn the reuse dial 
+								up a few notches by actively preferring to reuse 
+								existing resources instead of building them from 
+								scratch, including but not limited to existing 
+								models, existing components, open source 
+								software (OSS), and existing tools.</font></td>
+							</tr>
+							<tr>
+								<td style="width: 72.9pt; border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="122">
+								<a href="http://www.agilemodeling.com/essays/singleSourceInformation.htm">
+								Single Source Information</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<font size="2">There is no reason why you cannot 
+								store information in a single place when 
+								following the UP.&nbsp; Unfortunately, many 
+								organizations choose to instantiate the RUP in a 
+								documentation-driven manner (which IBM Rational 
+								clearly advices you not to do), and as a result 
+								they travel very heavy and clearly take a 
+								multi-source approach.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#UpdateOnlyWhenItHurts">
+								Update Only When it Hurts</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">In theory 
+								this can be an easy concept for UP teams to 
+								adopt as it dramatically reduces the effort 
+								expended to keep your artifacts up to date.&nbsp; 
+								However, in practice many organizations prove to 
+								have a problem with this concept, particularly 
+								if they have a strong &#8220;traceability&#8221; culture.&nbsp; 
+								Traceability is the ability to relate aspects of 
+								project artifacts to one another, the support 
+								for which is a strong feature of the UP as it is 
+								an important aspect of its Configuration and 
+								Change Management discipline.&nbsp; Furthermore, the 
+								RUP product includes tool mentors for working 
+								with Rational RequisitePro, a requirements 
+								traceability tool, making it appear easy to 
+								maintain a traceability matrix between 
+								artifacts.&nbsp; My experience is that organizations 
+								with traceability cultures will often choose to 
+								update artifacts regularly, even if it isn&#8217;t yet 
+								painful to have the artifacts out of date, and 
+								update the traceability matrix relating 
+								everything to one another.&nbsp; To turn their 
+								productivity dial up several notches UP teams 
+								should choose to travel light, to loosen up a 
+								bit and allow project artifacts to get out of 
+								sync with one another, and to maintain a 
+								traceability matrix between artifacts only when 
+								there is clear benefit to do so AND their 
+								project stakeholders understand the issues 
+								involved as well as authorize the effort.&nbsp; A 
+								traceability matrix is effectively a document 
+								and is therefore a business decision to be made 
+								by project stakeholders.</font></td>
+							</tr>
+							<tr>
+								<td style="border-left: 0.5pt solid windowtext; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="144">
+								<p class="MsoNormal">
+								<a href="http://www.agilemodeling.com/practices.htm#UseTheSimplestTools">
+								Use the Simplest Tools</a></td>
+								<td style="width: 441.9pt; border-left: medium none; border-right: 0.5pt solid windowtext; border-top: medium none; border-bottom: 0.5pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in" vAlign="top" width="737">
+								<p class="MsoNormal"><font size="2">The RUP 
+								product includes tool mentors that make it 
+								easier for teams to work with tools sold by 
+								Rational Corporation.&nbsp; However, the reality is 
+								that UP teams are welcome to use any development 
+								tool that they want and Rational tools compete 
+								on their merits just like the products of any 
+								other company.&nbsp; UP teams can turn their 
+								productivity dial up several notches by 
+								expanding their horizons to include simple tools 
+								such as whiteboards, index cards, and Post-It 
+								notes in addition to CASE tools.</font></td>
+							</tr>
+						</table>
+						<p class="MsoNormal">Something that is important to 
+						understand is that for AM to be successful the culture 
+						of your organization must be open to the concepts, 
+						values, and principles of agile software development.&nbsp; 
+						The problem is that the UP is often adopted by 
+						organizations that either implicitly or explicitly do 
+						not accept the values of agile software development.&nbsp; 
+						Their focus is often on following processes and using 
+						tools, the RUP product clearly defines many processes 
+						and describes how to apply Rational&#8217;s tools effectively 
+						on software projects, and therefore the RUP is clearly 
+						attractive to them.&nbsp; Unfortunately this goes against the 
+						agile value of preferring individuals and interactions 
+						over processes and tools.&nbsp; When the culture of an 
+						organization is documentation centric they may find the 
+						UP appealing because you can instantiate it in such a 
+						way as to result in the creation of significant amounts 
+						of documentation (you can also instantiate it to result 
+						in very little documentation, remember, the UP is 
+						flexible).&nbsp;&nbsp; If an organization is documentation centric 
+						then this aspect of its culture goes against agile 
+						software development&#8217;s value of preferring working 
+						software over comprehensive documentation.&nbsp; This 
+						organization may still successfully adopt, tailor, and 
+						instantiate the UP but be unable to follow many of AM&#8217;s 
+						principles and practices effectively because it does not 
+						have an agile culture (see the article
+						<a href="http://www.agilemodeling.com/essays/whenDoesAMWork.htm">
+						When Does(n't) AM Make Sense</a>).&nbsp; The point is that 
+						how well AM and UP will fit together in your 
+						organization depends largely on your organization&#8217;s 
+						culture and not so much on the UP itself.&nbsp;&nbsp; You can 
+						easily use the techniques of AM to improve your UP 
+						modeling efforts, but to be effective you will find that 
+						you need to overcome cultural challenges within your 
+						organization.&nbsp;</td>
+			</tr>
+		</table>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Classic Mistakes</h2>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none" id="table1">
+	<tr>
+		<td width="132" valign="top" style="width: 99.0pt; border: 1.0pt solid windowtext; padding-left: .05in; padding-right: .05in; padding-top: 0in; padding-bottom: 0in">
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><strong>
+		<span style="font-size: 9.0pt; font-family: Verdana">People-Related 
+		Mistakes</span></strong></td>
+		<td width="144" valign="top" style="width: 1.5in; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: .05in; padding-right: .05in; padding-top: 0in; padding-bottom: 0in">
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><strong>
+		<span style="font-size: 9.0pt; font-family: Verdana">Process-Related 
+		Mistakes</span></strong></td>
+		<td width="150" valign="top" style="width: 112.5pt; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: .05in; padding-right: .05in; padding-top: 0in; padding-bottom: 0in">
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><strong>
+		<span style="font-size: 9.0pt; font-family: Verdana">Product-Related 
+		Mistakes</span></strong></td>
+		<td width="132" valign="top" style="width: 99.0pt; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: .05in; padding-right: .05in; padding-top: 0in; padding-bottom: 0in">
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><strong>
+		<span style="font-size: 9.0pt; font-family: Verdana">Technology-Related 
+		Mistakes</span></strong></td>
+	</tr>
+	<tr>
+		<td width="132" valign="top" style="width: 99.0pt; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: .05in; padding-right: .05in; padding-top: 0in; padding-bottom: 0in">
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">1. Undermined motivation</span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">2. Weak personnel</span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">3. Uncontrolled problem employees</span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">4. Heroics</span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">5. Adding people to a late project </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">6. Noisy, crowded offices</span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">7. Friction between developers and customers </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">8. Unrealistic expectations </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">9. Lack of effective project sponsorship </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">10. Lack of stakeholder buy-in </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">11. Lack of user input </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">12. Politics placed over substance </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">13. Wishful thinking </span></font></td>
+		<td width="144" valign="top" style="width: 1.5in; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: .05in; padding-right: .05in; padding-top: 0in; padding-bottom: 0in">
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">14. Overly optimistic schedules </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">16. Insufficient risk management </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">17. Contractor failure Insufficient planning </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">18. Abandonment of planning under pressure </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">19. Wasted time during the fuzzy front end </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">20. Shortchanged upstream activities </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">21. Inadequate design </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">22. Shortchanged quality assurance </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">23. Insufficient management controls </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">24. Premature or too frequent convergence </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">25. Omitting necessary tasks from estimates </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">26. Planning to catch up later</span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">27. Code-like-hell programming </span></font></td>
+		<td width="150" valign="top" style="width: 112.5pt; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: .05in; padding-right: .05in; padding-top: 0in; padding-bottom: 0in">
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">28. Requirements gold-plating </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">29. Feature creep </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">30. Developer gold-plating </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">31. Push me, pull me negotiation</span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">32. Research-oriented development </span></font></td>
+		<td width="132" valign="top" style="width: 99.0pt; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: .05in; padding-right: .05in; padding-top: 0in; padding-bottom: 0in">
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">33. Silver-bullet syndrome </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">34. Overestimated savings from new tools or methods </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">35. Switching tools in the middle of a project </span></font></p>
+		<p class="MsoNormal" align="left" style="margin-top:3.0pt;margin-right:0in;
+  margin-bottom:3.0pt;margin-left:0in;text-align:left"><font face="Verdana">
+		<span style="font-size:
+  10.0pt">36. Lack of automated source-code control</span></font></td>
+	</tr>
+</table>
+<HR align="left" width="100%" size="4" noshade>
+<h2 align="left" style="margin: 3.0pt 0in">Scrum and its
+<a href="../scrum/scrum-rules.html">Rules</a></h2>
+<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">Scrum is an 
+iterative, incremental process for developing any product or managing any work. 
+It produces a potentially shippable set of functionality at the end of every 
+iteration. It's attributes are:</p>
+<ul>
+	<li>
+	<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">Scrum is an 
+	agile process to manage and control development work.</li>
+	<li>
+	<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">Scrum is a 
+	wrapper for existing engineering practices.</li>
+	<li>
+	<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">Scrum is a 
+	team-based approach to iteratively, incrementally develop systems and 
+	products when requirements are rapidly changing </li>
+	<li>
+	<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">Scrum is a 
+	process that controls the chaos of conflicting interests and needs. </li>
+	<li>
+	<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">Scrum is a way 
+	to improve communications and maximize co-operation.</li>
+	<li>
+	<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">Scrum is a way 
+	to detect and cause the removal of anything that gets in the way of 
+	developing and delivering products.</li>
+	<li>
+	<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">Scrum is a way 
+	to maximize productivity.</li>
+	<li>
+	<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">Scrum is 
+	scalable from single projects to entire organizations. Scrum has controlled 
+	and organized development and implementation for multiple interrelated 
+	products and projects with over a thousand developers and implementers. </li>
+	<li>
+	<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">Scrum is a way 
+	for everyone to feel good about their job, their contributions, and that 
+	they have done the very best they possibly could.</li>
+</ul>
+<h2 align="left" style="margin: 3.0pt 0in">Frequent, First-hand Observations</h2>
+<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">
+<img border="0" src="../scrum/images/flow.gif" width="500" height="324"></p>
+<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">&nbsp;</p>
+<h2 align="left" style="margin: 3.0pt 0in">Frequent, First-hand Observations</h2>
+<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">
+<img border="0" src="../scrum/images/observe.gif" width="500" height="340"></p>
+<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">&nbsp;</p>
+<h2 align="left" style="margin: 3.0pt 0in">Active, Intelligent Management</h2>
+<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">
+<img border="0" src="../scrum/images/scrum%203%20level.gif" width="500" height="285"></p>
+<p class="MsoNormal" align="left" style="margin: 3.0pt 0in">&nbsp;</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2 align="left" style="margin: 3.0pt 0in">XP @ Scrum</h2>
+<p>Scrum has been employed successfully as a management wrapper for Extreme 
+Programming engineering practices. Scrum provides the agile management 
+mechanisms; Extreme Programming provides the integrated engineering practices.</p>
+<p>&nbsp;</p>
+<img src="images/xp.gif">
+<p>Benefits of xP@Scrum include: </p>
+<ol>
+	<li>The agile management and control mechanisms of Scrum are applicable for 
+	any type of project, including business initiatives that consist of 
+	multiple, simultaneous software development, business development, 
+	re-engineering, marketing, support, and implementation projects. xp@Scrum 
+	projects fit within the overall management framework of these initiatives. 
+	</li>
+	<li>xP@Scrum projects realize the full benefits of self-organization; teams 
+	are iteration (or Sprint) goal directed, rather than story directed. 
+	</li>
+	<li>When Extreme Programming projects are wrapped by Scrum, they becomes 
+	scalable and can be run simultaneously by non-colocated teams. 
+	</li>
+	<li>Scrum implements in a day; Extreme Programming can be gradually 
+	implemented within the Scrum framework. 
+	</li>
+</ol>
+<HR align="left" width="100%" size="4" noshade>
+<h2><b>CS3365 Project Development and Milestones</b></h2>
+<ol>
+	<li>You work as a <b><i>creative SW development team</i></b></li>
+	<li>Lifecycle Objectives - at least: extended 4-blocker</li>
+	<li>Lifecycle Architecture - at least: Use case diagrams, component 
+	diagrams, interactions diagrams, prototype (at least storyboard)</li>
+	<li>Initial Operational Capability - at least: operational SW system and 
+	javadoc documentation</li>
+	<li>Product Release - at least: final presentation and demo</li>
+</ol>
+
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Rate of Change</h2>
+<p><img border="0" src="images/change.png" width="600" height="380"></p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>
+<a target="_blank" href="https://en.wikipedia.org/wiki/Forming-storming-norming-performing">
+Forming-storming-norming-performing</a></h2>
+<p>Bruce Tuckman's 1965 team-development model</p>
+<p><a href="../background/teamRules.html">Team Ground Rules</a></p>
+<p><img border="0" src="images/forming.jpg" width="485" height="449"></p>
+<p>The progression is:</p>
+<ol>
+	<li>forming </li>
+	<li>storming </li>
+	<li>norming </li>
+	<li>performing </li>
+</ol>
+<p>Features of each phase: <br>
+<br>
+<b>Forming - Stage 1</b></p>
+<ul>
+	<li>High dependence on leader for guidance and direction. </li>
+	<li>Little agreement on team aims other than received from leader. </li>
+	<li>Individual roles and responsibilities are unclear. </li>
+	<li>Leader must be prepared to answer lots of questions about the team's 
+	purpose, objectives and external relationships. </li>
+	<li>Processes are often ignored. </li>
+	<li>Members test tolerance of system and leader. </li>
+
+<li>Leader directs.</li>
+</ul>
+
+<br>
+<b>Storming - Stage 2</b><ul>
+	<li>Decisions don't come easily within group.</li>
+	<li>Team members view for position as they 
+attempt to establish themselves in relation to other team members and the 
+leader, who might receive challenges from team members. </li>
+	<li>Clarity of purpose 
+increases but plenty of uncertainties persist. </li>
+	<li>Cliques and factions form and 
+there may be power struggles. </li>
+	<li>The team needs to be focused on its goals to avoid 
+becoming distracted by relationships and emotional issues. </li>
+	<li>Compromises may be 
+required to enable progress. </li>
+<li>Leader coaches.</li>
+</ul>
+
+<b>Norming - Stage 3</b></p>
+<ul>
+	<li>Agreement and consensus is largely forms among team, who respond well to 
+facilitation by leader. </li>
+	<li>Roles and responsibilities are clear and accepted. </li>
+	<li>Big 
+decisions are made by group agreement. </li>
+	<li>Smaller decisions may be delegated to 
+individuals or small teams within group. </li>
+	<li>Commitment and unity is strong. </li>
+	<li>The 
+team may engage in fun and social activities. </li>
+	<li>The team discusses and develops 
+its processes and working style. </li>
+	<li>There is general respect for the leader and 
+some of leadership is more shared by the team. </li>
+<li>Leader facilitates and enables.</li>
+</ul>
+
+<b>Performing - Stage 4</b></p>
+<ul>
+	<li>The team is more strategically aware; the team knows clearly why it is doing 
+what it is doing. </li>
+	<li>The team has a shared vision and is able to stand on its own 
+feet with no interference or participation from the leader. </li>
+	<li>There is a focus on 
+over-achieving goals, and the team makes most of the decisions against criteria 
+agreed with the leader. </li>
+	<li>The team has a high degree of autonomy. </li>
+	<li>Disagreements 
+occur but now they are resolved within the team positively and necessary changes 
+to processes and structure are made by the team. </li>
+	<li>The team is able to work 
+towards achieving the goal, and also to attend to relationship, style and 
+process issues along the way. </li>
+	<li>Team members look after each other. </li>
+	<li>The team 
+requires delegated tasks and projects from the leader. </li>
+	<li>The team does not need to 
+be instructed or assisted. </li>
+	<li>Team members might ask for assistance from the leader 
+with personal and interpersonal development. </li>
+	<li>Leader delegates and oversees.<br><br>&nbsp;</li>
+</ul>
+</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Hersey's and Blanchard's Situational Leadership Model</h2>
+<p><a href="../background/teamRules.html">Team Ground Rules</a></p>
+<p><img border="0" src="images/leadership.jpg" width="460" height="422"></p>
+<p>The classic Situational Leadership model of management and leadership style 
+also illustrates the ideal development of a team from</p>
+<ul>
+	<li>&nbsp;immaturity (stage 1) through to maturity (stage 4) </li>
+	<li>during which management an leadership style progressively develops from 
+	relatively detached task-directing (1), </li>
+	<li>through the more managerially-involved stages of explanation (2) </li>
+	<li>and participation (3), </li>
+	<li>to the final stage of relatively detached delegation (4), at which time 
+	ideally the team is largely self-managing, and hopefully contains at least 
+	one potential management/leadership successor.<br>
+&nbsp;</li>
+</ul>
+<p><b>The aim of the leader or manager is therefore to develop the team through 
+the four stages, and then to move on to another role.</b></p>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c35a39ecba',t:'MTczOTIwNDU3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY>
+</HTML>

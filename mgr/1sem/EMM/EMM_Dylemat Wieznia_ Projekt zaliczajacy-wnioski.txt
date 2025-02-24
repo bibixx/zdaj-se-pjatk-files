@@ -1,0 +1,58 @@
+Dylemat wiêŸnia - wybór œcie¿ki optymalnej.
+
+1. Wariant podstawowy :
+
+Co mo¿emy ugraæ?
+
+Mamy trzech wiêŸniów : A,B,C
+
+wiedz¹, ¿e :
+
+	2+		2-
+
+1+	1:4/2:4		1:0/2:10
+
+1-	1:10/2:0	1:2/2:2
+
+zak³adamy, ¿e wiêzieñ konfrontuj¹c siê z innym nie zmienia swojej decyzji ( tzn. - A zeznawa³ na B, to A bêdzie zeznawa³ na C, itd. ). Je¿eli ktoœ ma odsiadywaæ wyrok to bierzemy pod uwagê najwy¿sz¹ karê ( Przyk³ad A i C zeznaj¹, B siedzi cicho : A i B = A powinien odsiadywaæ 0, B i C = C puszczony wolno, A i C = A:4/C:4, wiêc A i C odsiaduj¹ po 4 lata a B 10 )
+
+Nie konsultuj¹c ze sob¹ swojej decyzji staraj¹ siê osi¹gn¹æ decyzjê optymaln¹ dla ca³ej grupy. Mamy dwie sytuacje, w których ca³a grupa osi¹ga dwa zgo³a ró¿ne optima :
+
+1) - w sytuacji, gdzie ka¿dy wiêzieñ ryzykuje najmniej ( zak³ada, ¿e ka¿dy ze wspó³towarzyszy bêdzie dba³ tylko o swój interes ) i zeznaje przeciwko ka¿demu innemu kara jest mniejsza ni¿ wyrok maksymalny, lecz nie najmniejsza
+
+2) - w sytuacji najbardziej ryzykownej ( ka¿y zak³ada i¿ wspó³towarzysz nie zeznaje ) ka¿dy wiêzieñ nie zeznaje wówczas kara, któr¹ odbywaj¹ wszyscy jest najmniejsza
+
+Nasz udzia³ w grze :
+
+je¿eli bêdziemy staraæ siê graæ na optimum najkorzystniejsze dla grupy czyli nie bêdziemy zeznawaæ musimy wzi¹æ pod uwagê to, ¿e je¿eli którykolwiek z wiêŸniów bêdzie zeznawaæ wówczas stracimy najwiêcej. 
+*3 przypadki dla minimum  
+*1zysk grupowy najwiêkszy
+
+
+je¿eli bêdziemy chcieli wyjœæ najlepiej dla nas wówczas musimy zeznawaæ. W najkorzystniejszym przypadku zysk bêdzie najwiêkszy a strata najmniejsza, wiêc ryzykujemy najmniej. 
+*3 sytuacje w której uzyskujemy optimum
+*1 sytuacja w której uzyskujemy maximum
+
+
+Decyzja w grze: 
+w tym modelu nie wnikaj¹c w relacjê miêdzy wiêŸniami mo¿emy ustaliæ :
+najbezpieczniej jest wtedy, kiedy ka¿dy zeznaje, poniewa¿ niezale¿nie od podjêtej przez drugiego wiêŸnia decyzji nasza strata jest mniejsza ni¿ zaufanie.
+
+2. Wariant drugi :
+
+Zak³adamy nastêpuj¹ce relacje:
+ka¿dy z wiêŸniów mo¿e lubiæ b¹dŸ nie swoich wspó³wiêŸniów.
+Je¿eli lubi danego wiêŸnia to nie bêdzie zeznawa³.
+Je¿eli nie lubi danego wiêŸnia to bêdzie zeznawa³. 
+
+Otrzymujemy bardzo du¿o mo¿liwoœci w tabeli wynikowej.
+
+Istniej¹ jednak¿e nastêpuj¹ce momenty dla A,B,C:
+
+*Maximum - je¿eli jesteœmy w dobrej komitywie z innymi wiêŸniami ( lubi¹ nas ) to mo¿emy ich wydaæ i ugrywamy najwiêcej. Trzecia Para jest nieistotna.
+*Optimum najwiêksze - je¿eli jesteœmy w dobrej komitywie z innymi wiêŸniami ( lubi¹ nas ) i trzecia para jest równie¿ w dobrej komitywie wówczas ugrywaj¹ wszyscy.
+*Optimum bezpieczne - je¿eli wszyscy sobie nie ufamy wówczas wszyscy trac¹ najmniej.
+*Minimum - wtedy gdy lubimy wszystkich to tracimy najwiêcej :-)
+
+Decyzje w grze:
+rozgrywaj¹c grê istotne jest czy druga osoba nas lubi. My mog¹c lubiæ drug¹ osobê mo¿emy na tym albo zyskaæ oboje albo jedna z osób odniesie najwiêksz¹ stratê.

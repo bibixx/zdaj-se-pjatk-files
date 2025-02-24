@@ -1,0 +1,853 @@
+<TITLE>SE: Patterns and GUI Programming</TITLE>
+<HTML>
+<HEAD>
+<META name="keywords" content="Intro to Streams">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Patterns and GUI Programming</span><BR>
+
+<H2>Course Map</H2>
+<img border="0" src="../../images/CourseMap21.png" width="603" height="495">
+
+
+<h2>Agenda</h2>
+<ul>
+  <li>Iterators</li>
+  <li>The Pattern Concept</li>
+  <li>The OBSERVER Pattern</li>
+  <li>Layout Managers and the STRATEGY Pattern</li>
+  <li>Components, Containers, and the COMPOSITE Pattern</li>
+  <li>Scroll Bars and the DECORATOR Pattern<br />
+  </li>
+  <li>How to Recognize Patterns</li>
+  <li>Putting Patterns to Work<br />
+  </li>
+</ul>
+<h2>List Iterators</h2>
+<pre>LinkedList&lt;String&gt; list = . . .;<br />ListIterator&lt;String&gt; iterator = list.listIterator();<br />while (iterator.hasNext())<br />{<br />   String current = iterator.next();<br />   . . .<br />}<br /></pre>
+<ul>
+  <li>Why iterators?</li>
+</ul>
+<h2>Classical List Data Structure</h2>
+<ul>
+  <li>Traverse links directly<br />
+    <pre>Link currentLink = list.head;<br />while (currentLink != null)<br />{<br />   Object current = currentLink.data;<br />   currentLink = currentLink.next;<br />}<br /></pre>
+  </li>
+  <li>Exposes implementation</li>
+  <li>Error-prone</li>
+</ul>
+<h2>High-Level View of Data Structures</h2>
+<ul>
+  <li>Queue<br />
+    <br />
+    <img src="images/Ch5_01.jpg" title="" alt="."
+ style="width: 604px; height: 71px;" /><br />
+    <br />
+  </li>
+  <li>Array with random access<br />
+    <br />
+    <img src="images/Ch5_02.jpg" title="" alt="."
+ style="width: 293px; height: 140px;" /><br />
+    <br />
+  </li>
+  <li>List<br />
+???</li>
+</ul>
+<h2>List with Cursor</h2>
+<img src="images/Ch5_03.jpg" title="" alt="."
+ style="width: 443px; height: 197px;" /><br />
+<br />
+<pre>for (list.reset(); list.hasNext(); list.next())<br />{<br />   Object x = list.get();<br />   . . .<br />}<br /></pre>
+<ul>
+  <li>Disadvantage: Only one cursor per list</li>
+  <li>Iterator is superior concept</li>
+</ul>
+<h2>The Pattern Concept</h2>
+<ul>
+  <li>History: Architectural Patterns</li>
+  <li>Christopher Alexander</li>
+  <li>Each pattern has
+    <ul>
+      <li>a short <i>name</i></li>
+      <li>a brief description of the <i>context</i></li>
+      <li>a lengthy description of the <i>problem</i></li>
+      <li>a prescription for the <i>solution</i></li>
+    </ul>
+  </li>
+</ul>
+<h2>Short Passages Pattern</h2>
+<img src="images/Ch5_un01.jpg" title="" alt="."
+ style="width: 499px; height: 533px;" /><br />
+<h2>Short Passages Pattern</h2>
+<h3>Context</h3>
+"...Long, sterile corridors set the scene for everything bad about
+modern
+architecture..."<br />
+<h3>Problem</h3>
+<p>a lengthy description of the problem, including<br />
+</p>
+<ul>
+  <li>a depressing picture</li>
+  <li>issues of light and furniture</li>
+  <li>research about patient anxiety in hospitals</li>
+  <li>research that suggests that corridors over 50 ft are considered
+uncomfortable</li>
+</ul>
+<h2>Short Passages Pattern</h2>
+<h3>Solution</h3>
+Keep passages short. Make them as much like rooms as possible, with
+carpets
+or wood on the floor, furniture, bookshelves, beautiful windows. Make
+them
+generous in shape and always give them plenty of light; the best
+corridors
+and passages of all are those which have windows along an entire wall.<br />
+<br />
+<img src="images/Ch5_un02.jpg" title="" alt="." /><br />
+<h2>Iterator Pattern</h2>
+<h3>Context</h3>
+<ol>
+  <li>An aggregate object contains element objects</li>
+  <li>Clients need access to the element objects</li>
+  <li>The aggregate object should not expose its internal structure</li>
+  <li>Multiple clients may want independent access</li>
+</ol>
+<h2>Iterator Pattern</h2>
+<h3>Solution</h3>
+<ol>
+  <li>Define an iterator that fetches one element at a time</li>
+  <li>Each iterator object keeps track of the position of the next
+element</li>
+  <li>If there are several aggregate/iterator variations, it is best if
+the aggregate and iterator classes realize common interface types.<br />
+  </li>
+</ol>
+<h2>Iterator Pattern</h2>
+<img src="images/Ch5_un03.jpg" title="" alt="." /><br />
+<br />
+<h2>Iterator Pattern</h2>
+<ul>
+  <li>Names in pattern are <i>examples</i></li>
+  <li>Names differ in each occurrence of pattern</li>
+</ul>
+<table style="text-align: left; width: 74%;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;">Name in
+Design Pattern<br />
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Actual Name
+(linked lists)<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Aggregate<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">List<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">ConcreteAggregate<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">LinkedList<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Iterator<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">ListIterator<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">ConcreteIterator<br />
+      </td>
+      <td style="vertical-align: top;">anonymous class implementing <tt>ListIterator</tt><br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">createIterator()<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">listIterator()<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">next()<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">next()<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><tt>isDone()</tt><br />
+      </td>
+      <td style="vertical-align: top;">opposite of <tt>hasNext()</tt><br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><tt>currentItem()</tt><br />
+      </td>
+      <td style="vertical-align: top;">return value of <tt>hasNext()</tt><br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<br />
+<h2>Model/View/Controller</h2>
+<ul>
+  <li>Some programs have multiple editable views</li>
+  <li>Example: HTML Editor
+    <ul>
+      <li>WYSIWYG view<br />
+      </li>
+      <li>structure view</li>
+      <li>source view</li>
+    </ul>
+  </li>
+  <li>Editing one view updates the other</li>
+  <li>Updates seem instantaneous</li>
+</ul>
+<h2>Model/View/Controller</h2>
+<br />
+<img alt="" src="images/Ch5_04.png" /><br />
+<h2>Model/View/Controller</h2>
+<ul>
+  <li>Model: data structure, no visual representation</li>
+  <li>Views: visual representations</li>
+  <li>Controllers: user interaction</li>
+</ul>
+<h2>Model/View/Controller</h2>
+<ul>
+  <li>Views/controllers update model</li>
+  <li>Model tells views that data has changed</li>
+  <li>Views redraw themselves</li>
+</ul>
+<h2>Model/View/Controller</h2>
+<br />
+<img src="images/Ch5_05.jpg" title="" alt="." /><br />
+<h2>Observer Pattern</h2>
+<ul>
+  <li>Model notifies views when something interesting happens</li>
+  <li>Button notifies action listeners when something interesting
+happens<br />
+  </li>
+  <li>Views attach themselves to model in order to be notified</li>
+  <li>Action listeners attach themselves to button in order to be
+notified</li>
+  <li>Generalize: <i>Observers</i> attach themselves to <i>subject</i></li>
+</ul>
+<h2>Observer Pattern</h2>
+<h3>Context<br />
+</h3>
+<ol>
+  <li>An object, called the subject, is source of events</li>
+  <li>One or more observer objects want to be notified when such an
+event occurs.</li>
+</ol>
+<h3>Solution</h3>
+<ol>
+  <li>Define an observer interface type. All concrete observers
+implement it.<br />
+  </li>
+  <li>The subject maintains a collection of observers.</li>
+  <li>The subject supplies methods for attaching and detaching
+observers.<br />
+  </li>
+  <li>Whenever an event occurs, the subject notifies all observers.</li>
+</ol>
+<h2>Observer Pattern</h2>
+<img src="images/Ch5_un04.jpg" title="" alt="."
+ style="width: 495px; height: 331px;" /><br />
+<h2>Names in Observer Pattern<br />
+</h2>
+<table border="1" cellpadding="2" cellspacing="2" width="73%">
+  <tbody>
+    <tr>
+      <td valign="top" width="209"><b>Name in Design Pattern</b><br />
+      </td>
+      <td valign="top"><b>Actual Name (Swing buttons)</b><br />
+      </td>
+    </tr>
+    <tr>
+      <td style="font-family: monospace;" valign="top" width="209">Subject<br />
+      </td>
+      <td valign="top"><tt>JButton</tt><br />
+      </td>
+    </tr>
+    <tr>
+      <td style="font-family: monospace;" valign="top" width="209">Observer<br />
+      </td>
+      <td valign="top"><tt>ActionListener</tt><br />
+      </td>
+    </tr>
+    <tr>
+      <td style="font-family: monospace;" valign="top" width="209">ConcreteObserver<br />
+      </td>
+      <td valign="top">the class that implements the <tt>ActionListener</tt>
+interface type<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="font-family: monospace;" valign="top" width="209">attach()<br />
+      </td>
+      <td valign="top"><tt>addActionListener()</tt><br />
+      </td>
+    </tr>
+    <tr>
+      <td style="font-family: monospace;" valign="top" width="209">notify()</td>
+      <td valign="top"><tt>actionPerformed()</tt><br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h2>Layout Managers</h2>
+<ul>
+  <li>User interfaces made up of <i>components</i></li>
+  <li>Components placed in <i>containers</i></li>
+  <li>Container needs to arrange components</li>
+  <li>Swing doesn't use hard-coded pixel coordinates</li>
+  <li>Advantages:
+    <ul>
+      <li>Can switch "look and feel"</li>
+      <li>Can internationalize strings</li>
+    </ul>
+  </li>
+  <li>Layout manager controls arrangement</li>
+</ul>
+<h2>Layout Managers</h2>
+<ul>
+  <li><tt>FlowLayout</tt>: left to right, start new row when full</li>
+  <li><tt>BoxLayout</tt>: left to right or top to bottom</li>
+  <li><tt>BorderLayout</tt>: 5 areas, Center, North, South, East, West</li>
+  <li><tt>GridLayout</tt>: grid, all components have same size</li>
+  <li><tt>GridBagLayout</tt>: complex, like HTML table</li>
+</ul>
+<h2>Layout Managers</h2>
+<img src="images/Ch5_06.jpg" title="" alt="." /><br />
+<h2>Layout Managers</h2>
+<ul>
+  <li>Set layout manager<br />
+    <tt>JPanel keyPanel = new JPanel();<br />
+keyPanel.setLayout(new GridLayout(4, 3));</tt><br />
+  </li>
+  <li>Add components<br />
+    <tt>for (int i = 0; i &lt; 12; i++)<br />
+&nbsp;&nbsp; keyPanel.add(button[i]);</tt></li>
+</ul>
+<h2>Layout Managers</h2>
+<img src="images/Ch5_07.jpg" title="" alt="."
+ style="width: 576px; height: 381px;" /><br />
+<br />
+<h2>Voice Mail System GUI</h2>
+<ul>
+  <li>Same backend as text-based system<br />
+  </li>
+  <li>Only <tt>Telephone</tt> class changes</li>
+  <li>Buttons for keypad</li>
+  <li>Text areas for microphone, speaker</li>
+</ul>
+<h2>Voice Mail System GUI</h2>
+<img src="images/Ch5_08.jpg" title="" alt="."
+ style="width: 352px; height: 667px;" />&nbsp;<img alt=""
+ src="images/Ch5_09.png" height="500" width="277" /><br />
+<br />
+<h2>Voice Mail System GUI</h2>
+<ul>
+  <li>Arrange keys in panel with <tt>GridLayout</tt>:<br />
+    <pre>JPanel keyPanel = new JPanel(); <br />keyPanel.setLayout(new GridLayout(4, 3)); <br />for (int i = 0; i &lt; 12; i++) <br />{ <br />   JButton keyButton = new JButton(...); <br />   keyPanel.add(keyButton); <br />   keyButton.addActionListener(...);<br />}<br /></pre>
+  </li>
+</ul>
+<h2>Voice Mail System GUI</h2>
+<ul>
+  <li>Panel with <tt>BorderLayout</tt> for speaker<br />
+    <pre>JPanel speakerPanel = new JPanel(); <br />speakerPanel.setLayout(new BorderLayout()); <br />speakerPanel.add(new JLabel("Speaker:"), BorderLayout.NORTH); <br />speakerField = new JTextArea(10, 25); <br />speakerPanel.add(speakerField, BorderLayout.CENTER);<br /></pre>
+  </li>
+</ul>
+<img src="images/Ch5_10.jpg" title="" alt="."
+ style="width: 474px; height: 266px;" />
+<h2>Voice Mail System GUI</h2>
+<ul>
+  <li>Put speaker, keypads, and microphone panel into content pane</li>
+  <li>Content pane already has <tt>BorderLayout</tt><br />
+  </li>
+  <li><a href="code/mailgui/Telephone.java.html">Ch5/mailgui/Telephone.java</a></li>
+</ul>
+<img src="images/Ch5_11.jpg" title="" alt="."
+ style="width: 484px; height: 635px;" /><br />
+<h2>Custom Layout Manager</h2>
+<ul>
+  <li>Form layout</li>
+  <li>Odd-numbered components right aligned</li>
+  <li>Even-numbered components left aligned</li>
+  <li>Implement <tt>LayoutManager</tt> interface type<br />
+  </li>
+</ul>
+<img alt="" src="images/Ch5_12.png" height="130" width="283" /><br />
+<h2>The <tt>LayoutManager</tt> Interface Type<br />
+</h2>
+<pre>public interface LayoutManager <br />{ <br />   void layoutContainer(Container parent); <br />   Dimension minimumLayoutSize(Container parent); <br />   Dimension preferredLayoutSize(Container parent); <br />   void addLayoutComponent(String name, Component comp); <br />   void removeLayoutComponent(Component comp); <br />} <br /></pre>
+<h2>Form Layout</h2>
+<ul>
+  <li><a href="code/layout/FormLayout.java.html">Ch5/layout/FormLayout.java</a></li>
+  <li><a href="code/layout/FormLayoutTester.java.html">Ch5/layout/FormLayoutTester.java</a></li>
+  <li>Note: Can use <tt>GridBagLayout</tt> to achieve the same effect<br />
+  </li>
+</ul>
+<h2>Strategy Pattern</h2>
+<ul>
+  <li>Pluggable strategy for layout management</li>
+  <li>Layout manager object responsible for executing concrete strategy</li>
+  <li>Generalizes to Strategy Design Pattern</li>
+  <li>Other manifestation: Comparators<br />
+    <pre>Comparator&lt;Country&gt; comp = new CountryComparatorByName();<br />Collections.sort(countries, comp);<br /></pre>
+  </li>
+</ul>
+<h2>Strategy Pattern</h2>
+<h3>Context</h3>
+<ol>
+  <li>A class can benefit from different variants for an algorithm</li>
+  <li>Clients sometimes want to replace standard algorithms with custom
+versions</li>
+</ol>
+<h3>Solution</h3>
+<ol>
+  <li>Define an interface type that is an abstraction for the algorithm</li>
+  <li>Actual strategy classes realize this interface type.</li>
+  <li>Clients can supply strategy objects</li>
+  <li>Whenever the algorithm needs to be executed, the context class
+calls the appropriate methods of the strategy object<br />
+  </li>
+</ol>
+<h2>Strategy Pattern</h2>
+<img src="images/Ch5_un05.jpg" title="" alt="."
+ style="width: 544px; height: 348px;" /><br />
+<h2>Strategy Pattern: Layout Management&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+</h2>
+<table style="text-align: left; width: 73%;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;">Name in
+Design Pattern<br />
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Actual Name
+(layout management)<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Context<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">Container<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Strategy<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">LayoutManager<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">ConcreteStrategy<br />
+      </td>
+      <td style="vertical-align: top;">a layout manager such as <tt>BorderLayout</tt><br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">doWork()<br />
+      </td>
+      <td style="vertical-align: top;">a method such as <tt>layoutContainer</tt><br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<h2>Strategy Pattern: Sorting<br />
+</h2>
+<table style="text-align: left; width: 72%;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;">Name in
+Design Pattern<br />
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Actual Name
+(sorting)<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Context<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">Collections<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Strategy<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">Comparator<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">ConcreteStrategy<br />
+      </td>
+      <td style="vertical-align: top;">a class that implements <tt>Comparator</tt><br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">doWork()<br />
+      </td>
+      <td style="vertical-align: top;"><tt>compare</tt><br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<h2>Containers and Components</h2>
+<ul>
+  <li>Containers collect GUI components</li>
+  <li>Sometimes, want to add a container to another container</li>
+  <li>Container should <i>be</i> a component</li>
+  <li>Composite design pattern</li>
+  <li>Composite method typically invoke component methods</li>
+  <li>E.g. <tt>Container.getPreferredSize</tt> invokes <tt>getPreferredSize</tt>
+of components</li>
+</ul>
+<h2>Composite Pattern</h2>
+<h3>Context</h3>
+<ol>
+  <li>Primitive objects can be combined to composite objects</li>
+  <li>Clients treat a composite object as a primitive object<br />
+  </li>
+</ol>
+<h3>Solution</h3>
+<ol>
+  <li>Define an interface type that is an abstraction for the primitive
+objects</li>
+  <li>Composite object collects primitive objects<br />
+  </li>
+  <li>Composite and primitive classes implement same interface type.</li>
+  <li>When implementing a method from the interface type, the composite
+class applies the method to its primitive objects and combines the
+results</li>
+</ol>
+<h2>Composite Pattern</h2>
+<img src="images/Ch5_un06.jpg" title="" alt="." /><br />
+<h2>Composite Pattern</h2>
+<table style="text-align: left; width: 72%;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;">Name in
+Design Pattern<br />
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Actual Name
+(AWT components)<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Primitive<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">Component<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Composite<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">Container<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Leaf<br />
+      </td>
+      <td style="vertical-align: top;">a component without children
+(e.g. <tt>JButton</tt>)<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">method()<br />
+      </td>
+      <td style="vertical-align: top;">a method of <tt>Component</tt>
+(e.g. <tt>getPreferredSize</tt>)<br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<h2>Scroll Bars</h2>
+<ul>
+  <li>Scroll bars can be attached to components</li>
+  <li>Approach #1: <tt>Component</tt> class can turn on scroll bars</li>
+  <li>Approach #2: Scroll bars can surround component<br />
+    <pre>JScrollPane pane = new JScrollPane(component);<br /></pre>
+  </li>
+  <li>Swing uses approach #2</li>
+  <li><tt>JScrollPane</tt> is again a component</li>
+</ul>
+<img alt="" src="images/Ch5_13.png" height="202" width="202" /><br />
+<h2>Scroll Bars</h2>
+<img src="images/Ch5_14.jpg" alt="." width="615" height="249" />
+<h2>Decorator Pattern</h2>
+<h3>Context</h3>
+<ol>
+  <li>Component objects can be decorated (visually or behaviorally
+enhanced)</li>
+  <li>The decorated object can be used in the same way as the
+undecorated object</li>
+  <li>The component class does not want to take on the responsibility
+of the decoration</li>
+  <li>There may be an open-ended set of possible decorations</li>
+</ol>
+<h2>Decorator Pattern</h2>
+<h3>Solution</h3>
+<ol>
+  <li>Define an interface type that is an abstraction for the component</li>
+  <li>Concrete component classes realize this interface type.</li>
+  <li>Decorator classes also realize this interface type.</li>
+  <li>A decorator object manages the component object that it decorates</li>
+  <li>When implementing a method from the component interface type, the
+decorator class applies the method to the decorated component and
+combines the result with the effect of the decoration.</li>
+</ol>
+<h2>Decorator Pattern</h2>
+<img src="images/Ch5_un07.jpg" title="" alt="." />
+<h2>Decorator Pattern: Scroll Bars<br />
+</h2>
+<table style="text-align: left; width: 71%;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;">Name in
+Design Pattern<br />
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Actual Name
+(scroll bars)<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Component</td>
+      <td style="vertical-align: top; font-family: monospace;">Component<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">ConcreteComponent</td>
+      <td style="vertical-align: top; font-family: monospace;">JTextArea</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Decorator</td>
+      <td style="vertical-align: top; font-family: monospace;">JScrollPane</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">method()<br />
+      </td>
+      <td style="vertical-align: top;">a method of <tt>Component</tt>
+(e.g. <tt>paint</tt>)<br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<h2>Streams</h2>
+<pre>InputStreamReader reader = new InputStreamReader(System.in); <br />BufferedReader console = new BufferedReader(reader); <br /></pre>
+<ul>
+  <li><tt>BufferedReader</tt> takes a <tt>Reader</tt> and adds
+buffering</li>
+  <li>Result is another <tt>Reader</tt>: Decorator pattern</li>
+  <li>Many other decorators in stream library, e.g. <tt>PrintWriter</tt><br />
+  </li>
+</ul>
+<h2>Decorator Pattern: Input Streams<br />
+</h2>
+<table style="text-align: left; width: 71%;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;">Name in
+Design Pattern<br />
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Actual Name
+(input streams)<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Component</td>
+      <td style="vertical-align: top; font-family: monospace;">Reader</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">ConcreteComponent</td>
+      <td style="vertical-align: top; font-family: monospace;">InputStreamReader</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">Decorator</td>
+      <td style="vertical-align: top; font-family: monospace;">BufferedReader</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">method()<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">read</td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<h2>How to Recognize Patterns</h2>
+<ul>
+  <li>Look at the <i>intent</i> of the pattern</li>
+  <li>E.g. C<small>OMPOSITE</small> has different intent than D<small>ECORATOR</small><br />
+  </li>
+  <li><small>&nbsp;<big>Remember common uses (e.g. S<small>TRATEGY</small>
+for layout managers)</big></small></li>
+  <li><small><big>Not everything that is strategic is an example of S<small>TRATEGY</small>
+pattern<br />
+    </big></small></li>
+  <li><small><big>Use context and solution as "litmus test"</big></small></li>
+</ul>
+<h2>Litmus Test</h2>
+<ul>
+  <li>Can add border to Swing component<br />
+    <pre>Border b = new EtchedBorder()<br />component.setBorder(b);<br /></pre>
+  </li>
+  <li>Undeniably decorative</li>
+  <li>Is it an example of D<small>ECORATOR</small>?</li>
+</ul>
+<img alt="" src="images/Ch5_15.png" height="118" width="298" /><br />
+<h2>Litmus Test<br />
+</h2>
+<ol>
+  <li>Component objects can be decorated (visually or behaviorally
+enhanced)<br />
+    <b>PASS</b><br />
+  </li>
+  <li>The decorated object can be used in the same way as the
+undecorated object<br />
+    <b>PASS</b><br />
+  </li>
+  <li>The component class does not want to take on the responsibility
+of the decoration<br />
+    <b>FAIL--the component class has <tt>setBorder</tt> method</b><br />
+  </li>
+  <li>There may be an open-ended set of possible decorations</li>
+</ol>
+<h2>Putting Patterns to Work</h2>
+<ul>
+  <li>Invoice contains <i>line items</i></li>
+  <li>Line item has description, price</li>
+  <li>Interface type <tt>LineItem</tt>:<br />
+    <a href="code/invoice/LineItem.java.html">Ch5/invoice/LineItem.java</a><br />
+  </li>
+  <li><tt>Product</tt> is a concrete class that implements this
+interface:<br />
+    <a href="code/invoice/Product.java.html">Ch5/invoice/Product.java</a><br />
+  </li>
+</ul>
+<h2>Bundles</h2>
+<ul>
+  <li>Bundle = set of related items with description+price</li>
+  <li>E.g. stereo system with tuner, amplifier, CD player + speakers</li>
+  <li>A bundle has line items</li>
+  <li>A bundle is a line item</li>
+  <li>C<small>OMPOSITE</small> pattern</li>
+  <li><a href="code/invoice/Bundle.java.html">Ch5/invoice/Bundle.java</a>
+(look at <tt>getPrice</tt>)<br />
+  </li>
+</ul>
+<h2>Bundles</h2>
+<h2><img src="images/Ch5_16.jpg" title="" alt="." /></h2>
+<h2>Discounted Items</h2>
+<ul>
+  <li>Store may give discount for an item</li>
+  <li>Discounted item is again an item</li>
+  <li>D<small>ECORATOR</small> pattern</li>
+  <li><a href="code/invoice/DiscountedItem.java.html">Ch5/invoice/DiscountedItem.java</a>
+(look at <tt>getPrice</tt>)</li>
+  <li>Alternative design: add discount to <tt>LineItem</tt></li>
+</ul>
+<h2>Discounted Items</h2>
+<img src="images/Ch5_17.jpg" title="" alt="." /><br />
+<h2>Model/View Separation</h2>
+<ul>
+  <li>GUI has commands to add items to invoice</li>
+  <li>GUI displays invoice</li>
+  <li>Decouple input from display</li>
+  <li>Display wants to know <i>when</i> invoice is modified</li>
+  <li>Display doesn't care which command modified invoice</li>
+  <li>O<tt>BSERVER</tt> pattern</li>
+</ul>
+<h2>Change Listeners</h2>
+<ul>
+  <li>Use standard <tt>ChangeListener</tt> interface type<br />
+    <tt>public interface ChangeListener<br />
+{<br />
+&nbsp;&nbsp; void stateChanged(ChangeEvent event);<br />
+}</tt><br />
+  </li>
+  <li><tt>Invoice</tt> collects <tt>ArrayList</tt> of change listeners</li>
+  <li>When the invoice changes, it notifies all listeners:<br />
+    <tt>ChangeEvent event = new ChangeEvent(this);<br />
+for (ChangeListener listener : listeners)<br />
+&nbsp;&nbsp; listener.stateChanged(event);</tt><br />
+  </li>
+</ul>
+<h2>Change Listeners</h2>
+<ul>
+  <li>Display adds itself as a change listener to the invoice</li>
+  <li>Display updates itself when invoice object changes state<br />
+    <pre>final Invoice invoice = new Invoice();<br />final JTextArea textArea = new JTextArea(20, 40);<br />ChangeListener listener = new<br />   ChangeListener()<br />   {<br />      public void stateChanged(ChangeEvent event)<br />      {<br />         textArea.setText(...);<br />      }<br />   };<br /></pre>
+  </li>
+</ul>
+<h2>Observing the Invoice</h2>
+<h2><img src="images/Ch5_18.jpg" title="" alt="."
+ style="width: 528px; height: 364px;" /></h2>
+<h2>Iterating Through Invoice Items</h2>
+<ul>
+  <li>Invoice collect line items</li>
+  <li>Clients need to iterate over line items</li>
+  <li>Don't want to expose <tt>ArrayList</tt></li>
+  <li>May change (e.g. if storing invoices in database)</li>
+  <li>I<tt>TERATOR</tt> pattern</li>
+</ul>
+<h2>Iterators</h2>
+<ul>
+  <li>Use standard <tt>Iterator</tt> interface type<br />
+    <tt>public interface Iterator&lt;LineItem&gt;</tt><br
+ style="font-family: monospace;" />
+    <tt>{</tt><br style="font-family: monospace;" />
+    <tt>&nbsp;&nbsp; boolean hasNext();</tt><br
+ style="font-family: monospace;" />
+    <tt>&nbsp;&nbsp; LineItem next();</tt><br
+ style="font-family: monospace;" />
+    <tt>&nbsp;&nbsp; void remove();</tt><br
+ style="font-family: monospace;" />
+    <tt>}</tt></li>
+  <li><tt><tt>remove</tt></tt> is "optional operation" (see ch. 8)</li>
+  <li>implement to throw <tt>UnsupportedException</tt></li>
+  <li>implement <tt>hasNext/next</tt> manually to show inner workings</li>
+  <li><a href="code/invoice/Invoice.java.html">Ch5/invoice/Invoice.java</a></li>
+</ul>
+<h2>Iterators</h2>
+<br />
+<img src="images/Ch5_19.jpg" title="" alt="."
+ style="width: 543px; height: 413px;" /><br />
+<h2>Formatting Invoices</h2>
+<ul>
+  <li>Simple format: dump into text area</li>
+  <li>May not be good enough,</li>
+  <li>E.g. HTML tags for display in browser</li>
+  <li>Want to allow for multiple formatting algorithms</li>
+  <li>S<small>TRATEGY</small> pattern</li>
+</ul>
+<h2>Formatting Invoices</h2>
+<ul>
+  <li><a href="code/invoice/InvoiceFormatter.java.html">ch5/invoice/InvoiceFormatter.java</a></li>
+  <li><a href="code/invoice/SimpleFormatter.java.html">ch5/invoice/SimpleFormatter.java</a></li>
+  <li><a href="code/invoice/InvoiceTester.java.html">ch5/invoice/InvoiceTester.java</a><br />
+  </li>
+</ul>
+<h2>Formatting Invoices</h2>
+<img src="images/Ch5_20.jpg" title="" alt="."
+ style="width: 593px; height: 493px;" /><br />
+<h2>Formatting Invoices</h2>
+<img src="images/Ch5_21.jpg" title="" alt="."
+ style="width: 560px; height: 381px;" /><br />
+<br />
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c47d5fecbc',t:'MTczOTIwNDU3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

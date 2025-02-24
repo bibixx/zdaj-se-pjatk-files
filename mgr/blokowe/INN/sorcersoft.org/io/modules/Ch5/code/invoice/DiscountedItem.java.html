@@ -1,0 +1,31 @@
+<pre><tt><font color="#000000">01: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">02: </font><i><font color="#9A1900">   A decorator for an item that applies a discount.</font></i>
+<font color="#000000">03: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">04: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> DiscountedItem <b><font color="#0000FF">implements</font></b> LineItem
+<font color="#000000">05: </font><font color="#FF0000">{</font>
+<font color="#000000">06: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">07: </font><i><font color="#9A1900">      Constructs a discounted item.</font></i>
+<font color="#000000">08: </font><i><font color="#9A1900">      @param item the item to be discounted</font></i>
+<font color="#000000">09: </font><i><font color="#9A1900">      @param discount the discount percentage</font></i>
+<font color="#000000">10: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">11: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#000000">DiscountedItem</font></b><font color="#990000">(</font>LineItem item<font color="#990000">,</font> <font color="#009900">double</font> discount<font color="#990000">)</font> 
+<font color="#000000">12: </font>   <font color="#FF0000">{</font> 
+<font color="#000000">13: </font>      <b><font color="#0000FF">this</font></b><font color="#990000">.</font>item <font color="#990000">=</font> item<font color="#990000">;</font> 
+<font color="#000000">14: </font>      <b><font color="#0000FF">this</font></b><font color="#990000">.</font>discount <font color="#990000">=</font> discount<font color="#990000">;</font>
+<font color="#000000">15: </font>   <font color="#FF0000">}</font>
+<font color="#000000">16: </font>
+<font color="#000000">17: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">double</font> <b><font color="#000000">getPrice</font></b><font color="#990000">(</font><font color="#990000">)</font> 
+<font color="#000000">18: </font>   <font color="#FF0000">{</font>
+<font color="#000000">19: </font>      <b><font color="#0000FF">return</font></b> item<font color="#990000">.</font><b><font color="#000000">getPrice</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">*</font> <font color="#990000">(</font><font color="#993399">1</font> <font color="#990000">-</font> discount <font color="#990000">/</font> <font color="#993399">100</font><font color="#990000">)</font><font color="#990000">;</font> 
+<font color="#000000">20: </font>   <font color="#FF0000">}</font>
+<font color="#000000">21: </font>
+<font color="#000000">22: </font>   <b><font color="#0000FF">public</font></b> String <b><font color="#000000">toString</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">23: </font>   <font color="#FF0000">{</font>
+<font color="#000000">24: </font>      <b><font color="#0000FF">return</font></b> item<font color="#990000">.</font><b><font color="#000000">toString</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">+</font> <font color="#FF0000">" (Discount "</font> <font color="#990000">+</font> discount
+<font color="#000000">25: </font>         <font color="#990000">+</font> <font color="#FF0000">"%)"</font><font color="#990000">;</font>
+<font color="#000000">26: </font>   <font color="#FF0000">}</font> 
+<font color="#000000">27: </font>
+<font color="#000000">28: </font>   <b><font color="#0000FF">private</font></b> LineItem item<font color="#990000">;</font>
+<font color="#000000">29: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">double</font> discount<font color="#990000">;</font>
+<font color="#000000">30: </font><font color="#FF0000">}</font>
+</tt></pre>

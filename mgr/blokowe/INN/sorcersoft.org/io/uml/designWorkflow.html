@@ -1,0 +1,566 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: The Design Workflow</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">The Design Workflow</span><BR>
+
+<h2>Agenda</h2>
+<ul>
+	<li>
+	Modeling and Simulation Model</li>
+	<li>
+	Design Artifacts - Metamodel</li>
+	<li>
+	<a href="#Design_Workflow_Detail">Design Workflow Detail</a></li>
+	<li>
+	<a href="#Architectural_Design">Architectural Design</a></li>
+	<li><a href="useCaseDesign.html#Architecture">Architectural Patterns</a></li>
+	<li>
+	<a href="useCaseDesign.html">Design a Use Case</a></li>
+	<li><a href="#Design_a_Class">Design a Class</a></li>
+	<li><a href="#Design_a_Subsystem">Design a Subsystem</a></li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Modeling and Simulation Model</h2>
+<p><img border="0" src="images/objectModel.png" width="650" height="339"></p>
+<p>&nbsp;</p>
+<ul>
+	<li>A class is a descriptor (template) for a set of objects that have the 
+	same <i>features</i> (attributes, operations, methods, relationships, and 
+	behavior).</li>
+</ul>
+<p>Ways of using UML</p>
+<ol>
+	<li>UML class diagrams as <b>sketch</b> - result of requirement analysis</li>
+	<li>UML class diagrams as <b>blueprint</b> - result of a design process 
+	based on class sketches</li>
+	<li>UML as <b>programming language</b> - UML diagrams are compiled directly 
+	to executable code</li>
+</ol>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Design (Webster)</h2>
+<ul>
+	<li>verb: to conceive (<span class="sense_break"><span class="sense_content">to 
+	apprehend by reason or imagination-<b>requirements analysis</b>) </span>
+	</span>or execute a plan (<b>UP process</b>)</li>
+	<li>noun:<ul>
+		<li>a preliminary sketch or outline (<b>use cases, classes, and 
+		interactions</b>) showing the main features of something to be executed 
+		&lt;the design for the new stadium&gt; - <i>preliminary design</i></li>
+		<li>the arrangement of elements or details (<b>use cases, 
+		classes, and interactions</b>) in a product or work of art - <i>detailed 
+		design</i></li>
+		<li>the<i> </i>arrangement of elements of <b>components</b> - <i>
+		architecture</i> or <i>top-level design</i></li>
+	</ul>
+	</li>
+</ul>
+
+<body>
+
+<p class="MsoNormal" style="text-autospace: none"><b>Object-oriented design</b> 
+is part of OO methodology and it forces programmers to think in terms of <i>
+objects</i>, rather than procedures, when they plan their code. An <i>object</i> 
+contains encapsulated data and procedures grouped together to represent an 
+application entity. The &#8220;object interface&#8221;, how the object can be interacted, is also defined (interaction 
+diagrams) along with class relationships (class diagrams) in the design object 
+model.</p>
+<p class="MsoNormal" style="text-autospace: none">Implementers translate the 
+<b>design object model</b> developed during the object-oriented design 
+into a particular object-oriented language (programming). An object-oriented program is 
+described by the interaction of design objects. Implementers use a 
+programming paradigm</span></a> that uses <i>design objects</i> and their
+<i>interactions</i> to write computer programs based on object-oriented 
+techniques, including instantiation, encapsulation, modularity, polymorphism, and inheritance.</p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Design Artifacts - Metamodel</h2>
+<p><img border="0" src="images/fig16-3.png" width="496" height="374"></p>
+<ul>
+	<li>The design workflow is the primary modeling activity during the last 
+	part of the Elaboration phase and the first half of the Construction phase.</li>
+	<li>A subsystem is a part of physical system.</li>
+</ul>
+
+<p><map name="FPMap4">
+<area href="analysisWorkflow.html#Analysis_Artifacts_-_Metamodel" shape="rect" coords="142, 2, 320, 146">
+</map>
+<img border="0" src="images/fig16-4.png" width="341" height="376" usemap="#FPMap4"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Artifact trace relationship</h2>
+<ul>
+	<li><b>Design models</b> are made up of<ul>
+		<li>design subsystems</li>
+		<li>design classes</li>
+		<li>interfaces</li>
+		<li>use case realization-design</li>
+		<li>a deployment diagram</li>
+	</ul>
+	</li>
+</ul>
+
+<p><img border="0" src="images/fig16-5.png" width="650" height="591"></p>
+<p>&nbsp;</p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Should you Maintain Two Model?</h2>
+<table border="0" cellpadding="0" style="border-collapse: collapse" width="81%" id="table1" cellspacing="10">
+	<tr>
+		<td width="380"><b>Strategy</b></td>
+		<td width="7">&nbsp;</td>
+		<td><b>Consequences</b></td>
+	</tr>
+	<tr>
+		<td width="380" valign="top">1. Take the analysis model and refine it 
+		into a design model</td>
+		<td width="7" valign="top">&nbsp;</td>
+		<td valign="top">You have a single design model, but you have lost the 
+		analysis model</td>
+	</tr>
+	<tr>
+		<td width="380" valign="top">2. Take the analysis model, refine it into 
+		a design model and use a modeling tool to recover an &quot;analysis model&quot;</td>
+		<td width="7" valign="top">&nbsp;</td>
+		<td valign="top">You have a single design model, but the analysis view 
+		recovers by the modeling tool might not be satisfactory</td>
+	</tr>
+	<tr>
+		<td width="380" valign="top">3. Freeze the analysis model at some point 
+		in the Elaboration phase - refine a copy of the analysis model into a 
+		design model</td>
+		<td width="7" valign="top">&nbsp;</td>
+		<td valign="top">You have two models, but they are out of step</td>
+	</tr>
+	<tr>
+		<td width="380" valign="top">4. Maintain two separate models - an 
+		analysis model and a design model</td>
+		<td width="7" valign="top">&nbsp;</td>
+		<td valign="top">You have two models - they are in step, but there is a 
+		maintenance burden</td>
+	</tr>
+</table>
+<p>It is wise to remember that many systems long outlive their project life 
+span. Keep an analysis model for large, complex, or strategic system. They are 
+invaluable for:</p>
+<ul>
+	<li>introducing new people to the project</li>
+	<li>understanding the system months or years after delivery</li>
+	<li>understanding how the system satisfies user requirements</li>
+	<li>providing requirements traceability</li>
+	<li>planning maintenance and enhancements</li>
+	<li>understanding the logical architecture of the system</li>
+	<li>outsourcing the construction of the system</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Design_Workflow_Detail">Design Workflow Detail</a></h2>
+<p><map name="FPMap0">
+<area href="#Architectural_Design" shape="rect" coords="180, 4, 338, 85">
+<area coords="460, 197, 608, 278" shape="rect" href="useCaseDesign.html">
+<area href="#Design_a_Class" shape="rect" coords="338, 395, 471, 492">
+<area href="#Design_a_Subsystem" shape="rect" coords="557, 395, 708, 495">
+</map>
+<img border="0" src="images/fig16-6.png" width="709" height="498" usemap="#FPMap0"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Architectural_Design">Architectural Design</a></h2>
+<p><map name="FPMap2">
+<area href="#Design_a_Subsystem" shape="rect" coords="525, 4, 659, 118">
+<area href="#What_are_design_classes" shape="rect" coords="534, 214, 644, 354">
+<area href="#What_is_an_interface" shape="rect" coords="535, 121, 638, 212">
+<area href="analysisPackages.html#Architectural_Analysis" shape="rect" coords="535, 478, 642, 595">
+<area href="analysisPackages.html#Architectural_Analysis" shape="rect" coords="12, 387, 109, 521">
+<area href="requirementsWorkflow.html#SW_Requirements_-_Metamodel" shape="rect" coords="11, 161, 115, 280">
+<area href="requirementsWorkflow.html#Use_Case_Modeling" shape="rect" coords="5, 29, 122, 130">
+<area href="analysisWorkflow.html#Analysis_Artifacts_-_Metamodel" shape="rect" coords="4, 290, 122, 379">
+<area href="UML-borland-DeplDs.html" shape="rect" coords="531, 363, 656, 474">
+</map>
+<img border="0" src="images/fig16-7.png" width="663" height="596" usemap="#FPMap2"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Design_a_Class">Design a Class</a></h2>
+<p>&nbsp;</p>
+<p><map name="FPMap1">
+<area href="#What_are_design_classes" shape="rect" coords="547, 270, 645, 409">
+</map>
+<img border="0" src="images/fig17-2.png" width="650" height="498" usemap="#FPMap1"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="What_are_design_classes">What are design classes?</a></h2>
+<p>Design classes come from the problem domain and the solution domain.</p>
+<p><img border="0" src="images/fig17-3.png" width="650" height="296"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Anatomy of a Design Class</h2>
+<ul>
+	<li>With analysis classes you are trying to capture the required behavior of 
+	the system without worrying about how this behavior is going to be 
+	implemented.</li>
+	<li>With design classes you have to specify exactly how each class fulfill 
+	its responsibilities<ul>
+		<li>complete the <b>set of attributes</b> and fully specify them 
+		including name type, type, visibility, and&nbsp; (optionally) default 
+		values</li>
+		<li>complete the <b>set of operations</b> and fully specify them 
+		including name, parameter list, and return type</li>
+		<li><b>analysis</b> <b>relationships</b> (<i><a href="UML-borland-CDs.html#Generalization,_Association,_Aggregation,_and_Composition">5 types</a></i>) must be refined to 
+		design relationships that are directly implementable in the target OO 
+		language</li>
+	</ul>
+	</li>
+</ul>
+
+<p><img border="0" src="images/fig17-4.png" width="650" height="360"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Well Formed Design Classes</h2>
+<ul>
+	<li>Always assess a design class from the point of view of the users of the 
+	class</li>
+	<li>Four minimal characteristics must have to be considered for a&nbsp; 
+	well-formed design classes:<ul>
+		<li><b>complete&nbsp; and sufficient<br>
+		</b>A complete and sufficient class gives users of&nbsp; the class 
+		(public operations) the contract they expect-no more and no less.</li>
+		<li><b>primitive<br>
+		</b>Primitiveness - services should be simple, atomic, and unique.</li>
+		<li><b>high cohesion<br>
+		</b>Each class should capture a single, well-defined abstraction, using 
+		the minimal set of features.</li>
+		<li><b>low coupling<br>
+		</b>A class should be associated with the minimum number of other 
+		classes to allow it to fulfill its responsibilities.</li>
+	</ul>
+	</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>High Cohesion</h2>
+Each class should capture a single, well-defined abstraction, using the minimal 
+set of features.<ul>
+	<li><b>Each class should model a single abstract concept</b></li>
+	<li><b>Should have a set of operations that support the intent of the class</b></li>
+	<li>If a class needs to have many responsibilities, you create &quot;helper' 
+	classes to implement some of these</li>
+	<li>The main class then <b>delegates</b> responsibilities to its helper 
+	classes</li>
+</ul>
+<ol>
+	<li>Cohesive classes are easy to understand, reuse, and maintain</li>
+	<li>A cohesive class has a small set of responsibilities that are intimately 
+	related.</li>
+</ol>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>How to fix it?</h2>
+<ul>
+	<li>Is the below model is analysis or design one?</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><img border="0" src="images/fig17-5.png" width="550" height="148"></p>
+<p>Selling system:</p>
+<ul>
+	<li><code>HotelBean</code> was responsible for selling room stays in hotel</li>
+	<li><code>CarBean</code> for selling car hire</li>
+	<li><code>HotelCarBean</code> for selling package of car hire with hotel 
+	stay</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Low Coupling</h2>A class should be associated with the minimum number of 
+other classes to allow it to fulfill its responsibilities.<ul>
+	<li>One of the common mistakes the novice OO designer is to connect 
+	everything in the model to everything else on a more or less <b>ad hoc</b> 
+	basis.</li>
+	<li>Coupling is your worst enemy in object modeling.</li>
+	<li>A highly coupled model is the equivalent of &quot;spaghetti&quot; code in the 
+	non-OO world and will lead to a system that is <b>incomprehensible</b> and <b>
+	not maintainable</b>.</li>
+	<li>You can find that <strong>highly coupled OO systems</strong> often result from projects 
+	in which there is <b>no formal modeling</b> activity, where the system is 
+	simply allowed to evolve in an ad hoc manner over time.</li>
+	<li><b>Do not make</b> connections between classes because just one class 
+	has some code that another class could use. This the <b>worst</b> sort of 
+	reuse as you sacrifice the architectural integrity of the system for small 
+	savings in development time.</li>
+	<li>High coupling is <b>good within a subsystem</b> as this indicate high 
+	cohesion within the component.</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>A Paradigm for Verifying Analysis Objects and Classes</h2>
+		<ul>
+	<li>Use <b><i>commonality</i></b> and <b><i>variability</i></b> analysis as 
+	a primary architectural and design approach than direct CRC classes or looking for at just nouns 
+	and verbs.    
+</li>
+	<li>Find what is varying and encapsulate it.</li>
+	<li>Use inheritance to classify variation in behavior<ul>
+	<li>interfaces</li>
+	<li>abstract classes</li>
+	<li>subclasses</li>
+</ul>
+
+</li>
+	<li>Containing a reference to (interface or abstract class) hides these 
+	derived classes that represents variations in behavior</li>
+	<li>These derived classes are hidden (encapsulated) from the calling class.</li>
+	<li>This promotes loose coupling between generalization layers.</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Commonality_and_Variability_Analysis">Commonality and Variability Analysis</a></h2>
+<p><img border="0" src="images/variability.png" width="650" height="316"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Encapsulate, encapsulate,&nbsp; encapsulate ...</h2>
+<ul>
+	<li>Encapsulation of data - implementation of internal (private) data 
+	structures is not essential</li>
+	<li>Encapsulation of other objects - delegation to existing objects via 
+	wrapper, adapter classes</li>
+	<li>Encapsulation of methods - implementation of methods in terms of other 
+	private methods</li>
+	<li>Encapsulation of types - derived classes that might vary or private 
+	nested classes</li>
+</ul>
+
+<p><img border="0" src="images/shapes.png" width="650" height="310"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Interfaces and Specialization</h2>
+<ul>
+	<li>Interface (Abstract Class)
+	<ul>
+		<li>Defines the commonality</li>
+		<li>What interface is needed to handle the responsibilities of this 
+		component?</li>
+	</ul>
+	</li>
+	<li>Derived classes<ul>
+		<li>Defines the variability</li>
+		<li>Given this particular implementation (this variation), how can I 
+		implement it with the given specification?</li>
+	</ul>
+	</li>
+	<li>Process (management) perspective<ul>
+		<li>Identifies the interfaces I need to use to handle all the cases of 
+		the domain (commonality)</li>
+		<li>Given the interface, how can I implement this particular case (this 
+		variant).<br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Inheritance vs. Aggregation</h2>
+
+		<ol>
+			<li>Inheritance is the strongest form of coupling between classes.  
+			</li>
+			<li>Encapsulation is weak within a class hierarchy. Changes to the 
+			base class ripple down to changes in subclasses.<br>
+			Changes to the base class have a large impact on other class in the 
+			system - &quot;<b>fragile case class</b>&quot;</li>
+			<li>It is an inflexible relationship - fixed at runtime.<br></li>
+</ol>
+			<p>
+			<img border="0" src="images/fig17-6.png" width="408" height="323"></p>
+			<ul>
+				<li>Above, the beginner's solution of modeling roles in 
+				organization</li>
+				<li>Is an employee <b>just</b> his or her job, or is it rather 
+				that employee <b>has</b> a job?</li>
+				<li><b>Subclasses</b> should always represent &quot;<b>is kind of</b>&quot; 
+				rather than &quot;<b>is role played by</b>&quot;. </li>
+			</ul>
+<p><br><img border="0" src="images/fig17-7.png" width="574" height="421"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Multiple Inheritance</h2>
+<ul>
+	<li>Multiple inheritance allows a class to represent more than one type 
+	(parent). </li>
+	<li>Super types (parents) must be semantically disjoint.</li>
+	<li>If there is any <b>overlap</b> in semantics between the base classes, 
+	there is the possibility of <b>unforeseen interaction</b> between them.</li>
+	<li>With <b>inheritance</b> you get <b>two</b> things:<ul>
+		<li>interface - the public operations of the base class</li>
+		<li>implementation - the attributes, relationships, protected and 
+		private operations of the base class<br>
+		<img border="0" src="images/fig17-8.png" width="450" height="240"></li>
+	</ul>
+	</li>
+	<li><b>Mixin</b> classes are designed to be &quot;mixed in&quot; using multiple 
+	inheritance. </li>
+	<li>This is a safe an powerful idiom.</li>
+	<li>Above, the <code>Dialer</code> class is a simple mixin.</li>
+	<li>With <b>interface realization</b> you get exactly <b>one</b> thing:<ul>
+		<li>an interface - a set of public operations, attributes, and 
+		relationships&nbsp; that have <b>no</b> implementation</li>
+		<li>in Java a class extends one class only, but can implement multiple 
+		interfaces</li>
+	</ul>
+	</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Nested classes</h2>
+<p><br>A nested (in Java inner) class is a class defined inside another class.<br>
+<img border="0" src="images/fig17-12.png" width="500" height="381"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Design_a_Subsystem">Design a Subsystem</a></h2>
+<ul>
+	<li>A subsystem is just a special
+	<a href="UML-borland-CompDs.html#What_is_a_Component">component</a>. </li>
+	<li>The activity &quot;Design a subsystem&quot;&nbsp; is about breaking up the system 
+	into parts that are independent as possible. </li>
+	<li>These parts are called subsystems. </li>
+	<li>Interactions between subsystems are mediated by interfaces.</li>
+	<li>The goals of subsystem design are to minimize coupling in the system by 
+	designing appropriate interfaces and to ensure that each subsystem correctly 
+	realizes the behavior specified by its interfaces.</li>
+</ul>
+<p><map name="FPMap3">
+<area href="analysisPackages.html#Architectural_Analysis" shape="rect" coords="25, 3, 133, 127">
+<area href="#Design_a_Subsystem" shape="rect" coords="11, 140, 141, 268">
+<area href="#Design_a_Subsystem" shape="rect" coords="578, 29, 716, 170">
+<area href="#What_is_an_interface" shape="rect" coords="577, 263, 682, 381">
+<area href="#What_is_an_interface" shape="rect" coords="26, 276, 122, 389">
+</map>
+<img border="0" src="images/fig19-2.png" width="717" height="391" usemap="#FPMap3"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="What_is_an_interface">What is an interface?</a></h2>
+<ul>
+	<li>An <b>interface</b> specifies a named set of public features.</li>
+	<li>The key idea behind interface is to separate the <b>specification</b> of 
+	functionality (the interface) from its implementation by a classifier such 
+	as a class or component (subsystem).</li>
+	<li>An interface specifies a named set of public features.</li>
+	<li>Interfaces separate the specification of functionality from its 
+	implementation.</li>
+	<li>Interface define a contract.</li>
+	<li>If the implementation language doesn't directly support interfaces, just 
+	use abstract classes.</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Subsystems and <a href="UML-borland-CompDs.html">Components</a></h2>
+			<ol>
+				<li>Component-based development is about constructing software 
+				from <b>plug-in parts</b>.</li>
+				<li>Interfaces are key to component-based development (CBD).</li>
+				<li>If you want to create flexible component-based SW for which 
+				you can plug-in new implementation at will, <b>you must design 
+				with interfaces</b>.</li>
+				<li>UML definition: &quot;A component represents a modular part of a 
+				system that encapsulates its contents and whose manifestation is
+				<b>replaceable</b> with its environment.&quot;</li>
+			</ol>
+			<p>&nbsp;</p>
+			<ul>
+	<li>Interfaces that are realized by a classifier are its <b>provided 
+	interfaces</b> (bullets). </li>
+	<li>Interfaces that a classifier needs are its <b>required interfaces</b> 
+	(sockets).</li>
+	<li>A component acts as a&nbsp; black box whose external behavior is 
+	completely defined by its provided and required interfaces.</li>
+	<li>Because of this, one component can be replaced by another component that 
+	supports the same <b>communication protocol</b>.<br><br>
+	<img border="0" src="images/fig19-19.png" width="300" height="470"></li>
+</ul>
+<p>&nbsp;</p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Architecture and Layering Pattern</h2>
+<ul>
+	<li>The layering pattern organizes <b>subsystems</b> and <b>interfaces</b> 
+	into semantically cohesive layers.</li>
+	<li>The essence of creating a <b>robust layered architecture</b> is to 
+	manage the coupling between subsystems by<ul>
+		<li>introducing new interfaces where&nbsp; needed</li>
+		<li>repackaging classes into new subsystems in a way that reduces the 
+		coupling between subsystems</li>
+	</ul>
+	</li>
+	<li>Ideally, you want the layers to be<b> as decupled as possible</b>, so 
+	try the ensure that<ul>
+		<li>dependencies go one way</li>
+		<li>all dependencies are mediated by interfaces</li>
+	</ul>
+	</li>
+	<li>Designing to a contract is more flexible then designing to 
+	implementation.</li>
+	<li>Flexibility can lead to complexity-so take care.</li>
+	<li>One of the secrets of good OO analysis and design is identifying the <b>
+	fluid</b> (variability) and <b>stable</b> parts (commonality) parts of a 
+	system and modeling each accordingly.</li>
+	<li>Remember the <b>KISS rule</b> - keep interfaces sweet and simple.</li>
+</ul>
+<p><img border="0" src="images/fig19-20.png" width="650" height="492"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>FICUS Design (<a target="_blank" href="http://www.sparxsystems.com/">Sparx 
+	Enterprise Architect Professional</a>)</h2>
+<table style="width: 66%" cellSpacing="4" id="table2">
+	<tr>
+		<th>Description</th>
+		<th>File</th>
+		<th>Source</th>
+	</tr>
+	<tr>
+		<td>Silenus and Ficus Use Case</td>
+		<td><a href="../ficus/UseCase-Silenus-Ficus.png">Image</a></td>
+		<td rowSpan="6" valign="top"><a href="../ficus/FICUS.eap">FICUS.eap</a><br>
+&nbsp;</td>
+	</tr>
+	<tr>
+		<td>Tracker Use Case</td>
+		<td><a href="../ficus/UseCase-Tracker.png">Image</a></td>
+	</tr>
+	<tr>
+		<td>Ficus Components</td>
+		<td><a href="../ficus/Component-Ficus.png">Image</a></td>
+	</tr>
+	<tr>
+		<td>Ficus Upload Sequence Diagram</td>
+		<td><a href="../ficus/Sequence-FicusUploading.png">Image</a></td>
+	</tr>
+	<tr>
+		<td>Ficus Download Sequence Diagram</td>
+		<td>
+		<p align="left"><a href="../ficus/Sequence-FicusDownloading.png">Image</a></td>
+	</tr>
+	<tr>
+		<td>Ficus Deployment Diagram</td>
+		<td><a href="../ficus/Deployment-Ficus.png">Image</a></td>
+	</tr>
+	<tr>
+		<td>Ficus Class Diagram</td>
+		<td><a href="../ficus/Class-Ficus.png">Image</a></td>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+<p>&nbsp;</p>
+	
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70bbe86c024c',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

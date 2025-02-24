@@ -1,0 +1,597 @@
+<TITLE>Senior Project Design</TITLE>
+<HTML>
+<HEAD>
+<META name="keywords" content="Intro to Streams">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Senior Project Design</span><br>
+<span class="sts">The Event Generator Idiom</span><BR>
+</DIV>
+<H2>Event Generator Idiom</H2>
+<UL>
+<LI>
+Enable interested objects (listeners) to be notified of a state change or
+other events experienced by an "event generator."
+<LI>
+The JavaBeans/AWT/Swing event model
+<LI>
+Step 1. Define event category classes
+<LI>
+Step 2. Define listener interfaces
+<LI>
+Step 3. Design adapter classes (optional)
+<LI>
+Step 4. Define event generator classes
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Step 1. Define Event Category Classes</H2>
+<UL>
+<LI>
+Define a separate event category class for each major category of events that
+may be experienced and propagated by the event generator.
+<LI>
+Make each event category class extend <CODE>java.util.EventObject</CODE>.
+<LI>
+Design each event category class so that it encapsulates the information that
+needs to be propagated from the observable to the listeners for that
+category of events.
+<LI>
+Give the event category class a name that ends in <CODE>Event</CODE>, such as
+<CODE>OverdraftEvent</CODE>.
+</UL>
+<PRE>
+ 1 package com.artima.examples.account.ex4;
+ 2
+ 3 import java.util.EventObject;
+ 4
+ 5 <EM>/**
+ 6 * Event that indicates an overdraft has either been loaned to a client or
+ 7 * repaid by a client during a withdrawal or deposit transaction on an
+ 8 * &lt;code&gt;Account&lt;/code&gt;.
+ 9 */</EM>
+<STRONG>10 public class OverdraftEvent extends java.util.EventObject {</STRONG>
+11
+<STRONG>12     private long overdraft;
+13     private long amount;</STRONG>
+14
+15     <EM>/**
+16     * Constructs an &lt;code&gt;OverdraftEvent&lt;/code&gt; with the passed
+17     * &lt;code&gt;source&lt;/code&gt;, and &lt;code&gt;overdraft&lt;/code&gt;.
+18     *
+19     * @param source the source of the event
+20     * @param overdraft the current amount of overdraft outstanding in the
+21     *     &lt;code&gt;OverdraftAccount&lt;/code&gt;
+22     * @throws IllegalArgumentException if either of &lt;code&gt;overdraft&lt;/code&gt;
+23     *     or &lt;code&gt;amount&lt;/code&gt;, passed as parameters to this constructor,
+24     *     are less than or equal to zero.
+25     */</EM>
+<STRONG>26     public OverdraftEvent(OverdraftAccount source,
+27         long overdraft, long amount) {</STRONG>
+28
+29         super(source);
+30
+31         if (overdraft &lt;= 0 || amount &lt;= 0) {
+32             throw new IllegalArgumentException();
+33         }
+34
+35         this.overdraft = overdraft;
+36         this.amount = amount;
+37     }
+38
+39     <EM>/**
+40     * Returns the current overdraft, the amount of of overdraft after the
+41     * transaction that caused this event to be propagated.
+42     *
+43     * @returns the current overdraft
+44     */</EM>
+<STRONG>45     public long getOverdraft() {
+46         return overdraft;
+47     }</STRONG>
+48
+49     <EM>/**
+50     * Returns the amount of money either loaned to the client or repaid to
+51     * the bank during the transaction that caused this event to be
+52     * propagated.
+53     *
+54     * @returns the amount loaned or repaid
+55     */</EM>
+<STRONG>56     public long getAmount() {
+57         return amount;
+58     }</STRONG>
+59 }
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Step 2. Define Listener Interfaces</H2>
+<UL>
+<LI>
+For each event category, define a listener interface that extends tag interface
+<CODE>java.util.EventListener</CODE> and contains a method declaration for
+each event (of that category) that will trigger an information
+propagation from the event generator to its listeners.
+<LI>
+Name the listener interface by substituting <CODE>Listener</CODE> for
+<CODE>Event</CODE> in the event category class name. For example, the
+listener interface for <CODE>OverdraftEvent</CODE> would be
+<CODE>OverdraftListener</CODE>.
+<LI>
+Give the methods of the listener interface verb-based names describing in past
+tense the situation that triggered the event propagation. For example, a
+listener method for receiving a <CODE>OverdraftEvent</CODE> that was triggered
+by an overdraft occurring would be named <CODE>overdraftOccurred()</CODE>.
+<LI>
+Each method should return void and take one parameter, a reference to an
+instance of the appropriate event category class. For example, the full
+signature of the <CODE>overdraftOccurred()</CODE> method would be:
+<PRE>
+      void overdraftOccurred(OverdraftEvent e);
+</PRE>
+</UL>
+<PRE>
+ 1 package com.artima.examples.account.ex4;
+ 2
+ 3 import java.util.EventListener;
+ 4
+ 5 <EM>/**
+ 6 * Listener interface for receiving overdraft events.
+ 7 */</EM>
+<STRONG> 8 public interface OverdraftListener extends EventListener {</STRONG>
+ 9
+10     <EM>/**
+11     * Invoked when an overdraft has occurred. This method will
+12     * be invoked on listeners whenever the bank loans money
+13     * to a client that has requested a withdrawal of more funds
+14     * than is available in the account's balance.
+15     */</EM>
+<STRONG>16     void overdraftOccurred(OverdraftEvent e);</STRONG>
+17
+18     <EM>/**
+19     * Invoked when some or all of the outstanding overdraft
+20     * that a bank has loaned to a client is repaid.
+21     */</EM>
+<STRONG>22     void overdraftRepaid(OverdraftEvent e);</STRONG>
+23 }
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Step 3. Define Adapter Classes (Optional) </H2>
+<UL>
+<LI>
+For each listener interface that contains more than one method, define an
+adapter class that implements the interface fully with methods that do
+nothing.
+<LI>
+Name the adapter class by replacing <CODE>Listener</CODE> in the listener
+interface name with <CODE>Adapter</CODE>. For example, the adapter class
+for <CODE>OverdraftListener</CODE> would be <CODE>OverdraftAdapter</CODE>.
+</UL>
+<PRE>
+ 1 package com.artima.examples.account.ex4;
+ 2
+ 3 <EM>/**
+ 4 * An abstract adapter class for receiving overdraft events. The methods in
+ 5 * this class are empty. This class exists as convenience for listener
+ 6 * objects.
+ 7 */</EM>
+<STRONG> 8 public abstract class OverdraftAdapter implements OverdraftListener {</STRONG>
+ 9
+10     <EM>/**
+11     * Invoked when an overdraft has occurred. This method will
+12     * be invoked on listeners whenever the bank loans money
+13     * to a client that has requested a withdrawal of more funds
+14     * than is available in the account's balance.
+15     *
+16     * @param e the overdraft event object
+17     */</EM>
+<STRONG>18     public void overdraftOccurred(OverdraftEvent e) {
+19     }</STRONG>
+20
+21     <EM>/**
+22     * Invoked when some or all of the outstanding overdraft
+23     * that a bank has loaned to a client is repaid.
+24     *
+25     * @param e the overdraft event object
+26     */</EM>
+<STRONG>27     public void overdraftRepaid(OverdraftEvent e) {
+28     }</STRONG>
+29 }
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Step 4. Define Event Generator Classes </H2>
+<UL>
+<LI>
+For each category of events that will be propagated by instances of this
+class, define a pair of listener add/remove methods.
+<LI>
+Name the add method <CODE>add&lt;listener-interface-name&gt;()</CODE> and the
+remove
+method <CODE>remove&lt;listener-interface-name&gt;()</CODE>. For example, the
+listener add and remove methods for a <CODE>OverdraftEvent</CODE> would be
+named <CODE>addOverdraftListener()</CODE> and
+<CODE>removeOverdraftListener()</CODE>.
+<LI>
+You'll also need to fire the events, but that's implementation.
+</UL>
+<PRE>
+  1 package com.artima.examples.account.ex4;
+  2
+  3 <EM>/**
+  4 * Represents a bank account with overdraft protection. Instances of this
+  5 * class are instantiated with a specified maximum overdraft. If a client
+  6 * attempts to withdraw more than the current account balance, the bank may
+  7 * loan the amount in excess of the balance to the client. The overdraft
+  8 * maximum passed to an &lt;code&gt;OverdraftAccount&lt;/code&gt;'s constructor is the
+  9 * maximum amount the bank will lend to the client in this manner. When a
+ 10 * client makes a deposit, the bank will pay itself back first before
+ 11 * increasing the account's balance.
+ 12 *
+ 13 * &lt;p&gt;
+ 14 * Money is stored in this account in integral units. Clients can use this
+ 15 * account to store any kind of value, such as money or points, etc. The
+ 16 * meaning of the integral units stored in this account is a decision of the
+ 17 * client that instantiates the account. The maximum amount of units that can
+ 18 * be stored as the current balance of an &lt;code&gt;OverdraftAccount&lt;/code&gt; is
+ 19 * Long.MAX_VALUE.
+ 20 */</EM>
+ 21 public class OverdraftAccount implements Account, OverdraftEventGenerator {
+ 22
+ 23     <EM>/**
+ 24     * Helper back-end &lt;code&gt;BasicAccount&lt;/code&gt; object
+ 25     */</EM>
+ 26     private BasicAccount account = new BasicAccount();
+ 27
+ 28     <EM>/**
+ 29     * Helper back-end &lt;code&gt;OverdraftEventManager&lt;/code&gt; object
+ 30     */</EM>
+<STRONG> 31     private OverdraftEventManager eventMan
+ 32         = new OverdraftEventManager();</STRONG>
+ 33
+ 34     <EM>/**
+ 35     * The maximum amount the bank will loan to the client.
+ 36     */</EM>
+ 37     private final long overdraftMax;
+ 38
+ 39     <EM>/**
+ 40     * The current amount the bank has loaned to the client which has not yet
+ 41     * been repaid. This value must at all times be greater than or equal to
+ 42     * zero, and less than or equal to &lt;code&gt;overdraftMax&lt;/code&gt;. If this
+ 43     * value is greater than zero, then the balance of the helper
+ 44     * &lt;code&gt;BasicAccount&lt;/code&gt; (referenced from the &lt;code&gt;account&lt;/code&gt;
+ 45     * instance variable) must be exactly zero.
+ 46     */</EM>
+ 47     private long overdraft;
+ 48
+ 49     <EM>/**
+ 50     * Constructs a new &lt;code&gt;OverdraftAccount&lt;/code&gt; with the passed
+ 51     * overdraft maximum.
+ 52     *
+ 53     * @param overdraftMax the maximum amount the bank will loan to the
+ 54     *     client
+ 55     */</EM>
+ 56     public OverdraftAccount(long overdraftMax) {
+ 57         this.overdraftMax = overdraftMax;
+ 58     }
+ 59
+ 60     <EM>/**
+ 61     * Returns the current overdraft, the amount the bank has loaned to the
+ 62     * client that has not yet been repaid.
+ 63     *
+ 64     * @return the current overdraft
+ 65     */</EM>
+ 66     public long getOverdraft() {
+ 67         return overdraft;
+ 68     }
+ 69
+ 70     <EM>/**
+ 71     * Returns the overdraft maximum, the maximum amount the bank will allow
+ 72     * the client to owe it. For each instance of
+ 73     * &lt;code&gt;OverdraftAccount&lt;/code&gt;, the overdraft maximum is constant.
+ 74     *
+ 75     * @return the overdraft maximum
+ 76     */</EM>
+ 77     public long getOverdraftMax() {
+ 78         return overdraftMax;
+ 79     }
+ 80
+ 81     <EM>/**
+ 82     * Gets the current balance of this &lt;code&gt;OverdraftAccount&lt;/code&gt;.
+ 83     *
+ 84     * @return the current balance
+ 85     */</EM>
+ 86     public long getBalance() {
+ 87         return account.getBalance();
+ 88     }
+ 89
+ 90     <EM>/**
+ 91     * Withdraws the passed amount from this &lt;code&gt;OverdraftAccount&lt;/code&gt;.
+ 92     * If the passed amount is less than or equal to the current balance, all
+ 93     * withdrawn funds will be taken from the balance, and the balance will
+ 94     * be decremented by the passed amount. If the passed amount exceeds the
+ 95     * current balance, the bank may loan the client the difference. The bank
+ 96     * will make the loan only if the difference between the passed amount
+ 97     * and the balance (the shortfall) is less than or equal to the available
+ 98     * overdraft. The available overdraft is equal to the current overdraft
+ 99     * (the amount already loaned to the client and not yet repaid),
+100     * subtracted from the overdraft maximum, which is passed to the
+101     * constructor of any &lt;code&gt;OverdraftAccount&lt;/code&gt;.
+102     *
+103     * &lt;p&gt;
+104     * If the passed amount is less than or equal to the current balance, the
+105     * &lt;code&gt;withdraw&lt;/code&gt; method decrements the current balance by the
+106     * passed amount and returns the passed amount. If the passed amount is
+107     * greater than the current balance, but the passed amount minus the
+108     * current balance is less than or equal to the available overdraft, the
+109     * &lt;code&gt;withdraw&lt;/code&gt; method sets the current balance to zero, records
+110     * the loan, and returns the requested amount. Otherwise, the passed
+111     * amount minus the current balance exceeds the available overdraft, so
+112     * the &lt;code&gt;withdraw&lt;/code&gt; method throws
+113     * &lt;code&gt;InsufficientFundsException&lt;/code&gt;.
+114     *
+115     * Subclasses must withdraw at least the passed amount, but may
+116     * effectively withdraw more. For example, if a subclass includes a
+117     * notion of a withrawal fee, the subclass's implementation of this
+118     * method may charge that fee by decrementing it from the account at the
+119     * time of withdrawal.
+120     *
+121     * @param amount amount to withdraw
+122     * @return amount withdrawn from the &lt;code&gt;OverdraftAccount&lt;/code&gt;
+123     * @throws InsufficientFundsException if the
+124     *     &lt;code&gt;OverdraftAccount&lt;/code&gt; contains insufficient funds for the
+125     *     requested withdrawal
+126     * @throws IllegalArgumentException if requested withdrawal amount is
+127     *     less than or equal to zero.
+128     */</EM>
+129     public long withdraw(long amount) throws InsufficientFundsException {
+130
+131         if (amount &lt;= 0) {
+132             throw new IllegalArgumentException();
+133         }
+134
+135         long bal = account.getBalance();
+136         if (bal &gt;= amount) {
+137
+138             <EM>// Balance has sufficient funds, so just take the</EM>
+139             <EM>// money from the balance.</EM>
+140             return account.withdraw(amount);
+141         }
+142
+143         long shortfall = amount - bal;
+144         long extraAvailable = overdraftMax - overdraft;
+145
+146         if (shortfall &gt; extraAvailable) {
+147             throw new InsufficientFundsException(shortfall
+148                 - extraAvailable);
+149         }
+150         overdraft += shortfall;
+151         account.withdraw(amount - shortfall);
+152
+153         OverdraftEvent event = new OverdraftEvent(this, overdraft,
+154             shortfall);
+<STRONG>155         eventMan.fireOverdraftOccurred(event);</STRONG>
+156
+157         return amount;
+158     }
+159
+160     <EM>/**
+161     * Deposits the passed amount into the &lt;code&gt;OverdraftAccount&lt;/code&gt;. If
+162     * the current overdraft is zero, the balance will be increased by the
+163     * passed amount. Otherwise, the bank will attempt to pay off the
+164     * overdraft first, before increasing the current balance by the amount
+165     * remaining after the overdraft is repaid, if any.
+166     *
+167     * &lt;p&gt;
+168     * For example, if the balance is 0, the overdraft is 100, and the
+169     * &lt;code&gt;deposit&lt;/code&gt; method is invoked with a passed
+170     * &lt;code&gt;amount&lt;/code&gt; of 50, the bank would use all 50 of those monetary
+171     * units to pay down the overdraft. The overdraft would be reduced to 50
+172     * and the balance would remain at 0. If subsequently, the client
+173     * deposits another 100 units, the bank would use 50 of those units to
+174     * pay off the overdraft loan and direct the remaining 50 into the
+175     * balance. The new overdraft would be 0 and the new balance would be
+176     * 50.
+177     *
+178     * Subclasses may effectively deposit more or less than the passed amount
+179     * into the &lt;code&gt;OverdraftAccount&lt;/code&gt;. For example, if a subclass
+180     * includes a notion of funds matching, the subclass implementation of
+181     * this method may match some or all of the deposited amount at the time
+182     * of deposit, effectively increasing the deposited amount. Or, if a
+183     * subclass includes the notion of a deposit fee, the subclass's
+184     * implementation of this method may charge that fee by decrementing it
+185     * from the account at the time of deposit, effectively reducing the
+186     * deposited amount.
+187     *
+188     * @param amount amount to deposit
+189     * @throws ArithmeticException if requested deposit would cause the
+190     *     balance of this &lt;code&gt;OverdraftAccount&lt;/code&gt; to exceed
+191     *     Long.MAX_VALUE.
+192     * @throws IllegalArgumentException if requested withdrawal amount is
+193     *     less than or equal to zero.
+194     */</EM>
+195     public void deposit(long amount) {
+196
+197         if (amount &lt;= 0) {
+198             throw new IllegalArgumentException();
+199         }
+200
+201         if (overdraft &gt; 0) {
+202
+203             long amountRepaid = 0;
+204
+205             if (amount &lt; overdraft) {
+206                 amountRepaid = amount;
+207                 overdraft -= amount;
+208             }
+209             else {
+210                 long diff = amount - overdraft;
+211                 amountRepaid = diff;
+212                 overdraft = 0;
+213                 account.deposit(diff);
+214             }
+215
+216             OverdraftEvent event = new OverdraftEvent(this, overdraft,
+217                 amountRepaid);
+<STRONG>218             eventMan.fireOverdraftRepaid(event);</STRONG>
+219         }
+220         else {
+221             account.deposit(amount);
+222         }
+223     }
+224
+225     <EM>/**
+226     * Adds the specified overdraft listener to receive overdraft events from
+227     * this &lt;code&gt;OverdraftAccount&lt;/code&gt;. If &lt;code&gt;l&lt;/code&gt; is
+228     * &lt;code&gt;null&lt;/code&gt;, no exception is thrown and no action is performed.
+229     * If &lt;code&gt;l&lt;/code&gt; is already registered as a listener, no action is
+230     * performed.
+231     *
+232     * @param l the &lt;code&gt;OverdraftEventListener&lt;/code&gt; to add
+233     */</EM>
+<STRONG>234     public void addOverdraftListener(OverdraftListener l) {
+235
+236         eventMan.addOverdraftListener(l);
+237     }</STRONG>
+238
+239     <EM>/**
+240     * Removes the specified overdraft listener so that it no longer receives
+241     * overdraft events from this &lt;code&gt;OverdraftAccount&lt;/code&gt;. This method
+242     * performs no function, nor does it throw an exception, if the listener
+243     * specified by the argument was not previously added to this component.
+244     * If &lt;code&gt;l&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;, no exception is thrown and no
+245     * action is performed.
+246     *
+247     * @param l the &lt;code&gt;OverdraftEventListener&lt;/code&gt; to remove
+248     */</EM>
+<STRONG>249     public void removeOverdraftListener(OverdraftListener l) {
+250
+251         eventMan.removeOverdraftListener(l);
+252     }</STRONG>
+253 }
+
+  1 package com.artima.examples.account.ex4;
+  2
+  3 import java.util.Set;
+  4 import java.util.Iterator;
+  5 import java.util.HashSet;
+  6
+  7 <EM>/**
+  8 * A class that manages registration and unregistration of
+  9 * &lt;code&gt;OverdraftListener&lt;/code&gt;s and the firing of
+ 10 * &lt;code&gt;OverdraftEvent&lt;/code&gt;s.
+ 11 *
+ 12 * @author Bill Venners
+ 13 */</EM>
+ 14 class OverdraftEventManager {
+ 15
+ 16     <EM>/**
+ 17     * Unsynchronized &lt;code&gt;HashSet&lt;/code&gt; to which listeners are added and
+ 18     * removed via the synchronized methods &lt;code&gt;addOverdraftListener&lt;/code&gt;
+ 19     * and &lt;code&gt;removeOverdraftListener&lt;/code&gt; methods.
+ 20     */</EM>
+ 21     private HashSet listeners = new HashSet();
+ 22
+ 23     <EM>/**
+ 24     * Clone of the &lt;code&gt;listeners&lt;/code&gt; &lt;code&gt;HashSet&lt;/code&gt;, which is
+ 25     * used by the &lt;code&gt;fireOverdraftOccurred&lt;/code&gt; and
+ 26     * &lt;code&gt;fireOverdraftRepaid&lt;/code&gt; methods to propagate events. This
+ 27     * &lt;code&gt;HashSet&lt;/code&gt; always contains a most recent snapshot of the
+ 28     * &lt;code&gt;listeners&lt;/code&gt; &lt;code&gt;HashSet&lt;/code&gt;, but this
+ 29     * &lt;code&gt;HashSet&lt;/code&gt; is never modified, only replaced. Because this
+ 30     * &lt;code&gt;HashSet&lt;/code&gt; is never modified, the fire methods can iterate
+ 31     * through the set without synchronization. This implementation approach
+ 32     * is geared towards providing optimum performance for the expected run
+ 33     * time usage in which adding and removing listeners happens less
+ 34     * frequently than firing events to those listeners.
+ 35     */</EM>
+ 36     private Set listenersClone = new HashSet();
+ 37
+ 38     <EM>/**
+ 39     * Constructs a new &lt;code&gt;OverdraftEventManager&lt;/code&gt;. The
+ 40     * &lt;code&gt;OverdraftEventManager&lt;/code&gt; starts its life with an empty
+ 41     * listeners list.
+ 42     */</EM>
+ 43     public OverdraftEventManager() {
+ 44     }
+ 45
+ 46     <EM>/**
+ 47     * Adds the specified overdraft listener to receive overdraft events. If
+ 48     * &lt;code&gt;l&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;, no exception is thrown and no
+ 49     * action is performed. If &lt;code&gt;l&lt;/code&gt; is already registered as a
+ 50     * listener, no action is performed.
+ 51     *
+ 52     * @param l the &lt;code&gt;OverdraftEventListener&lt;/code&gt; to add
+ 53     */</EM>
+ 54     public synchronized void addOverdraftListener(OverdraftListener l) {
+ 55
+ 56         listeners.add(l);
+ 57         listenersClone = (Set) listeners.clone();
+ 58     }
+ 59
+ 60     <EM>/**
+ 61     * Removes the specified overdraft listener so that it no longer receives
+ 62     * overdraft events. This method performs no function, nor does it throw
+ 63     * an exception, if the listener specified by the argument was not
+ 64     * previously added to this component. If &lt;code&gt;l&lt;/code&gt; is
+ 65     * &lt;code&gt;null&lt;/code&gt;, no exception is thrown and no action is performed.
+ 66     *
+ 67     * @param l the &lt;code&gt;OverdraftEventListener&lt;/code&gt; to remove
+ 68     */</EM>
+ 69     public synchronized void removeOverdraftListener(OverdraftListener l) {
+ 70
+ 71         listeners.remove(l);
+ 72         listenersClone = (Set) listeners.clone();
+ 73     }
+ 74
+ 75     <EM>/**
+ 76     * Fires overdraftOccurred events to registered listeners.
+ 77     *
+ 78     * @param event the &lt;code&gt;OverdraftEvent&lt;/code&gt; to propagate
+ 79     */</EM>
+ 80     public void fireOverdraftOccurred(OverdraftEvent event) {
+ 81
+ 82         Iterator it = listenersClone.iterator();
+ 83         while (it.hasNext()) {
+ 84             OverdraftListener l = (OverdraftListener) it.next();
+ 85             l.overdraftOccurred(event);
+ 86         }
+ 87     }
+ 88
+ 89     <EM>/**
+ 90     * Fires overdraftRepaid events to registered listeners.
+ 91     *
+ 92     * @param event the &lt;code&gt;OverdraftEvent&lt;/code&gt; to propagate
+ 93     */</EM>
+ 94     public void fireOverdraftRepaid(OverdraftEvent event) {
+ 95
+ 96         Iterator it = listenersClone.iterator();
+ 97         while (it.hasNext()) {
+ 98             OverdraftListener l = (OverdraftListener) it.next();
+ 99             l.overdraftRepaid(event);
+100         }
+101     }
+102 }
+</PRE>
+
+<!--
+<HR align="left" width="100%" size="4" noshade>
+<H2>Listeners</H2>
+<UL>
+<LI>
+To be a listener for a certain category of events, an object's class must
+simply implement the listener interface for that category of events.
+<LI>
+Can subclass an adapter class if you care only about some events
+of a particular category
+</UL>
+</PRE>
+-->
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Discussion</H2>
+<UL>
+<LI>
+The Event Generator</UL>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd713b19d03576',t:'MTczOTIwNDU5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY>
+</HTML>

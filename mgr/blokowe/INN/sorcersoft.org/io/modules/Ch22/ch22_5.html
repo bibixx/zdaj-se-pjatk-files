@@ -1,0 +1,487 @@
+<TITLE>Senior Project Design</TITLE>
+<HTML>
+<HEAD>
+<META name="keywords" content="Intro to Streams">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Senior Project Design</span><br>
+<span class="sts">Generic Programming</span>
+
+<h2>Course Map</h2>
+
+<H2><img border="0" src="../../images/CourseMap18.png" width="603" height="390"></H2>
+<H2>Agenda</H2>
+<ul>
+  <li>To understand the objective of generic programming</li>
+  <li>To be able to implement generic classes and methods</li>
+  <li>To understand the execution of generic methods in the virtual
+machine</li>
+  <li>To know the limitations of generic programming in Java</li>
+  <li>To understand the relationship between generic types and
+inheritance</li>
+  <li>To learn how to constrain type variables</li>
+</ul>
+<h2>Type Variables</h2>
+<p><i>Generics</i> is essentially the ability to have type parameters on your 
+type.<br>
+They are also called parameterized types or parametric polymorphism.</p>
+<ul>
+  <li><em>Generic programming</em>: creation of programming constructs
+that can be used with many different types
+    <ul>
+      <li>In Java, achieved with inheritance or with type variables</li>
+    </ul>
+  </li>
+  <li>For example:
+    <ul>
+      <li>Type variables: Java's <tt>ArrayList</tt> (e.g. <tt>ArrayList&lt;String&gt;</tt>)</li>
+      <li>Inheritance: <tt>
+      <a target="_blank" href="code/impllist/LinkedList.java">LinkedList</a></tt> implemented 
+      to store objects of any class</li>
+    </ul>
+  </li>
+  <li><em>Generic class</em>: declared with a type variable <tt>E</tt></li>
+  <li>The type variable denotes the element type:
+    <pre>public class ArrayList<code class="blue">&lt;E&gt;</code> // could use "ElementType" instead of E<br>{<br>   public ArrayList() { . . . }<br>   public void add(<code
+ class="blue">E</code> element) { . . . }<br>   . . .<br>}</pre>
+  </li>
+</ul>
+
+<h2>Hiding Variability with Generic Programming</h2>
+<p>
+<img border="0" src="../coupling/images/polymorphism.gif" width="550" height="369"></p>
+
+<h2>&nbsp;</h2>
+<h2>Instantiating Classes with Type Variables</h2>
+<ul>
+  <li>Can be instantiated with class or interface types
+    <pre>ArrayList&lt;BankAccount&gt;<br>ArrayList&lt;Measurable&gt;</pre>
+  </li>
+  <li>Cannot use a primitive type as a type variable
+    <pre>ArrayList&lt;double&gt; // Wrong!</pre>
+  </li>
+  <li>Use corresponding wrapper class instead
+    <pre>ArrayList&lt;Double&gt;</pre>
+  </li>
+</ul>
+<h2>Instantiating Type Variables in Methods</h2>
+<ul>
+  <li>Supplied type replaces type variable in class interface</li>
+  <li>Example: <tt>add</tt> in <tt>ArrayList&lt;BankAccount&gt;</tt>
+has type variable <tt>E</tt> replaced with <tt>BankAccount</tt>:
+    <pre>public void add(<code class="blue">BankAccount</code> element)</pre>
+  </li>
+  <li>Contrast with <tt>LinkedList.add</tt>:
+    <pre>public void add(Object element)</pre>
+  </li>
+</ul>
+<h2>Type Variables Increase Safety<br>
+</h2>
+<ul>
+  <li>Type variables make generic code safer and easier to read
+    <ul>
+      <li>Impossible to add a <tt>String</tt> into an <tt>ArrayList&lt;BankAccount&gt;</tt></li>
+      <li>Can add a <tt>String</tt> into a <tt>LinkedList</tt>
+intended to hold bank accounts
+        <pre>ArrayList&lt;BankAccount&gt; accounts1 = new ArrayList&lt;BankAccount&gt;();<br>LinkedList accounts2 = new LinkedList(); // Should hold BankAccount objects<br>accounts1.add("my savings"); // Compile-time error<br>accounts2.add("my savings"); // Not detected at compile time<br>. . .<br>BankAccount account = (BankAccount) accounts2.getFirst(); // Run-time error</pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>Syntax 22.1: Instantiating a Generic Class</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="70%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">
+            <pre><i>GenericClassName&lt;Type<sub>1</sub>, Type<sub>2</sub>, . . .&gt;</i></pre>
+            </td>
+            <td><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>ArrayList&lt;BankAccount&gt;<br>HashMap&lt;String, Integer&gt;</pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To supply specific types for the type variables of a generic class </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li>The standard library provides a class <tt>HashMap&lt;K, V&gt;</tt>
+with key type <tt>K</tt> and value
+type <tt>V</tt>. Declare a hash map that maps strings to integers.</li>
+  <li>The <a target="_blank" href="code/tree/BinarySearchTree.java">binary search tree</a>&nbsp; is an example of
+generic programming
+because you can use it with any classes that implement the <tt>Comparable</tt>
+interface. Does it achieve genericity through inheritance or type
+variables?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li><tt>HashMap&lt;String, Integer&gt;</tt></li>
+  <li>It uses inheritance.</li>
+</ol>
+<br>
+<h2>Implementing Generic Classes</h2>
+<ul>
+  <li>Example: simple generic class that stores pairs of objects
+    <pre>Pair&lt;String, BankAccount&gt; result<br>      = new Pair&lt;String, BankAccount&gt;("Harry Hacker", harrysChecking);</pre>
+  </li>
+  <li>The <tt>getFirst</tt> and <tt>getSecond</tt> retrieve first and
+second values of pair
+    <pre>String name = result.getFirst();<br>BankAccount account = result.getSecond();</pre>
+  </li>
+  <li>Example of use: return two values at the same time (method
+returns a <tt>Pair</tt>)</li>
+  <li>Generic <tt>Pair</tt> class requires two type variables
+    <pre>public class Pair&lt;T, S&gt;</pre>
+  </li>
+</ul>
+<h2>Good Type Variable Names</h2>
+<table border="1" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <th>&nbsp;Type Variable&nbsp;</th>
+      <th>Name Meaning</th>
+    </tr>
+    <tr>
+      <td align="center"><tt>E</tt></td>
+      <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;Element type in a
+collection&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center"><tt>K</tt></td>
+      <td align="center">Key type in a map</td>
+    </tr>
+    <tr>
+      <td align="center"><tt>V</tt></td>
+      <td align="center">Value type in a map</td>
+    </tr>
+    <tr>
+      <td align="center"><tt>T</tt></td>
+      <td align="center">General type</td>
+    </tr>
+    <tr>
+      <td align="center"><tt>S</tt>, <tt>U</tt></td>
+      <td align="center">Additional general types</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Class <tt>Pair</tt></h2>
+<pre>public class Pair&lt;<code class="blue">T</code>, <code
+ class="blue">S</code>&gt;<br>{<br>   public Pair(<code class="blue">T</code> firstElement, <code
+ class="blue">S</code> secondElement)<br>   {<br>      first = firstElement;<br>      second = secondElement;<br>   }<br><br>   public <code
+ class="blue">T</code> getFirst() { return first; }<br>   public <code
+ class="blue">S</code> getSecond() { return second; }<br><br>   private <code
+ class="blue">T</code> first;<br>   private <code class="blue">S</code> second;<br>}</pre>
+<h2>Turning <tt>LinkedList</tt> into a Generic Class</h2>
+<pre>public class LinkedList&lt;<code class="blue">E</code>&gt;<br>{<br>   . . .<br>   public <code
+ class="blue">E</code> removeFirst()<br>   {<br>      if (first == null)<br>         throw new NoSuchElementException();<br>      <code
+ class="blue">E</code> element = first.data;<br>      first = first.next;<br>      return element;<br>   }<br>   . . .<br>   private Node first;<br><br>   private class Node<br>   {<br>      public <code
+ class="blue">E</code> data;<br>      public Node next;<br>   }<br>}</pre>
+<h2>Implementing Generic Classes</h2>
+<ul>
+  <li>Use type <tt>E</tt> when you receive, return, or store an
+element object</li>
+  <li>Complexities arise only when your data structure uses helper
+classes</li>
+  <li>If helpers are inner classes, no need to do anything special</li>
+  <li>Helper types defined outside generic class need to become generic
+classes too<br>
+    <tt>public class ListNode&lt;E&gt;</tt><br>
+  </li>
+</ul>
+<h2>Syntax: Defining a Generic Class</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="70%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">
+            <pre><i>accessSpecifier</i> class <i>GenericClassName&lt;TypeVariable<sub>1</sub>, TypeVariable<sub>2</sub>, . . .&gt;</i><br>{<br>   <i>constructors<br>   methods<br>   fields</i><br>}</pre>
+            </td>
+            <td><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>public class Pair&lt;T, S&gt;<br>{<br>   . . .<br>}<br></pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To define a generic class with methods and fields that depend on type
+variables </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>File LinkedList.java</h2>
+<h2>
+<iframe src="code/genlist/LinkedList.java.html" class="code" name="I1" width="684" height="363">
+Your browser does not support the
+&amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;gt; tag.</iframe>
+</h2>
+<h2>File ListIterator.java</h2>
+<iframe src="code/genlist/ListIterator.java.html" class="code" width="683" height="337">
+Your browser does not support the
+&amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;gt; tag.</iframe>
+<h2>File ListTester.java</h2>
+<iframe src="code/genlist/ListTester.java.html" class="code" width="685" height="366">
+Your browser does not support the
+&amp;amp;amp;amp;amp;lt;iframe&amp;amp;amp;amp;amp;gt; tag.</iframe>
+<h2>Output</h2>
+<pre>Dick<br>Harry<br>Juliet<br>Nina<br>Tom</pre>
+<h2>Self Check</h2>
+<ol>
+  <li value="3">How would you use the generic <tt>Pair</tt> class to
+construct a pair of strings <tt>"Hello"</tt>
+and <tt>"World"</tt>?</li>
+  <li>What change was made to the <tt>ListIterator</tt> interface, and
+why was that change necessary?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="3"><tt>new Pair&lt;String, String&gt;("Hello", "World")</tt></li>
+  <li><tt>ListIterator&lt;E&gt;</tt> is now a generic type. Its
+interface depends on the element type of the linked list.</li>
+</ol>
+<br>
+<h2>Generic Methods</h2>
+<ul>
+  <li><em>Generic method</em>: method with a type variable</li>
+  <li>Can be defined inside ordinary and generic classes</li>
+  <li>A regular (non-generic) method:
+    <pre>/**<br>   Prints all elements in an array of strings.<br>   @param a the array to print<br>*/<br>public static void print(String[] a)<br>{<br>   for (String e : a)<br>      System.out.print(e + " ");<br>   System.out.println();<br>}</pre>
+  </li>
+  <li>What if we want to print an array of <tt>Rectangle</tt> objects
+instead?
+    <pre>public static &lt;<code class="blue">E</code>&gt; void print(<code
+ class="blue">E</code>[] a)<br>{<br>   for (<code class="blue">E</code> e : a)<br>      System.out.print(e + " ");<br>   System.out.println();<br>}</pre>
+  </li>
+</ul>
+<h2>Generic Methods</h2>
+<ul>
+  <li>When calling a generic method, you need not instantiate the type
+variables:
+    <pre>Rectangle[] rectangles = . . .;<br>ArrayUtil.print(rectangles);</pre>
+  </li>
+  <li>The compiler deduces that <tt>E</tt> is <tt>Rectangle</tt></li>
+  <li>You can also define generic methods that are not static</li>
+  <li>You can even have generic methods in generic classes</li>
+  <li>Cannot replace type variables with primitive types <br>
+e.g.: cannot use the generic <tt>print</tt> method to print an array
+of type <tt>int[]</tt></li>
+</ul>
+<h2>Syntax: Defining a Generic Method</h2>
+<table bgcolor="#ffffff" border="1" cellpadding="10" width="70%">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">
+            <pre><i>modifiers &lt;TypeVariable<sub>1</sub>, TypeVariable<sub>2</sub>, . . .&gt; returnType methodName(parameters)</i><br>{<br>   <i>body</i><br>}</pre>
+            </td>
+            <td><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td>
+            <pre>public static <code class="blue">&lt;E&gt;</code> void print(<code
+ class="blue">E</code>[] a)<br>{<br>   . . .<br>}<br></pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+To define a generic method that depends on type variables </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Self Check</h2>
+<ol>
+  <li value="5">Exactly what does the generic <tt>print</tt> method
+print when you pass an array of <tt>BankAccount</tt> objects
+containing two bank accounts with zero
+balances?</li>
+  <li>Is the <tt>getFirst</tt> method of the <tt>Pair</tt> class a
+generic method?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="5">The output depends on the definition of the <tt>toString</tt>
+method in the <tt>BankAccount</tt> class.</li>
+  <li>No&#8211;the method has no type parameters. It is an ordinary method in
+a generic class.</li>
+</ol>
+<br>
+<h2>Constraining Type Variables</h2>
+<ul>
+  <li>Type variables can be constrained with bounds
+    <pre>public static &lt;E <b><code class="blue">extends Comparable</code></b>&gt; E min(E[] a)<br>{<br>   E smallest = a[0];<br>   for (int i = 1; i &lt; a.length; i++)<br>      if (a[i].compareTo(smallest) &lt; 0) smallest = a[i];<br>   return smallest;<br>}</pre>
+  </li>
+  <li>Can call <tt>min</tt> with a <tt>String[]</tt> array but not
+with a <tt>Rectangle[]</tt> array</li>
+  <li><tt>Comparable</tt> bound necessary for calling <tt>compareTo</tt>
+    <br>
+Otherwise, <tt>min</tt> method would not have compiled</li>
+</ul>
+<h2>Constraining Type Variables</h2>
+<ul>
+  <li>Very occasionally, you need to supply two or more type bounds
+    <pre>&lt;E <code class="blue">extends Comparable &amp; Cloneable</code>&gt;</pre>
+  </li>
+  <li><tt>extends</tt>, when applied to type variables, actually means
+"extends or implements"</li>
+  <li>The bounds can be either classes or interfaces</li>
+  <li>Type variable can be replaced with a class or interface type</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="7">Declare a generic <tt>
+  <a target="_blank" href="code/tree/BinarySearchTree.java">BinarySearchTree</a></tt> class with
+an appropriate type variable.</li>
+  <li>Modify the <tt>min</tt> method to compute the minimum of an
+array of elements that implements the <tt>
+  <a target="_blank" href="code/Measurable.java">Measurable</a></tt> interface.</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="7"><tt>public class BinarySearchTree&lt;E extends
+Comparable&gt;</tt></li>
+  <li>
+    <pre>public static &lt;E extends Measurable&gt; E min(E[] a)<br>{<br>   E smallest = a[0];<br>   for (int i = 1; i &lt; a.length; i++)<br>      if (a[i].getMeasure() &lt; smallest.getMeasure()) &lt; 0)<br>         smallest = a[i];<br>   return smallest;<br>}</pre>
+  </li>
+</ol>
+<br>
+<h2>Wildcard Types</h2>
+<table border="1" cellpadding="5" cellspacing="0">
+  <tbody>
+    <tr>
+      <th align="center">Name</th>
+      <th align="center">Syntax</th>
+      <th align="center">Meaning</th>
+    </tr>
+    <tr>
+      <td align="center">Wildcard with lower bound</td>
+      <td align="left"><tt>? extends B</tt></td>
+      <td align="center">Any subtype of <tt>B</tt></td>
+    </tr>
+    <tr>
+      <td align="center">Wildcard with upper bound</td>
+      <td align="center"><tt>? super B</tt></td>
+      <td align="center">Any supertype of <tt>B</tt></td>
+    </tr>
+    <tr>
+      <td align="center">Unbounded wildcard</td>
+      <td align="center"><tt>?</tt></td>
+      <td align="center">Any type</td>
+    </tr>
+  </tbody>
+</table>
+<p>
+</p>
+<h2>Wildcard Types</h2>
+<ul>
+  <li>
+    <pre>public void addAll(LinkedList&lt;? extends E&gt; other)<br>{<br>   ListIterator&lt;E&gt; iter = other.listIterator();<br>   while (iter.hasNext()) add(iter.next());<br>}</pre>
+  </li>
+  <li>
+    <pre>public static &lt;E extends Comparable&lt;E&gt;&gt; E min(E[] a)</pre>
+  </li>
+  <li>
+    <pre>public static &lt;E extends Comparable&lt;? super E&gt;&gt; E min(E[] a)</pre>
+  </li>
+  <li>
+    <pre>static void reverse(List&lt;?&gt; list)</pre>
+You can think of that declaration as a shorthand for
+    <pre>static &lt;T&gt; void reverse(List&lt;T&gt; list)</pre>
+  </li>
+</ul>
+<h2>Raw Types</h2>
+<ul>
+  <li>The virtual machine works with raw types, not with generic classes</li>
+  <li>The raw type of a generic type is obtained by erasing the type
+variables</li>
+  <li>For example, generic class <tt>Pair&lt;T, S&gt;</tt> turns into
+the following raw class:
+    <pre>public class Pair<br>{<br>   public Pair(<code class="blue">Object</code> firstElement, <code
+ class="blue">Object</code> secondElement)<br>   {<br>      first = firstElement;<br>      second = secondElement;<br>   }<br>   public <code
+ class="blue">Object</code> getFirst() { return first; }<br>   public <code
+ class="blue">Object</code> getSecond() { return second; }<br><br>   private <code
+ class="blue">Object</code> first;<br>   private <code class="blue">Object</code> second;<br>}</pre>
+  </li>
+</ul>
+<h2>Raw Types</h2>
+<ul>
+  <li>Same process is applied to generic methods:
+    <pre>public static <code class="blue">Comparable</code> min(<code
+ class="blue">Comparable</code>[] a)<br>{<br>   <code class="blue">Comparable</code> smallest = a[0];<br>   for (int i = 1; i &lt; a.length; i++)<br>      if (a[i].compareTo(smallest) &lt; 0) smallest = a[i];<br>   return smallest;<br>}</pre>
+  </li>
+  <li>Knowing about raw types helps you understand limitations of Java
+generics</li>
+  <li>For example, you cannot replace type variables with primitive
+types</li>
+  <li>To interface with legacy code, you can convert between generic
+and raw types</li>
+  <li>You can not construct new objects of a generic type (<tt>new E()</tt>) or 
+  an array of generic type (<tt>new E[]</tt>)</li>
+  <li>You can not use type variables to define static fields, static methods, or 
+  static inner classes.<br>
+  However you can make static methods and static inner classes as generic ones 
+  by adding type parameters.</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+  <li value="9">What is the erasure of the <tt>print</tt> method below?<pre>public static &lt;<code class="blue">E</code>&gt; void print(<code
+ class="blue">E</code>[] a)<br>{<br>   for (<code class="blue">E</code> e : a)<br>      System.out.print(e + " ");<br>   System.out.println();<br>}</pre>
+  </li>
+  <li>What is the raw type of the <tt>
+  <a target="_blank" href="code/genlist/LinkedList.java.html">LinkedList&lt;E&gt;</a></tt> class?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li value="9">
+    <pre>public static void print(Object[] a)<br>{<br>   for (Object e : a)<br>      System.out.print(e + " ");<br>   System.out.println();<br>}</pre>
+  </li>
+  <li>The <tt><a target="_blank" href="code/impllist/LinkedList.java">LinkedList</a></tt> class.</li>
+</ol>
+<br>
+<br>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd712e1a8a34a0',t:'MTczOTIwNDU4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

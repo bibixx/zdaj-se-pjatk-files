@@ -1,0 +1,121 @@
+Numeracja zadan taka jak z kartki, numery w nawasach - takie jak w pliku pdf.
+
+Ad. 1
+
+min bag 3, 2, 8
+
+Ad. 2 (nie ma w pliku)
+
+XXX
+
+Ad. 3 (2)
+
+print bag(1, 2, 3) union bag(4, 5, 6);
+print avg (bag(1, 2, 3) union bag(4, 5, 6));
+
+Ad. 4 (3)
+
+print 1 in bag(1, 2, 3, 4);
+
+Ad. 5 (4)
+
+print emp;
+
+Ad. 6 (5)
+
+print emp.last;
+
+Ad. 7 (6)
+
+print emp.last, emp.salary;
+
+Ad. 8 (7)
+
+print count(emp);
+
+Ad. 9 (8)
+
+print avg(emp.salary);
+
+Ad. 10 (9)
+
+print (emp where last  = "Smith").salary;
+
+Ad. 11 (10)
+
+print emp where salary > 3000 and job = "Programmer";
+
+Ad. 12 (11)
+
+print emp.("Pracownik "+ last+ " jest zatrudniony jako "+ job+ " i zarabia "+ salary);
+
+Ad. 13 (12)
+
+print (emp orderby salary)[2..4];
+
+Ad. 14 (13)
+
+print forall(emp) exists works;
+
+Ad. 15 (14)
+
+print emp.(salary as pensja, last as nazwisko) as pracownik groupas pracownicy;
+
+Ad. 16 (15)
+
+print (dept where name = "Sales").employs^;
+
+Ad. 17 (16)
+
+print dept where location = "London";
+
+Ad. 18 (17)
+
+print dept.(name, max employs^.salary);
+
+Ad. 19 (18)
+
+print (emp where salary = max (emp.salary)).(salary, works^);
+
+Ad. 20 (19)
+
+print (emp as e).(e, e.works^);
+
+Ad. 21 (20)
+
+print (emp where last = "Brown").works^.employs^;
+
+Ad. 22 (21)
+
+print dept where forall (employs^) salary > 5000;
+
+Ad. 23 (22)
+
+print (dept as d).(d, avg(d.employs^.salary));
+print dept join avg employs^.salary;
+
+Ad. 24 (23)
+
+print (dept where location = "Tokyo").employs^;
+
+Ad. 25 (24)
+
+print dept where count(employs) >= 3;
+
+Ad. 26 (25)
+
+print "Tokyo" in (emp where last = "Smith").works^.location;
+
+Ad. 27 (26)
+
+sum((dept where location = "Rome").employs^.salary)
+
+Ad. 28 (27)
+
+print emp where last in dept.name;
+
+Ad. 29 (28)
+
+print dept where not exists (employs^ where job = "Programmer");
+print dept where forall(employs^) not job = "Programmer";
+

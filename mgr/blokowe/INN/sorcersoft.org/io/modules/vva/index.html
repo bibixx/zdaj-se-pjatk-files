@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Verification, Validation, and Accreditation</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Verification, Validation, and Accreditation</span><BR>
+
+<H2>Course Map</H2>
+<img border="0" src="../../images/CourseMap6.png">
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Agenda</h2>
+<ul>
+	<li>What Are Verification, Validation, and Accreditation?</li>
+	<li>V&amp;V Myths Misconceptions</li>
+	<li>Verification</li>
+	<li>Validation</li>
+	<li>Sargent Circle</li>
+	<li>High Level VV&amp;A Process</li>
+	<li>Criteria for a Successful VV&amp;A</li>
+	<li>V&amp;V Techniques</li>
+	<li>References</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+
+<h2>What Are Verification, Validation, and Accreditation?</h2>
+<p>In the context of computer software, the terms verification, validation, and 
+accreditation have specific meanings. </p>
+<ul>
+	<li>V&amp;V starts with <b>requirements reviews</b> and continues trough <b>
+	design reviews</b> and <b>code inspections</b> to <b>product testing</b>.</li>
+	<li>Three basic approaches<ul>
+	<li><b>V&amp;V</b> can be done by the development team</li>
+	<li><b>IV&amp;V</b> (uses third party)</li>
+	<li>IV&amp;V can be done <b>concurrently </b>with SW development</li>
+</ul>
+	</li>
+	<li>IV&amp;V and VV&amp;A refer to the same fundamental activities, verification and 
+	validation. Both verification and validation are best done by independent 
+	organizations, and usually these activities are followed (when successful) 
+	by accreditation.</li>
+	<li><b>Verification</b> is an activity that determines whether the product of each 
+	phase of the software development cycle <b>meets the requirements</b> made upon it 
+	in each preceding phase, as in the questions <em>&quot;<b>Does the software design 
+	satisfy all elements of the requirements?</b>&quot;</em> or <em>&quot;<b>Does the 
+	implementation accurately reflect the design?</b>&quot;</em></li>
+	<li><b>Validation</b> is an activity that answers the question, <em>&quot;<b>Is the 
+	software suitable for its intended purpose?</b>&quot;</em> Provided the verification 
+	activity has been properly performed, that question translates roughly to
+	<em>&quot;<b>Does the software meet its requirements when it's run?</b>&quot;</em></li>
+	<li>Accreditation is a milestone: when it is reached, the accrediting agency 
+	issues a statement that the software product is appropriate for a specified 
+	purpose within a well-defined set of circumstances. Accreditation must be 
+	done by a respected authority in the field if the software's user community 
+	is to have confidence in the software.</li>
+</ul>
+<p>It is important that these activities are kept <em>independent</em> of the 
+development activity and that they are conducted <em>rigorously</em>. This is, 
+among other reasons, to ensure that the customer's confidence in the software 
+can remain high.</p>
+<HR align="left" width="100%" size="4" noshade>
+
+<h2>Verification</h2>
+<p><b><i>Are we building the product right?</i> </b> </p>
+<ul>
+	<li><b>The role of SW verification involves checking that the
+	<font color="#FF0000">SW</font> conforms to its <font color="#FF0000">
+	specification</font>.</b></li>
+	<li>Have the model and simulation been built so 
+that they fully satisfy the developer&#8217;s intent (as indicated in specifications)? 
+	</li>
+	<li>Verification has two aspects:
+	<ul>
+	<li>design (all specifications and nothing else are 
+included in the model or simulation design) </li>
+	<li>implementation (all 
+specifications and nothing else are included in the model or simulation as 
+built).</li>
+</ul>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Validation</h2>
+<p><b><i>Are we building the right product?</i> </b> </p>
+<ul>
+	<li><b>The aim of validation is to ensure that the <font color="#FF0000">SW 
+	system</font> meets the <font color="#FF0000">customer's expectations</font>.</b></li>
+	<li>Will the model or simulation be able to 
+adequately support <b>its intended use</b>? </li>
+	<li>Is its fidelity appropriate for that? 
+	</li>
+	<li>Validation has two aspects:
+	<ul>
+	<li>conceptual validation (when the anticipated fidelity 
+of the model or simulation conceptual model is assessed) 
+	</li>
+	<li>operational validation 
+(when results from the implemented model or simulation are compared with an appropriate referent to demonstrate that the model or simulation can in fact 
+support the intended use).</li>
+</ul>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+
+<h2><a name="sargent"></a>Sargent Circle</h2>
+<p><img border="0" src="images/vva-circle.png" width="534" height="526"></p>
+<ul>
+	<li><i>Conceptual model validity</i> is defined as determining that the 
+	theories and assumptions underlying the conceptual model are correct and 
+	that the model representation of the problem entity is &#8220;reasonable&#8221; for the 
+	intended purpose of the model. </li>
+	<li><i>Computerized model verification</i> is defined as ensuring that the 
+	computer programming and implementation of the conceptual model is correct. 
+	</li>
+	<li><i>Operational validity</i> is defined as determining that the model&#8217;s 
+	output behavior has sufficient accuracy for the model&#8217;s intended purpose 
+	over the domain of the model&#8217;s intended applicability. </li>
+	<li><i>Data validity</i> is defined as ensuring that the data necessary for 
+	model building, model evaluation and testing, and conducting the model 
+	experiments to solve the problem are adequate and correct.</li>
+	<li>The level of required confidence (&quot;fit for purpose&quot;) depends on the <b>
+	system's purpose</b> (SW functions), the <b>expectations</b> of the system 
+	users, and the <b>current marketing trends</b> (competition, price, quality)</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+
+<h2>Static and Dynamic V&amp;V</h2>
+<p>Within the V&amp;V process there are two complementary approaches to the system 
+checking and analysis:</p>
+<ul>
+	<li>System inspections or peer reviews</li>
+	<li>SW testing</li>
+</ul>
+<p>&nbsp;</p>
+<p><img border="0" src="images/static-dynamicVV.png" width="650" height="272"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+
+<h2>V&amp;V Planning (V-Model)</h2>
+<p><img border="0" src="images/V-Model.png" width="650" height="228"></p>
+<p>Test plans as link between development and testing</p>
+
+<HR align="left" width="100%" size="4" noshade>
+
+<h2>The Program Inspection Process</h2>
+<p><img border="0" src="images/inspectionProcess.png" width="650" height="143"></p>
+<ul>
+	<li>Find program defects rather than to consider broader design issues 
+	(Fagan, IBM, 1970s).<br>
+	Roles: author, reader, tester, moderator.&nbsp; The reader reads the code 
+	aloud to the inspection team, the tester inspects the code from testing 
+	perspective and the moderator organizes the process.</li>
+	<li>More than 60% of errors in a program can be detected using informal 
+	program inspections (Fagan).</li>
+	<li>More formal approach to inspection based on correctness arguments can 
+	detect more than 90% of the errors (Mills et al.).</li>
+	<li>One of the most effective uses of reviews is to review the test cases 
+	for a system (Gilb and Graham).</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+
+<h2>Cleanroom SW Development</h2>
+<ul>
+	<li>The name is derived from the 'Cleanroom' process in semiconductor 
+	fabrication. The philosophy is defect avoidance rather than defect removal.</li>
+	<li>This software development process is based on:<ul>
+		<li>Incremental development;</li>
+		<li>Formal specification;</li>
+		<li>Static verification using correctness arguments;</li>
+		<li>Statistical testing to determine program reliability.</li>
+	</ul>
+	</li>
+	<li>Cleanroom process teams<ul>
+		<li>Specification team. Responsible for developing and maintaining the 
+		system specification.</li>
+		<li>Development team. Responsible for developing and verifying the 
+		software. The software is NOT executed or even compiled during this 
+		process.</li>
+		<li>Certification team. Responsible for developing a set of statistical 
+		tests to exercise the software after development. Reliability growth 
+		models used to determine when reliability is acceptable.</li>
+		<li>However, the process is not widely used. It is not clear how this 
+		approach can be transferred to an environment with less skilled or less 
+		motivated software engineers.</li>
+	</ul>
+	<p>&nbsp;</li>
+</ul>
+<p><img border="0" src="images/cleanroom.png" width="650" height="205"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+
+<h2>High Level VV&amp;A Process</h2>
+<h2><br>
+<img border="0" src="images/vva-process.png" width="650" height="471"><br>
+&nbsp;</h2>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Criteria for a Successful VV&amp;A</h2>
+<p>Verification:
+<ul>
+<li>M&amp;S Requirements established and documented
+<li>Successful review of Conceptual Model
+<li>All outstanding Software Change Requests (SCRs) were implemented, tested, and met the requirements for that 
+version
+<li>All features and feature limitations documented
+</ul>
+Validation:
+<ul>
+<li>A Verified M&amp;S
+<li>Verification results and report
+<li>Successful runs of a representative set of scenarios and vignettes
+<li>Reasonable comparison of results to existing legacy data
+<li>Favorable SME (Subject Matter Expert) panel evaluation and review
+</ul>
+Accreditation:
+<ul>
+<li>Successful Verification and Validation
+<li>V&amp;V Reports and Analyses and Accreditation Package<
+<li>Meets accreditation requirements for the use intended
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+
+<h2>V&amp;V Techniques</h2>
+Informal V&amp;V Techniques
+<ul>
+<li>Tools and approaches rely heavily on human reasoning and subjectivity</li>
+<li>Does not include stringent mathematical formalism</li>
+</ul>
+Static V&amp;V Techniques
+<ul>
+<li>Assess the accuracy of the static model design and source code<br>
+<li>Does not require machine execution of the model</li>
+<li>Static &#8220;walk-through&#8221; of the execution can be done</li>
+</ul>
+Dynamic V&amp;V Techniques
+<ul>
+<li>Requires model execution<br>
+<li>Evaluates the model based execution behavior</li>
+</ul>
+Formal V&amp;V Techniques (or Formal Methods)<br>
+<ul>
+<li>Based on formal mathematical proofs or correctness</li>
+<li>Most thorough means of model V&amp;V</li>
+<li>Require significant effort - best applied to complex problems</li>
+</ul>
+&nbsp;<HR align="left" width="100%" size="4" noshade>
+<h2>References</h2>
+
+<ol>
+	<li><a href="sargent-2000.pdf">Verification, Validation, and Accreditation of Simulation Models</a>, Robert 
+	G. Sargent, Proceedings of the 2000 Winter Simulation Conference<br>
+	J. A. Joines, R. R. Barton, K. Kang, and P. A. Fishwick, eds.</li>
+
+<li><a href="http://www.jhuapl.edu/techdigest/td2502/Pace.pdf">Modeling and 
+Simulation Verification and Validation Challenges, Dale K. Pace</a>
+<li>
+Lewis, Robert O. <cite>Independent Verification and Validation: A Life Cycle 
+Engineering Process for Quality Software</cite>. New York: John Wiley &amp; Sons, 
+Inc., 1992.</li>
+</ol>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c6e969b197',t:'MTczOTIwNDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

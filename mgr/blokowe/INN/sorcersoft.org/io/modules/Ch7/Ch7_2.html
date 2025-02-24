@@ -1,0 +1,956 @@
+<TITLE>SE: Java Object Model</TITLE>
+<HTML xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns="http://www.w3.org/TR/REC-html40">
+<HEAD>
+<META name="keywords" content="Intro to Streams">
+
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Java Object Model</span><BR>
+
+<H2>Course Map</H2>
+<img border="0" src="../../images/CourseMap14.png" width="603" height="495">
+
+
+<H2>Agenda</H2>
+
+<ul>
+  <li>The Java Type System </li>
+  <li>Type Inquiry </li>
+  <li>The <tt>Object</tt> Class </li>
+  <li>Shallow and Deep Copy </li>
+  <li>Serialization </li>
+  <li>Reflection </li>
+  <li>The Java Beans Component Model </li>
+	<li><a href="../Ch22/ch22.html">Type Variables and Generic Classes</a></li>
+</ul>
+<h2>Types<br>
+</h2>
+<ul>
+  <li>Type: set of values and the operations that can be applied to the
+values </li>
+  <li>Strongly typed language: compiler and run-time system check that
+no operation can execute that violates type system rules </li>
+  <li>Compile-time check<br>
+    <tt>Employee e = new Employee();<br>
+e.clear(); // ERROR</tt> </li>
+  <li>Run-time check:<br>
+    <tt>e = null;<br>
+e.setSalary(20000); // ERROR</tt><br>
+  </li>
+</ul>
+<h2>Java Types</h2>
+<ul>
+  <li>Primitive types:<br>
+    <tt>int short long byte<br>
+char float double boolean</tt> </li>
+  <li>Class types </li>
+  <li>Interface types </li>
+  <li>Array types </li>
+  <li>The <tt>null</tt> type </li>
+  <li>Note: <tt>void</tt> is not a type<br>
+  </li>
+</ul>
+<h2>Exercise: What kind of type?</h2>
+<ul>
+  <li><tt>int</tt> </li>
+  <li><tt>Rectangle</tt> </li>
+  <li><tt>Shape</tt> </li>
+  <li><tt>String[]</tt> </li>
+  <li><tt>double[][]</tt><br>
+  </li>
+</ul>
+<h2>Java Values</h2>
+<ul>
+  <li>value of primitive type </li>
+  <li>reference to object of class type </li>
+  <li>reference to array </li>
+  <li><tt>null</tt> </li>
+  <li>Note: Can't have value of interface type </li>
+</ul>
+<h2>Exercise: What kind of value?</h2>
+<ul>
+  <li>13 </li>
+  <li><tt>new Rectangle(5, 10, 20, 30);</tt> </li>
+  <li><tt>"Hello"</tt> </li>
+  <li><tt>new int[] { 2, 3, 5, 7, 11, 13 }</tt> </li>
+  <li><tt>null</tt> </li>
+</ul>
+<h2>Subtype Relationship</h2>
+S is a subtype of T if<br>
+<ol>
+  <li>S and T are the same type </li>
+  <li>S and T are both class types, and T is a direct or indirect
+superclass of S </li>
+  <li>S is a class type, T is an interface type, and S or one of its
+superclasses implements T </li>
+  <li>S and T are both interface types, and T is a direct or indirect
+superinterface of S </li>
+  <li>S and T are both array types, and the component type of S is a
+subtype of the component type of T </li>
+  <li>S is not a primitive type and T is the type <tt>Object</tt> </li>
+  <li>S is an array type and T is <tt>Cloneable</tt> or <tt>Serializable</tt><br>
+  </li>
+  <li>S is the <tt>null</tt> type and T is not a primitive type </li>
+</ol>
+<h2>Subtype Examples</h2>
+<ul>
+  <li><tt>Container</tt> is a subtype of <tt>Component</tt> </li>
+  <li><tt>JButton</tt> is a subtype of <tt>Component</tt> </li>
+  <li><tt>FlowLayout</tt> is a subtype of <tt>LayoutManager</tt> </li>
+  <li><tt>ListIterator</tt> is a subtype of <tt>Iterator</tt> </li>
+  <li><tt>Rectangle[]</tt> is a subtype of <tt>Shape[]</tt> </li>
+  <li><tt>int[]</tt> is a subtype of <tt>Object</tt> </li>
+  <li><tt>int</tt> is not a subtype of <tt>long</tt> </li>
+  <li><tt>long</tt>&nbsp; is not a subtype of <tt>int</tt> </li>
+  <li><tt>int[]</tt> is not a subtype of <tt>Object[]</tt> </li>
+</ul>
+<h2>Subtype Examples</h2>
+<img alt="." title=""
+ src="images/Ch7_01.gif" width="600" height="708"><br>
+<br>
+<h2>The ArrayStoreException</h2>
+<ul>
+  <li><tt>Rectangle[]</tt> is a subtype of <tt>Shape[]</tt> </li>
+  <li>Can assign <tt>Rectangle[]</tt> value to <tt>Shape[]</tt>
+variable:
+    <pre>Rectangle[] r = new Rectangle[10];<br>Shape[] s = r;<br></pre>
+  </li>
+  <li>Both <tt>r</tt> and <tt>s</tt> are references to the same array
+  </li>
+  <li>That array holds rectangles </li>
+  <li>The assignment<br>
+    <tt>s[0] = new Polygon();</tt><br>
+compiles </li>
+  <li>Throws an <tt>ArrayStoreException</tt> at runtime </li>
+  <li>Each array remembers its component type </li>
+</ul>
+<h2>Array References</h2>
+<img alt="." title=""
+ src="images/Ch7_02.gif" width="600" height="361"><br>
+<br>
+<h2>Wrapper Classes</h2>
+<ul>
+  <li>Primitive types aren't classes </li>
+  <li>Use wrappers when objects are expected </li>
+  <li>Wrapper for each type:<br>
+    <pre>Integer Short Long Byte<br>Character Float Double Boolean<br></pre>
+  </li>
+  <li>Auto-boxing and auto-unboxing<tt><br>
+    </tt>
+    <pre>ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();<br>numbers.add(13); // calls new Integer(13)<br>int n = numbers.get(0); // calls intValue();<br></pre>
+  </li>
+</ul>
+<h2>Enumerated Types</h2>
+<ul>
+  <li>Finite set of values </li>
+  <li>Example:&nbsp; <tt>enum Size { SMALL, MEDIUM, LARGE }</tt><br>
+  </li>
+  <li>Typical use:<br>
+    <tt>Size imageSize = Size.MEDIUM;</tt><br
+ style="font-family: monospace;">
+    <tt>if (imageSize == Size.SMALL) . . .</tt></li>
+  <li>Safer than&nbsp;integer constants<br>
+    <tt>public static final int SMALL = 1;<br>
+public static final int MEDIUM = 2;<br>
+public static final int LARGE = 3;</tt> </li>
+</ul>
+<h2>Typesafe Enumerations</h2>
+<ul>
+  <li><tt>enum</tt> equivalent to class with fixed number of instances<br>
+    <tt>public class Size</tt><br style="font-family: monospace;">
+    <tt>{</tt><br style="font-family: monospace;">
+    <tt>&nbsp;&nbsp; <b>private /* ! */</b> Size() {&nbsp; }</tt><br
+ style="font-family: monospace;">
+    <tt></tt><tt>&nbsp;&nbsp; public static final Size SMALL = new
+Size();</tt><br style="font-family: monospace;">
+    <tt>&nbsp;&nbsp; public static final Size MEDIUM = new
+Size();</tt><br style="font-family: monospace;">
+    <tt>&nbsp;&nbsp; public static final Size LARGE = new Size();</tt><br
+ style="font-family: monospace;">
+    <tt>}</tt> </li>
+  <li><tt>enum</tt> types are classes; can add methods, fields,
+constructors<br style="font-family: monospace;">
+    <br>
+  </li>
+</ul>
+<h2>Type Inquiry</h2>
+<ul>
+  <li>Test whether <tt>e</tt> is a <tt>Shape</tt>:<br>
+    <tt>if (e instanceof Shape) . . .</tt> </li>
+  <li>Common before casts:<br>
+    <tt>Shape s = (Shape) e;</tt> </li>
+  <li>Don't know exact type of <tt>e</tt> </li>
+  <li>Could be any class implementing <tt>Shape</tt> </li>
+  <li>If <tt>e</tt> is <tt>null</tt>, test returns <tt>false</tt>
+(no exception) </li>
+</ul>
+<h2>The <tt>Class</tt> Class</h2>
+<ul>
+  <li><tt>getClass</tt> method gets class of any object </li>
+  <li>Returns object of type <tt>Class</tt> </li>
+  <li> <tt>Class</tt> object describes a <i>type</i>
+    <pre>Object e = new Rectangle();<br>Class c = e.getClass();<br>System.out.println(c.getName()); // prints java.awt.Rectangle<br></pre>
+  </li>
+  <li><tt>Class.forName</tt> method yields <tt>Class</tt> object:<br>
+    <tt>Class c = Class.forName("java.awt.Rectangle");</tt> </li>
+  <li><tt>.class</tt> suffix yields <tt>Class</tt> object:<br>
+    <tt>Class c = Rectangle.class; // java.awt prefix not needed</tt> </li>
+  <li><tt>Class</tt> is a misnomer: <tt>int.class</tt>, <tt>void.class</tt>,<tt>Shape.class</tt>
+  </li>
+</ul>
+<h2>An <tt>Employee</tt> Object vs. the <tt>Employee.class</tt> Object</h2>
+<img alt="." title=""
+ src="images/Ch7_03.gif" width="600" height="309"><br>
+<h2>Type Inquiry</h2>
+<ul>
+  <li>Test whether <tt>e</tt> is a <tt>Rectangle</tt>:<br>
+    <tt>if (e.getClass() == Rectangle.class) . . .</tt> </li>
+  <li>Ok to use <tt>==</tt> </li>
+  <li>A unique <tt>Class</tt> object for every class </li>
+  <li>Test fails for subclasses<br>
+  </li>
+  <li>Use <tt>instanceof</tt> to test for subtypes:<br>
+    <tt>if (e instanceof Rectangle) . . .</tt> </li>
+</ul>
+<h2>Array Types</h2>
+<ul>
+  <li>Can apply <tt>getClass</tt> to an array </li>
+  <li>Returned object describes an array type<br>
+    <pre>double[] a = new double[10];<br>Class c = a.getClass();<br>if (c.isArray())<br>   System.out.println(c.getComponentType()); <br>      // prints double<br></pre>
+  </li>
+  <li> <tt>getName</tt> produces strange names for array types<br>
+    <pre><tt>[D for double[])<br>[[java.lang.String; for String[][]</tt>
+    </pre>
+  </li>
+</ul>
+<h2>Object: The Cosmic Superclass</h2>
+<ul>
+  <li>All classes extend <tt>Object</tt> </li>
+  <li>Most useful methods:
+    <ul>
+      <li><tt>String toString()</tt> </li>
+      <li><tt>boolean equals(Object otherObject)</tt> </li>
+      <li><tt>Object clone()</tt> </li>
+      <li><tt>int hashCode()</tt> </li>
+    </ul>
+  </li>
+</ul>
+<h2>The <tt>toString</tt> Method</h2>
+<ul>
+  <li>Returns a string representation of the object </li>
+  <li>Useful for debugging </li>
+  <li>Example: <tt>Rectangle.toString</tt> returns something like<br>
+    <tt>java.awt.Rectangle[x=5,y=10,width=20,height=30]</tt> </li>
+  <li><tt>toString</tt> used by concatenation operator </li>
+  <li><tt>aString + anObject</tt><br>
+means<br>
+    <tt>aString + anObject<b>.toString()</b></tt> </li>
+  <li><tt>Object.toString</tt> prints class name and object address<br>
+    <tt>System.out.println(System.out)<br>
+    </tt> yields<br>
+    <tt>java.io.PrintStream@d2460bf</tt> </li>
+  <li>Implementor of <tt>PrintStream</tt> didn't override <tt>toString</tt></li>
+</ul>
+<h2>Overriding the <tt>toString</tt> Method</h2>
+<ul>
+  <li>Format all fields:<br>
+    <pre>public class Employee <br>{ <br>   public String toString() <br>   { <br>      return getClass().getName() <br>         + "[name=" + name <br>         + ",salary=" + salary <br>         + "]"; <br>   } <br>   ... <br>} <br></pre>
+  </li>
+  <li>Typical string:<br>
+    <pre>Employee[name=Harry Hacker,salary=35000]<br></pre>
+  </li>
+</ul>
+<h2>Overriding <tt>toString</tt> in Subclass</h2>
+<ul>
+  <li>Format superclass first </li>
+  <li>
+    <pre>public class Manager extends Employee <br>{ <br>   public String toString() <br>   {  <br>      <b>return super.toString() </b>
+         + "[department=" + department + "]"; 
+   } 
+   ... 
+} 
+
+    </pre>
+  </li>
+  <li>Typical string<br>
+    <pre>Manager[name=Dolly Dollar,salary=100000][department=Finance]<br></pre>
+  </li>
+  <li>Note that superclass reports actual class name </li>
+</ul>
+<h2>The <tt>equals</tt> Method</h2>
+<ul>
+  <li><tt>equals</tt> tests for equal <i>contents</i> </li>
+  <li><tt>==</tt> tests for equal <i>location</i> </li>
+  <li>Used in many standard library methods </li>
+  <li>Example: <tt>ArrayList.indexOf<br>
+    </tt>
+    <pre>/** <br>   Searches for the first occurrence of the given argument, <br>   testing for equality using the equals method. <br>   @param elem an object. <br>   @return the index of the first occurrence <br>   of the argument in this list; returns -1 if <br>   the object is not found. <br>*/ <br>public int indexOf(Object elem) <br>{ <br>   if (elem == null) <br>   { <br>      for (int i = 0; i &lt; size; i++) <br>         if (elementData[i] == null) return i; <br>   } <br>   else <br>   { <br>      for (int i = 0; i &lt; size; i++) <br>         if (elem.<b>equals</b>(elementData[i])) return i; <br>   } <br>   return -1; <br>} <br></pre>
+  </li>
+</ul>
+<h2>Overriding the <tt>equals</tt> Method</h2>
+<ul>
+  <li>Notion of equality depends on class </li>
+  <li>Common definition: compare all fields<br>
+    <pre>public class Employee <br>{ <br>   public boolean equals(Object otherObject) <br>      // not complete--see below <br>   { <br>      Employee other = (Employee)otherObject; <br>      return name.equals(other.name) <br>         &amp;&amp; salary == other.salary; <br>   } <br>   ... <br>} <br></pre>
+  </li>
+  <li>Must cast the <tt>Object</tt> parameter to subclass </li>
+  <li>Use <tt>==</tt> for primitive types, <tt>equals</tt> for object
+fields<br>
+  </li>
+</ul>
+<h2>Overriding <tt>equals</tt> in Subclass</h2>
+<ul>
+  <li>Call <tt>equals</tt> on superclass<br>
+    <pre>public class Manager <br>{ <br>   public boolean equals(Object otherObject) <br>   { <br>      Manager other = (Manager)otherObject; <br>      return super.equals(other) <br>         &amp;&amp; department.equals(other.department); <br>   } <br>}<br></pre>
+  </li>
+</ul>
+<h2>Not all <tt>equals</tt> Methods are Simple</h2>
+<ul>
+  <li>Two sets are equal if they have the same elements <i>in some
+order<br>
+    </i>
+    <pre>public boolean equals(Object o) <br>{ <br>   if (o == this) return true; <br>   if (!(o instanceof Set)) return false; <br>   Collection c = (Collection) o; <br>   if (c.size() != size()) return false; <br>   return containsAll(c); <br>} <br></pre>
+  </li>
+</ul>
+<h2>The <tt>Object.equals</tt>Method</h2>
+<ul>
+  <li> <tt>Object.equals</tt> tests for identity:<br>
+    <pre>public class Object <br>{ <br>   public boolean equals(Object obj) <br>   { <br>      return this == obj; <br>   } <br>   ... <br>}<br></pre>
+  </li>
+  <li>Override <tt>equals</tt> if you don't want to inherit that
+behavior </li>
+</ul>
+<h2>Requirements for <tt>equals</tt> Method</h2>
+<ul>
+  <li><i>reflexive</i>: <tt>x.equals(x)</tt> </li>
+  <li><i>symmetric</i>: <tt>x.equals(y)</tt> if and only if <tt>y.equals(x)</tt>
+  </li>
+  <li><i>transitive</i>: if <tt>x.equals(y)</tt>&nbsp; and <tt>y.equals(z)</tt>,
+then <tt>x.equals(z)</tt> </li>
+  <li><tt>x.equals(null)</tt> must return <tt>false</tt> </li>
+</ul>
+<h2>Fixing <tt>Employee.equals</tt></h2>
+<ul>
+  <li>Violates two rules </li>
+  <li>Add test for <tt>null</tt>:<br>
+    <tt>if (otherObject == null) return false</tt> </li>
+  <li>What happens if <tt>otherObject</tt> not an <tt>Employee</tt> </li>
+  <li>Should return <tt>false</tt> (because of symmetry) </li>
+  <li>Common error: use of <tt>instanceof<br>
+if (!(otherObject instanceof Employee)) return false;<br>
+&nbsp; &nbsp;// don't do this for non-final classes<br>
+    </tt> </li>
+  <li>Violates symmetry: Suppose <tt>e, m</tt> have same name, salary<br>
+    <tt>e.equals(m)</tt> is <tt>true</tt> (because <tt>m instanceof
+Employee</tt>)<br>
+    <tt>m.equals(e)</tt> is <tt>false</tt> (because <tt>e</tt> isn't
+an instance of <tt>Manager</tt>) </li>
+  <li>Remedy: Test for class equality<br>
+    <tt>if (getClass() != otherObject.getClass()) return false;</tt><br>
+  </li>
+</ul>
+<h2>The Perfect <tt>equals</tt> Method</h2>
+<ul>
+  <li>Start with these three tests:<br>
+    <pre>public boolean equals(Object otherObject) <br>{ <br>   if (this == otherObject) return true; <br>   if (otherObject == null) return false; <br>   if (getClass() != otherObject.getClass()) return false; <br>   ... <br>} <br></pre>
+  </li>
+  <li>First test is an optimization </li>
+</ul>
+<h2>Hashing</h2>
+<ul>
+  <li><tt>hashCode</tt> method used in <tt>HashMap</tt>, <tt>HashSet</tt>
+  </li>
+  <li>Computes an <tt>int</tt> from an object </li>
+  <li>Example: hash code of <tt>String<br>
+int h = 0;<br>
+for (int i = 0; i &lt; s.length(); i++)<br>
+&nbsp;&nbsp; h = 31 * h + s.charAt(i);</tt> </li>
+  <li>Hash code of <tt>"eat"</tt> is 100184 </li>
+  <li>Hash code of <tt>"tea"</tt> is 114704<br>
+  </li>
+</ul>
+<h2>Hashing</h2>
+<ul>
+  <li>Must be compatible with <tt>equals</tt>:<br>
+if <tt>x.equals(y)</tt>, then <tt>x.hashCode() == y.hashCode()</tt> </li>
+  <li><tt>Object.hashCode</tt> hashes memory address </li>
+  <li><i>NOT</i> compatible with redefined <tt>equals</tt> </li>
+  <li>Remedy: Hash all fields and combine codes<br>
+  (use relatively prime factors before adding them together):<br>
+    <pre>public class Employee <br>{ <br>   public int hashCode() <br>   { <br>      return 11 * name.hashCode() <br>         + 13 * new Double(salary).hashCode(); <br>   } <br>   ... <br>} <br></pre>
+  </li>
+</ul>
+<h2>Shallow and Deep Copy</h2>
+<ul>
+  <li>Assignment (<tt>copy = e</tt>) makes shallow copy </li>
+  <li>Clone to make deep copy </li>
+  <li><tt>Employee cloned = (Employee)e.clone();</tt><br>
+    <br>
+  </li>
+</ul>
+<h2>Cloning</h2>
+<img alt="." title=""
+ src="images/Ch7_06.gif" width="500" height="400"><br>
+<br>
+<h2>Cloning<br>
+</h2>
+<ul>
+  <li><tt>Object.clone</tt> makes new object and copies all fields (fields are 
+  object references)</li>
+  <li>Cloning is subtle </li>
+  <li><tt>Object.clone</tt> is <tt>protected</tt> </li>
+  <li>Subclass <i>must</i> redefine <tt>clone</tt> to be <tt>public</tt><br>
+    <pre>public class Employee <br>{ <br>   <b>public</b> Object clone() <br>   { <br>      return super.clone(); // not complete <br>   } <br>   ... <br>}<br></pre>
+  </li>
+</ul>
+<h2>The <tt>Cloneable</tt> Interface<br>
+</h2>
+<ul>
+  <li><tt>Object.clone</tt> is nervous about cloning </li>
+  <li>Will only clone objects that implement <tt>Cloneable</tt>
+interface<br>
+    <pre>public interface Cloneable<br>{<br>}<br></pre>
+  </li>
+  <li>Interface has no methods! </li>
+  <li>Tagging interface--used in test<br>
+    <tt>if (x instanceof Cloneable) ...</tt></li>
+  <li><tt>Object.clone</tt> throws <tt>CloneNotSupportedException</tt>
+  </li>
+  <li>A checked exception </li>
+</ul>
+<h2>The <tt>clone</tt> Method</h2>
+<pre>public class Employee <br>  implements Cloneable <br>{ <br>   public Object clone() <br>   { <br>      try <br>      { <br>         return super.clone(); <br>      } <br>      catch(CloneNotSupportedException e) <br>      { <br>         return null; // won't happen <br>      }<br>   } <br>   ... <br>}<br></pre>
+<h2>Shallow Cloning<br>
+</h2>
+<ul>
+  <li><tt>clone</tt> makes a shallow copy </li>
+  <li>Instance fields aren't cloned<br>
+    <img alt="." title=""
+ src="images/Ch7_07.gif" width="650" height="332"><br>
+  </li>
+</ul>
+<pre></pre>
+<h2>Deep Cloning<br>
+</h2>
+<ul>
+  <li>Why doesn't <tt>clone</tt> make a deep copy?<br>
+Wouldn't work for cyclic data structures<br>
+  </li>
+  <li>Not a problem for immutable fields </li>
+  <li>You must clone mutable fields<br>
+  </li>
+</ul>
+<pre>public class Employee <br>  implements Cloneable <br>{ <br>   public Object clone() <br>   { <br>      try <br>      { <br>         Employee cloned = (Employee)super.clone();<br>         cloned.hireDate = (Date)hiredate.clone();<br>         return cloned; <br>      } <br>      catch(CloneNotSupportedException e) <br>      { <br>         return null; // won't happen <br>      }<br>   } <br>   ... <br>}<br></pre>
+<h2>Deep Cloning</h2>
+<img alt="." title=""
+ src="images/Ch7_08.gif" width="650" height="512"><br>
+<br>
+<h2>Cloning and Inheritance</h2>
+<ul>
+  <li><tt>Object.clone</tt> is paranoid
+    <ul>
+      <li><tt>clone</tt> is protected </li>
+    </ul>
+    <ul>
+      <li>clone only clones <tt>Cloneable</tt> objects<br>
+      </li>
+    </ul>
+    <ul>
+      <li><tt>clone</tt> throws checked exception </li>
+    </ul>
+  </li>
+  <li>You don't have that luxury </li>
+  <li><tt>Manager.clone</tt> <i>must</i> be defined if <tt>Manager</tt>
+adds mutable fields </li>
+  <li>Rule of thumb: if you extend a class that defines <tt>clone</tt>,
+redefine <tt>clone</tt> </li>
+  <li>Lesson to learn: Tagging interfaces are inherited. Use them only
+to tag properties that inherit </li>
+</ul>
+<h2>Serialization</h2>
+<ul>
+  <li>Save collection of objects to stream<br>
+    <pre>Employee[] staff = new Employee[2]; <br>staff.add(new Employee(...)); <br>staff.add(new Employee(...)); <br></pre>
+  </li>
+  <li>Construct <tt>ObjectOutputStream</tt>:<br>
+    <pre>ObjectOutputStream out <br>   = new ObjectOutputStream( <br>      new FileOutputStream("staff.dat")); <br></pre>
+  </li>
+  <li>Save the array and close the stream<br>
+    <pre>out.writeObject(staff); <br>out.close(); <br></pre>
+  </li>
+</ul>
+<h2>Serialization<br>
+</h2>
+<ul>
+  <li>The array <i>and all of its objects and their dependent objects</i>
+are saved </li>
+  <li><tt>Employee</tt> doesn't have to define any method </li>
+  <li>Needs to implement the <tt>Serializable</tt> interface </li>
+  <li>Another tagging interface with no methods </li>
+</ul>
+<h2>How Serialization Works<br>
+</h2>
+<ul>
+  <li>Each newly encountered object is saved </li>
+  <li>Each object gets a serial number in the stream </li>
+  <li>No object is saved twice </li>
+  <li>Reference to already encountered object saved as "reference to #"
+  </li>
+</ul>
+<h2>How Serialization Works</h2>
+<img alt="." title=""
+ src="images/Ch7_09.gif" width="650" height="277"><br>
+<br>
+<h2>Serialing Unserializable Classes<br>
+</h2>
+<ul>
+  <li>Some classes are not serializable </li>
+  <li>Security? Anonymous classes? Programmer cluelessness? </li>
+  <li>Example: <tt>Ellipse2D.Double</tt> </li>
+  <li>How can we serialize <tt>Car</tt>?<br>
+  </li>
+  <li>Suppress default serialization to avoid exception </li>
+  <li>Mark with <tt>transient</tt>:<br>
+    <tt>private transient</tt> <tt>Ellipse2D frontTire;</tt> </li>
+  <li>Supply <tt>private</tt> (!) methods<br>
+    <tt>private void writeObject(ObjectOutputStream out)<br>
+private void readObject(ObjectInputStream in)</tt> </li>
+  <li>In these methods
+    <ul>
+      <li>Call <tt>writeDefaultObject</tt>/<tt>readDefaultObject</tt> </li>
+      <li>Manually save other data<br>
+      </li>
+    </ul>
+  </li>
+  <li><a href="code/serial2/Car.java.html">Car.java</a> </li>
+</ul>
+<h2><img border="0" src="images/cars.gif" width="231" height="277"></h2>
+<h2>Reflection</h2>
+<ul>
+  <li>Ability of running program to find out about its objects and
+classes </li>
+  <li><tt>Class</tt> object reveals
+    <ul>
+      <li>superclass </li>
+      <li>interfaces </li>
+      <li>package </li>
+      <li>names and types of fields </li>
+      <li>names, parameter types, return types of methods </li>
+      <li>parameter types of constructors </li>
+    </ul>
+  </li>
+  <li>Classes used to support reflection: <tt>Class, Package, Field, Method, 
+  Constructor, Array</tt></li>
+</ul>
+<p>&nbsp;</p>
+<h2>Reflection</h2>
+<ul>
+  <li><tt>Class getSuperclass()</tt> </li>
+  <li><tt>Class[] getInterfaces()</tt> </li>
+  <li><tt>Package getPackage()</tt> </li>
+  <li><tt>Field[] getDeclaredFields()</tt> </li>
+  <li><tt>Constructor[] getDeclaredConstructors()</tt> </li>
+  <li><tt>Method[]</tt> <tt>getDeclaredMethods()</tt> </li>
+</ul>
+<h2>Enumerating Fields<br>
+</h2>
+<ul>
+  <li>Print the names of all static fields of the <tt>Math</tt> class:
+    <pre>Field[] fields = Math.class.getDeclaredFields(); <br>for (Field f : fields) <br>   if (Modifier.isStatic(f.getModifiers())) <br>      System.out.println(f.getName()); <br></pre>
+  </li>
+</ul>
+<h2>Enumerating Constructors</h2>
+<ul>
+  <li>Print the names and parameter types of all&nbsp;<tt>Rectangle</tt><br>
+constructors:<br>
+    <pre>Constructor[] constructors = Rectangle.clsss.getDeclaredConstructors();
+
+for (Constructor c : constructors ) <br>{ <br>   Class[] params = c.getParameterTypes(); <br>   System.out.print("Rectangle(");<br>   boolean first = true; <br>   for (Class p : params) <br>   { <br>      if (first) first = false; else System.out.print(", "); <br>      System.out.print(p.getName()); <br>   } <br>   System.out.println(")"); <br>} <br></pre>
+  </li>
+  <li>Yields<br>
+    <pre>Rectangle() <br>Rectangle(java.awt.Rectangle) <br>Rectangle(int, int, int, int) <br>Rectangle(int, int) <br>Rectangle(java.awt.Point, java.awt.Dimension) <br>Rectangle(java.awt.Point) <br>Rectangle(java.awt.Dimension) <br><br></pre>
+  </li>
+</ul>
+<h2>Getting A Single Method Descriptor</h2>
+<ul>
+  <li>Supply method name </li>
+  <li>Supply array of parameter types </li>
+  <li>Example: Get <tt>Rectangle.contains(int, int)</tt>:<br>
+    <pre>Method m = Rectangle.class.getDeclaredMethod(<br>   "contains", int.class, int.class); <br></pre>
+  </li>
+  <li>Example: Get default <tt>Rectangle</tt> constructor:<br>
+    <pre>Constructor c = Rectangle.class.getDeclaredConstructor(); <br></pre>
+  </li>
+  <li><tt>getDeclaredMethod</tt>, <tt>getDeclaredConstructor</tt> are
+varargs methods<br>
+  </li>
+</ul>
+<h2>Invoking a Method</h2>
+<ul>
+  <li>Supply implicit parameter (<tt>null</tt> for static methods)<br>
+  </li>
+  <li>Supply&nbsp;array of explicit parameter values </li>
+  <li>Wrap primitive types </li>
+  <li>Unwrap primitive return value </li>
+  <li>Example: Call <tt>System.out.println("Hello, World")</tt> the
+hard way.<br>
+    <pre>Method m = PrintStream.class.getDeclaredMethod(<br>   "println", String.class);<br>m.invoke(System.out, "Hello, World!"); <br></pre>
+  </li>
+  <li><tt>invoke</tt> is a varargs method<br>
+  </li>
+</ul>
+<h2>Inspecting Objects</h2>
+<ul>
+  <li>Can obtain object contents at runtime </li>
+  <li>Useful for generic debugging tools </li>
+  <li>Need to gain access to private fields<br>
+    <pre>Class c = obj.getClass(); <br>Field f = c.getDeclaredField(name); <br>f.setAccessible(true); <br></pre>
+  </li>
+  <li>Throws exception if security manager disallows access </li>
+  <li>Access field value:<br>
+    <pre>Object value = f.get(obj); <br>f.set(obj, value); <br></pre>
+  </li>
+  <li>Use wrappers for primitive types </li>
+</ul>
+<h2>Inspecting Objects</h2>
+<ul>
+  <li>Example: Peek inside a randomizer </li>
+  <li><a href="code/reflect2/FieldTester.java.html">FieldTester.java</a>
+  </li>
+  <li>Output<br>
+    <pre>java.util.concurrent.atomic.AtomicLong seed=214557382433043
+double nextNextGaussian=0.0
+boolean haveNextNextGaussian=false</pre>
+    <p>After calling <tt>nextInt</tt>:</p>
+    <pre>java.util.concurrent.atomic.AtomicLong seed=2341557616363298
+double nextNextGaussian=0.0
+boolean haveNextNextGaussian=false<br></pre>
+  </li>
+</ul>
+<h2>Inspecting Array Elements</h2>
+<ul>
+  <li>Use static methods of <tt>Array</tt> class </li>
+  <li>
+    <pre>Object value = Array.get(a, i);<br>Array.set(a, i, value);<br></pre>
+  </li>
+  <li>
+    <pre>int n = Array.getLength(a);<br></pre>
+  </li>
+  <li>Construct new array:<br>
+    <pre>Object a = Array.newInstance(type, length);</pre>
+    <pre>Object anew = Array.newInstance(
+		a.getClass().getCompnentType(),
+		2 * Array.getLength(a) + 1);
+System.arrycopy(a, 0, anew, 0, Array.getLength(a));
+a = anew;<br><br></pre>
+  </li>
+</ul>
+<h2>Generic Types</h2>
+<ul>
+  <li>A generic type has one or more type variables <br>
+  </li>
+  <li>Type variables are instantiated with class or interface types</li>
+  <li>Cannot use primitive types, e.g. no <tt>ArrayList&lt;int&gt;</tt></li>
+  <li>When defining generic classes, use type variables in definition:<br>
+    <pre>public class ArrayList&lt;<b>E</b>&gt;<br>{<br>   public <b>E</b> get(int i) { . . . }<br>   public <b>E</b> set(int i, <b>E</b> newValue) { . . . }<br>   . . .<br>   private <b>E</b>[] elementData;<br>}</pre>
+  </li>
+  <li>NOTE: If <tt>S</tt> a subtyoe of <tt>T</tt>, <tt>ArrayList&lt;S&gt;</tt>
+is <i>not</i> a subtype of <tt>ArrayList&lt;T&gt;</tt>.</li>
+</ul>
+<h2>Generic Methods</h2>
+<ul>
+  <li>Generic method = method with type parameter(s)</li>
+  <li>
+    <pre>public class Utils<br>{<br>   public static &lt;E&gt; void fill(ArrayList&lt;E&gt; a, E value, int count)<br>   {<br>      for (int i = 0; i &lt; count; i++)<br>         a.add(value);<br>   }  <br>}</pre>
+  </li>
+  <li>A generic method in an ordinary (non-generic) class</li>
+  <li>Type parameters are inferred in call<br>
+    <pre>ArrayList&lt;String&gt; ids = new ArrayList&lt;String&gt;();<br>Utils.fill(ids, "default", 10); // calls Utils.&lt;String&gt;fill<br></pre>
+  </li>
+</ul>
+<h2>Type Bounds</h2>
+<ul>
+  <li>Type variables can be constrained with type bounds</li>
+  <li>Constraints can make a method more useful</li>
+  <li>The following method is limited:<br>
+    <pre>public static &lt;E&gt; void append(ArrayList&lt;E&gt; a, ArrayList&lt;E&gt; b, int count)<br>{<br>   for (int i = 0; i &lt; count &amp;&amp; i &lt; b.size(); i++)<br>      a.add(b.get(i));<br>}<br></pre>
+Cannot append an <tt>ArrayList&lt;Rectangle&gt;</tt> to an <tt>ArrayList&lt;Shape&gt;</tt></li>
+</ul>
+<h2>Type Bounds<br>
+</h2>
+<ul>
+  <li>Overcome limitation with type bound:<br>
+    <pre>public static &lt;E, F<b> extends E</b>&gt; void append(<br>   ArrayList&lt;E&gt; a, ArrayList&lt;F&gt; b, int count)<br>{<br>   for (int i = 0; i &lt; count &amp;&amp; i &lt; b.size(); i++)<br>      a.add(b.get(i));<br>}</pre>
+  </li>
+  <li><tt>extends</tt> means "subtype", i.e. extends or implements</li>
+  <li>Can specify multiple bounds:<br>
+    <tt>E extends Cloneable &amp; Serializable</tt></li>
+</ul>
+<h2>Wildcards</h2>
+<ul>
+  <li>Definition of <tt>append</tt> never uses type <tt>F</tt>. Can
+simplify with <i>wildcard</i>:<br>
+    <pre>public static &lt;E&gt; void append(<br>   ArrayList&lt;E&gt; a, ArrayList&lt;? extends E&gt; b, int count)<br>{<br>   for (int i = 0; i &lt; count &amp;&amp; i &lt; b.size(); i++)<br>      a.add(b.get(i));<br>}</pre>
+  </li>
+</ul>
+<h2>Wildcards<br>
+</h2>
+<ul>
+  <li>Wildcards restrict methods that can be called: <br>
+    <tt>ArrayList&lt;? extendsE&gt;.set</tt> method has the form<br>
+    <tt>? extends E add(? extends E newElement)</tt></li>
+  <li>You cannot call this method! <br>
+  </li>
+  <li>No value matches <tt>? extends E</tt> because <tt>?</tt> <i>is
+unknown</i><br>
+  </li>
+  <li>Ok to call <tt>get</tt>:<br>
+    <tt>? extends E get(int i)</tt></li>
+  <li>Can assign return value to an element of type <tt>E</tt></li>
+</ul>
+<h2>Wildcards</h2>
+<ul>
+  <li>Wildcards can be bounded in opposite direction</li>
+  <li><tt>? super F</tt> matches any supertype of <tt>F</tt></li>
+  <li><tt>public static &lt;F&gt; void append(<br>
+&nbsp;&nbsp; ArrayList&lt;<b>? super F</b>&gt; a, ArrayList&lt;F&gt; b,
+int count)<br>
+{<br>
+&nbsp;&nbsp; for (int i = 0; i &lt; count &amp;&amp; i &lt; b.size();
+i++)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a.add(b.get(i));<br>
+}</tt></li>
+  <li>Safe to call <tt>ArrayList&lt;? super F&gt;.add</tt>:<br>
+    <tt>boolean add(? super F newElement)</tt></li>
+  <li>Can pass any element of type <tt>F</tt> (but not a supertype!)<br>
+  </li>
+</ul>
+<h2>Wildcards</h2>
+<ul>
+  <li>Typical example--start with<br>
+    <pre>public static &lt;E extends Comparable&lt;E&gt;&gt; E getMax(ArrayList&lt;E&gt; a)<br>{<br>   E max = a.get(0);<br>   for (int i = 1; i &lt; a.size(); i++)<br>      if (a.get(i).compareTo(max) &gt; 0) max = a.get(i);<br>   return max;<br>}</pre>
+  </li>
+  <li><tt>E</tt> extends <tt>Comparable&lt;E&gt;</tt> so that we can
+call <tt>compareTo</tt></li>
+  <li>Too restrictive--can't call with <tt>ArrayList&lt;GregorianCalendar&gt;</tt></li>
+  <li><tt>GregorianCalendar</tt> <i>does not</i> implement <tt>Comparable&lt;GregorianCalendar&gt;</tt>,
+only <tt>Comparable&lt;Calendar&gt;</tt></li>
+  <li>Wildcards to the rescue:<br>
+    <pre>public static &lt;E extends Comparable&lt;<b>? super E</b>&gt;&gt; E getMax(ArrayList&lt;E&gt; a)</pre>
+  </li>
+</ul>
+<h2>Type Erasure</h2>
+<ul>
+  <li>Virtual machine does not know about generic types</li>
+  <li>Type variables are <i>erased</i>--replaced by type bound or <tt>Object</tt>
+if unbounded</li>
+  <li>Ex. <tt>ArrayList&lt;E&gt;</tt> becomes<br>
+    <pre>public class ArrayList<br>{<br>   public <b>Object</b> get(int i) { . . . }<br>   public <b>Object</b> set(int i, <b>Object</b> newValue) { . . . }<br>   . . .<br>   private <b>Object</b>[] elementData;<br>}</pre>
+  </li>
+  <li>Ex. <tt>getmax</tt> becomes<br>
+    <pre>public static <b>Comparable</b> getMax(ArrayList a)<br>   // E extends Comparable&lt;? super E&gt; erased to Comparable</pre>
+  </li>
+  <li>Erasure necessary to interoperate with legacy (pre-JDK 5.0) code</li>
+</ul>
+<h2>Limitations of Generics</h2>
+<ul>
+  <li>Cannot replace type variables with primitive types <br>
+  </li>
+  <li>Cannot construct new objects of generic type<br>
+    <tt>a.add(new E()); // Error--would erase to new Object()</tt></li>
+  <li>Workaround: Use class literals<br>
+    <pre>public static &lt;E&gt; void fillWithDefaults(ArrayList&lt;E&gt;,<br>   <b>Class&lt;? extends E&gt; cl</b>, int count)<br>   throws InstantiationException, IllegalAccessException<br>{<br>   for (int i = 0; i &lt; count; i++)<br>      a.add(<b>cl.newInstance()</b>);<br>}</pre>
+  </li>
+  <li>Call as <tt>fillWithDefaults(a, Rectangle.class, count)</tt><br>
+  </li>
+</ul>
+<h2>Limitations of Generics</h2>
+<ul>
+  <li>Cannot form arrays of parameterized types<br>
+    <tt>Comparable&lt;E&gt;[]</tt> is illegal. Remedy: <tt>ArrayList&lt;Comparable&lt;E&gt;&gt;</tt></li>
+  <li>Cannot reference type parameters in a static context (static
+fields, methods, inner classes)</li>
+  <li>Cannot throw or catch generic types</li>
+  <li>Cannot have type clashes after erasure. Ex. <tt>GregorianCalendar</tt>
+cannot&nbsp; implement <tt>Comparable&lt;GregorianCalendar&gt;</tt>
+since it already implements <tt>Comparable&lt;Calendar&gt;</tt>, and
+both erase to <tt>Comparable</tt><br>
+  </li>
+</ul>
+<h2>Components</h2>
+<ul>
+  <li>More functionality than a single class </li>
+  <li>Reuse and customize in multiple contexts<br>
+  </li>
+  <li>"Plug components together" to form applications </li>
+  <li>Successful model: Visual Basic controls
+    <ul>
+      <li>calendar </li>
+      <li>graph </li>
+      <li>database </li>
+      <li>link to robot or instrument </li>
+    </ul>
+  </li>
+  <li>Componens composed into program inside builder environment </li>
+</ul>
+<h2>A Builder Environment</h2>
+<img alt="" src="images/Ch7_10.gif" width="650" height="618"><br>
+<br>
+<h2>Java Beans<br>
+</h2>
+<ul>
+  <li>Java component model </li>
+  <li>Bean has
+    <ul>
+      <li>methods (just like classes) </li>
+      <li>properties </li>
+      <li>events </li>
+    </ul>
+  </li>
+</ul>
+<h2>Java Beans</h2>
+<img alt="." title=""
+ src="images/Ch7_11.gif" width="650" height="246"><br>
+<br>
+<h2>A Calendar Bean</h2>
+<img alt="" src="images/Ch7_12.png" height="145" width="236"><br>
+<br>
+<h2>A Property Sheet</h2>
+<ul>
+  <li>Edit properties with <i>property sheet</i><br>
+  </li>
+</ul>
+&nbsp;<img alt="" src="images/Ch7_13.png" height="332" width="227"><br>
+<h2>Fa&ccedil;ade Class</h2>
+<ul>
+  <li>Bean usually composed of multiple classes </li>
+  <li>One class nominated as <i>facade class</i> </li>
+  <li>Clients use only facade class methods </li>
+</ul>
+<h2>Fa&ccedil;ade Pattern</h2>
+Context<br>
+<ol>
+  <li>A subsystem consists of multiple classes, making it complicated
+for clients to use<br>
+  </li>
+  <li>Implementor may want to change subsystem classes </li>
+  <li>Want to give a coherent entry point<br>
+  </li>
+</ol>
+Solution<br>
+<ol>
+  <li>Define a facade class that exposes all capabilities of the
+subsystem as methods </li>
+  <li>The facade methods delegate requests to the subsystem classes </li>
+  <li>The subsystem classes do not know about the facade class<br>
+  </li>
+</ol>
+<h2>Fa&ccedil;ade Pattern</h2>
+&nbsp;
+<img alt="." title=""
+ src="images/Ch7_un01.gif" width="600" height="534"><br>
+<br>
+<h2>Fa&ccedil;ade Pattern</h2>
+<table style="text-align: left; width: 580;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;" width="220">Name in
+Design Pattern<br>
+      </td>
+      <td style="vertical-align: top; font-weight: bold;" width="340">Actual Name
+(Beans)<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;" width="220"> Client<br>
+      </td>
+      <td style="vertical-align: top;" width="340">Builder tool<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;" width="220"> Facade<br>
+      </td>
+      <td style="vertical-align: top;" width="340">Main bean class with which the
+tool interacts<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;" width="220">SubsystemClass<br>
+      </td>
+      <td style="vertical-align: top;" width="340">Class used to implement bean
+functionality</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h2>Bean Properties</h2>
+<ul>
+  <li>Property = value that you can get and/or set </li>
+  <li>Most properties are get-and-set </li>
+  <li>Can also have get-only and set-only </li>
+  <li>Property <i>not the same as</i> instance field </li>
+  <li>Setter can set fields, then call repaint </li>
+  <li>Getter can query database </li>
+</ul>
+<h2>Property Syntax</h2>
+<ul>
+  <li>Not Java :-( </li>
+  <li>C#, JavaScript, Visual Basic </li>
+  <li><tt>b.<i>propertyName</i> = value<br>
+    </tt> calls setter </li>
+  <li><tt>variable = b.<i>propertyName</i><br>
+    </tt> calls getter </li>
+</ul>
+<h2>Java Naming Conventions</h2>
+<ul>
+  <li>property = pair of methods<br>
+    <tt>public X get<i>PropertyName</i>()<br>
+public void set<i>PropertyName</i>(X newValue)</tt> </li>
+  <li>Replace <i><tt>propertyName</tt></i> with actual name<br>
+(e.g. <tt>getColor</tt>/<tt>setColor</tt>) </li>
+  <li>Exception for <tt>boolean</tt> properties:<br>
+    <tt>public boolean is<i>PropertyName</i>()</tt> </li>
+  <li>Decapitalization hokus-pokus:<br>
+    <tt>getColor -&gt; color<br>
+getURL -&gt; URL</tt> </li>
+</ul>
+<h2>Editing Beans in a Builder Tool</h2>
+<ul>
+  <li>Use wizard to make empty frame </li>
+</ul>
+<img alt="" src="images/Ch7_15.gif" width="650" height="452"><br>
+<h2>Editing Beans in a Builder Tool</h2>
+<ul>
+  <li>Add button to frame </li>
+  <li>Edit button with property sheet </li>
+</ul>
+<img alt="" src="images/Ch7_16.gif" width="650" height="618"><br>
+<br>
+<h2>Packaging a Bean</h2>
+<ul>
+  <li>Compile bean classes<br>
+    <a href="code/carbean/CarBean.java.html">Ch7/carbean/CarBean.java</a><br>
+  </li>
+  <li>Create manifest file<br>
+    <a href="code/carbean/CarBean.mf">Ch7/carbean/CarBean.mf</a> </li>
+  <li>Run JAR tool:<br>
+    <tt>jar cvfm CarBean.jar CarBean.mf *.class</tt> </li>
+  <li>Import JAR file into builder environment </li>
+</ul>
+<h2>Composing Beans</h2>
+<ul>
+  <li>Make new frame </li>
+  <li>Add car bean, slider to frame </li>
+  <li>Edit <tt>stateChanged</tt> event of slider </li>
+  <li>Add handler code<br>
+    <tt>carBean1.setX(jSlider1.getValue());</tt> </li>
+  <li>Compile and run </li>
+  <li>Move slider: the car moves </li>
+</ul>
+<h2>Composing Beans</h2>
+<img alt="" src="images/Ch7_17.gif" width="650" height="618"><br>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c37e9101fe',t:'MTczOTIwNDU3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: RUP Workflows</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">RUP Workflows</span><BR>
+
+<H2>Course Map</H2>
+<img border="0" src="../../images/CourseMap5.png" width="603" height="495">
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+<H2>Agenda</H2>
+<ul>
+	<li>Course Map</li>
+	<li>The nine core process Workflows.<ul>
+	<li>Three Core <i>Engineering</i> workflows:<ul>
+	<li>Business modeling workflow</li>
+	<li>Requirements workflow</li>
+	<li>Analysis &amp; Design workflow</li>
+	<li>Implementation workflow</li>
+	<li>Test workflow</li>
+	<li>Deployment workflow</li>
+</ul></li>
+	<li>Three Core <i>Supporting </i>Workflows:<ul>
+	<li>Project Management workflow</li>
+	<li>Configuration and Change Management workflow</li>
+	<li>Environment workflow</li>
+</ul></li>
+</ul></li>
+	<li>Business Modeling</li>
+	<li>Requirements</li>
+	<li>Analysis and Design</li>
+	<li>Implementation</li>
+	<li>Test</li>
+	<li>Deployment</li>
+	<li>Project Management</li>
+	<li>Configuration and Change Management</li>
+	<li>Environment</li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Workflows</h2>
+<p>A mere enumeration of all workers, activities and artifacts does not quite 
+constitute a process. We need <br>
+way to describe meaningful sequences of activities that produce some valuable 
+result, and to show<br>
+interactions between workers.<br>
+<br>
+A <b><i>workflow</i></b> is a sequence of activities that produces a result of observable 
+value.<br>
+<br>
+In UML terms, a workflow can be expressed as a sequence diagram, a collaboration 
+diagram, or an activity<br>
+diagram. We use a form of activity diagrams in this white paper.</p>
+<p><img border="0" src="../rup/images/workflow.png" width="650" height="419"><br>
+<br>
+Example of workflow.<br>
+<br>
+Note that it is not always possible or practical to represent all of the 
+dependencies between activities. Often<br>
+two activities are more tightly interwoven than shown, especially when they 
+involve the same worker or the<br>
+same individual. People are not machines, and the workflow cannot be interpreted 
+literally as a program for<br>
+people, to be followed exactly and mechanically.</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Core workflows</h2>
+<p>There are nine core process workflows in the Rational Unified Process, which 
+represent a partitioning of all<br>
+workers and activities into logical groupings.</p>
+<p><img border="0" src="../rup/images/rup2.png" width="650" height="413"><br>
+The nine core process workflows.<br>
+<br>
+The core process workflows are divided into six core &#8220;engineering&#8221; workflows:</p>
+<ol>
+	<li>Business modeling workflow</li>
+	<li>Requirements workflow</li>
+	<li>Analysis &amp; Design workflow</li>
+	<li>Implementation workflow</li>
+	<li>Test workflow</li>
+	<li>Deployment workflow</li>
+</ol>
+<p>And three core &#8220;supporting&#8221; workflows:</p>
+<ol>
+	<li>Project Management workflow</li>
+	<li>Configuration and Change Management workflow</li>
+	<li>Environment workflow</li>
+</ol>
+<p>Although the names of the six core engineering workflows may evoke the 
+sequential phases in a traditional<br>
+waterfall process, we should keep in mind that the phases of an iterative 
+process are different and that these<br>
+workflows are revisited again and again throughout the lifecycle. The actual 
+complete workflow of a<br>
+project interleaves these nine core workflows, and repeats them with various 
+emphasis and intensity at each<br>
+iteration.<br>
+&nbsp;</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Business Modeling</h2>
+<p>One of the major problems with most business engineering efforts, is that the 
+software engineering and the<br>
+business engineering community do not communicate properly with each other. This 
+leads to that the<br>
+output from business engineering is not used properly as input to the software 
+development effort, and viceversa.<br>
+The Rational Unified Process addresses this by providing a common language and 
+process for both<br>
+communities, as well as showing how to create and maintain direct traceability 
+between business and<br>
+software models.<br>
+<br>
+In Business Modeling we document business processes using so called business use 
+cases. This assures a<br>
+common understanding among all stakeholders of what business process needs to be 
+supported in the<br>
+organization. The business use cases are analyzed to understand how the business 
+should support the<br>
+business processes. This is documented in a business object-model.<br>
+Many projects may choose not to do business modeling.</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Requirements</h2>
+<p>The goal of the Requirements workflow is to describe what the system should 
+do and allows the developers<br>
+and the customer to agree on that description. To achieve this, we elicit, 
+organize, and document required<br>
+functionality and constraints; track and document tradeoffs and decisions.<br>
+<br>
+A Vision document is created, and stakeholder needs are elicited. Actors are 
+identified, representing the<br>
+users, and any other system that may interact with the system being developed. 
+Use cases are identified,<br>
+representing the behavior of the system. Because use cases are developed 
+according to the actor's needs, the<br>
+system is more likely to be relevant to the users. The following figure shows an 
+example of a use-case<br>
+model for a recycling-machine system.<br>
+<br>
+<img border="0" src="../rup/images/atm-uc.png" width="600" height="455"><br>
+An example of a use-case model with actors and use cases.<br>
+<br>
+Each use case is described in detail. The use-case description shows how the 
+system interacts step by step<br>
+with the actors and what the system does. Non-functional requirements are 
+described in <i>Supplementary<br>
+Specifications</i>.<br>
+<br>
+The use cases function as a unifying thread throughout the system's development 
+cycle. The same use-case<br>
+model is used during requirements capture, analysis &amp; design, and test.</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Analysis &amp; Design</h2>
+<p>The goal of the Analysis &amp; Design workflow is to show how the system will be 
+realized in the<br>
+implementation phase. You want to build a system that:</p>
+<ul>
+	<li>Performs&#8212;in a specific implementation environment&#8212;the tasks and functions 
+specified in the usecase<br>descriptions.</li>
+	<li>Fulfills all its requirements.</li>
+	<li>Is structured to be robust (easy to change if and when its functional 
+requirements change).</li>
+</ul>
+<p>Analysis &amp; Design results in a design model and optionally an analysis model. 
+The design model serves as<br>
+an abstraction of the source code; that is, the design model acts as a 
+'blueprint' of how the source code is<br>
+structured and written.<br>
+<br>
+The design model consists of design classes structured into design packages and 
+design subsystems with<br>
+well-defined interfaces, representing what will become components in the 
+implementation. It also contains<br>
+descriptions of how objects of these design classes collaborate to perform use 
+cases. The next figure shows<br>
+part of a sample design model for the recycling-machine system in the use-case 
+model shown in the<br>
+previous figure.<br>
+<img border="0" src="../rup/images/order.png" width="600" height="334"><br>
+Part of a design model, a composite structure of components, with connector 
+wiring between provided and required interfaces of parts (Note: &#8220;Client&#8221; 
+interface is a subtype of &#8220;Person&#8221;).<br>
+<br>
+The design activities are centered around the notion of architecture. The 
+production and validation of this<br>
+architecture is the main focus of early design iterations. Architecture is 
+represented by a number of<br>
+architectural views. These views capture the major structural design 
+decisions. In essence, architectural<br>
+views are abstractions or simplifications of the entire design, in which 
+important characteristics are made<br>
+more visible by leaving details aside. The architecture is an important vehicle 
+not only for developing a<br>
+good design model, but also for increasing the quality of any model built during 
+system development.</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Implementation</h2>
+<p>The purpose of implementation are:</p>
+<ul>
+	<li>To define the organization of the code, in terms of implementation subsystems 
+organized in layers.</li>
+	<li>To implement classes and objects in terms of components (source files, 
+binaries, executables, and<br>others).</li>
+	<li>To test the developed components as units.</li>
+	<li>To integrate the results produced by individual implementers (or teams), into 
+an executable<br>system.</li>
+</ul>
+<p>The system is realized through implementation of components. The Rational 
+Unified Process describes<br>
+how you reuse existing components, or implement new components with well defined 
+responsibility,<br>
+making the system easier to maintain, and increasing the possibilities to reuse.<br>
+<br>
+Components are structured into Implementation Subsystems. Subsystems take the 
+form of directories, with<br>
+additional structural or management information. For example, a subsystem can be 
+created as a directory or<br>
+a folder in a file system, or a subsystem in Rational/Apex for C++ or Ada, or 
+packages using Java.&#8482;</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Test</h2>
+<p>The purposes of testing are:</p>
+<ul>
+	<li>To verify the interaction between objects.</li>
+	<li>To verify the proper integration of all components of the software.</li>
+	<li>To verify that all requirements have been correctly implemented.</li>
+	<li>To identify and ensure defects are addressed prior to the deployment of the 
+software.</li>
+</ul>
+<p>The Rational Unified Process proposes an iterative approach, which means that 
+you test throughout the<br>
+project. This allows you to find defects as early as possible, which radically 
+reduces the cost of fixing the<br>
+defect. Test are carried out along three quality dimensions reliability, 
+functionality, application<br>
+performance and system performance. For each of these quality dimensions, the 
+process describes how you<br>
+go through the test lifecycle of planning, design, implementation, execution and 
+evaluation.<br>
+<br>
+Strategies for when and how to automate test are described. Test automation is 
+especially important using<br>
+an iterative approach, to allow regression testing at then end of each 
+iteration, as well as for each new<br>
+version of the product.</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Deployment</h2>
+<p>The purpose of the deployment workflow is to successfully produce product 
+releases, and deliver the<br>software to its end users. It covers a wide range of activities including:</p>
+<ul>
+	<li>Producing external releases of the software.</li>
+	<li>Packaging the software.</li>
+	<li>Distributing the software.</li>
+	<li>Installing the software.</li>
+	<li>Providing help and assistance to users.</li>
+</ul>
+<p>In many cases, this also includes activities such as:</p>
+<ul>
+	<li>Planning and conduct of beta tests.</li>
+	<li>Migration of existing software or data.</li>
+	<li>Formal acceptance.</li>
+</ul>
+<p>Although deployment activities are mostly centered around the transition phase, 
+many of the activities need<br>
+to be included in earlier phases to prepare for deployment at the end of the 
+construction phase.<br>
+The Deployment and Environment workflows of the Rational Unified Process contain 
+less detail than other<br>
+workflows.</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Project Management</h2>
+<p>Software Project Management is the art of balancing competing objectives, 
+managing risk, and overcoming<br>
+constraints to deliver, successfully, a product which meets the needs of both 
+customers (the payers of bills)<br>
+and the users. The fact that so few projects are unarguably successful is 
+comment enough on the difficulty<br>
+of the task.<br>
+<br>
+This workflow focuses mainly on the specific aspect of an iterative development 
+process. Our goal with<br>
+this section is to make the task easier by providing:</p>
+<ul>
+	<li>A framework for managing software-intensive projects.</li>
+	<li>Practical guidelines for planning, staffing, executing, and monitoring 
+projects.</li>
+	<li>A framework for managing risk.</li>
+</ul>
+<p>It is not a recipe for success, but it presents an approach to managing the 
+project that will markedly<br>
+improve the odds of delivering successful software. [14]</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Configuration &amp; Change Management</h2>
+<p>In this workflow we describe how to control the numerous artifacts produced 
+by the many people who<br>
+work on a common project. Control helps avoid costly confusion, and ensures that 
+resultant artifacts are not<br>
+in conflict due to some of the following kinds of problems:</p>
+<ul>
+	<li><b>Simultaneous Update</b> - When two or more workers work separately on the same 
+artifact, the last<br>one to make changes destroys the work of the former.</li>
+	<li><b>Limited Notification</b> - When a problem is fixed in artifacts shared by several 
+developers, and<br>some of them are not notified of the change.</li>
+	<li><b>Multiple Versions</b> - Most large programs are developed in evolutionary 
+releases. One release<br>could be in customer use, while another is in test, and the third is still in 
+development. If problems<br>are found in any one of the versions, fixes need to be propagated between them. 
+Confusion can<br>arise leading to costly fixes and re-work unless changes are carefully 
+controlled and monitored.</li>
+</ul>
+<p>This workflow provides guidelines for managing multiple variants of evolving 
+software systems, tracking<br>
+which versions are used in given software builds, performing builds of 
+individual programs or entire<br>
+releases according to user-defined version specifications, and enforcing 
+site-specific development policies.<br>
+<br>
+We describe how you can manage parallel development, development done at 
+multiple sites, and how to<br>
+automate the build process. This is especially important in an iterative process 
+where you may want to be<br>
+able to do builds as often as daily, something that would become impossible 
+without powerful automation.<br>
+We also describe how you can keep an audit trail on why, when and by whom any 
+artifact was changed.<br>
+<br>
+This workflow also covers change request management, i.e. how to report defects, 
+manage them through<br>
+their lifecycle, and how to use defect data to track progress and trends.</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Environment</h2>
+<p>The purpose of the environment workflow is to provide the software 
+development organization with the<br>
+software development environment&#8212;both processes and tools&#8212;that are needed to 
+support the development<br>
+team.<br>
+<br>
+This workflow focuses on the activities to configure the process in the context 
+of a project. It also focus on<br>
+activities to develop the guidelines needed to support a project. A step-by-step 
+procedure is provided<br>
+describing how you implement a process in an organization.<br>
+<br>
+The environment workflow also contains a Development Kit providing you with the 
+guidelines, templates<br>
+and tools necessary to customize the process. The Development Kit is described 
+in more detail in the<br>
+section &quot; Development Kit for Process Customization&quot; found later in this paper.<br>
+<br>
+Certain aspects of the Environment workflow are not covered in the process such 
+as selecting, acquiring,<br>
+and making the tools work, and maintaining the development environment.</p>
+
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70ca2bfebbb7',t:'MTczOTIwNDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

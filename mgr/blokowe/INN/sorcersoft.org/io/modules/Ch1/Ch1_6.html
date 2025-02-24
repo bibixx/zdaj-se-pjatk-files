@@ -1,0 +1,842 @@
+<TITLE>SE: Java Platfom</TITLE>
+<HTML>
+<HEAD>
+<META name="keywords" content="Intro to Streams">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Java Platform and Basics</span><H2>Course Map</H2>
+<img border="0" src="../../images/CourseMap13.png" width="603" height="495">
+
+
+<H2>Agenda</H2>
+<ul>
+  <li>Java Platform</li>
+  <li>Hello, World&nbsp; in
+Java<br />
+  </li>
+  <li>Documentation Comments </li>
+  <li>Primitive Types </li>
+  <li>Control Flow Statements </li>
+  <li>Object References </li>
+  <li>Parameter Passing </li>
+  <li>Packages </li>
+  <li>Basic Exception Handling </li>
+  <li>Strings </li>
+  <li>Reading Input </li>
+  <li>Array Lists and Linked Lists
+  </li>
+  <li>Arrays<br />
+  </li>
+  <li>Static Fields and Methods </li>
+  <li>Programming Style </li>
+</ul>
+<h2>Java Platform</h2>
+<p>The Java platform is not a specific hardware or operating system, but rather 
+an execution environment called a JRE (Java Runtime Environment) implementing 
+JVM (Java Virtual Machine) , and a set of standard 
+libraries (APIs) which provide common functionality.<br>
+The platform was called the <b>Java 2 Platform</b> although the &quot;2&quot;
+<a target="_blank" href="http://java.sun.com/developer/technicalArticles/javaone2005/naming.html">
+has been dropped</a>, and includes both a Standard Edition or Java SE, an
+<a title="Enterprise" href="https://en.wikipedia.org/wiki/Enterprise">Enterprise</a> 
+Edition Java EE), and a Micro Edition or Java ME. The current version of the 
+Java SE platform is alternatively specified as version 1.5 or version 5 (both 
+refer to the same version). A good overview of the myriad of technologies that 
+makes up the Java 2 Platform SE 5 (Java SE 5) can be found on the
+<a class="external text" title="http://java.sun.com/j2se/1.5.0/docs/index.html" href="http://java.sun.com/j2se/1.5.0/docs/index.html">
+JDK Documentation Page</a>.</p>
+<p>J2SE 6.0 will become Java SE 6 (code name Mustang), and J2SE 7.0 will become 
+Java SE 7 (code name Dolphin).</p>
+<h2>"Hello, World" in Java</h2>
+<ul>
+  <li>Simple but typical class<br />
+    <h4><span style="font-style: normal"><a href="code/helloworld/Greeter.java.html"><tt>Greeter.java</tt></a></span></h4>
+  </li>
+  <li>Features:<br />
+    <ul>
+      <li>Constructor <tt>Greeter(String
+aName)</tt> </li>
+      <li>Method <tt>sayHello()</tt>
+      </li>
+      <li>Instance field <tt>name</tt><br />
+      </li>
+    </ul>
+  </li>
+  <li>Each feature is tagged <tt>public</tt>
+or <tt>private</tt>
+  </li>
+</ul>
+<h2>"Hello, World" in Java</h2>
+<ul>
+  <li>Construct new objects with <tt>new</tt>
+operator<br />
+    <pre>new Greeter("World")<br /></pre>
+  </li>
+  <li>Can invoke method on newly
+constructed object<br />
+    <pre>new Greeter("World").sayHello()<br /></pre>
+  </li>
+  <li>More common: store object
+reference in object variable<br />
+    <pre>Greeter worldGreeter = new Greeter("World");<br /></pre>
+  </li>
+  <li>Then invoke method on
+variable:<br />
+    <pre>String greeting = worldGreeter.sayHello();<br /></pre>
+  </li>
+</ul>
+<h2>"Hello, World" in Java</h2>
+<ul>
+  <li>Construct separate class to
+test your class<br />
+    <h4><span style="font-style: normal"><a href="code/helloworld/GreeterTester.java.html"><tt>GreeterTester.java</tt></a></span></h4>
+  </li>
+  <li><tt>main</tt>
+method is called when program starts </li>
+  <li><tt>main</tt>
+is <tt>static</tt>:
+it doesn't operate on any
+objects </li>
+  <li>There are no objects yet
+when <tt>main</tt>
+starts </li>
+  <li>In OO program, <tt>main</tt>
+constructs objects and invokes
+methods<br />
+  </li>
+</ul>
+<h2>Using the SDK</h2>
+<ul>
+  <li>Create a new directory to
+hold your files </li>
+  <li>Use a text editor to prepare
+files (<tt>Greeter.java,
+GreeterTest.java</tt>) </li>
+  <li>Open a shell window </li>
+  <li><tt>cd</tt>
+to directory that holds your files </li>
+  <li>Compile and run<br />
+    <pre>javac -d F:\classes -classpath F:\classes *.java<br />java -cp F:\classes GreeterTest<br /></pre>
+Note that Greeter.java is compiled and class bytecodes are places in <tt>F:\classes</tt><br />
+  </li>
+  <li>Output is shown in shell
+window below<br />
+  </li>
+</ul>
+<img src="images/Ch1_01.gif" width="650" height="322" /><br />
+<h2>Executable JAR File</h2>
+<p>Putting your program in a JAR allows it to be distributed as a single 
+executable file, saving space and simplifying the download process. </p>
+  <p>Here is the general procedure for creating an executable JAR: </p>
+  <ol>
+    <li>Compile your java code, generating all of the program's class files.
+    </li>
+    <li>Create a <em>manifest file</em> containing the following 2 lines:
+    <blockquote>
+      <pre>Manifest-Version: 1.0
+Main-Class: <em>name of class containing main</em></pre>
+    </blockquote>
+    <p>The name of the file should end with the <tt>.mf</tt> suffix. It is 
+    important that the file ends with a blank line. </li>
+    <li>To create the JAR, type the following command:
+    <blockquote>
+      <pre>jar cmf <i>manifest-file</i> <i>jar-file</i> <i>input-files</i></pre>
+    </blockquote>
+    <p>The <i>input-files</i> must include any class files, images, sounds, etc. 
+    that your program uses. Optionally, you can include the program's <code>
+    .java</code> files in the JAR. See below for adding directories ot the JAR.
+    </li>
+    <li>To view the contents of the JAR, type:
+    <blockquote>
+      <pre>jar tf <i>jar-file</i></pre>
+    </blockquote>
+    </li>
+    <li>Execute the application from the command line by typing:
+    <blockquote>
+      <pre>java -jar <i>jar-file</i></pre>
+    </blockquote>
+    </li>
+  </ol>
+  <h2>Executing <tt>GreeterTester.jar</tt> File</h2>
+  <p>Let's say we wanted to distribute the simple program <tt>
+  <a target="_blank" href="code/helloworld/GreeterTester.java.html">GreeterTester.java</a></tt> as a JAR. First, we create a text file named 
+  <tt>GreeterTester.mf</tt> 
+  which contains: </p>
+  <blockquote>
+    <pre>Manifest-Version: 1.0
+Main-Class: GreeterTester
+</pre>
+  </blockquote>
+  <p>Then, we create the archive by typing: </p>
+  <blockquote>
+    <pre>jar cmf GreeterTester.mf GreeterTester.jar Greeter.class GreeterTester.class
+</pre>
+  </blockquote>
+  <p>and run it by typing: </p>
+  <blockquote>
+    <pre>java -jar GreeterTester.jar
+</pre>
+  </blockquote>
+  The file <tt><a href="../../../../../classes/GreeterTester.jar">GreeterTester.jar</a></tt> can now be downloaded and executed. 
+<h2>Using BlueJ</h2>
+<ul>
+  <li>Download BlueJ from <a href="http://www.bluej.org">http://www.bluej.org</a><br />
+  </li>
+  <li>No test program required </li>
+  <li>Select Project-&gt;New
+and supply directory name </li>
+  <li>Click on New Class... and
+type in Greeter class </li>
+  <li>Compile the class </li>
+  <li>Right-click the class to
+construct an object </li>
+  <li>Right-click the object to
+invoke a method </li>
+</ul>
+<h2>Using BlueJ</h2>
+<img alt="" src="images/Ch1_02.jpg" width="576" height="510" /><br />
+<h2>Documentation Comments</h2>
+<ul>
+  <li>Delimited by <tt>/**
+... */</tt> </li>
+  <li>First sentence = summary </li>
+  <li><tt>@param
+    <i>parameter</i></tt>
+    <i>explanation</i>
+  </li>
+  <li><tt>@return</tt>
+    <i>explanation</i>
+  </li>
+  <li><tt>javadoc</tt> utility extracts
+HTML file <br>
+  <tt>javadoc -d F:\docs *.java</tt></li>
+</ul>
+  <p><img border="0" src="images/javadoc.gif" width="588" height="455"></p>
+<h2>Documentation Comments -
+Summary<br />
+</h2>
+<img src="images/Ch1_03.gif" width="650" height="563"/><br />
+<h2>Documentation Comments - Detail</h2>
+<img src="images/Ch1_04.gif" width="650" height="496" /><br />
+<h2>Documentation Comments</h2>
+<ul>
+  <li>Easy to keep documentation
+in sync with code </li>
+  <li>You must document <i>all</i>
+classes and methods </li>
+  <li>The pros do it--check out
+the API docs </li>
+  <li>Install and bookmark the API
+docs <i>now</i>!
+  </li>
+</ul>
+<h2>Documentation Comments - API
+Docs</h2>
+<img src="images/Ch1_05.gif" width="650" height="496"/><br />
+<h2>Primitive Types</h2>
+<ul>
+  <li>8 primitive types </li>
+  <li><tt>int,
+long, short, byte</tt> </li>
+  <li><tt>double,
+float<br />
+    </tt> </li>
+  <li><tt>char</tt>
+  </li>
+  <li><tt>boolean</tt>
+  </li>
+  <li>suffixes L = long, F = float
+  </li>
+  <li>character constants <tt>'a',
+'\n', '\u2122'</tt> </li>
+  <li>Casts <tt>(int) x</tt>, <tt>(float) x</tt>
+  </li>
+  <li> <tt>Math</tt>
+class has methods that operate on numbers:<br />
+    <pre>y = Math.sqrt(x);<br /></pre>
+  </li>
+</ul>
+<h2>Control Flow</h2>
+<ul>
+  <li><tt>if</tt>
+  </li>
+  <li><tt>while</tt>
+  </li>
+  <li><tt>do/while</tt>
+  </li>
+  <li><tt>for</tt>
+  </li>
+  <li>Variable can be declared in <tt>
+for</tt> loop:<br />
+    <pre>for (int i = 1; i &lt;= n; i++)<br />{<br /> . . .<br />}<br />// i no longer defined here<br /></pre>
+  </li>
+</ul>
+<h2>Object References</h2>
+<ul>
+  <li>Object variable holds a <i>reference</i><br />
+    <pre>Greeter worldGreeter = new Greeter("World");<br /><br /><img
+ src="images/Ch1_06.jpg" title="" alt="."
+ style="width: 563px; height: 135px;" /> <br /><br /></pre>
+  </li>
+  <li>Can have multiple references
+to the same object<br />
+    <pre>Greeter anotherGreeter = worldGreeter;<br /><br /><img
+ src="images/Ch1_07.jpg" title="" alt="."
+ style="width: 590px; height: 137px;" /><br /></pre>
+  </li>
+  <li>After applying mutator
+method, all references access modified
+object<br />
+    <pre>anotherGreeter.setName("Dave");<br />// now worldGreeter.sayHello() returns "Hello, Dave!"<br /></pre>
+  </li>
+</ul>
+<h2>The <tt>null</tt>
+Reference</h2>
+<ul>
+  <li><tt>null</tt>
+refers to undefined object </li>
+  <li>Can assign <tt>null</tt>
+to object variable:<br />
+    <pre>worldGreeter = null;<br /></pre>
+  </li>
+  <li>Can test whether reference
+is <tt>null</tt><br />
+    <pre>if (worldGreeter == null) . . .<br /></pre>
+  </li>
+  <li>Dereferencing <tt>null</tt>
+causes <tt>NullPointerException</tt>
+  </li>
+</ul>
+<h2>The <tt>this</tt>
+Reference<br />
+</h2>
+<ul>
+  <li>Refers to implicit parameter
+of method call </li>
+  <li>Example: Equality testing<br />
+    <pre>public boolean equals(Greeter other)<br />{<br /> if (this == other) return true;<br /> return name.equals(other.name);<br />}<br /></pre>
+  </li>
+  <li>Example: Constructor<br />
+    <pre>public Greeter(String name)<br />{<br /> this.name = name;<br />}<br /></pre>
+  </li>
+</ul>
+<h2>Parameter Passing</h2>
+<ul>
+  <li>Java uses "call by value":<br />
+Method receives copy of parameter value </li>
+  <li>Copy of object reference
+lets method modify object<br />
+    <pre>public void copyNameTo(Greeter other)<br />{<br /> other.name = this.name;<br />}<br /></pre>
+  </li>
+  <li>
+    <pre>Greeter worldGreeter = new Greeter("World");<br />Greeter daveGreeter = new Greeter("Dave");<br />worldGreeter.copyNameTo(daveGreeter);<br /></pre>
+    <img src="images/Ch1_08.jpg" title="" alt="."
+ style="width: 550px; height: 137px;" />&nbsp;<br />
+  </li>
+</ul>
+<h2>No Reference Parameters</h2>
+<ul>
+  <li>Java has no "call by
+reference" </li>
+  <li>
+    <pre>public void copyLengthTo(int n)<br />{<br /> n = name.length(); <br />} <br />public void copyGreeterTo(Greeter other)<br />{<br /> other = new Greeter(name);<br />}<br /></pre>
+  </li>
+  <li>Neither call has any effect
+after the method returns<br />
+    <pre>int length = 0;<br />worldGreeter.copyLengthTo(length); // length still 0<br />worldGreeter.copyGreeterTo(daveGreeter) // daveGreeter unchanged<br /></pre>
+  </li>
+</ul>
+<h2>Packages</h2>
+<ul>
+  <li>Classes are grouped into
+packages </li>
+  <li>Package names are
+dot-separated identifier sequences<br />
+    <pre>java.util<br />javax.swing<br />com.sun.misc<br />edu.ttu.cs.dp.alice<br /></pre>
+  </li>
+  <li>Unique package names: start
+with reverse domain name </li>
+</ul>
+<h2>Packages</h2>
+<ul>
+  <li>Add <tt>package</tt>
+statement to top of file<br />
+    <pre>package edu.ttu.cs.dp.alice;<br />public class Greeter { . . . }<br /></pre>
+  </li>
+  <li>Class without package name
+is in "default package" </li>
+  <li>Full name of class = package
+name + class name<br />
+    <pre>java.util.ArrayList<br />javax.swing.JOptionPane<br /></pre>
+  </li>
+</ul>
+<h2>Importing Packages</h2>
+<ul>
+  <li>Tedious to use full class
+names </li>
+  <li> <tt>import</tt>
+allows you to use short class name<br />
+    <pre>import java.util.Scanner;<br />. . .<br />Scanner a; // i.e. java.util.Scanner<br /></pre>
+  </li>
+  <li>Can import all classes from
+a package<br />
+    <pre>import java.util.*;<br /></pre>
+  </li>
+</ul>
+<h2>Importing Packages</h2>
+<ul>
+  <li>Cannot import from multiple
+packages<br />
+    <pre>import java.*.*; // NO<br /></pre>
+  </li>
+  <li>If a class occurs in two
+imported packages, <tt>import</tt>
+is
+no help.<br />
+    <pre>import java.util.*;<br />import java.sql.*;<br />. . .<br />java.util.Date d; // Date also occurs in java.sql<br /></pre>
+  </li>
+  <li>Never need to import <tt>java.lang</tt>.<br />
+  </li>
+</ul>
+<h2>Packages and Directories</h2>
+<ul>
+  <li>Package name <tt>edu.ttu.cs.dp.alice</tt> must match
+subdirectory name <tt>edu/ttu/cs/dp/alice</tt><br />
+  <p> <tt>edu.ttu.cs.dp.alice.Greeter.java</tt></p>
+  <p>must be in subdirectory<br />
+    </p>
+    <pre><i>basedirectory</i>/edu/ttu/cs/dp/alice/alice&nbsp;<br /></pre>
+  </li>
+  <li>Always compile from the package directory
+directory<br />
+    <pre>cd <i>basedirectory</i>/edu/ttu/cs/dp/alice<i>
+</i>javac Greeter.java<br /></pre>
+  </li>
+  <li>Always run from the codebase
+directory wit fully qualified name<br />
+    <pre>java -cp F:/classes <tt>edu.ttu.cs.dp.alice.Greeter.</tt>GreeterTester<br /></pre>
+  </li>
+</ul>
+<h2>Exception Handling</h2>
+<ul>
+  <li>Example: <tt>NullPointerException</tt><pre>String name = null;<br />int n = name.length(); // ERROR<br /></pre>
+  </li>
+  <li>Cannot apply a method to <tt>null</tt>
+  </li>
+  <li>Virtual machine <i>throws</i>
+exception </li>
+  <li>Unless there is a handler,
+program exits with <i>stack trace<br />
+    </i>
+    <pre>Exception in thread "main" java.lang.NullPointerException <br /> at Greeter.sayHello(Greeter.java:25) <br /> at GreeterTest.main(GreeterTest.java:6)<br /></pre>
+  </li>
+</ul>
+<h2>Checked and Unchecked
+Exceptions</h2>
+<ul>
+  <li>Compiler tracks only <i>checked</i>
+exceptions </li>
+  <li><tt>NullPointerException</tt>
+is not checked </li>
+  <li><tt>IOException</tt>
+is checked </li>
+  <li>Generally, checked
+exceptions are thrown for reasons beyond the
+programmer's control </li>
+  <li>Two approaches for dealing
+with checked exceptions<br />
+    <ul>
+      <li>Declare the exception in
+the method header (preferred) </li>
+      <li>Catch the exception </li>
+    </ul>
+  </li>
+</ul>
+<h2>Declaring Checked Exceptions</h2>
+<ul>
+  <li>Example: Opening a file may
+throw <tt>FileNotFoundException</tt>:<br />
+    <pre>public void read(String filename) <b>throws FileNotFoundException</b><br />{<br /> FileReader reader = new FileReader(filename);<br /> . . .<br />}<br /></pre>
+  </li>
+  <li>Can declare multiple
+exceptions<br />
+    <pre>public void read(String filename)<br /><b>                                                                throws IOException, ClassNotFoundException<br /></b>public static void main(String[] args)<br /><b>                                                                throws IOException, ClassNotFoundException</b>
+    </pre>
+  </li>
+</ul>
+<h2>Catching Exceptions<br />
+</h2>
+<ul>
+  <li>
+    <pre>try<br />{<br /> <i>code that might throw an IOException</i><br />}<br />catch (IOException exception)<br />{<br /> <i>take corrective action</i><br />}<br /></pre>
+  </li>
+  <li>Corrective action can be:<br />
+    <ul>
+      <li>Notify user of error and
+offer to read another file </li>
+      <li>Log error in error
+report file </li>
+      <li>In student programs:
+print stack trace and exit<br />
+        <pre>exception.printStackTrace();<br />System.exit(1);<br /></pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>The <tt>finally</tt>
+Clause</h2>
+<ul>
+  <li>Cleanup needs to occur
+during normal <i>and</i>
+exceptional
+processing </li>
+  <li>Example: Close a file<br />
+    <pre>FileReader reader = null;<br />try<br />{<br /> reader = new FileReader(name);<br /> ...<br />}<br />finally<br />{<br /> if (reader != null) reader.close();<br />} <br /> <br /></pre>
+  </li>
+</ul>
+<h2>Strings</h2>
+<ul>
+  <li>Sequence of Unicode
+characters </li>
+  <li>(Technically, code units in
+UTF-16 encoding)<br />
+  </li>
+  <li><tt>length</tt>
+method yields number of characters </li>
+  <li><tt>""</tt>
+is the empty string of length 0, different from <tt>null</tt>
+  </li>
+  <li><tt>charAt</tt>
+method yields characters:<br />
+    <tt>char c = s.charAt(i);</tt>
+  </li>
+</ul>
+<h2>Strings</h2>
+<ul>
+  <li><tt>substring</tt>
+method yields substrings:<br />
+    <tt>"Hello".substring(1, 3)</tt>
+is <tt>"el"<br />
+    <img src="images/Ch1_10.jpg" title="" alt="."
+ style="width: 196px; height: 77px;" /><br />
+    </tt> </li>
+  <li>Use <tt>equals</tt>
+to compare strings<br />
+    <tt>if
+(greeting.equals("Hello"))</tt> </li>
+  <li><tt>==</tt>
+only tests whether the object references are
+identical:<br />
+    <tt>if ("Hello".substring(1,
+3) == "el") ... // NO!</tt> </li>
+</ul>
+<h2>String concatenation</h2>
+<ul>
+  <li> <tt>+</tt>
+operator concatenates strings:<br />
+    <pre>"Hello, " + name<br /></pre>
+  </li>
+  <li>If one argument of <tt>+</tt>
+is a string, the other is
+converted into a string:<br />
+    <pre>int n = 7;<br />String greeting = "Hello, " + n;<br /> // yields "Hello, 7"<br /></pre>
+  </li>
+  <li> <tt>toString</tt>
+method is applied to objects<br />
+    <pre>Date now = new Date();<br />String greeting = "Hello, " + now; <br /> // concatenates now.toString()<br /> // yields "Hello, Wed Jan 17 16:57:18 PST 2001"</pre>
+  </li>
+  <li>shortcut (not elegant)<br>
+  <tt>"" + object;</tt> <br>
+  instead of <tt>object.toString();</tt><br /></li>
+</ul>
+<h2>Converting Strings to Numbers<br />
+</h2>
+<ul>
+  <li>Use static methods<br />
+    <tt>Integer.parseInt</tt><br />
+    <tt>Double.parseDouble</tt>
+  </li>
+  <li>Example:<br />
+    <pre>String input = "7";<br />int n = Integer.parseInt(input);<br /> // yields integer 7<br /></pre>
+  </li>
+  <li>If string doesn't contain a
+number, throws a&nbsp; <tt>NumberFormatException</tt>(unchecked)
+  </li>
+</ul>
+<h2>Reading Input</h2>
+<ul>
+  <li>Construct <tt>Scanner</tt>
+from input stream (e.g. <tt>System.in</tt>)<br />
+    <tt>Scanner in = new
+Scanner(System.in)</tt><br />
+  </li>
+  <li><tt>nextInt</tt>,
+    <tt>nextDouble</tt>
+reads next <tt>int</tt>
+or <tt>double<br />
+int n = in.nextInt();</tt><br />
+  </li>
+  <li><tt>hasNextInt</tt>,
+    <tt>hasNextDouble</tt>
+test whether next
+token is a number </li>
+  <li><tt>next</tt>
+reads next string (delimited by whitespace) </li>
+  <li><tt>nextLine</tt>
+reads next line<br />
+  </li>
+</ul>
+<ul>
+  <li>
+    <h4><span style="font-style: normal"><a href="code/input/InputTester.java.html"><tt>InputTester.java</tt></a></span></h4>
+  </li>
+</ul>
+<h2>The <tt>ArrayList&lt;E&gt;</tt>
+class</h2>
+<ul>
+  <li>Generic class: <tt>ArrayList&lt;E&gt;</tt>
+collects objects of
+type <tt>E</tt>
+  </li>
+  <li><tt><tt>E</tt></tt>
+cannot be a primitive type<tt><br />
+    </tt> </li>
+  <li> <tt>add</tt>
+appends to the end<br />
+    <pre>ArrayList&lt;String&gt; countries = new ArrayList&lt;String&gt;();<br />countries.add("Belgium");<br />countries.add("Italy");<br />countries.add("Thailand");<br /></pre>
+  </li>
+</ul>
+<h2>The <tt>ArrayList&lt;E&gt;</tt>
+class</h2>
+<p>An array list is a collection of objects that supports efficient access to 
+all storage locations.</p>
+<ul>
+  <li><tt>get</tt>
+gets an element; no need to cast to correct type:<br />
+    <tt>String country =
+countries.get(i);</tt> </li>
+  <li><tt><tt>set</tt></tt>
+sets an element<br />
+    <tt>countries.set(2, "France");</tt>
+  </li>
+  <li><tt>size</tt>
+method yields number of elements<br />
+    <tt>for (int i = 0; i &lt;
+countries.size(); i++) . . .</tt> </li>
+  <li>Or use "for each" loop<br />
+    <pre>for (String country : countries) . . .<br /></pre>
+  </li>
+</ul>
+<h2>The <tt>ArrayList&lt;E&gt;</tt>
+class</h2>
+<ul>
+  <li>Insert and remove elements
+in the middle<tt><br />
+countries.add(3, "Germany");<br />
+countries.remove(2);</tt> </li>
+  <li>Not efficient--use linked
+lists if needed frequently<br />
+    <tt><br />
+    <img src="images/Ch1_13.jpg" title="" alt="." width="401" height="301" /><br />
+    </tt> </li>
+</ul>
+<h2>Linked Lists</h2>
+<ul>
+  <li>Efficient insertion and
+removal<br />
+    <img src="images/Ch1_14.jpg" title="" alt="."
+ style="width: 768px; height: 202px;" /><br />
+  </li>
+  <li> <tt>add</tt>
+appends to the end<br />
+    <pre>LinkedList&lt;String&gt; countries = new LinkedList&lt;String&gt;();<br />countries.add("Belgium");<br />countries.add("Italy");<br />countries.add("Thailand");<br /></pre>
+  </li>
+  <li>Use iterators to edit in the
+middle<br />
+  </li>
+</ul>
+<h2>List Iterators<br />
+</h2>
+<ul>
+  <li>Iterator points between list
+elements<br />
+    <br />
+    <img src="images/Ch1_15.jpg" title="" alt="."
+ style="width: 475px; height: 172px;" /><br />
+  </li>
+</ul>
+<h2>List Iterators</h2>
+<ul>
+  <li><tt><tt>next</tt></tt>
+retrieves element and advances iterator<tt><br />
+ListIterator&lt;String&gt; iterator = countries.listIterator();<br />
+while (iterator.hasNext())<br />
+{<br />
+&nbsp;&nbsp; String country = iterator.next();<br />
+&nbsp;&nbsp; . . .<br />
+}</tt> </li>
+  <li>Or use "for each" loop:<br />
+    <tt>for (String country :
+countries)</tt><br />
+  </li>
+  <li><tt>add</tt>
+adds element before iterator position </li>
+  <li><tt>remove</tt>
+removes element returned by last call to <tt>next</tt><br />
+  </li>
+</ul>
+<h2>Arrays</h2>
+<ul>
+  <li>Drawback of array lists: can't store values of primitive data types </li>
+  <li>Arrays can store objects of
+any type and values of primitive data types, but their length is fixed<br />
+    <tt>int[] numbers = new
+int[10];</tt> </li>
+  <li>Array variable is a <i>reference<br />
+    </i> <img src="images/Ch1_16.jpg" title="" alt="."
+ style="width: 472px; height: 434px;" /><br />
+  </li>
+</ul>
+<h2>Arrays</h2>
+<ul>
+  <li>Array access with <tt>[]</tt>
+operator:<br />
+    <tt>int n = numbers[i];</tt>
+  </li>
+  <li> <tt>length</tt>
+member yields number of elements<br />
+    <pre>for (int i = 0; i &lt; numbers.length; i++)<br /></pre>
+  </li>
+  <li>Or use "for each" loop<br />
+    <tt>for (int n : numbers) . . .</tt>
+  </li>
+</ul>
+<h2>Arrays<br />
+</h2>
+<ul>
+  <li>Can have array of length 0; <i>not</i>
+the same as <tt>null</tt>:<br />
+    <pre>numbers = new int[0];<br /></pre>
+  </li>
+  <li>Multidimensional array<br />
+    <pre>int[][] table = new int[10][20];<br />int t = table[i][j];<br /></pre>
+  </li>
+</ul>
+<h2>Command-Line Arguments</h2>
+<ul>
+  <li><tt>void
+main(String[] args)</tt><br />
+  </li>
+  <li><tt>args</tt>
+parameter of <tt>main</tt>
+is initialized with
+command-line arguments </li>
+  <li>Example:<br />
+    <tt>java GreeterTest Mars</tt><br />
+  </li>
+  <li><tt>args.length</tt>
+is 1<br />
+    <tt>args[0]</tt>
+is <tt>"Mars"</tt>
+  </li>
+</ul>
+<h2>Static (Class) Fields </h2>
+<ul>
+  <li>A static field belongs to the class, not to its individual instances</li>
+  <li>Shared among all instances
+of a class </li>
+  <li>Example: shared random
+number generator<br />
+    <pre>public class Greeter<br />{<br /> . . .<br /> private <b>static</b> Random generator;<br />}<br /></pre>
+  </li>
+  <li>Example: shared constants<br />
+    <pre>public class Math<br />{<br /> . . .<br /> public static final double PI = 3.14159265358979323846;<br />}<br /></pre>
+  </li>
+</ul>
+<h2>Static (Class) Methods</h2>
+<ul>
+  <li>Don't operate on class instances</li>
+  <li>Example: <tt>Math.sqrt</tt>
+  </li>
+  <li>Example: <i>factory
+method<br />
+    </i>
+    <pre>public static Greeter getRandomInstance()<br />{<br /> if (generator.nextBoolean()) // note: generator is static field<br /> 	return new Greeter("Mars");<br /> else<br /> 	return new Greeter("Venus");<br />}<br /></pre>
+  </li>
+  <li>Invoke through class:<br />
+    <pre>Greeter g = Greeter.getRandomInstance();<br /></pre>
+  </li>
+</ul>
+<h2>Programming Style: Case
+Convention</h2>
+<ul>
+  <li>variables, fields and
+methods:<br />
+start with lowercase, use caps for new words:<br />
+    <pre>name<br />sayHello<br /></pre>
+  </li>
+  <li>Classes:<br />
+start with uppercase, use caps for new words:<br />
+    <pre>Greeter<br />ArrayList<br /></pre>
+  </li>
+  <li>Constants:<br />
+use all caps, underscores to separate words<br />
+    <pre>PI<br />MAX_VALUE<br /></pre>
+  </li>
+</ul>
+<h2>Programming Style: Property
+Access</h2>
+<ul>
+  <li>Common to use <tt>get/set</tt>
+prefixes:<br />
+    <pre>String getName()<br />void setName(String newValue)<br /></pre>
+  </li>
+  <li>Boolean property has <tt>is/set</tt>
+prefixes:<br />
+    <pre>public boolean isPolite()<br />public void setPolite(boolean newValue)<br /></pre>
+  </li>
+</ul>
+<h2>Programming Style: Braces</h2>
+<ul>
+  <li>"Allman" brace style: braces
+line up<br />
+    <pre>public String sayHello()<br />{<br /> return "Hello, " + name + "!";<br />}<br /></pre>
+  </li>
+  <li>"Kernighan and Ritchie"
+brace style: saves a line
+    <pre>public String sayHello() {<br /> return "Hello, " + name + "!";<br />}<br /></pre>
+  </li>
+</ul>
+<h2>Programming Style: Fields</h2>
+<ul>
+  <li>Some programmers put fields
+before methods:<br />
+    <pre>public class Greeter<br />{<br /> private String name;<br /> public Greeter(String aName) { . . . }<br /> . . .<br />}<br /></pre>
+  </li>
+  <li>From OO perspective, it is
+better to list the <tt>public</tt>
+interface first </li>
+  <li>All fields should be <tt>private</tt>
+  </li>
+  <li>Don't use default (package)
+visibility </li>
+</ul>
+<h2>Programming Style:
+Miscellaneous</h2>
+<ul>
+  <li>Spaces around operators,
+after keywords, but not after method
+names<br />
+    <pre>Good: if (x &gt; Math.sqrt(y))<br />Bad: if(x&gt;Math.sqrt (y))<br /></pre>
+  </li>
+  <li>Don't use C-style arrays:<br />
+    <pre>Good: int[] numbers<br />Bad: int numbers[]<br /></pre>
+  </li>
+  <li>No magic numbers<br />
+    <pre>Good: h = HASH_MULTIPLIER * h + val[off];<br />Bad: h = 31 * h + val[off];<br /></pre>
+  </li>
+</ul>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd7125fe94ecba',t:'MTczOTIwNDU4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

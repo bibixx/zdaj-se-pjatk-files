@@ -1,0 +1,21 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>util<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font>
+<font color="#000000">03: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> QueueTester
+<font color="#000000">04: </font><font color="#FF0000">{</font>
+<font color="#000000">05: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#0000FF">static</font></b> <font color="#009900">void</font> <b><font color="#000000">main</font></b><font color="#990000">(</font>String<font color="#990000">[</font><font color="#990000">]</font> args<font color="#990000">)</font>
+<font color="#000000">06: </font>   <font color="#FF0000">{</font>
+<font color="#000000">07: </font>      BoundedQueue<font color="#990000">&lt;</font>String<font color="#990000">&gt;</font> q <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> BoundedQueue<font color="#990000">&lt;</font>String<font color="#990000">&gt;</font><font color="#990000">(</font><font color="#993399">10</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">08: </font>
+<font color="#000000">09: </font>      q<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font><font color="#FF0000">"Belgium"</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">10: </font>      q<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font><font color="#FF0000">"Italy"</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">11: </font>      q<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font><font color="#FF0000">"France"</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">12: </font>      q<font color="#990000">.</font><b><font color="#000000">remove</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">13: </font>      q<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font><font color="#FF0000">"Thailand"</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">14: </font>
+<font color="#000000">15: </font>      ArrayList<font color="#990000">&lt;</font>String<font color="#990000">&gt;</font> a <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> ArrayList<font color="#990000">&lt;</font>String<font color="#990000">&gt;</font><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">16: </font>      a<font color="#990000">.</font><b><font color="#000000">addAll</font></b><font color="#990000">(</font>q<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">17: </font>      System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font><font color="#FF0000">"Result of bulk add: "</font> <font color="#990000">+</font> a<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">18: </font>      System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font><font color="#FF0000">"Minimum: "</font> <font color="#990000">+</font> Collections<font color="#990000">.</font><b><font color="#000000">min</font></b><font color="#990000">(</font>q<font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">19: </font>   <font color="#FF0000">}</font>
+<font color="#000000">20: </font><font color="#FF0000">}</font>
+</tt></pre>

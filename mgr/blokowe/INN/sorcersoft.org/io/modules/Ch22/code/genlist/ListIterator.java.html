@@ -1,0 +1,43 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">02: </font></b><font color="#7a9ecd">   A list iterator allows access of a position in a linked list.    </font>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">   This interface contains a subset of the methods of the </font>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">   standard java.util.ListIterator interface. The methods for</font>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">   backward traversal are not included.</font>
+<b><font color="#006cb8">06: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">07: </font></b><font color="#d05b76">public</font> <font color="#d05b76">interface</font> <font color="#000000">ListIterator</font><font color="#000000">&lt;</font><font color="#000000">E</font><font color="#000000">&gt;</font>
+<b><font color="#006cb8">08: </font></b><font color="#000000">{</font>  
+<b><font color="#006cb8">09: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">10: </font></b><font color="#7a9ecd">      Moves the iterator past the next element.</font>
+<b><font color="#006cb8">11: </font></b><font color="#7a9ecd">      @return the traversed element</font>
+<b><font color="#006cb8">12: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">13: </font></b>   <font color="#000000">E</font> <font color="#000000">next</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">14: </font></b>      
+<b><font color="#006cb8">15: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">16: </font></b><font color="#7a9ecd">      Tests if there is an element after the iterator </font>
+<b><font color="#006cb8">17: </font></b><font color="#7a9ecd">      position.</font>
+<b><font color="#006cb8">18: </font></b><font color="#7a9ecd">      @return true if there is an element after the iterator </font>
+<b><font color="#006cb8">19: </font></b><font color="#7a9ecd">      position</font>
+<b><font color="#006cb8">20: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">21: </font></b>   <font color="#d05b76">boolean</font> <font color="#000000">hasNext</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">22: </font></b>      
+<b><font color="#006cb8">23: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">24: </font></b><font color="#7a9ecd">      Adds an element before the iterator position</font>
+<b><font color="#006cb8">25: </font></b><font color="#7a9ecd">      and moves the iterator past the inserted element.</font>
+<b><font color="#006cb8">26: </font></b><font color="#7a9ecd">      @param element the element to add</font>
+<b><font color="#006cb8">27: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">28: </font></b>   <font color="#d05b76">void</font> <font color="#000000">add</font><font color="#000000">(</font><font color="#000000">E</font> <font color="#000000">element</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">29: </font></b>      
+<b><font color="#006cb8">30: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">31: </font></b><font color="#7a9ecd">      Removes the last traversed element. This method may</font>
+<b><font color="#006cb8">32: </font></b><font color="#7a9ecd">      only be called after a call to the next() method.</font>
+<b><font color="#006cb8">33: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">34: </font></b>   <font color="#d05b76">void</font> <font color="#000000">remove</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">35: </font></b>
+<b><font color="#006cb8">36: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">37: </font></b><font color="#7a9ecd">      Sets the last traversed element to a different </font>
+<b><font color="#006cb8">38: </font></b><font color="#7a9ecd">      value. </font>
+<b><font color="#006cb8">39: </font></b><font color="#7a9ecd">      @param element the element to set</font>
+<b><font color="#006cb8">40: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">41: </font></b>   <font color="#d05b76">void</font> <font color="#000000">set</font><font color="#000000">(</font><font color="#000000">E</font> <font color="#000000">element</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">42: </font></b><font color="#000000">}</font>
+</tt></pre>

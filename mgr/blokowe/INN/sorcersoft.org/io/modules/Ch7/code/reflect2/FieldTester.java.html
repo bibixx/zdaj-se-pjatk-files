@@ -1,0 +1,48 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>lang<font color="#990000">.</font>reflect<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>util<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">03: </font>
+<font color="#000000">04: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">05: </font><i><font color="#9A1900">   This program shows how to use reflection to print</font></i>
+<font color="#000000">06: </font><i><font color="#9A1900">   the names and values of all nonstatic fields of an object.</font></i>
+<font color="#000000">07: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">08: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> FieldTester
+<font color="#000000">09: </font><font color="#FF0000">{</font>
+<font color="#000000">10: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#0000FF">static</font></b> <font color="#009900">void</font> <b><font color="#000000">main</font></b><font color="#990000">(</font>String<font color="#990000">[</font><font color="#990000">]</font> args<font color="#990000">)</font>
+<font color="#000000">11: </font>         <b><font color="#0000FF">throws</font></b> IllegalAccessException
+<font color="#000000">12: </font>   <font color="#FF0000">{</font>
+<font color="#000000">13: </font>      Random r <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Random</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">14: </font>      System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">print</font></b><font color="#990000">(</font><b><font color="#000000">spyFields</font></b><font color="#990000">(</font>r<font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">15: </font>      r<font color="#990000">.</font><b><font color="#000000">nextInt</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">16: </font>      System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">println</font></b><font color="#990000">(</font><font color="#FF0000">"\nAfter calling nextInt:\n"</font><font color="#990000">)</font><font color="#990000">;</font>      
+<font color="#000000">17: </font>      System<font color="#990000">.</font>out<font color="#990000">.</font><b><font color="#000000">print</font></b><font color="#990000">(</font><b><font color="#000000">spyFields</font></b><font color="#990000">(</font>r<font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">18: </font>   <font color="#FF0000">}</font>
+<font color="#000000">19: </font>
+<font color="#000000">20: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">21: </font><i><font color="#9A1900">      Spies on the field names and values of an object.</font></i>
+<font color="#000000">22: </font><i><font color="#9A1900">      @param obj the object whose fields to format</font></i>
+<font color="#000000">23: </font><i><font color="#9A1900">      @return a string containing the names and values of</font></i>
+<font color="#000000">24: </font><i><font color="#9A1900">      all fields of obj</font></i>
+<font color="#000000">25: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">26: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#0000FF">static</font></b> String <b><font color="#000000">spyFields</font></b><font color="#990000">(</font>Object obj<font color="#990000">)</font>
+<font color="#000000">27: </font>         <b><font color="#0000FF">throws</font></b> IllegalAccessException
+<font color="#000000">28: </font>   <font color="#FF0000">{</font>
+<font color="#000000">29: </font>      StringBuffer buffer <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">StringBuffer</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">30: </font>      Field<font color="#990000">[</font><font color="#990000">]</font> fields <font color="#990000">=</font> obj<font color="#990000">.</font><b><font color="#000000">getClass</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">.</font><b><font color="#000000">getDeclaredFields</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">31: </font>      <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>Field f <font color="#990000">:</font> fields<font color="#990000">)</font>
+<font color="#000000">32: </font>      <font color="#FF0000">{</font>
+<font color="#000000">33: </font>         <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><font color="#990000">!</font>Modifier<font color="#990000">.</font><b><font color="#000000">isStatic</font></b><font color="#990000">(</font>f<font color="#990000">.</font><b><font color="#000000">getModifiers</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">)</font>
+<font color="#000000">34: </font>         <font color="#FF0000">{</font>
+<font color="#000000">35: </font>            f<font color="#990000">.</font><b><font color="#000000">setAccessible</font></b><font color="#990000">(</font><b><font color="#0000FF">true</font></b><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">36: </font>            Object value <font color="#990000">=</font> f<font color="#990000">.</font><b><font color="#000000">get</font></b><font color="#990000">(</font>obj<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">37: </font>            buffer<font color="#990000">.</font><b><font color="#000000">append</font></b><font color="#990000">(</font>f<font color="#990000">.</font><b><font color="#000000">getType</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">.</font><b><font color="#000000">getName</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">38: </font>            buffer<font color="#990000">.</font><b><font color="#000000">append</font></b><font color="#990000">(</font><font color="#FF0000">" "</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">39: </font>            buffer<font color="#990000">.</font><b><font color="#000000">append</font></b><font color="#990000">(</font>f<font color="#990000">.</font><b><font color="#000000">getName</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">40: </font>            buffer<font color="#990000">.</font><b><font color="#000000">append</font></b><font color="#990000">(</font><font color="#FF0000">"="</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">41: </font>            buffer<font color="#990000">.</font><b><font color="#000000">append</font></b><font color="#990000">(</font><font color="#FF0000">""</font> <font color="#990000">+</font> value<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">42: </font>            buffer<font color="#990000">.</font><b><font color="#000000">append</font></b><font color="#990000">(</font><font color="#FF0000">"\n"</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">43: </font>         <font color="#FF0000">}</font>
+<font color="#000000">44: </font>      <font color="#FF0000">}</font>
+<font color="#000000">45: </font>      <b><font color="#0000FF">return</font></b> buffer<font color="#990000">.</font><b><font color="#000000">toString</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">46: </font>   <font color="#FF0000">}</font>
+<font color="#000000">47: </font><font color="#FF0000">}</font>
+</tt></pre>

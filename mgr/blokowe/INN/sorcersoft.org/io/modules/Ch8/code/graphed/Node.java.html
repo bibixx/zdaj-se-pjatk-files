@@ -1,0 +1,48 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>geom<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">03: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>io<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">04: </font>
+<font color="#000000">05: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">06: </font><i><font color="#9A1900">   A node in a graph.</font></i>
+<font color="#000000">07: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">08: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">interface</font></b> Node <b><font color="#0000FF">extends</font></b> Serializable<font color="#990000">,</font> Cloneable
+<font color="#000000">09: </font><font color="#FF0000">{</font>
+<font color="#000000">10: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">11: </font><i><font color="#9A1900">      Draw the node.</font></i>
+<font color="#000000">12: </font><i><font color="#9A1900">      @param g2 the graphics context</font></i>
+<font color="#000000">13: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">14: </font>   <font color="#009900">void</font> <b><font color="#000000">draw</font></b><font color="#990000">(</font>Graphics2D g2<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">15: </font>
+<font color="#000000">16: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">17: </font><i><font color="#9A1900">      Translates the node by a given amount.</font></i>
+<font color="#000000">18: </font><i><font color="#9A1900">      @param dx the amount to translate in the x-direction</font></i>
+<font color="#000000">19: </font><i><font color="#9A1900">      @param dy the amount to translate in the y-direction</font></i>
+<font color="#000000">20: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">21: </font>   <font color="#009900">void</font> <b><font color="#000000">translate</font></b><font color="#990000">(</font><font color="#009900">double</font> dx<font color="#990000">,</font> <font color="#009900">double</font> dy<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">22: </font>
+<font color="#000000">23: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">24: </font><i><font color="#9A1900">      Tests whether the node contains a point.</font></i>
+<font color="#000000">25: </font><i><font color="#9A1900">      @param aPoint the point to test</font></i>
+<font color="#000000">26: </font><i><font color="#9A1900">      @return true if this node contains aPoint</font></i>
+<font color="#000000">27: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">28: </font>   <font color="#009900">boolean</font> <b><font color="#000000">contains</font></b><font color="#990000">(</font>Point2D aPoint<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">29: </font>
+<font color="#000000">30: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">31: </font><i><font color="#9A1900">      Get the best connection point to connect this node </font></i>
+<font color="#000000">32: </font><i><font color="#9A1900">      with another node. This should be a point on the boundary</font></i>
+<font color="#000000">33: </font><i><font color="#9A1900">      of the shape of this node.</font></i>
+<font color="#000000">34: </font><i><font color="#9A1900">      @param aPoint an exterior point that is to be joined</font></i>
+<font color="#000000">35: </font><i><font color="#9A1900">      with this node</font></i>
+<font color="#000000">36: </font><i><font color="#9A1900">      @return the recommended connection point</font></i>
+<font color="#000000">37: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">38: </font>   Point2D <b><font color="#000000">getConnectionPoint</font></b><font color="#990000">(</font>Point2D aPoint<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">39: </font>
+<font color="#000000">40: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">41: </font><i><font color="#9A1900">      Get the bounding rectangle of the shape of this node</font></i>
+<font color="#000000">42: </font><i><font color="#9A1900">      @return the bounding rectangle</font></i>
+<font color="#000000">43: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">44: </font>   Rectangle2D <b><font color="#000000">getBounds</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">45: </font>
+<font color="#000000">46: </font>   Object <b><font color="#000000">clone</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">47: </font><font color="#FF0000">}</font>
+</tt></pre>

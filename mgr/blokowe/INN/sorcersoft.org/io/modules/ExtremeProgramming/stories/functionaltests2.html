@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--last modified on Wednesday, July 12, 2000 10:36 PM -->
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<META NAME="VPSiteProject" CONTENT="file:///D|/Web%20Sites/ExtremeProgramming/Project.vpp">
+
+	<META NAME="Author" Content="Don Wells">
+	<TITLE>Extreme Programming Lessons Learned</TITLE>
+</HEAD>
+
+<BODY TEXT="black" BGCOLOR="white" LINK="red" ALINK="#CC0000" VLINK="#990000">
+
+<P><SCRIPT LANGUAGE="JavaScript"><!--function imageOn (name) {	if (document.images) {		document[name].src = xpOn.src}}function imageOff (name) {	if(document.images) {		document[name].src = xpOff.src}}function learnedOn () {	if (document.images) {		document.learn.src = learnOn.src}}function learnedOff () {	if(document.images) {		document.learn.src = learnOff.src}}if (document.images) {	xpOff=new Image();	xpOff.src="../images/xplinktn.gif"; 	xpOn= new Image();
+	xpOn.src="../images/xpontiny.gif";	learnOff= new Image();	learnOff.src="../images/lessonsl.gif"; 	learnOn= new Image();
+	learnOn.src="../images/lessonon.gif";}//--></SCRIPT>
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%" HEIGHT="100%" BGCOLOR="white">
+	<TR>
+		<TD WIDTH="100%">
+			<CENTER>
+			<P>
+			<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="630">
+				<TR>
+					<TD WIDTH="630">
+						<CENTER>
+						<P>
+						<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="630" HEIGHT="62">
+							<TR>
+								<TD WIDTH="108" HEIGHT="62"><A HREF="../index.html"><IMG SRC="../images/xplogo.gif" WIDTH="108" HEIGHT="62" ALIGN="BOTTOM" ALT="XP Home" BORDER="0"></A></TD>
+								<TH WIDTH="414" HEIGHT="62">
+									<H2>Acceptance Tests Need <BR>
+									to be Easy to Update
+								</TH>
+								<TD WIDTH="108" HEIGHT="62">
+									<P ALIGN="CENTER"><A HREF="../lessons.html" onMouseOver="learnedOn()" onMouseOut="learnedOff()"><IMG SRC="../images/lessonsl.gif"
+									WIDTH="99" HEIGHT="61" ALIGN="BOTTOM" ALT="Lessons Learned" BORDER="0" NAME="learn"></A>
+								</TD>
+							</TR>
+						</TABLE>
+
+</CENTER>
+					</TD>
+				</TR>
+				<TR>
+					<TH WIDTH="630">
+						<P>
+						<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="10" WIDTH="630">
+							<TR>
+								<TD WIDTH="300" VALIGN="TOP"><IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">The VCAPS project at Ford
+									used the unit test framework for both <A HREF="../rules/unittests.html">unit tests</A> and <A HREF="../rules/functionaltests.html">acceptance
+									tests</A>. At the time it seemed like the <A HREF="../rules/simple.html">simplest thing</A> that could possibly
+									work. But in order to use the more generic <A HREF="../rules/unittestframework.html">unit test framework</A> we
+									had to hand code large amounts of data. That is, our database was created with := (assignment) statements. The
+									result was that it required someone familiar with the acceptance test data to update it or add new data and tests.<BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">I had noticed that it was
+									difficult. But continued on anyway. That was my mistake, we needed to create a tool to maintain our tests. A custom
+									made, domain specific tool that would aid us and our customers in creating acceptance tests. My excuse was that
+									there was never enough time to create it. We probably spent even more time creating test data the hard way.</TD>
+								<TD WIDTH="300" VALIGN="TOP"><IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">Now a couple years later
+									VCAPS has entered the maintenance part of it's life cycle. The acceptance tests are still being used to find integration
+									bugs, but no new tests are being added. What the maintenance people are finding is that it is nearly impossible
+									to add new acceptance tests and hard to maintain the ones that exist without some sort of tool designed to make
+									all that data easy to handle.<BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">The best thing we could
+									have done for our project was to just go ahead and create the tool early on. In retrospect it would have been far
+									simpler to have such a tool. Creating the tool would have helped us and saved us time over the entire life cycle
+									of the project. <A HREF="../rules/functionaltests.html" onMouseOver="imageOn('next')" onMouseOut="imageOff('next')"><IMG
+									SRC="../images/xplinktn.gif" WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT="functional tests" BORDER="0" NAME="next"></A><BR>
+									<BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="164" HEIGHT="4" ALIGN="BOTTOM" BORDER="0"><IMG SRC="images/donwells.gif"
+									WIDTH="103" HEIGHT="17" ALIGN="BOTTOM" ALT="Don Wells" BORDER="0"><BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="167" HEIGHT="4" ALIGN="BOTTOM" BORDER="0">eXPerience Software</TD>
+							</TR>
+						</TABLE>
+
+					</TH>
+				</TR>
+				<TR>
+					<TD WIDTH="630">
+						<P ALIGN="CENTER"><A HREF="../index.html">ExtremeProgramming.org home</A> | <A HREF="../lessons.html" onMouseOver="learnedOn()"
+						onMouseOut="learnedOff()">XP Lessons Learned</A> | <A HREF="../rules/functionaltests.html" onMouseOver="imageOn('next')"
+						onMouseOut="imageOff('next')">Acceptance Tests</A> | <A HREF="/cdn-cgi/l/email-protection#d7a0b2b5bab6a4a3b2a597b2afa3a5b2bab2a7a5b8b0a5b6bababeb9b0f9b8a5b0">Email the
+						webmaster</A>
+					</TD>
+				</TR>
+				<TR>
+					<TD WIDTH="630">
+						<P ALIGN="CENTER"><FONT SIZE="1">Copyright 1999 J. Donovan Wells all rights reserved.</FONT>
+					</TD>
+				</TR>
+			</TABLE>
+
+</CENTER>
+		</TD>
+	</TR>
+</TABLE>
+
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd72357f643bca',t:'MTczOTIwNDYzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY>
+
+</HTML>

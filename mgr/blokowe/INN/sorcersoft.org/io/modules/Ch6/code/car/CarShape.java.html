@@ -1,0 +1,78 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>geom<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">03: </font>
+<font color="#000000">04: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">05: </font><i><font color="#9A1900">   A car shape.</font></i>
+<font color="#000000">06: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">07: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> CarShape
+<font color="#000000">08: </font><font color="#FF0000">{</font>
+<font color="#000000">09: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">10: </font><i><font color="#9A1900">      Constructs a car shape.</font></i>
+<font color="#000000">11: </font><i><font color="#9A1900">      @param x the left of the bounding rectangle</font></i>
+<font color="#000000">12: </font><i><font color="#9A1900">      @param y the top of the bounding rectangle</font></i>
+<font color="#000000">13: </font><i><font color="#9A1900">      @param width the width of the bounding rectangle</font></i>
+<font color="#000000">14: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">15: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#000000">CarShape</font></b><font color="#990000">(</font><font color="#009900">int</font> x<font color="#990000">,</font> <font color="#009900">int</font> y<font color="#990000">,</font> <font color="#009900">int</font> width<font color="#990000">)</font>
+<font color="#000000">16: </font>   <font color="#FF0000">{</font>
+<font color="#000000">17: </font>      <b><font color="#0000FF">this</font></b><font color="#990000">.</font>x <font color="#990000">=</font> x<font color="#990000">;</font>
+<font color="#000000">18: </font>      <b><font color="#0000FF">this</font></b><font color="#990000">.</font>y <font color="#990000">=</font> y<font color="#990000">;</font>
+<font color="#000000">19: </font>      <b><font color="#0000FF">this</font></b><font color="#990000">.</font>width <font color="#990000">=</font> width<font color="#990000">;</font>
+<font color="#000000">20: </font>   <font color="#FF0000">}</font>
+<font color="#000000">21: </font>
+<font color="#000000">22: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">draw</font></b><font color="#990000">(</font>Graphics2D g2<font color="#990000">)</font>
+<font color="#000000">23: </font>   <font color="#FF0000">{</font>
+<font color="#000000">24: </font>      Rectangle2D<font color="#990000">.</font>Double body
+<font color="#000000">25: </font>         <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Rectangle2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>x<font color="#990000">,</font> y <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">,</font> 
+<font color="#000000">26: </font>            width <font color="#990000">-</font> <font color="#993399">1</font><font color="#990000">,</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">27: </font>      Ellipse2D<font color="#990000">.</font>Double frontTire
+<font color="#000000">28: </font>         <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Ellipse2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>x <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">,</font> y <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">3</font><font color="#990000">,</font> 
+<font color="#000000">29: </font>            width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">,</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">30: </font>      Ellipse2D<font color="#990000">.</font>Double rearTire
+<font color="#000000">31: </font>         <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Ellipse2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>x <font color="#990000">+</font> width <font color="#990000">*</font> <font color="#993399">2</font> <font color="#990000">/</font> <font color="#993399">3</font><font color="#990000">,</font> 
+<font color="#000000">32: </font>            y <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">3</font><font color="#990000">,</font>
+<font color="#000000">33: </font>            width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">,</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">34: </font>
+<font color="#000000">35: </font>      <i><font color="#9A1900">// The bottom of the front windshield</font></i>
+<font color="#000000">36: </font>      Point2D<font color="#990000">.</font>Double r1
+<font color="#000000">37: </font>         <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Point2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>x <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">,</font> y <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">38: </font>      <i><font color="#9A1900">// The front of the roof</font></i>
+<font color="#000000">39: </font>      Point2D<font color="#990000">.</font>Double r2
+<font color="#000000">40: </font>         <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Point2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>x <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">3</font><font color="#990000">,</font> y<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">41: </font>      <i><font color="#9A1900">// The rear of the roof</font></i>
+<font color="#000000">42: </font>      Point2D<font color="#990000">.</font>Double r3
+<font color="#000000">43: </font>         <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Point2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>x <font color="#990000">+</font> width <font color="#990000">*</font> <font color="#993399">2</font> <font color="#990000">/</font> <font color="#993399">3</font><font color="#990000">,</font> y<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">44: </font>      <i><font color="#9A1900">// The bottom of the rear windshield</font></i>
+<font color="#000000">45: </font>      Point2D<font color="#990000">.</font>Double r4
+<font color="#000000">46: </font>         <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Point2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>x <font color="#990000">+</font> width <font color="#990000">*</font> <font color="#993399">5</font> <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">,</font> y <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">47: </font>      Line2D<font color="#990000">.</font>Double frontWindshield
+<font color="#000000">48: </font>         <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Line2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>r1<font color="#990000">,</font> r2<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">49: </font>      Line2D<font color="#990000">.</font>Double roofTop
+<font color="#000000">50: </font>         <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Line2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>r2<font color="#990000">,</font> r3<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">51: </font>      Line2D<font color="#990000">.</font>Double rearWindshield
+<font color="#000000">52: </font>         <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Line2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>r3<font color="#990000">,</font> r4<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">53: </font>
+<font color="#000000">54: </font>      g2<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>body<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">55: </font>      g2<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>frontTire<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">56: </font>      g2<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>rearTire<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">57: </font>      g2<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>frontWindshield<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">58: </font>      g2<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>roofTop<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">59: </font>      g2<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>rearWindshield<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">60: </font>   <font color="#FF0000">}</font>
+<font color="#000000">61: </font>   
+<font color="#000000">62: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">boolean</font> <b><font color="#000000">contains</font></b><font color="#990000">(</font>Point2D p<font color="#990000">)</font>
+<font color="#000000">63: </font>   <font color="#FF0000">{</font>
+<font color="#000000">64: </font>      <b><font color="#0000FF">return</font></b> x <font color="#990000">&lt;</font><font color="#990000">=</font> p<font color="#990000">.</font><b><font color="#000000">getX</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">&amp;</font><font color="#990000">&amp;</font> p<font color="#990000">.</font><b><font color="#000000">getX</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">&lt;</font><font color="#990000">=</font> x <font color="#990000">+</font> width 
+<font color="#000000">65: </font>         <font color="#990000">&amp;</font><font color="#990000">&amp;</font> y <font color="#990000">&lt;</font><font color="#990000">=</font> p<font color="#990000">.</font><b><font color="#000000">getY</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">&amp;</font><font color="#990000">&amp;</font> p<font color="#990000">.</font><b><font color="#000000">getY</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">&lt;</font><font color="#990000">=</font> y <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">2</font><font color="#990000">;</font>
+<font color="#000000">66: </font>   <font color="#FF0000">}</font>
+<font color="#000000">67: </font>
+<font color="#000000">68: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">translate</font></b><font color="#990000">(</font><font color="#009900">int</font> dx<font color="#990000">,</font> <font color="#009900">int</font> dy<font color="#990000">)</font>
+<font color="#000000">69: </font>   <font color="#FF0000">{</font>
+<font color="#000000">70: </font>      x <font color="#990000">+</font><font color="#990000">=</font> dx<font color="#990000">;</font>
+<font color="#000000">71: </font>      y <font color="#990000">+</font><font color="#990000">=</font> dy<font color="#990000">;</font>
+<font color="#000000">72: </font>   <font color="#FF0000">}</font>
+<font color="#000000">73: </font>
+<font color="#000000">74: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> x<font color="#990000">;</font>
+<font color="#000000">75: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> y<font color="#990000">;</font>
+<font color="#000000">76: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> width<font color="#990000">;</font>
+<font color="#000000">77: </font><font color="#FF0000">}</font>
+</tt></pre>

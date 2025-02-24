@@ -1,0 +1,665 @@
+<TITLE>SE: Designing Objects</TITLE>
+<HTML xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns="http://www.w3.org/TR/REC-html40">
+<HEAD>
+<META name="keywords" content="Intro to Streams">
+
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Designing Objects</span><BR>
+
+
+<H2>Course Map</H2>
+<img border="0" src="../../images/CourseMap15.png" width="603" height="495">
+
+&nbsp;<h2>Agenda</h2>
+<ul>
+  <li>An overview of the Date classes in the Java library </li>
+  <li>Designing a Day class<br />
+  </li>
+  <li>Three implementations of the Day class<br />
+  </li>
+  <li>The importance of encapsulation </li>
+  <li>Analyzing the quality of an interface </li>
+  <li>Programming by contract </li>
+  <li>Unit testing<br />
+  </li>
+</ul>
+<h2>Date Classes in Standard Library</h2>
+<ul>
+  <li>Many programs manipulate dates such as<br />
+"Saturday, February 3, 2001" </li>
+  <li> <tt>Date</tt> class:<br />
+    <pre>Date now = new Date();<br />   // constructs current date/time<br />System.out.println(now.toString());<br />   // prints date such as <br />   // Sat Feb 03 16:34:10 PST 2001<br /></pre>
+  </li>
+  <li><tt>Date</tt> class encapsulates <i>point in time</i> </li>
+</ul>
+<h2>Methods of the <tt>Date</tt> class</h2>
+<table border="1" cellpadding="2" cellspacing="2" width="84%">
+  <tbody>
+    <tr>
+      <td valign="top"><tt>boolean after(Date other)</tt><br />
+      </td>
+      <td valign="top">Tests if this date is after the specified date<br />
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>boolean before(Date other)</tt></td>
+      <td valign="top">Tests if this date is before the specified date</td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>int compareTo(Date other)</tt><br />
+      </td>
+      <td valign="top">Tells&nbsp; which date came before the other<br />
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>long getTime()</tt><br />
+      </td>
+      <td valign="top">Returns milliseconds since the epoch<br />
+(1970-01-01 00:00:00 GMT)<br />
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><tt>void setTime(long n)</tt><br />
+      </td>
+      <td valign="top">Sets the date to the given number of
+milliseconds since the epoch<br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h2>Methods of the <tt>Date</tt> class</h2>
+<ul>
+  <li>Deprecated methods omitted </li>
+  <li><tt>Date</tt> class methods supply <i>total ordering</i> on <tt>Date</tt>
+objects </li>
+  <li>Convert to scalar time measure </li>
+  <li>Note that <tt>before/after</tt> not strictly necessary<br />
+(Presumably introduced for convenience) </li>
+</ul>
+<h2>Points in Time<br />
+</h2>
+<img src="images/Ch3_01.jpg" title="" alt="." /><br />
+<h2>The <tt>GregorianCalendar</tt> Class<tt><br />
+</tt></h2>
+<ul>
+  <li>The <tt>Date</tt> class doesn't measure months, weekdays, etc. </li>
+  <li>That's the job of a <i>calendar</i> </li>
+  <li>A calendar assigns a name to a point in time </li>
+  <li>Many calendars in use: 
+    <ul>
+      <li>Gregorian </li>
+      <li>Contemporary: Hebrew, Arabic, Chinese<br />
+      </li>
+      <li>Historical: French Revolutionary, &nbsp;Mayan </li>
+    </ul>
+  </li>
+</ul>
+<h2>Date Handling in the Java Library</h2>
+<img src="images/Ch3_02.jpg" title="" alt="."
+ style="width: 430px; height: 348px;" /><br />
+<h2>Designing a <tt>Day</tt> Class</h2>
+<ul>
+  <li>Custom class, for teaching/learning purpose </li>
+  <li>Use the standard library classes, not this class, in your own
+programs </li>
+  <li><tt>Day</tt> encapsulates a day in a fixed location </li>
+  <li>No time, no time zone </li>
+  <li>Use Gregorian calendar </li>
+</ul>
+<h2>Designing a <tt>Day</tt> Class</h2>
+<ul>
+  <li>Answer questions such as 
+    <ul>
+      <li>How many days are there between now and the end of the year? </li>
+      <li>What day is 100 days from now?<br />
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>Designing a <tt>Day</tt> Class</h2>
+<img src="images/Ch3_unf03.jpg" title="" alt="."
+ style="width: 563px; height: 338px;" /><br />
+<br />
+<h2>Designing a <tt>Day</tt> Class</h2>
+<ul>
+  <li> <tt>daysFrom</tt> computes number of days between two days:<br />
+    <pre>int n = today.daysFrom(birthday);<br /></pre>
+  </li>
+  <li> <tt>addDays</tt> computes a day that is some days away from a
+given day:<br />
+    <pre>Day later = today.addDays(999);<br /></pre>
+  </li>
+  <li>Mathematical relationship:<br />
+    <pre>d.addDays(n).daysFrom(d) == n<br />d1.addDays(d2.daysFrom(d1)) == d2<br /></pre>
+  </li>
+  <li>Clearer when written with "overloaded operators":<br />
+    <pre>(d + n) - d == n<br />d1 + (d2 - d1) == d2<br /></pre>
+  </li>
+  <li>Constructor <tt>Date(int year, int month, int date)</tt><br />
+  </li>
+  <li><tt>getYear</tt>, <tt>getMonth</tt>, <tt>getDate</tt> acccesors<br />
+  </li>
+</ul>
+<h2>Implementing a <tt>Day</tt> Class</h2>
+<ul>
+  <li>Straightforward implementation:<br />
+    <pre>private int year<br />private int month<br />private int date<br /></pre>
+  </li>
+  <li><tt>addDays</tt>/<tt>daysBetween</tt> tedious to implement 
+    <ul>
+      <li>April, June, September, November have 30 days </li>
+      <li>February has 28 days, except in leap years it has 29 days </li>
+      <li>All other months have 31 days </li>
+      <li>Leap years are divisible by 4, except after 1582, years
+divisible by 100 but not 400 are not leap years </li>
+      <li>There is no year 0; year 1 is preceded by year -1 </li>
+      <li>In the switchover to the Gregorian calendar, ten days were
+dropped: October 15, 1582 is preceded by October 4 </li>
+    </ul>
+  </li>
+</ul>
+<h2>Implementing a <tt>Day</tt> Class</h2>
+<ul>
+  <li><a href="code/day1/Day.java.html">Ch3/code/day1/Day.java</a> </li>
+  <li><a href="code/day1/DayTester.java.html">Ch3/code/day1/DayTester.java</a>
+  </li>
+  <li>Note private helper methods </li>
+  <li>Computations are inefficient: a day at a time </li>
+</ul>
+<h2>Second Implementation</h2>
+<ul>
+  <li>For greater efficiency, use Julian day number </li>
+  <li>Used in astronomy </li>
+  <li>Number of days since Jan. 1, 4713 BCE </li>
+  <li>May 23, 1968 = Julian Day 2,440,000 </li>
+  <li>Greatly simplifies date arithmetic </li>
+  <li><a href="code/day2/Day.java.html">Ch3/code/day2/Day.java</a> </li>
+</ul>
+<h2>Third Implementation</h2>
+<ul>
+  <li>Now constructor, accessors are inefficient </li>
+  <li>Best of both worlds: Cache known Julian, y/m/d values </li>
+  <li><a href="code/day3/Day.java.html">Ch3/code/day3/Day.java</a> </li>
+  <li>Which implementation is best? </li>
+</ul>
+<h2>The Importance of Encapsulation</h2>
+<ul>
+  <li>Even a simple class can benefit from different implementations </li>
+  <li>Users are unaware of implementation </li>
+  <li>Public instance variables would have blocked improvement 
+    <ul>
+      <li>Can't just use text editor to replace all<br />
+        <pre>d.year<br /></pre>
+with<br />
+        <pre>d.getYear()<br /></pre>
+      </li>
+      <li>How about<br />
+        <pre>d.year++?<br /></pre>
+      </li>
+      <li>
+        <pre>d = new Day(d.getDay(), d.getMonth(), d.getYear() + 1)<br /></pre>
+      </li>
+      <li>Ugh--that gets really inefficient in Julian representation </li>
+    </ul>
+  </li>
+  <li>Don't use public fields, even for "simple" classes </li>
+</ul>
+<h2>Accessors and Mutators</h2>
+<ul>
+  <li>Mutator: Changes object state </li>
+  <li>Accessor: Reads object state without changing it </li>
+  <li><tt>Day</tt> class has no mutators! </li>
+  <li>Class without mutators is <i>immutable</i> </li>
+  <li><tt>String</tt> is immutable </li>
+  <li><tt>Date</tt> and <tt>GregorianCalendar</tt> are mutable </li>
+</ul>
+<h2>Don't Supply a Mutator for every Accessor</h2>
+<ul>
+  <li><tt>Day</tt> has <tt>getYear</tt>, <tt>getMonth</tt>, <tt>getDate</tt>
+accessors </li>
+  <li><tt>Day</tt> does <i>not</i> have <tt>setYear</tt>, <tt>setMonth</tt>,<tt>setDate</tt>
+mutators </li>
+  <li>These mutators would not work well
+    <ul>
+      <li>Example:<br />
+        <pre>Day deadline = new Day(2001, 1, 31);<br />deadline.setMonth(2); // ERROR<br />deadline.setDate(28);<br /></pre>
+      </li>
+      <li>Maybe we should call <tt>setDate</tt> first?
+        <pre>Day deadline = new Day(2001, 2, 28);<br />deadline.setDate(31); // ERROR<br />deadline.setMonth(3);<br /></pre>
+      </li>
+    </ul>
+  </li>
+  <li><tt>GregorianCalendar</tt> implements confusing <i>rollover.&nbsp;</i>
+    <ul>
+      <li>Silently gets the wrong result instead of error. </li>
+    </ul>
+  </li>
+  <li>Immutability is useful<br />
+  </li>
+</ul>
+<h2>Sharing Mutable References</h2>
+<ul>
+  <li>References to immutable objects can be freely shared </li>
+  <li>Don't share mutable references </li>
+  <li>Example<br />
+    <pre>class Employee<br />{<br />   . . .<br />   public String getName() { return name; }<br />   public double getSalary() { return salary; }<br />   public Date getHireDate() { return hireDate; }<br />   private String name;<br />   private double salary;<br />   private Date hireDate;<br />}<br /></pre>
+  </li>
+</ul>
+<h2>Sharing Mutable References</h2>
+<ul>
+  <li>Pitfall:<br />
+    <pre>Employee harry = . . .;<br />Date d = harry.getHireDate();<br />d.setTime(t); // changes Harry's state!!!<br /></pre>
+  </li>
+</ul>
+<ul>
+  <li>Remedy: Use clone<br />
+    <pre>public Date getHireDate() <br />{ <br />   return (Date)hireDate.clone();<br />}<br /></pre>
+  </li>
+</ul>
+<h2>Sharing Mutable References</h2>
+<img src="images/Ch3_03.jpg" title="" alt="." /><br />
+<h2>Final Instance Fields</h2>
+<ul>
+  <li>Good idea to mark immutable instance fields as <tt>final<br />
+private final int day;</tt> </li>
+  <li><tt>final</tt> object reference can still refer to mutating object<br />
+    <tt>private final ArrayList elements;</tt> </li>
+  <li><tt>elements</tt> can't refer to another array list<br />
+  </li>
+  <li>The contents of the array list can change<br />
+  </li>
+</ul>
+<h2>Separating Accessors and Mutators</h2>
+<ul>
+  <li>If we call a method to access an object, we don't expect the
+object to mutate<br />
+  </li>
+  <li>Rule of thumb:<br />
+Mutators should return <tt>void</tt> </li>
+  <li>Example of violation:&nbsp;<br />
+    <pre>Scanner in = . . .;<br />String s = in.next();<br /></pre>
+  </li>
+  <li>Yields current token <i>and</i> advances iteration </li>
+  <li>What if I want to read the current token again? </li>
+</ul>
+<h2>Separating Accessors and Mutators</h2>
+<ul>
+  <li>Better interface:<br />
+    <pre>String getCurrent();<br />void next();<br /></pre>
+  </li>
+  <li>Even more convenient:<br />
+    <pre>String getCurrent();<br />String next(); // returns current<br /></pre>
+  </li>
+  <li>Refine rule of thumb:<br />
+Mutators can return a convenience value, provided there is also an
+accessor to get the same value </li>
+</ul>
+<h2>Side Effects</h2>
+<ul>
+  <li>Side effect of a method: any observable state change<br />
+  </li>
+  <li>Mutator: changes implicit parameter<br />
+  </li>
+  <li>Other side effects: change to
+    <ul>
+      <li>explicit parameter<br />
+      </li>
+      <li>static object </li>
+    </ul>
+  </li>
+  <li>Avoid these side effects--they confuse users </li>
+  <li>Good example, no side effect beyond implicit parameter<br />
+    <pre>a.addAll(b)<br /></pre>
+mutates <tt>a</tt> but not <tt>b</tt><br />
+  </li>
+</ul>
+<h2>Side Effects</h2>
+<ul>
+  <li>Date formatting (basic):<br />
+    <pre>SimpleDateFormat formatter = . . .;<br />String dateString = "January 11, 2012";<br />Date d = formatter.parse(dateString);<br /></pre>
+  </li>
+  <li>Advanced:
+    <pre>FieldPosition position = . . .;<br />Date d = formatter.parse(dateString, position);<br /></pre>
+  </li>
+  <li>Side effect: updates <tt>position</tt> parameter<br />
+  </li>
+  <li>Design could be better: add position to formatter state </li>
+</ul>
+<h2>Side Effects</h2>
+<ul>
+  <li>Avoid modifying static objects </li>
+  <li>Example: <tt>System.out</tt> </li>
+  <li>Don't print error messages to <tt>System.out</tt>:<br />
+    <pre>if (newMessages.isFull())<br />   System.out.println("Sorry--no space");<br /></pre>
+  </li>
+  <li>Your classes may need to run in an environment without <tt>System.out</tt>
+  </li>
+  <li>Rule of thumb: Minimize side effects beyond implicit parameter<br />
+  </li>
+</ul>
+<h2>Law of Demeter</h2>
+<ul>
+  <li>Example: Mail system in chapter 2<br />
+    <tt>Mailbox currentMailbox = mailSystem.findMailbox(...);</tt> </li>
+  <li>Breaks encapsulation </li>
+  <li>Suppose future version of <tt>MailSystem</tt> uses a database </li>
+  <li>Then it no longer has mailbox objects<br />
+  </li>
+  <li>Common in larger systems </li>
+  <li>Karl Lieberherr: Law of Demeter </li>
+  <li>Demeter = Greek goddess of agriculture, sister of Zeus </li>
+</ul>
+<h2>Law of Demeter</h2>
+<ul>
+  <li>The law: A method should only use objects that are
+    <ul>
+      <li>instance fields of its class </li>
+      <li>parameters </li>
+      <li>objects that it constructs with <tt>new</tt> </li>
+    </ul>
+  </li>
+  <li>Shouldn't use an object that is returned from a method call </li>
+  <li>Remedy in mail system: Delegate mailbox methods to mail system<br />
+    <tt>mailSystem.getCurrentMessage(int mailboxNumber);<br />
+mailSystem.addMessage(int mailboxNumber, Message msg);<br />
+. . .</tt> </li>
+  <li>Rule of thumb, not a mathematical law </li>
+</ul>
+<h2>Quality of Class Interface</h2>
+<ul>
+  <li>Customers: Programmers using the class </li>
+  <li>Criteria: 
+    <ul>
+      <li>Cohesion </li>
+      <li>Completeness </li>
+      <li>Convenience </li>
+      <li>Clarity </li>
+      <li>Consistency </li>
+    </ul>
+  </li>
+  <li>Engineering activity: make tradeoffs </li>
+</ul>
+<h2>Cohesion</h2>
+<ul>
+  <li>Class describes a <i>single</i> abstraction </li>
+  <li>Methods should be related to the single abstraction </li>
+  <li>Bad example:<br />
+    <pre>public class Mailbox <br />{ <br />   public addMessage(Message aMessage) { ... } <br />   public Message getCurrentMessage() { ... } <br />   public Message removeCurrentMessage() { ... } <br />   public void processCommand(String command) { ... } <br />   ... <br />}<br /></pre>
+  </li>
+</ul>
+<h2>Completeness</h2>
+<ul>
+  <li>Support operations that are well-defined on abstraction </li>
+  <li>Potentially bad example: <tt>Date<br />
+    </tt>
+    <pre>Date start = new Date();<br />// do some work<br />Date end = new Date();<br /></pre>
+  </li>
+  <li>How many milliseconds have elapsed? </li>
+  <li>No such operation in <tt>Date</tt> class </li>
+  <li>Does it fall outside the responsibility? </li>
+  <li>After all, we have <tt>before</tt>, <tt>after</tt>, <tt>getTime</tt>
+  </li>
+</ul>
+<h2>Convenience</h2>
+<ul>
+  <li>A good interface makes all tasks possible . . . and common tasks
+simple </li>
+  <li>Bad example: Reading from <tt>System.in</tt> before Java 5.0<br />
+    <pre>BufferedReader in = new BufferedReader(new<br />   InputStreamReader(System.in));<br /></pre>
+  </li>
+  <li>Why doesn't <tt>System.in</tt> have a <tt>readLine</tt> method?
+  </li>
+  <li>After all, <tt>System.out</tt> has <tt>println</tt>. </li>
+  <li><tt>Scanner</tt> class fixes inconvenience<br />
+  </li>
+</ul>
+<h2>Clarity</h2>
+<ul>
+  <li>Confused programmers write buggy code </li>
+  <li>Bad example: Removing elements from <tt>LinkedList</tt><br />
+  </li>
+  <li>Reminder: Standard linked list class<br />
+    <pre>LinkedList countries = new LinkedList(); <br />countries.add("A"); <br />countries.add("B"); <br />countries.add("C"); <br /></pre>
+  </li>
+  <li>Iterate through list:<br />
+    <pre>ListIterator iterator = countries.listIterator(); <br />while (iterator.hasNext()) <br />   System.out.println(iterator.next()); <br /></pre>
+  </li>
+</ul>
+<h2>Clarity<br />
+</h2>
+<ul>
+  <li>Iterator <i>between</i> elements </li>
+  <li>Like blinking caret in word processor </li>
+  <li><tt>add</tt> adds to the left of iterator (like word processor): </li>
+  <li>Add X before B:<br />
+    <pre>ListIterator iterator = countries.listIterator(); // |ABC <br />iterator.next(); // A|BC <br />iterator.add("France"); // AX|BC <br /></pre>
+  </li>
+  <li>To remove first two elements, you can't just "backspace" </li>
+  <li><tt>remove</tt> does <i>not</i> remove element to the left of
+iterator </li>
+  <li>From API documentation:<br />
+Removes from the list the last element that was returned by next or
+previous. This call can only be made once per call to next or previous.
+It can be made only if add has not been called after the last call to
+next or previous.&nbsp;<br />
+  </li>
+  <li>Huh?<br />
+  </li>
+</ul>
+<h2>Consistency<br />
+</h2>
+<ul>
+  <li>Related features of a class should have matching </li>
+  <li>
+    <ul>
+      <li>names </li>
+      <li>parameters </li>
+      <li>return values </li>
+      <li>behavior </li>
+    </ul>
+  </li>
+  <li>Bad example:<br />
+    <pre>new GregorianCalendar(year, month - 1, day)<br /></pre>
+  </li>
+  <li>Why is <tt>month</tt> 0-based? </li>
+</ul>
+<h2>Consistency<br />
+</h2>
+<ul>
+  <li>Bad example: <tt>String</tt> class<br />
+    <pre>s.equals(t) / s.equalsIgnoreCase(t)<br /></pre>
+  </li>
+  <li>But<br />
+    <pre>boolean regionMatches(int toffset, <br />   String other, int ooffset, int len) <br />boolean regionMatches(boolean ignoreCase, int toffset, <br />   String other, int ooffset, int len) <br /></pre>
+  </li>
+  <li>Why not <tt>regionMatchesIgnoreCase</tt>? </li>
+  <li>Very common problem in student code </li>
+</ul>
+<h2>Programming by Contract</h2>
+<ul>
+  <li>Spell out responsibilities 
+    <ul>
+      <li>of caller </li>
+      <li>of implementor </li>
+    </ul>
+  </li>
+  <li>Increase reliability </li>
+  <li>Increase efficiency<br />
+  </li>
+</ul>
+<h2>Preconditions</h2>
+<ul>
+  <li>Caller attempts to remove message from empty <tt>MessageQueue</tt>
+  </li>
+  <li>What should happen? </li>
+  <li><tt>MessageQueue</tt> can declare this as an error </li>
+  <li><tt>MessageQueue</tt> can tolerate call and return dummy value </li>
+  <li>What is better? </li>
+</ul>
+<h2>Preconditions<br />
+</h2>
+<ul>
+  <li>Excessive error checking is costly </li>
+  <li>Returning dummy values can complicate testing </li>
+  <li>Contract metaphor
+    <ul>
+      <li>Service provider must <i>specify</i> preconditions </li>
+      <li>If precondition is fulfilled, service provider must work
+correctly </li>
+      <li>Otherwise, service provider can do <i>anything</i> </li>
+    </ul>
+  </li>
+  <li>When precondition fails, service provider may 
+    <ul>
+      <li>throw exception </li>
+      <li>return false answer </li>
+      <li>corrupt data </li>
+    </ul>
+  </li>
+</ul>
+<h2>Preconditions</h2>
+<pre>/**<br />   Remove message at head<br />   @return the message at the head<br />   @precondition size() &gt; 0<br />*/<br />Message remove()<br />{<br />   return elements.remove(0);<br />}<br /></pre>
+<ul>
+  <li>What happens if precondition not fulfilled? </li>
+  <li><tt>IndexOutOfBoundsException</tt> </li>
+  <li>Other implementation may have different behavior </li>
+</ul>
+<h2>Circular Array Implementation</h2>
+<ul>
+  <li>Efficient implementation of bounded queue </li>
+  <li>Avoids inefficient shifting of elements </li>
+  <li>Circular: head, tail indexes wrap around </li>
+  <li><a href="code/queue/MessageQueue.java.html">Ch3/queue/MessageQueue.java</a><br />
+  </li>
+</ul>
+<h2>Inefficient Shifting of Elements</h2>
+<img src="images/Ch3_04.jpg" title="" alt="."
+ style="width: 401px; height: 268px;" /><br />
+<br />
+<h2>A Circular Array</h2>
+<img src="images/Ch3_05.jpg" title="" alt="."
+ style="width: 207px; height: 268px;" /><br />
+<br />
+<h2>Wrapping around the End</h2>
+<img src="images/Ch3_06.jpg" title="" alt="."
+ style="width: 207px; height: 268px;" /><br />
+<br />
+<h2>Preconditions</h2>
+<ul>
+  <li>In circular array implementation, failure of <tt>remove</tt>
+precondition corrupts queue! </li>
+  <li>Bounded queue needs precondition for <tt>add</tt> </li>
+  <li>Naive approach:<br />
+    <tt>@precondition size() &lt; elements.length</tt> </li>
+  <li>Precondition should be checkable by caller </li>
+  <li>Better:<br />
+    <tt>@precondition size() &lt; getCapacity()</tt> </li>
+</ul>
+<h2>Assertions</h2>
+<ul>
+  <li>Mechanism for warning programmers </li>
+  <li>Can be turned off after testing </li>
+  <li>Useful for warning programmers about precondition failure </li>
+  <li>Syntax:<br />
+    <pre>assert <i>condition</i>;<br />assert <i>condition</i> : <i>explanation</i>;<br /></pre>
+  </li>
+  <li>Throws <tt>AssertionError</tt> if condition false and checking
+enabled </li>
+</ul>
+<h2>Assertions</h2>
+<pre>public Message remove() <br />{ <br />   assert count &gt; 0 : "violated precondition size() &gt; 0";<br />   Message r = elements[head]; <br />   . . .<br />} <br /></pre>
+<ul>
+  <li>During testing, run with<br />
+    <pre>java -enableassertions MyProg<br /></pre>
+  </li>
+  <li>Or shorter, <tt>java -ea</tt><br />
+  </li>
+</ul>
+<h2>Exceptions in the Contract</h2>
+<pre>/**<br />   . . .<br />   @throws NoSuchElementException if queue is empty<br />*/<br />public Message remove() <br />{ <br />   if (count == 0) <br />      throw new NoSuchElementException();<br />   Message r = elements[head]; <br />   . . .<br />} <br /></pre>
+<ul>
+  <li>Exception throw part of the contract </li>
+  <li>Caller can <i>rely</i> on behavior </li>
+  <li>Exception throw <i>not result of precondition violation</i> </li>
+  <li>This method has <i>no</i> precondition<br />
+  </li>
+</ul>
+<h2>Postconditions</h2>
+<ul>
+  <li>Conditions that the service provider guarantees </li>
+  <li>Every method promises description, <tt>@return</tt> </li>
+  <li>Sometimes, can assert additional useful condition </li>
+  <li>Example: <tt>add</tt> method<br />
+    <pre>@postcondition size() &gt; 0<br /></pre>
+  </li>
+  <li>Postcondition of one call can imply precondition of another:<br />
+    <pre>q.add(m1);<br />m2 = q.remove(); <br /></pre>
+  </li>
+</ul>
+<h2>Class Invariants</h2>
+<ul>
+  <li>Condition that is 
+    <ul>
+      <li>true after every constructor </li>
+      <li>preserved by every method<br />
+(if it's true before the call, it's again true afterwards) </li>
+    </ul>
+  </li>
+  <li>Useful for checking validity of operations </li>
+</ul>
+<h2>Class Invariants</h2>
+<ul>
+  <li>Example: Circular array queue<br />
+    <pre>0 &lt;= head &amp;&amp; head &lt; elements.length<br /></pre>
+  </li>
+  <li>First check it's true for constructor 
+    <ul>
+      <li>Sets <tt>head = 0</tt> </li>
+      <li>Need precondition <tt>size &gt; 0</tt>! </li>
+    </ul>
+  </li>
+  <li>Check mutators. Start with <tt>add</tt>
+    <ul>
+      <li>Sets <tt>head<sub>new</sub> = (head<sub>old</sub> + 1) %
+elements.length</tt> </li>
+      <li>We know <tt>head<sub>old</sub></tt> &gt; 0 (Why?) </li>
+      <li> <tt>%</tt> operator property:
+        <pre>0 &lt;= head<sub>new</sub> &amp;&amp; head<sub>new</sub> &lt; elements.length<br /></pre>
+      </li>
+    </ul>
+  </li>
+  <li>What's the use? Array accesses are correct!<br />
+    <pre>return elements[head];<br /></pre>
+  </li>
+</ul>
+<h2>Unit Testing</h2>
+<ul>
+  <li>Unit test = test of a single class </li>
+  <li>Design test cases during implementation<br />
+  </li>
+  <li>Run tests after every implementation change </li>
+  <li>When you find a bug, add a test case that catches it<br />
+  </li>
+</ul>
+<h2>JUnit</h2>
+<img src="images/Ch3_07.jpg" title="" alt="."
+ style="width: 513px; height: 483px;" /><br />
+<br />
+<h2>JUnit</h2>
+<ul>
+  <li>Test class name = tested class name + <tt>Test</tt> </li>
+  <li>Test methods start with <tt>test</tt> </li>
+</ul>
+<pre>import junit.framework.*;<br />public class DayTest extends TestCase<br />{<br />   public void testAdd() { ... }<br />   public void testDaysBetween() { ... }<br />   . . .<br />}<br /></pre>
+<h2>JUnit</h2>
+<ul>
+  <li>Each test case ends with assertion </li>
+  <li>Test framework catches assertion failures<br />
+  </li>
+</ul>
+<pre>public void testAdd()<br />{<br />   Day d1 = new Day(1970, 1, 1);<br />   int n = 1000;<br />   Day d2 = d1.addDays(n);<br />   assertTrue(d2.daysFrom(d1) == n);<br />}<br /></pre>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c5aadfb5f7',t:'MTczOTIwNDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

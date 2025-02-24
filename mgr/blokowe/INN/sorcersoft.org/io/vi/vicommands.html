@@ -1,0 +1,259 @@
+<HTML><HEAD><TITLE>vi commands</TITLE><LINK href="vicommands_files/main.css" 
+type=text/css rel=STYLESHEET>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="MSHTML 6.00.3790.2759" name=GENERATOR></HEAD>
+<BODY link="#008000" style="background-color: #FFFFFF">
+
+<P class=head>vi Commands</P>
+<P><B>Switch to Text or Insert mode:</B><BR></P>
+<TABLE cellSpacing=0 cellPadding=3 width="80%" border=1>
+  <TBODY>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>
+      <DIV align=right>Open line above cursor </DIV></TD>
+    <TD><STRONG>O</STRONG></TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>
+      <DIV align=right>Insert text at beginning of line</DIV></TD>
+    <TD><STRONG>I </STRONG></TD>
+    <TD>
+      <DIV align=right>Insert text at cursor</DIV></TD>
+    <TD><STRONG>i</STRONG></TD>
+    <TD>
+      <DIV align=right>Insert text after cursor</DIV></TD>
+    <TD><STRONG>a</STRONG></TD>
+    <TD>
+      <DIV align=right>Append text at line end</DIV></TD>
+    <TD><STRONG>A</STRONG></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>
+      <DIV align=right>Open line below cursor</DIV></TD>
+    <TD><STRONG>o</STRONG></TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR></TBODY></TABLE>
+<P><B>Switch to Command mode:</B><BR></P>
+<TABLE cellSpacing=0 cellPadding=3 width="28%" border=1>
+  <TBODY>
+  <TR>
+    <TD width="75%">
+      <DIV align=right>Switch to command mode</DIV></TD>
+    <TD width="25%"><B>&lt;ESC&gt;</B></TD></TR></TBODY></TABLE>
+<P><STRONG>Cursor Movement (command mode):</STRONG><BR></P>
+<TABLE cellSpacing=0 cellPadding=3 width="80%" border=1>
+  <TBODY>
+  <TR>
+    <TD height=15>&nbsp;</TD>
+    <TD height=15>&nbsp;</TD>
+    <TD height=15>
+      <DIV align=right>Scroll <U>B</U>ackward 1 screen</DIV></TD>
+    <TD height=15><STRONG>&lt;ctrl&gt;b</STRONG></TD>
+    <TD height=15>&nbsp;</TD>
+    <TD height=15>&nbsp;</TD></TR>
+  <TR>
+    <TD height=15>&nbsp;</TD>
+    <TD height=15>&nbsp;</TD>
+    <TD height=15>
+      <DIV align=right>Scroll <U>U</U>p 1/2 screen</DIV></TD>
+    <TD height=15><STRONG>&lt;ctrl&gt;u</STRONG></TD>
+    <TD height=15>&nbsp;</TD>
+    <TD height=15>&nbsp;</TD></TR>
+  <TR>
+    <TD>
+      <DIV align=right>Go to beginning of line</DIV></TD>
+    <TD><STRONG>0</STRONG></TD>
+    <TD>
+      <DIV align=right>Go to line <VAR>n</VAR></DIV></TD>
+    <TD><STRONG><VAR>n</VAR>G</STRONG></TD>
+    <TD>
+      <DIV align=right>Go to end of line</DIV></TD>
+    <TD><STRONG>$</STRONG></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>
+      <DIV align=right>Scroll <U>D</U>own 1/2 screen</DIV></TD>
+    <TD><STRONG>&lt;ctrl&gt;d</STRONG></TD>
+    <TD>
+      <DIV align=right>Go to line number ##</DIV></TD>
+    <TD><B>:##</B></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>
+      <DIV align=right>Scroll <U>F</U>orward 1 screen</DIV></TD>
+    <TD><STRONG>&lt;ctrl&gt;f</STRONG></TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>
+      <DIV align=right>Go to last line</DIV></TD>
+    <TD><STRONG>G</STRONG></TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>Scroll by sentence f/b</TD>
+    <TD><STRONG>( )</STRONG></TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>Scroll by word f/b</TD>
+    <TD><STRONG>w b</STRONG></TD>
+    <TD>Move left, down, up, right</TD>
+    <TD><STRONG>h j k l</STRONG></TD>
+    <TD>
+      <DIV align=right>Left 6 chars</DIV></TD>
+    <TD><B>6h</B></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>Directional Movement</TD>
+    <TD><STRONG>Arrow Keys</STRONG></TD>
+    <TD>
+      <DIV align=right>Go to line #6</DIV></TD>
+    <TD><B>6G</B></TD></TR></TBODY></TABLE>
+<P><B>Deleting text <STRONG>(command mode)</STRONG>:</B><BR></P>
+<TABLE cellSpacing=0 cellPadding=3 width="80%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <DIV align=right>Change word </DIV></TD>
+    <TD><STRONG>cw</STRONG></TD>
+    <TD>
+      <DIV align=right>Replace one character</DIV></TD>
+    <TD><STRONG>r</STRONG></TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>
+      <DIV align=right>Delete word</DIV></TD>
+    <TD><STRONG>dw</STRONG></TD>
+    <TD>
+      <DIV align=right>Delete text at cursor</DIV></TD>
+    <TD><STRONG>x</STRONG></TD>
+    <TD>
+      <DIV align=right>Delete entire line (to buffer)</DIV></TD>
+    <TD><STRONG>dd</STRONG></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>
+      <DIV align=right>Delete current to end of line</DIV></TD>
+    <TD><B>D</B></TD>
+    <TD>
+      <DIV align=right>Delete 5 lines (to buffer)</DIV></TD>
+    <TD><B>5dd</B></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>
+      <DIV align=right>Delete lines 5-10</DIV></TD>
+    <TD><STRONG>:5,10d </STRONG></TD></TR></TBODY></TABLE>
+<P><B>Editing <STRONG>(command mode)</STRONG>:</B><BR></P>
+<TABLE cellSpacing=0 cellPadding=3 width="80%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <DIV align=right>Copy line</DIV></TD>
+    <TD><STRONG>yy </STRONG></TD>
+    <TD>
+      <DIV align=right>Copy <VAR>n</VAR> lines</DIV></TD>
+    <TD><STRONG><VAR>n</VAR>yy</STRONG></TD>
+    <TD>
+      <DIV align=right>Copy lines 1-2/paste after 3</DIV></TD>
+    <TD><STRONG>:1,2t 3</STRONG></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=right>Paste above current line</DIV></TD>
+    <TD><STRONG>P</STRONG></TD>
+    <TD>
+      &nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR>
+    <TD>
+      <DIV align=right>Paste below current line</DIV></TD>
+    <TD><STRONG>p</STRONG></TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>
+      <DIV align=right>Move lines 4-5/paste after 6</DIV></TD>
+    <TD><STRONG>:4,5m 6</STRONG></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>
+      <DIV align=right>Join previous line</DIV></TD>
+    <TD><STRONG>J</STRONG></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=right>Search backward for <VAR>string</VAR></DIV></TD>
+    <TD><STRONG>?<VAR>string</VAR></STRONG></TD>
+    <TD>
+      <DIV align=right>Search forward for <VAR>string</VAR></DIV></TD>
+    <TD><STRONG>/<VAR>string</VAR></STRONG></TD>
+    <TD>Find next <VAR>string</VAR> occurrence</TD>
+    <TD><STRONG>n</STRONG></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=right>% (entire file)<B> s </B>(search and replace) /old text 
+      with new/ <B>c</B> (confirm) <B>g</B> (global - all)</DIV></TD>
+    <TD><STRONG>:%s/oldstring/newstring/cg</STRONG></TD>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>
+      <DIV align=right>Ignore case during search</DIV></TD>
+    <TD><STRONG>:set ic</STRONG></TD></TR>
+  <TR>
+    <TD>
+      <DIV align=right>Repeat last command</DIV></TD>
+    <TD><B>.</B></TD>
+    <TD>
+      <DIV align=right>Undo previous command</DIV></TD>
+    <TD><STRONG>u</STRONG></TD>
+    <TD>
+      <DIV align=right>Undo all changes to line</DIV></TD>
+    <TD><STRONG>U</STRONG></TD></TR></TBODY></TABLE>
+<P><B>Save and Quit <STRONG>(command mode)</STRONG>:</B><BR></P>
+<TABLE cellSpacing=0 cellPadding=3 width="80%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <DIV align=right>Save changes to buffer</DIV></TD>
+    <TD><STRONG>:w</STRONG></TD>
+    <TD>
+      <DIV align=right>Save changes and quit vi</DIV></TD>
+    <TD><STRONG>:wq</STRONG></TD>
+    <TD>
+      <DIV align=right>Save file to new file</DIV></TD>
+    <TD><STRONG>:w file</STRONG></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD>
+    <TD>
+      <DIV align=right>Quit without saving</DIV></TD>
+    <TD><STRONG>:q!</STRONG></TD>
+    <TD>
+      <DIV align=right>Save lines to new file</DIV></TD>
+    <TD><STRONG>:10,15w file</STRONG></TD></TR></TBODY></TABLE>
+<P><b>References</b>:<BR><A 
+href="http://www.ungerhu.com/jxh/vi.html">Full list of VI commands</A> <BR><A 
+href="http://www.eng.hawaii.edu/Tutor/vi.html">vi Tutorial</A></P><!-- #EndLibraryItem --><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c1acb9ee3c',t:'MTczOTIwNDU3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY></HTML>

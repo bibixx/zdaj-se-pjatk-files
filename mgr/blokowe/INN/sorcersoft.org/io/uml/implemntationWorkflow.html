@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: The Implementation Workflow</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">The Implementation Workflow</span><BR>
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>The Analysis Workflow</title>
+</head>
+
+<body>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70bc29dcbf23',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+<h2>Agenda</h2>
+<ul>
+	<li>
+	Implementation artifacts - metamodel</li>
+	<li>
+	Relationship between design and implantation mode</li>
+	<li>
+	Implementation workflow detail</li>
+	<li>
+	Architectural implementation</li>
+	<li>
+	The deployment diagram</li>
+	<li>
+	Artifacts nested within artifacts</li>
+	<li>
+	See modules in Background and Guidelines<ul>
+	<li><a href="../modules/Ch1/Ch1.html">Java Basics &amp; Platform</a></li>
+	<li><a href="../modules/Ch7/Ch7.html">Java Object Model</a></li>
+	<li><a href="../modules/Ch3/Ch3.html">Designing Objects</a></li>
+	<li><a href="../modules/inf/index.html">Interfaces and Annotations</a></li>
+	<li><a href="../modules/Ch6/Ch6.html">Inheritance &amp; Abstract Classes</a></li>
+	<li><a href="../modules/Ch21/ch21.html">Concurrency</a></li>
+	<li><a href="../modules/Ch5/Ch5.html">Design Patterns</a></li>
+	<li><a href="../modules/Ch8/Ch8.html">Frameworks</a></li>
+</ul>
+
+	</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Implementation Artifacts - Metamodel</h2>
+<ul>
+	<li>The implementation workflow is the main focus of the Construction phase.</li>
+	<li>Implementation is about transforming a design model into executable 
+	code.</li>
+	<li>The implementation model is really just the implementation view of the 
+	design - that is, it is a <b>part</b> of the design model.</li>
+</ul>
+<p><img border="0" src="images/fig23-3.png" width="257" height="393"></p>
+<body>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Relationship between Design and Implantation Model</h2>
+<ul>
+	<li>The implementation model&nbsp; specifies how the design elements are 
+	manifest by artifacts and how these artifacts are deployed onto nodes.</li>
+</ul>
+<p><img border="0" src="images/fig23-4.png" width="650" height="456"></p>
+<p>&nbsp;</p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Implementation_workflow_detail">Implementation Workflow Detail</a></h2>
+<ul>
+	<li>The focus is on producing the implementation and deployment models as 
+	part of the architectural implementation. </li>
+	<li>System integration, class implementation, ad unit testing are 
+	programming activities rather that analysis and design activities.</li>
+</ul>
+<p><map name="FPMap0">
+<area href="#Architectural_implementation" shape="rect" coords="138, 15, 336, 90">
+</map>
+<img border="0" src="images/fig23-5.png" width="650" height="435" usemap="#FPMap0"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Architectural_implementation">Architectural Implementation</a></h2>
+<p>Architectural implementation is about identifying architecturally significant 
+components and mapping them to physical hardware.</p>
+<p><img border="0" src="images/fig24-2.png" width="650" height="446"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>The Deployment Diagram</h2>
+<ul>
+	<li>The <b>deployment diagram</b> maps the SW architecture created in design 
+	to the HW architecture that executes it. In distributed system, it models 
+	the <b>distribution</b> of the SW across physical nodes.</li>
+	<li>There are two forms of deployment diagrams:<ul>
+	<li><b>Descriptor form</b> deployment diagram - artifacts deployed on nodes. 
+	A node represents a <b>type</b> of HW. Similarly, an artifact represents a
+	<b>type</b> of of physical SW artifact such as a jar file.</li>
+	<li><b>Instance form</b> deployment diagram - artifact instances deployed on 
+	node instances.</li>
+</ul>
+	</li>
+</ul>
+<ol>
+	<li>In the design workflow, focus mainly on nodes on node instances and 
+	connections.</li>
+	<li>In the implementation workflow, focus on assigning artifact instances to 
+	node instances (instance form) or artifacts to node (descriptor form).</li>
+	<li>A <b>node</b> represents a type of computational resource.</li>
+	<li>An <b>artifact</b> represents the <b>specification</b> of a real world 
+	thing such as a file.</li>
+	<li>Artifacts can manifest one or more components.</li>
+</ol>
+<p><img border="0" src="images/fig24-9.png" width="650" height="387"></p>
+<p>A simple instance form of deployment diagram - a currency converter 
+application.</p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Artifacts Nested within Artifacts</h2>
+<p><img border="0" src="images/fig24-8.png" width="650" height="441"></p>
+	
+</body>
+
+</html>

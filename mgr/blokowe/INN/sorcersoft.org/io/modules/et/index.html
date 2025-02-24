@@ -1,0 +1,1075 @@
+<TITLE>Senior Project Design</TITLE>
+<HTML>
+<HEAD>
+<META name="keywords" content="Intro to Streams">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Senior Project Design</span><br>
+<span class="sts">Designing with Exceptions and Threads</span><H2>Agenda</H2>
+<UL>
+<LI>
+Use exceptions to indicate a broken semantic contract.
+<LI>
+Throw exceptions on abnormal conditions.
+<LI>
+Use a checked exception for conditions client code can reasonably be expected to handle.
+<LI>
+Throw a different exception type for each abnormal condition.
+<LI>
+Idiom: The Thread-Safe Object
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Broken Semantic Contract</H2>
+<UL>
+<LI>
+Guideline: <EM>Use exceptions to indicate a broken semantic contract.</EM>
+<LI>
+Pre-conditions, Post-conditions, Invariants
+<LI>
+<CODE>charAt(int index)</CODE> pre-condition: <CODE>0 <= index <
+length()</CODE>
+<LI>
+If you pass <CODE>-1</CODE> to <CODE>charAt()</CODE>, you'll get an
+(unchecked) <CODE>StringIndexOutOfBoundsException</CODE>
+<LI>
+If you meet the pre-condition, but <CODE>String</CODE> is somehow unable
+to meet the post-conditions and invariants, it will also throw an
+exception.
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Discussion</H2>
+<UL>
+<LI>
+Guideline: <EM>Use exceptions to indicate a broken semantic contract.</EM>
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Abnormal Conditions</H2>
+<UL>
+<LI>
+Guideline: <EM>Throw exceptions on abnormal conditions.</EM>
+<LI>
+But what's an abnormal condition?
+<LI>
+Avoid using exceptions to indicate conditions that can reasonably be expected
+as part of the typical functioning of the method.
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Example: <CODE>FileInputStream</CODE></H2>
+<UL>
+<LI>
+<CODE>FileInputStream</CODE> returns -1 on end of file.
+<LI>
+Even if you call <CODE>read()</CODE> again after hitting EOF, you'll
+still get -1.
+<LI>
+Says: hitting EOF is a normal condition to encounter when using the
+<CODE>read()</CODE> method
+</UL>
+<PRE>
+ 1 // In file ex9/Example9a.java
+ 2 import java.io.*;
+ 3 class Example9a {
+ 4
+ 5     public static void main(String[] args)
+ 6         throws IOException {
+ 7
+ 8         if (args.length == 0) {
+ 9             System.out.println("Must give filename as first arg.");
+10             return;
+11         }
+12
+13         FileInputStream in;
+14         try {
+15             in = new FileInputStream(args[0]);
+16         }
+17         catch (FileNotFoundException e) {
+18             System.out.println("Can't find file: " + args[0]);
+19             return;
+20         }
+21
+22         int ch;
+23         while ((ch = in.read()) != -1) {
+24             System.out.print((char) ch);
+25         }
+26         System.out.println();
+27
+28         in.close();
+29     }
+30
+</PRE>
+
+<!--
+<HR align="left" width="100%" size="4" noshade>
+<H2>Example: <CODE>DataInputStream</CODE></H2>
+<UL>
+<LI>
+<CODE>DataInputStream</CODE> throws (checked) <CODE>EOFException</CODE> on end of file.
+<LI>
+Says: hitting EOF is an abnormal condition to encounter when using the
+<CODE>readInt()</CODE> method
+<LI>
+From javadoc: "<CODE>EOFException</CODE> is mainly used by data input streams,
+which generally expect a binary file in a specific
+format, and for which an end of stream is an unusual condition."
+</UL>
+<PRE>
+ 1 // In file ex9/Example9b.java
+ 2 import java.io.*;
+ 3 class Example9b {
+ 4
+ 5     public static void main(String[] args)
+ 6         throws IOException {
+ 7
+ 8         if (args.length == 0) {
+ 9             System.out.println("Must give filename as first arg.");
+10             return;
+11         }
+12
+13         FileInputStream fin;
+14         try {
+15             fin = new FileInputStream(args[0]);
+16         }
+17         catch (FileNotFoundException e) {
+18             System.out.println("Can't find file: " + args[0]);
+19             return;
+20         }
+21
+22         DataInputStream din = new DataInputStream(fin);
+23         try {
+24             int i;
+25             for (;;) {
+26                 i = din.readInt();
+27                 System.out.println(i);
+28             }
+29         }
+30         catch (EOFException e) {
+31         }
+32
+33         fin.close();
+34     }
+35
+</PRE>
+-->
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Example: <CODE>StringTokenizer</CODE> and <CODE>Stack</CODE></H2>
+<UL>
+<LI>
+<CODE>StringTokenizer</CODE> makes you ask <CODE>hasMoreTokens()</CODE> before
+calling <CODE>nextToken()</CODE>
+<LI>
+If you call <CODE>nextToken()</CODE> after <CODE>hasMoreTokens()</CODE>
+returns (or would return) <CODE>false</CODE>, you get an (unchecked)
+<CODE>NoSuchElementException</CODE>
+<LI>
+Says: hitting "end of tokens" is an abnormal condition to encounter when
+using the <CODE>nextToken()</CODE> method, because you are supposed to
+check with <CODE>hasTokens()</CODE> first
+</UL>
+<PRE>
+ 1 // In file ex9/Example9c.java
+ 2 // This program prints the white-space separated tokens of an
+ 3 // ASCII file in reverse order of their appearance in the file.
+ 4 import java.io.*;
+ 5 import java.util.*;
+ 6 class Example9c {
+ 7
+ 8     public static void main(String[] args)
+ 9         throws IOException {
+10
+11         if (args.length == 0) {
+12             System.out.println("Must give filename as first arg.");
+13             return;
+14         }
+15
+16         FileInputStream in = null;
+17         try {
+18             in = new FileInputStream(args[0]);
+19         }
+20         catch (FileNotFoundException e) {
+21             System.out.println("Can't find file: " + args[0]);
+22             return;
+23         }
+24
+25         // Read file into a StringBuffer
+26         StringBuffer buf = new StringBuffer();
+27         try {
+28             int ch;
+29             while ((ch = in.read()) != -1) {
+30                 buf.append((char) ch);
+31             }
+32         }
+33         finally {
+34             in.close();
+35         }
+36
+37         // Separate StringBuffer into tokens and
+38         // push each token into a Stack
+39         StringTokenizer tok = new StringTokenizer(buf.toString());
+40         Stack stack = new Stack();
+41         while (tok.hasMoreTokens()) {
+42             stack.push(tok.nextToken());
+43         }
+44
+45         // Print out tokens in reverse order.
+46         while (!stack.empty()) {
+47             System.out.println((String) stack.pop());
+48         }
+49     }
+50
+</PRE>
+<UL>
+<LI>
+<CODE>Stack</CODE> makes you ask <CODE>empty()</CODE> before
+calling <CODE>pop()</CODE>
+<LI>
+If you call <CODE>pop()</CODE> after <CODE>empty()</CODE>
+returns (or would return) <CODE>true</CODE>, you get an (unchecked)
+<CODE>EmptyStackException</CODE>
+<LI>
+Says: hitting "empty stack" is an abnormal condition to encounter when
+using the <CODE>pop()</CODE> method, because you are supposed to
+check with <CODE>empty()</CODE> first
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Why Just Abnormal Conditions?</H2>
+<UL>
+<LI>
+Exceptions are free unless thrown...
+<LI>
+But if thrown, they are very expensive.
+<LI>
+Separating error handling code that almost never happens from code that
+represents the normal path of execution can make code more readable
+<LI>
+But if the normal path of execution has to go through lots of catch
+clauses, the code is harder to read
+<LI>
+Abnormal condition is what an exception <EM>means</EM>, because broken contracts should be relatively rare
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Discussion</H2>
+<UL>
+<LI>
+Guideline: <EM>Throw exceptions on abnormal conditions.</EM>
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Exceptions and <CODE>throws</CODE></H2>
+<UL>
+<LI>
+Guideline: <EM>Use a checked exception for conditions client code can reasonably be expected to handle.</EM>
+<LI>
+Java requires that a method declare in a <CODE>throws</CODE> clause the
+exceptions that it may throw
+<LI>
+A method's <CODE>throws</CODE> clause indicates to client programmers what
+exceptions they may have to deal with when they invoke the method
+<LI>
+Only exceptions that will cause a method to complete abruptly should
+appear in its <CODE>throws</CODE> clause:
+<BR><BR>
+<PRE>
+// In file VirtualPerson.java
+class VirtualPerson {
+    public void drinkCoffee(CoffeeCup cup)
+        throws TooColdException,
+        TemperatureException,
+        UnusualTasteException {
+        try {
+            int i = (int) (Math.random() * 4.0);
+            switch (i) {
+            case 0:
+                throw new TooHotException();
+            case 1:
+                throw new TooColdException();
+            case 2:
+                throw new UnusualTasteException();
+            default:
+                throw new TemperatureException();
+            }
+        }
+        catch (TooHotException e) {
+            System.out.println(
+                "This coffee is too hot.");
+            // Customer will wait until it cools
+            // to an acceptable temperature.
+        }
+    }
+    //...
+}
+</pre>
+<LI>
+The calling method must either catch the exception or declare it in
+its own <CODE>throws</CODE> clause:
+<BR><BR>
+<PRE>
+// In file VirtualCafe.java
+class VirtualCafe {
+    public static void serveCustomer(
+        VirtualPerson cust, CoffeeCup cup)
+        throws TemperatureException,
+        UnusualTasteException {
+        try {
+            cust.drinkCoffee(cup);
+        }
+        catch (TooColdException e) {
+            System.out.println(
+                "This coffee is too cold.");
+            // Add more hot coffee...
+        }
+    }
+}
+</pre>
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Checked versus Unchecked</H2>
+<UL>
+<LI>
+Only <EM>checked</em> exceptions need appear in <CODE>throws</CODE> clauses
+<LI>
+Whether an exception is "checked" or "unchecked" is determined by its
+position in the hierarchy of throwable classes:
+<BR><BR>
+<IMG src="../images/Checked.gif">
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Exceptions In Your Face</H2>
+<UL>
+<LI>
+Placing an exception in a <CODE>throws</CODE> clause <EM>forces</em> client
+programmers who invoke your method to deal with the exception, either by:
+<UL>
+<LI>Catching it, or
+<LI>Declaring it in their own <CODE>throws</CODE> clause
+</UL>
+<LI>
+<CODE>Error</CODE>s: For the JVM and Java API
+<LI>
+To make a checked exception, subclass <CODE>Exception</CODE> but not
+<CODE>RuntimeException</CODE>
+<LI>
+To make an unchecked exception, subclass <CODE>RuntimeException</CODE>
+<BR><BR>
+<IMG src="../images/Checked.gif">
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Why Checked Exceptions?</H2>
+<UL>
+
+<LI>
+From the JLS: "This compile-time checking for the presence of exception
+handlers is designed to reduce the number of exceptions which are not
+properly handled."
+
+<LI>
+If you are throwing an exception for an abnormal condition that you feel
+client programmers should consciously decide how to handle, throw a checked
+exception.
+
+<LI>
+Unchecked exceptions indicate software bugs.
+
+<LI>
+Precisely because unchecked exceptions usually represent software bugs, they
+often <EM>can't</EM> be handled somewhere with more context.
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Discussion</H2>
+<UL>
+<LI>
+Guideline: <EM>Use a checked exception for conditions client code can reasonably be expected to handle.</EM>
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Exception Classes</H2>
+<UL>
+<LI>
+Guideline: <EM>Throw a different exception type for each abnormal
+condition.</EM>
+<LI>
+When you need to throw an exception, you can
+choose an already existing exception or make one of
+your own
+<BR><BR>
+<IMG src="images/TempFamily.gif">
+<PRE>
+// In file TemperatureException.java
+class TemperatureException
+    extends Exception {
+}
+
+// In file TooColdException.java
+class TooColdException
+    extends TemperatureException {
+}
+
+// In file TooHotException.java
+class TooHotException
+    extends TemperatureException {
+}
+</PRE>
+<LI>
+Exception class should indicate the type of problem
+that caused the exception
+<LI>
+Often, exception classes may have no fields or methods
+<LI>
+Declare exceptions in the package they are thrown
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Why Exception Classes?</H2>
+<UL>
+<LI>
+Catch clauses catch exceptions based on type
+<LI>
+You want each different kind of abnormal condition to be catchable in
+its own catch clause, to separate the handlers
+<LI>
+Use inheritance relationships to enable a single catch clause to catch
+all flavors (subclasses) of a certain kind of abnormal condition
+<LI>
+A catch clause for <CODE>TemperatureException</CODE>, for example, can
+catch <CODE>TooHotException</CODE> and <CODE>TooColdException</CODE>
+<LI>
+<CODE>catch (TooHotException e) { ...</CODE> has meaning
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Discussion</H2>
+<UL>
+<LI>
+Guideline: <EM>Throw a different exception type for each abnormal
+condition.</EM>
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>The Thread-Safe Object</H2>
+<UL>
+<LI>A state machine <CODE>RGBColor</CODE> object (not thread-safe)</H2>
+</UL>
+<PRE>
+ 1 // In file objectidioms/ex6/RGBColor.java
+ 2 // Instances of this class are NOT thread-safe.
+ 3
+ 4 public class RGBColor {
+ 5
+ 6     private int r;
+ 7     private int g;
+ 8     private int b;
+ 9
+10     public RGBColor(int r, int g, int b) {
+11
+12         checkRGBVals(r, g, b);
+13
+14         this.r = r;
+15         this.g = g;
+16         this.b = b;
+17     }
+18
+19     public void setColor(int r, int g, int b) {
+20
+21         checkRGBVals(r, g, b);
+22
+23         this.r = r;
+24         this.g = g;
+25         this.b = b;
+26     }
+27
+28     /**
+29     * returns color in an array of three ints: R, G, and B
+30     */
+31     public int[] getColor() {
+32
+33         int[] retVal = new int[3];
+34         retVal[0] = r;
+35         retVal[1] = g;
+36         retVal[2] = b;
+37
+38         return retVal;
+39     }
+40
+41     public void invert() {
+42
+43         r = 255 - r;
+44         g = 255 - g;
+45         b = 255 - b;
+46     }
+47
+48     private static void checkRGBVals(int r, int g, int b) {
+49
+50         if (r < 0 || r > 255 || g < 0 || g > 255 ||
+51             b < 0 || b > 255) {
+52
+53             throw new IllegalArgumentException();
+54         }
+55     }
+56 }
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Write/Write Conflicts</H2>
+<center>
+<TABLE>
+<TR>
+<TD>Thread</TD>
+<TD>Statement</TD>
+<TD>r</TD>
+<TD>g</TD>
+<TD>b</TD>
+<TD>Color</TD>
+</TR>
+<TR>
+<TD>none</TD>
+<TD>object represents green</TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color=black>blue</font></TD>
+<TD><FONT color=black>blue thread invokes setColor(0, 0, 255)</font></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><CODE><FONT color="black">checkRGBVals(0, 0, 255);</font></CODE></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><CODE><FONT color="black">this.r = 0;</font></CODE></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><CODE><FONT color="black">this.g = 0;</font></CODE></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><FONT color="black">blue gets preempted</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><FONT color="black">red thread invokes setColor(255, 0, 0)</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">checkRGBVals(255, 0, 0);</font></CODE></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">this.r = 255;</font></CODE></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">this.g = 0;</font></CODE></TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#FF0000">&nbsp;<FONT color="#FFFFFF">RED</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">this.b = 0;</font></CODE></TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#FF0000">&nbsp;<FONT color="#FFFFFF">RED</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><FONT color="black">red thread returns</font></TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#FF0000">&nbsp;<FONT color="#FFFFFF">RED</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><FONT color="black">later, blue thread continues</font></TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#FF0000">&nbsp;<FONT color="#FFFFFF">RED</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><CODE><FONT color="black">this.b = 255</font></CODE></TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#FF0000">&nbsp;<FONT color="#FFFFFF">RED</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><FONT color="black">blue thread returns</font></TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD align="center" bgcolor="#FF00FF">&nbsp;<FONT color="#FFFFFF">MAGENTA</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD>none</TD>
+<TD>object represents magenta</CODE></TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD align="center" bgcolor="#FF00FF">&nbsp;<FONT color="#FFFFFF">MAGENTA</FONT>&nbsp;</TD>
+</TR>
+</TABLE>
+</center>
+
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Read/Write Conflicts</H2>
+<center>
+<TABLE>
+<TR>
+<TD>Thread</TD>
+<TD>Statement</TD>
+<TD>r</TD>
+<TD>g</TD>
+<TD>b</TD>
+<TD>Color</TD>
+</TR>
+<TR>
+<TD>none</TD>
+<TD>object represents green</TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><FONT color="black">blue thread invokes setColor(0, 0, 255)</font></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><CODE><FONT color="black">checkRGBVals(0, 0, 255);</font></CODE></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><CODE><FONT color="black">this.r = 0;</font></CODE></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><CODE><FONT color="black">this.g = 0;</font></CODE></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><FONT color="black">blue gets preempted</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><FONT color="black">red thread invokes getColor()</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">int[] retVal = new int[3];</font></CODE></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">retVal[0] = 0;</font></CODE></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">retVal[1] = 0;</font></CODE></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">retVal[2] = 0;</font></CODE></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">return retVal;</font></CODE></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><FONT color="black">red thread returns black</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><FONT color="black">later, blue thread continues</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><CODE><FONT color="black">this.b = 255</font></CODE></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><FONT color="black">blue thread returns</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD align="center" bgcolor="#0000FF">&nbsp;<FONT color="#FFFFFF">BLUE</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD>none</TD>
+<TD>object represents blue</CODE></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD align="center" bgcolor="#0000FF">&nbsp;<FONT color="#FFFFFF">BLUE</FONT>&nbsp;</TD>
+</TR>
+</TABLE>
+</center>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Thread-Safe <CODE>RGBColor</CODE> Object</H2>
+<PRE>
+ 1 // In file objectidioms/ex7/RGBColor.java
+ 2 // Instances of this class are thread-safe.
+ 3
+ 4 public class RGBColor {
+ 5
+ 6     private int r;
+ 7     private int g;
+ 8     private int b;
+ 9
+10     public RGBColor(int r, int g, int b) {
+11
+12         checkRGBVals(r, g, b);
+13
+14         this.r = r;
+15         this.g = g;
+16         this.b = b;
+17     }
+18
+19     public void setColor(int r, int g, int b) {
+20
+21         checkRGBVals(r, g, b);
+22
+23         synchronized (this) {
+24
+25             this.r = r;
+26             this.g = g;
+27             this.b = b;
+28         }
+29     }
+30
+31     /**
+32     * returns color in an array of three ints: R, G, and B
+33     */
+34     public int[] getColor() {
+35
+36         int[] retVal = new int[3];
+37
+38         synchronized (this) {
+39
+40             retVal[0] = r;
+41             retVal[1] = g;
+42             retVal[2] = b;
+43         }
+44
+45         return retVal;
+46     }
+47
+48     public synchronized void invert() {
+49
+50         r = 255 - r;
+51         g = 255 - g;
+52         b = 255 - b;
+53     }
+54
+55     private static void checkRGBVals(int r, int g, int b) {
+56
+57         if (r < 0 || r > 255 || g < 0 || g > 255 ||
+58             b < 0 || b > 255) {
+59
+60             throw new IllegalArgumentException();
+61         }
+62     }
+63 }
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Ready for Threads</H2>
+<center>
+<TABLE>
+<TR>
+<TD>Thread</TD>
+<TD>Statement</TD>
+<TD>r</TD>
+<TD>g</TD>
+<TD>b</TD>
+<TD>Color</TD>
+</TR>
+<TR>
+<TD>none</TD>
+<TD>object represents green</TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><FONT color="black">blue thread invokes setColor(0, 0, 255)</font></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><CODE><FONT color="black">checkRGBVals(0, 0, 255);</font></CODE></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><FONT color="black">blue thread acquires lock</font></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><CODE><FONT color="black">this.r = 0;</font></CODE></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><CODE><FONT color="black">this.g = 0;</font></CODE></TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#00FF00">&nbsp;<FONT color="#FFFFFF">GREEN</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><FONT color="black">blue gets preempted</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><FONT color="black">red thread invokes setColor(255, 0, 0)</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">checkRGBVals(255, 0, 0);</font></CODE></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><FONT color="black">red thread blocks because object locked</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><FONT color="black">later, blue thread continues</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><CODE><FONT color="black">this.b = 255</font></CODE></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#000000">&nbsp;<FONT color="#FFFFFF">BLACK</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">blue</font></TD>
+<TD><FONT color="black">blue thread returns and releases lock</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD align="center" bgcolor="#0000FF">&nbsp;<FONT color="#FFFFFF">BLUE</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><FONT color="black">later, red thread acquires lock and continues</font></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD align="center" bgcolor="#0000FF">&nbsp;<FONT color="#FFFFFF">BLUE</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">this.r = 255;</font></CODE></TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD align="center" bgcolor="#0000FF">&nbsp;<FONT color="#FFFFFF">BLUE</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">this.g = 0;</font></CODE></TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD align="center" bgcolor="#FF00FF">&nbsp;<FONT color="#FFFFFF">MAGENTA</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><CODE><FONT color="black">this.b = 0;</font></CODE></TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD>255</TD>
+<TD align="center" bgcolor="#FF00FF">&nbsp;<FONT color="#FFFFFF">MAGENTA</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD><FONT color="black">red</font></TD>
+<TD><FONT color="black">red thread returns and releases lock</font></TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#FF0000">&nbsp;<FONT color="#FFFFFF">RED</FONT>&nbsp;</TD>
+</TR>
+<TR>
+<TD>none</TD>
+<TD>object represents red</CODE></TD>
+<TD>255</TD>
+<TD>0</TD>
+<TD>0</TD>
+<TD align="center" bgcolor="#FF0000">&nbsp;<FONT color="#FFFFFF">RED</FONT>&nbsp;</TD>
+</TR>
+</TABLE>
+</center>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>The Thread-Safe Object</H2>
+<UL>
+<LI>
+Make instance variables private
+<LI>
+Figure out what the <EM>monitor regions</EM> should be and mark them synchronized
+<LI>
+Make objects thread-safe only if they'll actually be used in a multi-threaded
+environment
+<LI>
+Why? Performance hit from acquiring the lock and the possibility of deadlock
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Discussion</H2>
+<UL>
+<LI>
+The Thread-Safe Object
+</UL>
+
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd71395c86bbab',t:'MTczOTIwNDU5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY>
+</HTML>

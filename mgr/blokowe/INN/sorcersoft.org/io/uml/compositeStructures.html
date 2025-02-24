@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Composite Structures</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering<br>
+</span><span class="sts"><a href="../UML-compositeStructures.pdf">Composite Structure 
+Diagrams</a></span><h2>Agenda</h2>
+<ul>
+	<li>Definitions</li>
+	<li>Composite Structure Diagrams</li>
+	<li>Collaborations</li>
+	<li>Structured Classes</li>
+	<li>Composite Structure of Components</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Definitions</h2>
+<ul>
+	<li>A <b>component</b> represents a modular part of a system that 
+	encapsulates its contents and whose manifestation is replaceable within its 
+	environment.</li>
+	<li>The term &#8220;<b>structure</b>&#8221; refers to a composition of interconnected 
+	elements, representing run-time instances collaborating over communications 
+	links to achieve some common objectives.</li>
+	<li><b>Feature</b>: a property, such as an operation or attribute, that 
+	characterizes the instances of a classifier.</li>
+	<li><b>Role</b>: the named set of features defined over a collection of 
+	entities participating in a particular context.</li>
+	<li><b>Part</b>: an element representing a set of instances that are owned 
+	by a containing classifier instance or role of a classifier. Parts may be 
+	joined by attached connectors and specify configurations of linked instances 
+	to be created within an instance of the containing classifier.</li>
+	<li>The <b>ports</b> provide mechanisms for isolating a classifier from its 
+	environment. This is achieved by providing a point for conducting 
+	interactions between the internals of the classifier and its environment. 
+	This interaction point is referred to as a &#8220;<b>port</b>.&#8221;</li>
+	<li>A classifier can own <i>collaboration uses</i> that relate (aspects of) 
+	this classifier to a collaboration. The <b>collaboration</b> describes those 
+	aspects of this classifier. Objects in a system typically cooperate with 
+	each other to produce the behavior of a system. The behavior is the 
+	functionality that the system is required to implement. A behavior of a 
+	collaboration will eventually be exhibited by a set of cooperating instances 
+	(specified by classifiers) that communicate with each other by sending 
+	signals or invoking operations. Collaborations allow us to describe only the 
+	relevant aspects of the cooperation of a set of instances by identifying the 
+	specific roles that the instances will play. Interfaces allow the externally 
+	observable properties of an instance to be specified without determining the 
+	classifier that will eventually be used to specify this instance. </li>
+	<li><b>Collaboration</b>: the specification of how an operation or 
+	classifier, such as a use case, is realized by a set of classifiers and 
+	associations playing specific roles used in a specific way. The 
+	collaboration defines an interaction</li>
+	<li><b>Interaction</b>: a specification of how stimuli are sent between 
+	instances to perform a specific task. The interaction is defined in the 
+	context of a collaboration.</li>
+	<li>Consequentially, the <b>roles</b> in a collaboration will often be typed 
+	by interfaces and will then prescribe properties that the participating 
+	instances must exhibit, but will not determine what class will specify the 
+	participating instances.</li>
+	<li>The <b>namestring</b> of a role in an instance specification obeys the 
+	following syntax: {&lt;name&gt; [&#8216;/&#8217; &lt;rolename&gt;] | &#8216;/&#8217; &lt;rolename&gt;} [&#8216;:&#8217; &lt;classifiername&gt; 
+	[&#8216;,&#8217; &lt;classifiername&gt;]*] or simply: <code>participant-name / role-name : 
+	classifier-name</code><br>
+&nbsp;</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<body>
+	<h2>Composite Structure Diagrams</h2>
+	<ul>
+		<li>A <b>composite structure diagram</b> depicts the internal structure of a 
+		classifier in terms of its properties (parts). <b>Package diagrams</b> 
+		are just a <i>collection grouping</i>, but composite structure diagram 
+		are focused on the underlying <i>classifier structure</i>.</li>
+		<li>A <b>part</b> declares that an instance of a classifier may contain a set of 
+		instances by composition.  
+		References the properties specifying instances that the classifier owns 
+		by composition.</li>
+		<li>All such instances are destroyed when the containing classifier instance is destroyed. 
+		</li>
+		<li>As well as showing the internal structure of <i>structured 
+		classifiers</i> on a class diagram, you can show this structure on a <i>
+		composite structure diagram</i>. The diagram name is the name of the of 
+		the structured classifier.</li>
+	</ul>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70bb1b39bf2e',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Collaborations</h2>
+<ul>
+	<li>A <b>collaboration</b> is shown as a dashed ellipse icon containing the 
+	name of the collaboration. </li>
+	<li>The internal structure of a collaboration as comprised by roles and 
+	connectors may be shown in a compartment within the dashed ellipse icon.
+	</li>
+	<li>Alternatively, a composite structure diagram can be used.</li>
+	<li>The primary purpose of collaborations is to explain how a system of 
+	communicating entities collectively accomplish a specific task or set of 
+	tasks without necessarily having to incorporate detail that is irrelevant to 
+	the explanation. It is particularly useful as a means for capturing standard 
+	design patterns.</li>
+	<li>A dashed arrow with an open arrowhead may be used to show that a 
+	collaboration is used in a classifier, optionally labeled with the keyword 
+	«represents». A dashed arrow with an open arrowhead may also be used to show 
+	that a collaboration represents a classifier, optionally labeled with the 
+	keyword «occurrence». The arrowhead points at the owning classifier. When 
+	using this presentation option, the <b>role bindings</b> are shown 
+	explicitly as dependencies.</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Sale and BrokeredSale&nbsp; Example</h2>
+<p>This example shows the definition of two collaborations, Sale and 
+BrokeredSale. Sale is used twice as part of the definition of BrokeredSale. Sale 
+is a collaboration among two roles, a seller and a buyer. An interaction, or 
+other behavior specification, could be attached to Sale to specify the steps 
+involved in making a Sale.</p>
+<p><img border="0" src="images/compos3.gif"></p>
+<p>BrokeredSale is a collaboration among three roles, a <b>producer</b>, a <b>
+broker</b>, and a <b>consumer</b>. The specification of BrokeredSale shows that 
+it consists of two occurrences of the Sale collaboration, indicated by the 
+dashed ellipses. The occurrence wholesale indicates a Sale in which the producer 
+is the seller and the broker is the buyer. The occurrence retail indicates a 
+Sale in which the broker is the seller and the consumer is the buyer. The 
+connectors between sellers and buyers are not shown in the two occurrences; 
+these connectors are implicit in the BrokeredSale collaboration in virtue of 
+them being comprised of Sale. The BrokeredSale collaboration could itself be 
+used as part of a larger collaboration.</p>
+<p><img border="0" src="images/compos1.gif"></p>
+<p>The BrokeredSale collaboration</p>
+<p><img border="0" src="images/compos2.gif"></p>
+<p>A subset of the BrokeredSale collaboration</p>
+<body>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Structured Classes</h2>
+	<ul>
+		<li>Figure 
+		below shows two possible views of the Car class. In subfigure (i), Car is shown as having a composition association with 
+		role name rear to a class Wheel and an association with role name e to a class Engine. 
+		</li>
+		<li>In subfigure (ii), the same is 
+		specified. However, in addition, in subfigure (ii) it is specified that rear and e belong to the internal structure of the class 
+		Car. This allows specification of detail that holds only for instances of the Wheel and Engine classes within the context of 
+		the class Car, but which will not hold for wheels and engines in general. For example, subfigure (i) specifies that any 
+		instance of class Engine can be linked to an arbitrary number of instances of class Wheel. Subfigure (ii), however, specifies 
+		that within the context of class Car, the instance playing the role of e may only be connected to two instances playing the 
+		role of rear. In addition, the instances playing the e and rear roles may only be linked if they are roles of the same 
+		instance of class Car. In other words, subfigure (ii) asserts additional constraints on the 
+		instances of the classes Wheel and Engine, when they are playing the respective roles within an instance of class Car. These 
+		constraints are not true for instances of Wheel and Engine in general. Other wheels and engines may be arbitrarily linked as 
+		specified in subfigure (i).</li>
+	</ul>
+	<p>&nbsp;</p>
+	<p>
+	<img border="0" src="images/UML-bo12.gif"><br>A part is shown by graphical nesting of a box symbol with a solid 
+		outline representing the part within the symbol representing the containing classifier in a separate compartment. A 
+		property specifying an instance that is not owned by composition by the instance of the containing classifier is shown by 
+		graphical nesting of a box symbol with a dashed outline.</p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="A_composite_structure_of_components_">Composite Structure of 
+	Components</h2> </a><br><img border="0" src="images/UML-bo11.gif"><br>Example of a composite structure of components, with connector wiring 
+		between provided and required
+		interfaces of parts (Note: &#8220;Client&#8221; interface is a subtype of &#8220;Person&#8221;).
+		The wiring of components can be represented on structure diagrams by 
+		means of classifiers and dependencies between
+		them (Note: the ball-and-socket notation above may be used as a notation 
+		option for dependency based
+		wiring). On composite structure diagrams, detailed wiring can be 
+		performed at the role or instance level by defining parts
+		and connectors.
+
+</body>
+
+</html>

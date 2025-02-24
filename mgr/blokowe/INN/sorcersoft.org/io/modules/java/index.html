@@ -1,0 +1,687 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>Introduction - OO Programming in Java</TITLE>
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+div.Section1
+	{page:Section1;}
+span.GramE
+	{}
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Java Basics &amp; Platform</span><br>
+<span class="sts">Introduction</span><BR>
+<h2>Agenda</h2>
+
+
+<ul>
+   <li>Understand the activity of programming</li>
+   <li>Learn about the architectures of computers</li>
+   <li>Learn about abstractions of programming languages
+     </li>
+   <li>Become familiar with meaning of Java</li>
+   <li>Understand differences between Java compilation and interpretation </li>
+	<li>The &quot;Hello World&quot; example in Java</li>
+
+   <li>How Will Java Change My Life? </li>
+
+</ul>
+
+<h2>Prerequisites</h2>
+
+<ul>
+   <li>Computer savvy (file management, text editing)</li>
+   <li>Problem solving skills</li>
+   <li>Time management</li>
+   <li>High school math (algebra, trigonometry)</li>
+   <li>No prior programming background required</li>
+
+</ul>
+
+<h2>What is a computer?</h2>
+<UL>
+<LI>Conventionally:
+<ul>
+   <li>Central processing unit</li>
+   <li>Memory</li>
+   <li>Peripherals</li>
+   <li>Executes very simple instructions</li>
+   <li>Executes instructions very rapidly</li>
+   <li>General purpose device</li>
+   <li>Programs describe specific actions</li>
+</ul>
+</UL>
+
+<h2>Schematic Diagram of a Computer</h2>
+ <img src="images/schematic.gif" alt="" width="789" height="493">
+
+
+<h2>What is a computer?</h2>
+
+
+<p><img border="0" src="images/eniac.gif" width="722" height="512"></p>
+<p><strong>The computer is the network </strong><br>
+  (8 Fallacies of Distributed Computing)  </p>
+<UL>
+  <ol>
+  <li>The network is reliable </li>
+  <li>Latency is zero </li>
+  <li>Bandwidth is infinite </li>
+  <li>The network is secure </li>
+  <li>Topology doesn't change </li>
+  <li>There is one administrator </li>
+  <li>Transport cost is zero </li>
+  <li>The network is homogeneous</li>
+  </ol>
+</UL>
+
+
+<h2>What Is Programming?</h2>
+<ul>
+  <li>Computers are programmed to perform tasks</li>
+  <li>Different tasks = different programs</li>
+  <li>Program
+    <ul>
+      <li>Sequence of basic operations executed in succession</li>
+      <li>Contains instruction sequences for all tasks it can execute</li>
+    </ul>
+  </li>
+  <li>Sophisticated programs require teams of highly skilled
+programmers and other professionals</li>
+</ul>
+
+
+<h2><a href="languages/languageCategories.html">Programming Languages</a></h2>
+
+<ul>
+   <li>Machine/Virtual Machine<br>
+     <tt>21 40 16 100 163 240</tt></li>
+   <li>Assembler<br>
+     <tt>iload intRate<br>
+       bipush 100<br>
+       if_icmpgt intError</tt></li>
+   <li>High-level language<br>
+     <tt>if (intRate &gt; 100) . . .</tt></li>
+
+</ul>
+<h2>Computers are mind magnification tools</h2>
+<UL>
+<LI>The tools are beginning to look less like machines and more like part of our minds
+<LI>Like other forms of expression such as writing, painting, sculpture, animation, and filmmaking
+<LI>OOP is part of this movement toward using computers as an expressive medium
+</UL>
+
+<h2>The Progress of Abstraction</h2>
+<P>All programming languages provide abstractions.
+<UL>
+<LI>Assembly language is a small abstraction of the underlying machine.
+<LI>"Imperative" languages are abstractions of assembly languages.
+<LI>Problem solving: mapping from "problem space" to "solution space"
+<LI>A solution space is a machine - it is very constrained
+<UL>
+<LI>programs are difficult to write 
+<LI>programs are expensive to maintain
+</UL>
+<LI><i><b>Alternative to modeling the machine is to model the problem you are trying to solve.
+</b></i>
+<LI>C, PASCAL - all problems are procedures
+<LI>LISP - all problems are ultimately lists
+<LI>PROLOG - all problems are logical decisions (formulas)
+<LI>Smalltalk - represent solution elements in your problem as experts - <i><b>
+social</b></i> metaphor
+<LI>The elements in the problem space and their 
+representations in the solution space are <b><i>objects.</i></b>
+<LI>SORCER: 
+represent solution elements as distributed services (service providers) as 
+network objects
+</ul>
+<h2>&nbsp;</h2>
+
+<h2><a href="http://sorcer.cs.ttu.edu/">SORCER</a> Vision</h2>
+
+<p><img src="images/SORCERVision.gif" width="600" height="303"> </p>
+
+
+
+
+
+<h2>Object Abstraction</h2>
+<ul>
+  <li>OOP: a higher level of abstraction </li>
+  <li>Bjarne Stroustrup: Higher level of abstraction allows details to be 
+  hidden, which allows code to be shorter. The more details, the more mistakes. 
+  Plus, the more code you have, the harder it is to maintain. And, code at 
+  higher levels of abstraction is amenable to tools that analyze and optimize.
+  </li>
+  <li>Can think in terms of problem, not solution </li>
+  <li>Vocabulary facilitates communication: A bank has <code>Account</code>s,
+  <code>Customer</code>s, <code>Balance</code>s, etc... </li>
+</ul>
+
+
+<h2>What is Java?</h2>
+<UL>
+<LI><img border="0" src="../../images/java_logo.gif" width="38" height="66">
+<LI>Island of Indonesia
+<LI>Object-Oriented Philosophy
+<LI>Programming language<LI>API<LI>Platform
+<LI>Freedom
+<LI>Security
+<LI>Internet networking
+</UL>
+
+<h2>Object-Oriented Philosophy</h2>
+<UL>
+<LI>Everything is object (active data in your problem space)<LI>A program is a bunch of objects telling each other what to do by sending messages
+<LI>Each object has its own memory made up of other objects<LI>Every object has 
+a type (has its origin - class)<LI>All objects of a particular type can receive 
+the same messages</UL>
+
+<UL>
+<LI>What Is an Object?
+<BLOCKQUOTE>An object is a software bundle of variables and related methods. 
+Software objects are often used to model real-world objects you find in everyday 
+life. </BLOCKQUOTE>
+<LI>What Are Messages?
+  <BLOCKQUOTE>Software objects interact and communicate with each other using 
+<EM>messages</EM>. </BLOCKQUOTE>
+<LI>What Are Classes?
+<BLOCKQUOTE>A class is a blueprint or prototype that defines the variables and 
+the methods common to all objects of a certain kind. </BLOCKQUOTE>
+</UL>
+
+<h2>Java Programming Language</h2>
+
+<ul>
+   <li>Is very object-oriented</li>
+   <li>Enforces type safety at run-time (safe)</li>
+   <li>Platform-independent (highly portable - "write once, run anywhere")</li>
+   <li>Designed for the Internet</li> 
+   <LI>Supports exceptions </LI>
+   <li>Supports multi-threading</li>
+   <li>Rich library (API)</li>
+   <LI>Uses garbage collection 
+   <LI>Is dynamically linked 
+   <LI>Is dynamically extensible </LI>
+   <LI>5 data types (primitives, array, class, interface, null)</LI>
+   <LI>Includes eight primitive types</LI>
+   <LI>Low-coupling; high-cohesion APIs</LI>
+</ul>
+
+<h2>Exceptions</h2>
+<ul>
+  <li>Error handling that's &quot;structured&quot; </li>
+  <li>Like a &quot;goto&quot; from error to handler </li>
+  <li>Built into the Java language </li>
+  <li>Java compiler forces client programmers to deal with potential errors </li>
+</ul>
+<h2>Multi-threading</h2>
+<ul>
+  <li>Multi-threading built into Java </li>
+  <li>Like multiple processes in same address space </li>
+  <li>Synchronization built into Java </li>
+  <li>Helps you do several things at once:<br>
+  <em>responsive UIs, animations, server apps, ...</em> </li>
+  <li>Designed to work cross-platform </li>
+</ul>
+<h2>Java APIs</h2>
+<ul>
+  <li>Sun's goal: abstract OS interface </li>
+  <li>I/O: datat to/from files, strings, sockets, ... </li>
+  <li>GUI: AWT, 1.1 event model, Swing </li>
+  <li>Software Components: JavaBeans </li>
+  <li>Net programming: Applets, <code>java.net</code>, RMI </li>
+  <li>Accessing SQL databases: JDBC </li>
+</ul>
+
+<h2>Compiling and Running</h2>
+
+<p>Compiler machine dependent environment</p>
+
+<p><img border="0" src="images/compileDepndent.gif" width="550" height="329"></p>
+<p>The JVM model</p>
+<p><img src="images/BWJavaEnv.gif" width="544" height="316"></p>
+ <p>
+ &nbsp;<br>
+Java is also unusual in that each Java program is both compiled and interpreted. 
+With a compiler, you translate a Java program into an intermediate language 
+called <EM>Java bytecodes</EM>--the platform-independent codes interpreted by 
+the Java interpreter. With an interpreter, each Java bytecode instruction is 
+parsed and run on the computer. Compilation happens just once; interpretation 
+occurs each time the program is executed. <br>
+ <br>
+ <img border="0" src="images/VMmodel.gif" width="550" height="416"></p>
+
+<h2>Linking, Optimization, and Execution</h2>
+<p><img src="images/BWJVM.gif" width="542" height="265"></p>
+
+<h2>Java Virtual Machines</h2>
+<center>
+<p>
+<img src="images/platform1.gif" width="148" height="139" align="left"> </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</center>
+<P>You can think of Java bytecodes as the machine code instructions for the 
+<EM>Java Virtual Machine</EM> (Java VM). Every Java interpreter, whether it's a 
+Java development tool or a Web browser that can run Java applets, is an 
+implementation of the Java VM. The Java VM can also be implemented in hardware. 
+<P>Java bytecodes help make "write once, run anywhere" possible. You can compile 
+your Java program into bytecodes on any platform that has a Java compiler. The 
+bytecodes can then be run on any implementation of the Java VM. For example, the 
+same Java program can run on Windows NT, Solaris, and Macintosh. </P>
+<p>Java virtual machines (JVMs), Java development kits (JDKs), Java runtime 
+environments (JREs)</p>
+ <ul>
+   <li><a href="http://schmidt.devlib.org/java/compilers.html">Compilers for the 
+   Java programming language</a>
+   <ul>
+     <li><a href="http://schmidt.devlib.org/java/bytecode-compilers.html">
+     bytecode compilers</a> — tools that translate Java source code (<code>.java</code> 
+     files) to bytecode (<code>.class</code> files) </li>
+     <li><a href="http://schmidt.devlib.org/java/native-compilers.html">native compiler</a> — tools that translate either source code or bytecode 
+       to native executables (e.g. <code>.exe</code> files under Windows) </li>
+   </ul>
+   </li>
+   <li><a href="http://schmidt.devlib.org/java/virtual-machines.html">Java 
+   virtual machines (JVM), development kits (JDK) and runtime environments (JRE)</a>
+   <ul>
+     <li><a href="http://schmidt.devlib.org/java/jdk-jre.html">JDKs and JREs</a> 
+     - complete packages to either develop (JDK) or run (JRE) Java applications, 
+     applets etc. </li>
+     <li><a href="http://schmidt.devlib.org/java/standalone-vm.html">standalone 
+     JVMs</a> - mostly research projects that rely on an external class library 
+     implementations </li>
+     <li><a href="http://schmidt.devlib.org/java/embedded.html">embedded systems</a> 
+     - environments that run on systems with limited memory and CPU resources, 
+     sometimes integrated into the operating system </li>
+     <li><a href="http://schmidt.devlib.org/java/jit-compilers.html">
+     just-in-time (JIT) compilers</a> - mostly integrated in the JVM, they 
+     convert bytecode on demand to faster machine code </li>
+     <li><a href="http://java.sun.com/javase/technologies/hotspot/">HotSpot JVM</a> - It features techniques such as just-in-time compilation and adaptive optimization designed to improve performance</li>
+   </ul>
+   </li>
+   <li><a href="http://schmidt.devlib.org/java/class-file-optimizers.html">Java 
+   class file optimization and compression</a> - tools and techniques to reduce 
+   the size of Java class files </li>
+</ul>
+
+<h2>Just-in-time (JIT) compilers</h2>
+<p>Just-in-time (JIT) compilers are essentially fast traditional compilers 
+that translate the Java technology bytecodes into native machine code on the fly. 
+A JIT running on the end user's machine actually executes the bytecodes 
+and compiles each method the first time it is executed. </p>
+
+
+<h2>The Java HotSpot VM Architecture</h2>
+<p>Rather than compiling method by method, just in time, 
+the Java HotSpot VM immediately runs the program using an interpreter, 
+and analyzes the code as it runs to detect the critical hot spots in the program. 
+Then it focuses the attention of a global native-code optimizer on the hot spots.
+</p>
+
+<p><img src="images/Client_Server_plug.gif" width="200" height="192"> </p>
+
+<P>The Java HotSpot Client VM, on the left, and the Java HotSpot Server VM, 
+on the right, use a different compiler but otherwise interface to the same virtual machine, 
+using the same garbage collection (GC) routine, interpreter, 
+thread and lock subsystems, and so on.
+
+<P>
+The J2SE SDK contains both of the these systems in the distribution, 
+so developers can choose which system they want by specifying -client or -server
+
+
+<h2>Java Related Compilation Summary</h2>
+
+
+<p><img border="0" src="images/compilers.gif" width="349" height="206"></p>
+
+
+<p>&nbsp;</p>
+
+
+<h2><img border="0" src="images/compilation.gif" width="549" height="857"></h2>
+
+
+<p>&nbsp;</p>
+
+
+<h2>Benchmarking programming languages?<br>
+&quot;There are lies, damn lies and Benchmarks&quot;.</h2>
+
+
+<p>How can we benchmark a programming language?<br>
+We can't - we benchmark programming language implementations.</p>
+
+
+<p>How can we benchmark language implementations?<br>
+We can't - we measure particular programs.<br>
+<br>
+<a href="http://shootout.alioth.debian.org/">The Computer Language Shootout 
+Benchmarks</a><p><a href="http://kano.net/javabench/">
+The Java is Faster than C++ and C++ Sucks Unbiased Benchmark</a>
+<p>
+<a target="_blank" href="http://www.shudo.net/jit/perf/#linpack">Performance 
+Comparison of Java/.NET Runtimes </a><br>
+<a target="_blank" href="http://www.netlib.org/utk/people/JackDongarra/faq-linpack.html#_Toc27885709">
+Linpack Benchmark FAQ</a><br>
+
+
+
+<h2>Self Check</h2>
+<ol>
+  <li>Does a person who uses a computer for office work ever run a
+compiler?</li>
+  <li value="4">Where is a program stored when it is not currently
+running?</li>
+</ol>
+<h2>Answers</h2>
+<ol>
+  <li><b>No</b>&#8211;a compiler is intended for programmers, to translate
+high-level programming
+instructions into <b>VM (byte) code.</b><br>
+  <b>Yes</b>–a JVM compiler can compile opcodes into a <b>physical machine code</b>.</li>
+  <li>In secondary storage, typically a hard disk on a local host or a remote 
+  host . Class loaders are used when a program is located on of remote hosts.</li>
+</ol>
+
+
+<h2>The Java Platform</h2>
+A platform is the hardware or software environment in which a program runs. The 
+Java platform differs from most other platforms in that it's a software-only 
+platform that runs on top of other, hardware-based platforms. Most other 
+platforms are described as a combination of hardware and operating system. 
+<P>The Java platform has two components: 
+<UL>
+<LI>The <EM>Java Application Programming Interface</EM> (Java API) 
+<LI>The <EM>Java OS</EM> (implemented by JVM)<LI>The <EM>Java Runtime Environment</EM> (implements Java VM)</LI>
+</UL>
+</p>
+
+<p><img src="images/platform2.gif" width="700" height="404"> </p>
+
+<UL>
+<LI>"Write Once, Run Anywhere" -> Java Platform 
+<LI>All kinds of systems can talk to each other -- from smart cards to 
+supercomputers -- regardless of the underlying hardware or system software.
+<LI>When software written in the Java programming language is compiled with 
+Java technology, byte code results. The Java virtual machine, can explain 
+(interpret) that byte code to any platform on which the Java virtual machine is 
+installed. <b>This means no more porting of programs to platforms.</b>
+</UL>
+
+<h2>Java Card Technology</h2>
+<h2><img border="0" src="images/JavaCard.gif" width="650" height="374"></h2>
+<h2>&nbsp;</h2><p:colorscheme
+ colors="#ffffff,#000000,#b2b2b2,#006666,#ff9900,#666699,#ccccff,#cc0000"/>
+
+<div v:shape="_x0000_s1026" class="O">
+	<h2>End-to-End Computing</h2>
+<p><img border="0" src="images/end-to-end.gif" width="650" height="446"></p>
+	<h2>Java&#8482; Technology Leads the Way&#8230;</h2>
+	<p>New application development by language ( Soundview TG, 2001) <br>
+&nbsp;</p>
+	<p><img border="0" src="images/percentage.gif" width="650" height="368"></div>
+<h2>Freedom</h2>
+<UL>
+<LI>Hardware (CPU)
+<LI>Operating system
+<LI>Object mobility
+<LI>Network protocols
+<LI>Internationalization</UL>
+
+<h2>Security</h2>
+<ul>
+  <li>Two Levels of Security
+  <ul>
+    <li>Low-level intrinsic security </li>
+    <li>Resource level security</li>
+  </ul>
+  </li>
+  <li>Sandbox Security Model
+  <ul>
+    <li>Class loaders </li>
+    <li>Verification </li>
+    <li>Security Manager </li>
+  </ul>
+  </li>
+  <li>Language (including, type safety) </li>
+  <li>Beyond the Sandbox - protection domains</li>
+  <li>JAAS, JSSE, GSS, JCE, JCA, JERI, Jini Security</li>
+</ul>
+
+
+<h2>Internet Networking</h2> 
+<UL>
+<LI>URLs, TCP, UDP, multicast networking
+<LI>Applets/Plug-ins/Servlets/JSP/JSF<LI>RMI, JERI, RMI Activation<LI>EJBs<LI>Java IDL, RMI/IIOP<LI>Jini 
+Network Technology
+<LI>JXTA P2P Computing
+<li>Web Services (JAX...)
+<li>Java Database Connectivity (JDBC)</UL>
+
+
+<h2>Three Laws of Computing</h2>
+<ul>
+  <li>Moore's Law
+  <ul>
+    <li>Computing power doubles every 18 months </li>
+  </ul>
+  </li>
+  <li>Gilder's Law
+  <ul>
+    <li>Network bandwidth capacity doubles every 12 months </li>
+  </ul>
+  </li>
+  <li>Metcalfe's Law (Net Effect)
+  <ul>
+    <li>Value of network increases exponentially as number of participants 
+    increases </li>
+  </ul>
+  </li>
+</ul>
+
+<H2>Waves of Computing</H2>
+<IMG src="images/computing.gif" width="600" height="450">
+
+
+<H2>Many Kinds of Networks and Technologies</H2>
+<IMG src="images/networks.gif" width="600" height="389">
+
+
+<h2>Applets on a Web Page</h2>
+<P>Jmol is a free, open source molecule viewer written in Java. It is a 
+collaboratively developed visualization and measurement tool for chemical 
+scientists.
+<h3>Features</h3>
+<blockquote>
+  <ul>
+    <li>Available as both a Java application and as a web browser applet </li>
+    <li>Reads many types of files:
+    <a href="http://www.abinit.org/" target="_top">ABINIT</a>,
+    <a href="http://www.qtp.ufl.edu/Aces2/" target="_top">ACES II</a>,
+    <a href="http://www.scm.com/" target="_top">ADF</a> (Amsterdam Density 
+    Functional), <a href="http://www.xml-cml.org" target="_top">CML</a> 
+    (Chemical Markup Language),
+    <a href="http://www.kjemi.uio.no/software/dalton/dalton.html">Dalton</a>,
+    <a href="http://www.msg.ameslab.gov/GAMESS/GAMESS.html" target="_top">GAMESS</a>,
+    <a href="http://www.gaussian.com/" target="_top">Gaussian 90/92/94/96/98</a>,
+    <a href="http://www.bioinformatics.org/ghemical/" target="_top">Ghemical</a>,
+    <a href="http://www.schrodinger.com/Products/jaguar.html">Jaguar</a>,
+    <a href="http://www.mdli.com/">MDL molfiles</a>, MOPAC 7/97/2002,
+    <a href="http://www.rcsb.org/pdb/" target="_top">PDB</a>, XYZ (XMol). </li>
+    <li>Animates the results of simulations. </li>
+    <li>Displays measurements inter-atomic distances, bond angles, and dihedral 
+    angles from atomic coordinates as a simulation progresses. </li>
+    <li>Animates the computed vibrational modes from any of the quantum 
+    chemistry packages mentioned above. </li>
+    <li>Supports RasMol/Chime scripting </li>
+    <li>Displays vectors (velocity, dipole, etc.), charges, atomic symbols, or 
+    atomic indexes during animation. </li>
+    <li>Prints or exports images in these formats: GIF, JPG, PPM, BMP, PNG, PDF, 
+    PostScript, and PovRay (including animations). </li>
+    <li>Can display unit cell boxes, and energy bands. </li>
+  </ul>
+  <BR>
+<img src="images/jmol.gif" alt="" width="565" height="526" ></blockquote>
+<h2>&nbsp;</h2>
+
+
+<h2>File Hello.java</h2>
+<table cellSpacing="2" cellPadding="2" width="100%" border="0" id="table1" style="border-collapse: collapse" bordercolor="#111111" height="1">
+	<tr>
+		<td vAlign="top" align="right" height="30"><font color="#9999ff">1</font></td>
+		<td vAlign="top" height="30"><tt>public class Hello</tt></td>
+	</tr>
+	<tr>
+		<td vAlign="top" align="right" height="30"><font color="#9999ff">2</font></td>
+		<td vAlign="top" height="30"><tt>{</tt></td>
+	</tr>
+	<tr>
+		<td vAlign="top" align="right" height="30"><font color="#9999ff">3</font></td>
+		<td vAlign="top" height="30"><tt>&nbsp; &nbsp;public static void main(String[] args)</tt></td>
+	</tr>
+	<tr>
+		<td vAlign="top" align="right" height="30"><font color="#9999ff">4</font></td>
+		<td vAlign="top" height="30"><tt>&nbsp; &nbsp;{</tt></td>
+	</tr>
+	<tr>
+		<td vAlign="top" align="right" height="28"><font color="#9999ff">5</font></td>
+		<td vAlign="top" height="28"><tt>&nbsp; &nbsp; &nbsp; // </tt>display a greeting in the console 
+		window</td>
+	</tr>
+	<tr>
+		<td vAlign="top" align="right" height="30"><font color="#9999ff">6</font></td>
+		<td vAlign="top" height="30"><tt>&nbsp; &nbsp; &nbsp; System.out.println(&quot;Hello, World!&quot;);</tt></td>
+	</tr>
+	<tr>
+		<td vAlign="top" align="right" height="30"><font color="#9999ff">7</font></td>
+		<td vAlign="top" height="30"><tt>&nbsp; &nbsp;}</tt></td>
+	</tr>
+	<tr>
+		<td vAlign="top" align="right" height="1"><font color="#9999ff">8</font></td>
+		<td vAlign="top" height="1"><tt>}</tt></td>
+	</tr>
+</table>
+<br>
+&nbsp;<h2>A simple program</h2>
+<ul>
+	<li><tt>public class <i>ClassName</i></tt> 
+	</li>
+	<li><tt>public static void main(String[] args)</tt> 
+	</li>
+	<li><tt>//</tt> comment<br>
+&nbsp;</li>
+	<li>Method call <br>
+	<tt><i>object</i>.<i>methodName</i>(<i>parameters</i>)</tt> 
+	</li>
+	<li><tt>System</tt> class 
+	</li>
+	<li><tt>System.out</tt> object 
+	</li>
+	<li><tt>println</tt> method </li>
+</ul>
+<h2>&nbsp;</h2>
+<h2>Syntax: Method Call</h2>
+<table cellPadding="10" width="50%" bgColor="#ffffff" border="1" id="table2">
+	<tr>
+		<td>
+		<table border="0" id="table3">
+			<tr>
+				<td width="5%">&nbsp;</td>
+				<td>
+				<pre><i>object</i>.<i>methodName</i>(<i>parameters</i>)</pre>
+				</td>
+			</tr>
+		</table>
+		<h3>Example:</h3>
+		<table border="0" id="table4">
+			<tr>
+				<td width="5%">&nbsp;</td>
+				<td>
+				<pre>System.out.println(&quot;Hello, Dave!&quot;);</pre>
+				</td>
+			</tr>
+		</table>
+		<h3>Purpose:</h3>
+		To invoke a method of an object and supply any additional parameters 
+		</td>
+	</tr>
+</table>
+<h2>Compiling and Running</h2>
+<ul>
+	<li>Type program into text editor 
+	</li>
+	<li>Save 
+	</li>
+	<li>Open command shell 
+	</li>
+	<li>Compile into byte codes<br>
+	<tt>javac Hello.java</tt> 
+	</li>
+	<li>Execute byte codes<br>
+	<tt>java Hello</tt> </li>
+</ul>
+<h2>From Source Code to Running Program</h2>
+<img alt="" src="images/compiler.gif" width="876" height="308"> <br>
+&nbsp;<h2>Errors</h2>
+<ul>
+	<li>Syntax errors<br>
+	<tt>System.ouch.print(&quot;...&quot;);<br>
+	System.out.print(&quot;Hello);</tt> 
+	</li>
+	<li>Detected by the compiler 
+	</li>
+	<li>Logic errors<br>
+	<tt>System.out.print(&quot;Hell&quot;);</tt> 
+	</li>
+	<li>Detected (hopefully) through testing </li>
+</ul>
+<h2>The Edit-Compile-Test Loop</h2>
+<img height="491" alt="" src="images/loop.png" width="193"> 
+
+
+<H2><a href="images/intro-java.png">How Will Java Change My Life</a>? </H2>
+<P>
+<BLOCKQUOTE>I can't promise you fame, fortune, or even a job if you learn Java. 
+Still, Java is likely to make your programs better and requires less effort than 
+other languages. I believe that Java will help you do the following: 
+<UL>
+<LI><STRONG>Get started quickly</STRONG>: Although Java is a powerful 
+object-oriented language, it's easy to learn, especially for programmers already 
+familiar with C or C++. 
+<LI><STRONG>Write less code</STRONG>: Comparisons of program metrics (class 
+counts, method counts, and so on) suggest that a program written in Java can be 
+four times smaller than the same program in C++. 
+<LI><STRONG>Write better code</STRONG>: The Java language encourages good coding 
+practices, and its garbage collection helps you avoid memory leaks. Java's 
+object orientation, its JavaBeans component architecture, and its wide-ranging, 
+easily extendible API let you reuse other people's tested code and introduce 
+fewer bugs. 
+<LI><STRONG>Develop programs faster</STRONG>: Your development time may be as 
+much as twice as fast versus writing the same program in C++. Why? You write 
+fewer lines of code with Java and Java is a simpler programming language than 
+C++. 
+<LI><STRONG>Avoid platform dependencies with 100% Pure Java</STRONG>: You can 
+keep your program portable by avoiding the use of libraries written in other languages. 
+<LI><STRONG>Write once, run anywhere</STRONG>: Because 100% Pure Java programs 
+are compiled into machine-independent bytecodes, they run consistently on any 
+Java platform. 
+<LI><STRONG>Distribute software more easily</STRONG>: You can upgrade applets 
+easily from a central server. Applets take advantage of the Java feature of 
+allowing new classes to be loaded "on the fly," without recompiling the entire 
+program. </LI> 
+<LI><b>Learn selectively APIs</b>: Focus on learning those parts of the library 
+that you need for your programming projects.</LI></UL></BLOCKQUOTE>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c39bdabfd7',t:'MTczOTIwNDU3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

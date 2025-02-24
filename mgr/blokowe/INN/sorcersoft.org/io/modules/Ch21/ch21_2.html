@@ -1,0 +1,1619 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Concurrency</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Concurrency</span><BR>
+
+<H2>Course Map</H2>
+<img border="0" src="../../images/CourseMap20.png">
+
+<h2>Agenda</h2>
+<ul>
+  <li>Understand how multiple threads can execute in parallel</li>
+  <li>Learn how to implement threads</li>
+  <li>Understand race conditions and deadlocks</li>
+  <li>Be able to avoid corruption of shared objects by using synchronized methods</li>
+  <li>Be able to use threads for programming animations</li>
+</ul>
+
+<h2>Multi-Threading in Java</h2>
+<ul>
+  <li>Java has support for multi-threading built into the language </li>
+  <li>Threads are &quot;sub-processes&quot; within a process
+  <ul>
+    <li>User-interface responsiveness </li>
+    <li>Server responsiveness </li>
+    <li>Can take advantage of multi-processors </li>
+  </ul>
+  </li>
+  <li>Each process has a private data segment. Threads share the data segment of 
+  their process. </li>
+
+  <li>Two kinds of synchronization: mutual exclusion and co-operation </li>
+
+<li>In Java, threads are represented by an instance of class <code>
+java.lang.Thread</code>
+<p>
+
+  <li>Two ways to define a thread starting point: extend <code>Thread</code> or 
+  implementing <code>Runnable</code> </li>
+</ul>
+<h2>Subclassing <code>Thread</code></h2>
+<ul>
+  <li>Implement a class that extends the <tt>Thread</tt>
+    class</li>
+  <li>Place the code for your task into the <tt>run</tt>
+    method of your class</li>
+  <li>Create an object of your subclass</li>
+  <li>Call the <tt>start</tt> method of
+    your class to start the thread</li>
+  <li>When a <tt>Thread</tt> object is started,
+    the code in its <tt>run</tt> method is executed in a new thread</li>
+</ul>
+
+<h2>GreetingThread Outline</h2>
+A program to print a time stamp and "Hello World" once a second for ten seconds
+<pre>public class GreetingThread extends Thread
+{
+   public void run()
+   {
+      //thread action
+      . . .
+   }
+   //variables used by the thread action
+   . . .
+}</pre>
+<h2>Thread Action for <tt>GreetingThread</tt></h2>
+<ul>
+  <li>Print a time stamp</li>
+  <li>Print the greeting </li>
+  <li>Wait a second</li>
+</ul>
+
+<h2><tt>GreetingThread</tt></h2>
+<ul>
+  <li>We can get the date and time by constructing a Date object <br>
+    <tt> Date now = new Date(); </tt></li>
+  <li> To wait a second, use the sleep method of the Thread class <br>
+    <tt>sleep(milliseconds)</tt> </li>
+  <li>A sleeping thread can generate an InterruptedException
+    <ul>
+      <li>Catch the exception</li>
+      <li>Terminate the thread </li>
+    </ul>
+  </li>
+</ul>
+<h2><tt>GreetingThread run</tt> method</h2>
+  <pre>public run()
+{
+   try
+   {
+      //thread action
+   )
+   catch (InterruptedException exception)
+   {
+      //cleanup, if necessary
+   }
+}
+</pre>
+
+<h2>File GreetingThread.java</h2>
+<iframe src="code/GreetingThread.java.html" width="80%" height="80%">
+Your browser does not support the IFRAME tag. Click
+<a href="code/GreetingThread.java.html">here</a> to view the file.</iframe>
+<h2>To Start the Thread</h2>
+<ul>
+  <li>Construct an object of your thread class<br>
+   <pre>GreetingThread t = new GreetingThread(&quot;Hello World&quot;);</pre></li>
+  <li>Call the start method<br>
+  <pre>t.start();</pre></li>
+</ul>
+
+<h2>File GreetingThreadTest.java</h2>
+<iframe src="code/GreetingThreadTest.java.html" width="80%" height="40%"> 
+Your
+browser does not support the IFRAME tag. Click <a href="code/GreetingThreadTest.java.html">here</a>
+to view the file.</iframe>
+
+
+<h2>Output</h2>
+<pre>Thu Dec 28 23:12:03 PST 2004 Hello, World!
+Thu Dec 28 23:12:03 PST 2004 Goodbye, World!
+Thu Dec 28 23:12:04 PST 2004 Hello, World!
+Thu Dec 28 23:12:05 PST 2004 Hello, World!
+Thu Dec 28 23:12:04 PST 2004 Goodbye, World!
+Thu Dec 28 23:12:05 PST 2004 Goodbye, World!
+Thu Dec 28 23:12:06 PST 2004 Hello, World!
+Thu Dec 28 23:12:06 PST 2004 Goodbye, World!
+Thu Dec 28 23:12:07 PST 2004 Hello, World!
+Thu Dec 28 23:12:07 PST 2004 Goodbye, World!
+Thu Dec 28 23:12:08 PST 2004 Hello, World!
+Thu Dec 28 23:12:08 PST 2004 Goodbye, World!
+Thu Dec 28 23:12:09 PST 2004 Hello, World!
+Thu Dec 28 23:12:09 PST 2004 Goodbye, World!
+Thu Dec 28 23:12:10 PST 2004 Hello, World!
+Thu Dec 28 23:12:10 PST 2004 Goodbye, World!
+Thu Dec 28 23:12:11 PST 2004 Goodbye, World!
+Thu Dec 28 23:12:11 PST 2004 Hello, World!
+Thu Dec 28 23:12:12 PST 2004 Goodbye, World!
+Thu Dec 28 23:12:12 PST 2004 Hello, World!</pre>
+
+
+<h2>Implementing <code>Runnable</code></h2>
+<p>Often more flexible to implement <code>Runnable</code> than extend 
+   <code>Thread</code></p>
+<ol>
+  <li>Create an object of your subclass
+    that implements <code>Runnable</code>
+    <pre>Runnable r = new MyRunnable();</pre></li>
+  <li>Construct a <tt>Thread</tt> object from the runnable object.
+    <pre>Thread t = new Thread(r);</pre></li>
+  <li>Call the <tt>start</tt> method to start the thread.
+    <pre>t.start();</pre></li>
+</ol>
+
+
+<p>&nbsp;</p>
+  <PRE> 1 public class Animal {
+ 2 }
+
+ 1 public class Cat extends Animal implements Runnable {
+ 2
+ 3     private final String msg;
+ 4     private final long sleepTime;
+ 5
+ 6     public Cat(String msg, long sleepTime) {
+ 7         this.msg = msg;
+ 8         this.sleepTime = sleepTime;
+ 9     }
+10
+11     public void run() {
+12
+13         while (true) {
+14
+15             System.out.println(msg);
+16             try {
+17                 Thread.sleep(sleepTime);
+18             }
+19             catch (InterruptedException e) {
+20             }
+21         }
+22     }
+23 }
+
+ 1 public class CatTest {
+ 2
+ 3     // Args to this application specify "msg"
+ 4     // and "sleepTime" for multiple threads.
+ 5     // For example, the command:
+ 6     //
+ 7     // $ java CatTest Meow 100 Grrr 1000
+ 8     //
+ 9     // requests two threads, one that prints
+10     // out "Meow" every 100 milliseconds and
+11     // another that prints out "Grrr" every
+12     // 1000 milliseconds.
+13     //
+14     public static void main(String[] args) {
+15
+16         // Require an even argCount
+17         int argCount = args.length;
+18         if ((argCount / 2) == 1) {
+19             --argCount;
+20         }
+21
+22         for (int i = 0; i &lt; argCount; i += 2) {
+23
+24             String msg = args[i];
+25             long sleepTime = Long.parseLong(args[i + 1]);
+26
+27             Cat cat = new Cat(msg, sleepTime);
+28
+29             Thread catThread = new Thread(cat);
+30             catThread.start();
+31         }
+32     }
+33 }
+</PRE>
+
+<h2>Thread Scheduler</h2>
+<ul>
+  <li>The JVM holds non-blocked threads in priority-based scheduling queues.
+  <ul>
+    <li>By default, each new thread gets the same priority as its creator. </li>
+    <li>Can change a thread's priority by invoking <code>setPriority()</code>.
+    </li>
+  </ul>
+  </li>
+  <li>JVMs are encouraged to:
+  <ul>
+    <li>Cycle through highest priority threads (not necessarily in a <em>fair</em> 
+    way). </li>
+    <li>Preempt lower priority threads in favor of higher priority threads. </li>
+  </ul>
+  </li>
+  <li>Invoking <code>yield()</code> indicates to the JVM that you are ready for 
+  a rest. </li>
+  <li>Don't depend on &quot;time-slicing&quot; for program correctness. </li>
+  <li> Time Slicing - the thread scheduler runs each thread for a short amount of time called
+    a <i>time slice</i></li>
+  <li>Then the scheduler picks another thread from those that are <i>runnable</i></li>
+  <li>A thread is <i>runnable</i> if it is not asleep or blocked in some way</li>
+  <li>There is no guarantee about the order in which threads are executed</li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+<li>What happens if you change the call to the <tt>sleep</tt> method in the <tt>run</tt> method to <tt>Thread.sleep(1)</tt>?</li>
+<li>What would be the result of the program if the <tt>main</tt> method called
+<pre>t1.run();
+t2.run();</pre>
+instead of starting threads?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li>The messages are printed about one millisecond apart.</li>
+<li>The first call to <tt>run</tt> would print ten "Hello" messages, and then the second call
+to <tt>run</tt> would print ten "Goodbye" messages.</li>
+</ol>
+<br>
+
+ 
+<h2>Terminating Threads</h2>
+<ul>
+  <li> A thread terminates when its <tt>run</tt> method terminates</li>
+  <li>Do not terminate a thread using the deprecated<tt> stop</tt> method</li>
+  <li>Instead, notify a thread that it should terminate
+    <pre>t.interrupt();</pre></li>
+  <li><tt>interrupt</tt> does not cause the thread to terminate&#150;it sets a boolean field in the thread data structure</li>
+</ul>
+
+
+<h2>Terminating Threads</h2>
+<ul>
+  <li>A thread's <tt>run</tt> method should check occasionally whether it has been interrupted
+    <ul>
+      <li>Use the <tt>isInterrupted</tt> method</li>
+      <li>An interrupted thread should release resources, clean up, and exit</li>
+    </ul>
+  </li>
+  <li>The <tt>sleep</tt> method throws an InterruptedException when a sleeping thread is
+    interrupted
+    <ul>
+      <li>Catch the exception</li>
+      <li>Terminate the thread</li>
+    </ul>
+  </li>
+</ul>
+
+<pre>public void run() {
+   try
+   {
+      for (int = 1;
+           i <= REPETITIONS &amp;&amp; !isInterrupted();
+           i++)
+      {
+         //do the work
+      }
+   }
+   catch (InterruptedException exception)
+   {
+	// exit interrupted thread
+   }
+   //cleanup
+}</pre>
+<ul>
+	<li>Java does not force a thread to terminate when it is interrupted</li>
+	<li>It is entirely up to the thread what it does when it is interrupted</li>
+	<li>Interrupting is a general mechanism for getting the thread's attention</li>
+</ul>
+
+
+<h2>Making a Thread Sleep and Controlled Stopping</h2>
+<p>Applying <tt>Thread.sleep()</tt> or inJava 5 the utility <tt>TimeUnit</tt> class</p>
+<p><tt><a href="code/Clock.java">Clock.java</a></tt></p>
+<p><tt>volatile</tt><br>
+Roughly speaking, a <tt>volatile</tt> field is safe for concurrent use by two or more 
+threads. More accurately, <tt>volatile</tt> says that the value of a field must always be 
+read from to main memory and that it may not be cached by a thread (in register 
+or CPU cache).</p>
+<h2><br>
+Self Check</h2>
+<ol>
+<li value="3">Suppose a web browser uses multiple threads to load the images on a web page.
+Why should these threads be terminated when the user hits the "Back" button?</li>
+</ol>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="4">Consider the following runnable.
+<pre>public class MyRunnable implements Runnable
+{
+   public void run()
+   {
+      try
+      {
+         System.out.println(1);
+         Thread.sleep(1000);
+         System.out.println(2);
+      }
+      catch (InterruptedException exception)
+      {
+         System.out.println(3);
+      }
+      System.out.println(4);
+   }
+}</pre>
+Suppose a thread with this runnable is started and immediately interrupted.
+<pre>Thread t = new Thread(new MyRunnable());
+t.start();
+t.interrupt();</pre>
+What output is produced?
+</li></ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="3">If the user hits the "Back" button, the current web page is no longer displayed,
+and it makes no sense to expend network resources for fetching additional
+image data.</li>
+<li>The <tt>run</tt> method prints the values 1, 3, and 4. The call to <tt>interrupt</tt> merely
+sets the interruption flag, but the <tt>sleep</tt> method immediately throws an
+<tt>InterruptedException</tt>.</li>
+</ol>
+<br>
+ 
+
+<h2>Race Conditions</h2>
+<ul>
+  <li>When threads share a common object, they can conflict with each other</li>
+  <li>Sample program: multiple threads manipulate a bank account
+      <br>Here is the <tt>run</tt> method of <tt>DepositThread</tt>:
+    <pre>public void run()
+{
+   try
+   {
+      for (int i = 1; i <= count; i++)
+      {
+         account.deposit(amount);
+         Thread.sleep(DELAY);
+      }
+   }
+   catch (InterruptedException exception)
+   {
+   }
+}</pre></li>
+  <li>The <tt>WithdrawRunnable</tt> class is similar</li>
+</ul>
+
+
+<h2>Sample Application </h2>
+<ul>
+  <li>Create a BankAccount object, with a zero balance</li>
+  <li>Create a <tt>DepositThread t0</tt> to deposit $100 into the account for
+    10 iterations</li>
+  <li>Create a <tt>WithdrawThread t1</tt> to withdraw $100 from the account for
+    10 iterations </li>
+  <li>The result should be zero, but sometimes it is not</li>
+</ul>
+<h2>Scenario to Explain Non-zero Result </h2>
+<ul>
+  <li>The first thread <tt>t0</tt> executes the lines
+    <pre>System.out.print("Depositing " + amount);
+double newBalance = balance + amount;</pre>
+  </li>
+  <li><tt>t0</tt> reaches the end of its time slice and <tt>t1</tt> gains control</li>
+  <li><tt>t1</tt> calls the withdraw method which withdraws $100 from the balance
+    variable. </li>
+  <li>Balance is now -100</li>
+  <li><tt>t1</tt> goes to sleep</li>
+  <li><tt>t0</tt> regains control and picks up where it left off. </li>
+  <li><tt>t0</tt> executes the lines
+    <pre>System.out.println(", new balance is " + newBalance);
+balance = newBalance;</pre>
+  </li>
+  <li>The balance is now 100 instead of 0 because the deposit method used the
+    OLD balance</li>
+  <li>This is called a race condition.</li>
+</ul>
+<h2>Race Condition</h2>
+<ul>
+  <li>Occurs if the effect of multiple threads on shared data depends on the order 
+    in which they are scheduled</li>
+  <li>It is possible for a thread to reach the end of its time slice in the middle
+    of a statement</li>
+  <li>It may evaluate the right-hand side of an equation but not be able to store
+    the result until its next turn
+<pre>public void deposit(double amount)
+{
+   balance = <code class="blue">balance + amount</code>;
+   System.out.print("Depositing " + amount + ", new balance is " + balance);
+}</pre>
+Race condition can still occur:
+<pre>balance = <em>the right-hand-side value</em></pre></li>
+</ul>
+ 
+
+<h2>Corrupting the Contents of the balance Field</h2>
+<img src="images/corrupting_field.gif" alt="Corrupting the Contents of the balance Field" width="432" height="543">
+
+
+<h2>File BankAccountThreadTest.java</h2>
+<iframe src="code/unsynch/BankAccountThreadTest.java.html" width="80%" height="40%">
+  Your browser does not support the IFRAME tag. Click
+<a href="code/unsynch/BankAccountThreadTest.java.html">here</a> to view the file.</iframe>
+
+<h2>File DepositThread.java</h2>
+<iframe src="code/unsynch/DepositThread.java.html" width="80%" height="80%">
+  Your browser does not support the IFRAME tag. Click
+<a href="code/unsynch/DepositThread.java.html">here</a> to view the file.</iframe>
+
+<h2>File WithdrawThread.java</h2>
+<iframe src="code/unsynch/WithdrawThread.java.html" width="80%" height="80%">
+  Your browser does not support the IFRAME tag. Click
+<a href="code/unsynch/WithdrawThread.java.html">here</a> to view the file.</iframe>
+
+<h2>File BankAccount.java</h2>
+<iframe src="code/unsynch/BankAccount.java.html" width="80%" height="80%"> 
+  Your
+browser does not support the IFRAME tag. Click <a href="code/unsynch/BankAccount.java.html">here</a>
+to view the file.</iframe> 
+
+
+<h2>Output</h2>
+<pre>Depositing 100.0, new balance is 100.0
+Withdrawing 100.0, new balance is 0.0
+Depositing 100.0, new balance is 100.0
+Withdrawing 100.0, new balance is 0.0
+. . .
+Withdrawing 100.0, new balance is 400.0
+Depositing 100.0, new balance is 500.0
+Withdrawing 100.0, new balance is 400.0
+Withdrawing 100.0, new balance is 300.0</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="5">Give a scenario in which a race condition causes the bank balance to be -100
+after one iteration of a deposit thread and a withdraw thread.</li>
+<li>Suppose two threads simultaneously insert objects into a linked list.
+Explain how the list can be damaged in the process.</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="5">There are many possible scenarios. Here is one:<ul>
+  <li>The first thread loses control after the first <tt>print</tt> statement.</li>
+  <li>The second thread loses control just before the assignment <tt>balance = newBalance</tt>.</li>
+  <li>The first thread completes the <tt>deposit</tt> method.</li>
+  <li>The second thread completes the <tt>withdraw</tt> method.</li></ul></li>
+<li>One thread calls <tt>addFirst</tt> and is preempted just before executing the assignment
+<tt>first = newLink</tt>. Then the next thread calls <tt>addFirst</tt>, using the old value
+of <tt>first</tt>. Then the first thread completes the process, setting <tt>first</tt> to its new
+link. As a result, the links are not in sequence.</li>
+</ol>
+<br>
+
+
+<h2>Synchronizing Object Access</h2>
+<ul>
+  <li>To solve problems such as the one just seen, use a <em>lock object</em></li>
+  <li>A lock object is used to control threads that manipulate shared resources</li>
+  <li>In Java: <tt>Lock</tt> interface and several classes that implement it
+    <ul><li><tt>ReentrantLock</tt>: most commonly used lock class</li>
+    <li>Locks are a feature of Java version 5.0</li>
+    <li>Earlier versions of Java have a lower-level facility for thread synchronization</li></ul></li>
+</ul>
+
+
+<h2>Synchronizing Object Access</h2>
+<ul><li>Typically, a lock object is added to a class whose methods access shared resources, like this:
+<pre>public class BankAccount
+{
+   public BankAccount()
+   {
+      balanceChangeLock = new ReentrantLock();
+      . . .
+   }
+   . . .
+   private Lock balanceChangeLock;
+}</pre>
+</li></ul>
+
+
+<h2>Synchronizing Object Access</h2>
+<ul><li>Code that manipulates shared resource is surrounded by calls to <tt>lock</tt> and <tt>unlock</tt>:
+<pre>balanceChangeLock.lock();
+<em>Code that manipulates the shared resource</em>
+balanceChangeLock.unlock();</pre>
+</li></ul>
+
+
+<h2>Synchronizing Object Access</h2>
+<ul><li>If code between calls to <tt>lock</tt> and <tt>unlock</tt> throws an exception, call to <tt>unlock</tt> never happens</li>
+<li>To overcome this problem, place call to <tt>unlock</tt> into a <tt>finally</tt> clause:
+<pre>public void deposit(double amount)
+{
+   balanceChangeLock.lock();
+   try
+   {
+      System.out.print("Depositing " + amount);
+      double newBalance = balance + amount;
+      System.out.println(", new balance is " + newBalance);
+      balance = newBalance;
+   }
+   finally
+   {
+      balanceChangeLock.unlock();
+   }
+}</pre>
+</li></ul>
+
+
+<h2>Synchronizing Object Access</h2>
+<ul>
+  <li>When a thread calls <tt>lock</tt>, it owns the lock until it calls <tt>unlock</tt></li>
+  <li>A thread that calls <tt>lock</tt> while another thread owns the lock is temporarily deactivated</li>
+  <li>Thread scheduler periodically reactivates thread so it can try to acquire the lock</li>
+  <li>Eventually, waiting thread can acquire the lock</li>
+	<li><b>The Java Memory Model</b><br>
+	If a thread changes shared data and then releases a lock, and another thread 
+	acquires the same lock and reads the same data, then it is guaranteed to see 
+	the changed data.</li>
+	<li><b><i>Use locks or synchronized methods when accessing shared data among 
+	multiple threads (multiple CPUs), even if you are not concerned about race 
+	condition.</i></b></li>
+</ul>
+<h2>Self Check</h2>
+<ol>
+<li value="7">If you construct two <tt>BankAccount</tt> objects, how many lock objects are created?</li>
+<li>What happens if we omit the call <tt>unlock</tt> at the end of the <tt>deposit</tt> method?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="7">Two, one for each bank account object. Each lock protects a separate balance
+field.</li>
+<li>When a thread calls <tt>deposit</tt>, it continues to own the lock, and any other thread
+trying to deposit or withdraw money in the same bank account is blocked
+forever.</li>
+</ol>
+
+
+<h2>Avoiding Deadlocks</h2>
+<ul>
+  <li>A deadlock occurs if no thread can proceed because each thread is waiting
+    for another to do some work first</li>
+  <li>BankAccount example
+    <pre>public void withdraw(double amount)
+{
+   balanceChangeLock.lock();
+   try
+   {
+      while (balance < amount)
+         <em>Wait for the balance to grow</em>
+      . . .
+   }
+   finally
+   {
+      balanceChangeLock.unlock();
+   }
+}</pre>
+  </li>
+</ul>
+
+
+<h2>Avoiding Deadlocks</h2>
+<ul>
+  <li>How can we wait for the balance to grow?</li>
+  <li>We can't simply call <tt>sleep</tt> inside <tt>withdraw</tt> method;
+    <br>thread will block all other threads that want to use <tt>balanceChangeLock</tt></li>
+  <li>In particular, no other thread can successfully execute <tt>deposit</tt></li>
+  <li>Other threads will call <tt>deposit</tt>, but will be blocked until <tt>withdraw</tt> exits</li>
+  <li>But <tt>withdraw</tt> doesn't exit until it has funds available</li>
+  <li>DEADLOCK</li>
+</ul>
+
+
+<h2>Condition Objects</h2>
+<ul>
+  <li>To overcome problem, use a condition object</li>
+  <li>Condition objects allow a thread to temporarily release a lock, and to regain the lock at a later time</li>
+  <li>Each condition object belongs to a specific lock object</li>
+  <li>You obtain a condition object with <tt>newCondition</tt> method of <tt>Lock</tt> interface
+  <pre>public class BankAccount
+{
+   public BankAccount()
+   {
+      balanceChangeLock = new ReentrantLock();
+      sufficientFundsCondition = balanceChangeLock.newCondition();
+      . . .
+   }
+   . . .
+   private Lock balanceChangeLock;
+   private Condition sufficientFundsCondition;
+}</pre></li>
+</ul>
+
+<h2>Thread Cooperation: Condition Objects</h2>
+<ul>
+  <li>It is customary to give the condition object a name that describes condition to test</li>
+  <li>You need to implement an appropriate test</li>
+  <li>As long as test is not fulfilled, call <tt>await</tt> on the condition object:
+<pre>public void withdraw(double amount)
+{
+   balanceChangeLock.lock();
+   try
+   {
+      while (balance < amount)
+      sufficientFundsCondition.await();
+      . . .
+   }
+   finally
+   {
+      balanceChangeLock.unlock();
+   }
+}</pre></li>
+</ul>
+
+
+<h2>Thread Cooperation: Condition Objects</h2>
+<ul>
+  <li>Calling <tt>await</tt>
+    <ul><li>Makes current thread wait</li>
+    <li>Allows another thread to acquire the lock object</li></ul></li>
+  <li>To unblock, another thread must execute <tt>signalAll</tt> <i>on the same condition object</i>
+    <pre>sufficientFundsCondition.signalAll();</pre></li>
+  <li><tt>signalAll</tt> unblocks all threads waiting on the condition</li>
+  <li><tt>signal</tt>: randomly picks just one thread waiting on the object and unblocks it</li>
+  <li><tt>signal</tt>  can be more efficient, but you need to know that every waiting thread can proceed</li>
+  <li>Recommendation: always call <tt>signalAll</tt></li>
+</ul>
+
+
+
+<h2>File BankAccountThreadTester.java</h2>
+<iframe src="code/java5/synch/BankAccountThreadTester.java.html" class="code" name="I6" width="612" height="190">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File BankAccount.java</h2>
+<iframe src="code/java5/synch/BankAccount.java.html" class="code" name="I7" width="621" height="335">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File DepositRunnable.java</h2>
+<p>
+<iframe src="code/java5/synch/DepositRunnable.java.html" class="code" name="I8" width="611" height="312">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+</p>
+<h2>File WithdrawRunnable.java</h2>
+<p>
+<iframe src="code/java5/synch/WithdrawRunnable.java.html" class="code" name="I9" width="627" height="269">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+</p>
+
+
+<h2>Output</h2>
+<pre>Depositing 100.0, new balance is 100.0
+Withdrawing 100.0, new balance is 0.0
+Depositing 100.0, new balance is 100.0
+Depositing 100.0, new balance is 200.0
+. . .
+Withdrawing 100.0, new balance is 100.0
+Depositing 100.0, new balance is 200.0
+Withdrawing 100.0, new balance is 100.0
+Withdrawing 100.0, new balance is 0.0</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="9">What is the essential difference between calling <tt>sleep</tt> and <tt>await</tt>?</li>
+<li>Why is the <tt>sufficientFundsCondition</tt> object a field of the <tt>BankAccount</tt> class
+and not a local variable of the <tt>withdraw</tt> and <tt>deposit</tt> methods?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="9">A sleeping thread is reactivated when the sleep delay has passed. A waiting
+thread is only reactivated if another thread has called <tt>signalAll</tt> or <tt>signal</tt>.</li>
+<li>The calls to <tt>await</tt> and <tt>signal</tt>/<tt>signalAll</tt> must be made <em>to the same object</em>.</li>
+</ol>
+<pre>
+
+</pre><h2>Solving the Race Condition Problem - Low-Level Approach</h2>
+<ul>
+  <li>A thread must be able to lock an object temporarily</li>
+  <li>When a thread has the object locked, no other thread can modify the state
+    of the object.</li>
+  <li>In Java, use synchronized methods to do this</li>
+  <li>Tag all methods that contain thread-sensitive code with the keyword <tt>synchronized</tt></li>
+</ul>
+<h2>Synchronized Methods: Mutual Exclusion<br>
+</h2>
+<pre>public class BankAccount
+{
+   public synchronized void deposit(double amount)
+   {
+      . . .
+   }
+
+   public synchronized void withdraw(double amount)
+   {
+      . . .
+   }
+   . . .
+}</pre>
+<h2>Monitors and Non-reentrant&nbsp; <font color="#FF0000">Mutu</font>ally
+<font color="#FF0000">Ex</font>clusive Locks (Mutex)</h2>
+<p>A <i>monitor</i> is a body of code (not necessarily contiguous, developed by 
+C. A. R. Hoare), access to 
+which is guarded by a mutual-exclusion locks (or <i>mutex</i>) that is 
+associated with an <i>object</i>. The central notion of mutex is ownership. Only 
+one thread can own the mutex at a time. If a second thread tries to acquire 
+ownership, it will block (be suspended) until the owning thread <i>releases</i> 
+the mutex. </p>
+<pre>synchronized(obj) {
+
+	// guard code
+
+}
+</pre>
+<p>is effectively the same as this code: </p>
+<pre>obj.myMutex.acquire();
+try {
+
+	// guard code
+
+}
+finally {
+
+	obj.myMutex.release();
+
+}</pre>
+<h2>Synchronized Method:&nbsp; Mutual Exclusion<br>
+</h2>
+<ul>
+  <li>By declaring both the<tt> deposit</tt> and<tt> withdraw </tt>methods to
+    be synchronized
+    <ul>
+      <li>Our program will run correctly</li>
+      <li>Only one thread at a time can execute either method on a given object</li>
+      <li>When a thread starts one of the methods, it is guaranteed to execute
+        the method to completion before another thread can execute a synchronized
+        method on the same object. <br>
+      </li>
+    </ul>
+</ul>
+<h2>Synchronized Methods: Mutual Exclusion</h2>
+<ul>
+  <li>By executing a synchronized method:
+    <ul>
+      <li>The thread acquires the object lock. </li>
+      <li>No other thread can acquire the lock. </li>
+      <li>No other thread can modify the state of the object until the first thread
+        is finished</li>
+    </ul>
+
+</ul>
+
+<h2>Visualization of Synchronized Thread Behavior</h2>
+<ul>
+  <li> Imagine the object is a restroom that only one person can use at a time</li>
+  <li>The threads are people</li>
+  <li>If the restroom is empty, a person may enter</li>
+  <li>If a second person finds the restroom locked, the second person must wait
+    until it is empty</li>
+  <li>If multiple people want to gain access to the restroom , they all wait outside</li>
+  <li>The people may not form an orderly queue; </li>
+  <li>A randomly chosen person may gain access when the restroom becomes available
+    again</li>
+</ul>
+
+<h2>Deadlock</h2>
+<ul>
+  <li>A deadlock occurs if no thread can proceed because each thread is waiting
+    for another to do some work first</li>
+  <li>BankAccount example
+    <pre>public synchronized void withdraw(double amount)
+{
+   while (balance < amount)
+      //wait for balance to grow
+   . . .
+}</pre>
+  </li>
+</ul>
+<h2>Thread Cooperation with Mutexes</h2>
+<ul>
+  <li>Mutual exclusion is only half of the thread synchronization story: Java 
+  also supports thread cooperation. </li>
+  <li>The <tt>wait</tt> method temporarily releases the object lock and deactivates
+    the thread</li>
+  <li>Restroom analogy
+    <ul>
+      <li>Don't want the person in the restroom to go to sleep if there is no
+        toilet paper.</li>
+      <li>Think of the person giving up and leaving</li>
+      <li>This gives another person a chance to enter and refill the toilet paper</li>
+    </ul>
+  </li>
+</ul>
+<h2><tt>withdraw</tt> Method to Cooperate and Avoid Deadlock </h2>
+<pre>public synchronized void withdraw(double amount)
+   throws InterruptedException
+{
+   while (balance < amount)
+      wait();
+}</pre>
+<h2><tt>Object.wait()</tt> and <tt>Object.notify(), Object.notifyAll()</tt></h2>
+<ul>
+  <li>A thread that calls <tt>wait</tt> is in a blocked state</li>
+  <li>It will not be activated by the thread scheduler until it is unblocked</li>
+  <li>It is unblocked when another thread calls <tt>notify, notifyAll</tt></li>
+  <li>When a thread calls <tt>notifyAll</tt>, all threads waiting on the object's 
+  monitor
+    are unblocked</li>
+  <li> <tt>notify </tt>wakes up a single thread that is waiting on this object's 
+  monitor</li>
+  <li>Only the thread that has the lock can call <tt>notify, notifyAll</tt></li>
+</ul>
+<p>&nbsp;</p>
+<h2>Restroom<tt> wait/notifyAll </tt>Analogy </h2>
+<ul>
+  <li>The thread calling wait corresponds to the person who enters the restroom
+    and finds there is no toilet paper</li>
+  <li>The person then leaves the restroom and waits outside</li>
+  <li>Other people may enter and leave, but the first person just waits</li>
+  <li>Eventually an attendant enters the restroom, refills the toilet paper, and
+    shouts a notification</li>
+  <li>All the waiting people compete for the restroom</li>
+</ul>
+
+<h2>The Java Monitor</h2>
+<ul>
+  <li>A monitor is like a building that contains one special room (which usually 
+  contains some data - analog: toilet, toilet paper) that can be occupied by only one thread at a time.&nbsp; 
+  Each object has its own monitor.<br>
+  <br>
+  <img src="images/BWMonitor.gif" width="555" height="246"> </li>
+</ul>
+<h2>Thread Blocking</h2>
+<ul>
+  <li>A thread can be in one of the following 6 states:
+	<ul>
+		<li>
+		<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.State.html#NEW">
+		<code>NEW</code></a><br>
+		A thread that has not yet started is in this state. 
+		</li>
+		<li>
+		<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.State.html#RUNNABLE">
+		<code>RUNNABLE</code></a><br>
+		A thread executing in the Java virtual machine is in this state. 
+		</li>
+		<li>
+		<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.State.html#BLOCKED">
+		<code>BLOCKED</code></a><br>
+		A thread that is blocked waiting for a monitor lock is in this state. 
+		</li>
+		<li>
+		<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.State.html#WAITING">
+		<code>WAITING</code></a><br>
+		A thread that is waiting indefinitely for another thread to perform a 
+		particular action is in this state. 
+		</li>
+		<li>
+		<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.State.html#TIMED_WAITING">
+		<code>TIMED_WAITING</code></a><br>
+		A thread that is waiting for another thread to perform an action for up 
+		to a specified waiting time is in this state. 
+		</li>
+		<li>
+		<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.State.html#TERMINATED">
+		<code>TERMINATED</code></a><br>
+		A thread that has exited is in this state. </li>
+	</ul>
+	<p>A thread can be in <b>only one state</b> at a given point in time. These states 
+	are virtual machine states which do not reflect any operating system thread 
+	states. </p>
+	<p>A thread in the <b>blocked state</b> is waiting for a monitor lock to 
+	enter a synchronized block/method or reenter a synchronized block/method 
+	after calling
+	<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html#wait()">
+	<code>Object.wait</code></a></p>
+	<p>A thread is in the <b>waiting state </b>due to calling one of the 
+	following methods:
+	<ul>
+		<li>
+		<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html#wait()">
+		<code>Object.wait</code></a> with no timeout </li>
+		<li>
+		<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.html#join()">
+		<code>Thread.join</code></a> with no timeout </li>
+	</ul>
+	<p>A thread is in the <b>timed waiting state</b> due to calling one of the 
+	following methods with a specified positive waiting time:
+	<ul>
+		<li>
+		<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.html#sleep(long)">
+		<code>Thread.sleep</code></a> </li>
+		<li>
+		<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html#wait(long)">
+		<code>Object.wait</code></a> with timeout </li>
+		<li>
+		<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.html#join(long)">
+		<code>Thread.join</code></a> with timeout </li>
+	</ul>
+  </li>
+</ul>
+<h2>The Thread-Safe Object</h2>
+<ul>
+  <li>Make instance variables private </li>
+  <li>Figure out what the <em>monitor regions</em> should be and mark them 
+  synchronized </li>
+  <li>Make objects thread-safe only if they'll actually be used in a 
+  multi-threaded environment </li>
+  <li>Why? Performance hit from acquiring the lock and the possibility of 
+  deadlock </li>
+</ul>
+<pre>class IsSafe {
+
+	double x;
+
+	public void synchronized mark() (
+		x = 0;
+	}
+
+	public void john() {
+		x = -1;
+	}
+}
+</pre>
+<!-- #EndEditable -->
+<h2>&nbsp;</h2>
+<h2>File BankAccountThreadTest.java</h2>
+<h3>Using synchronized methods: cooperation</h3>
+<iframe width="80%" height="40%" name="I1" src="code/synch/BankAccountThreadTest.java.html">Your browser does not support the IFRAME tag. Click
+<a href="code/synch/BankAccountThreadTest.java.html">here</a> to view the file.
+</iframe>
+<h2>File BankAccount.java</h2>
+<iframe width="80%" height="80%" name="I2" src="code/synch/BankAccount.java.html">Your
+browser does not support the IFRAME tag. Click <a href="code/synch/BankAccount.java.html">here</a>
+to view the file.</iframe><!-- #EndEditable -->
+<h2>Counting Semaphores (1965, E. W. Dijkstra)</h2>
+<p>Conceptually, a semaphore maintains a set of permits. Each
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Semaphore.html#acquire()">
+<code>acquire()</code></a> blocks if necessary until a permit is available, and 
+then takes it. Each
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Semaphore.html#release()">
+<code>release()</code></a> adds a permit, potentially releasing a blocking 
+acquirer. However, no actual permit objects are used; the <tt>Semaphore</tt> 
+just keeps a count of the number available and acts accordingly.</p>
+<ul>
+	<li>A semaphore is a synchronizer that uses a counter of one or more permits 
+	to limit the number of threads that can access limited resources</li>
+	<li>Threads call to
+	<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Semaphore.html#acquire()">
+	<code>acquire()</code></a> obtain a permit</li>
+	<li>If no permits are available
+	<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Semaphore.html#acquire()">
+	<code>acquire()</code></a> blocks</li>
+	<li>Acts like bouncer, only allowing so many people into the party at one 
+	time</li>
+	<li>Semaphores are often used to restrict the number of threads than can 
+	access some (physical or logical) resource</li>
+	<li>Binary semaphore<br>
+	<code>Semaphore sem = new Semaphore (1, false);</code></li>
+	<li>Binary semaphores have no notion of ownership, the &quot;lock&quot; can be 
+	released by a thread other than the owner </li>
+</ul>
+<h2>
+Controlling Access to a Pool of Items</h2>
+<p>
+The semaphore encapsulates the synchronization needed to restrict access to the 
+pool, separately from any synchronization needed to maintain the consistency of 
+the pool itself.
+ 
+</p>
+<pre>
+class Pool {
+   private static final MAX_AVAILABLE = 100;
+   private final Semaphore available = new Semaphore(MAX_AVAILABLE, true);
+
+   public Object getItem() throws InterruptedException {
+     <b>available.acquire();</b>
+     return getNextAvailableItem();
+   }
+
+   public void putItem(Object x) {
+     if (markAsUnused(x))
+       <b>available.release();</b>
+   }
+
+   // Not a particularly efficient data structure; just for demo
+   protected Object[] items = ... whatever kinds of items being managed
+   protected boolean[] used = new boolean[MAX_AVAILABLE];
+
+   protected synchronized Object getNextAvailableItem() {
+     for (int i = 0; i < MAX_AVAILABLE; ++i) {
+       if (!used[i]) {
+          used[i] = true;
+          return items[i];
+       }
+     }
+     return null; // not reached
+   }
+
+   protected synchronized boolean markAsUnused(Object item) {
+     for (int i = 0; i < MAX_AVAILABLE; ++i) {
+       if (item == items[i]) {
+          if (used[i]) {
+            used[i] = false;
+            return true;
+          } else
+            return false;
+       }
+     }
+     return false;
+   }
+
+ }
+ </pre>
+<h2>
+Other Synchronizers</h2>
+<ul>
+	<code>
+	<li>java.util.concurency.<b>CountDownLatch<br></b>
+	</code>
+	A synchronization aid that allows one or more threads to wait until a 
+	set of operations being performed (preprocessing) in other threads completes. </li>
+	A <tt>CountDownLatch</tt> is initialized with a given <em>count</em>. The
+	<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/CountDownLatch.html#await()">
+	<code>await</code></a> methods block until the current
+	<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/CountDownLatch.html#getCount()">
+	<code>count</code></a> reaches zero due to invocations of the
+	<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/CountDownLatch.html#countDown()">
+	<code>countDown()</code></a> method, after which all waiting threads are 
+	released and any subsequent invocations of
+	<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/CountDownLatch.html#await()">
+	<code>await</code></a> return immediately.<code><li>java.util.concurency.<b>Exchanger<br>
+	</b></code>
+	A synchronization point provides for thread rendezvous at which two threads can exchange objects.</li>
+	Each thread presents some object on entry to the
+	<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Exchanger.html#exchange(V)">
+	<code>exchange</code></a> method, and receives the object presented by the 
+	other thread on return.<code><li>java.util.concurency.<b>CyclicBarrier<br>
+	</b></code>
+	A synchronization aid (multiple thread rendezvous) that allows a set of threads to all wait for each 
+	other to reach a common barrier point. <code>CyclicBarrier</code>s are useful in programs 
+	involving a fixed sized party of threads that must occasionally wait for 
+	each other. The barrier is called <em>cyclic</em> because it can be re-used 
+	after the waiting threads are released. <i><br>
+	Useful for master/slave applications - </i><code><b>
+	<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/CyclicBarrier.html#CyclicBarrier(int, java.lang.Runnable)">
+	CyclicBarrier</a></b>(int&nbsp;parties,
+	<a title="interface in java.lang" href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html">
+	Runnable</a>&nbsp;barrierAction)</code> </li>
+</ul>
+<p>
+&nbsp;</p>
+<h2>Animation </h2>
+<ul>
+	<li>Animation shows different objects moving or changing as time progresses 
+	</li>
+	<li>Thread programming is useful in animation 
+	</li>
+	<li>An algorithm animation helps visualize the steps in the algorithm </li>
+</ul>
+<h2>Algorithm Animation </h2>
+<ul>
+	<li>Runs in a separate thread that periodically updates an image of the 
+	current state of the algorithm 
+	</li>
+	<li>It then pauses so the user can see the change 
+	</li>
+	<li>After a short time the algorithm thread wakes up and runs to the next 
+	point of interest 
+	</li>
+	<li>It updates the image again and pauses again </li>
+</ul>
+<h2>Selection Sort Algorithm Animation </h2>
+<ul>
+	<li>Items in the algorithm's state 
+	<ul>
+		<li>The array of values 
+		</li>
+		<li>The size of the already sorted area 
+		</li>
+		<li>The currently marked element </li>
+	</ul>
+	</li>
+	<li>To visualize the algorithm 
+	<ul>
+		<li>Show the sorted part of the array in a different color 
+		</li>
+		<li>Mark the currently visited array element in red. </li>
+	</ul>
+	</li>
+</ul>
+<h2>Selection Sort Algorithm Animation </h2>
+<ul>
+	<li>Add an <tt>Applet</tt> instance variable to the algorithm class 
+	<pre>public class SelectionSorter
+{
+   public SelectionSorter(int[] anArray, Applet anApplet)
+   {
+      a = anArray;
+      applet = anApplet;
+   }
+   . . .
+   private Applet applet
+}</pre>
+	</li>
+</ul>
+<h2>Selection Sort Algorithm Animation </h2>
+<ul>
+	<li>Supply a<tt> pause </tt>method that sleeps for a time proportional to 
+	the number of steps involved,&nbsp;
+	one unit of time for each array element visited 
+	<pre>public void pause(int steps)
+      throws InterruptedException
+{
+   if (Thread.currentThread().isInterrupted())
+      throw new InterruptedException();
+   applet.repaint();
+   Thread.sleep(steps * DELAY);
+}</pre>
+	</li>
+</ul>
+<h2>Selection Sort Algorithm Animation </h2>
+<ul>
+	<li>Add a<tt> draw </tt>method to draw the current state of the array 
+	<pre>public void draw(Graphics2D g2)
+{
+   int deltaX = applet.getWidth() / a.length;
+   for (int i = 0; i &lt; a.length; i++)
+   {
+      if (i == markedPosition)
+         g2.setColor(Color.red);
+      else if (i &lt;= alreadySorted)
+         g2.setColor(Color.blue);
+      else
+         g2.setColor(Color.black);
+      g2.draw(new Line2D.Double(i * deltaX, 0,
+         i * deltaX, a[i]));
+   }
+}</pre>
+	</li>
+</ul>
+<h2>Selection Sort Algorithm Animation </h2>
+<ul>
+	<li>Add a <tt>pause</tt> to the <tt>minimumPosition</tt> method 
+	<pre>public int minimumPosition(int from)
+   throws InterruptedException
+{
+   int minPos = from;
+   for (int i = from + 1; i &lt; a.length; i++)
+   {
+      if (a[i] &lt; a[minPos]) minPos = i;
+
+      markedPosition = i;
+      pause(2);
+   }
+   return minPos;
+}</pre>
+	</li>
+	<li>Add a similar <tt>pause</tt> to the <tt>sort</tt> method </li>
+</ul>
+<h2>Applet to Provide User Interface</h2>
+<ul>
+	<li>Start the animation with a mousePressed event<br>
+	If an animation is already running, interrupt the thread to terminate it 
+	<pre>public class SelectionSortApplet extends Applet
+{
+   public SelectionSortApplet()
+   {
+      class MousePressListener extends MouseAdapter
+      {
+         public void mousePressed(MouseEvent event)
+         {
+             if (animation != null &amp;&amp; animation.isAlive())
+               animation.interrupt();
+            startAnimation();
+         }
+      }
+
+      MouseListener listener = new MousePressListener();
+      addMouseListener(listener);
+      . . .
+      animation = null;
+    }
+
+   . . .
+   private Thread Animation
+}
+   </pre>
+	</li>
+</ul>
+<h2>Applet to Provide User Interface</h2>
+<ul>
+	<li>The Applet's <tt>paint</tt> method calls the <tt>draw</tt> method of the 
+	algorithm 
+	<pre>   public void paint(Graphics g)
+   {
+      if (sorter == null) return;
+      Graphics2D g2 = (Graphics2D)g;
+      sorter.draw(g2);
+   }</pre>
+	</li>
+</ul>
+<h2>Applet to Provide User Interface</h2>
+<ul>
+	<li>The Applet provides a <tt>startAnimation</tt> method 
+	<ul>
+		<li>It constructs a <tt>SelectionSorter</tt> with a new array and a <tt>
+		this</tt> reference to the Applet 
+		</li>
+		<li>It constructs a thread 
+		</li>
+		<li>The thread's run method calls the sorter's sort method </li>
+	</ul>
+	</li>
+</ul>
+<h2>Applet to Provide User Interface</h2>
+<ul>
+	<li><tt>startAnimation</tt> method 
+	<pre>public void startAnimation()
+{
+   class AnimationThread extends Thread
+   {
+      public void run()
+      {
+         try
+         {
+            sorter.sort();
+         }
+         catch (InterruptedException exception)
+         {
+         }
+      }
+    }
+
+    int[] values = ArrayUtil.randomIntArray(30, 300);
+    sorter = new SelectionSorter(values, this);
+    animation = new AnimationThread();
+    animation.start();
+}</pre>
+	</li>
+</ul>
+<h2>A Step in the Animation of the Selection Sort Algorithm</h2>
+<p align="center">
+<img alt="Step in the Animation of the Selection Sort Algorithm" src="images/animation.png" width="360" height="431"></p>
+<h2>File SelectionSortApplet.java</h2>
+<iframe width="80%" height="80%" name="I3" src="code/SelectionSortApplet.java.html">Your browser does not support the IFRAME tag. Click
+<a href="code/SelectionSortApplet.java.html">here</a> to view the file.</iframe><!-- #BeginEditable "area%2024" -->
+<h2>File SelectionSorter</h2>
+<iframe width="80%" height="80%" name="I4" src="code/SelectionSorter.java.html">Your browser
+does not support the IFRAME tag. Click <a href="code/SelectionSorter.java.html">here</a>
+to view the file.</iframe>
+<h2>ArrayUtil</h2>
+<p><iframe width="80%" height="43%" name="I5" src="code/ArrayUtil.html">Your browser
+does not support the IFRAME tag. Click <a href="code/SelectionSorter.java.html">here</a>
+to view the file.</iframe></p>
+<h2>Making a System Call</h2>
+<ul>
+	<li>Use 
+      the <CODE>exec()</CODE> method of the <CODE>java.lang.Runtime</CODE> 
+      class. </li>
+	<li>A new way of executing a command in a separate 
+      process, through a class called <CODE>ProcessBuilder</CODE>. </li>
+	<li><CODE>ProcessBuilder</CODE> in the <CODE>java.lang</CODE> package (like 
+      <CODE>Runtime</CODE> and <CODE>Process</CODE>). </li>
+	<li>The <CODE>Runtime</CODE> class, also allows you to discover memory usage 
+	and add a shutdown hook. </li>
+	<li>The six versions of the <CODE>exec()</CODE> method of <CODE>Runtime</CODE>:
+	</li>
+</ul>
+<blockquote>
+	<blockquote>
+		<PRE>public Process exec(String command)
+             throws IOException
+
+public Process exec(String command,
+                    String[] envp)
+             throws IOException
+
+public Process exec(String command,
+                    String[] envp,
+                    File dir)
+             throws IOException
+
+public Process exec(String[] cmdarray)
+             throws IOExceptionjava
+
+public Process exec(String[] cmdarray,
+                    String[] envp)
+             throws IOException
+
+public Process exec(String[] cmdarray,
+                    String[] envp,
+                    File dir)
+             throws IOException</PRE>
+	</blockquote>
+</blockquote>
+<p>&nbsp;</p>
+<h2>An 
+      example using <code>Runtime</code>: <CODE>DoRuntime</CODE></h2>
+<ul>
+	<li>It that shows how to execute a command with the <CODE>Runtime</CODE> class. 
+	</li>
+	<li>The command to run is passed in 
+      from the command line. </li>
+</ul>
+<blockquote>
+	<PRE>   import java.io.*;
+   import java.util.*;
+   
+   public class DoRuntime {
+     public static void main(String args[]) throws IOException {
+       if (args.length &lt;= 0) {
+         System.err.println("Need command to run");
+         System.exit(-1);
+       }
+       Runtime runtime = Runtime.getRuntime();
+       Process process = runtime.exec(args);
+       InputStream is = process.getInputStream();
+       InputStreamReader isr = new InputStreamReader(is);
+       BufferedReader br = new BufferedReader(isr);
+       String line;
+       System.out.printf("Output of running %s is:", 
+           Arrays.toString(args));
+       while ((line = br.readLine()) != null) {
+         System.out.println(line);
+       }</PRE>
+	<PRE>       // check for a command failure  
+       try {
+           if (process.waitFor() != 0) 
+                   System.err.println(&quot;exit value = &quot; +
+                   process.exitValue());
+            }
+       }
+       catch (InterruptedException e) {
+           System.err.println(e);
+       }
+     }
+    } 
+</PRE>
+</blockquote>
+<ul>
+	<li>If you run <CODE>DoRuntime</CODE> in Solaris like this: </li>
+</ul>
+<blockquote>
+	<PRE>  java DoRuntime ls
+</PRE>
+</blockquote>
+<ul>
+	<li>You get output that looks something like this (which depends on the 
+      contents of the directory): </li>
+</ul>
+<blockquote>
+	<PRE>  Output of running ls is:DoRuntime.class
+  DoRuntime.java   
+</PRE>
+</blockquote>
+<ul>
+	<li>Linux users could also pass in "ls" as the command to get a 
+      directory listing. </li>
+	<li>On a Microsoft Windows platform, commands such 
+      as "dir" are internal to the command processor so the single command-line 
+      argument would be the quoted string: "<CODE>cmd /c dir</CODE>" (again, 
+      output would depend on the contents of the directory). </li>
+</ul>
+<blockquote>
+	<PRE>  &gt;java DoRuntime "cmd /c dir"
+   Volume in drive D is Users
+   Volume Serial Number is 2841-2ED0</PRE>
+	<PRE>   Directory of D:\...
+
+  04/15/2006  09:30 AM    &lt;DIR&gt;          .
+  04/15/2006  09:30 AM    &lt;DIR&gt;          ..
+  04/15/2006  09:30 AM             1,146 DoRuntime.class
+  04/15/2006  09:23 AM               724 DoRuntime.java
+  ...
+</PRE>
+</blockquote>
+<h2>System Call in a Different Directory</h2>
+<ul>
+	<li>As coded, the command executes in the current working directory with 
+      its environment variables intact. </li>
+	<li>If you want to run the command 
+      in a different directory, and you need to add more arguments to the 
+      <CODE>exec()</CODE> command, you change: </li>
+</ul>
+<blockquote>
+	<PRE>    Runtime runtime = Runtime.getRuntime();
+    Process process = runtime.exec(command);
+</PRE>to: 
+	<PRE>    File file = new File(other directory);
+    Runtime runtime = Runtime.getRuntime();
+    Process process = runtime.exec(command, null, file);
+</PRE>
+</blockquote>
+<ul>
+	<li>The second parameter in the call to the <CODE>exec()</CODE> method 
+      identifies the environment variable settings. Because the parameter is 
+      "null", the subprocess inherits the environment settings of the current 
+      process. </li>
+</ul>
+<h2>&nbsp;</h2>
+<h2>An example using <code>ProcessBuilder</code>: <code>DoProcessBuilder</code> </h2>
+<ul>
+	<li>The <CODE>Runtime.exec</CODE> approach 
+      doesn't necessarily make it easy to customize and invoke subprocesses. 
+	</li>
+	<li>The <CODE>ProcessBuilder</CODE> class simplifies things. Through various 
+      methods in the class, you can easily modify the environment variables for 
+      a process and start the process. </li>
+</ul>
+<blockquote>
+	<PRE>   import java.io.*;
+   import java.util.*;
+   
+   public class DoProcessBuilder {
+     public static void main(String args[]) throws IOException {
+       if (args.length &lt;= 0) {
+         System.err.println("Need command to run");
+         System.exit(-1);
+       }
+       Process process = new ProcessBuilder(args).start();
+       InputStream is = process.getInputStream();
+       InputStreamReader isr = new InputStreamReader(is);
+       BufferedReader br = new BufferedReader(isr);
+       String line;
+       System.out.printf("Output of running %s is:", 
+          Arrays.toString(args));
+       while ((line = br.readLine()) != null) {
+         System.out.println(line);
+       }
+      
+       // check for a command failure  
+       try {
+           if (process.waitFor() != 0) 
+                   System.err.println(&quot;exit value = &quot; +
+                   process.exitValue());
+            }
+       }
+       catch (InterruptedException e) {
+           System.err.println(e);
+       }
+     }
+    } 
+ 
+  
+  &gt; java DoProcessBuilder ls
+  Output of running ls is:DoProcessBuilder.class 
+  DoProcessBuilder.java
+  DoRuntime.class
+  DoRuntime.java   
+</PRE>
+</blockquote>
+<ul>
+	<li>Notice that the following two lines in <CODE>DoRuntime</CODE>: </li>
+</ul>
+<blockquote>
+	<PRE>    Runtime runtime = Runtime.getRuntime();
+    Process process = runtime.exec(command);
+</PRE>were changed to the following line in <CODE>DoProcessBuilder</CODE>: 
+	<PRE>    Process process = new ProcessBuilder(command).start();
+</PRE>
+</blockquote>
+<p>&nbsp;</p>
+<h2>Using <code>ProcessBuilder</code></h2>
+<ul>
+	<li>The <CODE>ProcessBuilder</CODE> class has two constructors. </li>
+	<li>One 
+      constructor accepts a <CODE>List</CODE> for the command and its arguments. 
+      </li>
+	<li>The other constructor accepts a variable number of <CODE>String</CODE> 
+      arguments. </li>
+</ul>
+<blockquote>
+	<PRE>public ProcessBuilder(List&lt;String&gt; command)
+public ProcessBuilder(String... command)
+</PRE>
+</blockquote>
+<ul>
+	<li>With <CODE>ProcessBuilder</CODE>, you call <CODE>start()</CODE> to 
+      execute the command. </li>
+	<li>Prior to calling <CODE>start()</CODE>, you can 
+      manipulate how the <CODE>Process</CODE> will be created. </li>
+	<li>If you want the 
+      process to start in a different directory, you don't pass a <CODE>File</CODE> in as a command line argument. Instead, you set the 
+      process builder's working directory by passing the <CODE>File</CODE> to 
+      the <CODE>directory()</CODE> method: </li>
+</ul>
+<blockquote>
+	<PRE>public <CODE>ProcessBuilder</CODE> directory(File directory)
+</PRE>
+</blockquote>
+<ul>
+	<li>Setting environment variables, get a <CODE>Map</CODE> of the variables through the 
+      <CODE>environment()</CODE> method, then you manipulate the 
+      <CODE>Map</CODE>: </li>
+</ul>
+<blockquote>
+	<PRE>   ProcessBuilder processBuilder = new ProcessBuilder(command);
+   Map&lt;String, String&gt; env = processBuilder.environment();
+   // manipulate env
+</PRE>
+</blockquote>
+<ul>
+	<li>The options for manipulating the environment include adding 
+      environment variables with the <CODE>put()</CODE> method, and removing 
+      them with the <CODE>remove()</CODE> method. For example: </li>
+</ul>
+<blockquote>
+	<PRE>   ProcessBuilder processBuilder = new ProcessBuilder(
+                                       command, arg1, arg2);
+   Map&lt;String, String&gt; env = processBuilder.environment();
+   env.put("var1", "value");
+   env.remove("var3");
+</PRE>
+</blockquote>
+<ul>
+	<li>After the environment variables and directory are set, call 
+      <CODE>start()</CODE>: </li>
+</ul>
+<blockquote>
+	<PRE>   processBuilder.directory("Dir");
+   Process p = processBuilder.start();
+</PRE>
+</blockquote>
+<ul>
+	<li>You can also <CODE>clear()</CODE> all the variables from the 
+      environment and explicitly set the ones you want. </li>
+	<li>With methods 
+      such as <CODE>environment()</CODE> for adding and removing environment 
+      variables from the process space, and <CODE>start()</CODE> for starting a 
+      new process, <CODE>ProcessBuilder</CODE> should make it easier to invoke a 
+      subprocess with a modified process environment. </li>
+	<li>You can get the 
+      initial set of environment variables by calling the <CODE>getenv()</CODE> 
+      method of <CODE>System</CODE>. Understand that not all platforms support 
+      changing environment variables. If you try to change an environment 
+      variable on a platform that forbids it, the operation will throw either an 
+      <CODE>UnsupportedOperationException</CODE> or an 
+      <CODE>IllegalArgumentException</CODE>. Also, when running with a security 
+      manager, you'll need the <CODE>RuntimePermission</CODE> for 
+      "<CODE>getenv.*</CODE>", otherwise a <CODE>SecurityException</CODE> will 
+      be thrown. </li>
+	<li>It is 
+      possible that the examples will deadlock if the subprocess generates 
+      enough output to overflow the system. A more robust solution requires 
+      draining the process stdout and stderr in separate threads. <BR>&nbsp;</li>
+</ul>
+<p>&nbsp;</p>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c55f9ab15b',t:'MTczOTIwNDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>

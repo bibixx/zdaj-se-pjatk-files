@@ -1,0 +1,41 @@
+<pre>
+<tt>
+01: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>util<font color=#990000>.</font>Date<font color=#990000>;</font>
+02: 
+03: <i><font color=#9A1900>/**</font></i>
+04: <i><font color=#9A1900>   A thread that repeatedly prints a greeting.</font></i>
+05: <i><font color=#9A1900>*/</font></i>
+06: <b><font color=#0000FF>public</font></b> <b><font color=#0000FF>class</font></b> GreetingThread <b><font color=#0000FF>extends</font></b> Thread
+07: <font color=#FF0000>{</font>
+08:    <i><font color=#9A1900>/**</font></i>
+09: <i><font color=#9A1900>      Constructs the thread object.</font></i>
+10: <i><font color=#9A1900>      @param aGreeting the greating to display</font></i>
+11: <i><font color=#9A1900>   */</font></i>
+12:    <b><font color=#0000FF>public</font></b> <b><font color=#000000>GreetingThread</font></b><font color=#990000>(</font>String aGreeting<font color=#990000>)</font>
+13:    <font color=#FF0000>{</font>
+14:       greeting <font color=#990000>=</font> aGreeting<font color=#990000>;</font>
+15:    <font color=#FF0000>}</font>
+16: 
+17:    <b><font color=#0000FF>public</font></b> <font color=#009900>void</font> <b><font color=#000000>run</font></b><font color=#990000>(</font><font color=#990000>)</font>
+18:    <font color=#FF0000>{</font>
+19:       <b><font color=#0000FF>try</font></b>
+20:       <font color=#FF0000>{</font>
+21:          <b><font color=#000000>for</font></b> <font color=#990000>(</font><font color=#009900>int</font> i <font color=#990000>=</font> <font color=#993399>1</font><font color=#990000>;</font> i <font color=#990000>&lt;</font><font color=#990000>=</font> REPETITIONS<font color=#990000>;</font> i<font color=#990000>+</font><font color=#990000>+</font><font color=#990000>)</font>
+22:          <font color=#FF0000>{</font>
+23:             Date now <font color=#990000>=</font> <b><font color=#0000FF>new</font></b> <b><font color=#000000>Date</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+24:             System<font color=#990000>.</font>out<font color=#990000>.</font><b><font color=#000000>println</font></b><font color=#990000>(</font>now <font color=#990000>+</font> <font color=#FF0000>" "</font> <font color=#990000>+</font> greeting<font color=#990000>)</font><font color=#990000>;</font>
+25:             <b><font color=#000000>sleep</font></b><font color=#990000>(</font>DELAY<font color=#990000>)</font><font color=#990000>;</font>         
+26:          <font color=#FF0000>}</font>
+27:       <font color=#FF0000>}</font>
+28:       <b><font color=#000000>catch</font></b> <font color=#990000>(</font>InterruptedException exception<font color=#990000>)</font>
+29:       <font color=#FF0000>{</font>
+30:       <font color=#FF0000>}</font>
+31:    <font color=#FF0000>}</font>
+32: 
+33:    <b><font color=#0000FF>private</font></b> String greeting<font color=#990000>;</font>
+34: 
+35:    <b><font color=#0000FF>private</font></b> <b><font color=#0000FF>static</font></b> <b><font color=#0000FF>final</font></b> <font color=#009900>int</font> REPETITIONS <font color=#990000>=</font> <font color=#993399>10</font><font color=#990000>;</font>
+36:    <b><font color=#0000FF>private</font></b> <b><font color=#0000FF>static</font></b> <b><font color=#0000FF>final</font></b> <font color=#009900>int</font> DELAY <font color=#990000>=</font> <font color=#993399>1000</font><font color=#990000>;</font>
+37: <font color=#FF0000>}</font>
+</tt>
+</pre>

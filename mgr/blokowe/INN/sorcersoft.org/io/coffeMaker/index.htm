@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CoffeeMaker Example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="tutorial.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+ <p class="title">CoffeeMaker Example</p>
+ <hr align="left" width="765">
+<span class="body"><a href="http://www.ncsu.edu">North Carolina State University<br>
+ </a><a href="http://courses.ncsu.edu/csc326/">CSC 326</a> - Software Engineering<br>
+Laurie Williams, Dright Ho, <a href="/cdn-cgi/l/email-protection#116274627c78657924517f7262643f7475642e6264737b7472652c5242522223273423215d70733423214564657e6378707d623423213c342321527e777774745c707a74633423215469707c617d74">Sarah Smith</a></span>
+ <p><a class="body" href="http://open.ncsu.edu/se/tutorials/eclipse/">Back to Software Engineering Tutorials</a></p>
+ <hr align="left" width="765">
+ <table width="765" border="0" cellspacing="0" cellpadding="5">
+   <tr>
+     <td class="body"><p>The Computer Science department at NCSU is in the process of building a new CSC building on Centennial Campus. We all know that computer scientists love caffene, so the CSC department is planning on installing a CoffeeMaker in a lounge across the hall from the 24-hour computer lab. Our job is to test and model the functionality of the CoffeeMaker. We are only working with the logic code behind the hardware, so only a command line interface is used. Here is a partial listing of requirements for the CoffeeMaker system. Use this as a reference when completing the CSC 326 tutorials.</p>
+       <p><a href="files/CoffeeMaker_Student.zip">CoffeeMaker Project</a> - Updated 3/9/2006 with new fit.jar </p>
+       <p><a name="user_stories"></a><span class="title">Requirements - User Stories</span></p>       
+       <table width="500" border="1" cellspacing="0" cellpadding="5">
+         <tr>
+           <td colspan="3">Title: Waiting State</td>
+         </tr>
+         <tr>
+           <td width="200">AccTest: checkOptions0</td>
+           <td width="110">Priority: 1 </td>
+           <td width="152">Story Points: 2 </td>
+         </tr>
+         <tr>
+           <td colspan="3">When the Coffee Maker is not in use it waits for user input. There are six different options of user input: 1) add recipe, 2) delete a recipe, 3) edit a recipe, 4) add inventory, 5) check inventory, and 6) purchase beverage. </td>
+         </tr>
+       </table>
+       <br>
+       <table width="500" border="1" cellspacing="0" cellpadding="5">
+       <tr>
+         <td colspan="3">Title: Add a Recipe </td>
+       </tr>
+       <tr>
+         <td width="200">AccTest: addRecipe1</td>
+         <td width="110">Priority: 1 </td>
+         <td width="152">Story Points: 2 </td>
+       </tr>
+       <tr>
+         <td colspan="3">Only three recipes may be added to the CoffeeMaker. A recipe consists of a name, price, units of coffee, units of milk, units of sugar, and units of chocolate. Each recipe name must be unique in the recipe list. Price must be handled as an integer. An status message is printed. Upon completion, the Coffee Maker is returned to the waiting state. </td>
+       </tr>
+     </table>     
+     <br>
+     <table width="500" border="1" cellspacing="0" cellpadding="5">
+       <tr>
+         <td colspan="3">Title: Delete a Recipe </td>
+       </tr>
+       <tr>
+         <td width="200">AccTest: deleteRecipe1</td>
+         <td width="110">Priority: 2 </td>
+         <td width="152">Story Points: 1 </td>
+       </tr>
+       <tr>
+         <td colspan="3">A recipe may be deleted from the CoffeeMaker if it exists in the list of recipes in the CoffeeMaker. The recipe to be deleted is chosen by its name. Upon completion, a status message is printed and the Coffee Maker is returned to the waiting state. </td>
+       </tr>
+     </table>     
+     <br>
+     <table width="500" border="1" cellspacing="0" cellpadding="5">
+       <tr>
+         <td colspan="3">Title: Edit a Recipe</td>
+       </tr>
+       <tr>
+         <td width="200">AccTest: editRecipe1</td>
+         <td width="110">Priority: 2 </td>
+         <td width="152">Story Points: 1 </td>
+       </tr>
+       <tr>
+         <td colspan="3">A recipe may be edited in the CoffeeMaker. The user will be prompted for the name of which recipe they wish to edit if there are any recipes to edit, then they will be asked to reenter the recipe information. A recipe name may not be changed to a name of any other recipe in the recipe list. Upon completion, a status message is printed and the Coffee Maker is returned to the waiting state.</td>
+       </tr>
+     </table>     
+     <br>
+     <table width="500" border="1" cellspacing="0" cellpadding="5">
+       <tr>
+         <td colspan="3">Title: Add Inventory </td>
+       </tr>
+       <tr>
+         <td width="200">AccTest: addInventory 1 </td>
+         <td width="110">Priority: 1 </td>
+         <td width="152">Story Points: 2 </td>
+       </tr>
+       <tr>
+         <td colspan="3">Inventory may be added to the machine at any time. The types of inventory in the Coffee Maker are coffee, milk, sugar, and chocolate. The inventory is measured in integer units. No inventory may be taken away from the CoffeeMaker except by purchasing a beverage. Upon completion, a status message is printed and the Coffee Maker is returned to the waiting state.</td>
+       </tr>
+     </table>     
+     <br>
+     <table width="500" border="1" cellspacing="0" cellpadding="5">
+       <tr>
+         <td colspan="3">Title: Check Inventory </td>
+       </tr>
+       <tr>
+         <td width="200">AccTest: checkInventory </td>
+         <td width="110">Priority: 2 </td>
+         <td width="152">Story Points: 1 </td>
+       </tr>
+       <tr>
+         <td colspan="3">Inventory may be checked at any time. The units of each item in the inventory are displayed. Upon completion, the Coffee Maker is returned to the waiting state.</td>
+       </tr>
+     </table>     
+     <br>
+     <table width="500" border="1" cellspacing="0" cellpadding="5">
+       <tr>
+         <td colspan="3">Title: Purchase Beverage </td>
+       </tr>
+       <tr>
+         <td width="200">AccTest: purchaseBeverage1</td>
+         <td width="110">Priority: 1 </td>
+         <td width="152">Story Points: 2 </td>
+       </tr>
+       <tr>
+         <td colspan="3">The user will not be able to purchase a beverage if they do not deposit enough money into the CoffeeMaker. Change will be dispensed to the user, if they paid more than the price of the beverage. A user's money will be returned if there is not enough inventory to make the beverage. Upon completion, the Coffee Maker is returned to the waiting state.</td>
+       </tr>
+     </table>     
+     <p class="title"><a name="use_cases"></a>Requirements - Use Cases</p>
+     <p class="title"><img src="pictures/cm_usecase.gif" width="674" height="454"></p>     <p>UC1: Flow of Events for the <em>Waiting State</em> Use Case<br>
+       1.1 Preconditions: None<br>
+       1.2 Main Flow: The Coffee Maker waits for user input. There are six options to chose from [E1]: 1) add recipe [UC2], 2) delete a recipe [UC3], 3) edit a recipe [UC4], 4) add inventory [UC5], 5) check inventory [UC6], and 6) purchase beverage [UC7]. </p>
+     <p>UC2: Flow of Events for the <em>Add Recipe </em> Use Case<br>
+        2.1 Preconditions: None<br>
+        2.2 Main Flow: A user selects that they want to add a recipe. The user enters the name, price [E2][E3][E4], units coffee [E2][E3][E4], units sugar [E2][E3][E4], units milk [E2][E3][E4], and units chocolate [E2][E3][E4] that make up the recipe. [E1][E5]<br>
+        2.3 Subflows: None<br>
+        2.4 Alternative Flows:<br>
+        [E1] If there are already three recipes in the system, then a new recipe may not be added. The user is returned to the main menu. <br>
+        [E2] The price must be a integer. If the price is not a number then, a status message is printed, and the user is returned to the main menu. <br>
+        [E3] The units of coffee, sugar, milk, and chocolate must be integers. If the unit value on any of the ingredients is not an integer, a status message is printed, and the user is returned to the main menu. <br>
+        [E4] The price and units of ingredients must be positive. If any number is negative, a status message is printed, and the user is returned to the main menu. <br>
+        [E5] If the name of the new recipe already exists in a recipe in the system, the new recipe will not be added. </p>
+     <p>UC3: Flow of Events for the <em>Delete Recipe</em> Use Case<br>
+       3.1 Preconditions: None<br>
+       3.2 Main Flow: The user will be shown a list of all recipes in the system, and asked to choose the recipe, by number, that they wish to delete. [S1][E1][E2]<br>
+       3.3 Subflows:<br>
+       [S1] If the user selects an empty recipe to delete, the user is returned to the main menu.<br>
+       3.4 Alternative Flows:<br>
+       [E1] If the user selects a number that is out of bounds of the number of recipes, the user is returned to the main menu.<br>
+       [E2] If the user enters a alphabetic character, the user is returned to the main menu. </p>
+     <p>UC4: Flow of Events for the <em>Edit Recipe </em> Use Case<br>
+4.1 Preconditions: None<br>
+4.2 Main Flow: The user will be shown a list of all recipes in the system, and asked to choose the recipe, by number, that they wish to edit. [S1][E1][E2] The user enters the name, price [E3][E4][E5], units coffee [E3][E4][E5], units sugar [E3][E4][E5], units milk [E3][E4][E5], and units chocolate [E3][E4][E5] that make up the recipe. [E6][E7]<br>
+4.3 Subflows: <br>
+[S1] If the user selects an empty recipe to edit, the user is returned to the main menu.<br>
+4.4 Alternative Flows:<br>
+[E1] If the user selects a number that is out of bounds of the number of recipes, the user is returned to the main menu.<br>
+[E2] If the user enters a alphabetic character, the user is returned to the main menu.<br>
+[E3] The price must be a integer. If the price is not a number then, a status message is printed, and the user is returned to the main menu. <br>
+[E4] The units of coffee, sugar, milk, and chocolate must be integers. If the unit value on any of the ingredients is not an integer, a status message is printed, and the user is returned to the main menu. <br>
+[E5] The price and units of ingredients must be positive. If any number is negative, a status message is printed, and the user is returned to the main menu. <br>
+[E6] If the name of the new recipe already exists in a recipe in the system, the new recipe will not be added. <br>
+[E7] If there are already three recipes in the system, then a new recipe may not be added. The user is returned to the main menu. 
+</p>
+     <p>UC5: Flow of Events for the <em>Add Inventory </em> Use Case<br>
+  5.1 Preconditions: None<br>
+  5.2 Main Flow: The user will be prompted for the units of each of the four ingredients they wish to add to the inventory. [E1][E2]<br>
+  5.3 Subflows: None <br>
+  5.4 Alternative Flows:<br>
+  [E1] If the user selects a number that is negative or a non-Integer, the user will be reprompted for the amount.<br>
+  [E2] If the user enters a alphabetic character, the user will be reprompted for the amount. </p>
+     <p>UC6: Flow of Events for the <em>Check Inventory </em> Use Case<br>
+6.1 Preconditions: None<br>
+6.2 Main Flow: The user will be shown a listing of the inventory of ingredients in the CoffeeMaker <br>
+6.3 Subflows: None<br>
+6.4 Alternative Flows: None </p>     
+     <p>UC7: Flow of Events for the <em>Purchase Beverage</em> Use Case<br>
+  7.1 Preconditions: None<br>
+  7.2 Main Flow: The user will select the beverage they wish to purchase [S1]. The user will deposit money to pay for the beverage [S2]. <br>
+  7.3 Subflows:<br>
+  [S1] The CoffeeMaker will check if there are enough ingrediant inthe inventory to make the selected drink.  [E1] The price of the beverage will be displayed. <br>
+  [S2] The CoffeeMaker will make sure enough money was deposited [E2], any extra change will be returned. <br>
+        7.4 Alternative Flows:<br>
+        [E1] If there is not enough inventory to make the beverage, a message will be displayed, and the user will be returned to the main menu. <br>
+     [E2] If the user does not enter enough money, they will be prompted for more money or given the option to return to the main menu and have their money returned.  </p>
+     </td>
+   </tr>
+ </table>
+ 
+ <hr align="left" width="765">
+ <table width="765" border="1" cellspacing="0" cellpadding="5">
+   <tr class="body">
+     <td width="143">Requirements</td>
+     <td width="217">Design</td>
+     <td width="375">Test</td>
+   </tr>
+   <tr class="body">
+     <td><a href="#user_stories">User Stories</a><br>
+         <a href="#use_cases">Use Cases</a> <br>
+         <a href="pictures/cm_usecase.gif">Use Case Diagram</a> </td>
+     <td><p><a href="pictures/cm_class.gif">Class Diagram</a><br>
+         <a href="pictures/cm_seq.gif">Sequence Diagram</a><br>
+        State Chart Diagram<br>
+     </p></td>
+     <td><a href="blackboxtests.html">Acceptance Tests</a><br>
+       <a href="files/result/summary.html">FIT Tests</a> <br>
+     JUnit tests are in unittests/ folder of CoffeeMaker project </td>
+   </tr>
+</table>
+ <hr align="left" width="765">
+ <a href="../index.html" class="body">Back to Software Engineering Tutorials</a>
+ <hr align="left" width="765">
+ <span class="body">CoffeeMaker Example for CSC 326 Tutorials &copy;2003-2006 <a href="http://www.ncsu.edu">North Carolina State University</a>, Laurie Williams, Dright Ho, Sarah Smith <br>
+Email <a href="/cdn-cgi/l/email-protection#8ffceafce2e6fbe7bacfe1ecfcfaa1eaebfab0fcfaede5eaecfbb2ccdcccbcbdb9aabdbfc3eeedaabdbfdbfafbe0fde6eee3fcaabdbfa2aabdbfcce0e9e9eaeac2eee4eafdaabdbfcaf7eee2ffe3ea">Sarah Smith</a> with any questions or comments about this example.<br>
+Last Updated: <!-- #BeginDate format:fcAm1a -->Thursday, March 9, 2006 1:59 PM<!-- #EndDate --></span>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70857bd83bcc',t:'MTczOTIwNDU2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

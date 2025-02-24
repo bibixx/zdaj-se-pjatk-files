@@ -1,0 +1,690 @@
+<head>
+<TITLE>SE: Inheritance and Abstract Classes</TITLE>
+<META name="keywords" content="Intro to Streams">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+</head>
+
+<HTML>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Inheritance and Abstract Classes</span>
+
+<H2>Course Map</H2>
+<img border="0" src="../../images/CourseMap17.png" width="603" height="495">
+
+
+<h2>Agenda</h2>
+<ul>
+  <li>The Concept of Inheritance<br />
+  </li>
+  <li>Graphics Programming with Inheritance<br />
+  </li>
+  <li>Abstract Classes</li>
+  <li>The TEMPLATE METHOD Pattern</li>
+  <li>Protected Interfaces<br />
+  </li>
+  <li>The Hierarchy of Swing Components</li>
+  <li>The Hierarchy of Standard Geometrical Shapes<br />
+  </li>
+  <li>The Hierarchy of Exception Classes</li>
+  <li>When Not to Use Inheritance<br />
+  </li>
+</ul>
+<h2>Modeling Specialization</h2>
+<ul>
+  <li>Start with simple <tt>Employee</tt> class<br />
+    <tt>public class Employee<br />
+{<br />
+&nbsp; &nbsp;public Employee(String aName) { name = aName; }<br />
+&nbsp;&nbsp; public void setSalary(double aSalary) { salary = aSalary; }<br />
+&nbsp;&nbsp; public String getName() { return name; }<br />
+&nbsp;&nbsp; public double getSalary() { return salary; }<br />
+    <br />
+&nbsp;&nbsp; private String name;<br />
+&nbsp;&nbsp; private double salary;<br />
+}</tt></li>
+  <li><tt>Manager</tt> is a subclass</li>
+</ul>
+<h2>Modeling Specialization</h2>
+<ul>
+  <li>Manager class adds new method: <tt>setBonus</tt></li>
+  <li>Manager class <i>overrides</i> existing method: <tt>getSalary</tt></li>
+  <li>Adds salary and bonus<br />
+  </li>
+  <li><tt><tt>public class Manager <b>extends</b> Employee<br />
+{<br />
+&nbsp;&nbsp; public Manager(String aName) { ... }<br />
+&nbsp;&nbsp; public void setBonus(double aBonus) { bonus = aBonus; } //
+new method<br />
+&nbsp;&nbsp; public double getSalary() { ... } // overrides Employee
+method<br />
+    <br />
+&nbsp;&nbsp; private double bonus; // new field<br />
+}</tt></tt></li>
+</ul>
+<h2>Modeling Specialization</h2>
+<img src="images/Ch6_01.jpg" title="" alt="."
+ style="width: 471px; height: 518px;" /><br />
+<br />
+<h2>Manager Methods and Fields<br />
+</h2>
+<ul>
+  <li>methods <tt>setSalary</tt>, <tt>getname</tt> (inherited from <tt>Employee</tt>)</li>
+  <li>method <tt>getSalary</tt> (overridden in <tt>Manager</tt>)</li>
+  <li>method <tt>setBonus</tt> (defined in <tt>Manager</tt>)</li>
+  <li>fields <tt>name</tt> and <tt>salary</tt> (defined in <tt>Employee</tt>)</li>
+  <li>field <tt>bonus</tt> (defined in <tt>Manager)</tt><br />
+  </li>
+</ul>
+<h2>The Super/Sub Terminology<br />
+</h2>
+<ul>
+  <li>Why is <tt>Manager</tt> a <b>sub</b>class?<br />
+  </li>
+  <li>Isn't a <tt>Manager</tt> superior?</li>
+  <li>Doesn't a <tt>Manager</tt> object have more fields?</li>
+  <li>The set of managers is a <i>subset</i> of the set of employees</li>
+</ul>
+<h2>The Super/Sub Terminology</h2>
+<br />
+<img src="images/Ch6_02.jpg" title="" alt="." /><br />
+<h2>Inheritance Hierarchies</h2>
+<ul>
+  <li>Real world: Hierarchies describe general/specific relationships
+    <ul>
+      <li>General concept at root of tree</li>
+      <li>More specific concepts are children</li>
+    </ul>
+  </li>
+  <li>Programming: Inheritance hierarchy
+    <ul>
+      <li>General superclass at root of tree</li>
+      <li>More specific subclasses are children<br />
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>Inheritance Hierarchies</h2>
+<img src="images/Ch6_03.jpg" title="" alt="." /><br />
+<h2>The Substitution Principle</h2>
+<ul>
+  <li>Formulated by Barbara Liskov</li>
+  <li>You can use a subclass object whenever a superclass object is
+expected</li>
+  <li>Example:<br />
+    <tt>Employee e;<br />
+...<br />
+System.out.println("salary=" + e.getSalary());</tt></li>
+  <li>Can set <tt>e</tt> to <tt>Manager</tt> reference</li>
+  <li>Polymorphism: Correct <tt>getSalary</tt> method is invoked</li>
+</ul>
+<h2>Invoking Superclass Methods</h2>
+<ul>
+  <li>Can't access private fields of superclass<br />
+    <tt>public class Manager extends Employee</tt><br
+ style="font-family: monospace;" />
+    <tt>{</tt><br style="font-family: monospace;" />
+    <tt>&nbsp;&nbsp; public double getSalary()<br />
+&nbsp;&nbsp; {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return salary + bonus;&nbsp; //
+ERROR--private field<br />
+&nbsp;&nbsp; }</tt><br style="font-family: monospace;" />
+    <tt>&nbsp;&nbsp; ...</tt><br style="font-family: monospace;" />
+    <tt>}</tt></li>
+  <li>Be careful when calling superclass method<br />
+    <tt>&nbsp;&nbsp; public double getSalary()<br />
+&nbsp;&nbsp; {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return getSalary() + bonus;&nbsp; //
+ERROR--recursive call<br />
+&nbsp;&nbsp; }</tt><br style="font-family: monospace;" />
+  </li>
+</ul>
+<h2>Invoking Superclass Methods</h2>
+<ul>
+  <li>Use <tt>super</tt> keyword<br />
+    <tt>&nbsp;&nbsp; public double getSalary()<br />
+&nbsp;&nbsp; {<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return <b>super.</b>getSalary() +
+bonus;&nbsp;<br />
+&nbsp;&nbsp; }</tt></li>
+  <li><tt><tt>super</tt></tt> is <i>not</i> a reference</li>
+  <li><tt>super</tt> turns off polymorphic call mechanism<br />
+  </li>
+</ul>
+<h2>Invoking Superclass Constructors</h2>
+<ul>
+  <li>Use <tt>super</tt> keyword in subclass constructor:<br />
+    <tt>public Manager(String aName)<br />
+{<br />
+&nbsp;&nbsp; <b>super(aName);</b> // calls superclass constructor<br />
+&nbsp;&nbsp; bonus = 0;<br />
+}</tt><br />
+  </li>
+  <li>Call to <tt>super</tt> must be <i>first</i> statement in
+subclass constructor</li>
+  <li>If subclass constructor doesn't call <tt>super</tt>, superclass
+must have constructor without parameters</li>
+</ul>
+<h2>Preconditions</h2>
+<ul>
+  <li>Precondition of redefined method <i>at most as strong</i></li>
+  <li>
+    <pre>public class Employee<br />{<br />   /**<br />      Sets the employee salary to a given value. <br />      @param aSalary the new salary <br />      @precondition aSalary &gt; 0 <br />   */ <br />   public void setSalary(double aSalary) { ... }<br />}<br /></pre>
+  </li>
+  <li>Can we redefine <tt>Manager.setSalary</tt> with precondition<br />
+    <tt>salary &gt; 100000</tt>?</li>
+  <li>No--Could be defeated:<br />
+    <pre>Manager m = new Manager();<br />Employee e = m;<br />e.setSalary(50000);<br /></pre>
+  </li>
+</ul>
+<h2>Postconditions, Visibility, Exceptions</h2>
+<ul>
+  <li>Postcondition of redefined method <i>at least as strong</i></li>
+  <li>Example: <tt>Employee.setSalary</tt> promises not to decrease
+salary</li>
+  <li>Then <tt>Manager.setSalary</tt> must fulfill postcondition<br />
+  </li>
+  <li>Redefined method cannot be more <tt>private</tt>.<br />
+(Common error: omit <tt>public</tt> when redefining)</li>
+  <li>Redefined method cannot throw more checked exceptions</li>
+</ul>
+<h2>Graphic Programming with Inheritance</h2>
+<ul>
+  <li>Chapter 4: Create drawings by by implementing <tt>Icon</tt>
+interface type</li>
+  <li>Now: Form subclass of <tt>JComponent</tt><br />
+    <tt>public class MyComponent extends JComponent<br />
+{<br />
+&nbsp;&nbsp; public void paintComponent(Graphics g)<br />
+&nbsp;&nbsp; {<br />
+    <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; drawing instructions go here</i><br
+ style="font-style: italic;" />
+&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; ...<br />
+}</tt></li>
+  <li>Advantage: Inherit behavior from <tt>JComponent</tt></li>
+  <li>Example: Can attach mouse listener to&nbsp;<tt>JComponent</tt></li>
+</ul>
+<h2>Mouse Listeners<br />
+</h2>
+<ul>
+  <li>Attach mouse listener to component</li>
+  <li>Can listen to mouse events (clicks) or mouse motion events<br />
+    <pre>public interface MouseListener <br />{ <br />   void mouseClicked(MouseEvent event); <br />   void mousePressed(MouseEvent event); <br />   void mouseReleased(MouseEvent event); <br />   void mouseEntered(MouseEvent event); <br />   void mouseExited(MouseEvent event); <br />}<br /> <br />public interface MouseMotionListener <br />{ <br />   void mouseMoved(MouseEvent event); <br />   void mouseDragged(MouseEvent event); <br />} <br /></pre>
+  </li>
+</ul>
+<h2>Mouse Adapters</h2>
+<ul>
+  <li>What if you just want to listen to <tt>mousePressed?</tt></li>
+  <li>Extend <tt>MouseAdapter<br />
+    </tt>
+    <pre>public class MouseAdapter implements MouseListener<br />{ <br />   public void mouseClicked(MouseEvent event) {} <br />   public void mousePressed(MouseEvent event) {}<br />   public void mouseReleased(MouseEvent event) {}<br />   public void mouseEntered(MouseEvent event) {} <br />   public void mouseExited(MouseEvent event) {} <br />}<br /></pre>
+  </li>
+  <li>Component constructor adds listener:<br />
+    <pre>addMouseListener(new<br />   Mouse<b>Adapter</b>()<br />   {<br />      public void mousePressed(MouseEvent event) <br />      {<br />         <i>mouse action goes here</i>
+      }
+   });
+    </pre>
+  </li>
+</ul>
+<h2>Car Mover Program</h2>
+<ul>
+  <li>Use the mouse to drag a car shape<br />
+  </li>
+  <li>Car panel has mouse + mouse motion listeners<br />
+  </li>
+  <li><tt>mousePressed</tt> remembers point of mouse press</li>
+  <li><tt>mouseDragged</tt> translates car shape</li>
+  <li><a href="code/car/CarComponent.java.html">Ch6/car/CarComponent.java</a></li>
+  <li><a href="code/car/CarMover.java.html">Ch6/car/CarMover.java</a></li>
+  <li><a href="code/car/CarShape.java.html">Ch6/car/CarShape.java</a></li>
+</ul>
+<h2>Car Mover Program</h2>
+<img src="images/Ch6_05.jpg" title="" alt="." /><br />
+<br />
+<h2>Scene Editor</h2>
+<ul>
+  <li>Draws various shapes</li>
+  <li>User can add, delete, move shapes</li>
+  <li>User <i>selects</i> shape with mouse</li>
+  <li>Selected shape is highlighted (filled in)</li>
+</ul>
+<h2>Scene Editor</h2>
+<br />
+<img alt="" src="images/Ch6_05.png" height="302" width="302" /><br />
+<h2>The <tt>SceneShape</tt> Interface Type<br />
+</h2>
+<ul>
+  <li>keep track of selection state<br />
+  </li>
+  <li>draw plain or selected shape<br />
+  </li>
+  <li>move shape<br />
+  </li>
+  <li><i>hit testing</i>: is a point (e.g. mouse position) inside?</li>
+</ul>
+<h2>The <tt>SceneShape</tt> Interface Type</h2>
+<img src="images/Ch6_07.jpg" title="" alt="."
+ style="width: 563px; height: 338px;" /><br />
+<h2>The <tt>SceneShape</tt> Interface Type</h2>
+<tt>public interface SceneShape<br />
+{<br />
+&nbsp;&nbsp; void setSelected(boolean b);<br />
+&nbsp;&nbsp; boolean isSelected();<br />
+&nbsp;&nbsp; void draw(Graphics2D g2);<br />
+&nbsp;&nbsp; void drawSelection(Graphics2D g2);<br />
+&nbsp;&nbsp; void translate(int dx, int dy);<br />
+&nbsp;&nbsp; boolean contains(Point2D aPoint);<br />
+}</tt><br />
+<br />
+<h2><tt>CarShape</tt> and <tt>HouseShape</tt> Classes<br />
+</h2>
+<pre>public class CarShape implements SceneShape <br />{ <br />   ... <br />   public void setSelected(boolean b) { selected = b; } <br />   public boolean isSelected() { return selected; }<br />   private boolean selected; <br />} <br /><br />public class HouseShape implements SceneShape<br />{ <br />   ... <br />   public void setSelected(boolean b) { selected = b; } <br />   public boolean isSelected() { return selected; }<br />   private boolean selected; <br />} <br /><br /></pre>
+<h2>Abstract Classes</h2>
+<ul>
+  <li>Factor out common behavior<br />
+(<tt>setSelected</tt>, <tt>isSelected</tt>)</li>
+  <li>Subclasses inherit common behavior<br />
+  </li>
+  <li>Some methods still undefined<br />
+(<tt>draw</tt>, <tt>drawSelection</tt>, <tt>translate</tt>, <tt>contains</tt>)</li>
+</ul>
+<pre>public class SelectableShape implements Item <br />{ <br />   public void setSelected(boolean b) { selected = b; } <br />   public boolean isSelected() { return selected; }<br />   private boolean selected; <br />} <br /><br /></pre>
+<h2>Abstract Classes</h2>
+<img src="images/Ch6_08.jpg" title="" alt="."
+ style="width: 493px; height: 777px;" /><br />
+<h2>Abstract Classes</h2>
+<ul>
+  <li><tt>SelectableShape</tt>&nbsp; doesn't define all <tt>SceneShape</tt>
+methods</li>
+  <li>It's <i>abstract</i></li>
+  <li><tt>public <b>abstract</b> class SelectableShape implements
+SceneShape</tt></li>
+  <li><tt>HouseShape</tt> and <tt>CarShape</tt> are <i>concrete</i></li>
+  <li>Can't instantiate abstract class:<br />
+    <pre>SelectableShape s = new SelectableShape(); // NO<br /></pre>
+  </li>
+  <li>Ok to have <i>variables</i> of abstract class type:<br />
+    <pre>SelectableShape s = new HouseShape(); // OK<br /></pre>
+  </li>
+</ul>
+<h2>Abstract Classes and Interface Types</h2>
+<ul>
+  <li>Abstract classes can have fields</li>
+  <li>Interface types can only have constants (<tt>public static final</tt>)</li>
+  <li>Abstract classes can define methods</li>
+  <li>Interface types can only declare methods</li>
+  <li>A class can implement any number of interface types</li>
+  <li>In Java, a class can extend only one other class</li>
+</ul>
+<h2>Scene Editor</h2>
+<ul>
+  <li>Mouse listener selects/unselects item</li>
+  <li>Mouse motion listener drags item</li>
+  <li>Remove button removes selected items<br />
+  </li>
+  <li><a href="code/scene1/SceneComponent.java.html">Ch6/scene1/SceneComponent.java</a></li>
+  <li><a href="code/scene1/SceneEditor.java.html">Ch6/scene1/SceneEditor.java</a></li>
+  <li><a href="code/scene1/HouseShape.java.html">Ch6/scene1/HouseShape.java</a></li>
+</ul>
+<h2>Uniform Highlighting Technique</h2>
+<ul>
+  <li>Old approach: each shape draws its selection state</li>
+  <li>Inconsistent<br />
+  </li>
+  <li>Better approach: shift, draw, shift, draw, restore to original
+position<br />
+  </li>
+  <li>Define in <tt>SelectableShape<br />
+    </tt> <tt>public void drawSelection(Graphics2D g2)<br />
+{<br />
+&nbsp;&nbsp; translate(1, 1);<br />
+&nbsp;&nbsp;&nbsp;draw(g2);<br />
+&nbsp;&nbsp;&nbsp;translate(1, 1);<br />
+&nbsp;&nbsp;&nbsp;draw(g2);<br />
+&nbsp;&nbsp;&nbsp;translate(-2, -2);<br />
+}</tt></li>
+</ul>
+<h2>Uniform Highlighting Technique</h2>
+<img alt="" src="images/Ch6_08.png" height="302" width="302" /><br />
+<br />
+<h2>Template Method</h2>
+<ul>
+  <li><tt>drawSelection</tt> calls <tt>draw</tt></li>
+  <li>Must declare <tt>draw</tt> in <tt>SelectableShape</tt></li>
+  <li>No implementation at that level!<br />
+  </li>
+  <li>Declare as <i>abstract</i> method<tt><br />
+public <b>abstract</b> void draw(Graphics2D g2)</tt><br />
+  </li>
+  <li>Defined in <tt>CarShape</tt>, <tt>HouseShape</tt></li>
+  <li><tt>drawSelection</tt> method calls <tt>draw</tt>, <tt>translate</tt></li>
+  <li><tt>drawSelection</tt> doesn't know <i>which</i>
+methods--polymorphism</li>
+  <li><tt>draw</tt><tt>Selection</tt> is a <i>template method</i></li>
+  <li><a href="code/scene2/SelectableShape.java.html">Ch6/scene2/SelectableShape.java</a></li>
+  <li><a href="code/scene2/HouseShape.java.html">Ch6/scene2/HouseShape.java</a></li>
+</ul>
+<h2>TEMPLATE METHOD Pattern</h2>
+<h3>Context</h3>
+<ol>
+  <li>An algorithm is applicable for multiple types.<br />
+  </li>
+  <li>The algorithm can be broken down into <i>primitive operations</i>.
+The primitive operations can be different for each type<br />
+  </li>
+  <li>The order of the primitive operations doesn't depend on the type<br />
+  </li>
+</ol>
+<h2>TEMPLATE METHOD Pattern</h2>
+<h3>Solution<br />
+</h3>
+<ol>
+  <li>Define a superclass that has a method for the algorithm and
+abstract methods for the primitive operations.</li>
+  <li>Implement the algorithm to call the primitive operations in the
+appropriate order.</li>
+  <li>Do not define the primitive operations in the superclass, or
+define them to have appropriate default behavior.</li>
+  <li>Each subclass defines the primitive operations but not the
+algorithm.</li>
+</ol>
+<h2>TEMPLATE METHOD Pattern</h2>
+<img src="images/Ch6_un02.jpg" title="" alt="."
+ style="width: 623px; height: 348px;" /><br />
+<br />
+<h2>TEMPLATE METHOD Pattern</h2>
+<table style="text-align: left; width: 70%;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;" width="338">Name in
+Design Pattern<br />
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Actual Name
+(Selectable shapes)<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;" width="338">AbstractClass<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">SelectableShape<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;" width="338">ConcreteClass<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">CarShape,
+HouseShape<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;" width="338">templateMethod()<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">drawSelection<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;" width="338">primitiveOp1(),
+primitiveOp2()<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">translate,
+draw<br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<h2>Compound Shapes<br />
+</h2>
+<ul>
+  <li>GeneralPath: sequence of shapes<br />
+    <pre>GeneralPath path = new GeneralPath(); <br />path.append(new Rectangle(...), false); <br />path.append(new Triangle(...), false); <br />g2.draw(path); <br /></pre>
+  </li>
+  <li>Advantage: Containment test is free<br />
+    <tt>path.contains(aPoint);</tt></li>
+  <li><a href="code/scene3/CompoundShape.java.html">Ch6/scene3/CompoundShape.java</a></li>
+  <li><a href="code/scene3/HouseShape.java.html">Ch6/scene3/HouseShape.java</a></li>
+</ul>
+<h2>Compound Shapes<br />
+</h2>
+<img src="images/Ch6_10.jpg" title="" alt="."
+ style="width: 166px; height: 794px;" />
+<h2>Access to Superclass Features<br />
+</h2>
+<ul>
+  <li>Why does the <tt>HouseShape</tt> constructor call <tt>add</tt>?<br />
+    <pre>public HouseShape()<br />{<br />   add(new Rectangle(...));<br />   add(new Triangle(...));<br />}<br /></pre>
+  </li>
+  <li>Why not just<br />
+    <tt>path.append(new Rectangle(...));</tt></li>
+  <li><tt>HouseShape</tt> inherits <tt>path</tt> field<br />
+  </li>
+  <li><tt>HouseShape</tt> can't access <tt>path</tt></li>
+  <li><tt>path</tt> is private to superclass</li>
+</ul>
+<h2>Protected Access</h2>
+<ul>
+  <li>Make <tt>CompoundShape.add</tt> method <i>protected</i></li>
+  <li>Protects <tt>HouseShape</tt>: other classes can't add graffiti</li>
+  <li>Protected features can be accessed by subclass methods...</li>
+  <li>...and by methods in the same package</li>
+  <li>Bad idea to make fields protected<br />
+    <tt>protected GeneralPath path; // DON'T</tt><br />
+  </li>
+  <li>Ok to make methods protected<br />
+    <tt>protected void add(Shape s) // GOOD</tt></li>
+  <li>Protected interface separate from public interface</li>
+</ul>
+<h2>Hierarchy of Swing Components</h2>
+<ul>
+  <li>Base of hierarchy: <tt>Component</tt></li>
+  <li>Huge number of common methods:<br />
+    <pre>int getWidth()<br />int getHeight()<br />Dimension getPreferredSize()<br />void setBackground(Color c)<br />. . .<br /></pre>
+  </li>
+  <li>Most important subclass: <tt>Container</tt></li>
+</ul>
+<h2>Hierarchy of Swing Components</h2>
+<img src="images/Ch6_12.jpg" title="" alt="." /><br />
+<br />
+<h2>Hierarchy of Swing Components</h2>
+<ul>
+  <li>History: First came AWT, Abstract Window Toolkit</li>
+  <li>Used <i>native</i> components</li>
+  <li>Subtle platform inconsistencies<br />
+  </li>
+  <li>Write once, run anywhere -&gt;<br />
+Write once, debug everywhere</li>
+  <li>Swing paints components onto blank windows</li>
+  <li>Supports multiple <i>look and feel</i> implementations</li>
+</ul>
+<h2>Look and Feel</h2>
+<img alt="" src="images/Ch6_11.png" /><br />
+<br />
+<h2>Hierarchy of Swing Components</h2>
+<ul>
+  <li>Base of Swing components: <tt>JComponent</tt></li>
+  <li>Subclass of <tt>Container</tt></li>
+  <li><i>Some</i> Swing components are containers</li>
+  <li>Java has no multiple inheritance</li>
+  <li><tt>JLabel</tt>, <tt>JButton</tt>, ... are subclasses of <tt>JComponent</tt></li>
+  <li>Intermediate classes <tt>AbstractButton</tt>, <tt>JTextComponent</tt></li>
+</ul>
+<h2>Hierarchy of Geometrical Shapes</h2>
+<ul>
+  <li>First version of Java: few shapes, integer coordinates<br />
+    <pre>Point<br />Rectangle<br />Polygon<br /></pre>
+  </li>
+  <li>Java 2: sophisticated shapes, floating-point coordinates<br />
+    <pre>Point2D<br />Rectangle2D<br />RoundRectangle2D<br />Line2D<br />Ellipse2D<br />Arc2D<br />QuadCurve2D<br />CubicCurve2D<br />GeneralPath<br />Area<br /></pre>
+  </li>
+  <li>All but <tt>Point2D</tt> implement <tt>Shape</tt> interface type<br />
+  </li>
+</ul>
+<h2>Hierarchy of Geometrical Shapes</h2>
+<img src="images/Ch6_15.jpg" title="" alt="." /><br />
+<br />
+<br />
+<h2>Rectangular Shapes</h2>
+<ul>
+  <li>Subclasses of <tt>RectangularShape</tt>:<br />
+    <pre>Rectangle2D<br />RoundRectangle2D<br />Ellipse2D<br />Arc2D<br /></pre>
+  </li>
+  <li><tt>RectangularShape</tt> has useful methods<br />
+    <pre>getCenterX/getCenterY<br />getMinX/getMinY<br />getMaxX/getMaxY<br />getWidth/getHeight<br />setFrameFromCenter/setFrameFromDiagonal<br /></pre>
+  </li>
+</ul>
+<h2>Float/Double Classes</h2>
+<ul>
+  <li>Each class has two subclasses, e.g.<br />
+    <pre>Rectangle2D.Double<br />Rectangle2D.Float<br /></pre>
+  </li>
+  <li>Are also inner classes!<br />
+(Just to avoid even longer class names)<br />
+  </li>
+  <li>Implementations have <tt>double</tt>/<tt>float</tt> fields</li>
+  <li>Most methods have <tt>double</tt> parameters/return values</li>
+</ul>
+<h2>Float/Double Classes</h2>
+<img src="images/Ch6_16.jpg" title="" alt="."
+ style="width: 493px; height: 331px;" /><br />
+<br />
+<h2>Float/Double Classes</h2>
+<pre>public class Rectangle2D <br />{ <br />   public static class Float extends Rectangle2D <br />   { <br />      public double getX() { return x; } <br />      public double getY() { return y; }<br />      public double getWidth() { return width; }<br />      public double getHeight() { return height;} <br />      public void setRect(float x, float y, float w, float h) <br />      { <br />         this.x = x; this.y = y; <br />         this.width = w; this.height = h; <br />      } <br />      public void setRect(double x, double y, <br />         double w, double h) <br />      { <br />         this.x = (float)x; this.y = (float)y; <br />         this.width = (float)w; this.height = (float)h; <br />      } <br />      ... <br />      public float x; <br />      public float y; <br />      public float width; <br />      public float height; <br />   } <br />   . . .<br /></pre>
+<h2>Float/Double Classes</h2>
+<pre>   . . .<br />   public static class Double extends Rectangle2D <br />      public double getX() { return x; } <br />      public double getY() { return y; }<br />      public double getWidth() { return width; }<br />      public double getHeight() { return height;} <br />      public void setRect(double x, double y, <br />         double w, double h) <br />      { <br />         this.x = x; this.y = y; <br />         this.width = w; this.height = h; <br />      } <br />      ... <br />      public double x; <br />      public double y; <br />      public double width; <br />      public double height; <br />   }<br />   ...<br />}<br /></pre>
+<h2>Float/Double Classes</h2>
+<ul>
+  <li><tt>Rectangle2D</tt> class has no instance variables</li>
+  <li>Template Method Pattern at work:<br />
+    <pre>public boolean contains(double x, double y)<br />{<br />   double x0 = getX();<br />   double y0 = getY();<br />   return x &gt;= x0 &amp;&amp; y &gt;= y0 &amp;&amp;<br />      x &lt; x0 + getWidth() &amp;&amp;<br />      y &lt; y0 + getHeight();<br />}<br /></pre>
+  </li>
+  <li>No need to use inner class after construction<br />
+    <tt><b>Rectangle2D</b> rect<br />
+&nbsp;&nbsp;&nbsp;= new <b>Rectangle2D.Double</b>(5, 10, 20, 30);</tt><br />
+  </li>
+</ul>
+<h2>TEMPLATE METHOD Pattern</h2>
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;">Name in
+Design Pattern<br />
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Actual Name
+(Rectangles)<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">AbstractClass<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">Rectangle<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">ConcreteClass<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">Rectangle2D.Double<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">templateMethod()<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">contains<br />
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-family: monospace;">primitiveOp<i>n</i>()<br />
+      </td>
+      <td style="vertical-align: top; font-family: monospace;">getX,
+getY, getWidth, getHeight</td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<h2>Hierarchy of Exception Classes</h2>
+<ul>
+  <li>Base of hierarchy: <tt>Throwable</tt></li>
+  <li>Two subclasses: <tt>Error</tt>, <tt>Exception</tt></li>
+  <li>Subclasses of <tt>Error</tt>: fatal<br />
+(out of memory, assertion failure)</li>
+  <li>Subclasses of <tt>Exception:</tt></li>
+  <li>
+    <ul>
+      <li>Lots of checked exceptions<br />
+(I/O, class not found)</li>
+      <li><tt>RuntimeException</tt>--its subclasses are unchecked<br />
+(null pointer, index out of bounds)</li>
+    </ul>
+  </li>
+</ul>
+<h2>Hierarchy of Exception Classes</h2>
+<img src="images/Ch6_14.jpg" title="" alt="." /><br />
+<br />
+<h2>Catching Exceptions</h2>
+<ul>
+  <li>Can have multiple <tt>catch</tt> clauses:<br />
+    <pre>try<br />{<br /><i>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                code that may throw exceptions</i>
+}
+catch (<i>ExceptionType1 exception1</i>)<br />{<br />   <i>handler for ExceptionType1</i>
+}
+catch (<i>ExceptionType2 exception1</i>)<br />{<br />   <i>handler for ExceptionType2</i>
+}
+. . .
+    </pre>
+  </li>
+  <li>Can catch by superclass:<br />
+    <tt>catch (IOException exception)<br />
+    </tt> catches <tt>FileNotFoundException</tt></li>
+</ul>
+<h2>Defining Exception Classes</h2>
+<ul>
+  <li>Decide exception should be checked</li>
+  <li>Subclass <tt>Exception</tt> or <tt>RuntimeException</tt></li>
+  <li>Provide two constructors<br />
+    <pre>public class IllegalFormatException extends Exception<br />{ <br />   public IllegalFormatException() {} <br />   public IllegalFormatException(String reason) <br />   { super(reason); } <br />}<br /></pre>
+  </li>
+  <li>Throw exception when needed:<br />
+    <tt>throw new</tt> <tt>IllegalFormat</tt><tt
+ style="font-family: monospace;">Exception("number expected");</tt><br />
+  </li>
+</ul>
+<h2>When Not to Use Inheritance<br />
+</h2>
+<ul>
+  <li>From a tutorial for a C++ compiler:<br />
+  </li>
+</ul>
+<pre>public class Point <br />{ <br />   public Point(int anX, int aY) { ... } <br />   public void translate(int dx, int dy) { ... } <br />   private int x; <br />   private int y; <br />} <br /><br />public class Circle extends Point // DON'T <br />{ <br />   public Circle(Point center, int radius) { ... } <br />   public void draw(Graphics g) { ... } <br />   private int radius; <br />} <br /></pre>
+<h2>When Not to Use Inheritance</h2>
+<ul>
+  <li>Huh? A circle isn't a point.</li>
+  <li>By accident, inherited <tt>translate</tt> works for circles</li>
+  <li>Same tutorial makes <tt>Rectangle</tt> a subclass of <tt>Point</tt>:<br />
+    <pre>public class Rectangle extends Point // DON'T <br />{ <br />   public Rectangle(Point corner1, Point corner2) { ... } <br />   public void draw(Graphics g) { ... } <br />   public void translate(int dx, int dy) { ... } <br />   private Point other; <br />} <br /></pre>
+  </li>
+</ul>
+<h2>When Not to Use Inheritance</h2>
+<ul>
+  <li>That's even weirder:<br />
+    <pre>public void translate(int dx, int dy)<br />{<br />   super.translate(dx, dy);<br />   other.translate(dx, dy);<br />}<br /></pre>
+  </li>
+  <li>Why did they do that?</li>
+  <li>Wanted to avoid abstract class <tt>Shape</tt></li>
+  <li>Remedy: Use aggregation.</li>
+  <li>Circle, Rectangle classes <i>have</i> points</li>
+</ul>
+<h2>When Not to Use Inheritance</h2>
+<ul>
+  <li>Java standard library:<br />
+    <pre>public class Stack&lt;T&gt; extends Vector&lt;T&gt; // DON'T<br />{<br />   T pop() { ... }<br />   void push(T item) { ... }<br />   ...<br />}<br /></pre>
+  </li>
+  <li>Bad idea: Inherit all <tt>Vector</tt> methods</li>
+  <li>Can insert/remove in the middle of the stack</li>
+  <li>Remedy: Use aggregation<br />
+    <pre>public class Stack&lt;T&gt;<br />{<br />   ...<br />   private ArrayList&lt;T&gt; elements;<br />}<br /></pre>
+  </li>
+</ul>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c57db93542',t:'MTczOTIwNDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

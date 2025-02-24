@@ -1,0 +1,26 @@
+<pre><tt><font color="#000000">01: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">02: </font><i><font color="#9A1900">   A simple invoice formatter.</font></i>
+<font color="#000000">03: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">04: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> SimpleFormatter <b><font color="#0000FF">implements</font></b> InvoiceFormatter
+<font color="#000000">05: </font><font color="#FF0000">{</font>
+<font color="#000000">06: </font>   <b><font color="#0000FF">public</font></b> String <b><font color="#000000">formatHeader</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">07: </font>   <font color="#FF0000">{</font>
+<font color="#000000">08: </font>      total <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+<font color="#000000">09: </font>      <b><font color="#0000FF">return</font></b> <font color="#FF0000">"     I N V O I C E\n\n\n"</font><font color="#990000">;</font>
+<font color="#000000">10: </font>   <font color="#FF0000">}</font>
+<font color="#000000">11: </font>
+<font color="#000000">12: </font>   <b><font color="#0000FF">public</font></b> String <b><font color="#000000">formatLineItem</font></b><font color="#990000">(</font>LineItem item<font color="#990000">)</font>
+<font color="#000000">13: </font>   <font color="#FF0000">{</font>
+<font color="#000000">14: </font>      total <font color="#990000">+</font><font color="#990000">=</font> item<font color="#990000">.</font><b><font color="#000000">getPrice</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">15: </font>      <b><font color="#0000FF">return</font></b> <font color="#990000">(</font>String<font color="#990000">.</font><b><font color="#000000">format</font></b><font color="#990000">(</font>
+<font color="#000000">16: </font>            <font color="#FF0000">"%s: $%.2f\n"</font><font color="#990000">,</font>item<font color="#990000">.</font><b><font color="#000000">toString</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">,</font>item<font color="#990000">.</font><b><font color="#000000">getPrice</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">17: </font>   <font color="#FF0000">}</font>
+<font color="#000000">18: </font>
+<font color="#000000">19: </font>   <b><font color="#0000FF">public</font></b> String <b><font color="#000000">formatFooter</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">20: </font>   <font color="#FF0000">{</font>
+<font color="#000000">21: </font>      <b><font color="#0000FF">return</font></b> <font color="#990000">(</font>String<font color="#990000">.</font><b><font color="#000000">format</font></b><font color="#990000">(</font><font color="#FF0000">"\n\nTOTAL DUE: $%.2f\n"</font><font color="#990000">,</font> total<font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">22: </font>   <font color="#FF0000">}</font>
+<font color="#000000">23: </font>
+<font color="#000000">24: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">double</font> total<font color="#990000">;</font>
+<font color="#000000">25: </font><font color="#FF0000">}</font>
+</tt></pre>

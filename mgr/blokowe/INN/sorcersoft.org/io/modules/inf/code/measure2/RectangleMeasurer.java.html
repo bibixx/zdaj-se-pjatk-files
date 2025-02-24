@@ -1,0 +1,16 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">awt</font><font color="#000000">.</font><font color="#000000">Rectangle</font><font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">   Objects of this class measure rectangles by area.</font>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">06: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">RectangleMeasurer</font> <font color="#d05b76">implements</font> <font color="#000000">Measurer</font>
+<b><font color="#006cb8">07: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">08: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">double</font> <font color="#000000">measure</font><font color="#000000">(</font><font color="#000000">Object</font> <font color="#000000">anObject</font><font color="#000000">)</font>
+<b><font color="#006cb8">09: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">10: </font></b>      <font color="#000000">Rectangle</font> <font color="#000000">aRectangle</font> <font color="#000000">=</font> <font color="#000000">(</font><font color="#000000">Rectangle</font><font color="#000000">)</font> <font color="#000000">anObject</font><font color="#000000">;</font>
+<b><font color="#006cb8">11: </font></b>      <font color="#d05b76">double</font> <font color="#000000">area</font> <font color="#000000">=</font> <font color="#000000">aRectangle</font><font color="#000000">.</font><font color="#000000">getWidth</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">*</font> <font color="#000000">aRectangle</font><font color="#000000">.</font><font color="#000000">getHeight</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">12: </font></b>      <font color="#d05b76">return</font> <font color="#000000">area</font><font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">14: </font></b><font color="#000000">}</font>
+<b><font color="#006cb8">15: </font></b>
+</tt></pre>

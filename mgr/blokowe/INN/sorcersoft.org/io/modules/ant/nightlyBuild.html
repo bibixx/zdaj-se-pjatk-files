@@ -1,0 +1,518 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0066)http://www.javaworld.com/javaworld/jw-06-2004/jw-0628-build_p.html -->
+<HTML><HEAD><TITLE>Create a nightly build system from scratch</TITLE>
+<META http-equiv=content-type content="text/html; charset=windows-1252">
+<META content=" nightly builds anthill ant tomcat continual build systems&#13;" 
+name=keywords>
+<META 
+content="&#13;&#10;All design methodologies advocate nightly builds during a project's code construction phase. Yet, as a Java developer, you will constantly find yourself on job sites where no automated build system is available. In this article, I teach you how you can leverage your knowledge of standard Java technologies and tools (Tomcat and Web applications) to put together a nightly build system with minimal pain. This build system automatically checks the latest code and informs you (via email and a Web interface) about the build's success or failure. In addition, the system deposits the resulting product into a Web directory for easy download. (3,400 words; June 28, 2004) &#13;&#10;" 
+name=description>
+<META content=NOARCHIVE name=GOOGLEBOT><BASEFONT 
+face="verdana, arial, helvetica" size=2>
+<STYLE type=text/css>CODE {
+	FONT-WEIGHT: normal; FONT-SIZE: 110%; LINE-HEIGHT: normal; FONT-STYLE: normal; FONT-VARIANT: normal
+}
+PRE {
+	FONT-WEIGHT: normal; FONT-SIZE: 100%; LINE-HEIGHT: normal; FONT-STYLE: normal; FONT-VARIANT: normal
+}
+TD {
+	FONT-WEIGHT: normal; FONT-SIZE: 90%; LINE-HEIGHT: normal; FONT-STYLE: normal; FONT-VARIANT: normal
+}
+</STYLE>
+
+<SCRIPT language=JavaScript>
+            <!--
+            function openBrWindow() {
+                win=window.open("http://www.javaworld.com/channel_content/jw-story-feedback.shtml",'Feedback','width=600,height=330,toolbar=no,location=no,directories=no,menubar=no,scrollbars=yes,resizable=yes');
+            }
+            -->
+        </SCRIPT>
+
+<META content="MSHTML 6.00.3790.2666" name=GENERATOR></HEAD>
+<BODY text=#000000 bottomMargin=0 vLink=#990033 aLink=#990033 link=#990033 
+bgColor=#ffffff leftMargin=0 topMargin=0 rightMargin=0 marginwidth="0" 
+marginheight="0"><IMG height=1 alt="" src="nightlyBuild_files/pixel.gif" width=1 
+border=0><FONT 
+face="verdana, arial, helvetica" size=2><H1 align=center>Create a nightly build system from scratch </H1>
+<H3 align=center>Learn how to put together a sophisticated nightly build system 
+in two days or less </H3>
+<P></P><!--<BLOCKQUOTE><STRONG>Summary</STRONG><BR>-->
+<BLOCKQUOTE><STRONG>Summary</STRONG><BR>All design methodologies advocate 
+  nightly builds during a project's code construction phase. Yet, as a Java 
+  developer, you will constantly find yourself on job sites where <EM>no</EM> 
+  automated build system is available. In this article, I teach you how you can 
+  leverage your knowledge of standard Java technologies and tools (Tomcat and 
+  Web applications) to put together a nightly build system with minimal pain. 
+  This build system automatically checks the latest code and informs you (via 
+  email and a Web interface) about the build's success or failure. In addition, 
+  the system deposits the resulting product into a Web directory for easy 
+  download. (<EM>3,400 words;</EM> <STRONG>June 28, 2004</STRONG>) </BLOCKQUOTE><!--</BLOCKQUOTE>--><STRONG>By Dan Hansen </STRONG>
+<P><IMG height=2 src="nightlyBuild_files/rule_ltblue.gif" width="100%"></P>
+<P><BR></P><!-- #include snippets/jw-articles-336x280.txt -->
+<P>
+<P><IMG height=29 alt=L src="nightlyBuild_files/L.gif" width=24 align=left>et's 
+suppose you have arrived at a new job site or landed a new contract. You may be 
+a bit nervous, but not too much so; you have a reasonable level of confidence in 
+your Java development skills. The first thing you do is try to get up and 
+running. You read some of the documentation. You look at the hardware available 
+for use. You check out the code from the source control system and run the Ant 
+scripts to see how the current product looks as opposed to the project described 
+in the (probably out-dated) schedule. Good. 
+<P>Then you actually get into the thick of things. Somebody on the team wastes 
+half your day by making a bad check-in, which you end up debugging since you 
+must get your code compiling (you do want to get some work done, after all). 
+Another morning comes and goes when somebody makes a late-night check-in to meet 
+a deadline, and nobody notices that the build is broken until half the team 
+checks out the broken build. Any seasoned developer has dealt with these types 
+of issues in a variety of forms (and any seasoned developer has broken the build 
+as well). How do you protect yourself and the team from forgetting to check in 
+files, from producing code that only compiles on your development machine, or 
+from instigating other frustrating and time-wasting behavior? 
+<P>One tool in your arsenal is a continual build system. Continual build systems 
+may go as far as to compile and run the unit tests every time you check in 
+modifications. Regardless of how often you build, you always want at least a 
+nightly build system. The benefits of such systems are well understood in the 
+industry now—I know of no software development methodology that does not 
+advocate a nightly build. As with other tools, it is no magic bullet, but it is 
+part of the toolkit necessary to produce quality software. 
+<P>At some point, you will ask management how builds and releases are handled. 
+You may be surprised to discover that the builds are handled by hand on a 
+release-by-release basis, which is common. There may even be a person (or entire 
+department) devoted to producing software builds. In such a shop, each developer 
+is usually on her own vis à vis building and testing daily. You can imagine (and 
+probably have experienced) the problems that such systems can produce. So why 
+don't you have a nightly build? 
+<P>Invariably, everyone agrees that a nightly build system would be nice. But no 
+time has been budgeted for such a snazzy tool—tools are a notorious waste of 
+time for engineers. Weeks can be whittled away playing with the tool and 
+slipping on the feature set. Management will not budget time for a build tool 
+that requires weeks to create. 
+<P>In this article, I show you how to put together a basic build system in a 
+couple of days. It is just a matter of making some installs and plugging in your 
+Ant scripts. We use the open source Web application Anthill; you will find its 
+configuration to be only a small part of setting up such a system. So let's get 
+to it. 
+<P><FONT size=+1><STRONG>Prerequisites </STRONG></FONT><BR>To start, I presume 
+the following about your situation and your abilities: You are a reasonably 
+savvy Java developer. You have worked on at least a couple of Java projects, and 
+you not only know the language, but you also know a bit about Web applications 
+and servlet containers. I am also going to presume that you know a bit about Ant 
+and how to use Ant scripts. Finally, I'm going to presume that you have some 
+understanding of source code control and have already put your code into such a 
+system. 
+<P>What is my justification for such presumptions? First, brevity: my goal is 
+explain how to quickly create a nightly build system, not how to use CVS 
+(Concurrent Versions System). Second, practicality: while it is true that most 
+shops have no functional build systems, it has always been true, in my 
+experience, that shops have source code control. Third, my estimation of the 
+time it will take you to set up the system is predicated on the expectation that 
+such items like a Tomcat server don't intimidate you. If you already know about 
+Web applications, then running one is no big deal. But if you have no idea about 
+such things and something goes wrong, trouble-shooting how to run the Web 
+application will dramatically increase your time. My assertion is that a 
+professional Java developer can set up a nightly build system in two days or 
+less. I say two days, because I recommend you spend some time reading the 
+manuals for each system component. Reading manuals and downloading software 
+simply takes time, so while you might do this in an afternoon, you should 
+probably allocate a couple of days. 
+<P><!-- break -->
+<P><FONT size=+1><STRONG>The machine and its OS </STRONG></FONT><BR>We will 
+create the example system on a Windows XP machine because it is common and, most 
+likely, the kind of machine that you have easily available for use. The OS is 
+really rather irrelevant. For Mac OS X, Linux, or Solaris users: you will set up 
+a Java server and run a Java Web application. All the tools used are 
+cross-platform or have a Unix equivalent. You do have to know how to do one 
+thing: if I ask you to set an environment variable in the Windows environment, 
+you will need to know how to set the environment variable in your flavor of 
+Unix. Yes, that is it. You must know how to set environment variables and how to 
+install off-the-shelf software. You will spend most of your time performing 
+installations. 
+<P>One item involving the path environment variable is of some importance: if 
+you rely on running an executable from Ant, then the Anthill Web application 
+requires it to be in your path. Sometimes when running an Ant script from 
+Anthill, you will encounter Java I/O exceptions—Anthill's rather nonintuitive 
+way of letting you know that it could not find an executable. So if your javac 
+or devenv is not in your path, you will see these exceptions when you try to 
+build those targets. 
+<P>At this point, you've probably either grabbed a machine leftover from the 
+last round of outsourcing or the box that you have not used since you last 
+upgraded your equipment. Maybe it is a bit old, but I cannot think of a better 
+use for an older, slower machine than a task that runs in the early hours of the 
+morning! I presume the box is tabula rasa (that is, it has no tools on it), so I 
+now will walk you through all the installations. 
+<P><FONT size=+1><STRONG>Source code control </STRONG></FONT><BR>In my example, 
+we use CVS. The Anthill Web application supports more than just CVS. If you have 
+Perforce, fine, please use it! But if you operate on the cheap, you can use CVS 
+and get your code from a CVS password server (pserver) machine. 
+<P>We start by downloading and installing the CVS client, <A 
+href="http://www.javaworld.com/javaworld/jw-06-2004/jw-0628-build_p.html#resources">WinCvs</A>. 
+We are not so interested in using WinCvs as we are in getting CVSNT onto the 
+box. This generally will not be an issue on a Unix box—CVS is standard fare on a 
+box these days. 
+<P>The installation itself (like most installations I mention) should be 
+relatively simple and won't take much time. You won't have to use WinCvs 
+(although you may want to test your CVS connection using the WinCvs client to 
+ensure your machine can talk correctly to the CVS server). If you do choose to 
+test your CVS connection, you will have to supply the server information either 
+at startup or via the Admin/Preferences menu item (see Figure 1). 
+<P>
+<TABLE cellPadding=5 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <P>
+      <CENTER>
+      <P><A 
+      href="http://www.javaworld.com/javaworld/jw-06-2004/images/jw-0628-build1.gif" 
+      target=new_window><IMG height=374 
+      src="nightlyBuild_files/jw-0628-build1-thumb.gif" width=350 vspace=3></A>
+      <P><BR><FONT size=-1><STRONG>
+      <P>Figure 1. Advanced System Properties panel. Click on thumbnail to view 
+      full-size image. </STRONG></FONT></CENTER>
+      <P></P></TD></TR></TBODY></TABLE>
+<P>An additional reason for using a client application such as WinCvs is because 
+it provides a convenient way to log into the server. The build system requires 
+that you log onto your CVS server—one of the simplest ways to do that is to 
+simply start up WinCvs and log in using the Admin/Login menu item. Remember, you 
+must be logged in for your build system to work. 
+<P>The most important thing for you to do is to add CVS (in this case CVSNT) to 
+your path. On an XP system, this will require going to the Control Panel and 
+opening up the System dialog. Open the Advanced panel and select the Environment 
+Variables button (see Figure 2). This will bring up a new dialog. Select the 
+Path variable and edit it. Add the location of your CVSNT installation to your 
+Path variable. In my case, I installed CVS into a standard location so that my 
+new path looks like this: 
+<P><STRONG>%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;C:\Program 
+Files\GNU\WinCvs 1.3\CVSNT</STRONG> 
+<P>
+<TABLE cellPadding=5 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <P>
+      <CENTER>
+      <P><A 
+      href="http://www.javaworld.com/javaworld/jw-06-2004/images/jw-0628-build2.gif" 
+      target=new_window><IMG height=237 
+      src="nightlyBuild_files/jw-0628-build2-thumb.gif" width=350 vspace=3></A>
+      <P><BR><FONT size=-1><STRONG>
+      <P>Figure 2. An example of CVS settings. Click on thumbnail to view 
+      full-size image. </STRONG></FONT></CENTER>
+      <P></P></TD></TR></TBODY></TABLE>
+<P>
+<P><FONT size=+1><STRONG>Ant </STRONG></FONT><BR>You need Ant on the system to 
+run your Ant scripts. The download is available from the <A 
+href="http://www.javaworld.com/javaworld/jw-06-2004/jw-0628-build_p.html#resources">Apache 
+Website</A>. You will want a new version of Ant since it includes support for 
+newer targets as well as support for such things as bean shell scripting. On 
+Windows machines, I typically install Ant on my C: drive—say, 
+C:\apache-ant-1.6.1. 
+<P>We need Ant to be in the path, so add <EM>c:\apache-ant-1.6.1\bin</EM> to 
+your Path Environment variable. We also need to add <EM>ANT_HOME</EM> to our 
+environment variables; you'll probably need to add this as a new value 
+(<EM>ANT_HOME</EM> and <EM>C:\apache-ant-1.6.1</EM>). 
+<P><STRONG>More on Ant and targets </STRONG><BR>Ant has evolved into a great 
+system over the years and I recommend using it not just for Java projects, but 
+also for .Net projects. Chances are, your current Ant targets end up creating 
+the final JARs, shared libraries, DLLs (dynamic link libraries), executables, 
+and support files inside the standard dist subdirectory. Regardless, once we 
+finish installing Anthill, we will need to add a new target, <EM>Publish,</EM> 
+to move the final product over to the Anthill directories (where it will be 
+visible on the Web). So keep in mind that we will need to add a new target 
+before all is said and done. 
+<P><!-- break -->
+<P><FONT size=+1><STRONG>Java </STRONG></FONT><BR>Of course! Make sure that your 
+box has the <A 
+href="http://www.javaworld.com/javaworld/jw-06-2004/jw-0628-build_p.html#resources">Java 
+SDK</A> installed. A small point but, still, it must be there. Make sure that 
+JAVA_HOME is set and that the sdk bin directory is your path for javac (in my 
+case, that is C:\j2sdk1.4.2\bin). 
+<P>At this point, you have a basic Java build environment on your system. You 
+can test whether your Ant build scripts will run: you need to check the CVS 
+module containing your code, open a command window, go to the check-out 
+directory, and run the <CODE>ant</CODE> command. I presume your Ant script 
+follows the conventional name: <CODE>build.xml</CODE>. 
+<P><FONT size=+1><STRONG>Tomcat </STRONG></FONT><BR>I freely admit that I am a 
+bit of a Tomcat junkie. We need Tomcat to run our system, so go ahead and <A 
+href="http://www.javaworld.com/javaworld/jw-06-2004/jw-0628-build_p.html#resources">download 
+it</A>. I use Tomcat 5.0, which is installed on XP as a service, but I start and 
+stop from the command line. You can run Tomcat as a service, but if you run a 
+nightly build on a dedicated machine, you should have an open window showing the 
+output from the build system. It will make troubleshooting that much easier. But 
+if you want to run as a service, feel free to do so. 
+<P>In my case, running Tomcat means opening a command prompt and going to the 
+Tomcat directory <CODE>C:\Program Files\Apache Software Foundation\Tomcat 
+5.0\bin&gt;</CODE> and then running the program <CODE>catalina.bat start</CODE>. 
+
+<P>If you want to run Tomcat in the debugger, you run <CODE>catalina.bat debug 
+start</CODE> and type <CODE>run</CODE> at the command prompt. 
+<P>Regardless of how you run Tomcat, you should now be able to see your running 
+Tomcat by clicking on your localhost at http://mymachine:8080. You should see 
+the standard Tomcat page (I won't show it). Go ahead and shut down Tomcat by 
+using the command <CODE>catalina.bat stop</CODE>. 
+<P><FONT size=+1><STRONG>Anthill </STRONG></FONT><BR>We are now ready for the 
+final component in our build system: the open source Web application named 
+Anthill. A professional version of Anthill is available, but, for our immediate 
+purposes, the vanilla open source <A 
+href="http://www.javaworld.com/javaworld/jw-06-2004/jw-0628-build_p.html#resources">Web 
+application</A> will do. 
+<P>The download will be a gzipped (GNU zipped) tar file. So first, you must be 
+able to unzip and untar the file. If you have a cross-mounted Unix box, you can 
+do that there. If not, you may need to download the Cygwin bash shell, which 
+contains both the gunzip and tar commands. Regardless, put all of the untarred 
+files into a base directory; I use C:\anthill as my base directory. Within this 
+directory you will now have a variety of subdirectories with names such as 
+<EM>conf</EM> and <EM>publishDir</EM>. 
+<P>One final step and we can start up the system. Tomcat needs the anthill.war 
+Web application, which is in the dist directory (as befits an Ant-related Web 
+application). So go to the dist directory and grab a copy of the anthill.war 
+file. Paste this copy into your Tomcat webapps subdirectory. This will be: 
+<P><STRONG>C:\Program Files\Apache Software Foundation\Tomcat 
+5.0\webapps</STRONG> 
+<P>Now restart Tomcat. 
+<P>Bring up a browser and hit the Anthill page: 
+http://yourmachine:8080/anthill/. You'll be requested to enter in the base 
+directory (<EM>C:\anthill</EM>). Figure 3 illustrates the Anthill page. 
+<P>
+<TABLE cellPadding=5 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <P>
+      <CENTER>
+      <P><A 
+      href="http://www.javaworld.com/javaworld/jw-06-2004/images/jw-0628-build3.gif" 
+      target=new_window><IMG height=322 
+      src="nightlyBuild_files/jw-0628-build3-thumb.gif" width=350 vspace=3></A>
+      <P><BR><FONT size=-1><STRONG>
+      <P>Figure 3. Enter the base Ant directory. Click on thumbnail to view 
+      full-size image. </STRONG></FONT></CENTER>
+      <P></P></TD></TR></TBODY></TABLE>
+<P>Finally, you have the base Anthill page up and running (Figure 4). I suggest 
+cleaning up the page by removing all of the samples. Do <STRONG>not</STRONG> 
+remove stoppedSchedule though. This is useful to have around. 
+<P>
+<TABLE cellPadding=5 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <P>
+      <CENTER>
+      <P><A 
+      href="http://www.javaworld.com/javaworld/jw-06-2004/images/jw-0628-build4.gif" 
+      target=new_window><IMG height=350 
+      src="nightlyBuild_files/jw-0628-build4-thumb.gif" width=279 vspace=3></A>
+      <P><BR><FONT size=-1><STRONG>
+      <P>Figure 4. The main build page. Click on thumbnail to view full-size 
+      image. </STRONG></FONT></CENTER>
+      <P></P></TD></TR></TBODY></TABLE>
+<P>
+<P><STRONG>Set the general Anthill properties </STRONG><BR>On the main build 
+page, click on Anthill Properties. This link will bring you to the default page 
+shown in Figure 5. 
+<P>
+<TABLE cellPadding=5 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <P>
+      <CENTER>
+      <P><A 
+      href="http://www.javaworld.com/javaworld/jw-06-2004/images/jw-0628-build5.gif" 
+      target=new_window><IMG height=350 
+      src="nightlyBuild_files/jw-0628-build5-thumb.gif" width=279 vspace=3></A>
+      <P><BR><FONT size=-1><STRONG>
+      <P>Figure 5. Default Anthill Properties page. Click on thumbnail to view 
+      full-size image. </STRONG></FONT></CENTER>
+      <P></P></TD></TR></TBODY></TABLE>
+<P>We need to change this page like so: 
+<P>
+<OL>
+  <LI>We want to point to our newer version of Ant so set anthill.ant.home to 
+  <EM>..\apache-ant-1.6.1\lib</EM> 
+  <P></P>
+  <LI>The anthill.mail.host and anthill.mail.from fields should reflect your 
+  mail server configuration 
+  <P></P>
+  <LI>Rename the title of your system using anthill.title.text—doing so makes 
+  your system a bit more professional</LI></OL>
+<P>As you can see, customizing Anthill is very simple. The only reason we update 
+the Ant version is so that our Ant scripts can take advantage of new Ant 
+features. Otherwise, we could even use the default version of Ant that comes 
+with Anthill. 
+<P><STRONG>Make a new project </STRONG><BR>So you have verified that Anthill is 
+running and you have set your general Anthill properties. It's time to put this 
+project to bed and head for home (unless, of course, you are working out of your 
+house). Do the following step: 
+<P>On the Anthill Build Management Server page, click on Create a New Project. 
+That link will take you to the Anthill Properties page. Complete the following 
+steps: 
+<P>
+<UL>
+  <LI>Set anthill.project.name to reflect your work; e.g., 
+  <EM>FischerContract</EM>. 
+  <P></P>
+  <LI>Click on the link for configuring the UrbanCodeVersionAdapter. Now what is 
+  this, you ask? Anthill has a nice feature in that it will increase your 
+  application's version number with each build. So if our CVS module's name is 
+  FischerContract, then we need to add a version file into CVS from which 
+  Anthill can get and set the version number. I always name this file 
+  <EM>version</EM>. So we create the file version at the top of the directory 
+  structure of our FischerContract module. We edit the version file and add the 
+  word <EM>FischerContract-1.0.0.0</EM> inside it. With each build, the version 
+  number increases. So the first time we build, the version file contains 
+  <EM>FischerContract-1.0.0.1</EM>. The file will increase with each build to 
+  1.0.0.2, 1.0.0.3, etc. When you become a sophisticated Ant user, you can use 
+  this version number in your Ant script to specify a version-specific directory 
+  for each build. But for now, we will avoid this additional complication and 
+  simply increase the version number in the file. 
+  <P></P>
+  <LI>Click on the CVSRepositoryAdapter and specify that the work directory is 
+  <EM>work</EM>. 
+  <P>Additionally, you must specify the CVS module (FischerContract) and the CVS 
+  root (:pserver:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e08488818e93858ea0d1d0ced0ced0ced1">[email&#160;protected]</a>:/export/cvsroot). Finally, you need to dispose 
+  of the anthill user field—just leave it blank. 
+  <P>Your final CVS page will look something like Figure 6. 
+  <P>
+  <TABLE cellPadding=5 align=center border=0>
+    <TBODY>
+    <TR>
+      <TD>
+        <P>
+        <CENTER>
+        <P><A 
+        href="http://www.javaworld.com/javaworld/jw-06-2004/images/jw-0628-build6.gif" 
+        target=new_window><IMG height=350 
+        src="nightlyBuild_files/jw-0628-build6-thumb.gif" width=283 
+vspace=3></A>
+        <P><BR><FONT size=-1><STRONG>
+        <P>Figure 6. CVS preferences page. Click on thumbnail to view full-size 
+        image. </STRONG></FONT></CENTER>
+        <P></P></TD></TR></TBODY></TABLE>
+  <P>Now you've got the CVS properties set. 
+  <P></P>
+  <LI>Set the build script name to <EM>build.xml</EM>. 
+  <LI>Set the build tagging policy to <EM>never</EM>. 
+  <LI>Add an email address to send the email to; e.g., <EM>Dan Hansen</EM> and 
+  <EM><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f4b0959a9d9198dabc959a87919ab4959799da9b8693">[email&#160;protected]</a></EM>. 
+  <LI>Set the email policy to <EM>always</EM>. 
+  <LI>Set the anthill.build.ant.params to <EM>publish</EM>. This Ant parameter 
+  refers to the new Ant target I mentioned previously. This target is used to 
+  copy your product over to the Anthill publishing directories. Then you can 
+  click on the link to your target on the Anthill build page and directly 
+  download the project from the builds directory—a handy feature. Here is a 
+  simple example of what such a target might look like for our example of the 
+  Fischer contract: 
+  <P><CODE>
+  <P>&nbsp;&nbsp; &lt;target name="publish" depends="compile,unit-test" 
+  description="Allows anthill to create release 
+  distribution"&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Copy the 
+  executable to the builds directory 
+  --&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;mkdir 
+  dir="C:\anthill/publishDir/FischerContract/builds"/&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;copy 
+  todir="C:\anthill/publishDir/FischerContract/builds"&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  &lt;fileset 
+  file="dist/myproject.jar"/&gt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/copy&gt;<BR>&nbsp;&nbsp; 
+  &lt;/target&gt;<BR></CODE>
+  <P>Leave the rest of the parameters alone for the moment. We leave this page 
+  by hitting the Update button. 
+  <P>At this point you should have a build page similar to one in Figure 7. 
+  <P>
+  <TABLE cellPadding=5 align=center border=0>
+    <TBODY>
+    <TR>
+      <TD>
+        <P>
+        <CENTER>
+        <P><A 
+        href="http://www.javaworld.com/javaworld/jw-06-2004/images/jw-0628-build7.gif" 
+        target=new_window><IMG height=341 
+        src="nightlyBuild_files/jw-0628-build7-thumb.gif" width=350 
+vspace=3></A>
+        <P><BR><FONT size=-1><STRONG>
+        <P>Figure 7. An unbuilt project. Click on thumbnail to view full-size 
+        image. </STRONG></FONT></CENTER>
+        <P></P></TD></TR></TBODY></TABLE>
+  <P></P></LI></UL>
+<P>So let's run a test build. <STRONG>Note:</STRONG> Make sure you are logged 
+onto your CVS pserver at this time. Click on the Build link and select the Force 
+toggle. Now press the Build button. You'll return to the main build page and see 
+that the Build Queue now contains an entry for the new project 
+(<EM>FischerContract—Being built</EM>). 
+<P>In the Tomcat output window, you'll notice that Anthill goes through many 
+steps. In the first step, Anthill checks the code from CVS. If you have a big 
+project, this could take a while. When all is said and done, you should have a 
+successful build, which will show up as a green box (see Figure 8), while a 
+build failure will appear red. 
+<P>
+<TABLE cellPadding=5 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <P>
+      <CENTER>
+      <P><A 
+      href="http://www.javaworld.com/javaworld/jw-06-2004/images/jw-0628-build8.gif" 
+      target=new_window><IMG height=346 
+      src="nightlyBuild_files/jw-0628-build8-thumb.gif" width=350 vspace=3></A>
+      <P><BR><FONT size=-1><STRONG>
+      <P>Figure 8. The final page with a successful build. Click on thumbnail to 
+      view full-size image. </STRONG></FONT></CENTER>
+      <P></P></TD></TR></TBODY></TABLE>
+<P><STRONG>Set up the nightly schedule </STRONG><BR>To schedule a nightly build, 
+we must complete two tasks: First, we must create a nightly schedule. Second, we 
+associate that schedule with our project. Making a schedule is easy—click on the 
+Create Schedule link on the main build page. Name your schedule and set the time 
+interval between builds to 1,440 minutes (one day). Set your start time (2:00 
+for 2 a.m.) and you are done. Hit Update to return to the main build page. Now 
+click on the Edit link next to your project. You return to your Project 
+Properties page. Down at the bottom, simply select the nightly schedule for the 
+anthill.schedule field. That's it. You now have a nightly build system. 
+<P><FONT size=+1><STRONG>Conclusion </STRONG></FONT><BR>Once you've set up your 
+nightly build system, you'll be tempted to spend time adding additional 
+capabilities to it. I encourage you to scratch this itch. You'll find that with 
+Ant's newer bean script integration, you can produce separate build directories 
+for each build or release. Then you can zip up the contents for easy download 
+from the builds page. You'll automate production of the executable JARs. You'll 
+inevitably start producing your own Webstart-enabled JARs. Perhaps you produce 
+your own installer; with the currently available open source installers, it is 
+not too hard to do. With Ant's FTP capabilities, you may start pushing the 
+resulting code out to other sites. 
+<P>I think that the Tomcat, Ant, and Anthill combination shows the power of the 
+maturing Java technology. It is a portable framework that, with minimal 
+presumptions, allows a developer to easily produce a sophisticated, powerful 
+build system. This combination is not the best build system I have seen. It is, 
+however, the best build system that a single developer can put together in a 
+short period of time. <IMG height=12 src="nightlyBuild_files/jw-dingbat.gif" 
+width=22>
+<P><BR></P>
+<P><STRONG>About the author</STRONG><BR>With more than 14 years of professional 
+experience in the software industry, <A href="http://www.javaworld.com/feedback" 
+target=_blank>Dan Hansen</A> has worked as a senior developer, an application 
+architect and designer, and a software development manager. He has worked on 
+large-scale Java projects for firms such as Quark, Creo, Jabber, and Fischer 
+Imaging. His Java experience ranges from writing media portals for large-scale 
+asset management systems to data-mining Web applications and SWT (Simple Widget 
+Toolkit) clients. <BR></P>
+<P>
+<UL><A name=resources></A><STRONG>Resources</STRONG> <BR>
+  <LI>WinCvs, currently at version 1.3, is available for download: <BR><A 
+  href="http://www.wincvs.org/">http://www.wincvs.org/</A><BR>
+  <LI>Ant is available from the Apache Website: <BR><A 
+  href="http://ant.apache.org/">http://ant.apache.org/</A><BR>
+  <LI>Download the Java SDK: <BR><A 
+  href="http://java.sun.com/j2se/downloads/index.html">http://java.sun.com/j2se/downloads/index.html</A><BR>
+  <LI>Download Tomcat from the Jakarta Website: <BR><A 
+  href="http://jakarta.apache.org/tomcat/">http://jakarta.apache.org/tomcat/</A><BR>
+  <LI>Anthill: <BR><A 
+  href="http://www.urbancode.com/projects/anthill/download.jsp">http://www.urbancode.com/projects/anthill/download.jsp</A><BR>
+  <LI>For more on Ant, read "Automate Your Build Process Using Java and 
+  Ant,</EM> Michael Cymerman (<EM>JavaWorld,</EM> October 2000): <BR><A 
+  href="http://www.javaworld.com/javaworld/jw-10-2000/jw-1020-ant.html">http://www.javaworld.com/javaworld/jw-10-2000/jw-1020-ant.html</A><BR>
+  <LI>For more articles on how to put your Java skills to work, browse the 
+  <STRONG>Applied Java</STRONG> section of <EM>JavaWorld</EM>'s Topical Index: 
+  <BR><A 
+  href="http://www.javaworld.com/channel_content/jw-applied-index.shtml">http://www.javaworld.com/channel_content/jw-applied-index.shtml</A></LI></UL>
+<p><BR>
+</p>
+<P></P></FONT><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd711f0d6cc060',t:'MTczOTIwNDU4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY></HTML>

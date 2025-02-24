@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Component Diagrams and Composite Structures</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering<br>
+</span><a href="UML-components.pdf">
+<span class="sts">Component Diagrams</span></a><h2>Course Map</h2>
+<img border="0" src="CourseMap9.png" width="603" height="495">
+
+<body>
+		
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70bdfb2beed6',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+<h2>Agenda</h2>
+<ul>
+	<li><a href="compositeStructures.html">Composite Structure Diagrams</a></li>
+	<li>
+	What is a Component?</li>
+	<li>Component Notation</li>
+	<li>White Box Components</li>
+	<li>Internal Component Classifiers</li>
+	<li>Ports and Combing Other Components</li>
+	<li>Components and Dependencies</li>
+	<li>Architectural Analysis - 
+	<a href="analysisPackages.html#Finding_Analysis_Packages">Find Packages</a></li>
+	<li>Architectural Design - <a href="designWorkflow.html#Design_a_Subsystem">Design a Subsystem</a></li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2><a name="What_is_a_Component">What is a Component?</a></h2>
+<ul>
+	<li>
+	<body>A component is a self contained unit that encapsulates the state and 
+	behavior of a number of classifiers. A component
+	specifies a formal contract of the services that it provides to its clients 
+	and those that it requires from other components
+	or services in the system in terms of its provided and required interfaces.</body></li>
+	<li>
+	<body>A component is a substitutable unit that can be replaced at design 
+	time or run-time by a component that offers equivalent
+	functionality based on compatibility of its interfaces. As long as the 
+	environment obeys the constraints expressed by the
+	provided and required interfaces of a component, it will be able to interact 
+	with this environment. Similarly, a system can
+	be extended by adding new component types that add new functionality.</body></li>
+	<li>
+	<body>The required and provided interfaces of a component allow for the 
+	specification of structural features such as attributes
+	and association ends, as well as behavioral features such as operations and 
+	events. A component may implement a
+	provided interface directly, or, its realizing classifiers may do so. The 
+	required and provided interfaces may optionally be
+	organized through ports, these enable the definition of named sets of 
+	provided and required interfaces that are typically
+	(but not always) addressed at run-time.</body></li>
+	<li>
+	<body>A component has an external view (or &#8220;black-box&#8221; view) by means of its 
+	publicly visible properties and operations.
+	Optionally, a behavior such as a protocol state machine may be attached to 
+	an interface, port, and to the component itself,
+	to define the external view more precisely by making dynamic constraints in 
+	the sequence of operation calls explicit.
+	Other behaviors may also be associated with interfaces or connectors to 
+	define the &#8216;contract&#8217; between participants in a
+	collaboration (e.g., in terms of use case, activity, or interaction 
+	specifications).</body></li>
+	<li>
+	<body>The wiring between components in a system or other context can be 
+	structurally defined by using dependencies between
+	component interfaces (typically on structure diagrams). Optionally, a more 
+	detailed specification of the structural
+	collaboration can be made using parts and connectors in composite 
+	structures, to specify the role or instance level
+	collaboration between components (See Chapter Composite Structures).</body></li>
+	<li>
+	<body>A component also has an internal view (or &#8220;white-box&#8221; view) by means 
+	of its private properties and realizing classifiers.
+	This view shows how the external behavior is realized internally. The 
+	mapping between external and internal view is by
+	means of dependencies (on structure diagrams), or delegation connectors to 
+	internal parts (on composite structure
+	diagrams). Again, more detailed behavior specifications such as interactions 
+	and activities may be used to detail the
+	mapping from external to internal behavior.</li>
+	</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+
+	<h2>Component Notation</h2>
+	<ul>
+		<li>A component is shown as a Classifier rectangle with the keyword 
+		«component». Optionally, in the right hand corner a
+		component icon can be displayed. This is a classifier rectangle with two 
+		smaller rectangles protruding from its left hand
+		side.</li>
+		<li>Black box notation</li>
+	</ul>
+	<blockquote>
+		<p><img border="0" src="images/comp1.png" width="500" height="248"></p>
+		<p>The ball-and-socket notation. A Component with two provided and three required interfaces</p>
+	</blockquote>
+	<ul>
+		<li>Alternatively, the interfaces and/or individual 
+		operations and attributes can be listed in the compartments
+		of a component box (for scalability, tools may offer way of listing and 
+		abbreviating component properties and behavior).</li>
+	</ul>
+	<blockquote>
+		<p><img border="0" src="images/comp2.png" width="300" height="350"><br>
+		Black box notation showing a listing of the properties of a component</p>
+	</blockquote>
+	<ul>
+		<li>For displaying the full signature of an interface of a component, 
+		the interfaces can also be displayed as typical classifier
+		rectangles that can be expanded to show details of operations and 
+		events.</li>
+	</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>White Box Components</h2>
+	<ul>
+		<li>An internal, or white box view of a Component is where the realizing 
+		classifiers are listed in an additional compartment.
+		Compartments may also be used to display a listing of any parts and 
+		connectors, or any implementing artifacts.<br>
+		<img border="0" src="images/UML-bo8.gif"><br>
+		A white-box representation of a component</li>
+	</ul>
+
+	<p><img border="0" src="images/comp3.png" width="500" height="244"></p>
+	<p>Nested representation</p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Internal Component Classifiers</h2>
+	<ul>
+		<li>The internal classifiers that realize the behavior of a component 
+		may be displayed by means of general dependencies.
+		Alternatively, they may be nested within the component shape.<br>
+		<img border="0" src="images/UML-bo9.gif"><br>
+&nbsp;</li>
+	</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Ports and Combing Other Components</h2>
+	<ul>
+		<li>Interfaces that are exposed by a Component and notated on a diagram, 
+		either directly or though a port definition, may be
+		inherited from a supertype component. These interfaces are indicated on 
+		the diagram by preceding the name of the
+		interface by a forward slash. An example of this can be found below, 
+		where &#8220;/OrderableItem&#8221; can be an interface that is
+		implemented by a supertype of the Product component.</li>
+		<li>A delegation connector is notated as a Connector from the delegating 
+		source Port to the handling target Part, and vice versa for required 
+		Interfaces or Ports.</li>
+		<li>An assembly connector is notated by a &#8220;ball-and-socket&#8221; connection 
+		between a provided interface and a required interface. This notation 
+		allows for succinct graphical wiring of components, a requirement for 
+		scaling in complex systems.</li>
+	</ul>
+	<p><br><img border="0" src="images/UML-bo10.gif"><br>Example of a platform independent model of a component, its provided and 
+		required interfaces, and wiring
+		through dependencies on a structure diagram.</p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Component Assembly</h2>
+	<p>In a system context where there are multiple components that provide or 
+	require a particular interface, a notation abstraction can be used that 
+	combines by joining the multiple connectors. This abstraction is similar to 
+	the one defined for aggregation and subtyping relationships.</p>
+	<p>&nbsp;</p>
+	<p><img border="0" src="images/UML-bo16.gif"></p>
+	<p>As a notation abstraction, multiple wiring relationships can be visually 
+	grouped together in a component assembly.</p>
+
+</body>
+
+</html>

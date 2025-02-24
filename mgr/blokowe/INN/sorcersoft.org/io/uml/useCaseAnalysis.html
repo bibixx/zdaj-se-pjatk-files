@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Use Case Analysis</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Use Case Analysis - Realizations</span><BODY text="#000000" alink="#666666"><h2>Agenda</h2>
+<ul>
+	<li>Analyze a Use Case</li>
+	<li>Goals for Use Case Realization</li>
+	<li>What Are Use Case Realizations?</li>
+	<li>Interactions</li>
+	<li>Lifelines and Messages<ul>
+	<li>Add Course Use Case</li>
+	<li>Delete Course Use Case</li>
+	</ul></li>
+	<li>Combined Fragments and Operators</li>
+	<li>Communication Diagrams</li>
+	</ul>&nbsp;<HR align="left" width="100%" size="4" noshade>
+	<h2>Analyze a Use Case</h2>
+<h2><map name="FPMap0">
+<area coords="537, 38, 649, 162" shape="rect" href="analysisWorkflow.html#What_are_analysis_classes">
+<area coords="534, 299, 649, 401" shape="rect" href="#What_are_use_case_realizations">
+<area href="analysisPackages.html#Architectural_Analysis" shape="rect" coords="17, 319, 129, 432">
+<area coords="11, 220, 136, 312" shape="rect" href="requirementsWorkflow.html#Use_Case_Modeling">
+<area coords="12, 121, 132, 218" shape="rect" href="requirementsWorkflow.html#SW_Requirements_-_Metamodel">
+<area href="../modules/4-blockers/index.html#What_is_a_4-blocker" shape="rect" coords="9, 13, 133, 117">
+</map>
+<img border="0" src="images/fig8-2.png" width="650" height="433" usemap="#FPMap0"></h2>
+<ul>
+	<li>Analysis classes model the static structure of a system, and <b>use case 
+	realizations</b> show how instances of the analysis classes interact to 
+	realize the functionality of the system.</li>
+	<li>This is part of the dynamic view of the system.</li>
+	</ul>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Goals">Goals for Use Case Realization</a></h2>
+	<ul>
+		<li>Find out which <b>analysis classes</b> interact to realize the 
+		behavior specified by use cases-you may uncover new analysis classes as 
+		you perform use case realization</li>
+		<li>Find out what <b>messages</b> instances of these classes need to 
+		send to each other to realize the specified behavior. This tells you<ul>
+			<li>the <b>key operations</b> your analysis classes need to have</li>
+			<li>the <b>key attributes</b> of the analysis classes</li>
+			<li><b>important relationships</b> between analysis classes</li>
+			<li><b>Update</b> your <b>use case model, requirements model, and 
+			analysis classes</b> with the information you get from use case 
+			realization. Keep all models consistent and in step with each other.</li>
+		</ul>
+		</li>
+	</ul>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="What_are_use_case_realizations">What are use case realizations?</a></h2>
+	<ul>
+		<li>Use case realizations show how classes collaborate to realize system 
+		functionality.<ul>
+			<li><b>Analysis <a href="http://sobolki.aster.net.pl/io/uml/UML-borland-CDs.html">class diagrams</a></b> &quot;tell story&quot; about one or more use cases</li>
+			<li><a href="http://sobolki.aster.net.pl/io/uml/UML-borland-SDs.html">Interaction diagrams</a> show how classifier instances interact to 
+			realize system behavior.</li>
+		</ul>
+		</li>
+		<li>You turn a <b>use case</b>, which is a specification of functional 
+		requirements,&nbsp; into a <b>class diagram</b> and <b>interaction 
+		diagram</b>, which are a high-level specification of the system.</li>
+	</ul>
+	<p><img border="0" src="images/fig12-3.png" width="500" height="114"></p>
+<p>Each use case has <strong>exactly one use case realization</strong>, so instead you add 
+appropriate elements as listed in the table below.</p>
+<p><img border="0" src="images/table12-1.png" width="600" height="303"></p>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2><a href="UML-borland-SDs.html">Interactions</a></h2>
+	<ul>
+		<li>Interaction - a unit of behavior of a context classifier</li>
+		<li>In use case realization a context classifier is a use case.</li>
+		<li>You create one or more interactions to demonstrate how behavior 
+		specified by the use case can be realized by instances of classifiers 
+		(either in in the analysis-<b>analysis classes</b>, or in the design-<b>design 
+		classes</b>) passing messages back and forth.</li>
+</ul>
+		<HR align="left" width="100%" size="4" noshade>
+	<h2>Add Course Use Case</h2>
+	<p><img border="0" src="images/fig12-6.png" width="550" height="469"></p>
+	<p>&nbsp;</p>
+	<p><img border="0" src="images/fig12-7.png" width="500" height="254"></p>
+	<p>&nbsp;</p>
+		<p>
+		<img border="0" src="images/fig12-8.png" width="550" height="307"></p>
+<p>
+		Interaction diagrams are not verbatim transcriptions of a use case; they 
+		are illustrations of how the use case behavior is realized by analysis 
+		classes.</p>
+		<HR align="left" width="100%" size="4" noshade>
+		<h2>Delete Course Use Case</h2>
+	<p><img border="0" src="images/fig12-9.png" width="550" height="468"></p>
+	<p>&nbsp;</p>
+	<p><img border="0" src="images/fig12-10.png" width="550" height="339"></p>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2>State Invariants and Constraints</h2>
+<p>You can show the state of the instances on the lifelines by using <b>state 
+invariants</b>.<br>
+Adding state invariants to a sequence diagrams can be a very useful analysis 
+technique because it allows you to capture the key states in the lifecycle of&nbsp; 
+a lifeline.</p>
+	<p><img border="0" src="images/fig12-11.png" width="550" height="409"></p>
+	<p>Capture the following constraints:</p>
+<ul>
+	<li>the order must be paid for in full by a <b>single</b> payment</li>
+	<li>the items specified in the order can only be delivered <b>after</b> 
+	payment</li>
+	<li>the items are delivered to the customer within <b>28 days</b> of payment</li>
+</ul>
+	<p><img border="0" src="images/fig12-12.png" width="550" height="320"></p>
+		
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c018d53566',t:'MTczOTIwNDU3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

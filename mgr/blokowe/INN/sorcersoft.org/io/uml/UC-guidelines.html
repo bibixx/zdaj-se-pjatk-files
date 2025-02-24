@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0085)http://faculty.washington.edu/jtenenbg/courses/360/f03/project/usecaseguidelines.html -->
+<HTML lang=en><HEAD><TITLE>Use case guidelines by Alistair Cockburn</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<META content="MSHTML 6.00.3790.2759" name=GENERATOR></HEAD>
+<BODY bgColor=white>
+<H1>Use case guidelines by Alistair Cockburn</H1>
+<DIV class=subtoc>
+<P><STRONG>Contents</STRONG></P>
+<OL>
+  <LI><A class=tocxref 
+  href="http://faculty.washington.edu/jtenenbg/courses/360/f03/project/usecaseguidelines.html#reminders">Reminders</A> 
+
+  <LI><A class=tocxref 
+  href="http://faculty.washington.edu/jtenenbg/courses/360/f03/project/usecaseguidelines.html#process">The 
+  Writing Process</A> 
+  <LI><A class=tocxref 
+  href="http://faculty.washington.edu/jtenenbg/courses/360/f03/project/usecaseguidelines.html#passfail">Pass/Fail 
+  Tests for Use Case Fields</A> </LI></OL></DIV>These guidelines are taken 
+verbatim from <EM>Writing Effective Use Cases</EM>, by Alistair Cockburn 
+(pronounced "Coburn"), Addison-Wesley, 2001, ISBN 0-201-70225-8. Note that "SuD" 
+stands for "System under Development" (sometimes referred to as System under 
+Discussion). 
+<H2><A name=reminders>Reminders</A></H2>
+<P>Write something readable. 
+<BLOCKQUOTE><EM>Casual, readable use cases are still useful, whereas 
+  unreadable use cases won't get read. </EM></BLOCKQUOTE>
+<P>Work breadth-first, from lower precision to higher precision. 
+<BLOCKQUOTE><EM>Precision Level 1: Primary actor's name and goal<BR>Precision 
+  Level 2: The use case brief, or the main success scenario<BR>Precision Level 
+  3: The extension conditions<BR>Precision Level 4: The extension handling steps 
+  </EM></BLOCKQUOTE>
+<P>For each step: 
+<BLOCKQUOTE><EM>Show a goal succeeding.<BR>Capture the actor's intention, not 
+  the user interface details.<BR>Have an actor pass information, validate a 
+  condition, or update state.<BR>Write between-step commentary to indicate step 
+  sequencing (or lack of).<BR>Ask "why" to find a next-higher level goal. 
+</EM></BLOCKQUOTE>
+<P>For data descriptions (only put Precision Level 1 into the use case text): 
+<BLOCKQUOTE><EM>Precision Level 1: Data nickname<BR>Precision Level 2: Data 
+  fields associated with the nickname<BR>Precision Level 3: Field types, 
+  lengths, and validations<BR></EM></BLOCKQUOTE>
+<P>(From inside front cover.)</P>
+<H2><A name=process>The Writing Process</A></H2>[NB: JDT has removed several of 
+the steps that are irrelevant for the use case template used in 360] 
+<P>
+<OL>
+  <LI>Name the system scope.<BR>
+  <LI>Brainstorm and list the primary actors.<BR><EM>Find every human and 
+  non-human primary actor, over the life of the system.</EM> 
+  <LI>Brainstorm and exhaustively list user goals for the system.<BR>
+  <LI>Select one use case to expand.<BR><EM>Consider writing a narrative to 
+  learn the material.</EM> 
+  <LI>Write the main success scenario (MSS).<BR><EM>Use 3 to 9 steps to meet all 
+  interests and guarantees.</EM> 
+  <LI>Brainstorm and exhaustively list the extension conditions.<BR><EM>Include 
+  all that the sytem can detect and must handle.</EM> 
+  <LI>Write the extension-handling steps.<BR><EM>Each will end back in the MSS, 
+  at a separate success exit, or in failure.</EM> 
+  <LI>Extract complex flows to sub use cases; merge trivial sub use 
+  cases.<BR><EM>Extracting a sub use case is easy, but it adds cost to the 
+  project.</EM> 
+  <LI>Readjust the set: add, subtract, merge, as needed.<BR></LI></OL>
+<P>(From inside front cover.)</P>
+<H2><A name=passfail>Pass/Fail Tests for Use Case Fields</A></H2>
+<P><EM>All of them should produce a "yes" answer.</EM> [NB: JDT has removed 
+several of the fields that are irrelevant for the use case template used in 360] 
+</P>
+<TABLE cellSpacing=2 cellPadding=2 align=center border=2>
+  <TBODY>
+  <TR>
+    <TH>Field</TH>
+    <TH>Question</TH></TR>
+  <TR>
+    <TD>Use Case Title</TD>
+    <TD>1. Is it an active-verb goal phrase that names the goal of the primary 
+      actor?<BR>2. Can the system deliver that goal?</TD></TR>
+  <TR>
+    <TD>Primary Actor</TD>
+    <TD>8. Does he/she/it have behavior?<BR>9. Does he/she/it have a goal 
+      against the SuD that is a service promise of the SuD?</TD></TR>
+  <TR>
+    <TD>Preconditions</TD>
+    <TD>10. Are they mandatory, and can they be set in place by the 
+      SuD?<BR>11. Is it true that they are never checked in the use case?</TD></TR>
+  <TR>
+    <TD>Main Success<BR>Scenario</TD>
+    <TD>15. Does it have 3-9 steps?<BR>16. Does it run from trigger to 
+      delivery of the success guarantee?<BR>17. Does it permit the right 
+      variations in sequencing?</TD></TR>
+  <TR>
+    <TD>Each Step in Any<BR>Scenario</TD>
+    <TD>18. Is it phrased as a goal that succeeds?<BR>19. Does the process 
+      move distinctly forward after its successful completion?<BR>20. Is it 
+      clear which actor is operating the goal--who is "kicking the ball"?<BR>21. 
+      Is the intent of the actor clear?<BR>22. Is the goal level of the step 
+      lower than the goal level of the overall use case? Is it, preferably, just 
+      a bit below the use case goal level?<BR>23. Are you sure the step does not 
+      describe the user interface design of the system?<BR>24. Is it clear what 
+      information is being passed in the step?<BR>25. Does it "validate" as 
+      opposed to "check" a condition?</TD></TR>
+  <TR>
+    <TD>Extension Condition</TD>
+    <TD>26. Can and must the system both detect and handle it?<BR>27. Is it 
+      what the system actually needs?</TD></TR>
+  <TR>
+    <TD>Overall Use Case<BR>Content</TD>
+    <TD>29. To the sponsors and users: "Is this what you want?"<BR>30. To the 
+      sponsors and users: "Will you be able to tell, upon delivery, whether you 
+      got this?"<BR>31. To the developers: "Can you implement 
+  this?"</TD></TR></TBODY></TABLE>
+<P>(From inside back cover.) 
+<P></P><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70bd4ef0c405',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY></HTML>

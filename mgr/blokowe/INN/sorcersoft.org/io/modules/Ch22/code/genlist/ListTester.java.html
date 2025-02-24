@@ -1,0 +1,44 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">LinkedList</font><font color="#000000">;</font>
+<b><font color="#006cb8">02: </font></b><font color="#000000">import</font> <font color="#000000">java</font><font color="#000000">.</font><font color="#000000">util</font><font color="#000000">.</font><font color="#000000">ListIterator</font><font color="#000000">;</font>
+<b><font color="#006cb8">03: </font></b>
+<b><font color="#006cb8">04: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">05: </font></b><font color="#7a9ecd">   A program that demonstrates the LinkedList class</font>
+<b><font color="#006cb8">06: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">07: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">ListTester</font>
+<b><font color="#006cb8">08: </font></b><font color="#000000">{</font>  
+<b><font color="#006cb8">09: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">static</font> <font color="#d05b76">void</font> <font color="#000000">main</font><font color="#000000">(</font><font color="#000000">String</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#000000">args</font><font color="#000000">)</font>
+<b><font color="#006cb8">10: </font></b>   <font color="#000000">{</font>  
+<b><font color="#006cb8">11: </font></b>      <font color="#000000">LinkedList</font><font color="#000000">&lt;</font><font color="#000000">String</font><font color="#000000">&gt;</font> <font color="#000000">staff</font> <font color="#000000">=</font> <font color="#d05b76">new</font> <font color="#000000">LinkedList</font><font color="#000000">&lt;</font><font color="#000000">String</font><font color="#000000">&gt;</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">12: </font></b>      <font color="#000000">staff</font><font color="#000000">.</font><font color="#000000">addLast</font><font color="#000000">(</font><font color="#00a99d">"Dick"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>      <font color="#000000">staff</font><font color="#000000">.</font><font color="#000000">addLast</font><font color="#000000">(</font><font color="#00a99d">"Harry"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">14: </font></b>      <font color="#000000">staff</font><font color="#000000">.</font><font color="#000000">addLast</font><font color="#000000">(</font><font color="#00a99d">"Romeo"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">15: </font></b>      <font color="#000000">staff</font><font color="#000000">.</font><font color="#000000">addLast</font><font color="#000000">(</font><font color="#00a99d">"Tom"</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">16: </font></b>      
+<b><font color="#006cb8">17: </font></b>      <font color="#7a9ecd">// | in the comments indicates the iterator position</font>
+<b><font color="#006cb8">18: </font></b>
+<b><font color="#006cb8">19: </font></b>      <font color="#000000">ListIterator</font><font color="#000000">&lt;</font><font color="#000000">String</font><font color="#000000">&gt;</font> <font color="#000000">iterator</font> <font color="#000000">=</font> <font color="#000000">staff</font><font color="#000000">.</font><font color="#000000">listIterator</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#7a9ecd">// |DHRT</font>
+<b><font color="#006cb8">20: </font></b>      <font color="#000000">iterator</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#7a9ecd">// D|HRT</font>
+<b><font color="#006cb8">21: </font></b>      <font color="#000000">iterator</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#7a9ecd">// DH|RT</font>
+<b><font color="#006cb8">22: </font></b>
+<b><font color="#006cb8">23: </font></b>      <font color="#7a9ecd">// Add more elements after second element</font>
+<b><font color="#006cb8">24: </font></b>      
+<b><font color="#006cb8">25: </font></b>      <font color="#000000">iterator</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#00a99d">"Juliet"</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#7a9ecd">// DHJ|RT</font>
+<b><font color="#006cb8">26: </font></b>      <font color="#000000">iterator</font><font color="#000000">.</font><font color="#000000">add</font><font color="#000000">(</font><font color="#00a99d">"Nina"</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#7a9ecd">// DHJN|RT</font>
+<b><font color="#006cb8">27: </font></b>
+<b><font color="#006cb8">28: </font></b>      <font color="#000000">iterator</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#7a9ecd">// DHJNR|T</font>
+<b><font color="#006cb8">29: </font></b>
+<b><font color="#006cb8">30: </font></b>      <font color="#7a9ecd">// Remove last traversed element </font>
+<b><font color="#006cb8">31: </font></b>
+<b><font color="#006cb8">32: </font></b>      <font color="#000000">iterator</font><font color="#000000">.</font><font color="#000000">remove</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#7a9ecd">// DHJN|T</font>
+<b><font color="#006cb8">33: </font></b>     
+<b><font color="#006cb8">34: </font></b>      <font color="#7a9ecd">// Print all elements</font>
+<b><font color="#006cb8">35: </font></b>
+<b><font color="#006cb8">36: </font></b>      <font color="#000000">iterator</font> <font color="#000000">=</font> <font color="#000000">staff</font><font color="#000000">.</font><font color="#000000">listIterator</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">37: </font></b>      <font color="#d05b76">while</font> <font color="#000000">(</font><font color="#000000">iterator</font><font color="#000000">.</font><font color="#000000">hasNext</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">)</font>
+<b><font color="#006cb8">38: </font></b>      <font color="#000000">{</font>
+<b><font color="#006cb8">39: </font></b>         <font color="#000000">String</font> <font color="#000000">element</font> <font color="#000000">=</font> <font color="#000000">iterator</font><font color="#000000">.</font><font color="#000000">next</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">40: </font></b>         <font color="#000000">System</font><font color="#000000">.</font><font color="#000000">out</font><font color="#000000">.</font><font color="#000000">println</font><font color="#000000">(</font><font color="#000000">element</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">41: </font></b>      <font color="#000000">}</font>
+<b><font color="#006cb8">42: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">43: </font></b><font color="#000000">}</font>
+</tt></pre>

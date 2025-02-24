@@ -1,0 +1,59 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>geom<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">03: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>io<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">04: </font>
+<font color="#000000">05: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">06: </font><i><font color="#9A1900">   An edge in a graph.</font></i>
+<font color="#000000">07: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">08: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">interface</font></b> Edge <b><font color="#0000FF">extends</font></b> Serializable<font color="#990000">,</font> Cloneable
+<font color="#000000">09: </font><font color="#FF0000">{</font>
+<font color="#000000">10: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">11: </font><i><font color="#9A1900">      Draw the edge.</font></i>
+<font color="#000000">12: </font><i><font color="#9A1900">      @param g2 the graphics context</font></i>
+<font color="#000000">13: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">14: </font>   <font color="#009900">void</font> <b><font color="#000000">draw</font></b><font color="#990000">(</font>Graphics2D g2<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">15: </font>
+<font color="#000000">16: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">17: </font><i><font color="#9A1900">      Tests whether the edge contains a point.</font></i>
+<font color="#000000">18: </font><i><font color="#9A1900">      @param aPoint the point to test</font></i>
+<font color="#000000">19: </font><i><font color="#9A1900">      @return true if this edge contains aPoint</font></i>
+<font color="#000000">20: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">21: </font>   <font color="#009900">boolean</font> <b><font color="#000000">contains</font></b><font color="#990000">(</font>Point2D aPoint<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">22: </font>
+<font color="#000000">23: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">24: </font><i><font color="#9A1900">      Connects this edge to two nodes.</font></i>
+<font color="#000000">25: </font><i><font color="#9A1900">      @param aStart the starting node</font></i>
+<font color="#000000">26: </font><i><font color="#9A1900">      @param anEnd the ending node</font></i>
+<font color="#000000">27: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">28: </font>   <font color="#009900">void</font> <b><font color="#000000">connect</font></b><font color="#990000">(</font>Node aStart<font color="#990000">,</font> Node anEnd<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">29: </font>
+<font color="#000000">30: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">31: </font><i><font color="#9A1900">      Gets the starting node.</font></i>
+<font color="#000000">32: </font><i><font color="#9A1900">      @return the starting node</font></i>
+<font color="#000000">33: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">34: </font>   Node <b><font color="#000000">getStart</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">35: </font>
+<font color="#000000">36: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">37: </font><i><font color="#9A1900">      Gets the ending node.</font></i>
+<font color="#000000">38: </font><i><font color="#9A1900">      @return the ending node</font></i>
+<font color="#000000">39: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">40: </font>   Node <b><font color="#000000">getEnd</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">41: </font>
+<font color="#000000">42: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">43: </font><i><font color="#9A1900">      Gets the points at which this edge is connected to</font></i>
+<font color="#000000">44: </font><i><font color="#9A1900">      its nodes.</font></i>
+<font color="#000000">45: </font><i><font color="#9A1900">      @return a line joining the two connection points</font></i>
+<font color="#000000">46: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">47: </font>   Line2D <b><font color="#000000">getConnectionPoints</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">48: </font>
+<font color="#000000">49: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">50: </font><i><font color="#9A1900">      Gets the smallest rectangle that bounds this edge.</font></i>
+<font color="#000000">51: </font><i><font color="#9A1900">      The bounding rectangle contains all labels.</font></i>
+<font color="#000000">52: </font><i><font color="#9A1900">      @return the bounding rectangle</font></i>
+<font color="#000000">53: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">54: </font>   Rectangle2D <b><font color="#000000">getBounds</font></b><font color="#990000">(</font>Graphics2D g2<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">55: </font>
+<font color="#000000">56: </font>   Object <b><font color="#000000">clone</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">57: </font><font color="#FF0000">}</font>
+<font color="#000000">58: </font>
+</tt></pre>

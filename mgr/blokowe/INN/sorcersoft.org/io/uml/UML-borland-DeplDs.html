@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Deployment Diagrams</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Deployment Diagrams</span>
+
+<H2>Course Map</H2>
+<img border="0" src="CourseMap12.png" width="603" height="495">
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Agenda</h2>
+<ul>
+	<li>Definitions</li>
+	<li>Artifacts</li>
+	<li>Nodes</li>
+	<li>Deployment specifications</li>
+	<li>Deploy relationships</li>
+	<li><a href="implemntationWorkflow.html#Implementation_workflow_detail">
+	Implementation workflow</a></li>
+	<li><a href="implemntationWorkflow.html#Architectural_implementation">
+	Architectural implementation</a></li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>
+
+
+		Definitions</h2>
+
+		<ul>
+			<li>An <b><i>artifact</i></b> is the specification of a physical piece of 
+		information that is used or produced by a software development process,
+		or by deployment and operation of a system. Examples of artifacts 
+		include <b>model files</b>, <b>source files</b>, <b>scripts</b>, and <b>binary
+		executable files</b>, a <b>table in a database system</b>, a <b>development 
+		deliverable</b>, or a <b>word-processing document</b>, a <b>mail message</b>.<br>
+			<br>
+			An Artifact defined by the user represents a concrete element in the physical 
+world. A particular instance (or &#8216;copy&#8217;) of
+an artifact is deployed to a node instance. Artifacts may have composition 
+associations to other artifacts that are nested
+within it. For instance, a deployment descriptor artifact for a component may be 
+contained within the artifact that
+implements that component. In that way, the component and its descriptor are 
+deployed to a node instance as one artifact
+instance.</li>
+			<li>A <b><i>deployment</i></b> (<strong>instalacja</strong>) is the allocation of an artifact or artifact 
+instance to a deployment target.</li>
+			<li>A <b><i>component deployment</i></b> is the deployment of one or more artifacts 
+or artifact instances to a deployment target,
+optionally parameterized by a deployment specification. Examples are executables 
+and configuration files.</li>
+			<li><b><i>Deployment diagrams </i></b>show the 
+allocation of Artifacts to Nodes according to the Deployments defined between 
+them.</li>
+			<li>A <b><i>deployment specification </i></b>is a general mechanism to parameterize 
+a Deployment relationship, as is common in various
+hardware and software technologies. The deployment specification element is 
+expected to be extended in specific
+component profiles. Non-normative examples of the standard stereotypes that a 
+profile might add to deployment
+specification are, for example, &laquo;concurrencyMode&raquo; with tagged values {thread, 
+process, none}, or &laquo;transactionMode&raquo;
+with tagged values {transaction, nestedTransaction, none}.</li>
+			<li>A <b><i>node</i></b> is <i>computational resource</i> upon which artifacts 
+may be deployed for execution.
+Nodes can be interconnected through communication paths to define network 
+structures.</li>
+			<li>A <b><i>device</i></b> is a <i>physical computational resource 
+			</i>with 
+processing capability upon which artifacts may be deployed for
+execution. Devices may be complex (i.e., they may consist of other devices).</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Artifacts</h2>
+<p>An <b>artifact</b> represents the <b>specification</b> of a real world thing 
+such as a file.</p>
+<p><img border="0" src="images/UML-bo14.gif"></p>
+<p>A visual representation of the manifestation relationship between artifacts 
+and components</p>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Nodes</h2>
+<ul>
+	<li>A <b>node</b> represents a type of computational resource.</li>
+	<li>A <b>node instance</b> represents a specific computation resource.</li>
+</ul>
+<p>&nbsp;</p>
+<p><img border="0" src="images/fig24-3.png" width="650" height="223"></p>
+<p>A descriptor form deployment diagram.</p>
+<p>&nbsp;</p>
+<p><img border="0" src="images/fig24-4.png" width="650" height="469"></p>
+<p>The instance for deployemt diagram.</p>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Deployment specifications</h2>
+<p><img border="0" src="images/UML-bo15.gif"></p>
+<p>Deployment Specification for an artifact (specification and instance levels)</p>
+
+<HR align="left" width="100%" size="4" noshade>
+<p>&nbsp;</p>
+<p><img border="0" src="images/UML-bo3.gif"></p>
+<p>Deployment Specifications related to the artifacts that they parameterize</p>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Deploy relationships</h2>
+<p><img border="0" src="images/UML-bo4.gif"></p>
+<p>A Deployment Specification for an artifact</p>
+
+<HR align="left" width="100%" size="4" noshade>
+<p>The following deployment diagram shows the relationships among software and 
+hardware components involved in a data base application.<font color="#cc0000"> </font></p>
+<p><img border="0" src="images/UML-bo6.gif"></p>
+<p>Communication path between two Node types with deployed Artifacts</p>
+
+<HR align="left" width="100%" size="4" noshade>
+<ul>
+	<li>Artifacts may be contained within node instance symbols. </li>
+	<li>This indicates that 
+the items are deployed on the node
+instances.</li>
+</ul>
+<p><img border="0" src="images/UML-bo7.gif"></p>
+<p>A set of deployed component artifacts on a Node</p>
+				
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70be3c0ebbb1',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

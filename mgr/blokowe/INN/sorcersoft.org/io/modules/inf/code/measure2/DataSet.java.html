@@ -1,0 +1,55 @@
+<pre><tt><b><font color="#006cb8">01: </font></b><font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">02: </font></b><font color="#7a9ecd">   Computes the average of a set of data values.</font>
+<b><font color="#006cb8">03: </font></b><font color="#7a9ecd">*/</font>
+<b><font color="#006cb8">04: </font></b><font color="#d05b76">public</font> <font color="#d05b76">class</font> <font color="#000000">DataSet</font>
+<b><font color="#006cb8">05: </font></b><font color="#000000">{</font>
+<b><font color="#006cb8">06: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">07: </font></b><font color="#7a9ecd">      Constructs an empty data set with a given measurer.</font>
+<b><font color="#006cb8">08: </font></b><font color="#7a9ecd">      @param aMeasurer the measurer that is used to measure data values</font>
+<b><font color="#006cb8">09: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">10: </font></b>   <font color="#d05b76">public</font> <font color="#000000">DataSet</font><font color="#000000">(</font><font color="#000000">Measurer</font> <font color="#000000">aMeasurer</font><font color="#000000">)</font>
+<b><font color="#006cb8">11: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">12: </font></b>      <font color="#000000">sum</font> <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font>
+<b><font color="#006cb8">13: </font></b>      <font color="#000000">count</font> <font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">;</font>
+<b><font color="#006cb8">14: </font></b>      <font color="#000000">maximum</font> <font color="#000000">=</font> <font color="#d05b76">null</font><font color="#000000">;</font>
+<b><font color="#006cb8">15: </font></b>      <font color="#000000">measurer</font> <font color="#000000">=</font> <font color="#000000">aMeasurer</font><font color="#000000">;</font>
+<b><font color="#006cb8">16: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">17: </font></b>
+<b><font color="#006cb8">18: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">19: </font></b><font color="#7a9ecd">      Adds a data value to the data set.</font>
+<b><font color="#006cb8">20: </font></b><font color="#7a9ecd">      @param x a data value</font>
+<b><font color="#006cb8">21: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">22: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">void</font> <font color="#000000">add</font><font color="#000000">(</font><font color="#000000">Object</font> <font color="#000000">x</font><font color="#000000">)</font>
+<b><font color="#006cb8">23: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">24: </font></b>      <font color="#000000">sum</font> <font color="#000000">=</font> <font color="#000000">sum</font> <font color="#000000">+</font> <font color="#000000">measurer</font><font color="#000000">.</font><font color="#000000">measure</font><font color="#000000">(</font><font color="#000000">x</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#006cb8">25: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">count</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#89c976">0</font> 
+<b><font color="#006cb8">26: </font></b>            <font color="#000000">|</font><font color="#000000">|</font> <font color="#000000">measurer</font><font color="#000000">.</font><font color="#000000">measure</font><font color="#000000">(</font><font color="#000000">maximum</font><font color="#000000">)</font> <font color="#000000">&lt;</font> <font color="#000000">measurer</font><font color="#000000">.</font><font color="#000000">measure</font><font color="#000000">(</font><font color="#000000">x</font><font color="#000000">)</font><font color="#000000">)</font>
+<b><font color="#006cb8">27: </font></b>         <font color="#000000">maximum</font> <font color="#000000">=</font> <font color="#000000">x</font><font color="#000000">;</font>
+<b><font color="#006cb8">28: </font></b>      <font color="#000000">count</font><font color="#000000">+</font><font color="#000000">+</font><font color="#000000">;</font>
+<b><font color="#006cb8">29: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">30: </font></b>
+<b><font color="#006cb8">31: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">32: </font></b><font color="#7a9ecd">      Gets the average of the added data.</font>
+<b><font color="#006cb8">33: </font></b><font color="#7a9ecd">      @return the average or 0 if no data has been added</font>
+<b><font color="#006cb8">34: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">35: </font></b>   <font color="#d05b76">public</font> <font color="#d05b76">double</font> <font color="#000000">getAverage</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">36: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">37: </font></b>      <font color="#d05b76">if</font> <font color="#000000">(</font><font color="#000000">count</font> <font color="#000000">=</font><font color="#000000">=</font> <font color="#89c976">0</font><font color="#000000">)</font> <font color="#d05b76">return</font> <font color="#89c976">0</font><font color="#000000">;</font>
+<b><font color="#006cb8">38: </font></b>      <font color="#d05b76">else</font> <font color="#d05b76">return</font> <font color="#000000">sum</font> <font color="#000000">/</font> <font color="#000000">count</font><font color="#000000">;</font>
+<b><font color="#006cb8">39: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">40: </font></b>
+<b><font color="#006cb8">41: </font></b>   <font color="#7a9ecd">/**</font>
+<b><font color="#006cb8">42: </font></b><font color="#7a9ecd">      Gets the largest of the added data.</font>
+<b><font color="#006cb8">43: </font></b><font color="#7a9ecd">      @return the maximum or 0 if no data has been added</font>
+<b><font color="#006cb8">44: </font></b><font color="#7a9ecd">   */</font>
+<b><font color="#006cb8">45: </font></b>   <font color="#d05b76">public</font> <font color="#000000">Object</font> <font color="#000000">getMaximum</font><font color="#000000">(</font><font color="#000000">)</font>
+<b><font color="#006cb8">46: </font></b>   <font color="#000000">{</font>
+<b><font color="#006cb8">47: </font></b>      <font color="#d05b76">return</font> <font color="#000000">maximum</font><font color="#000000">;</font>
+<b><font color="#006cb8">48: </font></b>   <font color="#000000">}</font>
+<b><font color="#006cb8">49: </font></b>
+<b><font color="#006cb8">50: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">double</font> <font color="#000000">sum</font><font color="#000000">;</font>
+<b><font color="#006cb8">51: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Object</font> <font color="#000000">maximum</font><font color="#000000">;</font>
+<b><font color="#006cb8">52: </font></b>   <font color="#d05b76">private</font> <font color="#d05b76">int</font> <font color="#000000">count</font><font color="#000000">;</font>
+<b><font color="#006cb8">53: </font></b>   <font color="#d05b76">private</font> <font color="#000000">Measurer</font> <font color="#000000">measurer</font><font color="#000000">;</font>
+<b><font color="#006cb8">54: </font></b><font color="#000000">}</font>
+</tt></pre>

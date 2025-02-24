@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Analysis Packages</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Analysis Packages</span><BODY text="#000000" alink="#666666"><h2>Agenda</h2>
+<ul>
+	<li>What is a package?</li>
+	<li>Analysis Package</li>
+	<li>Packages and Namespaces</li>
+	<li>Nested Packages</li>
+	<li>Package Dependencies</li>
+	<li>Package Generalization</li>
+	<li><a href="#Finding_Analysis_Packages">Finding Analysis Packages</a></li>
+	<li>A Package Model from a Simple eCommerce System</li>
+	<li>Cyclic Package Dependencies</li>
+	<li><a href="analysisWorkflow.html">Analysis Workflow</a></li>
+	<li><a href="#Architectural_Analysis">Architectural Analysis</a></li>
+	</ul><HR align="left" width="100%" size="4" noshade>
+	<h2>What is a package?</h2>
+<p>The <b>package</b> is the UML mechanism for grouping things.</p>
+<h2><img border="0" src="images/fig11-2.png" width="650" height="389"></h2>
+<ul>
+	<li>The set of UML building blocks consists of <b>things</b>, <b>
+	relationships</b>, and <b>diagram</b>.</li>
+	<li>The <b>package</b> is the UML mechanism for grouping items (including 
+	other packages).</li>
+	<li>Each package has its own namespace within which all names must be <b>
+	unique</b>.</li>
+	<li>Every model element is owned by <b>one</b> package.</li>
+	<li>The packages form a <b>hierarchy</b>.</li>
+	</ul>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2>Analysis Package</h2>
+<p>Every model element is owned by one package. The packages form a hierarchy.</p>
+<ul>
+	<li>A package can be used to<ul>
+	<li>provide an encapsulated namespace within which all names must be unique</li>
+	<li>group semantically related elements</li>
+	<li>define &quot;semantic boundary&quot; of the model</li>
+	<li>provide units for parallel working and configuration management</li>
+	</ul></li>
+	<li><b>Analysis packages </b>should contain<ul>
+	<li><a href="UML-borland-UCDs.html">use cases</a></li>
+	<li><a href="analysisWorkflow.html">analysis classes</a></li>
+	<li><a href="useCaseAnalysis.html">use case realization</a></li>
+	</ul>
+	</li>
+	</ul>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2>Packages and Namespaces</h2>
+	<ul>
+		<li>A package defines what is known as an encapsulated namespace.</li>
+		<li>It is a <b>logical boundary</b> within which all the element names 
+		must be unique.</li>
+		<li>When an element in one space needs to refer to an element in a 
+		different namespace, it has to specify both the name of the element it 
+		wants and the <b>qualified name</b> or <b>pathname</b> of the element 
+		(compare to file system analogy).</li>
+		<li>Qualified name of the class <code>Librarian</code> in the figure below is<br>
+		<code>Library::Users::Librarian</code> </li>
+	</ul>
+	<p><img border="0" src="images/fig11-3.png" width="400" height="262"></p>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2>Nested Packages</h2>
+<p><img border="0" src="images/fig11-4.png" width="400" height="538"></p>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2>Package Dependencies</h2>
+<p>A <b>dependency relationship</b> indicates that one package depends in some 
+way on another.</p>
+<p>Visibility determines whether a package element is visible outside the 
+package.</p>
+<p><img border="0" src="images/fig11-5.png" width="550" height="393"></p>
+<p>&nbsp;</p>
+<p><img border="0" src="images/table11-3.png" width="650" height="512"></p>
+<ul>
+	<li><b>&lt;&lt;import&gt;&gt; is transitive</b></li>
+	<li><b>&lt;&lt;access&gt;&gt; is not</b></li>
+</ul>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2>Package Generalization</h2>
+<ul>
+	<li>Child packages inherit elements from their parent.</li>
+	<li>They may override parent elements.</li>
+	<li>They may add new elements.</li>
+</ul>
+<p><img border="0" src="images/fig11-7.png" width="500" height="481"></p>
+<p>&nbsp;</p>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2><a name="Architectural_Analysis">Architectural Analysis</a></h2>
+<ul>
+	<li>In <b>architectural analysis</b>, all analysis classes are organized 
+		into a set of cohesive packages, and these are further organized into 
+  partitions and layers as illustrated below.</li>
+		<li>Always <b>minimize coupling.</b> You can do in&nbsp; three ways:
+        <ul>
+		<li>minimize the dependencies between analysis packages</li>
+		<li>minimize the number of public elements in each analysis package</li>
+		<li>maximize the number of private elements in each analysis package</li>
+	</ul>
+		</li>
+		<li>Reduction in coupling is one of the most important considerations in 
+		architectural analysis because systems that exhibit a high degree of 
+		coupling are typically <b>complex</b> and <b>difficult to maintain</b>.
+		</li>
+		<li>You should always try to keep coupling to the <b>necessary minimum</b>.</li>
+		<li>As the model deepens into a 
+		<a href="designWorkflow.html#Design_a_Subsystem">design model</a>, so the number of layers 
+		will tend to increase</li>
+		<li>In analysis you can just arrange packages into <b>
+		application-specific</b> and <b>application-general</b> layers.</li>
+</ul>
+	<p><img border="0" src="images/fig11-8.png" width="600" height="335"></p>
+	<HR align="left" width="100%" size="4" noshade>
+    <h2>Cyclic Package Dependencies</h2>
+    <ul>
+      <li>Avoid package&nbsp; cyclic dependencies in the analysis package model.</li>
+      <li>Merging two mutually dependent packages is a perfectly valid way of 
+        removing cyclic dependencies.</li>
+      <li>A better approach might be to factor the common elements out into a 
+        third package.</li>
+      <li>Classes that truly have mutual dependencies (rather than dependencies 
+        that are just a feature of the incompleteness of the model) should normally 
+        live in the same package.</li>
+    </ul>
+<p><img border="0" src="images/fig11-10.png" width="650" height="548"></p>
+    <p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Finding_Analysis_Packages">Finding Analysis Packages</a></h2>
+<ul>
+	<li>Look for clusters of classes that form a cohesive unit-have strong 
+	semantic connection.</li>
+	<li>Analysis packages are often discovered over a period of time as the 
+	model develops and matures.</li>
+	<li>Look for<ul>
+		<li>cohesive clusters of classes in the class diagram</li>
+		<li>inheritance hierarchies</li>
+		<li>consider the use case model (cohesive from business perspective)</li>
+	</ul>
+	<p>&nbsp;</li>
+<li>After a set of candidate packages has been identified, you should then 
+attempt to <b>minimize the public members of the package and the dependencies 
+between the packages</b> by<ul>
+	<li>moving classes between packages</li>
+	<li>adding packages</li>
+	<li>removing packages</li>
+</ul>
+<p>&nbsp;</li>
+<li>The keys to good package structure are <b>high cohesion</b> <b>within</b> a 
+package and <b>low coupling between </b>packages.</li>
+<li>A package should contain a group of closely related classes.</li>
+<li>Classes are most closely related by inheritance, next by composition, then 
+by aggregation, association, and finally by dependencies.</li>
+<li>As a rule of thumb, expect to have between four and ten classes per package.</li>
+</ul>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2>A Package Model from a Simple eCommerce System</h2>
+<p><img border="0" src="images/fig11-9.png" width="650" height="207"></p>
+	<HR align="left" width="100%" size="4" noshade>
+	<p>&nbsp;</p>
+		
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70b9ab2c016a',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

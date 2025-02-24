@@ -1,0 +1,505 @@
+<TITLE>Senior Project Design: Jini Service UIs</TITLE>
+<HTML>
+<HEAD>
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+</HEAD>
+<span class="ts">Senior Project Design</span><br>
+<SPAN class="sts">Jini Service UIs in SORCER</SPAN></DIV><H2>Agenda</H2>
+
+<UL>
+<LI>SOA, SOOA, Service UI<LI>UI Descriptors<LI>Arithmetic Demo
+<LI>API Details
+<LI>Implications
+<LI>Four Ways to Attach Service UI in SORCER<LI>Yet Another Calculator Demo<LI>Conclusions</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Service Oriented Architecture (SOA)</h2>
+<p><img border="0" src="images/soa.png" width="650" height="363"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Service Object-Oriented Architecture (SOOA)</h2>
+<p><img border="0" src="images/serviceRequestor.png" width="650" height="523"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>User Agent and Service UI</h2>
+<p><img border="0" src="images/soa-serviceui.png" width="650" height="523"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Bundles of Functionality</H2>
+<img border="0" src="images/requestor.png" width="650" height="163">
+
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Client UI</H2>
+<UL>
+<LI>Supplied by client programmer
+<LI>Limited by programmer's prior knowledge
+of a service provider
+<PRE>package sorcer.arithmetic;
+import java.rmi.RemoteException;
+import sorcer.service.Context;
+
+public interface Adder {
+	public Context add(Context context) throws RemoteException;
+}
+</PRE>
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Service UI</H2>
+<UL>
+<LI>
+Can give access to full functionality
+<LI>
+Can be branded
+<LI>
+Increases accessibility to users
+<PRE>
+package sorcer.arithmetic;
+import java.rmi.RemoteException;
+import sorcer.service.Context;
+
+public class ArithmeticProviderImpl implements ArithmeticRemote {
+	public Context add(Context context) throws RemoteException;
+	public Context <b>subtract</b>(Context context) throws RemoteException;
+	public Context <b>multiply</b>(Context context) throws RemoteException;
+	public Context <b>divide</b>(Context context) throws RemoteException;
+}
+</PRE>
+<PRE>
+package sorcer.arithmetic;
+import sorcer.arithmetic.Adder;
+import sorcer.arithmetic.Divider;
+import sorcer.arithmetic.Multiplier;
+import sorcer.arithmetic.Subtractor;
+
+public interface ArithmeticRemote extends Adder, Subtractor, Divider, Multiplier, Remote {)</PRE>
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2><a href="http://www.artima.com/jini/serviceui/index.html">The ServiceUI Project</a></H2>
+<UL>
+<LI>
+To use a service UI, clients need prior knowledge
+<LI>
+We needed a standard way to:
+<UL>
+<LI>Associate UIs with services
+<LI>Access those UIs at the client
+</UL>
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>User Adapters</H2>
+<img border="0" src="images/serviceui.png" width="650" height="164">
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>UI Descriptors</H2>
+<UL>
+<LI>UI provider describes UIs
+<LI>Client decides
+</UL>
+<img border="0" src="images/serviceItem.png" width="359" height="211">
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Class UIDescriptor</H2>
+<ul>
+	<li>UI descriptors created by <code>package <b>sorcer.ui.serviceui.UIDescriptorFactory</b></code> in SORCER</li>
+</ul>
+<PRE>
+package net.jini.lookup.entry;
+
+// imports...
+
+public class UIDescriptor extends AbstractEntry {
+
+    public String <STRONG>role</STRONG>;
+    public String <STRONG>toolkit</STRONG>;
+    public Set <STRONG>attributes</STRONG>;
+    public MarshalledObject <STRONG>factory</STRONG>;
+
+    //...
+}
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>UI Role</H2>
+<UL>
+<LI>Describe purpose of UI
+<LI>Examples: main, admin, about
+<LI>UIDescriptor.role = fully qualified name of role interface
+</UL>
+<PRE>package net.jini.lookup.ui;
+
+public <STRONG>interface MainUI</STRONG> {
+
+    String ROLE = &quot;net.jini.lookup.ui.MainUI&quot;;
+}
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>The Role Interface</H2>
+<UL>
+<LI>
+UI object implements the role interface
+<LI>
+MainUI, AdminUI, and AboutUI are tag interfaces
+<LI>
+Role interfaces can declare methods
+</UL>
+<PRE>
+package sorcer.arithmetic.ui;
+import javax.swing.JFrame;
+import net.jini.lookup.ui.MainUI;
+
+public class ArithmeticFrameUI extends JFrame
+    <STRONG>implements MainUI</STRONG> {
+
+    //...
+}
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>UI Attributes</H2>
+<UL>
+<LI>
+UIDescriptor.attributes = a set of objects that describe the UI
+<LI>
+Four attribute classes defined:
+<UL>
+<LI>AccessibleUI
+<LI>Locales
+<LI>RequiredPackages
+<LI>UIFactoryTypes
+</UL>
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>AccessibleUI Attribute</H2>
+<UL>
+<LI>
+Says two things about the UI:
+<UL>
+<LI>Implements <code>javax.accessibility.Accessible</code>
+<LI>Programmer did the necessary work
+</UL>
+</UL>
+<PRE>
+package net.jini.lookup.ui.attribute;
+
+public <STRONG>class AccessibleUI</STRONG>
+    implements java.io.Serializable {
+
+    public boolean equals(Object o) {}
+    public int hashCode() {}
+}
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Locales Attribute</H2>
+<UL>
+<LI>
+Describes supported locales
+</UL>
+<PRE>
+package net.jini.lookup.ui.attribute;
+import java.util.*;
+
+public <STRONG>class Locales</STRONG>
+    implements java.io.Serializable {
+
+    public boolean <STRONG>isLocaleSupported</STRONG>(Locale locale) {}
+    public Locale <STRONG>getFirstSupportedLocale</STRONG>(
+        List locales) {}
+    public Iterator iterator() {}
+    public Set getLocales() {}
+    //...
+}
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>RequiredPackages Attribute</H2>
+<UL>
+<LI>Lists packages required by the UI:
+<UL>
+<LI>fully qualified package name
+<LI>package version number
+</UL>
+</UL>
+<PRE>
+package net.jini.lookup.ui.attribute;
+
+import java.util.*;
+
+public <STRONG>class RequiredPackages</STRONG>
+    implements java.io.Serializable {
+
+    public Iterator <STRONG>iterator</STRONG>() {}
+    public String <STRONG>getVersion</STRONG>(String packageName) {}
+    public Map getRequiredPackages() {}
+}
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>UI Factories</H2>
+<UL>
+<LI>
+Don't want to serialize UI objects
+<LI>
+Instead, serialize a UI factory
+<LI>
+To get the UI, Client invokes factory method
+<LI>
+Factory methods declared in UI factory interfaces (<code>net.jini.lookup.ui.factory</code>):
+<UL>
+<LI><CODE>getJComponent()</CODE> declared in interface <CODE>JComponentFactory</CODE>
+or <CODE>getPanel()</CODE> declared in interface <code>PanelFactory</code><LI>
+<CODE>getJFrame()</CODE> declared in interface <CODE>JFrameFactory</CODE>&nbsp; 
+or <CODE>getFrame()</CODE> declared in interface <CODE>FrameFactory</CODE><LI><CODE>getJDialog()</CODE> declared in <CODE>
+JDialogFactory</CODE>
+or <CODE>getDialog()</CODE> declared in <CODE>DialogFactory</CODE>
+<LI><CODE>getJWindow()</CODE> declared in <CODE>
+JWindowFactory</CODE>
+or <CODE>getWindow()</CODE> declared in <CODE>
+WindowFactory</CODE>
+</UL>
+<li>Swing versions of these interfaces implemented in <code>package sorcer.ui.serviceui</code></li>
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>UIFactoryTypes Attribute</H2>
+<UL>
+<LI>
+Lists UI factory interfaces implemented by the factory object
+<UL>
+<LI>(Factory is stored in <CODE>UIDescriptor.factory</CODE>)
+</UL>
+</UL>
+<PRE>
+package net.jini.lookup.ui.attribute;
+
+import java.util.*;
+
+public <STRONG>class UIFactoryTypes</STRONG>
+    implements java.io.Serializable {
+
+    public boolean <STRONG>isAssignableTo</STRONG>(Class classObj) {}
+    public Iterator iterator() {}
+    public Set getTypeNames() {}
+}
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>UI Toolkit</H2>
+<UL>
+<LI>
+<CODE>UIDescriptor.toolkit</CODE> = package name of primary UI toolkit used by UI
+<UL>
+<LI><CODE>"javax.swing"</CODE>
+<LI><CODE>"java.awt"</CODE>
+</UL>
+<LI>
+Enables clients to narrow search for services based on UIs offered
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>UI Factory Interfaces</H2>
+
+<UL>
+<LI>Family of interfaces, each with targeted factory methods:
+<LI>AWT
+<UL>
+<LI><CODE>DialogFactory</CODE>
+<LI><CODE>FrameFactory</CODE>
+<LI><CODE>PanelFactory</CODE>
+<LI><CODE>WindowFactory</CODE>
+</UL>
+<LI>Swing
+<UL>
+<LI><CODE>JDialogFactory</CODE>
+<LI><CODE>JFrameFactory</CODE>
+<LI><CODE>JComponentFactory</CODE>
+<LI><CODE>JWindowFactory</CODE>
+</UL>
+</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>JFrameFactory</H2>
+
+<PRE>
+package net.jini.lookup.ui.factory;
+
+import javax.swing.JFrame;
+
+public <STRONG>interface JFrameFactory</STRONG>
+    extends java.io.Serializable {
+
+    String TOOLKIT = "javax.swing";
+    String TYPE_NAME =
+        "net.jini.lookup.ui.factory.JFrameFactory";
+
+    <STRONG>JFrame getJFrame(Object roleObject);</STRONG>
+}
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Separating Codebases</H2>
+<UL>
+<LI>Must not force clients to download JAR files for UI's they'll never use
+</UL>
+<PRE>
+public String <STRONG>role</STRONG>;
+public String <STRONG>toolkit</STRONG>;
+public Set <STRONG>attributes</STRONG>;
+public MarshalledObject <STRONG>factory</STRONG>;
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>
+Marshalling the UI Factory
+</H2>
+<PRE>
+UIDescriptor descriptor = new UIDescriptor();
+
+Class c = <STRONG>RMIClassLoader.loadClass(
+    "http://sorcer.cs.ttu.edu:9000/arithmetic-ui.jar",
+    "package sorcer.ui.serviceui.UIFrameFactory");</STRONG>
+
+Object factory = c.newInstance();
+descriptor.factory = new MarshalledObject(factory);
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Unmarshalling the UI Factory</H2>
+<UL>
+<LI>Client can call getUIFactory() on UIDescriptor
+</UL>
+<PRE>
+public final Object <STRONG>getUIFactory</STRONG>(final ClassLoader parentLoader)
+        throws IOException, ClassNotFoundException {}
+</PRE>
+<UL>
+<LI>Must pass a class loader that can load the classes
+of the role object
+</UL>
+<PRE>
+Object uiFactory = selectedDescriptor.<STRONG>getUIFactory</STRONG>(
+    serviceItem.service.getClass().getClassLoader());
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Generating the UI</H2>
+<UL>
+<LI>Client invokes a factory method, passing in the role object
+<LI>package <code>sorcer.ui.serviceui.UIFrameFactory implements JFrameFactory</code></UL>
+<blockquote>
+	<PRE>JFrameFactory frameFactory = (JFrameFactory) uiFactory;
+
+JFrame jff = frameFactory.<STRONG>getJFrame(serviceItem)</STRONG>;
+
+jff.setLocation(100, 100);
+jff.setVisible(true);
+//...</PRE>
+</blockquote>
+<ul>
+	<li>
+	Service UI can be generated by service browsers, <a href="http://www.incax.com/service-browser.htm#download">Inca X</a> for example
+</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>UI Talks to the Service</H2>
+<img border="0" src="images/SUI-example.png" width="650" height="255">
+<PRE>
+public class AritmeticUI extends JPanel {
+
+    private ArithmeticRemote server;
+
+    public AritmeticUI (Object obj) {
+
+        this.servcer = (ArithmeticRemote)obj;
+
+    //...
+</PRE>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Arithmetic Service UI - Component Type</h2>
+<pre>public UIDescriptor getMainUIDescriptor() {
+	// Associate the service UI as a component
+	UIDescriptor uiDesc = null;
+		try {
+			uiDesc = <b>UIDescriptorFactory.getUIDescriptor</b>(
+				MainUI.ROLE,
+				new UIComponentFactory(new URL[]{new URL(urlbase + 
+					&quot;arithmetic-ui.jar&quot;)},
+				&quot;sorcer.arithmetic.ui.ArithmeticUI&quot;));
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	return uiDesc;
+}</pre>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Cataloger Service UI - Frame Type</h2>
+<pre>public UIDescriptor getMainUIDescriptor() {
+     	UIDescriptor uiDesc = null;
+        	try {
+            		uiDesc = <b>UIDescriptorFactory.getUIDescriptor</b>(
+				MainUI.ROLE,
+                    		new UIFrameFactory(new URL[] {new URL(Env.getHttpCodebase() + 
+					"cataloger-ui.jar")},
+                            	"sorcer.core.provider.catalog.CatalogerUI"));
+        	} catch (Exception ex) {
+            		ex.printStackTrace();
+        	}
+        return uiDesc;
+}
+</pre>
+
+<hr align="left" width="100%" size="4" noshade>
+<h2>Cataloger Service UI - Component Type as Frame via a Button</h2>
+<pre>
+public UIDescriptor getMainUIDescriptor() {
+		UIDescriptor uiDesc = null;
+		try {
+			uiDesc = <b>UIDescriptorFactory.getUIDescriptor(</b>MainUI.ROLE,
+					new UIComponentFactory(new URL[] { new URL(Env
+							.getWebsterUrl()
+							+ "/cataloger-ui.jar") }, CatalogerUI.class
+							.getName(), true));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return uiDesc;
+	}
+</pre>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Arithmetic UI - Configuration Entry</h2>
+<pre>
+sorcer.core.provider.ServiceProvider {
+        /* service provider genetic properties */
+		name = "Smart Arithmetic";
+		description = "Example of a SORCER smart proxy provider";
+		interfaces = new String[] { "sorcer.arithmetic.provider.Arithmetic" };
+		entries = new Entry[] { ArithmeticUI.getUIDescriptor(), 
+			<b>ServiceProvider.getUIDescriptor()</b>, 
+			new Comment("It uses sorcer.arithmetic.Arithmometer for smart proxying"), 
+			new Location("3", "310", "CP TTU") };
+
+		// smart proxy		
+		smartProxy = new SmartArithmometer();
+}
+</pre>
+<HR align="left" width="100%" size="4" noshade>
+<H2>Conclusion</H2>
+<UL>
+<LI>Can add new roles, factories, and attributes
+<LI>Services can be used by both people and software
+<LI>Can create different UIs for different client devices
+<LI>More natural UIs than web pages
+<LI>UI descriptors created by <code>package <b>sorcer.ui.serviceui.UIDescriptorFactory</b></code> in SORCER</UL>
+
+</DIV>
+</BODY>
+</HTML>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd7155cce9028c',t:'MTczOTIwNDU5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>

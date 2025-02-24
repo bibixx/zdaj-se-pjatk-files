@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--last modified on Wednesday, April 19, 2000 01:00 AM -->
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<META NAME="VPSiteProject" CONTENT="file:///D|/Web%20Sites/ExtremeProgramming/Project.vpp">
+
+	<META NAME="Author" Content="Don Wells">
+	<TITLE>Extreme Rules</TITLE>
+</HEAD>
+
+<BODY TEXT="black" BGCOLOR="white" LINK="red" ALINK="#CC0000" VLINK="#990000">
+
+<P><SCRIPT LANGUAGE="JavaScript"><!--function imageOn (name) {	if (document.images) {		document[name].src = xpOn.src}}function imageOff (name) {	if(document.images) {		document[name].src = xpOff.src}}function learnedOn () {	if (document.images) {		document.learn.src = learnOn.src}}function learnedOff () {	if(document.images) {		document.learn.src = learnOff.src}}if (document.images) {	xpOff=new Image();	xpOff.src="../images/xplinktn.gif"; 	xpOn= new Image();
+	xpOn.src="../images/xpontiny.gif";	learnOff= new Image();	learnOff.src="../images/lessonsl.gif"; 	learnOn= new Image();
+	learnOn.src="../images/lessonon.gif";}//--></SCRIPT>
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%" HEIGHT="100%" BGCOLOR="white">
+	<TR>
+		<TD WIDTH="100%">
+			<CENTER>
+			<P>
+			<TABLE BORDER="0" WIDTH="709">
+				<TR>
+					<TD WIDTH="685">
+						<CENTER>
+						<P>
+						<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="630" HEIGHT="62">
+							<TR>
+								<TD WIDTH="108" HEIGHT="62"><A HREF="../index.html"><IMG SRC="../images/xplogo.gif" WIDTH="108" HEIGHT="62" ALIGN="BOTTOM" ALT="XP Home" BORDER="0"></A></TD>
+								<TH WIDTH="414" HEIGHT="62">
+									<H2>Code the Unit Test First
+								</TH>
+								<TD WIDTH="108" HEIGHT="62">
+									<P ALIGN="CENTER"><A HREF="../stories/testfirst.html" onMouseOver="learnedOn()" onMouseOut="learnedOff()"><IMG
+									SRC="../images/lessonsl.gif" WIDTH="99" HEIGHT="61" ALIGN="BOTTOM" ALT="Lessons Learned" BORDER="0" NAME="learn"></A>
+								</TD>
+							</TR>
+						</TABLE>
+
+</CENTER>
+					</TD>
+				</TR>
+				<TR>
+					<TH WIDTH="685">
+						<P>
+						<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="10" WIDTH="630">
+							<TR>
+								<TD WIDTH="300" VALIGN="TOP"><IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">When you create your tests
+									first, before the code, you will find it much easier and faster to create your code. The combined time it takes
+									to create a unit test and create some code to make it pass is about the same as just coding it up straight away.
+									But, if you already have the unit tests you don't need to create them after the code saving you some time now and
+									lots later.<BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">Creating a unit test helps
+									a developer to really consider what needs to be done. Requirements are nailed down firmly by tests. There can be
+									no misunderstanding a specification written in the form of executable code.<BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">You also have immediate
+									feedback while you work. It is often not clear when a developer has finished all the necessary functionality. Scope
+									creep can occur as extensions and error conditions are considered. If we create our unit tests first then we know
+									when we are done; the unit tests all run.<BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">There is also a benefit
+									to system design. It is often very difficult to unit test some software systems. These systems are typically built
+									code first and testing second, often by a different team entirely. By creating tests first your design will be
+									influenced by a desire to test everything of value to your customer. Your design will reflect this by being easier
+									to test.</TD>
+								<TD WIDTH="300" VALIGN="TOP"><IMG SRC="../map/images/codesml.gif" WIDTH="300" HEIGHT="173" ALIGN="BOTTOM" BORDER="0" USEMAP="#codesml"><BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">There is a rhythm to developing
+									software unit test first. You create one test to define some small aspect of the problem at hand. Then you create
+									the <A HREF="simple.html">simplest code</A> that will make that test pass. Then you create a second test. Now you
+									add to the code you just created to make this new test pass, but no more! Not until you have yet a third test.
+									You continue until there is nothing left to test. The coffee maker problem shows an <A HREF="../example/piacode.html">example
+									written in Java</A>.<BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">The code you will create
+									is simple and concise, implementing only the features you wanted. Other developers can see how to use this new
+									code by browsing the tests. Input whose results are undefined will be conspicuously absent from the test suite.
+									<A HREF="pair.html" onMouseOver="imageOn('next')" onMouseOut="imageOff('next')"><IMG SRC="../images/xplinktn.gif"
+									WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0" HSPACE="2" NAME="next"></A><BR>
+									<BR>
+									<A HREF="http://c2.com/cgi/wiki?CodeUnitTestFirst"><IMG SRC="../images/wikiwiki.gif" WIDTH="90" HEIGHT="40" ALIGN="BOTTOM"
+									ALT="Unit Tests" BORDER="0" HSPACE="5"></A><A HREF="http://www.xprogramming.com/publications/testfirstexample.pdf"><IMG
+									SRC="../images/xprogram.gif" WIDTH="96" HEIGHT="40" ALIGN="BOTTOM" ALT="Unit tests" BORDER="0" HSPACE="2"></A><A
+									HREF="http://users.vnet.net/wwake/xp/xp0002/index.shtml"><IMG SRC="../images/xplorations.gif" WIDTH="90" HEIGHT="40"
+									ALIGN="BOTTOM" BORDER="0" HSPACE="5"></A></TD>
+							</TR>
+						</TABLE>
+
+					</TH>
+				</TR>
+				<TR>
+					<TD WIDTH="685">
+						<P ALIGN="CENTER"><A HREF="../index.html">ExtremeProgramming.org home</A> | <A HREF="../rules.html">XP Rules</A>
+						| <A HREF="pair.html" onMouseOver="imageOn('next')" onMouseOut="imageOff('next')">Pair Programming</A> | <A HREF="/cdn-cgi/l/email-protection#c3b4a6a1aea2b0b7a6b183a6bbb7b1a6aea6b3b1aca4b1a2aeaeaaada4edacb1a4">Email
+						the webmaster</A>
+					</TD>
+				</TR>
+				<TR>
+					<TD WIDTH="685">
+						<P ALIGN="CENTER"><FONT SIZE="1">Copyright 2000 J. Donovan Wells all rights reserved.</FONT>
+					</TD>
+				</TR>
+			</TABLE>
+
+</CENTER>
+		</TD>
+	</TR>
+</TABLE>
+
+
+<MAP Name="codesml">
+<AREA Shape="Rect" coords = "255,132,299,168"  HREF="bugs.html">
+<AREA Shape="Rect" coords = "267,88,298,122"  HREF="functionaltests.html">
+<AREA Shape="Rect" coords = "267,30,297,80"  HREF="unittests.html">
+<AREA Shape="Rect" coords = "229,72,266,88"  HREF="unittests.html">
+<AREA Shape="Rect" coords = "206,89,262,114"  HREF="integrateoften.html">
+<AREA Shape="Rect" coords = "133,148,188,172"  HREF="refactor.html">
+<AREA Shape="Rect" coords = "129,23,190,47"  HREF="movepeople.html">
+<AREA Shape="Rect" coords = "130,88,187,114"  HREF="pair.html">
+<AREA Shape="Rect" coords = "49,83,68,99"  HREF="pair.html">
+<AREA Shape="Rect" coords = "76,75,130,124"  HREF="testfirst.html">
+<AREA Shape="Rect" coords = "2,90,43,122"  HREF="functionaltests.html">
+<AREA Shape="Rect" coords = "24,49,50,66"  HREF="simple.html">
+<AREA Shape="Rect" coords = "60,27,90,52"  HREF="crccards.html">
+<AREA Shape="Rect" coords = "-7,-2,53,21"  HREF="../map/code.html">
+</MAP>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd71ab4b02c065',t:'MTczOTIwNDYwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY>
+
+</HTML>

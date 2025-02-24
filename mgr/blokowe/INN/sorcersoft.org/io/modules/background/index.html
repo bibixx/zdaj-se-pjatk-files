@@ -1,0 +1,457 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Project Background</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Project Management</span><BR>
+
+<H2>Course Map</H2>
+<img border="0" src="../../images/CourseMap28.png">
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+<H2>Agenda</H2>
+<ul>
+	<li>Course Map</li>
+	<li>CS3365 Project Development and Milestones</li>
+	<li>Project Metasystemic Architecture</li>
+	<li>Common MDC Models</li>
+	<li>Context of Architecture</li>
+	<li>Project Management Architecture<ul>
+		<li><a href="#PMA_-_Tools">Tools</a></li>
+		<li><a href="#PMA_-_File_Storage_and_Hosts">File Storage and Hosts</a></li>
+		<li>SW Research and Development </li>
+	</ul>
+	</li>
+	<li>From Programming to Architectures</li>
+	<li>Class Model vs. Architecture and Design</li>
+	<li>UML Modeling in System Development</li>
+	<li>Architecture-based R&amp;D</li>
+	<li><a target="_blank" href="../../presentations/Architectures-06.ppt">From Programming to 
+Architectures</a></li>
+	<li><a target="_blank" href="../../presentations/sorcer-pma.ppt">SORCER 
+	Project Management Architecture</a></li>
+	<li>
+	<a target="_blank" href="http://sorcer.cs.ttu.edu/resources/dev-corner.html">
+	SORCER Developer's Corner</a></li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+<h2><b>CS3365 Project Development and Milestones</b></h2>
+<ol>
+	<li>You work as a <b><i>creative SW development team</i></b></li>
+	<li>Lifecycle Objectives - at least: extended 4-blocker</li>
+	<li>Lifecycle Architecture - at least: Use case diagrams, component 
+	diagrams, interactions diagrams, prototype (at least storyboard)</li>
+	<li>Initial Operational Capability - at least: operational SW system and 
+	javadoc documentation</li>
+	<li>Product Release - at least: final presentation and demo</li>
+</ol>
+
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Project Metasystemic&nbsp; (MDC) Approach</h2>
+<ol>
+	<li><b>Management</b><br>
+	judicious use of means to accomplish an end</li>
+	<li><b>Domain</b><br>
+	<span class="sense_break"><span class="sense_content">an area over which 
+	power is exercised</span></span></li>
+	<li><b>Carrier</b><br>
+	resources for accomplishing something<br>
+&nbsp;</li>
+</ol>
+<p><img border="0" src="images/metasystemic.png" width="650" height="360"></p>
+<p>Metasystemic approach</p>
+<p>&nbsp;</p>
+<p><img border="0" src="images/metaproject.png" width="650" height="431"></p>
+<p>Project and Architecture Views</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Common MDC Models</h2>
+<p>Spirit<br>
+Mind<br>
+Body</p>
+<p>Semantics<br>
+Syntax<br>
+Alphabet</p>
+<p>Management<br>
+Values<br>
+Resources (Equipment, People, Buildings) </p>
+<p>Process (Design, Manufacturing, Disposal)<br>
+Product<br>
+Organization (Virtual)</p>
+<p><font color="#0000FF"><b>Control Strategy<br>
+Data<br>
+Operations<br>
+<br>
+OS<br>
+Programs (Executable Codes)<br>
+HW</b></p>
+<p><b>Source Code<br>
+Binary Code<br>
+Runtime (Platform)</b></font></p>
+<p>
+<b><font color="#008000">SW Management</font><font color="#0000FF"><br>
+Computer Science</font><br>
+<font color="#FFCC00">SW Engineering</font></b></p>
+<p><font color="#008000"><b>Project Management Process (When)<br>
+Project Requirements (Why)<br>
+Project Management Team (Who)</b></font></p>
+<p><font color="#FFCC00"><b>SW Development Process (How)<br>
+SW Development
+Problem (What)<br>
+SW Development Team (Who)</b></font></p>
+<p> <a href="../../templates/4-blocker-template.ppt"><b>4-blocker</b></a> is 
+your abstract of <b><br>
+<font color="#008000">Project Management</font></b><font color="#008000"> and
+</font><b><br>
+<font color="#FFCC00">SW Development</font><br>
+<font color="#FF0000">Proposal Document of System</font></b></p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Context of Architecture</h2>
+<p><img border="0" src="images/archContext.png" width="650" height="471"></p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Popular Definitions of <i>Architecture</i></h2>
+<ul>
+	<li>Organizational<ul>
+		<li>Functional - Mission tasks (subtasks) to be done</li>
+		<li>Logical - Communications links between functions areas</li>
+		<li>Physical - Resources used to execute functions</li>
+	</ul>
+	</li>
+	<li>System<ul>
+		<li>Components - Major elements of system</li>
+		<li>Connections - Links between components</li>
+		<li>Constraints - Environment &amp; behavior bounds</li>
+	</ul>
+	</li>
+	<li>Software<ul>
+		<li>Components - Major SW design relevant structures</li>
+		<li>Connections - Data and control flow mechanisms</li>
+		<li>Constraints - Performance, construction rules and resources<br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Module, Classifier, Component, Part</h2>
+<ul>
+	<li><b>Module</b> - a separate and distinct unit of a process, system, or 
+	subject area that may be used as a conceptual component of a model or a part 
+	in a system.<br>
+	Software Module - a unit of software storage and manipulation. Software 
+	modules include source code modules, binary code modules, and executable 
+	code modules.</li>
+	<li><b>Classifier</b> - a collection of instances that have something in 
+	common. A classifier can have features that characterize its instances. 
+	Classifiers include interfaces, classes, data types, and components.</li>
+	<li><b>Component</b> - a modular part of a system that encapsulates its 
+	contents and whose manifestation is replaceable within its environment. A 
+	component defines its behavior in terms of provided and required interfaces. 
+	As such, a component serves as a type, whose conformance is defined by these 
+	provided and required interfaces (encompassing both their static as well as 
+	dynamic semantics).</li>
+	<li><b>Part</b> - an element representing a set of instances that are owned 
+	by a containing classifier instance or role of a classifier. (See role.) 
+	Parts may be joined by attached connectors and specify configurations of 
+	linked instances to be created within an instance of the containing 
+	classifier.</li>
+	<li><b>Role</b> - the named set of features defined over a collection of 
+	entities participating in a particular context. <i>Collaboration</i>: The 
+	named set of behaviors possessed by a class or part participating in a 
+	particular context. <i>Part</i>: a subset of a particular class which 
+	exhibits a subset of features possessed by the class. <i>Associations</i>: A 
+	synonym for association end often referring to a subset of classifier 
+	instances that are participating in the association.<br>
+&nbsp;</li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Software Architectural Patterns</h2>
+<ul>
+	<li>Data Flow Systems<ul>
+		<li>Batch Sequential</li>
+		<li>Pipes and Filters</li>
+	</ul>
+	</li>
+	<li>Call and Return Systems<ul>
+		<li>Main Program and Subroutines</li>
+		<li>Hierarchical Layers</li>
+		<li><b>Object-Oriented Systems</b></li>
+	</ul>
+	</li>
+	<li>Independent Components<ul>
+		<li>Communicating Processes</li>
+		<li><b>Event Systems</b></li>
+		<li><b>Service-oriented</b></li>
+	</ul>
+	</li>
+	<li>Data-Centered Systems<ul>
+		<li>Transactional Database Systems (Repository)</li>
+		<li>Blackboards</li>
+		<li><b>Space-based </b>(Tuple Spaces, JavaSpaces)</li>
+	</ul>
+	</li>
+	<li>Virtual Machines<ul>
+		<li>Rule-Based Systems</li>
+		<li>Interpreters</li>
+		<li>JIT/HotSpot compilers<br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2><a name="PMA_-_Tools">PMA - Tools</a></h2>
+<ul>
+	<li><a target="_blank" href="http://www.nongnu.org/cvs/">CVS </a>&nbsp;(<a target="_blank" href="http://ximbiot.com/cvs/wiki/index.php?title=CVS--Concurrent_Versions_System_v1.12.12.1">CVS 
+	Manual</a>), <a target="_blank" href="http://subversion.tigris.org/">SVN</a> 
+	(<a target="_blank" href="http://svnbook.red-bean.com/en/1.4/index.html">SVN 
+	Manual</a>), <a target="_blank" href="http://subclipse.tigris.org">
+	Subeclipse</a> - <a href="../../tmp/sorcer.cvsrep.tar">SORCER repository</a></li>
+	<li>
+	<a target="_blank" href="http://java.sun.com/javase/downloads/index.jsp">Java</a> SE 5, Java EE 5<ul>
+	<li>
+	<a target="_blank" href="http://java.sun.com/docs/books/tutorial/uiswing/">
+	Creating a GUI with JFC/Swing</a> (JFC = Toolkit (AWT), Swing and Java2D)</li>
+	<li>
+	<a href="http://developer.apple.com/documentation/Darwin/Reference/ManPages/man1/javadoc.1.html">
+	Manual Page for <font face="Courier New">javadoc</font></a></li>
+	<li>
+	<a target="_blank" href="../../codeconv/html/CodeConvTOC.doc.html">Code 
+	Conventions for the Java Programming Language</a></li>
+	<li>
+	<a target="_blank" href="http://java.sun.com/j2se/javadoc/writingdoccomments/">How to Write Doc Comments for the Javadoc Tool</a> </li>
+</ul></li>
+	<li><a target="_blank" href="http://www.eclipse.org/">Eclipse</a>/<a href="https://jazz.net/pub/index.jsp">Jazz</a> 
+	with some knowledge of
+	<a target="_blank" href="http://www.gnu.org/software/emacs/">Emacs</a>/<a target="_blank" href="../../vi/vicommands.html">vi</a>
+<ul>
+	<li>
+	<a href="http://openseminar.org/se/">CSC 326</a>
+	<a href="http://agile.csc.ncsu.edu/SEMaterials/tutorials/">Lab Tutorials</a>, NCSU</li>
+	<li><a href="http://omondo.com">Omondo</a> EclipseUML Free Edition (Studio free for 1 month or TTU license valid in the <b>
+	cs.ttu.edu</b> domain)</li>
+	<li>&nbsp;<a target="_blank" href="http://help.eclipse.org/">Eclipse Help</a>,
+	<a href="eclipse_shortcuts.html">Eclipse Shortcuts</a></li>
+	<li>Use
+	<a target="_blank" href="http://www.cs.ttu.edu/resources/facilities/students_machines.php">
+	departmental hosts</a> and your CVS 
+	repository<i> </i>path<i>&nbsp; /sp/dx/cvs </i>where<i> x </i>is your team 
+	number</li>
+	<li>Command line sandbox creation described in
+	<a target="_blank" href="../../presentations/sorcer-pma.ppt">SORCER Project 
+Management Architecture</a> page 5</li>
+	<li>You can use Eclipse '/sp/eclipse/eclipse &amp;' on
+	<a href="http://www.cs.ttu.edu/resources/facilities/students_machines.php">
+	departmental hosts</a> installed in /sp/eclipse directory </li>
+</ul></li>
+	<li><a target="_blank" href="http://junit.org">JUnit</a></li>
+	<li><a target="_blank" href="http://ant.apache.org/">Apache Ant</a> and 
+	<a target="_blank" href="http://tomcat.apache.org/">Apache Tomcat</a></li>
+	<li>
+	<a target="_blank" href="http://www.gnu.org/software/mailman/mailman.html">Mailman</a>, the GNU Mailing List Manager,
+	<a target="_blank" href="../../mailman-doc/index.html">docs</a></li>
+	<li>
+	<a target="_blank" href="http://www.urbancode.com/projects/anthill/download.jsp">Anthill</a> (for a nightly build system)</li>
+	<li><a target="_blank" href="http://www.bugzilla.org/">Bugzilla</a> 
+	(bug-tracking system)</li>
+	<li>Web browsers</li>
+	<li>Service browsers: 
+	<a target="_blank" href="http://www.incax.com/index.htm?http://www.incax.com/download.htm">Inca X</a></li>
+	<li>OSs: UNIX, Linux, Mac OS, Windows</li>
+	<li><a href="brainstorming.html">Brainstorming</a></li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2><a name="PMA_-_File_Storage_and_Hosts">PMA - File Storage and Hosts</a></h2>
+<ul>
+	<li>Course website<br>
+	<a href="http://3365.cs.ttu.edu/">http://3365.cs.ttu.edu</a><li>NFS file system 
+	(/sp on explorer.cs.ttu.edu)<li>Project directories (NFS mounts)<br>
+	/sp/d1, ..., /sp/d8<br>
+	available via Samba as <a href="file://spring.cs.ttu.edu/spd1">
+	\\spring.cs.ttu.edu\spd1</a>, .... , <a href="file://spring.cs.ttu.edu/spd1">
+	\\spring.cs.ttu.edu\spd8</a></li>
+	<li>Project mounts on: banana.cs.ttu.edu, 
+	chinaberry.cs.ttu.edu, dogwood.cs.ttu.edu, ficus.cs.ttu.edu, 
+	hickory.cs.ttu.edu, juniper.cs.ttu.edu, mulberry.cs.ttu.edu, 
+	olive.cs.ttu.edu, peach.cs.ttu.edu, sycamore.cs.ttu.edu</li>
+	<li>Project servers and Web sites:<br>spd1.cs.ttu.edu, ..., spd8.cs.ttu.edu</li>
+	<li>Project Website directories:<br>/sp/d1/public_html, ..., /sp/d8/public_html</li>
+	<li>Project UML models:<br>/sp/d1/models, ..., /sp/d8/models</li>
+	<li>Project repository:<br>/sp/d1/cvs, ... ,/sp/d8/cvs</li>
+	<li>Workspaces:<br>/sp/d1/workspace, ... ,/sp/d8/workspace</li>
+	<li>
+	<a href="http://www.cs.ttu.edu/resources/facilities/students_machines.php">
+	Project compute nodes</a> + your laptops and your home hosts running Uinx/Linux/Mac/Windows</li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>PMA - SW Research and Development - From Programming to Architecture</h2>
+<ol>
+	<li><b>Proposal -&gt; <a href="../../templates/4-blocker-template.ppt">4-blocker</a></b></li>
+	<li>Project Environment<ol>
+		<li><b>Project Website (http://spd1.cs.ttu.edu, ..., 
+		http://spd8.cs.ttu.edu)</b></li>
+		<li>Mailing List Manager (Mailman) - email archive</li>
+		<li><b>CVS/SVN repository</b></li>
+		<li>Nightly build system</li>
+		<li>Bug-tracking system - Bugzilla</li>
+	</ol>
+	</li>
+	<li><b>Architecture (UML)</b></li>
+	<li><b>Design (UML)</b></li>
+	<li><b>Implementation</b> (<a href="#PMA_-_Tools">PMA Tools</a>)</li>
+	<li><b>VV&amp;A - Progress evaluations and demos</b></li>
+</ol>
+
+
+<p><font color="#FF0000"><b>Items above in bold are mandatory</b></font></p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Class Model vs. Architecture and Design</h2>
+<p><img border="0" src="images/D-Arch.png" width="650" height="458"></p>
+<ul>
+	<li>Architecture<ul>
+		<li>Gain understanding and manage system complexity</li>
+		<li>Determine the architecture (modularization)</li>
+		<li>Use and contribute to the framework</li>
+		<li>Apply design patterns</li>
+		<li>Design individual components, parts (runtime)</li>
+	</ul>
+	</li>
+	<li>Design<ul>
+		<li>Design interfaces and classes</li>
+		<li>Apply design patterns</li>
+		<li>Reduce many-to-many associations</li>
+		<li>Design packages (compile-time)</li>
+	</ul>
+	</li>
+	<li>Construction<ul>
+		<li>Implement interfaces and classes</li>
+		<li>Test against use cases, state, and component models<br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>UML Modeling in System Development</h2>
+<p><img border="0" src="images/UML-Process.png" width="650" height="368"></p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Architecture-based R&amp;D</h2>
+<p><img border="0" src="images/RandD.png" width="590" height="514"></p>
+<p><b><a href="DoesNotCompute.html"><font color="#FF0000" size="4">Does Not Compute</font></a></b></p>
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Evolution of Distributed Computing Models</h2>
+<p><img border="0" src="images/index.2.jpg"></p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Why Java?</h2>
+<div class="O" v:shape="_x0000_s1026">
+	<h2>End-to-End Computing</h2>
+	<p><img height="446" src="images/end-to-end.gif" width="650" border="0"></p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+	<h2>Java&#8482; Technology Leads the Way&#8230;</h2>
+	<p>New application development by language ( Soundview TG, 2001) <br>
+	&nbsp;</p>
+	<p><img height="368" src="images/percentage.gif" width="650" border="0"></div>
+<ul>
+	<li><a target="_blank" href="http://www.tiobe.com/tpci.htm">TIOBE 
+	Programming Community Index</a></li>
+	<li>
+	<a target="_blank" href="http://www-cs-faculty.stanford.edu/~eroberts/jtf/index.html">ACM Java Task Force 
+	</a>(<a target="_blank" href="http://www-cs-faculty.stanford.edu/~eroberts/jtf/rationale/introduction.html">Introduction</a>)</li>
+	<li><a target="_blank" href="http://www.kano.net/javabench/">The Java is Faster than C++ and C++ Sucks Unbiased Benchmark 
+</a> </li>
+	<li><a href="http://www.craigslist.org">http://www.craigslist.org</a><br>
+	Local community classifieds and forums - a place to find jobs, housing, 
+	goods &amp; services, social activities, a girlfriend or boyfriend, advice, 
+	community information, and just about anything else.</li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2><a target="_blank" href="../../presentations/Architectures-07.ppt">From Programming to 
+Architectures</a></h2>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2><a target="_blank" href="../../presentations/sorcer-pma.ppt">SORCER Project 
+Management Architecture</a></h2>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>
+<a target="_blank" href="http://sorcer.cs.ttu.edu/resources/dev-corner.html">
+SORCER Developer's Corner</a><br>
+&nbsp;</h2>
+
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c9395c3510',t:'MTczOTIwNDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

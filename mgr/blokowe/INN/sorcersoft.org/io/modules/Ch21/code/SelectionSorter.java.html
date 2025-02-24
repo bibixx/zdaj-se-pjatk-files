@@ -1,0 +1,117 @@
+<pre>
+<tt>
+001: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>applet<font color=#990000>.</font>Applet<font color=#990000>;</font>
+002: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>awt<font color=#990000>.</font>Color<font color=#990000>;</font>
+003: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>awt<font color=#990000>.</font>Graphics2D<font color=#990000>;</font>
+004: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>awt<font color=#990000>.</font>geom<font color=#990000>.</font>Line2D<font color=#990000>;</font>
+005: 
+006: <i><font color=#9A1900>/**</font></i>
+007: <i><font color=#9A1900>   This class sorts an array, using the selection sort </font></i>
+008: <i><font color=#9A1900>   algorithm</font></i>
+009: <i><font color=#9A1900>*/</font></i>
+010: <b><font color=#0000FF>public</font></b> <b><font color=#0000FF>class</font></b> SelectionSorter
+011: <font color=#FF0000>{</font>
+012:    <i><font color=#9A1900>/**</font></i>
+013: <i><font color=#9A1900>      Constructs a selection sorter.</font></i>
+014: <i><font color=#9A1900>      @param anArray the array to sort.</font></i>
+015: <i><font color=#9A1900>   */</font></i>
+016:    <b><font color=#0000FF>public</font></b> <b><font color=#000000>SelectionSorter</font></b><font color=#990000>(</font><font color=#009900>int</font><font color=#990000>[</font><font color=#990000>]</font> anArray<font color=#990000>,</font> Applet anApplet<font color=#990000>)</font>
+017:    <font color=#FF0000>{</font>
+018:       a <font color=#990000>=</font> anArray<font color=#990000>;</font>
+019:       applet <font color=#990000>=</font> anApplet<font color=#990000>;</font>
+020:    <font color=#FF0000>}</font>
+021: 
+022:    <i><font color=#9A1900>/**</font></i>
+023: <i><font color=#9A1900>      Sorts the array managed by this selection sorter.</font></i>
+024: <i><font color=#9A1900>   */</font></i>
+025:    <b><font color=#0000FF>public</font></b> <font color=#009900>void</font> <b><font color=#000000>sort</font></b><font color=#990000>(</font><font color=#990000>)</font> 
+026:       <b><font color=#0000FF>throws</font></b> InterruptedException
+027:    <font color=#FF0000>{</font>  
+028:       <b><font color=#000000>for</font></b> <font color=#990000>(</font><font color=#009900>int</font> i <font color=#990000>=</font> <font color=#993399>0</font><font color=#990000>;</font> i <font color=#990000>&lt;</font> a<font color=#990000>.</font>length <font color=#990000>-</font> <font color=#993399>1</font><font color=#990000>;</font> i<font color=#990000>+</font><font color=#990000>+</font><font color=#990000>)</font>
+029:       <font color=#FF0000>{</font>  
+030:          <font color=#009900>int</font> minPos <font color=#990000>=</font> <b><font color=#000000>minimumPosition</font></b><font color=#990000>(</font>i<font color=#990000>)</font><font color=#990000>;</font>
+031:          <b><font color=#000000>swap</font></b><font color=#990000>(</font>minPos<font color=#990000>,</font> i<font color=#990000>)</font><font color=#990000>;</font>
+032:          <i><font color=#9A1900>// for animation</font></i>
+033:          alreadySorted <font color=#990000>=</font> i<font color=#990000>;</font>
+034:          <b><font color=#000000>pause</font></b><font color=#990000>(</font><font color=#993399>2</font><font color=#990000>)</font><font color=#990000>;</font>
+035:       <font color=#FF0000>}</font>
+036:    <font color=#FF0000>}</font>
+037: 
+038:    <i><font color=#9A1900>/**</font></i>
+039: <i><font color=#9A1900>      Finds the smallest element in a tail range of the array</font></i>
+040: <i><font color=#9A1900>      @param from the first position in a to compare</font></i>
+041: <i><font color=#9A1900>      @return the position of the smallest element in the</font></i>
+042: <i><font color=#9A1900>      range a[from]...a[a.length - 1]</font></i>
+043: <i><font color=#9A1900>   */</font></i>
+044:    <b><font color=#0000FF>private</font></b> <font color=#009900>int</font> <b><font color=#000000>minimumPosition</font></b><font color=#990000>(</font><font color=#009900>int</font> from<font color=#990000>)</font>
+045:       <b><font color=#0000FF>throws</font></b> InterruptedException
+046:    <font color=#FF0000>{</font>  
+047:       <font color=#009900>int</font> minPos <font color=#990000>=</font> from<font color=#990000>;</font>
+048:       <b><font color=#000000>for</font></b> <font color=#990000>(</font><font color=#009900>int</font> i <font color=#990000>=</font> from <font color=#990000>+</font> <font color=#993399>1</font><font color=#990000>;</font> i <font color=#990000>&lt;</font> a<font color=#990000>.</font>length<font color=#990000>;</font> i<font color=#990000>+</font><font color=#990000>+</font><font color=#990000>)</font>
+049:       <font color=#FF0000>{</font>
+050:          <b><font color=#000000>if</font></b> <font color=#990000>(</font>a<font color=#990000>[</font>i<font color=#990000>]</font> <font color=#990000>&lt;</font> a<font color=#990000>[</font>minPos<font color=#990000>]</font><font color=#990000>)</font> minPos <font color=#990000>=</font> i<font color=#990000>;</font>
+051:          <i><font color=#9A1900>// for animation</font></i>
+052:          markedPosition <font color=#990000>=</font> i<font color=#990000>;</font>
+053:          <b><font color=#000000>pause</font></b><font color=#990000>(</font><font color=#993399>2</font><font color=#990000>)</font><font color=#990000>;</font>
+054:       <font color=#FF0000>}</font>
+055:       <b><font color=#0000FF>return</font></b> minPos<font color=#990000>;</font>
+056:    <font color=#FF0000>}</font>
+057: 
+058:    <i><font color=#9A1900>/**</font></i>
+059: <i><font color=#9A1900>      Swaps two entries of the array.</font></i>
+060: <i><font color=#9A1900>      @param i the first position to swap</font></i>
+061: <i><font color=#9A1900>      @param j the second position to swap</font></i>
+062: <i><font color=#9A1900>   */</font></i>
+063:    <b><font color=#0000FF>private</font></b> <font color=#009900>void</font> <b><font color=#000000>swap</font></b><font color=#990000>(</font><font color=#009900>int</font> i<font color=#990000>,</font> <font color=#009900>int</font> j<font color=#990000>)</font>
+064:    <font color=#FF0000>{</font>
+065:       <font color=#009900>int</font> temp <font color=#990000>=</font> a<font color=#990000>[</font>i<font color=#990000>]</font><font color=#990000>;</font>
+066:       a<font color=#990000>[</font>i<font color=#990000>]</font> <font color=#990000>=</font> a<font color=#990000>[</font>j<font color=#990000>]</font><font color=#990000>;</font>
+067:       a<font color=#990000>[</font>j<font color=#990000>]</font> <font color=#990000>=</font> temp<font color=#990000>;</font>
+068:    <font color=#FF0000>}</font>
+069: 
+070:    <i><font color=#9A1900>/**</font></i>
+071: <i><font color=#9A1900>      Draws the current state of the sorting algorithm.</font></i>
+072: <i><font color=#9A1900>      @param g2 the graphics context</font></i>
+073: <i><font color=#9A1900>   */</font></i>
+074:    <b><font color=#0000FF>public</font></b> <font color=#009900>void</font> <b><font color=#000000>draw</font></b><font color=#990000>(</font>Graphics2D g2<font color=#990000>)</font>
+075:    <font color=#FF0000>{</font>
+076:       <font color=#009900>int</font> deltaX <font color=#990000>=</font> applet<font color=#990000>.</font><b><font color=#000000>getWidth</font></b><font color=#990000>(</font><font color=#990000>)</font> <font color=#990000>/</font> a<font color=#990000>.</font>length<font color=#990000>;</font>
+077:       <b><font color=#000000>for</font></b> <font color=#990000>(</font><font color=#009900>int</font> i <font color=#990000>=</font> <font color=#993399>0</font><font color=#990000>;</font> i <font color=#990000>&lt;</font> a<font color=#990000>.</font>length<font color=#990000>;</font> i<font color=#990000>+</font><font color=#990000>+</font><font color=#990000>)</font>
+078:       <font color=#FF0000>{</font>
+079:          <b><font color=#000000>if</font></b> <font color=#990000>(</font>i <font color=#990000>=</font><font color=#990000>=</font> markedPosition<font color=#990000>)</font>
+080:             g2<font color=#990000>.</font><b><font color=#000000>setColor</font></b><font color=#990000>(</font>Color<font color=#990000>.</font>red<font color=#990000>)</font><font color=#990000>;</font>
+081:          <b><font color=#0000FF>else</font></b> <b><font color=#000000>if</font></b> <font color=#990000>(</font>i <font color=#990000>&lt;</font><font color=#990000>=</font> alreadySorted<font color=#990000>)</font>
+082:             g2<font color=#990000>.</font><b><font color=#000000>setColor</font></b><font color=#990000>(</font>Color<font color=#990000>.</font>blue<font color=#990000>)</font><font color=#990000>;</font>
+083:          <b><font color=#0000FF>else</font></b>
+084:             g2<font color=#990000>.</font><b><font color=#000000>setColor</font></b><font color=#990000>(</font>Color<font color=#990000>.</font>black<font color=#990000>)</font><font color=#990000>;</font>
+085:          g2<font color=#990000>.</font><b><font color=#000000>draw</font></b><font color=#990000>(</font><b><font color=#0000FF>new</font></b> Line2D<font color=#990000>.</font><b><font color=#000000>Double</font></b><font color=#990000>(</font>i <font color=#990000>*</font> deltaX<font color=#990000>,</font> <font color=#993399>0</font><font color=#990000>,</font> 
+086:             i <font color=#990000>*</font> deltaX<font color=#990000>,</font> a<font color=#990000>[</font>i<font color=#990000>]</font><font color=#990000>)</font><font color=#990000>)</font><font color=#990000>;</font>
+087:       <font color=#FF0000>}</font>
+088:    <font color=#FF0000>}</font>
+089: 
+090:    <i><font color=#9A1900>/**</font></i>
+091: <i><font color=#9A1900>      Pauses the animation.</font></i>
+092: <i><font color=#9A1900>      @param steps the number of steps to pause</font></i>
+093: <i><font color=#9A1900>   */</font></i>
+094:    <b><font color=#0000FF>public</font></b> <font color=#009900>void</font> <b><font color=#000000>pause</font></b><font color=#990000>(</font><font color=#009900>int</font> steps<font color=#990000>)</font> 
+095:       <b><font color=#0000FF>throws</font></b> InterruptedException
+096:    <font color=#FF0000>{</font>
+097:       <b><font color=#000000>if</font></b> <font color=#990000>(</font>Thread<font color=#990000>.</font><b><font color=#000000>currentThread</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>.</font><b><font color=#000000>isInterrupted</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>)</font> 
+098:          <b><font color=#0000FF>throw</font></b> <b><font color=#0000FF>new</font></b> <b><font color=#000000>InterruptedException</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+099:       applet<font color=#990000>.</font><b><font color=#000000>repaint</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+100:       Thread<font color=#990000>.</font><b><font color=#000000>sleep</font></b><font color=#990000>(</font>steps <font color=#990000>*</font> DELAY<font color=#990000>)</font><font color=#990000>;</font>
+101:    <font color=#FF0000>}</font>
+102: 
+103:    <b><font color=#0000FF>private</font></b> <font color=#009900>int</font><font color=#990000>[</font><font color=#990000>]</font> a<font color=#990000>;</font>
+104: 
+105:    <i><font color=#9A1900>// the applet is needed for pausing the animation</font></i>
+106:    <b><font color=#0000FF>private</font></b> Applet applet<font color=#990000>;</font>   
+107:    
+108:    <i><font color=#9A1900>// these fields are needed for drawing </font></i>
+109:    <b><font color=#0000FF>private</font></b> <font color=#009900>int</font> markedPosition <font color=#990000>=</font> <font color=#990000>-</font><font color=#993399>1</font><font color=#990000>;</font>
+110:    <b><font color=#0000FF>private</font></b> <font color=#009900>int</font> alreadySorted <font color=#990000>=</font> <font color=#990000>-</font><font color=#993399>1</font><font color=#990000>;</font>
+111: 
+112:    <b><font color=#0000FF>private</font></b> <b><font color=#0000FF>static</font></b> <b><font color=#0000FF>final</font></b> <font color=#009900>int</font> DELAY <font color=#990000>=</font> <font color=#993399>100</font><font color=#990000>;</font>
+113: <font color=#FF0000>}</font>
+</tt>
+</pre>

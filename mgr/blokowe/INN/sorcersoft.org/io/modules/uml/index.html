@@ -1,0 +1,506 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Introduction to Modeling with UML</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="../uml/module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Introduction to Modeling with UML</span><BR>
+
+<H2>Course Map</H2>
+<img border="0" src="CourseMap7.png">
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Agenda</h2>
+<ul>
+	<li>History</li>
+	<li>Infrastructure of the UML</li>
+	<li>Object Constraint Language</li>
+	<li>Diagram Interchange</li>
+	<li>Superstructure of the UML</li>
+	<li>Basic UML Diagrams</li>
+	<li><a target="_blank" href="../../uml/super-11-08-06.pdf">OMG Unified 
+	Modeling Language: Superstructure</a><br>
+&nbsp;</li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<H2 >History</H2>
+<ul>
+	<li>
+	In the mid-1990s, Grady Booch was trying to unify some 
+	of the software development methods that were being proffered by different 
+	methodologists at the time. The OMT of Rumbaugh <EM CLASS="ForeignOrLatin">et al.</EM>
+ 	being the other - his effort seemed one of the more promising (problem 
+	statement; three models: object, dynamic, and functional).</li>
+ 	<li>The unification began and in 1995 the world became aware of the Unified Modeling Language, or UML.
+	The original contributors were Grady Booch and James Rumbaugh. &quot;Class&quot; diagrams and statecharts began to stabilize.<br>
+	Later, Ivar Jacobson joined in the effort and use cases and interaction diagrams were added.
+    <li>In 1997 The Object Management Group, or OMG (<A HREF="http://www.omg.org" CLASS="URL">http://www.omg.org</a>) took over stewardship of the UML from Rational Software Corporation, where the three authors were all working at that time, and where the UML had originally been developed. The OMG's main prior claim to fame had been the CORBA distributed object standard.
+    <li>
+	<a href="http://www.omg.org/technology/documents/modeling_spec_catalog.htm">UML</a> 2 arrived as a Final Adopted Specification in 2003 and replaced UML 1.5 in 2004.
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<H2 CLASS="FM1Heading">
+Structure of the UML</H2>
+<P CLASS="FirstBody">Four parts comprise the UML:</P>
+<UL>
+	<LI CLASS="Bullet-First-">Infrastructure</LI>
+	<LI CLASS="Bullet">Superstructure</LI>
+	<LI CLASS="Bullet">Object constraint language</LI>
+	<LI CLASS="Bullet">Diagram interchange</LI>
+</UL>
+<DIV>
+	<P CLASS="FirstBody">The 
+	<EM CLASS="NameOrTitle">superstructure</EM>
+ of the UML, which is our primary interest, offers standard modeling concepts 
+	that enable anyone who understands the superstructure, to create models that 
+	other people who understand the superstructure will stand a good chance of 
+	interpreting properly. </P>
+</DIV>
+<DIV>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+	<h2>Infrastructure</h2>
+	<ul>
+		<li>
+		The infrastructure doesn't focus on the UML itself; instead it describes the way in which the UML is described, and the way that description is structured into packages 
+	and profiles. For example, the most basic elements of modeling are 
+	represented core UML and additional layers and profiles tailor existing 
+	metamodels toward specific platforms, such as C++, Java, CORBA, or EJB, or 
+	domains such as real-time, business objects, or SW process modeling. This layering helps organize the UML,
+	and it helps incremental learning as well.<br>
+		<img border="0" src="images/infra1.png" width="504" height="223"><li>
+		A CASE tool can store the information gleaned from its diagrams in a 
+		nice sensible schema (logical database structure). What kinds of 
+		elements (what tables?) would the database need? That's what the 
+		infrastructure tries to tell you, the tool builder, as formally as 
+		possible.<li>
+		The infrastructure tries to ensure that the way the UML is described - 
+		the metamodel - is itself compatible with other modeling language 
+		descriptions. <br>
+		<img border="0" src="images/infra3.png" width="495" height="339"><p>
+		The Core packages<p>
+		&nbsp;<img border="0" src="images/infra2.png" width="550" height="320"><p>
+		The role of the common Core<br>
+&nbsp;<li>
+		The OMG has other metamodel called the Meta-Object Facility (MOF) - the 
+		metamodel of the UML. The languages in which languages are expressed are 
+		often called metalanguages. The infrastructure of the UML has metamodels 
+		of metamodels. A common and helpful picture is the &quot;M n &quot; picture of the 
+		layering. Look at Modeling layers (metamodels and meta-metamodels).<br>
+		<img border="0" src="images/infra4.png" width="500" height="282"><br>
+&nbsp;<li>
+		All of the UML metamodel is instantiated from meta-metaclasses that are 
+		defined in the InfrastructureLibrary.<li>
+		The UML metamodel imports and specializes all metaclasses in the 
+		InfrastructureLibrary.<li>
+		You do not need to learn the infrastructure - only UML models relevant 
+		to your projects, unless you want to be involved in the OMG UML 
+		standardization process.<br>
+&nbsp;</li></ul>
+</DIV>
+<DIV>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+	<h2>Object Constraint Language</h2>
+	<ul>
+		<li>
+		<P CLASS="FirstBody">The Object Constraint Language, or OCL, is a textual, formal, expression language for rigorously writing constraints using identifiers and values. 
+		</P></li>
+		<li>
+		<P CLASS="FirstBody">Constraints can appear in diagrams, often involving brackets: square for guards and curly for general constraints. Constraints can also express
+		<EM CLASS="NameOrTitle">preconditions</EM>
+, <EM CLASS="NameOrTitle">postconditions</EM>
+ and <EM CLASS="NameOrTitle">invariants</EM>. </P></li>
+		<li>
+		<P CLASS="FirstBody">Preconditions, postconditions and invariants are 
+		particular easy and powerful ways of improving specifications (<i><b>design 
+		by contract</b></i>). 
+		Preconditions are statements that must turn out to be true before 
+		particular things can take place. Postconditions are statements that 
+		must turn out to be true after particular things have taken place. 
+		Invariants are things that must always hold true when the system is at a 
+		stable point, i.e. the elements of the invariant are not actually 
+		undergoing change.</P></li>
+		<li>
+		<P CLASS="FirstBody">The OCL is also used in the UML infrastructure to 
+		formally express constraints of the UML metamodel.</P></li>
+		<li>
+		<P CLASS="FirstBody">The OCL has forAll and exists operators, but they 
+		can only be applied to identifiable existing collections. So it has a 
+		kind of higher-order logic.<br>
+&nbsp;</P></li>
+	</ul>
+</DIV>
+<DIV>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+	<h2>Diagram Interchange</h2>
+	<ul>
+		<li>
+		<P CLASS="FirstBody">The UML lacked a defined way of describing and transporting diagrams with all their layout information.</P>
+		</li>
+		<li>
+		<P CLASS="FirstBody">UML 2.0 brings an XML-based diagram interchange standard.</P>
+		</li>
+	</ul>
+</DIV>
+<DIV>
+<H2 CLASS="FM1Heading">&nbsp;
+</H2>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<H2 CLASS="FM1Heading">
+Metamodel Layering</H2>
+<p>
+The architecture that is centered around the Core package is a complementary 
+view of the four-layer metamodel hierarchy
+on which the UML metamodel has traditionally been based. When dealing with 
+meta-layers to define languages there are
+generally three layers that always has to be taken into account:</p>
+<ul>
+	<li>the language specification, or the metamodel (mangement),</li>
+	<li>the user specification, or the model (domain), and</li>
+	<li>objects of the model (carrier).</li>
+</ul>
+<p>This structure can be applied recursively many times so that we get a 
+possibly infinite number of meta-layers; what is a
+metamodel in one case can be a model in another case, and this is what happens 
+with UML and MOF. UML is a language
+specification (metamodel) from which users can define their own models. 
+Similarly, MOF is also a language specification
+(metamodel) from which users can define their own models.</p>
+<p><img border="0" src="images/meta1.png" width="532" height="284"></p>
+<p>An example of metamodeling; note that not all instance-of relationships are 
+shown</p>
+<p><img border="0" src="images/meta2.png" width="550" height="339"></p>
+<p>Giving an illustration of a class using an instance specification</p>
+<p><img border="0" src="images/metamodeling.png" width="650" height="619"></p>
+<p>An example of the four-layer metamodel hierarchy</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<H2 CLASS="FM1Heading">
+Superstructure of the UML: Diagrams</H2>
+<P CLASS="FirstBody">
+There are two kinds of diagrams: structure diagrams which represent the way 
+things are, and behavior diagrams which represent the way things happen.</P>
+<P CLASS="FirstBody">
+<img border="0" src="images/omg-super.png" width="650" height="467"></P>
+<P CLASS="FirstBody">
+The top-level package structure of UML 2.0 Superstructure</P>
+<P CLASS="Body">
+A diagram requires a border or a title, Diagram frame shows how this is done. The border plus title is known as a <EM CLASS="NameOrTitle">
+frame</EM>
+. Some behavioral diagram elements appear on diagram borders - ports or entry/exit points, for example.</P>
+<P CLASS="Body">
+<img border="0" src="images/empty-frame.png" width="427" height="255"></P>
+<P CLASS="Body">
+The heading gives the <EM CLASS="NameOrTitle">
+kind</EM>
+ of diagram and the <EM CLASS="NameOrTitle">
+name</EM>: <i>[&lt;kind&gt;]&lt;name&gt;[&lt;parameters&gt;]</i><br>
+The diagram may have the following <EM CLASS="NameOrTitle">
+kinds</EM>
+:</P>
+<ul>
+	<li>class</li>
+	<li>component</li>
+	<li>interaction</li>
+	<li>package</li>
+	<li>state machine</li>
+	<li>use case</li>
+</UL>
+	In addition to the long form names for diagram heading types, the following 
+	abbreviated forms can also be used:
+	<ul>
+		<li>act (for activity frames)</li>
+		<li>cmp (for component frames)</li>
+		<li>sd (for interaction frames)</li>
+		<li>pkg (for package frames)</li>
+		<li>stm (for state machine frames)</li>
+		<li>uc (for use case frames)</li>
+</ul>
+<p><img border="0" src="images/package-frame.png" width="431" height="243"></p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Things</h2>
+<p><b>Things</b> are the entities of a UML model.</p>
+<p>UML things can be partitioned:</p>
+<ul>
+	<li><b>structural</b> things: class, interface, collaboration, use case, active 
+	class, component, node</li>
+	<li><b>behavioral</b> things (process representation): interactions, 
+	activities, state machines</li>
+	<li><b>grouping</b> things: package, component</li>
+	<li><b>annotational</b> things: a note</li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Relationships</h2>
+<ul>
+	<li>UML relationships connect things.<ul>
+	<li>A <b>dependency</b> relationship indicates that one element depends in 
+	some way on another.</li>
+	<li><b>Associations</b> are connections between classifiers.</li>
+	<li><b>Links</b> are connections between instances.</li>
+</ul>
+	</li>
+</ul>
+<p><img border="0" src="images/table1-1.jpg"></p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2><a name="Extensibility_Mechanisms">Extensibility Mechanisms</a></h2>
+<ul>
+	<li>UML is extensible modeling language.</li>
+	<li><b>Constraints</b><br>
+	These extend the semantics of sn element by allowing us to add new rules.<br>
+	Constrains are define in OCL.</li>
+	<li><b>Stereotypes</b><br>
+	These allow us to define a new UML modeling element based on an existing one 
+	- we define the semantics if stereotype ourselves.<br>
+	(append a stereotype name in guillemets, e.g., &laquo;interface&raquo;)</li>
+	<li><b>Tagged values</b><br>
+	These provide a way of extending an element's specification by allowing us 
+	to add new, ad hoc information to it.<br>
+	{tag1 = value1, tag2 = value2, ... , tagN = valueN}</li>
+</ul>
+<p>&nbsp;</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>UML Diagrams Used in this Course</h2>
+<p><map name="FPMap1">
+<area href="../../uml/ActivityDiagrams.html" shape="rect" coords="346, 121, 428, 161">
+<area href="../../uml/UML-borland-UCDs.html" shape="rect" coords="466, 121, 550, 162">
+<area coords="346, 239, 428, 275" shape="rect" href="../../uml/UML-borland-SDs.html#Sequence_Diagrams">
+<area href="../../uml/UML-borland-SDs.html#Communication_Diagrams" shape="rect" coords="412, 285, 493, 325">
+<area href="../../uml/UML-borland-CDs.html" shape="rect" coords="6, 123, 88, 162">
+<area href="../../uml/UML-borland-CompDs.html" shape="rect" coords="105, 123, 187, 162">
+<area href="../../uml/compositeStructures.html" shape="rect" coords="56, 177, 137, 212">
+<area href="../../uml/UML-borland-DeplDs.html" shape="rect" coords="155, 175, 238, 214">
+<area href="../../uml/analysisPackages.html" shape="rect" coords="259, 176, 343, 214">
+</map>
+<img border="0" src="images/diagram-taxonomy.png" width="650" height="329" usemap="#FPMap1"></p>
+<ul>
+	<li>Structure Diagrams<ul>
+		<li><a href="../../uml/UML-borland-CDs.html">Class diagrams</a> (structure diagram)  
+		</li>
+		<li><a href="../../uml/analysisPackages.html">Package diagrams</a> (included in
+		<a href="../../uml/UML-borland-CDs.html">class diagrams</a>)</li>
+		<li><span class="FM2Heading">
+		<a href="../../uml/UML-borland-CompDs.html">Component diagrams</a></span></li>
+		<li><span class="FM2Heading">
+		<a href="../../uml/compositeStructures.html">Composite structure diagrams</a></span></li>
+		<li><span class="FM2Heading">
+		<a href="../../uml/UML-borland-DeplDs.html">Deployment diagrams</a></span></li>
+	</ul>
+	<li>Behavior Diagrams<ul>
+		<li><span class="FM2Heading"><a href="../../uml/UML-borland-UCDs.html">Use cases</a></span></li>
+		<li><span class="FM2Heading"><a href="../../uml/ActivityDiagrams.html">Activity diagram</a></span></li>
+		<li><span class="FM2HeadingAfter1Heading">
+		<a href="../../uml/UML-borland-SDs.html#Sequence_Diagrams">Sequence diagrams</a></span></li>
+		<li><span class="FM2Heading"><a href="../../uml/UML-borland-ComDs.html">Communication diagrams</a></span></li>
+	</ul>
+	<p>&nbsp;</ul>
+</DIV>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Terminology and Templates</h2>
+<ul>
+	<li><i>Requirements Definition </i>(<b>requirements</b>)<br>
+	A record of the requirements expressed in the customer's terms (<b>4-blocker</b>)</li>
+	<li><i>Requirements Specification</i> (<b>specification</b>)<br>
+	A record of the requirements expressed from the perspective of developer (<b>UML 
+	diagrams</b>)<ul>
+		<li><a href="../../assignments.html#Outline_for_the_project_report">Project Report</a></li>
+		<li><a href="srs_template.doc">Software Requirements Specification</a></li>
+		<li><a href="00720574.pdf">IEEE Recommended Practice for Software 
+		Requirements Specifications</a></li>
+		<li><a href="write-SRS.html">How to write a software requirements 
+		specification</a></li>
+	</ul>
+	</li>
+	<li><i>Source code (IDE)</i><br>
+	Source code (commonly just <b>source</b> or <b>code</b>) is any sequence of 
+	statements and/or declarations written in some human-readable computer 
+	programming language.</li>
+	<li><i>Executable code (IDE)</i><br>
+	A file containing a program in machine language which is ready to be 
+	executed (run). </li>
+	<li><i>UML Model (IDE)</i><ul>
+	<li>A representation of a set of components of a process, system, or subject 
+	area, generally developed for understanding, analysis, improvement, and/or 
+	replacement of the process. </li>
+	<li>A representation of information, activities, 
+	relationships, and constraints.</li>
+	<li>A representation of some aspect of external reality in a program or 
+	simulation of something that cannot be directly observed.</li>
+</ul>
+	</li>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>What Are Verification, Validation, and Accreditation?</h2>
+<p>In the context of computer software, the terms verification, validation, and 
+accreditation have specific meanings. </p>
+<ul>
+	<li>Verification is an activity that determines whether the product of each 
+	phase of the software development cycle meets the requirements made upon it 
+	in each preceding phase, as in the questions <em>&quot;Does the software design 
+	satisfy all elements of the requirements?&quot;</em> or <em>&quot;Does the 
+	implementation accurately reflect the design?&quot;</em></li>
+	<li>Validation is an activity that answers the question, <em>&quot;Is the 
+	software suitable for its intended purpose?&quot;</em> Provided the verification 
+	activity has been properly performed, that question translates roughly to
+	<em>&quot;Does the software meet its requirements when it's run?&quot;</em></li>
+	<li>Accreditation is a milestone: when it is reached, the accrediting agency 
+	issues a statement that the software product is appropriate for a specified 
+	purpose within a well-defined set of circumstances. Accreditation must be 
+	done by a respected authority in the field if the software's user community 
+	is to have confidence in the software.</li>
+</ul>
+<p>It is important that these activities are kept <em>independent</em> of the 
+development activity and that they are conducted <em>rigorously</em>. This is, 
+among other reasons, to ensure that the customer's confidence in the software 
+can remain high.</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Verification</h2>
+<p><i>Did I build the thing right?</i> </p>
+<ul>
+	<li>Have the model and simulation been built so 
+that they fully satisfy the developer&#8217;s intent (as indicated in specifications)? 
+	</li>
+	<li>Verification has two aspects: </li>
+	<ul>
+	<li>design (all specifications and nothing else are 
+included in the model or simulation design) </li>
+	<li>implementation (all 
+specifications and nothing else are included in the model or simulation as 
+built).</li>
+</ul>
+</ul>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Validation</h2>
+<p><i>Did I build the right thing?</i> </p>
+<ul>
+	<li>Will the model or simulation be able to 
+adequately support its intended use? </li>
+	<li>Is its fidelity appropriate for that? 
+	</li>
+	<li>Validation has two aspects:<ul>
+	<li>conceptual validation (when the anticipated fidelity 
+of the model or simulation conceptual model is assessed) 
+	</li>
+	<li>results validation 
+(when results from the implemented model or simulation are compared with an appropriate referent to demonstrate that the model or simulation can in fact 
+support the intended use).</li>
+</ul>
+</ul>
+
+<p><img border="0" src="images/vva2.png" width="653" height="346"></p>
+<p>&nbsp;</p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Moving from Document Centric to Model Centric Development (SysML)</h2>
+<p><img border="0" src="images/fromDocsToModel.png" width="600" height="317"></p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2><a name="Putting_It_All_Together">Putting It All Together</a></h2>
+<p><map name="FPMap0">
+<area target="_blank" coords="15, 9, 275, 195" shape="rect" href="images/4-blocker.png">
+<area target="_blank" coords="152, 214, 485, 389" shape="rect" href="images/vva2.png">
+<area target="_blank" coords="333, 440, 649, 626" shape="rect" href="images/UML-3layers.png">
+</map>
+<img border="0" src="images/together2.png" usemap="#FPMap0"></p>
+
+
+<HR align="left" width="100%" size="4" noshade>
+
+
+<h2>Personal Observations</h2>
+<h2>Everyone <b><i>can write programs</i></b> but not <b><i>everyone can design 
+  them</i></b>.</h2>
+<ul>
+	<li>There are tons of books on <i>programming and design</i> as well on <i>
+  cooking and diet</i>.</li>
+	<li><em><strong>Imperative</strong></em> (procedural) <strong><em>program</em></strong> in general: a <strong><em>subroutine</em></strong> expressed by: statement concatenation, branching, and looping (<b><i>algorithmic 
+	logic</i></b>).</li>
+	<li><em><strong>OO program</strong></em>: a <strong><em>structured collection of objects</em></strong> of your object model (<b><i>social 
+	metaphor</i></b>)</li>
+	<li><em><strong>SO program</strong></em> (distributed program): a <strong><em>structured collection of net subroutines </em></strong>(SPOA)<strong><em> and/or objects</em></strong> (SOOA)</li>
+	<li>Be pragmatic
+  <ul>
+    <li><b>modularize - commonality and loose coupling</b></li>
+    <li><b>encapsulate - variability and cohesiveness</b></li>
+    <li><b>manage process - cone of uncertainty so listen to the customer</b></li>
+  </ul>
+  </li>
+	<li>Or, eat less, exercise more, and listen to yourself</li>
+</ul>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c6ecb5027d',t:'MTczOTIwNDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY>
+</HTML>

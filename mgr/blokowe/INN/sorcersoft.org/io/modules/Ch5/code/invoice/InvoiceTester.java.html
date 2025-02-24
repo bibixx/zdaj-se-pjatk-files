@@ -1,0 +1,68 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>event<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">03: </font><b><font color="#000080">import</font></b> javax<font color="#990000">.</font>swing<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">04: </font><b><font color="#000080">import</font></b> javax<font color="#990000">.</font>swing<font color="#990000">.</font>event<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">05: </font>
+<font color="#000000">06: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">07: </font><i><font color="#9A1900">   A program that tests the invoice classes.</font></i>
+<font color="#000000">08: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">09: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> InvoiceTester
+<font color="#000000">10: </font><font color="#FF0000">{</font>
+<font color="#000000">11: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#0000FF">static</font></b> <font color="#009900">void</font> <b><font color="#000000">main</font></b><font color="#990000">(</font>String<font color="#990000">[</font><font color="#990000">]</font> args<font color="#990000">)</font>
+<font color="#000000">12: </font>   <font color="#FF0000">{</font>
+<font color="#000000">13: </font>      <b><font color="#0000FF">final</font></b> Invoice invoice <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Invoice</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">14: </font>      <b><font color="#0000FF">final</font></b> InvoiceFormatter formatter <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">SimpleFormatter</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">15: </font>
+<font color="#000000">16: </font>      <i><font color="#9A1900">// This text area will contain the formatted invoice</font></i>
+<font color="#000000">17: </font>      <b><font color="#0000FF">final</font></b> JTextArea textArea <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JTextArea</font></b><font color="#990000">(</font><font color="#993399">20</font><font color="#990000">,</font> <font color="#993399">40</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">18: </font>
+<font color="#000000">19: </font>      <i><font color="#9A1900">// When the invoice changes, update the text area</font></i>
+<font color="#000000">20: </font>      ChangeListener listener <font color="#990000">=</font> <b><font color="#0000FF">new</font></b>
+<font color="#000000">21: </font>         <b><font color="#000000">ChangeListener</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">22: </font>         <font color="#FF0000">{</font>
+<font color="#000000">23: </font>            <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">stateChanged</font></b><font color="#990000">(</font>ChangeEvent event<font color="#990000">)</font>
+<font color="#000000">24: </font>            <font color="#FF0000">{</font>
+<font color="#000000">25: </font>               textArea<font color="#990000">.</font><b><font color="#000000">setText</font></b><font color="#990000">(</font>invoice<font color="#990000">.</font><b><font color="#000000">format</font></b><font color="#990000">(</font>formatter<font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">26: </font>            <font color="#FF0000">}</font>
+<font color="#000000">27: </font>         <font color="#FF0000">}</font><font color="#990000">;</font>
+<font color="#000000">28: </font>      invoice<font color="#990000">.</font><b><font color="#000000">addChangeListener</font></b><font color="#990000">(</font>listener<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">29: </font>
+<font color="#000000">30: </font>      <i><font color="#9A1900">// Add line items to a combo box</font></i>
+<font color="#000000">31: </font>      <b><font color="#0000FF">final</font></b> JComboBox combo <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JComboBox</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">32: </font>      Product hammer <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Product</font></b><font color="#990000">(</font><font color="#FF0000">"Hammer"</font><font color="#990000">,</font> <font color="#993399">19.95</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">33: </font>      Product nails <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Product</font></b><font color="#990000">(</font><font color="#FF0000">"Assorted nails"</font><font color="#990000">,</font> <font color="#993399">9.95</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">34: </font>      combo<font color="#990000">.</font><b><font color="#000000">addItem</font></b><font color="#990000">(</font>hammer<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">35: </font>      Bundle bundle <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Bundle</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">36: </font>      bundle<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>hammer<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">37: </font>      bundle<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>nails<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">38: </font>      combo<font color="#990000">.</font><b><font color="#000000">addItem</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <b><font color="#000000">DiscountedItem</font></b><font color="#990000">(</font>bundle<font color="#990000">,</font> <font color="#993399">10</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">39: </font>
+<font color="#000000">40: </font>      <i><font color="#9A1900">// Make a button for adding the currently selected</font></i>
+<font color="#000000">41: </font>      <i><font color="#9A1900">// item to the invoice</font></i>
+<font color="#000000">42: </font>      JButton addButton <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JButton</font></b><font color="#990000">(</font><font color="#FF0000">"Add"</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">43: </font>      addButton<font color="#990000">.</font><b><font color="#000000">addActionListener</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b>
+<font color="#000000">44: </font>         <b><font color="#000000">ActionListener</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">45: </font>         <font color="#FF0000">{</font>
+<font color="#000000">46: </font>            <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">actionPerformed</font></b><font color="#990000">(</font>ActionEvent event<font color="#990000">)</font>
+<font color="#000000">47: </font>            <font color="#FF0000">{</font>
+<font color="#000000">48: </font>               LineItem item <font color="#990000">=</font> <font color="#990000">(</font>LineItem<font color="#990000">)</font> combo<font color="#990000">.</font><b><font color="#000000">getSelectedItem</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">49: </font>               invoice<font color="#990000">.</font><b><font color="#000000">addItem</font></b><font color="#990000">(</font>item<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">50: </font>            <font color="#FF0000">}</font>
+<font color="#000000">51: </font>         <font color="#FF0000">}</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">52: </font>
+<font color="#000000">53: </font>      <i><font color="#9A1900">// Put the combo box and the add button into a panel</font></i>
+<font color="#000000">54: </font>      JPanel panel <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JPanel</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">55: </font>      panel<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>combo<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">56: </font>      panel<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>addButton<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">57: </font>
+<font color="#000000">58: </font>      <i><font color="#9A1900">// Add the text area and panel to the content pane</font></i>
+<font color="#000000">59: </font>      JFrame frame <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">JFrame</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">60: </font>      frame<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b> <b><font color="#000000">JScrollPane</font></b><font color="#990000">(</font>textArea<font color="#990000">)</font><font color="#990000">,</font>
+<font color="#000000">61: </font>         BorderLayout<font color="#990000">.</font>CENTER<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">62: </font>      frame<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>panel<font color="#990000">,</font> BorderLayout<font color="#990000">.</font>SOUTH<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">63: </font>      frame<font color="#990000">.</font><b><font color="#000000">setDefaultCloseOperation</font></b><font color="#990000">(</font>JFrame<font color="#990000">.</font>EXIT_ON_CLOSE<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">64: </font>      frame<font color="#990000">.</font><b><font color="#000000">pack</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">65: </font>      frame<font color="#990000">.</font><b><font color="#000000">setVisible</font></b><font color="#990000">(</font><b><font color="#0000FF">true</font></b><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">66: </font>   <font color="#FF0000">}</font>
+<font color="#000000">67: </font><font color="#FF0000">}</font>
+</tt></pre>

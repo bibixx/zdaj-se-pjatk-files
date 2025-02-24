@@ -1,0 +1,1459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Interfaces, Inner Classes, and Annotations</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Interfaces, Inner Classes, and Annotations</span><BR>
+
+<H2>Course Map</H2>
+<img border="0" src="../../images/CourseMap16.png">
+
+<h2>Agenda</h2>
+<ul>
+  <li>Learn about interfaces</li>
+  <li>Be able to convert between class and interface references</li>
+  <li>Understand the concept of polymorphism</li>
+  <li>Appreciate how interfaces can be used to decouple classes</li>
+	<li><a href="#Nested_Types">Nested Types (Inner Classes) and Top-Level 
+	Classes</a></li>
+  <li>Learn how to implement helper classes as inner classes</li>
+  <li>Understand how inner classes access variables from the surrounding scope</li>
+  <li>Implement event listeners for timer events</li>
+	<li><a href="#Annotations">Annotations - the Java's Choice for Metadata</a></li>
+	<li>Annotations and Reflection</li>
+	<li>Tie it all together - build a simple annotation-based test framework</li>
+	<li><a href="#JUnit_4_Annotation_Types">JUnit 4 Annotation Types</a></li>
+</ul>
+
+
+<h2><br>
+Using Interfaces for Code Reuse</h2>
+<ul>
+  <li>Use <i>interface types</i> to make code more reusable</li>
+  <li>We used a <tt>DataSet</tt> to find the average and maximum 
+	of a set of values (<i>numbers</i>)</li>
+  <li>What if we want to find the average and maximum of a set of <tt>
+	BankAccount</tt> values?
+<pre>public class DataSet // Modified for BankAccount objects
+{
+   . . .
+   public void add(BankAccount x)
+   {
+      sum = sum + x.getBalance();
+      if (count == 0 || maximum.getBalance() &lt; x.getBalance())
+         maximum = x;
+      count++;
+   }
+
+   public BankAccount getMaximum()
+   {
+      return maximum;
+   }
+
+   private double sum;
+   private BankAccount maximum;
+   private int count;
+}</pre></li>
+</ul>
+
+
+<h2>Using Interfaces for Code Reuse</h2>
+<ul>
+  <li>Or suppose we wanted to find the coin with the highest value among a set 
+	of coins. We would need to modify the <tt>DataSet</tt> class again
+<pre>public class DataSet // Modified for Coin objects
+{
+   . . .
+   public void add(Coin x)
+   {
+      sum = sum + x.getValue();
+      if (count == 0 || maximum.getValue() &lt; x.getValue())
+         maximum = x;
+      count++;
+   }
+
+   public Coin getMaximum()
+   {
+      return maximum;
+   }
+
+   private double sum;
+   private Coin maximum;
+   private int count;
+}</pre></li>
+</ul>
+
+
+<h2>Using Interfaces for Code Reuse</h2>
+<ul>
+<li>The mechanics of analyzing the data is the same in all cases; details of 
+measurement differ</li>
+<li>Classes could agree on a method <tt>getMeasure</tt> that obtains the measure 
+to be used in the analysis</li>
+<li>We can implement a single reusable <tt>DataSet</tt> class whose <tt>add</tt> 
+method looks like this:
+<pre>sum = sum + x.getMeasure();
+if (count == 0 || maximum.getMeasure() &lt; x.getMeasure())
+   maximum = x;
+count++;</pre></li>
+<li>What is the type of the variable <tt>x</tt>?
+    <br><tt>x</tt> should refer to any class that has a <tt>getMeasure</tt> 
+method</li>
+<li>In Java, an <i>interface type</i> is used to specify required operations
+<pre>public interface Measurable
+{
+   double getMeasure();
+}</pre></li>
+<li>Interface declaration lists all methods (and their signatures) that the 
+interface type requires</li>
+</ul>
+
+
+<h2>Interfaces vs. Classes</h2>
+An interface type is similar to a class, but there are several important 
+differences:
+<ul>
+  <li>All methods in an interface type are abstract; they don't have an 
+	implementation</li>
+  <li>All methods in an interface type are automatically public</li>
+  <li>An interface type does not have instance fields</li>
+</ul>
+
+
+<h2>Generic <tt>DataSet</tt> for Measurable Objects</h2>
+<pre>public class DataSet
+{
+   . . .
+   public void add(<code class="blue">Measurable</code> x)
+   {
+      sum = sum + x.<code class="blue">getMeasure()</code>;
+      if (count == 0 || maximum.<code class="blue">getMeasure()</code> &lt; x.<code class="blue">getMeasure()</code>)
+         maximum = x;
+      count++;
+   }
+
+   public <code class="blue">Measurable</code> getMaximum()
+   {
+      return maximum;
+   }
+
+   private double sum;
+   private <code class="blue">Measurable</code> maximum;
+   private int count;
+}</pre>
+
+
+<h2>Implementing an Interface Type</h2>
+<ul>
+  <li>Use <tt>implements</tt> keyword to indicate that a class implements an 
+	interface type
+<pre>public class BankAccount <code class="blue">implements Measurable</code>
+{
+   public double getMeasure()
+   {
+      return balance;
+   }
+   <i>// Additional methods and fields</i>
+}</pre></li>
+  <li>A class can implement more than one interface type
+      <ul><li>Class must define all the methods that are required by all the 
+		interfaces it implements</li></ul></li>
+  <li>Another example:
+<pre>public class Coin implements Measurable
+{
+   public double getMeasure()
+   {
+      return value;
+   }
+   . . .
+}</pre></li>
+</ul>
+
+
+<h2>UML Diagram of DataSet and Related Classes</h2>
+<ul>
+  <li>Interfaces can reduce the coupling between classes</li>
+  <li>UML notation:
+    <ul><li>Interfaces are tagged with a &quot;stereotype&quot; indicator «interface»</li>
+    <li>A dotted arrow with a triangular tip denotes the &quot;is-a&quot; relationship 
+	between a class and an interface</li>
+    <li>A dotted line with an open v-shaped arrow tip denotes the &quot;uses&quot; 
+	relationship or dependency</li></ul></li>
+  <li>Note that <tt>DataSet</tt> is <i>decoupled</i> from <tt>BankAccount</tt> 
+	and <tt>Coin</tt><br>
+    <img src="images/uml1.png" alt=""></li>
+</ul>
+
+
+<h2>Syntax: Defining an Interface</h2>
+<table cellpadding="10" width="70%" border="1" bgcolor="#ffffff">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><pre>public interface <i>InterfaceName</i>
+{
+   // <i>method signatures</i>
+}</pre></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><pre>public interface Measurable
+{
+   double getMeasure();
+}</pre></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+ 		To define an interface and its method signatures. The methods are 
+		automatically public.</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+
+<h2>Syntax: Implementing an Interface</h2>
+<table cellpadding="10" width="69%" border="1" bgcolor="#ffffff">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><pre>public class <i>ClassName</i>
+   implements <i>InterfaceName, InterfaceName, ...</i>
+{
+      <i>// methods
+      // instance variables</i>
+}</pre></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><pre>public class BankAccount implements Measurable
+{
+   // Other BankAccount methods
+   public double getMeasure()
+   {
+      // Method implementation
+   }
+ }</pre></td></tr></tbody>
+      </table>
+      <h3>Purpose:</h3>
+     	To define a new class that implements the methods of an interface  
+     </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2>File DataSetTester.java</h2>
+<iframe src="code/measure1/DataSetTester.java.html" class="code" width="681" height="315">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+<br>Output
+<pre>   Average balance = 4000.0
+   Highest balance = 10000.0
+   Average coin value = 0.13333333333333333
+   Highest coin value = 0.25</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li>Suppose you want to use the <tt>DataSet</tt> class to find the <tt>Country</tt> 
+object with the largest population. What condition must the <tt>Country</tt> 
+class fulfill?</li>
+<li>Why can't the <tt>add</tt> method of the <tt>DataSet</tt> class have a 
+parameter of type <tt>Object</tt>?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li>It must implement the <tt>Measurable</tt> interface, and its <tt>getMeasure</tt> 
+method must return the population</li>
+<li>The <tt>Object</tt> class doesn't have a <tt>getMeasure</tt> method, and the <tt>
+add</tt> method invokes the <tt>getMeasure</tt> method</li>
+</ol>
+<br>
+
+
+<h2>Converting Between Class and Interface Types</h2>
+<ul>
+  <li>You can convert from a class type to an interface type, provided the class 
+	implements the interface</li>
+  <li><tt>BankAccount account = new BankAccount(10000);<br>
+ 	Measurable x = account; // OK</tt></li>
+  <li><tt>Coin dime = new Coin(0.1, &quot;dime&quot;);<br>
+	Measurable x = dime; // Also OK</tt></li>
+  <li>Cannot convert between unrelated types<br>
+    <tt>Measurable x = new Rectangle(5, 10, 20, 30); // ERROR</tt><br>
+  Because <tt>Rectangle</tt> doesn't implement <tt>Measurable</tt></li>
+</ul>
+
+
+<h2>Casts</h2>
+<ul>
+  <li>Add coin objects to <tt>DataSet<br>
+ 	DataSet coinData = new DataSet();<br>
+ 	coinData.add(new Coin(0.25, &quot;quarter&quot;));<br>
+ 	coinData.add(new Coin(0.1, &quot;dime&quot;));<br>
+ 	. . .<br>
+	Measurable max = coinData.getMaximum(); // Get the largest coin</tt></li>
+  <li>What can you do with it? It's not of type <tt>Coin<br>
+ 	String name = max.getName(); // ERROR</tt></li>
+  <li>You need a cast to convert from an interface type to a class type</li>
+  <li>You know it's a coin, but the compiler doesn't. Apply a cast:<br>
+    <tt>Coin maxCoin = (Coin) max;<br>
+ 	String name = maxCoin.getName();</tt></li>
+  <li>If you are wrong and <tt>max</tt> isn't a coin, the compiler throws an 
+	exception</li>
+  <li>Difference with casting numbers:<br>
+      When casting number types you agree to the information loss<br>
+      When casting object types you agree to that risk of causing an exception</li>
+</ul>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="3">Can you use a cast <tt>(BankAccount) x</tt> to convert a <tt>
+Measurable</tt> variable <tt>x</tt> to a
+<tt>BankAccount</tt> reference?</li>
+<li>If both <tt>BankAccount</tt> and <tt>Coin</tt> implement the <tt>Measurable</tt> 
+interface, can a <tt>Coin</tt> reference be converted to a <tt>BankAccount</tt> 
+reference?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="3">Only if <tt>x</tt> actually refers to a <tt>BankAccount</tt> 
+object.</li>
+<li>No&#8211;a <tt>Coin</tt> reference can be converted to a <tt>Measurable</tt> 
+reference, but if you attempt to cast that reference to a <tt>BankAccount</tt>, 
+an exception occurs.</li>
+</ol>
+<br>
+
+
+<h2>Polymorphism</h2>
+<ul>
+  <li>Interface variable holds reference to object of a class that implements 
+	the interface<br>
+    <tt>Measurable x;<br>
+ 	x = new BankAccount(10000);<br>
+ 	x = new Coin(0.1, &quot;dime&quot;);</tt>
+<br>Note that the object to which <tt>x</tt> refers doesn't have type <tt>
+	Measurable</tt>; the type of the object is some class that implements the <tt>
+	Measurable</tt> interface</li>
+  <li>You can call any of the interface methods:<br>
+    <tt>double m = x.getMeasure();</tt></li>
+  <li>Which method is called?</li>
+</ul>
+
+
+<h2>Polymorphism</h2>
+<ul>
+  <li>Depends on the actual object.&nbsp;</li>
+  <li>If <tt>x</tt> refers to a bank account, calls <tt>BankAccount.getMeasure</tt></li>
+  <li>If <tt>x</tt> refers to a coin, calls <tt>Coin.getMeasure</tt></li>
+  <li>Polymorphism (many shapes): Behavior can vary depending on the actual type 
+	of an object</li>
+  <li>Called <i>late binding</i>: resolved at runtime</li>
+  <li>Different from overloading; overloading is resolved by the compiler (<i>early 
+	binding</i>)</li>
+</ul>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="5">Why is it impossible to construct a <tt>Measurable</tt> object?</li>
+<li>Why can you nevertheless declare a variable whose type is <tt>Measurable</tt>?</li>
+<li>What do overloading and polymorphism have in common? Where do they differ?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="5"><tt>Measurable</tt> is an interface. Interfaces have no fields and 
+no method implementations.</li>
+<li>That variable never refers to a <tt>Measurable</tt> object. It refers to an 
+object of some class&#8211;a class that implements the <tt>Measurable</tt> interface.</li>
+<li>Both describe a situation where one method name can denote multiple methods. 
+However, overloading is resolved early by the compiler, by looking at the types 
+of the parameter variables. Polymorphism is resolved late, by looking at the 
+type of the implicit parameter object just before making the call.</li>
+</ol>
+<br>
+
+
+<h2>Using Interfaces for Callbacks</h2>
+<ul>
+  <li>Limitations of <tt>Measurable</tt> interface:
+  <ul>
+    <li>Can add <tt>Measurable</tt> interface only to classes under your control</li>
+    <li>Can measure an object in only one way
+        <br>E.g., cannot analyze a set of savings accounts both by bank balance 
+	and by interest rate</li>
+  </ul></li>
+  <li>Callback mechanism: allows a class to call back a specific method when it 
+	needs more information</li>
+  <li>In previous <tt>DataSet</tt> implementation, responsibility of measuring 
+	lies with the added objects themselves</li>
+  <li>Alternative: Hand the object to be measured to a method:<br>
+    <pre>public interface Measurer
+{
+   double measure(Object anObject);
+}</pre></li>
+  <li><tt>Object</tt> is the &quot;lowest common denominator&quot; of all classes</li>
+</ul>
+
+
+<h2>Using Interfaces for Callbacks</h2>
+<ul>
+  <li><tt>add</tt> method asks measurer (and not the added object) to do the 
+	measuring
+<pre>public void add(Object x)
+{
+   sum = sum + <code class="blue">measurer.measure(x)</code>;
+   if (count == 0 || <code class="blue">measurer.measure(maximum)</code> &lt; <code class="blue">measurer.measure(x)</code>)
+   maximum = x;
+   count++;
+}</pre></li>
+</ul>
+
+<h2>Using Interfaces for Callbacks</h2>
+<ul>
+  <li>You can define measurers to take on any kind of measurement
+<br>
+<pre>public class RectangleMeasurer implements Measurer
+{
+   public double measure(Object anObject)
+   {
+      Rectangle aRectangle = (Rectangle) anObject;
+      double area = aRectangle.getWidth() * aRectangle.getHeight();
+      return area;
+   }
+}</pre></li>
+  <li>Must cast from <tt>Object</tt> to <tt>Rectangle</tt>
+      <br><tt>Rectangle aRectangle = (Rectangle) anObject;</tt></li>
+  <li>Pass measurer to data set constructor:<br>
+    <tt>Measurer m = new RectangleMeasurer();<br>
+ 	DataSet data = new DataSet(m);<br>
+	data.add(new Rectangle(5, 10, 20, 30));<br>
+	data.add(new Rectangle(10, 20, 30, 40));<br>
+	. . .</tt></li>
+</ul>
+
+
+<h2>UML Diagram of Measurer Interface and Related Classes</h2>
+<ul>
+  <li>Note that the <tt>Rectangle</tt> class is decoupled from the <tt>Measurer</tt> 
+	interface
+  <br><img src="images/uml2.png" alt=""></li>
+</ul>
+
+
+<h2>File DataSet.java</h2>
+<iframe src="code/measure2/DataSet.java.html" class="code" width="693" height="322">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File DataSetTester2.java</h2>
+<iframe src="code/measure2/DataSetTester2.java.html" class="code" width="696" height="272">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File Measurer.java</h2>
+<iframe src="code/measure2/Measurer.java.html" class="code" width="699" height="222">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File RectangleMeasurer.java</h2>
+<iframe src="code/measure2/RectangleMeasurer.java.html" class="code" width="696" height="261">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+<br>Output
+<pre>   Average area = 616.6666666666666
+   Maximum area rectangle = java.awt.Rectangle[x=10,y=20,width=30,height=40]</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="8">Suppose you want to use the <tt>DataSet</tt> clas 
+to find the longest
+<tt>String</tt> from a set of inputs. Why can't this work?</li>
+<li>How can you use the <tt>DataSet</tt> class of this section to find the 
+longest <tt>String</tt>
+from a set of inputs?</li>
+<li>Why does the <tt>measure</tt> method of the <tt>Measurer</tt> interface have 
+one more parameter than the <tt>getMeasure</tt> method of the <tt>Measurable</tt> 
+interface?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="8">The <tt>String</tt> class doesn't implement the <tt>Measurable</tt> 
+interface.</li>
+<li>Implement a class <tt>StringMeasurer</tt> that implements the <tt>Measurer</tt> 
+interface.</li>
+<li>A measurer measures an object, whereas <tt>getMeasure</tt> measures 
+&quot;itself&quot;, that is, the implicit parameter.</li>
+</ol>
+<H2><a name="Nested_Types">Nested Types (Inner Classes) and Top-Level Classes</a></H2>
+<UL>
+<LI>Top-Level classes - direct members of packages, defined independently of 
+other types<UL>
+<li>classes</li>
+<li>interfaces</li>
+<li>enumerated types</li>
+</UL>
+<li>Starting with 1.1, you can define classes as: 
+<UL>
+<LI>members of other classes 
+- nested top-level classes<UL>
+<li><b><i>static member types</i></b> (&quot;class types&quot; - confusing) - 
+analogous to a class field<br>
+interfaces, enumerations, annotations are always implicitly static</li>
+<li><i><b>nonstatic member classes </b>- </i>analogous to an instance field</li>
+</UL>
+<LI>locally within a block of statements 
+-<b><i> local classes</i></b><LI>anonymously within an expression - <b><i>
+anonymous classes</i></b></LI></UL>
+</li>
+<LI>Code of inner classes and nested top-level classes can use simple names from 
+enclosing scopes, including private members. 
+<LI>Static member types enables you to use a class to do package-like 
+organization<LI>Inner classes have a reference to an enclosing instance<LI>A common use for inner classes is to define event handler "call backs." 
+</LI></UL>
+<p>
+<br>
+
+
+
+</p>
+
+
+
+<h2>Inner Classes</h2>
+<ul>
+  <li>Trivial class can be defined inside a method
+<pre>public class DataSetTester3
+{
+   public static void main(String[] args)
+   {
+      class RectangleMeasurer implements Measurer
+      {
+         . . .
+      }
+      Measurer m = new RectangleMeasurer();
+      DataSet data = new DataSet(m);
+      . . .
+   }
+}</pre></li>
+  <li>If inner class is defined inside an enclosing class, but outside its 
+	methods, it is available to all methods of enclosing class</li>
+  <li>Compiler turns an inner class into a regular class file:
+     <br><tt>DataSetTester$1$RectangleMeasurer.class</tt></li>
+</ul>
+
+
+<H2>Restrictions on Nested Top-Level Classes</H2>
+<UL>
+<LI>Top-level types can be declared with or without the <tt>public</tt> modifier 
+but they cannot be use <tt>private</tt> and <tt>protected</tt> modifiers<LI>A nested 
+top-level type can be declared with its own access control modifiers, <LI>
+Interfaces, enumerations, annotations are always implicitly static, whether or 
+not <tt>static</tt> keyword appears in their definition<LI>Can 
+not&nbsp; have the same name as any of its enclosing classes<LI>Static member types 
+can be defined only within top-level classes and other static member types (not 
+within member, local, and anonymous classes)<LI>Nonstatic member classes is 
+declared as a member of a containing class or enumerated type without the <tt>static</tt>
+keyword</UL>
+
+
+<H2>Restrictions on Member Classes</H2>
+<ul>
+  <li>A member class can not have the same name as any containing class</li>
+  <li>Member classes can not contain any static fields, methods, or classes 
+  (except constants)</li>
+  <li>Interfaces can not be defined as member classes</li>
+</ul>
+
+<H2>Restrictions on Local Classes</H2>
+<ul>
+  <li>A local class is visible only within a block that defines it</li>
+  <li>Local classes cannot be declared <code>public, protected,</code> or <code>static</code></li>
+  <li>Local classes can not contain any static fields, methods, or classes 
+  (except constants)</li>
+  <li>Interfaces can not be defined locally</li>
+  <li>A local class like a member class cannot have the same name as any of t 
+  enclosing&nbsp; class</li>
+  <li>A local class can use the local variables, method parameters, and even 
+  exception parameters that are in the scope, but only if those variables or 
+  parameters are declared <tt>final</tt></li>
+</ul>
+
+
+<h2>Syntax: Inner Classes</h2>
+<table cellpadding="10" width="68%" border="1" bgcolor="#ffffff">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td valign="TOP">Declared inside a method
+            (<b><i>local class</i></b>)<pre>class <i>OuterClassName</i>
+{
+  <i>method signature</i>
+  {
+     . . .
+     class <i>InnerClassName</i>
+     {
+        <i>// methods
+        // fields</i>
+     }
+     . . .
+  }
+  . . .
+}</pre>
+</td><td width="2%">&nbsp;</td>
+<td valign="TOP">Declared inside the class
+(<b><i>member class</i></b>)<pre>class <i>OuterClassName</i>
+{
+   <i>// methods
+   // fields</i>
+   <i>accessSpecifier</i> class <i>InnerClassName</i>
+   {
+      <i>// methods
+      // fields</i>
+   }
+   . . .
+}</pre></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+		To define an inner class whose scope is restricted to a single method 
+		(local class) or 
+		the methods of a single class (member class).</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+
+<h2>File DataSetTester3.java</h2>
+<iframe src="code/measure3/DataSetTester3.java.html" class="code" width="666" height="282">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="11">Why would you use an inner class instead of a regular class?</li>
+<li>How many class files are produced when you compile the <tt>DataSetTester3</tt> 
+program?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="11">Inner classes are convenient for insignificant classes. Also, 
+their methods can access variables and fields from the surrounding scope.</li>
+<li>Four: one for the outer class, one for the inner class, and two for the <tt>
+DataSet</tt>
+and <tt>Measurer</tt> classes.</li>
+</ol>
+
+<H2>Anonymous Classes</H2>
+<ul>
+	<li>An entity is anonymous if it does not have a name.</li>
+</ul>
+<blockquote>
+	<pre>Coin aCoin = new Coin(0.1, &quot;dime&quot;);
+data.add(aCoin);</pre>
+	<p>or</p>
+	<pre>data.add(new Coin(0.1, &quot;dime&quot;));</pre>
+</blockquote>
+<ul>
+	<li>Create an instance of the anonymous class implementing the <tt>Measurer</tt> 
+	interface:</li>
+</ul>
+<blockquote>
+	<pre>public static void main(String[] args) {
+	// Construct an object of an anonymous class
+	Measurer m = <b>new</b> Measurer<b>()</b>
+		// Class definition starts here
+		<b>{
+			public double measure(Object obj) {
+				Rectangle rec = (Rectangle)obj;
+				double area = rec.getWidth() * rec.getHight();	
+				return area;
+			}
+		}</b>;
+	DataSet data = new DataSet(m);
+	. . .
+}	</pre>
+</blockquote>
+<h2>When to use Anonymous  Classes</h2>
+<UL>
+<LI> Anonymous and local classes share the same restrictions</LI>
+<LI> The class has a very short body</LI>
+<LI> No constructors, can use constructors of its superclass</LI>
+<LI> Only one instance of the class is needed</LI>
+<LI> The class is used right after it is defined</LI>
+<LI> The name of the class does not make your code any easier to understand<UL>
+<li>if a name following the <tt>new</tt> keyword is the name of a class, the anonymous 
+class is a subclass of the named class</li>
+<li>if a name following <tt>new</tt> specifies an interface, the anonymous class 
+implements that interface and extends <tt>Object</tt></li>
+</UL>
+
+
+</LI></UL>
+
+
+<h2>Syntax: Anonymous Classes</h2>
+<table cellpadding="10" width="60%" border="1" bgcolor="#ffffff" id="table1">
+  <tbody>
+    <tr>
+      <td>
+      <table border="0" id="table2" width="509">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td valign="TOP">
+            <pre>new <i>class-Name </i>( [<i>argument-list</i>] ) 
+{
+  <i>class-body</i>
+}</pre>
+			<p>or</p>
+			<pre>new <i>interface-Name </i>() 
+{
+  <i>class-body</i>
+}</pre>
+</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Example:</h3>
+      <table border="0" id="table3" width="511">
+        <tbody>
+          <tr>
+            <td width="5%">&nbsp;</td>
+            <td><pre>Measurer m = new Measurer()
+    {
+	public double measure(Object obj) {
+		Rectangle rec = (Rectangle)obj;
+		double area = rec.getWidth() * rec.getHight();
+		return area;
+	}
+    };</pre></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Purpose:</h3>
+		To define a one-shot class exactly where it is needed.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<br>
+
+
+<h2>Processing Timer Events</h2>
+<ul>
+  <li><tt>javax.swing.Timer</tt> generates equally spaced timer events</li>
+  <li>Useful whenever you want to have an object updated in regular intervals</li>
+  <li>Sends events to action listener<br>
+    <tt>public interface ActionListener<br>
+	{</tt><br>
+&nbsp;&nbsp;&nbsp;&nbsp; <tt>void actionPerformed(ActionEvent event);<br>
+	}</tt></li>
+  <li>Define a class that implements the <tt>ActionListener</tt> interface<br>
+    <tt>class MyListener implements ActionListener<br>
+	{<br>
+    </tt>&nbsp;&nbsp;&nbsp;&nbsp; <tt>void actionPerformed(ActionEvent event)<br>
+&nbsp; &nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // This action will be executed at each timer 
+	event<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>Place listener action here</i><br>
+&nbsp; &nbsp;}</tt><br>
+    <tt>}<br>
+    </tt></li>
+  <li>Add listener to timer<br>
+    <tt>MyListener listener = new MyListener();<br>
+	Timer t = new Timer(interval, listener);<br>
+	t.start();</tt></li>
+</ul>
+
+
+<h2>Example: Countdown</h2>
+<ul>
+  <li>Example: a timer that counts down to zero
+     <br>Def</li>
+  <li>One second delay between printouts</li>
+</ul>
+
+
+<h2>File TimerTester.java</h2>
+<iframe src="code/timer1/TimerTester.java.html" class="code" width="640" height="285">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="13">Why does a timer require a listener object?</li>
+<li>How many times is the <tt>actionPerformed</tt> method called in the 
+preceding program?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="13">The timer needs to call some method whenever the time interval 
+expires. It calls the <tt>actionPerformed</tt> method of the listener object.</li>
+<li>It depends. The method is called once per second. The first eleven times, it 
+prints a message. The remaining times, it exits silently. The timer is only 
+terminated when the user quits the program.</li>
+</ol>
+<br>
+
+
+<h2>Accessing Surrounding Variables</h2>
+<ul>
+  <li>Methods of inner classes can access variables that are defined in 
+	surrounding scope</li>
+  <li>Useful when implementing event handlers</li>
+  <li>Example: Animation
+      <br>Ten times per second, we will move a shape to a different position
+<pre>class Mover implements ActionListener
+{
+   public void actionPerformed(ActionEvent event)
+   {
+      // Move the rectangle
+   }
+}
+
+ActionListener listener = new Mover();
+final int DELAY = 100; // Milliseconds between timer ticks
+Timer t = new Timer(DELAY, listener);
+t.start();</pre></li>
+</ul>
+
+
+<h2>Accessing Surrounding Variables</h2>
+<ul>
+  <li>The actionPerformed method can access variables from the surrounding 
+	scope, like this:
+<pre>public static void main(String[] args)
+{
+   . . .
+   final Rectangle box = new Rectangle(5, 10, 20, 30);
+
+   class Mover implements ActionListener
+   {
+      public void actionPerformed(ActionEvent event)
+      {
+         // Move the rectangle
+         box.translate(1, 1);
+      }
+   }
+   . . .
+}</pre></li>
+  <li>Local variables that are accessed by an inner-class method must be 
+	declared as final</li>
+  <li>Inner class can access fields of surrounding class that belong to the 
+	object that constructed the inner class object</li>
+  <li>An inner class object created inside a static method can only access 
+	static surrounding fields</li>
+</ul>
+
+
+<h2>File TimerTester2.java</h2>
+<iframe src="code/timer2/TimerTester2.java.html" class="code" width="680" height="290">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+<h2>File TimerTester3.java</h2>
+
+
+<h2>
+<iframe src="code/timer2/TimerTester3.java.html" class="code" width="680" height="290" name="I1">
+Your browser does not support the &lt;iframe&gt; tag.
+</iframe>
+
+
+</h2>
+<h2>Output</h2>
+<pre>java.awt.Rectangle[x=6,y=11,width=20,height=30]
+java.awt.Rectangle[x=7,y=12,width=20,height=30]
+java.awt.Rectangle[x=8,y=13,width=20,height=30]
+. . .
+java.awt.Rectangle[x=28,y=33,width=20,height=30]
+java.awt.Rectangle[x=29,y=34,width=20,height=30]
+Last box position: java.awt.Rectangle[x=29,y=34,width=20,height=30]</pre>
+
+
+<h2>Self Check</h2>
+<ol>
+<li value="15">Why would an inner class method want to access a variable from a 
+surrounding scope?</li>
+<li>If an inner class accesses a local variable from a surrounding scope, what 
+special rule applies?</li>
+</ol>
+
+
+<h2>Answers</h2>
+<ol>
+<li value="15">Direct access is simpler than the alternative&#8211;passing the 
+variable as a parameter to a constructor or method.</li>
+<li>The local variable must be declared as final.</li>
+</ol>
+
+
+&nbsp;<br>
+
+
+<H2>Why Inner Classes?</H2>
+<UL>
+<LI>Typically, the inner class inherits from a class or implements an interface, 
+and the code in the inner class manipulates the outer class object.
+<LI>Each inner class can independently inherit from an implementation. 
+Thus, the inner class is not limited by whether the outer class 
+is already inheriting from an implementation.
+<LI>The inner class can have multiple instances, each with its own state 
+information that is independent of the information in the outer class object.
+<LI>
+In a single outer class you can have several inner classes, each of which 
+implement the same interface or inherit from the same class in a different way.<LI>
+The point of creation of the inner class object is not tied to the creation of the outer class object.
+<LI>
+There is no potentially confusing &#8220;is-a&#8221; relationship with the inner class; it&#8217;s a separate entity.
+<LI>
+Interfaces and inner classes are more sophisticated concepts than what you&#8217;ll find in many OOP languages; 
+for example, there&#8217;s nothing like them in C++.
+<LI>
+Together, they solve the same problem that C++ attempts to solve with its 
+multiple inheritance (MI) feature. However, MI in C++ turns out to be rather difficult to use, whereas Java 
+interfaces and inner classes are, by comparison, much more accessible. 
+<LI>
+Although the features themselves are reasonably straightforward, the use of 
+these features is a design issue, much the same as polymorphism. 
+
+</UL>
+
+
+<h2>&nbsp;</h2>
+<h2><a name="Annotations">Annotations - the Java's Choice for Metadata </a> </h2>
+<p>Metadata can be used to create documentation, to track down dependencies in 
+code, and even to perform rudimentary compile-time checking. </p>
+<ul>
+	<li>Annotations take the form of an &quot;at&quot; sign (<code>@</code>), followed by 
+	the annotation name. Then, you supply data to the annotation -- when data is 
+	required -- in <code>name=value</code> pairs. </li>
+	<li>An annotation associates arbitrary information or metadata wit Java 
+	program element (<code>AnnotationElement </code>)</li>
+	<li>Annotations are modifiers (behave like public or final) you can add to 
+	your code and apply to package declarations, type declarations, 
+	constructors, methods, fields, parameters, and variables.</li>
+	<li>Java includes three built-in annotation types and four 
+meta-annotations, and also supports 
+custom annotations you can write yourself.</li>
+	<li>Annotations <i>never affect the way a Java program runs</i>, but they 
+	may affect things like compiler warnings or the behavior of auxiliary tools 
+	such as documentation generation, stub generation, and so forth.</li>
+</ul>
+
+
+<p>Annotation formats:</p>
+<ul>
+	<li><b>Marker annotations</b> have no variables. The annotation simply 
+	appears, identified by name, with no additional data supplied. For example,
+	<code>@MarkerAnnotation</code> is a marker annotation. It includes no data, 
+	just the annotation name.</li>
+	<li><b>Single-value annotations</b> are similar to markers, but provide a 
+	single piece of data. Because only a single bit of data is supplied, you can 
+	use a shortcut syntax (assuming the annotation type is defined to accept 
+	this syntax): <code>@SingleValueAnnotation(&quot;my data&quot;)</code>. This should 
+	look a lot like a normal Java method call, aside from the <code>@</code> 
+	sign.</li>
+	<li><b>Multivalue annotations</b> have multiple data members. As a result, you 
+	must use a longhand syntax (and the annotation doesn't look quite so much like 
+	a normal Java method anymore): <code>@FullAnnotation(var1=&quot;data value 1&quot;, 
+	var2=&quot;data value 2&quot;, var3=&quot;data value 3&quot;)</code>. </li>
+</ul>
+<p>&nbsp;</p>
+<h2>The <tt>Override</tt>, <tt>Deprecated</tt>, and <tt>SuppressWarnings</tt> Annotation Types</h2>
+
+<blockquote>
+	<pre>public class OverrideTester {
+
+  public OverrideTester() { }
+
+ <b> @Override</b>
+  public String toString() {
+    return super.toString() + " [Override Tester Implementation]";
+  }
+
+  <b>@Override</b>
+  public int hashCode() {
+    return toString().hashCode();
+  }
+}
+
+
+public class DeprecatedClass {
+
+  <b>@Deprecated </b>public void doSomething() {
+    // some code
+  }
+
+  public void doSomethingElse() {
+    // This method presumably does what doSomething() does, but better
+  }
+}
+
+
+
+<b>@SuppressWarnings(value={"unchecked"})</b>
+public void nonGenericsMethod() {
+  List wordList = new ArrayList();    // no typing information on the List
+
+  wordList.add("foo");                // causes error on list addition
+}
+
+</pre>
+</blockquote>
+
+<h2>Defining and Using Marker Annotation Types</h2>
+<ol>
+	<li>Defining 
+
+<p><code class="section">/**<br>&nbsp;* Marker annotation to indicate that a method or class<br>&nbsp;*&nbsp;&nbsp; is still in progress.<br>&nbsp;*/<br>
+<b>public @interface InProgress</b> { }<br>
+&nbsp;</code></p>
+</li>
+	<li>Using 
+<p><code class="section"><b>@InProgress</b><br>
+public void calculateInterest(float amount, float rate) {<br>
+&nbsp; // Need to finish this method later<br>
+}<br>
+</code></p>
+	</li>
+</ol>
+<h2>Defining Members of&nbsp; Annotation 
+Types</h2>
+<ul>
+	<li>The members of annotations are declared in annotation type as noargument 
+	methods</li>
+	<li>The method name and return type define the name and type of the member</li>
+	<li>You don't define a member variable and then provide accessor and mutator 
+	methods. </li>
+	<li>An annotation appearing on a program element includes name-vale pairs</li>
+</ul>
+<blockquote>
+	<p><code class="section">/**<br>&nbsp;* Annotation type to indicate a task still needs to be<br>&nbsp;*&nbsp;&nbsp; completed.<br>&nbsp;*/<br>public @interface TODO {<br>&nbsp; 
+	<b>String value();</b><br>}</code></p>
+</blockquote>
+<p>Shorthand
+version<code class="section"> (single-value annotations):</code></p>
+<blockquote>
+	<p><code class="section">@InProgress<br><b>@TODO(&quot;Figure out the amount of interest per month&quot;)<br>
+	</b>public void calculateInterest(float amount, float rate) {<br>&nbsp; // Need to finish this method later<br>}</code></p>
+</blockquote>
+<p>The shorthand version is available only if the annotation type has a <i>
+single</i>-member variable named <code>value</code>. </p>
+<p>Longhand version (multivalue annotations):</p>
+<blockquote>
+	<p><code class="section">@InProgress<br><b>@TODO(value=&quot;Figure out the amount of interest per month&quot;)<br>
+	</b>public void calculateInterest(float amount, float rate) {<br>&nbsp; // Need to finish this method later<br>}<br>&nbsp;</code></p>
+</blockquote>
+<h2>Defining&nbsp;Default Values in Annotation 
+Types</h2>
+
+<blockquote>
+	<p><code class="section">public @interface GroupTODO {<br>
+	<br>
+&nbsp; public enum Severity { CRITICAL, IMPORTANT, TRIVIAL, DOCUMENTATION };<br>
+	<br>
+&nbsp; Severity severity() <span class="boldcode"><b>default</b> 
+	Severity.IMPORTANT;</span><br>
+&nbsp; String item();<br>
+&nbsp; String assignedTo();<br>
+&nbsp; String dateAssigned();<br>
+	}</code></p>
+</blockquote>
+<p>Overriding default values</p>
+<blockquote>
+	<p><code class="section">@GroupTODO(<br>
+	<b>&nbsp; severity=GroupTODO.Severity.DOCUMENTATION,<br>
+	</b>&nbsp; item=&quot;Need to explain how this rather unusual method works&quot;,<br>
+&nbsp; assignedTo=&quot;Mike Sobolewski&quot;,<br>
+&nbsp; dateAssigned=&quot;04/10/2006&quot;<br>
+	)<br>
+	public&nbsp; void reallyConfusingMethod(int codePoint) {<br>
+&nbsp; // Really weird code implementation<br>
+	}<br>
+&nbsp;</code></p>
+</blockquote>
+<h2>Annotating an Annotation - Meta-annotations</h2>
+<ul>
+	<li>Meta-annotations<ol>
+		<li><b><code>java.lang.annotation.Target<br></code></b><code class="section">&nbsp;&nbsp; public enum ElementType {<br>&nbsp;&nbsp;&nbsp;&nbsp; TYPE,			// Class, interface, or enum (but not annotation)<br>&nbsp;&nbsp;&nbsp;&nbsp; FIELD,		// Field (including enumerated values)<br>&nbsp;&nbsp;&nbsp;&nbsp; METHOD,		// Method (does not include constructors)<br>&nbsp;&nbsp;&nbsp;&nbsp; PARAMETER,		// Method parameter<br>&nbsp;&nbsp;&nbsp;&nbsp; CONSTRUCTOR,		// Constructor<br>&nbsp;&nbsp;&nbsp;&nbsp; LOCAL_VARIABLE,	// Local variable or catch clause<br>&nbsp;&nbsp;&nbsp;&nbsp; ANNOTATION_TYPE,	// Annotation Types (meta-annotations)<br>&nbsp;&nbsp;
+&nbsp; PACKAGE		// Java package<br>&nbsp;&nbsp;
+		}</code></li>
+		<li><b><code>java.lang.annotation.</code></b><code class="section"><b>Retention
+		<br></b>&nbsp;&nbsp; public enum RetentionPolicy {<br>&nbsp;&nbsp;&nbsp;&nbsp; SOURCE,		// Annotation is discarded by the 
+		compiler<br>&nbsp;&nbsp;&nbsp;&nbsp; CLASS,		// Annotation is stored in the class file, 
+		but ignored by the VM<br>&nbsp;&nbsp;&nbsp;&nbsp; RUNTIME		// Annotation is stored in the class 
+		file and read by the VM<br>&nbsp;&nbsp; }</code></li>
+		<li><b><code>java.lang.annotation.</code><code class="section"><span class="boldcode">Documented</span></code></b></li>
+		<li><b><code>java.lang.annotation.Inherited</code></b></li>
+	</ol>
+	</li>
+</ul>
+
+<h2>&nbsp;</h2>
+<h2>Using <code>Target</code> Meta-annotation</h2>
+<blockquote>
+	<p><code class="section">import java.lang.annotation.ElementType;<br>
+	import java.lang.annotation.Target;<br>
+	<br>
+	/**<br>
+&nbsp;* Annotation type to indicate a task still needs to be completed<br>
+&nbsp;*/<br>
+	<b>@Target({ElementType.TYPE,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ElementType.METHOD,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ElementType.CONSTRUCTOR,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ElementType.ANNOTATION_TYPE})<br>
+	</b>public @interface TODO {<br>
+&nbsp; String value();<br>
+	}<br>
+&nbsp;</code></p>
+</blockquote>
+
+<ul>
+	<li>Now the Java compiler will apply <code>TODO</code> only to types, 
+	methods, constructors, and other annotation types. </li>
+	<li>This helps you ensure that nobody else takes your annotation type and 
+	misapplies it </li>
+</ul>
+<h2>&nbsp;</h2>
+<h2>Using <code>Retention</code> Meta-annotation</h2>
+
+<blockquote>
+	<p><code class="section"><b>@Retention(RetentionPolicy.SOURCE)<br>
+	</b>public @interface SuppressWarnings {<br>
+&nbsp; // annotation type body<br>
+	}</code></p>
+</blockquote>
+<ul>
+	<li>The shorthand form used here, because <code>Retention</code> has a 
+	single-member variable. </li>
+	<li>If you want the retention to be <code>RetentionPolicy.CLASS</code>, you 
+	don't have to do a thing, because that's the default behavior.</li>
+</ul>
+<h2>&nbsp;</h2>
+<h2>Using <code>Documented</code> Meta-annotation</h2>
+<ul>
+	<li>&nbsp;<code>Documented</code> indicates that an annotation should appear 
+	in the Javadoc for a class. </li>
+	<li>By default, annotations are <i>not</i> included in Javadoc pages</li>
+</ul>
+<blockquote>
+	<p><code class="section">import java.lang.annotation.Documented;<br>
+	import java.lang.annotation.Retention;<br>
+	import java.lang.annotation.RetentionPolicy;<br>
+	<br>
+	/**<br>
+&nbsp;* Marker annotation to indicate that a method or class<br>
+&nbsp;*&nbsp;&nbsp; is still in progress.<br>
+&nbsp;*/<br>
+	<b>
+	<span class="boldcode">@Documented</span><br>
+	</b>@Retention(RetentionPolicy.RUNTIME)<br>
+	public @interface InProgress { }</code></p>
+</blockquote>
+<ul>
+	<li><code>RUNTIME</code> is a <i>required</i> aspect of using the <code>
+	Documented</code> annotation type. </li>
+	<li>Javadoc loads its information from class files (not source files), using 
+	a virtual machine. </li>
+	<li>The only way to ensure that this VM gets the information for producing 
+	Javadoc from these class files is to specify the retention of <code>
+	RetentionPolicy.RUNTIME</code>. </li>
+</ul>
+<h2>&nbsp;</h2>
+<h2>Using <code>Inherited</code> Meta-annotation</h2>
+<ul>
+	<li>Suppose that you mark a class as being in progress, through your own 
+	custom <code>InProgress</code> annotation. </li>
+	<li>This will even show up in the Javadoc if you've correctly applied the
+	<code>Documented</code> meta-annotation. </li>
+	<li>Now, suppose you write a new class and extend the in-progress class.
+	</li>
+	<li>But remember that the superclass is in progress. </li>
+	<li>If you use the subclass, and even look at its documentation, you get no 
+	indication that anything is incomplete. </li>
+	<li>You must use the <code>Inherited</code> meta-annotation to specify the 
+	behavior you want:</li>
+</ul>
+<blockquote>
+	<p><code class="section">import java.lang.annotation.Documented;<br>
+	<b>import java.lang.annotation.Inherited;<br>
+	</b>import java.lang.annotation.Retention;<br>
+	import java.lang.annotation.RetentionPolicy;<br>
+	<br>
+	/**<br>
+&nbsp;* Marker annotation to indicate that a method or class<br>
+&nbsp;*&nbsp;&nbsp; is still in progress.<br>
+&nbsp;*/<br>
+	@Documented<br>
+	<b>
+	<span class="boldcode">@Inherited</span><br>
+	</b>@Retention(RetentionPolicy.RUNTIME)<br>
+	public @interface InProgress { }<br>
+&nbsp;</code></p>
+</blockquote>
+<ul>
+	<li>With the addition of <code>@Inherited</code>, you'll see the <code>
+	InProgress</code> annotation show up on subclasses of annotated classes.
+	</li>
+	<li>The default is <i>not</i> to inherit</li>
+	<li>&nbsp;For example, the <code>TODO</code> annotation wouldn't (and 
+	shouldn't) be propagated. </li>
+</ul>
+<p>&nbsp;</p>
+
+<h2>Annotations and Reflection</h2>
+<ul>
+	<li>Reading runtime-visible annotations using <code>java.lang.reflect</code></li>
+	<li>The interface <code>java.lang.reflect.AnnotaedElement</code> represents a program element that can be queried for 
+	annotations</li>
+	<li>Testing for existing runtime annotations<code class="section"><br>
+	</code><br><code>import java.lang.reflect.*; <br>
+	<br>
+	Class c = ConfusingClass.class;<br>
+	Method m = c.getMethod(&quot;</code><code class="section">reallyConfusingMethod&quot;, 
+	int.class);<br>
+	boolean isGroupTODO = m.isAnnotationPresnet();<br>
+&nbsp;</code><hr>
+	<p><code class="section">@Retention(RetentionPolicy.RUNTIME)<br>
+	@GroupTODO(<br>
+	&nbsp; severity=GroupTODO.Severity.DOCUMENTATION,<br>
+	&nbsp; item=&quot;Need to explain how this rather unusual method works&quot;,<br>
+&nbsp; assignedTo=&quot;Mike Sobolewski&quot;,<br>
+&nbsp; dateAssigned=&quot;07/30/2004&quot;<br>
+	)<br>
+	public&nbsp; void reallyConfusingMethod(int codePoint) {<br>
+&nbsp; // Really weird code implementation<br>
+	}</code></li>
+	<li>Finding values of annotations<br>
+	<br>
+	<code>import java.lang.reflect.*; <br>
+	<br>
+	AnnotationElement target = ConfusingClass.class; // the type to query<br>
+	// Ask for @GroupTODO annotation as an object that implements GroupTODO <br>
+	GroupTODO annotation = target.getAnnotation(GroupTODO.class);<br>
+	// Ask for needed annotation values<br>
+	String responsible = annotation.assignedTo();<br>
+	String whatToDo = annotation.item();<br>
+	String date = annotation.</code><code class="section">dateAssigned</code><code>();<br>
+	<br>
+</code></li>
+</ul>
+
+<h2>Tie It All Together - Build a Simple Annotation-based Test Framework</h2>
+<ul>
+	<li>A marker annotation type
+	<blockquote>
+		<pre>import java.lang.annotation.*;
+
+/**
+ * Indicates that the annotated method is a test method.
+ * This annotation should be used only on parameterless static methods.
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public <b>@interface Test</b> { }
+</pre>
+	</blockquote>
+	</li>
+	<li>A sample program, some of whose methods are annotated with the above 
+	interface: </li>
+</ul>
+<blockquote>
+	<blockquote>
+		<pre>public class Foo {
+    <b>@Test</b> public static void m1() { }
+
+    public static void m2() { }
+
+   <b> @Test</b> public static void m3() {
+        throw new RuntimeException(&quot;Boom&quot;);
+    }
+
+    public static void m4() { }
+
+    <b>@Test</b> public static void m5() { }
+
+    public static void m6() { }
+
+    <b>@Test</b> public static void m7() {
+        throw new RuntimeException(&quot;Crash&quot;);
+    }
+
+    public static void m8() { }
+}
+</pre>
+	</blockquote>
+</blockquote>
+<ul>
+	<li>Here is the testing tool: </li>
+</ul>
+<blockquote>
+	<blockquote>
+		<pre>import java.lang.reflect.*;
+
+public class RunTests {
+   public static void main(String[] args) throws Exception {
+      int passed = 0, failed = 0;
+      for (Method m : Class.forName(args[0]).getMethods()) {
+         if (<b>m.isAnnotationPresent(Test.class</b><font color="#009900">)</font>) {
+            try {
+               m.invoke(null);
+               passed++;
+            } catch (Throwable ex) {
+               System.out.printf(&quot;Test %s failed: %s %n&quot;, m, ex.getCause());
+               failed++;
+            }
+         }
+      }
+      System.out.printf(&quot;Passed: %d, Failed %d%n&quot;, passed, failed);
+   }
+}
+</pre>
+	</blockquote>
+</blockquote>
+<ul>
+	<li>Here is how it looks when you run the testing tool on the <code>Foo</code> 
+	program (above): </li>
+</ul>
+<blockquote>
+	<blockquote>
+		<pre>$ java RunTests Foo
+Test public static void Foo.m3() failed: java.lang.RuntimeException: Boom 
+Test public static void Foo.m7() failed: java.lang.RuntimeException: Crash 
+Passed: 2, Failed 2
+</pre>
+	</blockquote>
+</blockquote>
+<h2>&nbsp;</h2>
+<h2><a name="JUnit_4_Annotation_Types">JUnit 4 Annotation Types</a></h2>
+<dl>
+	<pre><font size="-1">@Retention(value=RUNTIME)
+@Target(value=METHOD)
+</font>public @interface <b>Test</b></pre>
+</dl>
+<ul>
+	<li>The <code>Test</code> annotation tells JUnit that the <code>public void</code> 
+	method to which it is attached can be run as a test case. </li>
+	<li>To run the method, JUnit first constructs a fresh instance of the class 
+	then invokes the annotated method. </li>
+	<li>Any exceptions thrown by the test will be reported by JUnit as a 
+	failure. </li>
+	<li>If no exceptions are thrown, the test is assumed to have succeeded. </li>
+</ul>
+<blockquote>
+	<p>A simple test looks like this:<br>
+	<code>public class Example {<br>
+	&nbsp;&nbsp;@Test public void method() {<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(&quot;Hello&quot;);<br>
+	&nbsp;&nbsp;}<br>
+	} </code></p>
+</blockquote>
+<ul>
+	<li>The <code>Test</code> annotation supports two optional parameters. The 
+	first, <code>expected</code>, declares that a test method should throw an 
+	exception. If it doesn't throw an exception or if it throws a different 
+	exception than the one declared, the test fails. For example, the following 
+	test succeeds: <br>
+	<code>&nbsp;&nbsp;@Test(<b>expected=IndexOutOfBoundsException.class</b>) public void 
+	outOfBounds() {<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;new ArrayList&lt;Object&gt;().get(1);<br>
+	&nbsp;&nbsp;}<br>
+&nbsp;</code></li>
+	<li>The second optional parameter, <code>timeout</code>, causes a test to 
+	fail if it takes longer than a specified amount of clock time (measured in 
+	milliseconds). The following test fails:<br>
+	<code>&nbsp;&nbsp;@Test(<b>timeout=100</b>) public void infinity() {<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;for(;;);<br>
+	&nbsp;&nbsp;}</code></li>
+	<li>Methods annotated with <code>@Test</code> that are also annotated with
+	<b><code>@Ignore</code></b> will not be executed as tests. </li>
+	<li>T annotate a <b><i>test fixture</i></b> use: <code>@Before, @After, @BeforeClass, @AfterClass</code></li>
+	<li>
+	<p>JUnit provides tools to define 
+the suite to be run and to display its results. To run tests and see the results 
+on the console, run: </p>
+<blockquote>
+	<pre>
+   public static void main(String args[]) {
+        org.junit.runner.JUnitCore.main("Example");
+   }
+</pre>
+
+</blockquote>
+	<p>Use this invocation for programmatic testing:<blockquote>
+
+	<pre>
+   public static boolean wasSuccessful() {
+        Result result = org.junit.runner.JUnitCore.runClasses(Example.class);
+        return result.wasSuccessful();
+   }</pre>
+</blockquote>
+	</li>
+</ul>
+
+<h2>&nbsp;</h2>
+<h2><a href="http://java.sun.com/j2se/1.5.0/docs/guide/apt/index.html">The Annotation Processing Tool (<code>apt</code>)</a></h2>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c3f99570bc',t:'MTczOTIwNDU3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

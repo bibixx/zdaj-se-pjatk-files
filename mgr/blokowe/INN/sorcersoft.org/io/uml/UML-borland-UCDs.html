@@ -1,0 +1,422 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Use Case Diagrams</TITLE>
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body {
+	color: #000000;
+	font-size: 13px;
+	font-family: verdana, sans-serif
+}
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts"><a href="UML-useCases.pdf">Use Case Diagrams</a></span>
+<H2>Course Map</H2>
+<img border="0" src="CourseMap8.png" width="603" height="495">
+<h2>Agenda</h2>
+<UL>
+  <LI> <SPAN 
+class=basicContent> User Stories</SPAN>
+  <LI>Use Cases
+  <LI>Use 
+    Cases Diagrams
+  <LI>More Details
+  <LI>Self Test
+  <LI>Use Case Descriptions
+  <LI> <a href="UseCase5.doc">Use Case Template</a>
+  <LI>Sample of Use Case Description
+  <LI> Register for Courses Example
+  <LI> <span class="basicContent"><a href="requirementsWorkflow.html">The Requirements Workflow</a></span>
+  <LI> <a href="ActivityDiagrams.html">Activity Diagrams</a>
+  <LI> <a href="useCaseAnalysis.html">Use Case Analysis</a>
+  <LI> <a href="useCaseDesign.html">Use Case Design</a>
+</UL>
+<SPAN 
+class=basicContent>
+<hr align="left" width="100%" size="4" noshade>
+<h2> <a href="../modules/ExtremeProgramming/rules/userstories.html" name="User_Stories">User Stories</a></h2>
+<ul>
+  <li>A user story is a software system requirement formulated as one or two 
+    sentences in the everyday language of the user.
+    <pre>Starting Application
+The application begins by bringing up the last document the user was working with.</pre>
+    <a href="../coffeMaker/index.html">CoffeMaker User Stories</a> <br>
+    &nbsp;</li>
+  <li>Developers prioritize them and estimate how long the stories might take 
+    to implement (Story Points). Each story will get a 1, 2 or 3 week estimate 
+    in &quot;ideal development time&quot;.</li>
+  <li>User stories are used for the specification of requirements (together 
+    with acceptance tests, (<a href="../coffeMaker/blackboxtests.html">CoffeeMaker 
+    tests</a>) in the software engineering method Extreme 
+    Programming (XP). </li>
+  <li>Each story is written on a small paper note card to ensure 
+    that it does not grow too large. </li>
+  <li>The stories should be written by the 
+    customers for a software project and are their main method of influence on 
+    the development.</li>
+  <li>User stories are a quick way of handling customer requirements without 
+    having to deal with large formal requirement documents and tedious tasks 
+    related to maintaining them. </li>
+  <li>The intention is to be able to respond faster 
+    and with less overhead to rapidly changing real-world requirements.</li>
+  <li>A user story is an informal statement of the requirement. </li>
+  <li>When a user story 
+    is to be implemented, a more formal acceptance test must be written by the 
+    customer to ensure that it is later possible to determine whether the goals 
+    of the story have been fulfilled.</li>
+  <li>You should try to keep stories focused on user needs and benefits as 
+    opposed to specifying GUI layouts.</li>
+</ul>
+<hr align="left" width="100%" size="4" noshade>
+</SPAN>
+<h2><a name="Use_Cases">Use Cases</a></h2>
+<ul>
+<li><b>Use cases </b>are a way of capturing requirements.
+<SPAN 
+class=basicContent>
+<li>A use case describes behavior that the system exhibits to benefit one or 
+  more actors. 
+
+</SPAN><li>The term <b>actor</b> is used to describe the <b><i>role</i></b> played 
+  by people or things that use the system.&nbsp;
+  <ul>
+    <li>A role is like a hat that something wears in a particular context. </li>
+    <li><SPAN 
+class=basicContent>A <b>use case</b> describes behavior that the system exhibits 
+      to benefit one or more actors.</li>
+  </ul>
+</li>
+<li>A use case describes the interaction (triggered by an external actor in order 
+  to achieve a goal) between a
+  system and its environment. </li>
+<li>A use case defines a goal-oriented set of 
+  interactions between external actors
+  and the system under consideration. </li>
+<li>A primary actor triggers the system 
+  behavior in order to achieve a
+  certain goal. </li>
+<li>A secondary actor interacts with the system but does not trigger 
+  the use case.
+</li>
+</ul>
+<SPAN 
+class=basicContent>
+<hr align="left" width="100%" size="4" noshade>
+</SPAN>
+<h2>Use Cases and Actors<a href="UML-useCases.pdf">(UML 2 Use Case Diagram Specification)</a></h2>
+<p><font color="#990000"><b><a name="usecasediagrams" href="UML-useCases.pdf">Use case diagrams</a></b></font> describe what a system does from the standpoint of an external observer. 
+  The emphasis is on<i>what</i>a system does rather than<i>how.</i>Use Case analysis is one of the first and primary means of gathering 
+  requirements in the behavioral methodology. Use cases are a standard technique 
+  for gathering requirements in many modern software development methodologies.</p>
+<p>Use case diagrams are closely connected to scenarios. A<b> scenario </b>is an example of what happens when someone interacts 
+  with the system. Here is a scenario for a medical clinic.</p>
+<div align="left">
+  <ul>
+    <p>&quot;A patient calls the clinic to make an appointment for a 
+      yearly checkup. The receptionist finds the nearest empty time 
+      slot in the appointment book and schedules the appointment for 
+      that time slot. &quot;</p>
+  </ul>
+</div>
+<p>A<b>use case</b> is a summary of scenarios for a single task or goal. An <b>actor </b>is who or what initiates the events involved in that 
+  task. Actors are simply roles that people or objects play. The picture 
+  below is a<b> Make Appointment </b>use case for the medical clinic. The 
+  actor is a <b>Patient</b>. The connection between actor and use case is 
+  a<b> communication association </b>(or <b>communication </b>for short).</p>
+<p><img src="images/31863/usecaseactorno3.gif" height="76" width="370" hspace="10" vspace="15" alt="Use case"></p>
+<p>Actors are stick figures. Use cases are ovals. Communications are 
+  lines that link actors to use cases.</p>
+<p>A use case diagram is a collection of actors, use cases, and their 
+  communications. We've put<b> Make Appointment</b> as part of a diagram 
+  with four actors and four use cases. Notice that a single use case can 
+  have multiple actors.</p>
+<p><img src="images/31863/actorsmultipleno3d.gif" height="234" width="460" hspace="10" vspace="15" alt="Use case diagram"></p>
+<SPAN 
+class=basicContent>
+<hr align="left" width="100%" size="4" noshade>
+<h2><a name="Use_Case_Diagrams">Use Case Diagrams</a></h2>
+<p><b>Use case diagrams</b> give an outsider's view of a system. Every use case 
+  diagram has actors, use cases, and communications. A simple use case diagram can 
+  be expanded with additional features to display more information.</p>
+<p>In the use case diagram you represent the <b>subject </b>of the use case 
+  modeled by a box labeled with the name of the subject. You show <b>actors </b>outside the subject and<b> use cases</b>, which constitute the system behavior. 
+  Actors and use cases are in<b> relationships </b>that define the structure of a 
+  use case model.</p>
+<ul>
+  <li>system boundaries - the subject of the use case model</li>
+  <li>actors - roles adopted by things external to the system</li>
+  <li>relationships
+    <ul>
+      <li>generalizations</li>
+      <li>includes</li>
+      <li>extensions</li>
+    </ul>
+  </li>
+</ul>
+<div align="left">The following use case diagram expands use cases defined in the original 
+  medical clinic above.</div>
+<p><img height="484" alt="Use case diagram" hspace="10" src="images/31863/systemusecase3no.gif" width="608" vspace="15"></p>
+<p>A<b>system boundary</b>rectangle separates the clinic system from the 
+  external actors.</p>
+<p>A use case<b> generalization</b> shows that one use case is simply a special 
+  kind of another.<b> Pay Bill</b> is a parent use case and<b> Bill Insurance </b>is the child. A child can be substituted for its parent whenever necessary. 
+  Generalization appears as a line with a triangular arrow head toward the parent 
+  use case.</p>
+<p><b>Include</b>relationships factor use cases into additional ones. Includes 
+  are especially helpful when the same use case can be factored out of two 
+  different use cases. Both<b> Make Appointment</b> and <b>Request Medication</b> include <b>Check Patient Record</b> as a subtask. In the diagram, include 
+  notation is a dotted line beginning at base use case ending with an arrows 
+  pointing to the include use case. The dotted line is labeled <font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">&lt;&lt;include&gt;&gt;</font>.</p>
+<p>An<b> extend</b> relationship indicates that one use case is a variation of 
+  another. Extend notation is a dotted line, labeled<font face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" size="2">&lt;&lt;extend&gt;&gt;</font>, 
+  and with an arrow toward the base case. The<b> extension point</b>, which 
+  determines when the extended case is appropriate, is written inside the base 
+  case.</p>
+<p>Use case diagrams are helpful in three areas.</p>
+<ul>
+  <li><b>determining features (requirements)</b>. New use cases often 
+    generate new requirements as the system is analyzed and the design 
+    takes shape.
+  <li><b>communicating with clients</b>. Their notational simplicity 
+    makes use case diagrams a good way for developers to communicate 
+    with clients.
+  <li><b>generating acceptance tests</b>. The collection of scenarios for a 
+    use case may suggest a suite of test cases for those scenarios.
+</ul>
+</SPAN>
+<p><a href="images/31863/q1frame.html" target="_blank"><img src="images/31863/test.gif" height="20" width="64" alt="Self test" border=0></a></p>
+<SPAN 
+class=basicContent>
+<hr align="left" width="100%" size="4" noshade>
+</SPAN>
+<h2><a name="Use_Case_Descriptions">Use Case Descriptions</a></h2>
+<ul>
+<li>A use case is completed successfully when that goal is satisfied.</li>
+<li>Use case descriptions also include possible extensions to this sequence, 
+  e.g., alternative sequences that may also satisfy the goal, as well as 
+  sequences that may lead to failure in completing the service in case of 
+  exceptional behavior, error handling, etc..</li>
+<li>The system is treated as a &quot;black box&#8221;, thus, use cases capture who 
+  (actor) does what (interaction) with the
+  system, for what purpose (goal), without dealing with system internals.</li>
+<li>A complete set of use cases specifies all the different ways to use the 
+  system, and therefore defines the whole required behavior of the system. 
+  Generally, use case steps are written in an easy-to-understand, structured 
+  narrative using the vocabulary of the domain.</li>
+<li>A scenario is an instance of a use case, and represents a single path 
+  through the use case. Thus, there exists a scenario for the main flow 
+  through the use case, and as many other scenarios as the possible variations 
+  of flow through the use case (e.g., triggered by options, error conditions, 
+  security breaches, etc.). Scenarios may also be depicted in a graphical form 
+  using <a href="ActivityDiagrams.html">activity diagrams</a>.</li>
+<li><a target="_blank" href="http://alistair.cockburn.us/index.php/Basic_use_case_template">Basic use case template</a> (Alistair Cockburn)<br>
+  In this textual notation, the main flow is expressed, in the &#8220;Description&#8221; 
+  section, by an indexed sequence of natural language sentences, describing a 
+  sequence of actions of the system. Variations are expressed (in the 
+  &quot;Extensions&quot; section) as alternatives to the main flow, linked by their 
+  index to the point of the main flow from which they branch as a variation.
+</li>
+<li><a target="_blank" href="UC-guidelines.html">Use case guidelines by 
+  Alistair Cockburn</a></li>
+</ul>
+<SPAN 
+class=basicContent>
+<hr align="left" width="100%" size="4" noshade>
+</SPAN>
+<h2>Use Case Description Template</h2>
+<h2><br>
+  <img border="0" src="images/UML-template.png" width="650" height="390"></h2>
+<SPAN 
+class=basicContent>
+<hr align="left" width="100%" size="4" noshade>
+</SPAN>
+<h2>Sample of Use Case Description (<a target="_blank" href="UseCase5.doc">Microsoft 
+  Word Sample</a>)</h2>
+<div id="globalWrapper">
+  <div id="column-content">
+    <div id="content">
+      <div id="bodyContent">
+        <table cellSpacing="1" cellPadding="7" width="599" border="1" id="table1">
+          <tr>
+            <td vAlign="top" width="20%">USE CASE 5</td>
+            <td vAlign="top" width="74%" colSpan="2">Buy Goods</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">Goal in Context</td>
+            <td vAlign="top" width="74%" colSpan="2">Buyer issues 
+              request directly to our company, expects goods shipped 
+              and to be billed.</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">Scope &amp; Level</td>
+            <td vAlign="top" width="74%" colSpan="2">Company, 
+              Summary</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">Preconditions</td>
+            <td vAlign="top" width="74%" colSpan="2">We know Buyer, 
+              their address, etc.</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">Success End Condition</td>
+            <td vAlign="top" width="74%" colSpan="2">Buyer has 
+              goods, we have money for the goods.</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">Failed End Condition</td>
+            <td vAlign="top" width="74%" colSpan="2">We have not 
+              sent the goods, Buyer has not spent the money.</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">Primary,
+              <p>Secondary Actors</td>
+            <td vAlign="top" width="74%" colSpan="2">Buyer, any 
+              agent (or computer) acting for the customer.
+              <p>Credit card company, bank, shipping service</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">Trigger</td>
+            <td vAlign="top" width="74%" colSpan="2">purchase 
+              request comes in.</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">DESCRIPTION</td>
+            <td vAlign="top" width="6%">Step</td>
+            <td vAlign="top" width="66%">Action</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">&nbsp;</td>
+            <td vAlign="top" width="6%">1</td>
+            <td vAlign="top" width="66%">Buyer calls in with a 
+              purchase request</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">&nbsp;</td>
+            <td vAlign="top" width="6%">2</td>
+            <td vAlign="top" width="66%">Company captures buyer&#8217;s 
+              name, address, requested goods, etc.</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">&nbsp;</td>
+            <td vAlign="top" width="6%">3</td>
+            <td vAlign="top" width="66%">Company gives buyer 
+              information on goods, prices, delivery dates, etc.</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">&nbsp;</td>
+            <td vAlign="top" width="6%">4</td>
+            <td vAlign="top" width="66%">Buyer signs for order.</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">&nbsp;</td>
+            <td vAlign="top" width="6%">5</td>
+            <td vAlign="top" width="66%">Company creates order, 
+              ships order to buyer.</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">&nbsp;</td>
+            <td vAlign="top" width="6%">6</td>
+            <td vAlign="top" width="66%">Company ships invoice to 
+              buyer.</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">&nbsp;</td>
+            <td vAlign="top" width="6%">7</td>
+            <td vAlign="top" width="66%">Buyers pays invoice.</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">EXTENSIONS</td>
+            <td vAlign="top" width="6%">Step</td>
+            <td vAlign="top" width="66%">Branching Action</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">&nbsp;</td>
+            <td vAlign="top" width="6%">3a</td>
+            <td vAlign="top" width="66%">Company is out of one of 
+              the ordered items:<br>
+              3a1. Renegotiate order.</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">&nbsp;</td>
+            <td vAlign="top" width="6%">4a</td>
+            <td vAlign="top" width="66%">Buyer pays directly with 
+              credit card:<br>
+              4a1. Take payment by credit card (use case 44)</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">&nbsp;</td>
+            <td vAlign="top" width="6%">7a</td>
+            <td vAlign="top" width="66%">Buyer returns goods:<br>
+              7a. Handle returned goods (use case 105)</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">SUB-VARIATIONS</td>
+            <td vAlign="top" width="6%">&nbsp;</td>
+            <td vAlign="top" width="66%">Branching Action</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">&nbsp;</td>
+            <td vAlign="top" width="6%">1</td>
+            <td vAlign="top" width="66%">Buyer may use phone in, fax 
+              in, use web order form, electronic interchange</td>
+          </tr>
+          <tr>
+            <td vAlign="top" width="20%">&nbsp;</td>
+            <td vAlign="top" width="6%">7</td>
+            <td vAlign="top" width="66%">Buyer may pay by cash or 
+              money order check credit card</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<SPAN 
+class=basicContent>
+<hr align="left" width="100%" size="4" noshade>
+</SPAN>
+<h2>Use Cases Drive Analysis, Design, Testing</h2>
+<p><img border="0" src="images/UML-bo1.gif" width="617" height="324"></p>
+<SPAN 
+class=basicContent>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Register for Courses - UML Use Case Diagram</h2>
+<p><img border="0" src="images/registerForCourses.jpg"></p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Register for Courses Bulleted Outline</h2>
+<ul>
+  <li>Basic Flow
+    <ul>
+      <li>Student logs onto system</li>
+      <li>Student opts to create a schedule</li>
+      <li>Student enters a course number</li>
+      <li>System verifies that student has satisfied pre-requisites for the 
+        course</li>
+      <li>System displays a list of open course offerings</li>
+      <li>Student selects an offering</li>
+      <li>Student is registered for the course</li>
+    </ul>
+  </li>
+  <li>Alternate Flows
+    <ul>
+      <li>Student opts to modify an existing schedule</li>
+      <li>Student opts to print an existing schedule</li>
+      <li>Student opts to delete an existing schedule</li>
+      <li>Pre-requisites not satisfied</li>
+      <li>No course offerings available</li>
+      <li>Student cannot be registered for the course offering</li>
+    </ul>
+  </li>
+</ul>
+</SPAN><SPAN 
+class=basicContent>
+<hr align="left" width="100%" size="4" noshade>
+</SPAN>
+<p><img border="0" src="images/basicFlow.png" width="538" height="513"></p>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70be8ff3eed1',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

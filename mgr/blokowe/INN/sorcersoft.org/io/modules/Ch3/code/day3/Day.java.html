@@ -1,0 +1,202 @@
+<pre><tt><font color="#000000">001: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> Day
+<font color="#000000">002: </font><font color="#FF0000">{</font>
+<font color="#000000">003: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">004: </font><i><font color="#9A1900">      Constructs a day with a given year, month, and day</font></i>
+<font color="#000000">005: </font><i><font color="#9A1900">      of the Julian/Gregorian calendar. The Julian calendar</font></i>
+<font color="#000000">006: </font><i><font color="#9A1900">      is used for all days before October 15, 1582</font></i>
+<font color="#000000">007: </font><i><font color="#9A1900">      @param aYear a year != 0</font></i>
+<font color="#000000">008: </font><i><font color="#9A1900">      @param aMonth a month between 1 and 12</font></i>
+<font color="#000000">009: </font><i><font color="#9A1900">      @param aDate a date between 1 and 31</font></i>
+<font color="#000000">010: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">011: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#000000">Day</font></b><font color="#990000">(</font><font color="#009900">int</font> aYear<font color="#990000">,</font> <font color="#009900">int</font> aMonth<font color="#990000">,</font> <font color="#009900">int</font> aDate<font color="#990000">)</font>
+<font color="#000000">012: </font>   <font color="#FF0000">{</font>
+<font color="#000000">013: </font>      year <font color="#990000">=</font> aYear<font color="#990000">;</font>
+<font color="#000000">014: </font>      month <font color="#990000">=</font> aMonth<font color="#990000">;</font>
+<font color="#000000">015: </font>      date <font color="#990000">=</font> aDate<font color="#990000">;</font>
+<font color="#000000">016: </font>      ymdValid <font color="#990000">=</font> <b><font color="#0000FF">true</font></b><font color="#990000">;</font>
+<font color="#000000">017: </font>      julianValid <font color="#990000">=</font> <b><font color="#0000FF">false</font></b><font color="#990000">;</font>
+<font color="#000000">018: </font>   <font color="#FF0000">}</font>
+<font color="#000000">019: </font>
+<font color="#000000">020: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">021: </font><i><font color="#9A1900">      Returns the year of this day</font></i>
+<font color="#000000">022: </font><i><font color="#9A1900">      @return the year</font></i>
+<font color="#000000">023: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">024: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">int</font> <b><font color="#000000">getYear</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">025: </font>   <font color="#FF0000">{</font>
+<font color="#000000">026: </font>      <b><font color="#000000">ensureYmd</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">027: </font>      <b><font color="#0000FF">return</font></b> year<font color="#990000">;</font>
+<font color="#000000">028: </font>   <font color="#FF0000">}</font>
+<font color="#000000">029: </font>
+<font color="#000000">030: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">031: </font><i><font color="#9A1900">      Returns the month of this day</font></i>
+<font color="#000000">032: </font><i><font color="#9A1900">      @return the month</font></i>
+<font color="#000000">033: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">034: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">int</font> <b><font color="#000000">getMonth</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">035: </font>   <font color="#FF0000">{</font>
+<font color="#000000">036: </font>      <b><font color="#000000">ensureYmd</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">037: </font>      <b><font color="#0000FF">return</font></b> month<font color="#990000">;</font>
+<font color="#000000">038: </font>   <font color="#FF0000">}</font>
+<font color="#000000">039: </font>
+<font color="#000000">040: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">041: </font><i><font color="#9A1900">      Returns the day of the month of this day</font></i>
+<font color="#000000">042: </font><i><font color="#9A1900">      @return the day of the month</font></i>
+<font color="#000000">043: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">044: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">int</font> <b><font color="#000000">getDate</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">045: </font>   <font color="#FF0000">{</font>
+<font color="#000000">046: </font>      <b><font color="#000000">ensureYmd</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">047: </font>      <b><font color="#0000FF">return</font></b> date<font color="#990000">;</font>
+<font color="#000000">048: </font>   <font color="#FF0000">}</font>
+<font color="#000000">049: </font>
+<font color="#000000">050: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">051: </font><i><font color="#9A1900">      Returns a day that is a certain number of days away from</font></i>
+<font color="#000000">052: </font><i><font color="#9A1900">      this day</font></i>
+<font color="#000000">053: </font><i><font color="#9A1900">      @param n the number of days, can be negative</font></i>
+<font color="#000000">054: </font><i><font color="#9A1900">      @return a day that is n days away from this one</font></i>
+<font color="#000000">055: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">056: </font>   <b><font color="#0000FF">public</font></b> Day <b><font color="#000000">addDays</font></b><font color="#990000">(</font><font color="#009900">int</font> n<font color="#990000">)</font>
+<font color="#000000">057: </font>   <font color="#FF0000">{</font>
+<font color="#000000">058: </font>      <b><font color="#000000">ensureJulian</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">059: </font>      <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Day</font></b><font color="#990000">(</font>julian <font color="#990000">+</font> n<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">060: </font>   <font color="#FF0000">}</font>
+<font color="#000000">061: </font>
+<font color="#000000">062: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">063: </font><i><font color="#9A1900">      Returns the number of days between this day and another</font></i>
+<font color="#000000">064: </font><i><font color="#9A1900">      day</font></i>
+<font color="#000000">065: </font><i><font color="#9A1900">      @param other the other day</font></i>
+<font color="#000000">066: </font><i><font color="#9A1900">      @return the number of days that this day is away from </font></i>
+<font color="#000000">067: </font><i><font color="#9A1900">      the other (&gt;0 if this day comes later)</font></i>
+<font color="#000000">068: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">069: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">int</font> <b><font color="#000000">daysFrom</font></b><font color="#990000">(</font>Day other<font color="#990000">)</font>
+<font color="#000000">070: </font>   <font color="#FF0000">{</font>
+<font color="#000000">071: </font>      <b><font color="#000000">ensureJulian</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">072: </font>      other<font color="#990000">.</font><b><font color="#000000">ensureJulian</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">073: </font>      <b><font color="#0000FF">return</font></b> julian <font color="#990000">-</font> other<font color="#990000">.</font>julian<font color="#990000">;</font>
+<font color="#000000">074: </font>   <font color="#FF0000">}</font>
+<font color="#000000">075: </font>
+<font color="#000000">076: </font>   <b><font color="#0000FF">private</font></b> <b><font color="#000000">Day</font></b><font color="#990000">(</font><font color="#009900">int</font> aJulian<font color="#990000">)</font>
+<font color="#000000">077: </font>   <font color="#FF0000">{</font>
+<font color="#000000">078: </font>      julian <font color="#990000">=</font> aJulian<font color="#990000">;</font>
+<font color="#000000">079: </font>      ymdValid <font color="#990000">=</font> <b><font color="#0000FF">false</font></b><font color="#990000">;</font>
+<font color="#000000">080: </font>      julianValid <font color="#990000">=</font> <b><font color="#0000FF">true</font></b><font color="#990000">;</font>
+<font color="#000000">081: </font>   <font color="#FF0000">}</font>
+<font color="#000000">082: </font>
+<font color="#000000">083: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">084: </font><i><font color="#9A1900">      Computes the Julian day number of this day if </font></i>
+<font color="#000000">085: </font><i><font color="#9A1900">      necessary</font></i>
+<font color="#000000">086: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">087: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">void</font> <b><font color="#000000">ensureJulian</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">088: </font>   <font color="#FF0000">{</font>  
+<font color="#000000">089: </font>      <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>julianValid<font color="#990000">)</font> <b><font color="#0000FF">return</font></b><font color="#990000">;</font>
+<font color="#000000">090: </font>      julian <font color="#990000">=</font> <b><font color="#000000">toJulian</font></b><font color="#990000">(</font>year<font color="#990000">,</font> month<font color="#990000">,</font> date<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">091: </font>      julianValid <font color="#990000">=</font> <b><font color="#0000FF">true</font></b><font color="#990000">;</font>
+<font color="#000000">092: </font>   <font color="#FF0000">}</font>
+<font color="#000000">093: </font>
+<font color="#000000">094: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">095: </font><i><font color="#9A1900">      Converts this Julian day mumber to a calendar date if necessary.</font></i>
+<font color="#000000">096: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">097: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">void</font> <b><font color="#000000">ensureYmd</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">098: </font>   <font color="#FF0000">{</font>  
+<font color="#000000">099: </font>      <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>ymdValid<font color="#990000">)</font> <b><font color="#0000FF">return</font></b><font color="#990000">;</font>
+<font color="#000000">100: </font>      <font color="#009900">int</font><font color="#990000">[</font><font color="#990000">]</font> ymd <font color="#990000">=</font> <b><font color="#000000">fromJulian</font></b><font color="#990000">(</font>julian<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">101: </font>      year <font color="#990000">=</font> ymd<font color="#990000">[</font><font color="#993399">0</font><font color="#990000">]</font><font color="#990000">;</font>
+<font color="#000000">102: </font>      month <font color="#990000">=</font> ymd<font color="#990000">[</font><font color="#993399">1</font><font color="#990000">]</font><font color="#990000">;</font>
+<font color="#000000">103: </font>      date <font color="#990000">=</font> ymd<font color="#990000">[</font><font color="#993399">2</font><font color="#990000">]</font><font color="#990000">;</font>
+<font color="#000000">104: </font>      ymdValid <font color="#990000">=</font> <b><font color="#0000FF">true</font></b><font color="#990000">;</font>
+<font color="#000000">105: </font>   <font color="#FF0000">}</font>
+<font color="#000000">106: </font>
+<font color="#000000">107: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">108: </font><i><font color="#9A1900">      Computes the Julian day number of the given day day.</font></i>
+<font color="#000000">109: </font><i><font color="#9A1900"></font></i>
+<font color="#000000">110: </font><i><font color="#9A1900">      @param year a year</font></i>
+<font color="#000000">111: </font><i><font color="#9A1900">      @param month a month</font></i>
+<font color="#000000">112: </font><i><font color="#9A1900">      @param date a day of the month</font></i>
+<font color="#000000">113: </font><i><font color="#9A1900">      @return The Julian day number that begins at noon of </font></i>
+<font color="#000000">114: </font><i><font color="#9A1900">      the given day</font></i>
+<font color="#000000">115: </font><i><font color="#9A1900">      Positive year signifies CE, negative year BCE. </font></i>
+<font color="#000000">116: </font><i><font color="#9A1900">      Remember that the year after 1 BCE is 1 CE.</font></i>
+<font color="#000000">117: </font><i><font color="#9A1900"></font></i>
+<font color="#000000">118: </font><i><font color="#9A1900">      A convenient reference point is that May 23, 1968 noon</font></i>
+<font color="#000000">119: </font><i><font color="#9A1900">      is Julian day number 2440000.</font></i>
+<font color="#000000">120: </font><i><font color="#9A1900"></font></i>
+<font color="#000000">121: </font><i><font color="#9A1900">      Julian day number 0 is a Monday.</font></i>
+<font color="#000000">122: </font><i><font color="#9A1900"></font></i>
+<font color="#000000">123: </font><i><font color="#9A1900">      This algorithm is from Press et al., Numerical Recipes</font></i>
+<font color="#000000">124: </font><i><font color="#9A1900">      in C, 2nd ed., Cambridge University Press 1992</font></i>
+<font color="#000000">125: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">126: </font>   <b><font color="#0000FF">private</font></b> <b><font color="#0000FF">static</font></b> <font color="#009900">int</font> <b><font color="#000000">toJulian</font></b><font color="#990000">(</font><font color="#009900">int</font> year<font color="#990000">,</font> <font color="#009900">int</font> month<font color="#990000">,</font> <font color="#009900">int</font> date<font color="#990000">)</font>
+<font color="#000000">127: </font>   <font color="#FF0000">{</font>  
+<font color="#000000">128: </font>      <font color="#009900">int</font> jy <font color="#990000">=</font> year<font color="#990000">;</font>
+<font color="#000000">129: </font>      <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>year <font color="#990000">&lt;</font> <font color="#993399">0</font><font color="#990000">)</font> jy<font color="#990000">+</font><font color="#990000">+</font><font color="#990000">;</font>
+<font color="#000000">130: </font>      <font color="#009900">int</font> jm <font color="#990000">=</font> month<font color="#990000">;</font>
+<font color="#000000">131: </font>      <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>month <font color="#990000">&gt;</font> <font color="#993399">2</font><font color="#990000">)</font> jm<font color="#990000">+</font><font color="#990000">+</font><font color="#990000">;</font>
+<font color="#000000">132: </font>      <b><font color="#0000FF">else</font></b>
+<font color="#000000">133: </font>      <font color="#FF0000">{</font>  
+<font color="#000000">134: </font>         jy<font color="#990000">-</font><font color="#990000">-</font><font color="#990000">;</font>
+<font color="#000000">135: </font>         jm <font color="#990000">+</font><font color="#990000">=</font> <font color="#993399">13</font><font color="#990000">;</font>
+<font color="#000000">136: </font>      <font color="#FF0000">}</font>
+<font color="#000000">137: </font>      <font color="#009900">int</font> jul <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> <font color="#990000">(</font>java<font color="#990000">.</font>lang<font color="#990000">.</font>Math<font color="#990000">.</font><b><font color="#000000">floor</font></b><font color="#990000">(</font><font color="#993399">365.25</font> <font color="#990000">*</font> jy<font color="#990000">)</font> 
+<font color="#000000">138: </font>            <font color="#990000">+</font> java<font color="#990000">.</font>lang<font color="#990000">.</font>Math<font color="#990000">.</font><b><font color="#000000">floor</font></b><font color="#990000">(</font><font color="#993399">30.6001</font> <font color="#990000">*</font> jm<font color="#990000">)</font> <font color="#990000">+</font> date <font color="#990000">+</font> <font color="#993399">1720995.0</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">139: </font>
+<font color="#000000">140: </font>      <font color="#009900">int</font> IGREG <font color="#990000">=</font> <font color="#993399">15</font> <font color="#990000">+</font> <font color="#993399">31</font> <font color="#990000">*</font> <font color="#990000">(</font><font color="#993399">10</font> <font color="#990000">+</font> <font color="#993399">12</font> <font color="#990000">*</font> <font color="#993399">1582</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">141: </font>         <i><font color="#9A1900">// Gregorian Calendar adopted Oct. 15, 1582</font></i>
+<font color="#000000">142: </font>
+<font color="#000000">143: </font>      <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>date <font color="#990000">+</font> <font color="#993399">31</font> <font color="#990000">*</font> <font color="#990000">(</font>month <font color="#990000">+</font> <font color="#993399">12</font> <font color="#990000">*</font> year<font color="#990000">)</font> <font color="#990000">&gt;</font><font color="#990000">=</font> IGREG<font color="#990000">)</font>
+<font color="#000000">144: </font>         <i><font color="#9A1900">// Change over to Gregorian calendar</font></i>
+<font color="#000000">145: </font>      <font color="#FF0000">{</font>  
+<font color="#000000">146: </font>         <font color="#009900">int</font> ja <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> <font color="#990000">(</font><font color="#993399">0.01</font> <font color="#990000">*</font> jy<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">147: </font>         jul <font color="#990000">+</font><font color="#990000">=</font> <font color="#993399">2</font> <font color="#990000">-</font> ja <font color="#990000">+</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> <font color="#990000">(</font><font color="#993399">0.25</font> <font color="#990000">*</font> ja<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">148: </font>      <font color="#FF0000">}</font>
+<font color="#000000">149: </font>      <b><font color="#0000FF">return</font></b> jul<font color="#990000">;</font>
+<font color="#000000">150: </font>   <font color="#FF0000">}</font>
+<font color="#000000">151: </font>
+<font color="#000000">152: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">153: </font><i><font color="#9A1900">      Converts a Julian day number to a calendar date.</font></i>
+<font color="#000000">154: </font><i><font color="#9A1900">      </font></i>
+<font color="#000000">155: </font><i><font color="#9A1900">      This algorithm is from Press et al., Numerical Recipes</font></i>
+<font color="#000000">156: </font><i><font color="#9A1900">      in C, 2nd ed., Cambridge University Press 1992</font></i>
+<font color="#000000">157: </font><i><font color="#9A1900"></font></i>
+<font color="#000000">158: </font><i><font color="#9A1900">      @param j  the Julian day number</font></i>
+<font color="#000000">159: </font><i><font color="#9A1900">      @return an array whose 0 entry is the year, 1 the month,</font></i>
+<font color="#000000">160: </font><i><font color="#9A1900">      and 2 the day of the month.</font></i>
+<font color="#000000">161: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">162: </font>   <b><font color="#0000FF">private</font></b> <b><font color="#0000FF">static</font></b> <font color="#009900">int</font><font color="#990000">[</font><font color="#990000">]</font> <b><font color="#000000">fromJulian</font></b><font color="#990000">(</font><font color="#009900">int</font> j<font color="#990000">)</font>
+<font color="#000000">163: </font>   <font color="#FF0000">{</font>  
+<font color="#000000">164: </font>      <font color="#009900">int</font> ja <font color="#990000">=</font> j<font color="#990000">;</font>
+<font color="#000000">165: </font>   
+<font color="#000000">166: </font>      <font color="#009900">int</font> JGREG <font color="#990000">=</font> <font color="#993399">2299161</font><font color="#990000">;</font>
+<font color="#000000">167: </font>         <i><font color="#9A1900">// The Julian day number of the adoption of the Gregorian calendar    </font></i>
+<font color="#000000">168: </font>
+<font color="#000000">169: </font>      <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>j <font color="#990000">&gt;</font><font color="#990000">=</font> JGREG<font color="#990000">)</font>
+<font color="#000000">170: </font>         <i><font color="#9A1900">// Cross-over to Gregorian Calendar produces this correction</font></i>
+<font color="#000000">171: </font>      <font color="#FF0000">{</font>  
+<font color="#000000">172: </font>         <font color="#009900">int</font> jalpha <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> <font color="#990000">(</font><font color="#990000">(</font><font color="#990000">(</font><font color="#009900">float</font><font color="#990000">)</font> <font color="#990000">(</font>j <font color="#990000">-</font> <font color="#993399">1867216</font><font color="#990000">)</font> <font color="#990000">-</font> <font color="#993399">0.25</font><font color="#990000">)</font> 
+<font color="#000000">173: </font>             <font color="#990000">/</font> <font color="#993399">36524.25</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">174: </font>         ja <font color="#990000">+</font><font color="#990000">=</font> <font color="#993399">1</font> <font color="#990000">+</font> jalpha <font color="#990000">-</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> <font color="#990000">(</font><font color="#993399">0.25</font> <font color="#990000">*</font> jalpha<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">175: </font>      <font color="#FF0000">}</font>
+<font color="#000000">176: </font>      <font color="#009900">int</font> jb <font color="#990000">=</font> ja <font color="#990000">+</font> <font color="#993399">1524</font><font color="#990000">;</font>
+<font color="#000000">177: </font>      <font color="#009900">int</font> jc <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> <font color="#990000">(</font><font color="#993399">6680.0</font> <font color="#990000">+</font> <font color="#990000">(</font><font color="#990000">(</font><font color="#009900">float</font><font color="#990000">)</font> <font color="#990000">(</font>jb <font color="#990000">-</font> <font color="#993399">2439870</font><font color="#990000">)</font> <font color="#990000">-</font> <font color="#993399">122.1</font><font color="#990000">)</font>
+<font color="#000000">178: </font>          <font color="#990000">/</font> <font color="#993399">365.25</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">179: </font>      <font color="#009900">int</font> jd <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> <font color="#990000">(</font><font color="#993399">365</font> <font color="#990000">*</font> jc <font color="#990000">+</font> <font color="#990000">(</font><font color="#993399">0.25</font> <font color="#990000">*</font> jc<font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">180: </font>      <font color="#009900">int</font> je <font color="#990000">=</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> <font color="#990000">(</font><font color="#990000">(</font>jb <font color="#990000">-</font> jd<font color="#990000">)</font> <font color="#990000">/</font> <font color="#993399">30.6001</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">181: </font>      <font color="#009900">int</font> date <font color="#990000">=</font> jb <font color="#990000">-</font> jd <font color="#990000">-</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> <font color="#990000">(</font><font color="#993399">30.6001</font> <font color="#990000">*</font> je<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">182: </font>      <font color="#009900">int</font> month <font color="#990000">=</font> je <font color="#990000">-</font> <font color="#993399">1</font><font color="#990000">;</font>
+<font color="#000000">183: </font>      <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>month <font color="#990000">&gt;</font> <font color="#993399">12</font><font color="#990000">)</font> month <font color="#990000">-</font><font color="#990000">=</font> <font color="#993399">12</font><font color="#990000">;</font>
+<font color="#000000">184: </font>      <font color="#009900">int</font> year <font color="#990000">=</font> jc <font color="#990000">-</font> <font color="#993399">4715</font><font color="#990000">;</font>
+<font color="#000000">185: </font>      <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>month <font color="#990000">&gt;</font> <font color="#993399">2</font><font color="#990000">)</font> <font color="#990000">-</font><font color="#990000">-</font>year<font color="#990000">;</font>
+<font color="#000000">186: </font>      <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>year <font color="#990000">&lt;</font><font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">)</font> <font color="#990000">-</font><font color="#990000">-</font>year<font color="#990000">;</font>
+<font color="#000000">187: </font>      <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">new</font></b> <font color="#009900">int</font><font color="#990000">[</font><font color="#990000">]</font> <font color="#FF0000">{</font> year<font color="#990000">,</font> month<font color="#990000">,</font> date <font color="#FF0000">}</font><font color="#990000">;</font>
+<font color="#000000">188: </font>   <font color="#FF0000">}</font>
+<font color="#000000">189: </font>
+<font color="#000000">190: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> year<font color="#990000">;</font>
+<font color="#000000">191: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> month<font color="#990000">;</font>
+<font color="#000000">192: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> date<font color="#990000">;</font>
+<font color="#000000">193: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> julian<font color="#990000">;</font>
+<font color="#000000">194: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">boolean</font> ymdValid<font color="#990000">;</font>
+<font color="#000000">195: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">boolean</font> julianValid<font color="#990000">;</font>
+<font color="#000000">196: </font><font color="#FF0000">}</font>
+<font color="#000000">197: </font>
+<font color="#000000">198: </font>
+<font color="#000000">199: </font>
+<font color="#000000">200: </font>
+<font color="#000000">201: </font>
+</tt></pre>

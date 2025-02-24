@@ -1,0 +1,28 @@
+<pre>
+<tt>
+01: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>util<font color=#990000>.</font>Random<font color=#990000>;</font>
+02: 
+03: <i><font color=#9A1900>/**</font></i>
+04: <i><font color=#9A1900>   This program runs four threads that deposit and withdraw</font></i>
+05: <i><font color=#9A1900>   money from the same bank account. </font></i>
+06: <i><font color=#9A1900>*/</font></i>
+07: <b><font color=#0000FF>public</font></b> <b><font color=#0000FF>class</font></b> BankAccountThreadTest
+08: <font color=#FF0000>{</font>
+09:    <b><font color=#0000FF>public</font></b> <b><font color=#0000FF>static</font></b> <font color=#009900>void</font> <b><font color=#000000>main</font></b><font color=#990000>(</font>String<font color=#990000>[</font><font color=#990000>]</font> args<font color=#990000>)</font>
+10:    <font color=#FF0000>{</font>
+11:       BankAccount account <font color=#990000>=</font> <b><font color=#0000FF>new</font></b> <b><font color=#000000>BankAccount</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+12: 
+13:       DepositThread t0 <font color=#990000>=</font> <b><font color=#0000FF>new</font></b> <b><font color=#000000>DepositThread</font></b><font color=#990000>(</font>account<font color=#990000>,</font> <font color=#993399>100</font><font color=#990000>)</font><font color=#990000>;</font>
+14:       WithdrawThread t1 <font color=#990000>=</font> <b><font color=#0000FF>new</font></b> <b><font color=#000000>WithdrawThread</font></b><font color=#990000>(</font>account<font color=#990000>,</font> <font color=#993399>100</font><font color=#990000>)</font><font color=#990000>;</font>
+15:       DepositThread t2 <font color=#990000>=</font> <b><font color=#0000FF>new</font></b> <b><font color=#000000>DepositThread</font></b><font color=#990000>(</font>account<font color=#990000>,</font> <font color=#993399>100</font><font color=#990000>)</font><font color=#990000>;</font>
+16:       WithdrawThread t3 <font color=#990000>=</font> <b><font color=#0000FF>new</font></b> <b><font color=#000000>WithdrawThread</font></b><font color=#990000>(</font>account<font color=#990000>,</font> <font color=#993399>100</font><font color=#990000>)</font><font color=#990000>;</font>
+17: 
+18:       t0<font color=#990000>.</font><b><font color=#000000>start</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+19:       t1<font color=#990000>.</font><b><font color=#000000>start</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+20:       t2<font color=#990000>.</font><b><font color=#000000>start</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+21:       t3<font color=#990000>.</font><b><font color=#000000>start</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+22:    <font color=#FF0000>}</font>
+23: <font color=#FF0000>}</font>
+24: 
+</tt>
+</pre>

@@ -1,0 +1,42 @@
+<pre>
+<tt>
+01: <i><font color=#9A1900>/**</font></i>
+02: <i><font color=#9A1900>   A deposit thread makes periodic deposits to a bank account.</font></i>
+03: <i><font color=#9A1900>*/</font></i>
+04: <b><font color=#0000FF>class</font></b> DepositThread <b><font color=#0000FF>extends</font></b> Thread
+05: <font color=#FF0000>{</font>
+06:    <i><font color=#9A1900>/**</font></i>
+07: <i><font color=#9A1900>      Constructs a deposit thread.</font></i>
+08: <i><font color=#9A1900>      @param anAccount the account into which to deposit money</font></i>
+09: <i><font color=#9A1900>      @anAmount the amount to deposit in each repetition</font></i>
+10: <i><font color=#9A1900>   */</font></i>
+11:    <b><font color=#0000FF>public</font></b> <b><font color=#000000>DepositThread</font></b><font color=#990000>(</font>BankAccount anAccount<font color=#990000>,</font> <font color=#009900>double</font> anAmount<font color=#990000>)</font>
+12:    <font color=#FF0000>{</font>
+13:       account <font color=#990000>=</font> anAccount<font color=#990000>;</font>
+14:       amount <font color=#990000>=</font> anAmount<font color=#990000>;</font>
+15:    <font color=#FF0000>}</font>
+16: 
+17:    <b><font color=#0000FF>public</font></b> <font color=#009900>void</font> <b><font color=#000000>run</font></b><font color=#990000>(</font><font color=#990000>)</font>
+18:    <font color=#FF0000>{</font>
+19:       <b><font color=#0000FF>try</font></b>
+20:       <font color=#FF0000>{</font>
+21:          <b><font color=#000000>for</font></b> <font color=#990000>(</font><font color=#009900>int</font> i <font color=#990000>=</font> <font color=#993399>1</font><font color=#990000>;</font> i <font color=#990000>&lt;</font><font color=#990000>=</font> REPETITIONS <font color=#990000>&amp;</font><font color=#990000>&amp;</font> <font color=#990000>!</font><b><font color=#000000>isInterrupted</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font> i<font color=#990000>+</font><font color=#990000>+</font><font color=#990000>)</font>
+22:          <font color=#FF0000>{</font>
+23:             account<font color=#990000>.</font><b><font color=#000000>deposit</font></b><font color=#990000>(</font>amount<font color=#990000>)</font><font color=#990000>;</font>
+24:             <b><font color=#000000>sleep</font></b><font color=#990000>(</font>DELAY<font color=#990000>)</font><font color=#990000>;</font>         
+25:          <font color=#FF0000>}</font>
+26:       <font color=#FF0000>}</font>
+27:       <b><font color=#000000>catch</font></b> <font color=#990000>(</font>InterruptedException exception<font color=#990000>)</font>
+28:       <font color=#FF0000>{</font>
+29:       <font color=#FF0000>}</font>
+30:    <font color=#FF0000>}</font>
+31: 
+32:    <b><font color=#0000FF>private</font></b> BankAccount account<font color=#990000>;</font>
+33:    <b><font color=#0000FF>private</font></b> <font color=#009900>double</font> amount<font color=#990000>;</font>
+34: 
+35:    <b><font color=#0000FF>private</font></b> <b><font color=#0000FF>static</font></b> <b><font color=#0000FF>final</font></b> <font color=#009900>int</font> REPETITIONS <font color=#990000>=</font> <font color=#993399>10</font><font color=#990000>;</font>
+36:    <b><font color=#0000FF>private</font></b> <b><font color=#0000FF>static</font></b> <b><font color=#0000FF>final</font></b> <font color=#009900>int</font> DELAY <font color=#990000>=</font> <font color=#993399>10</font><font color=#990000>;</font>
+37: <font color=#FF0000>}</font>
+38: 
+</tt>
+</pre>

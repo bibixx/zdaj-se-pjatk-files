@@ -1,0 +1,25 @@
+<pre><tt><font color="#000000">01: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">02: </font><i><font color="#9A1900">   This interface describes the tasks that an invoice</font></i>
+<font color="#000000">03: </font><i><font color="#9A1900">   formatter needs to carry out.</font></i>
+<font color="#000000">04: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">05: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">interface</font></b> InvoiceFormatter
+<font color="#000000">06: </font><font color="#FF0000">{</font>
+<font color="#000000">07: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">08: </font><i><font color="#9A1900">      Formats the header of the invoice.</font></i>
+<font color="#000000">09: </font><i><font color="#9A1900">      @return the invoice header</font></i>
+<font color="#000000">10: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">11: </font>   String <b><font color="#000000">formatHeader</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">12: </font>
+<font color="#000000">13: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">14: </font><i><font color="#9A1900">      Formats a line item of the invoice.</font></i>
+<font color="#000000">15: </font><i><font color="#9A1900">      @return the formatted line item</font></i>
+<font color="#000000">16: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">17: </font>   String <b><font color="#000000">formatLineItem</font></b><font color="#990000">(</font>LineItem item<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">18: </font>
+<font color="#000000">19: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">20: </font><i><font color="#9A1900">      Formats the footer of the invoice.</font></i>
+<font color="#000000">21: </font><i><font color="#9A1900">      @return the invoice footer</font></i>
+<font color="#000000">22: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">23: </font>   String <b><font color="#000000">formatFooter</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">24: </font><font color="#FF0000">}</font>
+</tt></pre>

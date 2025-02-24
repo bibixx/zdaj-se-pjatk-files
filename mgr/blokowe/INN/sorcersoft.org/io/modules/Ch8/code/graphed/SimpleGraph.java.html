@@ -1,0 +1,33 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>util<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">03: </font>
+<font color="#000000">04: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">05: </font><i><font color="#9A1900">   A simple graph with round nodes and straight edges.</font></i>
+<font color="#000000">06: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">07: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> SimpleGraph <b><font color="#0000FF">extends</font></b> Graph
+<font color="#000000">08: </font><font color="#FF0000">{</font>
+<font color="#000000">09: </font>   <b><font color="#0000FF">public</font></b> Node<font color="#990000">[</font><font color="#990000">]</font> <b><font color="#000000">getNodePrototypes</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">10: </font>   <font color="#FF0000">{</font>
+<font color="#000000">11: </font>      Node<font color="#990000">[</font><font color="#990000">]</font> nodeTypes <font color="#990000">=</font>
+<font color="#000000">12: </font>         <font color="#FF0000">{</font>
+<font color="#000000">13: </font>            <b><font color="#0000FF">new</font></b> <b><font color="#000000">CircleNode</font></b><font color="#990000">(</font>Color<font color="#990000">.</font>BLACK<font color="#990000">)</font><font color="#990000">,</font>
+<font color="#000000">14: </font>            <b><font color="#0000FF">new</font></b> <b><font color="#000000">CircleNode</font></b><font color="#990000">(</font>Color<font color="#990000">.</font>WHITE<font color="#990000">)</font>
+<font color="#000000">15: </font>         <font color="#FF0000">}</font><font color="#990000">;</font>
+<font color="#000000">16: </font>      <b><font color="#0000FF">return</font></b> nodeTypes<font color="#990000">;</font>
+<font color="#000000">17: </font>   <font color="#FF0000">}</font>
+<font color="#000000">18: </font>
+<font color="#000000">19: </font>   <b><font color="#0000FF">public</font></b> Edge<font color="#990000">[</font><font color="#990000">]</font> <b><font color="#000000">getEdgePrototypes</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">20: </font>   <font color="#FF0000">{</font>
+<font color="#000000">21: </font>      Edge<font color="#990000">[</font><font color="#990000">]</font> edgeTypes <font color="#990000">=</font> 
+<font color="#000000">22: </font>         <font color="#FF0000">{</font>
+<font color="#000000">23: </font>            <b><font color="#0000FF">new</font></b> <b><font color="#000000">LineEdge</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">24: </font>         <font color="#FF0000">}</font><font color="#990000">;</font>
+<font color="#000000">25: </font>      <b><font color="#0000FF">return</font></b> edgeTypes<font color="#990000">;</font>
+<font color="#000000">26: </font>   <font color="#FF0000">}</font>
+<font color="#000000">27: </font><font color="#FF0000">}</font>
+<font color="#000000">28: </font>
+<font color="#000000">29: </font>
+<font color="#000000">30: </font>
+<font color="#000000">31: </font>
+<font color="#000000">32: </font>
+</tt></pre>

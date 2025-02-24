@@ -1,0 +1,82 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>geom<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">03: </font>
+<font color="#000000">04: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">05: </font><i><font color="#9A1900">   A circular node that is filled with a color.</font></i>
+<font color="#000000">06: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">07: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> CircleNode <b><font color="#0000FF">implements</font></b> Node
+<font color="#000000">08: </font><font color="#FF0000">{</font>
+<font color="#000000">09: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">10: </font><i><font color="#9A1900">      Construct a circle node with a given size and color.</font></i>
+<font color="#000000">11: </font><i><font color="#9A1900">      @param aColor the fill color</font></i>
+<font color="#000000">12: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">13: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#000000">CircleNode</font></b><font color="#990000">(</font>Color aColor<font color="#990000">)</font>
+<font color="#000000">14: </font>   <font color="#FF0000">{</font>
+<font color="#000000">15: </font>      size <font color="#990000">=</font> DEFAULT_SIZE<font color="#990000">;</font>
+<font color="#000000">16: </font>      x <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+<font color="#000000">17: </font>      y <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+<font color="#000000">18: </font>      color <font color="#990000">=</font> aColor<font color="#990000">;</font>
+<font color="#000000">19: </font>   <font color="#FF0000">}</font>
+<font color="#000000">20: </font>
+<font color="#000000">21: </font>   <b><font color="#0000FF">public</font></b> Object <b><font color="#000000">clone</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">22: </font>   <font color="#FF0000">{</font>
+<font color="#000000">23: </font>      <b><font color="#0000FF">try</font></b>
+<font color="#000000">24: </font>      <font color="#FF0000">{</font>
+<font color="#000000">25: </font>         <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">super</font></b><font color="#990000">.</font><b><font color="#000000">clone</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">26: </font>      <font color="#FF0000">}</font>
+<font color="#000000">27: </font>      <b><font color="#0000FF">catch</font></b> <font color="#990000">(</font>CloneNotSupportedException exception<font color="#990000">)</font>
+<font color="#000000">28: </font>      <font color="#FF0000">{</font>
+<font color="#000000">29: </font>         <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">null</font></b><font color="#990000">;</font>
+<font color="#000000">30: </font>      <font color="#FF0000">}</font>
+<font color="#000000">31: </font>   <font color="#FF0000">}</font>
+<font color="#000000">32: </font>
+<font color="#000000">33: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">draw</font></b><font color="#990000">(</font>Graphics2D g2<font color="#990000">)</font>
+<font color="#000000">34: </font>   <font color="#FF0000">{</font>
+<font color="#000000">35: </font>      Ellipse2D circle <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Ellipse2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>
+<font color="#000000">36: </font>            x<font color="#990000">,</font> y<font color="#990000">,</font> size<font color="#990000">,</font> size<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">37: </font>      Color oldColor <font color="#990000">=</font> g2<font color="#990000">.</font><b><font color="#000000">getColor</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">38: </font>      g2<font color="#990000">.</font><b><font color="#000000">setColor</font></b><font color="#990000">(</font>color<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">39: </font>      g2<font color="#990000">.</font><b><font color="#000000">fill</font></b><font color="#990000">(</font>circle<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">40: </font>      g2<font color="#990000">.</font><b><font color="#000000">setColor</font></b><font color="#990000">(</font>oldColor<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">41: </font>      g2<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>circle<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">42: </font>   <font color="#FF0000">}</font>
+<font color="#000000">43: </font>
+<font color="#000000">44: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">translate</font></b><font color="#990000">(</font><font color="#009900">double</font> dx<font color="#990000">,</font> <font color="#009900">double</font> dy<font color="#990000">)</font>
+<font color="#000000">45: </font>   <font color="#FF0000">{</font>
+<font color="#000000">46: </font>      x <font color="#990000">+</font><font color="#990000">=</font> dx<font color="#990000">;</font>
+<font color="#000000">47: </font>      y <font color="#990000">+</font><font color="#990000">=</font> dy<font color="#990000">;</font>
+<font color="#000000">48: </font>   <font color="#FF0000">}</font>
+<font color="#000000">49: </font>
+<font color="#000000">50: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">boolean</font> <b><font color="#000000">contains</font></b><font color="#990000">(</font>Point2D p<font color="#990000">)</font>
+<font color="#000000">51: </font>   <font color="#FF0000">{</font>
+<font color="#000000">52: </font>      Ellipse2D circle <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Ellipse2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>
+<font color="#000000">53: </font>            x<font color="#990000">,</font> y<font color="#990000">,</font> size<font color="#990000">,</font> size<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">54: </font>      <b><font color="#0000FF">return</font></b> circle<font color="#990000">.</font><b><font color="#000000">contains</font></b><font color="#990000">(</font>p<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">55: </font>   <font color="#FF0000">}</font>
+<font color="#000000">56: </font>
+<font color="#000000">57: </font>   <b><font color="#0000FF">public</font></b> Rectangle2D <b><font color="#000000">getBounds</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">58: </font>   <font color="#FF0000">{</font>
+<font color="#000000">59: </font>      <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">new</font></b> Rectangle2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>
+<font color="#000000">60: </font>            x<font color="#990000">,</font> y<font color="#990000">,</font> size<font color="#990000">,</font> size<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">61: </font>   <font color="#FF0000">}</font>
+<font color="#000000">62: </font>
+<font color="#000000">63: </font>   <b><font color="#0000FF">public</font></b> Point2D <b><font color="#000000">getConnectionPoint</font></b><font color="#990000">(</font>Point2D other<font color="#990000">)</font>
+<font color="#000000">64: </font>   <font color="#FF0000">{</font>
+<font color="#000000">65: </font>      <font color="#009900">double</font> centerX <font color="#990000">=</font> x <font color="#990000">+</font> size <font color="#990000">/</font> <font color="#993399">2</font><font color="#990000">;</font>
+<font color="#000000">66: </font>      <font color="#009900">double</font> centerY <font color="#990000">=</font> y <font color="#990000">+</font> size <font color="#990000">/</font> <font color="#993399">2</font><font color="#990000">;</font>
+<font color="#000000">67: </font>      <font color="#009900">double</font> dx <font color="#990000">=</font> other<font color="#990000">.</font><b><font color="#000000">getX</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">-</font> centerX<font color="#990000">;</font>
+<font color="#000000">68: </font>      <font color="#009900">double</font> dy <font color="#990000">=</font> other<font color="#990000">.</font><b><font color="#000000">getY</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">-</font> centerY<font color="#990000">;</font>
+<font color="#000000">69: </font>      <font color="#009900">double</font> distance <font color="#990000">=</font> Math<font color="#990000">.</font><b><font color="#000000">sqrt</font></b><font color="#990000">(</font>dx <font color="#990000">*</font> dx <font color="#990000">+</font> dy <font color="#990000">*</font> dy<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">70: </font>      <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>distance <font color="#990000">=</font><font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">)</font> <b><font color="#0000FF">return</font></b> other<font color="#990000">;</font>
+<font color="#000000">71: </font>      <b><font color="#0000FF">else</font></b> <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">new</font></b> Point2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>
+<font color="#000000">72: </font>            centerX <font color="#990000">+</font> dx <font color="#990000">*</font> <font color="#990000">(</font>size <font color="#990000">/</font> <font color="#993399">2</font><font color="#990000">)</font> <font color="#990000">/</font> distance<font color="#990000">,</font>
+<font color="#000000">73: </font>            centerY <font color="#990000">+</font> dy <font color="#990000">*</font> <font color="#990000">(</font>size <font color="#990000">/</font> <font color="#993399">2</font><font color="#990000">)</font> <font color="#990000">/</font> distance<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">74: </font>   <font color="#FF0000">}</font>
+<font color="#000000">75: </font>
+<font color="#000000">76: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">double</font> x<font color="#990000">;</font>
+<font color="#000000">77: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">double</font> y<font color="#990000">;</font>
+<font color="#000000">78: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">double</font> size<font color="#990000">;</font>
+<font color="#000000">79: </font>   <b><font color="#0000FF">private</font></b> Color color<font color="#990000">;</font>  
+<font color="#000000">80: </font>   <b><font color="#0000FF">private</font></b> <b><font color="#0000FF">static</font></b> <b><font color="#0000FF">final</font></b> <font color="#009900">int</font> DEFAULT_SIZE <font color="#990000">=</font> <font color="#993399">20</font><font color="#990000">;</font>
+<font color="#000000">81: </font><font color="#FF0000">}</font>
+</tt></pre>

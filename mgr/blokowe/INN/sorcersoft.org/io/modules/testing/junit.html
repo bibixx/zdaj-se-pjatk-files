@@ -1,0 +1,825 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Unit Testing</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Unit Testing and Continuous Integration</span><BR>
+
+<H2>Course Map</H2>
+<img border="0" src="../../images/CourseMap23.png" width="603" height="495">
+
+<h2>Agenda</h2>
+<UL>
+<LI> What is black box/white box testing?<LI> Why Junit?
+<LI>Using Junit
+<LI>Install Junit
+<LI>
+Example
+<LI>
+Exercise
+<LI>
+Packaging tips<LI>
+<a href="../ant/index.html#Continuous_Integration">Continuous Integration</a><LI>
+Reference</UL>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>What is black box/white box testing?</h2>
+<ul>
+	<li>Black-box and white-box are test design methods. Black-box test design 
+	treats the system as a &quot;black-box&quot;, so it doesn't explicitly use knowledge 
+	of the internal structure. <b>Black-box test design</b> is usually described as 
+	focusing on testing functional requirements. Synonyms for black-box include: 
+	<b>behavioral</b>, <b>functional</b>, <b>opaque-box</b>, and <b>closed-box</b>.
+	<b>White-box test design</b> 
+	allows one to peek inside the &quot;box&quot;, and it focuses specifically on using 
+	internal knowledge of the software to guide the selection of test data. 
+	Synonyms for white-box include: <b>structural</b>, <b>glass-box </b>and <b>clear-box</b>.</li>
+	<li>While black-box and white-box are terms that are still in popular use, 
+	many people prefer the terms &quot;<b>behavioral</b>&quot; and &quot;<b>structural</b>&quot;. Behavioral test 
+	design is slightly different from black-box test design because the use of 
+	internal knowledge isn't strictly forbidden, but it's still discouraged. In 
+	practice, it hasn't proven useful to use a single test design method. One 
+	has to use a mixture of different methods so that they aren't hindered by 
+	the limitations of a particular one. Some call this &quot;<b>gray-box</b>&quot; or 
+	&quot;<b>translucent-box</b>&quot; test design, but others wish we'd stop talking about boxes 
+	altogether.</li>
+	<li>It is important to understand that these methods are used during the 
+	test design phase, and their influence is hard to see in the tests once 
+	they're implemented. Note that any level of testing (unit testing, system 
+	testing, etc.) can use any test design methods. Unit testing is usually 
+	associated with structural test design, but this is because testers usually 
+	don't have well-defined requirements at the unit level to validate.</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>The Testing Process</h2>
+<ul>
+	<li><b>Component testing</b><ul>
+		<li>Testing of individual program components;</li>
+		<li>Usually the responsibility of the component developer (except 
+		sometimes for critical systems);</li>
+		<li>Tests are derived from the developer&#8217;s experience.</li>
+	</ul>
+	</li>
+	<li><b>System testing</b><ul>
+		<li>Testing of groups of components integrated to create a system or 
+		sub-system;</li>
+		<li>The responsibility of an independent testing team;</li>
+		<li>Tests are based on a system specification.<br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Testing Process Goals</h2>
+<ul>
+	<li><b>Validation testing</b><ul>
+		<li>To demonstrate to the developer and the system customer that the 
+		software meets its requirements;</li>
+		<li>A successful test shows that the system operates as intended.</li>
+	</ul>
+	</li>
+	<li><b>Defect testing</b><ul>
+		<li>To discover faults or defects in the software where its behavior is 
+		incorrect or not in conformance with its specification;</li>
+		<li>A successful test is a test that makes the system perform 
+		incorrectly and so exposes a defect in the system.</li>
+	</ul>
+	</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>System Testing</h2>
+<ul>
+	<li>Involves integrating components to create a system or sub-system.</li>
+	<li>May involve testing an increment to be delivered to the customer.</li>
+	<li>Two phases:</li>
+</ul>
+<blockquote>
+	<ul>
+		<li><b>Integration testing</b> - the test team have access to the system 
+		source code. The system is tested as components are integrated.</li>
+		<li><b>Release testing</b> - the test team test the complete system to 
+		be delivered as a black-box.</li>
+	</ul>
+</blockquote>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Integration Testing</h2>
+<ul>
+	<li>Involves building a system from its components and testing it for 
+	problems that arise from component interactions.</li>
+	<li>Top-down integration<ul>
+		<li>Develop the skeleton of the system and populate it with components.</li>
+	</ul>
+	</li>
+	<li>Bottom-up integration<ul>
+		<li>Integrate infrastructure components then add functional components.</li>
+	</ul>
+	</li>
+	<li>To simplify error localization, systems should be incrementally 
+	integrated.</li>
+</ul>
+<p><img border="0" src="images/incremantalTesting.png" width="650" height="401"></p>
+<p>Components: ((A, B) -&gt; C) -&gt; D</p>
+<p>Rerun the test for previous increments as well as the new tests - regression 
+testing.</p>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Component Testing</h2>
+<ul>
+	<li><b>Component</b> or <b>unit testing</b> is the process of testing 
+	individual components in isolation.</li>
+	<li>It is a defect testing process.</li>
+	<li>Components may be:<ul>
+		<li>Individual functions or methods within an object;</li>
+		<li>Object classes with several attributes and methods;</li>
+		<li>Composite components with defined interfaces used to access their 
+		functionality.</li>
+	</ul>
+	</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Object Class Testing</h2>
+<ul>
+	<li>Complete test coverage of a class involves<ul>
+		<li>Testing all operations associated with an object;</li>
+		<li>Setting and interrogating all object attributes;</li>
+		<li>Exercising the object in all possible states.</li>
+	</ul>
+	</li>
+	<li>Inheritance makes it more difficult to design object class tests as the 
+	information to be tested is not localized.<br>
+&nbsp;</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Testing Approaches</h2>
+<ul>
+	<li><b>Architectural validation</b><ul>
+		<li>Top-down integration testing is better at discovering errors in the 
+		system architecture.</li>
+	</ul>
+	</li>
+	<li><b>System demonstration</b><ul>
+		<li>Top-down integration testing allows a limited demonstration at an 
+		early stage in the development.</li>
+	</ul>
+	</li>
+	<li><b>Test implementation</b><ul>
+		<li>Often easier with bottom-up integration testing.</li>
+	</ul>
+	</li>
+	<li><b>Test observation</b><ul>
+		<li>Problems with both approaches. Extra code may be required to observe 
+		tests.</li>
+	</ul>
+	</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Test Case Design</h2>
+<ul>
+	<li>Involves designing the test cases (inputs and outputs) used to test the 
+	system.</li>
+	<li>The goal of test case design is to create a set of tests that are 
+	effective in validation and defect testing.</li>
+	<li>Design approaches:<ul>
+		<li><b>Requirements-based testing</b><br>
+		where test cases are designed to test the system requirement;</li>
+		<li><b>Partition testing</b><br>
+		where you identify input and output partitions and design test so the 
+		system executes inputs from all partitions and generates outputs in all 
+		partitions;</li>
+		<li><b>Structural testing</b><br>
+		where you use knowledge of program's structure to design tests that 
+		exercise all parts of the program.</li>
+	</ul>
+	</li>
+	<li>In general you should start with the highest-level tests from the 
+	requirements the progressively add more detailed tests using partition and 
+	structural testing.</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Partition Testing</h2>
+<ul>
+	<li>Input data and output results often fall into different classes where 
+	all members of a class are related.</li>
+	<li>Each of these classes is an <b>equivalence partition</b> or <b>domain</b> 
+	where the program behaves in an equivalent way for each class member.</li>
+	<li>Test cases should be chosen from each partition.</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Equivalence Partitioning</h2>
+<p><img border="0" src="images/partitionTesting.png" width="366" height="448"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Equivalence Partitions</h2>
+<p>Example:<br>
+A program specification states that the program accepts 4 to 8 inputs that are 
+five-digit integers grate than 10,000.</p>
+<p>
+<img border="0" src="images/equivalencePartitions.png" width="600" height="392"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Why Junit?</H2>
+<ul>
+	<li><i>My code compiles, so it should run!</i> (Ha ha!). The C era joke - 
+	when C was side-effect of building Unix (no safety nets), not as a 
+	general-purpose programming language.</li>
+	<li>Java: strong static type checking and in runtime as well -&gt; getting 
+	working programs faster</li>
+	<li>Solve problems that complier doesn't -&gt; <i>automated unit testing</i></li>
+	<li>Writing tests and incorporating these tests into a build system that 
+	compiles your code and runs the tests every single time, as if the tests 
+	were part of the compilation process.</li>
+	<li>Junit's main purpose is to support developers in doing their unit testing of Java programs. 
+	</li>
+	<li>In your project, I expect you to use JUnit extensively when testing your programs. 
+	</li>
+	<li>Recall that one of the required program quality attributes for your project is 
+	<b>reliability</b>. 
+	</li>
+	<li><b><i>Test cases first, code later<br>
+	</i></b>Your UML model, generated 
+	classes form the model, test cases/suits, then <b>continuously</b> test the code 
+	under development.</li>
+	<li>JUnit can be used to help you achieve that.</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Install JUnit</H2>
+<p>Below are the installation steps for installing JUnit:</p>
+<ol>
+	<li>download from <a target="_blank" href="http://www.junit.org">JUnit.org</a> 
+	or
+	<a target="_blank" href="http://sourceforge.net/project/showfiles.php?group_id=15278&package_id=12472">
+	directly</a></li>
+	<li><font color="#000000">unzip the junit4.0.zip file </font></li>
+	<li><font color="#000000">add<i> </i><b>junit-4.0.jar</b> to the CLASSPATH. 
+	For example: <tt>set classpath=%classpath%;INSTALL_DIR\junit-4.0.jar;INSTALL_DIR</tt>
+	</font></li>
+	<li><font color="#000000">test the installation by running <tt>java 
+	org.junit.runner.JUnitCore org.junit.tests.AllTests.</tt> </font></li>
+</ol>
+<p><font color="#000000"><b><font color="#ff0000">Notice</font></b>: that the 
+tests are not contained in the junit-4.0.jar but in the installation directory 
+directly. Therefore make sure that the installation directory is on the class 
+path </font></p>
+<p><font color="#000000"><b><font color="#ff0000">Important</font></b>: don't 
+install the junit-4.0.jar into the extension directory of your JDK installation. 
+If you do so the test class on the files system will not be found. </font></p>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>JUnit Annotation Types</h2>
+<dl>
+	<pre><font size="-1">@Retention(value=RUNTIME)
+@Target(value=METHOD)
+</font>public @interface <b>Test</b></pre>
+</dl>
+<ul>
+	<li>The <code>Test</code> annotation tells JUnit that the <code>public void</code> 
+	method to which it is attached can be run as a test case. </li>
+	<li>To run the method, JUnit first constructs a fresh instance of the class 
+	then invokes the annotated method. </li>
+	<li>Any exceptions thrown by the test will be reported by JUnit as a 
+	failure. </li>
+	<li>If no exceptions are thrown, the test is assumed to have succeeded. </li>
+</ul>
+<blockquote>
+	<p>A simple test looks like this:<br>
+	<code>public class Example {<br>
+	&nbsp;&nbsp;@Test public void method() {<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(&quot;Hello&quot;);<br>
+	&nbsp;&nbsp;}<br>
+	} </code></p>
+</blockquote>
+<ul>
+	<li>The <code>Test</code> annotation supports two optional parameters. The 
+	first, <code>expected</code>, declares that a test method should throw an 
+	exception. If it doesn't throw an exception or if it throws a different 
+	exception than the one declared, the test fails. For example, the following 
+	test succeeds: <br>
+	<code>&nbsp;&nbsp;@Test(<b>expected=IndexOutOfBoundsException.class</b>) public void 
+	outOfBounds() {<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;new ArrayList&lt;Object&gt;().get(1);<br>
+	&nbsp;&nbsp;}<br>
+&nbsp;</code></li>
+	<li>The second optional parameter, <code>timeout</code>, causes a test to 
+	fail if it takes longer than a specified amount of clock time (measured in 
+	milliseconds). The following test fails:<br>
+	<code>&nbsp;&nbsp;@Test(<b>timeout=100</b>) public void infinity() {<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;for(;;);<br>
+	&nbsp;&nbsp;}</code></li>
+	<li>Other annotations: <code>@Before, @After, @BeforeClass, @AfterClass</code></li>
+	<li>To run the suite and to display its results invoke:<code>
+	<br>
+	org.junit.runner.JUnitCore.runClasses(TestClass1.class, ...);&nbsp;</code></li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Simple Test Case</h2>
+How do you write testing code? 
+<p>The simplest way is as an expression in a debugger. You can change debug 
+expressions without recompiling, and you can wait to decide what to write until 
+you have seen the running objects. You can also write test expressions as 
+statements which print to the standard output stream. Both styles of tests are 
+limited because they require human judgment to analyze their results. Also, they 
+don't compose nicely&mdash;you can only execute one debug expression at a time and a 
+program with too many print statements causes the dreaded &quot;Scroll Blindness&quot;.
+</p>
+<p>JUnit tests do not require human judgment to interpret, and it is easy to run 
+many of them at the same time. When you need to test something, here is what you 
+do: </p>
+<ol>
+	<li>Annotate a method with <b> <tt>@org.junit.Test</tt> 
+	</b> 
+	</li>
+	<li>Methods annotated with <code>@Test</code> that are also annotated with
+	<b><code>@Ignore</code></b> will not be executed as tests. </li>
+	<li>When you want to check a value, <code>import org.junit.Assert.*</code> statically, 
+	call <tt>assertTrue</tt>() and pass a boolean that is true if the test 
+	succeeds </li>
+</ol>For example, to test that the sum of two Moneys with the same currency contains 
+a value which is the sum of the values of the two Moneys, write: 
+<blockquote>
+	<pre><tt>@Test public void simpleAdd() {
+&nbsp;&nbsp;&nbsp; Money m12CHF = new Money(12, &quot;CHF&quot;);&nbsp;
+&nbsp;&nbsp;&nbsp; Money m14CHF = new Money(14, &quot;CHF&quot;);&nbsp;
+&nbsp;&nbsp;&nbsp; Money expected = new Money(26, &quot;CHF&quot;);&nbsp;
+&nbsp;&nbsp;&nbsp; Money result = m12CHF.add(m14CHF);&nbsp;
+&nbsp;&nbsp;&nbsp; assertTrue(expected.equals(result));
+}</tt></pre>
+</blockquote>
+If you want to write a test similar to one you have already written, write a 
+Fixture instead. 
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Fixture</h2>
+What if you have two or more tests that operate on the same or similar sets of 
+objects? 
+<p>Tests need to run against the background of a known set of objects. This set 
+of objects is called a <b><i>test fixture</i></b>. When you are writing tests you will often 
+find that you spend more time writing the code to set up the fixture than you do 
+in actually testing values. </p>
+<p>To some extent, you can make writing the fixture code easier by paying 
+careful attention to the constructors you write. However, a much bigger savings 
+comes from sharing fixture code. Often, you will be able to use the same fixture 
+for several different tests. Each case will send slightly different messages or 
+parameters to the fixture and will check for different results. </p>
+<p>When you have a common fixture, here is what you do: </p>
+<ol>
+	<li>Add a field for each part of the fixture 
+	</li>
+	<li>Annotate a method. eg., setUp with <b> <tt>@org.junit.Before</tt> </b>and initialize the variables in 
+	that method 
+	</li>
+	<li>Annotate a method with <b> <tt>@org.junit.After</tt> </b>to release any permanent 
+	resources you allocated in setUp<blockquote>
+For example, to write several test cases that want to work with different 
+combinations of 12 Swiss Francs, 14 Swiss Francs, and 28 US Dollars, first 
+create a fixture: 
+	<pre><tt>public class MoneyTest {&nbsp;
+&nbsp;&nbsp;&nbsp; private Money f12CHF;&nbsp;
+&nbsp;&nbsp;&nbsp; private Money f14CHF;&nbsp;
+&nbsp;&nbsp;&nbsp; private Money f28USD;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; @Before public void setUp() {&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; f12CHF = new Money(12, &quot;CHF&quot;);&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; f14CHF = new Money(14, &quot;CHF&quot;);&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; f28USD = new Money(28, &quot;USD&quot;);&nbsp;
+&nbsp;&nbsp;&nbsp; }
+}</tt></pre>
+</blockquote>
+	<li>Once you have the Fixture in place, you can write as many Test Cases as you'd 
+like. Add as many test methods (annotated with @Test) as you'd like.</li>
+	<li>Sometimes several tests need to share computationally expensive setup 
+	(like logging into a database). While this can compromise the independence 
+	of tests, sometimes it is a necessary optimization. Annotating a <b> <code>
+	public static void</code> no-arg method</b> with <b> <code>@BeforeClass</code></b> 
+	causes it to be run once before any of the test methods in the class. The
+	<code>@BeforeClass</code> methods of superclasses will be run before those 
+	the current class. </li>
+	<li>If you allocate expensive external resources in a <code>@BeforeClass</code> 
+	method you need to release them after all the tests in the class have run. 
+	Annotating a <b> <code>public static void</code> method</b> with <b> <code>@AfterClass</code></b> 
+	causes that method to be run after all the tests in the class have been run. 
+	All <code>@AfterClass</code> methods are guaranteed to run even if a <code>@BeforeClass</code> 
+	method throws an exception. The <code>@AfterClass</code> methods declared in 
+	superclasses will be run after those of the current class. </li>
+</ol>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>TestRunner</h2>
+How do you run your tests and collect their results? 
+<p>Once you have tests, you'll want to run them. JUnit provides tools to define 
+the suite to be run and to display its results. To run tests and see the results 
+on the console, run: </p>
+<blockquote>
+	<pre>
+   public static void main(String args[]) {
+        org.junit.runner.JUnitCore.main("Example");
+   }
+</pre>
+
+</blockquote>
+<p>Use this invocation for programmatic testing:<blockquote>
+
+	<pre>
+   public static boolean wasSuccessful() {
+        Result result = org.junit.runner.JUnitCore.runClasses(Example.class);
+        return result.wasSuccessful();
+   }</pre>
+</blockquote>
+You make your JUnit 4 test classes accessible to a TestRunner designed to work 
+with earlier versions of JUnit, declare a static method <i>suite</i> that 
+returns a test. 
+<blockquote>
+	<pre>
+   public static junit.framework.Test suite() {
+       return new JUnit4TestAdapter(Example.class);&nbsp;
+   }
+	
+   public static void testIt () {
+	junit.textui.TestRunner.run (suite());
+   }
+</pre>
+</blockquote>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Expected Exceptions</h2>
+How do you verify that code throws exceptions as expected? 
+<p>Verifying that code completes normally is only part of programming. Making 
+sure the code behaves as expected in exceptional situations is part of the craft 
+of programming too. For example: </p>
+<blockquote>
+	<pre><tt>new ArrayList&lt;Object&gt;().get(0);&nbsp;
+</tt></pre>
+</blockquote>
+This code should throw an IndexOutOfBoundsException. The @Test annotation has an 
+optional parameter &quot;expected&quot; that takes as values subclasses of Throwable. If 
+we wanted to verify that ArrayList throws the correct exception, we would write: 
+<blockquote>
+	<pre><tt>@Test(expected = IndexOutOfBoundsException.class) public void empty() {&nbsp;
+&nbsp;&nbsp;&nbsp; new ArrayList&lt;Object&gt;().get(0);&nbsp;
+}</tt></pre>
+</blockquote>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Examples</h2>
+<p><a target="_blank" href="code/SimpleTest.java">SimpleTest.java</a></p>
+<p><a target="_blank" href="code/ListTest.java">ListTest.java</a></p>
+<p><a target="_blank" href="code/CollectionAllTest.java">CollectionAllTest.java</a></p>
+
+<HR align="left" width="100%" size="4" noshade>
+<H2>Using JUnit 3.8 - without Annotations</H2>
+<p>Assuming that you want to test a class called Parser. The following are the general steps to use the JUnit framework to test this class:<br>
+</p>
+<ol>
+  <li>Write a class (let's call it TestParser) to test the Parser
+class.         This class must extend the class TestCase which is
+defined by the 	JUnit framework. </li>
+  <li>Create a constructor for this class, passing a name that is      
+representative of the set of tests for this class as the parameter. </li>
+  <li>Create a <em>fixture</em>. A test fixture is a set of sample
+objects         that you want to (re)use during testing. For example,
+you might create 	a few sample source files for the Parser to parse.
+JUnit provides 	a setUp and a tearDown method to manage the fixture.
+Therefore, 	you can eg. create file objects in setUp to open the source
+files 	and release these resources in the tearDown method. The
+important 	thing to note is that setUp and tearDown will be called for
+every 	<i>test</i> that you run. </li>
+  <li>Each <i>test</i> you perform is represented by the implementation of  
+a method in the test class. For example, if you want to test 	whether
+the parser extracts the tokens correctly, you can 	implement a method
+called testGetToken. An important point is 	that each method name
+begins with the word <i>test</i>. This is 	necessary because JUnit uses
+reflection to know which tests 	to run. The collection of test methods
+you implement forms a test 	suite. </li>
+  <li>In each test method you create, use the assertion mechanism      
+provided by JUnit to compare the results of running the tests 	and the
+results you expected. This will enable you to create 	<em>repeatable</em>
+tests as well as saving you lots of time from 	visually inspecting the
+results. </li>
+  <li>Finally, run the tests. There are two ways of running the tests. 
+JUnit provides a TestRunner tool that can be invoked from the 	command
+line to run the tests and display the results. 	(there are both text
+and graphical versions). Alternatively, 	you can create a main method
+which invokes the TestRunner for 	execution. Internally, JUnit creates
+	a test suite object that contains all the test methods of 	the
+testing class and execute each method. As each test is 	run, JUnit
+will provide feedback on whether the test 	run successfully, or the
+test failed, or an exception has occurred. </li>
+</ol>
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Example - JUnit</h2>
+In this section, I will describe how you can use JUnit using an
+example. Take a few minutes to examine the following two Java files to
+see what the two classes are doing:
+<ul>
+  <li>Course.java
+    <pre>// this class is used for storing the information of a course
+public class Course {
+    String course_name;           // name of the course
+    int grade;                    // grade for this course
+
+    // Constructor
+    public Course(String nm, int gr) throws RuntimeException {
+	// check that the parameters are valid
+	if (nm == null || nm.equals(&quot;&quot;) || gr &lt; 0 || gr &gt; 100)
+	    throw new RuntimeException(&quot;Illegal inputs for Course&quot;);
+
+	// store the course name and its grade
+	course_name = nm;
+	grade = gr;
+    }
+
+    // method to get the name of the course
+    public String getCourseName() { return course_name; }
+
+    // method to get the grade of the course
+    public int getCourseGrade() { return grade; }
+}
+    </pre>
+  </li>
+  <li>Student.java
+    <pre>import java.util.*;
+
+// Student is a data manager that keeps a student's record
+public class Student {
+    private String name;           // name of the student
+    private String number;         // the student's number
+    private Vector course_grades;  // courses taken by student
+
+    // Constructor
+    public Student(String nm, String no) throws RuntimeException {
+	// check that the parameters are valid
+	if (nm == null || no == null)
+	    throw new RuntimeException(&quot;Invalid inputs&quot;);
+
+	// store the student's name and number
+	name = nm;
+	number = no;
+
+	// initialize the vector that will store the student's grade
+	course_grades = new Vector();
+    }
+
+    // method to get the student's name
+    public String getStuName() { return name; }
+
+    // method to get the student's number
+    public String getStuNumber() { return number; }
+
+    // method to assign a grade to a course
+    public void assignGrade(String course, int score) 
+      throws RuntimeException {
+	Course c = new Course(course, score);
+	course_grades.addElement(c);
+    }
+
+    // method to return the grade of a course
+    public int getGrade(String course) throws RuntimeException {
+	// check the inputs
+	if (course == null)
+	    throw new RuntimeException(&quot;Invalid course name&quot;);
+
+	// find the course
+	for (Enumeration e = course_grades.elements(); 
+             e.hasMoreElements();) {
+	    Course c = (Course)e.nextElement();
+	    if (course.equals(c.getCourseName()))   
+		return c.getCourseGrade();         
+	} // for
+	// if course does not exists, throw exception
+	throw new RuntimeException(&quot;Course &quot; + course + &quot; does not exist&quot;);
+    }
+}
+    </pre>
+  </li>
+</ul>
+Basically, there are two files: Course.java contains the class
+definition of a course. Each Course object contains a name eg. CS3214s
+and an integer grade which ranges from 0 to 100. Student.java contains
+the class definition of a Student. Each student has a name, a number as
+well as a list of course grades. You can add the grade that a student
+scores at a particular course using the assignGrade method and retrieve
+the grade of a particular course using the getGrade method. The
+following is the test file I wrote for the Student class (called
+StudentTest.java):
+<pre>import junit.framework.*;    // <a href="#code1">Note 1</a>
+
+public class StudentTest extends TestCase {    // <a
+ href="#code2">Note 2</a>
+  // constructor - <a href="#code3">Note 3</a>
+  public StudentTest(String name) {
+    super(name);
+  }
+  
+  // method to test the constructor of the Student class
+  public void testConstructor() {    // <a
+ href="#code4">Note 4</a>
+    String student_name = &quot;Jimmy&quot;;
+    String student_no = &quot;946302B&quot;;
+    
+    // create a new student
+    Student stu = new Student(student_name, student_no);
+    
+    // verify that the object is constructed properly - <a
+ href="#code5">Note 5</a>
+    assertEquals(&quot;student name wrong&quot;, student_name, stu.getStuName());
+    assertTrue(&quot;student no. wrong&quot;, stu.getStuNumber().equals(student_no));
+    
+    // create some illegal inputs - <a
+ href="#code6">Note 6</a>
+    try { 
+      Student s = new Student(&quot;Jimmy&quot;, null); 
+      fail(&quot;Constructor allows null student number&quot;); 
+    } catch (RuntimeException e) {}
+
+    try { 
+      Student s = new Student(null, &quot;980921C&quot;); 
+      fail(&quot;Constructor allows null student name&quot;); 
+    } catch (RuntimeException e) {}
+  }
+    
+  // method to test the assigning and retrieval of grades
+  public void testAssignAndRetrieveGrades() {
+    // create a student
+    Student stu = new Student(&quot;Jimmy&quot;, &quot;946302B&quot;);
+    
+    // assign a few grades to this student
+    stu.assignGrade(&quot;cs2102&quot;, 60);
+    stu.assignGrade(&quot;cs2103&quot;, 70);
+    stu.assignGrade(&quot;cs3214s&quot;, 80);
+    
+    // verify that the assignment is correct
+    assertTrue(&quot;fail to assign cs2102 grade&quot;, stu.getGrade(&quot;cs2102&quot;) == 60);
+    assertTrue(&quot;fail to assign cs2103 grade&quot;, stu.getGrade(&quot;cs2103&quot;) == 70);
+    
+    // attempt to retrieve a course that does not exist
+    try { 
+      stu.getGrade(&quot;cs21002&quot;);
+      fail(&quot;fail to catch non-existent course name&quot;);
+    } catch (RuntimeException e) { }
+  }
+  
+  // method create a test suite - <a
+ href="#code7">Note 7</a>
+  public static Test suite() {
+    return new TestSuite(StudentTest.class);
+  }
+  
+  // the main method - <a
+ href="#code8">Note 8</a>
+  public static void main(String args[]) {
+    junit.textui.TestRunner.run(suite());
+  }
+}
+</pre>
+	 Notes for the preceding code:
+<ul>
+  <li><a name="code1"></a>Note 1<br>
+To use the JUnit's classes, you must have this import statement. </li>
+  <li><a name="code2"></a>Note 2<br>
+Every test class that you wrote must extend the class TestCase. </li>
+  <li><a name="code3"></a>Note 3<br>
+This constructor is quite standard, you can just cut and paste 	for
+every test class you create. </li>
+  <li><a name="code4"></a>Note 4<br>
+This is an example of a method written to test one of the methods 	of
+the Student class. In this case, it's the constructor. Notice 	that all
+the method names start with "test" (in lowercase). 	This is required
+for JUnit to find the methods to test at runtime. 	Hence, don't forget
+to begin all methods with the word "test". </li>
+  <li><a name="code5"></a>Note 5<br>
+There are several ways to test whether the results from the test 	is
+what you expected. The assertEquals method takes three arguments. 	The
+first argument is a message that gets printed if the 	assertion fails
+while the remaining two arguments are compared 	to see if they are
+equal. The assertion fails if they are not 	equal. On the other hand,
+the assertTrue method takes only two 	arguments. Its only difference
+from the assertEquals method is 	that the second argument is a boolean
+expression which results 	in either a true or false value. </li>
+  <li><a name="code6"></a>Note 6<br>
+You can use the following code to test for cases where an exception 	is
+expected. Notice that if the exception is not thrown, the fail 	method
+will be invoked causing the test to fail and printing the 	message
+passed as an argument to the fail method. </li>
+  <li><a name="code7"></a>Note 7<br>
+The class method suite is used for assembling all the tests into 	a
+test suite. You will need to include this method for each class 	that
+uses the JUnit framework. Just modify accordingly. </li>
+  <li><a name="code8"></a>Note 8<br>
+The main method used here invokes the text-based version of 	the TestRunner. Fairly standard - just cut and paste to your 	test
+classes. </li>
+</ul>
+To run the test suite, simply type:
+<pre>java StudentTest</pre>
+and you're off doing your unit testing :-)
+
+<HR align="left" width="100%" size="4" noshade>
+<h3>Exercise</h3>
+The best way to learn JUnit is to use it. So, here's a small exercise
+you can do to get some hands-on practice. Let's say we now extend the
+Student class by adding a method to find the average grade of all the
+courses taken by the student. You can add the following piece of code
+to Student.java:
+<pre>// method to find the average grade of all the courses taken by the student
+public float findAveGrade() {
+    // if the student has not taken any courses, return 0 marks
+    if (course_grades.isEmpty()) return 0.0f;
+
+    // otherwise, find the average grade
+    int total = 0;
+    for (Enumeration e = course_grades.elements(); e.hasMoreElements();) {
+        Course c = (Course)e.nextElement();
+        total += c.getCourseGrade();
+    }
+
+    return (float)total / course_grades.size();
+}
+</pre>
+Your job is to write a method in StudentTest.java to test this newly
+created method. Give it a try and see whether you really know how to
+use JUnit ;-)
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>Packaging your source code</h2>
+<h3>Organizing the project code into packages</h3>
+All your sources go under <span style="font-weight: bold;">src</span>.
+Create meaningful package structure under the src directory. All your
+class files go under <span style="font-weight: bold;">classes </span>directory.
+To compile, just do the following.<br>
+java -classpath c:\classes -d c:\classes c:\src\........<br>
+<h3>Organizing the test code</h3>
+Following the guideline of "Code a little, test a little, code a
+little, test a little,...", you'll soon find the amount of test code
+increasing rapidly as the project progresses. A recommended way to
+organize your test code is to put all the test code for classes of a
+particular package as a sub-package. Let's say I now want to organize
+the tests for my tutorial package:
+<ol>
+  <li>Create a subdirectory call test as follows:
+    <pre>mkdir C:\src\junit\tutorial\test</pre>
+  </li>
+  <li>Place the StudentTest.java file in the subdirectory just created </li>
+  <li>Ensure that StudentTest.java has the following (you will need   
+to recompile after editing the file): 	
+    <pre>package junit.tutorial.test;
+import junit.tutorial.*;
+	</pre>
+  </li>
+  <li>To run the test, type the following:
+    <pre>java junit.tutorial.test.StudentTest</pre>
+  </li>
+</ol>
+In this way, you will find it easier to locate your test code and do
+regression testing.
+<P>&nbsp;
+
+
+<HR align="left" width="100%" size="4" noshade>
+<h2>References</h2>
+<ol>
+	<li>I need to remind you that what I have just covered is the minimum that
+you need to know to get started using JUnit. <font color="#000000"></li>
+
+<blockquote>
+	<blockquote>
+		<a href="http://junit.sourceforge.net/doc/cookbook/cookbook.htm">JUnit 
+	Cookbook</a> <br>&nbsp;&nbsp;&nbsp; A cookbook for implementing tests with JUnit.
+		<br><a href="http://junit.sourceforge.net/javadoc_40/index.html">Javadoc</a> <br>&nbsp;&nbsp;&nbsp; API documentation generated with javadoc.
+		<br><a href="http://junit.sourceforge.net/doc/faq/faq.htm">Frequently 
+	asked questions</a> <br>&nbsp;&nbsp;&nbsp; Some frequently asked questions about using JUnit.
+	</blockquote>
+</blockquote>
+
+	<li>The following documents still describe JUnit 3.8. </li>
+</ol>
+<blockquote>
+	<blockquote>
+		<p><a href="doc/testinfected/testing.htm">Test Infected - Programmers Love Writing Tests</a>
+		<br>&nbsp;&nbsp;&nbsp; An article demonstrating the development process with JUnit.
+		<br><a href="doc/cookstour/cookstour.htm">JUnit - A cooks tour</a> </p>
+	</blockquote>
+	</font>
+	<p>&nbsp;</p>
+</blockquote>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c81a44b623',t:'MTczOTIwNDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY>
+</HTML>

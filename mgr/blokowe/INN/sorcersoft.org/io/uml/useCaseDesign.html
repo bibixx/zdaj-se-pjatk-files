@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Use Case Design</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Use Case Design</span><BODY text="#000000" alink="#666666"><h2>Agenda</h2>
+<ul>
+	<li>Design a Use Case</li>
+	<li>Use Case Realization-Design</li>
+	<li>Interaction Diagrams in Design</li>
+	<li>Modeling Concurrency</li>
+	<li>Subsystem Interactions</li>
+	</ul>&nbsp;<HR align="left" width="100%" size="4" noshade>
+	<h2>Design a Use Case</h2>
+<p><map name="FPMap0">
+<area href="useCaseDesign.html" shape="rect" coords="561, 56, 705, 170">
+<area href="designWorkflow.html#What_are_design_classes" shape="rect" coords="577, 178, 689, 304">
+<area href="designWorkflow.html#Design_a_Subsystem" shape="rect" coords="572, 318, 697, 443">
+</map>
+<img border="0" src="images/fig20-2.png" width="715" height="576" usemap="#FPMap0"></p>
+
+	<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Use_Case_Realization-Design">Use Case Realization-Design</a></h2>
+<ul>
+	<li>&quot;<b>Use case-realization-design</b>&quot; are collaborations of design 
+	objects and design classes that realize a use case.</li>
+	<li>Use case realization in design will involve design classes, interfaces, 
+	and components rather than analysis classes.</li>
+	<li>The process of creation of use case realizations in design is likely to 
+	uncover new non-functional requirements and new design classes.</li>
+	<li>Use case realization-design help you find central mechanisms (e.g., 
+	database management) that are applied consistently throughout the system 
+	development.</li>
+</ul>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2>Interaction Diagrams in Design</h2>
+	<p>In design you may </p>
+<ul>
+	<li>refine key analysis interaction diagrams, or </li>
+	<li>create new ones to illustrate central mechanisms such as object 
+	persistence.</li>
+</ul>
+<p><img border="0" src="images/fig20-3.png" width="650" height="546"></p>
+<p>&nbsp;</p>
+<p><img border="0" src="images/fig20-4.png" width="650" height="449"></p>
+<p>The analysis interaction diagram.</p>
+<p>&nbsp;</p>
+<p><img border="0" src="images/fig20-5.png" width="650" height="417"></p>
+<p>A typical sequence diagram for AddCourse use case in the early stage of 
+design</p>
+<ul>
+	<li>GUI (not modeled very deeply yet)</li>
+	<li>operations specified to be implemented, explicit constructor</li>
+	<li>persistence - central mechanism&nbsp; for the whole application</li>
+</ul>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Architecture"></a>Application Functional Components</h2>
+<p>&nbsp;</p>
+
+<img border="0" src="../modules/introProcess/images/appComponnets.png" width="615" height="322"><p>Application Distribution Points?
+	</p>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2>Distribution Points</h2>
+<p>
+<img border="0" src="../modules/introProcess/images/distributionPoints.png" width="700" height="560"></p>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2>Software Architectural Patterns</h2>
+<ul>
+	<li>Data Flow Systems<ul>
+		<li>Batch Sequential</li>
+		<li>Pipes and Filters</li>
+	</ul>
+	</li>
+	<li>Call and Return Systems<ul>
+		<li>Main Program and Subroutines</li>
+		<li><b>Object-Oriented Systems</b></li>
+		<li>Hierarchical Layers</li>
+	</ul>
+	</li>
+	<li><b>Independent Components</b><ul>
+		<li><b>Communicating Processes (C/S)</b></li>
+		<li><b>Event Systems</b></li>
+		<li><b>Service-oriented</b></li>
+		<li><b>P2P</b></li>
+	</ul>
+	</li>
+	<li>Data-Centered System<ul>
+		<li>Transactional Database Systems (Repository)</li>
+		<li>Blackboards</li>
+		<li><b>Space-based (Tuple Spaces, JavaSpaces)</b></li>
+	</ul>
+	</li>
+	<li>Virtual Machines<ul>
+		<li>Rule-Based Systems</li>
+		<li>Interpreters</li>
+		<li>JITs</li>
+		<li>Adaptive (HotSpot)<br>
+&nbsp;</li>
+	</ul>
+	</li>
+</ul>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2>Distributed Architecture Rules</h2>
+<ul>
+	<li>cooperative distributed processing - distributed data, transaction, and 
+	workflow management</li>
+	<li>fine granularity security</li>
+	<li>local autonomy</li>
+	<li>no reliance on central site</li>
+	<li>continuous operation </li>
+	<li>location transparency and location independence</li>
+	<li>fragmentation independence</li>
+	<li>replication independence</li>
+	<li>distributed query processing</li>
+	<li>hardware independence</li>
+	<li>operating system independence</li>
+	<li>network independence</li>
+	<li>DBMS independence</li>
+	<li>wrappers for existing applications</li>
+	<li>simple is beautiful - object technology (cohesive components and loosely 
+	coupled)</li>
+</ul>
+	<HR align="left" width="100%" size="4" noshade>
+	<h2>Architecture and Reuse </h2>
+<p>What Kinds of Architectures Best Support Reuse?</p>
+<p>&nbsp;</p>
+<p><img border="0" src="images/reuse.png" width="446" height="326"></p>
+<p>&nbsp;</p>
+	<HR align="left" width="100%" size="4" noshade>
+	<p>&nbsp;</p>
+	<h2>Modeling Concurrency</h2>
+<p>Concurrency is one of the key consideration is design.</p>
+<p>Concurrency support in UML 2</p>
+<ul>
+	<li>active classes</li>
+	<li>forks and joins in activity diagrams</li>
+	<li>the <code>par</code> operation in sequence diagrams</li>
+	<li>sequence numbers prefixes in communication diagram</li>
+	<li>multiple traces in timing diagrams</li>
+	<li>orthogonal composite states in state machines</li>
+</ul>
+		<HR align="left" width="100%" size="4" noshade>
+	<h2>Active classes</h2>
+<ul>
+	<li>Concurrency - each active object has its own thread.</li>
+	<li><b>Active classes</b> have instances that are <b>active objects</b>.</li>
+	<li>Active objects and active classes are drawn as normal classes and 
+	objects but with <b>double right and left borders</b> as illustrated below.</li>
+</ul>
+<p><img border="0" src="images/fig20-8.png" width="650" height="396"></p>
+		<HR align="left" width="100%" size="4" noshade>
+	<h2>Concurrency in sequence diagrams</h2>
+<ul>
+	<li><b>Combined fragments </b>divide a sequence diagram into different areas with 
+	different behavior.</li>
+	<li><code>par</code> (parallel) - all operands execute in parallel.</li>
+	<li>The diagram below demonstrates the use of the <code>par</code>, <code>loop</code>,
+	<code>critical</code>, and <code>opt</code> operators.<br>
+	The critical operand executes atomically without interruption.</li>
+</ul>
+<p><img border="0" src="images/fig20-9.png" width="650" height="472"></p>
+		<HR align="left" width="100%" size="4" noshade>
+	<h2>Concurrency in communication diagrams</h2>
+<p>Postfix the sequence number with a label to show different threads of 
+control.</p>
+<h2><img border="0" src="images/fig20-11.png" width="650" height="258"></h2>
+		<HR align="left" width="100%" size="4" noshade>
+	<h2>Subsystem Interactions</h2>
+	<p>Subsystem interactions diagrams can show the interactions between parts 
+	of the system.</p>
+<p><img border="0" src="images/fig20-12.png" width="346" height="208"></p>
+<p>&nbsp;</p>
+<p><img border="0" src="images/fig20-13.png" width="550" height="289"></p>
+<p>The interface <code>CustomerManager</code> is hanging below the subsystem.</p>
+	<p>&nbsp;</p>
+			
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c02f613530',t:'MTczOTIwNDU3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

@@ -1,0 +1,22 @@
+<pre>
+<tt>
+01: <b><font color=#008080>import</font></b> java<font color=#990000>.</font>util<font color=#990000>.</font>Date<font color=#990000>;</font>
+02: 
+03: <i><font color=#9A1900>/**</font></i>
+04: <i><font color=#9A1900>   This program tests the greeting thread by running two</font></i>
+05: <i><font color=#9A1900>   threads in parallel.</font></i>
+06: <i><font color=#9A1900>*/</font></i>
+07: <b><font color=#0000FF>public</font></b> <b><font color=#0000FF>class</font></b> GreetingThreadTest
+08: <font color=#FF0000>{</font>
+09:    <b><font color=#0000FF>public</font></b> <b><font color=#0000FF>static</font></b> <font color=#009900>void</font> <b><font color=#000000>main</font></b><font color=#990000>(</font>String<font color=#990000>[</font><font color=#990000>]</font> args<font color=#990000>)</font>
+10:    <font color=#FF0000>{</font>
+11:       GreetingThread t1 <font color=#990000>=</font> <b><font color=#0000FF>new</font></b> <b><font color=#000000>GreetingThread</font></b><font color=#990000>(</font><font color=#FF0000>"Hello, World!"</font><font color=#990000>)</font><font color=#990000>;</font>
+12:       GreetingThread t2 <font color=#990000>=</font> <b><font color=#0000FF>new</font></b> <b><font color=#000000>GreetingThread</font></b><font color=#990000>(</font><font color=#FF0000>"Goodbye, World!"</font><font color=#990000>)</font><font color=#990000>;</font>
+13: 
+14:       t1<font color=#990000>.</font><b><font color=#000000>start</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+15:       t2<font color=#990000>.</font><b><font color=#000000>start</font></b><font color=#990000>(</font><font color=#990000>)</font><font color=#990000>;</font>
+16:    <font color=#FF0000>}</font>
+17: <font color=#FF0000>}</font>
+18: 
+</tt>
+</pre>

@@ -1,0 +1,63 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>geom<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">03: </font>
+<font color="#000000">04: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">05: </font><i><font color="#9A1900">   A class that supplies convenience implementations for </font></i>
+<font color="#000000">06: </font><i><font color="#9A1900">   a number of methods in the Edge interface type.</font></i>
+<font color="#000000">07: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">08: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">abstract</font></b> <b><font color="#0000FF">class</font></b> AbstractEdge <b><font color="#0000FF">implements</font></b> Edge
+<font color="#000000">09: </font><font color="#FF0000">{</font>  
+<font color="#000000">10: </font>   <b><font color="#0000FF">public</font></b> Object <b><font color="#000000">clone</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">11: </font>   <font color="#FF0000">{</font>
+<font color="#000000">12: </font>      <b><font color="#0000FF">try</font></b>
+<font color="#000000">13: </font>      <font color="#FF0000">{</font>
+<font color="#000000">14: </font>         <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">super</font></b><font color="#990000">.</font><b><font color="#000000">clone</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">15: </font>      <font color="#FF0000">}</font>
+<font color="#000000">16: </font>      <b><font color="#0000FF">catch</font></b> <font color="#990000">(</font>CloneNotSupportedException exception<font color="#990000">)</font>
+<font color="#000000">17: </font>      <font color="#FF0000">{</font>
+<font color="#000000">18: </font>         <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">null</font></b><font color="#990000">;</font>
+<font color="#000000">19: </font>      <font color="#FF0000">}</font>
+<font color="#000000">20: </font>   <font color="#FF0000">}</font>
+<font color="#000000">21: </font>
+<font color="#000000">22: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">connect</font></b><font color="#990000">(</font>Node s<font color="#990000">,</font> Node e<font color="#990000">)</font>
+<font color="#000000">23: </font>   <font color="#FF0000">{</font>  
+<font color="#000000">24: </font>      start <font color="#990000">=</font> s<font color="#990000">;</font>
+<font color="#000000">25: </font>      end <font color="#990000">=</font> e<font color="#990000">;</font>
+<font color="#000000">26: </font>   <font color="#FF0000">}</font>
+<font color="#000000">27: </font>
+<font color="#000000">28: </font>   <b><font color="#0000FF">public</font></b> Node <b><font color="#000000">getStart</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">29: </font>   <font color="#FF0000">{</font>
+<font color="#000000">30: </font>      <b><font color="#0000FF">return</font></b> start<font color="#990000">;</font>
+<font color="#000000">31: </font>   <font color="#FF0000">}</font>
+<font color="#000000">32: </font>
+<font color="#000000">33: </font>   <b><font color="#0000FF">public</font></b> Node <b><font color="#000000">getEnd</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">34: </font>   <font color="#FF0000">{</font>
+<font color="#000000">35: </font>      <b><font color="#0000FF">return</font></b> end<font color="#990000">;</font>
+<font color="#000000">36: </font>   <font color="#FF0000">}</font>
+<font color="#000000">37: </font>
+<font color="#000000">38: </font>   <b><font color="#0000FF">public</font></b> Rectangle2D <b><font color="#000000">getBounds</font></b><font color="#990000">(</font>Graphics2D g2<font color="#990000">)</font>
+<font color="#000000">39: </font>   <font color="#FF0000">{</font>
+<font color="#000000">40: </font>      Line2D conn <font color="#990000">=</font> <b><font color="#000000">getConnectionPoints</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>      
+<font color="#000000">41: </font>      Rectangle2D r <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Rectangle2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">42: </font>      r<font color="#990000">.</font><b><font color="#000000">setFrameFromDiagonal</font></b><font color="#990000">(</font>conn<font color="#990000">.</font><b><font color="#000000">getX1</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">,</font> conn<font color="#990000">.</font><b><font color="#000000">getY1</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">,</font>
+<font color="#000000">43: </font>            conn<font color="#990000">.</font><b><font color="#000000">getX2</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">,</font> conn<font color="#990000">.</font><b><font color="#000000">getY2</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">44: </font>      <b><font color="#0000FF">return</font></b> r<font color="#990000">;</font>
+<font color="#000000">45: </font>   <font color="#FF0000">}</font>
+<font color="#000000">46: </font>
+<font color="#000000">47: </font>   <b><font color="#0000FF">public</font></b> Line2D <b><font color="#000000">getConnectionPoints</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">48: </font>   <font color="#FF0000">{</font>
+<font color="#000000">49: </font>      Rectangle2D startBounds <font color="#990000">=</font> start<font color="#990000">.</font><b><font color="#000000">getBounds</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">50: </font>      Rectangle2D endBounds <font color="#990000">=</font> end<font color="#990000">.</font><b><font color="#000000">getBounds</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">51: </font>      Point2D startCenter <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Point2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>
+<font color="#000000">52: </font>            startBounds<font color="#990000">.</font><b><font color="#000000">getCenterX</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">,</font> startBounds<font color="#990000">.</font><b><font color="#000000">getCenterY</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">53: </font>      Point2D endCenter <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Point2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>
+<font color="#000000">54: </font>            endBounds<font color="#990000">.</font><b><font color="#000000">getCenterX</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">,</font> endBounds<font color="#990000">.</font><b><font color="#000000">getCenterY</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">55: </font>      <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">new</font></b> Line2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>
+<font color="#000000">56: </font>            start<font color="#990000">.</font><b><font color="#000000">getConnectionPoint</font></b><font color="#990000">(</font>endCenter<font color="#990000">)</font><font color="#990000">,</font>
+<font color="#000000">57: </font>            end<font color="#990000">.</font><b><font color="#000000">getConnectionPoint</font></b><font color="#990000">(</font>startCenter<font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">58: </font>   <font color="#FF0000">}</font>
+<font color="#000000">59: </font>
+<font color="#000000">60: </font>   <b><font color="#0000FF">private</font></b> Node start<font color="#990000">;</font>
+<font color="#000000">61: </font>   <b><font color="#0000FF">private</font></b> Node end<font color="#990000">;</font>
+<font color="#000000">62: </font><font color="#FF0000">}</font>
+</tt></pre>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--last modified on Thursday, April 20, 2000 02:20 PM -->
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<META NAME="VPSiteProject" CONTENT="file:///D|/Web%20Sites/ExtremeProgramming/Project.vpp">
+
+	<META NAME="Author" Content="Don Wells">
+	<TITLE>XP Lessons Learned</TITLE>
+</HEAD>
+
+<BODY TEXT="black" BGCOLOR="white" LINK="red" ALINK="#CC0000" VLINK="#990000">
+
+<P><SCRIPT LANGUAGE="JavaScript"><!--function imageOn (name) {	if (document.images) {		document[name].src = xpOn.src}}function imageOff (name) {	if(document.images) {		document[name].src = xpOff.src}}function learnedOn () {	if (document.images) {		document.learn.src = learnOn.src}}function learnedOff () {	if(document.images) {		document.learn.src = learnOff.src}}if (document.images) {	xpOff=new Image();	xpOff.src="../images/xplinktn.gif"; 	xpOn= new Image();
+	xpOn.src="../images/xpontiny.gif";	learnOff= new Image();	learnOff.src="../images/lessonsl.gif"; 	learnOn= new Image();
+	learnOn.src="../images/lessonon.gif";}//--></SCRIPT>
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%" HEIGHT="100%" BGCOLOR="white">
+	<TR>
+		<TD WIDTH="100%">
+			<CENTER>
+			<P>
+			<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="630">
+				<TR>
+					<TD WIDTH="630">
+						<CENTER>
+						<P>
+						<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="630" HEIGHT="62">
+							<TR>
+								<TD WIDTH="108" HEIGHT="62"><A HREF="../index.html"><IMG SRC="../images/xplogo.gif" WIDTH="108" HEIGHT="62" ALIGN="BOTTOM" ALT="XP Home" BORDER="0"></A></TD>
+								<TH WIDTH="414" HEIGHT="62">
+									<H2>Testing First Makes the Code Testable
+								</TH>
+								<TD WIDTH="108" HEIGHT="62">
+									<P ALIGN="CENTER"><A HREF="../lessons.html" onMouseOver="learnedOn()" onMouseOut="learnedOff()"><IMG SRC="../images/lessonsl.gif"
+									WIDTH="99" HEIGHT="61" ALIGN="BOTTOM" ALT="Lessons Learned" BORDER="0" NAME="learn"></A>
+								</TD>
+							</TR>
+						</TABLE>
+
+</CENTER>
+					</TD>
+				</TR>
+				<TR>
+					<TH WIDTH="630">
+						<P>
+						<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="10" WIDTH="630">
+							<TR>
+								<TD WIDTH="300" VALIGN="TOP"><IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">Massimo Arnoldi and I were
+									working on booking payments for a life insurance policy. The requirements and the code were difficult to grasp
+									because of all the special cases- what if they pay too much, what if they pay late, what if they pay for two months
+									at once, etc.<BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">We spent half a day trying
+									to come up with the tests and code for this situation, without success. Every time we got one test working, we
+									discovered the need for three others.<BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">Cheese and oregano pizza
+									and a couple of espressos later, we decided to solve a simpler problem. Could we just test and code the part that
+									decided whether booking a payment was possible at all? Sure- if the amount matched, we could book. Otherwise we
+									had to ask for human intervention. We made a couple of tests and an object that passed them. Elapsed time, 15 minutes.<BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">Next, could we correctly
+									book a payment? Given that the first test passed correctly, we could assume that the source account had the correct
+									balance. Testing and coding was trivial- one test, one object, one method, done. Elapsed time, 5 minutes.</TD>
+								<TD WIDTH="300" VALIGN="TOP"><IMG SRC="../images/kent.gif" WIDTH="74" HEIGHT="120" ALIGN="BOTTOM" BORDER="0" HSPACE="113"><BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">We wouldn't have created
+									two objects if we hadn't been coding test first. The second object would have been god awful complicated if we
+									couldn't rely on the first test passing. Net result of test-first (once we pulled our heads out)- cleaner design,
+									correct behavior, simple tests, and simple code.<BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="45" HEIGHT="4" ALIGN="BOTTOM" ALT=" " BORDER="0">I now try to apply this
+									strategy to all of the difficult problems I encounter. &quot;What are the pieces, the combination of which I will
+									have confidence in assuming that the pieces all work?&quot; I don't always find the pieces right away. Sometimes
+									it's months or years. In the meantime I have lots of tests for my less-than-optimal design. When insight rears
+									its ugly head, I have all the resources I need to retrofit it. <A HREF="../rules/testfirst.html" onMouseOver="imageOn('next')"
+									onMouseOut="imageOff('next')"><IMG SRC="../images/xplinktn.gif" WIDTH="25" HEIGHT="12" ALIGN="BOTTOM" ALT=" " BORDER="0"
+									HSPACE="3" NAME="next"></A> <BR>
+									<BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="163" HEIGHT="4" ALIGN="BOTTOM" BORDER="0"><IMG SRC="images/kentbeck.gif"
+									WIDTH="123" HEIGHT="18" ALIGN="BOTTOM" ALT="Mark Bradac" BORDER="0"><BR>
+									<IMG SRC="../images/pixel.gif" WIDTH="162" HEIGHT="4" ALIGN="BOTTOM" BORDER="0">First Class Software</TD>
+							</TR>
+						</TABLE>
+
+					</TH>
+				</TR>
+				<TR>
+					<TD WIDTH="630">
+						<P ALIGN="CENTER"><A HREF="../index.html">ExtremeProgramming.org home</A> | <A HREF="../lessons.html" onMouseOver="learnedOn()"
+						onMouseOut="learnedOff()">XP Lessons Learned</A> | <A HREF="../rules/testfirst.html" onMouseOver="imageOn('next')"
+						onMouseOut="imageOff('next')">Test First</A> | <A HREF="/cdn-cgi/l/email-protection#e89f8d8a85899b9c8d9aa88d909c9a8d858d989a878f9a89858581868fc6879a8f">Email the webmaster</A>
+					</TD>
+				</TR>
+				<TR>
+					<TD WIDTH="630">
+						<P ALIGN="CENTER"><FONT SIZE="1">Copyright (c) 2000, First Class Software, All rights reserved. Logos Copyright
+						1999 J. Donovan Wells all rights reserved.</FONT>
+					</TD>
+				</TR>
+			</TABLE>
+
+</CENTER>
+		</TD>
+	</TR>
+</TABLE>
+
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd72393818c017',t:'MTczOTIwNDYzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></BODY>
+
+</HTML>

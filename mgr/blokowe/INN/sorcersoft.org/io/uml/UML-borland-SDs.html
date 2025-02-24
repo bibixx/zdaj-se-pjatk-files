@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Interaction Diagrams</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering<br>
+</span><span class="sts"><a href="UML-interactions.pdf">Interaction Diagrams</a></span><h2>Agenda</h2>
+<ul>
+	<li>Interaction Diagrams</li>
+	<li>Lifelines</li>
+	<li>Messages</li>
+	<li>Sequence Diagrams</li>
+	<li>Combined Fragments and Operators</li>
+	<li><a href="#Communication_Diagrams">Communication Diagrams</a></li>
+	<li><a href="useCaseAnalysis.html">Use Case Analysis</a></li>
+	<li><a href="useCaseDesign.html">Use Case Design</a></li>
+	</ul>
+	
+<h2>Course Map</h2>
+	<img border="0" src="CourseMap10.png" width="603" height="495">
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Interaction Diagrams</h2>
+	
+<body>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70be7c7602a0',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+	<ul>
+		<li>Class and object diagrams are static model views.</li>
+		<li>Interaction - a unit of behavior of a context classifier</li>
+		<li>In use case realization a context classifier is a use case.</li>
+		<li>You create one or more interactions to demonstrate how behavior 
+		specified by the use case can be realized by instances of classifiers 
+		passing messages back and forth.</li>
+		<li><b>Interaction diagrams</b> are dynamic.</li>
+		<li>They describe how participants 
+collaborate.</li>
+		<li>Four types: <b>sequence</b>, <b>communication</b>, interaction 
+		overview diagrams, timing diagrams</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Lifelines</h2>
+<ul>
+	<li>A <b>lifeline</b> represents a single participant in an interaction.
+	</li>
+	<li>You can think of a lifeline as representing <b>how</b> an instance of a 
+	classifier may participate in the interaction.</li>
+	<li>However, it does not represent any <b>particular</b> instance of the 
+	classifier.</li>
+</ul>
+<p><img border="0" src="images/fig12-4.png" width="450" height="174"></p>
+<ul>
+	<li>Name - used to refer to the lifeline within the interaction</li>
+	<li>Type - the name of the classifier of which the lifeline represents an 
+	instance</li>
+	<li>Selector - a Boolean condition that may be used to select a single 
+	instance that satisfies the condition</li>
+</ul>
+<p><img border="0" src="images/fig12-5.png" width="600" height="159"></p>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Messages</h2>
+<p><img border="0" src="images/table12-2.png" width="600" height="396"></p>
+<ul>
+	<li>In <b>analysis</b>, you are not concerned with the detailed semantics of 
+	message sending, merely with the fact that a message is sent. As such you 
+	can show all messages as synchronous because this is the most constraint 
+	case.</li>
+	<li>In <b>design</b>, it can be important to distinguish between those 
+	messages so you can design concurrent flow of control.</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Sequence_Diagrams">Sequence Diagrams</a></h2>
+<p><b>Sequence diagrams</b> show interactions between lifelines as a 
+time-ordered sequence of events.</p>
+		<p>A sequence diagram 
+		is an interaction diagram that details how operations are carried out -- 
+		what messages are sent and when. Sequence diagrams are organized 
+		according to time. The time progresses as you go down the page. The 
+		<b>participants</b> (<b>lifelines</b>) involved in the operation are listed from left to right 
+		according to when they take part in the message sequence.</p>
+		<p>Below is a sequence diagram for adding a course. The 
+		lifeline initiating the sequence of messages is <b>:Registrar</b></p>
+		<p>
+		<img border="0" src="images/fig12-8.png" width="550" height="307"></p>
+		<p>The <b>:Registra</b>r sends a <font size="4"><tt>
+		addCourse(&quot;UML)</tt></font> message to a <b>:RegistrationManager</b>. The 
+		<b>:RegistrationManager </b>then sends a <font size="4"><tt>create()</tt></font> 
+		message to the <b>Course </b>class.</p>
+		<ul>
+			<li>Each vertical dotted line (tail) represents the time that a <b>lifeline</b> exists. 
+			</li>
+			<li>Each 
+		arrow is a message call. An arrow goes from the sender to the top of the
+			<b>activation </b>of the message on the receiver's lifeline. 
+			Activations indicate when lifeline has&nbsp; focus of control.</li>
+			<li>The 
+		activation bar represents the duration of execution of the message.</li>
+</ul>
+		<p><img border="0" src="images/fig12-10.png" width="550" height="339"></p>
+	<p>In the diagram Delete Course, the <b>:RegistrationManager </b>issues a
+	<b>
+		self call</b> to determine if a course is available. If so, then 
+		the <b>:RegistrationManager </b>destroys a <b>uml:Course</b>. </p>
+		
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Combined Fragments and Operators</h2>
+<ul>
+	<li>Combined fragments divide a sequence diagram into different areas with 
+	different behavior.</li>
+	<li>Each combined fragment has an <b>operator</b>, one or more <b>operands</b>, 
+	and zero or more <b>guard condition</b>.</li>
+	<li>The operator determines <b>how</b> its operands execute.</li>
+	<li>Guard conditions determine <b>whether</b> their operands execute.</li>
+</ul>
+<p><img border="0" src="images/fig12-13.png" width="600" height="353"></p>
+<p>&nbsp;</p>
+<p><img border="0" src="images/table12-3.png"></p>
+		
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Branching with <i>opt</i> and <i>alt</i></h2>
+<pre><b>opt: creates a single branch</b>
+if (condition) then 
+    op1()</pre>
+<pre><b>alt: creates multiple branches</b>
+if (condition1) then
+    op2()
+else if (condition2) then
+    op3()
+else
+    op4()</pre>
+<p><img border="0" src="images/fig12-14.png" width="650" height="334"></p>
+		
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Iteration with <i>loop</i> and <i>break</i></h2>
+<ul>
+	<li><b>loop</b> allows you to model iteration.</li>
+	<li>When the <b>break</b> guard condition evaluates to true, the <b>break</b> 
+	operand executes, and the loop terminates,</li>
+</ul>
+<p><img border="0" src="images/fig12-18.png" width="600" height="444"></p>
+<p>&nbsp;</p>
+<p><img border="0" src="images/table12-4.png" width="650" height="354"></p>
+		
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Communication_Diagrams">Communication Diagrams</a></h2>
+
+		<p><b>Communication 
+		diagrams</b> are also interaction diagrams. They convey the 
+		similar 
+		information as sequence diagrams, but they focus on participant roles instead 
+		of the times that messages are sent. In a sequence diagram, participant roles 
+		are the vertices and messages are the connecting links.</p>
+		<p>
+		<img border="0" src="images/fig12-21.png" width="550" height="264"></p>
+		<p>The participant -role rectangles are labeled with either class or object 
+		names (or both). Class names are preceded by colons ( : ).</p>
+		<p>Each message in a collaboration diagram has a <b>
+		sequence number</b>. The top-level message is numbered 1. 
+		Messages at the same level (sent during the same call) have the same 
+		decimal prefix but suffixes of 1, 2, etc. according to when they occur.</p>
+		
+</body>
+		
+</body>
+
+</html>

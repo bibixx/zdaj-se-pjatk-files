@@ -1,0 +1,90 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>event<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">03: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>geom<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">04: </font><b><font color="#000080">import</font></b> javax<font color="#990000">.</font>swing<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">05: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>util<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">06: </font>
+<font color="#000000">07: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">08: </font><i><font color="#9A1900">   A component that shows a scene composed of shapes.</font></i>
+<font color="#000000">09: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">10: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> SceneComponent <b><font color="#0000FF">extends</font></b> JComponent
+<font color="#000000">11: </font><font color="#FF0000">{</font>
+<font color="#000000">12: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#000000">SceneComponent</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">13: </font>   <font color="#FF0000">{</font>
+<font color="#000000">14: </font>      shapes <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> ArrayList<font color="#990000">&lt;</font>SceneShape<font color="#990000">&gt;</font><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">15: </font>
+<font color="#000000">16: </font>      <b><font color="#000000">addMouseListener</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b>
+<font color="#000000">17: </font>         <b><font color="#000000">MouseAdapter</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">18: </font>         <font color="#FF0000">{</font>
+<font color="#000000">19: </font>            <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">mousePressed</font></b><font color="#990000">(</font>MouseEvent event<font color="#990000">)</font>
+<font color="#000000">20: </font>            <font color="#FF0000">{</font>
+<font color="#000000">21: </font>               mousePoint <font color="#990000">=</font> event<font color="#990000">.</font><b><font color="#000000">getPoint</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">22: </font>               <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>SceneShape s <font color="#990000">:</font> shapes<font color="#990000">)</font>
+<font color="#000000">23: </font>               <font color="#FF0000">{</font>
+<font color="#000000">24: </font>                  <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>s<font color="#990000">.</font><b><font color="#000000">contains</font></b><font color="#990000">(</font>mousePoint<font color="#990000">)</font><font color="#990000">)</font>
+<font color="#000000">25: </font>                     s<font color="#990000">.</font><b><font color="#000000">setSelected</font></b><font color="#990000">(</font><font color="#990000">!</font>s<font color="#990000">.</font><b><font color="#000000">isSelected</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">26: </font>               <font color="#FF0000">}</font>
+<font color="#000000">27: </font>               <b><font color="#000000">repaint</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">28: </font>            <font color="#FF0000">}</font>
+<font color="#000000">29: </font>         <font color="#FF0000">}</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">30: </font>
+<font color="#000000">31: </font>      <b><font color="#000000">addMouseMotionListener</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b>
+<font color="#000000">32: </font>         <b><font color="#000000">MouseMotionAdapter</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">33: </font>         <font color="#FF0000">{</font>
+<font color="#000000">34: </font>            <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">mouseDragged</font></b><font color="#990000">(</font>MouseEvent event<font color="#990000">)</font>
+<font color="#000000">35: </font>            <font color="#FF0000">{</font>
+<font color="#000000">36: </font>               Point lastMousePoint <font color="#990000">=</font> mousePoint<font color="#990000">;</font>
+<font color="#000000">37: </font>               mousePoint <font color="#990000">=</font> event<font color="#990000">.</font><b><font color="#000000">getPoint</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">38: </font>               <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>SceneShape s <font color="#990000">:</font> shapes<font color="#990000">)</font>
+<font color="#000000">39: </font>               <font color="#FF0000">{</font>
+<font color="#000000">40: </font>                  <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>s<font color="#990000">.</font><b><font color="#000000">isSelected</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font>
+<font color="#000000">41: </font>                  <font color="#FF0000">{</font>
+<font color="#000000">42: </font>                     <font color="#009900">double</font> dx <font color="#990000">=</font> mousePoint<font color="#990000">.</font><b><font color="#000000">getX</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">-</font> lastMousePoint<font color="#990000">.</font><b><font color="#000000">getX</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">43: </font>                     <font color="#009900">double</font> dy <font color="#990000">=</font> mousePoint<font color="#990000">.</font><b><font color="#000000">getY</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">-</font> lastMousePoint<font color="#990000">.</font><b><font color="#000000">getY</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">44: </font>                     s<font color="#990000">.</font><b><font color="#000000">translate</font></b><font color="#990000">(</font><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> dx<font color="#990000">,</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> dy<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">45: </font>                  <font color="#FF0000">}</font>
+<font color="#000000">46: </font>               <font color="#FF0000">}</font>
+<font color="#000000">47: </font>               <b><font color="#000000">repaint</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">48: </font>            <font color="#FF0000">}</font>
+<font color="#000000">49: </font>         <font color="#FF0000">}</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">50: </font>   <font color="#FF0000">}</font>
+<font color="#000000">51: </font>
+<font color="#000000">52: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">53: </font><i><font color="#9A1900">      Adds a shape to the scene.</font></i>
+<font color="#000000">54: </font><i><font color="#9A1900">      @param s the shape to add</font></i>
+<font color="#000000">55: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">56: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">add</font></b><font color="#990000">(</font>SceneShape s<font color="#990000">)</font>
+<font color="#000000">57: </font>   <font color="#FF0000">{</font>
+<font color="#000000">58: </font>      shapes<font color="#990000">.</font><b><font color="#000000">add</font></b><font color="#990000">(</font>s<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">59: </font>      <b><font color="#000000">repaint</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">60: </font>   <font color="#FF0000">}</font>
+<font color="#000000">61: </font>
+<font color="#000000">62: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">63: </font><i><font color="#9A1900">      Removes all selected shapes from the scene.</font></i>
+<font color="#000000">64: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">65: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">removeSelected</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">66: </font>   <font color="#FF0000">{</font>
+<font color="#000000">67: </font>      <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> shapes<font color="#990000">.</font><b><font color="#000000">size</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">-</font> <font color="#993399">1</font><font color="#990000">;</font> i <font color="#990000">&gt;</font><font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i<font color="#990000">-</font><font color="#990000">-</font><font color="#990000">)</font>
+<font color="#000000">68: </font>      <font color="#FF0000">{</font>
+<font color="#000000">69: </font>         SceneShape s <font color="#990000">=</font> shapes<font color="#990000">.</font><b><font color="#000000">get</font></b><font color="#990000">(</font>i<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">70: </font>         <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>s<font color="#990000">.</font><b><font color="#000000">isSelected</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font> shapes<font color="#990000">.</font><b><font color="#000000">remove</font></b><font color="#990000">(</font>i<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">71: </font>      <font color="#FF0000">}</font>
+<font color="#000000">72: </font>      <b><font color="#000000">repaint</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">73: </font>   <font color="#FF0000">}</font>
+<font color="#000000">74: </font>
+<font color="#000000">75: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">paintComponent</font></b><font color="#990000">(</font>Graphics g<font color="#990000">)</font>
+<font color="#000000">76: </font>   <font color="#FF0000">{</font>
+<font color="#000000">77: </font>      <b><font color="#0000FF">super</font></b><font color="#990000">.</font><b><font color="#000000">paintComponent</font></b><font color="#990000">(</font>g<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">78: </font>      Graphics2D g2 <font color="#990000">=</font> <font color="#990000">(</font>Graphics2D<font color="#990000">)</font> g<font color="#990000">;</font>
+<font color="#000000">79: </font>      <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>SceneShape s <font color="#990000">:</font> shapes<font color="#990000">)</font>
+<font color="#000000">80: </font>      <font color="#FF0000">{</font>
+<font color="#000000">81: </font>         s<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>g2<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">82: </font>         <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>s<font color="#990000">.</font><b><font color="#000000">isSelected</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font>
+<font color="#000000">83: </font>            s<font color="#990000">.</font><b><font color="#000000">drawSelection</font></b><font color="#990000">(</font>g2<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">84: </font>      <font color="#FF0000">}</font>
+<font color="#000000">85: </font>   <font color="#FF0000">}</font>
+<font color="#000000">86: </font>
+<font color="#000000">87: </font>   <b><font color="#0000FF">private</font></b> ArrayList<font color="#990000">&lt;</font>SceneShape<font color="#990000">&gt;</font> shapes<font color="#990000">;</font>
+<font color="#000000">88: </font>   <b><font color="#0000FF">private</font></b> Point mousePoint<font color="#990000">;</font>
+<font color="#000000">89: </font><font color="#FF0000">}</font>
+</tt></pre>

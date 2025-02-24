@@ -1,0 +1,123 @@
+<pre><tt><font color="#000000">001: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">002: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>geom<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">003: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>io<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">004: </font>
+<font color="#000000">005: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">006: </font><i><font color="#9A1900">   A serializable car shape.</font></i>
+<font color="#000000">007: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">008: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> Car <b><font color="#0000FF">implements</font></b> Serializable
+<font color="#000000">009: </font><font color="#FF0000">{</font>
+<font color="#000000">010: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">011: </font><i><font color="#9A1900">      Constructs a car.</font></i>
+<font color="#000000">012: </font><i><font color="#9A1900">      @param x the left of the bounding rectangle</font></i>
+<font color="#000000">013: </font><i><font color="#9A1900">      @param y the top of the bounding rectangle</font></i>
+<font color="#000000">014: </font><i><font color="#9A1900">      @param width the width of the bounding rectangle</font></i>
+<font color="#000000">015: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">016: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#000000">Car</font></b><font color="#990000">(</font><font color="#009900">int</font> x<font color="#990000">,</font> <font color="#009900">int</font> y<font color="#990000">,</font> <font color="#009900">int</font> width<font color="#990000">)</font>
+<font color="#000000">017: </font>   <font color="#FF0000">{</font>
+<font color="#000000">018: </font>      body <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Rectangle</font></b><font color="#990000">(</font>x<font color="#990000">,</font> y <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">,</font>
+<font color="#000000">019: </font>         width <font color="#990000">-</font> <font color="#993399">1</font><font color="#990000">,</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">020: </font>      roof <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">Rectangle</font></b><font color="#990000">(</font>x <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">3</font><font color="#990000">,</font> y<font color="#990000">,</font>
+<font color="#000000">021: </font>         width <font color="#990000">/</font> <font color="#993399">3</font><font color="#990000">,</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">022: </font>      frontTire <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Ellipse2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>x <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">,</font> y <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">3</font><font color="#990000">,</font>
+<font color="#000000">023: </font>         width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">,</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">024: </font>      rearTire <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Ellipse2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font>x <font color="#990000">+</font> width <font color="#990000">*</font> <font color="#993399">2</font> <font color="#990000">/</font> <font color="#993399">3</font><font color="#990000">,</font> y <font color="#990000">+</font> width <font color="#990000">/</font> <font color="#993399">3</font><font color="#990000">,</font>
+<font color="#000000">025: </font>         width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">,</font> width <font color="#990000">/</font> <font color="#993399">6</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">026: </font>   <font color="#FF0000">}</font>
+<font color="#000000">027: </font>
+<font color="#000000">028: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">void</font> <b><font color="#000000">writeObject</font></b><font color="#990000">(</font>ObjectOutputStream out<font color="#990000">)</font>
+<font color="#000000">029: </font>      <b><font color="#0000FF">throws</font></b> IOException
+<font color="#000000">030: </font>   <font color="#FF0000">{</font>
+<font color="#000000">031: </font>      out<font color="#990000">.</font><b><font color="#000000">defaultWriteObject</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">032: </font>      <b><font color="#000000">writeRectangularShape</font></b><font color="#990000">(</font>out<font color="#990000">,</font> frontTire<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">033: </font>      <b><font color="#000000">writeRectangularShape</font></b><font color="#990000">(</font>out<font color="#990000">,</font> rearTire<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">034: </font>   <font color="#FF0000">}</font>
+<font color="#000000">035: </font>
+<font color="#000000">036: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">037: </font><i><font color="#9A1900">      A helper method to write a rectangular shape.</font></i>
+<font color="#000000">038: </font><i><font color="#9A1900">      @param out the stream onto which to write the shape</font></i>
+<font color="#000000">039: </font><i><font color="#9A1900">      @param s the shape to write</font></i>
+<font color="#000000">040: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">041: </font>   <b><font color="#0000FF">private</font></b> <b><font color="#0000FF">static</font></b> <font color="#009900">void</font> <b><font color="#000000">writeRectangularShape</font></b><font color="#990000">(</font>ObjectOutputStream out<font color="#990000">,</font>
+<font color="#000000">042: </font>      RectangularShape s<font color="#990000">)</font>
+<font color="#000000">043: </font>      <b><font color="#0000FF">throws</font></b> IOException
+<font color="#000000">044: </font>   <font color="#FF0000">{</font>
+<font color="#000000">045: </font>      out<font color="#990000">.</font><b><font color="#000000">writeDouble</font></b><font color="#990000">(</font>s<font color="#990000">.</font><b><font color="#000000">getX</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">046: </font>      out<font color="#990000">.</font><b><font color="#000000">writeDouble</font></b><font color="#990000">(</font>s<font color="#990000">.</font><b><font color="#000000">getY</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">047: </font>      out<font color="#990000">.</font><b><font color="#000000">writeDouble</font></b><font color="#990000">(</font>s<font color="#990000">.</font><b><font color="#000000">getWidth</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">048: </font>      out<font color="#990000">.</font><b><font color="#000000">writeDouble</font></b><font color="#990000">(</font>s<font color="#990000">.</font><b><font color="#000000">getHeight</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">049: </font>   <font color="#FF0000">}</font>
+<font color="#000000">050: </font>
+<font color="#000000">051: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">void</font> <b><font color="#000000">readObject</font></b><font color="#990000">(</font>ObjectInputStream in<font color="#990000">)</font>
+<font color="#000000">052: </font>      <b><font color="#0000FF">throws</font></b> IOException<font color="#990000">,</font> ClassNotFoundException
+<font color="#000000">053: </font>   <font color="#FF0000">{</font>
+<font color="#000000">054: </font>      in<font color="#990000">.</font><b><font color="#000000">defaultReadObject</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">055: </font>      frontTire <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Ellipse2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">056: </font>      <b><font color="#000000">readRectangularShape</font></b><font color="#990000">(</font>in<font color="#990000">,</font> frontTire<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">057: </font>      rearTire <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Ellipse2D<font color="#990000">.</font><b><font color="#000000">Double</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">058: </font>      <b><font color="#000000">readRectangularShape</font></b><font color="#990000">(</font>in<font color="#990000">,</font> rearTire<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">059: </font>   <font color="#FF0000">}</font>
+<font color="#000000">060: </font>
+<font color="#000000">061: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">062: </font><i><font color="#9A1900">      A helper method to read a rectangular shape.</font></i>
+<font color="#000000">063: </font><i><font color="#9A1900">      @param in the stream from which to read the shape</font></i>
+<font color="#000000">064: </font><i><font color="#9A1900">      @param s the shape to read. The method sets the frame</font></i>
+<font color="#000000">065: </font><i><font color="#9A1900">      of this rectangular shape.</font></i>
+<font color="#000000">066: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">067: </font>   <b><font color="#0000FF">private</font></b> <b><font color="#0000FF">static</font></b> <font color="#009900">void</font> <b><font color="#000000">readRectangularShape</font></b><font color="#990000">(</font>ObjectInputStream in<font color="#990000">,</font>
+<font color="#000000">068: </font>      RectangularShape s<font color="#990000">)</font>
+<font color="#000000">069: </font>      <b><font color="#0000FF">throws</font></b> IOException
+<font color="#000000">070: </font>   <font color="#FF0000">{</font>
+<font color="#000000">071: </font>      <font color="#009900">double</font> x <font color="#990000">=</font> in<font color="#990000">.</font><b><font color="#000000">readDouble</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">072: </font>      <font color="#009900">double</font> y <font color="#990000">=</font> in<font color="#990000">.</font><b><font color="#000000">readDouble</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">073: </font>      <font color="#009900">double</font> width <font color="#990000">=</font> in<font color="#990000">.</font><b><font color="#000000">readDouble</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">074: </font>      <font color="#009900">double</font> height <font color="#990000">=</font> in<font color="#990000">.</font><b><font color="#000000">readDouble</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">075: </font>      s<font color="#990000">.</font><b><font color="#000000">setFrame</font></b><font color="#990000">(</font>x<font color="#990000">,</font> y<font color="#990000">,</font> width<font color="#990000">,</font> height<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">076: </font>   <font color="#FF0000">}</font>
+<font color="#000000">077: </font>
+<font color="#000000">078: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">079: </font><i><font color="#9A1900">      Draws the car.</font></i>
+<font color="#000000">080: </font><i><font color="#9A1900">      @param g2 the graphics context</font></i>
+<font color="#000000">081: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">082: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">draw</font></b><font color="#990000">(</font>Graphics2D g2<font color="#990000">)</font>
+<font color="#000000">083: </font>   <font color="#FF0000">{</font>
+<font color="#000000">084: </font>      g2<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>body<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">085: </font>      g2<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>roof<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">086: </font>      g2<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>frontTire<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">087: </font>      g2<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>rearTire<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">088: </font>   <font color="#FF0000">}</font>
+<font color="#000000">089: </font>
+<font color="#000000">090: </font>   <b><font color="#0000FF">public</font></b> String <b><font color="#000000">toString</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">091: </font>   <font color="#FF0000">{</font>
+<font color="#000000">092: </font>      <b><font color="#0000FF">return</font></b> <b><font color="#000000">getClass</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">.</font><b><font color="#000000">getName</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">093: </font>         <font color="#990000">+</font> <font color="#FF0000">"[body="</font> <font color="#990000">+</font> body
+<font color="#000000">094: </font>         <font color="#990000">+</font> <font color="#FF0000">",roof="</font> <font color="#990000">+</font> roof
+<font color="#000000">095: </font>         <font color="#990000">+</font> <font color="#FF0000">",frontTire="</font> <font color="#990000">+</font> <b><font color="#000000">formatRectangularShape</font></b><font color="#990000">(</font>frontTire<font color="#990000">)</font>
+<font color="#000000">096: </font>         <font color="#990000">+</font> <font color="#FF0000">",rearTire="</font> <font color="#990000">+</font> <b><font color="#000000">formatRectangularShape</font></b><font color="#990000">(</font>rearTire<font color="#990000">)</font>
+<font color="#000000">097: </font>         <font color="#990000">+</font> <font color="#FF0000">"]"</font><font color="#990000">;</font>
+<font color="#000000">098: </font>   <font color="#FF0000">}</font>
+<font color="#000000">099: </font>
+<font color="#000000">100: </font>   <i><font color="#9A1900">/**</font></i>
+<font color="#000000">101: </font><i><font color="#9A1900">      A helper method to format a rectangular shape.</font></i>
+<font color="#000000">102: </font><i><font color="#9A1900">      @param s the shape to format</font></i>
+<font color="#000000">103: </font><i><font color="#9A1900">      @return a formatted representation of the given shape</font></i>
+<font color="#000000">104: </font><i><font color="#9A1900">   */</font></i>
+<font color="#000000">105: </font>   <b><font color="#0000FF">private</font></b> <b><font color="#0000FF">static</font></b> String <b><font color="#000000">formatRectangularShape</font></b><font color="#990000">(</font>RectangularShape s<font color="#990000">)</font>
+<font color="#000000">106: </font>   <font color="#FF0000">{</font>
+<font color="#000000">107: </font>      <b><font color="#0000FF">return</font></b> RectangularShape<font color="#990000">.</font><b><font color="#0000FF">class</font></b><font color="#990000">.</font><b><font color="#000000">getName</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">108: </font>         <font color="#990000">+</font> <font color="#FF0000">"[x="</font> <font color="#990000">+</font> s<font color="#990000">.</font><b><font color="#000000">getX</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">109: </font>         <font color="#990000">+</font> <font color="#FF0000">",y="</font> <font color="#990000">+</font> s<font color="#990000">.</font><b><font color="#000000">getY</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">110: </font>         <font color="#990000">+</font> <font color="#FF0000">",width="</font> <font color="#990000">+</font> s<font color="#990000">.</font><b><font color="#000000">getWidth</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">111: </font>         <font color="#990000">+</font> <font color="#FF0000">",height="</font> <font color="#990000">+</font> s<font color="#990000">.</font><b><font color="#000000">getHeight</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">112: </font>         <font color="#990000">+</font> <font color="#FF0000">"]"</font><font color="#990000">;</font>
+<font color="#000000">113: </font>   <font color="#FF0000">}</font>
+<font color="#000000">114: </font>
+<font color="#000000">115: </font>
+<font color="#000000">116: </font>   <b><font color="#0000FF">private</font></b> Rectangle body<font color="#990000">;</font>
+<font color="#000000">117: </font>   <b><font color="#0000FF">private</font></b> Rectangle roof<font color="#990000">;</font>
+<font color="#000000">118: </font>   <b><font color="#0000FF">private</font></b> <b><font color="#0000FF">transient</font></b> Ellipse2D<font color="#990000">.</font>Double frontTire<font color="#990000">;</font>
+<font color="#000000">119: </font>   <b><font color="#0000FF">private</font></b> <b><font color="#0000FF">transient</font></b> Ellipse2D<font color="#990000">.</font>Double rearTire<font color="#990000">;</font>
+<font color="#000000">120: </font><font color="#FF0000">}</font>
+<font color="#000000">121: </font>
+<font color="#000000">122: </font>
+</tt></pre>

@@ -1,0 +1,122 @@
+<?php
+
+// DEBUGGER
+if ($_GET['d']==1) $debug = 1;
+else $debug = 0;
+if ($debug == 1) echo "<h2>TRYB DEBUGGERA</h2>";
+
+// UI
+echo '<form><input type="text" name="k" value="';
+if (isset($_GET['k'])) echo $_GET['k'];
+else echo "3, 13, 33";
+echo '"></input><input type="submit" value="Licz"></input><br />Debugger: <input type="checkbox" name="d" value="1"'; 
+if ($_GET['d']==1) echo 'checked="checked"';
+echo '/></form>';
+
+//ustawianie parametrow K]
+if (isset($_GET['k'])) $string = $_GET['k'];
+else $string = "";
+
+//wylicza poprawnosc dla testujacej tablicy i 2 treningowymi
+function precision($train, $test1, $test2, $K){
+	$correct = 0; $j=0;
+	// DEBUGGER
+	global $debug;
+	if ($debug == 1) echo "<br />";
+	foreach ($train as &$value) {
+	
+		$tabA = findNeightbours($value, $test1);
+		$tabB = findNeightbours($value, $test2);
+
+		$tabTrain = array_merge($tabA, $tabB);
+
+		$i = 0; 
+		while ($i++ < $K){
+			$index =  array_search(min($tabTrain), $tabTrain);
+			if ($index<50) $count[$test1[$index][4]]++;
+			else $count[$test2[$index-50][4]]++;
+			unset($tabTrain[$index]);
+		}
+
+		if  ($value[4]==array_search(max($count), $count)) $correct++;
+		// DEBUGGER
+		if ($debug == 1) { 
+			echo $j++ . ". Testowany: <b>" .$value[4]."</b> - Najbliższe: <b> " ; 
+			var_dump($count); 
+			echo "</b>"; 
+			if  ($value[4]==array_search(max($count), $count)) echo "<font color='green'>OK!</font>"; 
+			else echo "<font color='red'>BAD!</font>"; 
+
+			echo "<br />"; 
+		}
+		$count = NULL;
+	}
+
+	unset($value);
+	return $correct/50;
+}
+
+// zwraza tablice sciezek od $elementu do wszystkich punktow w $tab
+function findNeightbours($element, $tab){
+	$i = 0;
+	foreach ($tab as &$value) $temp[$i++] = 
+		sqrt(  	pow(($element[0] - $value[0]),2) + 
+			pow(($element[1] - $value[1]),2) + 
+			pow(($element[2] - $value[2]),2) + 
+			pow(($element[3] - $value[3]),2) );
+	return $temp;
+}
+
+// zwraca wypelniona tablice Irysami
+function intoTab($a, $buffer){
+	 $tab[$a][0]= substr( $buffer, 0, 3);
+	 $tab[$a][1]= substr( $buffer, 4, 3);
+	 $tab[$a][2]= substr( $buffer, 8, 3);
+	 $tab[$a][3]= substr( $buffer, 12, 3);
+	 $tab[$a][4]= substr( $buffer, 16, -1);
+	return $tab[$a];
+}
+
+//wczytuje plik z danymi
+$handle = @fopen("iris.data", "r");
+if ($handle) {
+
+    $a=0; $b=0; $c=0; $i = 0;
+    while (($buffer = fgets($handle, 4096)) !== false) {
+
+	if ($i%3==0) $tab1[$a++] = intoTab($a, $buffer);
+	else if ($i%3==1) $tab2[$b++] = intoTab($b, $buffer);
+	else $tab3[$c++] = intoTab($c, $buffer);
+
+	$i++;
+    }
+    if (!feof($handle)) {
+        echo "Error: unexpected fgets() fail\n";
+    }
+    fclose($handle);
+}
+
+//parsowanie stringa K do tablicy
+$K = array();
+$tok = strtok($string, ",");
+while ($tok !== false) {
+   array_push($K, $tok);
+   $tok = strtok(",");
+}
+
+
+foreach ($K as &$v) {
+	echo "<h4> Dla K=". $v . "</h4>";
+	echo 
+	$w1 = precision($tab1, $tab2, $tab3, $v).", ";
+	echo 
+	$w2 = precision($tab2, $tab1, $tab3, $v).", ";
+	echo 
+	$w3 = precision($tab3, $tab1, $tab2, $v);
+	echo "<br /><i>Wynik: ".($w1+$w2+$w3)/3 ."</i>";
+	$result[$v] = ($w1+$w2+$w3)/3;
+}
+
+if ($string != "") echo "<h3>Najlepszy wynik dla K = " . array_search(max($result), $result) ."</h3>";
+
+?>

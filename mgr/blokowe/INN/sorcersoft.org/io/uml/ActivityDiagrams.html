@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: Use Case Diagrams</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">Activity Diagrams</span>
+<h2>Agenda</h2>
+<UL>
+<LI>What are Activity Diagrams?<LI>Activity Diagrams and the UP<LI>Activities<LI>
+Activity Semantics<LI>Activity Partitions<body><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70b8ff4a3506',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body><LI>Action Nodes<LI>
+Control Nodes<LI>Object Nodes<LI>Pins</UL>
+
+		<SPAN 
+class=basicContent>
+<hr align="left" width="100%" size="4" noshade>
+</SPAN>
+		<h2>What are Activity Diagrams?</h2>
+<ul>
+	<li>Activity diagrams are often called &quot;OO flowcharts&quot;. </li>
+	<li>Describe one specific aspect of system's dynamic behavior.</li>
+	<li>They allow you to model a process as an activity that consists of a 
+	collection on nodes connected by edges.</li>
+	<li>In UML 2 activity diagrams have semantics based on a Petri Nets.</li>
+	<li>An activity can be attached to <b><i>any</i></b> modeling element for the purpose of 
+	modeling its behavior. The element provides the context for the activity, 
+	and the activity may refer to features of its context.</li>
+	<li>Activities are typically attached to<ul>
+		<li>use cases</li>
+		<li>classes</li>
+		<li>interfaces</li>
+		<li>components</li>
+		<li>collaborations</li>
+		<li>operations</li>
+	</ul>
+	</li>
+	<li>Business process and workflows can be molded with activity diagrams</li>
+	<li>Common use of activity diagrams is to flowchart operation</li>
+</ul>
+		<SPAN 
+class=basicContent>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Activity Diagrams and the UP</h2>
+<ul>
+	<li>They provide a general-purpose mechanism fro modeling behaviors and can 
+	be used whenever they add value</li>
+	<li>They let you model a process <b><i>without</i></b> having to specify the 
+	static structure of classes and objects that realize process</li>
+	<li>Activity diagrams can be used in many UP workflows.</li>
+	<li>Recommended<ul>
+		<li>In the analysis of workflow<ul>
+			<li>to model the flow in use case that is easy for stakeholders to 
+			understand</li>
+			<li>to model a flow between use cases (interaction overview diagram)</li>
+		</ul>
+		</li>
+		<li>In design<ul>
+			<li>to model the details of an operation</li>
+			<li>to model the details of an algorithm</li>
+		</ul>
+		</li>
+		<li>In business modeling<ul>
+			<li>to model a business process</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Activities</h2>
+<p>Activities are networks of <b><i>nodes</i></b> connected by <b><i>edges</i></b>. 
+There are three categories of node:</p>
+<ol>
+	<li><b>action node </b>- represent discrete units of work that are atomic <b>
+	<i>within the activity</i></b></li>
+	<li><b>control nodes</b> - control the flow thorough activity</li>
+	<li><b>object nodes</b> - represent objects used in the activity</li>
+</ol>
+<p>Edges represent flow through the activity. There are two categories of edge:</p>
+<ol>
+	<li><b>control flow</b> - represent flow of control through activity</li>
+	<li><b>object flow</b> - represent the flow of objects though the activity</li>
+</ol>
+<p><img border="0" src="activity-images/14-2.png" width="502" height="374"></p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>A use case as a series of actions</h2>
+<ul>
+	<li>Use case expresses system&nbsp; behavior as an interaction between an 
+	actor and the system.</li>
+	<li>Activity diagram expresses it as a series of actions <b><i>graphically</i></b>.</li>
+	<li>They are complementary views of the same behavior</li>
+</ul>
+<p><img border="0" src="activity-images/14-3.png" width="539" height="835"></p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Activity Semantics</h2>
+<p>Activity diagrams are based on Petri Nets (<a href="http://www.informatik.uni-hamburg.de/TGI/PetriNets/">http://www.informatik.uni-hamburg.de/TGI/PetriNets/</a>).</p>
+<p>Activity diagrams model behavior by using the <b><i>token game</i></b>. This 
+game describes the flow of token around the network of nodes and edges according 
+to specific rules. Tokens in UML activity diagrams can represent</p>
+<ul>
+	<li>the flow of control</li>
+	<li>an object</li>
+	<li>some data</li>
+</ul>
+<p><b>The state of the system at any point in time is determined by the 
+disposition of its tokens.</b></p>
+<p>In the <i>Send letter </i>example, the token is the flow of control as there 
+are no objects or data being passed between nodes in this particular case.</p>
+<ul>
+	<li>Tokens are moved from a source node to a target node across an edge.</li>
+	<li>Movement of a tokens is subject to conditions, and it can only occur 
+	when <b><i>all</i></b> of the conditions are satisfied.</li>
+	<li>In the <i>Send letter </i>example for action nodes consider: 
+<ul>
+	<li>the post conditions of 
+	the source node</li>
+	<li>guard condition on the edge</li>
+	<li>the precondition of the target 
+	node.</li>
+</ul>
+	</li>
+	<li>As well as action nodes there are control nodes and object nodes with 
+	own semantics. Control nodes for example have special semantics that 
+	control flow tokens are passed from the input edges to output edges.</li>
+</ul>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Activity Partitions</h2>
+<ul>
+	<li>Each activity partition represents a high-level grouping of related 
+	actions.</li>
+	<li>To make your activity easier to read, use vertical, horizontal, or 
+	curved lines to divide the activity into partitions.</li>
+	<li>Activity partitions are sometimes called swimlanes.</li>
+	<li>Partitions are not part of your system, always use your judgment and 
+	apply activity partitions only when they add real value to the model.</li>
+	<li>Activity partitions are commonly used to represent<ul>
+		<li>use cases</li>
+		<li>classes</li>
+		<li>components</li>
+		<li>organizational units (in business modeling)</li>
+		<li>roles (in workflow modeling)</li>
+		<li>distribution of processed across hosts (distributed systems)</li>
+	</ul>
+	<p>Each set of partitions should have a <b>single dimension</b> that 
+	describes the basic semantics of the set (tree structure below).</p></li>
+</ul>
+<p><img border="0" src="activity-images/14-6.png" width="541" height="424"></p>
+<p><img border="0" src="activity-images/14-8.png" width="441" height="203"></p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Action Nodes</h2>
+<p>Action&nbsp; nodes execute when</p>
+<ul>
+	<li>there is a token simultaneously on each of their input edges <i><b>AND</b></i></li>
+	<li>the input tokens satisfy all of the action node local preconditions</li>
+</ul>
+<p>When the action node has finished execution</p>
+<ul>
+	<li>the local postcondition is checked</li>
+	<li>if it is satisfied, the node simultaneously offers control tokens on <b><i>all</i></b> 
+	of its output edges</li>
+	<li>this is an explicit fork as one action node may give rise to many flows</li>
+	<li>unlike conventional flowcharts, activity diagrams are inherently 
+	concurrent</li>
+</ul>
+<p><img border="0" src="activity-images/14-9.png" width="441" height="406"></p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Four Types of Action Nodes</h2>
+<p><img border="0" src="activity-images/T14-1.png"></p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Call Action Node</h2>
+<p>The most common type of action node is the <b><i>call action node</i></b>. 
+This type of node can invoke</p>
+<ul>
+	<li>and activity</li>
+	<li>a behavior</li>
+	<li>an operation</li>
+</ul>
+<p><img border="0" src="activity-images/14-11.png" width="506" height="358"></p>
+<p>UML operation (operation signature):<br>
+visibility name( direction parameterName: parameterType = defaultValue, ... ) : 
+returnType</p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Accept Time Event Action Node</h2>
+<ul>
+	<li>An accept time event action node responds to time.</li>
+	<li>This type of node has time expression, and it generates a time event 
+	when the expression becomes true;<br>
+	eg., <i>end of business year</i>, <i>on 01/15/2008</i>, <i>wait 10 seconds</i></li>
+</ul>
+<p><img border="0" src="activity-images/14-12.png" width="376" height="140"></p>
+<p><img border="0" src="activity-images/14-13.png" width="413" height="152"></p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Control Nodes</h2>
+<p>Control nodes manage the flow of control within an activity</p>
+<p><img border="0" src="activity-images/T14-2.png"</p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Decision and Merge Nodes</h2>
+<ul>
+	<li>A <b><i>decision node</i></b> has one input and two or more alternate 
+	outputs edges.</li>
+	<li>A token arrived at the input edge will be offered to <b><i>all</i></b> 
+	the output edges but will traverse at most <b><i>one</i></b> of them.</li>
+	<li>The decision node acts like a crossroads in the flow where the token 
+	must take one direction only.</li>
+	<li>Each of the output edges is protected by a <b><i>guard condition</i></b> such that the edge will accept a token if, and only if, the guard condition 
+	evaluates to true.</li>
+	<li>Guard conditions have to be mutually exclusive, otherwise the node is <b>
+	<i>undefined</i></b>.</li>
+</ul>
+
+<ul>
+	<li><b><i>Merge nodes</i></b> have two or more input edges and a single 
+	output node. </li>
+	<li>They merge all their incoming flows into a single outgoing flow.</li>
+	<li>All tokens offered on the incoming edges are offered on the outgoing 
+	edge and there is no modification of the flow or the tokens.</li>
+</ul>
+<p><img border="0" src="activity-images/14-14.png" width="414" height="674"></p>
+<p>A note stereotyped <b>&lt;&lt;decisionInput&gt;&gt;</b> provides a decision condition for 
+a decision node.</p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Fork and Join Nodes - Concurrency</h2>
+<ul>
+	<li>A <b><i>fork node</i></b> splits a flow into multiple concurrent flows.</li>
+	<li>Tokens arriving at the incoming edges are duplicated and offered on <b>
+	<i>all</i></b> of the outgoing edges stimulatingly.</li>
+	<li>This splits the single incoming flow into multiple parallel outgoing 
+	flows.</li>
+	<li>Each outgoing edge may have a <b><i>guard condition</i></b> and a token 
+	can only traverse the outgoing edge if the guard condition is true.</li>
+</ul>
+
+<ul>
+	<li>A <b><i>join node</i></b> synchronizes and joins multiple input flows 
+	into a single output flow.</li>
+	<li>They synchronize flows by offering a token on their single output edge 
+	when there is a token on <b><i>all</i></b> of there input edges.</li>
+	<li>They perform a logical <b><i>AND</i></b> on their input edges.</li>
+</ul>
+<p><img border="0" src="activity-images/14-17.png" width="337" height="413"></p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Object Nodes</h2>
+<ul>
+	<li>Object nodes indicate that instances of classifier are available at 
+	specific point of activity.</li>
+	<li>The input and output edges of object nodes are <b><i>object flows</i></b>.</li>
+	<li>Object flows represent the movement of objects around the activity.</li>
+	<li>The objects themselves are created and consumed by action nodes.</li>
+	<li>When an object node receives an object token on one of its input edges, 
+	it offers this token on all of its output edges simultaneously and the 
+	output edges compete for the token.</li>
+	<li>It is still one token - the token is not replicated on the output edges.
+	<b>The first edge to accept the token gets it.</b></li>
+	<li>Object nodes act as buffers.&nbsp; An <b>upper bound</b> that indicates 
+	the maximum number of tokens can be defined along with ordering<br>
+	{upperBound = 12}&nbsp; {ordering = LIFO}.</li>
+</ul>
+<p><img border="0" src="activity-images/14-18.png" width="242" height="165"></p>
+<p><img border="0" src="activity-images/14-19.jpg" width="435" height="461"></p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Activity Parameters</h2>
+<ul>
+	<li>Activity parameters are object nodes input to or from an activity.</li>
+	<li>The input and output nodes should be drawn overlapping the activity 
+	frame.</li>
+	<li>Object nodes can represent objects in a particular state: [Paid].</li>
+</ul>
+<p><img border="0" src="activity-images/14-23.png" width="653" height="367"></p>
+<hr align="left" width="100%" size="4" noshade>
+<h2>Pins</h2>
+<ul>
+	<li>A pin is an object node that represents one input to or output from an 
+	action.</li>
+	<li>You can use pins to clean up things a bit!</li>
+</ul>
+<p><img border="0" src="activity-images/14-24.png" width="544" height="246"></p>
+<p>&nbsp;</p>
+<p><img border="0" src="activity-images/14-25.png" width="594" height="240"></p>
+</SPAN>
+		
+</body>
+
+</html>

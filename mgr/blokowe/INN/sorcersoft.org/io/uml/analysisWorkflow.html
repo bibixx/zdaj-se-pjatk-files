@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<TITLE>SE: The Analysis Workflow</TITLE>
+<META name="keywords" http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<LINK rel="stylesheet" type="text/css" href="module.css">
+<style>
+<!--
+span.body { color: #000000; font-size: 13px; font-family: verdana, sans-serif }
+-->
+</style>
+</HEAD>
+<BODY text="#000000" alink="#666666">
+<span class="ts">Software Engineering</span><br>
+<span class="sts">The Analysis Workflow</span><BR>
+<h2>Agenda</h2>
+<ul>
+	<li>
+	Modeling and Simulation Model</li>
+	<li>
+	Analysis Artifacts - Metamodel</li>
+	<li>
+	<a href="#Analysis_Workflow_Detail">Analysis Workflow Detail</a></li>
+	<li>
+	<a href="analysisPackages.html#Architectural_Analysis">Architectural 
+	Analysis</a></li>
+	<li>
+	<a href="#Analyze_a_Use_Case_">Analyze Use Case</a></li>
+	<li>Analysis Model - Rules of Thumb</li>
+	<li><a href="#What_are_analysis_classes">Analyze Classes</a><ul>
+		<li>A Paradigm for Finding Analysis Objects and Classes</li>
+		<li>CRC Modeling</li>
+		<li>Finding Classes by Using RUP Stereotypes</li>
+	</ul></li>
+	<li><a href="useCaseAnalysis.html">Analyze Use Case Realizations</a></li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Modeling and Simulation Model</h2>
+<p><img border="0" src="images/objectModel.png" width="650" height="339"></p>
+<p>&nbsp;</p>
+<ul>
+	<li>A class is a descriptor (template) for a set of objects that have the 
+	same <i>features</i> (attributes, operations, methods, relationships, and 
+	behavior).</li>
+	<li>An interaction is a unit of behavior of a context classifier, for 
+	example a use case. The classifier provides the context for the interaction.</li>
+</ul>
+<p>Ways of using UML</p>
+<ol>
+	<li>UML class diagrams as <b>sketch</b> - result of requirement analysis</li>
+	<li>UML class diagrams as <b>blueprint</b> - result of a design process 
+	based on class sketches</li>
+	<li>UML as <b>programming language</b> - UML diagrams are compiled directly 
+	to executable code</li>
+</ol>
+
+<body>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Analysis_Artifacts_-_Metamodel">Analysis Artifacts - Metamodel</a></h2>
+<p>Analysis modeling is strategic as we are trying to model the system's <b>
+essential behavior</b>.</p>
+<p><img border="0" src="images/fig-6-3.png" width="600" height="373"></p>
+<ul>
+	<li>In the analysis workflow, two key artifacts are produced<ul>
+	<li>analysis classes - these model key concepts of the business domain;</li>
+	<li>use case realizations - these illustrate how instances of the analysis 
+	classes can interact to realize behavior specified by a use case.</li>
+</ul>
+
+	</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Analysis_Workflow_Detail">Analysis Workflow Detail</a></h2>
+<p><map name="FPMap0">
+<area href="#Analyze_a_Use_Case_" shape="rect" coords="254, 141, 415, 229">
+<area href="analysisPackages.html#Finding_Analysis_Packages" shape="rect" coords="555, 294, 715, 380">
+<area href="#What_are_analysis_classes" shape="rect" coords="377, 290, 518, 375">
+<area href="analysisPackages.html#Architectural_Analysis" shape="rect" coords="151, 3, 313, 81">
+</map>
+<img border="0" src="images/fig6-4.png" width="716" height="387" usemap="#FPMap0"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a href="analysisPackages.html#Architectural_Analysis">Architectural 
+	Analysis</a></h2>
+<ul>
+	<li>Gain understanding and manage strategic system complexity </li>
+	<li>Determine the package structure: application-specific vs. 
+	application-general packages </li>
+	<li>Find analysis packages</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="Analyze_a_Use_Case_">Analyze a Use Case </a> </h2>
+<p>&quot;Analyze a use case&quot; involves creating analysis classes and use case 
+realization.</p>
+<p><map name="FPMap1">
+<area href="#What_are_analysis_classes" shape="rect" coords="542, 39, 649, 155">
+<area href="useCaseAnalysis.html#Goals" shape="rect" coords="537, 292, 648, 399">
+<area coords="9, 8, 134, 109" shape="rect" href="../modules/4-blockers/index.html#What_is_a_4-blocker">
+<area href="requirementsWorkflow.html#SW_Requirements_-_Metamodel" shape="rect" coords="12,114,134,222">
+<area href="analysisPackages.html#Architectural_Analysis" shape="rect" coords="17, 323, 125, 432">
+<area href="requirementsWorkflow.html#Use_Case_Modeling" shape="rect" coords="16, 228, 129, 313">
+</map>
+<img border="0" src="images/fig8-2.png" width="650" height="433" usemap="#FPMap1"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Analysis Model - Rules of Thumb</h2>
+<ul>
+	<li>The analysis model is always in the <b>language of the business</b> 
+	(project glossary describes the vocabulary of the business domain)</li>
+	<li>Create models that &quot;<b>tell a story</b>&quot;. Each diagram produced should 
+	elucidate same important part of the system's desired behavior.</li>
+	<li>Concentrate clearly on capturing the <b>big picture</b>. Don't get 
+	bogged down in the details of how the system will work-there is plenty of 
+	time for this in design</li>
+	<li>Distinguish clearly between the <b>problem domain</b> (the business 
+	requirements)&nbsp; and the <b>solution domain</b> (detailed design 
+	consideration). Always focus on <b>abstractions</b> that exist in the problem 
+	domain.</li>
+	<li>Always try to <b>minimize coupling</b>. Each association between classes&nbsp; 
+	creates coupling between them.</li>
+	<li>Explore <b>inheritance</b> <i>if </i>there seems to be a natural and 
+	compelling hierarchy of abstractions. In analysis never apply inheritance 
+	just to reuse code. Inheritance is the strongest form of coupling between 
+	classes.</li>
+	<li>Always ask, &quot;Is the model useful to all the stakeholders?&quot; There's 
+	nothing worse than producing an analysis model that is ignored by the 
+	business users or the designers and developers. <b>Yet this happens all too 
+	often.</b></li>
+	<li>Finally-keep the <b>model simple</b>! Remember, <b>inside every complex 
+	analysis model is a simple analysis model </b>struggling to get out.</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2 style="text-autospace: none">Abstractions </h2>
+<p class="MsoNormal" style="text-autospace: none">Abstraction is a mechanism and 
+practice to reduce and factor out details so that one can focus on a few 
+concepts at a time.</p>
+<p class="MsoNormal" style="text-autospace: none">Abstraction in SE is the 
+facility to define objects that represent abstract &quot;experts&quot; that can perform 
+work, report on and change their state, and &quot;communicate&quot; with other objects in 
+the system. The term data <i>encapsulation</i> refers to the hiding of expert <i>
+structure</i>, but extending the concept of <i>data type</i> from earlier 
+programming languages to associate <i>behavior</i> most strongly with the data, 
+and standardizing the way that different data types interact. When abstraction 
+proceeds into the operations defined, enabling objects of different types to be 
+substituted, it is called <i>polymorphism</i>. When it proceeds in the structure 
+of the types or classes, structuring them to simplify a complex set of 
+relationships, it is called <i>delegation</i> or <i>inheritance</i>.</p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="What_are_analysis_classes">What are analysis classes?</a></h2>
+<ul>
+	<li><b>Analysis classes</b> model important aspects of problem domain such 
+	as &quot;customer&quot; or &quot;product&quot;.<ul>
+	<li>represent a crisp abstraction in the problem domain</li>
+	<li>should map on to real-world business concepts (and carefully named 
+	accordingly)</li>
+</ul>
+
+	</li>
+	<li>An analysis class should map in a clear and unambiguous way to real 
+	world business concepts.</li>
+	<li>Finding the analysis class is the key to OO analysis and design.<ul>
+		<li>Analysis classes only have key attributes and very high-level 
+		responsibilities.</li>
+		<li>The name of analysis class should indicate its intent.</li>
+		<li>Responsibilities describe cohesive sets of operations.</li>
+	</ul>
+	</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Anatomy of an Analysis Class</h2>
+<ul>
+	<li>Analysis classes only have <b>high-level set of attributes</b> and very
+	<b>high-level responsibilities.</b></li>
+	<li>They <b>indicate</b> the attributes that the resultant design classes 
+	will <b>probably</b> have.</li>
+	<li>Analysis class operations specify, at high-level, the key services that 
+	the class must offer. In design they will become actual implantable 
+	operations.</li>
+</ul>
+
+<p>A minimal form of an analysis class consists of the following:</p>
+<ul>
+	<li><b>Name</b> - this is mandatory</li>
+	<li><b>Attributes</b> - attributes names are mandatory although only 
+	important subset of candidate attributes may be modeled at this point</li>
+	<li><b>Operations</b> - in analysis, operations might just be very 
+	high-level statements of the responsibilities of the class. Operations 
+	parameters and return values are only shown where they are important for 
+	understanding the model.</li>
+	<li><b>Visibility</b> - generally not shown</li>
+	<li><b><a href="../modules/uml/index.html#Extensibility_Mechanisms">Stereotypes</a></b> - may be shown if they enhance the model</li>
+	<li><b><a href="../modules/uml/index.html#Extensibility_Mechanisms">Tagged values</a> </b>- may be shown if they enhance the model</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>A Paradigm for Finding Analysis Objects and Classes</h2>
+<p>A class describes the features of set of objects. Every object is an instance 
+of exactly one class. Finding the right classification scheme is one of the keys 
+to successful OO analysis.</p>
+<ul>
+	<li>Identify the <b><i>nouns present</i></b>, and create objects 
+	representing them. Then find the <b><i>verbs relating to these nouns </i></b>
+	(actions) and implement them by adding methods to the objects. </li>
+	<li>Leads to larger class hierarchies than we might want</li>
+</ul>
+	
+		<b>Instead</b>
+		<ul>
+	<li>Use in analysis<b><i> CRC modeling, </i></b>however in
+	<a href="designWorkflow.html">design</a> use<b><i> 
+	<a href="designWorkflow.html#Commonality_and_Variability_Analysis">
+	commonality</a></i><a href="designWorkflow.html#Commonality_and_Variability_Analysis"> 
+	and <i>
+	variability</i> </a></b>oriented modeling as a primary approach than looking for at just nouns and 
+	verbs.
+</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>CRC (Class, Responsibility, Collaboration) Modeling</h2>
+<p><a href="../papers/oopsla89.html">Original CRC paper</a></p>
+<p>CRC is brainstorming technique in which you capture on sticky notes the 
+important things in the problem domain</p>
+<p>Difficulties with OOP: </p>
+<ul>
+	<li>Give-up the global knowledge of control that is possible with procedural 
+	programming (global variables, unnecessary pointers, inappropriate reliance 
+	on the implementation of other objects) 
+	</li>
+	<li>Rely on the local knowledge of objects to accomplish their tasks 
+	</li>
+	<li>Shift from process, data flow, and data store to class, responsibility, 
+	and collaboration </li>
+</ul>
+<p>CRC card - a standard index card divided into three sections showing the name 
+of the class, the responsibilities of the class, and the collaborators of the 
+class.</p>
+<ul>
+	<li>Finding classes 
+	<ul>
+		<li>Use a <b>use case model</b> as a primary approach than 
+		looking for at just nouns and verbs. 
+		</li>
+		<li>Look for anything that interacts with the system or is part of the 
+		system.  
+		</li>
+		<li>Ask yourself, &quot;Is there a customer?&quot;  
+		</li>
+		<li>Follow the workflow (scenario) of your use cases.  
+		</li>
+		<li>Look for the three to five main classes immediately.  
+		</li>
+		<li>Create a new card for a class immediately. 
+		</li>
+		<li>Use one or two words to describe the class.  
+		</li>
+		<li>Class names are singular. </li>
+	</ul>
+	</li>
+	<li>Responsibilities identify problems to be solved. 
+	<ul>
+		<li>Ask yourself what class knows.  
+		</li>
+		<li>Ask yourself what the class does.  
+		</li>
+		<li>If you've identified a responsibility, ask yourself what class it 
+		belongs to.  
+		</li>
+		<li>Sometimes we identify responsibilities that we won't implement, and 
+		that's OK. 
+		</li>
+		<li>Classes will collaborate to fulfill many of their responsibilities. 
+		</li>
+	</ul>
+	</li>
+	<li>Collaborators (senders - experts looking for other experts) will send or 
+	be sent messages in the course of satisfying responsibilities. 
+	<ul>
+		<li>Collaboration occurs when a sender needs information that it doesn't 
+		have.  
+		</li>
+		<li>Collaboration occurs when a sender needs to modify information that 
+		it doesn't have.  
+		</li>
+		<li>There will always be at least one initiator of any given 
+		collaboration.  
+		</li>
+		<li>Sometimes the collaboration does the bulk of the work.  
+		</li>
+		<li>New responsibilities may be created to fulfill the collaboration. 
+		</li>
+		<li>Don't pass the buck.  
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>CRC Cards</h2>
+<p><img src="images/fig1.gif" border="0" width="221" height="127"></p>
+<p>Model, view, controller (MVC) Paradigm<br>
+<img src="images/fig2.gif" border="0" width="338" height="314"></p>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>CRC Process</h2>
+<ol>
+	<li>Explain that this is a true <a href="brainstorm.html">brainstorm</a>  
+	</li>
+	<li>Explain the CRC modeling technique   
+	</li>
+	<li>Interactively perform the following modeling steps: 
+	<ul>
+		<li>Find classes  
+		</li>
+		<li>Find responsibilities </li>
+		<li>Define collaborators </li>
+		<li>Define use cases  
+		in your CRC terms</li>
+		<li>Rearrange the cards  
+		</li>
+		<li>Prototype </li>
+	</ul>
+	</li>
+	<li>Perform use-case scenario </li>
+</ol>
+	
+<ul>
+	<li>Stakeholder involvement is essential for CRC success. </li>
+	<li>Important business concepts generally become classes.</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Finding Classes by Using RUP Stereotypes</h2>
+<ul>
+	<li>It can be complementary to CRC modeling</li>
+	<li>Three distinct types of analysis class can be distinguished<ul>
+		<li><b>&lt;&lt;entity&gt;&gt;</b> - a class that is used to model persistent 
+		information about something<ul>
+			<li>value classes</li>
+			<li>cut across many use case</li>
+			<li>are manipulated by control classes</li>
+			<li>provide info to, and accept info from, boundary classes</li>
+			<li>represent key things managed by the system (e.g., Customer)</li>
+			<li>are often persistent</li>
+		</ul>
+		</li>
+		<li><b>&lt;&lt;control&gt;&gt;</b> - a class that encapsulates use-case-specific 
+		behavior</li>
+		<li><b>&lt;&lt;boundary&gt;&gt;</b> - a class that mediates interaction between the 
+		system and its environment<br>
+		- communicate with external actors<ul>
+			<li>user interface classes - that interface between the system and 
+			humans</li>
+			<li>system interface classes - that interface with other systems</li>
+			<li>device interface classes - that&nbsp; interface with external 
+			devices (sensors)</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<HR align="left" width="100%" size="4" noshade>
+		
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70ba0a2a3542',t:'MTczOTIwNDU3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

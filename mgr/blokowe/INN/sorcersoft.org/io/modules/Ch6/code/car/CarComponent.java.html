@@ -1,0 +1,52 @@
+<pre><tt><font color="#000000">01: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">02: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>event<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">03: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>awt<font color="#990000">.</font>geom<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">04: </font><b><font color="#000080">import</font></b> javax<font color="#990000">.</font>swing<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">05: </font><b><font color="#000080">import</font></b> java<font color="#990000">.</font>util<font color="#990000">.</font><font color="#990000">*</font><font color="#990000">;</font>
+<font color="#000000">06: </font>
+<font color="#000000">07: </font><i><font color="#9A1900">/**</font></i>
+<font color="#000000">08: </font><i><font color="#9A1900">   A component that shows a scene composed of items.</font></i>
+<font color="#000000">09: </font><i><font color="#9A1900">*/</font></i>
+<font color="#000000">10: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> CarComponent <b><font color="#0000FF">extends</font></b> JComponent
+<font color="#000000">11: </font><font color="#FF0000">{</font>
+<font color="#000000">12: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#000000">CarComponent</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">13: </font>   <font color="#FF0000">{</font>
+<font color="#000000">14: </font>      car <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> <b><font color="#000000">CarShape</font></b><font color="#990000">(</font><font color="#993399">20</font><font color="#990000">,</font> <font color="#993399">20</font><font color="#990000">,</font> <font color="#993399">50</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">15: </font>      <b><font color="#000000">addMouseListener</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b>
+<font color="#000000">16: </font>         <b><font color="#000000">MouseAdapter</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">17: </font>         <font color="#FF0000">{</font>
+<font color="#000000">18: </font>            <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">mousePressed</font></b><font color="#990000">(</font>MouseEvent event<font color="#990000">)</font>
+<font color="#000000">19: </font>            <font color="#FF0000">{</font>
+<font color="#000000">20: </font>               mousePoint <font color="#990000">=</font> event<font color="#990000">.</font><b><font color="#000000">getPoint</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">21: </font>               <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><font color="#990000">!</font>car<font color="#990000">.</font><b><font color="#000000">contains</font></b><font color="#990000">(</font>mousePoint<font color="#990000">)</font><font color="#990000">)</font>
+<font color="#000000">22: </font>                  mousePoint <font color="#990000">=</font> <b><font color="#0000FF">null</font></b><font color="#990000">;</font>
+<font color="#000000">23: </font>            <font color="#FF0000">}</font>
+<font color="#000000">24: </font>         <font color="#FF0000">}</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">25: </font>
+<font color="#000000">26: </font>      <b><font color="#000000">addMouseMotionListener</font></b><font color="#990000">(</font><b><font color="#0000FF">new</font></b>
+<font color="#000000">27: </font>         <b><font color="#000000">MouseMotionAdapter</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">28: </font>         <font color="#FF0000">{</font>
+<font color="#000000">29: </font>            <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">mouseDragged</font></b><font color="#990000">(</font>MouseEvent event<font color="#990000">)</font>
+<font color="#000000">30: </font>            <font color="#FF0000">{</font>
+<font color="#000000">31: </font>               <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>mousePoint <font color="#990000">=</font><font color="#990000">=</font> <b><font color="#0000FF">null</font></b><font color="#990000">)</font> <b><font color="#0000FF">return</font></b><font color="#990000">;</font>
+<font color="#000000">32: </font>               Point lastMousePoint <font color="#990000">=</font> mousePoint<font color="#990000">;</font>
+<font color="#000000">33: </font>               mousePoint <font color="#990000">=</font> event<font color="#990000">.</font><b><font color="#000000">getPoint</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">34: </font>
+<font color="#000000">35: </font>               <font color="#009900">double</font> dx <font color="#990000">=</font> mousePoint<font color="#990000">.</font><b><font color="#000000">getX</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">-</font> lastMousePoint<font color="#990000">.</font><b><font color="#000000">getX</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">36: </font>               <font color="#009900">double</font> dy <font color="#990000">=</font> mousePoint<font color="#990000">.</font><b><font color="#000000">getY</font></b><font color="#990000">(</font><font color="#990000">)</font> <font color="#990000">-</font> lastMousePoint<font color="#990000">.</font><b><font color="#000000">getY</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">37: </font>               car<font color="#990000">.</font><b><font color="#000000">translate</font></b><font color="#990000">(</font><font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> dx<font color="#990000">,</font> <font color="#990000">(</font><font color="#009900">int</font><font color="#990000">)</font> dy<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">38: </font>               <b><font color="#000000">repaint</font></b><font color="#990000">(</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">39: </font>            <font color="#FF0000">}</font>
+<font color="#000000">40: </font>         <font color="#FF0000">}</font><font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">41: </font>   <font color="#FF0000">}</font>
+<font color="#000000">42: </font>
+<font color="#000000">43: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">paintComponent</font></b><font color="#990000">(</font>Graphics g<font color="#990000">)</font>
+<font color="#000000">44: </font>   <font color="#FF0000">{</font>
+<font color="#000000">45: </font>      Graphics2D g2 <font color="#990000">=</font> <font color="#990000">(</font>Graphics2D<font color="#990000">)</font> g<font color="#990000">;</font>
+<font color="#000000">46: </font>      car<font color="#990000">.</font><b><font color="#000000">draw</font></b><font color="#990000">(</font>g2<font color="#990000">)</font><font color="#990000">;</font>
+<font color="#000000">47: </font>   <font color="#FF0000">}</font>
+<font color="#000000">48: </font>
+<font color="#000000">49: </font>   <b><font color="#0000FF">private</font></b> CarShape car<font color="#990000">;</font>
+<font color="#000000">50: </font>   <b><font color="#0000FF">private</font></b> Point mousePoint<font color="#990000">;</font>
+<font color="#000000">51: </font><font color="#FF0000">}</font>                               
+</tt></pre>

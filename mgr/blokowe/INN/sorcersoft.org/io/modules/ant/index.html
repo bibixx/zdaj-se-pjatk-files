@@ -1,0 +1,928 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Software Engineering: Building with Ant</TITLE>
+<META http-equiv=content-type content="text/html; charset=ISO-8859-1" 
+name=keywords>
+<LINK rel="stylesheet" type="text/css" href="../../module.css">
+<STYLE>SPAN.body {
+	FONT-SIZE: 13px; COLOR: #000000; FONT-FAMILY: verdana, sans-serif
+}
+</STYLE>
+
+<META content="Microsoft FrontPage 6.0" name=GENERATOR></HEAD>
+<BODY text=#000000 aLink=#666666>
+<h2>
+<span style="font-weight: 400"><span class="ts">Software Engineering</span></span><BR>
+<SPAN 
+class=sts> Software Configuration Management</SPAN></h2>
+<h2><SPAN 
+class=sts>Automate your Java Build Process Using CVS, Ant, a Nightly Build 
+  System</SPAN><BR>
+  <BR><strong>Summary</strong></h2>
+<p>Software development is full of best practices which are often talked about 
+but seem to be rarely done.</p>
+<p>The task of tracking and controlling changes in the software. Configuration management practices include revision control and the establishment of baselines.</p>
+<p>Generally, a baseline may be a single work product, or set of work products that can be used as a logical basis for comparison. A baseline may also be established (whose work products meet certain criteria) as the basis for subsequent select activities.</p>
+<p>The <b>Concurrent Versions System </b>(<b>CVS</b>), also known as the 
+Concurrent Versioning System, implements a version control system: it keeps 
+track of all work and all changes in a set of files, typically the 
+implementation of a software project, and allows several (potentially widely 
+separated) developers to collaborate. CVS utilizes a client-server architecture: 
+a server stores the current version(s) of the project and its history, and 
+clients connect to the server in order to check-out a complete copy of the 
+project, work on this copy and then later check-in their changes. Typically, 
+client and server connect over a LAN or over the Internet, but client and server 
+may both run on the same machine if CVS has the task of keeping track of the 
+version history of a project with only local developers. </p>
+<p><b>Ant</b> is a powerful scripting tool that lets you craft build processes around your 
+code requirements using predefined tasks and provides expansion capability to 
+handle even more difficult tasks. Ant is the powerful 
+XML-based scripting tool that can automate your mundane tasks and allow you to 
+concentrate on your business rules and code development. It is by nature an overhead task that accompanies a development 
+	effort. A defined build process ensures that the software in your 
+	development project is built in the exact same manner each time a build is 
+	executed. As the build process becomes more complex -- for example, with EJB 
+	builds or additional tasks -- it becomes more necessary to achieve such 
+	standardization. You should establish, document, and automate the exact 
+	series of steps as much as possible.</p>
+<p><strong>Jenkins</strong> is an open source continuous integration tool written in Java.<br>
+Jenkins provides continuous integration services for software development. It is a server-based system running in a servlet container such as Apache Tomcat. It supports SCM tools including CVS, Subversion, Git, Mercurial, Perforce and Clearcase, and can execute Apache Ant and Apache Maven based projects as well as arbitrary shell scripts and Windows batch commands. <br>
+Builds can be started by various means, including being triggered by commit in a version control system, scheduling via a cron-like mechanism, building when other builds have completed, and by requesting a specific build URL.</p>
+<p>The process of an <em><strong>automated build-and-test cycle</strong></em> is <b>continuous integration</b>. 
+  It works by having an integration server <b>check out code</b> from the version control 
+  system at set time intervals, or at certain times of the day, <b>build that code</b>,<b> 
+  run unit tests</b> on the build, and <b>report back build or test results</b> to 
+  developers. By providing <b>early build and test reports,</b> developers can <b>fix 
+    problems quickly</b>, allowing the project to move forward in an agile fashion: Such 
+  failures will not block the progress of the team for long.<br>
+<br>
+<br>
+&nbsp;<img border="0" src="../../images/CourseMap25.png" width="603" height="495"></p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Agenda</h2>
+<ul>
+	<li><b>CVS</b><ul>
+	<li>Creating Project CVS Repository</li>
+	<li><a name="start0">Initialize a Software Project Repository</a></li>
+	<li>Using CVS</li>
+	<li><a href="../../cvs-sandbox.html">Create a Project from the CVS 
+	Repository</a></li>
+</ul>
+	</li>
+	<li><b>Ant</b><ul>
+	<li><a href="#Why_do_I_need_a_defined_build_process">Why do I need a defined build process?</a></li>
+	<li><a href="#Installing_Ant">Installing Ant</a></li>
+	<li><a href="#Example_Scenario">Example Scenario</a></li>
+</ul>
+	</li>
+	<li>Continuous Integration</li>
+	<li>Create a Nightly Build System</li>
+	<li><a href="https://en.wikipedia.org/wiki/Comparison_of_open_source_software_hosting_facilities">Comparison of open source software hosting facilities</a></li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2><a name="Creating_Project_CVS_Repository">Creating Project CVS Repository</a></h2>
+<p>&nbsp;A CVS directory locations for the project <tt><em>prj_name</em></tt>: </p>
+<ul>
+	<li><tt><em>prj_name</em>/cvsroot</tt> 
+	</li>
+</ul>
+<p>That is the directory we will use in this example: </p>
+<blockquote>
+	<pre># cd <tt><em>prj_name</em></tt>
+# mkdir cvsroot
+
+# chgrp cvsdev cvsroot
+# ls -l 
+total 2
+drwxr-xr-x   2 root     cvsdev       512 Jun 28 16:12 cvsroot
+
+# chmod g+srwx cvsroot
+# ls -l
+total 2
+drwxrwsr-x   2 root     cvsdev       512 Jun 28 16:12 cvsroot
+
+# cvs -d <tt><em>prj_name</em></tt>/cvsroot init
+# ls -la cvsroot
+total 6
+drwxrwsr-x   3 root     cvsdev       512 Jun 28 16:12 .
+drwxr-xr-x   3 root     other        512 Jun 18 12:24 ..
+drwxrwsr-x   3 root     cvsdev      1024 Jun 28 16:13 CVSROOT
+
+# chown -R cvs cvsroot
+# ls -l
+total 2
+drwxrwsr-x   3 cvs      cvsdev       512 Jun 23 16:12 cvsroot</pre>
+	<pre># setenv CVSROOT <tt><em>prj_name</em></tt>/cvsroot
+</pre>
+</blockquote>
+Let's know examine the above commands: 
+<ul>
+	<li>A Unix group named, for example,&nbsp; <tt>cvsdev</tt> for your project will be used for 
+	group read/write to the repository. This will allow project team members that may be on 
+	this machine to access the repository. 
+	</li>
+	<li>We set the directory's SGID bit on the repository, so that files that 
+	get created in this directory have the same group ID as the directory's 
+	group ID. <i>(This is a very important step that can save a lot of headaches 
+	later!)</i> </li>
+	<li>We made the directory group writable/readable/executable. </li>
+	<li>We also created a CVS repository using the command: <br>
+	<tt>cvs -d <i>repository_root_directory</i> init</tt></li>
+	<li>For security reasons, we made a user (named <tt>cvs </tt>for example, 
+	the project leader) to own the 
+	repository and the administrative files. We then did a <i>chown</i> on the 
+	respository's root directory and administrative files to that username. 
+	</li>
+	<li>To use CVS let know the Unix environment the location of your project 
+	repository (inset that line in your shell config file).</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+	<h2><a name="start CVS">Initialize a Software Project Repository</a></h2>
+		To start a source repository: 
+		<blockquote>
+			<pre>cd <em>prj_name</em>
+cvs import -d <em>prj_name</em> <em>vendor_name</em> initial
+</pre>
+</blockquote>where <tt><em>prj_name</em></tt> is a descriptive name for the project
+		<tt><em>vendor_name</em></tt> can be anything, and <tt>initial</tt> is 
+what we use to tag the initial set of sources. If everything worked OK, then you 
+can remove the original sources. (Don't try to <em>check-out</em> 
+		the repository sources into the original source directory&nbsp; as this 
+		usually causes endless problems.) 
+		<blockquote>
+		<p align="justify"><a name="co"></p>
+	</blockquote>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Check Out Sources</h2>
+		</a>Check out the sources from the CVS repository with the following 
+		command: 
+		<blockquote>
+			<pre>cd <i>sandbox_dir</i>
+cvs co -P <em>prj_name</em>
+</pre>
+</blockquote>which will create a sub-directory named <tt><em>prj_name</em></tt> with 
+		the sources and each directory will have a sub-directory named <tt>CVS</tt> 
+		that contains info about the repository sources. Once you've checked-out 
+		the sources, you do not need to define <tt>$CVSROOT</tt> to work within the 
+		local sources. All the <em>cvs</em> commands will work, if they're 
+		invoked within the local source directories, and it's local host access. 
+		<p align="justify"><a name="diff"></p>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Compare Local Changes</h2>
+	</a>Suppose you modified any of the checked-out or local sources. To 
+		compare the changes you've made to the repository sources: 
+		<blockquote>
+			<pre>cvs diff [<em>source_file</em>]
+</pre>
+</blockquote>where you can give one or more optional <tt><em>source_file</em></tt> 
+		names, else <em>cvs</em> will compare all files in the current directory 
+		and all subdirectories. 
+		<p align="justify">However, be aware that this will not give any 
+		information about changes between the local source file and any changes 
+		that have been checked in by others. Only changes that have been made to 
+		the local source file and it's original source. </p>
+<p align="justify"><a name="history"></p>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>History of Changes</h2>
+	</a>To look at the history of changes: 
+		<blockquote>
+			<pre>cvs log [<em>source_file</em>]
+</pre>
+</blockquote>
+	<blockquote>
+		<p align="justify"><a name="status"></p>
+	</blockquote>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Status of Changes</h2>
+		</a>To check the current status of a <tt><em>source_file</em></tt> or 
+		all the files: 
+		<blockquote>
+			<pre>cvs status [<em>source_file</em>]
+</pre>
+</blockquote>A couple of useful C-shell <em>aliases</em> to create are: 
+		<dl>
+			<dt>cvsstat </dt>
+			<dd>shows just the status of all files 
+			<blockquote>
+				<pre>alias   cvsstat 'cvs status \!* |&amp; grep Status:'
+</pre>
+			</blockquote></dd>
+			<dt>cvswhat </dt>
+			<dd>shows the status of files that are not &quot;Up-to-date&quot; 
+			<blockquote>
+				<pre>alias   cvswhat 'cvs status \!* |&amp; grep Status: |&amp; grep -v &quot;to-date&quot;'
+</pre>
+			</blockquote></dd>
+</dl>
+<p align="justify"><a name="rm"></p>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Remove a File</h2>
+	</a>To remove a file from the repository: 
+		<blockquote>
+			<pre>rm <em>source_file</em>             # must first remove it locally
+cvs rm <em>source_file</em>         # schedules it for removal
+</pre>
+</blockquote>
+<p align="justify"><a name="add"></p>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Add a File</h2>
+	</a>To add a file to the repository 
+		<blockquote>
+			<pre>vi <em>source_file</em>             # create the file first
+cvs add <em>source_file</em>        # schedules it to be added
+</pre>
+</blockquote>
+	<blockquote>
+		<p align="justify"><a name="move"></p>
+	</blockquote>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Move a File</h2>
+		</a>This can not be done cleanly at the local level. The best way to do 
+		this with CVS is to go to the <em>cvsroot</em> repository and move the 
+		file or directory within the repository there (if you are interested in 
+		keeping the history of changes). The <em>cvsroot</em> repository keeps 
+		all files in their <em>RCS</em> form of <em>filename</em><tt>,v</tt> . 
+		The next <em>cvs update</em> will manifest the file move. 
+		<p align="justify"><a name="ci"></p>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Check In Local Changes</h2>
+	</a>Once you've made all the changes you care to for the current batch 
+		then: 
+		<blockquote>
+			<tt>cvs ci [<em>source_file</em>]</tt> or <tt>cvs commit [<em>source_file</em>]
+</tt>
+</blockquote>which checks-in the changes and updates the repository sources. CVS will 
+		pop-up an editor session where you can describe the changes made, which 
+		appears in the <tt><em>source_file</em></tt> log for each file affected. 
+		<blockquote>
+		<p align="justify"><a name="update"></p>
+	</blockquote>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Update Local Sources</h2>
+		</a>If many people are working on the repository, you can obtain any 
+		changes in the repository that have been made since you've checked out 
+		the sources with: 
+		<blockquote>
+			<pre>cvs update [<em>source_file</em>]
+</pre>
+</blockquote>and if there are conflicts, then CVS will notify you and flag it in the 
+		sources. On the Crays, I've noticed that CVS can't use the ``<em>patch</em>'' 
+		facility hence it will default to copying, which is not a problem, so 
+		ignore such messages. 
+		<p align="justify"><a name="tag"></p>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Tagging Sources</h2>
+	</a>You can <em>tag</em> the current set of changes (revisions) 
+		with: 
+		<blockquote>
+			<pre>cvs tag <em>tag_name</em>
+</pre>
+</blockquote>then this set of local sources can be recovered with this <tt><em>tag_name</em></tt><p align="justify">Another option is to tag the repository sources with
+		</p>
+<blockquote>
+	<pre>cvs rtag <em>tag_name</em> <em>prj_name</em>
+</pre>
+</blockquote>which you want to do for each <i>release</i> of the code, so you can always 
+		backtrack any bugs to the version released to the users. 
+		<p align="justify"><a name="patch"></p>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Creating Patches</h2>
+	</a>You can create a <i>patch</i> file of changes with 
+		<blockquote>
+			<pre>cvs rdiff -u -r <em>tag_name</em> -r <em>initial</em> <em>prj_name</em> &gt; <em>patch_file</em>
+</pre>
+</blockquote>which will have all the changes you've made between the <tt><em>tag_name</em></tt> 
+version and the <tt><em>initial</em></tt> version. You can also 
+		create patch files between any two tags. 
+		<p align="justify">You can also create a <i>patch</i> file of your local 
+		changes with: </p>
+<blockquote>
+	<pre>cvs diff -N -u -r <em>tag_name</em> &gt; <em>patch_file</em>
+</pre>
+</blockquote>
+<p align="justify"><a name="backout"></p>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Backing Out Changes</h2>
+	</a>Suppose you modify a file, but don't want to keep the changes: 
+		<blockquote>
+			<pre>rm source_file                  # remove it from local sources
+cvs update source_file          # get a new copy from the repository
+</pre>
+</blockquote>
+<p align="justify"><a name="branches"></p>
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Using Branches</h2>
+	</a>Working with branches is one of the more difficult concepts to 
+		master with CVS, but it is one of the most useful for an active 
+		development project. 
+		<p align="justify">The concept is that the software project has made a 
+		release, say version 3.1.0, and work is now progressing on version 3.2. 
+		However, a bug was discovered in the released 3.1.0 version, which you 
+		want to fix. Suppose that the project was <a href="#tag"><em>tagged</em></a> 
+		with <em>prj_3_1_0</em>. Also, it will be assumed that it wasn't marked 
+		as a branch (<tt>-b</tt>). </p>
+<ol>
+	<li>Need to tag the current tag sources as a branch with 
+			<blockquote>
+				<pre>cvs rtag -b -r prj_3_1_0 prj_3_1_0_branch project_name
+</pre>
+	</blockquote></li>
+	<li><a href="#co">Check out</a> the given tagged version into a 
+			directory named <em>prj.3.1.0</em> with 
+			<blockquote>
+				<pre>cvs checkout -d prj.3.1.0 -r prg_3_1_0_branch project_name
+</pre>
+	</blockquote></li>
+	<li>Get into the <em>prj.3.1.0</em> directory for further work. 
+			</li>
+	<li>Make whatever changes to the sources, which will be identified 
+			as version 3.1.1 
+			</li>
+	<li>Check in <a href="#ci">changes</a> for this branch as 
+			<blockquote>
+				<pre>cvs commit
+</pre>
+	</blockquote></li>
+	<li><a href="#tag">Tag</a> this version with 
+			<blockquote>
+				<pre>cvs tag -r prj_3_1_1
+</pre>
+	</blockquote></li>
+	<li>Make a tar ball for distribution, and remove the branch project 
+			directory, which is no longer needed. 
+			</li>
+	<li>If there are any fixes that can be merged into the main 
+			development branch. (This only works if the differences between this 
+			branch and the development branch are fairly small.) Get into a
+			<a href="#co">checked-out</a> project directory (not the branch 
+			directory which should have been removed). 
+			</li>
+	<li>Merge the branch changes with the main development branch with 
+			<blockquote>
+				<pre>cvs update -j prj_3_1_1
+</pre>
+	</blockquote>Carefully, note the output, and resolve any conflicts, and test 
+			changes. 
+			<p align="justify">&nbsp;</li>
+	<li>Note that merges can be incorporated into other branches by 
+			applying them to whatever checked-out version. </li>
+</ol><a name="sticky">
+<HR align="left" width="100%" size="4" noshade>
+	<h2>Sticky Tags!</h2>
+		</a>
+		<p align="justify">Generally, what happens when a tagged version is 
+		checked out: </p>
+<blockquote>
+	<pre>cvs checkout -d prj.3.1.0 -r prg_3_1_0 project_name
+</pre>
+</blockquote>Something in the <em>CVS</em> directories makes the tag ``<em>sticky</em>'' 
+		and no changes can be updated or checked in. An attempt to <em>cvs 
+		commit</em> any local changes usually results in a message saying the ``<em>sticky</em>'' 
+		tag is not a branch! 
+		<ol>
+			<li>The <em>tag</em> needs to be made into a <em>branch</em> with 
+			<blockquote>
+				<pre>cvs tag -b -r prj_3_1_0 prj_3_1_0_branch
+</pre>
+			</blockquote>Where the <em>-b</em> is the key here to making a branch. 
+			</li>
+			<li>Update the current working version as a branch with: 
+			<blockquote>
+				<pre>cvs update -r prj_3_1_0_branch
+</pre>
+			</blockquote>This will not affect the source files, only the <em>CVS/Entries</em> 
+			files will be updated to a different ``<em>sticky</em>'' tag ... a 
+			branch in this case. 
+			</li>
+			<li>The changes can now be checked in to that branch with 
+			<blockquote>
+				<pre>cvs commit
+</pre>
+			</blockquote></li>
+			<li>Changes in this branch can be merged into the development 
+			branch. (See the latter part of <a href="#tag">Using Branches</a> 
+			for more details.) 
+			</li>
+</ol><a name="help">
+<h2>&nbsp;</h2>
+<HR align="left" width="100%" size="4" noshade>
+<h2><a name="merge">Merging Revisions</a></h2>
+<p>Normally, it's best to edit files in the directory that you're using for 
+checkouts. This way, cvs will automatically take care of merging in changes, 
+just by running <code>cvs update</code>. However, in some cases that might not 
+always be possible. </p>
+<p><b>Hypothetical Situation</b>: you took a copy of <code>Myfile.java</code> 
+home, and did some work on it. In the meantime, your fellow developers have 
+committed changes to the file. The dilemna - you'd like to incorporate what 
+you've done, but your copy of the file is now out of date. Of course, you also 
+don't want to undo work that others have done. Here's a way to deal with this 
+situation. </p>
+<ol>
+	<li>Find out what revision your copy of the file is based on. This will be 
+	the revision number in the <code>$Id$</code> or <code>$Revision$</code> 
+	tags. If you can't determine the revision, this approach won't work, and 
+	you'll need to do a manual merge. 
+	</li>
+	<li>Run <code>cvs update</code> to refresh your repository copy. 
+	</li>
+	<li>Run <code>cvs log MyFile.java</code> (in the appropriate directory) to 
+	get the revision number of the copy that you just checked out of the 
+	repository. 
+	</li>
+</ol>
+<p>For the sake of illustration, lets say that the copy of <code>MyFile.java</code> 
+that you were working on at home is revision 1.6, and the current repository 
+version is 1.10. </p>
+<p>Copy the <code>MyFile.java</code> that you worked on at home to your checkout 
+directory. We now have the following arrangement: </p>
+<ul>
+	<li>Repository version is 1.10, which you've just checked out. As far as cvs 
+	is concerned, your local copy is up to date. 
+	</li>
+	<li>The actual file in your checkout area is revision 1.6 + changes. 
+	</li>
+	<li>You're missing the differences from 1.7 - 1.10. (Note: this is why you 
+	don't want to commit the file yet. Doing so would <u>remove</u> anything 
+	done between 1.7 and 1.10). </li>
+</ul>
+<p>To pick up the modifications made from 1.7 - 1.10, you need to merge: </p>
+<pre>cvs update -j 1.7 -j 1.10 MyFile.java
+</pre>
+<p>In cvs-speak, this means &quot;take the changes from revision 1.7 through revision 
+1.10, and apply them to the local copy of the file.&quot; Assuming that there were no 
+merge conflicts, examine the results: </p>
+<pre>cvs diff -w MyFile.java
+</pre>
+<p>Make sure it compiles, then commit. </p>
+<p>If things didn't go well, you'll need to examine the results and
+<a href="#conflicts">resolve any conflicts</a> that happened as a result of the 
+merge. </p>
+<p>On a related note, <code>update -j ...</code> can also be used to
+<a href="#backout">back out a bad commit</a>, simply by reversing the revision 
+order. </p>
+<h2>&nbsp;</h2>
+<HR align="left" width="100%" size="4" noshade>
+<h2><a name="conflicts">Resolving Conflicts</a></h2>
+<p>Eventually, something like this will happen: </p>
+<pre>$ cvs commit foo.java
+cvs commit: Up-to-date check failed for `foo.java'
+cvs [commit aborted]: correct above errors first!
+</pre>
+<p>Here, you've made changes to the foo.java, but someone else has already 
+committed a new version to the repository (eg - the repository version has a 
+higher number than your local copy). Before you can commit the file, you'll need 
+to update your working copy. </p>
+<p>If you and the other developer were working on different areas of the file, 
+cvs is pretty intelligent about merging the changes together; it might see that 
+the last set of modifications are in lines 75-100, and your changes are in lines 
+12-36. In this situation, the file can be patched and your work is unaffected.
+</p>
+<p>However, if the two of you changed the same area of the file it's possible to 
+have conflicts: </p>
+<pre>$ cvs update foo.java
+RCS file: /home/srevilak/c/mymodule/foo.java,v
+retrieving revision 1.1
+retrieving revision 1.2
+Merging differences between 1.1 and 1.2 into foo.java
+rcsmerge: warning: conflicts during merge
+cvs update: conflicts found in foo.java
+C foo.java
+</pre>
+<p>Oh dear! What do we do now? The answer is &quot;fix the merge&quot;. Two things have 
+been done to help you with this. </p>
+<ol>
+	<li>A pre-merge copy of the file has been made. 
+	<pre>$ ls -a .#*
+   1 .#foo.java.1.1
+</pre>
+	However, being a dotfile, it's presence isn't immediately obvious 
+	</li>
+	<li>cvs has inserted a conflict marker in your working copy. 
+	<pre>&lt;&lt;&lt;&lt;&lt;&lt;&lt; foo.java
+  static final int MYCONST = 3;
+=======
+  static final int MYCONST = 2;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 1.2
+</pre>
+	</li>
+</ol>
+<p>The conflict lies between the rows of greater than and less than signs. The 
+thing to do now is decide what version is right, remove the conflict markers, 
+and commit the file. </p>
+<h2>&nbsp;</h2>
+<HR align="left" width="100%" size="4" noshade>
+<h2><a name="backout0">Backing out a Bad Commit</a></h2>
+<p>Let's suppose that you've commited a file, but this ended up breaking 
+something horribly. Here's how to undo your commit: </p>
+<ol>
+	<li>Get the version number from after the commit. You can use an $Id$ tag 
+	within the file, or cvs status. Let's say that the new version is 1.5. 
+	</li>
+	<li>Get the version number from before the commit. Typically, this will be 
+	one lower than the current version. Let's say that the old version is 1.4. 
+	</li>
+</ol>
+<p>Now do this: </p>
+<pre>cvs update -j 1.5 -j 1.4 <i>filename</i>
+cvs commit <i>filename</i>
+</pre>
+<p>The above is an example of a <b>merge</b>. You've asked cvs to take the 
+difference between versions 1.5 and 1.4 and apply them to your working copy. The 
+ordering of version numbers is significant - think of it as removing changes, or 
+going backward in version history. </p>
+<h2>&nbsp;</h2>
+<HR align="left" width="100%" size="4" noshade>
+<h2><a name="other">Other Useful Commands</a></h2>
+<p>There are a variety of other useful cvs commands. Here are a few examples:
+</p>
+<div class="indent">
+	<table cellSpacing="0" cellPadding="1" border="1" id="table2" width="823">
+		<tr>
+			<td noWrap><tt>cvs diff</tt> filename</td>
+			<td>Shows differences between your local copy of <i>filename</i> and 
+			the current repository copy </td>
+		</tr>
+		<tr>
+			<td noWrap><tt>cvs diff -r 1.2</tt> filename</td>
+			<td>Shows differences between your local copy of <i>filename</i> and 
+			version 1.2 of <i>filename</i>. </td>
+		</tr>
+		<tr>
+			<td noWrap><tt>cvs diff -r 1.2 -r 1.3</tt> filename</td>
+			<td>Shows differences between versions 1.2 and 1.3. (regardless of 
+			what version your local copy is). </td>
+		</tr>
+		<tr>
+			<td noWrap><tt>cvs log</tt> filename</td>
+			<td>Show the commit log for <i>filename</i> (like rlog does with rcs). 
+			</td>
+		</tr>
+		<tr>
+			<td noWrap><tt>cvs annotate</tt> filename</td>
+			<td>Shows each line of <i>filename</i>, prefixed with the version 
+			number where the line was added, and the name of the person who 
+			added it. Useful for seeing who made a particular set of changes. 
+			</td>
+		</tr>
+	</table>
+</div>
+<p>&nbsp;</p>
+<HR align="left" width="100%" size="4" noshade>
+<h2>More Info</h2>
+		</a>
+<ol>
+	<li>To get more usage info: 
+		</li>
+
+		<blockquote>
+			<pre>cvs --help                      # usage info and general cvs-options
+cvs --help-commands             # list &amp; description of commands
+cvs --help-options              # general cvs-options
+cvs --help <em>command</em>              # command specific usage &amp; command options
+</pre>
+</blockquote>
+
+	<li>
+	<pre>man cvs                         # gives an overview
+</pre>
+
+	<li>
+	<a href="cvsqrc.pdf">CVS Quick Reference Card</a> (PDF) and more references 
+	at the end of this module</li>
+</ol>
+
+<HR align="left" width="100%" size="4" noshade>
+
+<p><font size="+1"><strong><a name="Why_do_I_need_a_defined_build_process">Why do I need a defined build process?</a></strong></font></p>
+<ul>
+	<li>A defined build process is an essential part of any development cycle 
+	because it helps close the gap between 
+	<ul>
+		<li>the development, </li>
+		<li>integration, </li>
+		<li>test, 
+	and </li>
+		<li>production environments. </li>
+	</ul>
+	</li>
+	<li>A build process alone will speed the migration 
+	of software from one environment to another. </li>
+	<li>It also removes many issues 
+	related to 
+	<ul>
+		<li>compilation, </li>
+		<li>classpath, or </li>
+		<li>properties that cost many projects 
+	time and money. </li>
+	</ul>
+	</li>
+</ul>
+	<p>Here are some useful tasks that are built in the 
+	<a target="_blank" href="http://ant.apache.org">Ant distribution</a>.</p>
+
+	<table cellSpacing="1" cellPadding="1" width="75%" bgColor="#ffffff" border="1" id="table1">
+		<tr vAlign="top" bgColor="#ffcccc">
+			<th>Command</th>
+			<th>Description</th>
+		</tr>
+		<tr vAlign="top">
+			<td>Ant</td>
+			<td>Used to execute another ant process from within the current one.</td>
+		</tr>
+		<tr vAlign="top" bgColor="#ffcccc">
+			<td>Copydir</td>
+			<td>Used to copy an entire directory.</td>
+		</tr>
+		<tr vAlign="top">
+			<td>Copyfile</td>
+			<td>Used to copy a single file.</td>
+		</tr>
+		<tr vAlign="top" bgColor="#ffcccc">
+			<td>Cvs</td>
+			<td>Handles packages/modules retrieved from a CVS repository.</td>
+		</tr>
+		<tr vAlign="top">
+			<td>Delete</td>
+			<td>Deletes either a single file or all files in a specified 
+			directory and its sub-directories.</td>
+		</tr>
+		<tr vAlign="top" bgColor="#ffcccc">
+			<td>Deltree</td>
+			<td>Deletes a directory with all its files and subdirectories.</td>
+		</tr>
+		<tr vAlign="top">
+			<td>Exec</td>
+			<td>Executes a system command. When the os attribute is specified, 
+			then the command is only executed when Ant is run on one of the 
+			specified operating systems.</td>
+		</tr>
+		<tr vAlign="top" bgColor="#ffcccc">
+			<td>Get</td>
+			<td>Gets a file from an URL.</td>
+		</tr>
+		<tr vAlign="top">
+			<td>Jar</td>
+			<td>Jars a set of files.</td>
+		</tr>
+		<tr vAlign="top" bgColor="#ffcccc">
+			<td>Java</td>
+			<td>Executes a Java class within the running (Ant) VM or forks 
+			another VM if specified.</td>
+		</tr>
+		<tr vAlign="top">
+			<td>Javac</td>
+			<td>Compiles a source tree within the running (Ant) VM.</td>
+		</tr>
+		<tr vAlign="top" bgColor="#ffcccc">
+			<td>Javadoc/Javadoc2</td>
+			<td>Generates code documentation using the javadoc tool.</td>
+		</tr>
+		<tr vAlign="top">
+			<td>Mkdir</td>
+			<td>Makes a directory.</td>
+		</tr>
+		<tr vAlign="top" bgColor="#ffcccc">
+			<td>Property</td>
+			<td>Sets a property (by name and value), or set of properties (from 
+			file or resource) in the project.</td>
+		</tr>
+		<tr vAlign="top">
+			<td>Rmic</td>
+			<td>Runs the rmic compiler for a certain class.</td>
+		</tr>
+		<tr vAlign="top" bgColor="#ffcccc">
+			<td>Tstamp</td>
+			<td>Sets the DSTAMP, TSTAMP, and TODAY properties in the current 
+			project.</td>
+		</tr>
+		<tr vAlign="top">
+			<td>Style</td>
+			<td>Processes a set of documents via XSLT.</td>
+		</tr>
+	</table>
+<p>While other tools are available for doing software builds, Ant is easy to use 
+and can be mastered within minutes. In addition, Ant lets you create expanded 
+functionality by extending some of its classes. </p>
+<ul>
+	<li><a target="_blank" href="http://ant.apache.org/manual/using.html#tasks">
+	Writing a Simple Buildfile</a></li>
+	<li>
+	<a target="_blank" href="http://ant.apache.org/manual/coretasklist.html">Ant 
+	Core Tasks</a></li>
+	<li><a target="_blank" href="http://ant.apache.org/manual/index.html">Ant 
+	Manual</a></li>
+	<li><a target="_blank" href="http://ant.apache.org/manual/running.html">
+	Running Ant</a></li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+	<p><font size="+1"><strong><a name="Installing_Ant">Installing Ant</a></strong></font></p>
+	<p>1)&nbsp; Download Ant from
+	the Apache Ant Project at
+	<a title="http://ant.apache.org/bindownload.cgi" onClick="return top.js.OpenExtLink(window,event,this)" target="_blank" href="http://ant.apache.org/">&nbsp;http://ant.apache.org/</a></p>
+	<p>The binary distribution of Ant consists of the following directory 
+	layout:</p>
+	<pre>  ant
+   +--- bin  // contains launcher scripts
+   |
+   +--- lib  // contains Ant jars plus necessary dependencies
+   |
+   +--- docs // contains documentation
+   |      +--- ant2    // a brief description of ant2 requirements 
+   |      |
+   |      +--- images  // various logos for html documentation
+   |      |
+   |      +--- manual  // Ant documentation (a must read ;-)
+   |
+   +--- etc // contains xsl goodies to:
+            //   - create an enhanced report from xml output of various tasks. 
+            //   - migrate your build files and get rid of 'deprecated' warning
+            //   - ... and more ;-)</pre>
+	<p><br>
+	Only the <code>bin</code> and <code>lib</code> directories are required to 
+	run Ant. To install Ant, choose a directory and copy the distribution file 
+	there. This directory will be known as ANT_HOME</p>
+	<h3>Setup</h3>
+	<p>Before you can run ant there is some additional set up you will need to 
+	do:</p>
+	<ul>
+		<li>Add the <code>bin</code> directory to your path (use %ANT_HOME%\bin 
+		on windows or $ANT_HOME/bin on unix).  
+		</li>
+		<li>Set the <code>ANT_HOME</code> environment variable to the directory 
+		where you installed Ant. On some operating systems the ant wrapper 
+		scripts can guess <code>ANT_HOME</code> (Unix dialects and Windows 
+		NT/2000) - but it is better to not rely on this behavior.  
+		</li>
+		<li>Optionally, set the <code>JAVA_HOME</code> environment variable . 
+		</li>
+	</ul>
+	<p>&nbsp;</p>
+<HR align="left" width="100%" size="4" noshade>
+	<p><font size="+1"><strong><a name="Example_Scenario">Example Scenario</a></strong></font><br>
+	This example scenario should help show you the value of Ant and provide 
+	insight into its benefits and how you can use it.</p>
+<p><a title="http://www.cs.ttu.edu/~java/modules/ant/src.zip" onClick="return top.js.OpenExtLink(window,event,this)" target="_blank" href="src.zip">Source Code Example</a></p>
+<p><strong>Simple build process with Ant (build.xml)</strong></p>
+<blockquote>
+	<p><code>&lt;project name=&quot;Greeter&quot; default=&quot;compile&quot; basedir=&quot;C:\java-cs3365\ass1&quot; &gt;<br>
+	<br>&lt;target name=&quot;init&quot;&gt; <br>&lt;property name=&quot;source&quot; value=&quot;src&quot; /&gt;<br>&lt;property name=&quot;package0&quot; value=&quot;edu\ttu\cs\greeter&quot; /&gt;<br>&lt;property name=&quot;package1&quot; value=&quot;greeters&quot; /&gt; 
+	<br>&lt;property name=&quot;package2&quot; value=&quot;greet&quot; /&gt;<br>&lt;property name=&quot;outputDir&quot; value=&quot;classes&quot; /&gt;<br>&lt;property name=&quot;classpath&quot; value=&quot;classes&quot; /&gt;
+	<br>&lt;/target &gt;<br><br>&lt;target name=&quot;clean&quot; depends=&quot;init&quot;&gt;<br>&lt;deltree dir=&quot;${outputDir}&quot; /&gt;<br>&lt;/target &gt;<br>
+	<br>&lt;target name=&quot;prepare&quot; depends=&quot;clean&quot;&gt; <br>&lt;mkdir dir=&quot;${outputDir}&quot; /&gt;<br>&lt;/target &gt;<br>
+	<br>&lt;target name=&quot;compile&quot; depends=&quot;prepare&quot; &gt;<br>&lt;ant antfile=&quot;${source}\${package0}\build.xml&quot; /&gt;<br>&lt;ant antfile=&quot;${source}\${package1}\build.xml&quot; /&gt;
+	<br>&lt;ant antfile=&quot;${source}\${package2}\build.xml&quot; /&gt;<br>&lt;/target &gt;<br>
+	<br>&lt;/project &gt;<br>&nbsp;</code></p>
+</blockquote>
+	<p>The first line contains information about the overall project that is to 
+	be built.</p>
+<blockquote>
+	<p><code>&lt;project name=&quot;Greeter&quot; default=&quot;compile&quot; basedir=&quot;C:\java-cs3365\ass1&quot; &gt;</code></p>
+</blockquote>
+	<p>The most important attributes of the project line are the <code>default</code> 
+	and the <code>basedir</code>.</p>
+	<p>The <code>default</code> attribute references the default target that is 
+	to be executed. Because Ant is a command-line build tool, it is possible to 
+	execute only a subset of the target steps in the Ant file. For example, You 
+	could perform the following command:</p>
+<blockquote>
+	<p><code>% ant init</code></p>
+</blockquote>
+<p>That will execute the <code>ant</code> command and run through the <code>build.xml </code>file until the <code>init</code> target is reached. So, in this 
+	example, the default is <code>compile</code>. </p>
+<p>The Ant process invoked in the 
+	following line will run through the <code>test.xml</code> file until the
+	default task is reached:</p>
+<blockquote>
+	<p><code>% ant -buildfile test.xml<br>
+	% ant -f test.xml</code></p>
+</blockquote>
+	<p>The <code>basedir</code> attribute is fairly self-explanatory as it is 
+	the base directory from which the relative references contained in the build 
+	file are retrieved. Each project can have only one <code>basedir</code> 
+	attribute so you can choose to either include the fully qualified directory 
+	location or break the large project file into smaller project files with 
+	different <code>basedir</code> attributes.</p>
+	<p>The next line of interest is the target line. Two different versions are 
+	shown here:<code><br>
+	<br>
+	&nbsp;&nbsp; &lt;target name=&quot;init&quot;&gt;<br>
+	&nbsp;&nbsp; &lt;target name=&quot;clean&quot; depends=&quot;init&quot;&gt;</code></p>
+	<p>The <code>target</code> element contains four attributes: <code>name</code>,
+	<code>if</code>, <code>unless</code>, and <code>depends</code>. Ant requires 
+	the <code>name</code> attribute, but the other three attributes are 
+	optional. </p>
+	<p>Using <code>depends</code>, you can stack the Ant tasks so that a 
+	dependent task is not initiated until the task that it depends on is 
+	completed. In the above example, the clean task will not start until the
+	<code>init </code>task has completed. The <code>depends</code> attribute may 
+	also contain a list of comma-separated values indicating several tasks that 
+	the task in discussion depends on.</p>
+	<p>The <code>if</code> and <code>unless</code> tasks let you specify 
+	commands that are to be performed either <em>if</em> a certain property is 
+	set or <em>unless</em> that property is set. The <code>if</code> will 
+	execute when the property value is set, and the <code>unless</code> will 
+	execute if the value is not set. You can use the <code>available</code> 
+	task to set those properties as shown below:</p>
+<p><code>&nbsp;&nbsp;&nbsp; &lt;available classname=&quot;org.whatever.Myclass&quot; property=&quot;Myclass.present&quot;/&gt;</code><br>
+sets the <code>Myclass.present</code> property to the value &quot;true&quot; if the class 
+<code>org.whatever.Myclass</code> is found in the classpath.<br>
+&nbsp;</p>
+	<p>The <code>init</code> target from the simple example contains four lines 
+	of <code>property</code> commands as shown here:<br>
+	<code><br>
+	&nbsp;&nbsp;&nbsp; &lt;property name=&quot;sourceDir&quot; value=&quot;src&quot; /&gt;</code></p>
+	<p>These <code>property</code> lines let you specify commonly used 
+	directories or files. A property is a simple name value pair that allows you 
+	to refer to the directory or file as a logical entity rather than a physical 
+	one. </p>
+	<p>If you wanted to reference the <code>sourceDir</code> variable later in 
+	the Ant file, you could simply use the following syntax to alert Ant to 
+	obtain the value for this tag: <code>${sourceDir}</code>.</p>
+	<p>Two other commands present in the above buildfile are:<br>
+	<code><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;deltree dir=&quot;${ outputDir }&quot; /&gt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;mkdir dir=&quot;${ outputDir }&quot; /&gt;<br>
+	<br>
+	</code>These commands are used to ensure that there are no extraneous files in 
+	the <code>outputDir</code> (or <code>classes</code> directory when 
+	dereferenced as mentioned above). The first command removes the entire tree 
+	contained under the <code>outputDir</code>. The second command creates the 
+	directory again.</p>
+	<p>The last line of major interest to the developer is the following 
+	compilation line:<br>
+	<code><br>
+	&nbsp;&nbsp;&nbsp;&nbsp; &lt;javac srcdir=&quot;${sourceDir}&quot; destdir=&quot;${outputDir}&quot; 
+	/&gt;<br>
+	<br>
+	</code>The <code>javac</code> command requires a source directory (the input 
+	location of the .java files) and a destination directory (the output 
+	location of the .classes file). It is important to note that all directories 
+	must either exist prior to the running of the <code>ant</code> command or be 
+	created using the <code>mkdir</code> command. Ant does not create 
+	directories based upon intuition, so you must create the <code>outputDir</code>, 
+	using the <code>mkdir</code> command prior to the compilation step above.
+	</p>
+	<p>While it took several lines to explain the example, it should be evident 
+	that Ant is an easy-to-use tool. Using this buildfile as a starting point, 
+	you should be able to incorporate Ant into your development effort. </p><HR align="left" width="100%" size="4" noshade>
+<h2><a name="Continuous_Integration">Continuous Integration</a></h2>
+<ul><li>Continuous Integration is a software development practice where members of a team integrate their work frequently, usually each person integrates at least daily - leading to multiple integrations per day. </li><li>Each integration is verified by an automated build (including test) to detect integration errors as quickly as possible. </li><li>Many teams find that this approach leads to significantly reduced integration problems and allows a team to develop cohesive software more rapidly. <br>&nbsp;<ul><li>Building a Feature with Continuous Integration 
+</li><li>Practices of Continuous Integration 
+<ul><li>Maintain a Single Source Repository. 
+</li><li>Automate the Build 
+</li><li>Make Your Build Self-Testing 
+</li><li>Everyone Commits Every Day 
+</li><li>Every Commit Should Build the Mainline on an Integration Machine 
+</li><li>Keep the Build Fast 
+</li><li>Test in a Clone of the Production Environment 
+</li><li>Make it Easy for Anyone to Get the Latest Executable 
+</li><li>Everyone can see what's happening 
+</li><li>Automate Deployment </li></ul></li></ul>
+	<p>More: <a target="_blank" href="http://www.martinfowler.com/articles/continuousIntegration.html">Continuous Integration</a></li></ul><HR align="left" width="100%" size="4" noshade>
+<h2>Benefits of Continuous Integration</h2>
+<ul>
+	<li><b>Reduced risk</b> - the trouble with deferred integration is that it's 
+	very hard to predict how long it will take to do, and worse it's very hard 
+	to see how far you are through the process.</li>
+	<li>Continuous Integration completely finesses this problem - you 
+	completely <b>eliminate the blind spots.</b></li>
+	<li>Continuous Integrations doesn't get rid of bugs, but it does make them 
+	<b>dramatically easier to find and remove</b>. In this respect it's rather like 
+	self-testing code.</li>
+	<li><b>Bugs are also cumulative</b>. The more bugs you have, the harder it is to 
+	remove each one. It's also psychological - people have less energy to find 
+	and get rid of bugs when there are many of them - a phenomenon that the 
+	Pragmatic Programmers call the <b>Broken Windows syndrome</b>.</li>
+	<li>As a result projects with Continuous Integration tend to have 
+	<b>dramatically less bugs</b>, both in production and in development process. 
+	However it should be stressed that the degree of this benefit is directly 
+	tied to <b>how good your test suite is</b>.</li>
+	<li>If you have continuous integration, it <b>removes one of the biggest 
+	barriers to frequent deployment</b>. Frequent deployment is valuable because it 
+	allows your users to get new features more rapidly, to give more rapid 
+	feedback on those features, and generally become more collaborative in the 
+	development cycle. This helps break down the barriers between customers and 
+	development - barriers which are the biggest barriers to 
+	successful software development.</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<h2>Continuous Integration Anti-patterns (patterns of what not to do)</h2><ul><li><b>Five o'clock check-in</b><br>Don't check code in after five p.m. Instead, have another look at your code with a fresh mind in the morning.<br>You need to have a culture where it's OK for a developer to break the build on occasion, but then that developer is also responsible for fixing the breakage as soon as possible.</li><li><b>Spoiled fruit</b><br>When you generate code, you often place the generated artifacts in the same directory as the hand-written code. That's very convenient, since build tools such as Ant can just use the current directory for code generation output. But remember that the integration server also must build that code and run the tests on that code. If your build process does not clean up all generated artifacts, the outdated generated code lingering around will break your build. That old generated code is like spoiled fruit on a dinner table.<br>The solution is to place all generated code in a separated directory. For instance, if your source code resides in the source top-level project directory, you might want generated code to be placed in a generated directory, and cause the build script to completely remove that directory before a clean build.</li><li><b>It's a small change<br></b>A developer thinks that there is no way a tiny change can break the build. Who would think that reformatting code, or adding a comment can break the build? Because you don't think your change can break anything, you don't do a clean build before checking the small change in. Yet, small changes are frequent causes of build breakage.</li><li><b>&nbsp;I am the senior developer so I can bypass established policies</b><br>&nbsp;</li></ul><HR align="left" width="100%" size="4" noshade>
+<h2><a target="_blank" href="nightlyBuild.html">Create a Nightly Build System</a></h2><ul><li>Jenkins:<br>
+    <a href="http://jenkins-ci.org">http://jenkins-ci.org</a></li>
+  <li>Ant is available from the Apache Website: <br><a target="_blank" href="http://ant.apache.org/">http://ant.apache.org/</a> </li>
+  <li>Download Tomcat from the Jakarta Website: <br><a target="_blank" href="http://jakarta.apache.org/tomcat/">http://jakarta.apache.org/tomcat/</a> </li><li>Anthill: <br><a target="_blank" href="http://www.urbancode.com/projects/anthill/download.jsp">http://www.urbancode.com/projects/anthill/download.jsp </a><br>
+  &nbsp;</li>
+</ul>
+<HR align="left" width="100%" size="4" noshade>
+<p><font size="+1"><strong>Reference</strong></font></p><ol>
+	<li>
+	<a target="_blank" href="http://ximbiot.com/cvs/wiki/index.php?title=CVS--Concurrent_Versions_System_v1.12.12.1">Wikied CVS Manual</a></li><li><a target="_blank" href="http://cvsbook.red-bean.com/cvsbook.html">Open 
+	Source Development with CVS, 3rd Edition</a></li><li><a target="_blank" href="cvs1_11.pdf">CVS--Concurrent Versions System</a> 
+	(PDF)</li><li>
+	<a target="_blank" href="http://www.network-theory.co.uk/docs/cvsmanual/">
+	Version Management with CVS</a></li><li><a href="cvsqrc.pdf">CVS Quick Reference Card</a> (PDF)</li><li><a target="_blank" href="http://ximbiot.com/cvs/cvshome/">CVS Home</a></li><li><a target="_blank" href="http://ant.apache.org">Ant Home</a> - <a title="http://ant.apache.org/" onClick="return top.js.OpenExtLink(window,event,this)" target="_blank" href="http://ant.apache.org/">http://ant.apache.org</a></li><li><a target="_blank" href="http://www.martinfowler.com/articles/continuousIntegration.html">Continuous Integration</a></li><li><a target="_blank" href="http://www.artima.com/forums/flat.jsp?forum=270&thread=157820">Three Build Anti-Patterns</a></li><li><a target="_blank" href="http://www.javaworld.com/javaworld/jw-06-2004/jw-0628-build_p.html">Create a nightly build system from scratch </a></li>
+	<li><a href="http://jenkins-ci.org">Jenkins</a></li>
+</ol>
+<p>
+  <br>
+&nbsp;
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'90fd70c81c28b22a',t:'MTczOTIwNDU3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>

@@ -1,0 +1,77 @@
+<pre><tt><font color="#000000">01: </font><i><font color="#9A1900">/** </font></i>
+<font color="#000000">02: </font><i><font color="#9A1900">    A first-in, first-out bounded collection of messages. </font></i>
+<font color="#000000">03: </font><i><font color="#9A1900">*/</font></i> 
+<font color="#000000">04: </font><b><font color="#0000FF">public</font></b> <b><font color="#0000FF">class</font></b> MessageQueue 
+<font color="#000000">05: </font><font color="#FF0000">{</font> 
+<font color="#000000">06: </font>   <i><font color="#9A1900">/** </font></i>
+<font color="#000000">07: </font><i><font color="#9A1900">       Constructs an empty message queue. </font></i>
+<font color="#000000">08: </font><i><font color="#9A1900">       @param capacity the maximum capacity of the queue </font></i>
+<font color="#000000">09: </font><i><font color="#9A1900">       @precondition capacity &gt; 0</font></i>
+<font color="#000000">10: </font><i><font color="#9A1900">   */</font></i> 
+<font color="#000000">11: </font>   <b><font color="#0000FF">public</font></b> <b><font color="#000000">MessageQueue</font></b><font color="#990000">(</font><font color="#009900">int</font> capacity<font color="#990000">)</font> 
+<font color="#000000">12: </font>   <font color="#FF0000">{</font> 
+<font color="#000000">13: </font>      elements <font color="#990000">=</font> <b><font color="#0000FF">new</font></b> Message<font color="#990000">[</font>capacity<font color="#990000">]</font><font color="#990000">;</font> 
+<font color="#000000">14: </font>      count <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> 
+<font color="#000000">15: </font>      head <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> 
+<font color="#000000">16: </font>      tail <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> 
+<font color="#000000">17: </font>   <font color="#FF0000">}</font> 
+<font color="#000000">18: </font>
+<font color="#000000">19: </font>   <i><font color="#9A1900">/** </font></i>
+<font color="#000000">20: </font><i><font color="#9A1900">       Remove message at head. </font></i>
+<font color="#000000">21: </font><i><font color="#9A1900">       @return the message that has been removed from the queue</font></i>
+<font color="#000000">22: </font><i><font color="#9A1900">       @precondition size() &gt; 0 </font></i>
+<font color="#000000">23: </font><i><font color="#9A1900">   */</font></i> 
+<font color="#000000">24: </font>   <b><font color="#0000FF">public</font></b> Message <b><font color="#000000">remove</font></b><font color="#990000">(</font><font color="#990000">)</font> 
+<font color="#000000">25: </font>   <font color="#FF0000">{</font> 
+<font color="#000000">26: </font>      Message r <font color="#990000">=</font> elements<font color="#990000">[</font>head<font color="#990000">]</font><font color="#990000">;</font> 
+<font color="#000000">27: </font>      head <font color="#990000">=</font> <font color="#990000">(</font>head <font color="#990000">+</font> <font color="#993399">1</font><font color="#990000">)</font> <font color="#990000">%</font> elements<font color="#990000">.</font>length<font color="#990000">;</font> 
+<font color="#000000">28: </font>      count<font color="#990000">-</font><font color="#990000">-</font><font color="#990000">;</font> 
+<font color="#000000">29: </font>      <b><font color="#0000FF">return</font></b> r<font color="#990000">;</font> 
+<font color="#000000">30: </font>   <font color="#FF0000">}</font> 
+<font color="#000000">31: </font>
+<font color="#000000">32: </font>   <i><font color="#9A1900">/** </font></i>
+<font color="#000000">33: </font><i><font color="#9A1900">       Append a message at tail. </font></i>
+<font color="#000000">34: </font><i><font color="#9A1900">       @param aMessage the message to be appended </font></i>
+<font color="#000000">35: </font><i><font color="#9A1900">       @precondition !isFull();</font></i>
+<font color="#000000">36: </font><i><font color="#9A1900">   */</font></i> 
+<font color="#000000">37: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">void</font> <b><font color="#000000">add</font></b><font color="#990000">(</font>Message aMessage<font color="#990000">)</font> 
+<font color="#000000">38: </font>   <font color="#FF0000">{</font> 
+<font color="#000000">39: </font>      elements<font color="#990000">[</font>tail<font color="#990000">]</font> <font color="#990000">=</font> aMessage<font color="#990000">;</font> 
+<font color="#000000">40: </font>      tail <font color="#990000">=</font> <font color="#990000">(</font>tail <font color="#990000">+</font> <font color="#993399">1</font><font color="#990000">)</font> <font color="#990000">%</font> elements<font color="#990000">.</font>length<font color="#990000">;</font> 
+<font color="#000000">41: </font>      count<font color="#990000">+</font><font color="#990000">+</font><font color="#990000">;</font> 
+<font color="#000000">42: </font>   <font color="#FF0000">}</font> 
+<font color="#000000">43: </font>
+<font color="#000000">44: </font>   <i><font color="#9A1900">/** </font></i>
+<font color="#000000">45: </font><i><font color="#9A1900">       Get the total number of messages in the queue. </font></i>
+<font color="#000000">46: </font><i><font color="#9A1900">       @return the total number of messages in the queue </font></i>
+<font color="#000000">47: </font><i><font color="#9A1900">   */</font></i> 
+<font color="#000000">48: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">int</font> <b><font color="#000000">size</font></b><font color="#990000">(</font><font color="#990000">)</font> 
+<font color="#000000">49: </font>   <font color="#FF0000">{</font> 
+<font color="#000000">50: </font>      <b><font color="#0000FF">return</font></b> count<font color="#990000">;</font> 
+<font color="#000000">51: </font>   <font color="#FF0000">}</font> 
+<font color="#000000">52: </font>
+<font color="#000000">53: </font>   <i><font color="#9A1900">/** </font></i>
+<font color="#000000">54: </font><i><font color="#9A1900">       Checks whether this queue is full</font></i>
+<font color="#000000">55: </font><i><font color="#9A1900">       @return true if the queue is full</font></i>
+<font color="#000000">56: </font><i><font color="#9A1900">   */</font></i> 
+<font color="#000000">57: </font>   <b><font color="#0000FF">public</font></b> <font color="#009900">boolean</font> <b><font color="#000000">isFull</font></b><font color="#990000">(</font><font color="#990000">)</font>
+<font color="#000000">58: </font>   <font color="#FF0000">{</font> 
+<font color="#000000">59: </font>      <b><font color="#0000FF">return</font></b> count <font color="#990000">=</font><font color="#990000">=</font> elements<font color="#990000">.</font>length<font color="#990000">;</font> 
+<font color="#000000">60: </font>   <font color="#FF0000">}</font> 
+<font color="#000000">61: </font>
+<font color="#000000">62: </font>   <i><font color="#9A1900">/** </font></i>
+<font color="#000000">63: </font><i><font color="#9A1900">       Get message at head. </font></i>
+<font color="#000000">64: </font><i><font color="#9A1900">       @return the message that is at the head of the queue </font></i>
+<font color="#000000">65: </font><i><font color="#9A1900">       @precondition size() &gt; 0 </font></i>
+<font color="#000000">66: </font><i><font color="#9A1900">   */</font></i> 
+<font color="#000000">67: </font>   <b><font color="#0000FF">public</font></b> Message <b><font color="#000000">peek</font></b><font color="#990000">(</font><font color="#990000">)</font> 
+<font color="#000000">68: </font>   <font color="#FF0000">{</font> 
+<font color="#000000">69: </font>      <b><font color="#0000FF">return</font></b> elements<font color="#990000">[</font>head<font color="#990000">]</font><font color="#990000">;</font> 
+<font color="#000000">70: </font>   <font color="#FF0000">}</font> 
+<font color="#000000">71: </font>
+<font color="#000000">72: </font>   <b><font color="#0000FF">private</font></b> Message<font color="#990000">[</font><font color="#990000">]</font> elements<font color="#990000">;</font> 
+<font color="#000000">73: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> head<font color="#990000">;</font> 
+<font color="#000000">74: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> tail<font color="#990000">;</font> 
+<font color="#000000">75: </font>   <b><font color="#0000FF">private</font></b> <font color="#009900">int</font> count<font color="#990000">;</font> 
+<font color="#000000">76: </font><font color="#FF0000">}</font>
+</tt></pre>
