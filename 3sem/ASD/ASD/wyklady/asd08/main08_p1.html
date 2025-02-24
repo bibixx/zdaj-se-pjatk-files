@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title>main08_p1.html</title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body style="background-color: whitesmoke;" leftmargin="8" topmargin="8"
+ marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"--><!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr--><!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main08_p0.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp; <a href="main08_p2.html" target="main"
+ class="NAWIGACJA">nastêpny
+punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 2"></a><br clear="all">
+<div class="tytulpunktu">1. Drzewa wywa¿one</div>
+<p>Podstawow± wad± drzew binarnych poszukiwañ by³ liniowy koszt
+operacji memebr, insert i delete w przypadku pesymistycznym. Zwi±zane
+to by³o z tym, ¿e niektóre ¶cie¿ki drzewa mog³y mieæ d³ugo¶æ du¿o
+wiêksz± ni¿ inne. Na przyk³ad, gdy wk³adamy do drzewa BST&nbsp; k
+elementów uporz±dkowanych rosn±co, to jedna ze ¶cie¿ek prawego
+poddrzewa wyd³u¿y siê o k wierzcho³ków, powoduj±c znaczne pogorszenie
+kosztów wyszukiwania. Adelson, Velskii, Landis zaproponowali strukturê
+danych, która ma wszystkie zalety drzew binarnych poszukiwañ, a
+dodatkowo wszystkie ¶cie¿ki od korzenia drzewa do li¶ci maj± w tej
+strukturze podobn± d³ugo¶æ. Strukturê tê, od nazwisk autorów pomys³u,
+nazywa siê w literaturze, struktur± AVL.</p>
+<p>Niech h(D) oznacza wysoko¶æ drzewa D, a LD(v) i PD(v) lewe i prawe
+poddrzewo wierzcho³ka v. Przyjmujemy dodatkowo dla pustego drzewa D,
+h(D)=-1.</p>
+<div class="def" style="width: 817px; height: 58px;">Definicja
+1.1&nbsp; Powiemy, ze drzewo binarne jest wywa¿one, je¿eli dla
+wszystkich jego wierzcho³ków wysoko¶ci jego lewego i prawego poddrzewa
+ró¿ni± siê co najwy¿ej o 1. Funkcjê W, przyporz±dkowuj±c± ka¿demu
+wierzcho³kowi v drzewa warto¶æ W(v)= h(LD(v)) - h(PD(v)) nazywamy
+funkcj± wag, a warto¶æ W(v) nazywamy wag± wierzcho³ka v.</div>
+<p>Bezpo¶rednio z powy¿szej definicji wynika, ¿e&nbsp; drzewo binarne
+jest wywa¿one, je¶li funkcja wag dla tego drzewa przypisuje
+wierzcho³kom tylko warto¶ci 0, 1, -1. </p>
+<p style="text-align: left;"><b>Przyk³ad 8.1</b></p>
+<p>Na rysunku 8.1 przedstawiono drzewo binarne&nbsp; z wagami
+przypisanymi wierzcho³kom. Wszystkie li¶cie maj± wagê równ± 0.
+Wierzcho³ek A ma wagê równ± +1, poniewa¿ lewe poddrzewo ma wysoko¶æ 2,
+a prawe poddrzewo wysoko¶æ 1. Podobnie dla wierzcho³ków B i C.
+Wierzcho³ek D ma wagê równ± -1, poniewa¿ lewe poddrzewo jest puste a
+prawe poddrzewo sk³ada siê tylko z jednego wierzcho³ka E i w zwi±zku z
+tym jego wysoko¶æ wynosi 0.&nbsp; Z analizy warto¶ci wag wynika, ¿e
+jest to drzewo wywa¿one. <font face="Wingdings">J</font> </p>
+<table border="0" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="60%"
+ id="AutoNumber2">
+  <tbody>
+    <tr>
+      <td width="43%"> <img border="0" src="Rysunki/Rysunek8_1a.gif"
+ width="250" height="250"></td>
+      <td width="23%">&nbsp;</td>
+      <td width="34%" bordercolor="#F5F5F5"> <img border="0"
+ src="Rysunki/Rysunek8_1b.gif" width="250" height="250"></td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: left;">&nbsp;</p>
+<div class="def" style="width: 820px; height: 42px;">Definicja
+1.2&nbsp; Drzewem AVL&nbsp; nazywamy wywa¿one drzewo binarnych
+poszukiwañ. </div>
+<p style="text-align: left;"><b>Przyk³ad 8.2</b></p>
+<p>Drzewo na rysunku 8.1(a) nie jest drzewem binarnych poszukiwañ,
+je¶li porz±dek liniowy, obowi±zuj±cy w¶ród etykiet tego drzewa, to
+porz±dek alfabetyczny. Drzewo przedstawione na rysunku 8.1(b) jest
+drzewem binarnych poszukiwañ ze wzglêdu na porz±dek alfabetyczny
+etykiet, ale nie jest drzewem wywa¿onym. Zatem ¿adne z drzew na
+rysunkach 8.1 nie jest drzewem AVL. Natomiast drzewo na rysunku 8.1(c)
+jest wywa¿onym drzewem binarnych poszukiwañ, jest wiêc drzewem AVL.<font
+ face="Wingdings"> J</font></p>
+<p><img border="0" src="Rysunki/Rysunek8_1c.gif" width="250"
+ height="250"></p>
+<p>Operacje na drzewie AVL s± typowymi operacjami na zbiorach
+uporz±dkowanych (u¿ywamy tych samych nazw operacji, jak w przypadku
+drzew BST):</p>
+<blockquote>
+  <blockquote>
+    <p style="text-align: left;"><br>
+member: Et<font face="Symbol"> <span lang="en">´</span></font> AVL <font
+ face="Symbol"><span lang="en">&#174;</span> </font>B<sub><font
+ face="Verdana">0</font></sub><br>
+min: AVL<font face="Symbol"> <span lang="en">&#174;</span> </font>Et<br>
+insert: Et<font face="Symbol"> <span lang="en">´</span></font> AVL <span
+ lang="en"><font face="Symbol">&#174;</font></span> AVL<br>
+delete: Et<font face="Symbol"> <span lang="en">´</span></font> AVL<font
+ face="Symbol"> <span lang="en">&#174;</span> </font>AVL</p>
+  </blockquote>
+</blockquote>
+<p><br>
+Algorytmy operacji member i min s± identyczne jak w przypadku drzew
+BST, gdy¿ ich wykonanie nie modyfikuje struktury drzewa. Pozosta³e
+operacje wykonuje siê podobnie jak na drzewach BST z tym, ¿e w
+przypadku, gdy otrzymany rezultat nie jest drzewem AVL, wykonuje siê
+dodatkowo wywa¿anie drzewa, tak aby wynik koñcowy by³ drzewem
+AVL.&nbsp; O zasadach wywa¿ania bêdzie mowa w nastêpnym punkcie tego
+wyk³adu.</p>
+<p>Implementacja drzewa AVL wymaga informacji o wagach wierzcho³ków.
+Wygodnie jest w tym celu rozwa¿aæ obiekty node wzbogacone o atrybut hv,
+którego warto¶ci± jest wysoko¶æ drzewa o korzeniu w rozwa¿anym
+wierzcho³ku. W niektórych aplikacjach przydatna te¿ jest&nbsp;
+referencja father do bezpo¶redniego poprzednika danego wierzcho³ka, na
+¶cie¿ce w kierunku korzenia drzewa.</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p style="text-align: left;">class
+node{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+lub&nbsp;&nbsp;&nbsp;&nbsp; class node{<br>
+&nbsp;&nbsp;&nbsp; val :
+Et;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+val : Et;<br>
+&nbsp;&nbsp;&nbsp; hv :
+int;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+hv : int;<br>
+&nbsp;&nbsp;&nbsp; left, right :
+node;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+left, right, father : node;<br>
+}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p>Te dodatkowe informacje pozwol± wyliczyæ szybko wagi wierzcho³ków i
+poruszaæ siê po drzewie od li¶ci w kierunku korzenia.</p>
+<p style="text-align: left;"><b>Pytanie 1</b>: Z ilu wierzcho³ków
+sk³ada siê najmniejsze drzewo AVL o wysoko¶ci 3?<br>
+<!-- Odpowied¼:  Z siedmiu.</P> --></p>
+<form><input class="GUZIK" type="button"
+ value="-----Sprawd¼ odpowied¼-----" name="Klik0"
+ onclick="napis(this.form,'Z siedmiu.')">
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main08_p0.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main08_p2.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td-->
+<!--/tr--><!--/table--></p>
+</body>
+</html>

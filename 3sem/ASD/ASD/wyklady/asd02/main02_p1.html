@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left">
+<A HREF="main02_p0.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;
+<A HREF="main02_p2.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a>
+</td></tr></table><br clear="all"><a NAME="EDU.wyklad.punkt 1"></a><br clear="all">
+   
+
+ <div class="tytulpunktu">1. Problem wyszukiwania</div> 
+
+    <p>
+
+Niech E będzie dowolnym, niepustym zbiorem, 
+a X jego dowolnym podzbiorem. Problem wyszukiwania polega na ustaleniu, czy dany element x należy do zbioru X.&nbsp;Rozwiązaniem 
+problemu będzie algorytm, który dla dowolnego ciągu i dowolnego elementu x 
+daje w wyniku wartość prawda wtedy i tylko wtedy, gdy c jest jednym z elementów ciągu.
+         Zakładamy, że elementy zbioru X są umieszczone w tablicy e jako e[1], e[2], ..., e[n] i, że odpowiedź zostanie zapamiętana na zmiennej booleowskiej 
+result.
+          
+<p>
+Specyfikacja poszukiwanego algorytmu składa się z dwóch warunków: 
+warunku początkowego wp określającego dane wejściowe i warunku końcowego&nbsp; 
+wk określającego oczekiwane własności wyniku:<blockquote>
+  <p>wp = { n &gt; 0   }
+     <br>
+  wk = { result = true&nbsp;&nbsp; wttw istnieje takie i, że x = e[i] oraz i <FONT FACE="Symbol">&#163</FONT>n}</p>
+</blockquote>
+</p>
+<H2 class="subsection"><font face="Verdana" size="2">Rozwiązanie </font></H2>
+      <P>
+         Metoda: Będziemy porównywali x z kolejnymi elementami ciągu poczynając od 
+         pierwszego. Jeśli badany element ciągu jest różny od x, to kontynuujemy 
+         przeszukiwanie, a jeśli jest równy x, to kończymy postępowanie. 
+         Algorytm odpowiadający tej metodzie, nazywany algorytmem poszukiwań 
+         sekwencyjnych, jest przedstawiony poniżej. Dla 
+         uproszczenia rozważań związanych z uzasadnieniem poprawności, szukany element jest umieszczony 
+         dodatkowo na pozycji (n+1)-szej danego ciągu, e[n+1]=x. Po takiej 
+         modyfikacji ciągu e, mamy pewność, 
+         że przeglądając kolejne pozycje zmodyfikowanego ciągu, trafimy na 
+         element x.</P>
+
+<H4 class="paragraph"><font size="2">ALGORYTM&nbsp; poszukiwań sekwencyjnych</font><BR/><BR/> </H4>
+<div class="przyk" style="width: 839; height: 264">
+   <TABLE frame="void" rules="none" width="816">
+      <COL align="left"><COL align="left"><COL align="left"><COL align="left"><COL align="left"><COL align="left"><COL align="left">
+      <TBODY>
+         <TR>
+            <TD width="35"> Member</TD>
+            <TD width="195">{</TD>
+             
+            <TD width="14">&nbsp; </TD>
+             
+            <TD width="554">&nbsp;</TD>
+             
+         </TR>
+         <tr>
+            <TD width="35"></TD>
+         </tr>
+         <TR>
+            <TD width="35"></TD>
+            <TD width="195">e[n+1] := x; i := 1; </TD>
+             
+            <TD width="14">&nbsp;</TD>
+             
+            <TD width="554">//przed wykonaniem pętli x <font face="Symbol">
+            <span lang="en">&Iuml;</span>{</font>e[1],...,e[i-1]<font face="Symbol">}
+            <br>
+&nbsp;</font></TD>
+             
+         </TR>
+         <TR>
+            <TD width="35">&nbsp; </TD>
+            <TD width="195"><STRONG>while </STRONG>
+            (not 
+             x = e[i])  <STRONG>do </STRONG></TD> 
+            <TD width="14">&nbsp;</TD> 
+            <TD width="554">//Po sprawdzeniu i-tego elementu, x
+            <font face="Symbol"><span lang="en">&Iuml;</span>{</font>e[1],...,e[i-1]<font face="Symbol"> 
+            } </font>oraz x<font face="Symbol"> </font><span lang="en">
+            <font face="Symbol">&sup1;</font></span>e[i]<font face="Symbol"><br>
+&nbsp;</font></TD> 
+         </TR>
+         <TR>
+            <TD width="35">&nbsp;</TD>
+            <TD width="195">   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG>
+             &nbsp; i := i+1 </TD>
+            <TD width="14">   &nbsp;</TD>
+            <TD width="554">   //Po zmianie wartości i, x <font face="Symbol">
+            <span lang="en">&Iuml;</span>{</font>e[1],...,e[i-1]<font face="Symbol">}</font></TD>
+         </TR>
+         <TR>
+            <TD width="35">&nbsp;</TD>
+            <TD width="195">      <STRONG>od</STRONG> ;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+             
+            <TD width="14">      &nbsp;</TD>
+             
+            <TD width="554">      &nbsp;</TD>
+             
+         </TR>
+         <TR>
+            <TD width="35"></TD>
+            <TD width="195">   <STRONG>if&nbsp; </STRONG>(i<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>n)<STRONG> 
+            then </STRONG>result := true<STRONG> </STRONG></TD>
+            <TD width="14">   &nbsp;</TD>
+            <TD width="554">   //Jeśli pętla zatrzymała się na indeksie 
+            mniejszym od n+1, to x<font face="Symbol"><span lang="en">Î</span>{</font>e[1],...,e[n]<font face="Symbol">}</font></TD>
+         </TR>
+         <TR>
+            <TD width="35"></TD>
+            <TD width="195">   <STRONG>&nbsp;&nbsp;else &nbsp;</STRONG></TD>
+            <TD width="14">   &nbsp;</TD>
+            <TD width="554">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="35">&nbsp;</TD>
+            <TD width="195">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>result :=<strong> false</strong></TD>
+            <TD width="14">   &nbsp;</TD>
+            <TD width="554">   //Jeśli pętla zatrzymała się na indeksie równym 
+            n+1, to x <font face="Symbol">
+            <span lang="en">&Iuml;</span>{</font>e[1],...,e[n]<font face="Symbol">} </font></TD>
+         </TR>
+         <TR>
+            <TD width="35">&nbsp;</TD>
+            <TD width="195">   <strong>fi</strong></TD>
+            <TD width="14">   &nbsp;</TD>
+            <TD width="554">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="35"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="195"></TD>
+            <TD width="14">&nbsp;</TD>
+            <TD width="554">&nbsp;</TD>
+         </TR>
+      </TBODY>
+   </TABLE>
+</P>
+</div>
+<P>
+   Zauważmy, że typ elementów ciągu nie ma tu żadnego znaczenia. Jest tylko 
+   konieczne, aby struktura, w której działa algorytm, miała zdefiniowaną relację 
+   równości dla obiektów ze zbioru E.</P>
+<P>
+   Algorytm przegląda kolejne pozycje zmodyfikowanego ciągu i zatrzymuje się na 
+   pozycji, którą zajmuje element x. W przypadku, gdy jest to pozycja ostatnia 
+   (n+1)-sza mamy pewność, że x nie występował w danym ciągu. Przeanalizujmy 
+   dokładniej zachowanie tego programu, stosując metodę niezmienników.
+</P>
+<P>
+   Łatwo zauważyć, że formuła <font face="Symbol">a</font> = (x<span lang="en"><font face="Symbol">&sup1;</font></span>e[1]<font face="Symbol">
+   <span lang="en">&Ugrave;</span> </font>... <font face="Symbol"><span lang="en">&Ugrave;</span>
+   </font>x<span lang="en"><font face="Symbol">&sup1;</font></span>e[i-1]<font face="Symbol">)
+   </font>jest niezmiennikiem pętli &quot;while&quot; w tym algorytmie. Przed wykonaniem 
+   pętli, gdy jeszcze nie sprawdziliśmy żadnego elementu, a&nbsp; i=1, formuła
+   <font face="Symbol">a</font> jest spełniona trywialnie. Jeśli po i-tej 
+   kolejnej iteracji stwierdziliśmy, że x <span lang="en"><font face="Symbol">&sup1;</font></span> 
+   e[i], to wiemy, że na żadnej z pozycji e[1],...,e[i] nie ma elementu x. W 
+   takiej sytuacji zwiększamy wartość indeksu i, zatem informacja jaką posiadamy 
+   o elementach ciągu e ma postać: (x<span lang="en"><font face="Symbol">&sup1;</font></span>e[1]<font face="Symbol">
+   <span lang="en">&Ugrave;</span> </font>... <font face="Symbol"><span lang="en">&Ugrave;</span>
+   </font>x<span lang="en"><font face="Symbol">&sup1;</font></span>e[i-1]). Jeśli 
+   natomiast po i-tej iteracji stwierdzamy, że e[i] = x, to algorytm opuszcza 
+   pętlę. Jedyna instrukcja jaką pozostało wykonać, to instrukcja warunkowa, 
+   ustalająca wartość wyniku.&nbsp; Jeśli znaleźliśmy x na pozycji od 1 do n, to 
+   znaczy, że x jest elementem danego ciągu. Jeśli wyszliśmy z pętli z wartością 
+   i = n+1, to znaczy, że nie znaleźliśmy x w danym ciągu.&nbsp; Z powyższych 
+   rozważań wynika następujące twierdzenie.</P>
+
+<p><div class="lemat">
+   Twierdzenie 
+   <p>Algorytm Member jest poprawnym rozwiązaniem problemu wyszukiwania, 
+   tzn. w dowolnej strukturze danych algorytm zatrzymuje się, a po jego 
+   wykonaniu prawdziwe jest zdanie<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+   result = true&nbsp;&nbsp; wttw&nbsp;&nbsp; x <FONT FACE="Symbol">&#206 </FONT>&nbsp;{e[1],...,e[n]}.</p>
+   </P>
+
+</div></p>
+
+<p><b><font face="Verdana">
+   <SPAN class="large1">Analiza kosztu</SPAN> </font></b></p>
+      <P>
+         Operacją, która (oprócz operacji arytmetycznych) powtarza się w tym 
+         algorytmie, jest porównywanie elementów.
+         Koszt czasowy będziemy&nbsp; więc mierzyli liczbą wykonanych porównań 
+         elementów ciągu.
+      </P>
+      <P>
+         Oczywiście, może się zdarzyć, że element x znajduje się na pierwszej 
+         pozycji, ale może się też zdarzyć, że nie ma go w naszym ciągu. Zatem:</P>
+<ul>
+  <li>w najlepszym przypadku wykonamy 1 porównanie. </li>
+  <li>w najgorszym przypadku wykonamy n+1&nbsp; porównań. </li>
+</ul>
+<P>
+   Ustalmy (dowolnie) strukturę danych, z której pochodzą elementy ciągu 
+   e[1],...,e[n].
+   Koszt średni policzymy ze wzoru:
+</P>
+<P style="text-align: center">
+   A(n) =&nbsp; <font face="Symbol" size="4">S</font><sub>d<FONT FACE="Symbol">&#206</FONT>D</sub><font face="Symbol"> 
+   (</font>P(d) <font face="Symbol"><span lang="en">´</span></font> t(d),</P>
+<P>
+   gdzie&nbsp; D
+   jest zbiorem wszystkich danych rozmiaru n, P(d) jest
+   prawdopodobieństwem wystąpienia danych d, a t(d) jest liczbą
+   porównań wykonanych w czasie realizacji algorytmu 1 dla danych d.
+</P>
+<P>
+   Wszystkie możliwe dane rozmiaru n można podzielić na dwie grupy: wszystkie te 
+   ciągi, do których x należy i wszystkie te ciągi, do których x nie należy. Co 
+   więcej, wszystkie ciągi rozmiaru n, w których x występuje,&nbsp; można poklasyfikować
+   następująco (są to klasy abstrakcji pewnej relacji
+   równoważności na zbiorze ciągów długości n):
+</P>
+<ul>
+  <li>wszystkie takie ciągi, w których <span class="inline-math-graphics">x 
+  znajduje się na pozycji pierwszej,</span> </li>
+  <li>wszystkie takie ciągi, w których <span class="inline-math-graphics">x 
+  znajduje się na pozycji drugiej,</span></li>
+  <li>itd....</li>
+  <li>wszystkie takie ciągi,&nbsp; w których <span class="inline-math-graphics">
+  x znajduje się na pozycji </span>n-tej,</li>
+</ul>
+<P>
+   Zatem zdarzenie x <FONT FACE="Symbol">&#206 </FONT>{e[1],...,e[n]} rozbija 
+   się na sumę zdarzeń x = e[i] dla i=1,2,..., n. Zauważmy jeszcze, że dla 
+   wszystkich danych z tej samej klasy zachowanie algorytmu jest takie samo, tzn. 
+   liczba wykonanych porównań będzie taka sama.</P>
+<P>
+   Przyjmijmy następujące uproszczenia.
+   Niech p będzie prawdopodobieństwem zdarzenia x <FONT FACE="Symbol">&#206 </FONT>{e[1],...,e[n]} i
+   niech prawdopodobieństwo tego, że x = e(i) będzie dla
+   każdego i = 1,...,n takie samo. Mamy więc
+</P>
+<P style="text-align: center">
+   P(x = e[i]) = p/n.</P>
+<P>
+   Ostatecznie, średni koszt rozważanego algorytmu wyraża się wzorem : <br>
+&nbsp;&nbsp;&nbsp; A(n) = P(x = e[1]) <font face="Symbol"><span lang="en">´</span></font>1 + ...+ P(x = e[i]) 
+   <font face="Symbol"><span lang="en">´</span> </font>i + ... + P(x = e[n])<font face="Symbol">
+   <span lang="en">´</span></font> 
+   n + (1-p)<font face="Symbol"><span lang="en">´</span></font>(n+1).</P>
+<P>
+   Stąd, po podstawieniu P(x=e[i]) = p/n,&nbsp; otrzymujemy&nbsp; A(n) = 
+   p<font face="Symbol"><span lang="en">´</span></font>(n+1)/2 +(1-p)(n+1) = n+1 - p<font face="Symbol"><span lang="en">´</span></font>(n+1)/2.<BR/><BR/>Jeśli wiemy, że
+   <span class="inline-math-graphics">x należy do danego ciągu, </span>tzn. p=1,
+   wtedy koszt średni wyraża się funkcją:
+   <SPAN CLASS="inline-math-graphics">A(n) = (n+1)/2.</SPAN></P>
+<P>
+   <BR/>Koszt pamięciowy  mierzymy liczbą
+         miejsc pamięci komputera, koniecznych do przechowania danych i wyników wykonania algorytmu. W tym
+         przypadku wynosi on n+3 (dany ciąg + zmienne pomocnicze). Koszt 
+   pamięciowy algorytmu Member jest liniowy ze względu na rozmiar danych.</P>
+<P>
+   Uwaga:
+         Właściwie należałoby traktować inaczej zmienne
+         pomocnicze arytmetyczne i zmienne służące go przechowywania obiektów 
+   zbioru E. Typu
+         elementów zbioru E nie znamy, a przecież mogą to być skomplikowane 
+   obiekty zajmujące dużo więcej miejsca, niż prosta zmienna typu integer.</P>
+<p><b>Pytanie 1</B>: Jaka jest długość ciągu, jeżeli całkowity 
+czas wykonania algorytmu Member dla tego ciągu i pewnego x, wyniósł 1s, a każde&nbsp; 
+porównanie elementów tego ciągu zajmuje 10<sup><font face="Verdana">-6</font></sup>s 
+(koszt związany z wszystkimi innymi operacjami wykonywanymi przez algorytm 
+zaniedbujemy)?&nbsp; </p>
+
+<!-- Odpowiedź: Odpowiedź: Algorytm 1 wykona liczbę porównań odpowiadającą 
+pozycji elementu szukanego w ciągu. Mamy x * 10<sup><font face="Verdana">-6</font></sup> s. = 1s, czyli&nbsp; x= 1 000 
+000. Ciąg musi mieć co najmniej 1000000 elementów.</P> -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Zobacz odpowiedź-----' NAME='Klik0'
+ onClick="napis(this.form,'Ciąg musi mieć co najmniej 1000000 elementów.')">
+</form>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main02_p0.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main02_p2.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

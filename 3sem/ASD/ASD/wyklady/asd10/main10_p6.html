@@ -1,0 +1,525 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main10_p5.html" TARGET="main"  class="NAWIGACJA">
+&laquo;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right"><A HREF="main10_cw.html" TARGET="main"  class="NAWIGACJA">
+&laquo;&nbsp;następny punkt</a>&nbsp;</td>
+</tr></table>
+<br clear="all"><A NAME="EDU.wyklad.punkt 6"></A>
+
+
+<br clear="all"><div class="tytulpunktu">6. Problem kolizji</div> 
+
+
+
+
+
+<p>Załóżmy, że mamy daną funkcję haszującą jednorodnie rozrzucającą klucze 
+interesującego nas zbioru w tablicy z haszowaniem. </p>
+
+
+
+
+
+<div class="def">
+<p>Definicja 4.1&nbsp;&nbsp; Kolizją nazywamy sytuację, gdy funkcja haszująca&nbsp; 
+przypisuje ten sam adres więcej niż jednemu elementowi. </P>
+</div>
+
+
+
+
+
+<p>W tym punkcie zajmiemy się sprawą rozwiązywania problemów kolizji. Są możliwe 
+różne strategie postępowania, które podzielimy na dwie kategorie: metody, w 
+których klucze o tym samym adresie umieszczamy na specjalnych listach 
+dynamicznych, lub ogólnie, w dodatkowych strukturach,&nbsp; i metody, w których 
+stosujemy ponowne mieszanie, gdy poprzednie prowadziło do kolizji.</P>
+<p><b>Metoda I </b>Rozwiązywanie kolizji metodą łańcuchową</p>
+<p>Metoda ta polega na umieszczaniu kluczy o takim samym adresie na jednej 
+liście wskazywanej przez numer klucza. Tablica haszująca jest w tym przypadku 
+tablicą list. Wyszukiwanie, wstawianie i usuwanie polega na wyliczeniu adresu 
+h(x) klucza x w tablicy, za pomocą funkcji mieszania h, i sprawdzeniu 
+umieszczonej pod tym adresem listy, Tab[h(x)], dowiązaniu nowego klucza lub 
+usunięciu wskazanego klucza z listy. Lista może być zorganizowana jako stos, 
+jako kolejka, czy jako lista uporządkowana. Mogą to być też drzewa BST. </p>
+<p>Przykład 6.1</p>
+<p>Na rysunku 10.3 przedstawiono tablicę haszującą utworzoną przez sukcesywne 
+wstawianie słów</p>
+<p style="text-align: center">antek, ola, piotr, asia, adam, ina&nbsp; basia, 
+aga, jan,&nbsp; ania,&nbsp; hela, olek, julka, janek, anna,</p>
+<p>których adresy wyliczono zgodnie z funkcją mieszania opisaną w przykładzie 
+4.1 (suma numerów liter modulo 13), i w której kolizje rozwiązano przez 
+zastosowanie metody łańcuchowej.</p>
+<table border="1" cellspacing="1" style="border-collapse: collapse" bordercolor="#000000" width="60%" id="AutoNumber1">
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">TAB:</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">0</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">
+    <p align="right" style="text-align: right">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#000000" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    antek</td>
+    <td width="5%" bordercolor="#000000" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    jan</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    ania</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    hela</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">1</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">2</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    piotr</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">3</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    ola</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    julka</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    janek</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">4</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    asia</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">5</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    olek</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">6</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    basia</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    anna</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">7</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    adam</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">8</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">9</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    aga</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">10</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">11</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">12</td>
+    <td width="5%" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5"><span lang="en">
+    <font face="Symbol">&reg;</font></span></td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    ina</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    /</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="25%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center" colspan="5">
+    Rysunek 10.3</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="right">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#F5F5F5" bgcolor="#F5F5F5">&nbsp;</td>
+  </tr>
+</table>
+
+
+
+
+
+<p>Ponieważ h(antek) = 52 mod 13 = 0 oraz h(hela) =&nbsp; h(ania) = h(jan) = 26 
+mod 13 = 0, więc słowa &quot;hela&quot; &quot;ania&quot; i &quot;jan&quot; spowodowały kolizje i dlatego 
+znalazły się w tej samej liście co &quot;antek&quot;. <font face="Wingdings">J</font></p>
+
+
+
+
+
+<p>Zauważmy, że nadal trzy pozycje są puste.</p>
+
+
+
+
+
+<p>Załóżmy, że listy kluczy o takich samych adresach są zorganizowane jako 
+kolejki. Algorytmy operacji słownikowych są bardzo proste: </p>
+<ul>
+  <li>insert(x, D) może być zrealizowana&nbsp; jako in(x,TAB[h(x)]) - wstawienie 
+  do kolejki o numerze h(x),</li>
+  <li>delete(x,D) może być zrealizowana podobnie, przez operację usuwania z 
+  kolejki out(x, TAB[h(x)]),</li>
+  <li>member(x,D) wymaga przeszukania kolejki TAB[h(x)].</li>
+</ul>
+<p>Wynika stąd, że o ile koszt obliczenia wartości funkcji haszującej jest 
+stały, to koszt wykonania operacji zależy od długości kolejek (łańcuchów).</p>
+<p>A jak długie mogą być te kolejki? Jeżeli funkcja mieszania jest określona na 
+n elementowym zbiorze kluczy i o wartościach w zbiorze {0,..., m-1},&nbsp; to w 
+najgorszym razie wszystkie klucze wstawione zostały do tej samej kolejki. 
+Oznaczmy przez <font face="Symbol" size="2">a </font>= n/m, współczynnik 
+charakterystyczny funkcji mieszającej. Koszt średni operacji zależy od tego, czy 
+funkcja haszująca równomiernie rozrzuca klucze w tablicy. Załóżmy, że tak jest, 
+tzn. każdy klucz może wpaść pod i-ty adres z jednakowym prawdopodobieństwem.&nbsp; 
+Wynika stąd, że średnia długość kolejki wynosi <font face="Symbol" size="2">a .</font> 
+Zatem koszt średni nieudanego poszukiwania klucza, wymaga, poza wyliczeniem 
+adresu (zakładamy, że ten koszt jest stały), sprawdzenia wszystkich pozycji 
+kolejki. Mamy następujące twierdzenie:</p>
+  
+
+
+<p></P>
+
+<div class="lemat">
+<p>Lemat 6.1&nbsp;&nbsp; W tablicy z mieszaniem, w której kolizje zostały 
+rozwiązane przez kolejkowanie, a funkcja haszująca równomiernie rozrzuca klucze, 
+zarówno koszt nieudanego poszukiwania jak i koszt skutecznego poszukiwania 
+wynosi średnio<font face="Symbol"> Q</font>(1+<font face="Symbol">a</font>), o 
+ile koszt obliczania wartości funkcji mieszającej jest stały. </P>
+ </div>
+ 
+<p style="text-align: left">&nbsp;Wynika stąd, że koszt operacji słownikowych w 
+tablicach z haszowaniem i kolizjami rozwiązanymi metodą łańcuchową, jest stały.</p>
+<p><b>Metoda II</b> Rozwiązywanie kolizji przez adresowanie otwarte</p>
+<p>W tej metodzie zamiast wykorzystywać dodatkową pamięć na elementy, których 
+adresy są takie same, staramy się umieścić je w tablicy na innej pozycji. </p>
+<p>W przykładzie 6.1 elementy &quot;jan&quot;, &quot;ania&quot; i &quot;hela&quot; możemy umieścić na 
+kolejnych wolnych pozycjach, albo pod adresem wyliczonym za pomocą nowej funkcji 
+mieszającej. Na przykład jeśli numer pierwszej litery słowa potraktujemy jako 
+&quot;awaryjny&quot; adres, to&nbsp;&nbsp; &quot;jan&quot; zajmie pozycję 10,&nbsp; &quot;ania&quot; pozycję 
+1, a &quot;hela&quot; pozycję 8.&nbsp; </p>
+<p>Prostym sposobem na wyszukanie nowego adresu w przypadku kolizji, jest 
+wybranie pierwszego wolnego miejsca. Wymaga to jednak liniowego przeglądania 
+tablicy. Można też wolne miejsca powiązać w łańcuch cykliczny, tak aby zawsze 
+można było szybko dojść do wolnej pozycji, o ile taka istnieje. Jeszcze innym 
+sposobem jest wyliczenie nowej pozycji za pomocą innej funkcji haszującej.&nbsp; 
+Może się jednak zdarzyć, że otrzymany adres również jest już zajęty. Prowadzi to 
+do ciągu prób, w najgorszym razie o długości równej rozmiarowi tablicy. 
+Oczywiście, jeśli liczba elementów w tablicy jest równa jej wymiarowi, to 
+żadnego nowego elementu nie możemy już wstawić do takiej struktury.</p>
+<p>Wiele ciekawych wyników na temat metod rozwiązywania kolizji, wyboru funkcji 
+mieszających, szacowania kosztów operacji&nbsp; można znaleźć w książkach&nbsp; 
+Cormen, Leiserson, Rivest, Stein, &quot;Wprowadzenie do algorytmów&quot;,&nbsp; WNT(2004) 
+oraz A. Drozdek, D. Simon &quot;Struktury danych w języku C&quot; WNT(1996). 
+Zainteresowanym polecam tę lekturę.</p>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main10_p5.html" TARGET="main"  class="NAWIGACJA">
+&laquo;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right"><A HREF="main10_cw.html" TARGET="main"  class="NAWIGACJA">
+&laquo;&nbsp;następny punkt</a>&nbsp;</td>
+
+</tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

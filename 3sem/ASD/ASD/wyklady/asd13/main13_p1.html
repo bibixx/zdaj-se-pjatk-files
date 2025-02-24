@@ -1,0 +1,441 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body style="background-color: whitesmoke;" leftmargin="8" topmargin="8"
+ marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"--><!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr--><!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main13_p0.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp; <a href="main13_p2.html" target="main"
+ class="NAWIGACJA">nastêpny
+punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 2"></a><br clear="all">
+<div class="tytulpunktu">1. Algorytmy cyrkla i linijki<br>
+</div>
+<p>Do wielu zas³ug Euklidesa mo¿emy dodaæ jeszcze tê, ¿e wprowadzi³ w geometrii 
+pojêcie konstrukcji euklidesowej, tzn. metody, w której opisano zestaw ¶rodków z 
+jakich wolno nam korzystaæ, zestaw elementarnych akcji jakimi mo¿emy siê 
+pos³ugiwaæ, oraz metodê postêpowania prowadz±c± do powstania obiektu 
+geometrycznego. Konstrukcja euklidesowa, to nic innego jak algorytm dzia³aj±cy w 
+specyficznym ¶rodowisku.<br>
+Algorytmy omawiane w tym punkcie, to konstrukcje euklidesowe, wykorzystuj±ce 
+operacje, których nauczyli¶my siê w szkole podstawowej, a wykonujemy je na 
+papierze za pomoc± cyrkla i linijki.<br>
+<br>
+<span style="font-weight: bold;">Problem</span> Obliczanie pierwiastka
+kwadratowego z liczby ca³kowitej.<br>
+Niech odcinek <span style="text-decoration: underline;">xy</span>&nbsp;
+reprezentuje jedno¶æ. Zadanie polega na znalezieniu pierwiastka
+kwadratowego z danej liczby naturalnej n, sqrt(n).<br>
+<br>
+Najprostsze rozwi±zanie wykorzystuje twierdzenie Pitagorasa.&nbsp;Je¶li jeden z boków trójk±ta prostok±tnego reprezentuje liczbê sqrt(i),
+a drugi liczbê 1, to przeciwprostok±tna odpowiada liczbie&nbsp; sqrt(i+1) por. 
+rysunek 13.1(a). <br>
+</p>
+<p><span style="font-weight: bold;">Algorytm 1<br>
+</span></p>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; width: 604;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;" width="592">
+      <table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 100%;">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;">SQRT1<br>
+            </td>
+            <td style="vertical-align: top;">(n : int){<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;"><br>
+            </span>Narysuj odcinek jednostkowy o pocz±tku w punkcie x i
+koñcu w punkcie y. </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">p[0]:= x; p[1] := y;</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">i := 1;<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">while</span> (i &lt; n) <span
+ style="font-weight: bold;">do</span></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Wystaw prost± prostopad³± do odcinka&nbsp; <span
+ style="text-decoration: underline;">x, p[i</span>] w&nbsp; punkcie
+p[i].</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Zaznacz na niej&nbsp; punkt p[i+1] w odleg³o¶ci 1 od punktu p[i].</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+i := i+1;<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">o</span><span style="font-weight: bold;">d</span></td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;">}<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><span style="font-weight: bold;"><br>
+</span>&nbsp;Niezmiennikiem pêtli w tym algorytmie jest w³asno¶æ:<br>
+</p>
+<div style="text-align: center;">Odcinek <span
+ style="text-decoration: underline;">xp[i]</span><u> </u>reprezentuje
+liczbê&nbsp; sqrt(i).<br>
+</div>
+<p>Rzeczywi¶cie, dla i=1 w³asno¶æ jest spe³niona, bo z za³o¿enia
+odcinek <span style="text-decoration: underline;">xy</span>
+reprezentuje jedno¶æ. Je¶li w i-tym kroku d³ugo¶æ odcinka <span
+ style="text-decoration: underline;">xp[i]</span> wynosi sqrt(i), i
+zbudujemy trójk±t prostok±tny o jednym boku równym xp[i], a drugim
+równym jedno¶ci, to przek±tna na mocy twierdzenia Pitagorasa ma d³ugo¶æ
+sqrt(i+1). Po wykonaniu n-1 kroków, wychodzimy z pêtli z i = n&nbsp;
+oraz odcinkiem <span style="text-decoration: underline;">xp[n]</span>
+d³ugo¶ci sqrt(n).&nbsp;
+</p>
+<p>Wszystkie operacje tego algorytmu mo¿na zrealizowaæ za pomoc± cyrkla i 
+linijki.<br>
+<br>
+</p>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 60%;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek13_1a.gif" title="" alt="slimak"
+ style="width: 250px; height: 250px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek13_1b.gif" title="" alt="graf"
+ style="width: 250px; height: 250px;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><br>
+Inne rozwi±zanie tego samego problemu polega na wykorzystaniu twierdzenia 
+Pitagorasa i w³asno¶ci, ¿e k±t oparty na ¶rednicy ko³a jest prosty, por. rysunek 
+13.1(b).
+</p>
+<p><br>
+<span style="font-weight: bold;">Algorytm 2</span><br>
+</p>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; width: 60%;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 100%;">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;">SQRT2<br>
+            </td>
+            <td style="vertical-align: top;">(n : int){<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">Narysuj liniê prost± L i
+zaznacz na niej punkt pocz±tkowy A.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">p[0]:= A; </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">for </span>i:=1<span
+ style="font-weight: bold;"> to </span>n<span
+ style="font-weight: bold;">+1 do</span> </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Zaznacz
+na prostej L punkt p[i] odleg³y od p[i-1]&nbsp; o jednostkê</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">o</span><span style="font-weight: bold;">d</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">Niech C=p[n+1].<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;">&nbsp;</td>
+            <td style="vertical-align: top;">Znajd¼ ¶rodek odcinka
+            <span style="text-decoration: underline">AC</span>. Niech to
+bêdzie punkt O. &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">Z punktu O narysuj okr±g o
+promieniu równym po³owie odcinka <span style="text-decoration: underline">AC</span>.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">W punkcie B=p[n] wystaw
+prost± prostopad³± do prostej L; </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">Zaznacz punkt D, przeciêcia
+okrêgu i tej prostej.<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;">}<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><span style="font-weight: bold;"><br>
+</span><b>Poprawno¶æ</b>
+</p>
+<p>Z konstrukcji wynika, ¿e&nbsp; BC bêdzie odcinkiem jdnostkowym, a&nbsp; AC&nbsp; 
+zawiera (n+1) jednostek. Poniewa¿ trójk±ty ADC, ADB i DBC s± trójk±tami 
+prostok±tnymi, zatem
+</p>
+<p style="text-align: center">n<sup><font face="Verdana">2</font></sup> +DB<sup><font face="Verdana">2</font></sup> 
+= AD<sup><font face="Verdana">2</font></sup>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+1+DB<sup><font face="Verdana">2</font></sup> = DC<sup><font face="Verdana">2</font></sup> 
+,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (n+1)<sup><font face="Verdana">2</font></sup> 
+= AD<sup><font face="Verdana">2</font></sup> +DC<sup><font face="Verdana">2</font></sup>.&nbsp;&nbsp;
+</p>
+<p style="text-align: left">St±d&nbsp; (n+1)<sup><font face="Verdana">2 </font>
+</sup>= n<sup><font face="Verdana">2</font></sup> +1 + 2 DB<sup><font face="Verdana">2</font></sup>&nbsp; 
+i ostatecznie&nbsp; sqrt(n) = DB.
+</p>
+<br>
+<b>Problem&nbsp; II</b> Dany odcinek AB podzieliæ go na n równych czê¶ci.&nbsp;
+<p>W tym przypadku zastosujemy twierdzenie Talesa, por. rysunek 13.2(a).<br>
+&nbsp;</p>
+<p><span style="font-weight: bold;">Algorytm 3</span><br>
+</p>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; width: 556;" height="287">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;" height="279" width="544">
+      <table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 100%;">
+        <tbody>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;">Podziel<br>
+            </td>
+            <td style="vertical-align: top;">(n : int){<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">Z punktu A odcinka AB narysuj 
+            dowoln± prost±. Ustal odcinekjednostkowy.</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">p[0]:= A; </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">for </span>i:=1<span
+ style="font-weight: bold;"> to </span>n<span
+ style="font-weight: bold;"> do</span> </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Zaznacz
+na prostej L punkt p[i] odleg³y od p[i-1]&nbsp; o jednostkê</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="font-weight: bold;">od</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">Niech C=p[n].<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;">&nbsp;</td>
+            <td style="vertical-align: top;">Poprowad¼ prost± przez punkty C, B 
+            i niech B = q[n];</td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;"><b>for</b> i := n-1 <b>downto</b> 1
+            <b>do</b>&nbsp; <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            Wystaw
+prost± równoleg³± do prostej BC i przechodz±c± przez punkt p[i]&nbsp; </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zaznacz punkt przeciêcia
+            tej prostej z L, q[i] <br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: middle; width: 10%;"><br>
+            </td>
+            <td style="vertical-align: top;"><b>od</b>}<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+      <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>Punkty q[i] dziel± odcinek <u>AB</u> na n równych czê¶ci. Rysowanie prostej 
+równoleg³ej do danej prostej i przechodz±cej przez dany punkt nie jest ca³kiem 
+proste, ale ca³kowicie da siê wykonaæ za pomoc± cyrkla i linijki. A oto 
+algorytm, por. rysunek 13.2(b):</p>
+<p>1. Niech X=p[i]. Z punktu X&nbsp; zakre¶l okr±g promieniem o d³ugo¶ci 1. <br>
+2. Punkt przeciêcia z prost± BC oznaczmy przez D. Powsta³ trójk±t równoramienny 
+o wierzcho³kach X,C,D.&nbsp; <br>
+3. Podziel odcinek <u>DC</u> (podstawa trójk±ta) na po³owê i znajd¼ punkt 
+¶rodkowy Y. Odcinek <u>XY</u> jest wysoko¶ci± trójk±ta i równocze¶nie 
+odleg³o¶ci± szukanej prostej równoleg³ej od prostej <u>BC</u>.<br>
+4. Z punktu B zaznacz punkt q[i], odleg³y od B o d³ugo¶æ odcinka <u>XY.</u> 
+Wyznaczony w³a¶nie odcinek to 1/m danego odcinka AB.</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber1">
+  <tr>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek13_2a.gif" width="250" height="250"></td>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek13_2b.gif" width="250" height="250"></td>
+  </tr>
+</table>
+<p style="text-align: left;"><b>Pytanie 1:</b> Jak podzieliæ dany k±t ABC na po³owê? 
+Zaproponuj algorytm.<br>
+<!-- Odpowied¼:Odp. Ma dok³adnie m+1 wierzcho³ków. Graf, o którym mowa, sam jest drzewem.-->
+<!-- Jego drzewo rozpinaj±ce jest z nim identyczne. --></p>
+<form><input class="GUZIK" type="button"
+ value="-----Krok 1-----" name="Klik0"
+ onclick="napis(this.form,'1.Dowol± rozwarto¶ci± cyrkla zaznacz dwa punkty x i y na ramionach k±ta.')">
+</form>
+<form><input class="GUZIK" type="button"
+ value="-----Krok 2-----" name="Klik0"
+ onclick="napis(this.form,' 2.Znajdz ¶rodek odcinka xy. ')">
+</form>
+<form><input class="GUZIK" type="button"
+ value="-----Krok 3-----" name="Klik0"
+ onclick="napis(this.form,'3.Po³±cz go z punktem B.')">
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main13_p0.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main13_p2.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td-->
+<!--/tr--><!--/table--></p>
+</body>
+</html>

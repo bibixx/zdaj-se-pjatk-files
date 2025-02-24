@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main08_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main08_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all">
+<A NAME="EDU.wyklad.punkt 3"></A><br clear="all"><div class="tytulpunktu">
+3. Operacja wstawiania do AVL</div>
+
+<p>Operacja wstawiania elementu do drzewa AVL, etykietowanego elementami zbioru 
+Et,</p>
+
+<p style="text-align: center">insert : AVL <span lang="en"><font face="Symbol">´</font></span> Et<font face="Symbol">
+<span lang="en">&reg;</span></font> AVL,&nbsp; </p>
+
+<p>może być zrealizowana tak jak dla drzew 
+binarnych poszukiwań. Problem polega na tym, że nie zawsze otrzymujemy w wyniku 
+drzewo wyważone. Metoda wstawiania elementu do drzewa AVL składa się więc z 
+trzech etapów:</p>
+
+<ol>
+  <li>znalezienie 
+wierzchołka, do którego można dołączyć nową etykietę (o ile nie było jej jeszcze 
+  w drzewie),</li>
+  <li>utworzenie nowego wierzchołka i dowiązanie go do drzewa w znalezionym (w 
+  punkcie 1) węźle, oraz</li>
+  <li>poprawienie wartości wag wierzchołków na ścieżce poszukiwania, od ojca nowo-wstawionego 
+  wierzchołka w kierunku korzenia drzewa,</li>
+  <li>wykonanie rotacji względem pierwszego napotkanego wierzchołka, którego 
+  waga wynosi +2 lub -2, o ile taki istnieje.</li>
+</ol>
+
+<p>Przykład 3.1</p>
+
+<p>Kolejne etapy tworzenia drzewa AVL z elementów 1,2,3,5,4 przedstawiono na 
+rysunku 8.6(a) i 8.6(b).<BR></p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber1">
+  <tr>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_6a.gif" width="250" height="250"></td>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_6b.gif" width="250" height="250"></td>
+  </tr>
+</table>
+&nbsp;<p>Po dołączeniu etykiety 3, otrzymane drzewo nie jest drzewem AVL, 
+ponieważ waga w korzeniu wynosi teraz -2.&nbsp; Prosta rotacja w lewo pozwoli 
+jednak zrównoważyć to drzewo, jak pokazano na rysunku 8.6 (a).&nbsp; Wstawienie 
+etykiety 5 do prawego poddrzewa powoduje zwiększenie wysokości całego drzewa,&nbsp; 
+ale wagi są nadal dopuszczalne (por. rysunek 8.6(b)). Nowy element 4 również 
+zwiększa wysokość, ale teraz waga wierzchołka 3 nie jest odpowiednia, wynosi 
+bowiem -2. Łatwo zauważyć, że prosta rotacja w lewo względem 3 nie poprawi 
+sytuacji. Jednak zastosowanie rotacji podwójnej doprowadza drzewo do stanu 
+wyważenia, por. ostatni z grafów na rysunku 8.6(b). <font face="Wingdings">J</font></p>
+<p>Sformułujemy teraz ogólne zasady wyważania, gdy do drzewa AVL wstawiamy nowy 
+element. Reguły postępowania zależą od tego jakie są aktualne wagi wierzchołków 
+i gdzie zostanie dowiązany nowy wierzchołek.</p>
+<p>Niech D będzie drzewem AVL, D = &lt;LD, r, PD&gt;, do którego wstawiamy etykietę e. 
+Niech D' oznacza drzewo otrzymane w wyniku zastosowania algorytmu insert(e,D) 
+dla drzew BST. Załóżmy, że nowy wierzchołek z etykietą e został dowiązany w 
+lewym poddrzewie drzewa D i że spowodowało to zwiększenie wysokości drzewa LD, 
+ale LD nadal pozostaje drzewem wyważonym. Wynika stąd, że przed wstawieniem 
+nowego wierzchołka, waga w korzeniu drzewa LD musiała być równa 0. Zachodzą 
+następujące przypadki:</p>
+<p>1. Jeżeli waga w wierzchołku drzewa D wynosiła 0, to po dołączeniu e, wynosi 
+1. Otrzymane drzewo D' jest więc drzewem AVL, chociaż jego wysokość jest o 1 
+większa niż drzewa D.</p>
+<p>2. Jeżeli waga w wierzchołku drzewa D wynosiła -1, to po dołączeniu e wynosi 
+0. Otrzymane drzewo jest wyważone, a jego wysokość jest taka sama jak drzewa D. </p>
+<p>3. Jeżeli waga w wierzchołku drzewa D wynosiła +1, to po dołączeniu e wynosi 
++2. Zatem drzewo D' nie jest wyważone. Typ użytej rotacji zależy od tego, czy e 
+zostało dołączone do lewego, czy do prawego poddrzewa drzewa LD.</p>
+<p>3a. Element e&nbsp; znajduje się w lewym poddrzewie drzewa LD. Waga korzenia 
+drzewa LD zmieniła się z 0 na +1. Zastosowanie pojedynczej rotacji w prawo 
+pozwoli wyważyć otrzymane drzewo. Na rysunku rysunek 8.7 (a) przedstawiono 
+opisaną w tym przypadku sytuację przed i po wykonaniu wstawienia elementu e, a 
+na rysunku 8.7(b) rezultat zastosowania prostej rotacji w prawo. Zauważmy, że 
+wysokość otrzymanego drzewa jest taka sama jak wysokość danego drzewa przed 
+wstawieniem elementu e.</p>
+<p>&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber2">
+  <tr>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_7a.gif" width="250" height="250"></td>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_7b.gif" width="250" height="250"></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber3">
+  <tr>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_7c.gif" width="250" height="250"></td>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_7d.gif" width="250" height="250"></td>
+  </tr>
+</table>
+<p>3b. Element e został dołączony do prawego poddrzewa drzewa LD. Waga drzewa LD 
+zmieniła się więc z 0 na -1. Otrzymane drzewo nie jest wyważone. Zastosowanie 
+rotacji podwójnej w prawo pozwoli je jednak wyważyć. Sytuacja opisana w tym 
+przypadku, jest przedstawiona na rysunku 8.8(a). Skreślone wagi odpowiadają 
+stanowi drzewa przed wykonaniem dołączenia etykiety e. Wynik wyważania jest 
+natomiast przedstawiony na rysunku 8.8(b). Jak poprzednio, zauważmy, że wysokość 
+drzewa po wykonaniu rotacji jest taka sama jak wysokość drzewa D. </p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber4">
+  <tr>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_8a.gif" width="250" height="250"></td>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_8b.gif" width="250" height="250"></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber5">
+  <tr>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_8c.gif" width="250" height="250"></td>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_8d.gif" width="250" height="250"></td>
+  </tr>
+</table>
+<p>Analogicznie, jeżeli nowy wierzchołek z etykietą e został dowiązany w prawym 
+poddrzewie drzewa D i spowodowało to zwiększenie wysokości drzewa PD, 
+ale PD nadal pozostaje drzewem wyważonym. Wynika stąd, że przed wstawieniem 
+nowego wierzchołka, waga w korzeniu drzewa PD musiała być równa 0. Zachodzą&nbsp; 
+trzy następujące przypadki:</p>
+<p>1. Jeżeli waga w wierzchołku drzewa D wynosiła 0, to po dołączeniu e, wynosi 
+-1. Otrzymane drzewo D' jest więc drzewem AVL, chociaż jego wysokość jest o 1 
+większa niż drzewa D.</p>
+<p>2. Jeżeli waga w wierzchołku drzewa D wynosiła +1, to po dołączeniu e wynosi 
+0. Otrzymane drzewo jest wyważone, a jego wysokość jest taka sama jak drzewa D. </p>
+<p>3. Jeżeli waga w wierzchołku drzewa D wynosiła -1, to po dołączeniu e wynosi 
+-2. Zatem drzewo D' nie jest wyważone. Typ użytej rotacji zależy od tego, czy e 
+zostało dołączone do prawego, czy do lewego poddrzewa drzewa PD. W pierwszym 
+przypadku opisanym na rysunku 8.7(c) zastosujemy prostą&nbsp; rotację w lewo, 
+która wyważy drzewo (por. 8.7 (d)). W drugim przypadku, przedstawionym na 
+rysunku 8.8(c) zastosujemy podwójną rotację w lewo. Otrzymany wynik jest 
+przedstawiony na rysunku 8.8(d).</p>
+<p><b>Pytanie 3:&nbsp; </b>
+
+Ile co najwyżej rotacji trzeba wykonać, jeśli do drzewa&nbsp; AVL o n 
+wierzchołkach dołączamy jeden element? <BR>
+ 
+</p>
+ 
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'Co najwyżej jedną rotację.');">
+</form>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main08_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main08_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

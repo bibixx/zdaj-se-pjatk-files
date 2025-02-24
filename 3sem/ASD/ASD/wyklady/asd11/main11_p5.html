@@ -1,0 +1,673 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr--><!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main11_p4.html" target="main"
+ class="NAWIGACJA"> &#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main11_cw.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 5"></a><br clear="all">
+<div class="tytulpunktu">5. Algorytm Dijkstry</div>
+<p>Algorytm Dijkstry rozwi±zuje problem II, znalezienia najkrótszych
+¶cie¿ek ze ¼ród³a do wszystkich innych wierzcho³ku grafu, stosuj±c
+metodê zach³ann±. Zak³ada siê, ¿e graf jest zorientowany i ¿e funkcja
+kosztu przypisuje krawêdziom liczby nieujemne. Przyjmiemy te¿, ¿e
+wierzcho³ki s± ponumerowane liczbami naturalnymi od 1 do n, a graf G = <v
+ ,="" e="" c=""> jest dany w postaci tablicy list incydencji.</v></p>
+<p><b>Idea algorytmu</b></p>
+<p>W kolejnych etapach algorytmu zbiór wierzcho³ków osi±galnych ze
+¼ród³a s jest powiêkszany sukcesywnie, o wierzcho³ki incydentne z
+ostatnio do³±czonymi wierzcho³kami. Zawsze staramy siê do³±czaæ te
+wierzcho³ki, których osi±gniêcie wymaga najmniejszego kosztu, które
+znajduj± siê najbli¿ej ¼ród³a.</p>
+<p>Strukrura danych, u¿yta w przedstawionej tu implementacji algorytmu
+Dijkstry, jest bardzo prosta. D³ugo¶ci najkrótszych ¶cie¿ek bêdziemy
+pamiêtali w tablicy d o n pozycjach (n odpowiada liczbie wierzcho³ków
+grafu). Ponadto w tablicy P bêdziemy zapisywali poprzedniki
+wierzcho³ków na najkrótszej ¶cie¿ce ze ¼ród³a.
+</p>
+<center>d[i] = d³ugo¶æ najkrótszej ¶cie¿ki ze ¼ród³a s do wierzcho³ka i.<br>
+p[i] = ojciec (poprzednik) wierzcho³ka i na najkrótszej ¶cie¿ce ze
+¼ród³a s do i.
+</center>
+<p>Wierzcho³ki grafu podzielimy na trzy grupy: <br>
+S1 - zbiór wierzcho³ków osi±galnych ze ¼ród³a s, dla kórych ju¿
+znaleziono najkrótsz± ¶cie¿kê,<br>
+S2 - zbiór wierzcho³ków, s±siaduj±cych z wierzcho³kami S1, tzn. S2={y:
+istnieje x w zbiorze S1, ¿e (x,y) nale¿y do E}. S2 jest wiêc zbiorem wierzcho³ków,
+dla których znamy droge ze ¼ród³a, ale nie wiemy jeszcze, czy jest to droga najkrótsza.<br>
+S3 - zbiór pozosta³ych wierzcho³ków, S3 = (V\S1)\S2.<br>
+</p>
+Pocz±tkowo S1={s}, S3=V\{s},d(s)=0, a warto¶ci± pocz±tkow± d(x) jest nieskoñczono¶æ dla wszystkich innych x.
+<p><b> Algorytm</b></p>
+<div class="def" style="width: 713px; ">
+<table frame="void" rules="none" width="680" >
+  <tbody>
+    <tr>
+      <td width="544" height="12" colspan="2">DijkstraSP(G : graf){</td>
+      <td width="634" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td width="488" height="12">x := s;</td>
+      <td width="634" height="12"> //zaczynamy od zród³a </td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td width="488" height="12"><strong>while </strong>niepusty(S3) <strong>do&nbsp;</strong>
+      </td>
+      <td width="634" height="12"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td width="488" height="12"> &nbsp;&nbsp;&nbsp;<strong>for</strong>
+y takich, ¿e (x,y) nale¿y do E <strong>do</strong></td>
+      <td width="634" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td width="488" height="12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+case y w S2 </td>
+      <td width="634" height="12"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td width="488" height="12"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp;<strong>if</strong> d[x] +c(x,y) &lt; d[y] <strong>
+then </strong></td>
+      <td width="634" height="12"> &nbsp;// wybieramy krótsz± drogê do y </td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td width="488" height="12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; p[y] := x; d[y] := d[x] + c(x,y); </td>
+      <td width="634" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td width="488" height="12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; &nbsp;&nbsp; <strong>fi</strong></td>
+      <td width="634" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td width="488" height="12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case
+y w S3</td>
+      <td width="634" height="12"> //odleg³osæ od s nie jest ustalona</td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td width="488" height="12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; S3 := S3\{y}; S2:=S2 + {y};</td>
+      <td width="634" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td width="488" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+p[y] := x; d[y] := d[x] +
+c(x,y); </td>
+      <td width="634" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td width="488" height="12"> &nbsp;&nbsp; <strong>od;</strong> </td>
+      <td width="634" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="56" height="1"> <br>
+      </td>
+      <td width="488" height="1">&nbsp;&nbsp;x := min(S2); </td>
+      <td width="634" height="1"> &nbsp;// wybierz wierzcho³ek z S2 z
+minimaln± warto¶ci± d(z) </td>
+    </tr>
+    <tr>
+      <td width="56" height="1"><br>
+      </td>
+      <td width="488" height="1"><strong> od</strong></td>
+      <td width="634" height="1"> &nbsp;</td>
+    </tr>
+    <tr>
+      <td width="56" height="1"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></td>
+      <td width="488" height="1"><br>
+      </td>
+      <td width="634" height="1"> &nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p><b> Koszt</b></p>
+Pêtla "while" wykonuje siê n razy, tyle ile jest elementów w zbiorze
+wierzcho³ków grafu. Pêtla "for" ma tak± d³ugo¶æ jak lista incydencji
+wierzcho³ka x. Mo¿e wiêc mieæ n elementów w najgorszym przypadku. Wybór
+elementu minimalnego (ze wzglêdu na warto¶æ d w zbiorze S2) kosztuje w
+najgorszym przypadku O(n). Ostatecznie, koszt algorytmu mo¿na oszacowaæ
+z góry przez O(n<sup>2</sup>).<br>
+<p><b>Przyk³ad 5.1</b></p>
+Rozwa¿my graf na rysunku 11.5(a). Za³ó¿my, ¿e wierzcho³ki zosta³y
+ponumerowne zgodnie z porz±dkiem alfabetycznym i niech zród³em bêdzie
+wierzcho³ek A.
+Kolejne zmiany stanu struktury zosta³y zanotowane na rysunku 11.5(c). W
+kolejnych pozycjach tablicy&nbsp; zaznaczono aktualnie najmniejsz±
+wyliczon± odleg³o¶æ od ¼ród³a do wierzcho³ka wskazanego przez numer
+kolumny, oraz ojca tego wierzcho³ka na aktualnie najkrótszej ¶cie¿ce. W
+oststniej kolumnie wypisano wierzcho³ki nale¿±ce aktualnie do zbioru
+S2. Wybrane minimalne elementy zaznaczono kolorem czerwonym.&nbsp;
+Ostateczny wynik, drzewo najkrótszych ¶cie¿ek ze ¼ród³a A, zosta³
+zaznaczony grub± ¶cie¿ka na rysunku 11.5(b).<br>
+<br>
+<table border="0" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="60%"
+ id="AutoNumber1">
+  <tbody>
+    <tr>
+      <td width="50%"> <img border="0" src="Rysunki/Rysunek11_5a.gif"
+ width="250" height="250"></td>
+      <td width="50%"> <img border="0" src="Rysunki/Rysunek11_5b.gif"
+ width="250" height="250"></td>
+    </tr>
+  </tbody>
+</table>
+<p><b><b>&nbsp;</b></b></p>
+<table border="0" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse; width: 596px; height: 446px;"
+ bordercolor="#111111" id="AutoNumber2">
+  <tbody>
+    <tr>
+      <td width="50%">
+      <table style="text-align: left; height: 424px; width: 429px;"
+ border="1" cellspacing="2" cellpadding="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;" rowspan="1" colspan="11"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">A<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">B<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">C<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">D<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">E<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">F<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">G<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">H<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">I<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">1<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">2A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9A<br>
+            </td>
+            <td style="vertical-align: top;">5A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">{B,F,G}<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">2<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">2A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9A<br>
+            </td>
+            <td style="vertical-align: top;">5A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">3<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">6B<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9A<br>
+            </td>
+            <td style="vertical-align: top;">5A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">{C,F,G<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">4<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">6B</td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9A</td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">5A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">5<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">6B<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">10G<br>
+            </td>
+            <td style="vertical-align: top;">7G<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">{C,F,H,I}<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">6<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">6B<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">10G<br>
+            </td>
+            <td style="vertical-align: top;">7G<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">7<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">8C<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">10G<br>
+            </td>
+            <td style="vertical-align: top;">7G<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">{D,F,H,I}<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">8<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">8C<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9A<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">10G<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">7G<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">9<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">8C<br>
+            </td>
+            <td style="vertical-align: top;">10I<br>
+            </td>
+            <td style="vertical-align: top;">8I<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">10G<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">{D,E,F,H}<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">10<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">8C<br>
+            </td>
+            <td style="vertical-align: top;">10I<br>
+            </td>
+            <td style="vertical-align: top;">8I<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">10G<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">11<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9D<br>
+            </td>
+            <td style="vertical-align: top;">8I<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9D<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">{E,F,H}<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">12<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9D<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">8I<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9D<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">{E,H}<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">13<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">9D<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;">9D<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">{H}<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">14<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">9D<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255); font-weight: bold;">2A<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255); font-weight: bold;">6B<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255); font-weight: bold;">8C<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255); font-weight: bold;">9D<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255); font-weight: bold;">8I<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255); font-weight: bold;">5A<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255); font-weight: bold;">9D<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255); font-weight: bold;">7G<br>
+            </td>
+            <td style="vertical-align: top; text-align: center;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;" rowspan="1" colspan="10"><br>
+            </td>
+            <td style="vertical-align: top; text-align: center;">Rysunek
+11.5(c) <br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      </td>
+      <td width="50%">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p><b>Pytanie 6</b>: Czy oszacowanie koszt algorytmu zmieni siê,
+je¶li zbiór S2 zaimplementujemy jako kolejkê priorytetow±?&nbsp;<br>
+</p>
+<!-- <p>Odpowied¼: Nie, chocia¿ wyszukanie minimum bêdzie mniej kosztowa³o.</P> -->
+<form><b><b><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0"
+ onclick="napis(this.form,'Nie, bo koszt pêtli wewnêtrznej szacuje siê przez O(n).')">
+  </b></b>
+  <p><b><b><br clear="all">
+  </b></b>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td align="left"><a href="main11_p4.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+        <td align="right">&nbsp;<a href="main11_cw.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+      </tr>
+    </tbody>
+  </table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</form>
+</body>
+</html>

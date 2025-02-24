@@ -1,0 +1,414 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main03_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main03_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 3"></A><br clear="all"><div class="tytulpunktu">
+  3. Rekurencyjny algorytm min-max. </div>
+
+<p style="text-align: left">Trzeci algorytm rozwiązywania problemu min-max, to 
+algorytm rekurencyjny. Z zasadą &quot;dziel i zwyciężaj&quot;, którą tu wykorzystano 
+spotkaliśmy w wcześniej w algorytmie binarnych poszukiwań. Warto ją zapamiętać, 
+gdyż będzie jeszcze wielokrotnie wykorzystywana. Zasada ta głosi, że aby 
+rozwiązać 
+zadanie rozmiaru n należy najpierw podzielić je na podzadania&nbsp; o mniejszych 
+rozmiarach ( np. na dwa podzadania rozmiaru n/2), rozwiązać je i z uzyskanych 
+rozwiązań podzadań wywnioskować rozwiązanie końcowe.</p>
+<p>W konkretnym przypadku problemu min-max, zastosowanie zasady &quot;dziel i 
+zwyciężaj&quot;&nbsp; będzie polegało na podzieleniu danych na dwie, możliwie równe części, 
+znalezienie elementów największego i najmniejszego w każdej z nich, a następnie 
+ustalenie elementu najmniejszego całego ciągu, przez porównanie wybranych 
+elementów najmniejszych i ustalenie elementu największego przez porównanie 
+elementów największych każdej z dwóch części:</p>
+<ul>
+  <li>min_globalne = min( min(e[1], ..., e[n div 2]), min(e[n div 2 +1], ..., e[n]))</li>
+  <li>max_globalne = max( max(e[1], ..., e[n div 2]), max(e[n div 2 +1], ..., e[n])).</li>
+</ul>
+<p>Algorytm zostanie zapisany jako funkcja min_max3, która zwraca obiekt typu 
+para o dwóch atrybutach min i max.&nbsp; Funkcja ta ma trzy parametry, którymi są: dany 
+ciąg oraz dwa indeksy wskazujące początek i koniec rozważanego fragmentu tego 
+ciągu. W pierwszym wykonaniu funkcji te parametry powinny mieć odpowiednio 
+wartości 1 i n. Dla uproszczenia rozważań, przyjmijmy, że n 
+(tzn. liczba elementów w ciągu) jest potęgą 2.</p>
+<p style="text-align: center">wp = {(<font face="Symbol">$</font>k)(n = 2<sup><font face="Verdana">k</font></sup>)},&nbsp; 
+wk ={result.min = min(e), result.max= max(e)},</p>
+
+
+<p style="text-align: left">gdzie min(e) oznacza element najmniejszy, a max(e) - 
+element największy w ciągu e.</p>
+
+
+<p><div class="przyk">
+   <TABLE frame="void" rules="none" width="797" height="302">
+         <TR>
+            <TD width="59" height="16">para</TD>
+            <TD width="562" height="16">min_max3 (e: ciąg, i, j : int); </TD>
+             
+            <TD width="22" height="16"></TD>
+             
+            <TD width="687" height="16"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16"><STRONG>if </STRONG>
+            (i+1=j)<STRONG> then </STRONG>
+            </TD> 
+            <TD width="22" height="16"></TD> 
+            <TD width="687" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            if </strong>e[i] <FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            e[j] then </TD> 
+            <TD width="22" height="16"></TD> 
+            <TD width="687" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>result.min := e[i]; result.max := e[j];</TD> 
+            <TD width="22" height="16"></TD> 
+            <TD width="687" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            else</strong></TD> 
+            <TD width="22" height="16"></TD> 
+            <TD width="687" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>result.min := e[j]; result.max := e[i];</TD> 
+            <TD width="22" height="16"></TD> 
+            <TD width="687" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            fi</strong></TD> 
+            <TD width="22" height="16"></TD> 
+            <TD width="687" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16">   <STRONG>else&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG>
+             </TD>
+            <TD width="22" height="16">   </TD>
+            <TD width="687" height="16">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16">   &nbsp;&nbsp;&nbsp;&nbsp; x := min_max3 
+            (e, i, (i+j)div 2); </TD>
+            <TD width="22" height="16">   </TD>
+            <TD width="687" height="16">   // e[k]<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            x.max, 
+            dla k= i, i+1, ..., (i+j)div 2 oraz</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16">   </TD>
+            <TD width="22" height="16">   </TD>
+            <TD width="687" height="16">   // x.min<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            e[k]<FONT FACE="Symbol"> </FONT>, 
+            dla k= i, i+1, ..., (i+j)div 2&nbsp; (założenie)</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16">      &nbsp;&nbsp;&nbsp;&nbsp; y := 
+            min_max3 (e, (i+j)div 2+1, j);&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+             
+            <TD width="22" height="16">      </TD>
+             
+            <TD width="687" height="16">      // e[k]<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            y.max, 
+            dla k= (i+j)div 2, ..., j-1, j oraz</TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16">      </TD>
+             
+            <TD width="22" height="16">      </TD>
+             
+            <TD width="687" height="16">      // y.min<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            e[k], 
+            dla k= (i+j)div 2, ..., j-1, j&nbsp; (założenie)</TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16">&nbsp;&nbsp;&nbsp;&nbsp;<STRONG>&nbsp;if&nbsp; </STRONG>
+             (x.min<FONT FACE="Symbol"> <span lang="en">&pound;</span></FONT>
+            y.min)<STRONG> then &nbsp;&nbsp; </STRONG>
+             </TD>
+            <TD width="22" height="16"></TD>
+            <TD width="687" height="16"></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             result.min := x.min<STRONG> </STRONG>
+             </TD>
+            <TD width="22" height="16"></TD>
+            <TD width="687" height="16"></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="20">&nbsp;</TD>
+            <TD width="562" height="20">   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else </STRONG>
+             </TD>
+            <TD width="22" height="20">&nbsp;</TD>
+            <TD width="687" height="20">// result.min <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+            e[k], dla k= i, ..., j</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="20">&nbsp;</TD>
+            <TD width="562" height="20">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             result.min := y.min<STRONG> fi;</STRONG></TD>
+            <TD width="22" height="20">&nbsp;</TD>
+            <TD width="687" height="20">&nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16">&nbsp;&nbsp;&nbsp;<STRONG>&nbsp; if&nbsp; </STRONG>
+             (y.max <FONT FACE="Symbol"> <span lang="en">&pound;</span></FONT>
+            x.max)<STRONG> then </STRONG>
+             result.max := x.max<STRONG>&nbsp; </STRONG>
+             </TD>
+            <TD width="22" height="16"></TD>
+            <TD width="687" height="16"></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16">   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else </STRONG>
+             </TD>
+            <TD width="22" height="16"></TD>
+            <TD width="687" height="16">//e[k]<FONT FACE="Symbol"> <span lang="en"> &pound;</span> </FONT>
+            result.max&nbsp; , dla k= i, ..., j</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="562" height="16">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             result.max := y.max<STRONG> fi</STRONG>;<STRONG> </STRONG>
+             &nbsp; </TD>
+            <TD width="22" height="16"></TD>
+            <TD width="687" height="16"></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"></TD>
+            <TD width="562" height="1"><strong>&nbsp;fi</strong></TD>
+            <TD width="22" height="1"></TD>
+            <TD width="687" height="1"></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="562" height="16"></TD>
+            <TD width="22" height="16"></TD>
+            <TD width="687" height="16">// result.min <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+            e[k], e[k] <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+            result.max dla k=i, ..., j</TD>
+         </TR>
+   </TABLE>
+</div>
+
+<p style="text-align: left">Zanim przejdziemy do analizy poprawności, 
+prześledźmy na przykładzie, jak działa ten algorytm. Omawiany algorytm jest 
+rekurencyjny, tzn. w jego treści będziemy się ponownie do niego odwoływać.&nbsp; Rozważmy ciąg o 16 
+elementach. Wartości tych elementów nie są teraz istotne. Zanotujmy tylko parametry 
+kolejnych wywołań. Zapiszemy je w postaci grafu (por. Rys. 3.1). Każde 
+wywołanie, o ile dotyczy ciągu o więcej niż dwóch elementach, spowoduje 
+dwukrotne wywołanie funkcji min_max3. W rozważanym przykładzie pierwsze 
+wywołanie ma parametry (1,16). Ponieważ ciąg ma więcej niż dwa 
+elementy, zatem zostaną wykonane instrukcje po &quot;else&quot;, tzn. wywołamy dwukrotnie 
+funkcję min_max3 z parametrami (1,8) i (9,16). Wywołanie min_max3 dla ciągu 8 
+elementowego znów spowoduje dwa rekurencyjne wywołania funkcji z parametrami 
+(1,4) i (5,8) itd. Pierwsze porównanie zostanie wykonane dopiero, gdy rozważany 
+fragment ciągu ma dwa elementy. </P>
+
+<p style="text-align: center">
+<img border="0" src="Rysunki/Rysunek3_1.gif" width="300" height="250"></P>
+
+<p style="text-align: left"><b>Pytanie</b>&nbsp;<b>3:</b> W jakiej kolejności będą 
+zakończone wywołania rekurencyjne funkcji min_max3 dla n=8?&nbsp; 
+</P>
+
+<FORM>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'(1,2)(3,4)(1,4)(5,6)(7,8)(5,8)(1,8)');">
+</p>
+</form>
+
+<p style="text-align: left"><b>Analiza poprawności algorytmu min_max3.</b></P>
+
+<p style="text-align: left">Udowodnimy, że jeżeli przed wywołaniem funkcji 
+min_max3(e,i,j) spełniony jest warunek <font face="Symbol">a</font>(i,j) = 
+{j-i+1 = 2<sup><font face="Verdana">k</font></sup> dla k&gt;0}, to po wykonaniu 
+algorytmu&nbsp; spełniony jest&nbsp; warunek <font face="Symbol">b</font>(i,j) = 
+{result.min = min(e[i],...,e[j]), result.max = max(e[i],...,e[j]}. </P>
+
+<p style="text-align: left">Dowód poprawności algorytmu min_max3 zaczniemy od 
+przypadku, gdy j-i=1 tzn. ciąg składa się tylko z dwóch elementów. W takim 
+przypadku&nbsp; zostanie wykonana instrukcja warunkowa:</P>
+
+   <TABLE frame="void" rules="none" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0" cellspacing="0">
+         <TR>
+            <TD><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if </strong>e[i] <FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            e[j] then </TD> 
+         </TR>
+         <TR>
+            <TD><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>result.min := e[i]; result.max := e[j];</TD> 
+         </TR>
+         <TR>
+            <TD><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else</strong></TD> 
+         </TR>
+         <TR>
+            <TD><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>result.min := e[j]; result.max := e[i];</TD> 
+         </TR>
+         <TR>
+            <TD><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fi;</strong></TD> 
+         </TR>
+   </TABLE>
+
+<p style="text-align: left">Po jej wykonaniu result.min jest elementem 
+najmniejszym we fragmencie ciągu od e[i] do e[j] , a result.max jest elementem największym,&nbsp; co oznacza, 
+że algorytm działa poprawnie dla  ciągów dwuelementowych.</P>
+
+<p style="text-align: left">Załóżmy, że algorytm działa poprawnie dla wszystkich 
+ciągów o długości 2<sup><font face="Verdana">(k-1)</font></sup>,<font face="Verdana"><sup>
+</sup></font>gdzie&nbsp; k&gt;1, i rozważmy ciąg dwa razy dłuższy j-i+1=2<sup><font face="Verdana">k</font></sup> . 
+Zgodnie z treścią algorytmu, wykonujemy dwa wywołania funkcji min_max3. Ponieważ 
+(i+j)div 2 - i+1 = j - (i+j)div 2 = 2<sup><font face="Verdana">(k-1)</font></sup>, 
+zatem na mocy 
+założenia indukcyjnego, po wykonaniu wywołań</P>
+
+<p style="text-align: center">x := min_max3 (e, i, (i+j)div 2); y := min_max3(e, (i+j)div 
+2+1, j);&nbsp; </P>
+
+<p style="text-align: left">spełnione są własności:</P>
+
+<p style="text-align: center">x.min <FONT FACE="Symbol"> <span lang="en">&pound;</span></FONT> e[l] <FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            x.max&nbsp; dla l = i, i+1, ..., (i+j)div2&nbsp; oraz y.min <FONT FACE="Symbol"> <span lang="en">&pound;</span></FONT>
+            e[l] <FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            y.max&nbsp; dla l = (i+j)div2 +1, ..., j.</P>
+
+<p>Mniejsza z&nbsp; wartości&nbsp; x.min i y.min jest, na mocy przechodniości 
+relacji <FONT FACE="Symbol"> <span lang="en">&pound;</span>,</FONT>
+            niewiększa od e[i], e[i+1],..., e[(i+j)div2] oraz 
+e[(i+j)div2+1], e[(i+j)div2+2], ..., e[j], czyli jest najmniejszym elementem ciągu 
+e[i],...,e[j]. Większa z wartości x.max i y.max 
+jest elementem największym ciągu e[i],...,e[j]. Zatem&nbsp; po wykonaniu 
+instrukcji warunkowej, rozważane wywołanie funkcji min_max3 zakończy się i 
+spełniony będzie warunek</p>
+
+<p style="text-align: center">&nbsp;<font face="Symbol">b</font>(i,j) = {result.min 
+= min(e[i],...,e[j]), result.max = max(e[i],...,e[j]}. </p>
+
+<p>Wykazaliśmy w ten sposób, że algorytm działa poprawnie dla ciągów o długości 
+2<sup><font face="Verdana">k</font></sup>. Na mocy zasady indukcji matematycznej, 
+jeżeli dane spełniają warunek {j-i+1 = 2<sup><font face="Verdana">k</font></sup> 
+dla k&gt;0}, to po wykonaniu min_max3(e,i,j) otrzymane wyniki spełniają warunek
+<font face="Symbol">b</font>(i,j) dla dowolnej liczby naturalnej k&gt;0.&nbsp; W 
+szczególności, gdy&nbsp; n jest potęgą dwójki, wykonanie min_max(e,1,n)&nbsp; daje, 
+dla dowolnego ciągu e, wyniki spełniające warunek końcowy specyfikacji 
+algorytmu.</p>
+<p></P>
+
+<div class="twier">
+<p>Twierdzenie 3.1&nbsp;&nbsp; Dla dowolnych danych spełniających warunek wp = {(<font face="Symbol">$</font>k)(n = 2<sup><font face="Verdana">k</font></sup>)}, 
+w dowolnej strukturze, która ma określony liniowy porządek elementów, algorytm 
+rekurencyjny min_max3&nbsp; zatrzymuje się, a otrzymany wynik spełnia warunek końcowy </P>
+<p style="text-align: center">wk ={result.min = min(e), result.max= max(e)}.</P>
+</div>
+
+<p></P>
+<DIR>
+<DIR>
+
+<p></P></DIR>
+</DIR>
+
+<p><b>Analiza kosztu algorytmu min_max3. </b> </P>
+
+<p>Niech T(n) oznacza koszt wykonania (mierzony liczbą wykonanych porównań) algorytmu min_max3 dla danych o rozmiarze 
+n i niech n= 2<sup><font face="Verdana">k</font></sup>. Jeśli ciąg ma tylko dwa 
+elementy, to algorytm wykonuje jedno porównanie w celu ustalenia, który z 
+elementów jest większy. Jeśli ciąg ma więcej niż dwa elementy, to dzielimy go na 
+dwie części i&nbsp; dwukrotnie wywołujemy funkcję min_max3. Na koniec wykonujemy 
+dodatkowo 2 porównania by ustalić wartość elementu najmniejszego i największego. 
+Korzystając z przyjętego oznaczenia możemy zdefiniować funkcję T rekurencyjnie:</P>
+
+<blockquote>
+
+<ul>
+  <li>T(2<sup><font face="Verdana">k</font></sup>) = 2  <font face="Symbol"><span lang="en">´</span> </font>T(2<sup><font face="Verdana">k-1</font></sup>) 
+  + 2 dla k&gt;1,</li>
+  <li>T(2) = 1.</li>
+</ul>
+
+</blockquote>
+
+<p>Rozwiązaniem tego równania rekurencyjnego jest&nbsp; funkcja T(2<sup><font face="Verdana">k</font></sup>) 
+= 3 <span lang="en"><font face="Symbol">´</font></span> 2<sup><font face="Verdana">(k-1)</font></sup> 
+-2.</P>
+
+<p>Rzeczywiście dla k=1, T(2) = 3<span lang="en"><font face="Symbol">´</font></span>2<sup><font face="Verdana">0</font></sup> 
+- 2 = 3 - 2 = 1, co jest zgodne z definicją funkcji T(n). Załóżmy, że T(2<sup><font face="Verdana">i</font></sup>)= 3 <span lang="en">
+<font face="Symbol">´</font></span> 2<sup><font face="Verdana">(i-1)</font></sup> 
+- 2 dla pewnego i. Udowodnimy prawdziwość wzoru dla i+. Korzystając kolejno z definicji rekurencyjnej i z założenia indukcyjnego 
+otrzymujemy </P>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; T(2<sup><font face="Verdana">i+1</font></sup>) = 2<span lang="en"><font face="Symbol">´</font></span>T(2<sup><font face="Verdana">i</font></sup>) 
++ 2 = 2<span lang="en"><font face="Symbol">´</font></span>(3 <span lang="en"><font face="Symbol">´</font></span> 2<sup><font face="Verdana">(i-1)</font></sup> 
+-2) + 2 = 3 <span lang="en"><font face="Symbol">´</font></span> 2<sup><font face="Verdana"> 
+i</font></sup> - 2,&nbsp; <br>
+co należało udowodnić.</P>
+
+<p>Ostatecznie, T(n) = 3n/2 - 2 dla wszystkich liczb naturalnych n, będących 
+potęgą 2.</P>
+
+<p>Wadą omawianej tu metody jest użycie rekursji, co jest zawsze związane z 
+koniecznością zapamiętywania parametrów kolejnych wywołań. Zwykle tworzy się do 
+tego celu stos. To oczywiście zajmuje czas i wymaga dodatkowego miejsca. W 
+następnym punkcie omówimy wersję iteracyjną tego algorytmu.&nbsp; </P>
+
+<p></P>
+
+<p><b>Pytanie 4</B>: Ile razy zostanie wywołana funkcja min_max3, jeśli w 
+pierwszym wywołaniu parametrem aktualnym funkcji jest ciąg 128 elementowy oraz i 
+= 1, j = 128? </p>
+
+<!-- <p>Odpowiedź:  127 razy: 1<span lang="en"><font face="Symbol">´</font></span>dla128+2<span lang="en"><font face="Symbol">´</font></span> dla64 +4<span lang="en"><font face="Symbol">´</font></span>dla32+ 8<span lang="en"><font face="Symbol">´</font></span>dla16 + 
+16<span lang="en"><font face="Symbol">´</font></span>dla8 + 32<span lang="en"><font face="Symbol">´</font></span>dla4 + 64<span lang="en"><font face="Symbol">´</font></span>dla2 
+</P> -->
+ 
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,' 127 razy');">
+</form>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main03_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main03_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

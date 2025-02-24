@@ -1,0 +1,13 @@
+<Context path="/db" docBase="E:/Programming/webapsNew/SERWLETY/db/build">
+
+  <Resource name="jdbc/ksidb" auth="Container" 
+            type="javax.sql.DataSource"
+            description="Baza danych ksiazek" 
+            driverClassName="org.apache.derby.jdbc.ClientDriver"
+            url="jdbc:derby://localhost/ksidb"
+            username="APP"
+            password="APP"
+            maxActive="20" /> 
+
+
+</Context>

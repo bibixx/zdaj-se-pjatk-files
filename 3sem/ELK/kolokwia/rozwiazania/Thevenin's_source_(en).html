@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Thevenin's Theorem - Chapter 10: DC NETWORK ANALYSIS - Volume I - DC</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META NAME="keywords" CONTENT="electronics,circuits,eletric,boolean algebra,math,calculas,robotics">
+<META NAME="description" CONTENT="a complete guide to electronic circuits">
+<META NAME="robots" CONTENT="FOLLOW,INDEX">
+
+<link href="http://sub.allaboutcircuits.com/Style.css" rel="stylesheet" type="text/css">
+
+<script language="javascript">
+    var submitted = 0;
+    function LockButton (form,element) {
+       if ( ! submitted ) {
+           form.elements[element].disabled=true;
+           submitted = 1;
+       }
+       else { alert("Form already submitted, please be patient"); }
+    }
+</script>
+</head>
+<body bgcolor="#0099ff" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="1" align="center">
+  <tbody><tr>
+    <td bgcolor="#000000">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" background="http://sub.allaboutcircuits.com/AllAboutCircuits_files/scan.gif">
+        <tbody><tr>
+          <td valign="bottom"><img src="http://sub.allaboutcircuits.com/AllAboutCircuits_files/logo.gif" width="304" height="26"></td>
+          <td>
+            <div align="right"><img src="http://sub.allaboutcircuits.com/AllAboutCircuits_files/cir1.jpg" width="280" height="83"></div>
+          </td>
+        </tr>
+        <tr bgcolor="#000000">
+          <td colspan="2">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody><tr>
+                <td>
+			                  <table width="100%" border="0" cellspacing="1" cellpadding="0">
+                    <tbody><tr bgcolor="#000000">
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/vol_1/index.html" title="Volume I - DC">Volume I - DC</a></div>
+                      </td>
+
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/vol_2/index.html" title="Volume II - AC">Volume II - AC</a></div>
+                      </td>
+
+                       <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/vol_3/index.html" title="Volume III - Semiconductors">Volume III - Semiconductors</a></div>
+                      </td>
+
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/vol_4/index.html" title="Volume IV - Digital">Volume IV - Digital</a></div>
+                      </td>
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                      </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/vol_5/index.html" title="Volume V - Reference">Volume V - Reference</a></div>
+                      </td>
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/vol_6/index.html" title="Volume VI - Experiments">Volume VI - Experiments</a></div>
+                      </td>
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://forum.allaboutcircuits.com" title="Electronics Forums">Forums</a></div>
+                      </td>
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/l_links.html" title="Electrical Circuit Links">Links</a></div>
+                      </td>
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+                  </tbody></table>                </td>
+                <td width="280">
+                  <div align="right"><img src="http://sub.allaboutcircuits.com/AllAboutCircuits_files/cir2.jpg" width="280" height="23"></div>
+                </td>
+              </tr>
+            </tbody></table>
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#000000">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#316ac5">
+        <tbody><tr>
+          <td width="200" valign="top"><br>
+            <table width="100%" border="0" cellspacing="1" cellpadding="3">
+              <tbody>
+              <tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/1.html" title="What is network analysis?">What is network analysis?</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/2.html" title="Branch current method">Branch current method</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/3.html" title="Mesh current method">Mesh current method</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/4.html" title="Introduction to network theorems">Introduction to network theorems</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/5.html" title="Millman's Theorem">Millman's Theorem</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/6.html" title="Superposition Theorem">Superposition Theorem</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/7.html" title="Thevenin's Theorem">Thevenin's Theorem</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/8.html" title="Norton's Theorem">Norton's Theorem</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/9.html" title="Thevenin-Norton equivalencies">Thevenin-Norton equivalencies</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/10.html" title="Millman's Theorem revisited">Millman's Theorem revisited</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/11.html" title="Maximum Power Transfer Theorem">Maximum Power Transfer Theorem</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/12.html" title="&#916;-Y and Y-&#916; conversions">&#916;-Y and Y-&#916; conversions</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/index.html">Back to Chapter Index</a></td></tr>              <td class="sidenav">
+              <form NAME="myform" method="GET" action="http://sub.allaboutcircuits.com/search.php">
+			  <input type="text" name="query" class="forms_field">
+			  <select name="volume_id" size="1" class="forms_dropdown">
+			  <option value="999">Search All Volumes</option>
+			  <option value="1" Selected>Volume I - DC</option>
+			  <option value="2" >Volume II - AC</option>
+			  <option value="3" >Volume III - Semiconductors</option>
+			  <option value="4" >Volume IV - Digital</option>
+			  <option value="5" >Volume V - Reference</option>
+			  <option value="6" >Volume VI - Experiments</option>
+			  </select>
+ 				<input name="Search" value="SEARCH" default="true" type="submit" class="forms_submit" >               </form>
+			  </td>
+
+              </tbody></table><br /><br />
+              <font size="2" color="#FFFFFF" face="Verdana, Arial, Helvetica">
+				  <b> Check out our <a href="http://forum.allaboutcircuits.com" title="Electronic Forums"><font color="yellow">Electronics Forums</font></a>!<br />
+							Ask questions and help answer others. Check it out!
+					</b>
+				</font><br /><br />
+</td>
+          <td bgcolor="#ffffff" valign="top">
+            <p> </p><table width="90%" border="0" cellspacing="0" cellpadding="0" align="center" class="bodytext">
+              <tbody><tr>
+                <td class="bodytext">
+					<div align="center">
+					<script type="text/javascript">
+					<!--
+					google_ad_client = "pub-6110766095769513";
+					google_ad_width = 468;
+					google_ad_height = 60;
+					google_ad_format = "468x60_as";
+					google_color_border = "336699";
+					google_color_bg = "FFFFFF";
+					google_color_link = "0000FF";
+					google_color_url = "008000";
+					google_color_text = "000000";
+					google_ad_channel ="4911351916";
+					//-->
+					</script>
+					<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+					</script><br /><br />
+					<font size="4">Thevenin's Theorem</font></div><br>
+					<div align="left"><a href="http://www.allaboutcircuits.com" title="All About Circuits">All About Circuits</a>&nbsp;>&nbsp;<a href="http://www.allaboutcircuits.com/vol_1/index.html" title="Volume I - DC">Volume I - DC</a>&nbsp;>&nbsp;<a href="http://www.allaboutcircuits.com/vol_1/chpt_10/index.html" title="Chapter 10: DC NETWORK ANALYSIS">Chapter 10: DC NETWORK ANALYSIS</a>&nbsp;>&nbsp;<a href="http://www.allaboutcircuits.com/vol_1/chpt_10/7.html" title="Thevenin's Theorem">Thevenin's Theorem</a></div>
+<hr>
+<h2><u>Thevenin's Theorem</u></h2>
+
+<a name="Thevenin's Theorem"></a>
+<a name="Theorem, Thevenin's"></a>
+<a name="Nonlinear circuit"></a>
+<a name="Circuits, nonlinear"></a>
+
+<p>
+Thevenin's Theorem states that it is possible to simplify any linear circuit, no matter how complex, to an equivalent circuit with just a single voltage source and series resistance connected to a load.  The qualification of "linear" is identical to that found in the Superposition Theorem, where all the underlying equations must be linear (no exponents or roots).  If we're dealing with passive components (such as resistors, and later, inductors and capacitors), this is true.  However, there are some components (especially certain gas-discharge and semiconductor components) which are nonlinear: that is, their opposition to current <i>changes</i> with voltage and/or current.  As such, we would call circuits containing these types of components, <i>nonlinear circuits</i>.
+
+</p>
+
+<p>
+Thevenin's Theorem is especially useful in analyzing power systems and other circuits where one particular resistor in the circuit (called the "load" resistor) is subject to change, and re-calculation of the circuit is necessary with each trial value of load resistance, to determine voltage across it and current through it.  Let's take another look at our example circuit:
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00209.png"> </p>
+
+<p>
+Let's suppose that we decide to designate R<sub>2</sub> as the "load" resistor in this circuit.  We already have four methods of analysis at our disposal (Branch Current, Mesh Current, Millman's Theorem, and Superposition Theorem) to use in determining voltage across R<sub>2</sub> and current through R<sub>2</sub>, but each of these methods are time-consuming.  Imagine repeating any of these methods over and over again to find what would happen if the load resistance changed (changing load resistance is <i>very</i> common in power systems, as multiple loads get switched on and off as needed. the total resistance of their parallel connections changing depending on how many are connected at a time).  This could potentially involve a <i>lot</i> of work!
+
+</p>
+
+<a name="Equivalent circuit"></a>
+<a name="Circuit, equivalent"></a>
+
+<p>
+Thevenin's Theorem makes this easy by temporarily removing the load resistance from the original circuit and reducing what's left to an equivalent circuit composed of a single voltage source and series resistance.  The load resistance can then be re-connected to this "Thevenin equivalent circuit" and calculations carried out as if the whole network were nothing but a simple series circuit:
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00235.png"> </p>
+
+<p>
+. . . after Thevenin conversion . . .
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00236.png"> </p>
+
+<p>
+The "Thevenin Equivalent Circuit" is the electrical equivalent of B<sub>1</sub>, R<sub>1</sub>, R<sub>3</sub>, and B<sub>2</sub> as seen from the two points where our load resistor (R<sub>2</sub>) connects.
+
+</p>
+
+<p>
+The Thevenin equivalent circuit, if correctly derived, will behave exactly the same as the original circuit formed by B<sub>1</sub>, R<sub>1</sub>, R<sub>3</sub>, and B<sub>2</sub>.  In other words, the load resistor (R<sub>2</sub>) voltage and current should be exactly the same for the same value of load resistance in the two circuits.  The load resistor R<sub>2</sub> cannot "tell the difference" between the original network of B<sub>1</sub>, R<sub>1</sub>, R<sub>3</sub>, and B<sub>2</sub>, and the Thevenin equivalent circuit of E<sub>Thevenin</sub>, and R<sub>Thevenin</sub>, provided that the values for E<sub>Thevenin</sub> and R<sub>Thevenin</sub> have been calculated correctly.
+
+</p>
+
+<p>
+The advantage in performing the "Thevenin conversion" to the simpler circuit, of course, is that it makes load voltage and load current so much easier to solve than in the original network.  Calculating the equivalent Thevenin source voltage and series resistance is actually quite easy.  First, the chosen load resistor is removed from the original circuit, replaced with a break (open circuit):
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00237.png"> </p>
+
+<p>
+Next, the voltage between the two points where the load resistor used to be attached is determined.  Use whatever analysis methods are at your disposal to do this.  In this case, the original circuit with the load resistor removed is nothing more than a simple series circuit with opposing batteries, and so we can determine the voltage across the open load terminals by applying the rules of series circuits, Ohm's Law, and Kirchhoff's Voltage Law:
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/10194.png"> </p>
+
+<p>
+
+</p>
+
+<br> </br>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00238.png"> </p>
+
+<p>
+The voltage between the two load connection points can be figured from the one of the battery's voltage and one of the resistor's voltage drops, and comes out to 11.2 volts.  This is our "Thevenin voltage" (E<sub>Thevenin</sub>) in the equivalent circuit:
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00239.png"> </p>
+
+<p>
+To find the Thevenin series resistance for our equivalent circuit, we need to take the original circuit (with the load resistor still removed), remove the power sources (in the same style as we did with the Superposition Theorem: voltage sources replaced with wires and current sources replaced with breaks), and figure the resistance from one load terminal to the other:
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00240.png"> </p>
+
+<p>
+With the removal of the two batteries, the total resistance measured at this location is equal to R<sub>1</sub> and R<sub>3</sub> in parallel: 0.8 &#937;.  This is our "Thevenin resistance" (R<sub>Thevenin</sub>) for the equivalent circuit:
+
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00241.png"> </p>
+
+<p>
+With the load resistor (2 &#937;) attached between the connection points, we can determine voltage across it and current through it as though the whole network were nothing more than a simple series circuit:
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/10195.png"> </p>
+
+<p>
+Notice that the voltage and current figures for R<sub>2</sub> (8 volts, 4 amps) are identical to those found using other methods of analysis.  Also notice that the voltage and current figures for the Thevenin series resistance and the Thevenin source (<i>total</i>) do not apply to any component in the original, complex circuit.  Thevenin's Theorem is only useful for determining what happens to a <i>single</i> resistor in a network: the load.
+
+</p>
+
+<p>
+The advantage, of course, is that you can quickly determine what would happen to that single resistor if it were of a value other than 2 &#937; without having to go through a lot of analysis again.  Just plug in that other value for the load resistor into the Thevenin equivalent circuit and a little bit of series circuit calculation will give you the result.
+</p>
+
+<ul>
+<li><b>REVIEW:</b></li>
+<li>Thevenin's Theorem is a way to reduce a network to an equivalent circuit composed of a single voltage source, series resistance, and series load.</li>
+<li>Steps to follow for Thevenin's Theorem:</li>
+<li>(1) Find the Thevenin source voltage by removing the load resistor from the original circuit and calculating voltage across the open connection points where the load resistor used to be.</li>
+
+<li>(2) Find the Thevenin resistance by removing all power sources in  the original circuit (voltage sources shorted and current sources open) and calculating total resistance between the open connection points.</li>
+<li>(3) Draw the Thevenin equivalent circuit, with the Thevenin voltage source in series with the Thevenin resistance.  The load resistor re-attaches between the two open points of the equivalent circuit.</li>
+<li>(4) Analyze voltage and current for the load resistor following the rules for series circuits.</li>
+</ul>
+<div align="center"><font size=3><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/6.html">&lt;&nbsp;Back</a></font></div><div align="center"><font size=3><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/8.html">Forward&nbsp;&gt;</a></font></div>
+
+<br />
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-6110766095769513";
+google_ad_width = 234;
+google_ad_height = 60;
+google_ad_format = "234x60_as";
+google_ad_channel ="4911351916";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "0072BC";
+google_color_url = "006633";
+google_color_text = "000000";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+					<br><br><br><br><br>
+					<br><br><br><br><br>
+					<br><br><br><br><br>
+					<br><br><br><br><br>
+					<br><br><br><br><br>
+                </td>
+              </tr>
+            </tbody></table>
+          <p> </p></td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#000000">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#316ac5">
+        <tbody><tr>
+          <td>
+            <div align="center"><font face="Arial, Helvetica, sans-serif" size="1" color="#cccccc"><a href="http://www.allaboutcircuits.com" title="E-Book about electric circuits"><font color="#cccccc">All About Electric Circuits</font></a>. Copyright
+              2003, AllAboutCircuits.com, All Rights Reserved. <a href="http://www.allaboutcircuits.com/l_disclaimer.html"><font color="#cccccc">Disclaimer</font></a>. <a href="http://www.allaboutcircuits.com/l_contact.html"><font color="#cccccc">Contact</font></a>.</font></div>
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+</body></html>

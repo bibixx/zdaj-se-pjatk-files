@@ -1,0 +1,1372 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+
+<td align="left"><A HREF="main06_p1.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main06_p3.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all">
+<A NAME="EDU.wyklad.punkt 2"></A>
+<br clear="all">
+
+<div class="tytulpunktu">2. Kolejki</div> 
+
+    <p>Kolejki, podobnie jak stosy, służą do reprezentowania skończonych ciągów 
+    i dopuszczają wykonywanie na nich prostych operacji wkładanie usuwania, 
+    badania, czy kolejka jest pusta. Organizacja kolejki przypomina 
+    organizację kolejki klientów przed okienkiem na poczcie: obsługiwana jest 
+    zwykle najpierw pierwsza osoba z kolejki, a nowoprzybyły klient ustawia się na 
+    jej końcu. Zasadę rządzącą kolejką przyjęło się określać z angielskiego&nbsp; FIFO: first in - first out.</p>
+
+
+
+
+
+    <p><div class="def">Definicja 6.2 <br>
+
+    <p>Standardową strukturą kolejek nazywamy strukturę<center>
+  <p style="text-align: center"><b>Q</b>(E) = &lt;&nbsp; E + Q, in out, first, empty, =&nbsp; &gt;,</p>
+  </center>
+    gdzie E jest zbiorem elementów, Q zbiorem skończonych ciągów nad E, a 
+    operacje struktury są określone dla dowolnych q = (e<sub>1</sub>,e<sub>2</sub>,...,e<sub>n</sub>) 
+  , q'= (e'<sub>1</sub>,e'<sub>2</sub>,...,e'<sub>m</sub>) 
+    następująco:</p>
+
+
+
+
+
+    <blockquote>
+      <blockquote>
+        <blockquote>
+
+
+
+
+
+    <p style="line-height: 20px">in(e, q) =<sup><font face="Verdana">df</font></sup> (e<sub>1</sub>,e<sub>2</sub>,...,e<sub>n</sub>,e),<br>
+    out(q) =<sup><font face="Verdana">df</font></sup> (e<sub>2</sub>,...,e<sub>n</sub>), gdy n&gt;1 i nieokreślone w pp.<br>
+    first(q) =<sup><font face="Verdana">df</font></sup> e<sub>1</sub>, gdy n&gt;1 i nieokreślone w pp.<br>
+    empty(q) =<sup><font face="Verdana">df</font></sup> true wttw q jest ciągiem pustym, 
+    tzn. n=0,<br>
+    s = s' wttw<sup><font face="Verdana">df&nbsp; </font>
+    </sup>&nbsp;n = m oraz e<sub>i</sub> = e'<sub>i</sub> dla i=1,...,n.</p>
+        </blockquote>
+      </blockquote>
+  </blockquote>
+    </div></p>
+
+
+
+
+    <p>Zasada wykonywania operacji w kolejce jest inna niż w stosach: operacje 
+    usuwania elementu z kolejki i wkładania nowego elementu do kolejki, odbywają 
+    się na różnych jej końcach. Kolejność elementów w kolejce jest związana z 
+    kolejnością ich wstawiania do kolejki.</p>
+
+
+
+
+
+    <p>Podobnie jak stosy, kolejki można w komputerze reprezentować na różne sposoby. Omówimy tu 
+    dwie z nich: Kolejkę w postaci tablicy i kolejkę w postaci listy.</p>
+
+
+
+
+
+    <p><b>Implementacja I</b></p>
+
+
+
+
+
+    <p>Jako pierwszą omówimy implementację kolejki z użyciem tablicy. Kolejka 
+    jest reprezentowana przez tablicę TAB, zawierającą 
+    elementy składowe kolejki i dwa wskaźniki head i tail, wskazujące pozycje początku 
+    i&nbsp; końca kolejki.&nbsp; Jest to więc obiekt o trzech atrybutach TAB, 
+    head, tail, jak na rysunku 6.3. </p>
+
+
+
+
+
+    <div style="float: left; width: 547; height: 171">
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="69%" id="AutoNumber4" height="167">
+  <tr>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="13%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="13%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0" height="16" bordercolor="#808080">
+    head</td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">
+    &nbsp;</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bgcolor="#C0C0C0" height="16" bordercolor="#808080">
+    tail</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">
+    &nbsp;</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="13%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <b><font face="Symbol" size="4" color="#808080"><span lang="en">&macr;</span></font></b></td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <b><span lang="en"><font face="Symbol" size="4" color="#808080">&macr;</font></span></b></td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="13%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">
+    TAB:</td>
+    <td width="4%" align="center" bordercolordark="#808080" height="16" bgcolor="#F0F8FF" bordercolor="#808080">
+    1</td>
+    <td width="4%" align="center" bordercolordark="#808080" height="16" bgcolor="#F0F8FF" bordercolor="#808080">
+    2</td>
+    <td width="4%" align="center" bordercolordark="#808080" height="16" bgcolor="#F0F8FF" bordercolor="#808080">
+    3</td>
+    <td width="4%" bordercolordark="#808080" height="16" bgcolor="#F0F8FF" bordercolor="#808080" align="center">
+    ...</td>
+    <td width="4%" align="center" bordercolordark="#808080" height="16" bgcolor="#F0F8FF" bordercolor="#808080">
+    i</td>
+    <td width="4%" bordercolordark="#808080" height="16" bgcolor="#F0F8FF" bordercolor="#808080" align="center">
+    ...</td>
+    <td width="4%" align="center" bordercolordark="#808080" height="16" bgcolor="#F0F8FF" bordercolor="#808080">
+    </td>
+    <td width="4%" bordercolordark="#808080" height="16" bgcolor="#F0F8FF" bordercolor="#808080" align="center">
+    n</td>
+    <td width="13%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolordark="#808080" height="32" bordercolor="#808080" bgcolor="#F0F8FF" rowspan="2">
+    e<sub><font face="Verdana">1</font></sub></td>
+    <td width="4%" align="center" bordercolordark="#808080" height="32" bordercolor="#808080" bgcolor="#F0F8FF" rowspan="2">
+    e<sub><font face="Verdana">2</font></sub></td>
+    <td width="4%" align="center" bordercolordark="#808080" height="32" bordercolor="#808080" bgcolor="#F0F8FF" rowspan="2">
+    e<sub><font face="Verdana">3</font></sub></td>
+    <td width="4%" bordercolordark="#808080" height="32" bordercolor="#808080" bgcolor="#F0F8FF" rowspan="2" align="center">
+    ...</td>
+    <td width="4%" align="center" bordercolordark="#808080" height="32" bordercolor="#808080" bgcolor="#F0F8FF" rowspan="2">
+    e<sub><font face="Verdana">i</font></sub></td>
+    <td width="4%" bordercolordark="#808080" height="32" bordercolor="#808080" bgcolor="#F0F8FF" rowspan="2" align="center">
+    &nbsp;</td>
+    <td width="4%" align="center" bordercolordark="#808080" height="32" bordercolor="#808080" bgcolor="#F0F8FF" rowspan="2">
+    &nbsp;</td>
+    <td width="4%" bordercolordark="#808080" height="32" bordercolor="#808080" bgcolor="#F0F8FF" rowspan="2" align="center">
+    &nbsp;</td>
+    <td width="13%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="13%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    &nbsp;</td>
+    <td width="4%" align="right" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">
+    </td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    &nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">
+    </td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    &nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">
+    </td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    &nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">
+    </td>
+    <td width="13%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    </tr>
+  <tr>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    &nbsp;</td>
+    <td width="4%" align="right" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">
+    </td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    &nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">
+    </td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    &nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">
+    </td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    &nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">
+    </td>
+    <td width="13%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    </tr>
+  <tr>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="12%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1" colspan="3">
+    Rysunek 6.3</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="13%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+  </tr>
+  </table>
+</div>
+
+
+
+
+
+    <p>Operację wkładania do kolejki realizujemy przez wpisanie nowego elementu na pozycję 
+    tail+1. Usunięcie elementu z kolejki, to po prostu przesunięcie wskaźnika head 
+    o jedną pozycję w prawo. Oczywisty kłopot powstaje wtedy, gdy do 
+    kolejki zawierającej n elementów chcemy dodać jeszcze jeden element. Możemy 
+    go rozwiązać tak jak w przypadku stosów: przepisać zawartość tablicy do tablicy 
+    większej. W kolejkach mamy jednak jeszcze 
+    jeden problem. Usuwanie elementów z początku tablicy powoduje powstanie 
+    &quot;dziury&quot;, którą moglibyśmy wykorzystać, o ile tablicę będziemy wypełniać 
+    cyklicznie: jeśli pozycja n-ta jest zapełniona to następny element wkładamy 
+    na pozycję pierwszą, o ile jest ona wolna. Na rysunku 6.4 pokazano kolejne 
+    stany kolejki w wyniku wykonania ciągu operacji wkładania i usuwania. </p>
+
+
+
+<center>
+
+<table border="1" cellpadding="0" cellspacing="0" width="66%" id="AutoNumber5">
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    head</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    tail</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5"><b><span lang="en">
+    <font face="Symbol">&macr;</font></span></b></td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5"><b><span lang="en">
+    <font face="Symbol">&macr;</font></span></b></td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center">TAB:</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">1</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">2</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">3</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">4</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">5</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">6</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">7</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">8</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">9</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">10</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">11</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">12</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">13</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">14</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">15</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">a</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">b</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">c</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">d</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">e</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">f</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">g</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">h</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">i</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">j</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">k</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">l</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" rowspan="2">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" rowspan="2">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" rowspan="2">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="76%" colspan="18" align="center">stan początkowy kolejki q</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    head</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    tail</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5"><b><span lang="en">
+    <font face="Symbol">&macr;</font></span></b></td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5"><b><span lang="en">
+    <font face="Symbol">&macr;</font></span></b></td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center">TAB:</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">1</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">2</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">3</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">4</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">5</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">6</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">7</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">8</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">9</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">10</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">11</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">12</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">13</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">14</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">15</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" rowspan="2">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" rowspan="2">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" rowspan="2">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">d</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">e</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">f</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">g</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">h</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">i</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">j</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">k</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">l</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">m</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" rowspan="2">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" rowspan="2">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="76%" colspan="18" align="center">stan po wykonaniu operacji: 
+    in(m,q); out(q); out(q); out(q);</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    tail</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    head</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5"><b><span lang="en">
+    <font face="Symbol">&macr;</font></span></b></td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5"><b><span lang="en">
+    <font face="Symbol">&macr;</font></span></b></td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center">TAB:</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">1</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">2</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">3</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">4</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">5</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">6</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">7</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">8</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">9</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">10</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">11</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">12</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">13</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">14</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB">15</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">p</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" rowspan="2">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" rowspan="2">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">d</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">e</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">f</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">g</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">h</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">i</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">j</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">k</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">l</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">m</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">n</td>
+    <td width="4%" align="center" bgcolor="#E6F0EB" rowspan="2">o</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="76%" colspan="18" align="center">stan po wykonaniu operacji: 
+    in(n,q); in(o,q); in(p,q);</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="20%" align="center" colspan="5" bordercolor="#F5F5F5">Rysunek 6.4</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+</table>
+
+</center>
+
+
+
+<p>Przyjmujemy, że kolejka jest pusta, jeśli head = 0. Operację first można zrealizować wykonując jedną instrukcję przypisania {<b>if</b> 
+(q.head<span lang="en"><font face="Symbol">&sup1;</font></span>0) then return q.TAB[head]<b> 
+fi</b>}. Oczywiście wynik nie będzie poprawny, gdy kolejka jest pusta, dlatego 
+zwykle obsługujemy ten błąd.&nbsp; Operację wkładania elementu można zrealizować następująco:</p>
+
+
+
+
+
+<blockquote>
+  <blockquote>
+    <blockquote>
+
+
+
+
+
+<p>in(x,q){ <b>if</b> (q.head = 0) <b>then</b>&nbsp;<BR> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+q.head :=1; q.tail :=1 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>else</b> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;
+<b>if</b> 
+ not ((q.tail mod n)+1 = q.head )  <b>then</b>  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+q.tail := (q.tail mod n) + 1 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+<b>fi </b>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>fi</b>; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; q.TAB[q.tail] := x;&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return q<br>
+}.</p>
+
+
+
+
+
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+
+
+
+
+<p>Jeżeli kolejka q jest pusta, to w wyniku wykonania operacji in(x,q) zarówno 
+atrybut head, jak i tail, wskazują pierwszy element tablicy TAB. W przeciwnym 
+przypadku musimy zbadać, czy jest wolne miejsce w tablicy. Jeśli tak, to 
+zwiększamy wartość wskaźnika tail o jeden i umieszczamy tam x. Tak zrealizowana 
+operacja wkładania będzie funkcjonować poprawnie przy założeniu, że liczba 
+elementów w kolejce nigdy nie przekroczy n.</p>
+
+
+
+
+
+<p>Realizacja usuwania jest też prosta.</p>
+
+
+
+
+
+<blockquote>
+  <blockquote>
+    <blockquote>
+
+
+
+
+
+<p>out(q){ <b>if</b> (q.head > 0) <b>then</b> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>if </b>q.head = q.tail <b>then</b><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; q.tail :=0; q.head := 0  
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>else</b>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; q.head := (q.head mod n) +1; 
+<b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fi fi</b>;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return q<br>
+}.</p>
+
+
+
+
+
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+
+
+
+
+<p>Zauważmy jeszcze, że koszt operacji in, out, first jest stały, przy 
+    założeniu, że tablica reprezentująca kolejkę ma dostatecznie duży rozmiar, 
+    tak by nigdy nie było w kolejce więcej niż n elementów.</p>
+
+
+
+
+
+<p><b>Implementacja II</b></p>
+
+
+
+
+
+<p>W tej implementacji będziemy myśleli o kolejce jako o obiekcie typu <i>queue,</i> mającym dwa 
+atrybuty head i tail, wskazujące odpowiednio pierwszy i ostatni element kolejki. 
+head i tail&nbsp; będą same obiektami typu LINK, o dwóch atrybutach val i next. 
+Wartością atrybutu val jest przechowywany w kolejce element, a next jest 
+referencją do obiektu typu LINK. Na rysunku 6.5 przedstawiono przykładową 
+kolejkę, złożoną z n obiektów typu LINK. Elementami tej kolejki są e<sub><font face="Verdana">1</font></sub>,...,e<sub><font face="Verdana">n</font></sub>. 
+Atrybut head wskazuje pierwszy element kolejki, a atrybut tail - ostatni.&nbsp; 
+Przy takiej realizacji kolejki, nie ma problemów z przepełnieniem: nowy element 
+dowiązujemy do końca kolejki, a usuwamy element wskazany przez head.</p>
+<center>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="61%" id="AutoNumber1" height="112">
+  <tr>
+    <td width="2%" bordercolor="#F5F5F5" height="1" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="1"></td>
+  </tr>
+  <tr>
+    <td width="2%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    e<sub><font face="Verdana">1</font></sub></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    next</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="6%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    e<sub><font face="Verdana">2</font></sub></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    next</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">
+    ...</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="6%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    e<sub><font face="Verdana">n-1</font></sub></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    next</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="6%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    e<sub><font face="Verdana">n</font></sub></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    next</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="3%" bgcolor="#C0C0C0" bordercolor="#808080" height="16" bordercolordark="#808080">
+    <p align="center" style="text-align: center">null</td>
+    <td width="3%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">
+    <p align="center" style="text-align: center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="2%" bordercolor="#F5F5F5" align="center" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" bordercolor="#F5F5F5" align="center" height="16">
+    <b><span lang="en"><font face="Symbol" size="4">­</font></span></b></td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="6%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="6%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="6%" bordercolor="#F5F5F5" align="center" height="16">
+    <b><span lang="en"><font face="Symbol" size="4">­</font></span></b></td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="16"></td>
+  </tr>
+  <tr>
+    <td width="2%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" align="center" height="16" bordercolorlight="#808080">
+    head</td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">
+    &nbsp;</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16" bgcolor="#F5F5F5"></td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">
+    &nbsp;</td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">
+    &nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16" bgcolor="#F5F5F5"></td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">
+    &nbsp;</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16" bgcolor="#F5F5F5"></td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">
+    &nbsp;</td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">
+    &nbsp;</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16" bgcolor="#F5F5F5"></td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" align="center" height="16" bordercolordark="#808080">
+    tail</td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">
+    &nbsp;</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="16"></td>
+  </tr>
+  <tr>
+    <td width="2%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="2%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="6%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="20%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1" colspan="5">
+    Rysunek 6.5</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="2%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1" align="center">&nbsp;</td>
+    <td width="3%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+  </tr>
+</table>
+
+</center>
+
+
+
+    <p>Kolejka jest pusta, jeśli wartością head jest null.&nbsp; Realizacja 
+    operacji jest niezwykle prosta:</p>
+
+
+
+
+
+    <blockquote>
+      <blockquote>
+        <blockquote>
+
+
+
+
+
+    <p>first(q){<b>if</b> (q.head <span lang="en"><font face="Symbol">&sup1;</font></span> 
+    null) <b>then</b> return q.head.val <b>fi</b> }</p>
+
+
+
+
+
+    <p>in(x,q){pom := new LINK(); pom.val := x; <b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if</b> (q.head
+    <span lang="en"><font face="Symbol">&sup1;</font></span> null) <b>then</b>
+    <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    q.tail.next := pom <b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else</b> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; q.head := pom <b>
+    <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fi</b>; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; q.tail := pom; 
+    <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return q <br>
+    }</p>
+
+
+
+
+
+    <p>out(q){<b>if</b> (q.head <span lang="en"><font face="Symbol">&sup1;</font></span> 
+    null) <b>then</b> q := q.head.next <b>fi</b>}</p>
+
+
+
+
+
+    <p>empty (q){ return (q.head = null) }.</p>
+
+
+
+
+
+        </blockquote>
+      </blockquote>
+</blockquote>
+
+
+
+
+
+    <p>Operacje first i out są operacjami częściowymi, tak jak to 
+    sygnalizowaliśmy w strukturze standardowej. </p>
+
+
+
+
+
+    <p>Zastanówmy się, jakie wspólne cechy mają te dwie implementacje struktury 
+    kolejek? Jakie własności charakteryzują kolejki?</p>
+
+
+
+
+
+    <p><b>Specyfikacja kolejek</b> </p>
+
+
+
+
+
+    <p>Rozważmy następujący zestaw formuł (Q1)-(Q7), w których q jest zmienną 
+    typu kolejka, a x jest zmienną typu element kolejki.</p>
+
+
+
+
+
+    <blockquote>
+      <blockquote>
+        <blockquote>
+          <blockquote>
+
+
+
+
+
+    <p>(Q1) empty(q) <span lang="en"><font face="Symbol">&reg;</font></span> 
+    out(in(x,q)) = q</p>
+
+
+
+
+
+    <p>(Q2) empty(q) <span lang="en"><font face="Symbol">&reg;</font></span>&nbsp; 
+    first(in(x,q)) = x</p>
+
+
+
+
+
+    <p>(Q3)<font face="Symbol"> <span lang="en">&Oslash;</span>&nbsp; </font>
+    empty(in(x,q))</p>
+
+
+
+
+
+    <p>(Q4)<font face="Symbol">&nbsp; <span lang="en">&Oslash;</span> </font>empty(q)
+    <span lang="en"><font face="Symbol">&reg;</font></span> first(in(x,q)) = first(q)</p>
+
+
+
+
+
+    <p>(Q5)<font face="Symbol">&nbsp; <span lang="en">&Oslash;</span>&nbsp; </font>
+    empty(q)<font face="Symbol"> <span lang="en">&reg;</span></font> in(x,out(q)) = out(in(x,q))</p>
+
+
+
+
+
+    <p>(Q6) każda kolejka jest skończona</p>
+
+
+
+
+
+    <p>(Q7) kolejki&nbsp; q i q' są równe wttw dla każdego i, albo&nbsp; 
+    first(out<sup><font face="Verdana"> i </font></sup>(q)) = first(out <sup>
+    <font face="Verdana">i </font></sup>(q'))</p>
+
+
+
+
+
+          </blockquote>
+        </blockquote>
+      </blockquote>
+</blockquote>
+
+
+
+
+
+    <p>Zauważmy najpierw, że niezależnie od tego, czy rozważamy strukturę 
+    standardową, czy jedną z opisanych implementacji kolejek, wszystkie te 
+    formuły są prawdziwe. Rzeczywiście, pierwsze dwie opisują sytuację, gdy 
+    kolejka jest pusta: włożenie i usunięcie jednego elementu pozostawia znów 
+    kolejkę pustą, a po włożeniu elementu, to on jest tym, który zwraca funkcja 
+    first. W przypadku, gdy kolejka jest niepusta, operacja in nie zmienia 
+    wartości first, a ponadto operacje in i out są przemienne.</p>
+
+
+
+
+
+    <p>Postulaty (Q6) i (Q7) mają nieco inny charakter i nie mogą być zapisane 
+    jako zwykłe formuły logiki klasycznej. Podobnie jak w przypadku stosów 
+    możemy je zapisać jako własności pewnych algorytmów. Niezapętlanie się 
+    programu</p>
+
+
+
+
+
+          <blockquote>
+            <blockquote>
+              <blockquote>
+                <blockquote>
+
+
+
+
+
+    <p>{<b>while</b> not empty(q) <b>do</b> q := out(q) <b>od</b>}</p>
+
+
+
+
+
+                </blockquote>
+              </blockquote>
+            </blockquote>
+</blockquote>
+
+
+
+
+
+    <p>oznacza, że kolejka q jest skończona. A program </p>
+
+
+
+
+
+          <blockquote>
+            <blockquote>
+              <blockquote>
+                <blockquote>
+
+
+
+
+
+    <p>{bool := true; <br>
+&nbsp;<b>while</b> (not empty(q) and not empty(q') and bool) <b>do</b> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bool := (first(q) = first(q)); <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; q := out(q); q':= out(q');<br>
+&nbsp;<b>od</b> <br>
+    }</p>
+
+
+
+
+
+                </blockquote>
+              </blockquote>
+            </blockquote>
+</blockquote>
+
+
+
+
+
+    <p>o ile kończy się spełnieniem warunku (bool and empty(q) and empty(q')) 
+    stwierdza równość dwóch kolejek q i q'.</p>
+
+
+
+
+
+    <p>Można udowodnić, że każda struktura danych, w której formuły (Q1)-(Q7) są 
+    prawdziwe jest izomorficzna z pewnym modelem standardowym kolejek. Wynika 
+    stąd, że postulaty (Q1)-(Q7) możemy przyjąć jako definicję abstrakcyjnej 
+    struktury kolejek. Nieważne jak naprawdę reprezentowana jest kolejka i jak 
+    zrealizowane są jej operacje. Wystarczy wiedzieć, że ma własności opisane w 
+    specyfikacji, by móc się nią poprawnie posłużyć.<br>
+&nbsp;</p>
+
+
+
+
+
+<p><b>Pytanie 3</B>: Do początkowo pustej kolejki q, włożono kolejno elementy a, 
+b, c, d, e. Ile operacji first, in, out trzeba wykonać, aby utworzyć kolejkę, w której kolejność elementów jest odwrotna 
+niż w kolejce q? <br>
+&nbsp;<FORM>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'Każdą z nich trzeba wykonać 15 razy.');"> </p>
+</form>
+
+
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left">
+<A HREF="main06_p1.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main06_p3.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

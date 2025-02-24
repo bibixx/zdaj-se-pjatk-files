@@ -1,0 +1,22 @@
+create or replace procedure DODAJ_GOSCIA( IM VARCHAR2, NAZW VARCHAR2, DATAUR DATE, ADR VARCHAR2, DOWOS VARCHAR2, CZYVIP NUMBER)
+as NUMG INTEGER;
+b integer;
+gosc_juz_jest exception;
+BEGIN
+
+select count(*) into numg from goœcie where nazwisko = nazw and dow_os=dowos;
+if numg>0 then raise gosc_juz_jest;
+else
+SELECT NVL(MAX(id_GOSCIA)+1,1) into NUMG from goœcie;
+dbMs_OUTPUT.PUT_LINE('numer goscia to '||numg);
+insert into goœcie values (numg, IM, NAZW, DATAUR, ADR, DOWOS, CZYVIP);
+dbMs_OUTPUT.PUT_LINE('dodany gosc:'||NUMG||' nazwisko='||NAZW);
+commit;
+end if;
+
+exception
+
+when gosc_juz_jest then
+select id_goscia into b from goœcie where dow_os=dowos;
+dbMs_OUTPUT.PUT_LINE ('gosc juz byl o id='||b||', nazwisko='||NAZW);
+END;

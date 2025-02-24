@@ -1,0 +1,967 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main06_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main06_p6.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><br clear="all"><div class="tytulpunktu">
+5. Implementacja algorytmu Turniej</div>
+
+
+ &nbsp;<p>Jako przykład zastosowań omawianych struktur danych,&nbsp; rozważmy 
+algorytm Turniej, o którym była mowa w wykładzie III, p.5. Przypomnijmy, że 
+problem polegał na znalezieniu elementu drugiego co do wielkości w danym ciągu 
+składającym się z n różnych elementów. Metoda rozwiązania polegała na zbudowaniu 
+drzewa turnieju i odszukania w nim elementów, które przegrały z elementem 
+największym, gdyż to właśnie wśród tych elementów znajduje się element drugi co 
+do wielkości. Trudność z implementacją tablicową polegała na zapamiętaniu, które 
+elementy były porównywane z elementem największym, zanim jeszcze ten największy 
+był znaleziony.</p>
+<p>W implementacji, którą omówimy w tym punkcie, informacje o elementach danego ciągu 
+będziemy przechowywali w specjalnie zorganizowanych listach. Każde ogniwo listy 
+ma trzy atrybuty:&nbsp; </p>
+<blockquote>
+  <ul>
+    <li>val - wartość elementu,</li>
+    <li>next - referencja do następnego ogniwa&nbsp; listy lub null, gdy jest to 
+    element ostatni,</li>
+    <li>stack - referencja do stosu elementów, które &quot;przegrały&quot; z elementem val.</li>
+  </ul>
+</blockquote>
+<p>Ogniwa stosu mają atrybuty val i prev, tak jak to było przedstawione w punkcie 
+pierwszym tego wykładu.  </p>
+<p><b>Przykład 5.1</b></p>
+<p>Rozważmy przykład III, 5.1. Niech dany będzie ciąg 6, 4, 9, 8, 5, 7, 3, 1. Na 
+rysunku 6.10 przedstawiono kolejne stany struktury danych, użytej w omawianej implementacji algorytmu Turniej.</p>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="80%" id="AutoNumber1" height="273">
+  <tr>
+    <td width="4%" bordercolor="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" align="right" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+  </tr>
+  <tr>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">&nbsp;</td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    6</td>
+    <td width="4%" align="right" bordercolor="#F5F5F5" height="16">
+    <p align="left"><span lang="en"><font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    4</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    9</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    8</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    5</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    7</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    3</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    1</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" height="16">null</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+  </tr>
+  <tr>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" align="right" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="20%" bordercolor="#F5F5F5" height="32" colspan="4" rowspan="2">
+    <b>Algorytm TURNIEJ</b></td>
+  </tr>
+  <tr>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">&nbsp;</td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" align="center" height="16">
+    null</td>
+    <td width="4%" align="right" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" align="center" height="16">
+    null</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" align="center" height="16">
+    null</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" align="center" height="16">
+    null</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" align="center" height="16">
+    null</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" align="center" height="16">
+    null</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" align="center" height="16">
+    null</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" align="center" height="16">
+    null</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+  </tr>
+  <tr>
+    <td width="4%" bordercolor="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" align="right" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+  </tr>
+  <tr>
+    <td width="4%" bordercolor="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" align="right" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="24%" bordercolor="#F5F5F5" colspan="6" height="16">Stan 
+    początkowy</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+  </tr>
+  <tr>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="5%" bordercolor="#F5F5F5" height="16"></td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bgcolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#DDA0DD" height="16" bordercolor="#808080">
+    6</td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <span lang="en"><font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#DDA0DD" height="16" bordercolor="#808080">
+    9</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <span lang="en"><font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#DDA0DD" height="16" bordercolor="#808080">
+    7</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <span lang="en"><font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#DDA0DD" height="16" bordercolor="#808080">
+    3</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <span lang="en"><font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    null</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bgcolor="#DDA0DD" height="16" align="center" bordercolor="#808080">
+    9</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <span lang="en"><font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#DDA0DD" height="16" align="center" bordercolor="#808080">
+    7</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <span lang="en"><font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    null</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bgcolor="#DDA0DD" height="16" align="center" bordercolor="#808080">
+    9</td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <span lang="en"><font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    null</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" align="center">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" align="center">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" align="center">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bgcolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#90EE90" height="16" bordercolor="#808080">
+    4</td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bgcolor="#90EE90" height="16" bordercolor="#808080">
+    8</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bgcolor="#90EE90" height="16" bordercolor="#808080">
+    5</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bgcolor="#90EE90" height="16" bordercolor="#808080">
+    1</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bgcolor="#90EE90" height="16" align="center" bordercolor="#808080">
+    6</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bgcolor="#90EE90" height="16" align="center" bordercolor="#808080">
+    5</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bgcolor="#90EE90" height="16" align="center" bordercolor="#808080">
+    7</td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="10%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="81" colspan="2" rowspan="5">
+    Stan po<br>
+    III rundzie</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <b><font face="Symbol" size="4" color="#90EE90"><span lang="en">&macr;</span></font></b></td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <b><span lang="en"><font face="Symbol" size="4" color="#90EE90">&macr;</font></span></b></td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <b><span lang="en"><font face="Symbol" size="4" color="#90EE90">&macr;</font></span></b></td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    <b><span lang="en"><font face="Symbol" size="4" color="#90EE90">&macr;</font></span></b></td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" align="center">
+    <b><span lang="en"><font face="Symbol" size="4" color="#90EE90">&macr;</font></span></b></td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" align="center">
+    <b><span lang="en"><font face="Symbol" size="4" color="#90EE90">&macr;</font></span></b></td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" align="center">
+    <b><span lang="en"><font face="Symbol" size="4" color="#90EE90">&macr;</font></span></b></td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    null</td>
+    <td width="4%" align="right" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    null</td>
+    <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    null</td>
+    <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    null</td>
+    <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" bgcolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" bordercolor="#808080" bgcolor="#90EE90" height="16" align="center">
+    4</td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" bordercolor="#808080" bgcolor="#90EE90" height="16" align="center">
+    3</td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bgcolor="#90EE90" height="16" align="center" bordercolor="#808080">
+    6</td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" align="center">
+    <b><span lang="en"><font face="Symbol" size="4" color="#90EE90">&macr;</font></span></b></td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" align="center">
+    <b><span lang="en"><font face="Symbol" size="4" color="#90EE90">&macr;</font></span></b></td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">&nbsp;</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" align="center">
+    <b><span lang="en"><font face="Symbol" size="4" color="#90EE90">&macr;</font></span></b></td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="20%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17" colspan="5">
+    Stan po I rundzie</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17" align="center">
+    null</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bgcolor="#C0C0C0" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17" align="center">
+    null</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="5%" bgcolor="#90EE90" height="17" align="center" bordercolor="#808080">
+    4</td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" align="center">
+    <b><span lang="en"><font face="Symbol" size="4" color="#90EE90">&macr;</font></span></b></td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="20%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" colspan="5">
+    Stan po II rundzie</td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" align="center">
+    null</td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="20%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17" colspan="5">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17" align="center">&nbsp;</td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="17">
+    </td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="left" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="20%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" colspan="5">
+    Rysunek 6.10</td>
+    <td width="20%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" colspan="5">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+    <td width="5%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+    </td>
+  </tr>
+</table>
+<p>Strzałki poziome odpowiadają atrybutowi next w ogniwach listy. Czarne 
+strzałki pionowe wskazują szczyt stosu elementów&nbsp; &quot;pokonanych&quot; w 
+poprzednich rundach, a zielone, pionowe strzałki - kolejne jego ogniwa. Zauważmy, że elementy, które przegrały z elementem przegrywającym, w aktualnym 
+porównaniu, nie są interesujące z punktu widzenia problemu wyszukiwania elementu 
+drugiego co do wielkości. Żaden z 
+nich na pewno nie będzie  drugim co do wielkości elementem w danym ciągu. Jeżeli porównujemy 
+dwa kolejne elementy listy x i y, to w przypadku, gdy x.val &gt; y.val wystarczy 
+dołączyć nowy element y.val do stosu x.stack i pominąć następne ogniwo w 
+aktualnej liście (tzn. ominąć element y).&nbsp; Łatwo to zrobić wykonując 
+następujące instrukcje:</p>
+<p style="text-align: center">x.stack := push(x.stack, y.val); x.next := y.next; </p>
+<p>Ponieważ w pierwszej rundzie 6 &quot;gra&quot; z 4, zatem cztery &quot;przegrywa i zostaje 
+umieszczone na stosie elementów przerywających z szóstką. Natomiast, elementem 
+następnym&nbsp; po 6 będzie teraz 9, jako że dziewiątka była następnym po 
+czwórce elementem listy. W następnym kroku tej samej rundy, 9 &quot;gra&quot; z 8, zatem 
+osiem &quot;przegrywa&quot; i zostaje umieszczone na stosie elementów przegrywających z 
+dziewiątką, itd. <font face="Wingdings">J</font></p>
+<p><b>Algorytm</b></p>
+
+
+<p>Zakładamy dla uproszczenia, że n, długość danego ciągu, jest potęgą dwójki, 
+oraz n&gt;1. Nie jest to istotne założenie z punktu widzenia algorytmu, ale pozwala 
+uprościć kod. Zakładamy ponadto, że elementy ciągu tworzą listę, a jej 
+początkowe ogniwo jest wartością zmiennej L.</p>
+
+
+<p><div class="przyk">
+   <TABLE frame="void" rules="none" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0" cellspacing="0">
+         <TR>
+            <TD width="59" height="16">Turniej</TD>
+            <TD width="542" height="16">{</TD>
+             
+            <TD width="48" height="16"></TD>
+             
+            <TD width="681" height="16"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16"><strong>while </strong>&nbsp;(L.next
+            <span lang="en"><font face="Symbol">&sup1;</font></span> null)<strong> do</strong>
+            </TD> 
+            <TD width="48" height="16">1</TD> 
+            <TD width="681" height="16">//dla dowolnej rundy</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x := L;</TD> 
+            <TD width="48" height="16">2</TD> 
+            <TD width="681" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while&nbsp; </strong>
+            (x <font face="Symbol"><span lang="en">&sup1;</span></font>&nbsp; null<strong> </strong>
+            )<strong> do</strong></TD> 
+            <TD width="48" height="16">3</TD> 
+            <TD width="681" height="16">//dla dowolnego meczu</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            y := x.next;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD> 
+            <TD width="48" height="16">4</TD> 
+            <TD width="681" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp;<b>&nbsp;&nbsp;&nbsp; 
+            if</b> x.val &gt; y.val t<b>hen</b></TD> 
+            <TD width="48" height="16">5</TD> 
+            <TD width="681" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="1"></TD>
+            <TD width="542" height="1"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>x.stack := push(x.stack, y.val);</TD> 
+            <TD width="48" height="1">6</TD> 
+            <TD width="681" height="1">//dopisanie przegrywającego do stosu x'a 
+            </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            else</strong></TD> 
+            <TD width="48" height="16">7</TD> 
+            <TD width="681" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">   <STRONG>&nbsp;&nbsp; </STRONG>
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            y.stack := push(y.stack, x.val);</TD>
+            <TD width="48" height="16">   8</TD>
+            <TD width="681" height="16">   //dopisanie przegrywającego do stosu x'a </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            x.val := y.val;</TD>
+            <TD width="48" height="16">   9</TD>
+            <TD width="681" height="16">   //umieszczenie atrybutów 
+            wygrywającego w obiekcie x</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            x.stack := y.stack</TD>
+            <TD width="48" height="16">   10</TD>
+            <TD width="681" height="16">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            fi;</strong></TD>
+            <TD width="48" height="16">   11</TD>
+            <TD width="681" height="16">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>x. next := y .next;</TD>
+            <TD width="48" height="16">   12</TD>
+            <TD width="681" height="16">   //ominięcie jednego ogniwa listy</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            x := x.next;</TD>
+            <TD width="48" height="16">   13</TD>
+            <TD width="681" height="16">   // pierwszy element następnej pary</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            od</strong></TD>
+            <TD width="48" height="16">   14</TD>
+            <TD width="681" height="16">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">   <strong>&nbsp;od;</strong></TD>
+            <TD width="48" height="16">   15</TD>
+            <TD width="681" height="16">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">      z:= L.stack;  </TD>
+             
+            <TD width="48" height="16">      16</TD>
+             
+            <TD width="681" height="16">      //Przeszukanie stosu zwycięzcy</TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">      drugi := top(z); z:= pop(z);</TD>
+             
+            <TD width="48" height="16">      17</TD>
+             
+            <TD width="681" height="16">      </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">
+             </TD>
+            <TD width="48" height="16">18</TD>
+            <TD width="681" height="16"></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="7"></TD>
+            <TD width="542" height="7">   <STRONG>&nbsp;</STRONG><b>while</b><STRONG>&nbsp;</STRONG>not 
+            empty(z) <STRONG>do&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             </TD>
+            <TD width="48" height="7">19</TD>
+            <TD width="681" height="7">//wyszukiwanie elementu największego na stosie 
+            x.stack</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">&nbsp;&nbsp;&nbsp;<STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if&nbsp;</STRONG>top(z) &gt; drugi<STRONG> then </STRONG>
+             drugi := top(z)<STRONG> fi;&nbsp; </STRONG>
+             </TD>
+            <TD width="48" height="16">20</TD>
+            <TD width="681" height="16"></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>z := pop(z);
+             </TD>
+            <TD width="48" height="16">21</TD>
+            <TD width="681" height="16"></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="542" height="16">   <STRONG>od;&nbsp;&nbsp;&nbsp;&nbsp;</STRONG></TD>
+            <TD width="48" height="16">22</TD>
+            <TD width="681" height="16"> </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"></TD>
+            <TD width="542" height="1"><strong>&nbsp;</strong>result := drugi;</TD>
+            <TD width="48" height="1">23</TD>
+            <TD width="681" height="1"></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="542" height="16"></TD>
+            <TD width="48" height="16">24</TD>
+            <TD width="681" height="16">  </TD>
+         </TR>
+   </TABLE>
+</div>
+
+<p style="text-align: left">Kolejne dwa porównywane elementy są wartościami 
+wskazanymi przez zmienne x i y. Dla wygody, parametry elementu większego są 
+umieszczane zawsze na zmiennej x, nawet, jeśli w aktualnym porównaniu &quot;wygrało&quot; 
+y (linie 9,10: x.val := y.val; x.stack := y.stack).&nbsp; Pozwoli to w 
+jednorodny i prosty sposób pominąć jeden element listy (linia 12: x.next := 
+y.next).</P>
+
+<p>Dla każdego obiektu &quot;z&quot; znajdującego się na aktualnej liście wskazywanej 
+przez L, z.stack zawiera wszystkie elementy, które są mniejsze od z.val i które 
+były bezpośrednio porównywane z z.val. Ponieważ w każdym przebiegu pętli 
+wewnętrznej, połowa elementów zostaje odłączona od listy głównej, to po 
+skończonej liczbie kroków pozostanie na liście tylko jeden element. Spełniony 
+jest wtedy warunek (L.next <font face="Symbol">=</font> null) i wyjdziemy z 
+pętli głównej.&nbsp; Wartość L.val jest największym elementem danego ciągu e<sub><font face="Verdana">1</font></sub>,...,e<sub><font face="Verdana">n</font></sub>.</P>
+
+<p>Ponieważ nadal jest spełniony niezmiennik, więc poszukiwany,&nbsp; drugi co do 
+wielkości element, znajduje się na stosie L.stack. Na mocy założenia (n&gt;1) 
+musiała zostać rozegrana chociaż jedna runda. Wynika stąd, że stos zwycięzcy 
+L.stack nie jest pusty. W drugiej części algorytmu (linie 17-22) przeglądamy 
+kolejno elementy tego stosu w poszukiwaniu elementu największego.</P>
+
+<p><b>Pytanie 7</B>: Jeżeli początkowa liczba elementów na liście wynosi 64, to 
+jaka jest maksymalna wysokość stosów w algorytmie Turniej? </P>
+
+<!-- <p>Odpowiedź: 6</P> -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'6')">
+</form>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main06_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main06_p6.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

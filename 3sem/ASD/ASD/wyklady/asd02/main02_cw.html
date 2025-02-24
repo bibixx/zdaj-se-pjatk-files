@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td-->
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left"><A HREF="main02_p5.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="../asd03/index03.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td>
+</tr></table>
+
+<br clear="all"><A NAME="EDU.wyklad.zadania"></A><br clear="all">
+<div class="tytulpunktu">Ćwiczenia do wykładu 02</div>
+<BR>
+
+
+<ol>
+  <LI>(a) Zbadaj poprawność następującego algorytmu wyszukiwania elementu x w danym 
+  dowolnym ciągu e[1],...,e[n]:<br>
+&nbsp;<TABLE frame="void" rules="none">
+         <TR>
+            <TD> szukaj{</TD>
+            <TD></TD>
+             
+         </TR>
+         <TR>
+            <TD></TD>
+            <TD>i:=1; result:= false;</TD>
+             
+         </TR>
+         <TR>
+            <TD></TD>
+            <TD><STRONG>while </STRONG>
+            (i<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>n  and 
+            not result)  <STRONG>do </STRONG></TD> 
+         </TR>
+         <TR>
+            <TD></TD>
+            <TD>   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if </STRONG>
+             x=e[i]   <STRONG>then</STRONG></TD>
+         </TR>
+         <TR>
+            <TD></TD>
+            <TD>      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            result := true</TD>
+             
+         </TR>
+         <TR>
+            <TD></TD>
+            <TD>   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else</STRONG></TD>
+         </TR>
+         <TR>
+            <TD></TD>
+            <TD>      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      i := i+1</TD> 
+         </TR>
+         <TR>
+            <TD></TD>
+            <TD>   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fi</STRONG></TD>
+         </TR>
+         <TR>
+            <TD></TD>
+            <TD><STRONG>od</STRONG></TD>
+         </TR>
+         <TR>
+            <TD><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD></TD>
+         </TR>
+   </TABLE>
+  <br>
+  (b) Zmodyfikuj podany  algorytm, tak by zwracał pozycję, na której 
+  znajduje się element x, jeśli należy on do danego zbioru,&nbsp; i zwracał 0, w 
+  przypadku, gdy x nie należy do tego zbioru. Sformułuj warunek końcowy dla 
+  zmodyfikowanego 
+  algorytmu. Wskaż niezmiennik pętli.<br>
+&nbsp;<li>Zaprojektuj algorytm wyszukiwania w ciągu uporządkowanym metodą dzielenia 
+  ciągu na 3 części. Zbadaj koszt tego algorytmu i porównaj z kosztem algorytmu 
+  binarnych poszukiwań. Zmodyfikuj algorytm BinSearch, tak by był całkowicie 
+  poprawny ze względu na specyfikację: wp = {(<font face="Symbol">$</font>i) 
+  (0&lt;i&lt;n+1 <font face="Symbol"><span lang="en">&Ugrave;</span> </font>x = e[i]), e[1]&lt; 
+  e[2]&lt;...&lt;e[n]}, wk = {e[result] = x}.<br>
+&nbsp;</li>
+
+  <li>
+<p class="MsoNormal">Przedstaw algorytm Skoki w postaci procedury z parametrem 
+k, określającym długość skoku. Uzasadnij jego poprawność i oszacuj koszt.<br>
+&nbsp;</p>
+  </li>
+  <li>Pewien kolekcjoner ma n monet, wśród których jedna jest fałszywa, a 
+  pozostałe są identyczne. Jedynym sposobem znalezienia fałszywej monety jest 
+  porównanie jej wagi z innymi monetami, gdyż moneta fałszywa nie różni się 
+  wyglądem, ale nieco lżejsza. Zaproponuj algorytm znalezienia fałszywej monety, 
+  jeśli&nbsp; mamy do dyspozycji tylko prymitywną wagę szalkową, pozwalającą 
+  jedynie porównywać wagi przedmiotów na szalkach. Na każdej szalce można 
+  położyć dowolną liczbę monet jednocześnie. Jaka jest minimalna liczba porównań, 
+  którą trzeba wykonać?<br>
+&nbsp;</li>
+  <li><font size="2" face="Verdana">Niech x będzie elementem pewnego n 
+  elementowego uporządkowanego rosnąco ciągu, gdzie n jest potęgą czwórki. 
+  Szukamy elementu x następującą metodą:</font><span style="font-style: normal; font-variant: normal; font-weight: normal; font-family: Verdana"><font size="2"> </font></span><font size="2" face="Verdana">Dzielimy ciąg na 
+  cztery części. Ustalamy, w której części znajduje się szukany element.</font><span style="font-family: Times New Roman"><span style="font-style: normal; font-variant: normal; font-weight: normal; font-family: Verdana"><font size="2">
+  </font></span><font size="2" face="Verdana">Dla tej wybranej części stosujemy 
+  rekurencyjnie to samo postępowanie, tak długo, jak liczba elementów w 
+  rozważanym obszarze jest większa od 1.</font></span><span style="font-family: Verdana"><font size="2">&nbsp; 
+  Oszacuj koszt tego algorytmu mierzony liczbą wykonanych porównań.<br>
+&nbsp;</font></span></li>
+  <li>Zaproponuj algorytm rekurencyjny,&nbsp; realizujący sekwencyjne 
+  przeglądanie, w celu znalezienia pozycji elementu x w dowolnym skończonym 
+  ciągu. Zrealizuj tę samą ideę przy założeniu, że dane elementy tworzą listę, 
+  której ogniwo ma dwa atrybuty: wartość elementu i referencję do elementu 
+  następnego.<br>
+&nbsp;</li>
+  <li>Zaproponuj algorytm dodawania dwóch liczb naturalnych zapisanych w 
+  systemie binarnym. Sformułuj warunek początkowy i końcowy i uzasadnij 
+  całkowitą poprawność tego algorytmu ze względu na podaną specyfikację. Oszacuj 
+  koszt algorytmu traktując długość liczby jako rozmiar danych.</li>
+</ol>
+ 
+<br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+<td align="left"><A HREF="main02_p5.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="../asd03/index03.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td>
+  </tr>
+</table>
+
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

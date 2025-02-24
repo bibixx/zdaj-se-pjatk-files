@@ -1,0 +1,132 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<link rel="stylesheet" type="text/css" href="pliki/main.css">
+<title>01 - Ćwiczenia Linux/Knoppix</title>
+</head>
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+<table border="0" cellpadding="5" cellspacing="5" height="100%" width="100%">
+<tbody><tr heigh="100%"><td bgcolor="#e6f0eb" valign="top" width="25%"><br>
+        <a class="menulink" href="01%20-%20Cwiczenia%20Linux%20Knoppix.html" onfocus="blur();" title="Ćwiczenia Linux/Knoppix" onmouseover="window.status='Ćwiczenia Linux/Knoppix'; return true;" onmouseout="window.status=''; ">
+	<b>1. Ćwiczenia Linux/Knoppix</b></a><br>
+	<br>
+	<a class="menulink" href="02%20-%20Skaner%20sieci%20-%20Ethereal.html" onfocus="blur();" title="Skaner sieci - Ethereal" onmouseover="window.status='Skaner sieci - Ethereal'; return true;" onmouseout="window.status=''; ">
+	2. Skaner sieci - Ethereal</a><br>
+	<br>
+	<a class="menulink" href="03%20-%20Automaty%20skonczone.html" onfocus="blur();" title="Automaty skończone" onmouseover="window.status='Automaty skończone'; return true;" onmouseout="window.status=''; ">
+	3. Automaty skończone</a><br>
+	<br>
+	<a class="menulink" href="04%20-%20SMTP,%20POP3,%20HTTP%20kontynuacja.html" onfocus="blur();" title="SMTP, POP3, HTTP kontynuacja" onmouseover="window.status='SMTP, POP3, HTTP kontynuacja'; return true;" onmouseout="window.status=''; ">
+	4. SMTP, POP3, HTTP kontynuacja</a><br>
+	<br>
+	<a class="menulink" href="05%20-%20Warstwa%20transportowa.html" onfocus="blur();" title="Warstwa tranportowa" onmouseover="window.status='Warstwa tranportowa'; return true;" onmouseout="window.status=''; ">
+	5. Warstwa tranportowa</a><br>
+	<br>
+	<a class="menulink" href="07%20-%20Protokoly%20rutingu.html" onfocus="blur();" title="Protokoły rutingu" onmouseover="window.status='Protokoły rutingu'; return true;" onmouseout="window.status=''; ">
+	7. Protokoły rutingu</a><br>
+	<br>
+	<a class="menulink" href="08%20-%20Warstwa%20sieci.html" onfocus="blur();" title="Warstwa sieci" onmouseover="window.status='Warstwa sieci'; return true;" onmouseout="window.status=''; ">
+	8. Warstwa sieci</a><br>
+	<br>
+	<a class="menulink" href="09%20-%20Powtorzenie%20materialu.html" onfocus="blur();" title="Powtórzenie materiału" onmouseover="window.status='Powtórzenie materiału'; return true;" onmouseout="window.status=''; ">
+	9.  Powtórzenie materiału</a><br>
+        <br>
+        <a class="menulink" href="javascript:window.close();" onfocus="blur();" onmouseover="window.status='Wyjście'; return true;" onmouseout="window.status=''; ">
+        Wyjście</a></td>
+<td bgcolor="whitesmoke" valign="top"><form name="f" method="post" action="eld.asp?id=37&amp;sid=115&amp;z=1"><p></p><h4>Uruchomienie / paramtery startowe dystrybucji Knoppix</h4><p></p><p>Po wystartowaniu komputera z płyty CD, mamy możliwość wyboru kilku opcji:</p><p></p><ul><p></p><p>    </p><li>knoppix - tryb graficzy<p></p><p>    </p></li><li>knoppix 2 - tryb tekstowy<p></p><p>    </p></li><li>lang - opcje językowe, np. za pomocą lang=pl wybieramy język polski<p></p><p>    </p></li><li>dekstop
+- wybieramy środowisko graficzne (standardowo jest to KDE), np. za
+pomocą desktop=fluxbox wybieramy menadżera pulpitu fluxbox<p></p><p></p></li></ul><p></p><p>Czasami może istnieć potrzeba podania parametrów odświeżania monitora oraz rozdzielczości monitora z którą chcemy pracować:</p><p></p><ul><p></p><p>    </p><li>vsync - odświeżanie pionowe<p></p><p>    </p></li><li>hsync - odświeżanie poziome<p></p><p>    </p></li><li>screen - rozdzielczość ekranu, np. screen=1024x768<p></p><p></p></li></ul><p></p><p>Przykład uruchomienia:</p><pre>boot: knoppix lang=pl</pre><p></p><h4>Zadania</h4><p></p><p></p><ol><p></p><p>    </p><li>Uruchomić dystrybucję bez żadnych dodatkowych parametrów.<p></p><p>    </p></li><li>Uruchomić dystrybucję w trybie tekstowym z obsługą języka polskiego.<p></p><p>    </p></li><li>Uruchomić dystrybucję w trybie graficznym z obsługą języka polskiego i menadżerem pulpitu "FluxBox".<p></p><p></p></li></ol><p></p><p></p><h4>System Plików</h4><p></p><p><b>ls</b> - lista plików w katalogu bieżącym.<br></p><p></p><blockquote><p></p><p>Przydatne parametry:<br></p><p>	<i>-a</i> - wyświetla wszystkie pliki, nawet te, których nazwy zaczynają się od "."<br></p><p>	<i>-l</i> - wyświetla dodatkowe informacje</p><p></p><p></p></blockquote><p></p><p></p><p><b>cd</b> - zmiana katalogu<br></p><p></p><blockquote><p></p><p>	<i>.</i> - oznacza katalog bieżący<br></p><p>	<i>..</i> - oznacza katalog nadrzędny<br></p><p>	<u>cd nazwa katalogu</u></p><p></p><p></p></blockquote><p></p><p></p><p><b>rm</b> - usunięcie pliku<br></p><p></p><blockquote><p></p><p>	<i>-f</i> - nie pytaj użytkownika o potwierdzenie wykonania operacji<br></p><p>	<i>-r</i> - usuwaj pliku rekursywnie (przydatne w przypadku kasowania katalogów)<br></p><p>	<u>rm nazwa_pliku</u><br></p><p>	<u>rm -rf nazwa_katalogu</u></p><p></p><p></p></blockquote><p></p><p></p><p><b>cp</b> - kopiowanie plików/katalogów<br></p><p></p><blockquote><p></p><p>	<i>-r</i> - kopiowanie rekursywne<br></p><p>	<u>cp nazwa_pliku1 nazwa_pliku2 nazwa_pliku3 nazwa_katalogu</u><br></p><p>	<u>cp -r nazwa_katalogu nazwa_katalogu</u></p><p></p><p></p></blockquote><p></p><p></p><p></p><blockquote><p></p><p><b>mv</b> - zmiana nazwy / przeniesienie pliku<br></p><p>	<u>mv stara_nazwa nowa_nazwa</u></p><p></p></blockquote><p></p><p></p><p></p><p></p><h4>Dołączanie systemu plików.</h4><p></p><p></p><p><b>mount</b> - zarządzanie systmem plików<br></p><p></p><blockquote><p></p><p>Przydatne parametry:<br></p><p>	<i>-t</i> typ_systemu_plików - określa typ podłączanego systemu plików</p><p></p></blockquote><p></p><pre>[root@localhost root]# mount
+/dev/hda2 on / type ext3 (rw)
+none on /proc type proc (rw)
+none on /sys type sysfs (rw)
+none on /dev/pts type devpts (rw,gid=5,mode=620)
+usbdevfs on /proc/bus/usb type usbdevfs (rw)
+none on /dev/shm type tmpfs (rw)
+/dev/hda3 on /home type ext3 (rw)
+sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw)</pre><p>Podłączamy system plików /dev/fd0 pod katalog /mnt/floppy.</p><pre>[root@localhost root]# mount /dev/fd0 /mnt/floppy/
+[root@localhost root]# mount
+(...)
+/dev/fd0 on /mnt/floppy type ext2 (rw)</pre><p>Podłączamy nasz sieciowy dysk z: pod katalog /mnt/z.</p><p>Jeżeli katalog /mnt/z nie istnieje, należy go utworzyć:</p><pre>[root@localhost root]# mkdir /mnt/z</pre><p>Następnie
+wykonujemy polecenie podłączenia sieciowego systemu plików (zamiast
+"cogi", podajemy własną nazwę użytkownika i własny katalog):</p><pre>[root@localhost root]# 
+mount -t smbfs //z/cogi /mnt/z -o username=cogi,workgroup=pjwstk
+Password:</pre><p>Weryfikujemy operację podłączenia systemu plików:</p><pre>[root@localhost root]# mount
+(...)
+//z/cogi on /mnt/z type smbfs (0)</pre><p></p><h4>Zadania</h4><p></p><p></p><ol><p></p><p>    </p><li>Kilka
+słów wstępu. Poleceniem touch możemy zmieniać znaczniki czasowe na
+plikach (w przypadku gdy plik nie istnieje, to zostaje utworzony).
+Polecenie man służy do przeglądania podręcznika systemowego (np. aby
+obejrzeć stronę opisującą polecenie ls, należy wykonać polecenie man
+ls).<p></p><p>    </p><ol type="a"><p></p><p>        </p><li>w katalogu domowym, należy utworzyć trzy pliki o nazwach: plik_1, plik_2, plik_3<p></p><p>        </p></li><li>następnie utworzyć drzewo katalogów katalog_1/katalog_2/katalog_3<p></p><p>        </p></li><li>plik_1 przekopiować do katalog_1, plik_2 przekopiować do katalog_2, plik_3 przekopiować do katalog_3.<p></p><p>        </p></li><li>wejść do katalog_3, usunąć plik_3<p></p><p>        </p></li><li>zmienić nazwę katalog_3 na katalog_pusty<p></p><p>        </p></li><li>usunąć pliki plik_1, plik_2, plik_3 z katalogu domowego<p></p><p>        </p></li><li>usunąć rekursywnie utworzone drzewo katalogów<p></p><p>    </p></li></ol><p></p><p>    </p></li><li>Przećwicz polecenia more, less, cat przeglądając pliki konfiguracyjne (w katalog /etc).<p></p><p></p></li></ol><p></p><p></p><h3>Konfiguracja sieci</h3><p></p><p></p><p>Wykorzystując polecenie <i>ifconfig</i> możemy uzyskać informację o obecnych w systemie interfejsach sieciowych, jak również, możemy dokonać ich konfiguracji.</p><p></p><p>Karty
+sieciowe Ethernet nazwane są w następujący sposób: ethX, gdzie X jest
+kolejnym numerem interfejsu. Interfejsy sieciowe numerowane są od zera.</p><p></p><p>Przydatne parametry:<br></p><p></p><blockquote><p></p><p>	<i>-a</i> - wyświetla informacje o wszystkich interfejsach (nawet nieaktywnych)</p><p></p></blockquote><p></p><pre>[root@localhost root]# ifconfig eth0 192.168.0.1 netmask 255.255.255.0
+[root@localhost root]# ifconfig eth0
+eth0      Link encap:Ethernet  HWaddr 00:0D:9D:59:E6:41
+          inet addr:192.168.0.1  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::20d:9dff:fe59:e641/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:6172 errors:14 dropped:0 overruns:0 frame:35
+          TX packets:290 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:4869686 (4.6 Mb)  TX bytes:52657 (51.4 Kb)
+          Interrupt:11 Base address:0x1000</pre><p>ifconfig eth0 down - deaktywuje interfejs eth0</p><p>ifconfig eth0 up - aktywuje interfejs eth0, wykorzystując poprzednio ustawione parametry</p><p></p><p>Kolejnym przydatnym poleceniem jest polecenie <i>route</i>. Polecenie route pozwala na przeglądanie/zarządzanie statycznymi wpisami w tablicy routingu.</p><p></p><p>Przydatne parametry:</p><p></p><blockquote><p></p><p>	<i>-n</i> - nie wykonuje zapytań DNS</p><p></p><p></p></blockquote><p></p><pre>[root@localhost root]# route -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+169.254.0.0     0.0.0.0         255.255.0.0     U     0      0        0 eth0
+10.0.0.0        0.0.0.0         255.0.0.0       U     0      0        0 eth0
+0.0.0.0         10.0.1.2        0.0.0.0         UG    0      0        0 eth0</pre><p>route add - dodaje wpis</p><p>route del - usuwa wpis</p><pre>[root@localhost root]# route add -host 192.168.0.1 dev eth0
+[root@localhost root]# route -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+192.168.0.1     0.0.0.0         255.255.255.255 UH    0      0        0 eth0
+169.254.0.0     0.0.0.0         255.255.0.0     U     0      0        0 eth0
+10.0.0.0        0.0.0.0         255.0.0.0       U     0      0        0 eth0
+0.0.0.0         10.0.1.2        0.0.0.0         UG    0      0        0 eth0
+
+[root@localhost root]# route add -net 172.16.0.0/24 dev eth0
+[root@localhost root]# route -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+192.168.0.1     0.0.0.0         255.255.255.255 UH    0      0        0 eth0
+172.16.0.0      0.0.0.0         255.255.255.0   U     0      0        0 eth0
+169.254.0.0     0.0.0.0         255.255.0.0     U     0      0        0 eth0
+10.0.0.0        0.0.0.0         255.0.0.0       U     0      0        0 eth0
+0.0.0.0         10.0.1.2        0.0.0.0         UG    0      0        0 eth0
+
+[root@localhost root]# route del -host 192.168.0.1
+[root@localhost root]# route del -net 172.16.0.0/24
+[root@localhost root]# route -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+169.254.0.0     0.0.0.0         255.255.0.0     U     0      0        0 eth0
+10.0.0.0        0.0.0.0         255.0.0.0       U     0      0        0 eth0
+0.0.0.0         10.0.1.2        0.0.0.0         UG    0      0        0 eth0</pre><p></p><h4>Zadania</h4><p></p><p></p><ol><p></p><p>    </p><li>Uruchom
+dystrybucję z opcją nodhcp. Dokonaj konfiguracji interfejsu sieciowego
+eth0. Adres ip 192.168.0.X, gdzie X jest numerem Twojego stanowiska,
+maska podsieci 255.255.255.0. Dokonaj konfiguracji domyślnego rutingu,
+adres ip bramki 192.168.0.1<p></p><p></p></li></ol><p></p><p></p><p></p><h4>Kompilacja programów</h4><p></p><p></p><p>Na ćwiczeniach będziemy wykorzystywali trzy kompilatory: <i>javac</i>, <i>gcc</i>, <i>g++</i>.</p><p></p><p><b>Kompilator javac</b></p><pre>/* HelloWorldApp.java */
+class HelloWorldApp {
+    public static void main(String[] args) {
+        System.out.println("Hello World!"); //Display the string.
+    }
+}</pre><p>Użycie javac</p><pre>[root@localhost root]# javac HelloWorldApp.java</pre><p>Uruchomienie programu:</p><pre>[root@localhost root]# java HelloWorldApp
+HelloWorld!</pre><p><b>Kompilator gcc</b></p><pre>/* main.c */
+#include &lt;stdio.h&gt;
+
+int main(int argc, char **argv)
+{
+	printf("HelloWorld!\n);
+	return 0;
+}</pre><p>Użycie gcc</p><pre>[root@localhost root]# gcc -o main main.c</pre><p>Uruchomienie programu:</p><pre>[root@localhost root]# ./main
+HelloWorld!</pre><p><b>Kompilator g++</b></p><pre>/* main.cpp */
+#include &lt;iostream.h&gt;
+
+int main(int argc, char **argv)
+{
+    cout &lt;&lt; "Hello World!";
+
+    return 0;
+}</pre><p>Użycie g++</p><pre>[root@localhost root]# g++ -o main main.cpp</pre><p>Uruchomienie programu:</p><pre>[root@localhost root]# ./main
+HelloWorld!</pre><p></p><h4>Zadania</h4><p></p><p></p><ol><p></p><p>    </p><li>Dokonaj samodzielnej kompilacji i uruchomienia ww. programów.<p></p><p></p></li></ol><p></p></form></td></tr></tbody></table></body></html>

@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+<style>
+<!--
+ li.MsoNormal
+	{mso-style-parent:"";
+	margin-bottom:.0001pt;
+	text-autospace:none;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	margin-left:0cm; margin-right:0cm; margin-top:0cm}
+-->
+</style>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+
+<td align="left"><A HREF="main07_p1.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main07_p3.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all">
+<A NAME="EDU.wyklad.punkt 2"></A>
+<br clear="all">
+
+<div class="tytulpunktu">2. Drzewa binarnych poszukiwań.</div> 
+
+    <p>Niech v będzie wierzchołkiem drzewa binarnego i niech LD(v) oznacza jego lewe poddrzewo  (tzn. drzewo, którego 
+    korzeniem jest lewy syn wierzchołka v), a PD(v) - jego prawe poddrzewo.</p>
+
+
+
+
+
+    <p><div class="def">
+  <p style="text-align: justify">Definicja 2.1&nbsp; Niech &lt;Et, <span lang="en">
+  <font face="Symbol">&pound;</font></span>&gt; będzie niepustym zbiorem etykiet, liniowo 
+  uporządkowanym przez relację <span lang="en"><font face="Symbol">&pound;</font></span>. 
+  Drzewem binarnych poszukiwań nazywamy etykietowane drzewo binarne z 
+  wyróżnionym korzeniem D = &lt;V, E, et &gt; takie, że et jest funkcją 
+  różnowartościową&nbsp; przyporządkowującą wierzchołkom drzewa etykiety w taki 
+  sposób, że dla dowolnego v <span lang="en"><font face="Symbol">Î</font></span>V,</p>
+  <blockquote>
+    <blockquote>
+      <p>
+  (1) jeśli x <span lang="en"><font face="Symbol">Î</font></span>LD(v), to et(x)
+  <font face="Symbol"><span lang="en">&pound;</span> </font>et(v),<br>
+  <br>
+  (2) jeśli x <span lang="en"><font face="Symbol">Î</font></span>PD(v), to et(v)
+  <font face="Symbol"><span lang="en">&pound;</span> </font>et(x).<br>
+
+    </p>
+
+    </blockquote>
+  </blockquote>
+</div></p>
+
+
+
+
+
+    <p>Przykład 2.1</p>
+
+
+
+
+
+    <p>Drzewo binarne przedstawione na rysunku 7.1(a) jest etykietowanym drzewem 
+    binarnym, ale nie jest drzewem binarnych poszukiwań, ponieważ porządek 
+    etykiet nie został zachowany. Drzewa na rysunku 7.3(a) i 7.3(b) są drzewami 
+    binarnych poszukiwań. Dla każdego wierzchołka, etykiety wierzchołków 
+    należących do&nbsp; lewego poddrzewa są mniejsze, a etykiety wierzchołków 
+    należących do prawego poddrzewa są większe od etykiety tego 
+    wierzchołka.</p>
+
+
+
+
+
+    <table border="1" cellpadding="0" cellspacing="0" width="80%" id="AutoNumber1" bordercolorlight="#808080" bordercolordark="#808080">
+      <tr>
+        <td width="50%">
+        <img border="0" src="Rysunki/Rysunek7_3a.gif" width="300" height="250"></td>
+        <td width="50%">
+        <img border="0" src="Rysunki/Rysunek7_3b.gif" width="300" height="250"></td>
+      </tr>
+</table>
+
+
+
+
+
+    <p>&nbsp;<br>
+    <b>Uwaga</b>. Zauważmy, że warunki (1), (2) definicji 2.1 nie mogą być 
+    zastąpione warunkiem</p>
+
+
+
+
+
+    <p style="text-align: center">(*) dla dowolnego wierzchołka v, etykieta 
+    lewego syna jest mniejsza, a etykieta prawego syna jest większa niż etykieta 
+    wierzchołka v.</p>
+
+
+
+
+
+    <p>Zamieniając w drzewie 7.3(b) etykiety 8 i 9 miejscami, otrzymamy drzewo, 
+    dla którego warunek (*) jest spełniony, a które mimo to nie jest drzewem 
+    binarnych poszukiwań, bo nie spełnia warunków (1) i (2) definicji 2.1. </p>
+
+
+
+
+
+    <p>Drzewa BST, będziemy implementowali tak jak inne drzewa binarne, jako 
+    obiekty klasy <i>node</i> (por. wykład VI p4.). Dostęp do innych wierzchołków 
+    będzie umożliwiony zawsze przez korzeń drzewa i jego atrybuty left i right.&nbsp; 
+    Wartości funkcji etykietującej będą zapamiętane jako parametr val, tzn. 
+    jeśli et(v) = e, to v.val = e.</p>
+
+
+
+
+
+    <p>W dalszych punktach tego wykładu omówimy podstawowe operacje na drzewach 
+    BST, których wykonanie prowadzi znów do drzew BST.&nbsp; Teraz zauważmy 
+    tylko, że, jeśli zbiór X jest reprezentowany przez drzewo BST, to wyszukanie 
+    w tym zbiorze elementu najmniejszego lub największego jest niezwykle proste. 
+    Aby ustalić wartość elementu najmniejszego musimy &quot;przejść&quot; po lewej 
+    skrajnej gałęzi tego drzewa. Element na końcu tej ścieżki jest elementem 
+    najmniejszym. Element na końcu skrajnej, prawej ścieżki jest elementem 
+    największym w X. Algorytmy znajdowania minimum i maksimum są zamieszczone 
+    poniżej.</p>
+
+
+
+
+
+    <p style="text-align: left">&nbsp;<p>
+<div class="def" style="width: 680; height: 186">
+   <TABLE frame="void" rules="none" width="670" height="158" bordercolorlight="#808080" bordercolordark="#FFFFFF" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0" cellspacing="0">
+         <TR>
+            <TD width="571" height="12" colspan="2">minBST(d : node) {</TD>
+             
+            <TD width="43" height="12">|</TD>
+             
+            <TD width="589" height="12"> maxBST(d : node) {</TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="512" height="12">v := d;</TD> 
+            <TD width="43" height="12">|</TD> 
+            <TD width="589" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            v := d;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="512" height="12"><strong>&nbsp;while&nbsp; </strong>(v.left
+            <font face="Symbol"><span lang="en">&sup1;</span> </font>null) <strong>do</strong></TD> 
+            <TD width="43" height="12">|</TD> 
+            <TD width="589" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while&nbsp; </strong>
+            (v.right <font face="Symbol"><span lang="en">&sup1;</span> </font>null) <strong>do</strong></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="512" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp; 
+            v := v.left;</TD> 
+            <TD width="43" height="12">|</TD> 
+            <TD width="589" height="12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v := v.right</TD> 
+         </TR>
+         <tr>
+            <TD width="59" height="12"></TD>
+            <TD width="512" height="12">   &nbsp;<b>od;</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+            <TD width="43" height="12">   |</TD>
+            <TD width="589" height="12">   <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            od;</b></TD>
+         </tr>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="512" height="12">   &nbsp;return v.val <STRONG>&nbsp;&nbsp;&nbsp; </STRONG>
+             </TD>
+            <TD width="43" height="12">   |</TD>
+            <TD width="589" height="12">   &nbsp;return v.val&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"><strong>}</strong></TD>
+            <TD width="512" height="1">   <strong>&nbsp;&nbsp;&nbsp;</strong></TD>
+            <TD width="43" height="1">   |</TD>
+            <TD width="589" height="1">   </TD>
+         </TR>
+         </TABLE>
+</div>
+
+
+
+
+
+<p>Koszt wyszukiwania minimum i maksimum jest proporcjonalny do długości 
+przeglądanej ścieżki. Zatem dla drzewa o wysokości h wynosi O(h). Nie musimy wykonywać operacji porównywania 
+elementów, a tylko instrukcje przypisania. Dla drzewa o n wierzchołkach, w 
+najgorszym razie wykonamy ich&nbsp; n, a w najlepszym tylko jedną. Interesujący jest 
+też koszt średni, który wynosi O(lg n), ale o tym będzie mowa w dalszej części wykładu.<p><b>
+Pytanie 4</B>:&nbsp;
+    Jaka jest minimalna i maksymalna liczba etykiet, które mogą być 
+    przechowywane w drzewie BST o wysokości h?<br>
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'min = h+1&nbsp;&nbsp; max = 2^(h+1)-1');">
+</form>
+
+
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left">
+<A HREF="main07_p1.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main07_p3.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

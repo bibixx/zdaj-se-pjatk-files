@@ -1,0 +1,58 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<link rel="stylesheet" type="text/css" href="pliki/main.css">
+<title>08 - Warstwa sieci</title>
+</head>
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+<table border="0" cellpadding="5" cellspacing="5" height="100%" width="100%">
+<tbody><tr heigh="100%"><td bgcolor="#e6f0eb" valign="top" width="25%"><br>
+        <a class="menulink" href="01%20-%20Cwiczenia%20Linux%20Knoppix.html" onfocus="blur();" title="Ćwiczenia Linux/Knoppix" onmouseover="window.status='Ćwiczenia Linux/Knoppix'; return true;" onmouseout="window.status=''; ">
+	1. Ćwiczenia Linux/Knoppix</a><br>
+	<br>
+	<a class="menulink" href="02%20-%20Skaner%20sieci%20-%20Ethereal.html" onfocus="blur();" title="Skaner sieci - Ethereal" onmouseover="window.status='Skaner sieci - Ethereal'; return true;" onmouseout="window.status=''; ">
+	2. Skaner sieci - Ethereal</a><br>
+	<br>
+	<a class="menulink" href="03%20-%20Automaty%20skonczone.html" onfocus="blur();" title="Automaty skończone" onmouseover="window.status='Automaty skończone'; return true;" onmouseout="window.status=''; ">
+	3. Automaty skończone</a><br>
+	<br>
+	<a class="menulink" href="04%20-%20SMTP,%20POP3,%20HTTP%20kontynuacja.html" onfocus="blur();" title="SMTP, POP3, HTTP kontynuacja" onmouseover="window.status='SMTP, POP3, HTTP kontynuacja'; return true;" onmouseout="window.status=''; ">
+	4. SMTP, POP3, HTTP kontynuacja</a><br>
+	<br>
+	<a class="menulink" href="05%20-%20Warstwa%20transportowa.html" onfocus="blur();" title="Warstwa tranportowa" onmouseover="window.status='Warstwa tranportowa'; return true;" onmouseout="window.status=''; ">
+	5. Warstwa tranportowa</a><br>
+	<br>
+	<a class="menulink" href="07%20-%20Protokoly%20rutingu.html" onfocus="blur();" title="Protokoły rutingu" onmouseover="window.status='Protokoły rutingu'; return true;" onmouseout="window.status=''; ">
+	7. Protokoły rutingu</a><br>
+	<br>
+	<a class="menulink" href="08%20-%20Warstwa%20sieci.html" onfocus="blur();" title="Warstwa sieci" onmouseover="window.status='Warstwa sieci'; return true;" onmouseout="window.status=''; ">
+	<b>8. Warstwa sieci</b></a><br>
+	<br>
+	<a class="menulink" href="09%20-%20Powtorzenie%20materialu.html" onfocus="blur();" title="Powtórzenie materiału" onmouseover="window.status='Powtórzenie materiału'; return true;" onmouseout="window.status=''; ">
+	9.  Powtórzenie materiału</a><br>
+        <br>
+        <a class="menulink" href="javascript:window.close();" onfocus="blur();" onmouseover="window.status='Wyjście'; return true;" onmouseout="window.status=''; ">
+        Wyjście</a></td>
+<td bgcolor="whitesmoke" valign="top"><form name="f" method="post" action="eld.asp?id=61&amp;sid=157&amp;z=1"><p></p><h4>Zadanie 1</h4><p></p><p>Zapisz maski sieci w postaci dziesiętnej (/a.b.c.d)</p><p></p><p>192.168.0.0/24<br>192.168.0.0/25<br>192.168.0.0/26<br>192.168.0.0./30</p><p></p><p></p><h4>Zadanie 2</h4><p></p><p>Podaj adresy sieci do których należą poniższe adresy IP (w postaci a.b.c.d/x).</p><p></p><p>213.123.35.225/16<br>213.123.35.225/23<br>213.123.35.225/24<br>213.123.35.225/25<br>213.123.35.225/26<br>213.123.35.225/30</p><p></p><h4>Zadanie 3</h4><p></p><p>Rozważmy
+sieć pakietową w której wykorzystywane są adresy 32 bitowe. Załóżmy, że
+ruter ma 4 interfejsy ponumerowane od 0 do 3 oraz poniższe reguły
+przesyłania pakietów.</p><p></p><p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><table border="1"><tbody><tr><td align="center">Adres docelwy</td><td align="center">Interfejs</td></tr><tr><td align="center">11100000 00000000 00000000 00000000<br>do<br>11100000 11111111 11111111 11111111</td><td align="center">0</td></tr><tr><td align="center">11100001 00000000 00000000 00000000<br>do<br>11100001 00000000 11111111 11111111</td><td align="center">1</td></tr><tr><td align="center">11100001 00000001 00000000 00000000<br>do<br>11100001 11111111 11111111 11111111</td><td align="center">2</td></tr><tr><td align="center">pozostałe</td><td align="center">3</td></tr></tbody></table></p><p></p><p></p><ul><p></p><p></p><li>przedstaw
+tablice przesyłania (forwarding table) wykorzystującą dopasowanie
+najdłuższego prefiksu oraz przesyłająca dane na prawidłowy interfejs</li><p></p><p></p><li>którymi interfejsami zostaną wysłane datagramy o adresach<p></p><p></p><ul><p></p><p></p><li>11001000 10010001 01010001 01010101</li><p></p><p></p><li>11100001 00000000 11000011 00111100</li><p></p><p></p><li>11100001 10000000 00010001 01110111</li><p></p><p></p></ul><p></p><p></p><p></p></li></ul><p></p><p></p><h4>Zadanie 4</h4><p></p><p>Rozważmy
+sieć datagramową wykorzstującą adresy 8 bitowe. Ruter wykorzystuje
+dopasowanie najdłuższego prefiksu. Tablica przesyłania (forwarding
+table) jest następująca:</p><p></p><p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><table border="1"><tbody><tr><td align="center">Prefiks</td><td align="center">Interfejs</td></tr><tr><td align="center">00</td><td align="center">0</td></tr><tr><td align="center">01</td><td align="center">1</td></tr><tr><td align="center">10</td><td align="center">2</td></tr><tr><td align="center">11</td><td align="center">3</td></tr></tbody></table></p><p></p><p>Dla każdego z interfejsów podaj ilość oraz zakres adresów.</p><p></p><p></p><h4>Zadanie 5</h4><p></p><p>Rozważmy
+sieć datagramową wykorzstującą adresy 8 bitowe. Ruter wykorzystuje
+dopasowanie najdłuższego prefiksu. Tablica przesyłania (forwarding
+table) jest następująca:</p><p></p><p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><table border="1"><tbody><tr><td align="center">Prefiks</td><td align="center">Interfejs</td></tr><tr><td align="center">1</td><td align="center">0</td></tr><tr><td align="center">11</td><td align="center">1</td></tr><tr><td align="center">111</td><td align="center">2</td></tr><tr><td align="center">pozostałe</td><td align="center">3</td></tr></tbody></table></p><p></p><p>Dla każdego z interfejsów podaj ilość oraz zakres adresów.</p><p></p><p></p><h4>Zadanie 6</h4><p></p><p>Mamy
+trzy sieci: Sieć1, Sieć2, Sieć3. W Sieć1 musimy zaadresować 125
+interfejsów. W Sieć2 i Sieć3 60 interfejsów. Wykorzystujemy adresy
+223.1.17.0/24. Adresy sieci podaj w postaci a.b.c.d/x.</p><p></p><h4>Zadanie 7</h4><p></p><p>Rozważmy
+sieć 101.101.101.64/26. Podaj zakres adresów IP możliwy do
+wykorzystania. Pewien ISP chce podzielić sieć 101.101.64.0/26 na 4
+równe podsieci. Podaj adresy tych sieci.</p><p></p><h4>Zadanie 8</h4><p></p><p>Mamy
+do dyspozycji następującą podsieć 214.97.254.0/23. Zaadresuj: SiećA 250
+interfejsów, SiećB i SiećC po 60 interfejsów. Dodatkowo zaadresuj
+SiećPA, SiećPB, SiećPC zawierające po 2 interfejsy.</p></form></td></tr></tbody></table></body></html>

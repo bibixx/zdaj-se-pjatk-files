@@ -1,0 +1,223 @@
+SKO1 - Egzamin 1
+Parametry testu:
+Iloœæ pytañ: 40
+Czas (min): 40
+Punktacja: Wagi (do ka¿dej opcji przypisana jest waga na plus lub minus)
+
+1 Wybierz poprawne rozwiniêcie skrótu TCP.
+Transmission Control Protocol 
+Transparent Control Protocol 
+Transport Control Protocol 
+Transfer Control Protocol 
+2 Za pomoc¹ jakiego polecenia (system operacyjny Linux) mo¿emy
+uzyskaæ informacje z serwerów DNS?
+dig 
+gid 
+route 
+qdns 
+3 Zaznacz protoko³y warstwy 7 modelu ISO/OSI:
+IP 
+SMTP 
+HTTP 
+FTP 
+UDP 
+TCP 
+POP3 
+4 W warstwie ³¹cza mówimy o:
+segmentach 
+ramkach 
+bitach 
+pakietach 
+5 Protokó³ bezstanowy utrzymuje informacje o trwaj¹cym po³¹czeniu
+podczas wiêcej ni¿ jednej wymiany komunikatów.
+Nie 
+Tak 
+6 Jakie us³ugi sieæ Internet oferuje dla swoich aplikacji?
+us³ugê gwarancji minimalnego dostêpnego pasma 
+niezawodn¹ "po³¹czeniow¹" us³ugê 
+us³ugê gwarancji maksymalnego czasu transmisji 
+zawodn¹ "bezpo³¹czeniow¹" us³ugê 
+7 Je¿eli do transmisji otrzymujemy kwant czasu, to jaki jest to
+rodzaj multipleksacji? Podaj skrót.
+FDM 
+TDM 
+8 Techniki: CIDR (Classless Interdomain Routingu) oraz NAT (Network
+Address Translation) pozwalaj¹ na efektywniejsze wykorzystanie
+adresów IPv4.
+Tak 
+Nie 
+9 TTL to:
+flaga w pakiecie IP 
+definiuje przez ile urz¹dzeñ prze³¹czaj¹cych warstwy sieci, dany
+pakiet mo¿e byæ przes³any 
+to samo co RTT 
+flaga w segmencie TCP 
+10 Maj¹c dany adres IP 213.23.10.34/23 okreœl adres rozg³oszeniowy
+sieci.
+213.23.10.254 
+213.23.11.255 
+213.23.11.254 
+213.23.10.255 
+11 Ile bitów ma adres IP w wersji 4?
+32 
+56 
+64 
+128 
+12 Zaznacz adresy sieci powsta³e po podzieleniu sieci 172.16.32.0/24
+na 4 podsieci.
+172.16.32.192/26 
+172.16.32.128/26 
+172.16.32.0/26 
+172.16.32.64/26 
+172.16.32.96/26 
+172.16.32.32/26 
+172.16.32.224/26 
+13 Protokó³ pozwalaj¹cy na uzyskanie przez klienta swojego adresu IP to:
+GONET 
+DHCP 
+IP 
+PNP 
+TCP 
+14 Ile bitów ma adres IP w wersji 6?
+64 
+32 
+56 
+128 
+15 Maj¹c dany adres IP 192.23.11.23/23 okreœl adres sieci.
+192.23.0.0/23 
+192.23.10.0/23 
+192.23.11.23/23 
+192.23.11.0/23 
+16 Skrót LAN oznacza:
+standard pod³¹czenia dysków dla serwerów uniksowych 
+Lack of Anonymous Nets 
+lokaln¹ sieæ komputerow¹ 
+¿adne z powy¿szych wyjaœnieñ nie jest prawid³owe 
+17 Adres IP ma:
+2 bajty 
+24 bity 
+32 bity 
+6 bajtów 
+18 Zast¹pienie koncentratów prze³¹cznikami, powoduje w sieci:
+zwiekszenie iloœci domen rozg³oszeniowych 
+zmniejszenie iloœci domen kolizyjnych 
+zmiejszenie iloœci domen rozg³oszeniowych 
+zwiêkszenie iloœci domen kolizyjnych 
+19 Który protokó³ dostêpu do wspó³dzielonego ³¹cza zapewnia, ¿e
+maksymalny czas oczekiwania na skuteczn¹ transmisjê nie przekroczy
+pewnej wartoœci?
+CSMA/CD 
+odpytywanie 
+CSMA/CA 
+slotted Aloha 
+Ethernet 
+token ring 
+20 ARP (Address Resolution Protocol) odpowiada za:
+VCI (Virtual Channel Identification) 
+przesy³anie pakietów warstwy drugiej 
+translacje pomiêdzy adresami IP i MAC 
+translacje pomiêdzy IPv4 i IPv6 
+21 Standard Ethernet w strukturze ramki okreœla preambu³ê:
+zawieraj¹c¹ CRC 
+zawieraj¹c¹ 2 (dwa) bajty sekwencji oktetu 100110011 
+sygnalizuj¹c¹ koniec ramki 
+synchronizuj¹c¹ odbiornik 
+22 W technologii 10BASE-T maksymalna d³ugoœæ kabla pomiêdzy
+prze³¹cznikami wynosi:
+205 m 
+400 m 
+100 m 
+185 m 
+23 PVC jest tworzone dla po³¹czeñ:
+sta³ych 
+tymczasowych 
+na ¿¹danie 
+24 W sieci Ethernet 100BaseT u¿ywaj¹cej tylko prze³¹czników
+pracuj¹cych w trybie store-and-forward i po³¹czeñ full-duplex
+wêze³ mo¿e jednoczeœnie nadawaæ i odbieraæ z pe³n¹ szybkoœci¹ 
+kolizje nie wystêpuj¹, ale ramki mog¹ byæ tracone na skutek
+przepe³nienia buforów w prze³¹czniku b¹dŸ uszkodzenia ramki 
+kolizje wystêpuj¹ ok. 3 razy rzadziej ni¿ w sieci bez prze³¹czników 
+ramki nigdy nie s¹ tracone 
+25 PPP (Point-to-Point Protocol) jest protoko³em warstwy drugiej.
+Nie 
+Tak 
+26 Switch jest to:
+urz¹dzenie sieciowe, które przekazuje ramki do odpowiedniego
+wyjœcia urz¹dzenia na podstawie adresu docelowego ka¿dej z nich 
+odmiana œwiat³owodu 
+rodzaj protoko³u sieciowego 
+¿adne z powy¿szych wyjaœnieñ nie jest prawid³owe 
+27 Skrót ATM oznacza:
+Asynchronous Tranfer Mode 
+¿adne z powy¿szych wyjaœnieñ nie jest prawdziwe 
+Abnormal Transmission of Medium 
+Algorythmic Transfer Mode 
+28 TokenRing pracuje w topologi logicznej:
+drzewa 
+szyny 
+pierœcienia 
+¿adne z powy¿szych wyjaœnieñ nie jest prawid³owe 
+29 Klasycznymodel sieci OSI sk³ada siê z:
+trzech warstw 
+czterech warstw 
+piêciu warstw 
+siedmiu warstw 
+30 10base2
+wykorzystuje cienki kabel koncentryczny 
+pozwala na transmisje do 10Mbps 
+to standard definiuj¹cy okablowanie dla sieci Ethernet 
+wykorzystuje UTP 
+wykorzystuje transmisje na wszystkich 4 parach 
+31 Teoretyczna prêdkoœæ sieci w której medium to 10BASE-T wynosi:
+100 MB/s 
+100 Mb/s 
+10 Mb/s 
+10 MB/s 
+32 TokenRing to:
+protokó³ u¿ywany przez ³¹cze szeregowe 
+sieæ komputerowa dzia³aj¹ca w topologii logicznej pierœcienia 
+oznaczenie ¿etonu inicjuj¹cego transmisjê 
+sposób obs³ugi b³êdnych bloków dyskowych w Microsoft Windows 2003
+Server 
+33 Warstwa najni¿sza (pierwsza) modelu sieci OSI realizowana jest:
+sprzêtowo 
+jedynie poprzez protokó³ TCP/IP 
+jedynie poprzez protokó³ IPX/SPX 
+programowo 
+34 Wzmacniacz(repeater):
+nie przenosi b³êdów 
+wnosi opóŸnienie w sieci wiêksze ni¿ 256 ms 
+przenosi b³êdy 
+nie rozszerza domeny kolizyjnej 
+35 Sieci radiowe w standardzie 802.11b pracuj¹ z nastêpuj¹c¹
+maksymaln¹ teoretyczn¹ szybkoœci¹ przesy³ania danych na kana³:
+11 Mb/s 
+512 Mb/s 
+54 Mb/s 
+2,1 Mb/s 
+36 IPSec zapewnia bezpieczeñstwo w warstwie:
+transportu 
+³¹cza 
+aplikacji 
+sieci 
+37 Integralnoœæpolega na tym, ¿e:
+z dwóch ramek tworzony jest jeden pakiet 
+¿adne z powy¿szych wyjaœnieñ nie jest prawid³owe 
+nie ma mo¿liwoœci zmodyfikowania niepostrze¿enie wiadomoœci 
+wiadomoœæ mo¿e zmodyfikowaæ tylko ka¿dy wêze³ poœredni sieci 
+38 Atak zablokowania us³ugi (DoS) polega na:
+w³amaniu na klienta i uniemo¿liwieniu pracy w sieci 
+przeci¹¿enia serwera w celu zablokowania us³ugi 
+w³amaniu na serwer i zablokowaniu us³ugi 
+podszyciu siê pod serwer w celu zablokowania us³ugi 
+39 Poufnoœæjest zachowana wtedy, kiedy:
+tylko nadawca mo¿e zrozumieæ wiadomoœæ 
+nadawca mo¿e potwierdziæ to¿samoœæ odbiorcy 
+odbiorca mo¿e potwierdziæ to¿samoœæ nadawcy 
+tylko w³aœciwy odbiorca mo¿e zrozumieæ wiadomoœæ 
+40 TEMPEST jest zabezpieczeniem przed:
+podszywaniem siê w warstwie fizycznej 
+pods³uchem w warstwie fizycznej 
+atakiem DoS w warstwie ³¹cza 
+pods³uchem w warstwie ³¹cza 

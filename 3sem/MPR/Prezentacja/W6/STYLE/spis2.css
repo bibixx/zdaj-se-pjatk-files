@@ -1,0 +1,17 @@
+BODY, P {
+ background-color: #dcdcdc;
+ color: black; 
+ font-family: Verdana;
+ font-size: 90%; 
+}
+
+A:link {
+	COLOR:  darkblue; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR:  darkblue; TEXT-DECORATION: none
+}
+
+A:hover {
+   color: blue; TEXT-DECORATION: underline
+}

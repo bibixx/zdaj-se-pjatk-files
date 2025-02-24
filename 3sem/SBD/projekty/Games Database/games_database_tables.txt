@@ -1,0 +1,121 @@
+--
+-- AUTHOR
+--   Miroslaw Dabrowski
+--
+--  USAGE
+--        START games_database_tables.txt
+
+SET TERMOUT ON
+PROMPT Building tables.  Please wait.
+SET TERMOUT OFF
+
+DROP TABLE POSITIONS;
+DROP TABLE GAMES;
+DROP TABLE DEVELOPERS;
+DROP TABLE PUBLISHERS;
+DROP TABLE TYPES;
+DROP TABLE LANGUAGES;
+DROP TABLE PLATFORMS;
+
+CREATE TABLE DEVELOPERS
+(	D_ID      NUMBER(2)    		,
+        D_NAME    VARCHAR2(50) NOT NULL ,
+	D_TOWN    VARCHAR2(50) 		,
+        D_COUNTRY VARCHAR2(50) 		,
+        D_WWW     VARCHAR2(50) 		,
+	PRIMARY KEY(D_ID)		);
+
+CREATE TABLE PUBLISHERS
+(	P_ID      NUMBER(2)             ,
+        P_NAME    VARCHAR2(50) NOT NULL ,
+	P_TOWN    VARCHAR2(50) 		,
+        P_COUNTRY VARCHAR2(50) 		,
+        P_WWW     VARCHAR2(50) 		,
+	PRIMARY KEY(P_ID)		);
+
+CREATE TABLE TYPES
+(	T_ID      	 NUMBER(2)             ,
+        T_NAME    	 VARCHAR2(50) NOT NULL ,
+	T_ABBREVIATION   VARCHAR2(50)  NOT NULL ,
+	PRIMARY KEY(T_ID)		       );
+
+CREATE TABLE LANGUAGES
+(	L_ID   		NUMBER(2)                ,
+        L_NAME 		VARCHAR2(50) NOT NULL    ,
+        L_ABBREVIATION  VARCHAR2(50)  NOT NULL    ,
+	PRIMARY KEY(L_ID)			 );
+
+CREATE TABLE PLATFORMS
+(	P_ID             NUMBER(2)   ,
+	P_NAME           VARCHAR2(50),
+	P_ABBREVIATION   VARCHAR2(50),
+	PRIMARY  KEY(P_ID)	     );
+
+CREATE TABLE GAMES
+(	G_ID         		NUMBER(2)                      ,
+        G_ORIGINAL_TITLE	VARCHAR2(50) NOT NULL          ,
+        G_ORIGINAL_SUB_TITLE	VARCHAR2(50)                   ,
+        G_DEVELOPER_FK  	NUMBER(2) 		       ,
+        G_TYPE_FK		NUMBER(2)		       ,
+        G_ORIGINAL_LANGUAGE_FK  NUMBER(2)                      ,
+	G_PLATFORM_FK  		NUMBER(2)		       ,
+	PRIMARY KEY(G_ID)			  	       ,
+	FOREIGN KEY(G_DEVELOPER_FK)         REFERENCES DEVELOPERS (D_ID) ,
+	FOREIGN KEY(G_TYPE_FK)	            REFERENCES TYPES      (T_ID) ,
+	FOREIGN KEY(G_ORIGINAL_LANGUAGE_FK) REFERENCES LANGUAGES  (L_ID) );
+
+CREATE TABLE POSITIONS
+(	P_ID     		NUMBER(2),
+	Game_FK     		NUMBER(2),
+        Language_FK      	NUMBER(2),
+        Publisher_FK		NUMBER(2),
+        P_RELASE_DATE 		DATE                            ,
+	P_TITLE 		VARCHAR2(50) NOT NULL           ,
+	P_SUB_TITLE 		VARCHAR2(50)                    ,
+	PRIMARY KEY(P_ID)					,
+	FOREIGN KEY(Game_FK) 	  REFERENCES GAMES     (G_ID)	,
+	FOREIGN KEY(Language_FK)  REFERENCES LANGUAGES (L_ID)	, 		       
+	FOREIGN KEY(Publisher_FK) REFERENCES PUBLISHERS(P_ID)	);
+
+INSERT INTO DEVELOPERS VALUES (1 , 'Bohemia Interactive Studios' , 'Prague'     , 'CZECH REPUBLIC' ,'');
+INSERT INTO DEVELOPERS VALUES (2 , 'City Interactive'            , 'Warsaw'     , 'POLAND'         ,'');
+INSERT INTO DEVELOPERS VALUES (3 , 'Techland'                    , 'Wroclaw'    , 'POLAND'         ,'');
+INSERT INTO DEVELOPERS VALUES (4 , 'JoWood'                      , 'Rottenmann' , 'AUSTRIA'        ,'');
+INSERT INTO DEVELOPERS VALUES (5 , 'GSC Game World'              , 'Kiev'       , 'UCRAINE'        ,'');
+INSERT INTO DEVELOPERS VALUES (6 , 'Cauldron'                    , ''           , ''               ,'http://www.cauldron.sk/');
+
+INSERT INTO PUBLISHERS VALUES (1 , 'Codemasters' , 'Leamington Spa Warks' , 'UK'  ,'');
+INSERT INTO PUBLISHERS VALUES (2 , 'THQ'         , 'Calabasas Hills'      , 'USA' ,'');
+INSERT INTO PUBLISHERS VALUES (3 , 'Activision'  , 'Santa Monica'         , 'USA' ,'');
+INSERT INTO PUBLISHERS VALUES (4 , 'Eidos'       , 'San Francisco'        , 'USA' ,'');
+INSERT INTO PUBLISHERS VALUES (5 , '2k'          , 'Manhattan'            , 'USA' ,'');
+INSERT INTO PUBLISHERS VALUES (6 , 'Playlogic'   , ''                     , ''    ,' http://www.playlogicgames.com/');
+
+INSERT INTO TYPES VALUES (1 , 'Strategy'                  , 'STR' );
+INSERT INTO TYPES VALUES (2 , 'First Person Perspective'  , 'FPP' );
+INSERT INTO TYPES VALUES (3 , 'Third Person Perspective'  , 'TPP' );
+
+INSERT INTO LANGUAGES VALUES (1 , 'English'  , 'EN'  );
+INSERT INTO LANGUAGES VALUES (2 , 'Polish'   , 'PL'  );
+INSERT INTO LANGUAGES VALUES (3 , 'German'   , 'GER' );
+INSERT INTO LANGUAGES VALUES (4 , 'Russian'  , 'RUS' );
+
+INSERT INTO PLATFORMS VALUES (1 , 'Personal Computer'    , 'PC' );
+INSERT INTO PLATFORMS VALUES (2 , 'PlayStation'          , 'PS' );
+INSERT INTO PLATFORMS VALUES (3 , 'Play Station 2'       , 'PS2');
+INSERT INTO PLATFORMS VALUES (4 , 'XBox'                 , 'XBX');
+INSERT INTO PLATFORMS VALUES (5 , 'GameCube'             , 'GCN');
+INSERT INTO PLATFORMS VALUES (6 , 'XBox 360'             , '360');
+INSERT INTO PLATFORMS VALUES (7 , 'PlayStation Portable' , 'PSP');
+
+INSERT INTO GAMES VALUES (1 , 'S.T.A.L.K.E.R.'          , 'Shadow of Chernobyl' , 1 , 1 , 1 , 1);
+INSERT INTO GAMES VALUES (2 , 'Knights of the Temple 2' , 'Shadow of Chernobyl' , 1 , 1 , 1 , 1);
+
+INSERT INTO POSITIONS VALUES (1 , 1 , 1 , 1 , TO_DATE('17-MAR-2006', 'DD-MON-YYYY') , 'Stlakus'  , 'Shadow');
+INSERT INTO POSITIONS VALUES (2 , 1 , 2 , 2 , TO_DATE('18-MAR-2006', 'DD-MON-YYYY') , 'StalKOFF' , 'Night Rider');
+
+COMMIT;
+
+SET TERMOUT ON
+PROMPT  Database build is complete
+set serveroutput on

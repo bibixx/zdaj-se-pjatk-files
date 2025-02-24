@@ -1,0 +1,58 @@
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.util.*;
+import javax.naming.*;
+import java.sql.*;
+import javax.sql.*;
+
+public class DbServlet1 extends HttpServlet {
+
+  Connection con;         // po³¹czenie
+  DataSource dataSource;  // Ÿrod³o danych
+
+
+
+  public void init() {
+    try {
+      Context init = new InitialContext();
+      Context ctx = (Context) init.lookup("java:comp/env");
+      dataSource = (DataSource) ctx.lookup("jdbc/ksidb");
+
+      synchronized (dataSource) {
+        con = dataSource.getConnection();
+      }
+
+    } catch (NamingException exc) {
+        throw new ServletException(
+           "Nie mogê uzyskaæ Ÿród³a java:comp/env/jdbc/ksidb",exc);
+    } catch (Exception exc) {
+
+  }
+
+  }
+
+
+  public void serviceRequest(HttpServletRequest req,
+                             HttpServletResponse resp)
+                             throws ServletException, IOException
+  {
+
+  }
+
+
+  public void doGet(HttpServletRequest request,
+                    HttpServletResponse response)
+                 throws ServletException, IOException
+  {
+      serviceRequest(request, response);
+  }
+
+  public void doPost(HttpServletRequest request,
+                    HttpServletResponse response)
+                 throws ServletException, IOException
+  {
+      serviceRequest(request, response);
+  }
+
+}

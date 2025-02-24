@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en"><html><head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (OS/2; I) [Netscape]"><title>Zadanie 1 MPR</title></head><body>
+<h2>
+
+
+<center>Zadanie 1</center>
+</h2>
+<center>
+<br>
+</center>
+<div align="Center">
+<div align="Left">
+<center></center>
+Termin wykonania: 28 października<br>
+</div>
+<center></center>
+</div>
+<center><hr width="100%">
+<br></center>
+
+
+<div align="Left">
+<div align="Left">
+<center></center><b>A. Zlecenie</b><br>
+<br>
+<table cellpadding="2" cellspacing="2" border="1" width="100%" bgcolor="#ffcccc">
+  <tbody>
+    <tr>
+      <td valign="Top">
+      <div align="Center"><b>HASŁO<br>
+      </b></div>
+      
+      <div align="Center"><b>System obsługi dla biura podróży
+      </b></div>
+      <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Zastanowić się jak powinien wyglądać taki system. <br>
+Co powinien umożliwiać? Dla samego biura i jego klientów.<br>
+Przejrzeć dostępne w Internecie klienckie  "front-endy" biur podróży (dużych - np. TUI.de i małych).<br>
+Zobaczyć jak to robią. Nie wzorować się. Raczej postawić się na miejscu klienta
+i zastanowić się czego im brakuje - pod względem zakresu oraz wygody użytkowania.<br>
+Sformułować pomysły na funkcjonalność "od strony klienta" (to łatwe i przyjemne).<br>
+Następnie postawić się na miejscu właściciela, pracownika małego - średniego
+biura podróży. Co jest nam wtedy potrzebne?  Zastanowić się jak "front-end"
+powinien integrować się, być spójny z "back-endem" (systemami obsługującymi
+funkcjonowanie samej firmy). Co to za systemy? Uwaga: nie bedziemy robić
+księgowości - potraktujmy ją jako czarną skrzynkę, atrapę.Ale są i inne,
+o których możemy coś więcej powiedzieć nie wdając się w reguły księgowania.<br>
+Oczekuję tutaj wstępnego projektu w formie słownego opisu (dokument tekstowy, np. doc).<br>
+To na początek.<br>
+<br>
+<b>B. Zadanie - wprawka</b><br>
+<br>
+</div></div>Polskie biuro podróży otrzymuje od kontrahentów pliki (na razie
+zwykłe, nie XML!) z ofertami wyjazdów-wycieczek. Każda oferta zawiera: datę 
+wyjazdu, datę powrotu , kraj docelowy, umiejscowienie, cenę (w jednym wierszu
+zaczynającym się ciągiem znaków ###) oraz następujący słowny opis oferty
+w dowolnej liczbie wierszy.<br>
+Pliki przychodzą od różnych kontrahentów: polskich, angielskich, niemieckich,
+hiszpańskich i zawierają treść w odpowiedniej lokalizacji (format daty, ceny,
+waluta, nazwa kraju, język opisu). Umiejscowienie, występujące w ofercie
+po kraju docelowym, dotyczy tego czy to jest nad morzem, czy w górach, czy
+nad jeziorami. Jest podane jako jedno słowo w języku kontrahenta.<br>
+ Lokalizacja kontrahenta jest zaznaczona w pierwszym wierszu pliku (np. pl_PL)<br>
+Oferty są  dodawane do pełnego zestawu ofert, prowadzonego jako swoista baza
+danych "w pamięci" ( wykorzystać kolekcje, jeszcze nie zajmujemy się JDBC!).
+W tej bazie ofert opis każdej oferty zawiera (oprócz dat
+wyjazdu i powrotu, kraju i ceny) <b>symbole</b> określające czy oferta dotyczy gór, morza czy jezior (ew. żadnej z tych rzeczy) oraz przetłumaczony opis oferty.<br>
+<br>
+Napisać aplikację, która:<br>
+<ol>
+  <li>dodaje zawartość plików ofert do zestawu wszystkich ofert, pomijając
+opisy (ale opisy będą tłumaczone i następnie opisy po polsku mają być dodawane
+do bazy),</li>
+  <li>jest zinternacjonalizowana - prezentuje klientowi pełny zestaw ofert
+w jego języku (przy czym umiejscowienie (morze, góry) ma być również podawane
+jako słowo w tym języku,</li>
+  <li>pokazuje oferty posortowane wg nazw krajów,</li>
+  <li>pozwala zapamiętywać i odtwarzać zestaw ofert,</li>
+  <li>dostarcza interfejsu zmian dat i zmian cen ofert,</li><li>dostarcza interfejsu tłumaczenia ofert - wygodnego w użyciu dla tłumaczy,<br>
+  </li>
+
+  <li>zmiany cen i zmiany dat są zapisywane do logu,</li>
+  <li>ustalone niedopuszczalne zmiany cen i zmiany dat są odrzucane.</li>
+</ol>
+<br>
+Wybrać dwie - trzy lokalizacje do testowania aplikacji.<br>
+Wykorzystać w kolejnych punktach:<br>
+<ol>
+  <li>JavaBeans, kolekcje,  klasy lokalizacyjnie czułe, regularne wyrażenia</li>
+  <li>klasy lokalizacyjnie czułe i internacjonalizację za pomocą ResourceBundle,</li>
+  <li>zlokalizowane Collatory,</li>
+  <li>XMLEncoder/Decoder,</li>
+  <li>Swing GUI (z użyciem zaawansowanych komponentów tekstowych),</li>
+  <li>nasluch zmian właściwości JavaBeans,</li>
+  <li>wetowanie zmian właściwości JavaBeans.</li>
+</ol>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+ <br>
+
+</body></html>

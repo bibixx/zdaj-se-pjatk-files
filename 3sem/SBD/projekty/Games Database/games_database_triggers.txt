@@ -1,0 +1,122 @@
+###############################################
+CREATE OR REPLACE TRIGGER message_types
+AFTER INSERT ON TYPES
+BEGIN
+DBMS_output.put_line('### Simple message ###');
+END;
+/
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+CREATE OR REPLACE TRIGGER auto_id_types
+BEFORE INSERT ON TYPES
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(T_ID)+1,1)
+INTO :NEW.T_ID FROM TYPES;
+END;
+/
+
+CREATE OR REPLACE TRIGGER auto_id_games
+BEFORE INSERT ON GAMES
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(G_ID)+1,1)
+INTO :NEW.G_ID FROM GAMES;
+END;
+/
+
+CREATE OR REPLACE TRIGGER auto_id_developers
+BEFORE INSERT ON developers
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(D_ID)+1,1)
+INTO :NEW.D_ID FROM developers;
+END;
+/
+
+CREATE OR REPLACE TRIGGER auto_id_publishers
+BEFORE INSERT ON publishers
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(p_ID)+1,1)
+INTO :NEW.p_ID FROM publishers;
+END;
+/
+
+CREATE OR REPLACE TRIGGER auto_id_languages
+BEFORE INSERT ON languages
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(l_ID)+1,1)
+INTO :NEW.l_ID FROM languages;
+END;
+/
+
+CREATE OR REPLACE TRIGGER auto_id_PLATFORMS
+BEFORE INSERT ON PLATFORMS
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(p_ID)+1,1)
+INTO :NEW.p_ID FROM PLATFORMS;
+END;
+/
+
+CREATE OR REPLACE TRIGGER auto_id_Positions
+BEFORE INSERT ON PLATFORMS
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(p_ID)+1,1)
+INTO :NEW.p_ID FROM Positions;
+END;
+/
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+CREATE OR REPLACE TRIGGER abbreviation_is_too_long
+BEFORE UPDATE ON TYPES
+FOR EACH ROW
+BEGIN
+if (:NEW.T_ABBREVIATION > 3) then
+DBMS_output.put_line('### Abbreviation is too long !!! ###');
+END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER show_status
+AFTER INSERT OR UPDATE ON POSITIONS
+FOR EACH ROW
+DECLARE
+   x number;
+   old number;
+   new number;
+BEGIN
+SELECT count(*) INTO x FROM POSITIONS;
+SELECT count(*) INTO old  FROM POSITIONS where P_RELASE_DATE<(sysdate-365);
+SELECT count(*) INTO new  FROM POSITIONS where P_RELASE_DATE>(sysdate-365);
+DBMS_output.put_line('### Status of POSITIONS table - ');
+DBMS_output.put_line('  Number of entities in table: ' || x);
+DBMS_output.put_line('  Number of old games: ' || old);
+DBMS_output.put_line('  Number of new games: ' || new);
+End;
+/
+
+CREATE OR REPLACE TRIGGER date_information
+AFTER INSERT OR UPDATE OR DELETE ON GAMES
+FOR EACH ROW
+DECLARE
+	data DATE;
+BEGIN
+       data:= SYSDATE;
+       DBMS_output.put_line('### Table games has been modified! Date: '||data);
+END;
+/
+
+CREATE OR REPLACE TRIGGER old_games
+BEFORE DELETE ON Positions
+FOR EACH ROW
+BEGIN
+if (:OLD.P_RELASE_DATE>(Sysdate-360))
+then
+raise_application_error(-1000,'### This game is still new.');
+END IF;
+END;
+/

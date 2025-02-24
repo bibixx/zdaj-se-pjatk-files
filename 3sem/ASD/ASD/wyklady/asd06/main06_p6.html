@@ -1,0 +1,542 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main06_p5.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main06_cw.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td>
+</tr></table>
+<br clear="all"><A NAME="EDU.wyklad.punkt 6"></A>
+
+
+<br clear="all"><div class="tytulpunktu">6. Obliczanie wartości wyrażeń</div> 
+
+<p>W tym punkcie rozważymy problem obliczania wartości wyrażeń algebraicznych (termów). 
+Algorytm rozwiązujący ten problem używa, jako pomocniczej struktury danych, 
+stosów. </P>
+
+<div class="def">
+Definicja 6.1 Zbiorem wyrażeń algebraicznych WA&nbsp; nazywać będziemy 
+najmniejszy zbiór napisów nad alfabetem {x,y,z, +,*,-,(,)}, taki że<blockquote>
+  <p>(1) x, y, z są wyrażeniami algebraicznymi,<br>
+  (2) jeśli w i w' należą do WA, to (w+w') , (w-w') oraz (w*w') też należą do WA.</p>
+</blockquote>
+</div>
+
+<p></P>
+<p>Przykładami wyrażeń algebraicznych są następujące termy ((x+y)*z), ((x+(y*z))+(x-z)). 
+W dalszym ciągu rozważać będziemy wyrażenia algebraiczne w strukturze liczb 
+rzeczywistych, co oznacza, że zmienne przyjmować będą wartości rzeczywiste, a 
+operacje + i * są po prostu dodawaniem, odejmowaniem i mnożeniem liczb 
+rzeczywistych.&nbsp; </p>
+
+<p>Jak obliczamy wartość wyrażenia? Niech nasze wyrażenie ma postać ((x+y) * (y+z)). 
+Działaniem głównym jest *. Aby wyliczyć wartość tego iloczynu, musimy znać 
+wartości zmiennych x, y, z oraz najpierw wyliczyć sumy (x+y) i (y+z).&nbsp; 
+Czyli, aby obliczyć wartość wyrażenia musimy najpierw obliczyć wartości jego 
+prostszych podwyrażeń. Zauważmy, że jeżeli przeglądamy znaki naszego wyrażenia 
+od lewej do prawej, to musimy zapamiętać wartość zmiennej x oraz operację +, bo 
+np. prawy argument może być skomplikowanym wyrażeniem, które trzeba wcześniej 
+wyliczyć, zanim przystąpimy do wykonania&nbsp; operacji +. Naturalną strukturą, 
+która pomoże nam pamiętać kolejność wykonywania operacji, jest stos.</p>
+
+<p><b>Idea algorytmu</b></p>
+
+<p>Załóżmy, że wyrażenie algebraiczne jest dane w postaci tablicy znakowej o 
+elementach tab[1], tab[2], ..., tab[n], a wartości zmiennych w nim występujących 
+są zapisane w obiekcie val, którego atrybutami są x, y, z. </p>
+
+<p>Idea algorytmu jest następująca: Czytamy kolejne znaki wyrażenia. Napotkane 
+symbole operacji wpisujemy na stos operacji, a napotkane argumenty - na stos 
+argumentów. Pojawienie się nawiasu zamykającego oznacza zakończenie wczytywania 
+jakiegoś poprawnego wyrażenia algebraicznego. Można więc obliczyć jego wartość. 
+Pobieramy nazwę operacji ze stosu operacji i argumenty ze stosu argumentów, i 
+wykonujemy obliczenie. Wynik wkładamy na stos argumentów, bo wartość obliczonego 
+wyrażenia może być argumentem innej operacji.</p>
+
+<p><b>Algorytm</b></p>
+   
+<p>Dany jest ciąg znaków tab[1], tab[2], ..., tab[n] pewnego wyrażenia 
+algebraicznego oraz obiekt val taki, że val.x, val.y, val.z są wartościami 
+zmiennych x, y i z. W przedstawionym algorytmie używać będziemy dwóch stosów 
+pomocniczych Arg i Op, o których zakładamy, że są początkowo puste. Na stosie 
+Arg umieszczać będziemy wartości zmiennych lub obliczone wartości podwyrażeń, 
+natomiast na stosie Op zapisywać będziemy symbole operacji. Użyta w algorytmie 
+instrukcja postaci case s of ...esac, zastępuje wielokrotną instrukcję warunkową 
+uzależniającą rodzaj wykonywanej akcji od wartości zmiennej s.</p>
+   
+<p>
+<div class="def" style="width: 913;">
+   <TABLE frame="void" rules="none" width="876" >
+         <TR>
+            <TD width="729" height="12" colspan="2">Oblicz{</TD>
+             
+            <TD width="42" height="12"></TD>
+             
+            <TD width="638" height="12"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12"><strong>&nbsp;for </strong>i := 1 <b>to</b> n<b> 
+            do </b><strong>&nbsp;</strong></TD> 
+            <TD width="42" height="12"></TD> 
+            <TD width="638" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;if </strong>
+            (tab[i]<font face="Symbol"> </font>=<font face="Symbol"> </font>'+' 
+            or tab[i] = '*' or tab[i] = '-') <b>
+            then</b> </TD> 
+            <TD width="42" height="12"></TD> 
+            <TD width="638" height="12">// przeczytany znak, to symbol operacji</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>
+            Op := push(tab[i], Op);</TD> 
+            <TD width="42" height="12"></TD> 
+            <TD width="638" height="12">//wpisujemy na stos operacji</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;<strong> </strong>&nbsp;&nbsp;&nbsp;&nbsp; <STRONG>
+            else&nbsp;&nbsp; </STRONG>
+             &nbsp;</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="6"></TD>
+            <TD width="670" height="6">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            if
+            </strong>(tab[i] = 'x' or tab[i] = 'y' or tab[i] ='z') <b>then</b> </TD>
+            <TD width="42" height="6">   </TD>
+            <TD width="638" height="6">   &nbsp;// przeczytany znak, to zmienna</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;<strong>&nbsp;&nbsp;&nbsp;
+            </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>&nbsp;</strong>case 
+            tab[i] of&nbsp;&nbsp; </TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            'x' : Arg := push(val.x, Arg);</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   //wpisujemy na stos argumentów jej 
+            wartość</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            'y' : Arg := push(val.y, Arg);</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            'z' : Arg := push(val.z, Arg);</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            esac</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;<strong> </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <STRONG>
+            else</STRONG></TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if
+            </strong>(tab[i] = ')' )&nbsp; <b>then</b> </TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   // przeczytany znak to nawias ')'</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            operacja := top(Op); Op := pop(op);</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   //zdejmujemy ze stosu symbol operacji</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            a2 := top(Arg); Arg := pop(Arg);</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   // zdejmujemy ze stosu argumenty</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            a1 := top(Arg); Arg := pop(Arg);</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            case operacja of</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   //wynik zapisujemy ponownie na stosie 
+            argumentów</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            '+' : Arg := push(a1 + a2, Arg);</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            '-' : Arg := push(a1 - a2, Arg);</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            '*' : Arg := push(a1 * a2, Arg);</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            esac;</TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>fi</b></TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp; <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            fi</b></TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            fi</b></TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="670" height="12">   <b>od;</b> &nbsp;&nbsp; </TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"><strong>}</strong></TD>
+            <TD width="670" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="42" height="12">   </TD>
+            <TD width="638" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p>Zauważmy, że algorytm ignoruje całkowicie nawiasy otwierające, nie rozważamy 
+też problemu poprawności wyrażenia. Zakładamy, że jest ono poprawnie zbudowane.</p>
+
+<p><b>&nbsp;Przykład 6.1</b></p>
+<p>Rozważmy wyrażenie algebraiczne postaci ((x+(y*z)) +(z-x)). Niech wartościami 
+zmiennych x, y, z będą odpowiednio liczby 3, 4, 5. Na&nbsp; rysunku 6.11 
+przedstawiono, kolejne etapy obliczania wartości tego wyrażenia.</p>
+<center>
+<table border="1" cellpadding="0" cellspacing="0" width="60%" id="AutoNumber1">
+  <tr>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">&nbsp;</td>
+    <td width="25%" align="center" colspan="5">stos argumentów</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center" bgcolor="#FFFFCC">&nbsp;</td>
+    <td width="20%" align="center" colspan="4">stos operacji</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">5</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">3</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">4</td>
+    <td width="5%" align="center" bgcolor="#FFFFCC">*</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">4</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">20</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">5</td>
+    <td width="5%" align="center" bgcolor="#FFFFCC">-</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">5</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">2</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">3</td>
+    <td width="5%" align="center" bgcolor="#FFFFCC">+</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">3</td>
+    <td width="5%" align="center" bgcolor="#FFFFCC">+</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">3</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">3</td>
+    <td width="5%" align="center" bgcolor="#FFFFCC">+</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">23</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center" bgcolor="#FFFFCC">+</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">23</td>
+    <td width="5%" align="center" bgcolor="#FFFFCC">+</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">23</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">23</td>
+    <td width="5%" align="center" bgcolor="#FFFFCC">+</td>
+    <td width="5%" align="center" bgcolor="#DDA0DD">25</td>
+    <td width="5%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">&nbsp;(</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">(</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">x</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">+</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">(</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">y</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">*</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">z</td>
+    <td width="10%" bordercolor="#808080" bgcolor="#C0C0C0" align="center" colspan="2">
+    )</td>
+    <td width="10%" bordercolor="#808080" bgcolor="#C0C0C0" align="center" colspan="2">
+    )</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">+</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">(</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">x</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">-</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">z</td>
+    <td width="10%" bordercolor="#808080" bgcolor="#C0C0C0" align="center" colspan="2">
+    )</td>
+    <td width="5%" bordercolor="#808080" bgcolor="#C0C0C0" align="center">)</td>
+    <td width="5%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="20%" align="center" colspan="4">Rysunek 6.11</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+    <td width="5%" align="center">&nbsp;</td>
+  </tr>
+</table>
+</center>
+
+<p>Na szarym pasku zapisano kolejne znaki rozważanego wyrażenia, a powyżej, 
+ewentualne zmiany zawartości stosów argumentów i operacji w wyniku odczytania 
+odpowiedniego znaku. Na zakończenie, wyliczona wartość wyrażenia znajduje się na 
+stosie argumentów.<font face="Wingdings"> J</font></p>
+   
+<p>&nbsp;</p>
+   
+<p><b>Pytanie 8:</b> Jaki jest koszt algorytmu Oblicz, jeśli rozmiarem danych jest 
+długość n danego wyrażenia algebraicznego, a miarą kosztu - liczba operacji 
+wykonanych na stosie? <BR>
+</p>
+   
+<FORM>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'O(n)');">
+</p>
+</form>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main06_p5.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main06_cw.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td>
+</tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

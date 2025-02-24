@@ -1,0 +1,21 @@
+<!--
+    Projekt
+-->
+
+<!DOCTYPE project [
+  <!ENTITY defbuild SYSTEM "../../common/defbuild.xml">
+]>
+
+
+<project name="default" default="build" basedir=".">
+  <target name="init">
+      <tstamp/>
+  </target>
+  
+  &defbuild;
+
+</project>
+
+
+
+

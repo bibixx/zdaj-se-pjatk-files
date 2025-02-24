@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <web-app version="2.4"
+    xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd">
+
+     <display-name>Przykladowe Serwlety 1</display-name>
+    <description>Proste przykladowe serwlety</description>
+
+    <servlet>
+       <servlet-name>Test</servlet-name>
+       <description>Serwlet testowy</description>
+       <servlet-class>Test</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Test</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>Test2</servlet-name>
+       <description>Serwlet z loggerem</description>
+       <servlet-class>Test2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Test2</servlet-name>
+        <url-pattern>/test2</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>Msg</servlet-name>
+       <description>Prosty napis </description>
+       <servlet-class>Msg</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Msg</servlet-name>
+        <url-pattern>/msg</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>Msg2</servlet-name>
+       <description>Info o sciezkach</description>
+       <servlet-class>Msg2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Msg2</servlet-name>
+        <url-pattern>/paths</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>Time1</servlet-name>
+       <description>  Pokazuje date i czas</description>
+       <servlet-class>Time1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Time1</servlet-name>
+        <url-pattern>/time1</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>ShowTime0</servlet-name>
+       <description>Pokazuje date i czas</description>
+       <servlet-class>ShowTime0</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowTime0</servlet-name>
+        <url-pattern>/Time</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>ShowTime</servlet-name>
+       <description>Pokazuje date i czas sesje</description>
+       <servlet-class>ShowTime</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowTime</servlet-name>
+        <url-pattern>/ShowTime</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>Params1</servlet-name>
+       <description>Test parametrow</description>
+       <servlet-class>Params1</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Params1</servlet-name>
+        <url-pattern>/params1</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>Params2</servlet-name>
+       <description>Test parametrow</description>
+       <servlet-class>Params2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Params2</servlet-name>
+        <url-pattern>/paramtest</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>ClientTester</servlet-name>
+       <description>Test klienta HTTP</description>
+       <servlet-class>ClientTester</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClientTester</servlet-name>
+        <url-pattern>/clientTester</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>RegexTest</servlet-name>
+       <description>  Regularne wyrazenia 1 zle</description>
+       <servlet-class>RegexTest</servlet-class>
+       <init-param>
+          <param-name>regexFormFile</param-name>
+          <param-value>regexform.html</param-value>
+       </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegexTest</servlet-name>
+        <url-pattern>/regex1 </url-pattern>
+    </servlet-mapping>
+
+</web-app>

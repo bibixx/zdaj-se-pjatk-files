@@ -1,0 +1,804 @@
+{\rtf1\ansi\ansicpg1250\uc1 \deff0\deflang1045\deflangfe1045{\fonttbl{\f0\froman\fcharset238\fprq2{\*\panose 02020603050405020304}Times New Roman;}{\f3\froman\fcharset2\fprq2{\*\panose 05050102010706020507}Symbol;}
+{\f57\fswiss\fcharset128\fprq2{\*\panose 020b0604020202020204}Arial Unicode MS;}{\f71\fswiss\fcharset128\fprq2 @Arial Unicode MS;}{\f74\froman\fcharset0\fprq2 Times New Roman;}{\f73\froman\fcharset204\fprq2 Times New Roman Cyr;}
+{\f75\froman\fcharset161\fprq2 Times New Roman Greek;}{\f76\froman\fcharset162\fprq2 Times New Roman Tur;}{\f77\froman\fcharset177\fprq2 Times New Roman (Hebrew);}{\f78\froman\fcharset178\fprq2 Times New Roman (Arabic);}
+{\f79\froman\fcharset186\fprq2 Times New Roman Baltic;}{\f530\fswiss\fcharset0\fprq2 Arial Unicode MS Western;}{\f528\fswiss\fcharset238\fprq2 Arial Unicode MS CE;}{\f529\fswiss\fcharset204\fprq2 Arial Unicode MS Cyr;}
+{\f531\fswiss\fcharset161\fprq2 Arial Unicode MS Greek;}{\f532\fswiss\fcharset162\fprq2 Arial Unicode MS Tur;}{\f533\fswiss\fcharset177\fprq2 Arial Unicode MS (Hebrew);}{\f534\fswiss\fcharset178\fprq2 Arial Unicode MS (Arabic);}
+{\f535\fswiss\fcharset186\fprq2 Arial Unicode MS Baltic;}{\f642\fswiss\fcharset0\fprq2 @Arial Unicode MS Western;}{\f640\fswiss\fcharset238\fprq2 @Arial Unicode MS CE;}{\f641\fswiss\fcharset204\fprq2 @Arial Unicode MS Cyr;}
+{\f643\fswiss\fcharset161\fprq2 @Arial Unicode MS Greek;}{\f644\fswiss\fcharset162\fprq2 @Arial Unicode MS Tur;}{\f645\fswiss\fcharset177\fprq2 @Arial Unicode MS (Hebrew);}{\f646\fswiss\fcharset178\fprq2 @Arial Unicode MS (Arabic);}
+{\f647\fswiss\fcharset186\fprq2 @Arial Unicode MS Baltic;}}{\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green255\blue255;\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;\red255\green255\blue255;
+\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;\red128\green0\blue128;\red128\green0\blue0;\red128\green128\blue0;\red128\green128\blue128;\red192\green192\blue192;}{\stylesheet{
+\ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 \snext0 Normal;}{\s3\qj \fi-357\li357\ri0\sb240\sa60\keepn\widctlpar
+\jclisttab\tx360\aspalpha\aspnum\faauto\ls1\outlinelevel2\adjustright\rin0\lin357\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 \sbasedon0 \snext15 heading 3;}{\*\cs10 \additive Default Paragraph Font;}{\s15\qj \fi-360\li720\ri0\widctlpar
+\jclisttab\tx720\aspalpha\aspnum\faauto\ls1\ilvl1\outlinelevel1\adjustright\rin0\lin720\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 \sbasedon16 \snext15 odpowiedzi;}{
+\s16\ql \fi-283\li283\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin283\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 \sbasedon0 \snext16 List;}{\s17\ql \li1134\ri0\nowidctlpar
+\tlul\tx567\tldot\tx1701\aspalpha\aspnum\faauto\adjustright\rin0\lin1134\itap0 \fs24\lang1033\langfe1045\cgrid\langnp1033\langfenp1045 \sbasedon0 \snext0 program;}{\s18\qj \li0\ri-2\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 
+\fs28\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 \sbasedon0 \snext18 Body Text;}{\s19\ql \fi-283\li566\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin566\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 \sbasedon0 \snext19 
+List 2;}{\s20\ql \fi-283\li849\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin849\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 \sbasedon0 \snext20 List 3;}{
+\s21\ql \li283\ri0\sa120\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin283\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 \sbasedon0 \snext21 Body Text 2;}{
+\s22\ql \li708\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin708\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 \sbasedon0 \snext22 Normal Indent;}{\s23\ql \li0\ri0\widctlpar
+\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\loch\f57\hich\af57\dbch\af57\cgrid\langnp1045\langfenp1045 
+\sbasedon0 \snext23 HTML Preformatted;}}{\*\listtable{\list\listtemplateid1573706796\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid2169584}{\list\listtemplateid355000566\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid79983523}{\list\listtemplateid1376276302\listsimple{\listlevel\levelnfc4\levelnfcn4
+\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid114057563}
+{\list\listtemplateid2104924964\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 
+\fi-450\li450\jclisttab\tx450 }{\listname ;}\listid163784217}{\list\listtemplateid-877368234\listsimple{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'00.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li360\jclisttab\tx360 }{\listname ;}\listid190917740}{\list\listtemplateid1336039844\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-450\li450\jclisttab\tx450 }{\listname ;}\listid359281474}{\list\listtemplateid-2036163424{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0
+\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'01);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li1800\jclisttab\tx1800 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3240\jclisttab\tx3240 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li3960\jclisttab\tx3960 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li4680\jclisttab\tx4680 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5400\jclisttab\tx5400 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6120\jclisttab\tx6120 }{\listname ;}\listid577835701}{\list\listtemplateid-752966664\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0
+\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid-1924865728\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li1800\jclisttab\tx1800 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3240\jclisttab\tx3240 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li3960\jclisttab\tx3960 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li4680\jclisttab\tx4680 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5400\jclisttab\tx5400 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6120\jclisttab\tx6120 }{\listname ;}\listid590165358}
+{\list\listtemplateid-92916240\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid-162076870\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid595207590}{\list\listtemplateid-1933405926\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\leveltemplateid518436762\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li720\jclisttab\tx720 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid659848097}{\list\listtemplateid68485143\listsimple{\listlevel
+\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'00);}{\levelnumbers\'01;}\i0\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listname 
+;}\listid697052311}{\list\listtemplateid2114729076\listsimple{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'00.;}{\levelnumbers\'01;}\b\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listname ;}\listid700520016}{\list\listtemplateid1542478298\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid-108879254\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li405\jclisttab\tx405 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1125\jclisttab\tx1125 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li1845\jclisttab\tx1845 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2565\jclisttab\tx2565 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3285\jclisttab\tx3285 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4005\jclisttab\tx4005 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li4725\jclisttab\tx4725 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5445\jclisttab\tx5445 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6165\jclisttab\tx6165 }{\listname ;}\listid701709121}{\list\listtemplateid2032540620\listhybrid{\listlevel\levelnfc4
+\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid930793298\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel
+\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel
+\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel
+\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel
+\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel
+\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel
+\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel
+\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel
+\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname 
+;}\listid762991349}{\list\listtemplateid-528086860\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid-355707464\'03(\'00);}{\levelnumbers\'02;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li1800\jclisttab\tx1800 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3240\jclisttab\tx3240 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li3960\jclisttab\tx3960 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li4680\jclisttab\tx4680 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5400\jclisttab\tx5400 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6120\jclisttab\tx6120 }{\listname ;}\listid799998245}{\list\listtemplateid-690685258\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid930793298\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid812983761}{\list\listtemplateid-705770290\listsimple
+{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname 
+;}\listid835533339}{\list\listtemplateid-851007378\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid835727719}{\list\listtemplateid-1055374610\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext
+\leveltemplateid-108879254\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li405\jclisttab\tx405 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0
+{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace45
+\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace45\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0
+\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2
+\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0
+\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4
+\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2
+\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname 
+;}\listid853541086}{\list\listtemplateid-1731678864{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'01);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1 \fi-180\li1800\jclisttab\tx1800 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1 \fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1 \fi-360\li3240\jclisttab\tx3240 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1 \fi-180\li3960\jclisttab\tx3960 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1 \fi-360\li4680\jclisttab\tx4680 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1 \fi-360\li5400\jclisttab\tx5400 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1 \fi-180\li6120\jclisttab\tx6120 }{\listname ;}\listid859469469}{\list\listtemplateid-765820298\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid862599047}{\list\listtemplateid996997846\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid868955797}{\list\listtemplateid1871739308
+\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid930793298\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360
+\jclisttab\tx360 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid68485121\'01\u-3913 ?;}{\levelnumbers;}\f3\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 
+\fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 
+\fi-180\li1800\jclisttab\tx1800 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 
+\fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 
+\fi-360\li3240\jclisttab\tx3240 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 
+\fi-180\li3960\jclisttab\tx3960 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 
+\fi-360\li4680\jclisttab\tx4680 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 
+\fi-360\li5400\jclisttab\tx5400 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 
+\fi-180\li6120\jclisttab\tx6120 }{\listname ;}\listid916480618}{\list\listtemplateid648174828\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid-162076870
+\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li1800\jclisttab\tx1800 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3240\jclisttab\tx3240 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li3960\jclisttab\tx3960 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li4680\jclisttab\tx4680 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5400\jclisttab\tx5400 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6120\jclisttab\tx6120 }{\listname ;}\listid938027020}{\list\listtemplateid-813387538\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0
+\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid518436762\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li720\jclisttab\tx720 }{\listlevel\levelnfc4\levelnfcn4
+\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2
+\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0
+\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4
+\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2
+\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0
+\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4
+\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2
+\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid970088006}
+{\list\listtemplateid-111894462\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid930793298\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid1122268052}{\list\listtemplateid1401185064\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li450\jclisttab\tx450 }{\listname ;}\listid1205674487}{\list\listtemplateid1249158222\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0
+\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid1195042518\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0
+\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid-162076870\'03(\'01);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc2
+\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li1800\jclisttab\tx1800 }{\listlevel\levelnfc0
+\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4
+\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3240\jclisttab\tx3240 }{\listlevel\levelnfc2
+\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li3960\jclisttab\tx3960 }{\listlevel\levelnfc0
+\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li4680\jclisttab\tx4680 }{\listlevel\levelnfc4
+\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5400\jclisttab\tx5400 }{\listlevel\levelnfc2
+\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6120\jclisttab\tx6120 }{\listname 
+;}\listid1219052587}{\list\listtemplateid-865958440\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1\fbias0 \fi-450\li450\jclisttab\tx450 }{\listname ;}\listid1224029596}{\list\listtemplateid68485143\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'00);}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listname ;}\listid1225483042}{\list\listtemplateid546340780{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0
+\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\'03(\'01);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li1800\jclisttab\tx1800 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3240\jclisttab\tx3240 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li3960\jclisttab\tx3960 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li4680\jclisttab\tx4680 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5400\jclisttab\tx5400 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6120\jclisttab\tx6120 }{\listname ;}\listid1230845686}{\list\listtemplateid-1840602946{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0
+\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'00);}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \s3\fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\'03(\'01);}{\levelnumbers\'02;}\fs20\loch\af0\hich\af0\dbch\af0\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \s15\fi-360\li720\jclisttab\tx720 }{\listlevel\levelnfc2\levelnfcn2\leveljc0\leveljcn0\levelfollow0
+\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'02);}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\'03(\'03);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\'03(\'04);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1800\jclisttab\tx1800 }{\listlevel\levelnfc2\levelnfcn2\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0
+{\leveltext\'03(\'05);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc2\levelnfcn2\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3240\jclisttab\tx3240 }{\listname ;}\listid1237740254}{\list\listtemplateid65306594\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0
+\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid1898086494\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid1240869306}
+{\list\listtemplateid67895297\listsimple{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'01\u-3913 ?;}{\levelnumbers;}\f3\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 
+\fi-360\li360\jclisttab\tx360 }{\listname ;}\listid1242956085}{\list\listtemplateid-1633537928\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid68485145
+\'02\'00.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li720\jclisttab\tx720 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid68485145
+\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext
+\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0
+{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360
+\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1
+\levelspace360\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0
+\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2
+\leveljcn2\levelfollow0\levelstartat1\levelspace360\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid1298873352}
+{\list\listtemplateid1640783154\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid-1277775714\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid1301157016}{\list\listtemplateid-1624367514\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid1316883134}{\list\listtemplateid-1899879528\listsimple{\listlevel\levelnfc4\levelnfcn4
+\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid1372918189}
+{\list\listtemplateid1501471352\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid-355707464\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'01.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid1403794424}{\list\listtemplateid370580680\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid1898086494\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li1800\jclisttab\tx1800 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3240\jclisttab\tx3240 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li3960\jclisttab\tx3960 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li4680\jclisttab\tx4680 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5400\jclisttab\tx5400 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6120\jclisttab\tx6120 }{\listname ;}\listid1421022958}{\list\listtemplateid695892370\listhybrid
+{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid-108879254\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li405
+\jclisttab\tx405 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440
+\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 
+\fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers
+\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485145
+\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext
+\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid1423796514}{\list\listtemplateid67895311\listsimple{\listlevel\levelnfc0\levelnfcn0\leveljc0
+\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'00.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li360\jclisttab\tx360 }{\listname ;}\listid1433622812}{\list\listtemplateid-88680334
+\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li450\jclisttab\tx450 }
+{\listname ;}\listid1543978404}{\list\listtemplateid1776597954\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid1545405007}{\list\listtemplateid-660675400\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid1630937606}{\list\listtemplateid-32096998\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid518436762\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li720\jclisttab\tx720 }{\listlevel\levelnfc4\levelnfcn4\leveljc0
+\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2
+\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0
+\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0
+\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2
+\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0
+\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0
+\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2
+\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid1692956373}
+{\list\listtemplateid792877432\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 
+\fi-375\li375\jclisttab\tx375 }{\listname ;}\listid1740129861}{\list\listtemplateid-1117735018\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid-108879254
+\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li405\jclisttab\tx405 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext
+\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace45\levelindent0
+{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace45
+\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace45\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0
+\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0
+\leveljcn0\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2
+\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace45\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid1784112423}
+{\list\listtemplateid2036234530\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid-825877958\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 
+\chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li1800\jclisttab\tx1800 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3240\jclisttab\tx3240 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li3960\jclisttab\tx3960 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li4680\jclisttab\tx4680 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5400\jclisttab\tx5400 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6120\jclisttab\tx6120 }{\listname ;}\listid1798377003}{\list\listtemplateid-1527760234\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid1901209590}{\list\listtemplateid-877368234\listsimple{\listlevel\levelnfc0\levelnfcn0
+\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'00.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li360\jclisttab\tx360 }{\listname ;}\listid1923219528}
+{\list\listtemplateid551051496\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 
+\fi-375\li375\jclisttab\tx375 }{\listname ;}\listid1930893039}{\list\listtemplateid217102352\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid1967352552}{\list\listtemplateid-2025915590\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid1995256699}{\list\listtemplateid-2029476588{\listlevel\levelnfc4\levelnfcn4\leveljc0
+\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0
+\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'01);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0
+\levelstartat1\levelspace0\levelindent0{\leveltext\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li1800\jclisttab\tx1800 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3240\jclisttab\tx3240 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li3960\jclisttab\tx3960 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li4680\jclisttab\tx4680 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5400\jclisttab\tx5400 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext
+\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6120\jclisttab\tx6120 }{\listname ;}\listid2036301176}{\list\listtemplateid-65340526\listsimple{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0
+\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname ;}\listid2123063932}{\list\listtemplateid1040194304\listsimple
+{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-375\li375\jclisttab\tx375 }{\listname 
+;}\listid2132356673}{\list\listtemplateid-1761046702\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid518436762\'03(\'00);}{\levelnumbers\'02;}\chbrdr
+\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1080\jclisttab\tx1080 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li1800\jclisttab\tx1800 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2520\jclisttab\tx2520 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3240\jclisttab\tx3240 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li3960\jclisttab\tx3960 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li4680\jclisttab\tx4680 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5400\jclisttab\tx5400 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}
+\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6120\jclisttab\tx6120 }{\listname ;}\listid2140226298}{\list\listtemplateid603244760\listhybrid{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace0
+\levelindent0{\leveltext\leveltemplateid930793298\'03(\'00);}{\levelnumbers\'02;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1\fbias0 \fi-360\li360\jclisttab\tx360 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'01.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li1440\jclisttab\tx1440 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'02.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li2160\jclisttab\tx2160 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'03.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li2880\jclisttab\tx2880 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'04.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li3600\jclisttab\tx3600 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'05.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li4320\jclisttab\tx4320 }{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485135\'02\'06.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5040\jclisttab\tx5040 }{\listlevel\levelnfc4\levelnfcn4\leveljc0\leveljcn0\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485145\'02\'07.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-360\li5760\jclisttab\tx5760 }{\listlevel\levelnfc2\levelnfcn2\leveljc2\leveljcn2\levelfollow0\levelstartat1
+\levelspace0\levelindent0{\leveltext\leveltemplateid68485147\'02\'08.;}{\levelnumbers\'01;}\chbrdr\brdrnone\brdrcf1 \chshdng0\chcfpat1\chcbpat1 \fi-180\li6480\jclisttab\tx6480 }{\listname ;}\listid2146118468}}{\*\listoverridetable
+{\listoverride\listid1237740254\listoverridecount0\ls1}{\listoverride\listid700520016\listoverridecount0\ls2}{\listoverride\listid1740129861\listoverridecount0\ls3}{\listoverride\listid1930893039\listoverridecount0\ls4}{\listoverride\listid2169584
+\listoverridecount0\ls5}{\listoverride\listid2132356673\listoverridecount0\ls6}{\listoverride\listid835727719\listoverridecount0\ls7}{\listoverride\listid79983523\listoverridecount0\ls8}{\listoverride\listid1995256699\listoverridecount0\ls9}
+{\listoverride\listid868955797\listoverridecount0\ls10}{\listoverride\listid1316883134\listoverridecount0\ls11}{\listoverride\listid1224029596\listoverridecount0\ls12}{\listoverride\listid163784217\listoverridecount0\ls13}{\listoverride\listid1433622812
+\listoverridecount0\ls14}{\listoverride\listid1242956085\listoverridecount0\ls15}{\listoverride\listid2123063932\listoverridecount0\ls16}{\listoverride\listid1543978404\listoverridecount0\ls17}{\listoverride\listid114057563\listoverridecount0\ls18}
+{\listoverride\listid1901209590\listoverridecount0\ls19}{\listoverride\listid1967352552\listoverridecount0\ls20}{\listoverride\listid1630937606\listoverridecount0\ls21}{\listoverride\listid359281474\listoverridecount0\ls22}{\listoverride\listid862599047
+\listoverridecount0\ls23}{\listoverride\listid1205674487\listoverridecount0\ls24}{\listoverride\listid835533339\listoverridecount0\ls25}{\listoverride\listid1545405007\listoverridecount0\ls26}{\listoverride\listid1372918189\listoverridecount0\ls27}
+{\listoverride\listid190917740\listoverridecount0\ls28}{\listoverride\listid1923219528\listoverridecount0\ls29}{\listoverride\listid799998245\listoverridecount0\ls30}{\listoverride\listid1403794424\listoverridecount0\ls31}{\listoverride\listid590165358
+\listoverridecount0\ls32}{\listoverride\listid1798377003\listoverridecount0\ls33}{\listoverride\listid1298873352\listoverridecount0\ls34}{\listoverride\listid1692956373\listoverridecount0\ls35}{\listoverride\listid970088006\listoverridecount0\ls36}
+{\listoverride\listid659848097\listoverridecount0\ls37}{\listoverride\listid2140226298\listoverridecount0\ls38}{\listoverride\listid701709121\listoverridecount0\ls39}{\listoverride\listid1784112423\listoverridecount0\ls40}{\listoverride\listid1423796514
+\listoverridecount0\ls41}{\listoverride\listid916480618\listoverridecount0\ls42}{\listoverride\listid853541086\listoverridecount0\ls43}{\listoverride\listid1219052587\listoverridecount0\ls44}{\listoverride\listid1301157016\listoverridecount0\ls45}
+{\listoverride\listid1421022958\listoverridecount0\ls46}{\listoverride\listid1240869306\listoverridecount0\ls47}{\listoverride\listid938027020\listoverridecount0\ls48}{\listoverride\listid595207590\listoverridecount0\ls49}{\listoverride\listid2146118468
+\listoverridecount0\ls50}{\listoverride\listid1122268052\listoverridecount0\ls51}{\listoverride\listid762991349\listoverridecount0\ls52}{\listoverride\listid812983761\listoverridecount0\ls53}{\listoverride\listid1230845686\listoverridecount0\ls54}
+{\listoverride\listid2036301176\listoverridecount0\ls55}{\listoverride\listid577835701\listoverridecount0\ls56}{\listoverride\listid859469469\listoverridecount0\ls57}{\listoverride\listid697052311\listoverridecount0\ls58}{\listoverride\listid1225483042
+\listoverridecount0\ls59}}{\info{\title Kolokwium  ALGORYTMY  I  STRUKTURY  DANYCH   ITN }{\author andrzej}{\operator mirkowska}{\creatim\yr2002\mo11\dy22\hr11\min55}{\revtim\yr2002\mo12\dy4\hr14\min31}{\version22}{\edmins943}{\nofpages9}{\nofwords3393}
+{\nofchars19343}{\*\company dabrowa.pl}{\nofcharsws23754}{\vern8249}}\paperw11906\paperh16838\margl1417\margr1417\margt1417\margb1417 
+\deftab708\widowctrl\ftnbj\aenddoc\hyphhotz425\noxlattoyen\expshrtn\noultrlspc\dntblnsbdb\nospaceforul\hyphcaps0\formshade\horzdoc\dghspace180\dgvspace180\dghorigin1701\dgvorigin1984\dghshow0\dgvshow0
+\jexpand\viewkind1\viewscale100\pgbrdrhead\pgbrdrfoot\nolnhtadjtbl \fet0\sectd \linex0\headery708\footery708\colsx708\endnhere\sectdefaultcl {\*\pnseclvl1\pnucrm\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl2\pnucltr\pnstart1\pnindent720\pnhang
+{\pntxta .}}{\*\pnseclvl3\pndec\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl4\pnlcltr\pnstart1\pnindent720\pnhang{\pntxta )}}{\*\pnseclvl5\pndec\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl6\pnlcltr\pnstart1\pnindent720\pnhang
+{\pntxtb (}{\pntxta )}}{\*\pnseclvl7\pnlcrm\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl8\pnlcltr\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl9\pnlcrm\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}\pard\plain 
+\qc \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs32 Kolokwium  ALGORYTMY  I  STRUKTURY  DANYCH  }{\b\fs32 \line }{\fs24 II rok}{\b\fs24  }{\fs24 PJWSTK, 7 grudnia 2002
+
+\par }\pard \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {Prosz\'ea uwa\'bfnie przeczyta\'e6 tre\'9c\'e6 zada\'f1 i odpowiedzie\'e6 zaznaczaj\'b9c, w przypadku pyta\'f1 testowych,    wybran\'b9 odpowied\'9f k\'f3\'b3
+kiem , lub wpisuj\'b9c odpowied\'9f w miejsce do tego przeznaczone, w przypadku innych form zadania. \'afadne materia\'b3y pomocnicze nie s\'b9 dozwolone. Powodzenia! 
+\par }\pard\plain \s15\qj \li360\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin360\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 
+Imie i nazwisko studenta............................................................................................................................\line Nr grupy........
+.......................................................................................................................................................
+\par }\pard\plain \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {
+\par }\pard \qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {1. Kt\'f3re z wymienionych ci\'b9g\'f3w funkcji s\'b9, a kt\'f3re nie s\'b9 uporz\'b9dkowane niemalej\'b9co ze wzgl\'eadu na rz\'b9d wielko\'9cci:
+\par 3n,  lg(n}{\super 2}{),  3n+ lg(n!), \tab \tab \tab TAK  /  NIE\tab \line lg n}{\super 4}{,   0.01*n}{\super 2}{ ,  100n+ 2 }{\super 3lg n}{\tab \tab TAK  /  NIE
+\par sqrt(n) , lg n , 20 n\tab \tab \tab TAK  /  NIE
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20\lang1045\langfe1036\langnp1045 1. Przy ka\'bfdym z ci\'b9g\'f3
+w zaznacz, czy jest (zaznaczamy TAK) czy nie jest (zaznaczamy NIE) uporz\'b9dkowany niemalej\'b9co, ze wzgl\'eadu na rz\'b9d wyst\'eapuj\'b9cych w nim funkcji (n}{\fs20\lang1045\langfe1036\langnp1045 {\field{\*\fldinst SYMBOL 206 \\f "Symbol"
+ \\s 10}{\fldrslt\f3\fs20}}}{\fs20\lang1045\langfe1036\langnp1045 N):\tab  \line  n+ lg }{\fs20 n}{\fs20\lang1045\langfe1036\langnp1045  , 2}{\fs20\lang1045\langfe1036\super\langnp1045 lg2n}{\fs20\lang1045\langfe1036\langnp1045  , 2}{
+\fs20\lang1045\langfe1036\super\langnp1045 2lgn}{\fs20\lang1045\langfe1036\langnp1045 \tab \tab \tab TAK  /  NIE\tab \line n}{\fs20\lang1045\langfe1036\super\langnp1045 1/2}{\fs20\lang1045\langfe1036\langnp1045 , lg n,  n}{
+\fs20\lang1045\langfe1036\super\langnp1045 3}{\fs20\lang1045\langfe1036\langnp1045  + lgn, }{\fs20 n}{\fs20\super 3}{\fs20\lang1045\langfe1036\langnp1045   \tab \tab \tab TAK  /  NIE\tab \line n !, 2}{\fs20\lang1045\langfe1036\super\langnp1045 n}{
+\fs20\lang1045\langfe1036\langnp1045 , 3}{\fs20\lang1045\langfe1036\super\langnp1045 n }{\fs20\lang1045\langfe1036\langnp1045  \tab \tab \tab \tab TAK  /  NIE
+\par }\pard\plain \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 
+\par }\pard\plain \qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {1. Kt\'f3re z wymienionych ci\'b9g\'f3w funkcji s\'b9, a kt\'f3re nie s\'b9 uporz\'b9dkowane niemalej\'b9
+co ze wzgl\'eadu na  rz\'b9d wielko\'9cci:
+\par }\pard\plain \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20  n}{\fs20\super 1/2}{\fs20 + lg(n),  lg(n}{\fs20\super 2}{\fs20 ), 2 }{\fs20\super 
+lg(n)}{\fs20 ,\tab \tab \tab TAK / NIE
+\par  n}{\fs20\super 1/2 }{\fs20 , lg (n!),  n}{\fs20\super 2}{\fs20  ,\tab \tab \tab \tab TAK / NIE
+\par (2 lg n), 300n}{\fs20\super 2  }{\fs20 + n,   n}{\fs20\super 2}{\fs20  + n}{\fs20\super 3}{\fs20  \tab \tab TAK / NIE
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20\lang1045\langfe1036\langnp1045 1. Przy ka\'bfdym z ci\'b9g\'f3
+w zaznacz, czy jest (zaznaczamy TAK) czy nie jest (zaznaczamy NIE) uporz\'b9dkowany niemalej\'b9co, ze wzgl\'eadu na rz\'b9d wyst\'eapuj\'b9cych w nim funkcji (n}{\fs20\lang1045\langfe1036\langnp1045 {\field{\*\fldinst SYMBOL 206 \\f "Symbol"
+ \\s 10}{\fldrslt\f3\fs20}}}{\fs20\lang1045\langfe1036\langnp1045 N):\tab  \line lg(n}{\fs20\lang1045\langfe1036\super\langnp1045 2}{\fs20\lang1045\langfe1036\langnp1045 ) , |sin n | + n , 2}{\fs20\lang1045\langfe1036\super\langnp1045 2lgn}{
+\fs20\lang1045\langfe1036\langnp1045  \tab \tab \tab TAK  /  NIE\tab \line 1000n  + n}{\fs20\lang1045\langfe1036\super\langnp1045 1/2}{\fs20\lang1045\langfe1036\langnp1045 , lg n, 0.001*n}{\fs20\lang1045\langfe1036\super\langnp1045 3}{
+\fs20\lang1045\langfe1036\langnp1045  +6  \tab \tab TAK  /  NIE\tab \line n}{\fs20\lang1045\langfe1036\super\langnp1045 2}{\fs20\lang1045\langfe1036\langnp1045 lgn, }{\fs20\lang1045\langfe1036\super\langnp1045  }{\fs20\lang1045\langfe1036\langnp1045 
+lgn!, lg}{\fs20\lang1045\langfe1036\super\langnp1045 3}{\fs20\lang1045\langfe1036\langnp1045 n \tab \tab \tab \tab TAK  /  NIE
+\par }\pard\plain \s15\qj \li360\ri0\widctlpar\brdrb\brdrdb\brdrw15\brsp20 \aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin360\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 
+\par }\pard\plain \qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {Zad.11 Niech n }{{\field{\*\fldinst SYMBOL 206 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{N. Oce\'f1 prawdziwo
+\'9c\'e6 ka\'bfdej z podanych zale\'bfno\'9cci 
+\par 2}{\super lgn }{= }{{\field{\*\fldinst SYMBOL 81 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{(n)    \tab \tab prawda  /   fa\'b3sz
+\par }\pard\plain \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 2}{\fs20\super 2n }{\fs20 = }{\fs20 {\field{\*\fldinst SYMBOL 87 \\f "Symbol"
+ \\s 10}{\fldrslt\f3\fs20}}}{\fs20 (2}{\fs20\super n}{\fs20 )  \tab \tab prawda  /   fa\'b3sz
+\par n!= O(2}{\fs20\super n}{\fs20 )     \tab \tab prawda  /   fa\'b3sz
+\par }\pard\plain \qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {
+\par Zad.11 Niech n }{{\field{\*\fldinst SYMBOL 206 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{N. Oce\'f1 prawdziwo\'9c\'e6 ka\'bfdej z podanych zale\'bfno\'9cci 
+\par 2}{\super lgn }{= }{{\field{\*\fldinst SYMBOL 87 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{(n)    \tab \tab prawda  /   fa\'b3sz
+\par }\pard\plain \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 3}{\fs20\super 2n }{\fs20 = O(2}{\fs20\super n}{\fs20 )  \tab \tab prawda  /  fa\'b3sz
+
+\par }{\fs20 {\field{\*\fldinst SYMBOL 214 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{\fs20 n = }{\fs20 {\field{\*\fldinst SYMBOL 81 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{\fs20 (lg n)    \tab \tab prawda  /   fa\'b3sz
+\par }\pard\plain \qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {
+\par Zad.11 Niech n }{{\field{\*\fldinst SYMBOL 206 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{N. Oce\'f1 prawdziwo\'9c\'e6 ka\'bfdej z podanych zale\'bfno\'9cci 
+\par 2}{\super lgn }{= O(lg n!)    \tab \tab prawda  /   fa\'b3sz
+\par }\pard\plain \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 3}{\fs20\super 2n }{\fs20 = }{\fs20 {\field{\*\fldinst SYMBOL 81 \\f "Symbol"
+ \\s 10}{\fldrslt\f3\fs20}}}{\fs20 (3}{\fs20\super n}{\fs20 )  \tab \tab prawda  /  fa\'b3sz
+\par }{\fs20 {\field{\*\fldinst SYMBOL 214 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{\fs20 n = }{\fs20 {\field{\*\fldinst SYMBOL 87 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{\fs20 (lg n)    \tab \tab prawda  /   fa\'b3sz
+\par }\pard\plain \qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {
+\par Zad.11 Niech n }{{\field{\*\fldinst SYMBOL 206 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{N. Oce\'f1 prawdziwo\'9c\'e6 ka\'bfdej z podanych zale\'bfno\'9cci 
+\par 2}{\super lgn }{= O(n)    \tab \tab prawda  /   fa\'b3sz
+\par }\pard\plain \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20\lang1031\langfe1045\langnp1031 4}{\fs20\lang1031\langfe1045\super\langnp1031 n }{
+\fs20\lang1031\langfe1045\langnp1031 = }{\fs20 {\field{\*\fldinst SYMBOL 87 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{\fs20\lang1031\langfe1045\langnp1031 (2}{\fs20\lang1031\langfe1045\super\langnp1031 lg n!}{\fs20\lang1031\langfe1045\langnp1031 )  \tab 
+\tab }{\fs20 prawda  /  fa\'b3sz
+\par }{\fs20 {\field{\*\fldinst SYMBOL 214 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{\fs20 n = }{\fs20 {\field{\*\fldinst SYMBOL 81 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{\fs20 (lg n!)    \tab \tab prawda  /   fa\'b3sz
+\par 
+\par }\pard \s15\qj \fi-360\li360\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin360\itap0 {\fs20 ===============================================================================
+\par }\pard\plain \qj \li0\ri-2\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {
+\par 
+\par 2. Niech A b\'eadzie algorytmem, kt\'f3rego z\'b3o\'bfono\'9c\'e6 wyra\'bfa si\'ea funkcj\'b9  n}{\super 2}{, gdzie n jest rozmiarem zadania. Czas wykonania tego algorytmu dla pewnego problemu o rozmiarze 10 (na pewnym komputerze) wynosi 1 sek.
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \qj \fi-360\li360\ri-2\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls31\adjustright\rin-2\lin360\itap0 {Ile czasu zajmie wykonanie zadania 2 razy wi\'eakszego? Odp..............
+
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Jaki jest maksymalny rozmiar zadania,\~ kt\'f3re mo\'bfna rozwi\'b9za\'e6 przy pomocy tego algorytmu (na tym samym komputerze) w ci\'b9gu 100sek\~? Odp. ..............
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Ile czasu zajmie wykonanie algorytmu dla danych o rozmiarze 50 na komputerze 5 razy szybszym? Odp.......
+\par }\pard \qj \li0\ri-2\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 {
+\par 2. Niech A b\'eadzie algorytmem, kt\'f3rego z\'b3o\'bfono\'9c\'e6 wyra\'bfa si\'ea funkcj\'b9 n}{\super 3}{, gdzie n jest rozmiarem zadania. Czas wykonania tego algorytmu dla danych o rozmiarze 3 (na pewnym komputerze) wynosi 81 sek.
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \qj \fi-360\li360\ri-2\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls32\adjustright\rin-2\lin360\itap0 {Ile czasu zajmie wykonanie zadania 3 razy wi\'eakszego? Odp. .............
+
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Jaki jest maksymalny rozmiar zadania,\~ kt\'f3re mo\'bfna rozwi\'b9za\'e6 w ci\'b9gu 375sek\~? Odp. ............. 
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Ile czasu zajmie wykonanie algorytmu dla danych o rozmiarze 9 na komputerze 27 razy szybszym? Odp.......
+\par }\pard \qj \li0\ri-2\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 {
+\par {\*\bkmkstart _Hlt448993673}{\*\bkmkend _Hlt448993673}2. Niech A b\'eadzie algorytmem, kt\'f3rego z\'b3o\'bfono\'9c\'e6 wyra\'bfa si\'ea funkcj\'b9 lg n, gdzi
+e n jest rozmiarem zadania. Czas wykonania tego algorytmu dla danych o rozmiarze 32 (na pewnym komputerze) wynosi 25 sek. 
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \qj \fi-360\li360\ri-2\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls30\adjustright\rin-2\lin360\itap0 {Ile czasu zajmie wykonanie zadania 2 razy wi\'eakszego? Odp..............
+
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Jaki jest maksymalny rozmiar zadania,\~ kt\'f3re mo\'bfna rozwi\'b9za\'e6 w ci\'b9gu  20sek? Odp..............
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Ile czasu zajmie wykonanie algorytmu dla danych o rozmiarze 4}{\super 4}{ na komputerze 5 razy szybszym? Odp......
+\par }\pard \qj \li0\ri-2\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 {
+\par 2. Niech A b\'eadzie algorytmem, kt\'f3rego z\'b3o\'bfono\'9c\'e6 wyra\'bfa si\'ea funkcj\'b9 2}{\super n}{, gdzie n jest rozmiarem zadania. Czas wykonania tego algorytmu dla danych o rozmiarze 10 (na pewnym komputerze) wynosi 1024 sek. 
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \qj \fi-360\li360\ri-2\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls33\adjustright\rin-2\lin360\itap0 {Ile czasu zajmie wykonanie zadania 2 razy mniejszego? Odp..............
+
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Jaki jest maksymalny rozmiar zadania,\~ kt\'f3re mo\'bfna rozwi\'b9za\'e6  w ci\'b9gu 512 sek\~? Odp..............
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Ile czasu zajmie wykonanie algorytmu dla danych o rozmiarze 7 na komputerze 2 razy szybszym? Odp.........
+\par }\pard \qj \li0\ri-2\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 {
+\par ========== =========================================================
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20\lang1045\langfe1036\langnp1045 3. R\'f3wnoczesne wyszukiwanie mini\-
+mum i maksimum w ci\'b9gu n-elementowym mo\'bfna zrealizowa\'e6 ustawiaj\'b9c elementy ci\'b9gu w pary, a nast\'eapnie wybieraj\'b9c element najmniejszy z mniejszych element\'f3w par i element najwi\'eakszy - z wi\'eakszych element\'f3w par. 
+\par {\listtext\pard\plain\s16 \fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard\plain \s16\ql \fi-360\li360\ri0\widctlpar\jclisttab\tx360\tx5100\aspalpha\aspnum\faauto\ls35\adjustright\rin0\lin360\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {
+Jaki jest koszt tego algorytmu, je\'9cli ci\'b9g ma 6 element\'f3w? Odp.:............
+\par {\listtext\pard\plain\s16 \fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Jaki jest koszt w przypadku, gdy ci\'b9g ma n element\'f3w? Odp.:............
+\par {\listtext\pard\plain\s16 \fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Czy koszt tego algorytmu jest liniowy?\tab \tab \tab  TAK   / NIE
+\par }\pard\plain \s18\qj \li0\ri-2\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 \fs28\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 
+\par 3. Do r\'f3wnoczesnego znalezienia minimum i maksimum w pewnym n-elementowym ci\'b9gu zastosowano metod\'ea \'84dziel i zwyci\'ea\'bfaj\'94
+\par {\listtext\pard\plain\s18 \fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \s18\qj \fi-360\li360\ri-2\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls37\adjustright\rin-2\lin360\itap0 {\fs20 Jaki jest dok\'b3adny koszt tego algorytmu, je\'bfeli ci\'b9
+g ma 8 element\'f3w. Odp.:...................
+\par {\listtext\pard\plain\s18 \fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \s18\qj \fi-360\li360\ri-2\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls36\adjustright\rin-2\lin360\itap0 {\fs20 Jaki jest koszt w przypadku og\'f3lnym?  Odp.:............
+
+\par {\listtext\pard\plain\s16 \fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}}\pard\plain \s16\ql \fi-360\li360\ri0\widctlpar\jclisttab\tx360\tx5100\aspalpha\aspnum\faauto\ls36\adjustright\rin0\lin360\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {
+Czy koszt tego algorytmu jest  liniowy? \tab \tab \tab  TAK   / NIE
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20\lang1045\langfe1036\langnp1045 3. Niech A b}{\fs20 \'ea
+dzie optymalnym algorytmem wyszukiwania elementu najwi\'eakszego }{\fs20\lang1045\langfe1036\langnp1045 w danym n-elementowym ci\'b9gu.
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard\plain \ql \fi-360\li360\ri0\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls38\adjustright\rin0\lin360\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {
+Ile co najmniej operacji por\'f3wnywania element\'f3w trzeba wykona\'e6, je\'9cli ci\'b9g ma 10 element\'f3w? Odp..........
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Jaki jest koszt tego algorytmu w przypadku og\'f3lnym? Odp.......................
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Czy istnieje algorytm o koszcie logarytmicznym rozwi\'b9zuj\'b9cy ten problem?  TAK  /  NIE
+\par }\pard\plain \s15\qj \li360\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin360\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 
+\par }\pard \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 {\fs20 3. Niech A b\'eadzie optymalnym algorytmem wyszukiwania elementu najwi\'eakszego i najmniejszego w danym n-elementowym ci\'b9gu liczb rzeczywistych.
+
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \s15\qj \fi-360\li405\ri0\widctlpar\jclisttab\tx405\aspalpha\aspnum\faauto\ls39\outlinelevel1\adjustright\rin0\lin405\itap0 {\fs20 Jaki jest koszt tego algorytmu zastosowanego do ci
+\'b9gu 10-elementowego?  Odp.:..................
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}}\pard\plain \ql \fi-360\li405\ri0\widctlpar\jclisttab\tx405\aspalpha\aspnum\faauto\ls39\adjustright\rin0\lin405\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {Jaka jest z\'b3o
+\'bfono\'9c\'e6  tego algorytmu w przypadku og\'f3lnym? Odp...............................
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Czy istnieje algorytm o koszcie logarytmicznym rozwi\'b9zuj\'b9cy ten sam problem?  TAK  /  NIE
+\par }\pard\plain \s15\qj \fi-360\li720\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin720\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 \tab 
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20\lang1045\langfe1036\langnp1045 
+===============================================================================
+\par }{\fs20 4. Za\'b3\'f3\'bfmy, \'bfe x-stronicowa ksi\'b9\'bfka telefoniczna zawiera uporz\'b9dkowan\'b9 leksykogra\-ficznie list\'ea nazwisk abonent\'f3w oraz, \'bfe otworzenie ksi\'b9\'bfki na stronie o dowolnie usta\-
+lonym numerze i stwierdzenie, czy to jest w\'b3a\'9cciwa strona czy nie, zajmuje 1sek. \tab 
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard\plain \ql \li0\ri0\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls44\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {Ile, co najwy\'bf
+ej, czasu potrzeba do wyszukania strony z Twoim nazwiskiem, je\'9cli  x=1024, a do poszukiwa\'f1 zastosowano metod\'ea binarnych poszukiwa\'f1? Odp.:.......
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Ile co najwy\'bfej os\'f3b figuruje w tej ksi\'b9\'bfce telefonicznej, je\'9cli wyszukanie dowolnego nazwiska zajmuje co najwy\'bfej 6 sek., a na jednej stronie znajduje si\'ea dok\'b3
+adnie 25 nazwisk? Odp.: ....................
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Ile co najwy\'bfej czasu zaj\'ea\'b3oby wyszukiwanie nazwiska z ostatniej strony, je\'9cli  x= 100, a do wyszukiwania zastosowali\'9cmy algorytm \'84skoki co 10\'94  ? Odp.: ............
+\par }\pard\plain \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\lang1036\langfe1045\langnp1036 
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20 4.  W pewnym pliku znajduje si\'ea k rekordow uporz\'b9
+dkowanych leksykograficznie. Przyjmijmy, \'bfe identyfikacja jednego rekordu zajmuje 1sek.
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard\plain \ql \fi-360\li360\ri0\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls49\adjustright\rin0\lin360\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {Ile co najwy\'bf
+ej czasu potrzeba do odnalezienia poszukiwanego rekordu, je\'9cli k=3600 i przegl\'b9damy plik sekwencyjnie\~? Odp.: ...............
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}A jaki b\'eadzie czas, je\'9cli u\'bfyjemy algorytmu poszukiwa\'f1 binarnych?. Odp.: ................................
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Je\'9cli  k=1024 i zu\'bfyli\'9cmy  10 sek. do znalezienia w\'b3a\'9cciwego rekordu, to jaki algorytm by\'b3 zastosowany: sekwencyjny czy binarnych poszukiwa\'f1
+ ? Odp.: ..................................
+\par }\pard\plain \s15\qj \fi-360\li720\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin720\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 
+\par }\pard \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 {\fs20 4. W uporz\'b9dkowanych alfabetycznie s\'b3owniku zawieraj\'b9cym x hase\'b3, chcemy wyszuka\'e6 stron\'ea z has\'b3em "kolokwium". Na ka\'bf
+dej stronie s\'b3ownika znajduj\'b9 si\'ea 32 has\'b3a. Otworzenie ksi\'b9\'bfki na stronie o dowolnie usta\-lonym numerze i stwierdzenie, czy to jest w\'b3a\'9cciwa strona czy nie, zajmuje 1sek.
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \s15\qj \fi-360\li360\ri0\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls46\outlinelevel1\adjustright\rin0\lin360\itap0 {\fs20 Ile co najwy\'bfej stron musimy obejrze\'e6
+ zanim znajdziemy stron\'ea z naszym has\'b3em, je\'9cli  x=2048, a do wyszukiwania zastosowali\'9cmy algorytm binarnych poszukiwa\'f1? Odp.:  .......................
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Je\'9cli wyszukanie strony z dowolnym has\'b3em  metod\'b9 binarnych poszukiwa\'f1 zajmuje nie wi\'eacej ni\'bf 5 sek., to ile hase\'b3 jest w tym s\'b3owniku? Odp.: ...........
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}}\pard\plain \ql \fi-360\li360\ri0\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls46\adjustright\rin0\lin360\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {Ile co najwy\'bf
+ej czasu zaj\'ea\'b3oby wyszukiwanie nazwiska z ostatniej strony, je\'9cli  x= 50, a do wyszukiwania zastosowali\'9cmy algorytm \'84skoki co 5\'94  ? Odp.: ............
+\par }\pard\plain \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 
+\par 4.  Aby odnale\'9f\'e6 stron\'ea z szukan\'b9 osob\'ea w uporz\'b9dkowanym spisie ludno\'9cci pewnej miejscowo\'9cci X trzeba sprawdzi\'e6 co najwy\'bfej 15 stron, stosuj\'b9c metod\'ea \'84skok\'f3w co k\'94. Znalezienie strony o dowolnie usta\-
+lonym numerze i stwierdzenie, czy to jest w\'b3a\'9cciwa strona czy nie, zajmuje 1sek, a na stronie jest 25 nazwisk.
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \s15\qj \fi-360\li360\ri0\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls48\outlinelevel1\adjustright\rin0\lin360\itap0 {\fs20 Je\'9cli k=10, to ile mieszka\'f1c\'f3
+w ma miejscowo\'9c\'e6 X. Odp.: ..................
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Ile co najwy\'bfej stron trzeba obejrze\'e6 aby wyszuka\'e6 dowoln\'b9 osob\'ea, je\'9cli liczba mieszka\'f1c\'f3w wynosi 800, a do przegl\'b9dania zastosowali\'9c
+my algorytm binary search. Odp.: ................................
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Ile czasu, w najgorszym przypadku, zaj\'ea\'b3oby wyszukanie w\'b3a\'9cciwej osoby, je\'9cli zastosujemy algorytm sekwencyjnego przegl\'b9
+dania stron, a w spisie figuruje 5000 nazwisk? Odp.: ..............
+\par }\pard\plain \qj \li0\ri-2\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {================================================================================
+\par }\pard\plain \s18\qj \li0\ri-2\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 \fs28\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 5. Niech P b\'eadzie problemem wyszukiwania elementu k-tego co do wielko\'9c
+ci w danym n-elementowym zbiorze. 
+\par {\listtext\pard\plain\s18 \fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \s18\qj \fi-360\li405\ri-2\widctlpar\jclisttab\tx405\aspalpha\aspnum\faauto\ls40\adjustright\rin-2\lin405\itap0 {\fs20 Koszt \'9credni algorytmu Hoare  rozwi\'b9
+zywania problemu P wynosi  O(lg n). \tab \tab TAK  / NIE
+\par {\listtext\pard\plain\s18 \fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Algorytm naiwny rozwi\'b9zywania tego problemu ma z\'b3o\'bfono\'9c\'e6 O(k+n). \tab \tab \tab TAK  / NIE
+\par {\listtext\pard\plain\s18 \fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Je\'9cli k=2, to problem mo\'bfna rozwi\'b9za\'e6 wykonuj\'b9c  n+lg n \endash 2 por\'f3wna\'f1.\tab \tab \tab TAK  / NIE
+\par }\pard \s18\qj \li0\ri-2\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 {\fs20 
+\par }\pard\plain \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {5. Niech A b\'eadzie algorytmem Hoare wyszukiwania elementu  k-tego co do wielko\'9cci w n-elementowym ci\'b9
+gu.  
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \ql \fi-360\li360\ri0\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls42\adjustright\rin0\lin360\itap0 {Algorytm Hoare A jest algorytmem rekurencyjnym.\tab \tab \tab \tab \tab 
+TAK  / NIE
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Koszt pami\'eaciowy algorytmu A nie zale\'bfy od k .\tab \tab \tab \tab \tab TAK  / NIE
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}W najgorszym razie z\'b3o\'bfono\'9c\'e6 algorytmu A jest taka sama jak algorytmu naiwnego. \tab TAK  / NIE
+\par }\pard \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {
+\par 5. Niech A b\'eadzie algorytmem 'turniej' wyszukiwania elementu drugiego co do wielko\'9cci.  
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (d)\tab}}\pard \ql \fi-360\li360\ri0\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls42\adjustright\rin0\lin360\itap0 {Czy koszt czasowy algorytmu A zale\'bfy od kolejno\'9cci element\'f3w w ci\'b9
+gu?\tab \tab \tab TAK  / NIE
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (e)\tab}Czy element najwi\'eakszy zawsze znajduje si\'ea w korzeniu drzewa turniejowego?\tab \tab TAK  / NIE
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (f)\tab}Czy element drugi co do wielko\'9cci musi si\'ea znajdowa\'e6 na poziomie 2 w drzewie turnieju?\tab TAK  / NIE
+\par }\pard \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {
+\par 5.  Niech A b\'eadzie algorytmem 'turniej' wyszukiwania elementu drugiego co do wielko\'9cci . 
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \ql \fi-360\li405\ri0\widctlpar\jclisttab\tx405\aspalpha\aspnum\faauto\ls43\adjustright\rin0\lin405\itap0 {W najgorszym razie algorytm wykona  n}{\super 2  }{por\'f3wna\'f1  dla ci\'b9
+gu n elementowego.\tab TAK  / NIE\tab     
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Dla ci\'b9gu 32 elementowego algorytm  A wykona  35 por\'f3wna\'f1\tab \tab \tab TAK  / NIE
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}}\pard \ql \fi45\li0\ri0\widctlpar\jclisttab\tx0\aspalpha\aspnum\faauto\ls43\adjustright\rin0\lin0\itap0 {Wysoko\'9c\'e6 drzewa turniejowego dla ci\'b9gu o 16 elementach wynosi 4.\tab \tab 
+TAK  / NIE\line ===============================================================================
+\par }\pard \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20\lang1045\langfe1036\langnp1045 6. Niech A b\'ea
+dzie algorytmem Quick-sort (jako median\'ea wybieramy zawsze pierwszy element sortowanego aktualnie ci\'b9gu) zastosowanym do ci\'b9gu n-elementowego.
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard\plain \s15\qj \fi-284\li284\ri0\widctlpar\jclisttab\tx0\aspalpha\aspnum\faauto\ls1\ilvl1\outlinelevel1\adjustright\rin0\lin284\itap0 
+\fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 A nie wykona on ani jednego por\'f3wnania, je\'9cli ci\'b9g by\'b3 uporz\'b9dkowany malej\'b9co.\tab TAK  / NIE
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}W najgorszym razie A wykona  O(n}{\fs20\super 2}{\fs20 ) por\'f3wna\'f1.\tab \tab \tab \tab \tab TAK  / NIE}{
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}}{\fs20 Algorytm A dzia\'b3a w oparciu o  zasad\'ea \'84 Dziel i zwyci\'ea\'bfaj\'94. \tab \tab \tab TAK  / NIE}{
+\par }\pard\plain \qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 { 
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20\lang1045\langfe1036\langnp1045 6. Je\'9cli za
+stosujemy algorytm Merge-sort do ci\'b9gu n-elementowego, to
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard\plain \s15\qj \fi-284\li284\ri0\widctlpar\jclisttab\tx284\aspalpha\aspnum\faauto\ls1\ilvl4\outlinelevel1\adjustright\rin0\lin284\itap0 
+\fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 wykona on }{\fs20 {\field{\*\fldinst SYMBOL 81 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{\fs20 (n}{\fs20\super 2}{\fs20 ) por\'f3wna\'f1 w przypadku gdy ci\'b9g jest odwrotnie uporz\'b9dkowany.
+}{\tab }{\fs20 TAK  / NIE\tab  
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}koszt czasowy nie zale\'bfy od warto\'9cci element\'f3w.\tab \tab \tab \tab TAK  / NIE\tab  
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}z\'b3o\'bfono\'9c\'e6 czasowa  tego algorytmu  wynosi..............................................             \tab \tab \tab 
+\par }\pard \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 {\fs20 
+\par 6.  Niech SPLIT b\'eadzie algorytmem rozdzielania ci\'b9gu wzgl\'eadem ustalonej mediany stosowanym w algorytmie sortowania Quick Sort. 
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \s15\qj \fi-360\li360\ri0\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls50\outlinelevel1\adjustright\rin0\lin360\itap0 {\fs20 Je\'9cli ci\'b9g sk\'b3ada si\'ea z element\'f3
+w 6,1,2,8,3,4,7, to po wykonaniu SPLIT(algorytmu rozdzielania), na kt\'f3rej pozycji znajdzie si\'ea element  6?.Odp.................  \tab 
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab} \'8credni koszt algorytmu Quick-sort wynosi O(n lg n). \tab \tab \tab \tab TAK  /  NIE
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Koszt algorytmu SPLIT jest proporcjonalny do d\'b3ugo\'9cci ci\'b9gu. \tab \tab \tab TAK /  NIE
+\par }\pard \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 {\fs20 
+\par 6.  Niech A b\'eadzie algorytmem scalania ci\'b9g\'f3w uporz\'b9dkowanych a i b.
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \s15\qj \fi-360\li360\ri0\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls51\outlinelevel1\adjustright\rin0\lin360\itap0 {\fs20 Ile co najwy\'bf
+ej razy wykonywany jest algorytm A w trakcie sortowania ci\'b9gu n-elementowego metod\'b9 Merge Sort? Odp.: ........................
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Algorytm A zastosowany do 100 elementowych cig\'f3w (a}{\fs20\sub i}{\fs20 ) , (b}{\fs20\sub i}{\fs20 ) takich, \'bfe b}{\fs20\sub 100}{\fs20 <a}{\fs20\sub 1}{\fs20  wykona 200 por\'f3wna
+\'f1. 
+\par }\pard \s15\qj \fi708\li7080\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin7080\itap0 {\fs20 TAK  /  NIE
+\par {\listtext\pard\plain\s15 \fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}}\pard \s15\qj \fi-360\li360\ri0\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls51\outlinelevel1\adjustright\rin0\lin360\itap0 {\fs20 
+Koszt wykonania algorytmu A wynosi O(n+m), gdzie n i m s\'b9 odpowiednio d\'b3ugo\'9cciami ci\'b9g\'f3w a i b.
+\par }\pard \s15\qj \fi708\li7080\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin7080\itap0 {\fs20  TAK  /  NIE
+\par }\pard \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 {\fs20 
+\par }\pard \s15\qj \fi567\li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 {\fs20 \tab \tab 
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20\lang1045\langfe1036\langnp1045 
+================================================================================
+\par 7.Dana jest tablica TAB= [ }{\fs20 78, 28, 31]. Elementy tej tablicy chcemy posortowa\'e6 niemalej\'b9co.}{\fs20\lang1045\langfe1036\langnp1045 
+\par }\pard\plain \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {(a) Wypisz kolejne stany tablicy  podczas sortowania  algorytmem Radix_sort. Odp.\~:..........................
+
+\par (b) Operaj\'b9 dominuj\'b9c\'b9 w algorytmie Radix Sort jest por\'f3wnywanie element\'f3w.\tab \tab TAK  /  NIE
+\par (c)..\tab \tab \tab \tab \tab \tab \tab \tab \tab \tab \tab TAK  /  NIE
+\par }\pard\plain \s15\qj \fi-360\li360\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin360\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 7. aaa
+\par (a) Wypisz kolejne stany ci\'b9gu  (52, 34, 51) podczas sortowania  algorytmem Radix_sort.  Odp.:
+\par }\pard \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 {\fs20 (b) Jakiej struktury pomocniczej stosu czy kolejki trzeba u\'bfy\'e6, aby algorytm Radix_sort dzia\'b3a\'b3 poprawnie. Odp.:.............
+\par (c) .....
+\par }\pard \s15\qj \fi-360\li360\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin360\itap0 {\fs20 7. aaa
+\par (a) Wypisz kolejne stany ci\'b9gu  (43, 23, 42) podczas sortowania  algorytmem Radix_sort.  Odp.:...................
+\par (b) Algorytm Cunting Sort jest stabilny.
+\par (c). ...
+\par }\pard \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 {\fs20 7. aaaa
+\par (a) Wypisz kolejne stany ci\'b9gu   (12, 43, 41)  podczas sortowania  algorytmem Radix_sort.   
+\par }\pard \s15\qj \fi-360\li360\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin360\itap0 {\fs20 (b) Ile por\'f3wna\'f1 element\'f3w trzeba wykona\'e6, gdyby do sortowania tego ci\'b9gu u\'bf
+yto algorytmu sortowania przez zliczanie Counting_sort .  Odp.:...............
+\par (c) 
+\par }\pard \s15\qj \li360\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin360\itap0 {\fs20 
+\par }\pard \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 {\fs20 \line ================================================================================
+\par }\pard \s15\qj \li360\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin360\itap0 {\fs20 
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20\lang1045\langfe1036\langnp1045 8. Niech A b\'ea
+dzie algorytmem sortowania ci\'b9gu a przez wyb\'f3r (w porz\'b9dku niemalej\'b9cym). 
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard\plain \ql \fi-360\li360\ri0\widctlpar\jclisttab\tx360\aspalpha\aspnum\faauto\ls52\adjustright\rin0\lin360\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {Ile przestawie
+\'f1 element\'f3w wykona algorytm A zastosowany do ci\'b9gu  a = (1,4,8,3,2)? (Jedno przestawienie polega na zamianie miejscami dw\'f3ch element\'f3w) Odp.:..................................
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}Ile por\'f3wna\'f1 wykona algorytm A dla ci\'b9gu   a = (1,4,8,3,2)? Odp.:...............................
+\par {\listtext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}Z\'b3o\'bfono\'9c\'e6 algorytmu A jest liniowa wzgl\'eadem rozmiaru danych .\tab \tab \tab \tab TAK  /  NIE
+\par }\pard\plain \s15\qj \li360\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin360\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\lang1036\langfe1045\langnp1036 
+\par }\pard \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 {\fs20 
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20  8. Niech A b\'eadzie algorytmem sortowania n-elementowego ci\'b9
+gu a przez wstawianie (w porz\'b9dku niemalej\'b9cym).}{\fs20\lang1045\langfe1036\langnp1045 
+\par }\pard\plain \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {(a) Ile element\'f3w zmieni swoje pierwotne pozycje w trakcie wykonywania algorytmu A dla ci\'b9
+gu a=(2,5,9,4,3) ? Odp.:...................... 
+\par (b) Ile por\'f3wna\'f1 wykona ten algorytm  dla a=(2,5,9,4,3)? Odp.:...............................
+\par (c) W najgorszym razie algorytm A wykona O(n lg n)  por\'f3wna\'f1. \tab \tab \tab \tab TAK  /  NIE
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20\lang1045\langfe1036\langnp1045 8. Niech A b\'eadzie algorytmem }{\fs20 
+sortowania}{\fs20\lang1045\langfe1036\langnp1045  ci\'b9gu a przez wyb\'f3r (w porz\'b9dku niemalej\'b9cym). 
+\par }\pard\plain \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {(a) Ile przestawie\'f1 element\'f3w wykona ten algorytm  podczas sortowania ci\'b9
+gu  6,7,8,9,10,1. Jedno przestawienie polega na zamianie miejscami dw\'f3ch element\'f3w? Odp.:..................................\line (b) Ile por\'f3wna\'f1 wykona ten algorytm dla ci\'b9gu 6,7,8,9,10,1. Odp.:............................
+\par (c) Koszt tego algorytmu, mierzony liczb\'b9 por\'f3wna\'f1 element\'f3w, jest liniowy.\tab \tab \tab TAK  /  NIE
+\par }\pard\plain \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20\lang1045\langfe1036\langnp1045 8. }{\fs20 Niech A b\'ea
+dzie algorytmem sortowania n-elementowego ci\'b9gu a przez wstawianie (w porz\'b9dku niemalej\'b9cym).}{\fs20\lang1045\langfe1036\langnp1045 
+\par }\pard\plain \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {(a) Ile razy zostanie wykonana operacja swap (polegaj\'b9ca na zamianie miejscami dw\'f3ch element\'f3
+w) podczas sortowania ci\'b9gu  2,4,6,8,10 przy u\'bfyciu algorytmu A ?Odp.:..................................
+\par (b) Jaki jest \'9credni koszt czasowy tego algorytmu? Odp.:..............................
+\par (c) W najgorszym razie algorytm A wykona O(n}{\super 2}{) por\'f3wna\'f1. \tab \tab \tab \tab TAK  /  NIE
+\par }\pard\plain \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 
+\par }\pard\plain \qj \li0\ri1701\widctlpar\tx9070\aspalpha\aspnum\faauto\adjustright\rin1701\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {=====================================================
+\par }\pard \qj \li0\ri1701\widctlpar\aspalpha\aspnum\faauto\adjustright\rin1701\lin0\itap0 {
+\par }\pard\plain \s18\qj \li0\ri-2\widctlpar\tx9070\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 \fs28\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 9. Dla ka\'bfdej z wymienionych zale\'bfno\'9cci, dotycz\'b9cych poni\'bf
+szego algorytmu, ustal, czy jest czy nie jest prawdziwa
+\par }\pard \s18\qj \li1416\ri-2\widctlpar\tx9070\aspalpha\aspnum\faauto\adjustright\rin-2\lin1416\itap0 {\fs20\lang1033\langfe1045\langnp1033 begin
+\par           s := a}{\fs20\lang1033\langfe1045\sub\langnp1033 n}{\fs20\lang1033\langfe1045\langnp1033  ; i := n; 
+\par           }{\fs20 while i>0 do
+\par                 s := s*x + a }{\fs20\sub i-1}{\fs20 ;
+\par                 i := i-1;
+\par            od
+\par end
+\par {\pntext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard\plain \qj \fi-375\li375\ri-851\widctlpar\jclisttab\tx375\tx7655{\*\pn \pnlvlbody\ilvl0\ls26\pnrnot0\pnlcltr\pnstart1\pnindent360\pnsp120\pnhang{\pntxtb (}{\pntxta )}}
+\aspalpha\aspnum\faauto\ls26\adjustright\rin-851\lin375\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {Niezmiennikiem p\'eatli \'84while\'94  jest formu\'b3a  ( i > 0).\tab TAK  /  NIE
+\par {\pntext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}}\pard \qj \fi-375\li375\ri-2\widctlpar\jclisttab\tx375\tx7655{\*\pn \pnlvlbody\ilvl0\ls26\pnrnot0\pnlcltr\pnstart1\pnindent360\pnsp120\pnhang{\pntxtb (}{\pntxta )}}
+\aspalpha\aspnum\faauto\ls26\adjustright\rin-2\lin375\itap0 {Po wykonaniu p\'eatli \'84while\'94 (s =  n}{\super 2}{ }{{\field{\*\fldinst SYMBOL 217 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{ i < n). \tab TAK  /  NIE
+\par {\pntext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}}\pard \qj \fi-375\li375\ri-2\widctlpar\jclisttab\tx375\tx7655{\*\pn \pnlvlbody\ilvl0\ls26\pnrnot0\pnlcltr\pnstart1\pnindent360\pnsp120\pnhang{\pntxtb (}{\pntxta )}}
+\aspalpha\aspnum\faauto\ls26\adjustright\rin-2\lin375\itap0 {Po wykonaniu algorytmu s  =  }{{\field{\*\fldinst SYMBOL 83 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{\super n}{\sub j=0}{ a}{\sub j}{ x }{\super j}{  .\tab TAK  /  NIE
+\par }\pard \qj \li0\ri-2\widctlpar\tx9070\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 {
+\par 
+\par 
+\par }\pard\plain \s18\qj \li0\ri-2\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 \fs28\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 9. Rozwa\'bfmy nast\'eapuj\'b9cy algorytm w strukturze liczb rzeczywistych i niech n b\'ea
+dzie liczb\'b9 naturaln\'b9.
+\par }\pard\plain \qj \li708\ri1701\widctlpar\aspalpha\aspnum\faauto\adjustright\rin1701\lin708\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\lang1033\langfe1045\langnp1033 begin
+\par \tab i := 0;  s := a(0);
+\par \tab while i<n+1 do
+\par  \tab \tab if s >a(i) then s := a(i) fi;
+\par \tab \tab }{i := i+1
+\par \tab od;
+\par end
+\par {\pntext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (a)\tab}}\pard \qj \fi-450\li450\ri1417\widctlpar\jclisttab\tx450\tx7797{\*\pn \pnlvlbody\ilvl0\ls22\pnrnot0\pnlcltr\pnstart1\pnindent360\pnsp120\pnhang{\pntxtb (}{\pntxta )}}
+\aspalpha\aspnum\faauto\ls22\adjustright\rin1417\lin450\itap0 {Niezmiennikiem p\'eatli \'84while\'94  jest formu\'b3a (i \u8804\'3f n)\tab TAK  /  NIE
+\par {\pntext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (b)\tab}}\pard \qj \fi-450\li450\ri1275\widctlpar\jclisttab\tx450\tx7797{\*\pn \pnlvlbody\ilvl0\ls22\pnrnot0\pnlcltr\pnstart1\pnindent360\pnsp120\pnhang{\pntxtb (}{\pntxta )}}
+\aspalpha\aspnum\faauto\ls22\adjustright\rin1275\lin450\itap0 {Po wykonaniu p\'eatli \'84while\'94 s jest najmniejszy elementem ci\'b9gu a(0),...,a(n).\tab TAK  /  NIE
+\par {\pntext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 (c)\tab}}\pard \qj \fi-450\li450\ri1417\widctlpar\jclisttab\tx450\tx7797{\*\pn \pnlvlbody\ilvl0\ls22\pnrnot0\pnlcltr\pnstart1\pnindent360\pnsp120\pnhang{\pntxtb (}{\pntxta )}}
+\aspalpha\aspnum\faauto\ls22\adjustright\rin1417\lin450\itap0 {Koszt tego algorytmu jest liniowy wzgl\'eadem rozmiaru danych.\tab TAK  /  NIE
+\par }\pard \qj \li0\ri-2\widctlpar\tx9070\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 {
+\par 
+\par }\pard\plain \s3\qj \li0\ri0\sb240\sa60\keepn\widctlpar\aspalpha\aspnum\faauto\outlinelevel2\adjustright\rin0\lin0\itap0 \fs24\lang1036\langfe1036\cgrid\langnp1036\langfenp1036 {\fs20\lang1045\langfe1036\langnp1045 9. Przy ka\'bfdej z wymienionych zale
+\'bfno\'9cci dotycz\'b9cych nast\'eapuj\'b9cego algorytmu, zaznacz, czy jest czy nie jest prawdziwa.
+\par }\pard\plain \s17\ql \li1134\ri0\nowidctlpar\tlul\tx567\tldot\tx1701\aspalpha\aspnum\faauto\adjustright\rin0\lin1134\itap0 \fs24\lang1033\langfe1045\cgrid\langnp1033\langfenp1045 {\fs20\lang1045\langfe1045\langnp1045           for i := 2 to n do
+\par                j := i; pom := e(i) ;
+\par }\pard \s17\ql \li0\ri0\nowidctlpar\tlul\tx567\tldot\tx1701\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {\fs20\lang1045\langfe1045\langnp1045                                       }{\fs20\lang1031\langfe1045\langnp1031 
+while ( j >1 andif  e(j-1)> pom) do
+\par                                                e(j) := e(j-1);
+\par                                                }{\fs20\lang1045\langfe1045\langnp1045 j := j -1;
+\par                                      od\~;
+\par }\pard\plain \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {                                     }{\lang1031\langfe1045\langnp1031 e(j) := pom;
+\par                                }{od;
+\par }\pard\plain \s15\qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 (a) Formu\'b3a  (j>1)  jest niezmiennikiem p\'eatli wewn\'eatrznej w tym algorytmie. 
+\tab \tab \tab TAK /  NIE\line (b) Ten algorytm wykonuje O(n}{\fs20\super 2}{\fs20 ) por\'f3wna\'f1. \tab \tab \tab \tab \tab \tab TAK / NIE\line (c) Po wykonaniu algorytmu e(n) jest najwi\'eakszym elementem ci\'b9gu. \tab \tab \tab \tab TAK    /   NIE
+
+\par }\pard\plain \qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {
+\par 9. Rozwa\'bfy\'e6 nast\'eapuj\'b9cy algorytm i oceni\'e6 ka\'bfd\'b9 z wymienionych  poni\'bfej zale\'bfno\'9cci
+\par                            for i := 1 to n-1 do
+\par                                        min := i; j := i+1;
+\par }\pard \qj \li1416\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin1416\itap0 {           }{\lang1033\langfe1045\langnp1033 while (j < n+1)  do
+\par \tab \tab if e(j) < e(min) then min := j fi;
+\par            }{od;
+\par            pom := e(i); e(i) := e(min); e(min) := pom;
+\par end
+\par }\pard \qj \li0\ri-993\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-993\lin0\itap0 {(a) Niezmiennikiem p\'eatli zewn\'eatrznej w tym programie jest formu\'b3a   (e(i)> e(i-1) dla i>1)   \tab \tab  TAK  /  NIE
+\par (b) Je\'9cli  e(1) jest najmniejszym elementem ci\'b9gu  przed wykonaniem algorytmu, to po jego wykonaniu\tab \line  te\'bf tak jest. \tab \tab \tab \tab \tab \tab \tab \tab \tab \tab \tab TAK  /  NIE
+\par (c) Ten algorytm zastosowany do ci\'b9gu 4 elementowego wykonuje tylko 7 por\'f3wna\'f1 \tab \tab \tab  TAK  / NIE
+\par }\pard \qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {
+\par }\pard\plain \s15\qj \fi-360\li720\ri0\widctlpar\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin720\itap0 \fs24\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs20 
+\par }\pard\plain \qj \li0\ri-2\widctlpar\aspalpha\aspnum\faauto\adjustright\rin-2\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {================================================================================
+\par }\pard \qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {10. Ustal prawdziwo\'9c\'e6   nast\'eapuj\'b9cych zda\'f1:
+\par (a) Nast\'eapuj\'b9ca formu\'b3a jest prawdziwa w ka\'bfdej strukturze kolejek \tab \line  out(in(q,e))= q   \tab \tab \tab \tab \tab \tab \tab \tab \tab \tab  TAK / NIE
+\par (b) Koszt operacji usuwania elementu z kolejki, zrealizowanej jako lista dynamiczna, jest sta\'b3y\tab \line \tab   \tab \tab \tab \tab \tab \tab \tab \tab \tab \tab TAK / NIE
+\par (c) Formu\'b3a  push(e, pop(s)) = s jest prawdziwa dowolnego niepustego stosu.  \tab \tab \tab TAK / NIE
+\par 
+\par 
+\par 10. Ustal prawdziwo\'9c\'e6   nast\'eapuj\'b9cych zda\'f1:
+\par (a) Nast\'eapuj\'b9ca formu\'b3a jest prawdziwa w ka\'bfdej strukturze stos\'f3w \tab 
+\par  empty(s) }{{\field{\*\fldinst SYMBOL 174 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{pop(push(e,s))= s   \tab \tab \tab \tab \tab \tab  \tab \tab TAK / NIE
+\par (b) Koszt operacji push wstawiania elementu do stosu, zrealizowanego jako lista dynamiczna,\tab \line  jest proporcjonalny do wysoko\'9cci stosu .\tab \tab \tab \tab \tab \tab \tab TAK / NIE
+\par (c) Program  while not empty(q) do q:= out(out(q)) od nie zap\'eatla si\'ea tylko dla kolejek q\tab \line o parzystej liczbie element\'f3w. \tab \tab \tab \tab \tab \tab \tab \tab TAK / NIE
+\par 
+\par 10. Ustal prawdziwo\'9c\'e6  nast\'eapuj\'b9cych zda\'f1:
+\par (a) Formu\'b3a first(in(q,e)) = e   jest prawdziwa w ka\'bfdej strukturze kolejek.\tab \tab \tab TAK / NIE
+\par (b) Koszt operacji pop usuwania elementu ze stosu, zrealizowanego jako lista dynamiczna,\tab \line  jest sta\'b3y.\tab \tab \tab \tab \tab \tab \tab \tab \tab \tab TAK / NIE
+\par (c) Formu\'b3a pop(push(e,s))=s jest prawdziwa w ka\'bfdym stosie.\tab \tab \tab \tab TAK / NIE
+\par }{\fs24 
+\par }{
+\par 10. Ustal prawdziwo\'9c\'e6   nast\'eapuj\'b9cych zda\'f1:
+\par (a) Formu\'b3a first(push(s,e)) = e   jest prawdziwa jedynie dla niepustego stosu s.\tab \tab \tab TAK / NIE
+\par (b) Koszt operacji in wstawiania  elementu do kolejki,  zrealizowanej jako lista dynamiczna, \tab \line zale\'bfy od d\'b3ugo\'9cci listy. \tab \tab \tab \tab \tab \tab \tab \tab \tab  TAK / NIE
+\par (c) Program while not empty(s) do s := push(pop(s),e)) od zawsze zatrzymuje si\'ea..\tab \tab   TAK / NIE
+\par }{\fs24 
+\par }{
+\par }\pard\plain \s23\ql \li720\ri720\widctlpar\tx916\tx1832\tx2748\tx3664\tx4580\tx5496\tx6412\tx7328\tx8244\tx9160\tx10076\tx10992\tx11908\tx12824\tx13740\tx14656\aspalpha\aspnum\faauto\adjustright\rin720\lin720\itap0 
+\fs20\lang1045\langfe1045\loch\af57\hich\af57\dbch\af57\cgrid\langnp1045\langfenp1045 {\page \line }{\f528 \hich\af528\dbch\af57\loch\f528 \hich\f528 Zadanie 9 - niekt\'f3\loch\f528 \hich\f528 re wersje zawieraj\'b9\loch\f528 \hich\f528 
+ algorytmy z zagnie\'bf\loch\f528 \hich\f528 d\'bf\loch\f528 \hich\f528 onymi p\'ea\loch\f528 tlami\line \hich\f528      - dla wyr\'f3\loch\f528 \hich\f528 wnania trudno\'9c\loch\f528 \hich\f528 ci proponowa\'b3\loch\f528 \hich\f528 abym ujednolici\'e6
+\loch\f528  zadania np.\line \hich\f528     sprawdzenie czy element jest w tablicy w dw\'f3\loch\f528 ch wersjach:\line     I}{\line \hich\af57\dbch\af57\loch\f57      i:=1;\line      t:=false;\line      while ((i<n+1) and not t) \line        do\line 
+         if e(i)=s then t=true;\line          i:=i+1;\line        od\line \line     II\line      i:=1;\line      t:=false;\line      while (i<n+1)  \line        do\line          if e(i)=s then t=true;\line          i:=i+1;\line        od\line \line pr
+\hich\af57\dbch\af57\loch\f57 z}{\f528 \hich\af528\dbch\af57\loch\f528 \hich\f528 y mo\'bf\loch\f528 liwych odpowiedziach:\line a) niezmiennkiem jest i<=n\line \hich\f528 b) po wykonaniu t jest false wtw, gdy s nie nale\'bf\loch\f528 y do zbioru \{
+e(1),..,e(n)\}\line \hich\f528 c) algorytm wykonuje O(n) por\'f3\loch\f528 \hich\f528 wna\'f1\line \loch\f528 d) algorytm nigdy sie nie zatrzyma\line \line \hich\f528  W zadaniu 7 trzecim zagadnieniem opr\'f3\loch\f528 cz Radix_Sort i 
+\hich\af528\dbch\af57\loch\f528 C\hich\af528\dbch\af57\loch\f528 \hich\f528 ounting_sort mog\'b3\loch\f528 \hich\f528 yby by\'e6\loch\f528  :\line \hich\f528  - w jakich algorytmach wykorzystuje si\'ea\loch\f528 \hich\f528  scalanie dw\'f3\loch\f528 
+\hich\f528 ch ci\'b9\loch\f528 \hich\f528 g\'f3\loch\f528 \hich\f528 w uporz\'b9\loch\f528 dkowanych?\line \hich\f528  - kt\'f3\loch\f528 \hich\f528 ry algorytm - merge_sort czy quick_sort ma gorsz\'b9\loch\f528 \hich\f528  z\'b3\loch\f528 \hich\f528 o
+\'bf\loch\f528 \hich\f528 ono\'9c\'e6\loch\f528  w przypadku pesymistycznym?\line \hich\f528  - poda\'e6\loch\f528 \hich\f528  algorytmy dzia\'b3\loch\f528 \hich\f528 aj\'b9\loch\f528 \hich\f528 ce wed\'b3\loch\f528 ug zasady "dziel i z
+\hich\af528\dbch\af57\loch\f528 w\hich\af528\dbch\af57\loch\f528 \hich\f528 ycie\'bf\loch\f528 aj" (2)\line \hich\f528  - czy mo\'bf\loch\f528 \hich\f528 na posortowa\'e6\loch\f528 \hich\f528  liczby z zadanego przedzia\'b3\loch\f528 \hich\f528 
+u nie wykonuj\'b9\loch\f528 \hich\f528 c \'bf\loch\f528 \hich\f528 adnego por\'f3\loch\f528 wnania?}{
+\par }\pard\plain \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \fs20\lang1045\langfe1045\cgrid\langnp1045\langfenp1045 {\fs24 \page }{////// Og\'f3lnie
+\par ////////  Poni\'bfej przesy\'b3am kilka propozycji. Uwa\'bfam, \'bfe zadania na sortowanie proponowane przeze mnie
+\par /////// dobrze sprawdzaj\'b9 rozumienie dzia\'b3ania algorytm\'f3w, ale \'b3atwiej jest tu studentom unikn\'b9\'e6 b\'b3\'ead\'f3w.
+\par /////// Poza tym zamieszczam propozycje jak w \'b3atwy spos\'f3b mo\'bfna robi\'e6 wiele wersji tego samego zadania
+\par ///////// uniemo\'bfliwiaj\'b9cych \'9cci\'b9ganie od koleg\'f3w bez znajomo\'9cci algorytmu.
+\par 
+\par /////RZ\'caDY
+\par ////Do zada\'f1 o rz\'eadach ewentualnie proponowa\'b3bym tylko doda\'e6 zadania sprawdzaj\'b9ce znajomo\'9c\'e6
+\par ///operacji na logarytmach(zmiana podstawy, logarytm iloczynu) (nie/nie/tak/tak)
+\par 
+\par 1.(}{\i log n}{ oznacza logarytm przy podstawie 10 natomiast }{\i lg n}{ przy podstawie 2)
+\par Czy prawdziwe s\'b9 nast\'eapuj\'b9ce stwierdzenia?
+\par lg n = }{{\field{\*\fldinst SYMBOL 87 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{(log n) 
+\par log n = }{{\field{\*\fldinst SYMBOL 87 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{(lg n) 
+\par 
+\par lg n = O(lg 3n)
+\par lg 3n = O(lg n)
+\par 
+\par /////////////////////
+\par SORTOWANIE:
+\par 
+\par 6/7(quickSort)
+\par  ////(do zmiany grupy wystarczy zmieni\'e6 1)inicjalizacj\'ea tablicy i/lub 2)argumenty przekazywane do split)
+\par /////( wa\'bfne, \'bfeby tablic\'ea zainicjalizowa\'e6 tak, \'bfeby przynajmniej 2 razy musieli wykona\'e6 \'84swap\'94)
+\par 
+\par Za\'b3\'f3\'bfmy, \'bfe tablica A zosta\'b3a zainicjalizowana w nast\'eapuj\'b9cy spos\'f3b:
+\par int[] A = \{ 5, 6, 7, 5, 3, 7, 2, 8,1, 10, 2, 10, 13, 20\};
+\par Zapisz zawarto\'9c\'e6 tej tablicy oraz warto\'9c\'e6 zmiennej k po wykonaniu nast\'eapuj\'b9cej instrukcji:
+\par }{\lang1033\langfe1045\langnp1033 int k = split(3, 10); 
+\par }{(Zak\'b3adamy, \'bfe procedura split odnosi si\'ea do tablicy A, oraz \'bfe jako median\'ea bierze pierwsz\'b9
+\par warto\'9c\'e6 w przetwarzanej podtablicy) UWAGA: pierwszy indeks w tablicy ma warto\'9c\'e6 0.
+\par 
+\par /////Mog\'b9 byc te\'bf nast\'eapuj\'b9ce pytania:
+\par Je\'9cli n to d\'b3ugo\'9c\'e6 tablicy do posortowania, to ile wynosi W(n) dla quickSort?
+\par Jakie dane rozmiaru n stanowi\'b9 najgorszy przypadek dla quickSort?
+\par 
+\par Czy rz\'b9d przeci\'eatnej z\'b3o\'bfono\'9cci mergeSort jest gorszy(tzn. wy\'bfszy)  od A(n) dla quickSort?
+\par Czy przeci\'eatna z\'b3o\'bfono\'9c\'e6 quickSort jest mniejsza od przeci\'eatnej z\'b3o\'bfono\'9cci mergeSort?
+\par 
+\par (countSort)
+\par //////(wa\'bfne, \'bfeby pokazali tablic\'ea zlicze\'f1 tzn. \'bfeby ona by\'b3a tutaj rzeczywi\'9ccie d\'b3u\'bfsza tzn
+\par }{\lang1033\langfe1045\langnp1033 ///////  max(A)-min(A)+1 > A.length
+\par }{////// do zmiany grupy wystarczy wtedy zmieni\'e6 zawarto\'9c\'e6 tablicy
+\par //////// dodatkowo mo\'bfna te\'bf sprawi\'e6 by tablica zlicze\'f1 w niekt\'f3rych grupach by\'b3a kr\'f3tsza od oryginalnej
+\par ///////// i wtedy poprosi\'e6 o przedstawienie kr\'f3tszej (oczywi\'9ccie chodzi o t\'b9 sam\'b9 rzecz)
+\par Za\'b3\'f3\'bfmy, \'bfe mamy posortowa\'e6 zawarto\'9c\'e6 tablicy A za pomoc\'b9 algorytmu countSort.
+\par Int[] A = \{5, 3, 2, 5,  2,  8, 2, 1, 11 \}
+\par Algorytm ten u\'bfywa dw\'f3ch pomocniczych tablic(w tym konkretnym przypadku jedna z nich b\'eadzie kr\'f3tsza a druga d\'b3u\'bfsza).
+\par Zapisz zawarto\'9c\'e6 d\'b3u\'bfszej z nich w momencie tu\'bf przed rozpocz\'eaciem zapisywania warto\'9cci do kr\'f3tszej.
+\par 
+\par 
+\par Od jakich parametr\'f3w zale\'bfy i ile wynosi z\'b3o\'bfono\'9c\'e6 pami\'eaciowa countSort?
+\par 
+\par ////////////////////////////
+\par Niezmienniki:
+\par 
+\par /////do pojedynczych p\'eatli
+\par ////Proponuj\'ea doda\'e6 co\'9c, co JEST niezmiennikiem np.: i }{{\field{\*\fldinst SYMBOL 163 \\f "Symbol" \\s 10}{\fldrslt\f3\fs20}}}{ n + 1
+\par 
+\par ////////////podw\'f3jne p\'eatle proponuj\'ea zmienic np. na:
+\par wersja 1:
+\par }{\i k=1;
+\par a=1;
+\par }{\i\lang1033\langfe1045\langnp1033 while(k<n)\{
+\par \tab }{\i k=k+1;
+\par \tab a=a*k;
+\par \}
+\par }{i (opr\'f3cz pytania o niezmienniki) zapyta\'e6 np.:
+\par 
+\par Za\'b3\'f3\'bfmy, \'bfe traktujemy a jako funkcj\'ea n.
+\par Czy po wykonaniu powy\'bfszego kodu
+\par {\pntext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 a)\tab}}\pard \ql \fi-360\li360\ri0\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls58\pnrnot0\pnlcltr\pni0\pnstart1\pnindent360\pnsp120\pnhang{\pntxta )}}
+\aspalpha\aspnum\faauto\ls58\adjustright\rin0\lin360\itap0 {\i lg a = O(n * (lg n))?
+\par {\pntext\pard\plain\fs20 \hich\af0\dbch\af0\loch\f0 b)\tab}}\pard \ql \fi-360\li360\ri0\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls58\pnrnot0\pnlcltr\pni0\pnstart1\pnindent360\pnsp120\pnhang{\pntxta )}}
+\aspalpha\aspnum\faauto\ls58\adjustright\rin0\lin360\itap0 {\i lg a = O(n)? }{
+\par }\pard \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {
+\par Wersja 2
+\par }{\i k = 1;
+\par a = 0;
+\par }{\i\lang1033\langfe1045\langnp1033 while(k<=n)\{
+\par \tab }{\i a = a + 3*k;
+\par \tab k = k + 1;
+\par \}
+\par 
+\par }{Za\'b3\'f3\'bfmy, \'bfe traktujemy a jako funkcj\'ea n.
+\par Czy po wykonaniu powy\'bfszego kodu:
+\par {\pntext\pard\plain\i\fs20 \hich\af0\dbch\af0\loch\f0 a)\tab}}\pard \ql \fi-360\li360\ri0\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls59\pnrnot0\pnlcltr\pnstart1\pnindent360\pnsp120\pnhang{\pntxta )}}
+\aspalpha\aspnum\faauto\ls59\adjustright\rin0\lin360\itap0 {\i a  = O(n*n)}{?
+\par {\pntext\pard\plain\i\fs20 \hich\af0\dbch\af0\loch\f0 b)\tab}}\pard \ql \fi-360\li360\ri0\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls59\pnrnot0\pnlcltr\pnstart1\pnindent360\pnsp120\pnhang{\pntxta )}}
+\aspalpha\aspnum\faauto\ls59\adjustright\rin0\lin360\itap0 {\i lg  a = O(n*lg3)?}{
+\par }\pard \ql \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {
+\par //w ten spos\'f3b otrzymaliby\'9cmy 4 r\'f3\'bfne zadania o bardzo zbli\'bfonym poziomie trudno\'9cci.
+\par 
+\par }\pard \qj \li0\ri0\widctlpar\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {\fs24 
+\par }}

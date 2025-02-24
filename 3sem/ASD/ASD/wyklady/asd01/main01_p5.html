@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left"><A HREF="main01_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main01_p6.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td>
+</tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><br clear="all"><div class="tytulpunktu">
+5. Koszt algorytmu&nbsp; </div>
+
+
+<p>Podstawowymi miarami kosztu algorytmu są: czas i pamięć.</p>
+<p> Jak mierzyć czas? Oczywiście chcemy by miara była niezależna od komputera, 
+na którym realizowany będzie algorytm. Jest oczywiste, że realizacja tego samego 
+algorytmu&nbsp; na różnych komputerach dla tych samych danych, nie musi zająć 
+tyle samo czasu. Zatem informacja, ile jednostek czasu
+  wymaga wykonanie algorytmu dla konkretnych danych, na konkretnym komputerze, niewiele mówili
+  o samym algorytmie. Miara kosztu algorytmu powinna zależeć od typu problemu
+  i rodzaju rozwiązania, a nie od komputera, na którym realizujemy obliczenia.
+  Naturalną miarą czasu może być:</p>
+<p> * liczba instrukcji,<br>
+  * liczba operacji arytmetycznych,<br>
+  * liczba porównań wykonanych, w trakcie realizacji algorytmu,<br>
+  * liczba wywołań rekurencyjnych procedur, itd.</p>
+<p>W każdym algorytmie można wyróżnić pewną operację istotną dla rozwiązywanego zadania. 
+Taką operację nazwiemy dominującą. Mówimy, że koszt czasowy algorytmów mierzymy
+  liczbą operacji
+  dominujących. Wybór operacji dominującej zależy od problemu i wybranego rozwiązania. W problemie mnożenia macierzy za operacje dominujące&nbsp; można uznać 
+operacje arytmetyczne +, *. W problemie wyszukiwania elementu w zbiorze, operacją dominującą jest 
+równość. W problemie sortowania operacją dominującą jest najczęściej porównywanie
+  elementów, ale można też przyjąć operację przestawiania elementów.</p>
+<p>Mając dany algorytm Alg i&nbsp; środowisko, w którym&nbsp;
+  będzie on pracował, 
+  możemy policzyć liczbę operacji dominujących, wykonanych przez algorytm w 
+czasie jego realizacji dla konkretnych danych d. Liczbę tę oznaczamy przez t(Alg,d). 
+Jeśli z kontekstu wynika o jaki algorytm 
+chodzi, będziemy po prostu pisali t(d).</p>
+<p>Rozważmy poznane przykłady algorytmów. W algorytmie&nbsp; max, rozwiązującym 
+problem wyszukiwania elementu największego, dane to długość ciągu i jego 
+elementy. Wybierzmy jako operację dominującą porównywanie elementów, a rozmiar 
+danych to liczba elementów ciągu. Dla danych d1 = &lt;5, (1,7,4,2,8)&gt; mamy t(max,d1) 
+= 4, a dla danych&nbsp; d2 = &lt;6, (2,4,7,8,1,3)&gt;,&nbsp; t(max,d2)=5. </p>
+<p>W algorytmie znajdowania pierwiastka kwadratowego z danej liczby naturalnej, 
+rozmiarem danym może być liczba bitów potrzebnych do zapamiętania tej liczby n, 
+a operacją dominującą operacje arytmetyczne. W każdym kroku algorytmu wykonujemy 
+3 operacje dodawania i jedno&nbsp; badanie równości. Jeśli n=16, to t(sqrt, n) = 
+4<font face="Symbol"> <span lang="en">´</span> </font>4 =16, jeśli n=25, to t(sqrt, n) = 4
+<font face="Symbol"><span lang="en">´</span> </font>5 = 20. Wiedząc jaka jest liczba 
+wykonanych operacji dominujących, możemy dokładnie powiedzieć, ile czasu zajmie 
+nam wykonanie algorytmu. Czy jednak jest to dla nas interesujące? Czy możemy z 
+tych informacji wyciągnąć wniosek, ile czasu potrzeba dla wykonania algorytmu 
+dla danych o rozmiarze 100000? Nie.&nbsp; </p>
+<p>Zupełnie inaczej wygląda sprawa, jeśli zauważymy, że np. algorytm max 
+wykonuje zawsze n-1 porównań dla dowolnego n elementowego ciągu, a algorytm sqrt,&nbsp; 
+obliczając pierwiastek z liczby n, wykonuje zawsze 4<span lang="en"><font face="Symbol">Ö</font></span>n 
+operacji arytmetycznych. Dlatego też ocenę kosztów algorytmu chcemy uniezależnić od szybkości komputera, konkretnej 
+implementacji, języka programowania oraz konkretnego zestawu danych.&nbsp; 
+Natomiast chcemy ją uzależnić od rozmiaru danych. </p>
+<p>To, jak mierzymy wielkość danych zależy od rozwiązywanego problemu. Na przykład, jeżeli naszym
+  problemem jest mnożenie macierzy, to przez rozmiar danych rozumie się zwykle wymiar mnożonych macierzy; jeżeli problem polega na sortowaniu, to oczywistym 
+rozmiarem danych jest długość sortowanego ciągu. Dla problemu wyszukiwania 
+najkrótszych ścieżek w grafie, rozmiarem danych będzie liczba wierzchołków grafu.&nbsp; 
+Mając ustaloną operację dominującą oraz pojęcie wymiaru danych dla rozważanego 
+algorytmu, będziemy się starali określić zależność między rozmiarem danych, a 
+liczbą wykonanych&nbsp; przez niego operacji dominujących, zwaną złożonością 
+czasową algorytmu.<BR>
+</p>
+<p><div class="def">Definicja 5.1<p>Złożoność czasowa algorytmu, to liczba 
+  operacji dominujących wykonywanych przez algorytm w czasie jego realizacji, 
+  wyrażona jako funkcja rozmiaru danych. 
+</div>
+
+<p> Faktyczny czas wykonania algorytmu jest proporcjonalny do jego złożoności 
+czasowej. Znając rozmiar danych oraz złożoność algorytmu możemy wyliczyć liczbę 
+operacji dominujących wykonywanych przez algorytm, a wiedząc na jakim komputerze 
+algorytm zostanie wykonywany, możemy obliczyć czas potrzebny do jego wykonania.</p>
+
+<p> Zdarzają się jednak algorytmy, których działanie zależy nie tylko od 
+rozmiaru danych, ale także od ich wartości. W takich przypadkach, będziemy 
+analizować przypadki najgorszych i średnich zachowań algorytmu.</p>
+<p><div class="def">Definicja 5.2<p></p>
+<p> Niech D(n) będzie zbiorem danych rozmiaru n dla pewnego problemu P oraz
+  Alg niech będzie algorytmem rozwiązującym ten problem. Pesymistyczną złożoność 
+czasową oznaczamy przez W(Alg,n), a średnią (oczekiwaną) złożoność czasową przez&nbsp; 
+A(Alg,n). Wielkości te są zdefiniowane następująco:</p>
+<p style="text-align: center"> &nbsp;W(Alg,n) = max{t(Alg,d): d<span lang="en"><font face="Symbol">Î</font></span>D(n)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A(Alg,n) =<font face="Symbol"> <span lang="en">&aring;</span></font>{p(d)<span lang="en"><font face="Symbol">´</font></span>t(Alg,d): d<span lang="en"><font face="Symbol">Î</font></span>D(n)} </p>
+<p> gdzie p(d) jest prawdopodobieństwem wystąpienia danych d, t(Alg,d) liczbą 
+operacji dominujących, wykonanych przez algorytm Alg dla danych d.</p>
+<p> Jeżeli wartość t(Alg,d) jest taka sama dla wszystkich danych d z klasy D(n), to mówimy po 
+prostu o złożoności
+  czasowej algorytmu i wielkość tę oznaczamy przez T(Alg, n).</p> 
+</div>
+
+<p><BR>Inną interesującą miarą złożoności algorytmu jest złożoność pamięciowa. 
+Podobnie jak poprzednio i to pojęcie chcemy uniezależnić od komputera i języka programowania, natomiast chcemy by zależało
+  od wymiaru danych. Miarą danych tego typu złożoności może być liczba zmiennych użytych 
+w algorytmie lub liczba miejsc potrzebnych do zapamiętania danych. Pamiętajmy 
+jednak, że zmienne mogą być bardzo różnych typów i w związku z tym ilość słów 
+pamięci potrzebnych do przechowywania ich wartości różnić się może bardzo 
+istotnie. Rozsądniej więc będzie mierzyć złożoność pamięciową ilością słów 
+maszynowych potrzebnych do przechowania danych i realizacji algorytmu.</p>
+<p style="text-align: left"> Złożoność pamięciową wyrażamy jako funkcję rozmiaru danych&nbsp; i oznaczamy&nbsp; 
+przez S(Alg,n),
+  gdzie Alg jest algorytmem, a n rozmiarem danych dla tego algorytmu. Podobnie jak w przypadku złożoności czasowej, ilość słów pamięci&nbsp; potrzebnej
+  do wykonania algorytmu zależy często od rodzaju danych. Rozważa się więc koszt 
+pamięciowy pesymistyczny, oraz koszt pamięciowy średni. </p>
+<p style="text-align: left"> W następnych wykładach tego kursu, Czytelnik pozna 
+wiele przykładów analizy złożoności. Skupimy się jednak bardziej na analizie 
+czasowej złożoności, niż złożoności pamięciowej przedstawianych algorytmów.</p>
+<p></P>
+
+<p><b>Pytanie 5</B> Niech Alg = {if&nbsp; g then&nbsp; A1 else A2 fi}, oraz 
+tt(g) oznacza liczbę operacji dominujących wykonywanych przy badaniu testu g, a  
+tt(A<sub><font face="Verdana">i</font></sub>) - maksymalną liczbę operacji 
+dominujących, które może wykonać algorytm A<sub><font face="Verdana">i</font></sub> 
+dla i=1,2. Jak można oszacować liczbę operacji dominujących dla algorytmu Alg? </P>
+
+<FORM><p>
+<INPUT class="GUZIK" TYPE='button' VALUE='------Zobacz odpowiedź------' NAME='Klik0' 
+onClick="napis(this.form,'tt(if g then A1 else A2 fi)<= tt(g) + max(tt(A1),tt(A2)).');">
+</p></form>
+
+
+
+ <table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main01_p4.html" TARGET="main"  class="NAWIGACJA">
+&laquo;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main01_p6.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

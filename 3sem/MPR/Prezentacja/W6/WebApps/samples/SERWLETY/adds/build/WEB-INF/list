@@ -1,0 +1,12 @@
+    <listener>
+        <listener-class>listeners.TestContextListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>listeners.TestContextAttributeListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>listeners.TestSessionListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>listeners.TestSesAttrListener</listener-class>
+    </listener>

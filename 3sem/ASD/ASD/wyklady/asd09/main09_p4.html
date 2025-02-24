@@ -1,0 +1,1181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main09_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main09_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all"><A NAME="EDU.wyklad.punkt 4"></A>
+
+<br clear="all">
+<div class="tytulpunktu">4. Implementacja kopca w tablicy</div>
+</p>
+<p>Wróćmy na chwilę do rysunku 9.3(a). Etykietami wierzchołków kopca są tam 
+liczby naturalne od 1 do 12. Zauważmy, że przy takiej numeracji wierzchołków, 
+synami węzła o etykiecie k są węzły o etykiecie 2k i 2k+1. Łatwo zauważyć, że 
+nie jest to przypadek. Wyobraźmy sobie&nbsp; wyższe drzewo, którego wierzchołki 
+zostały ponumerowane liczbami naturalnymi (zaczynając od 1) w porządku &quot;wszerz&quot;.&nbsp; 
+Na poziomie k-tym kopca, o ile jest całkowicie wypełniony, znajduje się 2<sup><font face="Verdana">k</font></sup> 
+elementów. Ponadto, jeśli węzeł z jakiegoś poziomu ma lewego syna, to wszystkie 
+poprzedzające go węzły na tym poziomie, mają obu synów. Wynika stąd, że jeśli 
+węzeł na poziomie k drzewa ma numer p, to jego lewy syn ma numer&nbsp; 2<sup><font face="Verdana">k+1</font></sup> 
++ 2(p-2<sup><font face="Verdana">k</font></sup>) = 2p, a prawy syn, o ile 
+istnieje, ma numer 2p+1. Znalezienie ojca dowolnego wierzchołka też nie 
+przedstawia problemu: jeśli numerem wierzchołka jest p, to numerem jego ojca 
+jest p div 2. Rozważania te prowadzą do następującej prostej reprezentacji 
+kopca.</p>
+<p><b>Reprezentacja tablicowa kopca.</b></p>
+<p>Kopiec reprezentujemy przez obiekt typu Heap o dwóch atrybutach Tab i idx, por. rysunek 
+9.5(a). Tab jest tablicą wszystkich etykiet umieszczonych w kopcu, a idx&nbsp;jest 
+ich liczbą. Organizacja elementów w tablicy 
+wynika z numeracji węzłów kopca w porządku &quot;wszerz&quot;:&nbsp; </p>
+<ul>
+  <li>Tab[1] jest etykietą korzenia</li>
+  <li>Tab[2i] jest etykietą lewego syna wierzchołka o etykiecie TAB[i], o ile 
+  istnieje,</li>
+  <li>TAB[2i+1] jest etykietą prawego syna, o ile taki istnieje.</li>
+</ul>
+&nbsp;</li>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="40%" id="AutoNumber13">
+  <tr>
+    <td width="100%">
+    <img border="0" src="RYSUNKI/Rysunek9_5a.gif" width="400" height="150"></td>
+  </tr>
+</table>
+
+<p><b>Przykład 4.1</b></p>
+<p>Na rysunku 9.5 (b) przedstawiono tablicową reprezentację kopca, a obok 
+drzewo-kopiec (por. rysunek 9.5.(c)). Pozycje większe od 11 są&nbsp; puste, gdyż 
+kopiec ma aktualnie tylko 11 wierzchołków. Tablica jest nieco większa, tak by 
+można było dołączyć do niej nowe elementy.<font face="Wingdings"> J</font></p>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="70%" id="AutoNumber14">
+  <tr>
+    <td width="64%">
+    <img border="0" src="RYSUNKI/Rysunek9_5b.gif" width="400" height="150"></td>
+    <td width="36%">
+    <img border="0" src="RYSUNKI/Rysunek9_5c.gif" width="200" height="150"></td>
+  </tr>
+</table>
+
+<p>Zgodnie z tym co było powiedziane do tej pory, przekształcenie kopca-drzewa w 
+tablicę-kopiec polega na odczytaniu etykiet drzewa algorytmem BFS, o którym była 
+mowa w wykładzie VII p1. i zapisaniu etykiet, kolejno odwiedzanych wierzchołków, w 
+tablicy. Odwrotnie, utworzenie drzewa-kopca na podstawie jego tablicowej 
+reprezentacji też nie przedstawia większych problemów. Jeżeli H jest obiektem 
+typu Heap, tzn. tablicową reprezentacją kopca, to następująca rekurencyjna 
+procedura rekurencyjna Buduj_Kopiec, wywołana dla parametru i=1, zwróci korzeń drzewa-kopca.</p>
+
+<blockquote>
+  <blockquote>
+
+<p>node Buduj_Kopiec(H: Heap, i : int){ <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; v := new node; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; v.val := H.TAB[i]; n := H.idx;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (2i&lt;n) then v.left := Buduj_Kopiec(2i) fi;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (2i&lt;n) then v.right := Buduj_Kopiec(2i+1) fi;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return v;<br>
+}</p>
+
+  </blockquote>
+</blockquote>
+
+<p>Poprawność przedstawionej procedury jest dość oczywista. Otrzymane drzewo jest częściowo uporządkowane, ponieważ z własności tablicy TAB 
+wynika, że dla dowolnego wierzchołka v konstruowanego drzewa,</p>
+<p style="text-align: center">v.val &lt; v.left.val&nbsp; oraz v.val &lt; v.right.val.</p>
+<p>Liśćmi w tym drzewie są tylko te wierzchołki, które odpowiadają pozycjom n 
+div2+1, n div2+2,..., n-1, n.&nbsp; Czytelnikowi pozostawiamy uzasadnienie, że 
+otrzymane drzewo jest doskonałe.</p>
+<p>Reprezentacja tablicowa kopca umożliwia bardzo łatwą implementację algorytmów 
+wstawiania i usuwania elementu minimalnego.</p>
+<p><b>Algorytm wstawiania</b></p>
+<p>Operacja insert, wstawiania elementu do kopca danego w reprezentacji 
+tablicowej, odbywa się dokładnie tak, jak to przedstawiliśmy w punkcie drugim 
+tego wykładu. Teraz jednak nie ma problemu znalezienia&nbsp; pierwszego z prawej 
+wierzchołka wewnętrznego, do którego należy dowiązać nowy element - jest to 
+pozycja (idx+1) div 2. Natomiast, pozycją 
+nowego elementu jest pozycja następna po wskazywanej przez 
+atrybut idx. Algorytm wstawiania przedstawiliśmy jako 
+funkcję insert z dwoma parametrami: obiektem typu Heap i wstawianą etykietą.</p>
+<p>
+<div class="def">
+   <TABLE frame="void" rules="none" width="90%" height="150">
+         <TR>
+            <TD width="615" height="12" colspan="2">Heap Insert (H: Heap, e: Et){</TD>
+             
+            <TD width="580" height="12"> </TD>
+             
+         </TR>
+         <tr>
+            <TD width="46" height="12"></TD>
+            <TD width="569" height="12">      &nbsp;H.idx := H.idx+1; &nbsp;&nbsp;&nbsp; </TD>
+             
+            <TD width="580" height="12">      &nbsp;// zwiększamy liczbę 
+            elementów kopca &nbsp;&nbsp;      </TD>
+             
+         </tr>
+         <TR>
+            <TD width="46" height="12"></TD>
+            <TD width="569" height="12"><strong>&nbsp;</strong>H.TAB[k] := e; k 
+            := H.idx;</TD> 
+            <TD width="580" height="12">//na pierwszej wolnej pozycji w tablicy 
+            TAB umieszczamy etykietę e</TD> 
+         </TR>
+         <TR>
+            <TD width="46" height="12"></TD>
+            <TD width="569" height="12"><strong>&nbsp;while&nbsp; </strong>(k&gt;1) 
+            and (H.TAB[k]&lt;H.TAB[k div 2]) <strong>do </strong> </TD> 
+            <TD width="580" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="46" height="12"></TD>
+            <TD width="569" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>swap(H.TAB[k], H.TAB[k div 2])</TD> 
+            <TD width="580" height="12">// zamień etykiety ojca i syna</TD> 
+         </TR>
+         <tr>
+            <TD width="46" height="12"></TD>
+            <TD width="569" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; k := 
+            k div 2;</TD>
+            <TD width="580" height="12">   &nbsp;</TD>
+         </tr>
+         <TR>
+            <TD width="46" height="12"></TD>
+            <TD width="569" height="12">   <STRONG>od;</STRONG>&nbsp;&nbsp;&nbsp;&nbsp; <STRONG>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; </STRONG>
+             </TD>
+            <TD width="580" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="46" height="12"></TD>
+            <TD width="569" height="12">   return H;</TD>
+            <TD width="580" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="46" height="1"><strong>&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="569" height="1"></TD>
+            <TD width="580" height="1"> &nbsp;</TD>
+         </TR>
+   </TABLE>
+</div>
+
+<p><b>Przykład 4.2</b></p>
+<p>Niech H będzie tablicową reprezentacją kopca, por. rysunek 9.5 
+(b). Przypuśćmy, że chcemy dołączyć do tego kopca element 1. Działanie algorytmu 
+insert(H,1) przedstawiono na rysunku 9.6. Po dołączeniu 1 na pierwszej wolnej 
+pozycji w tablicy TAB, musimy sprawdzić uporządkowanie. Na rysunkach (b), (c), 
+(d) zaznaczono pozycje, porównywane kolejno z dołączonym elementem 1.&nbsp; 
+Ostatecznie tablica (d) reprezentuje kopiec z wstawionym elementem 1.</p>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber4" height="83">
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    1</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    3</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    7</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    8</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    TAB:</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    2</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    3</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    8</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    7</td>
+    <td width="6%" bgcolor="#FF0000" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    1</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">(a)</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    <span lang="en"><font face="Symbol" size="4">&macr; </span></font></td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    ___</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    ___</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    ___</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    ___</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    ___</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    <font face="Symbol">_</font><span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    1</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    3</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    7</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    8</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    TAB:</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    2</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    3</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    8</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#FF0000" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    1</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    7</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">(b)</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span><font face="Symbol">_</font></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    ___</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    ___</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    <font face="Symbol">_</font><span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    1</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    3</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    7</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    8</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    TAB:</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    2</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#FF0000" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    1</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    8</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    3</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    7</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">(c)</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span><font face="Symbol">_</font></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    ___</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    <font face="Symbol">_</font><span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    1</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    3</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    7</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    8</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    TAB:</td>
+    <td width="5%" bgcolor="#FF0000" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    1</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    2</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    8</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    3</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    7</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">(d)</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    <b>
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></b></td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    idx</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="24%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center" colspan="4">
+    Rysunek 9.6 </td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+</table>
+<p><b>Pytanie 4</B>: Jakie etykiety będą liśćmi, jeśli do kopca z 
+rysunku 9.6 (d) wstawiono kolejno elementy -1, 0 ? 
+<!-- <p>Odpowiedź: Czytając od lewej : 12, 9, 6, 7, 11, 3, 10.</P> -->
+
+<BR>
+
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'Czytając od lewej : 12, 9, 6, 7, 11, 3, 10.');">
+</p>
+</form>
+
+<p><br clear="all">
+<p><b>Algorytm usuwania elementu minimalnego</b></p>
+<p>Operacja usuwania elementu minimalnego z kopca, w jego tablicowej 
+reprezentacji, odbywa się dokładnie tak jak przedstawiono w punkcie 3 tego 
+wykładu. Podobnie jak przy wstawianiu, nie ma problemu z wyszukaniem ostatniego 
+liścia, bo jest to po prostu ostatni element tablicy reprezentującej kopiec. 
+Algorytm usuwania delmin przedstawiliśmy jako funkcję z jednym parametrem typu 
+Heap. Proces poprawiania ścieżki został wyróżniony i przedstawiony jako osobna 
+procedura DownHeap, ponieważ będzie on wykorzystany również w następnym punkcie 
+wykładu.</p>
+<p style="text-align: left">&nbsp;<p>
+<div class="def" >
+   <TABLE frame="void" rules="none" width="90%" height="150">
+         <TR>
+            <TD width="45%" height="12" colspan="2">Heap delmin(H: Heap){</TD>
+             
+            <TD width="45%" height="12"> </TD>
+             
+         </TR>
+         <tr>
+            <TD width="5%" height="12"></TD>
+            <TD width="45%" height="12">      H.TAB[1] := H.TAB[H.idx];</TD>
+             
+            <TD width="40%" height="12">      //zastępujemy etykietę korzenia 
+            etykietą ostatniego liścia      </TD>
+             
+         </tr>
+         <TR>
+            <TD width="5%" height="12"></TD>
+            <TD width="45%" height="12">H.idx := H.idx - 1; </TD> 
+            <TD width="40%" height="12">//zmniejszamy liczbę elementów kopca &nbsp;&nbsp; </TD> 
+         </TR>
+         <TR>
+            <TD width="5%" height="12"></TD>
+            <TD width="45%" height="12">DownHeap(H.TAB, H.idx, 1);</TD> 
+            <TD width="40%" height="12">//poprawiamy uporządkowanie na ścieżce 
+            od korzenia</TD> 
+         </TR>
+         <tr>
+            <TD width="5%" height="12"></TD>
+            <TD width="45%" height="12">   return H;</TD>
+            <TD width="40%" height="12">   &nbsp;</TD>
+         </tr>
+         <TR>
+            <TD width="5%" height="12"><strong>}</strong></TD>
+            <TD width="45%" height="12">   &nbsp;&nbsp; <STRONG>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; </STRONG>
+             </TD>
+            <TD width="40%" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p>Algorytm poprawiania ścieżek, DownHeap, też jest bardzo prosty: zaczynając od korzenia 
+aktualnie rozważanego kopca, zamieniamy etykietę ojca z etykietą mniejszego z 
+synów i kontynuujemy ten proces od zmienionej pozycji wzdłuż jednej ścieżki, w 
+dół, do liścia. Parametrami algorytmu są: tablica zawierająca etykiety kopca, 
+liczba elementów w tablicy i pozycja od której zaczynamy poprawiać 
+uporządkowanie.</P>
+
+<p style="text-align: left">&nbsp;<p>
+<div class="def">
+   <TABLE frame="void" rules="none" width="782" height="227">
+         <TR>
+            <TD width="552" height="12" colspan="2">DownHeap (TAB: tablica, n: 
+            int, k : int){</TD>
+             
+            <TD width="737" height="12"> </TD>
+             
+         </TR>
+         <tr>
+            <TD width="59" height="12"></TD>
+            <TD width="493" height="12">      &nbsp;i, j, v : int;&nbsp; &nbsp;&nbsp;&nbsp; </TD>
+             
+            <TD width="737" height="12">      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      </TD>
+             
+         </tr>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="493" height="12"><strong>&nbsp;</strong>v := TAB[k]; </TD> 
+            <TD width="737" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="493" height="12"><strong>&nbsp;while&nbsp; </strong>(k <font face="Symbol"> <span lang="en">&pound;</span></font>
+            n div 2) <strong>do </strong> </TD> 
+            <TD width="737" height="12">//Poprawianie ścieżki od v&nbsp; </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="493" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>j := 2*k; &nbsp;</TD> 
+            <TD width="737" height="12">//TAB[j] jest etykietą lewego syna 
+            wierzchołka k-tego</TD> 
+         </TR>
+         <tr>
+            <TD width="59" height="12"></TD>
+            <TD width="493" height="12">   &nbsp;&nbsp;&nbsp;&nbsp; <b>&nbsp;if
+            </b>&nbsp;(j &lt; n) <b>then</b></TD>
+            <TD width="737" height="12">   //wierzchołek na pozycji k-tej 
+            ma dwóch synów,</TD>
+         </tr>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="493" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <STRONG>&nbsp; 
+            if </STRONG>
+             (TAB[j]&nbsp;&gt;TAB[j+1])<STRONG> then </STRONG>
+             j := j+1<STRONG> fi &nbsp;&nbsp;&nbsp; </STRONG>
+             </TD>
+            <TD width="737" height="12">   //j jest pozycją mniejszego z synów</TD>
+         </TR>
+         <tr>
+            <TD width="59" height="12"></TD>
+            <TD width="415" height="12">   &nbsp;&nbsp;&nbsp;&nbsp; <STRONG>fi; </STRONG>
+             </TD>
+            <TD width="821" height="12">   &nbsp;</TD>
+         </tr>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="493" height="12">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong><b>if </b>&nbsp;(v &lt; TAB[j]) <b>then</b> <STRONG>exit fi; </STRONG>
+             </TD>
+            <TD width="737" height="12">   //Porównujemy etykietę mniejszego z 
+            synów z etykietą ojca&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="493" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TAB[k] 
+            := TAB[j]; k := j;</TD>
+            <TD width="737" height="12">   //Etykieta z pozycji j-tej wędruje &quot;w 
+            górę drzewa&quot; na pozycję k-tą i proces powtarzamy dla wierzchołka j&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="493" height="12">   <STRONG>od;</STRONG></TD>
+            <TD width="737" height="12">   &nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="493" height="12">   TAB[k] 
+            := v;</TD>
+            <TD width="737" height="12">   // znaleźliśmy miejsce dla etykiety 
+            v.</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="493" height="1"></TD>
+            <TD width="737" height="1"> &nbsp;</TD>
+         </TR>
+   </TABLE>
+</div>
+
+<p><b>Przykład 4.3</b></P>
+
+<p>Niech H będzie tablicową reprezentacją kopca, przedstawioną na rysunku 9.5 
+(b).&nbsp; Działanie algorytmu delmin(H) zilustrowano na rysunku 9.7. Ostatni 
+element tablicy jest kandydatem na miejsce aktualnego korzenia (rysunek 9.7(a)) 
+Teraz następuje poprawianie uporządkowania. Porównujemy mniejszego z synów 
+korzenia z etykietą 7 (rysunek 9.7(b)). Ponieważ 7&gt;3, więc na pozycji pierwszej 
+pojawia się 3. Zanim wpiszemy 7 na pozycję trzecią porównujemy ją z mniejszym z 
+synów tej pozycji, czyli z liczbą 10. Ponieważ 7&lt;10, więc kończymy wykonanie 
+pętli i umieszczamy ostatecznie 7 na pozycji trzeciej. Wynikiem działania 
+algorytmu delmin(H) jest tablica 9.7(c). <font face="Wingdings">J</font></P>
+
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber15" height="83">
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    1</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    3</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    7</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    8</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    TAB:</td>
+    <td width="5%" bgcolor="#FF0000" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    2</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    3</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    8</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#FF0000" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    7</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    &nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">(a)</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    |</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    __</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    __</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    __</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    __</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    __</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    __</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    __</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    __</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    __</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">
+    &nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="15" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    1</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    3</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    7</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    8</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    TAB:</td>
+    <td width="5%" bgcolor="#FF0000" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    7</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    3</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    8</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    &nbsp;</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    &nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">(b)</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">__</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    &nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    1</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    3</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    7</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    8</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    TAB:</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    3</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    4</td>
+    <td width="5%" bgcolor="#FF0000" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    7</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    8</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    5</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    11</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    10</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    12</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    9</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    6</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    &nbsp;</td>
+    <td width="6%" bgcolor="#C0C0C0" bordercolor="#808080" bordercolorlight="#808080" bordercolordark="#808080" height="16" align="center">
+    &nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">(c)</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    <font face="Symbol">_</font><span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">__</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">__</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    __</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    <span lang="en"><font face="Symbol" size="4">&macr;</font></span></td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    <span lang="en"><b><font face="Symbol" size="4">&macr;</font></b></span>idx</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">
+    &nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="24%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center" colspan="4">
+    Rysunek 9.7 </td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16" align="center">&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;<p><b>Pytanie 5</B>: Jakie etykiety znajdą się w liściach drzewa, jeśli 
+z kopca przedstawionego na rysunku&nbsp; 9.6(b) usuniemy dwukrotnie minimum? 
+<!-- <p>Odpowiedź: 6, 11, 10, 12, 9.</P> -->
+
+
+&nbsp;<br>
+
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'6, 11, 10, 12, 9.');">
+</p>
+</form>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main09_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main09_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

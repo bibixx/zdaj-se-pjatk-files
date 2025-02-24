@@ -1,0 +1,270 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr--><!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main01_p2.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main01_p4.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 3"></a><br clear="all">
+<div class="tytulpunktu">3. Struktura danych</div>
+<p>Ka¿dy algorytm dzia³a w pewnym ¶rodowisku: w jednym algorytmie
+wykorzystujemy liczby naturalne i operacje na nich, inny algorytm u¿ywa
+operacji na zbiorach, a jeszcze inny jest napisany z my¶l± o pewnych
+specjalnych obiektach, okre¶lonych przez twórcê algorytmu z my¶l± o
+pewnej specjalnej aplikacji. ¦rodowisko, w którym dzia³a algorytm
+nazywaæ bêdziemy struktur± danych tego algorytmu. Warto¶ci zmiennych i
+operacje pochodz± w³a¶nie z tej przewidzianej dla danego algorytmu
+struktury danych. Struktura danych dostarcza interpretacji dla
+formalnego tekstu, którym jest algorytm.&nbsp; Zdarza siê nierzadko, ¿e
+ten sam algorytm interpretowany w ró¿nych strukturach danych ró¿nie siê
+zachowuje i, co wiêcej, rozwi±zuje zupe³nie ró¿ne problemy.</p>
+<p>Rozwa¿my nastêpuj±cy przyk³ad algorytmu:<br>
+</p>
+<div class="przyk" style="width: 687px; height: 232px;">
+<table frame="void" rules="none" width="661" height="212"
+ style="border-collapse: collapse;" bordercolor="#111111"
+ cellpadding="0" cellspacing="0">
+  <col align="left"><col align="left"><col align="left"><col
+ align="left"><col align="left"> <tbody>
+    <tr>
+      <td width="1" height="16"> Kleene{</td>
+      <td width="300" height="16">&nbsp; </td>
+    </tr>
+    <tr>
+      <td width="1" height="1"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="1" height="13"><br>
+      </td>
+      <td width="300" height="13">&nbsp;<b>for</b> k:=1 to n <b>do</b>&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="1" height="16"><br>
+      </td>
+      <td width="300" height="16"> <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </strong> &nbsp;<b>for</b> i :=1 to n <b>do</b></td>
+    </tr>
+    <tr>
+      <td width="1" height="16"><br>
+      </td>
+      <td width="300" height="16"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>
+for</b> j := 1 to n <b>do</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+    </tr>
+    <tr>
+      <td width="1" height="16"><br>
+      </td>
+      <td width="300" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+c[i,j] := c[i,j] <font face="Symbol">&nbsp; <span lang="en">&#197;</span>&nbsp;
+      </font>(c[i,k] <font face="Symbol"><span lang="en">Ä</span></font>
+c[k,j]);</td>
+    </tr>
+    <tr>
+      <td width="1" height="16"><br>
+      </td>
+      <td width="300" height="16"> <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+od od</strong></td>
+    </tr>
+    <tr>
+      <td width="1" height="16"><br>
+      </td>
+      <td width="300" height="16"> <strong>&nbsp;od&nbsp;;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </strong></td>
+    </tr>
+    <tr>
+      <td width="1" height="16"><br>
+      </td>
+      <td width="300" height="16"> result := c;</td>
+    </tr>
+    <tr>
+      <td width="1" height="11">}</td>
+      <td width="300" height="11"> <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p><u>Pierwsza interpretacja.</u> Je¶li 0 oznacza warto¶æ logiczn±
+fa³sz, a 1 warto¶æ logiczn± prawda, oraz operacje <font face="Symbol"><span
+ lang="en">&#197;</span> ,</font>
+<font face="Symbol"><span lang="en">Ä</span></font> s± operacjami&nbsp;
+alternatywy i koniunkcji,</p>
+<p style="text-align: center;">u <font face="Symbol"><span lang="en">&#197;</span></font>&nbsp;
+w =<sup><font face="Verdana">df</font></sup>&nbsp; (u <font
+ face="Symbol">
+<span lang="en">Ú</span> </font>w),&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+u <font face="Symbol"><span lang="en">Ä</span> </font>w =<sup><font
+ face="Verdana">df</font></sup> (u <font face="Symbol"><span lang="en">&#217;</span>
+</font>w),</p>
+<p>to przedstawiony algorytm znajduje tranzytywne domkniêcie grafu,
+którego macierz± incydencji jest pocz±tkowa warto¶æ tablicy c.
+Rzeczywi¶cie, w ka¿dym kroku zewnêtrznej pêtli, dla dowolnych dwóch
+wierzcho³ków i, j badamy, czy istnieje jaka¶ droga od i do j
+przechodz±ca przez wierzcho³ek k.&nbsp; Je¿eli istnieje droga od i do k
+(tzn. gdy c[i,k]=1) oraz, gdy istnieje droga od k do j (tzn.c[j,k]=1)
+wtedy istnieje droga od i do j, a warto¶ci± c[i,j] bêdzie 1.</p>
+<p><u>Druga interpretacja.</u> Je¶li przyjmiemy, ¿e tablica c jest
+macierz± incydencji&nbsp; pewnego grafu z wagami, gdzie c[i,j] jest
+liczb± rzeczywist± dodatni± okre¶laj±c± d³ugo¶æ drogi od wierzcho³ka i
+do wierzcho³ka j w tym grafie lub +<span lang="en"><font face="Symbol">&#165;</font></span>,
+gdy takiej drogi nie ma, oraz operacje&nbsp; <font face="Symbol">
+<span lang="en">&#197;</span> ,</font> <font face="Symbol"><span lang="en">Ä</span></font>
+s± okre¶lone nastêpuj±co:</p>
+<p style="text-align: center;">u <font face="Symbol"><span lang="en">&#197;</span></font>&nbsp;
+w =<sup><font face="Verdana">df</font></sup>&nbsp; min(u,<font
+ face="Symbol">
+</font>w),&nbsp; dla dowolnych liczb rzeczywistych u, w,&nbsp;
+i&nbsp;&nbsp; +<span lang="en"><font face="Symbol">&#165;</font></span>
+<font face="Symbol"><span lang="en">&#197;</span></font>&nbsp; w =<sup><font
+ face="Verdana">df</font></sup>&nbsp; w, u <font face="Symbol"><span
+ lang="en">&#197;</span></font>&nbsp; +<span lang="en"><font face="Symbol">&#165;</font></span>
+=<sup><font face="Verdana">df</font></sup> u</p>
+<p style="text-align: center;">&nbsp;&nbsp;&nbsp; u <font face="Symbol">
+<span lang="en">Ä</span> </font>w =<sup><font face="Verdana">df</font></sup>
+(u
+<font face="Symbol">+ </font>w),&nbsp;&nbsp; dla dowolnych liczb
+rzeczywistych u, w i&nbsp;&nbsp; +<span lang="en"><font face="Symbol">&#165;</font></span>
+<font face="Symbol"><span lang="en">Ä</span> </font>w =<sup><font
+ face="Verdana">df</font></sup> +<font face="Symbol"><span lang="en">&#165;</span>,&nbsp;
+</font>u
+<font face="Symbol"><span lang="en">&#197;</span></font>&nbsp; +<span
+ lang="en"><font face="Symbol">&#165;</font></span> =<sup><font
+ face="Verdana">df</font></sup> +<span lang="en"><font face="Symbol">&#165;</font></span>
+,</p>
+<p>to algorytm oblicza najkrótsz± drogê od dowolnego wierzcho³ka do
+dowolnego innego. Tak jak w poprzedniej interpretacji, badamy dla
+ustalonego k wszystkie drogi, które przechodz± przez wierzcho³ek k.
+Je¶li istnieje droga od i do&nbsp; k o d³ugo¶ci c[i,k] oraz istnieje
+droga od k do j o d³ugo¶ci c[k,j], to istnieje te¿ droga od i do j o
+d³ugo¶ci c[i,k]+c[k,j]. Wybieraj±c mniejsz± z liczb c[i,j]
+(dotychczasowa droga) i c[i,k]+c[k,j] zapewnimy, ¿e warto¶ci± c[i,j]
+jest d³ugo¶æ najkrótszej mo¿liwej drogi od i do j.</p>
+<p></p>
+<div class="def">
+<p>Definicja 3.1</p>
+<p>Struktur± danych&nbsp; <a
+ name="EDU.skorowidz.termin suma_uogólniona 9_17"></a>&nbsp;nazywaæ
+bêdziemy system algebraiczny postaci &lt;U, o<sub><font face="Verdana">1</font></sub>,...,o<sub><font
+ face="Verdana">n</font></sub>; r<sub><font face="Verdana">1</font></sub>,...,r<sub><font
+ face="Verdana">m</font></sub>&gt;, gdzie&nbsp; U jest dziedzin±, w
+której okre¶lone s± operacje o<sub><font face="Verdana">1</font></sub>,...,o<sub><font
+ face="Verdana">n</font></sub> i relacje&nbsp; r<sub><font
+ face="Verdana">1</font></sub>,...,r<sub><font face="Verdana">m
+</font></sub>struktury. Ka¿da operacja i ka¿da relacja ma okre¶lony
+typ, tzn. liczbê i typy argumentów oraz typ wyniku. Zwykle zak³ada siê
+te¿, ¿e operacje i relacje s± programowalne.&nbsp;&nbsp; <br>
+Typy operacji i relacji, to sygnatura struktury.</p>
+</div>
+<p></p>
+<p>Przyk³adem struktury danych s± podstawowe struktury arytmetyczne
+zaimplementowane na ka¿dym komputerze i umo¿liwiaj±ce operacje typu
+dodawania liczb rzeczywistych, mno¿enia, porównywania itd.&nbsp; Innym
+przyk³adem struktury jest tablica. Operacje jakie na tablicach
+wykonujemy, to wstawianie elementu na wybran± pozycjê, sprawdzanie
+zawarto¶ci wskazanego elementu etc.</p>
+<p><b>Uwaga</b>. Zwykle, bêdziemy milcz±co zak³adali, ¿e te podstawowe
+struktury s± integraln± czê¶ci± omawianych w wyk³adzie struktur danych.</p>
+<p>Dzia³anie algorytmu zale¿y ¶ci¶le od struktury danych, w której on
+dzia³a. Je¶li mamy badaæ zachowanie algorytmu, analizowaæ jego
+zachowanie i koszt, musimy wcze¶niej poznaæ w³asno¶ci przyjêtej
+struktury danych. Oczywi¶cie,&nbsp; implementacja struktury danych,
+jest wystarczaj±cym jej opisem, pozwalaj±cym poznaæ wszystkie w³asno¶ci
+struktury. Czy jednak taki sposób poznawania w³a¶ciwo¶ci struktury jest
+wygodny? Implementacja struktury danych musi zawieraæ definicje
+operacji, które mog± przecie¿ byæ skomplikowanymi programami. Z punktu
+widzenia algorytmu, który ma dzia³aæ w tej strukturze, nie zawsze jest
+istotne, jak zosta³a ona zaimplementowana. Czêsto implementacj±
+struktury danych zajmuje&nbsp; siê inna osoba, nie autor algorytmu.
+Czêsto strukturê danych mo¿emy "wzi±æ z pó³ki". Analizowanie w³asno¶ci
+takiej struktury przez "rozgryzanie" szczegó³ów implementacji by³oby
+karko³omnym zajêciem. Dlatego te¿, struktura danych powinna byæ
+wyspecyfikowana. Specyfikacja powinna byæ zwiêz³a, ale jednocze¶nie
+powinna zawieraæ wszystkie istotne cechy charakteryzuj±ce specyfikowan±
+strukturê.</p>
+<p></p>
+<div class="def">
+<p>Definicja 3.2</p>
+<p>Specyfikacj± struktury danych <a
+ name="EDU.skorowidz.termin suma_uogólniona 9_17"></a>
+&nbsp;nazywaæ bêdziemy parê {S, Ax}, gdzie S jest sygnatur± struktury
+danych, a Ax zbiorem formu³ (postulatów), których prawdziwo¶æ w tej
+strukturze zak³adamy.&nbsp; </p>
+</div>
+<p></p>
+<p>Sygnatura pozwala ustaliæ jakiego typu operacje i relacje bêd±
+dostêpne w tej strukturze. Postulaty natomiast, maj± charakteryzowaæ
+operacje i relacje&nbsp; tej struktury. By³oby najlepiej, gdyby
+specyfikacja definiowa³a z dok³adno¶ci± do izomorfizmu ca³± strukturê,
+ale nie zawsze jest to mo¿liwe. W nastêpnych wyk³adach poznamy
+przyk³ady konkretnych struktur danych i ich specyfikacji. Tu, dla
+przyk³adu, przedstawimy specyfikacjê struktury liczb naturalnych,
+ograniczonych przez sta³± Max, z&nbsp; jednoargumentow± operacj±
+cyklicznego nastêpnika s, sta³ymi 0 i Max oraz&nbsp; relacj±
+identyczno¶ci =. Postulaty tej struktury s± nastêpuj±ce</p>
+<p style="text-align: center;">&nbsp;(x = y) <span lang="en"><font
+ face="Symbol">&#186;</font></span> (s(x) = s(y)),&nbsp; s(Max) = 0, (<font
+ face="Symbol">"</font>y) (<font face="Symbol">$</font>i<span lang="en"><font
+ face="Symbol">Î</font></span>N)
+s<sup><font face="Verdana">i</font></sup>(0) = y</p>
+<p>Pierwszy postulat mówi, ¿e s jest funkcj± ró¿nowarto¶ciow±,&nbsp;
+drugi postulat definiuje nastêpnik elementu Max, a trzeci zapewnia, ¿e
+ka¿dy element struktury mo¿e byæ otrzymany z zera przez
+sukcesywne zastosowanie nastêpnika.&nbsp; Ten ostatni postulat nie jest
+wyra¿alny w&nbsp; jêzyku logiki klasycznej, ale mo¿emy go zapisaæ jako
+w³asno¶æ programu: program {x:= 0; while not (x=y) do x:= s(x) od}
+zatrzymuje siê dla dowolnych danych w tej strukturze.</p>
+<p></p>
+<p><b>Pytanie 3</b>: Co robi algorytm Kleene, je¶li operacja&nbsp;
+<font face="Symbol"><span lang="en">&#197;</span> </font>&nbsp;odpowiada
+wziêciu maksimum z dwóch liczb, a&nbsp; operacja <font face="Symbol"><span
+ lang="en">Ä</span></font> wziêciu minimum, oraz warto¶ci pocz±tkowe
+tablicy c[i,j] zinterpretujemy jako ciê¿ar, który mo¿e byæ
+przetransportowany wzd³u¿ krawêdzi (i,j) pewnego grafu?</p>
+<p><br>
+</p>
+<form>
+  <p><input class="GUZIK" type="button"
+ value="------Zobacz odpowied¼------" name="Klik0"
+ onclick="napis(this.form,'Algorym znajduje maksymalny ciê¿ar jaki mo¿e byæ przetransponowany z punktu i do punktu j dla dowolych i,j.');">
+  </p>
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main01_p2.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main01_p4.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

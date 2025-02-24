@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+<td align="left"><A HREF="main14_p0.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;
+<A HREF="main14_p2.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td>
+    </tr>
+</table>
+
+<br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><br clear="all">
+    <div class="tytulpunktu">1.&nbsp; Na czym to polega?</div> 
+
+  
+
+
+<p>  
+W wielu omawianych w tym wykładzie algorytmach była stosowana zasada &quot;dziel i 
+zwyciężaj&quot;, która polega na podzieleniu&nbsp; rozwiązywanego problemu na dwa 
+podproblemy, rozwiązaniu ich i połączeniu wyników, tak by uzyskać rozwiązanie 
+całego problemu. Metoda programowania dynamicznego jest właściwie rozwinięciem 
+tej idei. Podzielmy dany problem na mniejsze podproblemy, a z ich wyników 
+spróbujmy wywnioskować rozwiązanie końcowe. Nie zawsze jednak wiadomo, jakie to 
+mniejsze podproblemy są nam potrzebne. W metodzie zwanej &quot;programowaniem 
+dynamicznym&quot; proponuje się rozważenie wszystkich mniejszych podproblemów. Z 
+pozoru takie podejście może się wydawać nierozsądne ze względu na nakład 
+potrzebnej pracy. Tymczasem jest odwrotnie. Wykonując pewną dodatkową pracę, 
+postawiony problem możemy rozwiązać z kosztem mniejszym, niż gdybyśmy ten 
+problem atakowali bezpośrednio. Oczywiście nie każdy problem można rozwiązać tą 
+metodą, tak jak to było w przypadku techniki zachłannej, metody dziel i 
+zwyciężaj, czy metody rekurencyjnej. Jednak klasa problemów, dla których metoda 
+programowania dynamicznego daje dobre rezultaty jest na tyle duża, że warto 
+poznać bliżej tę technikę rozwiązywania problemów.</P>
+
+<p>  
+Matematyczne podstawy tej metody zawdzięczamy R. Belmanowi, który rozpoczął 
+badania nad tą metodą w 1955 r. Słowo &quot;programowanie&quot; użyte w nazwie tej metody 
+nie odnosi się do programowania, w sensie zapisywania pewnej metody postępowania 
+w języku zrozumiałym dla komputera, ale do techniki tablicowania wyników 
+pośrednich w celu ich późniejszego użycia do znalezienia optymalnego rozwiązania 
+danego problemu.</P>
+
+<p>  
+Metodę programowania dynamicznego zwykle stosuje się w przypadku problemów 
+optymalizacyjnych, dla których proste rozwiązania rekurencyjne prowadzą do 
+algorytmów wykładniczych. Aby można było zastosować metodę programowania 
+dynamicznego, problem powinien mieć dwie podstawowe cechy: optymalną 
+podstrukturę oraz wspólne podproblemy. 
+
+
+</P>
+
+<p>  
+Powiemy, że problem ma optymalną podstrukturę, jeżeli optymalne rozwiązanie 
+problemu zawiera w sobie optymalne rozwiązania jego podproblemów. Wyznaczenie optymalnego 
+rozwiązania problemu polega na wybraniu tych podproblemów, które składają się na 
+rozwiązanie całego problemu.</P>
+
+
+
+<p>  
+Paradygmat programowania dynamicznego składa się z trzech prostych zasad:</P>
+
+<ol>
+  <li>Scharakteryzować strukturę rozwiązania optymalnego.</li>
+  <li>Zdefiniować rekurencyjnie wartość rozwiązania optymalnego, jako funkcję 
+  rozwiązań optymalnych dla podproblemów.</li>
+  <li>Skonstruować optymalne rozwiązanie problemu na bazie wyliczonych wcześniej 
+  wielkości.</li>
+</ol>
+
+  
+
+
+    <p style="text-align: left">Użycie tych zasad wyjaśnimy na przykładach, 
+    które są treścią pozostałych punktów tego wykładu.</p>
+  
+
+
+    
+    <p>Na zakończenie tego punktu zauważmy, że metoda zachłanna, o której 
+    mówiliśmy w wykładzie XI też wymaga by problem posiadał własność optymalnej 
+    podstruktury. Istotna różnica polega na sposobie wykorzystania tej 
+    własności. Stosując technikę zachłanną, najpierw dokonujemy wyboru 
+    podproblemu, który w danym momencie rokuje najlepsze rozwiązanie zadania, a 
+    następnie rozwiązujemy ten podproblem. W programowaniu dynamicznym najpierw 
+    znajdujemy optymalne rozwiązania podproblemów, a potem wybieramy te 
+    właściwe, które pozwolą nam znaleźć optymalne rozwiązanie problemu.</p>
+  
+
+
+    
+    <p><b>Pytanie 1</B>: Niech problem polega na znalezieniu najkrótszej ścieżki 
+    w grafie zorientowanym, w którym każda krawędź ma taki sam koszt. Czy 
+    problem najkrótszej ścieżki ma własność optymalnej podstruktury?
+
+    <br>
+  
+<!-- Odpowiedź: Tak.Podzielmy najkrótszą ścieżkę od u do v na dwie części: ścieżkę od u 
+    do w i&nbsp; od w do v.&nbsp; Obie te ścieżki&nbsp; muszą być optymalne, bo 
+    w przeciwnym wypadku można by skonstruować inną krótszą ścieżkę od u do v.</P> -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Sprawdź odpowiedź-----' NAME='Klik0' onClick="napis(this.form,'Tak. ')">
+</form>
+</p>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td align="left"><A HREF="main14_p0.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main14_p2.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

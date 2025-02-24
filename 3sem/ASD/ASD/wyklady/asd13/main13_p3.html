@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body style="background-color: whitesmoke;" leftmargin="8" topmargin="8"
+ marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"--><!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr--><!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main13_p2.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main13_p4.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<br clear="all">
+<div class="tytulpunktu">3. Problem otoczki wypuk³ej<br>
+</div>
+<br>
+<p>
+</p>
+<div class="def" style="text-align: justify;"> Definicja 3.1 Niech Q
+bêdzie skoñczonym zbiorem
+punktów na
+p³aszczy¼nie.&nbsp; Najmniejszy zbiór wypuk³y taki,&nbsp; ¿e ka¿dy
+punkt zbioru Q znajduje siê albo w jego wnêtrzu albo na brzegu,
+nazywamy otoczk± wypuk³± zbioru Q (ang. convex hull).</div>
+<br>
+Otoczkê wypuk³± danego zbioru Q oznaczaæ bêdziemy przez CH(Q). <br>
+<br>
+<div style="text-align: justify;">W geometrii dowodzi siê, ¿e dla
+dowolnego zbioru Q na p³aszczy¼nie,
+otoczka wypuk³a&nbsp; jest wielok±tem.
+Dok³adniej mówi o tym lemat 3.1.<br>
+</div>
+<br>
+<div class="lemat">
+<div style="text-align: justify;">Lemat 3.1&nbsp; Dla dowolnego n<font face="Symbol">
+  <span lang="en">&sup3;</span></font>3
+otoczka wypuk³a zbioru Q jest wielok±tem
+wypuk³ym o
+wierzcho³kach w pewnych punktach zbioru Q.</div>
+</div>
+<div style="text-align: justify;">&nbsp;</div>
+<div style="text-align: justify;"><span style="font-weight: bold;">Uwaga</span>
+Wielok±t jest wypuk³y wttw, gdy ka¿dy odcinek ³±cz±cy dwa punkty
+wewnêtrzne wielok±ta le¿y ca³kowicie wewn±trz tego wielok±ta.<br>
+</div>
+<br>
+<div style="text-align: justify;">Podstawow± w³asno¶æ otoczki wypuk³ej
+danego zbioru punktów, mo¿na sformu³owaæ nastêpuj±co:&nbsp;
+je¶li dowoln± liniê le¿±c± na zewn±trz otoczki, przesun±æ w
+dowolnym kierunku w stronê otoczki, to musi ona spotkaæ najpierw jeden
+z wierzcho³ków
+otoczki. Otoczka w naturalny sposób definiuje granice danego zbioru
+punktów. Wiele problemów geometrycznych wymaga w swoim rozwi±zaniu
+znalezienia otoczki wypuk³ej, po to by u³atwiæ dalsze rozwa¿ania.
+Przytoczymy tu jako przyk³ad zadanie znalezienia pary najbardziej
+odleg³ych punktów w danym zbiorze. Mo¿na udowodniæ, ¿e punkty te s±
+wierzcho³kami otoczki wypuk³ej. Zbadanie, które to punkty otoczki,
+mo¿na
+zrealizowaæ w czasie liniowym. Je¶li umiemy rozwi±zaæ szybko problem
+otoczki, to bêdziemy umieli równie¿ szybko rozwi±zaæ
+problem najbardziej odleg³ych punktów.<br>
+</div>
+<br>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 60%;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <img border="0" src="Rysunki/Rysunek13_5a.gif" width="250" height="250"><br>
+      </td>
+      <td style="vertical-align: top;">
+      <img border="0" src="Rysunki/Rysunek13_5b.gif" width="250" height="250"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<div style="text-align: justify;"><span style="font-weight: bold;">Przyk³ad
+3.1</span> Dla dowolnych trzech punktów nie wspó³liniowych, otoczk±
+wypuk³± jest trójk±t o wierzcho³kach w tych punktach.&nbsp; Otoczk±
+wypuk³± czteroelementowego zbioru punktów, w którym ¿adne trzy nie s±
+wspó³liniowe, jest czworok±tem lub trójk±tem. Na rysunku 13.5(a)(b) przedstawiono
+przyk³adowy zbiór punktów&nbsp; i
+jego otoczkê wypuk³±. <font face="Wingdings">J</font><br>
+</div>
+<br>
+<b>Problem</b><br>
+<div style="text-align: justify;">Jak znale¼æ otoczkê wypuk³± danego
+zbioru punktów. Na mocy Lematy
+3.1, musimy wybraæ ze zbioru punktów te, które s± wierzcho³kami
+najmniejszego wielok±ta wypuk³ego otaczaj±cego ca³y zbiór.<br>
+</div>
+<br>
+<div style="text-align: justify;">Zastanówmy siê, które wierzcho³ki
+zbioru Q na pewno nie mog± byæ
+wierzcho³kami otoczki. Jest oczywiste, ¿e je¶li wybrali¶my ju¿ jakie¶
+punkty p i q, to wszystkie punkty le¿±ce na prostej ³±cz±cej p z q i
+le¿±ce miêdzy p i q mo¿emy pomin±æ. Co wiêcej, wszystkie punkty le¿±ce
+wewn±trz jakiegokolwiek trójk±ta utworzonego z punktów zbioru Q,&nbsp;
+nie mog± byæ wierzcho³kami otoczki wypuk³ej.&nbsp; Opieraj±c siê na
+powy¿szym kryterium eliminacji punktów, mo¿na zaproponowaæ nastêpuj±c±
+metodê wyszukiwania zbioru wierzcho³ków otoczki wypuk³ej.<br>
+</div>
+<br>
+<b>Metoda trójk±tów</b><br>
+Niech X = Q.<br>
+Dla ka¿dej trójki punktów p<sub>1</sub>, p<sub>2</sub>, p<sub>3</sub>
+ze
+zbioru X,<br>
+<div style="margin-left: 40px;">
+<ul>
+  <li>je¿eli nie s± one wspó³liniowe, to usuñ wszystkie punkt zbioru X
+le¿±ce wewn±trz trójk±ta <font face="symbol">D</font>(p<sub>1</sub>,p<sub>2</sub>,p<sub>3</sub>),</li>
+  <li>je¿eli s± wspó³liniowe, to usuñ ze zbioru X punkt ¶rodkowy (z tej
+trójki).<br>
+  </li>
+</ul>
+</div>
+Punkty, które pozosta³y, tworz± zbiór wierzcho³ków otoczki
+wypuk³ej zbioru Q, CH(Q).<br>
+&nbsp;<p>
+<span style="font-weight: bold;">Poprawno¶æ<br>
+</span>Po wykonaniu algorytmu, pozosta³e w zbiorze X punkty
+spe³niaj± warunek:<br>
+dowolna trójka punktów p<sub>1</sub>, p<sub>2</sub>, p<sub>3</sub> ze
+zbioru X, tworzy trójk±t, a ka¿dy inny punkt zbioru X znajduje siê na
+zewn±trz tego trójk±ta. <br>
+</p>
+<div style="text-align: justify;">Wynika st±d, ¿e wszystkie punkty
+zbioru X musz± nale¿eæ&nbsp; do
+otoczki wypuk³ej. Ponadto, z metody konstrukcji zbioru X wynika, ¿e
+punkty zbioru Q, które nie nale¿± do zbioru X, znajduj± siê wewn±trz
+pewnego trójk±ta utworzonego z punktów zbioru X.&nbsp; Zatem&nbsp; 
+wielok±t, którego wierzcho³kami s± punkty zbioru X, jest najmniejszym wypuk³ym
+wielok±tem zawieraj±cym wszystkie punkty zbioru Q na brzegu lub wewn±trz.<br>
+</div>
+<p><b>Przyk³ad 3.2</b> Na rysunku 13.6 zaznaczono jeden z mo¿liwych trójk±tów 
+utworzonych przez punkty zbioru Q przedstawionego na rysunku 13.5(a). Trzy 
+punkty znalaz³y siê wewn±trz trójk±ta, wiêc nie bêd± mog³y byæ wierzcho³kami 
+szukanej otoczki wypuk³ej. Na rysunku 13.6(b) zaznaczono inny trójk±t, który 
+pozwala wyeliminowaæ ze zbioru dalsze dwa punkty znajduj±ce siê na brzegu lub 
+wewn±trz trójk±ta. Widaæ z tego przyk³adu, ¿e metoda trójk±tów mo¿e byæ bardzo 
+skuteczna, je¶li odpowiednio wybierzemy trójk±ty.&nbsp; </p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber1">
+  <tr>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek13_6a.gif" width="250" height="250"></td>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek13_6b.gif" width="250" height="250"></td>
+  </tr>
+</table>
+<p>
+<br>
+&nbsp;<br>
+<span style="font-weight: bold;">Koszt algorytmu</span><br>
+Je¿eli |Q| = n, to mo¿na utworzyæ co najwy¿ej (n nad 3) ró¿nych trójk±tów. Wynika
+st±d, ¿e pêtla zewnêtrzna algorytmu wykonuje O(n<sup>3</sup>)
+iteracji. Poniewa¿ dla ka¿dego trójk±ta przegl±damy wszystkie
+punkty pozosta³e w zbiorze X, zatem pêtla wewnêtrzna wykonuje siê O(n)
+razy.&nbsp; Sprawdzenie, czy punkty s± wspó³liniowe i sprawdzenie, czy
+punkt znajduje siê wewn±trz danego trójk±ta maj± koszt sta³y (jak
+wynika z rozwa¿añ w drugim punkcie tego wyk³adu). Zatem koszt algorytmu
+trójk±tów mo¿na pesymistycznie oszacowaæ&nbsp; przez O( n<sup>4</sup>).</p>
+<p>Koszt algorytmu trójk±tów nie jest zadowalaj±cy. Na szczê¶cie istniej± inne 
+algorytmy rozwi±zywania problemu otoczki, których koszt jest istotnie lepszy.<br>
+<br>
+</p>
+<p>
+</p>
+<p><b>Pytanie 3:</b> Je¿eli wszystkie punkty zbioru Q, |Q|= n, le¿± na obwodzie 
+pewnego ko³a, to ile trójk±tów trzeba bêdzie zbadaæ, aby znale¼æ otoczkê wypuk³± 
+tego zbioru punktów? <br>
+</p>
+
+
+<form>
+  <p><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+
+ name="Klik0" onclick="napis(this.form,'Wszystkie mo¿liwe, tzn. (n nad 3).');"> </p>
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main13_p2.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main13_p4.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

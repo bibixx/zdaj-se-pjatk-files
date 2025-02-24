@@ -1,0 +1,202 @@
+@CHARSET "UTF-8";
+
+br.clear { clear: both;}
+.highlight		{ background:#e3f1fb; }
+.even			{ background:#fff; }
+.mo				{ background:#e3f1fb; }
+.odd			{ background:#ddd; }
+.zebra th		{ padding-left:5px; height:25px; vertical-align:middle; background:url("../../adds/images/theader.png"); text-align:left; font-weight:normal; color:#222; }
+.zebra td		{ padding:2px 20px 2px 2px; border-bottom:1px solid #ddd; }
+
+form{
+	display:inline;
+}
+
+h1{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:16px;
+	color:#e73800;
+	font-weight:bold;
+	margin:0px;
+	padding-bottom:20px;
+}
+
+body {
+	margin:0px; 
+	padding:0px; 
+	border:0px;
+	background:#fff;
+}f
+
+#container{
+	width:100%;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:left;
+	
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#222222;
+	
+	min-height: 200px;
+	height: auto !important;
+	height: 200px;
+}
+
+
+#contentContainer { 
+	background:#fff;
+	
+	min-height: 300px;
+	height: auto !important;
+	height: 300px;
+}
+
+#header{
+	height:135px;
+	background:url("../../adds/images/logo.png");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-color:#c40f11;
+	/* border-bottom:2px #222 solid; */
+	
+	font-size:26px;
+	color:#fff;
+}
+
+#menuBar{
+	background:url("../../adds/images/belka_gora.png");
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	padding:7px 10px 0px 10px;
+	color: #222;
+	vertical-align:middle;
+	min-height: 27px;
+	height: auto !important;
+	height: 27px;
+	font-size:12px;
+}
+
+#menuBar a{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color: #222;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+#menuBar a:hover{
+	color: #222;
+	text-decoration:underline;
+}
+
+ .rmVertical img.rmLeftImage
+{
+	margin: -2px 0px 0px 0px;
+}
+
+#cont{
+	padding:5px;	
+	min-height: 300px;
+	height: auto !important;
+	height: 300px;
+	margin-left: 193px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+
+#contNoMenu{
+	min-height: 300px;
+	height: auto !important;
+	height: 300px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+
+#footer{
+	background:url("../../adds/images/belka_dol.png");
+	min-height: 33px;
+	height: auto !important;
+	height: 10px;
+	padding:9px;
+	
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+	text-align: center;
+}
+
+#contLogout
+{
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	text-align: center;
+}
+
+.loginWindow {
+    width: 350px ;
+    margin-left:auto;
+    margin-right:auto;
+    padding:100px 0px 100px 0px;
+    
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+.info{
+	width: 97%;
+	padding: 10px;
+	background: #f6f9ed;
+	border:1px #BCEE68 solid;
+	text-align:center;
+	font-weight: bold;
+	
+	margin-bottom: 20px;
+}
+
+.infoInTable{
+	padding: 10px;
+	text-align:center;
+	font-weight: bold;
+	background:#e3f1fb;
+	width: 100%
+}
+
+.lblValidator
+{
+	font-weight:bold;
+	font-size:12px;
+	color:#ff0000;
+}
+
+.radEditor
+{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8px;
+}
+
+.login_form
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.Standard
+{
+     font-family: Verdana, Arial, Helvetica, sans-serif;
+     font-size:12px;
+}
+
+.login_form
+{
+     font-family: Verdana, Arial, Helvetica, sans-serif;
+     font-size:12px;
+}
+
+.telerikCheckBox
+{
+     text-align:left !important;
+    font-family:Verdana, Arial, Helvetica, sans-serif !important;
+    font-size:12px !important;
+    color:#222222 !important;
+    direction: rtl;
+}

@@ -1,0 +1,391 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body style="background-color: whitesmoke;" leftmargin="8" topmargin="8"
+ marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"--><!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr--><!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main13_p4.html" target="main"
+ class="NAWIGACJA"> &#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main13_cw.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 5"></a><br clear="all">
+<div class="tytulpunktu">5. Algorytm Jarvisa<br>
+</div>
+<br>
+<div style="text-align: justify;">Metoda u¿yta w algorytmie Jarwisa
+jest zupe³nie inna ni¿ metoda Grahama. Wyobra¼my sobie kartkê papieru,
+której róg przyk³adamy najpierw w najni¿ej po³o¿onym punkcie zbioru Q,
+a nastêpnie obracamy wzglêdem tego punktu, w kierunku przeciwnym
+do&nbsp; ruchu wskazówek zegara tak d³ugo,&nbsp; a¿ brzeg kartki
+napotka jakim¶ inny punkt zbioru Q. Ten w³a¶nie punkt przyjmujemy za
+nastêpny wierzcho³ek szukanej otoczki. Teraz przyk³adamy kartkê w nowym
+punkcie i znów obracamy&nbsp; j± wzglêdem tego punktu, tak d³ugo a¿
+spotkamy nastêpny punkt zbioru itd. Takie postêpowanie&nbsp; przypomina
+owijanie&nbsp; zbioru punktów paskiem papieru lub sznurkiem i st±d jego
+angielska nazwa package wrapping.<br>
+</div>
+<p style="text-align: justify;">Zauwa¿my jeszcze, ¿e je¶li pocz±tek
+uk³adu wspó³rzêdnych umie¶cimy w punkcie p, wybranym zgodnie z opisan±
+zasad±, to nastêpny "wykryty" metod± obracania kartki papieru, punkt,
+to ten punkt q zbioru Q, dla którego k±t jaki tworzy wektor <span
+ style="text-decoration: underline;">pq</span> z dodatnim kierunkiem
+osi X&nbsp; jest najmniejszy, tzn. dla którego k±t biegunowy ze wzglêdu
+na p jest najmniejszy licz±c od dodatniej pó³osi OX.&nbsp;&nbsp; Je¶li
+jednak osi±gniemy punkt po³o¿ony najwy¿ej w zbiorze Q, to nastêpny
+wybrany punkt to ten o najmniejszej wspó³rzêdnej k±towej w biegunowym
+uk³adzie wspó³rzêdnych,&nbsp; licz±c od ujemnej pó³osi OX.<br>
+</p>
+<p style="text-align: justify;">Na rysunku 13.10&nbsp; zaznaczono
+wybrane punkty i k±ty, które badamy. Punkt p[1] jest nastêpnym wybranym
+po punkcie p[0], bo k±t jaki tworzy dodatni kierunek osi OX z wektorem
+<span style="text-decoration: underline;">p[0]p[1]</span> jest
+najmniejszy&nbsp; (kartkê obracamy w lewo). Podobnie dla
+punktów p[2] i p[m]. Punkt p[m] jest najwy¿ej po³o¿onym punktem.
+Umie¶æmy pocz±tek uk³adu w tym punkcie i przy³ó¿my kartkê w punkcie
+q[0]=p[m], tak, by jej brzeg pokrywa³ siê z ujemnym kierunkiem osi OX.
+Obracamy kartkê w dó³ w prawo. Znaleziony punkt q[1] tworzy najmniejszy
+k±t biegunowy z ujemn± pó³osi± OX.</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="30%" id="AutoNumber1">
+  <tr>
+    <td width="100%"><span style="position: relative">
+    <img border="0" src="Rysunki/Rysunek13_10.gif" width="266" height="250"></span></td>
+  </tr>
+</table>
+<p style="text-align: justify;"><br>
+</p>
+<p style="text-align: justify;">W algorytmie Jarvisa, podobnie jak w algorytmie 
+Grahama, nie musimy liczyæ k±tów. Wystarczy umieæ je porównywaæ.&nbsp; Zgodnie z 
+tym co by³o powiedziane w punkcie drugim tego wyk³adu, wymaga to obliczenia 
+iloczynu wektorowego, a dok³adniej zbadania
+znaku pewnego wyznacznika.<br>
+</p>
+<p><span style="font-weight: bold;">Szkic algorytmu Jarvisa</span><br>
+<br>
+Krok 1.<b> </b>Znale¼æ punkty p[0], q[0] : p[0] o najmniejszej, a
+q[0] o najwiêkszej
+wspó³rzêdnej y: <br>
+p[0].y = min {p.y : p <font face="Symbol"> Î</font> Q};&nbsp; q[0].y =
+max{p.y : p <font face="Symbol"> Î</font> Q}.</p>
+<p>Krok 2. Konstruujemy dwa ci±gi&nbsp; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - lewy ci±g :
+p[0],..., p[m] i<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - prawy ci±g :q[0],...
+,q[l],<br>
+takie ¿e p[m] =q[0], q[l] = p[0] oraz<br>
+p[i+1] jest tym punktem zbioru Q, który ma najmniejszy k±t biegunowy ze
+wzglêdu na p[i], licz±c od dodatniej pó³osi OX w lewo,<br>
+q[i+1] jest tym punktem zbioru Q, który ma najmniejszy k±t biegunowy ze
+wzglêdu na p[i], licz±c od ujemnej pó³osi OX w prawo.<br>
+</p>
+<p>Zbiór punktów p[0],...,p[m], q[1],...., q[l-1] jest ci±giem
+wierzcho³ków otoczki wypuk³ej w porz±dku&nbsp; ich wystêpowania na
+obwodzie wielok±ta, w kierunku przeciwnym do ruchu wskazówek zegara.<br>
+<br>
+</p>
+<p><b>Koszt algorytmu Jarvisa</b></p>
+<p>Niech k bêdzie liczb± wierzcho³ków szukanej otoczki wypuk³ej&nbsp;
+zbioru n punktów Q. Ka¿dy krok pêtli znajduj±cej kolejne punkty ci±gu
+lewego i prawego kosztuje O(n) (szukamy minimum k±ta biegunowego w n
+elementowym zbiorze).&nbsp; Zatem ostatecznie koszt ocenimy na O(nk).<b>&nbsp;</b></p>
+<div style="text-align: justify;"><br>
+</div>
+<div class="lemat">Lemat 5.1 Algorytm Jarvisa poprawnie rozwi±zuje
+problem znajdowania otoczki wypuk³ej danego skoñczonego zbioru punktów
+na p³aszczy¼nie. <br>
+</div>
+<p style="text-align: justify;"><span style="font-weight: bold;">Przyk³ad
+5.1<br>
+</span>Rozwa¿my zbiór punktów przedstawiony na rysunku 13.11(a). W
+tabeli obok zaznaczono kolorem czerwonym punkty wybrane w kolejnych
+krokach algorytmu (dla których k±t biegunowy by³ aktualnie
+najmniejszy). Punktem pocz±tkowym jest B, gdy¿&nbsp; jego wspó³rzêdna y
+ma najmniejsz± warto¶æ. Wybrane punkty s± wstawiane na kolejne
+pocz±tkowe pozycje tablicy punktów podobnie, jak to siê dzieje w
+algorytmie SelectionSort. Je¶li znaleziony punkt jest identyczny z
+punktem pocz±tkowym, to proces tworzenia otoczki jest zakoñczony.<br>
+</p>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 60%;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <img border="0" src="Rysunki/Rysunek13_11a.gif" width="250" height="250"><br>
+      </td>
+      <td style="vertical-align: top;">
+      <table style="text-align: left; width: 100%;" border="1"
+ cellspacing="2" cellpadding="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;">A<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="color: rgb(255, 102, 102);">B</span><br>
+            </td>
+            <td style="vertical-align: top;">C</td>
+            <td style="vertical-align: top;">D<br>
+            </td>
+            <td style="vertical-align: top;">E<br>
+            </td>
+            <td style="vertical-align: top;">F<br>
+            </td>
+            <td style="vertical-align: top;">G<br>
+            </td>
+            <td style="vertical-align: top;">H<br>
+            </td>
+            <td style="vertical-align: top;">I<br>
+            </td>
+            <td style="vertical-align: top;">J<br>
+            </td>
+            <td style="vertical-align: top;">K<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">B<br>
+            </td>
+            <td style="vertical-align: top;">A<br>
+            </td>
+            <td style="vertical-align: top;">C<br>
+            </td>
+            <td style="vertical-align: top;">D<br>
+            </td>
+            <td style="vertical-align: top;">E<br>
+            </td>
+            <td style="vertical-align: top;">F<br>
+            </td>
+            <td style="vertical-align: top;">G<br>
+            </td>
+            <td style="vertical-align: top;">H<br>
+            </td>
+            <td style="vertical-align: top;">I<br>
+            </td>
+            <td style="vertical-align: top;">J<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="color: rgb(255, 0, 0);">K</span><br>
+            </td>
+            <td style="vertical-align: top;">B<br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">B<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">K<br>
+            </td>
+            <td style="vertical-align: top;">C<br>
+            </td>
+            <td style="vertical-align: top;">D<br>
+            </td>
+            <td style="vertical-align: top;">E<br>
+            </td>
+            <td style="vertical-align: top;">F<br>
+            </td>
+            <td style="vertical-align: top;">G<br>
+            </td>
+            <td style="vertical-align: top;">H<br>
+            </td>
+            <td style="vertical-align: top;">I<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="color: rgb(255, 102, 102);">J</span><br>
+            </td>
+            <td style="vertical-align: top;">A<br>
+            </td>
+            <td style="vertical-align: top;">B<br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">B<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">K<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">J<br>
+            </td>
+            <td style="vertical-align: top;">D<br>
+            </td>
+            <td style="vertical-align: top;">E<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="color: rgb(255, 102, 102);">F</span><br>
+            </td>
+            <td style="vertical-align: top;">G<br>
+            </td>
+            <td style="vertical-align: top;">H<br>
+            </td>
+            <td style="vertical-align: top;">I<br>
+            </td>
+            <td style="vertical-align: top;">C<br>
+            </td>
+            <td style="vertical-align: top;">A<br>
+            </td>
+            <td style="vertical-align: top;">B<br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">B<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">K<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">J<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">F<br>
+            </td>
+            <td style="vertical-align: top;">E<br>
+            </td>
+            <td style="vertical-align: top;">D<br>
+            </td>
+            <td style="vertical-align: top;">G<br>
+            </td>
+            <td style="vertical-align: top;">H<br>
+            </td>
+            <td style="vertical-align: top;">I<br>
+            </td>
+            <td style="vertical-align: top;">C<br>
+            </td>
+            <td style="vertical-align: top;"><span
+ style="color: rgb(255, 102, 102);">A</span><br>
+            </td>
+            <td style="vertical-align: top;">B<br>
+            </td>
+          </tr>
+          <tr>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">B<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">K<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">J<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">F<br>
+            </td>
+            <td
+ style="vertical-align: top; background-color: rgb(255, 204, 255);">A<br>
+            </td>
+            <td style="vertical-align: top;">D<br>
+            </td>
+            <td style="vertical-align: top;">G<br>
+            </td>
+            <td style="vertical-align: top;">H<br>
+            </td>
+            <td style="vertical-align: top;">I<br>
+            </td>
+            <td style="vertical-align: top;">C<br>
+            </td>
+            <td style="vertical-align: top;">E<br>
+            </td>
+            <td style="vertical-align: top;">B<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;" rowspan="1" colspan="7">Rysunek
+13.11(b)<br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+            <td style="vertical-align: top;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="text-align: justify;"><span style="font-weight: bold;">Uwaga</span>
+Eddy i Floyd zaproponowali, by proces konstrukcji otoczki wypuk³ej
+(dowolnym algorytmem) zawsze rozpoczynaæ od usuniêcia wszystkich
+punktów le¿±cych wewn±trz czworok±ta&nbsp; zbudowanego z punktów
+ekstremalnych: p1- o najmniejszej wspó³rzêdnej x, p2 - o najmniejszej
+wspó³rzêdnej y, p3 - o najwiêkszej wspó³rzêdnej x i p4 - o najwiêkszej
+wspó³rzêdnej y. Jest do¶æ du¿a szansa, ¿e w tym pierwszym kroku
+usuniemy z dalszych rozwa¿añ znaczn± liczbê niepotrzebnych punktów.
+</p>
+<p><b>Pytanie 5</b>:&nbsp; Jaki jest w najgorszym przypadku koszt algorytmu Jarvisa 
+zastosowanego do zbioru n punktów ?&nbsp;<br>
+</p>
+<!-- <p>Odpowied¼: 2</P> -->
+<form><b><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0" onclick="napis(this.form,'Kwadratowy, O(n*n).')"> <br clear="all">
+  </b>
+</form>
+<BR>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td align="left"><a href="main13_p4.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+        <td align="right">&nbsp;<a href="main13_cw.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+      </tr>
+    </tbody>
+  </table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

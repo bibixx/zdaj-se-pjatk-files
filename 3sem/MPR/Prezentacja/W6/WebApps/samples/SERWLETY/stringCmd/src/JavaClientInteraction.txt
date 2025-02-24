@@ -1,0 +1,73 @@
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+public class Test extends HttpServlet {
+
+  /*ServletContext context1, context2;
+
+  public Test() {
+    try {
+     context1 = getServletContext();
+    } catch (Exception exc) {
+    }
+  }
+
+  public void init() {
+    context2 = getServletContext();
+  }
+  */
+
+  public void doGet(HttpServletRequest request,
+                       HttpServletResponse response)
+                 throws ServletException, IOException
+  {
+    /*  PrintWriter out = response.getWriter();
+      out.println("context1 (w konstruktorze) = " + context1);
+      out.println("context2 (w init)          = " + context2);
+      out.println("context3 (w doGet)         = " + getServletContext());
+      out.close();
+      */
+      doPost(request, response);
+  }
+
+  public void doPost(HttpServletRequest request,
+                       HttpServletResponse response)
+                 throws ServletException, IOException
+  {
+    int len = request.getContentLength();
+
+    String charset = request.getHeader("content-encoding");
+    if (charset == null) charset = "UTF-8";
+    BufferedReader br = new BufferedReader (
+                              new InputStreamReader(
+                                 request.getInputStream(), charset)
+                        );
+
+    response.setCharacterEncoding(charset);
+    /*PrintWriter out = new PrintWriter(
+        new OutputStreamWriter(response.getOutputStream(), charset),
+        true);
+     */
+    PrintWriter out = response.getWriter();
+    out.println(URLEncoder.encode("D³ugoœæ danych: " + len, charset));
+    out.println("Headers");
+    Enumeration e = request.getHeaderNames();
+    while (e.hasMoreElements()) {
+        String headerName = (String)e.nextElement();
+        String headerValue = request.getHeader(headerName);
+        out.println(headerName + ":   " + headerValue);
+    }
+
+
+    String line;
+    while((line = br.readLine()) != null) {
+      out.println(line);
+    }
+    br.close();
+    out.close();
+  }
+
+}

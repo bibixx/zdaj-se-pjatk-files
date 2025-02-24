@@ -1,0 +1,78 @@
+CREATE TRIGGER Sprawdzenie_zarobków
+BEFORE INSERT OR UPDATE OF Zarobki, Stanowisko
+ON Pracownicy
+FOR EACH ROW
+DECLARE
+	minimum NUMBER;
+	maksimum NUMBER;
+BEGIN
+	/* Znalezienie zakresu zarobków na danym stanowisko */
+	SELECT Min_zar, Mak_zar INTO minimum, maksimum
+	FROM Wide³ki
+	WHERE Stanowisko = :NEW.Stanowisko;
+	/* Jeœli zarobki spoza zakresu, generuj b³¹d */
+IF :NEW.Zarobki <Minimum OR :NEW.Zarobki >Maksimum THEN
+Raise_application_error(-20500,'Zarobki=' ||:NEW.Zarobki|| 'spoza zakresu');
+	END IF;
+END;	/* Koniec wyzwalacza */
+-----------------------------------
+CREATE TRIGGER Bud¿et_dzia³u
+AFTER DELETE OR INSERT OR UPDATE OF Zarobki, Num_dzia³u
+ON Pracownicy
+FOR EACH ROW
+BEGIN 
+/* Zak³adamy, ¿e Zarobki, Num_dzia³u nie s¹  NULL */
+	IF DELETING OR
+	  (UPDATING AND :OLD.Num_dzia³u <> :NEW.Num_dzia³u) THEN
+UPDATE Bud¿et
+		SET Fund_p³ac = Fund_p³ac - :OLD.Zarobki
+WHERE Id_dzia³u = :OLD.Num_dzia³u;
+	END IF;
+IF INSERTING OR
+(UPDATING AND :OLD.Num_dzia³u <> :NEW.Num_dzia³u) THEN
+UPDATE Bud¿et
+		SET Fund_p³ac = Fund_p³ac + :NEW.Zarobki
+WHERE Id_dzia³u = :NEW.Num_dzia³u;
+	END IF;
+	IF UPDATING AND
+	  (:OLD.Num_dzia³u = :NEW.Num_dzia³u)  AND 
+(:OLD.Zarobki <> :NEW.Zarobki)  THEN
+       UPDATE Bud¿et
+       SET Fund_p³ac=Fund_p³ac-:OLD.Zarobki+:NEW.Zarobki
+    WHERE Id_dzia³u = :OLD.Num_dzia³u;
+	END IF;
+END;
+---------------------------------------------
+CREATE TRIGGER GenerujIdPracccc
+BEFORE INSERT ON emp
+FOR EACH ROW
+BEGIN
+	SELECT NVL(MAX(empno)+1,1)
+	INTO :NEW.empno
+	FROM emp;
+END;
+--------------------------------------------
+CREATE TRIGGER Ustaw_null_dept
+AFTER DELETE OR UPDATE OF Deptno ON Dept
+FOR EACH ROW
+BEGIN
+IF UPDATING AND :OLD.Deptno <> :NEW.Deptno OR DELETING THEN 
+		UPDATE Emp 
+SET Emp.Deptno = NULL
+		WHERE Emp.Deptno = :OLD.Deptno;
+	END IF;
+END;
+----------------------------------------
+
+Wyzwalacz bazy danych mo¿e byæ w³¹czany i wy³¹czany za pomoc¹ instrukcji:
+ALTER TRIGGER wyzwalacz {ENABLE|DISABLE};
+Wyzwalacz mo¿e zostaæ usuniêty za pomoc¹ instrukcji:
+DROP TRIGGER wyzwalacz;
+Informacje o wyzwalaczach znajduj¹ siê w perspektywie s³ownika danych User_triggers. Aby je obejrzeæ piszemy (nazwê wyzwalacza du¿ymi literami):
+SELECT Trigger_type, Table_name, Triggering_event
+FROM User_triggers
+WHERE Trigger_name = ‘wyzwalacz’;
+lub
+SELECT Trigger_body FROM User_triggers
+	WHERE Trigger_name = ‘wyzwalacz’;
+

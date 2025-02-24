@@ -1,0 +1,248 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<link rel="stylesheet" type="text/css" href="pliki/main.css">
+<title>05 - Warstwa transportowa</title>
+</head>
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+<table border="0" cellpadding="5" cellspacing="5" height="100%" width="100%">
+<tbody><tr heigh="100%"><td bgcolor="#e6f0eb" valign="top" width="25%"><br>
+        <a class="menulink" href="01%20-%20Cwiczenia%20Linux%20Knoppix.html" onfocus="blur();" title="Ćwiczenia Linux/Knoppix" onmouseover="window.status='Ćwiczenia Linux/Knoppix'; return true;" onmouseout="window.status=''; ">
+	1. Ćwiczenia Linux/Knoppix</a><br>
+	<br>
+	<a class="menulink" href="02%20-%20Skaner%20sieci%20-%20Ethereal.html" onfocus="blur();" title="Skaner sieci - Ethereal" onmouseover="window.status='Skaner sieci - Ethereal'; return true;" onmouseout="window.status=''; ">
+	2. Skaner sieci - Ethereal</a><br>
+	<br>
+	<a class="menulink" href="03%20-%20Automaty%20skonczone.html" onfocus="blur();" title="Automaty skończone" onmouseover="window.status='Automaty skończone'; return true;" onmouseout="window.status=''; ">
+	3. Automaty skończone</a><br>
+	<br>
+	<a class="menulink" href="04%20-%20SMTP,%20POP3,%20HTTP%20kontynuacja.html" onfocus="blur();" title="SMTP, POP3, HTTP kontynuacja" onmouseover="window.status='SMTP, POP3, HTTP kontynuacja'; return true;" onmouseout="window.status=''; ">
+	4. SMTP, POP3, HTTP kontynuacja</a><br>
+	<br>
+	<a class="menulink" href="05%20-%20Warstwa%20transportowa.html" onfocus="blur();" title="Warstwa tranportowa" onmouseover="window.status='Warstwa tranportowa'; return true;" onmouseout="window.status=''; ">
+	<b>5. Warstwa tranportowa</b></a><br>
+	<br>
+	<a class="menulink" href="07%20-%20Protokoly%20rutingu.html" onfocus="blur();" title="Protokoły rutingu" onmouseover="window.status='Protokoły rutingu'; return true;" onmouseout="window.status=''; ">
+	7. Protokoły rutingu</a><br>
+	<br>
+	<a class="menulink" href="08%20-%20Warstwa%20sieci.html" onfocus="blur();" title="Warstwa sieci" onmouseover="window.status='Warstwa sieci'; return true;" onmouseout="window.status=''; ">
+	8. Warstwa sieci</a><br>
+	<br>
+	<a class="menulink" href="09%20-%20Powtorzenie%20materialu.html" onfocus="blur();" title="Powtórzenie materiału" onmouseover="window.status='Powtórzenie materiału'; return true;" onmouseout="window.status=''; ">
+	9.  Powtórzenie materiału</a><br>
+        <br>
+        <a class="menulink" href="javascript:window.close();" onfocus="blur();" onmouseover="window.status='Wyjście'; return true;" onmouseout="window.status=''; ">
+        Wyjście</a></td>
+<td bgcolor="whitesmoke" valign="top"><form name="f" method="post" action="eld.asp?id=49&amp;sid=131&amp;z=1"><p></p><h4>Ćwiczenia - warstwa transportowa</h4><p></p><p></p><h4>Zadanie 1</h4><p></p><p></p><p>Serwer www (np. apache) odbiera segment TCP w postaci:</p><p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><table border="1" bordercolor="#000000" cellpadding="4" cellspacing="0" width="100%"><tbody><tr><td colspan="2" align="center"><b>IP</b></td></tr><tr><td>Źródło: 80.55.40.30</td><td>Cel: 148.81.141.19</td></tr><tr><td colspan="2" align="center">Inne pola IP</td></tr><tr><td colspan="2" align="center"><b>TCP</b></td></tr><tr><td>Źródło: 2034</td><td>Cel: 80</td></tr><tr><td>Flaga: SYN</td><td><p><br></p></td></tr><tr><td colspan="2" align="center">Inne pola TCP</td></tr><tr><td colspan="2" align="center">Dane</td></tr></tbody></table></p><p>
+	Uzupełnij
+poniższą tabelkę, która będzie odpowiedzią serwera. Napisz, co według
+Ciebie jest w polu danych w pierwszym i drugim segmencie.</p>
+	<table border="1" width="100%" bordercolor="#000000" cellspacing="0" cellpadding="4">
+		<tr>
+			<td width="50%">Źródło: <font face="Verdana" color="#000080">148.81.141.19</font></td>
+			<td width="50%">Cel: <font face="Verdana" color="#000080">80.55.40.30</font></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<p align="center" style="text-align: center">Inne pola IP</td>
+		</tr>
+		<tr>
+			<td width="50%">Źródło: <font face="Verdana" color="#000080">80</font></td>
+			<td width="50%">Cel: <font face="Verdana" color="#000080">2034</font></td>
+		</tr>
+		<tr>
+			<td width="50%">Flaga: <font face="Verdana" color="#000080">SYN, ACK</font></td>
+			<td width="50%">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<p align="center" style="text-align: center">Inne pola TCP</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<p align="center" style="text-align: center">Dane</td>
+		</tr>
+	</table>
+	<p></p><p></p><h4>Zadanie 2</h4><p></p><p></p><p>Wypisz co najmniej 4 protokoły warstwy aplikacji, które korzystają z UDP i 4 które korzystają z TCP.</p>
+	<table border="1" width="100%" cellspacing="0" cellpadding="4" bordercolor="#000000">
+		<tr>
+			<td width="50%">
+			<p align="center" style="text-align: center"><i><b>UDP</b></i></td>
+			<td width="50%">
+			<p align="center" style="text-align: center"><i><b>TCP</b></i></td>
+		</tr>
+		<tr>
+			<td width="50%"><font face="Verdana" color="#000080">DNS, NFS</font></td>
+			<td width="50%"><font face="Verdana" color="#000080">HTTP</font></td>
+		</tr>
+		<tr>
+			<td width="50%"><font face="Verdana" color="#000080">RTP</font></td>
+			<td width="50%"><font face="Verdana" color="#000080">FTP, telnet</font></td>
+		</tr>
+		<tr>
+			<td width="50%"><font face="Verdana" color="#000080">RIP</font></td>
+			<td width="50%"><font face="Verdana" color="#000080">SMTP, POP3</font></td>
+		</tr>
+		<tr>
+			<td width="50%"><font face="Verdana" color="#000080">Real Audio</font></td>
+			<td width="50%"><font face="Verdana" color="#000080">IMAP</font></td>
+		</tr>
+	</table>
+	<p></p><p>Czy
+wszystkie wypisane protokoły korzystające z UDP, zawsze z niego
+korzystają, czy zdarzają się sytuacje, kiedy UDP jest zastępowane prze
+TCP, jeśli tak, to w jakich sytuacjach?</p><p></p><p></p><h4>Zadanie 3</h4><p></p><p></p><p>Uzupełnij tabelę:</p><p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><table border="1" bordercolor="#000000" cellpadding="4" cellspacing="0" width="100%"><tbody><tr>
+		<td width="72"><b>Flaga</b></td><td><b>Opis</b></td></tr><tr>
+			<td width="72"><p><font face="Verdana" color="#000080">URG</font><br></p></td><td>Ta flaga wskazuje, że dane są ważne.</td></tr><tr>
+			<td width="72">ACK</td><td><p><font face="Verdana" color="#000080">
+			Potwierdzenie.</font><br></p></td></tr><tr><td width="72">PSH</td><td><p>
+			<font face="Verdana" color="#000080">Natychmiastowe dostarczenie do 
+			wyższej warstwy.</font></p></td></tr><tr><td width="72">RST</td><td><p>
+			<font face="Verdana" color="#000080">Zerowanie. Resetuje połączenie, 
+			gdy wystąpi niemożliwy do naprawy błąd.</font></p></td></tr><tr>
+			<td width="72"><p><font face="Verdana" color="#808080">ACK,</font>
+			<font face="Verdana" color="#000080">SYN</font><br></p></td><td>Ta flaga wskazuje chęć nawiązania połączenia i ustawienia numeru sekwencyjnego.</td></tr><tr>
+			<td width="72"><p><font face="Verdana" color="#000080">FIN</font><br></p></td><td>Ta flaga wskazuje chęć zakończenia połączenia.</td></tr></tbody></table></p><p></p><p></p><h4>Zadanie 4</h4><p></p><p>Załóżmy,
+że host A wysyła do serwera &#8222;echo&#8221;
+	<font face="Verdana" color="#808080">10.2.2.6 port 7</font> (7/TCP) literę Q, w odpowiedzi
+dostaje tą samą literę. Następnie host A kończy połączenie. Przedstaw
+wszystkie segmenty, które zostaną wysłane i odebrane przez hosta A,
+zakładając, że: </p><p></p><p>Port źródłowy = 1030</p><p></p><p>Startowy numer sekwencyjny dla hosta A to: 44</p><p></p><p>Startowy numer sekwencyjny dla serwera &#8222;echo&#8221; to: 77</p><p></p><p>Zakładamy że żaden segment nie zginie, ani nie zostanie uszkodzony.</p><p></p><p>Jako pomoc możesz wykorzystać ethereala.</p><p></p><p>Edytuj plik /etc/xined.d/echo i zamień linie disable = yes na disable = no i zrestaruj usługę xinetd poleceniem:</p><p></p><p>/etc/init.d/xinetd restart</p><p></p><p>Następnie
+odpal ethereala i połącz się telnetem na port 7 do komputera obok.
+Wyślij jeden znak i zakończ połączenie naciskając kombinację klawiszy
+Ctrl-] i wpisz quit. Zatrzymaj ethereala i przefiltruj dane po tcp.</p><p></p><p></p><p><p>	</p><p>	</p><p>	</p><p>	</p><p>	</p><p>	</p><p>	</p><p>	</p><p>		</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>		</p><p>	</p><p>	</p><p>		</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>		</p><p>		</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>		</p><p>		</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>		</p><p>		</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>		</p><p>		</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>		</p><p>		</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>		</p><p>		</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>		</p><p>		</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>		</p><p>		</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>		</p><p>		</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>			</p><p>		</p><p>	</p><p></p><table style="page-break-inside: avoid;" border="1" bordercolor="#000000" cellpadding="4" cellspacing="0" width="100%"><col width="37*"><col width="41*"><col width="42*"><col width="29*"><col width="28*"><col width="41*"><col width="37*"><thead><tr valign="top">
+		<th width="14%" align="left"><p>Kierunek</p></th>
+		<th width="16%" align="left"><p>Port źródłowy</p></th>
+		<th width="16%" align="left"><p>Port docelowy</p></th>
+		<th width="11%" align="left"><p>Seq</p></th>
+		<th width="11%" align="left"><p>ACK</p></th>
+		<th width="16%" align="left"><p>Flagi</p></th>
+		<th width="14%" align="left"><p>Dane</p></th></tr></thead><tbody><tr valign="top">
+			<td width="14%" align="left"><p>Do serwera</p></td>
+			<td width="16%" align="left"><p>
+			<font face="Verdana" color="#000080">1030</font></p></td>
+			<td width="16%" align="left">
+			<p>7</p></td>
+			<td width="11%" align="left"><p>
+			<font face="Verdana" color="#000080">44</font></p></td>
+			<td width="11%" align="left"><p>
+			<font face="Verdana" color="#000080">0</font></p></td>
+			<td width="16%" align="left"><p>syn</p></td>
+			<td width="14%" align="left"><p>&nbsp;</p></td></tr><tr valign="top">
+				<td width="14%" align="left"><p>Do hosta A</p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">7</font></p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">1030</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">77</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">45</font></p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">syn, ack</font></p></td>
+				<td width="14%" align="left"><p>&nbsp;</p></td></tr><tr valign="top">
+				<td width="14%" align="left"><p>Do serwera</p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">1030</font></p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">7</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">45</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">78</font></p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">ack</font></p></td>
+				<td width="14%" align="left"><p>&nbsp;</p></td></tr><tr valign="top">
+				<td width="14%" align="left"><p>Do serwera</p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">1030</font></p></td>
+				<td width="16%" align="left"><p>7</p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">45</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">78</font></p></td>
+				<td width="16%" align="left"><p>psh,ack</p></td>
+				<td width="14%" align="left"><p>
+				<font face="Verdana" color="#000080">Q</font></p></td></tr><tr valign="top">
+				<td width="14%" align="left"><p>Do hosta A</p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">7</font></p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">1030</font></p></td>
+				<td width="11%" align="left"><p>			
+				<font face="Verdana" color="#000080">78</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">46</font></p></td>
+				<td width="16%" align="left"><p>ack</p></td>
+				<td width="14%" align="left"><p>&nbsp;</p></td></tr><tr valign="top">
+				<td width="14%" align="left"><p>Do hosta A</p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">7</font></p></td>
+				<td width="16%" align="left"><p>			
+				<font face="Verdana" color="#000080">1030</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">78</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">46</font></p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">psh,ack</font></p></td>
+				<td width="14%" align="left"><p>Q</p></td></tr><tr valign="top">
+				<td width="14%" align="left"><p>Do 
+				serwera</p></td><td width="16%" align="left"><p>			
+				<font face="Verdana" color="#000080">1030</font></p></td>
+				<td width="16%" align="left"><p>			
+				<font face="Verdana" color="#000080">7</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">46</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">79</font></p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">ack</font></p></td>
+				<td width="14%" align="left"><p>&nbsp;</p></td></tr><tr valign="top">
+				<td width="14%" align="left"><p>Do serwera</p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">1030</font></p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">7</font></p></td>
+				<td width="11%" align="left"><p>			
+				<font face="Verdana" color="#000080">46</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">79</font></p></td>
+				<td width="16%" align="left"><p>fin,ack</p></td>
+				<td width="14%" align="left"><p>&nbsp;</p></td></tr><tr valign="top">
+				<td width="14%" align="left"><p>Do hosta A</p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">7</font></p></td>
+				<td width="16%" align="left"><p>1030</p></td>
+				<td width="11%" align="left"><p>			
+				<font face="Verdana" color="#000080">79</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">47</font></p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">fin,ack</font></p></td>
+				<td width="14%" align="left"><p>&nbsp;</p></td></tr><tr valign="top">
+				<td width="14%" align="left"><p>Do serwera</p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">1030</font></p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">7</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">47</font></p></td>
+				<td width="11%" align="left"><p>
+				<font face="Verdana" color="#000080">80</font></p></td>
+				<td width="16%" align="left"><p>
+				<font face="Verdana" color="#000080">ack</font></p></td>
+				<td width="14%" align="left"><p>&nbsp;</p></td></tr></tbody></table></p><p></p><p></p><h4>Zadanie 5</h4><p></p><p>
+Klient próbuje połączyć się na serwer na port 80 przez protokół TCP, jaką 
+dostanie odpowiedź, jeśli tam nie działa żaden serwer który nasłuchuje na 
+porcie 80?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+<font face="Verdana" color="#000080">RST, ACK</font></p><p></p><p>Klient wysyła segment UDP na port 53, ale nie ma tam żadnej usługi działającej na tym porcie, jaką odpowiedź dostaje?</p><p></p><p>
+Jeśli nie znasz odpowiedzi, możesz użyć ethereala. Pomocne aplikacje: telnet 
+(TCP), dig (udp)&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+<font face="Verdana" color="#000080">ICMP Port unavailable</font></p>
+<p></p><p></p><p></p><h4>Zadanie 6</h4><p></p><p></p><p>Uzupełnij diagram stanów, dla klienta i dla serwera:</p><p>klient</p><p><img src="pliki/05_01a.gif"></p><p>serwer</p><p><img src="pliki/05_02a.gif"></p><p></p><h4>Zadanie 7</h4><p></p><p></p><p>Przedstaw
+transmisje TCP w której okno zwiększa się do 3 segmentów. Załóżmy, że
+okno na początku jest wielkości jednego segmentu, następnym razem,
+dwóch, potem trzech, a po nich zakończenie transmisji.</p><p> </p><p><img src="pliki/05_03a.gif"></p></form></td></tr></tbody></table></body></html>

@@ -1,0 +1,25 @@
+1. Dla pracowników z dzialu 10 i 20 wypisac: zlaczone w jedna kolumne numer i
+nazwisko, numer dzialu, oraz w kolejnej kolumnie kwartalne dochody (suma pensji i
+prowizji). Kolumny zatytulowac Pracownik, Nr Dzialu, Wyplata
+
+SELECT empno||' '||ename||' '||job "Pracownik", sal "Wyplata", deptno "Nr Dzialu"
+FROM emp
+WHERE deptno IN (10,20);
+
+
+2. DISTINCT nie dziala w tym zadaniu
+
+SELECT DISTINCT job Stanowisko, sal "Osiagalna pensja"
+FROM emp
+WHERE job != 'PRESIDENT';
+ORDER BY deptno, sal DESC;
+
+SELECT job Stanowisko, sal "Osiagalna pensja"
+FROM emp
+WHERE job != 'PRESIDENT';
+ORDER BY deptno, sal DESC;
+
+3.
+SELECT DISTINCT 'W dziale nr'||' '||deptno||' jest pracownik, który zarabia '|| sal "Pensja wyplacana w dziale"
+FROM emp 
+WHERE sal BETWEEN 1000 AND 3200;

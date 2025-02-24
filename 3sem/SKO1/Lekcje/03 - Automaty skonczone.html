@@ -1,0 +1,180 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<link rel="stylesheet" type="text/css" href="pliki/main.css">
+<title>03 - Automaty skończone</title>
+</head>
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+<table border="0" cellpadding="5" cellspacing="5" height="100%" width="100%">
+<tbody><tr heigh="100%"><td bgcolor="#e6f0eb" valign="top" width="25%"><br>
+        <a class="menulink" href="01%20-%20Cwiczenia%20Linux%20Knoppix.html" onfocus="blur();" title="Ćwiczenia Linux/Knoppix" onmouseover="window.status='Ćwiczenia Linux/Knoppix'; return true;" onmouseout="window.status=''; ">
+	1. Ćwiczenia Linux/Knoppix</a><br>
+	<br>
+	<a class="menulink" href="02%20-%20Skaner%20sieci%20-%20Ethereal.html" onfocus="blur();" title="Skaner sieci - Ethereal" onmouseover="window.status='Skaner sieci - Ethereal'; return true;" onmouseout="window.status=''; ">
+	2. Skaner sieci - Ethereal</a><br>
+	<br>
+	<a class="menulink" href="03%20-%20Automaty%20skonczone.html" onfocus="blur();" title="Automaty skończone" onmouseover="window.status='Automaty skończone'; return true;" onmouseout="window.status=''; ">
+	<b>3. Automaty skończone</b></a><br>
+	<br>
+	<a class="menulink" href="04%20-%20SMTP,%20POP3,%20HTTP%20kontynuacja.html" onfocus="blur();" title="SMTP, POP3, HTTP kontynuacja" onmouseover="window.status='SMTP, POP3, HTTP kontynuacja'; return true;" onmouseout="window.status=''; ">
+	4. SMTP, POP3, HTTP kontynuacja</a><br>
+	<br>
+	<a class="menulink" href="05%20-%20Warstwa%20transportowa.html" onfocus="blur();" title="Warstwa tranportowa" onmouseover="window.status='Warstwa tranportowa'; return true;" onmouseout="window.status=''; ">
+	5. Warstwa tranportowa</a><br>
+	<br>
+	<a class="menulink" href="07%20-%20Protokoly%20rutingu.html" onfocus="blur();" title="Protokoły rutingu" onmouseover="window.status='Protokoły rutingu'; return true;" onmouseout="window.status=''; ">
+	7. Protokoły rutingu</a><br>
+	<br>
+	<a class="menulink" href="08%20-%20Warstwa%20sieci.html" onfocus="blur();" title="Warstwa sieci" onmouseover="window.status='Warstwa sieci'; return true;" onmouseout="window.status=''; ">
+	8. Warstwa sieci</a><br>
+	<br>
+	<a class="menulink" href="09%20-%20Powtorzenie%20materialu.html" onfocus="blur();" title="Powtórzenie materiału" onmouseover="window.status='Powtórzenie materiału'; return true;" onmouseout="window.status=''; ">
+	9.  Powtórzenie materiału</a><br>
+        <br>
+        <a class="menulink" href="javascript:window.close();" onfocus="blur();" onmouseover="window.status='Wyjście'; return true;" onmouseout="window.status=''; ">
+        Wyjście</a></td>
+<td bgcolor="whitesmoke" valign="top"><form name="f" method="post" action="eld.asp?id=41&amp;sid=118&amp;z=1"><p></p><h4>Automaty skończone</h4><p></p><p>Poniższy
+diagram przedstawia zmianę biegów w samochodzie osobowym z ręczną
+skrzynią biegów. Wyjaśnij znaczenie wszystkich stanów diagramu.
+Uzupełnij diagram o wszystkie możliwe stany i przejścia. Na przejściach
+zaznaczaj kierunki strzałkami.</p><p>Rysunek 1</p><p><img src="pliki/03_01.gif"></p><p></p><h4>Zadanie</h4><p></p><p>Zaprojektuj protokół komunikacji pomiędzy bankomatem i klientem. Bankomat powinien realizować następujące funkcje:</p><p></p><ol><p></p><p>    </p><li>Podanie i sprawdzenie PINu<p></p><p>    </p></li><li>Stan konta<p></p><p>    </p></li><li>Pobranie pieniędzy<p></p><p></p></li></ol><p></p><p></p><p>Przejścia
+pomiędzy stanami bankomatu (i klienta) są powodowane przez zdarzenia
+(mogą to być warunki logiczne, które opisują zdarzenie). Przy każdym
+przejściu, bankomat (lub klient) może wykonać czynność. Zdarzenie
+wywołujące przejście należy narysować przy przejściu nad poziomą
+kreską, a czynność wykonywaną przy przejściu: pod tą kreską, w
+następujący sposób:</p><p>Rysunek 2</p><p><img src="pliki/03_03.gif"></p><p>Zdarzenia
+mogą być puste (przejście jest wtedy obowiązkowe i może być tylko do
+jednego stanu). Czynności mogą także być puste - żadna czynność nie
+jest wtedy wykonywana przy przejściu do nowego stanu. Stany można
+wielokrotnie rysować na diagramie, żeby zwiększyć jego czytelność.</p><p></p><h4>DNS</h4><p></p><p></p><p>Wykorzystując narzędzie <i>dig</i>
+możemy prześledzić działanie systemu DNS. Jak wiemy system DNS jest
+strukturą hierarchiczną. W sieci Internet znajduję się 13 głównych
+serwerów DNS (root DNS servers) nazwanych od A do M.</p><pre>[cogi@msh cogi]$ dig
+
+; &lt;&lt;&gt;&gt; DiG 9.2.3 &lt;&lt;&gt;&gt;
+;; global options:  printcmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 5728
+;; flags: qr rd ra; QUERY: 1, ANSWER: 13, AUTHORITY: 0, ADDITIONAL: 13
+
+;; QUESTION SECTION:
+;.                              IN      NS
+
+;; ANSWER SECTION:
+.                       78897   IN      NS      h.root-servers.net.
+.                       78897   IN      NS      c.root-servers.net.
+.                       78897   IN      NS      g.root-servers.net.
+.                       78897   IN      NS      f.root-servers.net.
+.                       78897   IN      NS      b.root-servers.net.
+.                       78897   IN      NS      j.root-servers.net.
+.                       78897   IN      NS      k.root-servers.net.
+.                       78897   IN      NS      l.root-servers.net.
+.                       78897   IN      NS      m.root-servers.net.
+.                       78897   IN      NS      i.root-servers.net.
+.                       78897   IN      NS      e.root-servers.net.
+.                       78897   IN      NS      d.root-servers.net.
+.                       78897   IN      NS      a.root-servers.net.
+
+;; ADDITIONAL SECTION:
+h.root-servers.net.     78897   IN      A       128.63.2.53
+c.root-servers.net.     78897   IN      A       192.33.4.12
+g.root-servers.net.     78897   IN      A       192.112.36.4
+f.root-servers.net.     78897   IN      A       192.5.5.241
+b.root-servers.net.     78897   IN      A       192.228.79.201
+j.root-servers.net.     78897   IN      A       192.58.128.30
+
+k.root-servers.net.     78897   IN      A       193.0.14.129
+l.root-servers.net.     78897   IN      A       198.32.64.12
+m.root-servers.net.     78897   IN      A       202.12.27.33
+i.root-servers.net.     78897   IN      A       192.36.148.17
+e.root-servers.net.     78897   IN      A       192.203.230.10
+d.root-servers.net.     78897   IN      A       128.8.10.90
+a.root-servers.net.     78897   IN      A       198.41.0.4
+
+;; Query time: 7 msec
+;; SERVER: 10.1.1.1#53(10.1.1.1)
+;; WHEN: Wed Oct 12 11:39:22 2005
+;; MSG SIZE  rcvd: 449
+</pre><p>Kolejnymi w hierarchii są serwery DNS obsługujące główne
+domeny (Top-Level Domain servers) np. com, edu, pl. Poniższy przykład
+przedstawia sposób uzyskania adresów IP serwerów DNS obsługujących
+domenę pl. Żądanie wysyłamy do serwera a.root-servers.net.</p><pre>[cogi@msh cogi]$ dig -t ns pl @a.root-servers.net
+
+; &lt;&lt;&gt;&gt; DiG 9.2.3 &lt;&lt;&gt;&gt; -t ns pl @a.root-servers.net
+;; global options:  printcmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 25073
+;; flags: qr rd; QUERY: 1, ANSWER: 7, AUTHORITY: 0, ADDITIONAL: 9
+
+;; QUESTION SECTION:
+;pl.                            IN      NS
+
+;; ANSWER SECTION:
+pl.                     172800  IN      NS      F-DNS.pl.
+pl.                     172800  IN      NS      B-DNS.pl.
+pl.                     172800  IN      NS      A-DNS.pl.
+pl.                     172800  IN      NS      C-DNS.pl.
+pl.                     172800  IN      NS      G-DNS.pl.
+pl.                     172800  IN      NS      D-DNS.pl.
+pl.                     172800  IN      NS      E-DNS.pl.
+
+;; ADDITIONAL SECTION:
+F-DNS.pl.               172800  IN      A       217.17.34.50
+B-DNS.pl.               172800  IN      A       80.50.50.10
+A-DNS.pl.               172800  IN      AAAA    2001:a10:1:1::44
+A-DNS.pl.               172800  IN      A       195.187.245.44
+C-DNS.pl.               172800  IN      AAAA    2001:610:240:0:53:cc:12:176
+C-DNS.pl.               172800  IN      A       193.0.12.176
+G-DNS.pl.               172800  IN      A       149.156.1.3
+D-DNS.pl.               172800  IN      A       192.36.125.2
+E-DNS.pl.               172800  IN      A       157.25.5.30
+
+;; Query time: 151 msec
+;; SERVER: 198.41.0.4#53(a.root-servers.net)
+;; WHEN: Wed Oct 12 11:45:40 2005
+;; MSG SIZE  rcvd: 328
+</pre><p>Następne w hierarchii są serwery tzw. autorytatywne
+(authoritative DNS servers) obsługujące domeny firm, uczelnii itp.
+Zobaczmy jak możemy uzyskać informację o serwerach obsługujących domenę
+edu.pl. Zapytanie należy kierować do serwerów DNS obsługujących domenę
+pl.</p><pre>[cogi@msh cogi]$ dig -t ns edu.pl @c-dns.pl
+
+; &lt;&lt;&gt;&gt; DiG 9.2.3 &lt;&lt;&gt;&gt; -t ns edu.pl @c-dns.pl
+;; global options:  printcmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 2548
+;; flags: qr rd; QUERY: 1, ANSWER: 0, AUTHORITY: 6, ADDITIONAL: 7
+
+;; QUESTION SECTION:
+;edu.pl.                                IN      NS
+
+;; AUTHORITY SECTION:
+edu.pl.                 86400   IN      NS      b-dns.pl.
+edu.pl.                 86400   IN      NS      d-dns.pl.
+edu.pl.                 86400   IN      NS      e-dns.pl.
+edu.pl.                 86400   IN      NS      f-dns.pl.
+edu.pl.                 86400   IN      NS      g-dns.pl.
+edu.pl.                 86400   IN      NS      a-dns.pl.
+
+;; ADDITIONAL SECTION:
+a-dns.pl.               86400   IN      A       195.187.245.44
+a-dns.pl.               86400   IN      AAAA    2001:a10:1:1::44
+b-dns.pl.               86400   IN      A       80.50.50.10
+d-dns.pl.               86400   IN      A       192.36.125.2
+e-dns.pl.               86400   IN      A       157.25.5.30
+f-dns.pl.               86400   IN      A       217.17.34.50
+g-dns.pl.               86400   IN      A       149.156.1.3
+
+;; Query time: 132 msec
+;; SERVER: 2001:610:240:0:53:cc:12:176#53(c-dns.pl)
+;; WHEN: Wed Oct 12 11:59:33 2005
+;; MSG SIZE  rcvd: 268</pre><p>Pamiętajmy,
+że rekordy DNS mają kilka typów. W powyższych przykładach zadawaliśmy
+pytania o rekord typu NS (name server), czyli o serwery DNS obsługujące
+domeny wyspecyfikowane w parametrze polecenia dig (inne typu to np. MX,
+CNAME, A).</p><p></p><h4>Zadania</h4><p></p><p></p><ol><p></p><p>    </p><li>Uzyskaj informacje o serwerach obsługujących domenę uk (nazwy i adresy IP).<p></p><p>    </p></li><li>Uzyskaj informację o serwerach DNS obsługujących domenę pjwstk.edu.pl. Zapytania rozpocznij od serwera a.root-servers.net.<p></p><p>    </p></li><li>Host
+dns.pjwstk.edu.pl posiada dwa różne adresy. Inny dla sieci zewnętrznych
+oraz inny wewnątrz sieci pjwstk. Uzyskaj obydwa adresy IP.<p></p><p>    </p></li><li>Sprawdź czy dns.pjwstk.edu.pl jest serwerem realizującym zapytania rekursywnie dla sieci wewnętrznej. Odpowiedź uzasadnij.<p></p><p>    </p></li><li>Sprawdź czy dns.pjwstk.edu.pl jest serwerem buforującym (DNS caching). Odpowiedź uzasanij.<p></p><p>    </p></li><li>Sprawdź jakie komputery są odpowiedzialne za wymianę poczty dla domeny icm.edu.pl.<p></p><p></p></li></ol><p></p></form></td></tr></tbody></table></body></html>

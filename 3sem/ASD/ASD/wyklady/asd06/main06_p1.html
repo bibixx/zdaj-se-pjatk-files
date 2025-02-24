@@ -1,0 +1,613 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr-->
+<!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main06_p0.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;
+      <a href="main06_p2.html" target="main" class="NAWIGACJA">nastêpny
+punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 2"></a><br clear="all">
+<div class="tytulpunktu">1. Struktura stosów</div>
+<p>Pojêcia "stos" u¿ywamy w jêzyku naturalnym w odniesieniu do grupy
+przedmiotów w pewien sposób u³o¿onych. Mówimy o stosie listów, stosie
+spraw do za³atwienia, stosie ksi±¿ek lub talerzy itd. Ka¿dy wie, ¿e
+próba wyci±gniêcia czego¶ ze ¶rodka stosu, koñczy siê zwykle jego
+zburzeniem. Wobec tego bierzemy zwykle, np. list ze szczytu stosu i
+odk³adamy na szczyt stosu. </p>
+<p>Stos w informatyce jest pewn± abstrakcj± tego pojêcia. S³u¿y do
+przechowywania skoñczonego zbioru elementów i umo¿liwia wykonywanie
+operacji wk³adania i usuwania elementów. Obowi±zuje przy tym zasada, ¿e
+obie operacje s± wykonywane na tym samym koñcu ci±gu. Krótko zasadê
+rz±dz±c± stosami zapisujemy jako LIFO -&nbsp; last in, first out. </p>
+<p></p>
+<div class="def">Definicja 6.1
+<p></p>
+<p>Standardow± struktur± stosów nazywamy dwusortowy system
+algebraiczny, </p>
+<center>
+<p style="text-align: center;"><b>S</b>(E) = &lt; S <font face="Symbol"><span
+ lang="en">&#200;</span> </font>E; push, pop, top, empty, = &gt;,</p>
+</center>
+którego uniwersum sk³ada siê ze zbioru elementów E i&nbsp;zbioru S
+skoñczonych ci±gów o elementach z E, a operacje struktury s± okre¶lone
+nastêpuj±co:
+<p>dla dowolnego ci±gu s <span lang="en"><font face="Symbol">Î</font></span>S,
+s = (e<sub><font face="Verdana">1</font></sub>,e<sub><font
+ face="Verdana">2</font></sub>,...,e<sub><font face="Verdana">n</font></sub>),
+i dowolnego elementu x <font face="Symbol"> <span lang="en">Î</span> </font>E,<br>
+</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <p style="text-align: left; line-height: 20px;">push(x,s) =<sup><font
+ face="Verdana">df </font> </sup>(x, e<sub>1</sub>, e<sub>2</sub>,
+..., e<sub>n</sub>),<br>
+pop(s) =<sup><font face="Verdana">df </font></sup>&nbsp;(e<sub>2</sub>,
+..., e<sub>n</sub>), o ile n &gt;= 1 i&nbsp; pop(s) jest
+nieokre¶lone,&nbsp; gdy n = 0.<br>
+top(s) =<sup><font face="Verdana">df </font></sup>&nbsp;e<sub>1</sub>,
+gdy n&gt;=1 i nieokre¶lone, gdy n = 0.<br>
+empty(s) =<sup><font face="Verdana">df </font></sup>&nbsp;true wttw n
+= 0 (tzn. gdy s jest ci±giem pustym),<br>
+s = (e*<sub>1</sub>, e*<sub>2</sub>, ..., e*<sub>m</sub>)&nbsp;&nbsp;
+wttw<sup><font face="Verdana">df</font></sup>&nbsp;&nbsp; n=m oraz e<sub>i</sub>
+= e<sub>i</sub>* dla i=1, ..., n.</p>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+</div>
+<p></p>
+<p>Operacja push pozwala wstawiæ nowy element do ci±gu, operacja pop
+pozwala usun±æ ostatnio w³o¿ony do stosu element. Wynikiem operacji top
+jest ostatnio w³o¿ony element. Obie operacje pop i top s± operacjami
+czê¶ciowymi, nieokre¶lonymi dla ci±gu pustego. Empty jest relacj±
+odpowiadaj±c± na pytanie, czy stos jest pusty, a równo¶æ stosów jest
+zdefiniowana tak, jak równo¶æ ci±gów.</p>
+<p>Stos mo¿e byæ reprezentowany&nbsp; w komputerze na wiele ró¿nych
+sposobów. W dalszym ci±gu tego punktu przedstawimy dwie jego
+implementacje.</p>
+<p style="text-align: left;"><b>Implementacja I</b></p>
+<p>Implementacja tablicowa stosu jest jedn± z prostszych. Zasadnicza
+jej idea zosta³a przedstawiona na rysunku 6.1. Stos jest tu obiektem
+pewnej klasy STACK o dwóch atrybutach TAB i idx. Tablica&nbsp; TAB
+s³u¿y do zapamiêtania wk³adanych na stos elementów, a wska¼nik idx
+zawsze wskazuje indeks elementu bêd±cego aktualnie na szczycie stosu.
+Na rysunku 6.1, na szczycie stosu znajduje siê element e<sub><font
+ face="Verdana">i</font></sub>. Wcze¶niej w³o¿ono do tego stosu
+elementy e<sub><font face="Verdana">1</font></sub>, e<sub><font
+ face="Verdana">2</font></sub>, ..., e<sub><font face="Verdana">i-1</font></sub>.</p>
+<center>
+<table border="1" cellpadding="0" cellspacing="0" width="51%"
+ id="AutoNumber1" bordercolorlight="#000000" bordercolordark="#000000"
+ bgcolor="#f5f5f5">
+  <tbody>
+    <tr>
+      <td width="6%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="6%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="6%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="12%" colspan="2" rowspan="2" align="center"
+ bordercolor="#F5F5F5"> TAB<b><font face="Symbol" size="4">&nbsp; <span
+ lang="en">&#174;</span></font></b></td>
+      <td width="6%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+1</td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+2</td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+3</td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+...</td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+i</td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+i+1</td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+...</td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+n</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="6%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+e<sub><font face="Verdana">1</font></sub></td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+e<sub><font face="Verdana">2</font></sub></td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+e<sub><font face="Verdana">3</font></sub></td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+...<br>
+&nbsp;</td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+e<sub><font face="Verdana">i</font></sub></td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+null</td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+...</td>
+      <td width="7%" align="center" bgcolor="#e6f0eb"
+ bordercolorlight="#C0C0C0" bordercolordark="#C0C0C0"
+ style="border-right-color: rgb(128, 128, 128); border-bottom-color: rgb(128, 128, 128);">
+null</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="6%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="6%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="6%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5"><b><span
+ lang="en"> <font face="Symbol" size="4">­</font></span></b><br>
+      </td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="6%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="6%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="6%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#808080"
+ bgcolor="#c0c0c0" bordercolordark="#C0C0C0">idx</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="6%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="6%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="6%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="28%" align="center" bordercolor="#F5F5F5" colspan="4">Rysunek
+6.1</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<p>Metodami, dostêpnymi dla obiektów klasy stos, powinny byæ&nbsp;
+funkcje&nbsp; push, pop, top i empty. Ustalmy, ¿e stos jest pusty, gdy
+atrybut idx wskazuje&nbsp; zero. Operacja w³o¿enia elementu x do stosu
+s przedstawionego na rysunku 6.1, mo¿e byæ zaimplementowana
+nastêpuj±co: </p>
+<p style="text-align: center;">push(x,s){ <b>if</b> empty(s) <b>then</b>
+s.idx := 1 <b>else</b> s.idx := i+1 <b>fi</b>; s.TAB[idx] := x;
+return s}.</p>
+<p>Oczywi¶cie tre¶ci± funkcji top(s) jest {return s.TAB[idx];}. Jest to
+funkcja czê¶ciowa, nieokre¶lona dla stosu pustego. W praktyce zwykle w
+tre¶ci funkcji top umieszcza siê obs³ugê b³êdu pusto¶ci. Operacja pop,
+która ma powodowaæ usuniêcie elementu ostatnio wstawionego na stos mo¿e
+mieæ nastêpuj±c± tre¶æ</p>
+<p style="text-align: center;">pop(s){s.TAB[idx] := null; s.idx :=
+s.idx-1; return s;}</p>
+<p>Operacja pop, jak ju¿ wspomniano wcze¶niej,&nbsp; jest te¿ operacj±
+czê¶ciow±: daje poprawny wynik tylko wtedy, gdy stos s nie jest
+pusty.&nbsp;Utworzenie nowego, pustego, stosu powinno polegaæ na
+utworzeniu obiektu z pust± tablic± TAB i wska¼nikiem idx równym 0. <font
+ face="Wingdings">J</font></p>
+<p>K³opot, z przedstawion± implementacj± I, polega na tym, ¿e na ogó³
+nie wiemy, ile elementów znajdzie siê jednoczenie na stosie. W zwi±zku
+z tym, trudno jest&nbsp; powiedzieæ w chwili tworzenia stosu pustego,
+jaka powinna byæ warto¶æ n. Jest na to rada. Je¿eli element, który
+chcemy w³o¿yæ do stosu jest (n+1)-szym przechowywanym w nim elementem,
+to przepisujemy wszystkie elementy do wiêkszej (np. dwa razy wiêkszej)
+tablicy. Komplikuje to jednak kod operacji push, a przede wszystkim,
+istotnie zwiêksza jej koszt: z kosztu sta³ego przechodzimy do kosztu
+rzêdu n, gdzie n jest aktualn± d³ugo¶ci± tablicy. Unikniemy tego
+problemu, je¶li zamiast tablicy u¿yjemy dynamicznej struktury
+dowi±zaniowej, o której mowa w nastêpnej implementacji.</p>
+<p style="text-align: left;"><b>Implementacja II</b></p>
+<p style="text-align: left;">Niech LINK bêdzie pewnym typem obiektów, z
+których ka¿dy ma dwa atrybuty: val - typu element&nbsp; i prev -
+typu&nbsp; LINK,</p>
+<p style="text-align: center;">&nbsp;val -warto¶æ przechowywanego
+elementu, prev - wska¼nik do elementu poprzedniego.&nbsp; </p>
+<p style="text-align: left;">Przedstawimy teraz stos, jako obiekt
+pewnej klasy abstrakcyjnej STACK z jednym tylko atrybutem head typu
+LINK. Je¶li na stosie znajduj± siê trzy elementy a, b, c, to stos mo¿e
+mieæ postaæ przedstawion± na rysunku 6.2&nbsp;</p>
+<center>
+<table border="1" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="33%"
+ id="AutoNumber5" height="98">
+  <tbody>
+    <tr>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="15%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="11%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="9%" bordercolor="#F5F5F5" height="16"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="15%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16" align="center"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="12%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16" align="center"> <br>
+      </td>
+      <td width="9%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="1"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="1"> <br>
+      </td>
+      <td width="15%" bgcolor="#dda0dd" height="1" align="center"
+ bordercolor="#808080"> head</td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="1"> <span lang="en"><font
+ face="Symbol" size="5">&#174;</font></span></td>
+      <td width="12%" bgcolor="#90ee90" height="1" align="center"
+ bordercolor="#808080"> <font color="#808080">val = c<br>
+prev</font></td>
+    </tr>
+    <tr>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="15%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16" align="center"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="12%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16" align="center"> <b><span
+ lang="en"><font face="Symbol" size="4" color="#808080">&#175;</font></span></b></td>
+    </tr>
+    <tr>
+      <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="4%" bordercolor="#F5F5F5" bgcolor="#f5f5f5"
+ bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="16">
+&nbsp;</td>
+      <td width="15%" bordercolor="#F5F5F5" bgcolor="#f5f5f5"
+ height="16" align="center"> &nbsp;</td>
+      <td width="4%" bordercolor="#F5F5F5" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="12%" bgcolor="#90ee90" height="16" align="center"
+ bordercolor="#808080"> <font color="#808080">val = b<br>
+prev</font></td>
+    </tr>
+    <tr>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="15%" height="16" align="center" bgcolor="#f5f5f5"
+ bordercolor="#F5F5F5"> &nbsp;</td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="12%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16" align="center"> <b><span
+ lang="en"><font face="Symbol" size="4" color="#808080">&#175;</font></span></b></td>
+    </tr>
+    <tr>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="15%" bgcolor="#f5f5f5" height="16" align="center"
+ bordercolor="#F5F5F5"> &nbsp;</td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="12%" bgcolor="#90ee90" height="16" align="center"
+ bordercolor="#808080"> <font color="#808080">val = a<br>
+prev</font></td>
+      <td width="9%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="15%" height="16" bgcolor="#f5f5f5"
+ bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="12%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16" align="center"> <b><span
+ lang="en"><font face="Symbol" size="4" color="#808080">&#175;</font></span></b></td>
+      <td width="9%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="15%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+      <td width="12%" bgcolor="#c0c0c0" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16" align="center"> <font
+ color="#808080">null</font></td>
+      <td width="9%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="17"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="17"> <br>
+      </td>
+      <td width="15%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="17"> <br>
+      </td>
+      <td width="4%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="17"> <br>
+      </td>
+      <td width="12%" bgcolor="#f5f5f5" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="17" align="center"> &nbsp;</td>
+      <td width="9%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="16"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="20%" align="center" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="1" colspan="4"> Rysunek 6.2</td>
+      <td width="12%" bordercolorlight="#F5F5F5"
+ bordercolordark="#F5F5F5" height="1"> <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<p>Sprawdzenie, jaki element zosta³ ostatnio w³o¿ony na stos, polega na
+sprawdzeniu atrybutu val&nbsp; w obiekcie wskazanym przez g³owê stosu,
+head. W³o¿enie elementu na stos powoduje stworzenie nowego obiektu typu
+LINK i dowi±zanie do niego starej zawarto¶ci stosu (wskazanej przez
+atrybut head). W ten sposób na szczycie stosu znajduje siê zawsze ten
+element, który by³ ostatnio do niego wk³adany. Operacje na stosach tego
+typu mog± wygl±daæ nastêpuj±co:</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p style="text-align: left;">ELEMENT top(s){return s.head.val} </p>
+      <p style="text-align: left;">STACK push(x,s){pom := new LINK();
+pom.val := x; pom.prev := s.head; s.head := pom; return s} </p>
+      <p style="text-align: left;">STACK pop(s){s.head := s.head.prev;
+return s}</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p>s jest zmienn± typu STACK, a x zmienn± pewnego typu ELEMENET. Natura
+elementów typu ELEMENT nie jest istotna i mo¿e byæ dowolnie
+zdefiniowana przez u¿ytkownika. <font face="Wingdings">J</font></p>
+<p><b>Pytanie 1</b></p>
+<p>Na stos s w³o¿ono kolejno litery a,b,c,d,e, a nastêpnie odczytano i
+wypisano zawarto¶æ stosu. W jakiej kolejno¶ci pojawi± siê litery na
+wyj¶ciu? </p>
+<form>
+  <p><input class="GUZIK" type="button"
+ value="-----Sprawd¼ odpowied¼-----" name="Klik0"
+ onclick="napis(this.form,'Kolejno¶æ bêdzie odwrotna : e,d,c,b,a.')">
+  </p>
+</form>
+<p></p>
+<p>Zauwa¿my, ¿e te dwie wymienione implementacje ró¿ni± siê wieloma
+elementami. Czym mamy siê kierowaæ w wyborze tej lub innej
+implementacji? Jak rozpoznaæ, czy implementacja stosów jest poprawna?
+Co to znaczy, ¿e implementacja stosów jest poprawna?&nbsp; Na ogó³
+interesuj± nas pewne specjalne cechy, które odró¿niaj± stosy od innych
+struktur i pozwalaj± zaakceptowaæ lub odrzuciæ przedstawion±
+implementacjê. Taki zbiór w³asno¶ci nazywamy specyfikacj± struktury
+danych (por. wyk³ad I, p.3).</p>
+<p style="text-align: left;"><b>Specyfikacja struktury stosów</b></p>
+<p>Niech s oznacza dowolny stos, a x dowolny element. Nastêpuj±ce
+formu³y charakteryzuj± podstawowe w³asno¶ci stosów i operacji na nich. </p>
+<blockquote>
+  <blockquote>
+    <p style="text-align: left;">(S1) <font face="Symbol"><span
+ lang="en">&#216;</span> </font>empty(push(x,s)),</p>
+    <p style="text-align: left;">(S2) top(push(x,s)) = x,</p>
+    <p style="text-align: left;">(S3) pop(push(x,s)) = s,</p>
+    <p style="text-align: left;">(S4) <font face="Symbol"><span
+ lang="en">&#216;</span> </font>empty(s) =&gt; push(top(s),pop(s)) = s,</p>
+    <p style="text-align: left;">(S5)&nbsp; ka¿dy stos sk³ada siê ze
+skoñczonej liczby elementów,</p>
+    <p style="text-align: left;">(S6) dwa stosy s± równe, je¶li
+sk³adaj± siê z tych samych elementów i je¶li umieszczono je w takiej
+samej kolejno¶ci.</p>
+  </blockquote>
+</blockquote>
+<p>Pierwszy z postulatów stwierdza, ¿e po w³o¿eniu elementu x stos nie
+jest pusty. Drugi postulat stwierdza, ¿e funkcja top zwraca ten
+element, który by³ ostatnio na stos w³o¿ony. Nastêpne dwa postulaty
+charakteryzuj± zale¿no¶ci miêdzy pop i push. Je¶li modyfikacja stosu s
+polega³a na w³o¿eniu elementu x, to wykonanie operacji pop na
+zmodyfikowanym stosie spowoduje powrót do stanu poprzedniego. Je¶li
+stos nie jest pusty oraz x=top(s) jest na jego szczycie, to po
+wykonaniu operacji pop, a nastêpnie w³o¿eniu na stos elementu&nbsp; x
+wrócimy do pocz±tkowego stanu stosu.&nbsp; </p>
+<p>Postulaty (S5) i (S6) maj± nieco inny charakter ni¿ pozosta³e, nie
+mo¿na ich wyraziæ przez formu³y logiki klasycznej. £atwo jest natomiast
+opisaæ, odpowiadaj±c± im w³asno¶æ, za pomoc± programów. Je¿eli program:</p>
+<p style="text-align: center;">P1{<b>while</b> not empty(s) <b>do</b>
+s := pop(s) <b>od</b>}</p>
+<p>nie zapêtla siê, to tylko skoñczona liczba elementów znajdowa³a siê
+na stosie s. I odwrotnie, je¶li na stosie znajduj± siê elementy e<sub><font
+ face="Verdana">1</font></sub>,e<sub><font face="Verdana">2</font></sub>,...,
+e<sub><font face="Verdana">n</font></sub>, to po n wykonaniach operacji
+pop, stos zostanie opró¿niony. Zatem program P1 zatrzyma siê. Mo¿emy
+wiêc przyj±æ, ¿e cech± charakterystyczn± stosów, jest niezapêtlanie siê
+tego programu. </p>
+<p>Podobnie, niech P2 bêdzie nastêpuj±cym algorytmem, w którym s i s*
+s± dowolnymi stosami:</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <blockquote>
+          <p>P2{bool := true; <br>
+          <b>while</b> (not empty(s) and not empty(s*) and bool) <b>do</b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bool := (top(s) = top(s*));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s:= pop(s); s*:= pop(s*);<br>
+          <b>od</b> }</p>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p>Je¿eli program P2 zatrzymuje siê i warto¶ci± zmiennej bool jest
+true, to znaczy, ¿e stosy s i s* maj± po tyle samo elementów, a
+elementy na tych samych pozycjach w stosach s i s* s± identyczne:
+zmienna bool mo¿e zmieniæ warto¶æ na false, tylko wtedy, gdy elementy
+na szczytach stosów s± ró¿ne. Wynika st±d, ¿e w³asno¶æ mówi±ca, ¿e po
+wykonaniu programu P2 spe³niona jest formu³a (bool<font face="Symbol"> <span
+ lang="en">&#217;</span></font> empty(s)&nbsp; <font face="Symbol"><span
+ lang="en">&#217;</span></font> empty(s*)) charakteryzuje równo¶æ stosów.</p>
+<p>Zauwa¿my, ¿e niezale¿nie od tego, czy my¶limy o stosie jako ci±gu,
+tak jak standardowej strukturze stosów, czy jako o obiekcie
+przedstawionym w implementacji pierwszej lub drugiej, wszystkie
+wymienione postulaty s± spe³nione. Co wiêcej, postulaty te mo¿emy
+traktowaæ jak definicjê struktury stosów, poniewa¿ ka¿dy model zbioru
+postulatów (S1),..., (S6) jest izomorficzny z modelem standardowym
+wyznaczonym przez ten sam zbiór elementów. Mamy w ten sposób kryterium,
+które pozwoli rozstrzygn±æ, czy dana implementacja stosów jest
+poprawna: wystarczy sprawdziæ prawdziwo¶æ formu³ (S1), ..., (S6).</p>
+<p style="text-align: left;"><b>Pytanie 2</b>: Jaki jest koszt
+wyszukania dowolnego elementu w stosie sk³adaj±cym siê z n elementów?<br>
+<!-- Odpowied¼:  O(n) .</P> --></p>
+<form><input class="GUZIK" type="button"
+ value="-----Sprawd¼ odpowied¼-----" name="Klik0"
+ onclick="napis(this.form,' O(n).')">
+</form>
+<p></p>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main06_p0.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main06_p2.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td-->
+<!--/tr--><!--/table-->
+</p>
+</body>
+</html>

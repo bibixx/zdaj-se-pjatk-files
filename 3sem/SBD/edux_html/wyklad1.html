@@ -1,0 +1,790 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>GAKKO.EDU</title>
+    <link rel="stylesheet" href="Tests.aspx_pliki/standard.css" type="text/css">
+<style type="text/css" charset="utf-8">/* See license.txt for terms of usage */
+
+/** reset styling **/
+#header {
+    background: url("https://edux.pjwstk.edu.pl/adds/images/logo.png") no-repeat scroll left top #C40F11;
+    color: #FFFFFF;
+    font-size: 26px;
+    height: 135px;
+}
+#menuBar {
+    background: url("https://edux.pjwstk.edu.pl/adds/images/belka_gora.png") repeat scroll 0 0 transparent;
+    color: #222222;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    height: auto !important;
+    min-height: 27px;
+    padding: 7px 10px 0;
+    vertical-align: middle;
+}
+.firebugResetStyles {
+
+    z-index: 2147483646 !important;
+
+    top: 0 !important;
+
+    left: 0 !important;
+
+    display: block !important;
+
+    border: 0 none !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    outline: 0 !important;
+
+    min-width: 0 !important;
+
+    max-width: none !important;
+
+    min-height: 0 !important;
+
+    max-height: none !important;
+
+    position: fixed !important;
+
+    -moz-transform: rotate(0deg) !important;
+
+    -moz-transform-origin: 50% 50% !important;
+
+    -moz-border-radius: 0 !important;
+
+    -moz-box-shadow: none !important;
+
+    background: transparent none !important;
+
+    pointer-events: none !important;
+
+}
+
+
+
+.firebugBlockBackgroundColor {
+
+    background-color: transparent !important;
+
+}
+
+
+
+.firebugResetStyles:before, .firebugResetStyles:after {
+
+    content: "" !important;
+
+}
+
+/**actual styling to be modified by firebug theme**/
+
+.firebugCanvas {
+
+    display: none !important;
+
+}
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+.firebugLayoutBox {
+
+    width: auto !important;
+
+    position: static !important;
+
+}
+
+
+
+.firebugLayoutBoxOffset {
+
+    opacity: 0.8 !important;
+
+    position: fixed !important;
+
+}
+
+
+
+.firebugLayoutLine {
+
+    opacity: 0.4 !important;
+
+    background-color: #000000 !important;
+
+}
+
+
+
+.firebugLayoutLineLeft, .firebugLayoutLineRight {
+
+    width: 1px !important;
+
+    height: 100% !important;
+
+}
+
+
+
+.firebugLayoutLineTop, .firebugLayoutLineBottom {
+
+    width: 100% !important;
+
+    height: 1px !important;
+
+}
+
+
+
+.firebugLayoutLineTop {
+
+    margin-top: -1px !important;
+
+    border-top: 1px solid #999999 !important;
+
+}
+
+
+
+.firebugLayoutLineRight {
+
+    border-right: 1px solid #999999 !important;
+
+}
+
+
+
+.firebugLayoutLineBottom {
+
+    border-bottom: 1px solid #999999 !important;
+
+}
+
+
+
+.firebugLayoutLineLeft {
+
+    margin-left: -1px !important;
+
+    border-left: 1px solid #999999 !important;
+
+}
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+.firebugLayoutBoxParent {
+
+    border-top: 0 none !important;
+
+    border-right: 1px dashed #E00 !important;
+
+    border-bottom: 1px dashed #E00 !important;
+
+    border-left: 0 none !important;
+
+    position: fixed !important;
+
+    width: auto !important;
+
+}
+
+
+
+.firebugRuler{
+
+    position: absolute !important;
+
+}
+
+
+
+.firebugRulerH {
+
+    top: -15px !important;
+
+    left: 0 !important;
+
+    width: 100% !important;
+
+    height: 14px !important;
+
+    background: url("data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%13%88%00%00%00%0E%08%02%00%00%00L%25a%0A%00%00%00%04gAMA%00%00%D6%D8%D4OX2%00%00%00%19tEXtSoftware%00Adobe%20ImageReadyq%C9e%3C%00%00%04%F8IDATx%DA%EC%DD%D1n%E2%3A%00E%D1%80%F8%FF%EF%E2%AF2%95%D0D4%0E%C1%14%B0%8Fa-%E9%3E%CC%9C%87n%B9%81%A6W0%1C%A6i%9A%E7y%0As8%1CT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AATE9%FE%FCw%3E%9F%AF%2B%2F%BA%97%FDT%1D~K(%5C%9D%D5%EA%1B%5C%86%B5%A9%BDU%B5y%80%ED%AB*%03%FAV9%AB%E1%CEj%E7%82%EF%FB%18%BC%AEJ8%AB%FA'%D2%BEU9%D7U%ECc0%E1%A2r%5DynwVi%CFW%7F%BB%17%7Dy%EACU%CD%0E%F0%FA%3BX%FEbV%FEM%9B%2B%AD%BE%AA%E5%95v%AB%AA%E3E5%DCu%15rV9%07%B5%7F%B5w%FCm%BA%BE%AA%FBY%3D%14%F0%EE%C7%60%0EU%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5JU%88%D3%F5%1F%AE%DF%3B%1B%F2%3E%DAUCNa%F92%D02%AC%7Dm%F9%3A%D4%F2%8B6%AE*%BF%5C%C2Ym~9g5%D0Y%95%17%7C%C8c%B0%7C%18%26%9CU%CD%13i%F7%AA%90%B3Z%7D%95%B4%C7%60%E6E%B5%BC%05%B4%FBY%95U%9E%DB%FD%1C%FC%E0%9F%83%7F%BE%17%7DkjMU%E3%03%AC%7CWj%DF%83%9An%BCG%AE%F1%95%96yQ%0Dq%5Dy%00%3Et%B5'%FC6%5DS%95pV%95%01%81%FF'%07%00%00%00%00%00%00%00%00%00%F8x%C7%F0%BE%9COp%5D%C9%7C%AD%E7%E6%EBV%FB%1E%E0(%07%E5%AC%C6%3A%ABi%9C%8F%C6%0E9%AB%C0'%D2%8E%9F%F99%D0E%B5%99%14%F5%0D%CD%7F%24%C6%DEH%B8%E9rV%DFs%DB%D0%F7%00k%FE%1D%84%84%83J%B8%E3%BA%FB%EF%20%84%1C%D7%AD%B0%8E%D7U%C8Y%05%1E%D4t%EF%AD%95Q%BF8w%BF%E9%0A%BF%EB%03%00%00%00%00%00%00%00%00%00%B8vJ%8E%BB%F5%B1u%8Cx%80%E1o%5E%CA9%AB%CB%CB%8E%03%DF%1D%B7T%25%9C%D5(%EFJM8%AB%CC'%D2%B2*%A4s%E7c6%FB%3E%FA%A2%1E%80~%0E%3E%DA%10x%5D%95Uig%15u%15%ED%7C%14%B6%87%A1%3B%FCo8%A8%D8o%D3%ADO%01%EDx%83%1A~%1B%9FpP%A3%DC%C6'%9C%95gK%00%00%00%00%00%00%00%00%00%20%D9%C9%11%D0%C0%40%AF%3F%EE%EE%92%94%D6%16X%B5%BCMH%15%2F%BF%D4%A7%C87%F1%8E%F2%81%AE%AAvzr%DA2%ABV%17%7C%E63%83%E7I%DC%C6%0Bs%1B%EF6%1E%00%00%00%00%00%00%00%00%00%80cr%9CW%FF%7F%C6%01%0E%F1%CE%A5%84%B3%CA%BC%E0%CB%AA%84%CE%F9%BF)%EC%13%08WU%AE%AB%B1%AE%2BO%EC%8E%CBYe%FE%8CN%ABr%5Dy%60~%CFA%0D%F4%AE%D4%BE%C75%CA%EDVB%EA(%B7%F1%09g%E5%D9%12%00%00%00%00%00%00%00%00%00H%F6%EB%13S%E7y%5E%5E%FB%98%F0%22%D1%B2'%A7%F0%92%B1%BC%24z3%AC%7Dm%60%D5%92%B4%7CEUO%5E%F0%AA*%3BU%B9%AE%3E%A0j%94%07%A0%C7%A0%AB%FD%B5%3F%A0%F7%03T%3Dy%D7%F7%D6%D4%C0%AAU%D2%E6%DFt%3F%A8%CC%AA%F2%86%B9%D7%F5%1F%18%E6%01%F8%CC%D5%9E%F0%F3z%88%AA%90%EF%20%00%00%00%00%00%00%00%00%00%C0%A6%D3%EA%CFi%AFb%2C%7BB%0A%2B%C3%1A%D7%06V%D5%07%A8r%5D%3D%D9%A6%CAu%F5%25%CF%A2%99%97zNX%60%95%AB%5DUZ%D5%FBR%03%AB%1C%D4k%9F%3F%BB%5C%FF%81a%AE%AB'%7F%F3%EA%FE%F3z%94%AA%D8%DF%5B%01%00%00%00%00%00%00%00%00%00%8E%FB%F3%F2%B1%1B%8DWU%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*UiU%C7%BBe%E7%F3%B9%CB%AAJ%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5*%AAj%FD%C6%D4%5Eo%90%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5%86%AF%1B%9F%98%DA%EBm%BBV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%AD%D6%E4%F58%01%00%00%00%00%00%00%00%00%00%00%00%00%00%40%85%7F%02%0C%008%C2%D0H%16j%8FX%00%00%00%00IEND%AEB%60%82") repeat-x !important;
+
+    border-top: 1px solid #BBBBBB !important;
+
+    border-right: 1px dashed #BBBBBB !important;
+
+    border-bottom: 1px solid #000000 !important;
+
+}
+
+
+
+.firebugRulerV {
+
+    top: 0 !important;
+
+    left: -15px !important;
+
+    width: 14px !important;
+
+    height: 100% !important;
+
+    background: url("data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%13%88%08%02%00%00%00%0E%F5%CB%10%00%00%00%04gAMA%00%00%D6%D8%D4OX2%00%00%00%19tEXtSoftware%00Adobe%20ImageReadyq%C9e%3C%00%00%06~IDATx%DA%EC%DD%D1v%A20%14%40Qt%F1%FF%FF%E4%97%D9%07%3BT%19%92%DC%40(%90%EEy%9A5%CB%B6%E8%F6%9Ac%A4%CC0%84%FF%DC%9E%CF%E7%E3%F1%88%DE4%F8%5D%C7%9F%2F%BA%DD%5E%7FI%7D%F18%DDn%BA%C5%FB%DF%97%BFk%F2%10%FF%FD%B4%F2M%A7%FB%FD%FD%B3%22%07p%8F%3F%AE%E3%F4S%8A%8F%40%EEq%9D%BE8D%F0%0EY%A1Uq%B7%EA%1F%81%88V%E8X%3F%B4%CEy%B7h%D1%A2E%EBohU%FC%D9%AF2fO%8BBeD%BE%F7X%0C%97%A4%D6b7%2Ck%A5%12%E3%9B%60v%B7r%C7%1AI%8C%BD%2B%23r%00c0%B2v%9B%AD%CA%26%0C%1Ek%05A%FD%93%D0%2B%A1u%8B%16-%95q%5Ce%DCSO%8E%E4M%23%8B%F7%C2%FE%40%BB%BD%8C%FC%8A%B5V%EBu%40%F9%3B%A72%FA%AE%8C%D4%01%CC%B5%DA%13%9CB%AB%E2I%18%24%B0n%A9%0CZ*Ce%9C%A22%8E%D8NJ%1E%EB%FF%8F%AE%CAP%19*%C3%BAEKe%AC%D1%AAX%8C*%DEH%8F%C5W%A1e%AD%D4%B7%5C%5B%19%C5%DB%0D%EF%9F%19%1D%7B%5E%86%BD%0C%95%A12%AC%5B*%83%96%CAP%19%F62T%86%CAP%19*%83%96%CA%B8Xe%BC%FE)T%19%A1%17xg%7F%DA%CBP%19*%C3%BA%A52T%86%CAP%19%F62T%86%CA%B0n%A9%0CZ%1DV%C6%3D%F3%FCH%DE%B4%B8~%7F%5CZc%F1%D6%1F%AF%84%F9%0F6%E6%EBVt9%0E~%BEr%AF%23%B0%97%A12T%86%CAP%19%B4T%86%CA%B8Re%D8%CBP%19*%C3%BA%A52huX%19%AE%CA%E5%BC%0C%7B%19*CeX%B7h%A9%0C%95%E1%BC%0C%7B%19*CeX%B7T%06%AD%CB%5E%95%2B%BF.%8F%C5%97%D5%E4%7B%EE%82%D6%FB%CF-%9C%FD%B9%CF%3By%7B%19%F62T%86%CA%B0n%D1R%19*%A3%D3%CA%B0%97%A12T%86uKe%D0%EA%B02*%3F1%99%5DB%2B%A4%B5%F8%3A%7C%BA%2B%8Co%7D%5C%EDe%A8%0C%95a%DDR%19%B4T%C66%82fA%B2%ED%DA%9FC%FC%17GZ%06%C9%E1%B3%E5%2C%1A%9FoiB%EB%96%CA%A0%D5qe4%7B%7D%FD%85%F7%5B%ED_%E0s%07%F0k%951%ECr%0D%B5C%D7-g%D1%A8%0C%EB%96%CA%A0%A52T%C6)*%C3%5E%86%CAP%19%D6-%95A%EB*%95q%F8%BB%E3%F9%AB%F6%E21%ACZ%B7%22%B7%9B%3F%02%85%CB%A2%5B%B7%BA%5E%B7%9C%97%E1%BC%0C%EB%16-%95%A12z%AC%0C%BFc%A22T%86uKe%D0%EA%B02V%DD%AD%8A%2B%8CWhe%5E%AF%CF%F5%3B%26%CE%CBh%5C%19%CE%CB%B0%F3%A4%095%A1%CAP%19*Ce%A8%0C%3BO*Ce%A8%0C%95%A12%3A%AD%8C%0A%82%7B%F0v%1F%2FD%A9%5B%9F%EE%EA%26%AF%03%CA%DF9%7B%19*Ce%A8%0C%95%A12T%86%CA%B8Ze%D8%CBP%19*Ce%A8%0C%95%D1ae%EC%F7%89I%E1%B4%D7M%D7P%8BjU%5C%BB%3E%F2%20%D8%CBP%19*Ce%A8%0C%95%A12T%C6%D5*%C3%5E%86%CAP%19*Ce%B4O%07%7B%F0W%7Bw%1C%7C%1A%8C%B3%3B%D1%EE%AA%5C%D6-%EBV%83%80%5E%D0%CA%10%5CU%2BD%E07YU%86%CAP%19*%E3%9A%95%91%D9%A0%C8%AD%5B%EDv%9E%82%FFKOee%E4%8FUe%A8%0C%95%A12T%C6%1F%A9%8C%C8%3D%5B%A5%15%FD%14%22r%E7B%9F%17l%F8%BF%ED%EAf%2B%7F%CF%ECe%D8%CBP%19*Ce%A8%0C%95%E1%93~%7B%19%F62T%86%CAP%19*Ce%A8%0C%E7%13%DA%CBP%19*Ce%A8%0CZf%8B%16-Z%B4h%D1R%19f%8B%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1%A2%A52%CC%16-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2EKe%98-Z%B4h%D1%A2EKe%D02%5B%B4h%D1%A2EKe%D02%5B%B4h%D1%A2E%8B%96%CA0%5B%B4h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%16-%95a%B6h%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-Z*%C3l%D1%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z%B4T%86%D9%A2E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4h%A9%0C%B3E%8B%16-Z%B4h%A9%0CZf%8B%16-Z%B4h%A9%0CZf%8B%16-Z%B4h%D1R%19f%8B%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1%A2%A52%CC%16-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2EKe%98-Z%B4h%D1%A2EKe%D02%5B%B4h%D1%A2EKe%D02%5B%B4h%D1%A2E%8B%96%CA0%5B%B4h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%16-%95a%B6h%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-Z*%C3l%D1%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z%B4T%86%D9%A2E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4h%A9%0C%B3E%8B%16-Z%B4h%A9%0CZf%8B%16-Z%B4h%A9%0CZf%8B%16-Z%B4h%D1R%19f%8B%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1%A2%A52%CC%16-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2EKe%98-Z%B4h%D1%A2EKe%D02%5B%B4h%D1%A2EKe%D02%5B%B4h%D1%A2E%8B%96%CA0%5B%B4h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%16-%95a%B6h%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-Z*%C3l%D1%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z%B4T%86%D9%A2E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4%AE%A4%F5%25%C0%00%DE%BF%5C'%0F%DA%B8q%00%00%00%00IEND%AEB%60%82") repeat-y !important;
+
+    border-left: 1px solid #BBBBBB !important;
+
+    border-right: 1px solid #000000 !important;
+
+    border-bottom: 1px dashed #BBBBBB !important;
+
+}
+
+
+
+.overflowRulerX > .firebugRulerV {
+
+    left: 0 !important;
+
+}
+
+
+
+.overflowRulerY > .firebugRulerH {
+
+    top: 0 !important;
+
+}
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+.fbProxyElement {
+
+    position: fixed !important;
+
+    pointer-events: auto !important;
+
+}</style></head>
+<body>
+<form name="aspnetForm" method="post" action="Tests.aspx" id="aspnetForm">
+<div>
+<input name="ctl00_RadScriptManager1_TSM" id="ctl00_RadScriptManager1_TSM" value=";;System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35:en-US:7263e9c6-5962-41bc-b839-88b704bfcf0d:ea597d4b:b25378d2;Telerik.Web.UI, Version=2010.3.1317.35, Culture=neutral, PublicKeyToken=121fae78165ba3d4:en-US:d7b88a55-4248-43ee-a9ed-d9058fd97467:16e4e7cd:f7645509:24ee1bba:e330518b:1e771326:c8618e41:58366029" type="hidden">
+<input name="__EVENTTARGET" id="__EVENTTARGET" value="" type="hidden">
+<input name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" type="hidden">
+<input name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJODA5MzgxODU1ZBgDBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAgURY3RsMDAkbW51TWFpbk1lbnUFImN0bDAwJENvbnRlbnRQbGFjZUhvbGRlcjEkZ3JkVGVzdHkFKGN0bDAwJENvbnRlbnRQbGFjZUhvbGRlcjEkZ3JkVGVzdHkkY3RsMDAPFCsAAxQrAAJkFwMFBl8hRFNJQwIIBQtfIUl0ZW1Db3VudAIIBQhfIVBDb3VudGQWAh4DX3NlFgIeAl9jZhQrAAgUKwACFCsAAQUGSWRUZXN0FCsAAQJ+FCsAAhQrAAEFBklkVGVzdBQrAAECeRQrAAIUKwABBQZJZFRlc3QUKwABAnsUKwACFCsAAQUGSWRUZXN0FCsAAQJ3FCsAAhQrAAEFBklkVGVzdBQrAAECehQrAAIUKwABBQZJZFRlc3QUKwABAnwUKwACFCsAAQUGSWRUZXN0FCsAAQJ9FCsAAhQrAAEFBklkVGVzdBQrAAECeGQFImN0bDAwJENvbnRlbnRQbGFjZUhvbGRlcjEkZ3JkVGVzdHkPFCsAAmQXAQUPU2VsZWN0ZWRJbmRleGVzFgBkf77k/qZA4+e40liPddy3fsLjQrc=" type="hidden">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="Tests.aspx_pliki/WebResource.js" type="text/javascript"></script>
+
+<link class="Telerik_stylesheet" type="text/css" rel="stylesheet" href="Tests.aspx_pliki/WebResource.css"><link class="Telerik_stylesheet" type="text/css" rel="stylesheet" href="Tests.aspx_pliki/WebResource_004.css"><link class="Telerik_stylesheet" type="text/css" rel="stylesheet" href="Tests.aspx_pliki/WebResource_003.css"><link class="Telerik_stylesheet" type="text/css" rel="stylesheet" href="Tests.aspx_pliki/WebResource_002.css">
+<script src="Tests.aspx_pliki/Telerik.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<div>
+
+	<input name="__PREVIOUSPAGE" id="__PREVIOUSPAGE" value="lOMpOJ5v3rLUZesNLFPFLHzYCG3msuMU7yKhpy_GNAspdaSLll0zn1c5SAfs4Ek9vUYTdRY0sL84IDwmwzm1KGqp-_I1" type="hidden">
+	<input name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWCQLTpefZCQKXpu2nBQKXpumnBQKXpvWnBQKXpvGnBQKXpt2nBQKXptmnBQLx1qy3AQLx1sy3D+dhZKK71kUunJjjZHDJUin3yREa" type="hidden">
+</div>
+	<div id="container">
+		<div id="header"></div>
+        <div id="menuBar">
+          <div style="float:left;"> <span id="ctl00_lblKurs"><a href="https://edux.pjwstk.edu.pl/premain.aspx">Start</a> <img src="Tests.aspx_pliki/arright.png" alt="" /> <a href="https://edux.pjwstk.edu.pl/course.aspx">Systemy baz danych (SBD) - studia dzienne</a> <img src="Tests.aspx_pliki/arright.png" alt="" /> <a href="https://edux.pjwstk.edu.pl/Tests.aspx">Testy</a></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="ctl00_lblZalogowany">Zalogowany jako: Jan Niezbędny</span> </div>
+          <div style="float:right;vertical-align:middle">
+                <a id="ctl00_hplAdmin" href="mailto:eduadmin@pjwstk.edu.pl">Administrator</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    <a id="ctl00_hplHelp" href="https://edux.pjwstk.edu.pl/Tests_help.aspx">Pomoc</a>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    <a href="https://edux.pjwstk.edu.pl/logout.aspx">Wyloguj</a>
+			</div>
+		</div>				
+        <div id="contentContainer">
+        <div>
+            <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$RadScriptManager1', document.getElementById('aspnetForm'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls([], [], [], 90);
+//]]>
+</script>
+            <div id="ctl00_mnuMainMenu" class="RadMenu RadMenu_Telerik rmSized" style="text-decoration: none; width: 180px; z-index: 7000;">
+              <!-- 2010.3.1317.35 -->
+              <ul class="rmRootGroup rmVertical">
+                <li class="rmItem rmFirst"><a href="generatory.html" target="_parent" class="rmLink rmRootLink mnu" style="width: 168px;"><img alt="" src="Tests.aspx_pliki/ico_course.png" class="rmLeftImage" /><span class="rmText">Generatory</span></a></li>
+                <li class="rmItem "><a style="width: 168px;" href="wyklad1.html" class="rmLink rmRootLink mnu"><img alt="" src="Tests.aspx_pliki/ico_announcement.png" class="rmLeftImage" /><span class="rmText">Wykłady1</span></a><a style="width: 168px;" href="https://edux.pjwstk.edu.pl/Announcements.aspx" class="rmLink rmRootLink mnu"></a></li>
+                <li class="rmItem "><a style="width: 168px;" href="wyklad2.html" class="rmLink rmRootLink mnu"><img alt="" src="Tests.aspx_pliki/ico_grade.png" class="rmLeftImage" /><span class="rmText">Wykłady2</span></a><a style="width: 168px;" href="https://edux.pjwstk.edu.pl/Grades.aspx" class="rmLink rmRootLink mnu"></a></li>
+                <li class="rmItem "><a style="width: 168px;" href="zapytania.html" class="rmLink rmRootLink mnu rmFocused"><img alt="" src="Tests.aspx_pliki/ico_test2.png" class="rmLeftImage" /><span class="rmText">Zapytania</span></a></li>
+                <li class="rmItem "><a style="width: 168px;" href="skladnia.html" class="rmLink rmRootLink mnu"><img alt="" src="Tests.aspx_pliki/ico_material.png" class="rmLeftImage" /><span class="rmText">PL SQL Składnia</span></a></li>
+                <li class="rmItem "><a style="width: 168px;" href="https://edux.pjwstk.edu.pl/Folder.aspx" class="rmLink rmRootLink mnu"><img alt="" src="Tests.aspx_pliki/ico_tasks_folders.png" class="rmLeftImage" /><span class="rmText">Foldery zadań</span></a></li>
+                <li class="rmItem rmLast"><a style="width: 168px;" href="https://edux.pjwstk.edu.pl/Links.aspx" class="rmLink rmRootLink mnu"><img alt="" src="Tests.aspx_pliki/ico_www.png" class="rmLeftImage" /><span class="rmText">Linki</span></a></li>
+              </ul>
+              <script type="text/javascript">
+		Telerik.Web.UI.RadMenu._adjustRootItemWidth("ctl00_mnuMainMenu");
+	          </script>
+              <input autocomplete="off" id="ctl00_mnuMainMenu_ClientState" name="ctl00_mnuMainMenu_ClientState" type="hidden" />
+            </div>
+        </div>
+        <div id="cont">
+          <h2 align="center">Wykład 14 </h2>
+          <h2 align="center"><em>Rozproszona baza danych</em></h2>
+          <h3> </h3>
+          <h3>Streszczenie</h3>
+          <p> Wykład składa się z trzech części. W pierwszej  przedstawione jest pojęcie <em> rozproszonej bazy danych</em>. Omówione zostają jej zalety i wady w porównaniu  z konwencjonalną, scentralizowaną bazą danych. Przedstawione jest rozszerzenie algorytmów  optymalizacji zapytań i zatwierdzania transakcji na przypadek rozproszonej bazy  danych. </p>
+          <p> W drugiej części wykładu przedstawiona jest implementacja pojęć rozproszonej  bazy danych w konkretnym systemie baz danych – Oracle. </p>
+          <p> W trzeciej części wykładu  jest rozważony problem integracji informacji pochodzących z różnych baz  danych.<br />
+          </p>
+          <hr />
+          <h3>14.1 <a name="Baza sce" id="Baza sce">Baza scentralizowana</a></h3>
+          <p>W sytuacji rozproszenia użytkowników w różnych węzłach sieci internetowej są możliwe różne  organizacje bazy danych. Najprostszym rozwiązaniem jest <em> baza  scentralizowana</em>, w której dane są przechowywane w jednym węźle   sieci. W takim przypadku można  utrzymywać jeden centralny system kontroli danych.  Przetwarzanie transakcji i odtwarzanie po awarii są objęte sprawdzonymi   algorytmami i protokołami. Jeśli kierowane z węzłów sieci do bazy danych   transakcje dotyczą wszystkich danych (nie zależą istotnie od samego   węzła), wówczas rozwiązanie scentralizowane jest dobre. Przykładem   takich systemów mogą być ogólnokrajowe rejestry: podmiotów   gospodarczych, podatników, samochodów. </p>
+          <p> <u>Wady bazy scentralizowanej</u>: </p>
+          <ol>
+            <li>Potencjalnie długi czas oczekiwania na rezultaty z odległego węzła sieci – bardzo długi przy awarii sieci lub centralnego węzła.</li>
+            <li>Brak kontroli nad danymi specyficznymi dla danego miejsca.</li>
+            <li>Generowanie dużego ruchu w sieci.<br />
+            </li>
+          </ol>
+          <hr />
+          <h3><a name="Baza sce" id="Baza sce">14.2 Baza rozproszona</a></h3>
+          <p>W przypadku, gdy transakcje w lokalnych węzłach dotyczą na ogół   danych lokalnych i  stosunkowo rzadko zachodzi potrzeba sięgnięcia do danych dotyczących   węzłów odległych, lepszym rozwiązaniem może być zbiór połączonych ze   sobą baz lokalnych – z danymi przechowywanymi w węzłach lokalnych. <br />
+          </p>
+          <table>
+            <tbody>
+              <tr>
+                <td> Z <em> rozproszoną bazą danych</em> mamy do czynienia wtedy, gdy zbiór   lokalnych baz stanowi całość w sensie jednego modelu danych i   koordynacji wykonywanych transakcji.</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>W rozproszonej bazie danych występuje rozłożenie danych  do węzłów sieci poprzez  ich <em> fragmentację</em> (<em>podział</em>) lub <em> replikację</em> - do   różnych konfiguracji sprzętowych i programistycznych na ogół   rozmieszczonych w różnych (geograficznie) miejscach organizacji.</p>
+          <ul>
+            <li>
+              <p> <em> <a name="Fragment" id="Fragment"> Fragment danych</a></em> stanowi pewien podzbiór wszystkich danych całej bazy  danych przechowywany w jednym węźle sieci.</p>
+            </li>
+            <li>
+              <p> <em> <a name="Replika" id="Replika"> Replika danych</a></em> stanowi kopię całości lub jakiejś części danych przechowywanych w  innym miejscu niż oryginał.</p>
+            </li>
+          </ul>
+          <p>Rozproszona baza danych powinna reprezentować pojedynczy model danych    firmy. Przypuśćmy, że tworzymy model danych odzwierciedlający    zarządzanie kadrami w pewnej organizacji i projektujemy rozproszoną bazę   danych:</p>
+          <ul>
+            <li> w biurze w Gdańsku znajdują się dane dotyczące Polski Północnej,</li>
+            <li> w biurze w Krakowie znajdują się dane dotyczące Polski Południowej,</li>
+            <li> a w biurze w Warszawie znajdują się dane dotyczące Polski Środkowej.</li>
+          </ul>
+          <p> Informacje  o strukturze firmy są replikowane i przechowywane w   każdym węźle. Zakładamy, że okresowo dane dotyczące wszystkich trzech   regionów  są zbierane razem, dając obraz całego kraju.</p>
+          <p>Są dwa typy fragmentacji: <em> pionowa</em> i <em>pozioma</em>.</p>
+          <p> <em> Fragment poziomy</em> stanowi podzbiór wierszy w tabeli, np. dane z jednego rejonu kraju.</p>
+          <p><em>Fragment pionowy</em> stanowi podzbiór kolumn w tabeli, np. identyfikator,  data urodzenia i zarobki pracowników.</p>
+          <p>Fragmentację pionową wykonuje się przez wykonanie rzutu na podzbiór kolumn zawierający  w sobie klucz główny. Odtworzenie oryginalnej tabeli polega na zastosowaniu złączenia w oparciu o wartości klucza głównego.</p>
+          <p>Fragmentację poziomą uzyskuje się przez zastosowanie operacji selekcji. Odtworzenie oryginalnej tabeli polega na zastosowaniu operacji  sumy UNION.<br />
+          </p>
+          <table border="1" width="40%">
+            <tbody>
+              <tr>
+                <td width="33%"><strong>Operacja </strong></td>
+                <td width="33%"><em><strong>Fragmentacja pozioma</strong></em></td>
+                <td width="34%"><em><strong>Fragmentacja pionowa</strong></em></td>
+              </tr>
+              <tr>
+                <td width="33%"><em><strong>rozkład</strong></em></td>
+                <td width="33%"> selekcja</td>
+                <td width="34%"> rzut</td>
+              </tr>
+              <tr>
+                <td width="33%"><em><strong>złożenie</strong></em></td>
+                <td width="33%"> suma</td>
+                <td width="34%"> złączenie</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>Dla użytkownika rozproszona baza danych powinna wyglądać dokładnie tak  samo jak jedna, scentralizowana baza danych. W związku z tym rozproszona baza danych powinna mieć trzy właściwości <em> przezroczystości</em>:</p>
+          <ol>
+            <li>
+              <p><em>Przezroczystość geograficzna</em>. Użytkownicy nie muszą wiedzieć, w którym dokładnie      węźle są przechowywane dane, które oglądają.</p>
+            </li>
+            <li>
+              <p><em>Przezroczystość      fragmentacji</em>. Użytkownicy nie muszą wiedzieć, w jaki   sposób dane są podzielone. W przykładzie zarządzania kadrami mamy do   czynienia logicznie z jedną bazą danych, a fizycznie z trzema jej   fragmentami.</p>
+            </li>
+            <li>
+              <p><em>Przezroczystość replikacji</em>.   Użytkownicy nie muszą wiedzieć, w jaki sposób dane są      replikowane i z której repliki pochodzą dane, które oglądają. W   przykładowej bazie danych, w każdym z trzech biur jest przechowywana   kopia informacji o strukturze firmy. Kiedy zachodzi potrzeba okresowej   aktualizacji tych danych, użytkownicy nie muszą być świadomi tego, że   aktualizacja dotyczy każdego z trzech miejsc.<br />
+              </p>
+            </li>
+          </ol>
+          <p><u>Zalety rozproszenia</u> (w porównaniu z systemem scentralizowanym)</p>
+          <ol>
+            <li>Odwzorowanie w bazie danych geograficznego podziału organizacji.   Jeśli organizacja ma charakter narodowy lub ponadnarodowy, system musi   uwzględniać podział organizacji na departamenty, oddziały itd.</li>
+            <li>Większą kontrolę nad danymi można uzyskać przechowując je w   miejscu, gdzie są one potrzebne. Jeśli biurowi w Gdańsku przekażemy   odpowiedzialność za dane dotyczące Polski Północnej, wówczas tylko   personel w Gdańsku będzie miał prawo aktualizować te dane.</li>
+            <li>Utrzymywanie replikacji danych zwiększa niezawodność systemu.   Przechowywanie danych w miejscach, gdzie są one potrzebne, poprawia ich   dostępność. W dużych bankach bazy danych  obsługujące transakcje   klientów muszą działać 24 godziny      przez      wszystkie dni w tygodniu. Powszechnie używa się dwóch lub więcej   bliźniaczych baz danych, jednej do bezpośredniego wykonywania   transakcji, drugiej jako jej      kopii (bazy rezerwowej lub repliki).</li>
+            <li>Działanie systemu może się istotnie poprawić, jeśli dokona się   prawidłowego rozproszenia danych. Jeśli większość zapytań      generowanych w lokalnej bazie danych będzie wykonywana w tej   lokalnej bazie danych zamiast      w dużej scentralizowanej, wówczas jest duża szansa przyśpieszenia   dostępu do danych przy operacjach wyszukiwania i aktualizacji.<br />
+            </li>
+          </ol>
+          <p><u>System zarządzania rozproszoną bazą danych</u> jest bardziej skomplikowany  w porównaniu z bazą scentralizowaną.</p>
+          <ol>
+            <li>
+              <p>Słownik danych (katalog      systemowy) rozproszonej bazy danych jest znacznie bardziej złożony. Obejmuje on na przykład informacje o położeniu fragmentów i      replik tabel bazowych.</p>
+            </li>
+            <li>
+              <p>Problemy związane ze  współbieżnością są zwielokrotnione w systemach rozproszonych. Propagowanie aktualizacji do szeregu różnych węzłów jest skomplikowane.      Gdy jest wiele kopii tego samego obiektu, trudno jest utrzymać  spójność      danych. Trudno jest zrealizować naturalny postulat, że każdy użytkownik, niezależnie      skąd loguje się, widzi to samo. Obok      dotychczasowych rodzajów awarii system rozproszony musi sobie dać radę również      z awariami połączeń sieciowych.</p>
+            </li>
+            <li>
+              <p>Optymalizator zapytań   w prawdziwym systemie rozproszonym powinien być w stanie użyć      właściwości topologiczne sieci (np. o koszcie przesłania danych   między dwoma węzłami) przy decydowaniu, jak najlepiej wykonać dane   zapytanie.</p>
+            </li>
+            <li>
+              <p>Aby zapewnić  odporność na      awarie, system zarządzania rozproszoną bazą danych nie   powinien być ulokowany w jednym miejscu. Zarówno oprogramowanie, jak i   dane powinny zostać rozproszone po różnych      miejscach w sieci.<br />
+              </p>
+            </li>
+          </ol>
+          <h4><a name="Transakcje rozproszone" id="Transakcje rozproszone">Transakcje rozproszone</a></h4>
+          <p>W kontekście rozproszonej bazy danych odróżnia się  zapytania i transakcje <em> odległe</em> od <em>rozproszonych</em>.</p>
+          <p> <em><a name="odleg" id="odleg">Zapytanie odległe, transakcja odległa</a></em> – dane do  realizacji znajdują się w jednym, odległym węźle sieci.</p>
+          <p><em><a name="rozprosz" id="rozprosz">Zapytanie rozproszone, transakcja  rozproszona</a></em> – dane do  realizacji znajdują się w różnych węzłach sieci.</p>
+          <p>Do kosztu wykonywania zapytania dochodzi koszt przesłań danych między węzłami  w sieci - i ten koszt ma największy wpływ na czas wykonywania zapytania. </p>
+          <h4>Zapytania rozproszone</h4>
+          <p> Załóżmy, że dane do poniższego zapytania znajdują się w różnych węzłach sieci. </p>
+          <blockquote>SELECT AVG(E.Sal)<br />
+            FROM Emp E<br />
+            WHERE E.Deptno &gt; 30 AND E.Deptno &lt; 70</blockquote>
+          <ul>
+            <li>
+              <p> Fragmentacja pozioma: Załóżmy, że wiersze z <em> E.Deptno</em> &lt; 5O są  w Krakowie, natomiast z <em> E.Deptno </em>&gt;= 50 w  Warszawie. Aby wykonać zapytanie, obliczamy osobno w obu węzłach SUM(<em>E.Sal</em>)  i COUNT(<em>E.Sal</em>). Gdyby był warunek,  np. <em> E.Empno</em>&gt;70,  wtedy wykonywanie zapytania odbywałoby się tylko w jednym węźle.</p>
+            </li>
+            <li>
+              <p>Fragmentacja pionowa:      Załóżmy, że kolumna E.Sal jest w Warszawie, E.Deptno w Krakowie,      natomiast E.Empno w obu bazach. Wystraczy sprowadzić dane potrzebne do      wykonania zapytania do jednego węzła (można wykorzystać warunki      ograniczające) i zrekonstruować potrzebny fragment tabeli, po czym wykonać      obliczenia. W naszym przypadku dane z Krakowa (odpowiednia projekcja      selekcji) zostałyby przesłane do Warszawy.</p>
+            </li>
+            <li>
+              <p>Replikacja: Załóżmy, że kopie tabeli <em>Emp</em> są dostępne w Warszawie i Krakowie. Wybór węzła  wykonującego zapytanie jest uzależniony od lokalnego kosztu wykonania zapytania i od kosztu przesłania wyników.<br />
+              </p>
+            </li>
+          </ul>
+          <h4>Rozproszone złączenia </h4>
+          <p>Jest kilka metod wykonywania rozproszonego złączenia. Rozważymy je na przykładzie. Załóżmy, że  tabela <em>Dept</em> jest dostępna w Warszawie a  <em>Emp</em> jest dostępna w  Krakowie. </p>
+          <blockquote> SELECT E.Ename, d.Dname<br />
+            FROM Emp E INNER JOIN Dept D ON E.Deptno=D.Deptno<br />
+            WHERE E.Job='MANAGER' AND d.Loc='Warszawa'</blockquote>
+          <p>Oto te metody.<br />
+          </p>
+          <p>1. Zastosuj metodę <u> Nested Loops Join</u>. </p>
+          <p>2. Sprowadź jedną tabelę (ewentualnie jej odpowiednią projekcję  selekcji) do węzła gdzie jest druga tabela i tam wykonaj zapytanie. </p>
+          <p>3. Gdy rozmiar wyniku jest duży w porównaniu z rozmiarem tabel, sprowadź tabele do końcowego węzła i tam je złącz. </p>
+          <p>4. Metoda <em>półzłączeń</em></p>
+          <blockquote>
+            <ol>
+              <li> W Warszawie, dokonaj projekcji tabeli <em>Dept</em> na kolumny złączenia i prześlij wynik do        Krakowa. Można skorzystać z selekcji d.Loc='Warszawa' ograniczającej        zbiór wierszy.</li>
+              <li>W Krakowie, dokonaj złączenia projekcji tabeli <em> Dept</em> z tabelą <em>Emp</em>.        Wynik nazywa się <em> redukcją </em> tabeli <em> Emp</em> względem <em>Dept</em>. Prześlij redukcję tabeli <em>Emp </em>do Warszawy. Można skorzystać z selekcji E.Job='MANAGER'        ograniczającej zbiór wierszy.</li>
+              <li>W Warszawie, dokonaj ostatecznego złączenia tabeli <em>Dept</em> z redukcją tabeli <em>Emp</em>.</li>
+            </ol>
+            <ul>
+              <li><u>Idea metody półzłączeń</u>:  koszt przesłania całej tabeli zastępujemy kosztem obliczenia i przesłania kolejno projekcji i redukcji. </li>
+            </ul>
+            <p>
+              <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0" height="300" width="500">
+                <embed src="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/fig14/k4.swf" loop="false" quality="high" bgcolor="#FFFFFF" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" height="300" width="500"> </embed>
+              </object>
+            </p>
+            <p>Rys. 14.1 Przesyłanie danych w sieci w metodzie półzłączeń<br />
+            </p>
+            <h4> Optymalizacja rozproszonego zapytania </h4>
+            <p> Rozważ wszystkie plany, wybierz najtańszy; podobnie jak w scentralizowanym przypadku.  Oto różnice w porównaniu z przypadkiem scentralizowanym. </p>
+            <p><u>Różnica 1</u>: Trzeba uwzględnić koszty komunikacji między węzłami;  trzeba podejmować decyzję, którą replikę wybrać. </p>
+            <p><u>Różnica 2</u>:  Trzeba wziąć pod uwagę specyfikę każdego węzła lokalnego (np. inny  rodzaj SZBD). </p>
+            <p><u>Różnica 3</u>:  Trzeba wziąć pod uwagę specyficzne metody rozproszonego złączenia.<br />
+            </p>
+            <h4>Odświeżanie <a name="Modyfikacja replik" id="Modyfikacja replik">replik</a></h4>
+            <p>Są dwie metody synchronizacji (odświeżania) replik:</p>
+            <ul>
+              <li><em>Synchroniczna replikacja</em>.   Zanim modyfikująca transakcja zostanie zatwierdzona należy dokonać   aktualizacji wszystkich replik (obejmuje zakładanie blokad, wymianę   komunikatów w sieci).      Możliwe jest astosowanie zarówno blokowania pesymistycznego jak i      optymistycznego. Wynik odczytywania danych tabeli jest zawsze taki   sam dla każdej jej      repliki.</li>
+              <li><em>Asynchroniczna replikacja</em>.  Kopie zmodyfikowanej tabeli są tylko okresowo aktualizowane – metoda znacznie tańsza; ale chwilowo      repliki mogą nie być zsynchronizowane ze zmodyfikowaną tabelą.<br />
+              </li>
+            </ul>
+            <p><strong>Modyfikacje przez repliki</strong></p>
+            Na ogół  repliki stanowią kopie tabeli nadrzędnej, na której wyłącznie są wykonywane  wszystkie  operacje INSERT, DELETE i UPDATE.
+  <p><em>Replika modyfikowalna</em> to replika przez którą można dokonywać zmian w taleli oryginale wykonując  instrukcje  INSERT/DELETE/UPDATE. Możliwe jest zastosowanie zarówno blokowania  pesymistycznego jak i optymistycznego. </p>
+  <p>W przypadku zastosowania blokowania optymistycznego, problemem jest,   co robić w przypadku konfliktu, np. gdy w dwóch różnych węzłach dokonano   różnych modyfikacji tego samego  wiersza - szczególnie wtedy kiedy obie modyfikujące transakcje   zakończyły się  już zatwierdzeniem. Możliwe metody rozwiązywania kolizji są następujące:</p>
+  <ol>
+    <li>nie pozwolić jednej z transakcji na zatwierdzenie i po stwierdzeniu      zaistnienia konfliktu, wycofać ją - zgodnie ze standardowymi regułami,</li>
+    <li>ustalić ogólne reguły np. oparte na priorytetach,</li>
+    <li>pozostawić konflikty do rozstrzygnięcia administratorowi bazy danych.</li>
+  </ol>
+  <p>Ustalenie zasad ograniczających możliwości modyfikacji przez repliki ma  prowadzić do zachowania <u>aksjomatu t</u><a name="Trwa" id="Trwa"><u>rwałości</u> wykonywania transakcji (czwarty aksjomat ACID) - albo przy najmniej tylko do  kontrolowanego jego naruszania.</a></p>
+  <p><a name="Trwa" id="Trwa"> </a></p>
+  <hr />
+  <h3>14.3 <a name="Rozproszone odtwarzanie" id="Rozproszone odtwarzanie">Rozproszone zatwierdzanie i odtwarzanie</a></h3>
+  <p>W porównaniu z przypadkiem scentralizowanym pojawiają się nowe problemy:</p>
+  <ol>
+    <li>Dodatkowe rodzaje awarii, np. związane z połączeniami sieciowymi i odległymi węzłami.</li>
+    <li>Gdy &quot;pod-transakcje&quot; całej transakcji są wykonywane w różnych węzłach, wszystkie      razem  wykonują COMMIT albo żadna z nich. Potrzebny jest specjalny protokół zatwierdzania.</li>
+    <li>W każdym węźle jest utrzymywany odrębny dziennik (log) wykonywanych akcji,      tak jak w scentralizowanej bazie danych. W tym dzienniku są odnotowywane akcje protokołu zatwierdzania. </li>
+  </ol>
+  <p>Transakcja rozproszona jest realizowana przez zbiór węzłów w sieci.   Jest jeden wyróżniony węzeł, który inicjuje i koordynuje transakcję –  jest nazywany <em>koordynatorem transakcji</em>.</p>
+  <p align="center"> </p>
+  <p>
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0" height="300" width="300">
+      <embed src="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/fig14/k3.swf" loop="false" quality="high" bgcolor="#FFFFFF" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" height="300" width="300"> </embed>
+    </object>
+  </p>
+  <p>Rys. 14.2 Model wykonywania transakcji rozproszonej<br />
+  </p>
+  <p>Strzałki oznaczają przepływ sterowania, nie koniecznie przepływ danych.  Baza danych użytkownika może być jedną z baz danych biorących udział w  transkcji, ale nie koniecznie.</p>
+  <p>Podstawą realizacji transakcji rozproszonej jest następujący protokół.</p>
+  <p><a name="dwufaz" id="dwufaz"><u>Protokół dwufazowego zatwierdzania   (2PC ang. Two-Phase Commit)</u></a></p>
+  <ol>
+    <li>Koordynator wysyła do wszystkich węzłów komunikat <em>prepare</em>.</li>
+    <li> Węzły podejmują lokalnie decyzję o gotowości do zatwierdzenia <em>prepare</em> lub konieczności wycofania transakcji <em>abort</em> i zapisują w swoim dzienniku      odpowiednio albo rekord <em> prepare </em>albo rekord <em>abort</em> i następnie wysyłają do koordynatora      odpowiednio komunikat albo <em>yes </em>albo <em>no</em>.</li>
+    <li> Gdy koordynator uzyska jednomyślną odpowiedź <em>yes</em>, zapisuje do swojego dziennika rekord <em> commit</em> i wysyła do wszystkich węzłów komunikat <em>commit</em>. W      przeciwnym przypadku zapisuje do swojego dziennika rekord <em> abort</em> i wysyła      do wszystkich węzłów komunikat <em>abort</em>.</li>
+    <li> Węzły zapisują w swoim dzienniku odpowiednio rekord <em> abort/commit</em> albo <em>end, </em> kończą transakcję usuwając informację o niej z      bufora bazy      danych w pamięci RAM<em>. </em>a następnie wysyłają do koordynatora komunikat <em>ack</em>.</li>
+    <li> Po otrzymaniu wszystkich potwierdzeń <em> ack</em> koordynator zapisuje do swojego dziennika rekord <em>end </em>i kończy transakcję usuwając informację o niej z buforu bazy      danych w pamięci RAM<em>.<br />
+    </em></li>
+  </ol>
+  <p><u>Komentarz na temat protokołu 2PC</u></p>
+  <ol>
+    <li><u>Dwufazowość</u> - <u>dwie rundy</u> komunikacji:  pierwsza -  głosowanie; druga -      kończenie.  Obie      są inicjowane przez koordynatora.</li>
+    <li>Koordynator w fazie głosowania, gdy nie ma odpowiedzi z jednego z węzłów, może zadecydować o wycofaniu      (<em>abort</em>)      całej transakcji - jest zwykle określone      ograniczenie czasowe oczekiwania na odpowiedź.</li>
+    <li>Każdy węzeł przed lub w czasie fazy głosowania może zadecydować o wycofaniu      (<em>abort</em>) transakcji - również      wtedy gdy nie może się połączyć z koordynatorem.</li>
+    <li>Każdy komunikat odzwierciedla decyzję nadawcy; aby mieć pewność   odporności na awarie, decyzja jest najpierw zapisywana do dziennika   transakcji      (logu).</li>
+    <li>Dwu-fazowe zatwierdzanie (2PC) z domyślnym      wycofaniem: w przypadku podjęcia decyzji o wycofaniu zarówno      koordynator jak i węzeł lokalny od razu dokonują wycofania transakcji.      Brak transakcji w pamięci RAM oznacza, że została ona wycofana.</li>
+  </ol>
+  <p> </p>
+  <hr />
+  <h3>14.4 <a name="Implement" id="Implement">Implementacja rozproszonych baz danych w Oracle</a></h3>
+  <p> Przede wszystkim Oracle dostarcza oprogramowanie sieciowe <em> Oracle Net</em> umożliwiające komunikację między bazami danych Oracle oraz obsługę transakcji  rozproszonych działających na więcej niż jednej bazie danych – w tym zatwierdzanie takich transakcji i ich wycofywanie.</p>
+  <p> Z punktu widzenia projektanta rozproszonej bazy danych najważniejsze są   dwa nowe rodzaje obiektów tworzonych w lokalnej bazie danych, za pomocą   których uzyskuje się dostęp do obiektów w odległych bazach danych. W   ten sposób ze zbioru lokalnych baz danych można utworzyć  jedną rozproszoną bazę danych.  Obiekty te to: </p>
+  <p> 1. <em> Powiązanie z bazą danych</em> (ang. <em> database link</em>) – jest to zapisana w bazie danych ścieżka sieciowa do odległej bazy danych.</p>
+  <p> 2. <em> Migawka, perspektywa  zmaterializowana</em> (ang. <em>snapshot</em>, <em> materialized view</em>)   – lokalna kopia  (replika) danych znajdujących się w jednej lub więcej odległych bazach   danych. Migawka ma charakter perspektywy odświeżanej co określony   przedział czasu (może więc nie zawierać danych w pełni aktualnych!). </p>
+  <h4> <a name="Powi" id="Powi">Powiązanie z bazą danych</a></h4>
+  <p> Składnia tworzenia powiązania z bazą danych jest następująca:<br />
+  </p>
+  <table>
+    <tbody>
+      <tr>
+        <td>CREATE DATABASE LINK <em> nazwa_powiązania</em><br />
+          CONNECT TO <em> użytkownik</em> IDENTIFIED BY <em> hasło</em><br />
+          USING &rsquo;<em>nazwa_usługi</em>&rsquo;;</td>
+      </tr>
+    </tbody>
+  </table>
+            gdzie:
+  </p>
+  <ul>
+    <li>
+      <p><em>użytkownik/hasło </em> – dotyczą konta, na które ma zostać dokonane logowanie w odległej bazie   danych, jeśli ich brak – używana jest nazwa użytkownika i hasło z   lokalnej bazy      danych;</p>
+    </li>
+    <li>
+      <p><em>nazwa_usługi</em> – nazwa usługi (aliasu bazy danych) Oracle Net np. zdefiniowanej w lokalnym pliku konfiguracyjnym TNSNAMES.ORA. </p>
+    </li>
+  </ul>
+  <p>Po utworzeniu powiązania z bazą danych można korzystać z tabel i   perspektyw w tej odległej bazie danych, tak jakby znajdowały się one w   lokalnej bazie danych – dołączając do nazwy tabeli lub perspektywy napis    @<em>nazwa_powiązania</em>. Na przykład, instrukcja:</p>
+  <blockquote>CREATE DATABASE LINK baza<br />
+    CONNECT TO scott IDENTIFIED BY tiger<br />
+    USING 'elektron';</blockquote>
+            tworzy powiązanie bazodanowe o nazwie <em> baza</em> z odległą bazą danych określoną przez sieciową usługę Oracle o nazwie <em>elektron</em>. Przy wykonywaniu instrukcji
+  <blockquote>SELECT *<br />
+    FROM Emp@baza;</blockquote>
+            lokalny serwer Oracle łączy się, używając oprogramowania Oracle Net, z odległą bazą danych <em>elektron</em>. Oprogramowanie Oracle Net znajdujące się na docelowym komputerze  przechwytuje zgłoszenie i dokonuje logowania w bazie danych <em>elektron</em> na konto <em>scott/tiger</em>. Serwer wykonuje przesłaną   instrukcję SELECT i przesyła przez sieć z powrotem wyniki zapytania,   jednocześnie wylogowując użytkownika <em>scott/tiger</em>.
+  <p>System Oracle potrafi wykonywać dowolne instrukcje SQL, tak jakby   tabele i perspektywy z odległych baz danych znajdowały się w lokalnej   bazie danych np.</p>
+  <blockquote>SELECT * FROM Emp@warszawa<br />
+    UNION<br />
+    SELECT * FROM Emp@gdansk<br />
+    UNION<br />
+    SELECT * FROM Emp@katowice;</blockquote>
+            czy
+  <blockquote>UPDATE Emp@baza<br />
+    SET Salary = Salary * 1,1;<br />
+  </blockquote>
+  <h4>Synonimy</h4>
+  <p> Definiuje się zwykle synonimy dla obiektów w odległej bazie danych, np.</p>
+  <blockquote>CREATE SYNONYM Klienci<br />
+    FOR Klienci@Baza_szkola;</blockquote>
+            Następnie używamy nazwy  Klienci, tak jakby to była to zwykła  tabela.
+  <h4> Migawki (<a name="Repliki" id="Repliki">repliki)</a></h4>
+  <p>Drugi rodzaj obiektów specyficzny dla rozproszonej bazy danych <em>replika</em> (<em>migawka</em>, <em> perspektywa zmaterializowana</em>) jest tworzona za pomocą instrukcji:<br />
+  </p>
+  <table>
+    <tbody>
+      <tr>
+        <td>CREATE SNAPSHOT <em> nazwa_migawki</em><br />
+          REFRESH NEXT <em> przedział_czasu</em><br />
+          AS <em>zapytanie</em>;</td>
+      </tr>
+    </tbody>
+  </table>
+            gdzie:
+  </p>
+  <ol>
+    <li>
+      <p><em>przedział_czasu</em> – określa, co jaki czas należy odświeżać migawkę,</p>
+    </li>
+    <li>
+      <p><em> zapytanie</em> – określa zapytanie, które tworzy zawartość migawki i które jest ponawiane przy każdym odświeżaniu migawki.</p>
+    </li>
+  </ol>
+  <p> Zamiast słowa kluczowego SNAPSHOT można też używać słowo kluczowe MATERIALIZED VIEW.</p>
+  <p> Instrukcja:</p>
+  <blockquote>CREATE SNAPSHOT Wszyscy_prac<br />
+    REFRESH NEXT Sysdate+1<br />
+    AS SELECT * FROM Emp@warszawa<br />
+    UNION<br />
+    SELECT * FROM Emp@krakow<br />
+    UNION<br />
+    SELECT * FROM Emp@gdansk;</blockquote>
+            tworzy migawkę złożoną z danych o pracownikach pochodzących z trzech oddziałów firmy w Warszawie,  Krakowie i Gdańsku. Zawartość migawki ma być odświeżana raz na dzień.  Po zdefiniowaniu migawki <em> Wszyscy_prac</em> można jej używać w zapytaniach, tak jakby to była zwykła tabela lub perspektywa.  Na przykład:
+  <blockquote>SELECT *<br />
+    FROM Wszyscy_prac<br />
+    WHERE Job = 'MANAGER';</blockquote>
+            wypisuje informacje o wszystkich osobach pracujących w firmie na stanowisku MANAGER.
+  <h4> Implementacja migawki</h4>
+  <p> W lokalnej bazie danych dla każdej migawki są tworzone trzy obiekty:</p>
+  <ol>
+    <li>
+      <p><em>tabela</em>, do której jest zapisywany wynik zapytania (stąd nazwa <em> perspektywa zmaterializowana</em>),</p>
+    </li>
+    <li>
+      <p><em>indeks</em> dla klucza głównego,</p>
+    </li>
+    <li>
+      <p><em>perspektywa</em> służąca do wyświetlania i używania zawartości migawki.<br />
+      </p>
+    </li>
+  </ol>
+  <h4> <a name="Od" id="Od">Odświeżanie migawki</a></h4>
+  <p> Rozróżniamy dwa typy migawek względem instrukcji SELECT występującej w jej  definicji: <em> proste</em> i <em> złożone</em>. W przypadku migawki <em> złożonej</em> nie ma żadnych ograniczeń. Jeśli w instrukcji SELECT nie występują  ani klauzule GROUP BY, CONNECT BY, DISTINCT ani funkcje sumaryczne, ani   operatory zbiorowe, ani złączenia tabel, to taka migawka jest <em>prosta</em>.</p>
+  <p>Dla migawki prostej jest możliwe <em> szybkie odświeżanie</em> (opcja REFRESH FAST) pod warunkiem utworzenia w węźle, w którym   znajduje się tabela-oryginał tej migawki, specjalnego dziennika. <em> Dziennik migawki</em> jest tabelą, do   której są wpisywane zmiany dokonywane na tabeli-oryginale. Następnie,   przy odświeżaniu migawki zamiast przesyłać całą zawartość   tabeli-oryginału, jest przesyłana tylko zawartość dziennika migawki.  Oto przykład instrukcji zakładającej dziennik migawki na tabeli <em>Emp</em>:</p>
+  <blockquote>CREATE SNAPSHOT LOG ON Emp<br />
+    TABLESPACE users;</blockquote>
+            Ze względu na spójność referencyjną - łączy się migawki w grupy i dokonuje się ich jednoczesnego odświeżania.
+  <h4><a name="Modyfi" id="Modyfi">Modyfikowanie danych przez migawkę</a></h4>
+  <p> Jeśli w definicji migawki prostej użyjemy klauzuli FOR UPDATE, utworzymy <em> migawkę modyfikowalną</em>:</p>
+  <blockquote>CREATE SNAPSHOT Rep_emp<br />
+    REFRESH FAST NEXT Sysdate+1<br />
+    FOR UPDATE<br />
+    AS SELECT * FROM Emp@warszawa;</blockquote>
+            Można wówczas dokonywać zmian w taleli oryginale wykonując operacje  INSERT/DELETE/UPDATE na migawce, np.
+  <blockquote>UPDATE Rep_emp<br />
+    SET Sal = Sal*1.05<br />
+    WHERE Ename = 'SCOTT';</blockquote>
+            
+  <hr />
+  <h3>14.5 <a name="Problem integracji informacji" id="Problem integracji informacji">Problem integracji informacji</a></h3>
+  <p>W zastosowaniach baz danych coraz częściej pojawia się problem   integracji danych pochodzących z różnych źródeł danych - w szczególności  z baz danych.</p>
+  <ol>
+    <li> Powiązane dane istnieją w różnych miejscach i może zaistnieć potrzeba jednoczesnego ich użycia przez jedną aplikację.</li>
+    <li> Bazy danych mogą się różnić:
+      <ul>
+        <li><em> modelem</em> (np. relacyjny, obiektowo-relacyjny, hierarchiczny, XML, pliki MS Excel),</li>
+        <li><em> schematem</em> (np. znormalizowany, nieznormalizowany),</li>
+        <li><em> terminologią</em> (np. czy konsultanci firmy są pracownikami, czy emerytowani pracownicy są pracownikami),</li>
+        <li><em> konwencjami</em> (np. stopnie Celsjusza lub Fahrenheita; mile lub kilometry).</li>
+      </ul>
+    </li>
+  </ol>
+  <p> <u> Przykład</u></p>
+  <p> Dwie szkoły wyższe chcą się połączyć. Każda z nich ma swoją osobną bazę   danych. Władze nowej szkoły wyższej chcą mieć zintegrowany widok na   całość. </p>
+  <h4> Dwa podejścia do integracji</h4>
+  <ol>
+    <li><em> Hurtownia danych</em>. Skopiuj dane źródłowe do centralnej bazy danych dokonując ich transformacji do wspólnego schematu.      Hurtownie danych są tematem osobnego wykładu.
+      <ul>
+        <li> Sprowadzanie danych i ich transformacja jest dokonywane  raz na pewien czas – np. raz na dzień.</li>
+      </ul>
+      <p align="center"> </p>
+      <p>
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0" height="300" width="450">
+          <embed src="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/fig14/k1.swf" loop="false" quality="high" bgcolor="#FFFFFF" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" height="300" width="450"> </embed>
+        </object>
+      </p>
+      <p>Rys. 14.3 Rozwiązanie problemu integracji za pomocą hurtowni danych<br />
+      </p>
+    </li>
+    <li><em>Mediator</em>. Utwórz perspektywę wszystkich źródeł danych, tak jakby były zintegrowane.
+      <ul>
+        <li> Wyznaczaj wynik zapytania do perspektywy przez jego tłumaczenie do źródeł      danych a następnie tam wykonuj  zapytanie.</li>
+      </ul>
+      <p>
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0" height="300" width="450">
+          <embed src="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/fig14/k2.swf" loop="false" quality="high" bgcolor="#FFFFFF" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" height="300" width="450"> </embed>
+        </object>
+      </p>
+      <p>Rys.14.4 Rozwiązanie problemu integracji za pomocą modułu mediatora<br />
+      </p>
+    </li>
+  </ol>
+  <h5>Moduł osłony (wrapper) i rola języka XML</h5>
+  <p> Moduł stojący między źródłową bazą danych a hurtownią danych bądź mediatorem nazywa się <em> osłoną</em> (ang. wrapper).</p>
+  <p> Filtruje on dane ze źródłowej bazy danych na zewnątrz (zgodnie ze specyfikacją). Najwygodniejszym        uniwersalnym językiem wynikowym jest        XML (do komunikacji, co najmniej, między mediatorem a osłoną).</p>
+  <p> Zapytanie do źródłowej bazy danych (przygotowywane przez mediatora) też może być sformułowane przy użyciu XML.  Tłumaczenia na język źródłowej bazy danych dokonuje konkretny moduł osłony  związany z konkretną bazą danych.</p>
+  <p>   </p>
+  <hr />
+  <h3>14.6 <a name="Podsumowanie" id="Podsumowanie">Podsumowanie</a></h3>
+  <p> Zostało przedstawione pojęcie rozproszonej bazy danych i omówione jej zalety i wady w porównaniu  z konwencjonalną, scentralizowaną bazą danych. </p>
+  <p>Przedstawiona została implementacja rozproszonej  bazy danych w konkretnym systemie baz danych – Oracle. </p>
+  <p>Rozważony też został problem integracji informacji pochodzących z różnych  heterogenicznych baz  danych. </p>
+  <p>  </p>
+  <hr />
+  <h3>14.7 <a name="Slownik" id="Slownik">Słownik</a> pojęć</h3>
+  <p><a href="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/w14.htm#Fragment"> fragment danych</a> - podzbiór wszystkich danych całej bazy  danych przechowywany w jednym węźle sieci.</p>
+  <p><a href="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/w14.htm#Replika">replika danych</a> - kopia całości lub jakiejś części danych przechowywanych w  innym węźle sieci niż oryginał.</p>
+  <a href="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/w14.htm#Modyfikacja%20replik">replikacja synchroniczna</a> - zanim modyfikująca transakcja zostanie zatwierdzona  dokonuje się aktualizacji (odświeżenia) wszystkich replik (obejmuje zakładanie blokad, wymianę komunikatów w sieci).
+  <p> <a href="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/w14.htm#Modyfikacja%20replik">replikacja asynchroniczna</a> - kopie zmodyfikowanej tabeli są tylko okresowo aktualizowane (odświeżane)  – metoda znacznie tańsza; ale chwilowo różne kopie mogą nie być ze sobą zsynchronizowane. </p>
+  <p><a href="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/w14.htm#odleg">zapytanie odległe</a> – zapytanie, w którym dane do  realizacji znajdują się w jednym odległym węźle sieci.</p>
+  <p><a href="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/w14.htm#odleg">transakcja odległa </a> – transakcja, której dane do  realizacji znajdują się w jednym odległym węźle sieci.</p>
+  <p><a href="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/w14.htm#rozprosz">zapytanie rozproszone</a> – zapytanie, w którym dane do  realizacji znajdują się w różnych, odległych węzłach sieci. </p>
+  <p><a href="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/w14.htm#rozprosz">transakcja  rozproszona</a> – transakcja, której dane do  realizacji znajdują się w różnych odległych węzłach sieci.</p>
+  <p> <a href="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/w14.htm#dwufaz">protokół dwufazowego zatwierdzania (2PC)</a> -   protokół zatwierdzania  transakcji rozproszonej obowiązujący węzły w sieci biorące udział w  realizacji transakcji rozproszonej. Składa się z dwóch faz  komunikacji między węzłami: pierwsza - <em> głosowanie</em> czy zatwierdzić  transakcję; druga - <em> kończenie</em> transakcji po podjęciu decyzji.  Obie fazy są inicjowane przez jeden  wyznaczony do tego węzeł nazywany <em> koordynatorem transakcji</em>.</p>
+  <p> <a href="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/w14.htm#Powi">powiązanie bazodanowe (z bazą danych</a>) - zapisana, jako obiekt bazy danych  Oracle,  ścieżka sieciowa do odległej bazy danych. </p>
+  <p> <a href="http://edu.pjwstk.edu.pl/wyklady/sbd/scb/w14.htm#Problem%20integracji%20informacji">integracja informacji</a> -   problem zbudowania jednolitego intefejsu do zbioru heterogenicznych baz danych.  Dwa stosowane podejścia to albo kopiowanie danych do jednej bazy danych  nazywanej <em> hurtownią danych</em> albo zbudowanie modułu <em> mediatora</em> między  bazami danych. Jako język do komunikacji jest używany język XML.<br />
+  </p>
+  <hr />
+  <h3>14.8 <a name="Zadania" id="Zadania">Zadania</a></h3>
+  <p>1. Międzynarodowa sieć  supermarketów potrzebuje bazy danych do zarządzania działalnością sieci.  Jakiego rodzaju zapytania będą kierowane do bazy danych z lokalnych oddziałów  a jakie z centrali? Zaplanuj, które dane powinny znajdować się w lokalnych  bazach danych, a które w bazie centrali; które dane powinny być replikowane,  a które nie muszą. Czy modyfikowalność przez repliki jest istotna?</p>
+  <p>2. Kilka funkcjonujących sklepów  chce utworzyć spółkę. Każdy ze sklepów ma swoją niezależnie zbudowaną i  funkcjonującą bazę danych. Kierownictwo firmy chce mieć pełny wgląd w całość  spółki. Jakie rozwiązanie zaproponowałbyś, np. utworzyć od początku nową  bazę danych i dokonać do niej migracji danych, zbudować moduł mediatora,  zbudować hurtownię danych?</p>
+  <hr />
+  <hr />
+  <em> Strona przygotowana przez Lecha Banachowskiego - 03/21/05   .</em></blockquote>
+        </div>
+	       <br style="clear: both;">
+		</div>
+		
+		<div id="footer"><label>Edu@Gakko PJWSTK 2011</label></div>
+	</div>
+
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.Application.initialize();
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadMenu, {"_childListElementCssClass":null,"_flow":0,"_skin":"Telerik","clientStateFieldID":"ctl00_mnuMainMenu_ClientState","collapseAnimation":"{\"duration\":450}","enableSelection":false,"expandAnimation":"{\"duration\":450}","itemData":[{"value":"35","navigateUrl":"Course.aspx","cssClass":"mnu"},{"value":"36","navigateUrl":"Announcements.aspx","cssClass":"mnu"},{"value":"38","navigateUrl":"Grades.aspx","cssClass":"mnu"},{"value":"39","navigateUrl":"Tests.aspx","cssClass":"mnu rmFocused"},{"value":"40","navigateUrl":"Materials.aspx","cssClass":"mnu"},{"value":"41","navigateUrl":"Folder.aspx","cssClass":"mnu"},{"value":"43","navigateUrl":"Links.aspx","cssClass":"mnu"}]}, null, null, $get("ctl00_mnuMainMenu"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadGrid, {"ClientID":"ctl00_ContentPlaceHolder1_grdTesty","ClientSettings":{"AllowAutoScrollOnDragDrop":true,"ShouldCreateRows":true,"DataBinding":{},"Selecting":{},"Scrolling":{},"Resizing":{},"ClientMessages":{},"KeyboardNavigationSettings":{"AllowActiveRowCycle":false,"EnableKeyboardShortcuts":true,"FocusKey":89,"InitInsertKey":73,"RebindKey":82,"ExitEditInsertModeKey":27,"UpdateInsertItemKey":13,"DeleteActiveRow":127,"ExpandDetailTableKey":39,"CollapseDetailTableKey":37},"Animation":{}},"Skin":"Simple","UniqueID":"ctl00$ContentPlaceHolder1$grdTesty","_activeRowIndex":"","_controlToFocus":"","_currentPageIndex":0,"_editIndexes":"[]","_embeddedSkin":true,"_gridTableViewsData":"[{\"ClientID\":\"ctl00_ContentPlaceHolder1_grdTesty_ctl00\",\"UniqueID\":\"ctl00$ContentPlaceHolder1$grdTesty$ctl00\",\"PageSize\":10,\"PageCount\":1,\"EditMode\":\"EditForms\",\"CurrentPageIndex\":0,\"VirtualItemCount\":0,\"AllowMultiColumnSorting\":false,\"AllowNaturalSort\":true,\"AllowFilteringByColumn\":false,\"PageButtonCount\":10,\"HasDetailTables\":false,\"IsItemInserted\":false,\"clientDataKeyNames\":[],\"_dataBindTemplates\":false,\"_selectedItemStyle\":\"\",\"_selectedItemStyleClass\":\"rgSelectedRow\",\"_columnsData\":[{\"UniqueName\":\"Nazwa\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridTemplateColumn\",\"Display\":true},{\"UniqueName\":\"DataOd\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true},{\"UniqueName\":\"DataDo\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true},{\"UniqueName\":\"Czas\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true},{\"UniqueName\":\"Punktacja\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true},{\"UniqueName\":\"LiczbaPytan\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true},{\"UniqueName\":\"Status\",\"Resizable\":true,\"Reorderable\":true,\"Groupable\":true,\"ColumnType\":\"GridBoundColumn\",\"Display\":true}]}]","_masterClientID":"ctl00_ContentPlaceHolder1_grdTesty_ctl00","_shouldFocusOnPage":false,"allowMultiRowSelection":false,"clientStateFieldID":"ctl00_ContentPlaceHolder1_grdTesty_ClientState"}, null, null, $get("ctl00_ContentPlaceHolder1_grdTesty"));
+});
+//]]>
+</script>
+</form>
+
+</body></html>

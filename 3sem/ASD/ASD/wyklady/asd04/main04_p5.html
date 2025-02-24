@@ -1,0 +1,419 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main04_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main04_cw.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><br clear="all"><div class="tytulpunktu">
+5. Sortowanie przez scalanie</div>
+
+
+ &nbsp;<p>Algorytm sortowania, który zamierzamy omówić w tym punkcie jest algorytmem 
+rekurencyjnym, wykorzystującym zasadę &quot;dziel i zwyciężaj&quot;, tak jak to było w 
+przypadku algorytmu QuickSort. Teraz jednak nasze postępowanie będzie zupełnie 
+inne. Zamiast operacji rozdzielania ciągu, stosujemy operację scalania już 
+uporządkowanych fragmentów ciągu.&nbsp; Omawiany algorytm nosi nazwę MergeSort.</p>
+<p><b>Idea algorytmu sortowania przez scalanie</b></p>
+<ul>
+  <li>Podziel dany ciąg na dwie (w przybliżeniu równe) części.</li>
+  <li>Opisywanym tu algorytmem sortowania posortuj każdą z nich.</li>
+  <li>Scal posortowane części ciągu.</li>
+</ul>
+<p>Z przedstawionej idei algorytmu wynika, że etap początkowy polega na 
+kolejnych podziałach ciągu na części. Na tym etapie nie wykonujemy żadnych 
+porównań,&nbsp; ani zmian w ciągu danych. Dopiero, gdy dojdziemy do ciągów 
+jednoelementowych, możemy zacząć scalanie.</p>
+<p><b>Przykład 5.1</b></p>
+<p>Rozważmy ciąg 5,7,4,9,3,6,2,1. Potraktujmy, każdy z elementów tego ciągu jako 
+jednoelementowy uporządkowany ciąg. Zastosujemy procedurę scalania do 
+sąsiadujących ciągów, otrzymując 4 dwuelementowe posortowane ciągi: 
+{5,7}, {4,9}, {3,6}, {1,2}. Teraz ponownie zastosujemy scalanie sąsiednich ciągów 
+tworząc dwa czteroelementowe segmenty uporządkowane {4,5,7,9}, {1,2,3,6}. 
+Wykonanie jeszcze jednego scalania pozwoli nam utworzyć ciąg uporządkowany 
+{1, 2, 3, 4, 5, 6, 7, 9}.<font face="Wingdings">J</font></p>
+<p>Na rysunku 4.2 przedstawiono graf rekurencyjnych wywołań funkcji MergeSort. </p>
+<p>Operacja, którą wykonywać będziemy wielokrotnie w omawianym algorytmie 
+sortowania, to scalanie. Ponieważ scalanie dotyczy tu sąsiadujących fragmentów&nbsp; 
+jednego ciągu, a wynik scalania powinien być też zapisany w tym samym ciągu, 
+zmodyfikujemy nieco algorytm Merge przedstawiony w poprzednim punkcie.</p>
+<p>Niech Scal(l,x,p) będzie procedurą, która realizuje scalanie dwóch odcinków 
+danego ciągu e, wyznaczonych&nbsp; przez indeksy l, x, oraz x+1, p. Oczywiście 
+zakładamy, że&nbsp; l<font face="Symbol"> <span lang="en">&pound;</span></font>
+            x<font face="Symbol"> <span lang="en">&pound;</span></font> p.&nbsp; 
+W pierwszym kroku algorytmu przepiszemy&nbsp; elementy e[l],...,e[x] oraz e[x+1],...,e[p] 
+do&nbsp; dwóch tablic pomocniczych a i b. Następnie powtórzymy postępowanie z 
+algorytmu Merge zapisując ciąg wyjściowy na pozycjach e[l],...,e[p].&nbsp; 
+Procedura scalania przyjmie teraz postać.</p>
+
+   <TABLE frame="void" rules="none" width="530" height="178">
+         <TR>
+            <TD width="10" height="12">
+            <p align="center">Scal </TD> 
+            <TD width="313" height="12">
+            <p align="center">(l,x,p: :int )</TD> 
+         </TR>
+         <TR>
+            <TD width="10" height="12">
+            <p align="center"><b>{</b></TD> 
+            <TD width="313" height="12">
+            <p align="center">n := x-l+1; m := p-x;</TD> 
+         </TR>
+         <TR>
+            <TD width="10" height="12">
+            <p align="center"></TD> 
+            <TD width="313" height="12">
+            <p align="center">for i := 1&nbsp; to n do a[i] := e[l+i-1] od;</TD> 
+         </TR>
+         <TR>
+            <TD width="10" height="12">
+            <p align="center"></TD> 
+            <TD width="313" height="12">
+            <p align="center">for i := 1 to m do b[i] := e[x+i] od;</TD> 
+         </TR>
+         <TR>
+            <TD width="10" height="12">
+            <p align="center"></TD> 
+            <TD width="313" height="12">
+            <p align="center">a[n+1] := <font face="Symbol">+ <span lang="en">&yen;</span></font>; 
+            b[m+1]:= <font face="Symbol">+ <span lang="en">&yen;</span></font>;</TD> 
+         </TR>
+         <TR>
+            <TD width="10" height="12">
+            <p align="center"></TD> 
+            <TD width="313" height="12">
+            <p align="center">i := 1; j := 1; k := l;</TD> 
+         </TR>
+         <TR>
+            <TD width="10" height="12">
+            <p align="center"></TD> 
+            <TD width="313" height="12">
+            <p align="center"><b>while</b> (k<font face="Symbol"> <span lang="en">&pound;</span></font> 
+            p) <b>do</b></TD> 
+         </TR>
+         <TR>
+            <TD width="10" height="12">
+            <p align="center"> </TD> 
+            <TD width="313" height="12">
+            <p align="center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if&nbsp; </strong>
+            (a[i]<font face="Symbol"> <span lang="en">&pound;</span></font>
+            b[j]) <strong>then </strong> </TD> 
+         </TR>
+         <TR>
+            <TD width="10" height="12">
+            <p align="center"></TD> 
+            <TD width="313" height="12">
+            <p align="center"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            e[k] := a[i]; i := i+1&nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="10" height="12">
+            <p align="center"> </TD> 
+            <TD width="313" height="12">
+            <p align="center"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else</b> </TD> 
+         </TR>
+         <TR>
+            <TD width="10" height="12">   
+            <p align="center">
+             </TD>
+            <TD width="313" height="12">   
+            <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            e[k] := b[j]; j := j+1&nbsp; <STRONG>&nbsp; </STRONG>
+             </TD>
+         </TR>
+         <TR>
+            <TD width="10" height="12">   
+            <p align="center"></TD>
+            <TD width="313" height="12">   
+            <p align="center">   <strong>&nbsp;
+            </strong><b>&nbsp;&nbsp;&nbsp; fi;</b><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong></TD>
+         </TR>
+         <TR>
+            <TD width="10" height="12">   
+            <p align="center"> </TD>
+            <TD width="313" height="12">   
+            <p align="center">&nbsp;&nbsp;&nbsp;&nbsp; k := k+1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="10" height="12">   
+            <p align="center"></TD>
+            <TD width="313" height="12">   
+            <p align="center">   <b>od;</b></TD>
+         </TR>
+         <TR>
+            <TD width="10" height="12">   
+            <p align="center"><b>}</b></TD>
+            <TD width="313" height="12">   
+            <p align="center"></TD>
+         </TR>
+         </TABLE>
+
+<p style="text-align: left">Korzystając z analizy poprawności algorytmu Merge, 
+możemy udowodnić następujące twierdzenie.</P>
+
+<p><div class="lemat">
+  <p>Twierdzenie 5.1&nbsp; Jeżeli {e[l]<font face="Symbol"><span lang="en">&pound;</span> </font>
+  ...<font face="Symbol"><span lang="en">&pound;</span> </font>e[x], e[x+1]<font face="Symbol"><span lang="en">&pound;</span> </font>
+  ...<font face="Symbol"><span lang="en">&pound;</span> </font>e[p] oraz e[i] = 
+  e<sub><font face="Verdana">i</font></sub> dla i= l,...,p}, to po wykonaniu 
+  procedury Scal(l,x,p)&nbsp; w dowolnej strukturze danych z porządkiem 
+  liniowym, spełniony jest warunek </p>
+  <p style="text-align: center">e[l]<font face="Symbol"><span lang="en">&pound;</span> </font>...<font face="Symbol"><span lang="en">&pound;</span> </font>e[p] oraz ciąg e[l],...,e[p] jest permutacją 
+  elementów ciągu e<sub><font face="Verdana">l</font></sub> ,..., e<sub><font face="Verdana">p</font></sub>.</p>
+</div>
+<p></p>
+
+<p><b>Algorytm </b> </p>
+
+<p>Algorytm sortowania przez scalanie można zapisać bardzo elegancko jako 
+rekurencyjną procedurę MergeSort o dwóch parametrach l, p, będących indeksami 
+lewego i prawego końca rozważanej części ciągu. Oczywiście w celu posortowania 
+tablicy e[1],...,e[n] należy wywołać tę procedurę z parametrami 1, n.</p>
+<p>
+<div class="def" style="width: 738; height: 206">
+   <TABLE frame="void" rules="none" width="721" height="178">
+         <TR>
+            <TD width="431" height="12" colspan="2">MergeSort (l, p : int){</TD>
+             
+            <TD width="38" height="12"></TD>
+             
+            <TD width="785" height="12"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="372" height="12"><b>if </b>(l &lt; p) </TD> 
+            <TD width="38" height="12"></TD> 
+            <TD width="785" height="12">&nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="372" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>
+            x :=(l+p) div 2;</TD> 
+            <TD width="38" height="12"></TD> 
+            <TD width="785" height="12">// l <font face="Symbol"> <span lang="en">&pound;</span> </font>
+            x <font face="Symbol"> <span lang="en">&pound;</span> </font>p</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="372" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp;MergeSort(l, 
+            x);&nbsp;&nbsp;&nbsp;&nbsp; </TD> 
+            <TD width="38" height="12"></TD> 
+            <TD width="785" height="12">// e[l]<font face="Symbol">&nbsp; <span lang="en">&pound;</span> </font>...<font face="Symbol"><span lang="en">&pound;</span></font> 
+            e[x-1<font face="Symbol">] <span lang="en">&pound;</span> </font>e[x]&nbsp;&nbsp;&nbsp; </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="372" height="12"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </b>&nbsp; 
+            MergeSort(x+1, p);</TD> 
+            <TD width="38" height="12"></TD> 
+            <TD width="785" height="12">// e[x+1]<font face="Symbol">&nbsp; <span lang="en">
+            &pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span></font> 
+            e[p-1<font face="Symbol">] <span lang="en">&pound;</span> </font>e[p]&nbsp; </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="372" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scal(l, 
+            x, p);&nbsp;&nbsp;&nbsp;&nbsp;
+             </TD>
+            <TD width="38" height="12">   </TD>
+            <TD width="785" height="12">   // e[1]<font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[x]&nbsp;<font face="Symbol"><span lang="en">&pound;</span></font>e[x+1]<font face="Symbol">&nbsp; <span lang="en">
+            &pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span></font> 
+            e[p-1<font face="Symbol">] <span lang="en">&pound;</span> </font>e[p]&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="372" height="12">   <b>&nbsp;fi;</b><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong></TD>
+            <TD width="38" height="12">   </TD>
+            <TD width="785" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"><strong>&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="372" height="1">   &nbsp;<STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG></TD>
+            <TD width="38" height="1">   </TD>
+            <TD width="785" height="1">   </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p style="text-align: left"><b>Przykład 5.2</b></P>
+
+<p>Przyjrzyjmy się dokładniej, jak wygląda proces dzielenia ciągu na fragmenty i 
+jak te fragmenty  
+są następnie scalane w kolejnych etapach algorytmu. W poniższej tabeli zaznaczono tylko numery 
+pozycji rozdzielanych i następnie scalanych dla ciągu o szesnastu elementach.</p>
+<center>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber1" bgcolor="#FFFFE0">
+  <tr>
+    <td width="100%" align="center" bgcolor="#FFFFCC" colspan="16">
+    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16</td>
+  </tr>
+  <tr>
+    <td width="48%" align="center" bgcolor="#FFFFCC" colspan="8">1,2,3,4,5,6,7,8</td>
+    <td width="52%" align="center" bgcolor="#FFFFCC" colspan="8">9,10,11,12,13,14,15,16</td>
+  </tr>
+  <tr>
+    <td width="24%" align="center" bgcolor="#FFFFCC" colspan="4">1,2,3,4</td>
+    <td width="24%" align="center" bgcolor="#FFFFCC" colspan="4">5,6,7,8</td>
+    <td width="24%" align="center" bgcolor="#FFFFCC" colspan="4">9,10,11,12</td>
+    <td width="28%" align="center" bgcolor="#FFFFCC" colspan="4">13,14,15,16</td>
+  </tr>
+  <tr>
+    <td width="12%" align="center" bgcolor="#FFFFCC" colspan="2">1,2</td>
+    <td width="12%" align="center" bgcolor="#FFFFCC" colspan="2">3,4</td>
+    <td width="12%" align="center" bgcolor="#FFFFCC" colspan="2">5,6</td>
+    <td width="12%" align="center" bgcolor="#FFFFCC" colspan="2">7,8</td>
+    <td width="12%" align="center" bgcolor="#FFFFCC" colspan="2">9,10</td>
+    <td width="12%" align="center" bgcolor="#FFFFCC" colspan="2">11,12</td>
+    <td width="14%" align="center" bgcolor="#FFFFCC" colspan="2">13,14</td>
+    <td width="14%" align="center" bgcolor="#FFFFCC" colspan="2">15,16</td>
+  </tr>
+  <tr>
+    <td width="6%" align="center" bgcolor="#FFFFCC">1</td>
+    <td width="6%" align="center" bgcolor="#FFFFCC">2</td>
+    <td width="6%" align="center" bgcolor="#FFFFCC">3</td>
+    <td width="6%" align="center" bgcolor="#FFFFCC">4</td>
+    <td width="6%" align="center" bgcolor="#FFFFCC">5</td>
+    <td width="6%" align="center" bgcolor="#FFFFCC">6</td>
+    <td width="6%" align="center" bgcolor="#FFFFCC">7</td>
+    <td width="6%" align="center" bgcolor="#FFFFCC">8</td>
+    <td width="6%" align="center" bgcolor="#FFFFCC">9</td>
+    <td width="6%" align="center" bgcolor="#FFFFCC">10</td>
+    <td width="6%" align="center" bgcolor="#FFFFCC">11</td>
+    <td width="6%" align="center" bgcolor="#FFFFCC">12</td>
+    <td width="7%" align="center" bgcolor="#FFFFCC">13</td>
+    <td width="7%" align="center" bgcolor="#FFFFCC">14</td>
+    <td width="7%" align="center" bgcolor="#FFFFCC">15</td>
+    <td width="7%" align="center" bgcolor="#FFFFCC">16</td>
+  </tr>
+  <tr>
+    <td width="12%" colspan="2" align="center" bgcolor="#FFFFCC">1,2</td>
+    <td width="12%" colspan="2" align="center" bgcolor="#FFFFCC">3,4</td>
+    <td width="12%" colspan="2" align="center" bgcolor="#FFFFCC">5,6</td>
+    <td width="12%" colspan="2" align="center" bgcolor="#FFFFCC">7,8</td>
+    <td width="12%" colspan="2" align="center" bgcolor="#FFFFCC">9,10</td>
+    <td width="12%" colspan="2" align="center" bgcolor="#FFFFCC">11,12</td>
+    <td width="14%" colspan="2" align="center" bgcolor="#FFFFCC">13,14</td>
+    <td width="14%" colspan="2" align="center" bgcolor="#FFFFCC">15,16</td>
+  </tr>
+  <tr>
+    <td width="24%" align="center" colspan="4" bgcolor="#FFFFCC">1,2,3,4</td>
+    <td width="24%" align="center" colspan="4" bgcolor="#FFFFCC">5,6,7,8</td>
+    <td width="24%" align="center" colspan="4" bgcolor="#FFFFCC">9,10,11,12</td>
+    <td width="28%" align="center" colspan="4" bgcolor="#FFFFCC">13,14,15,16</td>
+  </tr>
+  <tr>
+    <td width="48%" align="center" colspan="8" bgcolor="#FFFFCC">1,2,3,4,5,6,7,8</td>
+    <td width="52%" align="center" colspan="8" bgcolor="#FFFFCC">
+    9,10,11,12,13,14,15,16</td>
+  </tr>
+  <tr>
+    <td width="100%" align="center" colspan="16" bgcolor="#FFFFCC">
+    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16</td>
+  </tr>
+</table>
+</center>
+
+<p style="text-align: left">Na rysunku 4.3 przedstawiono drzewo rekurencyjnych 
+wywołań procedury MergeSort dla n=16. Idąc w dół tego drzewa dokonujemy podziału 
+każdego zadania na dwa podzadania. Następnie wracając, scalamy odpowiadające 
+fragmenty ciągu.</P>
+
+<p style="text-align: center">
+<img border="0" src="Rysunki/Rysunek4_3.gif" width="394" height="251"></P>
+
+<p style="text-align: left"><b>Poprawność algorytmu:</b></P>
+
+<p style="text-align: left">Dowód poprawności algorytmu przeprowadzimy przez 
+indukcję ze względu na długość sortowanego ciągu. Jeżeli l = p to ciąg zawiera 
+tylko jeden element i&nbsp; jest uporządkowany. Procedura MergeSort nie wykona w 
+tym przypadku żadnych porównań. Rozważmy wykonanie algorytmu MergeSort dla ciągu 
+e[l],... ,e[p], gdzie l&lt; p i załóżmy, że procedura MergeSort sortuje poprawnie 
+dowolny ciąg o długości mniejszej. Skoro l &lt; p, to zostanie wykonana instrukcja 
+warunkowa, będąca treścią procedury MergeSort. Ponieważ x = (l+p) div 2, więc (x 
+- l) &lt; (p - l) oraz p-(x+1) &lt; (p - l). Oba ciągi e[l], ..., e[x] oraz e[x+1], 
+..., e[p] są krótsze od ciągu e[l],... ,e[p]. Na mocy założenia indukcyjnego, po wykonaniu instrukcji 
+&quot;MergeSort(l,x);&quot; otrzymamy</P>
+
+<p style="text-align: center">&nbsp;e[l]<font face="Symbol">&nbsp; <span lang="en">&pound;</span> </font>...<font face="Symbol"><span lang="en">&pound;</span></font> 
+            e[x-1<font face="Symbol">] <span lang="en">&pound;</span> </font>e[x],&nbsp; </P>
+
+<p style="text-align: left">a po wykonaniu &quot;MergeSort(x+1,p);&quot;</P>
+
+<p style="text-align: center">&nbsp;e[x+1]<font face="Symbol">&nbsp; <span lang="en">
+&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span></font> e[p-1<font face="Symbol">] <span lang="en">
+&pound;</span> </font>e[p].</P>
+
+<p style="text-align: left">Na mocy twierdzenia o poprawności procedury Scal, po 
+wykonaniu instrukcji &quot;Scal(l,x,p)&quot; cały rozważany ciąg jest posortowany:</P>
+
+<p style="text-align: center">e[l]<font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[x]&nbsp;<font face="Symbol"><span lang="en">&pound;</span></font>e[x+1]<font face="Symbol">&nbsp; <span lang="en">
+&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span></font> e[p-1<font face="Symbol">] <span lang="en">
+&pound;</span> </font>e[p].</P>
+
+<p style="text-align: left">&nbsp; Wynika stąd, że dla dowolnego ciągu algorytm 
+wykonuje poprawnie zadanie sortowania. </P>
+
+<p><div class="lemat">
+  <p>Twierdzenie 5.2&nbsp; Algorytm MergeSort jest całkowicie  poprawnym rozwiązaniem problemu sortowania, 
+  w każdej strukturze danych z liniowym porządkiem <span lang="en"><font face="Symbol">&pound;</font></span>.</p>
+</div>
+<p></p>
+
+<p><b>Koszt algorytmu: </b></p>
+
+<p>Niech T(n) będzie liczbą porównań wykonanych przez algorytm MergeSort dla 
+ciągu o n elementach. Załóżmy dla wygody, że n jest potęgą dwójki, np. n= 2<sup><font face="Verdana">k</font></sup>. 
+Ponieważ scalenie dwóch ciągów o długości n/2 wymaga n porównań, zatem mamy 
+następujące równanie rekurencyjne, opisujące koszt algorytmu MergeSort</p>
+
+<p style="text-align: center">T(1) = 0,&nbsp; T(2<sup><font face="Verdana">k</font></sup>) 
+= 2 T(2 <sup><font face="Verdana">k-1</font></sup>) + n.</p>
+
+<p>Rozwiązaniem tego równania jest funkcja&nbsp; T(n) = <font face="Symbol">Q</font>(n 
+lg n). Koszt algorytmu MergeSort mierzony liczbą wykonanych porównań elementów 
+ciągu jest liniowo-logarytmiczny ze względu na rozmiar danych. Bardziej wnikliwa 
+analiza scalania pokazuje, że algorytm MergeSort wymaga <font face="Symbol">Q</font>(n 
+lg n) porównań, zarówno w przypadku najlepszym, jak i w przypadku pesymistycznym.</p>
+<p><b>Uwaga.</b> </p>
+<p>1. Algorytm MergeSort nadaje się doskonale do zrównoleglenia: wywołania rekurencyjne mogą 
+być przecież realizowane przez dwa różne procesory. <br>
+&nbsp;2. Przyglądając się bliżej algorytmowi MergeSort dojdziemy do wniosku, że 
+etapy algorytmu związane z dzieleniem zadania na podzadania możemy pominąć. 
+Możemy zacząć od razu od scalania, łącząc najpierw elementy w pary 
+uporządkowane, potem w czwórki itd. Taka realizacja algorytmu nie wymaga 
+użycia rekursji. Niestety struktura algorytmu jest wtedy bardziej skomplikowana. 
+Dokładne zapisanie tego algorytmu&nbsp; pozostawiamy Czytelnikowi jako 
+ćwiczenie.</p>
+<p><b>Pytanie 5</B>: Ile razy zostanie wykonana instrukcja&nbsp; &quot;x:= (l+p)/2&quot;, 
+jeżeli algorytm MergeSort zastosowano do ciągu n elementowego, a n jest potęgą 
+dwójki?  </P>
+
+<!-- <p>Odpowiedź: n-1 razy.</P> -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'n-1 razy')">
+</form>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main04_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main04_cw.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

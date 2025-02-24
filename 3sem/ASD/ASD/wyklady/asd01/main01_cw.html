@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td-->
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left"><A HREF="main01_p7.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="../asd02/index02.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td>
+</tr></table>
+
+<br clear="all"><A NAME="EDU.wyklad.zadania"></A><br clear="all">
+<div class="tytulpunktu">Ćwiczenia do wykładu 01</div>
+<BR><BR>
+
+
+<P>Część I  Notacja asymptotyczna.</P>
+
+
+<OL>
+<LI>Dla każdej z poniższych funkcji znajdź najmniejszą liczbę k taką, że f(n) = O(n<SUP>k</SUP> ).</LI>
+
+<UL>
+<LI>f(n) = 6 n<SUP>2 </SUP>+ 3n + 20</LI>
+<LI>f(n) = (n<SUP>2 </SUP>+ 1)( 2n<SUP>4 </SUP>+ 3n - 8)</LI>
+<LI>f(n) = ( n<SUP>6 </SUP>+ 2n<SUP>3</SUP>  +1)/(n<SUP>3</SUP> + 1)</LI>
+</UL>
+
+<BR>
+
+<LI>Zbadaj, która z równości jest prawdziwa:</LI>
+<UL>
+<LI>2 <SUP>n+1</SUP> = O(2<SUP>n</SUP>)</LI>
+<LI>2<SUP> 2n</SUP> = O(2<SUP>n</SUP>)</LI>
+<LI>50n +100 = O(n)</LI>
+<LI>n<SUP>3</SUP> + 6n  + 4 = O(n<SUP>6</SUP>)</LI>
+</UL>
+
+
+<BR>
+<LI>Podaj przykłady ciągów  a(n) i b(n) takich, że a(n) = O(n<SUP>6</SUP>), b(n)= O(n<SUP>2</SUP>),
+ ale a(n)/b(n) nie jest O(n<SUP>4</SUP>).</LI>
+
+<BR><BR>
+<LI>Udowodnij, że jeśli a(n)= O(c(n))  i b(n)= O(c(n)), to a(n)+b(n)= O(c(n)).</LI>
+
+<BR><BR>
+<LI>Uporządkuj, ze względu na rosnący rząd  następujące funkcje:<BR>
+lg n!, 2<SUP>3lg n</SUP>,  n<SUP>2</SUP>, 2<SUP>lg n</SUP>, n!, log n</LI>.<BR><BR>
+<LI> Zaproponuj algorytm pozwalający na wyliczenie sumy teoriomnogościowej dwóch zbiorów skończonych. 
+Zakładamy, że zbiory są zapisane w tablicach A i B. Przedyskutuj trzy przypadki :</LI>
+<UL>
+<LI>Elementy zbiorów są dowolne, ale ich przecięcie jest puste.</LI>
+<LI>Elementy zbiorów są liczbami naturalnymi niewiększymi od k.</LI>
+<LI>Elementy zbiorów są zapisane w tablicach A i B jako ciągi uporządkowane 
+rosnąco.</LI>
+</UL>
+</ol>
+
+<BR><BR>
+<P>Część II  Weryfikacja programów.</P>
+
+<ol>
+  <li>We wszystkich podanych przykładach n jest liczbą naturalną,&nbsp; A[1..n] 
+  tablicą liczb całkowitych, a rozważaną strukturą danych jest zbiór liczb 
+  rzeczywistych z operacjami dodawania i mnożenia oraz relacjami &lt; i
+  <span lang="en"><font face="Symbol">&pound;</font></span>. Zbadać co robi podany 
+  algorytm formułując&nbsp; odpowiedni niezmiennik pętli i warunek końcowy:<br>
+&nbsp;<ul>
+    <li>{ i := 1; s := 0; while ( i <span lang="en"><font face="Symbol">&pound;</font></span> 
+    n) do s := s + A[i]; i := i + 1; od },</li>
+    <li>{ i := 1; s := 1; while ( i <span lang="en"><font face="Symbol">&pound;</font></span> 
+    n) do s := s <span lang="en"><font face="Symbol">´</font></span> i; i := i + 1; od},</li>
+    <li>{ i := 0; z := 0; while ( i&lt; n) do z := z+(2i+1); i := i+1; od},</li>
+    <li>{ i := 1; s := 0; while ( i <span lang="en"><font face="Symbol">&pound;</font></span> 
+    n) do if ( x = A[i]) then s:= s+1 fi; od;&nbsp; i := i + 1;}.<br>
+&nbsp;</li>
+  </ul>
+  </li>
+  <li>Udowodnij, stosując zasadę indukcji lub metodą niezmiennika pętli, że 
+  wartością zmiennej result, po wykonaniu następującego algorytmu w strukturze 
+  liczb rzeczywistych jest n!:<br>
+  { i:=2; result :=1; while (i &lt; n+1) do&nbsp; result := result <span lang="en">
+  <font face="Symbol">´</font></span> i; i := i+1; od;}<br>
+&nbsp;</li>
+  <li>Zbadaj, która z wymienionych formuł <br>
+  (a)&nbsp; (i&lt; n <span style="font-family: Symbol">&Ugrave;</span> n<span style="font-family: Symbol">Î</span> 
+  N)&nbsp;&nbsp;&nbsp;&nbsp; (b)&nbsp; (s= i<sup>2</sup> + i
+  <span style="font-family: Symbol">&Ugrave;</span> i<span style="font-family: Symbol"> &pound;</span> 
+  n)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (c)&nbsp; (2s = i<sup>2</sup> - i
+  <span style="font-family: Symbol">&Ugrave;</span> i<span style="font-family: Symbol"> &pound;</span> 
+  n+1 )&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (d)&nbsp; ( i = i+1<span style="font-family: Symbol"> &Ugrave;</span> 
+  s =&nbsp; s + i) <br>
+  jest niezmiennikiem&nbsp; pętli w podanym&nbsp; poniżej algorytmie A, jeśli wiadomo, n jest 
+  liczbą naturalną większą od zera.<br>
+  A = { i := 1; s :=&nbsp; 0;&nbsp;&nbsp;while ( i
+  <span lang="EN-US" style="font-family: Symbol">&pound;</span>&nbsp;n)&nbsp; do &nbsp;s 
+  :=&nbsp; s + i; i :=&nbsp; i + 1; od&nbsp;}. <br>
+&nbsp;</li>
+  <li>Rozważmy następujący algorytm AXX w strukturze liczb rzeczywistych 
+  dodatnich. Zbadaj co robi ten algorytm?<br>
+  AXX{z:=0;
+  if x&lt;1 then y :=1 else y := x fi;&nbsp;
+  while abs(y-z)&gt;eps do&nbsp;
+  z := y;
+  y := (z+x/z)/2&nbsp;
+  od; result := y}<br>
+&nbsp;</li>
+  <li>Dana jest funkcja f : (a, b) --&gt; R odwzorowująca przedział otwarty (a,b) 
+  w zbiór liczb rzeczywistych, oraz liczba rzeczywista dodatnia epsilon. 
+  Uzasadnij, że podany niżej algorytm Newton znajduje przybliżenie jakiegoś pierwiastka tej funkcji w przedziale (a,b), 
+  przy założeniu, że a &lt; b, oraz f(a) <span lang="en">
+  <font face="Symbol">´</font></span> f(b) &lt; 0.<br>
+  Newton{aa:=a; bb:=b;&nbsp;
+  while (abs(bb - aa) &gt; epsilon) do&nbsp; c := (bb+aa)/2;
+  if f(c) <span lang="en">
+  <font face="Symbol">´</font></span> f(aa)&lt;0 then
+  bb := c
+  else aa := c
+  fi } </li>
+</ol>
+
+<p>
+
+<BR>
+</p>
+<P>Część III  Złożoność.</P>
+
+<ol>
+  <li>Oszacuj koszt algorytmu postaci {P1;P2}, wiedząc że&nbsp; P1 jest 
+  algorytmem o koszcie liniowym, a funkcja koszt algorytmu P2&nbsp; jest 
+  kwadratowa względem rozmiaru danych.<br>
+&nbsp;</li>
+  <li>Jaki jest koszt algorytmu&nbsp;&nbsp; {i:=0; while i&lt;n do P; i := i+1; od 
+  }, jeżeli wiadomo, że wykonanie algorytmu P zależy od parametru i, a jego 
+  funkcja kosztu wyraża się wzorem T(P,i) =&nbsp; i+1?<br>
+&nbsp;</li>
+  <li>Niech A będzie algorytmem o złożoności T(n) = lg n. Wykonanie tego 
+  algorytmu dla danych rozmiaru n=32 na pewnym komputerze zajmuje 16s. Ile 
+  czasu zajmie wykonanie tego algorytmu dla danych o rozmiarze n=8? Jaki jest 
+  maksymalny rozmiar zadania, które można wykonać w czasie&nbsp; 32s?<br>
+&nbsp;</li>
+  <li><span style="font-size: 12.0pt; font-family: Times New Roman">Jakiego 
+  rozmiaru zadanie można zrealizować na pewnym komputerze w&nbsp; czasie t&nbsp; przy 
+  pomocy algorytmu A o złożoności T(A,n) = n<sup>2</sup>, jeśli wiadomo, że&nbsp; 
+  ten sam algorytm na komputerze 64 razy wolniejszym wykonuje w czasie t zadanie 
+  o rozmiarze 16?</span><br>
+&nbsp;</li>
+</ol>
+<br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+<td align="left"><A HREF="main01_p7.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="../asd02/index02.html" TARGET="_top" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td>
+  </tr>
+</table>
+
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

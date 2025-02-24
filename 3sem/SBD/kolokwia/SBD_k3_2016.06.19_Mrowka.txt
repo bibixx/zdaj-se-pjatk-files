@@ -1,0 +1,27 @@
+PL_SQL poprawa
+Wszystkie nazwy tworzonych obiektów (tabel czy procedur) powinny zawieraæ  numer studenta. 
+W ramach rozwi¹zania proszê podaæ skrypty poleceñ PL-SQl, ich przyk³adowe wywo³ania i uzyskany wynik. Plik nale¿y umieœciæ w odpowiednim folderze zadañ portalu EDUX
+
+Zadanie 1    (2pkt)
+
+Dodaj do bazy tabelê Stat_przedmiot {Przedmiot_Id PK FK,  liczba_niedost} Przy u¿yciu instrukcji insert wype³nij j¹ danymi
+
+Zadanie 2    (4 pkt)
+
+Napisz procedurê, która przy pomocy kursora wype³ni tabelê Stat_przedmiot  danymi  wyliczaj¹cymi liczbê ocen niedostatecznych wystawionych z ka¿dego przedmiotu oraz wypisze nazwy przedmiotów z tabeli PRZEDMIOT wraz z liczb¹ ocen niedostatecznych
+
+Forma komunikatu:
+
+Matematyka - liczba dwójek =  5
+
+………………….
+
+Zadanie 3(4p)    
+
+Napisz wyzwalacz, który  poprawi  tabelê Stat_przedmiot  (z zadania 1) zawsze, gdy dane w tabeli Stat_przedmiot powinny siê zmieniæ. (Zak³adamy, ¿e Katedry nie ulegaj¹ zmianie)
+
+Podaj treœæ wyzwalacza oraz instrukcje testuj¹ce i uzyskan¹ odpowiedŸ serwera
+
+Zadanie 3 alternatywnie (2p)  
+
+Utwórz wyzwalacz, który przy wstawianiu Studenta sprawdzi czy data rekrutacji jest mniejsza lub równa dacie disiejszej  . W przeciwnym przypadku wyzwalacz powinien zg³osiæ b³¹d i nie dopuœciæ do wstawienia rekordu dotycz¹cego przysz³oœci. 

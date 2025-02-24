@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<link rel="stylesheet" type="text/css" href="pliki/main.css">
+<title>02 - Skaner sieci - Ethereal</title>
+</head>
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+<table border="0" cellpadding="5" cellspacing="5" height="100%" width="100%">
+<tbody><tr heigh="100%"><td bgcolor="#e6f0eb" valign="top" width="25%"><br>
+        <a class="menulink" href="01%20-%20Cwiczenia%20Linux%20Knoppix.html" onfocus="blur();" title="Ćwiczenia Linux/Knoppix" onmouseover="window.status='Ćwiczenia Linux/Knoppix'; return true;" onmouseout="window.status=''; ">
+	1. Ćwiczenia Linux/Knoppix</a><br>
+	<br>
+	<a class="menulink" href="02%20-%20Skaner%20sieci%20-%20Ethereal.html" onfocus="blur();" title="Skaner sieci - Ethereal" onmouseover="window.status='Skaner sieci - Ethereal'; return true;" onmouseout="window.status=''; ">
+	<b>2. Skaner sieci - Ethereal</b></a><br>
+	<br>
+	<a class="menulink" href="03%20-%20Automaty%20skonczone.html" onfocus="blur();" title="Automaty skończone" onmouseover="window.status='Automaty skończone'; return true;" onmouseout="window.status=''; ">
+	3. Automaty skończone</a><br>
+	<br>
+	<a class="menulink" href="04%20-%20SMTP,%20POP3,%20HTTP%20kontynuacja.html" onfocus="blur();" title="SMTP, POP3, HTTP kontynuacja" onmouseover="window.status='SMTP, POP3, HTTP kontynuacja'; return true;" onmouseout="window.status=''; ">
+	4. SMTP, POP3, HTTP kontynuacja</a><br>
+	<br>
+	<a class="menulink" href="05%20-%20Warstwa%20transportowa.html" onfocus="blur();" title="Warstwa tranportowa" onmouseover="window.status='Warstwa tranportowa'; return true;" onmouseout="window.status=''; ">
+	5. Warstwa tranportowa</a><br>
+	<br>
+	<a class="menulink" href="07%20-%20Protokoly%20rutingu.html" onfocus="blur();" title="Protokoły rutingu" onmouseover="window.status='Protokoły rutingu'; return true;" onmouseout="window.status=''; ">
+	7. Protokoły rutingu</a><br>
+	<br>
+	<a class="menulink" href="08%20-%20Warstwa%20sieci.html" onfocus="blur();" title="Warstwa sieci" onmouseover="window.status='Warstwa sieci'; return true;" onmouseout="window.status=''; ">
+	8. Warstwa sieci</a><br>
+	<br>
+	<a class="menulink" href="09%20-%20Powtorzenie%20materialu.html" onfocus="blur();" title="Powtórzenie materiału" onmouseover="window.status='Powtórzenie materiału'; return true;" onmouseout="window.status=''; ">
+	9.  Powtórzenie materiału</a><br>
+        <br>
+        <a class="menulink" href="javascript:window.close();" onfocus="blur();" onmouseover="window.status='Wyjście'; return true;" onmouseout="window.status=''; ">
+        Wyjście</a></td>
+<td bgcolor="whitesmoke" valign="top"><form name="f" method="post" action="eld.asp?id=39&amp;sid=116&amp;z=1"><p></p><h4>Ogólne założenia</h4><p></p><p>Laboratoria
+mają na celu przybliżyć wewnętrzną budowę protokołów, pokazać
+odwzorowanie modelu ISO/OSI w praktyce oraz przybliżyć działanie
+skanerów sieci. </p><p></p><h4>Zadanie 1</h4><p></p><p>Zapoznanie się z Ethereal'em badając żądanie HTTP do strony HTML</p><p>Rysunek 1</p><p><img src="pliki/02_01a.gif"></p><p></p><ol><p></p><p>    </p><li>Na
+przykładzie obserwacji w skanerze pakietów, opisz nagłówki, jakie są
+dodawane do danych przez każdą z warstw. Nazwij te nagłówki nazwami
+protokołów z odpowiednich warstw, zaobserwowanych w skanerze pakietów,
+i uzupełnij diagram, pokazujący enkapsulację i dekapsulację danych
+przez stos protokołów.<p></p><p>    </p></li><li>Wyobraź sobie, że dwa
+hosty przedstawione na diagramie są połączone za pośrednictwem rutera.
+Ruter jest to urządzenie sieciowe posiadające warstwy 1, 2, 3. Narysuj
+samodzielnie diagram taki, jak powyższy, przedstawiający komunikację
+między hostami za pośrednictwem rutera, i opisz na diagramie jak
+przebiega enkapsulacja i dekapsulacja.<p></p><p></p></li></ol><p></p><p></p><h4>Zadanie 2</h4><p></p><p>Poniższy diagram ma przedstawiać fragmentację i defragmentację pakietów</p><p>Rysunek 2</p><p><img src="pliki/02_02.gif"></p><p></p><ol><p></p><p></p><li>Uzupełnij go, zakładając, że każda z warstw T, S, Ł dzieli otrzymane dane co najmniej na dwie części.<p></p><p>    </p></li><li>Przyjmij
+założenia, że: dane mają 60KB, maksymalny rozmiar jednostki danych (bez
+nagłówka) wynosi: w warstie T: 12 KB, w warstwie S: 3KB, w warstwie Ł:
+1KB. Zakładając, że nagłówek TCP oraz IP mają po 20 bajtów, zaś
+nagłówek Ethernet: 26 bajtów, oblicz, ile informacji jest dodawane
+przez stos protokołów do danych. <p></p><p>    </p></li><li>Nazwij odpowiednio jednostkę danych w każdej z warstw A, T, S, Ł, F.<p></p><p>    </p></li><li>Czy nagłówki TCP1 i TCP2 narysowane na diagramie są jednakowe? Jeśli nie, to czym się różnią?<p></p><p>    </p></li><li>Jakie adresy mogą być stosowane przez każdą z warstw A, T, S, Ł? <p></p><p>    </p></li><li>W sieci działa usługa IP_To_MAC która tłumaczy adresy IP na adresy MAC. Która warstwa będzie korzystała z tej usługi?<p></p><p></p></li></ol><p></p><p></p><h4>Zadanie 3</h4><p></p><p>1. Napisz implementację funkcji udostępnianej przez warstwę sieci dla warstwy transportu:</p><p></p><pre>//wysyła segment otrzymany od warstwy transportu na podany adres
+void Wyślij_Segment( Segment dane, Adres odbiorca );</pre><p>Funkcja
+ta stanowi część interfejsu pomiędzy warstwą transportu oraz warstwą
+sieci. Dane są przesyłane przez warstwę transportu do warstwy sieci w
+postaci segmentów za pomocą wywołania tej funkcji. Ponieważ warstwa
+sieci posługuje się adresami IP, warstwa transportu musi jej dostarczyć
+taki adres. Funkcja Wyślij_Segment ma za zadanie utworzyć pakiet z
+segmentu (zakładamy, że segment jest mały i nie nastąpi fragmentacja);
+w nagłówku pakietu trzeba wpisać adres odbiorcy. Następnie warstwa
+sieci musi jeszcze wybrać interfejs, na którym ma wysłać ten pakiet
+tak, żeby dotarł on do odbiorcy. Potem warstwa sieci przekazuje pakiet
+do warstwy łącza, która go wyśle, korzystając z odpowiedniej funkcji
+warstwy łącza.</p><p></p><p>Warstwa łącza udostępnia warstwie sieci funkcję:</p><pre>//wysyła pakiet p, utworzony przez warstwę sieci, poprzez interfejs i
+void Wyślij_Pakiet( Pakiet p, Interfejs i );</pre><p>Biblioteka stosu protokołów udostępnia funkcje:</p><pre>//tworzy nagłówek zawierający adres nadawcy i odbiorcy
+Nagłówek Utwórz_Nagłówek( Adres nadawca, Adres odbiorca );
+
+//tworzy pakiet z nagłówka i segmentu
+Pakiet Utwórz_Pakiet( Nagłówek n, Segment s );
+
+//wybiera interfejs, przez który należy wysłać pakiet
+Interfejs Wybierz_Interfejs( Adres a );
+
+//zwraca adres hosta, na którym została wywołana
+Adres Mój_Adres();</pre><p>2. Zaimplementuj funkcję warstwy sieci, wywoływaną przez warstwę łącza:</p><pre>//odbiera pakiet od warstwy łącza
+void Odbierz_Pakiet( Pakiet p );</pre><p>Ta
+funkcja warstwy sieci odbiera otrzymany pakiet od warstwy łącza. Pakiet
+ten może być zaadresowany do naszego hosta, i wtedy należy usunąć
+nagłówek warstwy sieci i przekazać dane (segment, bo zakładamy że nie
+ma fragmentacji) do warstwy transportu. Jeśli jednak pakiet nie jest
+przeznaczony dla naszego hosta, to trzeba go przekazać dalej - wysłać
+przez odpowiedni interfejs.</p><p></p><p>Oprócz funkcji opisanych powyżej, mamy także funkcje warstwy transportu:</p><pre>//odbiera segment od warstwy sieci
+void Odbierz_Segment( Segement s );</pre><p>Biblioteka stosu protokołów:</p><pre>//usuwa nagłówek warstwy sieci z pakietu
+Segment Usuń_Nagłówek( Pakiet p );
+
+//zwraca adres odbiorcy zapisany w nagłówku pakietu
+Adres Adres_Odbiorcy( Pakiet p );</pre><p>Dostępny jest również operator porównujący obiekty Adres.</p><p></p><h4>Zadanie 4</h4><p></p><p>Na
+hoście była zainstalowana karta Ethernet. Host był podłączony kablem
+Ethernet z siecią. Teraz karta Ethernet została wyjęta i zastąpiona
+przez kartę optyczną, a host został połączony z siecią za pomocą
+światłowodu. Zakładamy, że zostały wykonane wszystkie czynności na
+zewnętrznym sprzęcie potrzebne do tego, żeby host komunikował się nową
+kartą. Nie zostały jedynie wykonane żadne zmiany w oprogramowaniu ani
+konfiguracji hosta.</p><p></p><ol><p></p><p>    </p><li>Opisz, w jakich warstwach trzeba dokonać zmian (być może w żadnych), żeby host mógł się poprawnie komunikować z siecią. <p></p><p>    </p></li><li>Co
+trzeba zrobić, żeby host wykorzystywał nową kartę, gdyby karta optyczna
+została włożona dodatkowo, a stara karta Ethernetowa i połączenia
+kablowe nadal pozostały na miejscu? Jak można wtedy zamienić z powrotem
+komunikację na Ethernet, jeśli światłowód ulegnie uszkodzeniu?<p></p><p></p></li></ol><p></p><p></p><h4>Zadanie 5</h4><p></p><p>Rysunek 3</p><p><img src="pliki/02_03.gif"></p><p>Diagram
+przedstawia sieć, w której dwa hosty połączone są za pośrednictwem
+rutera. Ruter w warstwie sieci używa protokołu IPv4. Wybierz te z
+pośród narysowanych czterech stosów protokołów A, B, C, D i E, które
+umożliwiają komunikację obu hostom.</p><p></p><h4>Zadanie 6</h4><p></p><p></p><ol><p></p><p>    </p><li>które z warstw realizują komunikację typu end-to-end?<p></p><p>    </p></li><li>które warstwy mogą posiadać funkcje:<p></p><p>    </p><ul><p></p><p>        </p><li>niezawodnej komunikacji<p></p><p>        </p></li><li>kontroli przeciążeń<p></p><p>        </p></li><li>ochrony informacji<p></p><p>        </p></li><li>komutacji<p></p><p>        </p></li><li>multipleksacji<p></p><p>    </p></li></ul><p></p><p></p><p></p></li></ol><p></p></form></td></tr></tbody></table></body></html>

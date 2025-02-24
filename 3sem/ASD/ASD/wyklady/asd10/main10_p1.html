@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr-->
+<!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main10_p0.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;
+      <a href="main10_p2.html" target="main" class="NAWIGACJA">nastêpny
+punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 2"></a><br clear="all">
+<div class="tytulpunktu">1. Kolejki priorytetowe</div>
+<p>Kolejki priorytetowe (ang. priority queue) s³u¿± do reprezentowania
+zbiorów skoñczonych, podobnie jak tablice, stosy i kolejki. Cech±
+szczególn± tej struktury jest liniowe uporz±dkowanie zbioru
+elementów.&nbsp; Za matematyczny wzorzec kolejki priorytetowej uwa¿ana
+jest tzw. standardowa struktura kolejek priorytetowych, w której
+kolejka jest po prostu skoñczonym zbiorem elementów pewnej
+uporz±dkowanej liniowo przestrzeni.</p>
+<p></p>
+<div class="def">Definicja 1.1&nbsp; Standardow± struktur±&nbsp;
+kolejek priorytetowych nazywamy dwusortowy system algebraiczny
+<center>
+<p style="text-align: center;"><b>PQ</b>(E) = &lt;&nbsp; PQ <span
+ lang="en"> <font face="Symbol">&#200;</font></span> E; min, insert,
+delmin,&nbsp; empty, <font face="Symbol"><span lang="en">&#163;</span>&nbsp;
+</font>&gt;,</p>
+</center>
+którego uniwersum sk³ada siê ze&nbsp; zbioru elementów (etykiet) E
+i&nbsp; zbioru PQ&nbsp; skoñczonych podzbiorów E. Ponadto,<br>
+<p style="text-align: left;">1. zbiór E jest liniowo uporz±dkowany
+przez relacjê&nbsp; <font face="Symbol"><span lang="en">&#163;</span>,</font></p>
+<p style="text-align: left;"><font face="Symbol">2.&nbsp; </font>a
+operacje struktury s± okre¶lone dla dowolnego skoñczonego zbioru
+X&nbsp; nastêpuj±co:</p>
+<blockquote>
+  <p style="text-align: left;">min(X) = najmniejszy element zbioru X, o
+ile X jest niepusty i nieokre¶lone w pp.</p>
+  <p style="text-align: left;">insert(e,X) = {e} <font face="Symbol"> <span
+ lang="en">&#200;</span>&nbsp; </font>X,<br>
+  <br>
+delmin(X) = X \ {min(X) }, gdy X jest niepusty i nieokre¶lone w pp.<br>
+  <br>
+empty(X) = true wttw X jest zbiorem pustym.</p>
+</blockquote>
+</div>
+<p></p>
+<p>Operacja insert pozwala do³±czyæ nowy element do zbioru. Wynikiem
+operacji jest zbiór, zatem, je¶li element e nale¿a³ do zbioru X przed
+wykonaniem operacji, to wynikiem bêdzie ten sam zbiór X. Wynikiem
+operacji min jest element najmniejszy zbioru, bêd±cego argumentem
+operacji. Jest oczywiste, ¿e wynik zale¿y nie tylko od zbioru X, ale od
+definicji relacji <font face="Symbol"><span lang="en">&#163;</span></font>,
+o której wiemy tylko, ¿e jest liniowym porz±dkiem.&nbsp; Operacja
+delmin usuwa element najmniejszy ze wzglêdu na przyjêty porz±dek <font
+ face="Symbol"><span lang="en">&#163;</span></font>. Obie operacje min i
+delmin s± operacjami czê¶ciowymi, nieokre¶lonymi dla zbioru pustego.</p>
+<p>Definicja 1.1 okre¶la nie jeden konkretny obiekt, ale ca³± klasê
+struktur w zale¿no¶ci od przyjêtego zbioru E i od rodzaju porz±dku
+liniowego elementów tego zbioru. Zauwa¿my, ¿e zarówno drzewa binarnych
+poszukiwañ (BST,&nbsp; AVL), jak i kopce s± strukturami takiego w³a¶nie
+typu - zapewniaj± implementacjê wszystkich wymienionych w standardowej
+strukturze kolejek priorytetowych operacji, a organizacja elementów, w
+zbiorach reprezentowanych przez te drzewa, zale¿y od przyjêtego
+porz±dku liniowego. </p>
+<p>W wielu zastosowaniach, nie jest istotne, jak dok³adnie jest
+reprezentowany zbiór i jak s± zaimplementowane operacje na nim.&nbsp;
+Zale¿y nam raczej na konkretnym zestawie operacji, które mogliby¶my
+wykonaæ szybko i zgodnie z naszymi intencjami. Korzystaj±c z gotowych
+bibliotek modu³ów, procedur czy klas, nie zastanawiamy siê nad
+szczegó³ami ich implementacji, raczej pos³ugujemy siê specyfikacj± by
+sprawdziæ, czy zapewniaj± po¿±dane cechy. </p>
+<p>Poniewa¿ operacje wymienione w standardowej strukturze kolejek
+priorytetowych mo¿na zaimplementowaæ na wiele ró¿nych sposobów,
+zajmijmy siê wyodrêbnieniem ich wspólnych cech, które pozwol± korzystaæ
+z nich zamiennie, i w oderwaniu od szczegó³ów implementacyjnych. Te
+wspólne cechy pozwol± okre¶liæ abstrakcyjne pojêcie kolejki
+priorytetowej, lub inaczej zdefiniowaæ specyfikacjê kolejek
+priorytetowych.</p>
+<p style="text-align: left;"><b>Specyfikacja struktury kolejek
+priorytetowych</b></p>
+<p style="text-align: left;">Abstrakcyjna struktura&nbsp; kolejek
+priorytetowych&nbsp; jest systemem algebraicznym, o dwusortowym
+uniwersum E <font face="Symbol"><span lang="en">&#200;</span> </font>&nbsp;PQ,
+w którym okre¶lone s±&nbsp; operacje </p>
+<blockquote>
+  <ul>
+    <li>
+      <p style="text-align: left;">insert : E<font face="Symbol"> <span
+ lang="en">´</span> </font>PQ <span lang="en"><font face="Symbol">&#174;</font></span>
+PQ</p>
+    </li>
+    <li>
+      <p style="text-align: left;">delmin : PQ <span lang="en"><font
+ face="Symbol"> &#174;</font></span> PQ</p>
+    </li>
+    <li>
+      <p style="text-align: left;">min: PQ <span lang="en"><font
+ face="Symbol">&#174;</font></span> E</p>
+    </li>
+    <li>
+      <p style="text-align: left;">empty: PQ <span lang="en"><font
+ face="Symbol">&#174;</font></span> B<sub><font face="Verdana">0</font></sub></p>
+    </li>
+  </ul>
+</blockquote>
+<p style="text-align: left;">oraz spe³nione s± nastêpuj±ce postulaty:</p>
+<blockquote>
+  <p style="text-align: left;">(PQ1) &lt;E , <font face="Symbol"><span
+ lang="en">&#163;</span> </font>&gt; jest zbiorem liniowo uporz±dkowanym,</p>
+  <p style="text-align: left;">(PQ2)&nbsp; <font face="Symbol"><span
+ lang="en"> &#216;</span> </font>empty(q) <span lang="en"><font
+ face="Symbol">&#174;</font></span>&nbsp; ((<font face="Symbol">"</font>e)
+member(e,q) <span lang="en"> <font face="Symbol">&#174;</font></span>&nbsp;
+min(q) <font face="Symbol"> <span lang="en">&#163;</span> </font>e),</p>
+  <p style="text-align: left;">(PQ3)
+member(e,insert(e,q)),&nbsp;&nbsp;&nbsp; (e <span lang="en"><font
+ face="Symbol">&#185;</font></span> e' <span lang="en"> <font face="Symbol">&#174;</font></span>&nbsp;
+member(e',q) <font face="Symbol"> <span lang="en">&#186;</span> </font>member(e',
+insert(e,q))<font face="Symbol">)&nbsp; </font></p>
+  <p style="text-align: left;">(PQ4) <font face="Symbol"><span
+ lang="en">&#216;</span> </font>memeber(min(q),delmin(q)),&nbsp;&nbsp; (e <span
+ lang="en"><font face="Symbol">&#185;</font></span> min(q) <span lang="en"><font
+ face="Symbol">&#174;</font></span> member(e,q) <font face="Symbol"><span
+ lang="en">&#186;</span> </font>member(e, delmin(q))<font face="Symbol">&nbsp;)
+  </font></p>
+  <p style="text-align: left;">(PQ5) instrukcja&nbsp; <b>while</b> not
+empty(q) <b>do</b> q := delmin(q) <b>od</b> nie zapêtla siê dla
+dowolnej kolejki priorytetowej q,</p>
+  <p>gdzie member(e,q) jest dodatkowo wyró¿nion± operacj± typu member :
+E<font face="Symbol"> <span lang="en">´</span> </font>PQ <span
+ lang="en"><font face="Symbol">&#174;</font></span> B<sub><font
+ face="Verdana">0</font></sub><font face="Verdana"><sub> </sub></font>zdefiniowan±
+nastêpuj±cym algorytmem</p>
+  <p style="text-align: center;">{boo := false; <b>while</b> (not
+empty(q) and not bool) <b>do</b> bool := (min(q) = e); q := delmin(q) <b>od</b>}</p>
+</blockquote>
+<p>Oczywi¶cie standardowa struktura kolejek priorytetowych<font
+ face="Symbol"> </font>spe³nia wszystkie wymienione postulaty, a
+operacja member(e,q) daje wynik true tylko wtedy, gdy e jest elementem
+zbioru reprezentowanego przez q.&nbsp;Postulat drugi&nbsp; okre¶la
+w³a¶ciwo¶ci wyniku operacji min: wszystkie elementy znajduj±ce siê w
+kolejce priorytetowej q musz± byæ wiêksze lub równe min(q). Postulat
+(PQ3) charakteryzuje operacjê insert: je¶li wykonamy operacjê
+insert(e,q), to na pewno&nbsp; e znajduje siê w kolejce priorytetowej q
+i bêdziemy mogli dotrzeæ do tego elementu po pewnej skoñczonej liczbie
+kroków (opisanych w algorytmie memeber).&nbsp; Co wiêcej operacja ta
+nie modyfikuje innych elementów, które ju¿ w q by³y. Postulat (PQ4)
+charakteryzuje wykonanie operacji delmin - to element minimalny zostaje
+w jej wyniku usuniêty, a inne elementy, które w kolejce priorytetowej q
+znajdowa³y siê przed wykonaniem operacji, bêd± siê tam znajdowa³y i po
+jej wykonaniu. Ostatni postulat (PQ5) zapewnia, ¿e zbiór dostêpnych
+elementów w dowolnej kolejce priorytetowej jest skoñczony. Zwróæmy
+uwagê na algorytmiczne sformu³owanie tego postulatu - niestety ¿adna
+formu³a klasycznej logiki nie mo¿e tej w³asno¶ci wyraziæ.</p>
+<p>Wszystkie postulaty (PQ1) - (PQ5) s± te¿ spe³nione przez operacje
+okre¶lone w kopcach, w drzewach binarnych poszukiwañ i w drzewach AVL.
+Struktury AVL, BST i kopca s±&nbsp; wiêc przyk³adami implementacji
+abstrakcyjnej struktury kolejek priorytetowych.</p>
+<p>Mo¿na udowodniæ wiêcej: dowolne dwa modele kolejek priorytetowych
+oparte na tym samym zbiorze elementów E s± izomorficzne. Wynika to
+natychmiast z nastêpuj±cego twierdzenia o reprezentacji
+stwierdzaj±cego, ¿e ka¿dy model przedstawionej specyfikacji kolejek
+priorytetowych jest izomorficzny z pewnym modelem standardowym.</p>
+<p></p>
+<div class="lemat">
+<p>Twierdzenie 1.1&nbsp;&nbsp; (O reprezentacji) Ka¿dy model postulatów
+(PQ1) - (PQ5) jest izomorficzny z pewnym modelem standardowym kolejek
+priorytetowych. </p>
+</div>
+<p></p>
+<p style="text-align: left;">&nbsp;</p>
+<p>Jaka p³ynie st±d korzy¶æ dla informatyka, programisty? Maj±c dan±
+konkretn± implementacjê kolejki priorytetowej mo¿emy pos³ugiwaæ
+siê&nbsp; dostarczonymi operacjami nie wchodz±c w szczegó³y
+implementacyjne i uzasadniaæ poprawno¶æ tworzonych nowych algorytmów w
+oparciu o w³asno¶ci&nbsp; wymienione w postulatach (PQ1)-(PQ5). W
+nastêpnym punkcie tego wyk³adu przedstawimy dwie ilustracje takiego
+podej¶cia.&nbsp; </p>
+<p style="text-align: left;"><b>Pytanie 1</b>: Jaka jest ró¿nica miêdzy
+kolejk± FIFO, a kolejk± priorytetow±?<br>
+<!-- Odpowied¼: W kolejce FIFO, pozycja elementu zale¿y tylko od kolejno&#65533;ci wstawiania, a w kolejce priorytetowej od relacji zachodz¹cej miêdzy elementami.</P> --></p>
+<form><input class="GUZIK" type="button"
+ value="-----Sprawd¼ odpowied¼-----" name="Klik0"
+ onclick="napis(this.form,' W kolejce FIFO, pozycja elementu zale¿y tylko od kolejno¶ci wstawiania, a w kolejce priorytetowej od relacji zachodz¹cej miêdzy elementami.')">
+</form>
+<p></p>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main10_p0.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main10_p2.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td-->
+<!--/tr--><!--/table-->
+</p>
+</body>
+</html>

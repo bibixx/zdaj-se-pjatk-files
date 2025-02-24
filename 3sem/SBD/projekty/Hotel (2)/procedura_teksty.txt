@@ -1,0 +1,60 @@
+SQL> select * from kategorie;
+
+ID_KATEGORII OPIS_KATEGORII
+------------ ------------------------------
+           1 single
+           2 double
+
+SQL> select * from goscie;
+select * from goscie
+              *
+B£¥D w linii 1:
+ORA-00942: tabela lub perspektywa nie istnieje
+
+
+SQL> select * from goœcie;
+
+ ID_GOSCIA IMIE       NAZWISKO             DATA_UR  ADRES                          DOW_OS        CZY_VIP
+---------- ---------- -------------------- -------- ------------------------------ ---------- ----------
+         1 IMIE2      NAZWISKO2            66/05/05 ADRES2                         DOW_OS2             0
+
+SQL> exec dodaj_goscia('Jan','Kowalski','55/04/11','Lipowa 3','456123',1);
+
+Procedura PL/SQL zosta³a zakoñczona pomyœlnie.
+
+SQL> select * from goœcie;
+
+ ID_GOSCIA IMIE       NAZWISKO             DATA_UR  ADRES                          DOW_OS        CZY_VIP
+---------- ---------- -------------------- -------- ------------------------------ ---------- ----------
+         1 IMIE2      NAZWISKO2            66/05/05 ADRES2                         DOW_OS2             0
+         2 Jan        Kowalski             55/04/11 Lipowa 3                       456123              1
+
+SQL> exec rezerwuj_vip(1,'88/12/11','88/12/15',1);
+
+Procedura PL/SQL zosta³a zakoñczona pomyœlnie.
+
+SQL> /
+
+ ID_GOSCIA IMIE       NAZWISKO             DATA_UR  ADRES                          DOW_OS        CZY_VIP
+---------- ---------- -------------------- -------- ------------------------------ ---------- ----------
+         1 IMIE2      NAZWISKO2            66/05/05 ADRES2                         DOW_OS2             0
+         2 Jan        Kowalski             55/04/11 Lipowa 3                       456123              1
+
+SQL> exec rezerwuj_vip(1,'88/12/11','88/12/15',1);
+
+Procedura PL/SQL zosta³a zakoñczona pomyœlnie.
+
+SQL> set serveroutput on;
+SQL> exec rezerwuj_vip(1,'88/12/11','88/12/15',1);
+Nie ma wolnego pokoju
+Wstawiamy do zamowien
+
+Procedura PL/SQL zosta³a zakoñczona pomyœlnie.
+
+SQL>  exec rezerwuj_vip(2,'88/12/11','88/12/15',1);
+Nie ma wolnego pokoju
+to VIP
+Wstawiamy do rezerwacji zamowionych1
+Wstawiamy do rezerwacji przydzielonych  2
+
+Procedura PL/SQL zosta³a zakoñczona pomyœlnie.

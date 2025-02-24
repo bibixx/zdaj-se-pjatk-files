@@ -1,0 +1,94 @@
+  <!-- Wlasciwosci dla dostepu do Managera aplikacji -->
+  <property name="url"      value="http://localhost:8080/manager"/>
+
+       <!-- Konfiguracja wlasciwosci  --> 
+  <property file="../../common/build.properties"/>
+  <property file="build.properties"/>
+  <property name="build" value="${app.path}/${app}/build" />
+  <property name="context.path" value="${app}" />
+
+
+  <!-- Sciezka klas dla kompilacji -->
+
+  <path id="classpath">
+    <fileset dir="${catalina.home}/lib">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <!-- definiowane zadania Anta dla Tomcata -->
+  <taskdef name="install" classname="org.apache.catalina.ant.InstallTask"/>
+  <taskdef name="reload"  classname="org.apache.catalina.ant.ReloadTask"/>
+  <taskdef name="remove"  classname="org.apache.catalina.ant.RemoveTask"/>	
+  <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask"/>	
+  <taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask"/>	
+
+
+  <target name="prepare" depends="init"
+   	description="Buduje katalogi build">
+    <mkdir dir="${build}" />
+    <mkdir dir="${build}/WEB-INF" />
+    <mkdir dir="${build}/WEB-INF/classes" />
+    <mkdir dir="${build}/WEB-INF/lib" />	
+    <mkdir dir="${build}/WEB-INF/tags" />			
+  </target>
+
+
+  <!-- wykonanie zadan -->
+
+  <target name="install" description="Instaluje aplikacje"
+          depends="build">
+    <install url="${url}" username="${username}" password="${password}"
+          path="/${context.path}" war="file:${build}"/>
+  </target>
+
+  <target name="install-config"  
+      description="Instaluje w oparciu o context.xml" depends="build">
+     <install url="${url}" path="/${context.path}" war="file:${build}"
+      config="file:${app.path}/${app}/context.xml"
+      username="${username}" password="${password}"/>
+  </target> 
+
+
+  <target name="reload" description="Przeladowuje  aplikacje"
+          depends="build">
+    <reload  url="${url}" username="${username}" password="${password}"
+          path="/${context.path}"/>
+  </target>
+
+  <target name="remove" description="Usuwa aplikacje">
+    <remove url="${url}" username="${username}" password="${password}"
+          path="/${context.path}"/>
+  </target>
+
+
+  <target name="build" depends="prepare" 
+     description="Kompilacja i kopiowanie" >
+    <javac srcdir="src" destdir="${build}/WEB-INF/classes" debug="on">
+    	<include name="**/*.java" />
+     	<classpath refid="classpath"/>
+    </javac>
+    <copy todir="${build}/WEB-INF">
+      <fileset dir="web/WEB-INF"    >
+        <include name="**/*.xml" />
+        <include name="**/*.html" />
+        <include name="**/*.tld" />
+        <include name="**/*.properties" />
+        <include name="**/*.txt" />
+      </fileset>
+    </copy>
+    <copy todir="${build}">
+      <fileset dir="web">
+        <include name="**/*.html" />
+        <include name="**/*.jsp" />
+        <include name="**/*.jspf" />
+        <include name="**/*.gif" />
+      </fileset>
+    </copy>
+    <copy todir="${build}/WEB-INF/tags">
+      <fileset dir="web">
+        <include name="**/*.tag" />
+      </fileset>
+    </copy>
+  </target>
+

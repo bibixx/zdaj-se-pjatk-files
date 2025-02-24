@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left">
+<A HREF="main01_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main01_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all"><A NAME="EDU.wyklad.punkt 4"></A>
+
+<br clear="all">
+<div class="tytulpunktu">4. Poprawność algorytmu</div>
+
+<p><BR>Co to znaczy, że algorytm działa poprawnie? 
+Intuicja podpowiada nam, że chodzi tu o to, by dla dowolnych danych&nbsp;uzasadnić zgodność 
+uzyskanych wyników z zamierzeniami.
+ Aby jednak taką zgodność ustalić ponad wszelką wątpliwość,
+    musimy jasno sformułować intencje, podać tzw. specyfikację algorytmu. </p>
+<p>Specyfikacją
+    algorytmu nazywać będziemy parę własności: &lt;wp, wk&gt;, gdzie wp jest warunkiem
+  początkowym, a wk warunkiem końcowym. Intuicyjnie, warunek początkowy to ten, 
+który mają spełniać dane początkowe, a warunek końcowy to ten, który ma być 
+spełniony po wykonaniu algorytmu. Ogólnie, oba warunki powinny opisywać 
+zależności między zmiennymi przed i po wykonaniu algorytmu. </p>
+  <p><b>Przykład 4.1&nbsp; </b></p>
+  <p>Rozważmy problem znalezienia elementu największego w danym ciągu liczb naturalnych 
+  x<sub>1</sub>,..., x<sub>n</sub>. Naturalnym warunkiem początkowym będzie założenie&nbsp; niepustości ciągu: 
+  nie można znaleźć elementu największego w zbiorze pustym. Możemy go zapisać w postaci: 
+  wp 
+  = {n&gt;0}. 
+   Warunek końcowy, natomiast, powinien charakteryzować oczekiwany wynik i może mieć postać: 
+  wk = {result = x<sub>i </sub>dla pewnego i<FONT FACE="Symbol"> &#163; </FONT>n 
+ oraz dla wszystkich i, x<sub>i</sub> <FONT FACE="Symbol"> &#163; </FONT> result}.&nbsp;Algorytm rozwiązujący ten problem możemy zapisać w 
+  postaci:</p>
+
+<p> <div class="przyk" style="width: 510; height: 178">
+   <TABLE frame="void" rules="none" width="464" height="143" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0" cellspacing="0">
+         <TR>
+            <TD width="50" height="12"> max<b>{</b></TD>
+            <TD width="403" height="12">&nbsp; </TD>           
+         </TR>
+         <TR>
+            <TD width="50" height="16">  </TD>
+            <TD width="403" height="16">   <STRONG>&nbsp;</STRONG>result := x<sub>1</sub>; i := 2;&nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="50" height="16">  </TD>
+            <TD width="403" height="16"> &nbsp;<b>while</b> i <FONT FACE="Symbol"> &#163; </FONT>n <b>do </b></TD>            
+         </TR>
+         <TR>
+            <TD width="50" height="16">  </TD>
+            <TD width="403" height="16"> <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if</b> not (x<sub>i</sub> <FONT FACE="Symbol"> &#163;</FONT> result) 
+<b>then </b> result := x<sub>i</sub> <b>fi</b>; </TD>
+         </TR>
+         <TR>
+            <TD width="50" height="16">  </TD>
+            <TD width="403" height="16">   <STRONG> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG>i := i+1</TD>
+         </TR>
+         <TR>
+            <TD width="50" height="16">  </TD>
+            <TD width="403" height="16">   <strong> od </strong></TD>
+         </TR>
+         <TR>
+            <TD width="50" height="16"> <strong> } </strong> </TD>
+            <TD width="403" height="16">   </TD>
+         </TR>
+         
+   </TABLE>
+   </div>
+
+<p>
+
+Łatwo zauważyć, że po wykonaniu tego algorytmu w strukturze liczb 
+naturalnych, wartością zmiennej result jest rzeczywiście element największy 
+ciągu, czyli po wykonaniu algorytmu spełniony jest warunek końcowy wk.
+Warunek wk, podany w przykładzie 4.1., wydaje się być rozsądnym z punktu widzenia 
+badanego problemu.
+ Jest jednak jasne, że dla jednego algorytmu można zaproponować wiele różnych 
+par postaci &lt;wp, wk&gt;, nie każda jest jednak dla nas interesująca, np.: 
+para formuł</p>
+<p style="text-align: center"> <n></n>
+wp = {n&gt;0},&nbsp; wk = {i =(n+1)}, </p>
+<p>chociaż opisuje własności zmiennych występujących w algorytmie max, nie daje 
+nam dostatecznej informacji o tym, czego mamy się spodziewać po wynikach i co 
+właściwie robi ten algorytm.&nbsp; Specyfikacja ma precyzować problem, ma 
+umożliwić&nbsp; odpowiedź na pytanie, czy algorytm rozwiązuje 
+postawiony problem, czy nie. Specyfikacja ma opisać co ma robić algorytm, jednak 
+bez wskazywania, jak ma to robić.<BR>
+
+</p>
+
+<div class="def">
+<p><A NAME="EDU.skorowidz.termin poprawność_algorytmu 1_3"></A> 
+Definicja 4.1 Całkowita poprawność algorytmu.</P>
+<p>Powiemy, że algorytm Alg działający w pewnej strukturze danych Str jest całkowicie poprawny
+ ze względu na warunek początkowy wp i warunek  końcowy  wk
+ wtedy i tylko wtedy, gdy dla wszystkich danych spełniających warunek początkowy
+  wp w strukturze Str, algorytm kończy obliczenie i  jego wyniki spełniają warunek końcowy 
+wk. </div>
+<p style="text-align: left"><font face="Verdana">Podkreślmy jeszcze raz, że 
+jeśli</font> algorytm Alg jest całkowicie poprawny ze względu na specyfikację <b>
+&lt;</b>wp, wk<b>&gt;</b>, to warunek początkowy daje gwarancję, że algorytm zakończy 
+obliczenie. Tak właśnie jest w przykładzie 4.1: algorytm max zatrzymuje się dla 
+dowolnych danych w strukturze liczb naturalnych. Rzeczywiście, zmienna i, 
+kontrolująca pętlę, przyjmuje jako swoje wartości kolejne liczby naturalne, a 
+parametr n też jest liczbą naturalną. Zatem po skończonej liczbie kroków zmienna 
+i przyjmie wartość n. </p>
+
+<p style="text-align: left">Co więcej, po wykonaniu algorytmu spełniony jest 
+warunek 
+  (<font face="Symbol">&quot;</font>i)(x<sub>i</sub> <FONT FACE="Symbol"> &#163; </FONT> 
+  result):&nbsp; W pętli &quot;while&quot; każdy element
+  ciągu jest porównywany z elementem result. Jeśli po przejrzeniu i-pierwszych elementów
+  ciągu, result ma wartość największego z nich, to w następnym kroku, result przyjmie
+  wartość największego elementu wśród pierwszych (i+1) elementów: max{max{x<sub>1</sub>,...,
+  x<sub>i</sub>}, x<sub>i+1</sub>}
+  = max{x<sub>1</sub>,..., x<sub>i+1</sub>}. Ponieważ, dla ciągu o długości 1,
+  wartością zmiennej result jest element największy (ten jedyny element ciągu),
+  to, na mocy zasady indukcji matematycznej, dla ciągu dowolnej długości
+  n, po zakończeniu pętli &quot;while&quot;, wartością result będzie element największy 
+ciągu x<sub>1</sub>,...,x<sub>n</sub>.</p>
+
+<p style="text-align: left">Łatwo zauważyć, że nie są tu istotne wartości 
+elementów ciągu, ani ich typy. To samo rozumowanie możemy powtórzyć dla ciągów o 
+elementach z dowolnej liniowo uporządkowanej przestrzeni, byle tylko n było 
+liczbą naturalną. Prawdziwe jest więc ogólniejsze twierdzenie sformułowane jako 
+lemat 4.1.</p>
+
+<p><div class="lemat">
+  <p>Lemat 4.1</p>
+  <p>Algorytm max jest całkowicie poprawny ze względu na specyfikację <b>&lt;</b> 
+  (n&gt;0<font face="Symbol"> <span lang="en">&Ugrave;</span></font> n<span lang="en"><font face="Symbol">Î</font></span>N),<wp,wk></wp,wk> 
+  (<font face="Symbol">&quot;</font>i)(x<sub>i</sub> <FONT FACE="Symbol"> &#163; </FONT> 
+  result) <font face="Symbol"><span lang="en">&Ugrave;</span> </font>(<font face="Symbol">$</font>i)(x<sub>i</sub>
+  <font face="Symbol">= </font>result) <b>&gt; </b>w każdej strukturze danych, w 
+  której relacja porównywania elementów&nbsp; <FONT FACE="Symbol"> &#163;</FONT> 
+  jest relacją liniowego porządku.</p>
+</div>
+<p></p>
+
+<p>Nie zawsze można znaleźć dostatecznie silny warunek początkowy, który 
+gwarantowałby zatrzymywanie się programu. Nie zawsze też zależy nam na tym. W 
+takich przypadkach zadowolimy się częściową poprawnością algorytmu.<BR>
+
+</p>
+
+<div class="def">
+<p><A NAME="EDU.skorowidz.termin poprawność_algorytmu 1_3"></A> 
+Definicja 4.2 Częściowa poprawność algorytmu.</P>
+<p>
+
+Powiemy że algorytm Alg jest częściowo poprawny
+  ze względu na warunek początkowy wp i warunek końcowy wk w strukturze Str wtedy i tylko wtedy,
+  gdy dla wszystkich danych spełniających warunek początkowy wp w strukturze Str, jeżeli algorytm
+  zakończy obliczenie, to wyniki spełniają warunek końcowy wk.</div>
+<p></p>
+
+<p>Wprost z przyjętych definicji wynika, że całkowita poprawność algorytmu 
+implikuje jego częściową&nbsp; poprawność ze względu na tę samą specyfikację. Nie jest 
+jednak odwrotnie, jak pokazuje następujący przykład.</p>
+
+<p><b>Przykład 4.2</b></p>
+
+<p>Rozważmy następujący algorytm sqrt_1, którego zadaniem ma być obliczenie 
+pierwiastka kwadratowego z liczby x. Będziemy go rozważać w strukturze liczb 
+rzeczywistych, to znaczy, że operacje użyte w tym algorytmie są operacjami w 
+zbiorze liczb rzeczywistych, a zmienne przyjmują wyłącznie wartości rzeczywiste. 
+Niech specyfikacja algorytmu ma postać:</p>
+
+<p style="text-align: center">wp = {x&gt;0},&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+wk = {result = <span lang="en"><font face="Symbol">Ö</font></span>x}.<BR/> </p>
+
+<div class="przyk" style="width: 721; height: 219">
+   <TABLE frame="void" rules="none" width="685" height="183">
+      <COL align="left"><COL align="left"><COL align="left"><COL align="left"><COL align="left"><COL align="left"><COL align="left">
+      <TBODY>
+         <TR>
+            <TD width="43" height="3"> sqrt</TD>
+            <TD width="268" height="3"><b>{&nbsp; </b> </TD>
+             
+            <TD width="10" height="3">&nbsp; </TD>
+             
+            <TD width="346" height="3"></TD>
+             
+         </TR>
+         <tr>
+            <TD width="43" height="1"></TD>
+         </tr>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="268" height="16">i := 1; k := 0; reszta := x;</TD>
+             
+            <TD width="10" height="16"></TD>
+             
+            <TD width="346" height="16"></TD>
+             
+         </TR>
+         <TR>
+            <TD width="43" height="16">&nbsp; </TD>
+            <TD width="268" height="16"><b>while</b> not (reszta = 0) <b>do</b></TD> 
+            <TD width="10" height="16"></TD> 
+            <TD width="346" height="16">// i = 2k+1, reszta = x - k<sup><font face="Verdana">2</font></sup></TD> 
+         </TR>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="268" height="16">   <STRONG>&nbsp;&nbsp;&nbsp; </STRONG>
+             &nbsp;&nbsp;&nbsp; k := k + 1;</TD>
+            <TD width="10" height="16">   </TD>
+            <TD width="346" height="16">   // i = 2k-1, reszta = x - (k-1)<font face="Symbol"><sup>2</sup></font></TD>
+         </TR>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="268" height="16">      <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>&nbsp;  
+            reszta := reszta - i;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+             
+            <TD width="10" height="16">      </TD>
+             
+            <TD width="346" height="16">      // i = 2k-1, reszta = x - k<font face="Symbol"><sup>2</sup></font></TD>
+             
+         </TR>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="268" height="16">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            i := i + 2;</TD>
+            <TD width="10" height="16">   </TD>
+            <TD width="346" height="16">   // i = 2k+1, reszta = x - k<font face="Symbol"><sup>2</sup></font></TD>
+         </TR>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="268" height="16">   <STRONG>&nbsp;od;&nbsp;</STRONG></TD>
+            <TD width="10" height="16">   </TD>
+            <TD width="346" height="16">   </TD>
+         </TR>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="268" height="16">   <strong>&nbsp;</strong>result := k   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong></TD>
+            <TD width="10" height="16">   </TD>
+            <TD width="346" height="16">   // reszta = 0, reszta = x - k<sup><font face="Symbol">2</font></sup>, 
+            result = k</TD>
+         </TR>
+         <TR>
+            <TD width="43" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></TD>
+            <TD width="268" height="16"><strong>}</strong></TD>
+            <TD width="10" height="16"></TD>
+            <TD width="346" height="16"></TD>
+         </TR>
+      </TBODY>
+   </TABLE>
+</div>
+<p>Proste eksperymenty z tym algorytmem pokażą, że dla x=4 wynikiem jest 2, dla 
+x=16 wynikiem jest 4. itd. Można udowodnić, że dla dowolnego x postaci n<sup><font face="Verdana">2</font></sup>, 
+wynikiem programu jest n. W strukturze liczb rzeczywistych, ten algorytm nie 
+zawsze się jednak zatrzymuje. Wystarczy przyjąć jakąkolwiek liczbę całkowitą 
+postaci n<sup><font face="Verdana">2</font></sup> + 1. Po żadnej liczbie kroków 
+nie otrzymamy warunku reszta=0. Wynika stąd, że algorytm sqrt jest częściowo poprawny ze względu na podaną 
+specyfikację w strukturze liczb rzeczywistych, ale nie jest całkowicie poprawny.</p>
+
+<p><b>Uwaga</b> Gdybyśmy nieco zmodyfikowali algorytm, wstawiając w pętli 
+warunek not(reszta &gt; i) zamiast obecnego testu, to otrzymany algorytm byłby 
+całkowicie poprawny w strukturze liczb rzeczywistych ze względu na specyfikację
+<b>&lt;</b> x&gt;0, result = [<span lang="en"><font face="Symbol">Ö</font></span>x]}<b>&gt;</b>.</p>
+
+<p>Analiza częściowej&nbsp; i całkowitej poprawności&nbsp; programu nie jest 
+rzeczą banalną. Samo zrozumienie jak &quot;działa&quot; instrukcja przypisania często 
+nastręcza dużo kłopotów.</p>
+
+<p><b>Przykład 4.3</b></p>
+
+<p>Instrukcja {x:= 5;} ma oczywiste konsekwencje: po jej wykonaniu wartością x 
+jest 5, a wartość żadnej innej zmiennej nie ulega zmianie. Jeżeli instrukcja 
+przypisania ma postać {x := x+ 5;}, to po wykonaniu tej instrukcji wartość 
+zmiennej x zwiększyła się o 5 w stosunku do starej wartości x. Skomplikujmy 
+teraz nieco sytuację&nbsp;&nbsp; zakładając, że x &gt; y (wartość zmiennej x jest 
+większa od wartości pewnej zmiennej y) tuż przed wykonaniem instrukcji {x := 
+x+5;}. Jaka zależność między x i y jest spełniona po wykonaniu tej instrukcji? 
+Warto się samodzielnie zastanowić nad tym pytaniem i dlatego odpowiedź jest 
+ukryta pod przyciskiem. </p>
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Zobacz odpowiedź-----' NAME='Klik0' onClick="napis(this.form,'x-5 > y')">
+</form>
+
+<p>Dowodzenie poprawności złożonego algorytmu jest bardziej skomplikowane. 
+Będziemy postępowali zgodnie z ideą Floyda opisów programów. Skorzystamy przy 
+tym ze strukturalnej budowy algorytmu. Aby udowodnić poprawność algorytmu 
+postaci {P1;P2;} ze względu na specyfikację &lt;wp, wk&gt;, będziemy się starali 
+znaleźć taką własność pośrednią <font face="Symbol">a</font>, że algorytm 
+{P1} jest poprawny ze względu na specyfikację &lt;wp, <font face="Symbol">a</font>&gt;, 
+a algorytm {P2} jest poprawny ze względu na specyfikację &lt;<font face="Symbol">a</font>, 
+wk&gt;.</p>
+
+<p>Jeszcze gorzej jest w przypadku, gdy program zawiera pętle.&nbsp; Jedną z 
+metod analizy algorytmów stosowanych w tym wykładzie, jest metoda 
+niezmienników Hoare. Przypomnijmy najpierw definicję niezmiennika.<BR>
+
+</p>
+
+<div class="def">
+<p><A NAME="EDU.skorowidz.termin poprawność_algorytmu 1_3"></A> 
+Definicja 4.3 Niezmiennik</P>
+<p>
+
+Powiemy że formuła <font face="Symbol">a</font> jest niezmiennikiem pętli&nbsp; 
+{while <font face="Symbol">g</font> do P od} w strukturze Str, jeżeli z tego że formuła (<font face="Symbol">g
+<span lang="en">&Ugrave;</span> a</font>) jest spełniona&nbsp; przed wykonaniem 
+programu P (tzn. treści pętli} wynika, że formuła <font face="Symbol">a</font> jest spełniona po wykonaniu 
+programu P w strukturze Str. </div>
+<p></p>
+
+<p><b>Przykład 4.4 </b>  </p>
+
+<p>Problem: Znaleźć największy wspólny dzielnik dwóch danych liczb naturalnych x, y. 
+Niech specyfikacja poszukiwanego algorytmu ma postać:</p>
+<p style="text-align: center">wp ={x+y &gt; 0},&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+wk = {result<FONT FACE="Symbol"> | </FONT>x <font face="Symbol"> <span lang="en">&Ugrave;</span></font> 
+result<FONT FACE="Symbol"> 
+| </FONT>y <font face="Symbol"> <span lang="en">&Ugrave;</span> </font>(<FONT FACE="Symbol"> &quot; </FONT>z)(z<FONT FACE="Symbol">&#189;</FONT>x i z<FONT FACE="Symbol">&#189;</FONT>y<FONT FACE="Symbol">
+<span lang="en">&reg;</span> </FONT> 
+ z<FONT FACE="Symbol"> &#163; </FONT>result)}.</p>
+<p>Warunek początkowy gwarantuje, że x i y nie są równocześnie równe 0, w 
+warunek końcowy, że uzyskany wynik (wartość zmiennej result) jest dzielnikiem 
+zarówno x jak i y, oraz każdy inny wspólny dzielnik x i y ma mniejszą od niego 
+wartość. Znany wszystkim algorytm Euklidesa rozwiązuje postawiony w tym 
+przykładzie problem.&nbsp; <BR/> </p>
+
+<div class="przyk">
+   <TABLE frame="void" rules="none" width="777" height="188">
+      <COL align="left"><COL align="left"><COL align="left"><COL align="left"><COL align="left"><COL align="left"><COL align="left">
+      <TBODY>
+         <TR>
+            <TD width="43" height="3"> &nbsp;nwd(</TD>
+            <TD width="260" height="3"><b>{&nbsp; </b> </TD>
+             
+            <TD width="35" height="3">&nbsp; </TD>
+             
+            <TD width="421" height="3"></TD>
+             
+         </TR>
+         <tr>
+            <TD width="43" height="1"></TD>
+         </tr>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="260" height="16"><b>if</b> x*y = 0 <b>then</b>   result := x+y
+            <b>else</b>  <STRONG>&nbsp;</STRONG></TD>
+             
+            <TD width="35" height="16"></TD>
+             
+            <TD width="421" height="16">// jeżeli jedna z liczb x, y jest równa 
+            zeru, to największy wspólny dzielnik tych liczb jest równy drugiej z 
+            nich</TD>
+             
+         </TR>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="260" height="16"><strong>while </strong>not(x = y) <b>do</b></TD>
+             
+            <TD width="35" height="16"></TD>
+             
+            <TD width="421" height="16">//nwd(x,y) = k</TD>
+             
+         </TR>
+         <TR>
+            <TD width="43" height="16">&nbsp; </TD>
+            <TD width="260" height="16"><b>&nbsp;&nbsp;&nbsp;&nbsp; if</b> x &gt; y
+            <b>then </b> </TD> 
+            <TD width="35" height="16"></TD> 
+            <TD width="421" height="16"> </TD> 
+         </TR>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="260" height="16">   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG>
+             &nbsp;&nbsp;&nbsp; x := x - y</TD>
+            <TD width="35" height="16">   </TD>
+            <TD width="421" height="16">   // nwd(x,y) = k</TD>
+         </TR>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="260" height="16">      <strong>&nbsp;&nbsp;&nbsp;&nbsp; else</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+             
+            <TD width="35" height="16">      </TD>
+             
+            <TD width="421" height="16">      </TD>
+             
+         </TR>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="260" height="16">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            y := y - x</TD>
+            <TD width="35" height="16">   </TD>
+            <TD width="421" height="16">   // nwd(x,y) = k</TD>
+         </TR>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="260" height="16">   <STRONG>&nbsp;&nbsp;&nbsp; fi&nbsp;</STRONG></TD>
+            <TD width="35" height="16">   </TD>
+            <TD width="421" height="16">   </TD>
+         </TR>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="260" height="16">   <strong>&nbsp;od&nbsp;;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong></TD>
+            <TD width="35" height="16">   </TD>
+            <TD width="421" height="16">   // jeżeli liczby są równe, to ich 
+            największy wspólny dzielnik jest równy ich wspólnej wartości</TD>
+         </TR>
+         <TR>
+            <TD width="43" height="16"></TD>
+            <TD width="260" height="16">   result := y</TD>
+            <TD width="35" height="16">   </TD>
+            <TD width="421" height="16">   </TD>
+         </TR>
+         <TR>
+            <TD width="43" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></TD>
+            <TD width="260" height="16"><strong>}</strong></TD>
+            <TD width="35" height="16"></TD>
+            <TD width="421" height="16"></TD>
+         </TR>
+      </TBODY>
+   </TABLE>
+</div>
+<p>Niezmiennikiem pętli w tym algorytmie jest formuła&nbsp; nwd(x,y) = k. Uzasadnienie: nwd(x,y) = nwd(x-y,y), gdy x&gt;y 
+oraz nwd(x,y) = nwd(y-x,x), gdy y&gt;x. Zatem niezależnie od tego, którą część 
+instrukcji warunkowej wykonamy, największy wspólny dzielnik nowych wartości 
+zmiennych x i y jest taki sam, jak liczb przypisanych tym zmiennym przed 
+wykonaniem programu.</p>
+<p>Nie na wiele przyda nam się niezmiennik, jeżeli nie jest on prawdziwy 
+przed wykonaniem programu. Jeżeli jednak jest prawdziwy przed wejściem do pętli 
+i pozostaje prawdziwy po każdej iteracji, to, o ile algorytm się zatrzyma, 
+uzyskane wartości zmiennych również go spełniają. Pozwala nam to często 
+zrozumieć co robi program i uzasadnić jego częściową poprawność.</p>
+<p>
+<div class="lemat">
+  <p>Twierdzenie 4.1 O niezmiennikach.</p>
+  <p>Jeżeli formuła <font face="Symbol">a </font>&nbsp;jest niezmiennikiem pętli 
+  {while <font face="Symbol">g</font> do P od} oraz jest prawdziwa przed jej 
+  wykonaniem w pewnej strukturze Str, to po wykonaniu pętli, formuła&nbsp;
+  <font face="Symbol" size="2">a</font><font face="Symbol" size="3"> </font>&nbsp;będzie 
+  również prawdziwa.&nbsp; </p>
+</div>
+<p></p>
+<p>Wróćmy na chwilę do przykładu poprzedniego. Niech k będzie największym 
+wspólnym dzielnikiem danych liczb naturalnych x i y.&nbsp; Jeżeli x*y = 0, to 
+jedna z liczb x lub y musi być zerem, ale wtedy k jest równe sumie tych liczb. 
+Jeżeli obie liczby x i y są różne od zera i&nbsp; przed wykonaniem pętli mamy 
+nwd(x,y) = k, to własność ta nie zmienia się w kolejnych iteracjach pętli. W 
+momencie, wyjścia z pętli&nbsp; mamy (nwd(x,y) = k <span lang="en">
+<font face="Symbol">&Ugrave;</font></span> x=y), z czego wynika, że zmienna result ma 
+wartość k, a więc wartość największego wspólnego dzielnika danych liczb.&nbsp; 
+Pozostaje jeszcze pytanie, czy ten algorytm zatrzymuje się dla wszystkich danych 
+spełniających warunek początkowy. Zauważmy, że suma&nbsp; (x + y) jest w tym 
+algorytmie zawsze liczbą naturalną różną od zera. Co więcej, wartość tej sumy 
+jest w każdym następnym kroku równa większej z wartości x i y w kroku 
+poprzednim. Zatem ciąg wartości sum (x + y) jest ściśle malejący, a więc nie 
+może być nieskończony. To dowodzi, że po skończonej liczbie kroków algorytm 
+Euklidesa zatrzyma się. <BR>
+
+</p>
+
+<div class="def">
+<p><A NAME="EDU.skorowidz.termin poprawność_algorytmu 1_3"></A> 
+Definicja 4.4 Własność stopu.</P>
+<p>
+
+Algorytm Alg ma własność stopu w strukturze danych Str, jeżeli dla dowolnych 
+danych początkowych obliczenie algorytmu w tej strukturze jest skończone.&nbsp; </div>
+<p></p>
+
+<p>Przykładem niech będzie algorytm {x:=0; while&nbsp; not (x=y) do x := x+1 
+od}. W strukturze liczb naturalnych ten algorytm zawsze się zatrzymuje,&nbsp; bo 
+każdą liczbę naturalną można otrzymać z zera przez dodawanie jedynki. Ten 
+algorytm ma więc własność stopu w strukturze liczb naturalnych.</p>
+
+<p>
+&nbsp;<b>Pytanie 4&nbsp; </b>Czy własność&nbsp; (Wartością zmiennej result&nbsp; 
+jest największa z liczb {x<sub><font face="Verdana">1</font></sub>,...,x<sub><font face="Verdana">i-1</font></sub>}&nbsp; 
+oraz&nbsp; i <FONT FACE="Symbol"> &#163; </FONT>n ) jest niezmiennikiem pętli w 
+algorytmie max?  
+<BR>
+<FORM><p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'Nie, bo po wykonaniu ostatniego kroku i = n+1.');">
+</p></form>
+
+<FORM><p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Uwaga!' NAME='Klik0' 
+onClick="napis(this.form,'Gdy zmienimy drugi warunek na i<n+2, to odpowiedzią jest TAK.');">
+</p></form>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left">
+<A HREF="main01_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main01_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td>
+</tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

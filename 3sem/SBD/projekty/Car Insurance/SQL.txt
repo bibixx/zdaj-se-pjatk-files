@@ -1,0 +1,244 @@
+TABLES
+
+
+create table customer(
+cid number(4) primary key,
+cname varchar(12) not null,
+csurname varchar(12) not null,
+cadress varchar(12) not null,
+cphone number(8) not null)
+;
+
+
+create table staff(
+sid number(4) primary key,
+sname varchar(12),
+ssurname varchar(12),
+sadress varchar(12),
+sposition varchar(12),
+sphone number(8),
+salary number(8))
+;
+
+
+create table insurance(
+insid number(4) primary key,
+year_from number(4) not null,
+year_to number(4) not null,
+cid number(4) references customer,
+sid number(4) references staff,
+price number(12) not null)
+;
+
+
+create table car(
+carid number(4) primary key,
+car_brand varchar(12) not null,
+car_colour varchar(12) not null,
+cid number(4) references customer)
+;
+
+
+create table recent_customers(
+cid number(4) not null,
+cname varchar(12) not null,
+csurname varchar(12) not null,
+cadress varchar(12) not null,
+cphone number(8) not null)
+;
+
+
+create table SAL(
+ids NUMBER(4) PRIMARY KEY ,
+losal NUMBER(7,2) not null, 
+hisal NUMBER(7,2) not null, 
+position varchar2(12) not null
+);
+
+
+#####################################################################################
+TRIGGERS
+
+set serveroutput on
+
+
+create or replace trigger ChangeCust
+after delete 
+on customer
+for each row
+begin
+insert into recent_customers values(
+:old.cid,
+:old.cname,
+:old.csurname,
+:old.cadress,
+:old.cphone);
+end;
+/
+
+
+create or replace trigger AddCustomer
+after insert
+on customer
+begin
+dbms_output.put_line('A NEW CUSTOMER ADDED');
+end;
+/
+
+
+
+create or replace trigger InsuranceIndex
+before insert 
+on insurance
+for each row
+begin
+select nvl(max(i.insid)+1,1)
+into :new.insid
+from insurance i;
+end;
+/
+
+
+
+create or replace trigger CheckPrice
+before insert or update
+on insurance 
+for each row
+begin
+if (:new.price < 1)then
+Raise_application_error(-20000,'WRONG PRICE ENTERED!');
+end if;
+end;
+/
+
+
+create or replace trigger DontDelete
+before delete
+on insurance
+for each row
+begin
+Raise_application_error(-20001,'YOU CANT DELETE AN INSURANCE!!!');
+end;
+/
+
+
+
+create or replace trigger SalUpdate
+after update
+on staff
+for each row
+begin
+if(:new.salary < :old.salary) then
+dbms_output.put_line('WARNING!!! NEW SALARY IS LOWER THAN OLD SALARY!!!');
+end if;
+end;
+/
+
+
+
+
+####################################################################################3
+PROCEDURES
+
+
+
+
+create or replace procedure RaiseSalary(idin number, adding number) 
+
+AS
+
+empty exception;
+change_grade exception;
+ile integer;
+salary integer (7,2);
+my_pos varchar2(20);
+my_losal integer;
+my_hisal integer;
+my_sal integer;
+
+BEGIN
+select count(*) into ile from staff where staff.sid=idin;
+
+if ile != 1 then raise empty;
+
+else
+select sposition,salary into my_pos,my_sal from staff where sid=idin;
+select s.losal, s.hisal into my_losal, my_hisal from sal s where s.position=my_pos;
+if my_sal+adding>my_hisal or my_sal+adding<my_losal then raise change_grade;
+
+else
+
+update staff set salary=salary+adding; 
+end if;
+end if;
+exception
+when empty then
+dbms_output.put_line('Not exists');
+when change_grade then
+dbms_output.put_line('Changing grade not allowed!');
+end;
+/
+
+
+________________________________________________________________________________________
+
+
+create or replace procedure Addcustom(
+Cname IN customer.cname%type,
+Csurname IN customer.csurname%type,
+Cadress IN customer.cadress%type,
+Cphone IN customer.cphone%type)
+
+AS
+
+thesame exception;
+counter integer;
+Cid customer.cid%type;
+
+BEGIN
+
+select count(*) into counter from customer c where c.csurname=Csurname;
+if counter != 0
+then raise thesame;
+end if;
+select NVL(max(customer.cid)+1,1) into Cid
+from customer;
+
+insert into customer
+values(Cid,Cname,Csurname,Cadress,Cphone);
+exception
+when thesame then
+dbms_output.put_line('Warning! The same surname exists!!');
+
+end;
+/
+
+________________________________________________________________________________________
+
+create or replace procedure twolowest(param NUMBER)
+AS 
+cursor salaries is
+select sname,ssurname,salary from staff order by salary;
+my_salaries salaries%rowtype;
+counter INTEGER;
+no_workers exception;
+BEGIN 
+select count(*) into counter from staff;
+if counter=0 then raise no_workers;
+else
+DBMS_output.put_line('LOWEST EARNINGS:');
+open salaries;
+fetch salaries into my_salaries;
+DBMS_output.put_line('1:'||my_salaries.sname||' '||my_salaries.ssurname||' '||my_salaries.salary||'.');
+fetch salaries into my_salaries;
+DBMS_output.put_line('2:'||my_salaries.sname||' '||my_salaries.ssurname||' '||my_salaries.salary||'.');
+close salaries;
+END IF;
+EXCEPTION
+when no_workers then
+DBMS_output.put_line('YOU SHOULD HAVE AT LEAST 2 STAFF WORKERS IN DataBase');
+END;
+
+/
+
+

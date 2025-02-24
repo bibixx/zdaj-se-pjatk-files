@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left">
+<A HREF="main01_p5.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main01_p7.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all"><A NAME="EDU.wyklad.punkt 6"></A>
+<br clear="all"><div class="tytulpunktu">6. Złożoność asymptotyczna&nbsp; </div> 
+
+
+
+
+
+<p> Złożoność algorytmu zdefiniowaliśmy jako funkcję rozmiaru danych. Istotną informacją zawartą w 
+tej funkcji jest jej zachowanie asymptotyczne, gdy rozmiar danych dąży do 
+nieskończoności. Jest rzeczą zrozumiałą, że dla danych niewielkich rozmiarów, 
+metoda obliczeń nie jest tak ważna, jak dla dużych danych, gdy nawet drobne 
+zmiany wielkości danych powodują ogromne zmiany&nbsp; w poniesionym koszcie. </p>
+<p> Co więcej, dla dużych n nie jest też istotne, czy algorytm wykonuje n, czy 
+n+5 operacji dominujących. Nawet stały współczynnik nie ma wielkiego znaczenia: 
+jeśli jakiś algorytm wykonuje n<sup><font face="Verdana">2</font></sup> operacji, a inny 2n<sup><font face="Verdana">2</font></sup>, 
+to ich szybkość wzrostu do nieskończoności jest w przybliżeniu taka sama. <BR>
+
+</p>
+
+<div class="def">
+<p><A NAME="EDU.skorowidz.termin poprawność_algorytmu 1_3"></A> 
+Definicja 6.1 Notacja asymptotyczna, wielkie O.</P>
+<p>Niech f i g będą dwoma funkcjami ze zbioru liczb naturalnych w zbiór liczb 
+rzeczywistych dodatnich, f, g : N <span lang="en"><font face="Symbol">&reg;</font></span> R<sup><font face="Verdana">+</font></sup>. Powiemy, 
+że funkcja g jest co najwyżej rzędu f, w skrócie g = O(f), wtedy i
+  tylko wtedy, gdy dla pewnej stałej c i dla prawie wszystkich n, wartości funkcji
+  g można oszacować z góry przez wartości funkcji f pomnożone przez stałą c,</P>
+<p style="text-align: center">g = O(f) wttw (<font face="Symbol">$</font>c&gt;0)(<font face="Symbol">$</font>n<sub><font face="Verdana">0</font></sub><span lang="en"><font face="Symbol">Î</font></span>N)(<font face="Symbol">&quot;</font>n&gt;n<sub><font face="Verdana">0</font></sub>)&nbsp; g(n)<font face="Symbol">
+<span lang="en">&pound;</span> </font>c<font face="Symbol"> <span lang="en">´</span>
+</font>f(n)</div>
+<p></p>
+<p>Rozważmy dla przykładu trzy funkcje f(n) = 10<sup><font face="Verdana">-6</font></sup> 
+n , g(n) = 10<sup><font face="Verdana">6</font></sup> n + 1000, h(n) = n<sup><font face="Verdana">2</font></sup> 
++ 3n +1. Na mocy przyjętej definicji, zarówno funkcję f jak i funkcję g można 
+oszacować z góry przez funkcję&nbsp; liniową n,</p>
+<p style="text-align: center">10<sup><font face="Verdana">-6</font></sup> n = 
+O(n)&nbsp; oraz&nbsp;&nbsp; 10<sup><font face="Verdana">6</font></sup> n + 1000 
+= O(n).</p>
+<p>Obie równości są spełnione dla dowolnych liczb naturalnych&nbsp; i, na 
+przykład, dla stałej c=1, w pierwszym przypadku, a stałej&nbsp; c=2<span lang="en"><font face="Symbol">´</font></span>10<sup><font face="Verdana">6</font></sup>, 
+w drugim przypadku.&nbsp; Funkcji h nie można oszacować z góry przez funkcję g, 
+gdyż zawsze znajdzie się dostatecznie duże n, że wartość h(n) będzie większa niż 
+g(n), niezależnie od wyboru stałej c. Rzeczywiście, jeśli ustalimy c&gt;0, to dla n 
+&gt; (c+1)10<sup><font face="Verdana">6</font></sup> mamy</p>
+<p style="text-align: center">c10<sup><font face="Verdana">6</font></sup> n + 
+1000 &lt; (c+1) 10<sup><font face="Verdana">6</font></sup> n &lt;&nbsp; n<sup><font face="Verdana">2
+</font></sup>&lt; n<sup><font face="Verdana">2</font></sup> + 3n + 1.</p>
+<p>Obie funkcje f i g można natomiast&nbsp; oszacować z góry przez funkcję h: 
+funkcja kwadratowa rośnie do nieskończoności szybciej niż dowolna funkcja 
+liniowa. </p>
+<p style="text-align: center">10<sup><font face="Verdana">-6</font></sup> n &lt; 10<sup><font face="Verdana">6</font></sup> 
+n + 1000 &lt; 10<sup><font face="Verdana">6</font></sup> (n+1) &lt; n(n+1) &lt; c (n<sup><font face="Verdana">2</font></sup> 
++ 3n + 1 ) dla stałej c=1 i dla n&gt; 10<sup><font face="Verdana">6</font></sup> .</p>
+<p>Wszystkie trzy funkcje można też oszacować przez dowolny wielomian rzędu 
+wyższego niż 1. Oczywiście, im wyższy stopień tego wielomiany, tym mniej 
+dokładne jest to oszacowanie.</p>
+<p> Zauważmy, że dla dużych n,&nbsp; ani stały składnik, ani nawet stały 
+współczynnik multiplikatywny nie mają wielkiego znaczenia. Jeśli jakiś algorytm 
+wykonuje c<sub><font face="Verdana">1</font></sub><font face="Symbol"><span lang="en">´</span>
+</font>n + c<sub><font face="Verdana">2</font></sub>&nbsp; operacji, a inny n<sup><font face="Verdana">2</font></sup>, 
+to&nbsp; niezależnie od stałych c<sub><font face="Verdana">1</font></sub> i c<sub><font face="Verdana">2</font></sub>, 
+algorytm o złożoności c<sub><font face="Verdana">1</font></sub><font face="Symbol"><span lang="en">´</span></font>n + c<sub><font face="Verdana">2</font></sub> 
+będzie lepszy dla dostatecznie dużych n.</p>
+<p>Zauważmy jeszcze proste własności notacji asymptotycznej, które przydadzą się 
+nam przy szacowaniu kosztów algorytmów omawianych w tym wykładzie.</p>
+
+<p><div class="lemat">
+  <p>Lemat 6.1</p>
+<p> Dla dowolnych funkcji&nbsp; f, g, h&nbsp; określonych w zbiorze liczb naturalnych 
+i o wartościach w zbiorze liczb rzeczywistych dodatnich,  </p>
+  <ul>
+    <li>jeżeli f = O(g) i g = O(h), to f&nbsp; = O(h),</li>
+    <li>jeżeli f = O(h) i g = O(h), to f + g&nbsp; = O(h),&nbsp; </li>
+    <li>jeżeli f = O(h), to c<font face="Symbol"><span lang="en">´</span></font>f = O(h), dla dowolnej stałej c&gt;0.</li>
+  </ul>
+</div>
+<p></p>
+<p>Dowód lematu wynika natychmiast z definicji notacji wielkie O. Rozważmy dla 
+przykładu&nbsp; drugą własność. Niech f=O(h) i g = O(h). Istnieją więc dodatnie 
+stałe c1 i c2 oraz liczby naturalne n1 i n2 takie że </p>
+<p style="text-align: center">&nbsp;f(n)<font face="Symbol"> <span lang="en">&pound;</span>
+</font>c<font face="Symbol"><sub>1</sub> <span lang="en">´</span> </font>h(n),&nbsp; 
+dla&nbsp; n<font face="Symbol"> <span lang="en">&sup3;</span></font> n<sub><font face="Verdana">1</font></sub>&nbsp;&nbsp; 
+i&nbsp; g(n)<font face="Symbol"> <span lang="en">&pound;</span> </font>c<font face="Symbol"><sub>2</sub>
+<span lang="en">´</span> </font>h(n), dla n <font face="Symbol"><span lang="en">
+&sup3;</span></font> n<sub><font face="Verdana">2</font></sub>.</p>
+<p style="text-align: left">Przyjmując jako n<sub><font face="Verdana">0</font></sub> 
+= max(n<sub><font face="Verdana">1</font></sub>, n<sub><font face="Verdana">2</font></sub>) 
+oraz c = c<font face="Symbol"><sub>1</sub>+ </font>c<sub><font face="Symbol">2</font></sub>, 
+otrzymamy&nbsp; f(n) + g(n)<font face="Symbol"> <span lang="en">&pound;</span> </font>c<font face="Symbol"><sub>1</sub></font><sub><font face="Symbol">
+</font></sub><font face="Symbol"><span lang="en">´</span> </font>h(n) + c<sub><font face="Symbol">2</font></sub><font face="Symbol">
+<span lang="en">´</span> </font>h(n) = c<font face="Symbol"> <span lang="en">´</span>
+</font>h(n) dla wszystkich n<font face="Symbol"> <span lang="en">&sup3;</span></font> 
+n<sub><font face="Verdana">0</font></sub>, co dowodzi, że f + g = O(h).</p>
+<p>Analogicznie do oszacowania górnego, wprowadza się oszacowanie dolne 
+asymptotycznego rzędu funkcji.<BR>
+
+</p>
+
+<div class="def">
+<p><A NAME="EDU.skorowidz.termin poprawność_algorytmu 1_3"></A> 
+Definicja 6.2 Notacja asymptotyczna, oszacowanie dolne.</P>
+<p>Niech f i g będą funkcjami ze zbioru liczb naturalnych w zbiór liczb 
+rzeczywistych dodatnich, f, g : N <span lang="en"><font face="Symbol">&reg;</font></span> R<sup><font face="Verdana">+</font></sup>. Powiemy, 
+że funkcja g jest co najmniej rzędu f, w skrócie g = <font face="Symbol">W</font>(f), wtedy i
+  tylko wtedy, gdy istnieje dodatnia stała c, że dla prawie wszystkich n, 
+wartości funkcji
+  g można oszacować z dołu&nbsp; przez wartości funkcji f pomnożone przez stałą 
+c,</P>
+<p style="text-align: center">g = <font face="Symbol">W</font>(f) wttw (<font face="Symbol">$</font>c&gt;0)(<font face="Symbol">$</font>n<sub><font face="Verdana">0</font></sub><span lang="en"><font face="Symbol">Î</font></span>N)(<font face="Symbol">&quot;</font>n&gt;n<sub><font face="Verdana">0</font></sub>)
+<font face="Symbol">&nbsp; </font>c<font face="Symbol"> <span lang="en">´</span>
+</font>f(n)<font face="Symbol"> <span lang="en">&pound;</span></font> g(n)</div>
+<p></p>
+<p> Rozważmy jeszcze raz funkcje z poprzedniego przykładu. Jak wynika z 
+poprzednich rozważań, funkcję h(n) = n<sup><font face="Verdana">2</font></sup> + 
+3n +1 możemy oszacować z dołu przez funkcję g(n) = 10<sup><font face="Verdana">6</font></sup> 
+n + 1000, a tym bardziej przez funkcję f. Nieco wbrew intuicji, funkcję f można 
+oszacować z dołu przez funkcję g przyjmując odpowiednią wartość dla stałej c,</p>
+<p style="text-align: center"> c(10<sup><font face="Verdana">6</font></sup> n + 
+1000)&nbsp; &lt; 10<sup><font face="Verdana">-6</font></sup> n&nbsp; dla wszystkich 
+n naturalnych i c = 10<sup><font face="Verdana">-7</font></sup> .</p>
+<p> Nie jest natomiast możliwe oszacowanie funkcji g z dołu przez funkcję 
+h. Oczywiście, dla wszystkich k&gt;2 mamy też n<sup><font face="Verdana">k</font></sup> 
+= O(h(n)).<BR>
+
+</p>
+
+<div class="def">
+<p><A NAME="EDU.skorowidz.termin poprawność_algorytmu 1_3"></A> 
+Definicja 6.3 Rząd funkcji.</P>
+<p>Funkcje&nbsp; f i g takie, że f, g : N <span lang="en"><font face="Symbol">&reg;</font></span> R<sup><font face="Verdana">+</font></sup> 
+mają asymptotycznie ten sam rząd wielkości, co oznaczamy f = <font face="Symbol">
+Q</font>(g), wtedy i
+  tylko wtedy, gdy </P>
+<p style="text-align: center">g = <font face="Symbol">O</font>(f) oraz f = O(g).</P>
+</div>
+<p></p>
+<p> Na mocy tej definicji każda z funkcji&nbsp; n<sup><font face="Verdana">3</font></sup>+ 
+100n, 100n<sup><font face="Verdana">3</font></sup> , (1/100)n<sup><font face="Verdana">3</font></sup>, 
+( n<sup><font face="Verdana">5</font></sup> +n<sup><font face="Verdana">4</font></sup> 
++15 n)/ (n<sup><font face="Verdana">2</font></sup> +10n + 6) ma taki sam rząd 
+jak funkcja n<sup><font face="Verdana">3</font></sup>.&nbsp; </p>
+<p> Warto zapamiętać, że rzędy wielkości asymptotycznej znanych funkcji: lg n, 
+n, n lg n, n<sup><font face="Verdana">2</font></sup>, n<sup><font face="Verdana">3</font></sup>, 
+2<sup><font face="Verdana">n</font></sup>, 3<sup><font face="Verdana">n</font></sup>, 
+n<sup><font face="Verdana">n</font></sup>&nbsp; ściśle rosną: każdą funkcja w 
+tym ciągu może być z góry oszacowana przez funkcję następną, a żadna z nich nie 
+może być z góry oszacowana przez funkcję poprzednią. </p>
+<p>Następujący lemat pozwala ustalić asymptotyczny rząd funkcji metodami analizy 
+matematycznej.</p>
+
+<p><div class="lemat">
+  <p>Lemat 6.2</p>
+<p> Niech f i g będą funkcjami określonymi na liczbach naturalnych, o wartościach w zbiorze liczb rzeczywistych dodatnich, oraz niech 
+lim<sub>n<span lang="en"><font face="Symbol">&reg;&yen;</font></span></sub> f(n)/g(n) = c.
+  Wtedy</p>
+  <ul>
+    <li>jeżeli c &gt;0, to funkcje f i g mają asymptotycznie ten sam rząd&nbsp; f = 
+    <font face="Symbol">Q</font>(g) i g = <font face="Symbol">Q</font>(f),</li>
+    <li>jeżeli c = 0, to rząd g jest ściśle większy niż rząd funkcji f, f = O(g) 
+    i f <font face="Symbol"><span lang="en">&sup1;</span> Q</font>(g),</li>
+    <li>jeżeli c = +<span lang="en"><font face="Symbol">&yen;</font></span>, to rząd funkcji f jest 
+    ściśle większy niż rząd funkcji g, g = O(f) i f <font face="Symbol">
+    <span lang="en">&sup1;</span> Q</font>(g).</li>
+  </ul>
+</div>
+<p></p>
+<p>Korzystając z tego lematu łatwo udowodnimy, że funkcja 2<sup><font face="Verdana">n</font></sup> 
+ma inny rząd niż funkcja 3<sup><font face="Verdana">n</font></sup>. Chociaż obie 
+rosną do nieskończoności bardzo szybko, to asymptotyczny rząd&nbsp; funkcji 2<sup><font face="Verdana">n</font></sup> 
+jest ściśle mniejszy niż rząd funkcji 3<sup><font face="Verdana">n</font></sup>,</p>
+<p style="text-align: center">lim<sub>n<span lang="en"><font face="Symbol">&reg;&yen;</font></span></sub> 
+(2<sup><font face="Verdana">n</font></sup> /3<sup><font face="Verdana">n</font></sup>) = 
+lim<sub>n<span lang="en"><font face="Symbol">&reg;&yen;</font></span></sub> (2/3)<sup><font face="Verdana">n
+</font></sup>= 0.</p>
+<p>Podobnie funkcja lg n! rośnie do nieskończoności wolniej niż funkcja 
+kwadratowa n<sup><font face="Verdana">2</font></sup>.&nbsp; Rzeczywiście, 
+ponieważ lgn! może być przedstawiony jako suma lg 1 + lg 2 + ... + lg (n-1) + lg 
+n, zatem mamy oszacowanie</p>
+<p style="text-align: center">(lg n)/n<sup><font face="Verdana">2</font></sup>
+<font face="Symbol"><span lang="en">&pound;</span>&nbsp; (</font>lg n!)/ n<sup><font face="Verdana">2</font></sup>&nbsp;
+<font face="Symbol"><span lang="en">&pound;</span> (</font>n lg n)/ n<sup><font face="Verdana">2</font></sup>.</p>
+<p>Ponieważ obie funkcje (lg n)/n<sup><font face="Verdana">2</font></sup>&nbsp; 
+i <font face="Symbol">(</font>n lg n)/n<sup><font face="Verdana">2</font></sup> 
+dążą do zera przy n zmierzającym do nieskończoności, zatem lim<sub>n<span lang="en"><font face="Symbol">&reg;&yen;</font></span></sub> 
+(<font face="Symbol"> (</font>lg n!)/ n<sup><font face="Verdana">2</font></sup>) 
+= 0, co&nbsp; na mocy lematu dowodzi, że log n! = O(n<sup><font face="Verdana">2</font></sup>) 
+oraz log n! <font face="Symbol"><span lang="en">&sup1;</span> Q</font>(n<sup><font face="Verdana">2</font></sup>).<BR>
+
+</p>
+
+<div class="def">
+<p><A NAME="EDU.skorowidz.termin poprawność_algorytmu 1_3"></A> 
+Definicja 6.4 </P>
+<p> Powiemy, że algorytm Alg ma czasową złożoność asymptotyczną </p>
+<blockquote>
+  <ul>
+    <li>wielomianową, jeżeli T(Alg,n) = <font face="Symbol">Q</font>(n<sup><font face="Verdana">c</font></sup>) 
+    dla pewnego naturalnego c&gt;0,</li>
+    <li>wykładniczą, jeżeli T(Alg,n) =<font face="Symbol"> Q</font>(a<sup><font face="Verdana">n</font></sup>) 
+    dla pewnego a&gt;1, </li>
+    <li>liniową, jeżeli&nbsp; T(Alg,n) =<font face="Symbol"> Q</font>(n),</li>
+    <li>kwadratową, jeżeli&nbsp; T(Alg,n) =<font face="Symbol"> Q</font>(n<sup><font face="Verdana">2</font></sup>),</li>
+    <li>logarytmiczną, jeżeli&nbsp; T(Alg,n) =<font face="Symbol"> Q</font>(lg n),</li>
+    <li>liniowologarytmiczną, jeśli T(Alg,n) =<font face="Symbol"> Q</font>(nlg n).</li>
+  </ul>
+</blockquote>
+</div>
+<p></p>
+<p>Oczywiście najbardziej pożądane są algorytmy o złożoności liniowej. Nie 
+zawsze jednak jest to możliwe. Złożoność większości przedstawionych w tym 
+wykładzie algorytmów jest wielomianowa. Spotkamy się jednak również z 
+algorytmami o złożoności wykładniczej. Takim algorytmem jest np. algorytm 
+generowania wszystkich permutacji danego ciągu, lub metoda zerojedynkowa badania 
+spełnialności formuł rachunku zdań. Aby zrozumieć jak istotna jest dla nas&nbsp; 
+różnica&nbsp; między złożonością wielomianową a wykładniczą, rozważmy 
+następujące zadanie. </p>
+
+<p>Niech będą dane algorytmy: Alg1 o złożoności T(Alg1, n) = n<sup><font face="Verdana">2</font></sup>&nbsp; 
+i&nbsp; Alg2 o złożoności T(Alg2, n) = 2<sup><font face="Verdana">n</font></sup>, 
+rozwiązujące ten sam problem. Załóżmy, że wykonują one zadanie&nbsp; o rozmiarze&nbsp; 
+k w czasie t na pewnym komputerze K. Zastanówmy się najpierw w jakim czasie 
+zostanie wykonane przy pomocy tych algorytmów zadanie 5 razy większe. Dla 
+algorytmu Alg1 mamy&nbsp; t <font face="Symbol"><span lang="en">´</span> </font>
+(5k)<sup><font face="Verdana">2</font></sup>/ k<sup><font face="Verdana">2</font></sup> 
+= 25t, a dla algorytmu Alg2,&nbsp; t<font face="Symbol"> <span lang="en">´</span>
+</font>(2<sup><font face="Verdana">5k</font></sup>)/2<sup><font face="Verdana">k</font></sup> 
+=&nbsp; t<font face="Symbol"> <span lang="en">´</span> </font>(2<sup><font face="Verdana">k</font></sup>)<sup><font face="Verdana">4</font></sup> 
+= t<sup><font face="Verdana">5</font></sup>, czyli algorytm Alg1 wykona większe 
+zadanie w czasie 25 razy dłuższym, a algorytm Alg2 potrzebuje aż t<sup><font face="Verdana">5</font></sup> 
+czasu.&nbsp; Może się wydawać, że sytuacja zmieni się, jeśli algorytmy będą 
+wykonywane na szybszym, np. 16 razy szybszym, komputerze. Jaki jest maksymalny 
+wymiar zadania, które można rozwiązać na tym komputerze w czasie&nbsp; t. 
+Zadanie o rozmiarze k wykonamy więc 16 razy szybciej, czyli w czasie&nbsp; t/16. 
+Algorytm Alg1 może zatem wykonać w czasie t na szybszym&nbsp; komputerze zadanie 
+o rozmiarze x, gdzie <BR> <center>(t/16)<font face="Symbol"> <span lang="en">´</span> </font>x<sup><font face="Verdana">2</font></sup> =&nbsp; 
+t <font face="Symbol"> <span lang="en">´</span> </font>k<sup><font face="Verdana">2</font></sup> = 16k<sup><font face="Verdana">2</font></sup>,</center> czyli ostatecznie x = 4k. 
+Algorytm Alg2 natomiast, wykona w czasie t zadanie o rozmiarze&nbsp; y,&nbsp; 
+gdzie 
+<BR> <center> (t/16)<font face="Symbol"> <span lang="en">´</span> </font>2<sup><font face="Verdana">y</font></sup> 
+=&nbsp; t<font face="Symbol"> <span lang="en">´</span> </font>2<sup><font face="Verdana">k</font></sup>.</center> 
+Wynika stąd, że y= k+4. Alg2 wykona więc zadanie jedynie o 4 jednostki większe.<BR>
+
+&nbsp;</p>
+
+<p><b>Pytanie 7</B>: Która z funkcji lg (n<sup><font face="Verdana">2</font></sup>), 
+czy 2<sup><font face="Verdana">lg(lgn)</font></sup>&nbsp; ma asymptotycznie 
+większy rząd? </P>
+
+<!-- <p>Odpowiedź: Taki sam rząd.</P> -->
+
+<form>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'Mają ten sam rząd  lg n')">
+</p>
+</form>
+
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left">
+<A HREF="main01_p5.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main01_p7.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

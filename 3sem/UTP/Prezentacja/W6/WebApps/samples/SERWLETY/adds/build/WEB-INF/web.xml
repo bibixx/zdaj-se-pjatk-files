@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <web-app version="2.4"
+    xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd">
+
+    <display-name>Adds</display-name>
+    <description>Dodatkowe</description>
+
+    <filter>
+        <filter-name>HeaderFilter</filter-name>
+        <filter-class>filters.TestFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HeaderFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>FooterFilter</filter-name>
+        <filter-class>filters.FooterFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FooterFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <listener>
+        <listener-class>listeners.TestContextListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>listeners.TestContextAttributeListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>listeners.TestSessionListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>listeners.TestSesAttrListener</listener-class>
+    </listener>
+
+
+
+    <servlet>
+       <servlet-name>CookieAndSess</servlet-name>
+       <description></description>
+       <servlet-class>CookieAndSess</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CookieAndSess</servlet-name>
+        <url-pattern>/cook</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>ListenersTest</servlet-name>
+       <description></description>
+       <servlet-class>ListenersTest</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListenersTest</servlet-name>
+        <url-pattern>/listen</url-pattern>
+    </servlet-mapping>
+
+</web-app>

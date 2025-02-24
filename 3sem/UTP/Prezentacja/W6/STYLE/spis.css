@@ -1,0 +1,36 @@
+#spisbody {
+ background-color: #d1d1d1;
+ color: black; 
+ font-family: Verdana;
+ font-size: 90%; 
+}
+
+#spis a {
+  font-family: Verdana;
+  font-size: 90%; 
+  display: block;
+  color: black;
+  background-color: #d1d1d1;
+  width: 100%;
+  text-decoration: none;
+}
+
+#spis a:hover
+{
+  background-color: #369;
+  color: #FFF;
+}
+
+#spis br
+{
+ line-height: 50%; 
+}
+
+#lev2
+{
+  margin-left: 20px;
+}
+
+#lev3 {
+  margin-left: 15px;
+}

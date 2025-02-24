@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+
+<td align="left"><A HREF="main04_p1.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main04_p3.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all">
+<A NAME="EDU.wyklad.punkt 2"></A>
+<br clear="all">
+
+<div class="tytulpunktu">2. Sortowanie przez wstawianie</div> 
+
+    <p><b>Idea</b> tego algorytmu polega na sukcesywnym wstawianiu kolejnych 
+elementów na właściwą pozycję w już uporządkowanym fragmencie ciągu.&nbsp; Dokładniej, sortowanie odbywać się będzie w n-1 etapach. W i-tym 
+etapie zapamiętujemy i-ty element i porównujemy go z elementami poprzedzającymi. 
+    W przypadku, gdy są one większe niż i-ty, zostaną przesunięte o jedno 
+    miejsce w prawo zwalniając w ten sposób zajmowaną pozycję i robiąc ew. 
+    miejsce&nbsp; dla elementu i-tego. Zauważmy, że w wyniku przesunięć nie 
+    &quot;zgubiliśmy, żadnego elementu, bo element i-ty został na początku 
+    zapamiętany na zmiennej pomocniczej pom. W ten sposób zwolniła się pozycja 
+    i-ta i mogliśmy na niej umieścić element z pozycji sąsiedniej, itd. Przesunięcia w prawo kontynuujemy tak 
+    długo, aż znajdziemy element, który jest&nbsp; mniejszy bądź równy 
+    elementowi i-temu i wówczas wpisujemy element zapamiętany na wolną pozycję z 
+    jego prawej&nbsp; strony (por. Rysunek 4.2).  
+
+    <p style="text-align: center">
+    <img border="0" src="Rysunki/Rysunek4_2.gif" width="600" height="200"><p>
+Algorytm realizujący opisaną wyżej ideę nosi nazwę sortowania przez wstawianie (InsertionSort). Zauważmy, że strategia 
+    postępowania&nbsp; jest w tym algorytmie inna niż w algorytmie SelectionSort. Tam nigdy nie 
+    wracaliśmy do elementów, które wcześniej zostały wybrane. Natomiast 
+    wielokrotnie przeglądaliśmy elementy, które tworzyły blok elementów jeszcze 
+    nieuporządkowanych. Tu odwrotnie. Z segmentu nieuporządkowanego bierzemy po 
+    jednym elemencie i wstawiamy go na właściwą pozycję w segmencie 
+    uporządkowanym &quot;przepychając&quot;, jeśli trzeba, elementy większe, już 
+uporządkowane, o jedną 
+    pozycję w prawo.<p>Algorytm możemy zapisać w następującej postaci:<p style="text-align: left">&nbsp;<p>
+<div class="def" style="width: 820; height: 261">
+   <TABLE frame="void" rules="none" width="782" height="227">
+         <TR>
+            <TD width="515" height="12" colspan="2">InsertionSort (e : ciąg){</TD>
+             
+            <TD width="30" height="12"></TD>
+             
+            <TD width="770" height="12"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="456" height="12"><strong>&nbsp;</strong>i := 2; n := 
+            e.length;</TD> 
+            <TD width="30" height="12"></TD> 
+            <TD width="770" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="456" height="12"><strong>&nbsp;while&nbsp; </strong>(i <font face="Symbol"> <span lang="en">&pound;</span></font>
+            n) <strong>do </strong> </TD> 
+            <TD width="30" height="12"></TD> 
+            <TD width="770" height="12">// e[1]<font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[i-1], i<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            n+1&nbsp; oraz i<font face="Symbol">&nbsp; <span lang="en">&pound;</span> </font>n</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="456" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>j := i; pom := e[i];&nbsp;</TD> 
+            <TD width="30" height="12"></TD> 
+            <TD width="770" height="12">// e[i] = pom</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="456" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <b>while</b> (j&gt;1 and e[j-1]&gt;pom) <b>do</b><STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG>
+             </TD>
+            <TD width="30" height="12">   </TD>
+            <TD width="770" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   //   pom <font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[j+1]<font face="Symbol"> <span lang="en">&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>e[i]&nbsp; 
+            oraz e[j-1]&gt;pom</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="456" height="12">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>e[j] := e[j-1];</TD>
+            <TD width="30" height="12">   </TD>
+            <TD width="770" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   // pom <font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[j]<font face="Symbol"> <span lang="en">&pound;</span></font> e[j+1]<font face="Symbol"> <span lang="en">&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>e[i]</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="456" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            j := j - 1;</TD>
+            <TD width="30" height="12">   </TD>
+            <TD width="770" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   //   pom <font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[j+1]<font face="Symbol"> <span lang="en">&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>e[i]&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="456" height="12">   &nbsp;<STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; od;</STRONG></TD>
+            <TD width="30" height="12">   </TD>
+            <TD width="770" height="12">   //&nbsp; e[1]<font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[j-1]&nbsp;<font face="Symbol"><span lang="en">&pound;</span></font>
+            
+            pom <font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[j+1]<font face="Symbol"> <span lang="en">&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>e[i]</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="456" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e[j] 
+            := pom;</TD>
+            <TD width="30" height="12">   </TD>
+            <TD width="770" height="12">   // e[1]<font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[i-1]<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            e[i]</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="456" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i := 
+            i+1;</TD>
+            <TD width="30" height="12">   </TD>
+            <TD width="770" height="12">   &nbsp;// e[1]<font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[i-2]<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            e[i-1],&nbsp; i<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            n+1</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="456" height="12">      &nbsp;<strong>od</strong>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; </TD>
+             
+            <TD width="30" height="12">      </TD>
+             
+            <TD width="770" height="12">      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="1"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="456" height="1"></TD>
+            <TD width="30" height="1"></TD>
+            <TD width="770" height="1"> &nbsp; // e[1]<font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[i-2]<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            e[i-1]&nbsp; oraz i=n+1</TD>
+         </TR>
+   </TABLE>
+</div>
+
+<p style="text-align: left"><b>Analiza poprawności</b></P>
+
+<p>Niech&nbsp; e<sub><font face="Verdana">1</font></sub>, ..., e<sub><font face="Verdana">n </font></sub>
+będzie ciągiem,&nbsp; którego elementy stanowią początkowe wartości tablicy e 
+oraz n&gt;0, czyli spełniony jest warunek początkowy specyfikacji algorytmów 
+sortowania. Mamy wykazać, że po wykonaniu algorytmu spełniony będzie także 
+warunek końcowy</P>
+
+<p style="text-align: center">wk = {e[1] <font face="Symbol"><span lang="en">&pound;</span> </font>e<font face="Symbol">[2]&nbsp;  <span lang="en">&pound;</span> ...&nbsp;  <span lang="en">&pound;</span> </font>e[n] 
+    oraz istnieje taka permutacja&nbsp; i<sub><font face="Verdana">1</font></sub>, 
+    ..., i<sub><font face="Verdana">n</font></sub> liczb 1,..., n, e[1] = e<sub><font face="Verdana">i1</font></sub>, 
+    e[n]= e<sub><font face="Verdana">in</font></sub> }.</P>
+
+<p>Rozważymy najpierw pętlę wewnętrzną. Załóżmy, że wszystkie elementy od 
+pozycji 1 aż do pozycji i-1 zostały już uporządkowane i wchodzimy do pętli 
+wewnętrznej &quot;while&quot; wiedząc, że wszystkie elementy na pozycjach od&nbsp; 
+j+1,..., i są większe od elementu pom. Przed pierwszym wejściem do 
+pętli wewnętrznej tak właśnie jest, bo j=i. Jeśli warunek pętli wewnętrznej jest spełniony, to prawdziwe 
+są własności:</P>
+
+<p style="text-align: center">pom <font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[j+1]<font face="Symbol"> <span lang="en">&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>e[i]&nbsp; 
+oraz e[j-1]&gt;pom oraz j&gt;1.</P>
+
+<p style="text-align: left">Zatem przesuwając na pozycję j-tą element e[j-1], 
+otrzymamy pom <font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[j] <font face="Symbol"> <span lang="en">&pound;</span> </font>e[j+1]<font face="Symbol"> <span lang="en">&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>e[i]. 
+Po wykonaniu przypisania &quot;j:= j-1;&quot;, ponownie prawdziwa jest własność </P>
+
+<p style="text-align: center">pom <font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[j+1]<font face="Symbol"> <span lang="en">&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>e[i].</P>
+
+<p>Ta ostatnia formuła jest więc niezmiennikiem pętli &quot;while <strong>&nbsp;</strong>(i <font face="Symbol"> <span lang="en">&pound;</span></font>
+            n) &quot;. Na mocy twierdzenia o niezmiennikach (por. wykład I, p.4), po 
+wykonaniu pętli wewnętrznej spełniony jest niezmiennik oraz, albo j=1, albo 
+e[j-1]<font face="Symbol"><span lang="en">&pound;</span> </font>
+            pom. Ponieważ żadna z pozycji e[1] do e[j-1] nie została w tej pętli 
+zmieniona, zatem, korzystając z założenia i z niezmiennika możemy w obu 
+przypadkach stwierdzić, że prawdziwa jest formuła</P>
+
+<p style="text-align: center">e[1]<font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[j-1]&nbsp;<font face="Symbol"><span lang="en">&pound;</span></font>
+            
+            pom <font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[j+1]<font face="Symbol"> <span lang="en">&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>e[i]. </P>
+
+<p>Zauważmy jeszcze, że aktualne wartości e[1],...,e[j-1], pom, e[j+1],...,e[i] 
+są permutacją oryginalnych wartości danego ciągu&nbsp; e<sub><font face="Verdana">1</font></sub>, ..., e<sub><font face="Verdana">i</font></sub>.</p>
+
+<p>&nbsp;Zajmijmy się teraz pętlą zewnętrzną. Tu niezmiennikiem jest formuła</p>
+<p style="text-align: center">e[1]<span lang="en"><font face="Symbol">&pound;</font></span>...<span lang="en"><font face="Symbol">&pound;</font></span>e[i-1]
+<font face="Symbol"><span lang="en">&Ugrave;</span> </font>&nbsp;i<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            n+1. (*)</p>
+<p>Jeśli w kolejnej iteracji pętli zewnętrznej spełniony jest warunek pętli <strong>&nbsp;</strong>(i <font face="Symbol"> <span lang="en">&pound;</span></font>
+            n) oraz formuła (*), to na mocy poprzednich rozważań, po wykonaniu 
+pętli wewnętrznej mamy e[1]<font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[j-1]&nbsp;<font face="Symbol"><span lang="en">&pound;</span></font>
+            
+            pom <font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[j+1]<font face="Symbol"> <span lang="en">&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>e[i].&nbsp; 
+Wstawiając na miejsce j-te zapamiętany wcześniej na zmiennej pom element e[i], 
+otrzymujemy&nbsp; e[1]<font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[i-1]<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            e[i].&nbsp; Ponadto nadal (i <font face="Symbol"> <span lang="en">&pound;</span></font>
+            n). Po zmianie wartości i, mamy e[1]<font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[i-1]<font face="Symbol"> </font>
+            &nbsp;<font face="Symbol"><span lang="en">&Ugrave;</span> </font>&nbsp;i<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            n+1.</p>
+
+<p>Ponieważ formuła (*) jest prawdziwa trywialnie przy pierwszym wejściu i w 
+każdej iteracji pętli zewnętrznej, to jest również prawdziwa w chwili wyjścia. 
+Zewnętrzna pętla zakończy się, gdy i &gt;n, co łącznie z formułą (*) daje e[1]<span lang="en"><font face="Symbol">&pound;</font></span>...<span lang="en"><font face="Symbol">&pound;</font></span>e[n]. 
+Ponieważ w i-tym kroku, wartości pierwszych i elementów stanowią permutację 
+pierwszych i elementów danego ciągu e<sub><font face="Verdana">1</font></sub>, ..., e<sub><font face="Verdana">i</font></sub>, 
+zatem po zakończeniu pętli zewnętrznej elementy tablicy e są permutacją 
+elementów danego ciągu.</p>
+
+<p><div class="lemat">
+  <p>Twierdzenie 2.1&nbsp; Algorytm InsertionSort jest całkowicie  poprawnym rozwiązaniem problemu sortowania, 
+  w każdej strukturze danych z liniowym porządkiem <span lang="en"><font face="Symbol">&pound;</font></span>.</p>
+</div>
+<p></p>
+<p><b>Analiza kosztu:</b></p>
+<p>Zastanówmy się najpierw nad przypadkami szczególnymi. Załóżmy że dany ciąg, 
+do którego chcemy zastosować algorytm InsertionSort jest już uporządkowany 
+niemalejąco. Wykonanie pętli wewnętrznej za każdym razem zakończy się na 
+zbadaniu warunku (j&gt;1 and e[j-1]&gt;pom). Żaden element nie będzie 
+przesunięty. W każdej iteracji zewnętrznej pętli, wykonamy więc tylko jedno 
+porównanie. Razem n-1 porównań.</p>
+<p>A jak się zachowa nasz algorytm w przypadku ciągu odwrotnie uporządkowanego?&nbsp; 
+Każdy element trzeba będzie przenieść na pozycję pierwszą. Ale w tym celu pętla 
+wewnętrzna będzie musiała przesunąć cały już uporządkowany fragment o jedno 
+miejsce w prawo, wykonując w i-tym kroku i-1 porównań. Razem 1 + 2 + ...+ n-1 
+porównań. Przypadek tu rozpatrywany jest najgorszy dla algorytmu InsertionSort, 
+zatem&nbsp; koszt czasowy pesymistyczny wynosi W(n) = n(n-1)/2. </p>
+<p>A jaki jest średni koszt czasowy algorytmu? W pętli zewnętrznej nie 
+wykonujemy porównań. Policzymy więc jaka jest oczekiwana liczba porównań 
+wykonanych przez pętlę wewnętrzną. W i-tym kroku mamy już uporządkowane elementy 
+na pozycjach e[1],...,e[i-1], a zadanie pętli wewnętrznej polega na wstawieniu 
+elementu e[i] na jedną z pozycji 1,2,...,i. Załóżmy, że z takim samym 
+prawdopodobieństwem element e[i] może zająć każde z tych i miejsc. Zatem 
+prawdopodobieństwo, że e[i] zajmie miejsce j-te wynosi 1/i. Jeśli e[i] ma trafić 
+na miejsce j-te, to musieliśmy element e[i] porównać z e[i-1],..., e[j], e[j-1] 
+wykonując przy tym i-j+1 porównań. Wynika stąd, że średni liczba porównań 
+wykonanych przez pętlę wewnętrzną wynosi</p>
+<p style="text-align: center">&nbsp;<font face="Symbol" size="3">S</font> <sub>
+<font face="Verdana">j=1,...,i</font></sub> (1/i)(i-j+1) = (1/i)(1+2+...+i) = 
+(i+1)/2.</p>
+<p>Sumując&nbsp; po wszystkich i otrzymujemy:</p>
+<p style="text-align: center">A(n) = <font face="Symbol" size="3">S</font> <sub>
+<font face="Verdana">i=2,...,n</font></sub> (średnia liczba porównań wykonanych 
+w i-tym kroku algorytmu) = <font face="Symbol" size="3">S</font> <sub>
+<font face="Verdana">i=2,...,n</font></sub> (i+1)/2 .</p>
+<p style="text-align: left">Ostatecznie A(n) = (1/4)n<sup><font face="Verdana">2</font></sup> 
++O(n). Koszt średni algorytmu InsertionSort niewiele odbiega od kosztu w 
+przypadku pesymistycznym: też jest kwadratowy.</p>
+<p>Algorytm sortowania przez wstawianie sortuje w miejscu, tzn. wykorzystuje tylko 
+pamięć konieczną do przechowywania danych i kilka zmiennych pomocniczych. Jego 
+koszt pamięciowy jest więc liniowy w stosunku do rozmiaru danych, S(n) = <font face="Symbol">Q</font>(n)</p>
+
+  <p><b>Przykład 2.1</b></p>
+  <p>Niech dany ciąg składa się z liczb całkowitych, 4,2,6,1,7,5. Stany 
+  tablicy e w kolejnych iteracjach pętli zewnętrznej&nbsp; algorytmu 
+  InsertionSort są następujące:</p>
+  <p style="text-align: center"><b>4</b>,2,6,1,7,5&nbsp;&nbsp;&nbsp; <b>2,4,</b>6,1,7,5&nbsp;&nbsp;&nbsp; 
+  <b>2,4,6,</b>1,7,5&nbsp;&nbsp; <b>1,2,4,6,</b>7,5&nbsp;&nbsp;&nbsp; 
+  <b>1,2,4,6,7,</b>5&nbsp;&nbsp;&nbsp; <b>1,2,4,5,6,7.</b></p>
+  <p>Pogrubioną czcionką zaznaczono segmenty uporządkowane.<FONT FACE="Wingdings"> &#74;</FONT> </p>
+<p><b>Pytanie 2</B>: Algorytm InsertionSort wykonuje dość dużo instrukcji 
+przypisania. Policzmy tylko te, które dotyczą elementów ciągu. Ile&nbsp; ich 
+wykonamy w przypadku pesymistycznym, jeżeli ciąg składa się z n elementów? 
+ </p>
+
+<!-- <p>Odpowiedź: w kazdej iteracji i+1 przypisań dla i=2,...,n = (n+1)(n+2)/2 -3.</P> -->
+
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'(n+1)(n+2)/2 - 3');">
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left">
+<A HREF="main04_p1.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main04_p3.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

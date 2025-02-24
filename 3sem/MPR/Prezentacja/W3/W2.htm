@@ -1,0 +1,1435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.01 transitional//EN"><html><head rel="stylesheet" type="text/css" href="../style/common.css">
+ <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+ <meta name="GENERATOR" content="Mozilla/4.61 [en] (OS/2; I) [Netscape]"><title>Wykład 2</title>
+ <link rel="stylesheet" type="text/css" href="../style/common.css">
+ <script type="text/javascript" language="JavaScript1.2" src="../js/dodatki.js">
+  </script></head><body bgcolor="#efefef">
+<div align="Center"><a name="W3"></a><a name="W2"></a><h1>2. Dynamiczna Java i programowanie komponentowe (JavaBeans)</h1></div>
+<hr>
+<a name="W2.1"></a><h2>2.1. Dynamiczne ładowanie klas. </h2>
+W klasie Object metoda getClass. Zastosowana wobec dowolnego obiektu
+zwraca odnośnik do jego klasy, do obiektu klasy java.lang.Class. <br><br>
+Obiekty klasy Class są klasami (to ważne: tu same klasy są obiektami) <br>
+<br>
+Możemy wobec nich stosować różne metody klasy Class z pakietu java.lang, np. <br>
+<br>
+getSuperClass(), <br>
+getInterfaces(), <br>
+newInstance(), <br>
+<br>
+Obiektów-klas nie możemy tworzyć za pomocą konstrukcji new. <br>
+Jedynie poprzez użycie odpowiednich metod uzyskujemy odnośniki do tych obiektów. <br>
+<br>
+Jedną z takich metod jest statyczna metoda klasy Class: <br>
+<br><b>
+forName(String NazwaKlasy); </b><br>
+<br>
+Np. pisząc: <br>
+<br>
+Class c = Class.forName("javax.swing.JButton"); <br>
+<br>
+lub <br>
+<br>
+Class c = Class.forName(java.awt.Button.class); <br>
+<br>
+uzyskujemy deskryptor klasy przycisków i możemy się nim posłużyć przy tworzeniu obiektu: <br>
+<br>
+JButton b = c.newInstance(); <br>
+   <br>
+W statycznym przypadku, gdy wszystko jest ustalone "w źródle" programu, sens
+takich konstrukcji jest niewielki. Ale bardzo często warto odłożyć pewne
+ustalenia do fazy wykonania programu, zwiększając jego elastyczność i uniwersalność.
+Wtedy dynamiczna reprezentacja obiektów-klas bardzo się przydaje. <br>
+<br>
+Najprostszy przykład: odroczenie ustalenia sposobu obsługi akcji na przycisku
+do fazy wykonania programu pokazano na poniższym wydruku.  Jako argument
+podajemy nazwę klasy, której obiekt obsługuje akcję. Możemy mieć wiele takich
+(wariantowych) klas i bez żadnej rekompilacji zmieniać sposoby obsługi kliknięcia
+w przycisk.<br>
+<pre>
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
+
+class Main extends JFrame {
+
+static void exit(String s) { System.out.println(s); System.exit(1); }
+
+public static void main(String args[]) {
+   new Main(args[0]);
+}
+
+Main(String actionClassName) {
+ Class actionClass = null;
+ Action act = null;
+ try {
+       actionClass = Class.forName(actionClassName);
+       act = (Action) actionClass.newInstance();
+  } catch (Exception exc) {exit("Obiekt klasy akcji nie może być utworzony");}
+
+ JButton b = new JButton();
+ b.setAction(act);
+ getContentPane().add(b);
+ setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ pack();
+ show();
+ }
+}
+
+</pre>
+Uwaga:newInstance zwraca referencję do obiektu klasy Object - stąd potrzeba konwersji do typu Action.<br>
+<br>
+Jeśli teraz przygotujemy dwie klasy, opisujące różne akcje np.<br>
+<pre>
+import javax.swing.*;
+import java.awt.event.*;
+
+public class DialogAction extends AbstractAction {
+
+  final static String ACTION_NAME = "Show msg";
+
+   public DialogAction() {
+     super(ACTION_NAME);
+   }
+
+   public void actionPerformed(ActionEvent e) {
+     JOptionPane.showMessageDialog(null, ACTION_NAME);
+   }
+
+}
+</pre>
+i<br>
+<pre>
+import javax.swing.*;
+import java.awt.event.*;
+
+public class PrintAction extends AbstractAction {
+
+  final static String ACTION_NAME = "Print";
+
+   public PrintAction() {
+     super(ACTION_NAME);
+   }
+
+   public void actionPerformed(ActionEvent e) {
+     System.out.println("Wykonan akcja: " + ACTION_NAME);
+   }
+
+}
+</pre>
+to uruchomienie głównego programu z argumentem: DialogAction:<br>
+<br>
+java Main DialogAction<br>
+<br>
+spowoduje, że przycisk w oknie uzysaka nazwę Show Msg, a jego klikniecie otworzy okienko komunikaty.<br>
+<br>
+Natomiast po uruchomieniu programu z argmentem PrintAction<br>
+<br>
+java Main PrintAction<br>
+<br>
+nada przyciskowi nazwę Print, a jego kliknięcie wyprowadzi komunikat na konsolę.<br>
+<br>
+<br>
+Takie możliwości istniały w Javie od zawsze. Ale samo dynamiczne ładowanie
+klas to zdecydowanie za mało, by można było tworzyć naprawdę elastyczne programy.
+Dopiero w wersji 1.1  Java zyskała prawdziwą elastyczność dzięki wprowadzeniu
+mechanizmów refleksji<br>
+<br>
+<a name="W3.2"></a><a name="W2.2"></a><h2>2.2. Refleksja</h2>
+Podstawowy programistyczny interfejs refleksji (<b>Core Reflection API</b>) realizowany jest przez klasy pakietu <b>java.lang.reflect</b>  oraz rozbudowaną klasę Class z pakietu java.lang.<br>
+<br>
+<div class="def"><b>Refleksja</b> oznacza możliwoć wykonywania W TRAKCIE WYKONANIA PROGRAMU następujących działań:  <br>
+<ul>
+  <li>uzyskiwania pełnej informacji o charakterystykach klasy (pola, metody, ich charakterystyki) </li>
+  <li>działań na polach danego obiektu, poprzez ich nazwy,  </li>
+  <li>aktywowanie metod na rzecz danego obiektu poprzez ich nazwy i z podaniem argumentów.</li>
+</ul>
+</div><br>
+<br>
+Użycie refleksji pozwala m.in. na: <br>
+  <br>
+<ul>
+  <li>stwierdzenie jakie i z jakimi argumentami metody występują w danej
+klasie (np. podawanej dynamicznie w trakcie wykonania programu) </li>
+  <li>dynamiczne wywoływanie metod (specyfikowanych w trakcie wykonania programu)
+na rzecz jakiego obiektu (też dynamicznie ustalanego), </li>
+  <li>dynamiczne uzyskiwanie i modyfikacje wartości pól obiektu. </li>
+</ul>
+Uzywając mechanizmów refleksji do metod i pól odwołujemy się poprzez ich nazwy, a nie identyfikatory. <br>
+Na czym polega różnica wobec statycznego przypadku? <br>
+<br>
+W statyce odwołania są skonkretyzowane na etapie kompilacji. <br>
+Piszemy np. b.geText(). I tak już zostanie na zawsze. <br><br>
+W dynamice konstrukcja jest całkiem inna - właśnie posługująca się nazwą metody. Piszemy raczej tak: b.wykonaj("getText"). <br><br>
+<p align="Center"> Klasy pakietu java.lang.reflect</p>
+<p></p>
+<table border="1" cellspacing="1" width="623">
+<tbody><tr><td width="14%" valign="Middle"><p align="Center">Klasa</p></td><td width="86%" valign="Middle"><p align="Center">Przeznaczenie</p></td></tr><tr><td width="14%" valign="Middle"><p>Array </p></td><td width="86%" valign="Middle"><p>Tworzenie tablic, uzyskiwa<font face="Times New Roman">nie i ustalanie wartości elementów</font></p></td></tr><tr><td width="14%" valign="Middle"><p>Constructor </p></td><td width="86%" valign="Middle"><p><font face="Times New Roman">Informacja i dostęp do danego konstru
+ktora danej klasy. W szczególności wykorzystanie dla tworzenia obiektu.</font></p></td></tr><tr><td width="14%" valign="Middle"><p>Field </p></td><td width="86%" valign="Middle"><p><font face="Times New Roman">Informacja i dostęp do pola obiektu. Pobranie i zmiana wartości pola.</font></p></td></tr><tr><td width="14%" valign="Middle"><p>Method </p></td><td width="86%" valign="Middle"><p>Informacja <font face="Times New Roman">o danej metodzie danej klasy. Dynamiczne wywołanie metody na rzecz danego obiektu.
+</font></p></td></tr><tr><td width="14%" valign="Middle"><p>Modifier </p></td><td width="86%" valign="Middle"><p><font face="Times New Roman">Uzyskiwanie informacji o modyfikatorach składowej obiektu lub klasy.</font></p></td></tr></tbody>
+</table>
+<p align="Center"><br>
+ <br>
+Użyteczne metody klasy java.lang.Class</p>
+<p>  </p>
+<table border="1" cellspacing="1" width="623">
+<tbody><tr><td width="45%" valign="Middle"><p align="Center">Metoda</p></td><td width="55%" valign="Middle"><p align="Center">Przeznaczenie</p></td></tr><tr><td width="45%" valign="Middle"><p>getClasses()  </p><p>getDeclaredClasses() </p></td><td width="55%" valign="Middle"><p><font face="Times New Roman">Zwraca tablicę obiektów klasy Class, które są składowymi danej klasy.</font></p></td></tr><tr><td width="45%" valign="Middle"><p>getConstructors()  </p><p>getDeclaredConstructors()</p></td><td width="55%"
+valign="Middle"><p><font face="Times New Roman">Zwraca tablicę obiektów klasy Constructor; są to konstruktory danej klasy</font></p></td></tr><tr><td width="45%" valign="Middle"><p>getConstructor(Class[]) getDeclaredConstructor(Class[]) </p></td><td width="55%" valign="Middle"><p>Zwraca obiekt konstruktor (obiekt klasy konstruktor), który ma podane typy argumentów </p></td></tr><tr><td width="45%" valign="Middle"><p>getMethods()  </p><p>getDeclaredMethods() </p></td><td width="55%" valign="Middle"><p><font
+face="Times New Roman">Zwraca tablicę, zawierającą odnośniki do metod klasy. Metody są obiektami klasy Method.</font></p></td></tr><tr><td width="45%" valign="Middle"><p>getMethod(String, Class[]) </p><p>getDeclaredMethod(String, Class[]) </p></td><td width="55%" valign="Middle"><p><font face="Times New Roman">Zwraca metodę o podanej nazwie i podanych argumentach jako obiekt klsy Method.</font></p></td></tr></tbody>
+</table>
+<font face="Times New Roman"><p>Uwaga : Rozróżnienie pomiędzy metodami mającymi i nie mającymi w nazwie tekstu "Declared" jest następujące: </p></font>
+<ul>
+  <li><font face="Times New Roman">
+    <p>
+metody bez "Declared" zwracają składowe tylko publiczne, ale jednocześnie również dziedziczone, </p>
+    </font></li>
+  <li><font face="Times New Roman">
+    <p>
+metody z "Declared" zwracają wszystkie składowe (również prywatne i zabezpieczone), ale bez dziedziczonych</p>
+    </font></li>
+</ul>
+<a name="W3.3"></a><a name="W2.3"></a><h2>2.3.  Przykład wykorzystania refleksji </h2>
+Napiszmy program, który daje użytkownikowi wybór co do następstw przyciśnięcia
+jakiego przycisku. Co więcej, wyborów takich użytkownik może dokonywać w
+fazie wykonania programu. <br>
+Zestaw możliwych akcji (na przyciskach) będzie zawarty w klasie ActionsSet np. <br>
+<br>
+<pre>
+class ActionsSet {
+  public void Action1() { System.out.println("Action1"); }
+  public void Action2() { System.out.println("Action2"); }
+  public void Action3() { System.out.println("Action3"); }
+  public void Action4() { System.out.println("Action4"); }
+  public void Action5() { System.out.println("Action5"); }
+}
+</pre>
+Opcje dla użytkownika będą przedstawione w menu kontekstowym, otwieranym
+na przycisku. Z tego menu może on wybrać (wielokrotnie i różnie w trakcie
+działania programu) co konkretnie ma się stać, jeśli przyciśnie ten przycisk.<br>
+<br>
+Poniższy wydruk pokazuje konstrukcję programu.<br>
+<br>
+<pre>
+import java.lang.reflect.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+class Main extends JFrame implements ActionListener, MouseListener {
+
+  static void exit(String s) { System.out.println(s); System.exit(1); }
+
+  Method currAction = null;   // bieżąca metoda obsługi
+  Class actionClass = null;   // klasa obsługi
+  Object actionObject = null; // obiekt obsługi
+  JPopupMenu popUp = null;    // menu kontekstowe z wyborem obsługi
+
+
+Main() {
+  super("Test refleksji");
+  try {
+    actionClass = Class.forName("ActionsSet");
+    actionObject = actionClass.newInstance();
+  }  catch(Exception exc) {
+         exit("Wadliwa klasa obsługi");
+  }
+
+  JButton b = new JButton("Akcja");
+  b.setFont(new Font("Dialog", Font.BOLD, 24));
+  b.addActionListener(this);
+  b.addMouseListener(this);
+  getContentPane().setLayout(new FlowLayout());
+  getContentPane().add(b);
+  popUp = new JPopupMenu();
+  createMenuItems();
+  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  pack();
+  show();
+}
+
+void createMenuItems() {
+  Method m[] = null;
+   try {
+       m = actionClass.getDeclaredMethods();
+   } catch(Exception exc) {
+        exit("Niedostępna info o metodach klasy obsługi");
+   }
+
+  for (int i = 0; i &lt; m.length; i++) {
+     String name = m[i].getName();
+     JMenuItem mi = new JMenuItem(name);
+     mi.addActionListener(this);
+     popUp.add(mi);
+  }
+}
+
+
+void setCurrentAction(String action) {
+  Class args[] = {};
+  try {
+     currAction = actionClass.getMethod(action, args);
+    } catch(Exception exc) { exit("Nieznana metoda obsługi"); }
+}
+
+public void actionPerformed(ActionEvent e) {
+   Object src = e.getSource();
+   if (src instanceof JMenuItem)
+      setCurrentAction(((JMenuItem) src).getText());
+   else {
+     try {
+       Object args[] = { };
+       currAction.invoke(actionObject, args);  // wywołanie metody obsługi
+     }  catch(Exception exc) {
+          JOptionPane.showMessageDialog(null, "Akcja na przycisku nieustalona!");
+     }
+   }
+}
+
+public void mousePressed(MouseEvent e) {
+  showPopup(e);
+}
+public void mouseReleased(MouseEvent e) {
+  showPopup(e);
+}
+
+public void mouseEntered(MouseEvent e) {}
+public void mouseExited(MouseEvent e) {}
+public void mouseClicked(MouseEvent e) {}
+
+private void showPopup(MouseEvent e)  {
+  if (e.isPopupTrigger()) popUp.show(e.getComponent(), e.getX(), e.getY());
+}
+
+public static void main(String args[]) { new Main(); }
+
+}
+</pre>
+<br>
+W programie korzystamy z klasy Method. Uzyskując odnośnik do konkretnej metody,
+możemu ustalić ją jako obsługującą zdarzenie (metoda setCurrentAction). Przy
+zajściu zdarzenia możemy "pośrednio" (dynamicznie) wywołać jego obsługę.
+Służy temu metoda invoke z klasy Method, użyta w actionPerformed. <br>
+<br>
+Działanie programu ilustruje rysunek.<br>
+<br>
+<img src="images/Clipboard.jpg" alt="r" width="393" height="187" border="1">
+<br>
+<br>
+Po wyborze opcji Action3 - kliknięcia w przycisk będą wyprowadzać na konsolę napisy "Akcja3".<br>
+<br>
+<br>
+<u>Dwa  komentarze</u><br>
+<br>
+<b>Kwestia argumentów:</b> gdy określają sygnaturę metody (w getMethod)  występują jako typy danych, a więc obiekty klasy Class. <br>
+Jako konkretne argumenty wywołania metody  są konkretnymi obiektami, a więc
+egzemplarzami klasy Object (obiekty klasy Object - w metodzie invoke). <br>
+W tym programie metoda wywoływana pośrednio nie miała argumentów. <br>
+<br>
+<b>Sposób tworzenia menu kontekstowego</b>. prezentuje ono dostępne akcje,
+a te - całkowicie - są opisywane poprzez klasę ActionsSet. Stąd ułatwienie
+: dynamiczne pobranie akcji za pomocą metody getDeclaredMethods z klasy Class.
+Nawet wtedy, gdy wszystko jest umieszczone w jednym pliku i nie przewiduje
+się zmian w alternatywnych sposobach obsługi - to podejcie do programowania
+zasługuje na uwagę. <br>
+<br>
+<a name="W3.4"></a><a name="W2.4"></a><h2>2.4. Pojęcie JavaBean</h2>
+<br>
+<div class="def"><b>JavaBean</b> - (bean – ziarno) – to programowy komponent "wielokretnego
+użytku", którego właściwości i funkcjonalność mogą być odczytywane i/lub
+zmieniane uniwersalnymi środkami programistycznymi.</div><br>
+<br>
+Uwaga: JavaBean oznacza zarówno obiekt, jak i klasę tego obiektu. Rozróżnienie
+zawsze jasno wynika z kontekstu. O JavaBean będziemy mówić krócej "ziarno".<br>
+<br>
+Co oznacza powyższa definicja?<br>
+Gdy wbudowujemy zewnętrzny komponent-ziarno do naszego programu, mamy do
+dyspozycji środki programistyczne, które pozwalają uzyskać o nim informacje:<br>
+<br>
+<ul>
+  <li>jakie ma właściwości? jakie metody służą do ich pobierania i ustalania? </li>
+  <li>jakie obsługuje zdarzenia? jakie zdarzenia mogą się mu przytrafiać? </li>
+  <li>jakie metody udostępnia otoczeniu (eksportuje)? </li>
+</ul>
+Uniwersalność sposobów odczytywania i/lub zmieniana charakterystyk obiektu-ziarna opiera się na:<br>
+<ul>
+  <li>uzgodnionym protokole. dotyczącym informacji o ziarnie (standardowe wzorce deklaracji metod i/lub klasy informacyjne) </li>
+  <li>standardowych środkach pobierania informacji (introspekcja - realizowana przez klasę Introspector z pakietu java.beans) </li>
+  <li>standardowych środkach dostosowania obiektu </li>
+</ul>
+<a name="W3.5"></a><a name="W2.5"></a><h2>2.5.  Właściwości i akcesory </h2>
+Ziarna mają właściwości (atrybuty).<br>
+<br>
+<div class="def">Dostęp do własciwości zapewniają metody klasy-ziarna nazywane akcesorami..<br>
+Akcesor pobierający właściwości nazywa się getter, a ustalający – setter.</div><br>
+<br>
+Wyróżniamy własciwości <b>proste </b>(w tym binarne) oraz właściwości <b>indeksowane</b>.<br>
+Właściwości proste mają jedną wartość, właściwości indeksowane – wiele wartości, przedstawianych jako tablica.<br>
+<br>
+<div class="syntax">Standardowe wzorce deklaracji akcesorów są następujące<br>
+<br>
+Dla  prostej (niebinarnej) własciwości o nazwie NNN i typie Typ<br>
+<br>
+getter: Typ getNNN() <br>
+setter: void  setNNN(Typ)<br>
+<br>
+np. dla ziarna javax.swing.JButton i własciwości background mamy <br>
+getter: Color getBackground()<br>
+ i setter: void setBackground(Color).<br>
+<br>
+Dla właściwości binarnej o nazwie NNN:<br>
+<br>
+getter: boolean isNNN()<br>
+setter: void setNNN(boolean)<br>
+<br>
+np. boolean isVisible(), setVisible(boolean)<br>
+<br>
+Dla właściwości indeksowanej o nazwie NNN, której wartości reprezentowane są jako tablice elementów typu Typ:<br>
+ <br>
+getter elementu:  Typ getNNN(int) // zwraca wartość  podanego indeksu właściwości<br>
+setter elementu: vois setNNN(int, Typ) // ustala wartość  podanego indeksu właściwości<br>
+<br>
+getter tablicy: Typ[] getNNN()<br>
+setter tablicy: void setNNN(Typ[])<br>
+</div><br>
+<br>
+Właściwości ziarna mogą być <b>związane (bounded)</b>. <br>
+<br>
+O zmianie związanej właściwości ziarna mogą być zawiadamiane inne komponenty i reagować na tę zmianę. <br>
+<br>
+Właściwości ziarna mogą być <b>ograniczane (constrained)</b>.<br>
+Ograniczana właściwość – to taka, o której zmianie powiadamiane są zainteresowane
+inne komponenty i są pytane o zgodę na tę zmianę. Jeśli którykolwiek z komponentów
+nie da takiej zgody (zawetuje zmianę)  – zmiana nie dochodzi do skutku.<br>
+<br>
+Setter związanej i/lub ograniczanej właściwości ma obowiązek wygenerować zdarzenie klasy <b>PropertyChangeEvent</b>..<br>
+<br>
+Klasy-ziarna , mające związane właściwości musżą dostarczyć metody przyłączania słuchaczy zmian właściwości: <b>addPropertyChangeListener(PropertyChangeListener)</b><br>
+<br>
+Klasy-ziarna, mające ograniczane właściwości, muszą dostarczyć  metody <b>addVetoableChangeListener(VetoableChangeListener)</b>.<br>
+<br>
+Ziarna możemy wykorzystywać, możemy też je tworzyć (w znaczeniu: definiować klasę ziarna)<br>
+<br>
+Tworzenie ziarna (jako klasy) wymaga zdefiniowania klasy,  która:<br>
+<ul>
+  <li>stosuje ogólnie przyjęte wzorce sygnatur metod  i/lub uzupełniona jest
+przez dodatkową specjalną klasę opisującą "niestandardowe" informacje o ziarnie
+(implementacja interfejsu BeanInfo) </li>
+  <li>zapewnia serializację obiektów</li>
+  <li>zawiera konstruktor bezparametrowy </li>
+  <li>uzwględnia działania w środowisku wielowątkowym (do obiektu klasy może równocześnie odwoływać się kilka wątków) </li>
+</ul>
+<a name="W3.6"></a><a name="W2.6"></a><h2>2.6.  Nasłuch i wetowanie zmian właściwosci</h2>
+Zmiana właściwości związanej lub ograniczanej powinna generować zdarzenie typu <b>PropertyChangeEvent</b>.<br>
+<br>
+Komponenty (obiekty) zainteresowane w śledzeniu zmian  tej własciwości  muszą implementować interfejs <b>PropertyChangeListener</b>.  W ten sposób stają się słuchaczami zmian właściwości.. <br>
+Komponenty, które mogą wetować zmiany właściwości muszą implementować interfejs <b>VetoableChangeListener</b> (będą więc słuchaczami zmian właściwości ograniczonych i będę miały możliwość wetowania tych zmian).<br>
+<br>
+Zdarzenie typu PropertChangeEvent możemy zapytać o:<br>
+<ul>
+  <li>nazwę właściwości -  String getPropertyName()</li>
+  <li>starą wartość własciwości  (przed zmianą) – Object getOldValue()</li>
+  <li>nową wartość własciwości – Object getNewValue() </li>
+</ul>
+Interfejs <b>PropertyChangeListener</b> ma jedną metodę:<br>
+<br>
+<b>    public void propertyChange(PropertyChangeEvent)</b><br>
+<br>
+W implementacji tej metody, dowiadując się o zmianach właściwości, możemy na nie odpowiednio reagować.<br>
+<br>
+Również interfejs <b>VetoableChangeListener</b> ma jedną metodę: <b>vetoableChange(...)</b>
+ z argumentem–zdarzeniem typu PropertyChange. W jej implementacji , gdy dowiemy
+się już wszystkich niezbędnych szczegółow o zmianie – możemy ją zawetować.<br>
+<br>
+<b>Wetowanie zmiany</b>  odbywa się na zasadzie zgłoszenia wyjątku <b>PropertyVetoException</b>, zatem deklaracja metody vetoableChange wygląda następująco:<br>
+<br>
+<b>    public void vetoableChange(PropertyChangeEvent e)  <br>
+                                                throws PropertyVetoException<br>
+</b><br>
+a w jej implementacji – gdy po sprawdzeniu warości właściwości chcemy zgłosić veto – sygnalizujemy wyjątek: <b>throw new PropertyVetoException(...)</b>.<br>
+<br>
+<b>Słuchacze</b> zmian  właściwości  związanych (jak zawsze w Javie) musżą
+być przyłączeni do źródła zdarzenia., którym jest  w tym przypadku ziarno. 
+<br><br>
+Przyłączenie staje się możliwe, jesli w klasie-ziarnie zdefiniowano metodę <b>addPropertyChangeListener(...)</b><br>
+Musi też być zdefiniowana metoda <b>removePropertyChangeListener</b>, odłaczająca słuchacza.<br>
+<br>
+To samo dotyczy nasłuchu zmian właściwości ograniczanych: klasa zaiarno musi dostarczyć  metody przyłączenia słuchacza:  <b>addVetoableChangeListener</b> oraz metody odłączania słuchacza:  <b>removeVetoableChangeListener</b>.<br>
+<br><font color="#ff0000"><b>
+Obowiązkiem klasy ziarna, która implementuje związane i/lub ograniczane właściwości
+jest również dostarczenie odpowiednich definicji setterów dla tych właściwości.
+<br>
+
+
+W setterach należey  generować zdarzenie PropertyChangeEvent  i propagować go pośród przyłączonych słuchaczy.<br>
+</b></font>
+<br>
+W pakiecie java.beans znajdują się dwie klasy narzędziowe,  znacznie ułatwiające
+wykonanie tych zadań: PropertyChangeSupport i VetoableChangeSupport.<br>
+Klasy dostarczają metod  generowania zdarzeń i propagacji zdarzeń zmian:<br>
+<ul>
+  <li>właściwości związanych -  firePropertyChange </li>
+  <li>właściwości ograniczanych -  fireVetoableChange słuchaczy.</li>
+  <li>a także metod przyłączanai i odłączania słuchaczy tych zmian (addNNNListener, removeNNListener).</li>
+</ul>
+Konstruktory tych klas mają jako argument  referencję do obiektu-ziarna.<br>
+<br>
+<u><b>Schemat postępowania przy implementacji właściwości związanej jest następujący:</b></u><br>
+<br>
+<pre>
+class Ziarno .... {
+
+  //wsparcie
+  private PropertyChangeSupport chg = new PropertyChangeSupport(this);
+
+  String text;    // to będzie właściwośc związana o nazwie "text"
+  ...
+// setter
+synchronized void setText(String newTxt) { // pamiętamy o wielowątkowości!
+
+    String oldTxt =  text;   // stara wartość
+    text = newTxt;           // ustalenie nowej wartości
+     // powiadomienie
+    chg.firePropertyChange("text", oldTxt, newTxt);
+}
+....
+
+// metody dodawania i usuwania słuchaczy
+public synchronized void addPropertyChangeListener(PropertyChangeListener l) {
+ chg.addPropertyChangeListener(l);
+ }
+
+public synchronized void removePropertyChangeListener(PropertyChangeListener l) {
+ chg.removePropertyChangeListener(l);
+ }
+...
+}
+
+</pre>
+<br>
+Implementacja właściwości ograniczanych musi uzwględniać możliwość zawetowania zmiany przez któregoś ze słuchaczy. <br>
+<br>
+<u><b>Schemat postępowania przy implementacji właściwości ograniczanej jest następujący:</b></u><br>
+<br>
+<pre>
+class Ziarno .... {
+
+  //wsparcie
+  private VetoableChangeSupport veto = new VetoableChangeSupport(this);
+
+  String text;    // to będzie właściwośc ograniczana o nazwie "tekst"
+  ...
+// setter
+
+synchronized void setText(String newTxt)  throws PropertyVetoException
+ {
+    String oldTxt =  text;  // stara wartość
+
+     // wywołujemy metodę fireVotoableChange, która z kolei
+     // wywołuje metody vetoableChange zarejestrowanych słuchaczy
+     // jeśli któraś z nich zgłasza veto, setter kończy działanie
+     // a wyjątek PropertyVetoException jest przekazywany do obsługi
+     //  przez metodę wywołującą setText
+
+     veto.fireVetoableChange("tekst", oldTxt, newTxt);
+
+     // Tylko jeśli nikt nie zawetował zmiany:
+
+     text = newTxt;   // ustalenie nowej wartości
+}
+....
+// metody dodawania i usuwania słuchaczy
+
+public synchronized void addVetoableChangeListener(PropertyChangeListener l) {
+ veto.addVetoableChangeListener(l);
+ }
+
+public synchronized void removeVetoableChangeListener(PropertyChangeListener l) {
+ veto.removeVetoableChangeListener(l);
+ }
+...
+}
+
+<b>// Uwaga: wsystkie klasy  zdarzeniowe i interfejsy nasłuchu
+// dla właściwości znajdują się w pakiecie java.beans.
+</b>
+</pre>
+<br>
+<a name="W3.7"></a><a name="W2.7"></a><h2>
+2.7.  JavaBean - przykład praktyczny</h2>
+
+Będziemy budować klasę-licznik jako JavaBean. Klasę nazwiemy <b>Counter</b>.<br>
+Licznik będzie miał jedną właściwość o nazwie <b>count</b> (stan licznika).<br>
+W wersji pierwszej uczynimy tę właściwość związaną (bounded), w  wersji drugiej – związaną i ograniczoną (constrained).<br>
+<br> Przy budowie aplikacji zastosujemy koncepcję  "Model-View-Controller".
+<br>
+<br>
+Sama klasa Counter odzwierciedla logikę działania licznika ("<b>model</b>
+"). Obiekty tej klasy "są niewidzialne", a zatem  żeby zobaczyć licznik musimy
+stworzyć dodatkową klasę, która zdefiniuje widok licznika  (<b>view</b>).<br>
+Nazwiemy ją <b>CounterView</b>. Warto zwrócić uwagę: separacja kodu jest
+korzystna – widok uniezależniamy od modelu, a model od widoku, w ten sposób
+możemy mieć np. wiele widoków licznika, lub zmieniać model nie zmieniając
+widoku.<br>
+<br>
+Komunikacja między modelem i widokiem będzie się odbywać na zasadzie nasłuchu
+zmian właściwości (zmian właściwości count) czyli obiekt klasy CounterView
+będzie też słuchaczem zmian właściwości (PropertyChangeListener).<br>
+<br>
+Musimy też mieć jakieś środki zmiany stanu licznika. Interakcję użytkownika z modelem/widokiem zapewnia tzw. kontroler.<br>
+Widzieliśmy, że w komponentach Swingu (w naturalny dla nich sposób) kontroler
+połączony jest z widokiem. Tu jednak odseparujemy jego kod od widoku, tworząc
+klasę <b>CounterControlGui</b>, zapewniającą interfejs interakcji z licznikiem.. Widok zostanie dodany do tego GUI (ale kody obu klas będą odseparowane).<br>
+<br>
+W wersji drugiej – kiedy właściwość count będzie związana i ograniczana musimy
+dostarczyć obiektu-nadzorcy, który będzie sprawdzał czy zmiana właściwości
+jest dopuszczalna i jeśli stwierdzi, że nie – będzie wetował tę zmianę. Odpowiednią
+klasę nazwiemy <b>CounterLimitator</b>.<br>
+<br>
+W metodzie main(...) klasy Main, w której nasza aplikacja zacznie życie stworzymy
+wszystkie odpowiednie obiekty w/w klas i ustanowimy niezbędne połączenia
+między nimi.<br>
+<br>
+W sumie logika działania aplikacji będzie wyglądać tak:<br>
+<br>
+<br>
+<img src="images/Counter1.jpg" alt="r" width="597" height="224" border="1">
+<br>
+<br>
+Zaczynamy od wersji pierwszej, uboższej, w której klasa Counter daje przykład
+typowego programowania JavaBean z wlaściwością związaną:<br>
+<br>
+<pre>
+// Klasa Counter
+
+import java.awt.event.*;
+import java.beans.*;
+import java.io.*;
+
+public class Counter implements Serializable {
+
+  private int count = 0;    // właściwość count
+
+  // Pomocniczy obiekt do prowadzenia listy słuchaczy zmian właściwości oraz
+  // propagowania zmian  wśród zarejestrowanych złuchaczy
+   private PropertyChangeSupport propertyChange = new PropertyChangeSupport(this);
+
+
+  // Konstruktory
+
+  public Counter() {
+    this(0);
+  }
+
+  public Counter(int aCount) {
+    setCount( aCount );
+  }
+
+
+  // Metody przyłączania i odłączania słuchaczy zmian właściwości
+
+  public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {
+    propertyChange.addPropertyChangeListener(listener);
+  }
+
+  public synchronized void removePropertyChangeListener(PropertyChangeListener l) {
+    propertyChange.removePropertyChangeListener(l);
+  }
+
+  // Proste metody zwiększania i zmniejszania licznika
+
+  public void increment() {
+    setCount(getCount()+1);
+  }
+
+  public void decrement() {
+    setCount(getCount()-1);
+  }
+
+
+  // Getter właściwości "count"
+  public int getCount() {
+    return count;
+  }
+
+  // Setter właściowści "count"
+  public synchronized void setCount(int aCount) {
+    int oldValue = count;
+    count = aCount;
+
+    // wywołanie metody firePropertChange z klasy PropertyChangeSupport
+    // powoduje wygenerowanie zdarzenia PropertyChangeEvent i rozpropagowanie
+    // go wśród wszystkich przyłączonych słuchaczy, ale tylko wtedy, gdy nowa
+    // wartość właściwości różni się od starej wartości
+
+    propertyChange.firePropertyChange("count", new Integer(oldValue),
+                                            new Integer(aCount));
+  }
+
+}
+</pre>
+Widok licznika przedstawimy jako etykietę - klasa ta jednocześnie będzie
+nasłuchiować zmian właściwości count i odpowiednio do tego zmieniać tekst
+na etykiecie (a także wyprowadzać informacje o zmianach właściwości count
+na konsolę).<br>
+<br>
+<pre>
+//Klasa CounterView
+//Widok licznika przedstawiamy w postaci etykiety
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.beans.*;
+
+
+public class CounterView extends JLabel implements PropertyChangeListener {
+
+
+  // Konstruktor domyślny: inicjalizuje etykietę tekstem "0"
+  CounterView()  {
+     this("0");
+  }
+
+  // Konstruktor inicjalizujący etykietę podanym tekstem
+  CounterView(String lab) {
+     super(lab);
+     setOpaque(true);   // etykieta nie przezroczysta
+       // ramka
+     setBorder(BorderFactory.createLineBorder(Color.black));
+       // rozmiary i wyrównanie tekstu
+     setPreferredSize(new Dimension(75, 40));
+     setHorizontalAlignment(CENTER);
+  }
+
+  // obługa zdarzenia PropertyChange
+  public void propertyChange(PropertyChangeEvent e)  {
+    Integer oldVal = (Integer) e.getOldValue(),
+           newVal = (Integer) e.getNewValue();
+    System.out.println("Value changed from " + oldVal + " to " + newVal);
+    setText("" + newVal + "");  // pokazanie na etykiecie nowego stanu licznika
+   }
+
+
+}
+</pre>
+Klasa kontrolera - CounterControlGui dostarcza dwóch przycisków (zwiększ,
+zmniejsz licznik) oraz pole tekstowe, w którym można wpisać wartość licznika
+(ENTER)<br>
+Zarówno kliknięcie w przyciski jak i ENTER na polu tekstowym powoduje powstanie
+zdarzenia Action, które tu (w tej klasie) obsługujemy ustalając nowe wartości
+licznika za pomocą metod incremet() decrement() i setCount(...) z klasy  Counter.
+<br>
+<br>
+<pre>
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.beans.*;
+import java.io.*;
+
+public class CounterControlGui extends JFrame implements ActionListener {
+
+  Counter counter;
+  JButton binc = new JButton("Increment");
+  JButton bdec = new JButton("Decrement");
+  JTextField txt = new JTextField(10);
+
+  // Konstruktor otrzymuje jako argumenty obiekty typu Counter i CounterView
+  // Pierwszy jest nam potrzebny do komunikacji z licznikiem, drugi - widok
+  // wbudujemy w to GUI.
+
+  CounterControlGui(Counter c, CounterView clab)  {
+    counter = c;
+    Container cp = getContentPane();
+    cp.setLayout(new FlowLayout());
+    binc.addActionListener(this);
+    cp.add(binc);
+    cp.add(clab);
+    bdec.addActionListener(this);
+    cp.add(bdec);
+    txt.addActionListener(this);
+    cp.add(txt);
+    setDefaultCloseOperation(3);
+    pack();
+    show();
+  }
+
+
+  // Obsługa akcji
+  public void actionPerformed(ActionEvent e)  {
+      if (e.getSource() == txt)  {
+         int n = 0;
+         try  {
+            n = Integer.parseInt(txt.getText());
+         } catch (NumberFormatException exc)  { return; }
+         counter.setCount(n);
+         return;
+      }
+      String cmd = e.getActionCommand();
+      if (cmd.equals("Increment")) counter.increment();
+      else if (cmd.equals("Decrement")) counter.decrement();
+      else System.out.println("Unrecognized command");
+  }
+
+}
+</pre>
+I wreszcie lacząca wszystko klasa Main, która inicjuje działanie aplikacji.<br>
+<br>
+<pre>
+public class Main {
+
+ public static void main(String[] args)  {
+
+   // Tworzymy obiekty: licznik i jego widok
+   Counter counter = new Counter();
+   CounterView counterView = new CounterView(""+counter.getCount());
+
+   // Rejestrujemy widok jako słuchacza zmian licznika
+   counter.addPropertyChangeListener(counterView);
+
+   // Tworzymu GUI kontrolera i pokazujemy go
+   CounterControlGui gui = new CounterControlGui(counter, counterView);
+   gui.pack();
+   gui.show();
+  }
+
+}
+</pre>
+<br>
+Dizałanie aplikacji ilustruje rysunek oraz komunikaty na konsoli, powstałe
+po kolejnych klilnięciach w przyciski Incremenet i Decrement oraz wprowadzeniu
+liczby 23 w polu tekstowym i naciśnieciu ENTER.<br>
+<br>
+<img src="images/Counter1-v1.jpg" alt="r" width="407" height="75" border="1">
+<br>
+<br>
+<div class="listing100"><br>
+Value changed from 0 to 1<br>
+Value changed from 1 to 0<br>
+Value changed from 0 to 23<br>
+</div><br>
+<br>
+<b>Wersja 2</b><br>
+<br>
+W wersji drugiej chcemy dodać obiekt – nadzorcę, który będzie sprawdzał czy
+zmiana licznika jest dopuszczalna, a jeśli nie to będzie wetował tę zmianę.<br>
+Mechanizm wetowania polega na sygnalizowaniu wyjątku PropertyVetoException.<br>
+Wyjątek ten będzie sygnalizowany przez obiekt-nadzorcę, który jest jednoczesnie
+słuchaczem zmian wartości właściwości ograniczonych (VetoableChangeListener).
+<br>
+<br>
+Klasa definiująca obiekty nadzorujące nasz licznik wygląda tak.<br>
+<br>
+<pre>
+import java.beans.*;
+
+public class CounterLimitator implements VetoableChangeListener {
+
+// minimalne i makszymalne dopuszczalne wartości licznika
+private int min, max;
+
+CounterLimitator(int minLim, int maxLim)  {
+  min = minLim;
+  max = maxLim;
+}
+
+// Obsługa zdarzenia vetoableChange
+// metoda może sygnalizować PropertyVetoException
+public void vetoableChange(PropertyChangeEvent e)
+            throws PropertyVetoException {
+   Integer newVal = (Integer) e.getNewValue();
+   int val = newVal.intValue();
+   // Sprawdzamy, czy zmiana  licznika jest dopuszczalna,
+   // jeśli nie – sygnalizujemy wyjatek  PropertyVetoException
+   if (val &lt; min || val &gt; max)
+      throw new PropertyVetoException("Niedopuszczalna zmiana wartości", e);
+   }
+
+}
+
+</pre>
+W klasie Counter musimy poczynić zmiany, po to by właściwość count była zarazem związana i ograniczana.<br>
+Wykorzystamy podobną do PropertyChangeSupport klasę pomocniczą VetoableChangeSupport<br>
+Obiekt tej klasy nazwiemy vetos, dostarczymy też metod przyłączania i odłączania słuchaczy zmian ograniczanych.<br>
+<br>
+<pre>
+public class Counter {
+
+//...
+
+private VetoableChangeSupport vetos = new VetoableChangeSupport(this);
+
+public synchronized void addVetoableChangeListener(VetoableChangeListener l) {
+	vetos.addVetoableChangeListener(l);
+}
+
+public synchronized void removeVetoableChangeListener(VetoableChangeListener l) {
+	vetos.removeVetoableChangeListener(l);
+}
+
+// ...
+}
+</pre>
+<br>
+Zmianie ulegnie też metoda setCount.<br>
+<br>
+<pre>
+public class Counter {
+
+//...
+public synchronized void setCount(int aCount)
+                         throws PropertyVetoException {
+
+     int oldValue = count;
+
+     // wywołujemy metodę fireVotoableChange, która z kolei
+     // wywołuje metody vetoableChange zarejestrowanych słuchaczy
+     // jeśli któraś z nich zgłasza veto, setter kończy działanie
+     // a wyjątek PropertyVetoException jest przekazywany do obsługi
+     // przez metodę wywołującą setCount
+     // (co zaznaczyliśmy w nagłówku metody przez
+     // throws PropertyVetoException)
+
+    vetos.fireVetoableChange("count", new Integer(oldValue), new Integer(aCount));
+
+    // tylko jeśli nikt nie zawetował
+
+    count = aCount;  // ustalamy nową wartość licznika
+
+    // ... powiadamiamy nasłuchujących zmiany właściwości count
+
+    propertyChange.firePropertyChange("count", new Integer(oldValue),
+                                       new Integer(aCount));
+}
+
+//...
+}
+</pre>
+Ponieważ metody increment, decrement i konstruktory wywołują metodę setCount,
+to w sygnaturach tych metod i konstruktorów musimy dodać informację, że wyjątek
+PropertyVetoException ma być obsługiwany przez  wołającego te metody.<br>
+<br>
+A wołamy je z GUI kontrolera.<br>
+Tam jest miejsce do obsługi tego wyjątku:<br>
+<pre>
+public class CounterControlGui .... {
+
+....
+public void actionPerformed(ActionEvent e)  {
+  try  {
+    if (e.getSource() == txt)  {
+       int n = 0;
+       try  {
+          n = Integer.parseInt(txt.getText());
+       } catch (NumberFormatException exc)  { return; }
+       counter.setCount(n);
+       return;
+    }
+    String cmd = e.getActionCommand();
+    if (cmd.equals("Increment")) counter.increment();
+    else if (cmd.equals("Decrement")) counter.decrement();
+    else System.out.println("Unrecognized command");
+  } catch (PropertyVetoException exc)  { // obługa wyjatku:
+      System.out.println(""+ exc);       // podanie informacji
+                                         //o niedopuszczalnej zmianie wartości
+  }
+}
+
+//...
+}
+</pre>
+W klasie Main dodajemy fragment dotyczący tworzenia obiektu klasy CounterLimitator
+(nadzorcy) i rejestrujemy go jako słuchacza zmian właściwości ograniczanej:<br>
+<br>
+<pre>
+import java.beans.*;
+public class Main {
+
+ public static void main(String[] args) throws PropertyVetoException {
+   Counter counter = new Counter();
+   CounterView counterView = new CounterView(""+counter.getCount());
+   counter.addPropertyChangeListener(counterView);
+
+   // licznik może się zmieniać od –5 do 10
+   // bo Limitator zawetuje każdą inną zmianę
+   CounterLimitator clim = new CounterLimitator(-5, 10);
+   counter.addVetoableChangeListener(clim);
+
+   CounterControlGui gui = new CounterControlGui(counter, counterView);
+   gui.pack();
+   gui.show();
+  }
+
+}
+</pre>
+Dzialanie programu  (przy tym samym GUI kontrolera) zilustrujemy komunikatami
+na konsoli po kolejneych kliknięciach w przycisk "Decrement".<br>
+<br>
+<br>
+<div class="listing100"><br>
+Value changed from 0 to -1<br>
+Value changed from -1 to -2<br>
+Value changed from -2 to -3<br>
+Value changed from -3 to -4<br>
+Value changed from -4 to -5<br>
+java.beans.PropertyVetoException: Niedopuszczalna zmiana wartości<br>
+</div><br>
+<br>
+Jak widać, CounterLimitator nie dopuścił do zmiany wartości z -5 na -6.<br>
+<br>
+<br>
+<a name="W3.8"></a><a name="W2.8"></a><h2>2.8. Introspekcja</h2>
+<br>
+Srodowisko programistyczne, które ma umożliwiać dynamiczne odczytywanie własności
+i funkcjonalności dowolnych "podrzucanych" mu ziaren analizuje ziarna za
+pomocą uniwerslanych metod introspekcji. <br>
+<br>
+Introspekcja kojarzy dwa mechanizmy: <br>
+<ul>
+  <li>analizę komponentów za pomocą metod refleksji przy założeniu, że stosowane
+są pewne standardowe wzorce nazewnictwa, umożliwiające określenie  własnściwości
+i ich typu, metod pobierania i ustalania tych właściwości,  rodzajóa zdarzeń, 
+metod rejestracji słuchaczy i nnych metod udostępnianych przez dane ziarno
+"na zewnątrz" </li>
+  <li>określanie uzewnętrznianych właściwości i funkcjonalności ziarna na
+podstawie dowolnie specyfikowanych przez twórcę ziarna elementów, zapisywanych
+w odpowiedniej dla danego ziarna klasie BeanInfo. </li>
+</ul>
+Oba mechanizmy mogą być stosowane łącznie. W prostych przypadkach (prostych
+ziaren) nie ma potrzeby żmudnego tworzenia klasy BeanInfo, metody refleksji
+są całkiem wystarczające. <br>
+Introspekcja za pomocą metod refleksji jest możliwa dzięki kontraktowi dotyczącemu wzorców nazewnictwa. <br>
+<br>
+Dla właściwości introspekcja określa pary metod <b>get... (is...)  -  set...</b>
+ z tymi samymi nazwami właściwości i z odpowiednimi sygnaturami. Może się
+okazać, że niektóre właściwości są tylko do odczytu lub tylko do zapisu.
+Uwzględnia się też indeksowane własciwości. <br>
+<br>
+Dla  określenia, czy istnieją możliwość obsługi zdarzeń i jakich używane są wzorce: <b>addXXXListener i removeXXXListener. </b><br>
+<br>
+Samą introspekcje realizuje klasa <b>Introspector</b>. <br>
+<br>
+Introspector analizuje klasę-zarna (i nadrzędne wobec niej klasy oraz implementowane
+interfejsy) zbierając informacje o właściowościach, metodach, zdarzeniach.
+<br>
+Informacja ta jest umieszczana w obiekcie typu <b>BeanInfo</b> (BeanInfo jest nazwą interfejsu). Wobec tego obiektu możemy następnie zastosować metody zwracające iinformacje o ziarnie. <br>
+<br>
+Np. analizę klasy-ziarna javax.swing.JButton uzyskujemy przez następujące odwołanie: <br>
+<br>
+<b>BeanInfo info = Introspector.getBeanInfo(Class.forName("javax.swing.JButton")); </b><br>
+lub<br>
+<b>BeanInfo info = Introspector.getBeanInfo(javax.swing.JButton.class)); </b><br>
+<br>
+<br>
+Następnie wobec obiektu info możemu zastosować metody interfejsu BeanInfo: <br>
+<br>
+<ul>
+  <li><b>EventSetDescriptor[]  getEventSetDescriptors()  - </b>zwraca tablicę deskryptorów zdarzeń<b> </b></li>
+  <li><b>PropertyDescriptor[]  getPropertyDescriptors()  - </b>zwraca tablicę deskryptorów własności<b> </b></li>
+  <li><b>MethodDescriptor[]   getMethodDescriptors()     - </b>zwraca tablicę deskryptorów metod</li>
+  <li>dla każdgo deskryptora metody <b>ParameterDescriptor[] getParameterDexriptors()</b> - zwraca tablicę deskryptorów parametrów tej metody<br>
+  </li>
+</ul>
+Zwracane tablice są tablicami obiektów odpowiednich klas. Wobec tych obiektów
+stosujemy metody tych klas pozwalające na uzyskiwanie różnej konkretnej informacji.
+<br>
+Np. program na poiniższym wydruku analizuje klasę podaną jako argument i wypisuje niektóre informacje o niej: <br>
+<br>
+<pre>
+import java.lang.reflect.*;
+import java.beans.*;
+
+public class BeanAnalyze {
+
+  static void say(String s) { System.out.println(s); }
+
+  public static void main(String[] arg) throws Exception {
+
+    BeanInfo beanInfo = Introspector.getBeanInfo(Class.forName(arg[0]));
+
+    PropertyDescriptor[] pd = beanInfo.getPropertyDescriptors();
+    MethodDescriptor[] md = beanInfo.getMethodDescriptors();
+    EventSetDescriptor[] evd = beanInfo.getEventSetDescriptors();
+
+    say("Właściwości:");
+    for (int i = 0; i &lt; pd.length; i++) {
+      say(pd[i].getShortDescription());
+      // getReadMethod i getWriteMethod zwracają obiekty typu Method
+      say(" getter: "+ pd[i].getReadMethod());
+      say(" setter: "+ pd[i].getWriteMethod());
+    }
+
+    say("\nMetody:");
+    for (int i=0; i&lt;md.length; i++) {
+      say(" " + md[i].getMethod());
+    }
+
+    say("\nZdarzenia:");
+    for (int i = 0; i &lt; evd.length; i++) {
+      say("Zdarzenie : " + evd[i].getShortDescription());
+      Method[] met = evd[i].getListenerMethods();
+      say("Metody obsługi:");
+      for (int j=0; j &lt; met.length; j++)  say(" " + met[j]);
+    }
+  }
+
+}
+</pre>
+<br>
+Fragmenty (dużego!) wydruku z programu uruchomionego z argumentem javax.swing.JButton:<br>
+<br>
+<div class="listing100"><br>
+Właściwości:<br>
+UI<br>
+ getter: public javax.swing.plaf.ButtonUI javax.swing.AbstractButton.getUI()<br>
+ setter: public void javax.swing.AbstractButton.setUI(javax.swing.plaf.ButtonUI)<br>
+UIClassID<br>
+ getter: public java.lang.String javax.swing.JButton.getUIClassID()<br>
+ setter: null<br>
+accessibleContext<br>
+ getter: public javax.accessibility.AccessibleContext javax.swing.JButton.getAccessibleContext()<br>
+ setter: null<br>
+action<br>
+ getter: public javax.swing.Action javax.swing.AbstractButton.getAction()<br>
+ setter: public void javax.swing.AbstractButton.setAction(javax.swing.Action)<br>
+actionCommand<br>
+ getter: public java.lang.String javax.swing.AbstractButton.getActionCommand()<br>
+ setter: public void javax.swing.AbstractButton.setActionCommand(java.lang.String)<br>
+actionListeners<br>
+ getter: public java.awt.event.ActionListener[] javax.swing.AbstractButton.getActionListeners()<br>
+ setter: null<br>
+actionMap<br>
+ getter: public final javax.swing.ActionMap javax.swing.JComponent.getActionMap()<br>
+ setter: public final void javax.swing.JComponent.setActionMap(javax.swing.ActionMap)<br>
+...<br>
+<br>
+Metody:<br>
+ public boolean java.awt.Component.action(java.awt.Event,java.lang.Object)<br>
+ public synchronized void java.awt.Component.add(java.awt.PopupMenu)<br>
+ public java.awt.Component java.awt.Container.add(java.awt.Component)<br>
+ public java.awt.Component java.awt.Container.add(java.awt.Component,int)<br>
+ public void java.awt.Container.add(java.awt.Component,java.lang.Object)<br>
+ public void java.awt.Container.add(java.awt.Component,java.lang.Object,int)<br>
+ public java.awt.Component java.awt.Container.add(java.lang.String,java.awt.Component)<br>
+ public void javax.swing.AbstractButton.addActionListener(java.awt.event.ActionListener)<br>
+...<br>
+<br>
+Zdarzenia:<br>
+Zdarzenie : action<br>
+Metody obsługi:<br>
+ public abstract void java.awt.event.ActionListener.actionPerformed(java.awt.event.ActionEvent)<br>
+Zdarzenie : ancestor<br>
+Metody obsługi:<br>
+ public abstract void javax.swing.event.AncestorListener.ancestorMoved(javax.swing.event.AncestorEvent)<br>
+ public abstract void javax.swing.event.AncestorListener.ancestorAdded(javax.swing.event.AncestorEvent)<br>
+ public abstract void javax.swing.event.AncestorListener.ancestorRemoved(javax.swing.event.AncestorEvent)<br>
+Zdarzenie : change<br>
+Metody obsługi:<br>
+ public abstract void javax.swing.event.ChangeListener.stateChanged(javax.swing.event.ChangeEvent)<br>
+...<br>
+</div><br>
+<br>
+Szczerze mowiąc, za pomocą metod instrospekcji sporo można się dowiedziec o dostępnych właściwościach i metodach danej klasy.<br>
+<br>
+Oczywiście, mając obiekty-metody (uzyskane z deskryptorów metod) mozemy je
+dynamicznie wyowływac środkami refleksji. Ale istnieje też nieco prostsza,
+specjalnie dla JavaBean przygotowana możliwość dynamicznego pobierania i
+ustalania wlaściwości oraz wołania innych metod.<br>
+<br>
+<a name="W3.9"></a><a name="W2.9"></a><h2>2.9. Dynamiczne pobieranie i ustalanie właściwości</h2>
+W pakiecie java.beans znajdziemy dwie ciekawe klasy  Statement i Expression<br>
+<br>
+<div class="syntax">Obiekt klasy Statement tworzymy za pomocą konstuktora:<br>
+<br>
+<b>    Statement s =  Statement( Object target, <br>
+                                           String methodName, <br>
+                                           Object[] arguments );<br>
+</b><br>
+a wywołanie na jego rzecz metody <b>void execute()</b> spowoduje wywołanie na rzecz obiektu target metody o nazwie methodName z argumentami podanymi w tablicy arguments<br>
+<br>
+Zwykle stosujemy tę procedure do ustalania właściowości JavaBean, ale może
+ona być rownież stosowana do wyołania dowolnych metod</div><br>
+<br>
+Klasa Expression dziedziczy klasę Statement. Czyli tu też możemy wołać metodę
+execute(). Jednak jej główne zastosowanie polega na dynamicznym pobieraniu
+właściwości, lub - inaczej - dynamicznym wołaniu metod, które zwracają wyniki
+i uzyskiwaniu dostępu do tych wyników. <br>
+<br>
+<div class="syntax">Obiekt klasy Expression tworzymy za pomocą konstuktora:<br>
+<br>
+<b>
+    Expression e =  Expression( Object target,<br>
+                                                String methodName, <br>
+                                                Object[] arguments );<br>
+</b><br>
+<ul>
+  <li>
+wywołanie na jego rzecz metody <b>void execute()</b> spowoduje wywołanie
+na rzecz obiektu target metody o nazwie methodName z argumentami podanymi
+w tablicy arguments oraz przechowanie wyniku wywołanej metody w obiekcie
+Expresion; wynik ten będzie dostępny przez wywolanie metody Object getValue()
+na rzecz obeiktu Expressiom</li>
+  <li>samo wywołanie metody <b>Object getValue()</b> spowoduje ten sam efekt o ile wynik dla danego obiektu-wyrażenia nie został jeszcze ustalony.</li>
+</ul>
+</div><br>
+<br>
+Szczegółowo komentowany program ilustruje zastosowanie tych klas.<br>
+W poniższym przykładzie metody klas Statement i Expression bedziemy stosowac
+wobec obiektów klasy JButton oraz naszej własnej klasy TestBean, która wygląda
+tak:<br>
+<pre>
+public class TestBean {
+
+  private String[] headers;
+  private int count;
+
+
+  public TestBean() {
+  }
+
+  public TestBean(int n) {
+    count = n;
+  }
+
+  public String[] getHeaders() {
+    return headers;
+  }
+
+  public void setHeaders(String[] value) {
+    headers = value;
+  }
+
+  public int getCount() {
+    return count;
+  }
+
+  public void setCount(int value) {
+    count = value;
+  }
+
+}
+</pre>
+<br>
+Szczegółowo komentowany program ilustruje zastosowanie klas Statement i Expression,
+dając też pewne dodatkowe na ich temat informacje.<br>
+<pre>
+import java.beans.*;
+import java.awt.*;
+import javax.swing.*;
+
+public class DynamicExec {
+
+  public static void main(String[] args) throws Exception {
+
+    Statement stmt;
+    Expression expr;
+
+    JButton b = new JButton();
+
+    // Na rzecz przycisku wołamy dynamicznie metodę setText
+    // z argumentem "Przycisk"
+    stmt = new Statement(b, "setText", new Object[] { "Przycisk" });
+    stmt.execute();
+
+    // Jaki wynik? Najpierw statyczne odwołanie
+    System.out.println("Tekst na przycisku 1: " + b.getText());
+
+    // Teraz dynamicznie: stwórzmy wyrażenie, którego wynikiem
+    // jest wynik podanej metody z podanymi argumentami wywolanej
+    // na rzecz b
+    // Uwaga: brak argumentów - czyli tablica Object o rozmiarze 0
+    expr = new Expression(b, "getText", new Object[0]);
+
+    // Jeżeli wyrażenie expr nie ma jeszcze wyniku
+    // metoda getValue() wywołuje podaną w wyrażeniu metodę
+    // i zwraca jej wynik; w przeciwnym razie zwraca
+    // ustalony wczesniej wynik
+
+    String txt = (String) expr.getValue();
+    System.out.println("Tekst na przycisku 2: " + txt);
+
+    // Możemy też stosować klasy Statement i Expression
+    // wobec naszych własnych klas JavaBeans
+
+    TestBean tbean = new TestBean();
+
+    // Uwaga: przy przekazywaniu argumentów i zwrocie wynikow
+    // następują automatyczne przeksztalcenia pomiedzy
+    // typami prostymi i odpowiadającymi im klasami opakowującymi
+    // np. int - Integer  - setCount wymaga argumentu int,
+    // my podajemy Integer
+
+    stmt = new Statement(tbean, "setCount",
+                               new Object[] { new Integer(22) });
+    stmt.execute();
+
+    // Jaka jest teraz wartość właściwości count
+    // I znowu: getCount() zwraca int, my odbieramy Integer
+
+    expr = new Expression( tbean, "getCount", new Object[0] );
+    Integer val = (Integer) expr.getValue();
+
+    System.out.println("Wartość count: " + val);
+
+    // Czy możemy działać na tabliach? Ależ tak!
+
+    stmt = new Statement(tbean, "setHeaders",
+                         new Object[] { new String[] { "a", "b" } }
+                        );
+    stmt.execute();
+
+    expr = new Expression(tbean, "getHeaders", new Object[0]);
+    String[] hdr = (String[]) expr.getValue();
+
+    System.out.println("Ustalone nagłówki");
+    for (int i=0; i&lt;hdr.length; i++)
+       System.out.println(hdr[i]);
+
+    // Możemy nawet stworzyć nowy obiekt
+    // używając specjalnej nazwy metody - new  (oczywiście)
+
+    expr = new Expression(TestBean.class, "new",
+                          new Object[] { new Integer(111) }
+                         );
+    TestBean tb2 = (TestBean) expr.getValue();
+
+    expr = new Expression (tb2, "getCount", new Object[0]);
+    val = (Integer) expr.getValue();
+
+    System.out.println("W nowym obiecie count = " + val);
+
+  }
+}
+
+</pre>
+<br>
+<br>
+<a name="W3.10"></a><a name="W2.10"></a><h2>2.10. Serializacja JavaBeans</h2>
+Oprócz zapisywania do strumieni obiektowych (ObjectOutputStream), obiekty
+JavaBeans można serializowac w postaci tekstowej, w formacie XML (wersja
+1.0, kodowanie UTF-8). Jest to nawet - w przypadku JavaBeans - bardziej "przenośny"
+sposób utrwalania obiektów.<br>
+Zapisywaniem obiektów zajmuje się klasa XMLEncoder, a ich odtwarzaniem -
+klasa XMLDccoder. Przy tym  stan obiektu zapisywany jest w postaci  zdatnej
+do wykorzystania przez klasy Statement i Expression przy odtwarzaniu tego
+obiektu<br>
+<br>
+Najprostsze (przeznaczone wyłącznie dla JavaBeans) zastosowanie tych klas pokazuje poniższy program.<br>
+<pre>
+import java.beans.*;
+import java.awt.*;
+import javax.swing.*;
+import java.io.*;
+
+public class SerialBean {
+
+  String fname = "test.xml";
+
+  public SerialBean() {
+    JButton b = new JButton("Kąśliwie wróbel ćwierkał");
+    b.setBackground(Color.red);
+    b.setForeground(Color.yellow);
+
+    try {
+      XMLEncoder enc = new XMLEncoder(
+                         new BufferedOutputStream(
+                            new FileOutputStream(fname)
+                            )
+                      );
+      enc.writeObject(b);
+      enc.close();
+    } catch (FileNotFoundException exc) {
+        exc.printStackTrace();
+        System.exit(1);
+    }
+    nowReadAndReport();
+  }
+
+  private void nowReadAndReport() {
+    try {
+      XMLDecoder dec = new XMLDecoder(
+                          new BufferedInputStream(
+                              new FileInputStream(fname)));
+      Object obj = dec.readObject();
+      JButton b = (JButton) obj;
+      dec.close();
+      System.out.println("Napis na przycisku: " + b.getText());
+      System.out.println("Kolor tła: " + b.getBackground());
+      System.out.println("Kolor tekstu : " + b.getForeground());
+
+    } catch (FileNotFoundException exc) {
+        exc.printStackTrace();
+        System.exit(1);
+    }
+  }
+
+
+
+  public static void main(String[] args) {
+    SerialBean serialbean = new SerialBean();
+  }
+
+
+}
+</pre>
+Wyprowadzi on na konsolę właściwą  informację o stanie zapisanego a później odtworzonego obiektu:<br>
+<div class="listing100"><br>
+Napis na przycisku: Kąśliwie wróbel ćwierkał<br>
+Kolor tła: java.awt.Color[r=255,g=0,b=0]<br>
+Kolor tekstu : java.awt.Color[r=255,g=255,b=0]<br>
+</div><br>
+<br>
+Z ciekawości można zajrzeć do pliku test.xml.<br>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;java version="1.4.1-rc" class="java.beans.XMLDecoder"&gt;
+ &lt;object class="javax.swing.JButton"&gt;
+  &lt;string&gt;KÄĹ&gt;liwie wrĂłbel Ä+wierkaĹ'&lt;/string&gt;
+  &lt;void property="background"&gt;
+   &lt;object class="java.awt.Color"&gt;
+    &lt;int&gt;255&lt;/int&gt;
+    &lt;int&gt;0&lt;/int&gt;
+    &lt;int&gt;0&lt;/int&gt;
+    &lt;int&gt;255&lt;/int&gt;
+   &lt;/object&gt;
+  &lt;/void&gt;
+  &lt;void property="foreground"&gt;
+   &lt;object class="java.awt.Color"&gt;
+    &lt;int&gt;255&lt;/int&gt;
+    &lt;int&gt;255&lt;/int&gt;
+    &lt;int&gt;0&lt;/int&gt;
+    &lt;int&gt;255&lt;/int&gt;
+   &lt;/object&gt;
+  &lt;/void&gt;
+ &lt;/object&gt;
+&lt;/java&gt;
+
+</pre>
+Faktycznie, jest do dokładny szablon gotowy do zastosowania klas Expression
+(dla metody-kostsruktora new z argumentem String) i Statement (dla setBackground
+i setForeground). Wszystko opiera się na zachowaniu protokołu JavaBeans.<br>
+<br>
+Oczywiście, możemy w ten sposób serializować obiekty prawie wszystkich klas
+Javy (bo prawie wszystkie są JavaBeans) oraz  własnych klas, spełniających
+protokół JavaBeans.<br> A nawet można uwzględnić pewne odstępstwa od tego
+protokołu (np. inicjację właściwości JavaBeans w konstruktorz, bez użycia
+setterów) poprzez dostosowanie delegata "persystencji", do którego odwołuje
+się XMLEncoder - klasy <b>DefaultPersistanceDelegate</b>. <br>O takim bardziej zaawansowanym zastosowaniu, jak również o użyciu nasłuchu wyjątków dekodowania za pomocą interfejsu <b>ExceptionListener</b> można przeczytać w dokumentacji API Javy.<br>
+<br>
+<br>
+<a name="W3.11"></a><a name="W2.11"></a><h2>2.11. Inne zagadnienia związane z JavaBeans</h2>
+<br>
+To skrótowe wprowadzenie do JavaBeans nie wyczerpuje tematu.<br>
+Warto więc na koniec zwrócić uwagę na nieporuszone tu ważne kwestie<br>
+<ul>
+  <li>przystosowanie ziaren: klasy-edytory właściwości używane m.in. w środowiskach wizualnych </li>
+  <li>tworzenie klas BeanInfo, opisujących informacje niedostępną metodami refleksji, </li>
+  <li>koteksty (BeanContext) - swoiste kontenery, dostarczające generalnych mechanizmów i serwisów dla JavaBeans.</li>
+</ul>
+
+Informacje na te teamaty można zanaleźć w dokumentacji.<br>
+<a name="W3.12"></a><br>
+
+
+</body></html>

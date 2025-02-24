@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+  <meta name="author" content="Krzysztof Barteczko">
+  <meta name="description" content="Podstawy programowania w języku Java (PRG1, PPJ)">
+  <meta name="copyright" content="(c) Krzysztof Barteczko PJWSTK 2008">
+  <link rel="stylesheet" type="text/css" href="../STYLE/common.css">   
+  <title>Przetwarzanie danych: liczby, daty, algorytmy</title></head>
+
+<body>
+<div align="center">
+<a name="LiczbAlg"></a><h1>Formator</h1>
+<hr>
+</div>
+
+<h2>1.  Formatowanie liczb i dat</h2>
+<br><br><a name="ind.LiczbAlg.20"></a>
+Klasa java.utill.Formatter zapewnia możliwości formatowania danych.<br>
+<br>Tworząc formator (za pomocą wywołania konstruktora) możemy
+określić: <br>
+<br><ul><li>destynację formatowanych danych (dokąd mają być zapisane), którą m.in.
+może być String, StringBuffer, plik tekstowy,</li></ul><ul><li>lokalizację
+(ustawienia regionalne, reprezentowane przez obiekt
+klasyLocale),&nbsp;wpływającą &nbsp;m.in. na reprezentację liczb i dat,</li></ul><ul><li>stronę kodową (do kodowania napisów) -
+m.in. dla plików i Stringów</li></ul>&nbsp;<br>
+Uwaga: formatory dla plików powinny być po użyciu zamykane lub wymiatane
+(close(), flush()),
+co powoduje zamknięcie lub wymiecenie buforów tych destynacji.<br>
+<br>
+Formatowanie polega na wywołaniu jednej z dwóch wersji metody format
+(na rzecz fornatora):<br> <span style="font-weight: bold;"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br>&nbsp;<span style="font-weight: bold;">Formatter
+format(String format, Object... arg)</span> <br><span style="font-weight: bold;">&nbsp;Formatter
+format(Locale l, String format, Object... arg)&nbsp;</span><br> <br>Druga z tych metod pozwala na podanie lokalizacji, m.in. wpływającej na sposób formatowania liczb.<br><br><a name="ind.LiczbAlg.21"></a>Łańcuch formatu (zmienna format) zawiera dowolne ciągi znaków oraz specjalne elementy
+formatujące.
+Dalej następują dane do "wstawienia"
+w łańcuch formatu
+w miejsce elementów&nbsp;formatu i do sformatowania podług zasad określanych przez te elementy
+(zmienna
+liczba argumentów dowolnego typu - formalnie Object). Dzięki
+autoboxingowi
+nie ma problemu z formatowaniem danych typów prostych.<br> <br>Dla uproszczenia dostępne są:
+<ul><li>statyczne metody <b>format</b> w
+klasie String, pozwalające na uzyskiwanie sformatowanych napisów,</li><li>metody <b>format i printf</b>
+(działające tak samo) w klasach PrintStream i PrintWriter,
+wyprowadzające sformatowane napisy "na wyjście" (np. na standardowe
+wyjście lub do pliku).</li></ul><div class="syntax">Elementy formatu mają następującą ogólną postać:<br><br>%[arg_ind$][flagi][szerokość_pola][.precyzja]konwersja<br><br>gdzie:<br><ul><li>arg_ind$&nbsp;
+- numer argumentu (z listy argumentów arg) do sformatowania przez dany
+element; numeracja zaczyna się&nbsp;od 1; poczynając od drugiego
+elmentu formatu można w tym miejscu zastosować znak &lt; , co oznacza,
+że dany element ma być zastosowany wobec argumentu uzytego w poprzednim
+formatowaniu,&nbsp; &nbsp;</li><li>flagi&nbsp; - znaki modyfikujące sposób formatowania (są różne dla różnych typów konwersji),</li><li>szerokość_pola - minimalna liczba znaków dla danego argumentu w wynikowym napisie,&nbsp;</li><li>.precyzja
+- liczba pokazywanych miejsc dziesiętnych (dotyczy liczb rzeczywistych)
+lub maksymalna&nbsp;liczba wyprowadzanych znaków (dotyczy np. napisów),</li><li>konwersja
+- określa jak ma być traktowany i formatowany odpowiadający danemu
+elementowi argument - np. jako liczba rzeczywista albo jako napis albo
+jako data.<br></li></ul>Uwaga: nawiasy kwadratowe oznaczają opcjonalność.<br></div><br><a name="ind.LiczbAlg.22"></a>Symboli konwersji jest b. dużo, dla różnych symboli mogą być stosowane też dodatkowe flagi.<br>Wszystko to jest opisane w sposób systematyczny w dokumentacji (proszę sięgać). <br>Tutaj przedstawione zostaną wybrane konwersje i flagi.<br><br><div style="text-align: center;"><span style="font-weight: bold;">Wybrane konwersje - skrót</span><br></div><table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2"><tbody><tr><td style="text-align: center; font-weight: bold;">Konwersja</td><td style="text-align: center; font-weight: bold;">Może być stosowana wobec</td><td style="text-align: center; font-weight: bold;">Wynik</td></tr><tr><td style="text-align: center; font-weight: bold;">s lub S</td><td>dowolnych danych</td><td>Jeżeli argument jest null - napis "null":<br>w przeciwym razie<br>&nbsp; &nbsp;jeżeli klasa arg na to zezwala <br>&nbsp; &nbsp; &nbsp;- wynik wywołania arg.formatTo(...)<br>&nbsp; &nbsp;w przeciwnym razie wynik wywołania arg.toString() <br>Uwaga: użycie jako symbolu konwersji dużego S spowoduje zamianę liter napisu na duże.</td></tr><tr><td style="text-align: center; font-weight: bold;">c lub C</td><td>typów reprezentujących znaki Unicode</td><td>znak Unicode</td></tr><tr><td style="text-align: center; font-weight: bold;">d</td><td>typów reprezentujących liczby całkowite</td><td>liczba całkowita (dziesiętna)</td></tr><tr><td style="text-align: center; font-weight: bold;">f</td><td>float,&nbsp; double, Float, Double, BigDecimal</td><td>liczba rzeczywista z separatorem miejsc dzisiętnych</td></tr><tr><td style="text-align: center; font-weight: bold;">tH</td><td colspan="1" rowspan="9">danych reprezentujących czas, czyli: <br>long, Long, Calendar, Date</td><td>godzina na zegarze 24-godzinnym-2 cyfry (00-23) </td></tr><tr><td style="text-align: center; font-weight: bold;">tM</td><td>minuty - 2 cyfry (00 - 59)</td></tr><tr><td style="text-align: center; font-weight: bold;">tS</td><td>sekundy&nbsp; - 2 cyfry (00-60)</td></tr><tr><td style="text-align: center; font-weight: bold;">tY</td><td>rok - 4 cyfry (np. 2008)</td></tr><tr><td style="text-align: center; font-weight: bold;">tm</td><td>miesiąc - 2 cyfry (01-12)</td></tr><tr><td style="text-align: center; font-weight: bold;">td</td><td>dzień miesiąca - 2 cyfry (01 -31)</td></tr><tr><td style="text-align: center; font-weight: bold;">tR</td><td>czas na zegarze 24 godzinnym sformatowany jako&nbsp; "%tH:%tM"</td></tr><tr><td style="text-align: center; font-weight: bold;">tT</td><td>czas na zegarze 24 godzinnym sformatowany jako&nbsp; "%tH:%tM:%tS"</td></tr><tr><td style="text-align: center; font-weight: bold;">tF</td><td>data sformatowana jako "%tY-%tm-%td"</td></tr></tbody></table><br>Wśród flag na szczególną uwagę zasługują:<br>'-' - wynik wyrównany w polu do lewej (domyslnie jest wyrównany do prawej),<br>'+' - wynik zawiera zawsze znak (dla typów liczbowych),<br>' ' - wynik zawiera wiodąca spację dla argumentów nieujmenych (tylko dla typów liczbowych).<br><br>Zatem,
+aby uzyskać sformatowane wyniki w poprzednim przykładowym programie
+(liczbę z dwoma miejscami dziesiętnymi, datę w postaci
+rok-miesiąc-dzień) możemy napisać:<br><pre>import java.util.*;
+
+public class Format1 {
+
+  public static void main(String[] args) {
+    double cena = 1.52;
+    double ilosc = 3;
+    double koszt = cena * ilosc;
+    System.out.printf("Koszt wynosi %.2f zł", koszt);
+    System.out.printf("\nData: %tF", Calendar.getInstance());
+  }
+
+}</pre>Wynik:<br><div class="listing100">Koszt wynosi 4,56 zł<br>Data: 2008-08-14</div><br>Warto
+tu zwrócić uwagę na to, że dla lokalizacji polskiej liczba pokazywana
+jest z przecinkiem jako separatorem miejsc dziesiętnych.<br>Aby uzyskac kropkę można napisać:<br><pre>System.out.printf(Locale.ROOT, "Koszt wynosi %.2f zł", koszt);</pre>W tym przypadku stała statyczna Locale.ROOT oznacza neutralną lokalizację (bez wybranego kraju i języka).<br><br>Kilka innych przykładów pokazuje program na wydruku.<br><pre>import javax.swing.*;
+
+public class Format2 {
+
+  public static void main(String[] args) {
+    System.out.println("Wyrównany wydruk tablicy (po 2 elementy w wierszu)");
+    int[] arr = { 1, 100, 200, 4000 };
+    int k = 1;
+    for (int i : arr) {
+      System.out.printf("%5d", i);
+      if (k%2 ==0) System.out.println();
+      k++;
+    }
+    // Zastosowanie znaku &lt; (element formatu stosowany wobec argumentu z poprzedniego formatowania)
+    System.out.println("Zaokraglenia");
+    System.out.printf("%.3f %&lt;.2f %&lt;.1f", 1.256 );
+    
+    // Znak &lt; szczególnie przydatny w datach/czasie
+    Calendar c = Calendar.getInstance();
+    c.set(Calendar.MONTH, 1);
+    System.out.printf("\nW roku %tY i miesiącu %&lt;tm mamy %d dni", c, c.getActualMaximum(Calendar.DATE) );
+    
+    // Oczywiście możemy formatować do Stringów
+    String dateNow = String.format("%td-%&lt;tm-%&lt;tY", System.currentTimeMillis());
+    JOptionPane.showMessageDialog(null, dateNow);
+  }
+
+}</pre>Wynik działania programu (konsolę i okno dialogowe) pokazuje rysunek.<br><img style="border: 2px solid ; width: 584px; height: 162px;" alt="r" src="images/format.jpg"><br><br><hr style="width: 100%; height: 2px;"><br><h2>2. Interfejs Formattable</h2>Dla
+symbolu konwersji s lub S jeżeli klasa drugiego argumentu metody format
+na to pozwala, to do formatowania zostanie użyta metoda formatTo.<br>Jest
+to możliwe tylko wtedy gdy klasa argumentu "do sformatowania"
+implementuje interfejs Formattable i definiuje jego&nbsp;jedyną metodę:<br><br><div class="syntax">public void formatTo(Formatter formatter, int flags, int width, int precision)</div><br>Jeśli teraz za pomocą jakiegoś formatora następuje formatowanie obiektu z użyciem symbolu konwersji s lub S, to:<br><ol><li>wywoływana jest metoda formatTo z klasy obiektu,</li><li>metodzie formatTo jest przekazywany formator (jako parametr <span style="font-style: italic;">formatter</span>), flagi formatowania (parametr <span style="font-style: italic;">flags</span>), szerokość pola (parametr <span style="font-style: italic;">width</span>) i precyzja (parametr <span style="font-style: italic;">precision</span>),</li><li>w
+metodzie formatTo możemy sprawdzić wartości przekazanych informacji
+(np. locale formatora, flagi, szerokość precyzje) i na tej podstawie
+podjąć odpowiednie działania przetwarzające obiekt do
+wynikowego napisu, </li><li>przed zwróceniem sterowania z metody formatTo wywołujemy metodę format przekazanego formatora,</li><li>sformatowany napis będzie przez formator zapisany do odpowiedniej destynacji (np. wyprowadzony na standardowe wyjście).</li></ol>Sprawdzić
+jakich użyto flag formatowania możemy za pomocą porównywania ze stałymi
+statycznymi klasy java.util.FormattableFlags. Dostępne są stałe o
+następujących nazwach:<br><ul><li>ALTERNATE - oznacza, że należy użyć alternatywnej formy sformatowania obiektu (w formacie użyto znaku #),</li><li>LEFT_JUSTIFY - sformatowany napis będzie wyrównany w polu do lewej (w formacie użyto znaku -),</li><li>UPPERCASE - zamiana liter na duże (użyto wielkiej litery w symbolu konwersji np. S, zamiast s).</li></ul><br>Przykładowy
+program pokazuje zastosowanie metody formatTo do łatwej zmiany sposobu
+wyprowadzania informacji o obiektach klasy Person. &nbsp;W trybie
+normalnym wyprowadzane jest nazwisko, w trybie&nbsp;alternatywnym
+(zastosowana flaga #) - nazwisko i imię. W metodzie formatTo, na
+podstawie przekazanych informacji wybieramy formę formatowania,i
+budujemy napis formatu na podstawie przekazanej informacji, po czym za
+jego pomocą formatujemmy obiekt, używając przekazanego formatora. <br><br><pre>import java.util.*;
+import static java.util.FormattableFlags.*;
+
+public class Person implements Formattable{
+  
+  private String fname;
+  private String lname;
+
+  public Person(String fname, String lname) {
+    this.fname = fname;
+    this.lname = lname;
+  }
+
+  @Override
+  public void formatTo(Formatter formatter, int flags, int width, int precision) {
+    String txt = lname;
+    if ((flags &amp; ALTERNATE) == ALTERNATE) txt += ' ' + fname;
+    String fs = "%";
+    if ((flags &amp; LEFT_JUSTIFY) == LEFT_JUSTIFY) fs += '-';
+    if (width &gt;= 0) fs += width;
+    if (precision &gt;= 0) fs += "."+precision;
+    fs += ((flags &amp; UPPERCASE) == UPPERCASE) ?  "S" : "s";
+    formatter.format(fs, txt);
+  }
+
+
+  public static void main(String[] args) {
+    Person e =  new Person("Jan", "Kowalski");
+    System.out.printf("%#s\n", e);
+    System.out.printf("%20s\n", e);
+    System.out.printf("%#30S\n", e);
+    System.out.printf("%#.10S\n", e);
+  }
+
+}
+</pre>Wynik działania programu:<br><div class="listing100">Kowalski Jan<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kowalski<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; KOWALSKI JAN<br>KOWALSKI J</div><br><hr style="width: 100%; height: 2px;">
+</body></html>

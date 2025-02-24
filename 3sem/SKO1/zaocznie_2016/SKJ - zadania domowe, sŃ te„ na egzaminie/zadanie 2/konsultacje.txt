@@ -1,0 +1,99 @@
+Piotr Sma¿yñski - 16:47 : Witam wszystkich!
+S³awomir Jab³oñski - 17:06 : Dzieñ dobry
+S³awomir Jab³oñski - 17:14 : Czy s³ysz mnie Pan?
+  - 17:21 : <br>Welcome to <b>Sieci komputerowe (SKJ) - studia internetowe</b>!<br><br>For help on using BigBlueButton see these (short) <a href="event:http://www.bigbluebutton.org/content/videos"><u>tutorial videos</u></a>.<br><br>To join the audio bridge click the headset icon (upper-left hand corner).  Use a headset to avoid causing background noise for others.<br><br><br>This server is running <a href="http://docs.bigbluebutton.org/" target="_blank"><u>BigBlueButton</u></a>.
+S³awomir Jab³oñski - 17:26 : Dzieñ dobry
+Piotr Sma¿yñski - 17:28 : W czxym moge pomoc?
+S³awomir Jab³oñski - 17:30 : Mam pytanie odnoœnie krzy¿ówki komunikacyjnej
+Piotr Sma¿yñski - 17:30 : Prosze smialo pytac...
+S³awomir Jab³oñski - 17:31 : Jak zrozumia³em z materia³ów, zanim nasz komputer, w tym przypadku gucio.intranet.pl wyœle jakiekolwiek ¿¹danie, niezbêdny jest mu docelowy i wszystkie "poœrednie" adresy MAC
+Piotr Sma¿yñski - 17:31 : Nie!
+Piotr Sma¿yñski - 17:31 : Istnieje zasada, ze gucio dowiaduje sie tylk,o tego co jest mu potrzebne...
+S³awomir Jab³oñski - 17:32 : W naszym przypadku adresem DNS, który odpytywa³ bêdzie komputer gucio jest serwer podlegaj¹cy pod domenê test.pl, tj. dns.test.pl
+S³awomir Jab³oñski - 17:32 : Czyli skoro mamy tablicê ARP dla podsieci gucia, nie musimy o ni¹ pytaæ
+Piotr Sma¿yñski - 17:32 : I znowu nie do koca to jest prawda: gucio ma prawo pytac ten serwerdns, ktory jest podany w jego parametrach konfiguracji sieci.
+S³awomir Jab³oñski - 17:33 : W pierwszym kroku musimy ustaliæ adres MAC podsieci test.pl, nastêpnie adres MAC dns.test.pl
+Piotr Sma¿yñski - 17:33 : Nie ma adresu podsieci test.pl, jest adres IP hosta test.pl
+S³awomir Jab³oñski - 17:33 : Czyli rozumiem, ¿e gucio posiadaj¹c skonfigurowany serwer DNS dns.test.pl zna ju¿ jego adres MAC i wynika to z konfiguracji sieciowej?
+Piotr Sma¿yñski - 17:34 : W tresci zadania jes powiedziane, ze wsyztskie serwery dns znaja wszystkie adresy ip w tej sieci.
+Piotr Sma¿yñski - 17:34 : Gucio moze pytac tylko serwer dns ktory ma ustaiony w swoich paramatrach...
+S³awomir Jab³oñski - 17:35 : Czyli w pierwszym kroku muszê wykonaæ ARP request dla adresu IP hosta test.pl
+Piotr Sma¿yñski - 17:36 : Nie ma takie mozliwosci: ARP jest protokoloem warstwy drugiej i nie przechodzi przez router...
+S³awomir Jab³oñski - 17:37 : Mam problem z ustaleniem w jaki sposób bêdzie siê odbywa³o ustalenie adresu MAC dla IP hosta test.pl i dla www.test.pl. ARP dzia³a tylko w ramach sieci lokalnej, jak wiêc mo¿na zdobyæ adres MAC dla IP hosta test.pl?
+Piotr Sma¿yñski - 17:37 : Zacznijmy od poczatku (ogolnie):
+Piotr Sma¿yñski - 17:37 : gucio ma wykonac ping do test.pl
+S³awomir Jab³oñski - 17:37 : Zgadza siê
+Piotr Sma¿yñski - 17:37 : nie zna adresu IP dopowiadajacego test.pl
+Piotr Sma¿yñski - 17:37 : musi zapytac serwer dns
+S³awomir Jab³oñski - 17:38 : Dlatego w pierwszej kolejnoœci musi o niego zapytaæ DNS
+Piotr Sma¿yñski - 17:38 : serwer dns ktory zna to ten ktory ma wpisany w swoich parametrach sieciowych
+S³awomir Jab³oñski - 17:38 : Czyli dns.test.pl
+Piotr Sma¿yñski - 17:38 : jezeli serwer dns znaduje s
+Piotr Sma¿yñski - 17:39 : bledne jest uzywanie nazwy serwera dns bo skad gucio wie jaki jest jego adres ip?
+Piotr Sma¿yñski - 17:40 : w parametrach konfugiracyjnych gucia jest wpisany adres IP serwera DNS i poprzez niego on sie odwoluje!
+S³awomir Jab³oñski - 17:40 : Czyli gucio ma bezpoœredni dostêp do serwera DNS, nie musi znaæ jego adresu MAC?
+Piotr Sma¿yñski - 17:41 : Aby skutecznie wyslac informacje do dowolnego hosta musimy miuec dwa adresy: jego adres IP oraz jego adres MAC.
+Piotr Sma¿yñski - 17:42 : czyli gucio odwolujac sie do serwera dns musi znac jesgo adres MAC, jezeli ten serwer nalezy do jego podsieci.
+S³awomir Jab³oñski - 17:42 : To w jaki sposób gucio pozyska adres MAC serwera DNS, skoro serwer nie jest w jego podsieci i nie ma mo¿liwoœci skorzystania z ARP?
+Piotr Sma¿yñski - 17:43 : Jezeli serwer dns nie nalezy do jego podsieci, to gucio zapytanie o adres IP dla zadanej nazwy kieruje do bramy domyslnej (adresa IP jej zna, ewentualnie jak nie zna jej adreds MAC musi o to dopytac)
+Piotr Sma¿yñski - 17:44 : Jak pakiet taki dojdzie do routera, to lewy interfejs routera albo zna MAC adres tego serwera DNS, albo ten interfejs dopyta jaki jest adres MAC dla adresIP pod ktorym jest serwer dns
+S³awomir Jab³oñski - 17:44 : Co dalej robi brama domyœlna? Jeœli dobrze rozumiem, ona równie¿ nie mo¿e wykonaæ zapytania ARP, poniewa¿ znajduje siê jeszcze przed routerem?
+Piotr Sma¿yñski - 17:45 : Jak pakiet przychodzi do routera, to jest "okrakiem" na routerze i wyjsciowy (tu prawy) interfejs routera decydujue (taj jak naopisalem powyzej) co robic dalej...
+S³awomir Jab³oñski - 17:46 : Czyli to lewa strona routera odpytuje ARP (w naszym przypadku podsieæ test nie ma wype³nionej tablicy ARP) o adres MAC serwera DNS
+Piotr Sma¿yñski - 17:46 : Nie lewa tylko prawa...
+Piotr Sma¿yñski - 17:47 : Przez router NIE PRZECHODZA MAC ADRESY W ZADNYM STOPNIU!
+S³awomir Jab³oñski - 17:47 : Ale napisa³ Pan, ¿e lewy interfejs routera albo zna MAC serwera DNS albo dopyta
+Piotr Sma¿yñski - 17:47 : sorki, pomylka, tam powinna byc prawa
+S³awomir Jab³oñski - 17:48 : Czyli prawy interfejs wysy³a zapytanie ARP dla IP serwera DNS
+S³awomir Jab³oñski - 17:48 : serwer DNS odpowiada na to zapytanie
+Piotr Sma¿yñski - 17:48 : dokladnie (oczywiscie, jesli tej informacji nie ma w swoim cachu ARp)
+S³awomir Jab³oñski - 17:49 : i lewy interfejs zna ju¿ adres MAC i IP serwera DNS
+Piotr Sma¿yñski - 17:49 : odpowiedz polega na podaniu MAC adresu serwera DNS, i teraz z prawego interfejsu routera idzie dalej DNS request o adres test.pl
+Piotr Sma¿yñski - 17:49 : bo znamu zarowno IP serwera dns jak i jego MAC adres
+S³awomir Jab³oñski - 17:50 : Czyli krok 1. gucio odpytuje swoj¹ bramê domyœln¹ o adres IP www.test.pl
+S³awomir Jab³oñski - 17:50 : 2. Prawa strona interfejsu (czyli brama domyœlna podsieci test.pl) wysy³a zapytanie ARP o adres DNS
+S³awomir Jab³oñski - 17:51 : 3. Serwer DNS odpowiada na zapytanie o swój adres MAC swojej bramie domyœlnej
+Piotr Sma¿yñski - 17:51 : Zwracamn uwag, ze to pyatnie w adresie IP przenaczenia ma adres IP serwera DNS, a przekirowanie do bramy domyslnej dokonuje sie za pomoca MAC adresu bramy domyslnej.
+Piotr Sma¿yñski - 17:52 : CHodzi oczywiscei o linijke 1.
+Piotr Sma¿yñski - 17:52 : punkt drugi jest nie precyzyjny: prawa strona wysyala zapytanie o MAC adres serwera DNs
+S³awomir Jab³oñski - 17:53 : 4. Tu pojawia siê pole wype³nione w tabelce - DNS request www.test.pl - wychodzi ono tym razem z bramy domyœlnej gucia - czyli tam gdzie siê "zatrzyma³o" w oczekiwaniu na adres MAC serwera DNS?
+Piotr Sma¿yñski - 17:54 : IP zrodla: gucio Ip przeznaczenia: serwer DNS MAC zrodla: brama domyslna (prawy interfejs routera) MAc celu: MAC serwera DNS
+Piotr Sma¿yñski - 17:54 : jezeli IP zrodla nie bedzie gucio, to skad wiadomo dokad ma wrocic odpowiedz z serwera dns
+S³awomir Jab³oñski - 17:56 : Czyli gucio ponawia zapytanie DNS, maj¹c ju¿ pe³n¹ wiedzê (poœrednio poprzez bramê i ARP prawego interfejsu)
+S³awomir Jab³oñski - 17:56 : pe³n¹ wiedzê na temat "œcie¿ki" do serwera DNS
+Piotr Sma¿yñski - 17:56 : Nie tyle gucio, co prawy interfejs przekazuje pytanie gucia...
+S³awomir Jab³oñski - 17:57 : Mo¿e niezbyt trafnie opisa³em to jako wiedzê "poœrednio"
+Piotr Sma¿yñski - 17:58 : ok
+Piotr Sma¿yñski - 17:58 : i co dalej?
+S³awomir Jab³oñski - 17:58 : 4. Ponawiamy zapytanie DNS od gucia do serwera DNS
+S³awomir Jab³oñski - 17:59 : 5. OdpowiedŸ DNS wraca z powrotem do gucia (w jednym "hopie"?)
+Piotr Sma¿yñski - 17:59 : To slowo ponawiamy raczej mi sie nie podoba: raczej: prawy interfejs przeyla dalej otrzymane pytanie DNS request
+Piotr Sma¿yñski - 17:59 : Odpowidz idzie tak:
+S³awomir Jab³oñski - 18:00 : Czyli DNS request idzie od prawego interfejsu, ale z adresem nadawcy - gucia, czyli MAC nadawcy = MAC prawego interfejsu, IP nadawcy = IP gucia
+Piotr Sma¿yñski - 18:00 : Ip zrodla: serwer dns IP celu: gucio MAC zrodla: serwer dns MAC celu: MAC brmy domyslnej sieci w ktorej jest serwer dns
+Piotr Sma¿yñski - 18:01 : i drusi skok:
+Piotr Sma¿yñski - 18:01 : IP zrodla: serwer DNS IP celu: gucio MAC zrodla: Ma lewego interfejsu routera MAC celu: MAC gucia
+S³awomir Jab³oñski - 18:03 : Czyli 5. i 6. to dwa skoki dla odpowiedzi na DNS request
+Piotr Sma¿yñski - 18:03 : dokladnie
+S³awomir Jab³oñski - 18:04 : Nastêpnie 7. ICMP echo request www.test.pl
+Piotr Sma¿yñski - 18:04 : ale znowu do routera;
+Piotr Sma¿yñski - 18:04 : prawy interfejs routera pyta o mac adres www. test.pl
+S³awomir Jab³oñski - 18:05 : tak, do routera i wtedy 8. ARP request od prawego interfejsu do IP pozyskanego z odpowiedzi DNS
+Piotr Sma¿yñski - 18:05 : jak otzryma info o MAC adresie www. test.pl to moze zrobic ping...
+S³awomir Jab³oñski - 18:05 : 9. ARP reply do prawego interfejsu
+Piotr Sma¿yñski - 18:05 : dokladnie tak...
+S³awomir Jab³oñski - 18:06 : 10. Prawy interfejs przesy³a dalej zapytanie ICMP
+Piotr Sma¿yñski - 18:06 : tak
+S³awomir Jab³oñski - 18:07 : 11. OdpowiedŸ ICMP odbywaj¹ca siê w dwóch hopach tak jak w przypadku odpowiedzi DNS
+S³awomir Jab³oñski - 18:07 : czyli w zasadzie 11. i 12.
+Piotr Sma¿yñski - 18:07 : dokladnie tak
+S³awomir Jab³oñski - 18:07 : W koñcu zrozumia³em, mia³em te¿ spore w¹tpliwoœci czy zapytanie np. DNS mo¿e "czekaæ" dopóki nie odpytamy o adres MAC adresata
+Piotr Sma¿yñski - 18:08 : podstawowa zasada jest taka: pytamy o to co potrzebujemy; nie pytamy na zapas...
+S³awomir Jab³oñski - 18:08 : Myœlê, ¿e teraz krzy¿ówkê uda mi siê rozwi¹zaæ bez problemu, dziêkujê serdecznie za pomoc i cierpliwoœæ w prostowaniu moich nie do koñca trafnych stwierdzeñ
+Piotr Sma¿yñski - 18:08 : Trzeba tez pamietac aby zachowac skrne adresy IP
+Piotr Sma¿yñski - 18:09 : aby bylo widomo gdzie ma odpowiedz wrocic...
+Piotr Sma¿yñski - 18:09 : Dziekuje bardzo za wspolprace w wyjsnieniu problemu :-)
+S³awomir Jab³oñski - 18:09 : Czyli IP nadawcy siê nie zmienia, zmienia siê tylko MAC nadawcy, w ramach "hopów"
+S³awomir Jab³oñski - 18:10 : Jeszcze raz dziêkujê uprzejmie i do widzenia :)
+Piotr Sma¿yñski - 18:10 : wewnatrz przekierowanie jest za pomoca adresow MAC i taka jest geneza naszego zadania: pokazac po co sa wlasciwie MAC adresy...
+Piotr Sma¿yñski - 18:10 : Dzikuje i do widzenia

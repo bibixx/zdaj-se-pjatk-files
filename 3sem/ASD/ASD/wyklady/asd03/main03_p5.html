@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+   <td align="left"><A HREF="main03_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+   <td align="right">&nbsp;<A HREF="main03_p6.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+
+
+<br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><br clear="all"><div class="tytulpunktu">
+  5. Drugi co do wielkości element ciągu</div>
+
+<p>Być może, oglądając pucharowe rozgrywki sportowe, zastanawiacie się Państwo, 
+jak to jest, że miejsce drugie zajmują często drużyny, które wcale nie są 
+najlepsze. Doszły do finału i przegrały z mistrzem, ale tak naprawdę 
+reprezentują dużo gorszy poziom od zwycięzcy i&nbsp; inne drużyny wydają się być 
+dużo lepsze. To nie wydaje się wręcz sprawiedliwe! Jak znaleźć drużynę, która jest 
+obiektywnie najlepsza ze wszystkich, po pominięciu zwycięzcy?</P>
+
+<p>Sformalizujemy problem w następujący sposób: dany jest ciąg n elementów 
+e[1],..., e[n] pewnej liniowo uporządkowanej struktury danych. Znaleźć drugi co do wielkości 
+element tego ciągu, tzn.&nbsp; znaleźć element największy w zbiorze {e[1],...,e[n]}\max{e[1], ..., e[n]}.&nbsp; 
+Założymy, że elementy w ciągu nie powtarzają się, i że ciąg posiada co najmniej 
+dwa elementy. Jak zwykle wynik algorytmu zapiszemy na zmiennej result. Przyjmijmy następującą specyfikację: </P>
+
+<p style="text-align: center">wp = {e[i]<font face="Symbol"> <span lang="en">&sup1;</span></font> 
+e[j] dla i<span lang="en"><font face="Symbol">&sup1;</font></span>j, n&gt;0},&nbsp; </P>
+
+<p style="text-align: center">wk = { result= e[i] dla pewnego i &lt; n+1,&nbsp; e[j] &lt;  result &lt; e[i<sub><font face="Verdana">0</font></sub>] 
+dla pewnego i<sub><font face="Verdana">0</font></sub> i dla wszystkich j
+<font face="Symbol"><span lang="en">&sup1;</span> </font>i<sub><font face="Verdana">0</font></sub>}.</P>
+
+<p style="text-align: left">Pierwsza część warunku końcowego, mówi, że wartość 
+zmiennej result jest elementem danego ciągu, a druga część, że tylko jeden 
+element ciągu jest od result większy. Algorytm naiwny, wynikający z samego 
+sformułowania zadania jest następujący:</P>
+<blockquote>
+  <ul>
+    <li>
+
+<p style="text-align: left">1. Znajdź element największy stosując algorytm max.</P>
+    </li>
+    <li>
+
+<p style="text-align: left">2. Pomiń w dalszych rozważaniach element największy.</P>
+    </li>
+    <li>
+
+<p style="text-align: left">3. Wśród pozostałych elementów, znajdź element 
+największy stosując ponownie algorytm max.</P>
+    </li>
+  </ul>
+</blockquote>
+<p>Algorytm znajdujący maksimum, max, jest, jak wiadomo, algorytmem optymalnym i wykonuje n-1 porównań 
+dla znalezienia elementu największego (por. wykład I, p.4). Usunięcie elementu maksymalnego może 
+polegać na zamianie pozycji pierwszego i maksymalnego elementu. Koszt tej 
+operacji jest stały. Punkt trzeci algorytmu, można zrealizować szukając elementu 
+największego w ciągu e[2],...,e[n], co wymaga n-2 porównań. Razem koszt 
+algorytmu naiwnego wynosi 2n-3.</p>
+<p>Zastanówmy się jednak, czy to drugie wyszukiwanie elementu największego 
+nie mogłoby być zastąpione czymś innym. Czy przeglądając ciąg w poszukiwaniu 
+elementu największego, nie moglibyśmy wykonać części pracy potrzebnej do 
+znalezienia elementu drugiego największego?</p>
+<p>Przypatrzmy się jeszcze raz turniejowi rozgrywanemu przez, powiedzmy, n drużyn 
+systemem pucharowym.&nbsp; W każdym etapie turnieju drużyny grają parami.&nbsp; 
+Dobór w pary może być losowy. Do następnego etapu przechodzą tylko te drużyny, 
+które wygrywają pojedynki. Oczywiście, po skończonej liczbie rund turniej kończy 
+się wybraniem najlepszej drużyny. </p>
+
+
+<p><b>Pytanie 6</B>: Ile rund trzeba wykonać, aby wybrać najlepszą drużynę, 
+jeżeli na początku startowały 32 drużyny? 
+<FORM><p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'5 rund');">
+</p></form>
+
+<p></P><!-- <p>Odpowiedź: 5 rund</P> --><p></P>
+
+<p>Ogólnie, jeżeli startowało 2<sup><font face="Verdana">n</font></sup> drużyn, 
+to&nbsp; liczba rund wynosi n. A ile dokładnie meczów musiało zostać w tym 
+przypadku rozegranych?&nbsp; </P>
+<FORM><p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'2^n - 1');">
+</p></FORM>
+
+<p>Wróćmy jednak do problemu bardziej abstrakcyjnego, sformułowanego w 
+specyfikacji powyżej. Każdej drużynie odpowiada teraz jeden element ciągu, a 
+siła drużyny jest wyrażona przez wartość przypisaną temu elementowi. &quot;Mecz&quot; 
+polega na porównaniu dwóch elementów zgodnie z pewną, obwiązującą w przyjętej 
+strukturze danych, relacją porządku liniowego <span lang="en">
+<font face="Symbol">&pound;</font></span>. &quot;Zwycięża&quot; i przechodzi do następnej rundy 
+element o większej wartości. Oczywiście element, który wygrał w ostatniej 
+rundzie nie przegrał ani jednego &quot;meczu&quot; - jest to rzeczywiście element 
+największy.</p>
+<p><b>Przykład 5.1</b> Niech elementami ciągu będą liczby naturalne 6, 4 ,9, 8, 
+5, 7, 3, 1. Przedstawmy w postaci grafu kolejne etapy wyszukiwania elementu 
+największego opisaną metodą, por. Rysunek 3.2.</p>
+<p style="text-align: center">
+<img border="0" src="Rysunki/Rysunek3_2.gif" width="300" height="250"></p>
+<p>Węzłami w drzewie turnieju są wartości elementów ciągu. Kolejne rundy 
+turnieju odpowiadają poziomom w tym drzewie. W korzeniu drzewa znajduje się 
+element największy. A gdzie znajduje się element drugi co co wielkości? Nie jest 
+to bynajmniej wierzchołek na na poziomie 1, bo porównywaliśmy tu dziewiątkę z 
+siódemką, a przecież 8 jest większe niż 7. Łatwo zauważyć, że musiał być taki 
+moment, że element największy był porównywany z elementem drugim co do 
+wielkości. W rozważanym przykładzie stało się tak już na początku turnieju, ale 
+mogło się tak stać w dowolnej z rund. Zatem, gdzie szukać drugiego co do 
+wielkości elementu? Wśród elementów, które przegrały z elementem największym.</P>
+<p>Obserwacja z przykładu 5.1 jest dostatecznie ogólna, byśmy mogli 
+zaprojektować algorytm rozwiązywania naszego problemu. Zapiszemy go 
+nieformalnie, implementację przedstawionej tu metody omówimy później w wykładzie 
+szóstym.</P>
+<p></P>
+
+<div class="def" style="width: 704; height: 112">
+<p>Algorytm turniej (szkic):</P>
+<ol>
+  <li>Zbuduj drzewo turnieju znajdując element największy ciągu. </li>
+  <li>Wśród elementów, które &quot;przegrały&quot; z elementem największym, znajdź element 
+  największy.</li>
+</ol>
+</div>
+
+<p></P>
+<p>Zauważmy najpierw, że koszt tego algorytmu jest dużo mniejszy niż algorytmu 
+naiwnego. Znalezienie elementu największego wiąże się z wykonaniem n-1 porównań 
+niezależnie od tego, czy liczba n jest, czy nie jest potęgą dwójki. Elementy, 
+które nie miały pary, przechodzą do następnego etapu, bez wykonywania porównań. 
+Liczba rund turnieju wynosi <span lang="en"><font face="Symbol">é</font></span>lg 
+n<font face="Symbol"><span lang="en">&ugrave;</span>, </font>bo jest to wysokość drzewa 
+binarnego o n liściach, por. wykład II, p.5. Zatem ciąg, który musimy ponownie 
+przeszukać składa się z <span lang="en"><font face="Symbol">é</font></span>lg n<font face="Symbol"><span lang="en">&ugrave;</span></font>&nbsp; 
+elementów. Ostatecznie liczba wykonanych porównań wynosi n-1 + <span lang="en">
+<font face="Symbol">é</font></span>lg n<font face="Symbol"><span lang="en">&ugrave;</span>-1,</font></P>
+<p style="text-align: center">T(Turniej, n) = n + <span lang="en">
+<font face="Symbol">é</font></span>lg n<font face="Symbol"><span lang="en">&ugrave;</span>-</font>2 
+.</P>
+<p>Cała trudność w implementacji tego algorytmu polega za sposobie znalezienia 
+elementów, które przegrały ze zwycięzcą, tak by nie wykonywać żadnych 
+dodatkowych porównań 
+elementów. Ponieważ budując drzewo turnieju nie wiemy, który element zwycięży, 
+zatem dla każdego wygrywającego trzeba pamiętać listę elementów, które z nim 
+przegrały. Implementację wykorzystującą strukturę list i strukturę stosów 
+omówimy w rozdziale szóstym.</P>
+<p></P>
+
+<p><b>Pytanie 7</B>: Ile dokładnie porównań wykona algorytm Turniej dla ciągu 
+dziewięcioelementowego, jeżeli założymy, że element, który nie ma pary 
+automatycznie przechodzi do następnej rundy?&nbsp; </P>
+
+<!-- <p>11 porównań.</P> -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'11 porównań.')">
+</form>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main03_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main03_p6.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

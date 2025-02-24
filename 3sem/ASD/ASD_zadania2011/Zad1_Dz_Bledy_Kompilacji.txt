@@ -1,0 +1,50 @@
+(Jeżeli ktoś z Państwa został przyporządkowany od nieodpowiedniego języka (g++ - C++ , gcc - c, javac - java) proszę o maila o temacie :
+ASD Zad1 Dz Bledna Detekcja jezyka
+A w stopce: Imię, Nazwisko, Numer Studenta, tryb studiów.
+
+Część poniższych błędów może dotyczyć starszych rozwiązań przesyłanych przez państwa, więc jeżeli mają Państwo ocenę oznacza to że nowsze rozwiązanie już się poprawnie skompilowało.
+
+Compilation error (g++)
+s6676
+Pledy kompilacji, głównie linie 54. 63, 69.
+s7683
+Visual C++ to Nie jest C++ (linia 14)
+
+Compilation error (gcc)
+s7174
+fatal error: iostream: Nie ma takiego pliku ani katalogu
+s7795
+fatal error: iostream: Nie ma takiego pliku ani katalogu
+s7360
+fatal error: cstdlib: Nie ma takiego pliku ani katalogu
+s7103
+fatal error: cstdlib: Nie ma takiego pliku ani katalogu
+
+Hmm wygląda na to, że dla C++ rozszerzenie to C !
+Uruchamiam sprawdzanie jako C++ , proszę o maila według powyższych wytycznych, z prośbą umieszczenie wyników.
+
+Compilation error (javac)
+s1844
+s3637
+s6837
+s6996
+s7303
+s7309
+s7311
+s7322
+s7368
+s7415
+s7461
+Na poczatku pliku jest u Pana : "
+ntent-Disposition: form-data; name="plik"; filename="Main.java"
+"
+Dla mnie mógł Pan próbować hackować edu.
+Proszę, więc wpierw sprawę nadmiarowych bajtów wyjaśnić z administratorami edu, a maila wysłać w kopii do nas (Grzegorza Wierzowiekciego, Pawła Rembelskiego),
+s7474
+s7493
+s7495
+s8046
+Większość pozostałych rozwiązań niedotrzymana standardów np. takich jak nazwanie klasy jako "Main".
+Programy w java są kopiowane do pliku Main.java i kompilowane za pomocą polecenie javac.
+
+W nazwie wysyłanego pliku najważniejsze jest rozszerzenie.

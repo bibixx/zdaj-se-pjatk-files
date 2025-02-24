@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr-->
+<!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main01_p0.html" target="main"
+ class="NAWIGACJA">
+&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;
+      <a href="main01_p2.html" target="main" class="NAWIGACJA">nastêpny
+punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 2"></a><br clear="all">
+<div class="tytulpunktu">1. Wprowadzenie</div>
+<p>Celem tego wyk³adu jest przedstawienie ró¿nych problemów
+algorytmicznych i metod ich rozwi±zywania, przedstawienie wa¿nych i
+u¿ytecznych algorytmów oraz dokonanie przegl±du podstawowych struktur
+danych. Rozwa¿ymy ró¿ne dziedziny aplikacji, koncentruj±c siê jednak na
+podstawowych technikach konstrukcji algorytmów i podstawowych
+algorytmach. Na licznych przyk³adach bêdziemy ¶ledzili proces przej¶cia
+od problemu i jego specyfikacji do gotowego rozwi±zania w postaci
+poprawnego programu. Bêdziemy siê starali wyró¿niaæ w tym procesie
+algorytm i ¶rodowisko, w którym on dzia³a, daj±c w ten sposób wyraz
+przekonaniu (za N. Wirthem), ¿e </p>
+<p align="center" style="text-align: center;">Program = Algorytm +
+Struktura Danych. </p>
+<p>Pytania, które sobie kolejno postawimy s± nastêpuj±ce: </p>
+<ul>
+  <li> Co to jest algorytm i jak go zapisywaæ?</li>
+  <li> Jak specyfikowaæ zadania, algorytmy?</li>
+  <li>Jak weryfikowaæ algorytmy?</li>
+  <li> Jak porównywaæ algorytmy?</li>
+  <li> Jak badaæ koszt algorytmu?</li>
+  <li>Czym jest struktura danych? Jak mo¿na j± wyspecyfikowaæ? </li>
+  <li>Czy dana implementacja struktury jest poprawna wzglêdem
+specyfikacji?</li>
+  <li>Czy zawsze mo¿na znale¼æ lepsze rozwi±zanie?</li>
+  <li>Czy zawsze istnieje algorytm rozwi±zuj±cy postawiony problem?</li>
+</ul>
+<p>Zadania i problemy algorytmiczne formu³ujemy najczê¶ciej w jêzyku
+naturalnym. Tak te¿ bêdziemy postêpowaæ w tym wyk³adzie. Jednak jêzyk
+naturalny mo¿e stwarzaæ pewne problemy, gdy¿ jest niejednoznaczny.
+Bêdziemy siê wiêc starali przedstawiaæ problemy na tyle precyzyjnie,
+aby by³a mo¿liwa odpowied¼ na pytanie, czy dany algorytm jest, czy nie
+jest rozwi±zaniem postawionego problemu. Zanim zabierzemy siê do
+konstruowania algorytmu, okre¶limy precyzyjnie w jakich sytuacjach
+chcemy go stosowaæ i czego od niego oczekujemy.&nbsp; A wszystko po to,
+by po napisaniu algorytmu mo¿na by³o przedyskutowaæ jego zgodno¶æ z
+oczekiwaniami. Te wymagania i oczekiwania nazywaæ bêdziemy specyfikacj±
+algorytmu. W dalszym ci±gu wyk³adu wielokrotnie pokonamy&nbsp; drogê</p>
+<p align="center" style="text-align: center;">problem ---&gt;
+{specyfikacja} ---&gt; algorytm</p>
+<p align="center">i przeanalizujemy poszczególne jej elementy. </p>
+<p align="center">Do zapisywania algorytmów bêdziemy stosowaæ prosty
+pseudokod, który z ³atwo¶ci± mo¿na przepisaæ na dowolny jêzyk wysokiego
+poziomu. Nie bêdziemy siê tym jednak w zasadzie zajmowaæ: to co nas
+interesuje najbardziej, to metoda postêpowania opisana w algorytmie, a
+nie jej szczególna implementacja. Chcemy poznaæ i analizowaæ&nbsp;
+w³a¶nie tê metodê, a nie jej konkretn± implementacjê.</p>
+<p align="center">Najprostszym sprawdzeniem, czy algorytm rzeczywi¶cie
+rozwi±zuje podany problem, jest wykonanie serii testów. Jednak samo
+testowanie algorytmu nie daje ¿adnej gwarancji jego poprawno¶ci w ca³ej
+dziedzinie zastosowañ. Tak± gwarancjê mo¿e nam daæ jedynie dowód
+poprawno¶ci. W tym wyk³adzie, do dowodzenia poprawno¶ci algorytmów
+bêdziemy stosowali zazwyczaj technikê niezmienników Hoare. </p>
+<p align="center">Specyfikacja, chocia¿ zwykle przedstawiona bardziej
+formalnie ni¿ sam problem, nie determinuje jednoznacznie algorytmu.
+Mo¿e zatem siê zdarzyæ, ¿e mamy wiele ró¿nych algorytmów poprawnych ze
+wzglêdu na tê sam± specyfikacjê. Jak wiêc mamy zdecydowaæ, które z
+wielu rozwi±zañ postawionego problemu jest lepsze? Jakie kryteria
+powinni¶my stosowaæ przy porównywaniu algorytmów? Najprostsze z nich to
+prostota i czytelno¶æ. Te cechy mo¿emy uzyskaæ konstruuj±c algorytm
+strukturalnie, dodaj±c zwiêz³e komentarze dotycz±ce istotnych elementów
+algorytmu. </p>
+<p align="center">Innym kryterium stosowanym przy porównywaniu
+algorytmów, jest koszt zwi±zany z jego realizacj±. Naturaln± miar±
+kosztu jest czas potrzebny do realizacji algorytmu. Nie chodzi tu o
+dok³adn± liczbê sekund potrzebnych do wykonania algorytmu dla
+konkretnych danych i na konkretnym komputerze. Chcemy nasze kryterium
+uniezale¿niæ od konkretnych danych i konkretnego komputera. Poszukiwaæ
+wiêc bêdziemy zale¿no¶ci miêdzy, rozmiarem danych, a liczb± wykonanych
+operacji. Taka zale¿no¶æ (funkcja), to z³o¿ono¶æ algorytmu. Co wiêcej,
+zwykle nie bêdzie nas interesowa³a dok³adna postaæ tej funkcji, lecz
+raczej jej zachowanie, gdy rozmiar danych d±¿y do nieskoñczono¶ci. Taka
+uproszczona forma tej funkcji nosi nazwê z³o¿ono¶ci asymptotycznej. W
+punkcie 6 tego wyk³adu przypomnimy notacjê asymptotyczn±, która s³u¿y
+do okre¶lania z³o¿ono¶ci asymptotycznej algorytmów.</p>
+<p align="center">Analizuj±c zachowanie asymptotyczne ró¿nych funkcji
+dojdziemy do wniosku, ¿e nie ka¿dy algorytm mo¿e byæ przez nas
+zaakceptowany. Bywaj± bowiem problemy, których algorytmy rozwi±zania
+maj± tak du¿± z³o¿ono¶æ, ¿e&nbsp; ich realizacja przy pomocy komputera
+nie jest mo¿liwa. Przyk³adem takiego problemu jest problem gry w
+szachy. Mo¿na sobie wyobraziæ program do gry w szachy, który jest
+lepszy od najlepszego gracza, gdy¿ analizuje wszystkie mo¿liwe kroki i
+wybiera zawsze ten najlepszy ruch. Chocia¿ w ka¿dej chwili, w szachach
+jest tylko skoñczenie wiele mo¿liwych ruchów i gra koñczy siê zawsze po
+skoñczonej liczbie kroków, to jednak z³o¿ono¶æ problemu jest tak
+wielka, ¿e w praktyce taki algorytm nie móg³by byæ u¿yty. Musia³by
+rozwa¿yæ rzêdu 10<sup><font face="Verdana">19</font></sup> mo¿liwych
+pozycji w ka¿dym&nbsp; ruchu! Nawet bardzo szybkim komputerom zajê³oby
+to zbyt du¿o czasu. Problemy tego typu nale¿± do problemów trudnych
+informatyki. Bêdziemy o nich rozmawiaæ w ostatnim wyk³adzie.</p>
+<p style="text-align: left;">Na zakoñczenie zauwa¿my, ¿e istniej±
+dobrze postawione problemy matematyczne, które jednak nie mog± byæ
+rozwi±zane przy pomocy komputera ani teraz, ani nigdy w przysz³o¶ci.
+Nie jest to problem czasu, czy nak³adu kosztów. Natura tych problemów
+jest zbyt z³o¿ona aby móg³ je rozwi±zaæ algorytm. Takim problemem jest
+np. badanie prawdziwo¶ci zdañ arytmetyki. Chocia¿ arytmetyka jest
+precyzyjnie okre¶lon± teori± matematyczn±, to udowodniono, ¿e nie mo¿e
+istnieæ ¿aden algorytm, który dla dowolnej formu³y arytmetycznej
+rozstrzygnie, czy ona jest, czy nie jest twierdzeniem arytmetyki.&nbsp;
+</p>
+<p style="text-align: left;">&nbsp;</p>
+<p></p>
+<p><b>Pytanie 1</b>: Jak nazywa siê sformalizowany opis wymagañ, ktore
+ma spe³niaæ konkretny algorytm? </p>
+<!-- Odpowied¼: Jest to specyfikacja algorytmu.</P> -->
+<form><input class="GUZIK" type="button"
+ value="-----Zobacz odpowied¼-----" name="Klik0"
+ onclick="napis(this.form,'Jest to specyfikacja algorytmu.')">
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main01_p0.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main01_p2.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

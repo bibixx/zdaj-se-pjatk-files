@@ -1,0 +1,310 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+<td align="left"><A HREF="main11_p0.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;
+<A HREF="main11_p2.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td>
+    </tr>
+</table>
+
+<br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><br clear="all">
+    <div class="tytulpunktu">1. Ogólne zasady</div> 
+
+  
+
+
+    <p>Technika konstrukcji algorytmu polegająca na tym, że danej chwili 
+    wykonujemy to działanie, które prowadzi do najlepszego wyniku w tej chwili, 
+    nosi nazwę zachłannej&nbsp; (ang. greedy algorithms). Jest zdumiewające, że 
+    takie postępowanie często prowadzi do dobrych rozwiązań&nbsp; i do algorytmów 
+    optymalnych.</p>
+  
+
+
+    
+    <p><div class="def">ZASADA W każdym kroku, w którym trzeba dokonać wyboru 
+  dalszego działania, 
+  zawsze wybieramy rozwiązanie lokalnie optymalne, takie które w danym momencie 
+  działania algorytmu, wydaje się być najlepsze.</p>
+  
+    </div>
+
+
+    <p style="text-align: left"><b>Przykład 1.1</b></p>
+  
+
+
+    <p>Niech będzie dana tablica A i niech zadanie polega na znalezieniu takiego 
+    podzbioru zbioru elementów w tablicy, by ich suma była największa i w każdej kolumnie znajdował się co najwyżej 
+    jeden wybrany element. Na rysunku 11.1 przedstawiono tablicę A oraz trzy 
+    możliwe wybory. W pierwszym suma elementów wynosi 15, a w drugim 12. 
+    Postępowanie polegające na wybraniu z każdej kolumny elementu największego, 
+    prowadzi do najlepszego wyniku końcowego (por. rysunek 11.1(b)). Jest to 
+    typowy przykład algorytmu zachłannego: optymalne rozwiązanie dla każdej 
+    kolumny prowadzi do optymalnego rozwiązania dla całej tablicy A.</p>
+  
+
+
+    <table border="1" style="border-collapse: collapse" width="60%" id="AutoNumber1" height="181" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+      <tr>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">7</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">5</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">1</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#DDA0DD" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        7</td>
+        <td width="6%" bgcolor="#DDA0DD" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        5</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        1</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#DDA0DD" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        7</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        5</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        1</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#DDA0DD" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        7</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        5</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        1</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">
+        A=</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">3</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">4</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">3</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        3</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        4</td>
+        <td width="6%" bgcolor="#DDA0DD" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        3</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        3</td>
+        <td width="6%" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        4</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        3</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#E6F0EB" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        3</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        4</td>
+        <td width="6%" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        3</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">2</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">3</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">1</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        2</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        3</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        1</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        2</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        3</td>
+        <td width="6%" bgcolor="#DDA0DD" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        1</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        2</td>
+        <td width="6%" bgcolor="#DDA0DD" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        3</td>
+        <td width="6%" bgcolor="#E6F0EB" height="16" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+        1</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">
+        (a)</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">
+        (b)</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">
+        (c)</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">
+        &nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">
+        (d)</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">
+        &nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="5%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="30%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" colspan="4">
+        Rysunek 11.1</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="5%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="5%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="6%" bgcolor="#F5F5F5" height="11" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      </table>
+
+    <p>Algorytmy zachłanne stosujemy zwykle wtedy, gdy mamy do czynienia z 
+    problemami optymalizacyjnymi i, gdy dochodzenie do rozwiązania optymalnego 
+    wymaga podejmowania szeregu decyzji. Zaletą algorytmów zachłannych jest zwykle 
+    to, że nie tracimy czasu na 
+    zastanawianie się jakie będą konsekwencje przyjętego postępowania w 
+    przyszłości, staramy się tylko, by aktualne rozwiązanie było optymalne 
+    (mówimy o nim, że jest lokalnie optymalne).<p>W następnych punktach 
+tego wykładu i w wykładzie 12tym omówimy trzy przykłady problemów, w których 
+zastosowanie zachłannego postępowania prowadzi do bardzo dobrych algorytmów. 
+Algorytmami zachłannymi, o których będziemy tu mówić będą: algorytm Huffmana 
+znajdowania optymalnego kodu prefiksowego, algorytm Dijkstry znajdowania 
+najkrótszej ścieżki&nbsp; i algorytm Kruskala znajdowania minimalnego drzewa 
+rozpinającego grafu.<p>Nie zawsze, jednak, postępowanie zachłanne prowadzi do 
+poprawnych rozwiązań i dlatego trzeba ostrożnie stosować tę technikę konstrukcji 
+algorytmów.<p><b>Przykład 11.2</b><p>Rozważmy teraz nieco zmodyfikowany problem 
+z przykładu 11.1: znaleźć taki podzbiór zbioru elementów danej tablicy, by suma 
+była największa i by żadne dwa wybrane elementy nie należały do tego samego 
+wiersza, ani do tej samej kolumny. Algorytm zachłanny, zastosowany do 
+rozwiązania tego zadnia, prowadzi w przykładzie przedstawionym na rysunku 11.1 
+do zbioru {7,4,1}, jeśli postępowanie zaczynamy od pierwszej kolumny, lub do 
+zbioru {3,5,2}, jeśli zaczynam od ostatniej kolumny. Nie są to jednak dobre 
+rozwiązania, bo zbiór {7,3,3} ma największą z możliwych sumę i spełnia kryterium 
+zadania. Wynika stąd, że nie zawsze możemy, z dobrym skutkiem, stosować 
+algorytmy zachłanne.<font face="Wingdings"> J</font><p style="text-align: left"><b>Pytanie 1</B>: 
+Przypuśćmy, że mamy wydać resztę w wysokości 78 złotych. Załóżmy, że mamy 
+dostępne dowolne potrzebne banknoty i monety. Jak będzie wyglądało postępowanie 
+zachłanne? <br>
+  
+<!-- Odpowiedź:Wydamy najpierw największy banknot (lub monetę) tak by -->
+<!--zminimalizować pozostałą do wydania resztę. Czyli 50 + 20 +5+ 2+1.. -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Sprawdź odpowiedź-----' NAME='Klik0' 
+onClick="napis(this.form,'Wydajemy kolejno 50 + 20 + 5 + 2 + 1. ')">
+</form>
+</p>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td align="left"><A HREF="main11_p0.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main11_p2.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

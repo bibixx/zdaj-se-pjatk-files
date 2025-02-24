@@ -1,0 +1,70 @@
+1. Do bazy danych zawieraj¹cej tabele: EMP, DEPT i SALGRADE dodaj dodatkow¹ tabelê o nazwie STATYSTYKA_PLATNOSCI_Sxxxx przeznaczon¹ do rejestracji informacji dotycz¹cych grup zaszegregowania GRADE. Tabela powinna zawierac numer grupy, LOSAL, HISAL, liczbê osób nale¿¹c¹ do grupy w momencie wpisywania okreœlon¹ w kolumnie "data ostaniej modyfikacji", maksymaln¹ i minimalnê pensje podstawow¹ rzeczywiœcie osi¹galn¹ rzeczywiœcie osi¹gan¹ przez pracowników tej grupy na przestrzeni ca³ej historii oraz datê ostaniej modyfikacji tych informacji (sysdate)
+
+ 2. Utwórz procedurê która wype³ni tabelê STATYSTYKA_PLATNOSCI_Sxxxx pocz¹tkowymi danymi z tebel EMP, DEPT i SALGRADE dodatkowo wypisuj¹c komunikaty o ka¿dym wystawianym do tabeli wierszu.
+
+ 3. Napisz wyzwalacz poprawiaj¹cy tabelê STATYSTYKA_PLATNOSCI_Sxxxx gdy w tabel EMP nast¹pi¹ zmiany maj¹ce wp³yw na statystyke p³atnoœci (zak³adamy, ¿e tabela SALGRADE siê nie zmienia)
+
+
+ROZWI¥ZANIE:
+//zadanie1
+CREATE TABLE STATYSTYKA_STANOWISK_Sxxxx(
+STANOWISKO VARCHAR2(25) null,
+PENSJA NUMBER(10,0) not null,
+DATA date null,
+constraint STATYSTYKA_STANOWISK_Sxxxx_PK primary key (STANOWISKO) ); 
+
+//zadanie 2
+SET SERVEROUTPUT ON
+create or replace procedure WYPELNIJ_STANOWISKA
+as
+cursor PRACOWNICY is
+	SELECT SUM(SAL) sal,JOB FROM EMP GROUP BY JOB;
+PRACOWNIK PRACOWNICY%rowtype;
+begin 
+open PRACOWNICY;
+LOOP
+FETCH PRACOWNICY INTO PRACOWNIK;
+EXIT WHEN PRACOWNICY%NOTFOUND;
+INSERT INTO STATYSTYKA_STANOWISK_Sxxxx
+(stanowisko,pensja,data)
+VALUES 
+(pracownik.job, pracownik.sal,sysdate);
+dbms_output.put_line('Dodane stanowisko: '||pracownik.job||' wynagrodzenie: '||pracownik.sal||' data '||sysdate);
+END LOOP;
+end;
+
+Dodane stanowisko: CLERK wynagrodzenie: 6150 data 12/01/20
+Dodane stanowisko: SALESMAN wynagrodzenie: 13600 data 12/01/20
+Dodane stanowisko: PRESIDENT wynagrodzenie: 5000 data 12/01/20
+Dodane stanowisko: MANAGER wynagrodzenie: 10275 data 12/01/20
+Dodane stanowisko: ANALYST wynagrodzenie: 6000 data 12/01/20
+PL/SQL procedure successfully completed.
+
+//zadanie 3
+CREATE OR REPLACE TRIGGER SPRAWDZ_STATYSTYKE
+BEFORE UPDATE OF SAL
+ON EMP
+FOR EACH ROW
+BEGIN
+UPDATE STATYSTYKA_STANOWISK_Sxxxx SET PENSJA=PENSJA+(:NEW.SAL-:OLD.SAL) WHERE stanowisko=:NEW.JOB;
+end;
+
+SELECT ENAME,JOB,SAL FROM EMP WHERE EMPNO=7369;
+SELECT * FROM STATYSTYKA_STANOWISK_Sxxxx WHERE STANOWISKO='CLERK';
+UPDATE EMP SET SAL=900 WHERE  EMPNO=7369;
+SELECT ENAME,JOB,SAL FROM EMP WHERE EMPNO=7369;
+SELECT * FROM STATYSTYKA_STANOWISK_Sxxxx WHERE STANOWISKO='CLERK';
+
+ENAME 	JOB 	SAL
+SMITH 	CLERK 	800
+
+STANOWISKO 	PENSJA 	DATA
+CLERK 	6150 	12/01/20
+
+1 row updated.
+
+ENAME 	JOB 	SAL
+SMITH 	CLERK 	900
+
+STANOWISKO 	PENSJA 	DATA
+CLERK 	6250 	12/01/20

@@ -1,0 +1,3070 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.01 transitional//EN"><html><head rel="stylesheet" type="text/css" href="../style/common.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+  <meta name="GENERATOR" content="Mozilla/4.61 [en] (OS/2; I) [Netscape]"><title>MPR - wykład 2</title>
+
+  <link rel="stylesheet" type="text/css" href="../style/common.css">
+  <script type="text/javascript" language="JavaScript1.2" src="../js/dodatki.js">
+  </script></head><body bgcolor="#efefef"><div align="Center">
+
+<a name="W2"></a><h1>2. Wyrażenia regularne</h1>
+
+</div>
+<hr>
+Wyrażenia regularne stanowią silne narzędzie przetwarzania tekstów (wyszukiwania,
+modyfikowania, analizy składniowej). Oparte na matematecznej teorii zbiorów
+i wyrażeń regularnych, weszły do szerszego zastosowania w informatyce u początku
+lat siedemdziesiątych wraz z narzędziamu systemu Unix (np. grep). Znalazły
+się następnie w arsenale wielu języków programowania, wśród których na szczególną
+wzmiankę zasługuje Perl, który wzbogacił składnię i możliwości wyrażeń regularnych.
+W Javie, poczynając od wersji 1.4, klasy i metody, umożliwiające posługiwanie
+się wyrażeniami regularnymi są dostępne w ramach standardowego zestawu pakietów.<br>
+<br>
+<hr>
+<a name="W2.1"></a><h2>2.1. Podstawowe zasady</h2><div class="def">Regularne wyrażenie stanowi opis wspólnych cech (składni) zbioru łańcuchów znakowych</div><br>
+<br>
+Możemy sobie wyobrażać, że regularne wyrażenie jest pewnym wzorcem, który
+opisuje jeden lub wiele napisów, pasujących do tego wzorca. Wzorzec taki
+zapisujemy za pomocą specjalnej składni wyrażeń regularnych.<br>
+<br>
+Najprostszym wzorcem jest po prostu sekwencja znaków, które nie mają specjalnego znaczenia (sekwencja <b>literałów</b>).<br>
+Np. wyrażenie regularne abc stanowi wzorzec opisujący trzy występujące po
+sobie znaki: a, b, i c. Wzorzec ten opisuje jeden napis "abc".<br>
+<br>
+We wzorcach możemy stosować znaki specjalne (tzw. <b>metaznaki</b>) oraz tworzone za ich pomocą konstrukcje składniowe. Do znaków specjalnych należą:<br>
+<br>
+<table cellpadding="4" width="300" border="1">
+<tbody><tr><td>$</td><td>^</td><td>.</td><td>*</td><td valign="Top"><br>
+      </td>
+</tr><tr><td>+</td><td>?</td><td>[</td><td>]</td><td valign="Top"><br>
+      </td>
+</tr><tr><td>(<br>
+</td><td>) </td><td>{ </td><td>}<br>
+</td><td valign="Top">\<br>
+      </td>
+</tr></tbody>
+</table>
+Uwagi: <br>
+<ol>
+  <li>jesli chcemy traktować znaki specjalne jako literały - poprzedzamy je odwrotnym ukośnikiem \.</li>
+  <li>w niektórych konstrukcjach składniowych metaznaki tracą specjalne znaczenie i są traktowane literalnie.</li>
+</ol>
+
+
+Za pomocą znaków specjalnych i tworzonych za ich pomocą bardziej rozbudowanych konstrukcji składniowych opisujemy m.in.<br>
+<ul>
+  <li>wystąpienie jednego z wielu znaków - odpowiednie konstrukcje składniowe noszą nazwę <b>klasy znaków </b>(np. litery lub cyfry),</li>
+  <li>początek lub koniec ograniczonego ciągu znaków (np. wiersza lub słowa) - <b>granice</b>,</li>
+  <li>powtórzenia - w składni wyrażeń regularnych opisywane przez tzw. <b>kwantyfikatory,</b></li>
+  <li>logiczne kombinacje wyrażeń regularnych.<br>
+  </li>
+</ul>
+Np. wyrażenie regularne [0-9] stanowi wzorzec opisujący jeden znak, który
+może być dowolną cyfrą 0,1,2,... ,9. Wzorzec ten opisuje wszystkie napisy składające
+się z jednej cyfry.<br>
+A wyrażenie regularne a.*z (a, kropka, gwiazdka, z) opisuje dowolną sekwencję
+znaków, zaczynających się od litery a i kończących się literą z. Do wzorca
+tego pasują np. następujące napisy: "az", "abz", "a x y z".<br>
+<br>
+Składnię wyrażeń regularnych będziemy omawiać bardziej szczegółowo w następnych punktach.<br>
+<br>
+Wyrażeń regularnych możemy użyć m.in. do: <br>
+<ul>
+  <li>stwierdzenia czy dany napis pasuje do podanego przez wyrażenie wzorca,</li>
+  <li>stwierdzenia czy dany napis zawiera podłańcuch znakowy pasujący do
+podanego wzorca i ew. uzyskania tego podnapisu i/lub jego pozycji w napisie,</li>
+  <li>zamiany części napisu, pasujących do wzorca na inne napisy,</li>
+  <li>wyróżniania części napisu, które są rozdzielane ciagami znaków posującymi do podanego wzorca. </li>
+</ul>W Javie służą do tego klasy pakietu java.util.regex: <b>Pattern i Matcher</b>.<br>
+<br>
+Przed zastosowaniem wyrażenia regularnego do składniowej analizy jakiegoś napisu musi ono być skompilowane. Obiekty klasy <b>Pattern</b> reprezentują skompilowane wyrażenia regularne, a obiekty te uzyskujemy za pomocą statycznych metod klasy Pattern - <b>compile(...)</b>, mających za argument wyrażenie regularne.<br>
+Obiekty klasy <b>Matcher</b> wykonują operacje wyszukiwania 
+w tekście za pomocą interpretacji skompilowanego wyrażenia regularnego i
+dopasowywania go do tekstu lub jego częsci.<br>
+Obiekt-matcher jest zawsze związany z danym wzorcem. Zatem uzyskujemy go od obiektu-wzorca za pomocą metody <b>matcher(...)</b>
+ klasy Pattern, podając jako jej argument przeszukiwany tekst. Następnie
+możemy dokonywać różnych operacji przeszukiwania i zastępowania tekstu poprzez
+użycie różnych metod klasy Matcher. <br>
+W szczególności: <br>
+<ul>
+  <li>metoda <b>matches()</b> stara się dopasować do wzorca cały podany łańcuch znakowy,</li>
+  <li>metoda <b>find()</b>  przeszukuje wejściowy łańcuch znakowy i wyszukuje kolejne pasujące do wzorca jego podłańcuchy.</li>
+</ul>
+Wszystkie metody dopasowania/wyszukiwania zwracają wartości typu boolean,
+stwierdzające dopasowanie (true) lub jego brak (false). Więcej informacji
+o dopasowaniu (jaki konkretnie tekst  pasuje do wzorca, gdzie jest jego początek,
+a gdzie koniec itp.) można uzyskać odpytując matcher o aktualny jego stan
+za pomocą odpowiednich metod.<br>
+Będziemy o tym mówić dokładnie w dalszej części rozdziału.<br>
+<br>
+Typową sekwencję operacji, potrzebnych do zastosowania 
+wyrażeń regularnych można opisać w następujący schematyczny sposób.<br>
+<br>
+<div class="syntax"><br>A. Tekst, podlegający dopasowaniu może być reprezentowany przez obiekt dowolnej
+klasy implementującej interfejs CharSequence (np. String, StringBuffer, CharBuffer
+z pakietu java.nio) np:<br>
+<br>
+    String text = "ala-127"; <br>
+<br>B. Tworzymy wyrażenie regularne jako napis np.<br>
+<br>
+    String regexp = "[0-9]";   <br>
+<br>C. Kompilujemy wyrażenie regularne i uzyskujemy skompilowany wzorzec.<br>
+<br>
+    Pattern pattern = Pattern.compile(regexp);<br>
+<br>D. Tworzymy obiekt-matcher związany z danym wyrażeniem, podając przy tym tekst do dopasowania:<br>
+<br>
+    Matcher matcher = pattern.matcher(text);<br>
+<br>E. Szukamy dopasowania tekstu ( w tekście ) zgodnie ze wzorcem np.<br>
+<br>
+    boolean hasMatch = matcher.find();  <br>
+    albo:<br>
+    boolean isMatching = matcher.matches(); <br>
+</div><br>
+<br>Inne możliwe sposoby postępowania opisane zostaną w podpunkcie dotyczącym dopasowania i wyszukiwania.<br>
+<br>
+Przedtem zapoznamy się nieco bliżej ze składnią wyrażeń regularnych,<br>
+Przy  prezentacji przykładów pokazane zostanie zarówno działanie metody marches()
+jak i find(). Wykorzystujemy przy tym następującą metodę, która jako argumenty
+otrzymuje wyrażenie regularne oraz  analizowany za jego pomocą tekst, a zwraca
+opis wyników działania metod matches() i find().<br>
+<pre>
+  String report(String regex, String text) {
+    String result = "Wzorzec: \"" + regex + "\"\n" +
+                    "Tekst: \"" + text + "\"";
+    // Kompilacja wzorca
+    // Gdy wzorzec jest składniowo błędny
+    // wystąpi wyjątek PatternSyntaxException
+    Pattern pattern = null;
+    try {
+      pattern = Pattern.compile(regex);
+    } catch (Exception exc) {
+        return result + "\n" + exc.getMessage(); // zwracamy komunikat o błędzie
+    }
+
+    // Uzyakanie matchera dla podanego tekstu
+    Matcher matcher = pattern.matcher(text);
+
+    // Próba dopasowania całego tekstu do wzorca
+    boolean isMatching = matcher.matches();
+    result += "\nmatches(): Cały tekst" + (isMatching ? "" : " NIE") +
+              " pasuje do wzorca.";
+
+    matcher.reset(); // Przywrócenie początkowej pozycji matchera
+
+    // Teraz stosujemy metodę find()
+    // Jej wywołanie zwraca true po znalezieniu pierwszego
+    // pasującego do wzorca podłańcucha w tekście
+    // Kolejne wywołania pozwalają wyszukiwać kolejne pasujące podłańcuchy
+    // wynik false oznacza, że w tekście nie ma już pasujących podłańcuchów
+    boolean found = matcher.find();
+    if (!found)
+      result += "\nfind(): Nie znaleziono żadnego podłańcucha " +
+                "pasującego do wzorca";
+    else
+      do {
+        result += "\nfind(): Dopasowano podłańcuch \"" + matcher.group() +
+                   "\" od pozycji " + matcher.start() +
+                   " do pozycji " + matcher.end() + ".";
+      } while(matcher.find());
+
+    return result;
+  }
+</pre>
+Uwaga: nie szkodzi jeśli kod tej metody nie jest teraz w pełni zrozumiały,
+wykorzystamy ją w następnych punktach wyłącznie do prezentacji składni i
+efektów interpretacji wyrażeń regularnych. Szczegółowe omówienie metod dopasowania
+oraz metod uzyskiwania informacji o stanie matchera zawarto dalej.<br>
+<br>
+Składnia wyrażeń regularnych i reguły rządzące jej interpretacją są - abstrahując
+od najprostszych przypadków - dość skomplikowane, a czasem mało intuicyjne.
+<br> Tworzenie dobrych wyrażeń regularnych jest prawdziwą sztuką, a zagadnieniu
+temu poświęcono wielosetstronicowe książki. Do najlepszych (a zarazem dość
+zaawansowanych) należy "Mastering regular expressions" autorstwa Jeffreya
+E. F. Friedla,  wydana przez O'Reilly w roku 1997 i 2003, jak również nie tak dawno
+w tłumaczeniu polskim w Wydawnictwie Helion. Oczywiście, w tym rozdziale nie
+sposób w tak dogłębny i szczegółowy sposób przedstawić składni i mechanizmów
+interpretacji wyrażeń regularnych. Mając nadzieję, że przedstawiony dalej
+materiał będzie wystarczający dla codziennych potrzeb, Czytelnikom zainteresowanym
+pogłebieniem wiedzy o wyrażeniach regularnych można polecić tę dodatkową lekturę.
+<br>
+
+<a name="W2.2"></a><h2>
+2.2. Literały</h2>
+
+Literały użyte w wyrażeniu regularnym są dopasowywane po kolei.<br>
+Na przykład wyrażenie regularne: <br>
+<br>
+    String regexp = "ala";<br>
+<br>
+jest interpretetewane w następujący sposób: w podanym łąńcuchu wejściowym
+wyszukiwane są kolejno występujące po sobie znaki 'a'. 'l' i 'a'.  Wynikiem
+metody matches() jest true tylko wtedy, gdy cały tekst pasuje do tego wzorca
+("ala"), metoda find() umożliwia znalezienie w tekście wielu podłańcuchów
+"ala".<br>
+<br>
+<div class="listing100"> Przykład:<br>
+Wzorzec: "ala"<br>
+Tekst: "ala"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 0 do pozycji 3.<br>
+<br>
+Wzorzec: "ala"<br>
+Tekst: "Ta ala ma kota i ala ma psa ala"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 3 do pozycji 6.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 17 do pozycji 20.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 28 do pozycji 31.<br>
+</div><br>
+<br>
+Jak już wspomniano, jako literałów nie możemy używać symboli mających specjalne
+znaczenie w składni wyrażeń regularnych. Powstanie wtedy błąd składniowy
+przy kompilacji wyrażenia. Błędy składniowe (różnego rodzaju) możemy obsługiwać
+przechwytując wyjątek PatternSyntaxException (jak pokazano na 
+wydruku metody report(...)). <br>
+<br>
+Oto przykład.<br>
+<div class="listing100"><br>
+Wzorzec: "(x"<br>
+Tekst: "(x"<br>
+Unclosed group near index 2<br>
+(x<br>
+  ^<br>
+</div><br>
+<br>
+<br>
+Warto zauważyć, że użycie znaków specjalnych (metaznaków) może nie powodować
+błędu składniowego, ale inne od zamierzonych wyniki dopasowania.<br> Wyobraźmy
+sobie, że nie znamy znaczenia metaznaków '(' i ')' (no, rzeczywiście, na razie jeszcze nie znamy) i chcemy dopasować/znaleźć
+literalny tekst (x). Efekty będą inne od oczekiwanych:<br>
+<div class="listing100"><br>
+Wzorzec: "(x)"<br>
+Tekst: "(x)"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "x" od pozycji 1 do pozycji 2.<br>
+</div><br>
+<br>
+Jeśli chcemy wyszukiwać w tekście literalne znaki specjalne to w wyrażeniu
+regularnym powinniśmy je poprzedzić odwrotnym ukośnikiem (nie dotyczy to metaznaków
+użytych w definicji klas znaków - o czym w następnym podpunkcie).<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "\(x"<br>
+Tekst: "(x"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "(x" od pozycji 0 do pozycji 2.<br></div><br>
+<br>
+Używając odwrotnego ukośnika możemy także literalnie wprowadzać kody znaków oraz znaki kontrolne.<br>
+Tabela poniżej przdestawia sposób literalnego zapisu pewnych specjalnych znaków w wyrażeniu regularnym.<br>
+<br>
+<table border="0" cellpadding="1" cellspacing="0">
+<tbody><tr><td valign="Top">\0n</td><td>Znak o kodzie ósemkowym <i>n</i>
+         (0 <tt>&lt;=</tt> <i>n</i> <tt>&lt;=</tt> 7)</td></tr><tr><td valign="Top">\0nn</td><td>Znak o kodzie ósemkowym <i>nn</i>
+         (0 <tt>&lt;=</tt> <i>n</i> <tt>&lt;=</tt> 7)</td></tr><tr><td valign="Top">\0mnn</td><td>Znak o kodzie ósemkowym  <i>mnn</i>
+         (0 <tt>&lt;=</tt> <i>m</i> <tt>&lt;=</tt> 3,
+         0 <tt>&lt;=</tt> <i>n</i> <tt>&lt;=</tt> 7)</td></tr><tr><td valign="Top">\xhh</td><td>Znak o kodzie szesnastkowym <tt>x</tt><i>hh</i></td></tr><tr><td valign="Top">\uhhhh</td><td>Znak o kodzie szesnastkowym <tt>x</tt><i>hhhh</i></td></tr><tr><td valign="Top">\t</td><td>Znak tabulacji (<tt>'\u0009'</tt>)</td></tr><tr><td valign="Top">\n</td><td>Znak nowego wiersza (<tt>'\u000A'</tt>)</td></tr><tr><td valign="Top">\r</td><td>Powrót karetki (<tt>'\u000D'</tt>)</td></tr><tr><td valign="Top">\f</td><td
+>Nowa strona (<tt>'\u000C'</tt>)</td></tr><tr><td valign="Top">\a</td><td>Alert (dzwonek) (<tt>'\u0007'</tt>)</td></tr><tr><td valign="Top">\e</td><td>Znak \  (<tt>'\u001B'</tt>), można napisac również \\</td></tr><tr><td valign="Top">\cx</td><td>Znbak sterujący <i>x</i></td></tr></tbody>
+</table>
+<br>
+<div class="listing100">Przykład<br>
+Wzorzec: "ala\nma\nkota"<br>
+Tekst: "ala<br>
+ma<br>
+kota"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "ala<br>
+ma<br>
+kota" od pozycji 0 do pozycji 11.<br>
+</div><br>
+<br>
+<br>
+Wyrażenia regularne (w tym te w postaci literałów) możemy ze sobą logicznie
+łączyć. Tak naprawdę wyrażenie regularne "abc" jest logiczną koniunkcją wyrażeń
+"a", "b" i "c".<br>
+Mamy też logiczną alternatywę wprowadzaną znakiem |.<br>
+<br>
+Jeśli np. chcemy dopasować (lub znaleźć) tekst który jest napisem "ala" albo"kot",
+albo "pies", możemy zbudować wyrażenie regularne "ala|kot|pies"<br>
+<br>
+Oto przyklad jego dzialania:<br>
+<div class="listing100"><br>
+Wzorzec: "ala|kot|pies"<br>
+Tekst: "ala"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 0 do pozycji 3.<br>
+<br>
+Wzorzec: "ala|kot|pies"<br>
+Tekst: "pies"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "pies" od pozycji 0 do pozycji 4.<br>
+<br>
+Wzorzec: "ala|kot|pies"<br>
+Tekst: "Loskotek, ala i kot i pies w jednym stali domu"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "kot" od pozycji 3 do pozycji 6.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 10 do pozycji 13.<br>
+find(): Dopasowano podłańcuch "kot" od pozycji 16 do pozycji 19.<br>
+find(): Dopasowano podłańcuch "pies" od pozycji 22 do pozycji 26.<br>
+</div><br>
+<br>
+Zwrócmy szczególną uwagę:<br>
+<ul>
+  <li>matcher przegląda tekst znak po znaku i za każdym razem szuka dopasowania
+całego wyrażenia regularnego; zatem o kolejności odnalezionych podłańcuchów
+decyduje całe wyrażenie, a nie kolejność jego alternatywnych części - dlatego
+w ostatnim przykładzie find() najpierw odnalazl ciąg znaków "kot" w wyrazie
+"Loskotek", a nie wyraz "ala" mimo, że ciąg "kot" wystąpił w wyrażeniu regularnym
+po ciągu "ala",</li>
+  <li>no i oczywiście, wyszukiwane są dowolne ciągi znaków, a nie słowa (o
+tym jak szukać ciągów znaków, które są słowami - dowiemy się dalej).</li>
+</ul>
+<a name="W2.3"></a><h2>2.3. Klasy znaków </h2>
+
+Stosując nawiasy kwadratowe możemy wprowadzać w wyrażeniu regularnym tzw. <b>klasy znaków</b>.<br>
+<br>
+<b>Prosta klasa znaków</b> stanowi ciąg znaków ujętych w nawiasy kwadratowe np.<br>
+<br>
+[123abc]<br>
+<br>
+Matcher dopasuje do takiego wzorca dowolny z wymienionych znaków. Jest to w istocie skrót zapisu 1|2|3|a|b|c. <br>
+<br>
+Jeśli pierwszym znakiem w nawiasach kwadratowych jest <b>^</b>, to dopasowanie nastąpi dla każdego znaku <b>oprócz</b> wymienionych na liście. Jest to swoista <b>negacja</b> klasy znaków.<br>
+Np. do wzorca [^abc] będzie pasował każdy znak oprócz a, b i c.<br>
+<br>
+Możliwe jest także formułowanie <b>zakresów</b> znaków (co już znacznie ułatwia zapis). Przy formułowaniu zakresów używamy naturalnego symbolu -. <br>
+Przykładowe wzorce:<br>
+[0-9] - dowolna cyfra,<br>
+[a-zA-Z] - dowolna mała i duża litera alfabetu angielskiego.<br>
+[a-zA-Z0-9] = dowolna cyfra lub litera<br>
+<br>
+i nieco bardziej skomplikowany przykład, w którym po slowie Numer powinna
+następować spacja, potem zaś jedna z cyfr 1,2,3,7,8,9, następnie dowolna
+cyfra, ukośnik i dowolny znak oprócz cyfr 0,1,2,3 oraz malej litery alfabetu
+angielskiego.<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "Numer [1-37-9][0-9]/[^0-3a-z]"<br>
+<br>
+Tekst: "Numer 11/9"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "Numer 11/9" od pozycji 0 do pozycji 10.<br>
+<br>
+Tekst: "Numer 51/9"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Nie znaleziono żadnego podłańcucha pasującego do wzorca<br>
+<br>
+Tekst: "Numer 38/A"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "Numer 38/A" od pozycji 0 do pozycji 10.<br>
+<br>
+Tekst: "Numer 38/a"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Nie znaleziono żadnego podłańcucha pasującego do wzorca<br>
+</div><br>
+<br>
+<div class="important">Należy pamiętać, że klasa znaków określa jeden znak należący (lub nie)
+do podanego w nawiasach kwadratowych zestawu.  Kolejność znaków w zestawie
+nie jest istotna, ale zakresy muszą być podawane w porządku rosnącym.</div><br>
+<br>
+Ostatnią obserwację obrazują przykłady.<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "[abc][0-9]"<br>
+Tekst: "a1"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "a1" od pozycji 0 do pozycji 2.<br>
+<br>
+Wzorzec: "[abc][0-9]"<br>
+Tekst: "c3"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "c3" od pozycji 0 do pozycji 2.<br>
+<br>
+Wzorzec: "[bca][0-9]"<br>
+Tekst: "a1"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "a1" od pozycji 0 do pozycji 2.<br>
+<br>
+Wzorzec: "[bca][9-0]"<br>
+Tekst: "a1"<br>
+Illegal character range near index 8<br>
+[bca][9-0]<br>
+        ^<br>
+</div><br>
+<br>
+Ułatwieniem zapisu zakresów są tzw. klasy predefiniowane. Podstawowe klasy predefiniowane pokazuje poniższa tabela.<br>
+<br>
+<table border="0" cellpadding="1" cellspacing="0">
+<tbody><tr><td valign="Top">.</td><td>Dowolny znak (w zależności od opcji kompilacji wzorca może pasować lub nie do znaku końca wiersza)</td></tr><tr><td valign="Top">\d</td><td>Cyfra: [0-9]</td></tr><tr><td valign="Top">\D</td><td>Nie-cyfra: [^0-9]</td></tr><tr><td valign="Top">\s</td><td>"Biały" znak: [ \t\n\x0B\f\r]</td></tr><tr><td valign="Top">\S</td><td>Każdy znak, oprócz "białego": [^\s]</td></tr><tr><td valign="Top">\w</td><td>Jeden ze znaków: [a-zA-Z0-9],  znak "dopuszczalny w słowie"</td></tr><tr>
+<td valign="Top">\W</td><td>Znak nie będący literą lub cyfrą [^\w]</td></tr></tbody>
+</table>
+Uwaga: ogólna reguła - klasy wprowadzane przez duże litery stanowią negację klas definiowanych przez małe litery.<br>
+<br>
+Bardzo ważną predefiniowaną klasą jest "klasa wszystkich znaków", podawana
+jako kropka. Za jej pomocą możemy dopasować dowolny znak.<br>
+<br>
+Przykład: wzorzec który dopasowuje teksty składające się z trzech dowolnych
+cyfr, następujących po nich trzech dowolnych znaków i dwóch znaków, nie będących
+cyframi. <br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "\d\d\d...\D\D"<br>
+<br>
+Tekst: "123###a$"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "123###a$" od pozycji 0 do pozycji 8.<br>
+<br>
+Tekst: "123abc12"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Nie znaleziono żadnego podłańcucha pasującego do wzorca<br>
+<br>
+Tekst: "abc123xx"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Nie znaleziono żadnego podłańcucha pasującego do wzorca<br>
+</div><br>
+<br>
+Pewnym rozszerzeniem podstawowych predefiniowanych klas są klasy znakowe,
+zdefiniowane w standardzie POSIX. Pokazuje je poniższa tabela,<br>
+<br>
+<table border="0" cellpadding="1" cellspacing="0">
+<tbody><tr><td valign="Top">\p{Lower}</td><td>Mała litera: [a-z]</td></tr><tr><td valign="Top">\p{Upper}</td><td>Duża litera: [A-Z]</td></tr><tr><td valign="Top">\p{ASCII}</td><td>Dowolny znak ASCII :[\x00-\x7F]</td></tr><tr><td valign="Top">\p{Alpha}</td><td>Dowolna litera: [\p{Lower}\p{Upper}]</td></tr><tr><td valign="Top">\p{Digit}</td><td>Cyfra: [0-9]</td></tr><tr><td valign="Top">\p{Alnum}</td><td>Cyfra bądź litera: [\p{Alpha}\p{Digit}]</td></tr><tr><td valign="Top">\p{Punct}</td><td>Znak punktuacji: !
+"#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~</td></tr><!-- <tt>[\!"#\$%&'\(\)\*\+,\-\./:;\<=\>\?@\[\\\]\^_`\{\|\}~]</tt>
+          <tt>[\X21-\X2F\X31-\X40\X5B-\X60\X7B-\X7E]</tt> --><tr><td valign="Top">\p{Graph}</td><td>Widzialny znak: [\p{Alnum}\p{Punct}]</td></tr><tr><td valign="Top">\p{Print}</td><td>Drukowalny znak: [\p{Graph}]</td></tr><tr><td valign="Top">\p{Blank}</td><td>Spacja lub tabulacja: [ \t]</td></tr><tr><td valign="Top">\p{Cntrl}</td><td>Znak sterujący: [\x00-\x1F\x7F]</td></tr><tr><td valign="Top">\p{XDigit}</td><td>Cyfra szesnastkowa: [0-9a-fA-F]</td></tr><tr><td valign="Top">\p{Space}</td><td>Biały znak: [
+ \t\n\x0B\f\r]</td></tr></tbody>
+</table>
+<br>
+Wypróbujmy tę składnię na przykładzie wzorca, który opisuje tekst zczynający
+się od dowolnej litery, z następującym po niej dowolnym znakiem punktuacji
+i dowolną cyfrą.<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "\p{Alpha}\p{Punct}\d"<br>
+<br>
+Tekst: "a,1"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "a,1" od pozycji 0 do pozycji 3.<br>
+<br>
+Tekst: "aa1"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Nie znaleziono żadnego podłańcucha pasującego do wzorca<br>
+</div><br>
+<br>
+Dość nieprecyzyjnie powiedzieliśmy: "zaczynający się od dowolnej litery".
+Oczywiście (jak widać z tablicy) nie dotyczy to liter polskich (a także innych
+- od angielskiego - języków).<br>
+Zobaczmy:<br>
+<div class="listing100"><br>
+Wzorzec: "\p{Alpha}\p{Punct}\d"<br>
+Tekst: "ć,1"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Nie znaleziono żadnego podłańcucha pasującego do wzorca<br>
+</div><br>
+<br>
+Aha, potrzebny jest Unicode. Do "dopasowywania" znaków Unicodu służą odrębne predefiniowane klasy, niektóre podane w tabeli:<br>
+<br>
+<table border="0" cellpadding="1" cellspacing="0">
+<tbody><tr><td valign="Top"><b>\p{L}</b></td><td>Dowolna litera (Unicode)</td></tr><tr><td valign="Top"><b>\p{Lu}</b></td><td>Dowolna duża litera (Unicode)<br>
+</td></tr><tr>
+      <td valign="Top"><b>\p{Ll}</b><br>
+      </td>
+      <td valign="Top">Dowolna mała litera<br>
+      </td>
+    </tr>
+<tr><td valign="Top"><b>\p{Sc}</b></td><td>Symbol waluty</td></tr><tr>
+      <td valign="Top"><b>\p{In<i>NazwaBlokuUnicode</i>}</b><br>
+      </td>
+      <td valign="Top">Znak należący do podanego bloku Unicode<br>
+      </td>
+    </tr>
+</tbody>
+</table>
+<br>
+Np. wzorzec \p{Ll} będzie pasował do dowolnego znaku Unicode, który jest
+małą literą, zatem np. do polskich znaków ą, ć, ś itd. (ale oczywiście nie
+tylko).<br>
+<br>
+Jeśli chodzi nam o znaki tylko z konkretnych bloków Unicode'u (np. alfabetu
+greckiego, lub cyrylicy) stosujemy ostatni z podanych w tabeli wzorców, podając
+po słowie In (bez spacji) nazwę bloku np.<br>
+\p{InGreek}<br>
+\p{InCyrillic}<br>
+<br>
+Stosowane są tutaj nazwy bloków standardu Unicode 3, które - dla ciekawości
+podaję poniżej (zwróćmy uwagę, że w Unicodzie mamy również najróżniejsze
+znaki specjalne, matematyczne itp.).<br>
+<pre>
+Bloki Unicode (wyciąg)
+
+0000; 007F; Basic Latin
+0080; 00FF; Latin-1 Supplement
+0100; 017F; Latin Extended-A
+0180; 024F; Latin Extended-B
+0250; 02AF; IPA Extensions
+02B0; 02FF; Spacing Modifier Letters
+0300; 036F; Combining Diacritical Marks
+0370; 03FF; Greek
+0400; 04FF; Cyrillic
+0530; 058F; Armenian
+0590; 05FF; Hebrew
+0600; 06FF; Arabic
+0700; 074F; Syriac
+0780; 07BF; Thaana
+0900; 097F; Devanagari
+0980; 09FF; Bengali
+...
+1F00; 1FFF; Greek Extended
+2000; 206F; General Punctuation
+2070; 209F; Superscripts and Subscripts
+20A0; 20CF; Currency Symbols
+20D0; 20FF; Combining Marks for Symbols
+2100; 214F; Letterlike Symbols
+2150; 218F; Number Forms
+2190; 21FF; Arrows
+2200; 22FF; Mathematical Operators
+2300; 23FF; Miscellaneous Technical
+2400; 243F; Control Pictures
+2440; 245F; Optical Character Recognition
+2460; 24FF; Enclosed Alphanumerics
+2500; 257F; Box Drawing
+2580; 259F; Block Elements
+25A0; 25FF; Geometric Shapes
+2600; 26FF; Miscellaneous Symbols
+2700; 27BF; Dingbats
+2800; 28FF; Braille Patterns
+...</pre>
+Spróbujmy zatem "pasować" tylko litery należące do bloku Latin Extended-A (gdzie znajdują się m.in. polskie znaki).<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "\p{InLatinExtended-A}"<br>
+Tekst: "a"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Nie znaleziono żadnego podłańcucha pasującego do wzorca<br>
+<br>
+Wzorzec: "\p{InLatinExtended-A}"<br>
+Tekst: "ą"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "ą" od pozycji 0 do pozycji 1.<br>
+</div><br>
+<br>
+<br>
+Oczywiście, wszystkie predefiniowane klasy (poza klasą wszystkich znaków,
+określaną przez kropkę)  można włączać do zestawu znaków na liście ujętej
+w nawiasach kwadratowych. W ten sposób możemy zażyczyć sobie np. by był dopasowany
+albo znak z bloku Latin Extended-A, albo symbol waluty, albo cyfra szesnastkowa:<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "[\p{InLatinExtended-A}\p{Sc}\p{XDigit}]"<br>
+<br>
+Tekst: "Ć"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+<br>
+Tekst: "9"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+<br>
+Tekst: "$"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+<br>
+Tekst: "k"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+</div><br>
+<br>
+Klasy znaków (które przecież traktowane są jak zbiory)  możemy kombinować
+również w jeszcze bardziej elastyczny sposób. Służą od tego operacje:<br>
+<ul>
+  <li>sumowania klas (zbiorów) - uzyskiwanego poprzez zagnieżdżenie dodatkowych nawiasów kwadratowych,</li>
+  <li>wspólnej części klas (zbiorów) - uzyskiwanej za pomocą operatora &amp;&amp;</li>
+  <li>różnicy klas (zbiorów) - uzyskiwanej poprzez kombinację operacji &amp;&amp; i negacji.</li>
+</ul>
+<b>Suma klas</b> oznacza połączenie zestawu znaków tych klas. Na przykład:<br>
+<br>
+[a-c[1-3]] - pasuje do znaków a, b, c, 1, 2, 3 <br>
+<br>
+<b>Wspólna część klas </b>określa znaki, które występują w obu klasach. Na
+przykład, wzorzec: [1-9&amp;&amp;3-7] pasuje do cyfr 3,4,5,6,7, które są
+wspólne dla obu wymienionych zakresów.<br>
+Ten sam wzorzec moglibyśmy zapisać i tak [1-9&amp;&amp;[3-7]].<br>
+<br>
+<b>Różnica</b> klas tworzy klasę, która zawiera wszystkie znaki jednej z
+podanych klas za wyjątkiem znaków drugiej z podanych klas. Aby uzyskać taki
+efekt trzeba połączyć działanie operatorów &amp;&amp; i negacji ^.<br>
+<br>
+Na przykład, wzorzec  [\p{L}&amp;&amp;[^abc]] określa dowolną literę Unicode
+za wyjątkiem liter a, b i c o czym możemy się łatwo przekonać:<br>
+<div class="listing100"><br>
+Wzorzec: "[\p{L}&amp;&amp;[^abc]]"<br>
+<br>
+Tekst: "ą"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+<br>
+Tekst: "a"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+<br>
+Tekst: "d"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+</div><br>
+ <br>
+Na koniec bardzo ważna informacja.<br>
+Otóż użyte w zestawie znaków klasy (w nawiasach kwadratowych) metaznaki (oprócz
+odwrotnego ukośnika, symbolu ^ oraz -) tracą swoje specjalne znaczenie i
+są traktowane literalnie. W szczególności, kropka traktowana jest literalnie
+(poza nawiasami kwadratowymi oznacza dowolnyc znak). To samo z "zrezerwowanymi"
+nawiasami okrągłymi i klamrowymi.<br>
+<br>
+<div class="listing100">Przykład:<br>
+Wzorzec: "[({]x[})]"<br>
+Tekst: "(x)"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "(x)" od pozycji 0 do pozycji 3.<br>
+<br>
+Tekst: "{x}"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "{x}" od pozycji 0 do pozycji 3.<br>
+</div><br>
+<br>
+A jak dopasować znak x okolony dowolnymi nawiasami lub znakami - ? Przecież
+nawiasy kwadratowe oznaczają klasę, zaś znaki '-' służą do definiowania zakresów.
+<br>
+Z symbolem zakresu (-) nie będzie kłopotu - trzeba go tylko podać w definicji
+klasy albo na początku, albo na końcu (wredy oczywiście nie może służyć do
+oznaczania zakresów a machina przetwarzająca wyrażenia regularne jest na
+tyle inteligentna, że w takim kontekście traktuje go literalnie). Z nawiasami
+kwadratowymi nie możemy tak postępować, szczególnie w Javie (która - np.
+w przeciwieństwie do Perla - pozwala na zagnieżdżanie nawiasów kwadratowych).
+Musimy zatem użyć symbolu "ucieczki" - odwrotnego ukośnika dla wskazania,
+że nawias kwadratowy chcemy potraktowac literalnie.<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "[\[({-]x[-)}\]]"<br>
+<br>
+Tekst: "-x-"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "-x-" od pozycji 0 do pozycji 3.<br>
+<br>
+Tekst: "[x]"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "[x]" od pozycji 0 do pozycji 3.<br>
+<br>
+Tekst: "(x)"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "(x)" od pozycji 0 do pozycji 3.<br>
+<br>
+Tekst: "{x}"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "{x}" od pozycji 0 do pozycji 3.<br>
+</div><br>
+<br>
+<br>
+<a name="W2.4"></a><h2>
+2.4. Kwantyfikatory</h2>Wyrażenia regularne byłyby całkiem nieprzydatne,
+gdyby nie można było za ich pomocą dopasowywać powtarzających się sekwencji
+znaków. Do specyfikacji powtórzeń służą <b>kwantyfikatory</b>.<br>
+<br>
+Symbole kwantyfikatorów są następujące i oznaczają:<br>
+<br>
+<table border="0" cellpadding="1" cellspacing="0">
+<tbody><tr><td valign="Top">?</td><td>wystąpienie jeden raz lub wcale</td></tr><tr><td valign="Top">*</td><td>wystąpienie zero lub więcej razy</td></tr><tr><td valign="Top">+</td><td>wystąpienie raz lub więcej razy</td></tr><tr><td valign="Top">{n}</td><td>wystąpienie dokładnie n razy</td></tr><tr><td valign="Top">{n,}</td><td>wystąpienie co najmniej n razy<br>
+</td></tr><tr><td valign="Top">{n,m}</td><td>wystąpienie co najmniej  n ale nie więcej niż m razy</td></tr></tbody>
+</table>
+<br>
+Czego dotyczy słowo "wystąpienie"? <br>
+<br>
+W przypadku gdy kwantyfikator następuje po literale - wymagane jest wystąpienie
+(liczba wystąpień zależy od kwantyfikatora, w szczególności może być 0) tego
+literału np. "12a+" oznacza 1, potem 2, następnie wystąpienie znaku 'a' jeden
+lub więcej razy.<br>
+Uwaga: "12a+" nie oznacza wystąpienia ciągu znaków 12a jeden lub więcej razy!<br>
+<br>
+Gdy kwantyfikator występuje po klasie znaków - dotyczy dowolnego znaku z
+tej klasy. Np. [abc]+ oznacza wystąpienie jeden lub więcej razy znaku a,
+lub znaku b, lub znaku c. Wzorzec ten pasuje do takich tekstów jak np.<br>
+"abc"<br>
+"bcaabc"<br>
+"aaaaaaaaaa"<br>
+<br>
+Jeśli natomiast chcemy, by kwantyfikator dotyczył dowolnego wyrażenia regularnego <b>X</b> -  to powinniśmy zastosować jedną z poniższych konstrukcji składniowych:<br>
+<br>
+<b>(X)<i>symbol_kwantyfikatora</i><br>
+(?:X)<i>symbol_kwantyfikatora</i></b><br>
+<br>
+Konstrukcje takie tworzą tzw. grupy. Grupy ujęte w nawiasy okrągłe (pierwsza
+z w/w form składniowych) służą też do zapamiętywania tekstu pasującego
+do wzorca podanego w nawiasach. Druga forma służy wyłącznie grupowaniu, bez
+zapamiętywania.  Więcej na ten temat powiemy za chwilę. Teraz spójrzmy na
+kilka przykładów grupowania, służącego przede wszystkim zastosowaniu kwantyfikatorów,
+ale również po to, by zmieniać porządek interpretacji wyrażenia.<br>
+<br>
+Pierwszy wzorzec opisuje jedno lub wiele wystąpień dowolnych ze słów pies, kot, krowa (nie rozdzielonych spacjami).<br>
+<div class="listing100"><br>
+Wzorzec: "(pies|kot|krowa)+"<br>
+<br>
+Tekst: "pieskot"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+<br>
+Tekst: "piespiespies"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+<br>
+Tekst: "kotkotkrowa"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+<br>
+Tekst: "krowapiespies"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+</div><br>
+<br>
+Bardziej skomplikowany przypadek uzyskamy jeśli zażyczymy sobie, by tekst:<br>
+<ul>
+  <li>mógł składać się z dowolnego pojedynczego słowa pies, kot, krowa (bez kończącej spacji),</li>
+  <li>mógł składać się z dowolnej liczby powtórzeń tych słów, ale przy tym
+rozdzielonych co najmniej jedną i nie więcej niż trzema spacjami.</li>
+</ul>
+
+Jednym z możliwych wyrażeń regularnych opisujących tę sytuację jest następujący wzorzec:<br>
+<br>
+<pre>
+(pies|kot|krowa)( {1,3}(pies|kot|krowa))*</pre>
+Czytamy go tak:<br>
+<ul>
+  <li>tekst zaczyna się jednym ze słów pies, kot, krowa</li>
+  <li>po czym następuje <b>zero</b> lub więcej powtórzeń (kwantyfikator *) tekstu opisywanego przez wyrażenie w drugich nawiasach,</li>
+  <li>wyrażenie w drugich nawiasach stwierdza, że opisywany przez nie tekst
+ma zaczynać się 1, 2 lub trzema spacjami (kwantyfikator {1,3}), po czym ma
+następować jedno ze słów pies, kot, krowa.</li>
+</ul>
+Przetestujmy czy to działa.<br>
+<div class="listing100"><br>
+Wzorzec: "(pies|kot|krowa)( {1,3}(pies|kot|krowa))*"<br>
+
+Tekst: "pies"<br>
+
+matches(): Cały tekst pasuje do wzorca.<br>
+<br>
+Tekst: "krowa krowa pies pies"<br>
+
+matches(): Cały tekst pasuje do wzorca.<br>
+<br>
+Tekst: "pieskot"<br>
+
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+ALE!!!:<br>
+find(): Dopasowano podłańcuch "pies" od pozycji 0 do pozycji 4.<br>
+
+find(): Dopasowano podłańcuch "kot" od pozycji 4 do pozycji 7.<br>
+<br>
+Tekst: "pies  pies   pies"<br>
+
+matches(): Cały tekst pasuje do wzorca.<br>
+<br>
+Tekst: "pies     pies pies"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+ALE!!!:<br>
+
+find(): Dopasowano podłańcuch "pies" od pozycji 0 do pozycji 4.<br>
+
+find(): Dopasowano podłańcuch "pies pies" od pozycji 9 do pozycji 18.<br>
+</div><br>
+<br>
+<br>
+Zwróćmy najpierw szczególną uwagę na zastosowanie nawiasów okrągłych. Służy
+ono nie tylko do stosowania kwantyfikatorów, ale również do zmiany kolejności
+interpretacji wyrażenia regularnego. Gdybyśmy pierwszą aletnatywę pies|kot|krowa
+nie ujęli w nawiasy, to interpretacja wyrażenia pies|kot|krowa({1,3}(pies|kot|krowa))*
+byłaby taka: albo pies, albo kot, albo krowa po której następuje 0 lub więcej
+powtórzeń kombinacji pies, kot, krowa rozdzielonych spacjami (od jednej od
+trzech). Zatem otrzymalibyśmy inne od oczekiwanych wyniki: <br>
+<div class="listing100"><br>
+Wzorzec: "pies|kot|krowa( {1,3}(pies|kot|krowa))*"<br>
+Tekst: "pies kot"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+</div><br>
+<br>
+poprawne tylko wtedy, gdy tekst zawierający więcej niż jeden wyraz  zaczynałby się od słowa "krowa" <br>
+<br>
+<div class="listing100"><br>
+Tekst: "krowa pies krowa"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+</div><br>
+<br>
+Tak samo potrzebne sa użyte w wyrażeniu ( {1,3}(pies|kot|krowa))* nawiasy
+wokół alternatywy pies|kot|krowa, bez nich bowiem znaczenie tego wzorca byłoby
+inne od oczekiwanego, mianowicie znaczyłby on od 1 do 3 spacji przed psem
+(i sam pies oczywiście), albo sam kot (już bez spacji) albo sama krowa (też
+bez spacji).  <br>
+<br>
+Warto też zwrócić baczną uwagę na te kwantyfikatory, które dopuszczają brak wystąpień
+ciągu znaków. Kwantyfikator ? wymaga jednego wystąpienia lub <b>braku</b> wystąpień, kwantyfikator * wymaga <b>zera</b>
+ lub więcej wystąpień. Tutaj trzeba uważać, bowiem matcher znajdzie (może
+znaleźć) dopasowania i przy braku specyfikowanego ciągu znaków.  <br>
+<br>
+Właśnie dlatego metoda find() przy zastosowaniu wzorca "(pies|kot|krowa)(
+{1,3}(pies|kot|krowa))*" do tekstu "pieskot" znajdowała dopasowanie (tylko
+na podstawie<br>
+pierwszych nawiasów, część oznaczona kwantyfikatorem-gwiazdką mogła, ale nie musiała wystąpić).<br>
+<br>
+Przy tej okazji uwidacznia się wspomniana wcześniej różnica pomiędzy metodą
+matches() (szukającej dopasowania do wzorca całego tekstu) i metodą find()
+- która przeszukuje tekst sekwencyjnie. Zobaczmy to jeszcze raz  na przykładzie
+tekstu "xxaxxaxx" i wzorca "x*" (0 lub więcej wystąpień znaku 'x'). <br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "x*"<br>
+Tekst: "xxaxxaxx"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "xx" od pozycji 0 do pozycji 2.<br>
+find(): Dopasowano podłańcuch "" od pozycji 2 do pozycji 2.<br>
+find(): Dopasowano podłańcuch "xx" od pozycji 3 do pozycji 5.<br>
+find(): Dopasowano podłańcuch "" od pozycji 5 do pozycji 5.<br>
+find(): Dopasowano podłańcuch "xx" od pozycji 6 do pozycji 8.<br>
+find(): Dopasowano podłańcuch "" od pozycji 8 do pozycji 8.<br>
+</div><br>
+<br>
+Oczywiście, nasz tekst wejściowy nie jest ciągiem 0 lub większej liczby znaków
+x. Zatem matches() słusznie powiada: "nie ma dopasowania". Ale metoda find()
+stosuje nasz wzorzec kolejno przeglądając tekst od początku. Znajduje dwa
+znaki x (od pozycji 0) - co spełnia wymagania wzorca (uzyskujemy dopasowanie), po czym natrafia na znak 'a' na pozycji 2. To nie
+jest 'x', ale wzorzec dopuszcza brak wystąpienia znaku 'x' - zatem find()
+ogłasza dopasowanie tekstu o zerowej długości (co oznacza ni mniej ni więcej,
+tylko to, że tutaj x nie występuje).<br>
+Wrócimy jeszcze do tego zagadnienia przy okazji omawiania wyszukiwania.<br>
+<br><div class="notel">W polskiej literaturze <b><i>greedy</i></b> tłumaczy się zwykle jako zachłanny. Tutaj tego słowa użyto do tłumaczenia terminu <b><i>possesive</i></b>, zatem trzeba było zmienić tłumaczenie terminu greedy</div> Opisywane dotąd kwantyfikatory są tzw. kwantyfikatorami <b>żarłocznymi</b> (greedy).<br>
+Matcher - przy ich zastosowaniu - jest "żarłoczny", bowiem najpierw konsumuje
+cały tekst wejściowy (i stara się go dopasować). Jeśli to się nie uda, następuje
+cofanie znak po znaku, aż do uzyskania dopasowania lub jego braku. <br>
+<br>
+W Javie dostępne są też dwa inne rodzaje kwantyfikatorów: <b>wstrzemięźliwe</b> lub leniwe (reluctant) i <b>zachłanne</b>
+ (possesive). Kwantyfikatory wstrzemięźliwe - w przeciwieństwie do żarłocznych
+- rozpoczynają od początku tekstu wejściowego i pobierają znak po znaku szukając
+dopasowania. Ewentualna próba dopasowanie całego tekstu następuje na samym
+końcu.<br>
+Kwantyfikatory zachłanne (possesive) podobnie jak żarłoczne konsumują cały
+tekst i sprawdzają jego dopasowanie, jednak przy braku dopasowania - w przeciwieństwie
+do kwantyfikatorów żarłocznych - nie następuje cofanie znak po znaku.<br>
+<br>
+Każdy z omówionych wcześniej kwantyfikatorów (które generalnie są żarłoczne
+- "greedy") można uczynić wstrzemiężliwym lub zachłannym..<br>
+W tym celu po kwantyfikatorze dodajemy odpowiednio znak ? lub +.<br>
+<br>
+<table cellpadding="2" cellspacing="2" border="1" width="100%">
+  <tbody>
+    <tr>
+      <td valign="Top">
+      <div align="Center">Aby uczynić <br>
+żarłoczny (greedy)<br>
+kwantyfikator: ?, *, +, (n), (n,), (n,m)<br>
+      </div>
+      </td>
+      <td valign="Top">
+      <div align="Center"><b>Wstrzemiężliwym</b><br>
+      <b>(reluctant)</b><br>
+      </div>
+      </td>
+      <td valign="Top">
+      <div align="Center"><b>Zachłannnym</b><br>
+      <b>(possesive)</b><br>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <td valign="Top">Dodajemy po nim znak<br>
+      </td>
+      <td valign="Top">
+      <div align="Center"><b>?</b><br>
+      </div>
+      </td>
+      <td valign="Top">
+      <div align="Center"><b>+</b><br>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <td valign="Top">Czyli kwantyfikatory wyglądają tak:<br>
+      </td>
+      <td valign="Top">??, *?, +?, (n)? ...<br>
+      </td>
+      <td valign="Top">?+, *+, ++, (n)+ ...<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+Różnicę w działaniu trzech rodzajów kwantyfikatoró pokazuje przykład.<br>
+<div class="listing100"><br>
+Wzorzec: ".*ala"<br>
+Tekst: "to jest ala i ma psa ala"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "to jest ala i ma psa ala" od pozycji 0 do pozycji 24.<br>
+<br>
+Wzorzec: ".*?ala"<br>
+Tekst: "to jest ala i ma psa ala"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "to jest ala" od pozycji 0 do pozycji 11.<br>
+find(): Dopasowano podłańcuch " i ma psa ala" od pozycji 11 do pozycji 24.<br>
+<br>
+Wzorzec: ".*+ala"<br>
+Tekst: "to jest ala i ma psa ala"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Nie znaleziono żadnego podłańcucha pasującego do wzorca<br>
+</div><br>
+<br>
+Kwantyfikator żarłoczny (pierwszy przypadek) skonsumował cały tekst, po czym
+matcher wycofywał się, aż znalazł dopasowanie (słowa "ala" na końcu). Na
+tym matcher zakończył działanie, co widac wyraźnie z wyniku metody find().<br>
+<br>
+Kwantyfikator wstrzemiężliwy (drugi przypadek) zaczął działanie od początku
+tekstu, dzięki czemu metoda find() miała okazję znaleźć w tekście dwa dopasowania
+do wzorca.<br>
+<br>
+Kwantyfikator zachłanny (trzeci przypadek) skonsumował cały tekst i nic już
+nie zostało do dopasowania do słowa "ala" we wzorcu. Ten kwatyfikator nie
+pozwala matcherowi cofać się, zatem dostaliśmy brak dopasowania.  <br>
+<br>
+To, który z rodzajów kwantyfikatorów wybrać zależy od kontekstu.<br>
+<br>
+Generalnie, żarłoczność nie jest sama w sobie zła (często umożliwia uzyskanie
+efektów, które nie byłyby możliwe bez tej cechy kwantyfikatorów).<br>
+Spójrzmy na przykład: chcemy wyodrębnić z jakiegoś tekstu <b>ostatnie</b> zawarte w nim trzy po sobie następujące cyfry.<br>
+Zastosowanie żarłocznego kwantyfikatora pozwoli na uzyskanie tego efektu: ".*(\d\d\d).*".<br>
+Dla tekstu "a 123 b 456 cdefgh" zadziała on tak: .* skonsumuje cały tekst,
+a matcher cofając się napotka ostanie 3 cyfry, po czym następujący .* pominie
+wszystko do końca. W wyniku grupa w nawiasach okrągłych, będzie miała pożądaną
+wartość 456<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: ".*(\d\d\d).*"<br>
+Tekst: "a 123 b 456 cdefgh"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+Wartość grupy w nawiasach: "456" <br>
+</div><br>
+<br>
+Gdyby w tym przykładzie pierwszy kwantyfikator był wstrzemiężliwy, uzyskalibyśmy inny efekt:<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: ".*?(\d\d\d).*"<br>
+Tekst: "a 123 b 456 cdefgh"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+Wartość grupy w nawiasach: "123" <br>
+</div><br>
+<br>
+Oczywiście, nie zawsze żarłoczność kwantyfikatorów będzie nam odpowiadać.
+Wyobraźmy sobie, że chcemy uzyskać ostatnią liczbę całkowitą w tekście, niezaleznie
+do tego ile ma cyfr.<br>
+Powiemy tak: dowolna liczba dowolnych znaków, po niej jedna lub więcej cyfr,
+po czym dowolna liczba nie-cyfr (również brak znaków).<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: ".*(\d+)\D*"<br>
+Tekst: "a 123 b 4567 cdefgh"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+Wartość grupy w naiwasach: "7"<br>
+</div><br>
+<br>
+Kwantyfikator pożarł wszystko, a matcher cofając się znalazł dopasowanie
+do wzorca (\d+)\D* już przy ostatniej cyfrze (7) i tym się zadowolił. <br>
+<br>
+Natomiast zastosowanie kwantyfikora wstrzemięźliwego pozwoli na wyodrębnienie
+całej liczby. Zapiszmy wzorzec: ".*?(\d+)\D*", co znowu oznacza: dowolne
+znaki, jedna lub więcej cyfr, po których następuje dowolna (również zerowa)
+liczba znaków nie będących cyframi. Tym razem jednak kwantyfikator jest wstrzemiężliwy.
+Wynik:<br>
+<div class="listing100"><br>
+Wzorzec: ".*?(\d+)\D*"<br>
+Tekst: "a 123 b 4567 cdefgh"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+Wartość grupy w nawiasach: "4567"<br>
+</div><br>
+<br>
+Można też zauważyć, że w wielu przypadkach wstrzemięźliwe kwantyfikatory działają bardziej efektywnie. <br>
+ Gdy natomiast nasze wyrażenie jest dobrze skonstruowane i służy do sprawdzenia
+czy cały tekst pasuje/nie pasuje do wzorca - pochłonięcie tekstu przez kwantyfikator
+bez cofania się może okazać się bardzo efektywne niż przeglądanie od początku
+czy też dopuszczenie wycofywania się znak po zbaku. Zastosujemy wtedy kwantyfikator
+zachłanny, a nie  wstrzemięźliwy czy żarłoczny. <br>
+<br>
+<a name="W2.5"></a><h2>
+2.5. Granice</h2>
+
+
+Jeżeli jesteśmy zainteresowani dopasowaniem wzorca w pewnym konkretnym miejscu tekstu stosujemy tzw. <b>granice</b>
+ ("boundary matchers") inaczej zwane kotwicami ("anchors"). W szczególności
+możemy życzyć sobie, by dopasowanie następowało na początku lub końcu wiersza,
+czy na granicy słów. <br>
+Symbole służące oznaczaniu granic są następujące.<br>
+<br>
+<table width="405" border="1" cellspacing="2" cellpadding="0" height="229">
+<tbody><tr><td colspan="2" height="22"><center> Symbole granic</center></td></tr><tr><td width="11%" height="23">
+     ^</td><td width="89%" height="23">
+     Początek linii</td></tr><tr><td width="11%" height="23">
+     $</td><td width="89%" height="23">
+     Koniec linii</td></tr><tr><td width="11%" height="23">
+     \b</td><td width="89%" height="23">
+     Na granicy słowa</td></tr><tr><td width="11%" height="23">
+     \B</td><td width="89%" height="23">
+     Nie na granicy słowa</td></tr><tr><td width="11%" height="23">
+     \A</td><td width="89%" height="23">
+     Początek wejścia</td></tr><tr><td width="11%" height="23">
+     \G</td><td width="89%" height="23"> Koniec poprzedniego dopasowania</td></tr><tr><td width="11%" height="23">
+     \Z</td><td width="89%" height="23"> Koniec wejścia (bez terminatora)<br>
+</td></tr><tr><td width="11%" height="23">
+     \z</td><td width="89%" height="23"> Koniec wejścia</td></tr></tbody>
+</table>
+Uwaga: metaznak ^ zyskuje tutaj nowe znaczenie (poprzednio stosowaliśmy go do negacji klas).<br>
+<br>Rozważmy przykłady.<br>
+<br>
+Pierwszy dotyczy dopasowania linii, które zaczynają się od jednej lub więcej cyfr.<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "^\d+.*"<br>
+Tekst: "123"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "123" od pozycji 0 do pozycji 3.<br>
+<br>
+Wzorzec: "^\d+.*"<br>
+Tekst: "ala 123"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Nie znaleziono żadnego podłańcucha pasującego do wzorca<br>
+</div><br>
+<br>
+Zwrócmy uwagę na różnicę: wzorzec "\d+.*" (czyli bez zaznaczenia, że cyfry
+mają wystąpić na początku linii) pozwoli metodzie find() na dopasowanie części
+napisu "ala 123":<br>
+<div class="listing100"><br>
+Wzorzec: "\d+.*"<br>
+Tekst: "ala 123"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "123" od pozycji 4 do pozycji 7.<br>
+</div><br>
+<br>
+<br>
+Możemy też sprawdzić, czy linia zawiera na samym końcu liczbę całkowitą (i wyodrębnić ją w grupie). <br>
+<div class="listing100"><br>
+Wzorzec: ".+?(\d+)$"<br>
+<br>
+Tekst: "a 123"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "a 123" od pozycji 0 do pozycji 5.<br>
+Wartość grupy w nawiasach: "123"<br>
+<br>
+Tekst: "a 123 a"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Nie znaleziono żadnego podłańcucha pasującego do wzorca<br>
+</div><br>
+<br>
+Zauważmy, że gdyby zrezygnować z zaznaczenia końca wiersza symbolem $, w
+ostatnim przykładzie "a 123 a" metoda find() znalazła by dopasowanie:<br>
+<br>
+<div class="listing100"><br>
+ Wzorzec: ".+?(\d+)"<br>
+Tekst: "a 123 a"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "a 123" od pozycji 0 do pozycji 5.<br>
+</div><br>
+<br>
+Normalnie, symbole ^ i $ ignorują znaki końca wiersza i dopasowują początek
+i koniec całej sekwencji wejściowej (linia = String poddany analizie składniowej
+za pomoca wyrażenia regularnego).  Zatem, poprzednie przykładowe wzorce nie
+pozwolą metodzie find() znaleźć dopasowań w więcej niż w jednym wierszu. Można
+to zmienić, stosując flagi - o czym dalej.<br>
+ <br>
+Spróbujmy teraz wyodrębniać słowa. Jeżeli zapiszemy wzorzec "sto", to odnalezione
+zostaną wystąpienia tego ciągu znaków, niezależnie od tego, czy jest on słowem,
+czy też stanowi część jakiegoś słowa. <br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "sto"<br>
+Tekst: "sto podstołecznych autobusów stoi na postoju numer sto"<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 0 do pozycji 3.<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 7 do pozycji 10.<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 29 do pozycji 32.<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 39 do pozycji 42.<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 51 do pozycji 54.<br>
+</div><br>
+<br>
+Jeśli chcemy znaleźć tylko całe słowa "sto" zastosujemy symbole \b.<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "\bsto\b"<br>
+Tekst: "sto podstołecznych autobusów stoi na postoju numer sto"<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 0 do pozycji 3.<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 51 do pozycji 54.<br>
+</div><br>
+<br>
+Gdy chcemy znaleźć ciąg "sto", rozpoczynający słowo (przy czym mogący być, ale niekoniecznie będący słowem) napiszemy:<br>
+<div class="listing100"><br>
+Wzorzec: "\bsto"<br>
+Tekst: "sto podstołecznych autobusów stoi na postoju numer sto"<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 0 do pozycji 3.<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 29 do pozycji 32.<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 51 do pozycji 54.<br>
+</div><br>
+<br>
+Z kolei, jeśli chcemy znaleźć "sto" jako początki słów (ale nie słowa) możemy napisać:<br>
+<div class="listing100"><br>
+Wzorzec: "\bsto\B"<br>
+Tekst: "sto podstołecznych autobusów stoi na postoju numer sto"<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 29 do pozycji 32.<br>
+</div><br>
+<br>
+I wreszcie, ciąg "sto" w środku słów:<br>
+<div class="listing100"><br>
+Wzorzec: "\Bsto\B"<br>
+Tekst: "sto podstołecznych autobusów stoi pusto na postoju numer sto"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 7 do pozycji 10.<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 45 do pozycji 48.<br>
+</div><br>
+<br>
+i na końcu słów (ale nie będący słowem):<br>
+<br>
+<div class="listing100"><br>
+Wzorzec: "\Bsto\b"<br>
+Tekst: "sto podstołecznych autobusów stoi pusto na postoju numer sto"<br>
+find(): Dopasowano podłańcuch "sto" od pozycji 36 do pozycji 39.<br>
+</div><br>
+<br>
+<br>
+Zastosowanie symbolu \G ("koniec ostatniego dopasowania") ilustrują przykłady:<br>
+<div class="listing100"><br>
+Wzorzec: "ala"<br>
+Tekst: "ala ala ala"<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 0 do pozycji 3.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 4 do pozycji 7.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 8 do pozycji 11.<br>
+<br>
+Wzorzec: "\Gala"<br>
+Tekst: "ala ala ala"<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 0 do pozycji 3.<br>
+<br>
+Wzorzec: "\Gala"<br>
+Tekst: "alaalaala"<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 0 do pozycji 3.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 3 do pozycji 6.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 6 do pozycji 9.<br>
+</div><br>
+<br>
+<br>
+Pierwszy przypadek jest naturalny: znajdowane jest każde wystąpienie ciągu "ala".<br>
+W przypadku drugim, żądamy by kolejne wystąpienie zaczynało się na końcu
+poprzedniego dopasowania. Dla tekstu "ala ala ala", find() nie dopasowuje
+koejnych wyrazów, bowiem, nie zaczynają się one na końcu poprzedniego dopasowania
+(spacja nie pasuje do wzorca). Trzeci przypadek - z usuniętymi spacjami -
+daje dopasowania "na końcach popzrednich dopasowań", zatem znowu odnajdywane
+są trzy wystąpienia ciągu "ala".<br>
+<br>
+<br>
+<a name="W2.6"></a><h2>2.6. Flagi</h2>
+
+Sposób interpretacji wyrażenia regularnego można modyfikować za pomocą tzw. flag. Flagi podajemy:  <br>
+<ul>
+  <li>albo przy kompilacji wyrażenia - jako drugi argument metody <b>compile(...)</b> z klasy <b>Pattern</b>,</li>
+  <li>albo bezpośrednio w wyrażeniu regularnym stosując odpowiednie symbole.</li>
+</ul>
+Mamy do dyspozycji następujace flagi.<br>
+<br>
+<table width="100%" border="1" cellspacing="2" cellpadding="0">
+<tbody><tr><td width="30%">
+      <div align="Center"> <b>Stała statyczna klasy<br>
+      </b><b>Pattern<br>
+      </b></div>
+</td><td width="30%">
+      <div align="Center"><b>Odpowiednik<br>
+w wyrażeniu regularnym<br>
+      </b></div>
+</td><td valign="Top" width="40%">
+      <div align="Center"><b>Znaczenie <br>
+      </b></div>
+      </td>
+</tr><tr><td width="30%">
+     Pattern.CANON_EQ</td><td width="30%">
+      <div align="Center">
+     brak</div>
+</td><td valign="Top" width="40%">Pozwala  na  pełne , kanoniczne porównywanie znaków i kodów znaków   (zmniejsza efektywność)<br>
+      </td>
+</tr><tr><td width="30%">
+     Pattern.CASE_INSENSITIVE</td><td width="30%">
+      <div align="Center">
+     (?i)</div>
+</td><td valign="Top" width="40%">Porównania liter bez uwzględnienia ich wielkości<br>
+      </td>
+</tr><tr><td width="30%">
+     Pattern.COMMENTS</td><td width="30%">
+      <div align="Center">
+     (?x)</div>
+</td><td valign="Top" width="40%">Pozwala na wstawianie komentarzy w wyrażeniu<br>
+      </td>
+</tr><tr><td width="30%">
+     Pattern.MULTILINE </td><td width="30%">
+      <div align="Center">
+     (?m)</div>
+</td><td valign="Top" width="40%">Pozwala na dopasowanie ^ i $ na początku i na końcu wierszy (separowanych znakiem końca wiersza) <br>
+      </td>
+</tr><tr><td width="30%">
+     Pattern.DOTALL</td><td width="30%">
+      <div align="Center">
+     (?s)</div>
+</td><td valign="Top" width="40%">Pozwala na dopasowanie metaznaku . (kropka) również do znaku końca wiersza.<br>
+      </td>
+</tr><tr><td width="30%">
+     Pattern.UNICODE_CASE</td><td width="30%">
+      <div align="Center">
+     (?u)</div>
+</td><td valign="Top" width="40%">Przy ignorowaniu wielkości liter w porównaniach uwzględnia znaki Unicode<br>
+      </td>
+</tr><tr><td width="30%">
+     Pattern.UNIX_LINES</td><td width="30%">
+      <div align="Center">
+     (?d)</div>
+</td><td valign="Top" width="40%">Uniksowe separatory wierszy.<br>
+      </td>
+</tr></tbody>
+</table>
+<br>
+Domyślnie działające opcje (bez użycia flag) są przeciwstawne znaczeniom
+podanym w tabeli (np. kropka nie dopasowuje znaków końca wiersza, porównania
+uwzględniają wielkość liter itp.).<br>
+<br>
+Przy kompilacji wyrażenia podajemy flagi jako bitową sumę stałych o wyżej wymienionych nazwach np.<br>
+<blockquote><pre>
+String regex = "....";
+int flags = Pattern.CASE_INSENSITIVE | Pattern.DOTALL;
+Pattern pattern = Pattern.compile(regex, flags);
+</pre></blockquote>
+Działają one wtedy dla całego wyrażenia.<br>
+  <br>
+Alternatywnie, możemy podać flagi bezpośrednio w wyrażeniu regularnym - wtedy
+(w przeciwieństwie do Perla) będą one działać od momentu wystąpienia w wyrażeniu
+regularnym.<br>
+  <br>
+Przykład. <br>
+Wyszukiwanie słowa "Ala" (z uwzględnieniem wielkości liter),  po którym wystepuje
+napis "ma kota", który może być pisany literami małymi, dużymi, lub mieszanymi.<br>
+  <br>
+<div class="listing100"><br>
+  <br>
+Wzorzec: "Ala (?i)ma kota"<br>
+  <br>
+Tekst: "Ala ma kota"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "Ala ma kota" od pozycji 0 do pozycji 11.<br>
+  <br>
+Tekst: "Ala MA KOTA"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "Ala MA KOTA" od pozycji 0 do pozycji 11.<br>
+  <br>
+Tekst: "ALA MA KOTA"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Nie znaleziono żadnego podłańcucha pasującego do wzorca<br>
+</div><br>
+  <br>
+Pamiętajmy o tym, że jeśli obojętność na wielkość liter chcemy rozciągnąć
+na inne niż angielski języki, oprócz flagi CASE_INSENSITIVE (?i) musimy podać
+flagę UNICODE_CASE (?u), co obrazuje poniższy przykład.<br>
+  <br>
+<div class="listing100"><br>
+Wzorzec: "Ala (?i)ma kota pączka"<br>
+Tekst: "Ala ma kota Pączka"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "Ala ma kota Pączka" od pozycji 0 do pozycji 18.<br>
+  <br>
+Wzorzec: "Ala (?i)ma kota pączka"<br>
+Tekst: "Ala ma kota PĄCZKA"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Nie znaleziono żadnego podłańcucha pasującego do wzorca<br>
+  <br>
+Wzorzec: "Ala (?i)(?u)ma kota pączka"<br>
+Tekst: "Ala ma kota PĄCZKA"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "Ala ma kota PĄCZKA" od pozycji 0 do pozycji 18.<br>
+</div><br>
+  <br>
+W pierwszym przypadku nie było kłopotu z samą flagą (?i), bo zmieniliśmy
+wielkość litery 'p' (należącej do alfabetu angielskiego). Gdy jednak - w
+drugim przypadku - podaliśmy duże Ą, matcher nie znalazł dopasowania. Dopiero
+dodatkowa specyfikacja flagi (?u) dała prawidłowy wynik.<br>
+  <br>
+Przy przetwarzaniu tekstów, składającyh się z wielu wierszy istotne jest
+czy metaznak . (kropka) będzie dopasowywał znaki końca wiersza czy też nie.
+Domyślny brak dopasowania można zmienić używając flagi DOTALL lub (?s) w
+wyrażeniu regularnym. <br>
+  <br>
+Poniższy przykład pokazuje jak różnie działa matcher przy fladze DOTALL wyłączonej
+(pierwszy przypadek) i włączonej (drugi). Tekst zawiera trzy wiersze z cyframi
+1,2, 3 na początku każdego z nich odpowiednio.<br>
+<div class="listing100"><br>
+Wzorzec: "\d.*"<br>
+Tekst: "1 aaaa<br>
+2 aaaa<br>
+3 aaaa"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "1 aaaa" od pozycji 0 do pozycji 6.<br>
+find(): Dopasowano podłańcuch "2 aaaa" od pozycji 7 do pozycji 13.<br>
+find(): Dopasowano podłańcuch "3 aaaa" od pozycji 14 do pozycji 20.<br>
+  <br>
+Wzorzec: "(?s)\d.*"<br>
+Tekst: "1 aaaa<br>
+2 aaaa<br>
+3 aaaa"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "1 aaaa<br>
+2 aaaa<br>
+3 aaaa" od pozycji 0 do pozycji 20.<br>
+</div><br>
+  <br>
+Również znaki początku (^) i końca ($) wiersza domyślnie nie uwzględniają
+rozbicia tekstu na wiersze znakami końca wiersza (praktycznie oznaczają początek
+i koniec tekstu).<br> Ilustrują to poniższe przykłady tekstu składającego
+się z dwóch wierszy i stosujących wzorce najpiewr dopasowania "na początku"
+(^), a później "na końcu" ($)<br>
+  <br>
+<div class="listing100"><br>
+Wzorzec: "^\d+ a+"<br>
+Tekst: "123 aaa<br>
+456 aaaaa"<br>
+find(): Dopasowano podłańcuch "123 aaa" od pozycji 0 do pozycji 7.<br>
+  <br>
+Wzorzec: "\d+ a+$"<br>
+Tekst: "123 aaa<br>
+456 aaaaa"<br>
+find(): Dopasowano podłańcuch "456 aaaaa" od pozycji 8 do pozycji 17.<br>
+</div><br>
+  <br>
+Dopiero włączenie flagi MULTILINE czyli (?m) w wyrażeniu regularnym zmienia tę sytuację:<br>
+  <br>
+<div class="listing100"><br>
+Wzorzec: "(?m)^\d+ a+"<br>
+
+Tekst: "123 aaa<br>
+
+456 aaaaa"<br>
+find(): Dopasowano podłańcuch "123 aaa" od pozycji 0 do pozycji 7.<br>
+
+find(): Dopasowano podłańcuch "456 aaaaa" od pozycji 8 do pozycji 17.<br>
+  <br>
+Wzorzec: "(?m)\d+ a+$"<br>
+Tekst: "123 aaa<br>
+456 aaaaa"<br>
+find(): Dopasowano podłańcuch "123 aaa" od pozycji 0 do pozycji 7.<br>
+find(): Dopasowano podłańcuch "456 aaaaa" od pozycji 8 do pozycji 17.<br>
+</div><br>
+  <br>
+  <br>
+  <br>
+  <a name="W2.7"></a><h2>
+2.7. Grupy i odniesienia zwrotne</h2>
+Jak już wiemy, użycie nawiasów okrągłych '('  i  ')'  pozwala zapamiętywać
+części tekstu pasujące do wzorca podanego w nawiasach. Do takich <b>grup</b> możemy się następnie odwoływac z poziomu języka oraz w samym wyrażeniu regularnym.<br>
+  <br>
+Grupy, które wprowadziliśmy w wyrażeniu regularnym nawiasami (), są kolejno
+numerowane poczynając od 1. Mówiąc ściślej są numerowane poprzez zliczanie
+otwartych i zamkniętych nawiasów (bowiem grupy mogą być zagnieżdżone).<br>
+  <br>
+Np. w wyrażeniu (A) (B) (C) mamy trzy grupy o numerach:<br>
+1 - grupa odpowiadająca wyrażeniu A<br>
+2 - grupa odpowiadająca wyrażeniu B<br>
+3 - grupa odpowiadająca wyrażeniu C<br>
+  <br>
+a w wyrażeniu ((A)((B)(C)))(D) mamy 6 grup o numerach<br>
+1 - grupa odpowiadająca wyrażeniu (A)((B)(C)<br>
+2 - grupa odpowiadająca wyrażeniu A<br>
+3 - grupa odpowiadająca wyrażeniu  (B)(C)<br>
+4 - grupa odpowiadająca wyrażeniu  B<br>
+5 - grupa odpowiadająca wyrażeniu C<br>
+6 - grupa odpowiadająca wyrażeniu  D<br>
+  <br>
+Liczbę grup możemy uzyskać używając metody groupCount() wobec matchera (obiektu
+klasy Matcher). Zawartość każdej z grup (tekst pasujący do wyrażenia podanego
+w jej nawiasach) - uzyskujemy za pomocą odwołania group(numer_grupy).<br>
+Tekst pasujący do całego wyrażenia dostępny jest poprzez odwołanie group() lub group(0).<br>
+  <br>
+  <b>Uwaga: maksymalnie dopuszczalna liczba grup wynosi 9.</b><br>
+  <br>
+Rozważmy przykład. Z wprowadzanych (np. w dialogach wejściowych) wierszy
+tekstu, które zawierają na początku jeden lub więcej znaków słowa (w alfabecie
+angielskim), następnie 1 lub więcej "białych znaków", po czym dowolną liczbę
+całkowitą, chcemy wyodrębnić początkowe słowo i podaną liczbę. <br>
+W tym celu zbudujemy wyrażenie regularne, które grupuje znaki słowa i cyfry:<br>
+  <pre>
+(\w+)\s+(\d+)
+</pre>
+W programie, który ma znajdować dopasowania pokażemy (tradycyjnie już) działanie
+metod matches() oraz find(), a także sposób odwołań do zawartości grup i
+raportowanie pozycji tekstu  na których wystąpiło dopasowanie<br>
+Zwróćmy uwagę: pozycje dopasowań oraz zawartość grup są stanami matchera,
+niezależnymi od tego czy używamy metody matches() czy find(), zatem uzyskiwanie
+informacji o grupach i pozycjach dopasowania wyodrębnimy w metodzie report(...),
+która jest wołana zarówno po matches() jak i find().<br>
+I istotna uwaga: przy braku dopasowania (albo gdy jeszcze nie próbowano dopasowywać
+tekstu) odwołania do metod matchera, zwracających jego stany (pozycje, grupy)
+powodują powstanie wyjątku IllegalStateException. Wyjątek ten będziemy obsługiwać,
+wyprowadzając komunikat o błędzie.<br>
+  <pre>
+import java.util.regex.*;
+import javax.swing.*;
+
+public class Grupy {
+
+  public static void main(String[] args) {
+
+    // Kompilacja wzorca
+    // uwaga: odwrotne ukośniki w tekście programu duplikujemy
+
+    Pattern pattern = Pattern.compile("(\\w+)\\s+(\\d+)");
+
+    String txt;  // przeszukiwany (dopasowywany) tekst
+                 // pobierany w dialogach wejściowych, w pętli
+
+    while((txt = JOptionPane.showInputDialog("Tekst")) != null) {
+
+      Matcher matcher = pattern.matcher(txt); // uzyskanie matchera
+
+      // Próba dopasowania całego tekstu i pokazanie wyniku
+      boolean res = matcher.matches();
+      report(txt, "matches()", res, matcher);
+
+      // odtworzenie pierwotnego stanu matchera (po matches)
+      matcher.reset();
+
+      // Sekwencyjne wyszukiwanie za pomocą metody find
+      while ((res = matcher.find()) != false) {
+        report(txt, "find()", res, matcher);
+      }
+    }
+    System.exit(0);
+  }
+
+  static void report(String txt, String who, boolean result, Matcher matcher) {
+
+     System.out.println("Tekst: \"" + txt + "\"");
+
+     int lgrup = matcher.groupCount(); // liczba grup
+     System.out.println("Liczba grup w wyrażeniu: " + lgrup);
+
+     System.out.println(who + ": znalazł dopasowanie ? - " + result);
+
+     try {
+
+       // Cały dopasowany/wyszukany fragment
+       String whatMatches = "\"" + matcher.group() + "\"";
+
+       // Pozycja tekstu na której zaczyna się dopasowanie
+       int pos = matcher.start();
+       System.out.println("Dopasowano co: " + whatMatches);
+       System.out.println("Na pozycji   : " + pos);
+
+       // Wyprowadzamy zwartość wszystkich grup
+       for (int i=1; i&lt;=lgrup; i++) {
+         System.out.println("Grupa " + i + ": \"" + matcher.group(i) + "\"");
+       }
+
+     } catch (IllegalStateException exc) {  // wyjątek - gdy brak dopasowania
+         System.out.println(exc.getMessage());
+         return;
+     }
+  }
+
+}
+</pre>
+Program po wprowadzeniu w dialogach dwóch tekstów:<br>
+Java 1234<br>
+Bali 3456 Kawa 245<br>
+  <br>
+wyprowadzi następujące wyniki:<br>
+<div class="listing100"><br>
+Tekst: "Java 1234"<br>
+Liczba grup w wyrażeniu: 2<br>
+matches(): znalazł dopasowanie ? - true<br>
+Dopasowano co: "Java 1234"<br>
+Na pozycji   : 0<br>
+Grupa 1: "Java"<br>
+Grupa 2: "1234"<br>
+Tekst: "Java 1234"<br>
+Liczba grup w wyrażeniu: 2<br>
+find(): znalazł dopasowanie ? - true<br>
+Dopasowano co: "Java 1234"<br>
+Na pozycji   : 0<br>
+Grupa 1: "Java"<br>
+Grupa 2: "1234"<br>
+Tekst: "Bali 3456 Kawa 245"<br>
+Liczba grup w wyrażeniu: 2<br>
+matches(): znalazł dopasowanie ? - false<br>
+No match found<br>
+Tekst: "Bali 3456 Kawa 245"<br>
+Liczba grup w wyrażeniu: 2<br>
+find(): znalazł dopasowanie ? - true<br>
+Dopasowano co: "Bali 3456"<br>
+Na pozycji   : 0<br>
+Grupa 1: "Bali"<br>
+Grupa 2: "3456"<br>
+Tekst: "Bali 3456 Kawa 245"<br>
+Liczba grup w wyrażeniu: 2<br>
+find(): znalazł dopasowanie ? - true<br>
+Dopasowano co: "Kawa 245"<br>
+Na pozycji   : 10<br>
+Grupa 1: "Kawa"<br>
+Grupa 2: "245"<br>
+</div><br>
+  <br>
+I znowu widzimy, że find() działa sekwencyjnie, przeszukując tekst wedle
+wzorca, dzięki czemu w tekście "Bali 3456 Kawa 245" znaleziono dwa dopasawania
+(i wyróżniono po dwa słowa i liczby), gdy matches() stwierdził brak dopasowania
+całego tekstu do wzorca.<br>
+  <br>
+Odniesienie do zawartości grup mogą wystąpić w samym wyrażeniu regularnym.
+Wprowadzamy je za pomoca odwrotnego ukośnika z następującym numerem grupy (od 1 do 9).
+Taka konstrukcja oznacza, że w tym miejscu wzorca powinien wystąpić dokładnie
+taki sam ciąg znaków, jaki został zapamiętany w grupie o podanym numerze. Nazywa się to <b>odniesieniem zwrotnym</b> (backreference).<br>
+  <br>
+Korzystając z tego możemy np. zidentyfikować wszystkie podwójne, takie same
+po sobie następujące słowa (zapewne błędy) w tekście.<br>
+Posłużymy się w tym celu wzorcem:<br>
+  <pre>
+(\b\p{L}+)[\s\p{Punct}]+\1
+</pre>
+ który oznacza ciąg dowolnych liter Unicode rozpoczynający się na granicy
+słowa (słowo), jedną lub więcej spacji lub znaków punktuacji, a następnie
+powtórzenie tego samego słowa. Zuważmy: ciąg liter od początku słowa \b\p{L}+
+ujęliśmy w nawiasy okrągłe, tworząc grupę. Jest to grupa o numerze 1. W naszym
+wzorcu możemy się odwołać do jej zawartości poprzez \1 i dzięki temu wykryć
+powtórzenia słów.<br>
+  <br>
+Wykorzystajmy ten wzorzec w przykładowym programie, który czyta plik tekstowy
+i raportuje powtarzające się słowa oraz numery wierszy, w których występują.
+Dodatkow skompilujemy wzorzec z flagą CASE_INSENSITIVE, by zapewnić wykrywanie
+duplikatów niezaleznie od wielkości liter.<br>
+  <pre>
+import java.util.regex.*;
+import java.io.*;
+
+public class DupWords {
+
+  public static void main(String[] args) {
+
+    Pattern pattern = Pattern.compile("(\\b\\p{L}+)[\\s\\p{Punct}]+\\1",
+                                       Pattern.CASE_INSENSITIVE);
+    Matcher matcher = pattern.matcher("");
+
+    try {
+      LineNumberReader lr = new LineNumberReader(
+                                 new FileReader(args[0])
+                              );
+      String line;
+      while ((line = lr.readLine()) != null) {
+        int  lineNr = lr.getLineNumber();
+
+        matcher.reset(line);  // matcher nastawiamy na nowy tekst
+
+        while (matcher.find()) {
+          System.out.println("Powtórzenie słowa " + matcher.group(1) +
+                             " w wierszu " + lineNr);
+        }
+
+      }
+      lr.close();
+    } catch(IOException exc) {
+        System.out.println(exc);
+        System.exit(1);
+    }
+  }
+
+}
+</pre>
+W tym programie warto zwrócić uwagę na wykorzystanie metody reset(...) matchera,
+ustawiającego nowy tekst do przeszukiwania (podany jako argument). W ten
+sposób unikamy tworzenia obiektów klasy Matcher przy każdej przeczytanej
+linii pliku: jeden obiekt-matcher, utworzony najpierw jako skojarzony z pustym
+tekstem jest ponownie wykorzystywany dla kolejnych wierszy.<br>
+  <br>
+Przetwarzanie przykładowego pliku:<br>
+<div class="listing100">Początek początek tekstu jest nie nie zbyt ciekawy. <br>
+Potem nie jest jest lepiej.<br>
+I i co co? Takie takie słowa.<br>
+Na przykład, ala ala, Czy też też ala ala, ala, ala.<br>
+I bez powtórzeń.<br>
+I z z powtórzeniami.<br>
+Niestety to też będzie powtórzenie: jejku, jejku!<br>
+I takie też: Co? Co?! <br>
+A na razie na granicy wierszy<br>
+wierszy nie wykrywamy!</div><br>
+  <br>
+da w wyniku:<br>
+<div class="listing100"><br>
+Powtórzenie słowa Początek w wierszu 1<br>
+Powtórzenie słowa nie w wierszu 1<br>
+Powtórzenie słowa jest w wierszu 2<br>
+Powtórzenie słowa I w wierszu 3<br>
+Powtórzenie słowa co w wierszu 3<br>
+Powtórzenie słowa Takie w wierszu 3<br>
+Powtórzenie słowa ala w wierszu 4<br>
+Powtórzenie słowa też w wierszu 4<br>
+Powtórzenie słowa ala w wierszu 4<br>
+Powtórzenie słowa ala w wierszu 4<br>
+Powtórzenie słowa z w wierszu 6<br>
+Powtórzenie słowa jejku w wierszu 7<br>
+Powtórzenie słowa Co w wierszu 8<br>
+</div><br>
+  <br>
+Oczywiście,  program nie jest bardzo uniwersalny. Nie wykrywamy powtórzeń
+na granicach wierszy (łatwo to zrobić bez raportowania numerów wierszy, trudniej
+gdy chcemy te numery właściwie podawać). Również, przyjęty "algorytm" decydowania
+co jest a co nie jest powtórzeniem słowa jest raczej bardzo ad hoc i w praktycznych
+zastosowaniach wymagałby gruntownego przemyślenia. Jednak ten program, jak
+również poprzedni przykładowy kod przybliżają nas mocno do zagadnień związanychy
+ z zastosowaniem róznych metod klas Pattern i Matcher do wyszukiwania i dopasowywania
+tekstów. <br>
+Zanim jednak zajmiemy się tym w sposób nieco bardziej usystematyzowany - ostatnia ważna uwaga, dotycząca grup.<br>
+  <br>
+Otóż, jak pamiętamy, nawiasy okrągłe służą nie tylko grupowaniu w celu zapamiętywania
+zawartości grup, ale również po to by właściwie ustalać sposób interpretacji
+wyrażenia (np. powtórzenia jakiegoś wzorca albo zmianę kolejności opracowania
+wyrażenia gdy stosujemy operator alternatywy). Byłoby wielce niewygodne,
+gdyby wszystkie takie zastosowania wiązały się z zapamiętywaniem grup - musielibyśmy
+wtedy bacznie śledzić numery tych grup, których zawartość nas interesuje,
+a byłyby one zapewne nieciągłe.<br>
+Dlatego mamy również do dyspozycji tzw. <b>grupy niezapamiętywane</b> (non-capturing groups). Wprowadzamy je za pomocą konstrukcji:<br>
+  <br>
+    <b>(?:<i>wyrażenie</i>)</b><br>
+  <br>
+Takie grupy nie są zapamiętywane i nie są numerowane. Możemy więc oddzielić
+to co chcemy zapamiętać, od tego co chcemy tylko odpowiednio porządkowac.<br>
+Np. jeśli chcemy z tekstów w postaci:<br>
+  <ul>
+    <li>jedno lub więcej wystąpień tekstów Ax, Bx lub Cx,</li>
+    <li>po którym następuje dowolna liczba całkowita,</li>
+    <li>po której następują jedno lub więcej wystąpień litery x poprzedzonej
+za każdym razem dowolnym znakiem buiałym lub nzakiem punktuacji,</li>
+    <li>po czym następuje cyfra</li>
+  </ul>
+wyłuskać pierwszą liczbę i ostatnią cyfrę, to możemy zbudowac następujące wyrażenie:<br>
+  <pre>
+ (?:[ABC]x)+(\d+)(?:[\s\p{Punct}-]x)+(\d)</pre>
+zapewniając, że interesująca nas zawartość będzie dostępna w grupach o numerach
+1 i 2 (i żadna inna grupa nie będzie zapamiętana, choć musimy zastosować
+grupowanie dla dopasowania części tekstu nie będących cyframi).<br>
+Przykładowy wynik działania tego wyrażenia:<br>
+<div class="listing100"><br>
+Wzorzec: "(?:[ABC]x)+(\d+)(?:[\s\p{Punct}-]x)+(\d)"<br>
+Tekst: "AxBxAx321-x-x-x:x:x:x7"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "AxBxAx321-x-x-x:x:x:x7" od pozycji 0 do pozycji 22.<br>
+Grupy:<br>
+1 "321"<br>
+2 "7"<br>
+</div><br>
+  <br>
+  <br>
+<br>
+  <a name="W2.8"></a><h2>
+2.8. Dopasowanie i wyszukiwanie.</h2>
+
+Wielokrotnie już widzieliśmy działanie metod matches() i find() klasy Matcher.
+Oprócz tego dostępna jest metoda find z argumentem typu int, mamy też do dyspozycji
+jeszcze jedną, dotąd nie omawianą metodę wyszukiwania: lookingAt(). Podsumujmy
+różnice pomiędzy tymi metodami.<br>
+  <br>
+  <table border="1" cellpadding="3" cellspacing="0" width="100%">
+<tbody><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%">boolean</td><td>find()<br>
+          Przeszukuje łańcuch wejściowy poczynając od początku (lub poprzedniego
+dopasowania) w poszukiwaniu podłańcucha pasującego do wzorca. Jeśli wzorzec
+został dopasowany (wynik true), kolejne wywołanie tej metody przeszukuje
+łańcuch wejściowy poczynając od znaku po ostatnim dopasowanym znaku. Jeśli
+wzorzec nie został znaleziony  metoda zwraca wartość false.</td></tr><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> boolean</td><td>find(int start)<br>
+           Resetuje matcher i przeszukuje łańcuch wejściowy poczynając od
+podanej pozycji start w poszukiwaniu podłańcucha pasującego do wzorca. Zwraca
+true przy znalezieniu dopasowania. Kolejne find() będzie szukać podłańcucha
+poczynając od znaku po ostatnio dopasowanym znaku, a find(int start) - od
+podanej pozycji. </td></tr><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> boolean</td><td>matches()<br>
+           Sprawdza dopasowanie całego łańcucha wejściowego do wzorca. Zwraca
+true, jeśli takie dopasowanie występuje i false w przeciwnym razie.</td></tr><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> boolean</td><td>lookingAt()<br>
+           Próbuje zmaleźć dopasowanie do wzorca dowolnego pdołańcucha zaczynającego
+się od początku łańcucha wejściowego. Zwraca true, jeśli takie dopasowanie
+występuje i false w przeciwnym razie. W przeciwieństwie do metody matches()
+może być dopasowana tylko część łańcucha wejściowego.</td></tr></tbody>
+  </table>
+  <br>
+  <br>
+Poniższy przykład pokazuje różnice pomiędzy metodami matches(), lookingAt() i find().<br>
+<div class="listing100"><br>
+Wzorzec: "ala"<br>
+Tekst: "ala"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 0 do pozycji 3.<br>
+lookingAt(): Dopasowano podłańcuch "ala" Od początku do pozycji: 3.<br>
+  <br>
+Wzorzec: "ala"<br>
+Tekst: "ala ala"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 0 do pozycji 3.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 4 do pozycji 7.<br>
+lookingAt(): Dopasowano podłańcuch "ala" Od początku do pozycji: 3.<br>
+  <br>
+Wzorzec: "ala"<br>
+Tekst: "bela ala ala"<br>
+matches(): Cały tekst NIE pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 5 do pozycji 8.<br>
+find(): Dopasowano podłańcuch "ala" od pozycji 9 do pozycji 12.<br>
+lookingAt(): Nie znaleziono początkowego podłańcucha pasującego do wzorca<br>
+</div><br>
+  <br>
+W pierwszym przypadku (tekst "ala") cały tekst pasuje do wzorca i nie występują
+żadne różnice w działaniu metod. W drugim przypadku tekst "ala ala" nie pasuje
+(w całości) do wzorca, ale metoda find(), sekwencyjnie przeszukując łańcuch
+wejściowy, wyróżnia w nim dwa pasujące podłańcuchy, natomiast metoda lookingAt()
+znajduje pasujący podłańcuch początkowy.<br>
+W trzecim przypadku  (tekst "bela ala ala") tylko metoda find() znajdzie
+dopasowania (kolejne pasujące podłańcuchy). Metoda lookingAt() zawsze zaczyna
+od początku i nie znajduje - na początku tekstu - pasującego podłańcucha.<br>
+  <br>
+Zwróćmy jednak uwagę, że jeśli wyrażenie regularne kończone jest kwantyfikatorem,
+który nie ogranicza (z góry) liczby wystąpień znaków, to działanie metod
+find(...), matches() i lookingAt() jest identyczne.<br>
+Np.<br>
+<div class="listing100"><br>
+Wzorzec: ".*\d+"<br>
+Tekst: "    123"<br>
+matches(): Cały tekst pasuje do wzorca.<br>
+find(): Dopasowano podłańcuch "    123" od pozycji 0 do pozycji 7.<br>
+lookingAt(): Dopasowano podłańcuch "    123" Od początku do pozycji: 7.<br>
+</div><br>
+  <br>
+Każde wywołanie metod matches(), find() i lookingAt() ustala nowy stan obiektu-matchera.<br>
+Stan ten opisywany jest przez następujące charakterystyki, które - jeśli
+tylko dopasowanie zakończyło się sukcesem - możemy odczytać za pomocą podanych
+niżej metod.<br>
+  <br>
+  <table cellpadding="2" cellspacing="2" border="1" width="100%">
+    <tbody>
+      <tr>
+        <td valign="Top">
+        <div align="Center"><b>Charakterystyka stanu matchera</b><br>
+        </div>
+        </td>
+        <td valign="Top">
+        <div align="Center"><b>Metoda odczytu</b><br>
+        </div>
+        </td>
+      </tr>
+      <tr>
+        <td valign="Top">Początek dopasowania (pozycja, indeks)<br>
+        </td>
+        <td valign="Top"><b>int start()</b><br>
+Uwaga: dla matches() i lookingAt() zawsze 0<br>
+        </td>
+      </tr>
+      <tr>
+        <td valign="Top">Koniec dopasowania<br>
+Uwaga: jest to pozycja pierwszego znaku po dopasowanym tekście<br>
+        </td>
+        <td valign="Top"><b>int end()</b><br>
+        </td>
+      </tr>
+      <tr>
+        <td valign="Top">Dopasowany łańcuch/podłańcuch<br>
+        </td>
+        <td valign="Top"><b>String group()</b> lub <br>
+        <b>String group(0)</b><br>
+        </td>
+      </tr>
+      <tr>
+        <td valign="Top">Zawartość n-ej grupy. <br>
+Uwaga: może się zdarzyć przy dopasowaniu, że specyfikacja<br>
+ grupy nie pasuje - wtedy group(n) zwraca null. Niektóre konstrukcje składniowe
+dopasowują puste łańcuchy - wtedy zwracany jest pusty łańcuch znakowy.<br>
+        </td>
+        <td valign="Top"><b>String group(int n)</b><br>
+        </td>
+      </tr>
+      <tr>
+        <td valign="Top">Pozycja początku n-ej grupy<br>
+(Pozycja pierwszego znaku dopasowanej n-ej grupy lub -1, jeśli całość pasuje, a grupa nie).<br>
+        </td>
+        <td valign="Top"><b>int start(int grupa)  </b>   <br>
+        </td>
+      </tr>
+      <tr>
+        <td valign="Top">Pozycja końca n-ej grupy<br>
+Uwaga: jest to pozycja ostatniego dopasowanego znaku dla grupy + 1<br>
+        </td>
+        <td valign="Top"><b>int end(int grupa)</b><br>
+        </td>
+      </tr>
+      <tr>
+        <td valign="Top" rowspan="1" colspan="2">Jeżeli brak dopasowania
+lub dla danego matchera jeszcze nie podjęto próby dopasowania (nie wywołano
+żadnej z metod find(), matches(), lookingAt()), to wywołanie dowolnej z powyższych
+metod spowoduje wyjątek IllegalStateException.<br>
+        <br>
+Uwaga: liczba grup w wyrażeniu, zwracana przez metodę groupCount() jest niezalezna
+od wyników dopasowania i tekstu wejściowego i jest wyłącznie charakterystyką
+samego wyrażenia regularnego.<br>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+ <br>
+Należy zwrócić szczególną uwagę na to, że metody end(..) zwracają indeks
+końca dopasowania, zwiększony o 1. Długość dopasowanego podłańcucha jest
+zatem naturalnie określana jako end()-start(). Jak już wspomniano, niektóre
+konstrukcje składniowe (np. x* - zero lub więcej wystąpień znaku x) mogą
+dopasowywać dowolne teksty np. brak litery x. Mamy wtedy do czynienia z dopasowaniami
+zerowej długości i indeks początku i końca dopasowania jest taki sam (np.
+dla pustego tekstu będzie 0 i 0). <br>
+  <br>
+Pamiętajmy też o tym, że w przeciwieństwie do matches(), lookingAt() oraz
+find(int) bezargumentowa metoda find() rozpoczyna poszukiwanie, korzystając
+z zastanego stanu matchera. W szczególności, pozycja od której metoda find()
+będzie szukać dopasowania jest równa indeksowi ostatniego dopasowania + 1
+(jest to wartość zwracana przez end() dla ostatniego dopasowania). Jest to
+oczywiście szczególnie wygodne w sekwencyjnym przeszukiwaniu tekstu wejściowego
+za pomocą metody find(), według następującego schematu:<br>
+  <br>
+<div class="syntax"><br>
+Schemat odnajdywania wszystkich wystąpień wzorca regex w tekście wejściowym txt<br>
+  <br>
+Pattern pattern = Pattern.compile(regex);<br>
+Matcher matcher = pattern.matcher(txt);<br>
+while (matcher.find()) {<br>
+    System.out.println("Znaleziono tekst: " + matcher.group() +<br>
+                                " zaczynający się na pozycji " + matcher.start() +<br>
+                                " kończący się na pozycji " + (matcher.end() -1) );<br>
+}<br>
+</div><br>
+  <br>
+Ale, kiedy - po jakiejś próbie dopasowania - metodę find() chcemy zastosować
+znowu od początku tekstu wejściowego, to należy "zresetować" matcher, tak
+by jego poprzedni stan nie miał wpływu na nowe wyszukiwanie,<br>
+Służy temu metoda <b>reset()</b>. Jej wersja z argumentem klasy CharSequence
+(który to interfejs - przypomnijmy - jest implementowany w klasach String,
+StringBuffer oraz CharBuffer z pakietu NIO) pozwala jednocześnie ustalić
+nowy tekst do przeszukiwania.<br>
+  <br>
+Rozważmy przykład. W pliku tekstowym zapisane są liczby całkowite. Niektóre
+z nich występują "samotnie" w wierszach tego pliku (być może okolone spacjami).
+Inne mogą występować w wierszu  wraz z innymi liczbami lub słowami. Chcemy
+odrębnie zsumować liczby samotne i "niesamotne" i pokazać obie sumy. <br>
+Pierwsze przychodzące na myśl wyrażenie regularne, które możemy tu zastosować
+to dowolny ciąg cyfr z poprzedzającym i/lub następującym ciągiem zera lub
+więcej "białych znaków". <br>
+  <pre>
+\s*\d+\s*
+</pre>
+Oczywiście, chcemy wyodrębniać liczby całkowite, wobec tego uczynimy z nich grupę.<br>
+  <pre>
+\s*(\d+)\s*
+</pre>
+Metoda matches() zastosowana do tego wzorca dopasuje wszystkie samotnie występuje
+liczby. Metoda find() będzie znajdowac dopasowania sekwencyjnie, zatem -
+przy braku dopasowania przez matches() uzyskamy od niej liczby występujące
+w wierszach w ramach tekstu (kilka liczb, liczby z tekstem itp.).<br>
+  <br>
+W programie zastosujemy też metodę reset(..). Po pierwsze po to, by nie tworzyć
+przy każdym wierszu nowego obiektu-matchera (gdy zajrzymy do źródeł klas
+Pattern i Matcher, okaże się, że każde odwołanie pattern.matcher() zwraca
+nowy obiekt). Po drugie, najpierw będziemy sprawdzać całkowite dopasowanie
+wzorca (a więc wyłuskiwac samotne liczby), jeśli się to nie powiedzie - w
+wierszu może być więcej liczb lub liczba z tekstem -  będziemy chcieli użyć
+metody find(), a ta korzysta z bieżącego stanu matchera, który może być zaburzony.
+Użyjemy więc reset() bez argumentów.<br>
+  <br>
+Oto program.<br>
+  <pre>
+import java.util.regex.*;
+import java.io.*;
+
+public class Sumowanie {
+
+  public static void sumAndReport(String fileName) {
+
+    try {
+      BufferedReader in = new BufferedReader(
+                           new FileReader(fileName)
+                       );
+
+      Pattern pattern = Pattern.compile("\\s*(\\d+)\\s*");
+
+
+      Matcher matcher = pattern.matcher("");
+
+      int suma1 = 0,   // suma liczb występujących samotnie w wierszach
+          suma2 = 0;   // suma liczb, które nie są w wierszach samotne
+
+      String input;
+      while ((input = in.readLine()) != null) {
+
+        matcher.reset(input);          // nowy tekst wejściowy
+
+        if (matcher.matches())         // czy mamy samotną liczbę?
+          suma1 += Integer.parseInt(matcher.group(1));
+
+        else {                         // nie, może jest kilka, albo w tekście?
+
+          matcher.reset();             // konieczne, by ew. poprzedni stan
+                                       // nie miał wpływu na find()
+          while (matcher.find())
+            suma2 += Integer.parseInt(matcher.group(1));
+        }
+      }
+      in.close();
+      System.out.println("Suma samotnych liczb: " + suma1);
+      System.out.println("Suma niesamotnych liczb: " + suma2);
+    } catch(Exception exc) {
+        exc.printStackTrace();
+        System.exit(1);
+    }
+
+  }
+
+  public static void main(String[] args) {
+    sumAndReport(args[0]);
+  }
+
+}
+</pre>
+Przykładowe wyniki dzialania programu dla pliku wejściowego:<br>
+1<br>
+2 ala 4<br>
+   5<br>
+10 20 30<br>
+  <br>
+<div class="listing100"><br>
+Suma samotnych liczb: 6<br>
+Suma niesamotnych liczb: 66<br>
+</div><br>
+  <br>
+wydają się zadowalające.<br>
+Ale ten wzorzec i ten program pozwalają na kilka ciekawych obserwacji.<br>
+Obie związane są z zastosowanymi kwantyfikatorami.<br>
+Pierwsza dotyczy efektywności: we wzorcu zastosowaliśmy kwantyfikatory żarłoczne <b>(greedy)</b>
+, a jak pamiętamy powodują one pochłonięcie całego wejścia i dopasowanie
+przy cofaniu się znak po znaku. Przy dużych plikach lub dużej liczbie przetwarzanych
+plików zaczyna to odgrywać istotną rolę. Porównajmy czas działania tego samego
+programu dla większego pliku raz przy zastosowaniu kwantyfikatorów "greedy"
+(dotychczasowy wzorzec), a drugi raz przy kwantyfikatorach wstrzemięźliwych
+(reluctant), wprowadzonych w nowym wzorcu:<br>
+ <br>
+  <pre>
+\s*?(\d+?)\s*?</pre>
+  Oto wynik porównania:<br>
+<div class="listing100"><br>
+Suma samotnych liczb: 6840<br>
+Suma niesamotnych liczb: 1713600<br>
+Czas greedy: 1430<br>
+Suma samotnych liczb: 6840<br>
+Suma niesamotnych liczb: 1713600<br>
+Czas reluctant: 990<br>
+</div><br>
+  <br>
+Zatem kwantyfikatory "reluctant" działają w tym przypadku o ok. 40% szybciej
+od kwantyfikatorów "greedy". To, oczywiście, zależy od wzorca i dopasowywanego
+tekstu. Czasem "greedy" mogą być lepszym rozwiązaniem, a nawet - w sensie
+koncepcyjnym - niezbędnym. Warto jednak mieć na uwadzę różnice w działaniu
+obu typów kwantyfikatorów (o których zresztą już była mowa w podrozdziale
+o kwantyfikatorach i do których jeszcze wrócimy pod sam koniec tego podrozdziału).<br>
+  <br>
+Inny problem związany jest z użyciem (bardzo wygodnego, ale dość niebezpiecznego)
+kwantyfikatora, dopuszczającego brak wystąpień podawanych znaków (w naszym
+przypadku 0 lub więcej spacji).<br>
+  <br>
+O ile w tym przykładzie na działanie metody matches() (znajdującej "samotne"
+liczby) nie ma to wpływu, to metoda find() - jak już widzieliśmy - z przyjemnością
+dopasuje do wzorca \s* każdy inny znak oprócz spacji. W rezultacie będziemy
+(jako niesamotne) sumować również liczby, które są częścią słów np. Nr1 (bez
+spacji). Być może wcale tego  nie chcemy i chodzi nam tylko a takie liczby,
+które nie są częścią słów w tekście.<br>
+  <br>
+Prosty test pokaże, że nasz dotychczasowy wzorzec jest w tym przypadku całkiem niezadawalający.<br>
+Dla następującego pliku wejściowego:<br>
+1<br>
+   2   <br>
+aa 5 b  5 5 5 c<br>
+100b<br>
+3<br>
+x3000 <br>
+y40000y 11<br>
+Dostaniemy jako wynik:<br>
+<div class="listing100"><br>
+Suma samotnych liczb: 6<br>
+Suma niesamotnych liczb: 43131<br>
+</div><br>
+  <br>
+co oczywiście nie odpowiada naszym wymaganiom (zsumowane zostały liczby stanowiące cześć słów).<br>
+  <br>
+Niewątpliwie, dla kogoś kto zaczyna przygodę z wyrażeniami regularnymi dobór
+odpowiedniego wzorca nie jest łatwy. Dla przykładu, pokażę najpierw niewłaściwie
+rozumowanie (przy okazji ilustrując ciekawy przypadek, gdy wzorzec jest dopasowany,
+a nie wszystkie grupy zyskały zawartość). <br>
+Możemy oto rozumować następująco. Powodem naszych kłopotów był kwantyfikator
+* (0 lub więcej wystąpień, konkretnie spacji). Spróbujmy się więc ograniczyć
+i powiedzieć, że liczby mają być okalane conajmniej przez jeden biały znak.
+Ale to za mało. Mogą być przecież przypadki, kiedy wiersz zaczyna się od
+liczby, a później dopiero następują spacje (i ew. inne liczby w tekście),
+albo kiedy wiersz kończy się liczbą (bez końcowych spacji). Wydaje się zatem,
+że musimy przygotować alternatywne przypadki:<br>
+  <ul>
+    <li>w wierszu jest tylko liczba i nic więcej - wzorzec: ^(\d+)$</li>
+    <li>wiersz zaczyna się od liczby, po czym następuje 1 lub więcej spacji : ^(\d+)\s+</li>
+    <li>wiersz kończy się liczbą, poprzedzoną jedną lub więcej spacjami:  \s+(\d+)$ </li>
+    <li>w wierszu występują liczby (lub liczba) okolona jedną lub więcej spacjami: \s+(\d+)\s+</li>
+  </ul>
+Alternatywy musimy grupować, ale ponieważ nie chcemy ich zapamiętywać jako
+grupy zastosujemy grupy niezpamiętywane. Zapamiętywac będziemy jednak grupy
+określające liczby (wystąpienia cyfr). Dochodzimy więc do następującego wzorca,
+który wstawimy do poprzedniego programu (w metodzie kompilacji).<br>
+  <br>
+  <pre>
+(?:^(\d+)\s+)|(?:^(\d+)$)|(?:\s+(\d+)$)|(?:\s+(\d+)\s+)
+</pre>
+W tym wzorcu mamy cztery grupy zapamiętywane (określane przez alternatywne
+dopasowania liczb). Oczywiście, przy każdym dopasowaniu całego wzorca tak
+naprawdę tylko jedna z grup może pasować. Pozostałe będą miały wartość null.
+W programie musimy więc odnajdywać tylko tę pasującą grupę i zrobimy to poprzez
+dostarczenie własnej metody <br>
+getMatchingGroupAsNumber(...). W metodzie tej będziemy też chcieli zobaczyć
+co naprawdę się dziej i jak są dopasowywane konkretne grupy. Informację tę
+pokażemy na konsoli. <br>
+Przykładowy program wygląda teraz tak:<br>
+  <pre>
+import java.util.regex.*;
+import java.io.*;
+
+public class Sumowanie2 {
+
+  private Pattern pattern = Pattern.compile("(?:^(\\d+)\\s+)|" +
+                                        "(?:^(\\d+)$)|" +
+                                        "(?:\\s+(\\d+)$)|" +
+                                        "(?:\\s+(\\d+)\\s+)"
+                                       );
+
+  private Matcher matcher = pattern.matcher("");
+
+  private int lgroup = matcher.groupCount(); // liczba grup
+
+  public void sumAndReport(String fileName) {
+
+    try {
+      BufferedReader in = new BufferedReader(
+                           new FileReader(fileName)
+                       );
+      int suma1 = 0,   // suma liczb występujących samotnie w wierszach
+          suma2 = 0;   // suma liczb, które nie są w wierszach samotne
+
+      String input;
+      while ((input = in.readLine()) != null) {
+
+        matcher.reset(input);          // nowy tekst wejściowy
+
+        if (matcher.matches())         // czy mamy samotną liczbę?
+          suma1 += getMatchingGroupAsNumber("matches");
+
+        else {                         // nie, może jest kilka, albo w tekście?
+          matcher.reset();
+          while (matcher.find())
+            suma2 += getMatchingGroupAsNumber("find");
+        }
+      }
+      in.close();
+      System.out.println("Suma samotnych liczb: " + suma1);
+      System.out.println("Suma niesamotnych liczb: " + suma2);
+    } catch(Exception exc) {
+        exc.printStackTrace();
+        System.exit(1);
+    }
+
+  }
+
+  // Metoda zwracająca dopasowaną grupę
+  // przekształconą na liczbę
+
+  private int getMatchingGroupAsNumber(String info)
+              throws NumberFormatException
+  {
+    System.out.println(info + "\nDopasowanie: \"" + matcher.group() + "\"");
+    int wynik = 0;
+    for (int i=1; i &lt;= lgroup; i++) {
+       System.out.println("Gr. " + i + " \"" + matcher.group(i) + "\"");
+       if (matcher.group(i) != null) {
+         wynik = Integer.parseInt(matcher.group(i));
+       }
+    }
+    return wynik;
+  }
+
+  public static void main(String[] args) {
+    new Sumowanie2().sumAndReport(args[0]);
+  }
+
+}
+</pre>
+a wyniki jego działania dla  pliku wejściowego:<br>
+1<br>
+
+   2   <br>
+
+aa 5 b  5 5 5 c<br>
+
+100b<br>
+
+3<br>
+
+x3000 <br>
+
+y40000y 11<br>
+  <br>
+są następujące:<br>
+<div class="listing100"><br>
+matches<br>
+Dopasowanie: "1"<br>
+Gr. 1 "null"<br>
+Gr. 2 "1"<br>
+Gr. 3 "null"<br>
+Gr. 4 "null"<br>
+matches<br>
+Dopasowanie: "   2   "<br>
+Gr. 1 "null"<br>
+Gr. 2 "null"<br>
+Gr. 3 "null"<br>
+Gr. 4 "2"<br>
+find<br>
+Dopasowanie: " 5 "<br>
+Gr. 1 "null"<br>
+Gr. 2 "null"<br>
+Gr. 3 "null"<br>
+Gr. 4 "5"<br>
+find<br>
+Dopasowanie: "  5 "<br>
+Gr. 1 "null"<br>
+Gr. 2 "null"<br>
+Gr. 3 "null"<br>
+Gr. 4 "5"<br>
+find<br>
+Dopasowanie: " 5 "<br>
+Gr. 1 "null"<br>
+Gr. 2 "null"<br>
+Gr. 3 "null"<br>
+Gr. 4 "5"<br>
+matches<br>
+Dopasowanie: "3"<br>
+Gr. 1 "null"<br>
+Gr. 2 "3"<br>
+Gr. 3 "null"<br>
+Gr. 4 "null"<br>
+find<br>
+Dopasowanie: " 11"<br>
+Gr. 1 "null"<br>
+Gr. 2 "null"<br>
+Gr. 3 "11"<br>
+Gr. 4 "null"<br>
+Suma samotnych liczb: 6<br>
+Suma niesamotnych liczb: 26<br>
+</div><br>
+  <br>
+  <b>Prawie</b> dobrze! Niestety, find() zgubił jedną piątkę z wiersza<br>
+
+aa 5 b  5 5 5 c<br>
+i - oczywiście - jest to wina źle pomyślanego wyrażenia regularnego.<br>
+Sposób dopasowania wiersza do wzorca możemy prześledzić dokładniej:<br>
+<div class="listing100"><br>
+Wzorzec: "(?:^(\d+)\s+)|(?:^(\d+)$)|(?:\s+(\d+)$)|(?:\s+?(\d+)\s+?)"<br>
+Tekst: "aa 5 b  5 5 5 c"<br>
+find(): Dopasowano podłańcuch " 5 " od pozycji 2 do pozycji 5.<br>
+find(): Dopasowano podłańcuch "  5 " od pozycji 6 do pozycji 10.<br>
+find(): Dopasowano podłańcuch " 5 " od pozycji 11 do pozycji 14.<br>
+</div><br>
+  <br> Po dopasowaniu do wzorca drugiej piątki z okalającymi spacjami początek
+następnego wyszukiwania zaczyna się na (trzecim) znaku '5' - niestety nie
+pasuje on do żadnego z alternatywnych wzorców, zatem jest pomijany.<br>
+  <br>
+W tym przykładzie łatwo jest znaleźć takie (proste) wyrażenie regularne,
+które rozwiązuje problem. Wystarczy przywrócić (kłopotliwy poprzednio) kwantyfikator
+* , ale przy tym skorzystać z symbolu granicy słowa:<br>
+  <pre>
+\s*\b(\d+)\b\s*
+</pre>
+i wyniki (pierwotnego programu) będą nareszcie poprawne.<br>
+Np. dla pokazanego przed chwilą pliku testowego otrzymamy:<br>
+<div class="listing100"><br>
+Suma samotnych liczb: 6<br>
+Suma niesamotnych liczb: 31<br>
+</div><br>
+  <br>
+Nie zawsze jednak uda się skonstruować dobry wzorzec. <br>
+W Internecie, na różnego rodzaju forum, w różnego rodzaju podpowiedziach
+itp. można znaleźć wzorce opisujące wydawałoby się dość oczywiste kwestie
+(np. walidację adresu IP) zapisane w kilkunastu lub nawet kilkudziesięciu
+wierszach. Jest to oczywiście jak najbardziej niewłaściwy sposób korzystania
+z wyrażeń regularnych.  <br>
+  <br>
+Czasami trudno jest zbudować właściwy wzorzec. Czasami właściwy wzorzec jest
+na tyle skomplikowany i duży, że zgoła niebezpieczny (możliwe błędy). Czasami
+w ogóle nie można podać włąsciwego wyrażenia regularnego, jak np. w przypadku
+pełnej składniowej analizy wszystkich argumentów wywolania metody dla wszelkich
+możliwych wariantów zapisu tych argumentów (dowolny poziom zagnieżdżenia
+nawiasów).<br>
+  <br>
+Warto więc chyba zauwazyć, że:<br>
+  <ul>
+    <li>wyrażenia regularne nie są lekiem dobrym na wszystko,</li>
+    <li>czasem mniej wysiłku kosztuje oprogramowanie od podstaw analizy składniowej tekstu, niż zbudowanie właściwego wzorca,</li>
+    <li>większą moc zyskuje się przy połączeniu wyrażeń regularnych z innymi
+środkami programowania, m.in. metodami klasy Matcher, ale również z innymi
+prostymi środkami przetwarzania łańcuchów znakowych.</li>
+  </ul>
+  <br>
+Jako przykład połączenia wyrażeń regularnych i dodatkowych środków programistycznych
+pokażę w jaki sposób - posługując się niespelniającym wszystkich wymagań
+wszorcem - można w omawianym przykładzie sumowania liczb uzyskać prawidłowy
+wynik:<br>
+  <pre>
+import java.util.regex.*;
+import java.io.*;
+
+public class Sumowanie3 {
+
+  public static void sumAndReport(String fileName) {
+
+    try {
+      BufferedReader in = new BufferedReader(
+                           new FileReader(fileName)
+                       );
+
+      // Ten wzorzec nie spłenia wszystkich wymagań
+      Pattern pattern = Pattern.compile("\\s*(\\d+)\\s*");
+
+      Matcher matcher = pattern.matcher("");
+
+      int suma1 = 0,   // suma liczb występujących samotnie w wierszach
+          suma2 = 0;   // suma liczb, które nie są w wierszach samotne
+
+      String input;
+      while ((input = in.readLine()) != null) {
+
+        int len = input.length();       // długość tekstu
+
+        matcher.reset(input);
+
+        if (matcher.matches())         // czy mamy samotną liczbę?
+          suma1 += Integer.parseInt(matcher.group(1));
+
+        else {                         // nie, może jest kilka, albo w tekście?
+          matcher.reset();
+          while (matcher.find()) {
+
+            // pozycja znaku tuż przed dopasowaną grupą cyfr
+            int start = matcher.start(1) - 1;
+            // pozycja znaku tuż po dopasowanej grupie cyfr
+            int end = matcher.end(1);
+
+            // jeżeli są takie znaki i nie są to spacje
+            // - odrzucamy dopasowanie
+            if (start == end ||
+                (start &gt;= 0 &amp;&amp; !Character.isWhitespace(input.charAt(start))) ||
+                (end &lt; len &amp;&amp; !Character.isWhitespace(input.charAt(end)))
+               ) continue;
+
+            // w przeciwnym razie mamy dopasowanie i sumujemy liczby
+            suma2 += Integer.parseInt(matcher.group(1));
+          }
+        }
+      }
+      in.close();
+      System.out.println("Suma samotnych liczb: " + suma1);
+      System.out.println("Suma niesamotnych liczb: " + suma2);
+    } catch(Exception exc) {
+        exc.printStackTrace();
+        System.exit(1);
+    }
+
+  }
+
+  public static void main(String[] args) {
+    sumAndReport(args[0]);
+  }
+
+}
+</pre>
+Wykorzystaliśmy tutaj niektóre metody klasy Matcher (mianowicie uzyskiwanie
+informacji o pozycjach znaków, kstzałtujących grupy) i - wychodząc poza 
+sferę najprostszego zastosowania wyrażeń regularnych - sięgneliśmy do informacji
+o indeksach i znakach.<br>
+Dzięki temu mogliśmy korygować działanie metody find().<br>
+  <br>
+I na koniec o pewnym uproszczeniu. W omawianych tu przykładach wielokrotnie stosowaliśmy ten sam wzorzec do
+różnych tesktów wejściowych (wierszy pliku). W takich przypadkach ze względów
+efektywnościowych nieodzowny jest znany nam schemat postępowania, polegający
+na uprzedniej kompilacji wzorca, uzyskaniu matchera i wołaniu jego metod.
+  <br>
+Wtedy jednak (i tylko wtedy), gdy chcemy dany wzorzec zastosować jednorazowo i to wyłącznie
+do stwierdzenia dopasowania całego tekstu możemy posłużyć się metodą matches() klasy
+Pattern.<br>
+  <br>
+<div class="syntax"><br>
+Ma ona postać:<br>
+  <br>
+    boolean Pattern.matches(String regex,
+        CharSequence input)<br>
+  <br>
+i powoduje - z naszego punktu widzenia w jednym kroku - kompilację wzorca
+regex, utworzenie matchera i zastosowanie jego metody matches() wobec tekstu
+wejściowego input.</div><br>
+  <br>
+  <a name="W2.9"></a><h2>2.9. Rozbiór</h2>
+Klasa Pattern zawiera wygodną metodę split(...), która pozwala na dokonywanie
+podziału tekstu wejściowego na podłańcuchy separowane innymi podłańcuchami,
+które pasują do podanego wyrażenia regularnego.<br>
+  <br> Jest to swego rodzaju odpowiednik StringTokenizera, z tą różnicą,
+że separatorami wyłuskiwanych symboli mogą być dowolne napisy, pasujące do
+wzorca.<br>
+  <br>
+Aby rozłożyć tekst na symbole należy najpierw skompilować wzorzec, a następnie
+wobec uzyskanego obiektu klasy Pattern użyć metody split(...).<br>
+Występuje ona w dwóch formach:<br>
+  <br>
+  <table border="1" cellpadding="3" cellspacing="0" width="100%">
+<tbody><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> String[]</td><td>split(CharSequence input)<br>
+          </td></tr><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> String[]</td><td>split(CharSequence input,
+      int limit)<br>
+          </td></tr></tbody>
+  </table>
+  <br>
+Obie metody zwracają tablicę wyróżnionych podłańcuchów (symboli). Jeśli nie
+udało się znaleźć żadnego separatora pasującego do wzorca, to tablica ma
+jeden element, który zawiera cały rozkładany tekst (input).<br>
+W przeciwnym razie, kolejne elementy tablicy zawierają wyróżnione kolejne
+podłancuchy, każdy z których w sekwencji wejściowej kończy się podłańcuchem
+pasującym do wzorca lub końcem wejścia.<br>
+Argument limit okresla liczbę razy zastosowania wzorca do wyłuskiwania podłancuchów.<br>
+Jeżeli limit równy jest n &gt;0, to wzorzec jest stosowany n-1 razy, wobec
+czego liczba elementów w tablicy równa jest co najwyżej n, a ostatni element
+stanowi podłańcuch od ostatniego separatora do końca tekstu wejściowego.
+Jeżeli limit jest mniejszy od 0, to wzorzec zostanie zastosowany tyle razy
+ile można, a tablica będzie zawierać wszystkie możliwe do wyłuskania podłańcuchy.
+To samo stosuje się do sytuacji, gdy limit równy jest 0, tyle, że <b>ostatnie
+  puste</b> podłańcuchy nie zostaną umieszczone w tablicy.<br>
+Metoda split() bez parametru limit działa tak samo jak split() z parametrem limit = 0.<br>
+<br>
+Poniższy program pokazuje przykładowe zastosowanie metody split() do rozbioru
+zawartości pliku podanego jako argument programu wedle separatorów określanych
+przez wzorce podawane w dialogach wejściowych. Przy okazji pokazano tutaj,
+że - tak samo jak w przypadku matchera - wejściowy tekst może być obiektem
+dowolnej klasy implementującej interfejs CharSequence i dlatego np. łatwo
+można zastosować machinę regularnych wyrażeń do buforów znakowych uzyskiwanych
+poprzez kanały plikowe. Oprócz tego warto zwrócić uwagę na flagę kompilacji
+DOTALL oraz na użycie metody pattern(), która zwraca aktualny wzorzec danego
+obiektu klasy Pattern.<br>
+  <pre>
+import java.util.regex.*;
+import java.nio.*;
+import java.io.*;
+import java.nio.channels.*;
+import java.nio.charset.*;
+import javax.swing.*;
+
+
+public class Parsing {
+
+  private CharBuffer input;
+  private Charset inCharset  = Charset.forName("Cp1250");
+
+
+  public void readFile(String fname) throws IOException {
+
+    // Wczytanie pliku
+    FileInputStream instream = new FileInputStream(fname);
+    FileChannel in = instream.getChannel();
+    ByteBuffer buf = ByteBuffer.allocate((int) in.size());
+    in.read(buf); in.close(); instream.close();
+
+    // Dekodowanie
+    buf.flip();
+    input = inCharset.decode(buf);
+  }
+
+  public void reporter(Pattern pattern) {
+    String[] subs = pattern.split(input);
+    System.out.println("Rozbiór wg wzorca: \""+ pattern.pattern() + "\"");
+    boolean isOk = subs.length &gt; 1;
+    System.out.println( isOk ? " udany" : " nieudany");
+    if (!isOk) return;
+    System.out.println("Wyróżnione podłańcuchy:");
+    for (int i=0; i &lt; subs.length; i++) {
+      System.out.println("[ " + (i+1) + " ] \"" + subs[i] + "\"");
+    }
+  }
+
+
+  public static void main(String[] args) throws Exception {
+
+    Parsing parse = new Parsing();
+    parse.readFile(args[0]);
+
+    String regex = "";
+    while ((regex = JOptionPane.showInputDialog("Wzorzec", regex)) != null) {
+      Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
+      parse.reporter(pattern);
+    }
+
+  }
+
+}
+</pre>
+Podając jako testowy plik o następującej zawartości:<br>
+2 + ( 3 + 4)*10 = nie wiem ile;<br>
+ala + kot = ala ma kota;<br>
+jeden = 1;<br>
+dwa = 2;<br>
+trzy = 3;  <br>
+oraz stosując pokazane dalej wzorce, uzyskamy następujący wynik:<br>
+<div class="listing100"><br>
+Rozbiór wg wzorca: "\r\n"<br>
+ udany<br>
+Wyróżnione podłańcuchy:<br>
+[ 1 ] "2 + ( 3 + 4)*10 = nie wiem ile;"<br>
+[ 2 ] "ala + kot = ala ma kota;"<br>
+[ 3 ] "jeden = 1;"<br>
+[ 4 ] "dwa = 2;"<br>
+[ 5 ] "trzy = 3;  "<br>
+Rozbiór wg wzorca: "([\r\n;])|( *= *)"<br>
+ udany<br>
+Wyróżnione podłańcuchy:<br>
+[ 1 ] "2 + ( 3 + 4)*10"<br>
+[ 2 ] "nie wiem ile"<br>
+[ 3 ] ""<br>
+[ 4 ] ""<br>
+[ 5 ] "ala + kot"<br>
+[ 6 ] "ala ma kota"<br>
+[ 7 ] ""<br>
+[ 8 ] ""<br>
+[ 9 ] "jeden"<br>
+[ 10 ] "1"<br>
+[ 11 ] ""<br>
+[ 12 ] ""<br>
+[ 13 ] "dwa"<br>
+[ 14 ] "2"<br>
+[ 15 ] ""<br>
+[ 16 ] ""<br>
+[ 17 ] "trzy"<br>
+[ 18 ] "3"<br>
+[ 19 ] "  "<br>
+Rozbiór wg wzorca: "[\r\n\p{Punct} ]+"<br>
+ udany<br>
+Wyróżnione podłańcuchy:<br>
+[ 1 ] "2"<br>
+[ 2 ] "3"<br>
+[ 3 ] "4"<br>
+[ 4 ] "10"<br>
+[ 5 ] "nie"<br>
+[ 6 ] "wiem"<br>
+[ 7 ] "ile"<br>
+[ 8 ] "ala"<br>
+[ 9 ] "kot"<br>
+[ 10 ] "ala"<br>
+[ 11 ] "ma"<br>
+[ 12 ] "kota"<br>
+[ 13 ] "jeden"<br>
+[ 14 ] "1"<br>
+[ 15 ] "dwa"<br>
+[ 16 ] "2"<br>
+[ 17 ] "trzy"<br>
+[ 18 ] "3"<br>
+</div><br>
+  <br>
+  <a name="W2.10"></a><h2>2.10. Zastępowanie</h2>
+  Matcher umożliwia  zastępowanie fragmentów tekstu wejściowego pasujących
+do wzorca podanymi napisami. Służy do tego kilka metod klasy Matcher,<br>
+Dwie najprostsze działają w następujący sposób:<br>
+  <br>
+  <table border="1" cellpadding="3" cellspacing="0" width="100%">
+<tbody><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> String</td><td>replaceAll(String replacement)<br>
+           Zwraca łańcuch znakowy, w którym zastąpiono każdy fragment tekstu
+wejściowego, pasujący do wzorca napisem podanym jako argument replacement.</td></tr><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> String</td><td>replaceFirst(String replacement)<br>
+           Zwraca łańcuch znakowy, w którym zastąpiono pierwsze wystąpienie
+fragmentu tekstu wejściowego, pasującego do wzorca, napisem podanym jako
+argument replacement.</td></tr></tbody>
+  </table> Uwaga. Należy baczną uwagę zwrócić na to, że metody te nie zmieniają
+tekstu wejściowego, ale zwracają nowy napis, w którym dokonano zmian.<br>
+  <br>
+Przykład:<br>
+Zamienić w pliku wejściowym wielokrotne spacje - pojedynczymi.<br>
+  <pre>
+import java.util.regex.*;
+import java.io.*;
+
+public class Replace1 {
+
+  public static void main(String[] args) {
+
+    Matcher matcher = Pattern.compile(" +").matcher("");
+
+    try {
+      BufferedReader in = new BufferedReader(
+                            new FileReader(args[0])
+                          );
+      String input;
+      while ((input = in.readLine()) != null) {
+        matcher.reset(input);
+        input = matcher.replaceAll(" ");
+        System.out.println(input);
+      }
+      in.close();
+    } catch(Exception exc) {
+        exc.printStackTrace();
+        System.exit(1);
+    }
+
+  }
+
+}
+</pre>
+  <br>
+Podając na wejściu np. taki plik:<br>
+To jest jakiś tekst  gdzieniegdzie w nim jest   za dużo spacji<br>
+i     w tym wierszu też<br>
+a w tym nie.<br>
+  <br>
+w wyniku otrzymamy:<br>
+<div class="listing100"><br>
+To jest jakiś tekst gdzieniegdzie w nim jest za dużo spacji<br>
+i w tym wierszu też<br>
+a w tym nie.<br>
+</div><br>
+  <br>
+Inny zestaw metod  zastępowania pozwala na bardziej wybiórcze, selektywne i elastyczne zamiany.<br>
+Są to metody:<br>
+  <table border="1" cellpadding="3" cellspacing="0" width="100%">
+<tbody><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> Matcher</td><td>appendReplacement(StringBuffer sb,
+                  String replacement)<br>
+          </td></tr><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> StringBuffer</td><td>appendTail(StringBuffer sb)<br>
+          </td></tr></tbody>
+  </table>
+  <br>
+Metody te są głównie przeznaczone do wspólnego wykorzystania z metodą find().<br>
+  <br>
+Metoda <b>appendReplacement(...)</b> posługuje się specjalnym stanem matchera, który nazywa się "pozycją append" i  działa w następujący sposób:<br>
+  <ol>
+    <li>kopiuje do bufora StringBuffer wszystkie znaki  tekstu wejściowego
+od bieżącej pozycji "append" (przy pierwszym użyciu jest to początek tekstu
+wejściowego) do pozycji poprzedzającej ostatnie dopasowanie wzorca (czyli
+start()-1),</li>
+    <li>następnie dopisuje do bufora tekst podany jako jej argument <i><b>replacement</b></i>,</li>
+    <li>ustala bieżącą pozycję "append" na pierwszy znak po ostatnio dopasowanym wzorcu (czyli end())</li>
+  </ol>
+Metoda <b>appendTail(...)</b> - wywoływana  po użyciu metody appendReplacemnet()
+- dopisuje do bufora pozostałą część napisu wejściowego (czyli od ostatniej
+pozycji "append" do końca tekstu).<br>
+  <br>
+Poprzedni przykład zastępowania spacji moglibyśmy za pomocą tych metod zapisać tak:<br>
+  <pre>
+import java.util.regex.*;
+
+public class Replace2 {
+
+  public static void main(String[] args) {
+
+    String input = "To jest   tekst  gdzie za dużo  spacji";
+    Matcher matcher = Pattern.compile(" +").matcher(input);
+    StringBuffer nowyTekst = new StringBuffer();
+    while (matcher.find()) {
+      matcher.appendReplacement(nowyTekst, " ");
+    }
+    matcher.appendTail(nowyTekst);
+    System.out.println("Tekst wejściowy:");
+    System.out.println(input);
+    System.out.println("Tekst wyjściowy:");
+    System.out.println(nowyTekst.toString());
+  }
+
+}
+</pre>
+i otrzymać w wyniku:<br>
+<div class="listing100"><br>
+Tekst wejściowy:<br>
+To jest   tekst  gdzie za dużo  spacji<br>
+Tekst wyjściowy:<br>
+To jest tekst gdzie za dużo spacji<br>
+</div><br>
+  <br>
+Jako prosty przykład zwiększonej elastyczności zastępowania można podać zastąpeinie co drugiego wystąpienia cyfry 1 cyfrą 3:<br>
+  <pre>
+import java.util.regex.*;
+
+public class Replace3 {
+
+  public static void main(String[] args) {
+
+    String input = "1111111111111";
+    Matcher matcher = Pattern.compile("1").matcher(input);
+    StringBuffer nowyTekst = new StringBuffer();
+    while (matcher.find() &amp;&amp; matcher.find()) {
+      matcher.appendReplacement(nowyTekst, "3");
+    }
+    matcher.appendTail(nowyTekst);
+    System.out.println("Tekst wejściowy:");
+    System.out.println(input);
+    System.out.println("Tekst wyjściowy:");
+    System.out.println(nowyTekst.toString());
+  }
+
+}
+</pre>
+
+  <div class="listing100"><br>
+Tekst wejściowy:<br>
+1111111111111<br>
+Tekst wyjściowy:<br>
+1313131313131<br>
+</div><br>
+  <br>
+  <br>
+Ważną właściwością wszystkich metod zastępowania jest to, że w napisie stanowiącym
+ich argument - tekst zastępujący - możemy odwoływać się do zawartości grup
+wzorca.<br>
+Wtedy tekst zastępujący będzie zawierał zawartość grupy z wyrażenia.<br>
+Inaczej niż w odniesieniach zwrotnych w wyrażeniu regularnym przy zastępowaniu
+stosujemy znak $ z następującym po nim numerem grupy.<br>
+  <br>
+Przykład.<br>
+  <br>
+Plik zawiera listę studentów w postaci:<br>
+sNumerIndeksu Imię Nazwisko<br>
+  <br>
+np.<br>
+s1111 Jan Kowalski<br>
+  <br>
+Chcemy tę liste zmiodyfikować w taki sposób, by najpierw było naziwsko, później
+imię a na końcu numer indeksu, ale bez popzredzającego s.<br>
+  <br>
+Zastosujemy metodę replaceFirst z argumentem zawierającym odniesienia do grup następującego wyrażenia:<br>
+  <pre>
+^s(\d+) +([\p{L}-]+) +([\p{L}-]+)$
+</pre>
+które oznacza:<br>
+poczatek wiersza, s, następnie jedna lub więcej cyfr, następnie po spacji
+lub spacjach ciąg liter Unicode lub znaków -, znowu spacje i znowu ciąg liter
+Unicode lub znaków - tuż przed końcem wiersza, Wyrażenie to odpowiada struktorze
+początkowej listy studentów (aczkolwiek  nie jest dość uniwersalne ani odporne
+na błędy). Numer indeksu jest tutaj grupą 1, imię - grupą 2, a nazwisko -
+grupą 3. W argumencie metody replaceFirst użyjemy odwołań do tych grup: "$3
+$2 $1", co oznacza, że dopasowany do wzorca tekst wejściowy ma być zastąpiony
+przez:  nazwisko, spacja, imię, spacja, numer indeksu (bez s!).<br>
+Poniższy program:<br>
+  <pre>
+import java.util.regex.*;
+import java.io.*;
+
+public class Replace4 {
+
+  public static void main(String[] args) {
+
+    Matcher matcher = Pattern.compile(
+                        "^s(\\d+) +([\\p{L}-]+) +([\\p{L}-]+)$"
+                      ).matcher("");
+
+    try {
+      BufferedReader in = new BufferedReader(
+                            new FileReader(args[0])
+                          );
+      String input;
+      while ((input = in.readLine()) != null) {
+        matcher.reset(input);
+        input = matcher.replaceFirst("$3 $2 $1");
+        System.out.println(input);
+      }
+      in.close();
+    } catch(Exception exc) {
+        exc.printStackTrace();
+        System.exit(1);
+    }
+
+  }
+
+}
+</pre>
+użyty wobec pliku przykładowego:<br>
+  <br>
+s1111 Jan Kowalski<br>
+s3211 Michał Michałowski<br>
+s4235 Kazimierz Kazik-Kaźmierski<br>
+  <br>
+wyprowadzi:<br>
+<div class="listing100"><br>
+Kowalski Jan 1111<br>
+Michałowski Michał 3211<br>
+Kazik-Kaźmierski Kazimierz 4235<br>
+</div><br>
+  <br>
+  <br>
+  <br>
+  <a name="W2.11"></a><h2>
+2.11. Metody klasy String związane z wyrażeniami regularnymi</h2>
+
+Jako pewne uproszczenie, do zastosowań ad hoc, znajdziemy w klasie String
+metody, które odwzorowują niektore z omówionych metod klas Matcher i Pattern.<br>
+Są one następujące.<br>
+  <br>
+  <table border="1" cellpadding="3" cellspacing="0" width="100%">
+<tbody><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> boolean</td><td>matches(String regex)<br>
+          Czy <i><b>ten</b></i> napis pasuje do wzorca regex?</td></tr><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> String</td><td>replaceAll(String regex,
+           String replacement)<br>
+          Zastępuje każdy pasujący do regex podłańcuch <i><b>tego</b></i> napisu podanym napisem replacement</td></tr><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> String</td><td>replaceFirst(String regex,
+             String replacement)<br>
+          Zastępuje pierwszy pasujący do regex podłańcuch <i><b>tego</b></i> napisu podanym napisem replacement</td></tr><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> String[]</td><td>split(String regex)<br>
+          Rozklada ten napis wokół separatorów, które są podłancuchami pasującymi do wzorca</td></tr><tr bgcolor="white" class="TableRowColor"><td align="Right" valign="Top" width="1%"> String[]</td><td>split(String regex,
+      int limit)<br>          j.w., ale nie więcej niż limit-1 razy<br>
+        <br>
+</td></tr></tbody>
+  </table>
+  <br>
+Metody te są ścisłymi odpowiednikami odpowiednich metod klas Matcher i Pattern.
+Faktycznie, "wewnętrznie" wykorzystują one właśnie te klasy i ich metody.
+Np. jeśli txt jest typu String, to<br>
+txt.matches("[0-9]+");<br>
+jest tożsame z :<br>
+Pattern.compile("[0-9]+").matcher().matches();<br>
+  <br>
+Oznacza to, że tych "skróconych" metod klasy String powinniśmy używać wyłącznie
+wetdy, gdy dane wyrażenie regularne i związany z nim matcher używane są jednokrotnie.
+Przy wielokrotnym użyciu nalezy najpierw wyrażenie skompilować (raz), po
+czym dopiero wielokrotnie użyć, co oczywiście już wymaga wykorzystania klas
+Pattern i Matcher.<br>
+  <br>
+  <br>
+  <br>
+  <a name="W2.12"></a><h2>2.12. Praktyczny przykład</h2>
+Na koniec rozważmy bardziej rozbudowany praktyczny przykład, korzystający
+praktycznie ze wszystkich omówionych dotąd narzędzi wyrażeń regularanych,
+jak również pokazujący w jaki sposób można wspierać ich moc dodatkowymi środkami
+programistycznymi. Przy okazji jeszcze raz zwrócimy uwagę na pewne istotne
+kwestie, związane ze stosowaneim wyrażeń regularnych.<br>
+  <br>
+Chcemy oto zapisać do pliku wyjściowego wszystkie nagłówki (oznaczane znacznikami
+&lt;h1&gt;, &lt;h2&gt; itd.) z jakiegoś  pliku HTML, stworzyć swoisty spis
+treści.<br>
+
+Zadanie dobrania właściwego wzorca wydaje się trywialne. Nagłówek jest tekstem
+występującym pomiędzy otwierającym znacznikiem &lt;h<i>n</i>&gt; i zamykającym znacznikeim &lt;/h<i>n</i>&gt;, gidze n - poziom nagłówka.<br>
+
+Narzucającym się wzorcem mógłby być:<br>
+  <pre>
+&lt;h[1-6]&gt;(.+)&lt;/h[1-6]&gt;
+</pre>
+
+Istotnie, dla pliku w postaci:<br>
+
+&lt;h1&gt;Nagłówek 1&lt;/h1&gt;<br>
+
+&lt;h2&gt;Nagłówek 1.1&lt;/h2&gt;<br>
+
+&lt;h2&gt;Nagłówek 1.2&lt;/h2&gt;<br>
+
+uzyskamy właściwe dopasowania i będziemy mogli wyłuskać zapamiętane w grupach nagłówki:<br>
+
+<div class="listing100"><br>
+
+find(): Dopasowano podłańcuch "&lt;h1&gt;Nagłówek 1&lt;/h1&gt;" od pozycji 0 do pozycji 19.<br>
+
+find(): Dopasowano podłańcuch "&lt;h2&gt;Nagłówek 1.1&lt;/h2&gt;" od pozycji 20 do pozycji 41.<br>
+
+find(): Dopasowano podłańcuch "&lt;h2&gt;Nagłówek 1.2&lt;/h2&gt;" od pozycji 42 do pozycji 63.<br>
+
+</div><br>
+  <br>
+
+Jednak w plikach HTML nagłówki mogą przecież być dzielone na wiele wierszy. Dla pliku:<br>
+  <br>
+
+&lt;h1&gt;Nagłówek 1<br>
+
+        rozbity na wiersze&lt;/h1&gt;<br>
+
+&lt;h2&gt;Nagłówek 1.1&lt;/h2&gt;<br>
+
+&lt;h2&gt;Nagłówek 1.2&lt;/h2&gt;<br>
+
+find() nie znajdzie dopasowania nagłówka poziomu 1. Dlaczego? Bo metaznak
+. domyślnie pasuje do każdego znaku oprócz znaku końca wiersza. Powinniśmy
+zatem zastosować - albo przy kompilacji wzorca, albo w samym wyrażeniu -
+flagę DOTALL - ?s (powodująca pasowanie metaznaku . również do znaków końca
+wiersza). A jeśli już, to uwzględnijmy też fakt, że znaczniki html mogą byc
+pisane małą i dużą literą (zatem wprowadźmy flagę CASE_INSENSITIVE - ?i).<br>
+
+Nowy - teraz wydawałoby się prawidłowy - wzorzec wyglądałby tak (flagi wprowadzimy w samym wyrażeniu).<br>
+  <pre>
+(?i)(?s)&lt;h[1-6]&gt;(.+)&lt;/h[1-6]&gt;
+</pre>
+
+
+  Czy teraz  find() znajdzie wszystkie trzy nagłówki? Nic z tych rzeczy!<br>
+
+Znajdzie tylko jeden duży tekst zaczynający się pierwszym znacznikiem &lt;h1&gt;
+i kończący się ostatnim znacznikiem &lt;/h2&gt;. Znowu zwracam uwagę na żarłoczność
+(greediness) kwantyfikatorów, bowiem jest to temat dość nieintuicyjny.<br>
+
+Zobaczmy: żarłoczny .+ skonsumował wszystkie znaki do końca tekstu wejściwoego
+(mógł to zrobić, bo teraz kropka pasuje do znaków końca wiersza). Po czym
+matcher cofając się napotkał dopasowanie &lt;/h2&gt; (ostatnie w tekście)
+i to spełniło wymagania wzorca dla metody find(), która w tym momencie zakończyła
+działanie.<br>
+
+Aha, zatem powinniśmy zastosować kwantyfikator wstrzemięźliwy (reluctant).<br>
+  <pre>
+(?i)(?s)&lt;h[1-6]&gt;(.+?)&lt;/h[1-6]&gt;
+</pre>
+  <br>
+
+W teście wygląda to teraz całkiem dobrze:<br>
+
+<div class="listing100"><br>
+
+Wzorzec: "(?i)(?s)&lt;h[1-6]&gt;(.+?)&lt;/h[1-6]&gt;"<br>
+
+Tekst: "&lt;h1&gt;Nagłówek 1<br>
+
+   rozbity na wiersze&lt;/h1&gt;<br>
+
+&lt;h2&gt;Nagłówek 1.1&lt;/h2&gt;<br>
+
+&lt;h2&gt;Nagłówek 1.2&lt;/h2&gt;"<br>
+
+find(): Dopasowano podłańcuch "&lt;h1&gt;Nagłówek 1<br>
+
+   rozbity na wiersze&lt;/h1&gt;" od pozycji 0 do pozycji 41.<br>
+
+find(): Dopasowano podłańcuch "&lt;h2&gt;Nagłówek 1.1&lt;/h2&gt;" od pozycji 42 do pozycji 63.<br>
+
+find(): Dopasowano podłańcuch "&lt;h2&gt;Nagłówek 1.2&lt;/h2&gt;" od pozycji 64 do pozycji 85.<br>
+
+</div><br>
+  <br>
+
+Spróbujmy więc zastosować ten właśnie wzorzec w programie wypisującym "spis
+treści" pliku html. Zobaczymy jednak, że sam wzorzec nie wystarcza. Musimy
+rozstrzygnąć jeszcze kilka kwestii:<br>
+  <ul>
+<li>w jaki sposób przeczytać plik, tak by wielowierszowe nagłówki dały
+się przetwarzać przez wybrane wyrażenie regularne? Na pewno nie możemy stosować
+go do każdego z wierszy pliku oddzielnie. </li><li>co zrobić ze znakami nowego wiersza umieszczonymi wewnętrz nagłówków?
+Raczej chcielibyśmy wypisywać tytuły w jednym wierszu, a nie zachowywać  -
+często przypadkowego, dokonanego np. przez jakieś wizualne edytory HTML,
+rozbicia.</li><li>co robić w przypadku błędów w pliku HTML - niesparowania znaczników
+otwierających i kończących? Nasz wzorzec znajdzie (jakieś) dopasowanie np.
+w takim tekście, &lt;h1&gt;xxxx&lt;h2&gt;xxxx&lt;/h1&gt;xxx&lt;/h2&gt;, jak
+również i w takim &lt;h1&gt;xxxx&lt;/h2&gt;. Czy warto szukać wzorca bardziej odpornego na błędy?</li>
+  </ul>
+  <br>
+
+Przy wprowadzaniu pliku najprostsze wydaje się wczytanie całego pliku do
+pamięci i traktowanie go w całości jako tekstu wejściowego matchera. Jak już widzieliśmy wygodnie
+będzie zrobić to za pomocą kanału plikowego, jednocześnie jednak wymagać
+to będzie odpowiedniego dekodowania bufora znakowego. 
+Przy dekodowaniu trzeba wiedzieć w jakiej stronie kodowej zapisany jest plik.
+Ta informacja powinna być dostępna w pliku html za pomocą metatagu charset,
+ale jeśli jej brak, to możemy przyjąć jakąś domyślną stronę kodową. Dla odnalezienia
+opisu strony kodowej w pliku html zastosujemy (oczywiście) wyrażenie regularne.
+Musimy przy tym wiedzieć, że w metatagu charset=... po obu stronach znaku
+= mogą wystąpić (bądź nie) spacje, że nazwa strony kodowej może składać się
+z liter, cyfr, znaku podkreślenia, myślnika, kropki, dwukropka i że wielkość
+liter w nazwie nie ma znaczenia. <br>
+
+Prosty wzorzec (nie wykluczający wadliwych metatagów charset) mógłby wyglądać tak:<br>
+  <pre>
+(?i)charset *?= *?([\p{Alnum}.:_-]+)
+</pre>
+  <br>
+
+Znaki nowego wiersza (występujące wewnątrz wypisywanych nagłówków)  powinniśmy
+zamienić na (jedną) spację. Ale "przejście do nowego wiersza" może być oznaczane
+przez znaki \r\n (0d0a) jak w Windows lub przez sam znak \n - jak w Unixie.
+Aktualny separator obowiązujący na danej platformie uzyskamy z właściwości
+systemowych. Gdyby nie metody replace... klasy matchera zamiana na (jedną!) spację wymagałaby od nas trochę uciążliwej pracy.<br>
+  <br>
+
+Możliwe błędy w HTML nie dadzą się opisać za pomocą wyrażeń regularnych.
+Musimy więc znowu zastosować dodatkowe środki programistyczne, korzystające
+oczywiście z różnych metod matchera. Mianowicie:<br>
+  <ul>
+    <li>
+będziemy wykrywać otwarte znaczniki &lt;h wewnątrz nagłówków,</li>
+    <li>
+będziemy sprawdzać, czy nasze wyrażenie spowodowało dopasowania znaczników
+(otwierającego i zamykającego) nagłówków różnych poziomów.</li>
+  </ul>
+Te wskazówki wystarczą do napisania programu. Zobaczymy poniżej, że jego
+kod korzysta z kilku różnych wzorców i wielu metod klas Matcher i Pattern
+(w tym split i replaceAll). Sczegółowe wyjąsnienie znaleźć można w komentarzach.<br>
+  <pre>
+import java.util.regex.*;
+import java.nio.*;
+import java.io.*;
+import java.nio.channels.*;
+import java.nio.charset.*;
+
+public class Headers1 {
+
+  // Matcher do wyszukiwania metatagu charset
+  // i wyłuskania strony kodowej
+  private Matcher charsetMatcher = Pattern.compile(
+                                   "charset *?= *?([\\p{Alnum}.:_-]+)",
+                                   Pattern.CASE_INSENSITIVE
+                                   ).matcher("");
+
+  // Matcher do wyłuskania tytułu dokumentu
+  private Matcher titleMatcher =  Pattern.compile(
+                                  "&lt;title&gt;(.+?)&lt;/title&gt;",
+                                  Pattern.CASE_INSENSITIVE |
+                                  Pattern.DOTALL
+                                  ).matcher("");
+
+  // Matcher do wyszukiwania podtytułów (headingów)
+  private Matcher headingMatcher = Pattern.compile(
+                                    "&lt;h[1-6]&gt;(.+?)&lt;/h[1-6]&gt;",
+                                    Pattern.CASE_INSENSITIVE |
+                                    Pattern.DOTALL
+                                    ).matcher("");
+
+  // Matcher do zastępowania domyślnego dla danej platformy
+  // zestawu znaków końca wiersza jedną spacją
+  private Matcher replaceMatcher = Pattern.compile(
+                                    System.getProperty("line.separator")//"\\r\\n"
+                                   ).matcher("");
+
+  // Wzorzec do podziału dokumentu na dwie części: nagłówek i ciało
+  private Pattern splitPattern = Pattern.compile("&lt;/head&gt;",
+                                         Pattern.CASE_INSENSITIVE
+                                 );
+
+
+  // Domyślna strona kodowa
+  private Charset defaultCharset = Charset.forName("ISO-8859-2");
+
+  ByteBuffer channelBuffer;   // bufor bajtowy kanalu
+  CharBuffer input;           // bufor znakowy z wejściem dla matcherów
+
+
+  // Główna metoda
+  // przetwarzająca dokument HTML
+  // i wypisująca jego "spis treści"
+
+  public void processFile(String fname) {
+    // Wczytanie pliku
+    try {
+      FileInputStream instream = new FileInputStream(fname);
+      FileChannel in = instream.getChannel();
+      channelBuffer = ByteBuffer.allocate((int) in.size());
+      in.read(channelBuffer);
+      in.close();
+      instream.close();
+    } catch (IOException exc) { errMsg(exc); }
+
+    // Dekodowanie (na razie wedle domyślnej strony)
+    // Jeśli okaże się, że plik jest kodowany inaczej
+    // - powtórzymy dekodowanie
+
+    channelBuffer.flip();
+    input = defaultCharset.decode(channelBuffer);
+
+    // Teraz wyróżniamy dwie części pliku : nagłówek pliku
+    // i ciało. W ten sposób matchery będą działać szybciej
+    // Uwaga: podział następuje na pierwszym &lt;/head&gt;
+    // ew. następne w tekście html (np. w &lt;pre&gt;...&lt;/pre&gt;
+    // nie będą brane pod uwagę
+
+    String[] part = splitPattern.split(input, 2);
+    // jeżeli jest nagłówek - szukamy w nim określenia strony kodowej
+    // i ew. ponawiamy dekodowanie za pomocą własnej metody newDecode,
+    // a także wyszukujemy tytuł
+
+    String title = "Bez tytułu";  // zakładamy, że nie ma tytułu
+    String body;                  // tu będzie ciało, w nim będziemy szukać
+                                  // headingów
+
+    if (part.length == 2) {        // jeżeli jest nagłówek
+       if (newDecoding(part[0]))   // jeżeli ponowiono dekodowanie
+          part = splitPattern.split(input, 2); // - nowy podział na części
+
+       titleMatcher.reset(part[0]);  // szukamy tytułu
+       if (titleMatcher.find())
+         title = titleMatcher.group(1);
+
+       body = part[1];             // ciałem będzie druga część
+    } else {                       // nie ma nagłówka, wtedy
+       body = part[0];             // ciałem będzie jedyna pierwsz część
+    }
+
+    System.out.println(title);     // wypisanie tytułu
+
+    // Teraz szukamy headingów
+    headingMatcher.reset(body);
+    while (headingMatcher.find()) {
+      String heading = headingMatcher.group(1);
+      replaceMatcher.reset(heading);  // zamiana znaku końca wiersza
+      heading = replaceMatcher.replaceAll(" "); // na jedną spację
+
+      // Sprawdzenie poprawności
+      boolean valid = true;
+
+      // - czy nie ma &lt;h&gt;  w srodku?
+      if (heading.indexOf("&lt;h") != -1) valid = false;
+
+      // czy otwierający i zamykający numer poziomu jest zgodny?
+      String match = headingMatcher.group();
+      char level = match.charAt(2);
+      if (level != match.charAt(match.length()-2)) valid = false;
+      if (!valid)
+        System.out.println("***** uwaga poniższy heading jest błędny!");
+      else {
+         int k = level - '0' - 1;
+         while(k-- &gt; 0)                // poziomy wyróżniamy tabulacjami
+           System.out.print('\t');
+      }
+      System.out.println(heading);      // wypisanie podtytułu
+    }
+
+  }
+
+  // Metoda wyszukuje metatatg charset i ew. ponawia dekodowanie
+  // Jeśli tagu nie ma, albo podany charset jest taki sam jak
+  // domyślny, albo jest wadliwy - nie ponawiamy dekodowania
+  // Zwraca true, gdy zdekdodowano na nowa
+  private boolean newDecoding(String header) {
+    charsetMatcher.reset(header);
+    if (charsetMatcher.find()) { // czy jest metatag charset?
+       try {
+           Charset fileCharset = Charset.forName(charsetMatcher.group(1));
+           if (fileCharset.equals(defaultCharset)) // gdy taki sam jak domyślny
+              return false;                        // nie trzeba dekodować
+           channelBuffer.flip();                   // inny - ponowne dekodowanie
+           input = fileCharset.decode(channelBuffer);
+         } catch(Exception exc) {
+             return false;
+         }
+       return true; // zdekodowany na nowo
+    }
+    return false;
+  }
+
+  private void errMsg(Exception exc) {
+    exc.printStackTrace();
+    System.exit(1);
+  }
+
+  public static void main(String[] args) {
+     new Headers1().processFile(args[0]);
+  }
+
+}
+</pre>
+
+  <a name="W2.13"></a><h2>2.13. Zadania i ćwiczenia</h2>
+  <ol>
+    <li>Zbudować wyrażenie regularne, które dopasowuje dowolną liczbę - całkowitą
+lub rzeczywistą. Użyć go w programie, który z pliku wejściowego wybiera wszystkie
+takie liczby i zastępuje je ich dwukrotnością.</li>
+    <li>Stworzyć program do przetwarzania plików HTML, w taki sposób, by
+zapisane w nich kody programów Javy, znajdujące się w znacznikach &lt;pre&gt;....
+&lt;/pre&gt; były zapisowane jako pliki .java z nazwą wyłuskaną z kodu na
+podstawie nazwy obecnej tam klasy publicznej.</li>
+    <li>Napisać program, który  w pliku źródłowym zmienia nazwy wybranych
+metod. Uwaga: trzeba też zmeinić identyfikatory w wyrażeniach wywołujących
+metody.<br>
+    </li>
+  </ol>
+
+
+
+
+
+</body></html>

@@ -1,0 +1,362 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+<td align="left"><A HREF="main15_p0.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;
+<A HREF="main15_p2.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td>
+    </tr>
+</table>
+
+<br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><br clear="all">
+    <div class="tytulpunktu">1. Problemy &quot;rozsądne&quot; i inne</div> 
+
+  
+
+
+    <p>Większość algorytmów, o których była mowa o tej pory miała koszt czasowy 
+    i pamięciowy wielomianowy, tzn. rząd wielkości czasu potrzebnego do ich 
+    wykonania był ograniczony z góry przez funkcję wielomianową względem 
+    rozmiaru danych. Takie były algorytmy wyszukiwania, sortowania, algorytmy 
+    realizujące różne operacje na grafach i ogólniej na zbiorach. Wszystkie te 
+    algorytmy uważamy za realizowalne w rozsądnym czasie. </p>
+  
+
+
+    
+    <p><div class="def">Definicja 1.1&nbsp; Powiemy, że problem jest 
+  rozwiązywalny w czasie wielomianowym, jeżeli istnieje algorytm rozwiązujący 
+  ten problem w czasie O(n<sup><font face="Verdana">k</font></sup>) dla pewnego 
+  k, gdzie n jest rozmiarem danych w tym problemie.</div></p>
+
+
+    <p>Problem znajdowania najdłuższego wspólnego podciągu jest wielomianowy, chociaż można 
+    przedstawić rozwiązanie, którego koszt jest wykładniczy. Problem mnożenia 
+    ciągu macierzy&nbsp; też jest wielomianowy, znalezienie pełnego nawiasowania, 
+    przy którym liczba mnożeń skalarnych będzie najmniejsza metodą programowania 
+    dynamicznego zajmuje O(n<sup><font face="Verdana"> 3</font></sup>) czasu. 
+    Zwróćmy jeszcze raz uwagę, że problem jest wielomianowy, jeśli chociaż jeden 
+    algorytm potrafi go rozwiązać z kosztem wielomianowym. Istnieją jednak zadania, których nie umiemy rozwiązać 
+    żadną ze znanych nam technik w czasie wielomianowym. </p>
+  
+
+
+    <p><b>Problem &quot;Wieże Hanoi&quot;</b></p>
+  
+
+
+    <p>Danych jest n krążków, umieszczonych w porządku rosnących średnic, na 
+    drążku A. Zadanie polega na przeniesieniu wszystkich krążków na drążek B, 
+    przy czym można wykorzystywać pomocniczy drążek C. Początkowo drążki B i C 
+    są puste. Przenoszenie drążków odbywa się wg. zasady : mniejszy krążek może 
+    być położony tylko na krążku większym. </p>
+  
+
+
+    <p><b>Pytanie 1:</b> Ile pojedynczych przeniesień krążków trzeba wykonać, 
+    dla n=3? <br>
+  
+<!-- Odpowiedź: 7 przeniesień krążków.</P> -->
+
+</p>
+  
+
+
+<form>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Sprawdź odpowiedź-----' NAME='Klik0' onClick="napis(this.form,'7 przeniesień krążków.')">
+</p>
+</form>
+
+<p><br clear="all">Tybetańczycy, którzy rozważali ten problem dla n = 64, wierzyli, że świat 
+    skończy się wcześniej nim zostanie przeniesiony ostatni z krążków. Dlaczego? Istnieje 
+przecież prosty, rekurencyjny algorytm rozwiązujący ten problem, por. algorytm &quot;move&quot;.
+  
+
+
+
+
+    <p style="text-align: left">&nbsp;<p>
+<div class="def" style="width: 700; height: 184">
+   <TABLE frame="void" rules="none" width="670" height="158" bordercolorlight="#808080" bordercolordark="#FFFFFF" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0" cellspacing="0">
+         <TR>
+            <TD width="526" height="12" colspan="2">move (n : int, A, B, C: 
+            drążek) {</TD>
+             
+            <TD width="637" height="12"> //przenieś n krążków z A na B 
+            wykorzystując C</TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="467" height="12"><b>if</b>&nbsp; (n <span lang="en">
+            <font face="Symbol">&sup1;</font></span>0) <b>then</b> </TD> 
+            <TD width="637" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="467" height="12"><strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp; 
+            move (n-1, A, C, B);</TD> 
+            <TD width="637" height="12"><strong>&nbsp;</strong>//przenieś n-1 
+            krążków z A na C wykorzystując B<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>
+            </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="467" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp; </strong>&nbsp; przenieś 
+            jeden krążek z A na B;</TD> 
+            <TD width="637" height="12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD> 
+         </TR>
+         <tr>
+            <TD width="59" height="12"></TD>
+            <TD width="467" height="12">   &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;move(n-1, 
+            C, B, A)&nbsp;</TD>
+            <TD width="637" height="12">   <b>&nbsp;</b>//przenieś n-1 krążków z 
+            C na B wykorzystując A<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b></TD>
+         </tr>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="467" height="12">   &nbsp;<b>fi</b><STRONG>&nbsp;&nbsp;&nbsp; </STRONG>
+             </TD>
+            <TD width="637" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"><strong>}</strong></TD>
+            <TD width="467" height="1">   <strong>&nbsp;&nbsp;&nbsp;</strong></TD>
+            <TD width="637" height="1">   </TD>
+         </TR>
+         </TABLE>
+</div>
+
+
+
+
+
+    <p>Zauważmy, że skoro n-1 pierwszych krążków zostało już przełożonych z 
+    drążka A na drążek C (w wyniku wywołania&nbsp; move (n-1, A, C, B)), 
+    to na drążku A pozostał tylko jeden krążek (największy), a drążek B jest 
+    pusty. Możemy więc bezpiecznie przenieść ten jedyny krążek na drążek B, a 
+    następnie, stosując to samo postępowanie, przenieść&nbsp; z C pozostałe n-1 
+    krążków na drążek B.</p>
+  
+
+
+    <p>Koszt  algorytmu &quot;move&quot;, mierzony liczbą przeniesień krążków, wyraża się 
+    następującym równaniem rekurencyjnym:</p>
+  
+
+
+    <p style="text-align: center">T(1) = 1,&nbsp;&nbsp; T(n) = T(n-1) + 1 + 
+    T(n-1).</p>
+  
+
+
+    <p>Rozwiązaniem tego równania jest funkcja wykładnicza T(n) = 
+    2<sup><font face="Verdana">n </font></sup>- 1. Przy tempie przekładania 10<sup><font face="Verdana">6
+    </font></sup>krążków/sek. dla n= 64 praca zajęłaby więcej niż 0.5 miliona lat. Nie ma 
+    co się dziwić Tybetańczykom! Niestety nie jest znany żaden algorytm 
+    wielomianowy, który rozwiązywałby ten problem. Co więcej można wykazać, że 2<sup><font face="Verdana">n </font></sup>
+    - 1 jest też dolnym ograniczeniem koniecznej liczby ruchów w rozwiązaniu 
+    tego problemu.</p>
+  
+
+
+    <p><b>Problem permutacji</b></p>
+  
+
+
+    <p>Dana jest liczba naturalna n. Wypisać wszystkie możliwe permutacje liczb 
+    od 1 do n.</p>
+  
+
+
+    <p>Jest wiele różnych sposobów tworzenia kolejnych permutacji. Jedną z 
+    prostszych metod jest następująca: aby wypisać wszystkie permutacje liczb od 
+    1 do n, wypiszmy wszystkie permutacje liczb od 2 do n, i w każdej z nich 
+    umieśćmy liczbę 1 na wszystkich możliwych n pozycjach: przed pierwszym 
+    elementem przed drugim itd.... przed (n-1)szym i po (n-1)szym. Taka metoda 
+    wydaje się być bardzo dobra, ale po zastanowieniu dojdziemy do wniosku, że 
+    pojawia się problem przechowywania wygenerowanych permutacji. (n-1)! ciągów 
+    do zapamiętania to bardzo dużo. Już dla małych n, możemy przekroczyć 
+    możliwości naszego komputera.  </p>
+  
+
+
+    <p><b>Pytanie 2: </b>W jakiej kolejności zostaną wypisane permutacje dla 
+    n=3, jeśli stosujemy opisaną wyżej metodę rekurencyjnie?  </p> <br>
+
+<form>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Sprawdź odpowiedź-----' NAME='Klik0' onClick="napis(this.form,'123, 132, 213,312, 231, 321.')">
+</p>
+</form>
+  
+
+
+    <p>Na szczęście istnieją algorytmy, które 
+    potrafią wypisać na bieżąco, kolejno tworzone permutacje, bez konieczności ich 
+    pamiętania. Przykładem niech będzie algorytm <i>permutacje</i> przedstawiony 
+    poniżej, por. R. Sedgewick, Algorithms, Addison Wesley Pub. 1983. W 
+    algorytmie tym permutacje są tworzone w tablicy tab[0:n] na pozycjach od 1 
+    do n. Pozycja tab[0] jest pomocnicza. Generowanie permutacji odbywa się za 
+    pomocą rekurencyjnej procedury <i>generuj</i>, która dla danego k wypisuje 
+    wszystkie permutacje z ustaloną wartością now+1 na pozycji k-tej.</p>
+  
+
+
+
+
+    <p style="text-align: left">&nbsp;<p>
+<div class="def" style="width: 700; height: 184">
+   <TABLE frame="void" rules="none" width="670" height="158" bordercolorlight="#808080" bordercolordark="#FFFFFF" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0" cellspacing="0">
+         <TR>
+            <TD width="526" height="12" colspan="2">permutacje (n : int) { </TD>
+             
+            <TD width="637" height="12"> | generuj (k : int){</TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="467" height="12">&nbsp;int&nbsp; now, i ;</TD> 
+            <TD width="637" height="12">|&nbsp; int t;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="467" height="12"><b>if</b>&nbsp; (n <span lang="en">
+            <font face="Symbol">&sup1;</font></span>0) <b>then</b> </TD> 
+            <TD width="637" height="12">|&nbsp; now := now+1; tab[k]:= now;&nbsp;&nbsp; </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="467" height="12"><strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>for</b> i := 1 <b>to</b> n <b>do</b> tab[i] := 0 <b>od;</b></TD> 
+            <TD width="637" height="12">| <strong>&nbsp;</strong><b>if </b>(now= 
+            n) <b>then</b>&nbsp;&nbsp; Wypisz(tab)<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>
+            </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="467" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp; </strong>&nbsp; 
+            now := -1; </TD> 
+            <TD width="637" height="12"> |&nbsp;&nbsp;<b>else</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD> 
+         </TR>
+         <tr>
+            <TD width="59" height="12"></TD>
+            <TD width="467" height="12">   &nbsp; &nbsp;&nbsp;&nbsp;generuj(0);</TD>
+            <TD width="637" height="12">   |<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            for</b> t := 1 <b>to</b> n <b>do</b></TD>
+         </tr>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="467" height="12">   <b>fi</b><STRONG>&nbsp;&nbsp;&nbsp; </STRONG>
+             </TD>
+            <TD width="637" height="12">   |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>if</b> tab[t]=0 <b>then</b> generuj(t);<b>fi</b></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"><strong>}</strong></TD>
+            <TD width="467" height="1">   <strong>&nbsp;&nbsp;&nbsp;</strong></TD>
+            <TD width="637" height="1">   |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>od</b>;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"></TD>
+            <TD width="467" height="1">   </TD>
+            <TD width="637" height="1">   |&nbsp; <b>fi</b>;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"></TD>
+            <TD width="467" height="1">   </TD>
+            <TD width="637" height="1">   |&nbsp; now := now-1; tab[k] := 0;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"></TD>
+            <TD width="467" height="1">   </TD>
+            <TD width="637" height="1">   |<b>}</b></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"></TD>
+            <TD width="467" height="1">   </TD>
+            <TD width="637" height="1">   </TD>
+         </TR>
+         </TABLE>
+</div>
+
+
+
+
+
+    <p>Chociaż problem wykorzystania pamięci został w tym algorytmie pomyślnie 
+    rozwiązany (ale uwaga na stos rekurencyjnych wywołań), to jednak koszt 
+    algorytmu nadal jest rzędu n!. Rozwiązaniem problemu permutacji jest przecież ciąg złożony 
+    z n! ciągów. Nie powinniśmy się dziwić, że wymaga to sporo czasu, bo nawet 
+    dla n=16, liczba n! jest olbrzymia ( 16! &gt; 2<sup><font face="Verdana">50</font></sup>).&nbsp; </p>
+  
+
+
+    <p>Trudno nazwać przedstawione tu algorytmy rozsądnymi.&nbsp; Uznajmy więc, 
+    że rozsądne będą te algorytmy, dla których koszt czasowy realizacji jest 
+    wielomianowy. Każdy algorytm możemy więc zaklasyfikować do jednej z dwu klas 
+    tak jak na rysunku 15.1.</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="40%" id="AutoNumber1">
+  <tr>
+    <td width="100%">
+    <img border="0" src="Rysunki/Rysunek15_1.gif" width="300" height="250"></td>
+  </tr>
+</table>
+<p>Linia prosta na tym rysunku ma symbolizować granicę podziału. 
+    Ale w rzeczywistości granica między tym co rozsądne i nierozsądne nie jest 
+    wcale oczywista. Rozważmy następujący przykład.</p>
+  
+
+
+    <p><b>Przykład 1.1</b></p>
+  
+
+
+    <p>Przypuśćmy, że mamy dwa algorytmy rozwiązujące ten sam problem: pierwszy, 
+    A1, o koszcie O(n<sup><font face="Verdana">100</font></sup>) i drugi, A2, o 
+    koszcie O(2<sup><font face="Verdana">n</font></sup>). Który z nich wybrać? 
+    Algorytm A1 jest wielomianowy, a zatem &quot;rozsądny&quot;, zgodnie z klasyfikacją na 
+    rysunku 15.1 Natomiast algorytm A2 jest algorytmem wykładniczym i nie 
+    chcemy, &quot;z zasady&quot;, uznać go za rozsądny. Tymczasem&nbsp; dla bardzo wielu n, algorytm A2 
+    wygrywa w czasie z algorytmem A1. Wynika stąd, że granica między tym co 
+    rozsądne i możliwe do zastosowania, a tym czego w praktyce nie da się 
+    zastosować jest dość nieostra.<font face="Wingdings"> J</font></p>
+  
+
+
+    <p style="text-align: left"><b>Pytanie 3</B>: Czy algorytm Dijkstry 
+    znajdowania najkrótszej ścieżki&nbsp; z ustalonego źródła w grafie 
+    zorientowanym z dodatnimi wagami należy do algorytmów &quot;rozsądnych&quot; w naszej 
+    klasyfikacji?&nbsp; <br>
+  
+<!-- Odpowiedź: Tak, ma przecież koszt wielomianowy O(n*n) dla grafu o n węzłach.</P> -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Sprawdź odpowiedź-----' NAME='Klik0' onClick="napis(this.form,'Tak, ma przecież koszt wielomianowy O(n*n) dla grafu o n węzłach.')">
+</form>
+</p>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td align="left"><A HREF="main15_p0.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main15_p2.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

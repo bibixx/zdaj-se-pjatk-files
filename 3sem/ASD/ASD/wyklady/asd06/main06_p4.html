@@ -1,0 +1,1329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main06_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main06_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all"><A NAME="EDU.wyklad.punkt 4"></A>
+
+<br clear="all">
+<div class="tytulpunktu">4. Grafy i drzewa	</div>
+</p>
+<p>W tym punkcie omawiać będziemy grafy i szczególny ich rodzaj - drzewa. 
+Podstawowe pojęcia dotyczące grafów były omawiane w wykładzie matematyki dyskretnej. 
+Tu zwrócimy uwagę na sposoby przedstawiania grafu w komputerze i na operacje, 
+które najczęściej na grafach wykonujemy. </p>
+
+
+
+
+
+<p>Graf podobnie jak stos i kolejka, służy do reprezentowania zbiorów 
+skończonych. Elementy zbioru reprezentowanego przez graf&nbsp; będą etykietami 
+wierzchołków grafu. Operacje, które najczęściej wykonujemy na grafach, dotyczą 
+dołączania lub usuwania krawędzi lub wierzchołków grafu, wyszukiwania, 
+wstawiania i usuwania wskazanych etykiet wierzchołków.&nbsp; Są to więc operacje 
+teoriomnogościowe wykonywane na wierzchołkach, krawędziach i etykietach. Koszt 
+tych operacji jest ściśle związany ze sposobem przedstawienia grafu.</p>
+
+
+
+
+
+<p>Graf reprezentujemy zwykle przez macierz sąsiedztwa lub tablicę list 
+incydencji. Poniżej omówimy krótko obie te reprezentacje. Inne sposoby 
+reprezentowania grafu będą tematem zadań przedstawionych w ćwiczeniach.</p>
+
+<p> <br>
+<b>Reprezentacja macierzowa grafu </b> </p>
+<p>Niech V będzie n elementowym zbiorem, V = {v<sub><font face="Verdana">1</font></sub>,...,v<sub><font face="Verdana">n</font></sub>}. 
+Macierzą sąsiedztwa dla grafu G = &lt;V, E&gt; nazywamy macierz kwadratową M(nxn) taką, 
+że  </p>
+<p style="text-align: center">M[i,j] = 1, gdy (i,j) <span lang="en"><font face="Symbol">Î</font></span> E 
+oraz M[i,j] = 0, gdy (i,j)<font face="Symbol"> <span lang="en">&Iuml;</span></font> 
+E.</p>
+<p>Operacje dołączania i usuwania krawędzi w tak przedstawionym grafie, wykonuje 
+się bardzo prosto: usunięcie krawędzi polega na wstawieniu na odpowiedniej 
+pozycji 0, a dołączenie nowej krawędzi, na wstawieniu w odpowiedni miejsce 1. 
+Koszt tych operacji jest, ze względu na bezpośredni dostęp do elementów tablicy, 
+stały. Bardziej kosztowne jest np. sprawdzenie stopnia wskazanego wierzchołka: 
+trzeba w tym celu przejrzeć wszystkie pozycje jednego wiersza macierzy i ustalić 
+liczbę pozycji w tym wierszu różnych od zera. Koszt takiej operacji jest rzędu 
+n. Dołączenie nowego wierzchołka i usunięcie wierzchołka z grafu są operacjami 
+bardziej kosztownymi w tej implementacji: musimy bowiem przepisać całą macierz 
+do macierzy o innym rozmiarze.</p>
+
+
+
+
+
+<p>Na rysunku 6.7 przedstawiono pewien graf zorientowany o pięciu wierzchołkach 
+oraz jego reprezentację tablicową. W macierzy 6.7(b) zaznaczono (kolorem 
+czerwonym) wynik usunięcia krawędzi (1,5) oraz wstawienia krawędzi (3,5). Graf 
+przedstawiony na tym rysunku jest zorientowany, ma dwie pętle (1,1) i (2,2), 
+oraz&nbsp; cykl np.&nbsp; 1, 3, 4, 
+5, 1.</p>
+
+
+
+
+
+<table border="1" cellpadding="0" cellspacing="0" width="80%" id="AutoNumber1" height="228" bordercolorlight="#808080" bordercolordark="#808080">
+  <tr>
+    <td width="30%" rowspan="12" height="208">
+    <p align="center">
+    <img border="0" src="Rysunki/Rysunek6_7ab.gif" width="221" height="225"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+  </tr>
+  <tr>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">1</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">2</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">3</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">4</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">5</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">1</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">2</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">3</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">4</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">5</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+  </tr>
+  <tr>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">
+    <font face="Verdana" color="#FF0000">0</font></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+  </tr>
+  <tr>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">2</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">2</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+  </tr>
+  <tr>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">3</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5">3</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="18">
+    <font face="Verdana" color="#FF0000">1</font></td>
+    <td width="5%" align="center" height="18" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+  </tr>
+  <tr>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5">4</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">1</td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5">4</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">1</td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+  </tr>
+  <tr>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5">5</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5">5</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">1</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" bgcolor="#C0C0C0" align="center" height="17">0</td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+  </tr>
+  <tr>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+  </tr>
+  <tr>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5">(a)</td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5">(b)</td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+  </tr>
+  <tr>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+    <td width="5%" align="center" height="17" bgcolor="#F5F5F5" bordercolor="#F5F5F5"></td>
+  </tr>
+  <tr>
+    <td width="70%" align="center" height="16" colspan="14" bgcolor="#F5F5F5" bordercolor="#F5F5F5">Rysunek 6.7 Graf i 
+    jego macierzowa reprezentacja.</td>
+  </tr>
+  <tr>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+    <td width="5%" align="center" height="1"></td>
+  </tr>
+  </table>
+
+
+
+
+
+<p><b>Reprezentacja grafu jako tablicy list incydencji</b></p>
+
+
+
+
+
+<p>Niech V będzie n elementowym zbiorem wierzchołków grafu G, V = {v<sub><font face="Verdana">1</font></sub>,...,v<sub><font face="Verdana">n</font></sub>}. 
+Niech TAB będzie tablicą o n pozycjach, odpowiadających wierzchołkom grafu. 
+Element TAB[i] tablicy jest referencją do listy wierzchołków sąsiadujących z 
+wierzchołkiem v<sub><font face="Verdana">i</font></sub> (tzn. połączonych z nim 
+krawędzią). Listy mogą być dodatkowo zorganizowane tak jak stosy, czy kolejki, 
+lub mieć elementy uporządkowane ze względu na pewien porządek. Operacje 
+dołączania krawędzi wykonuje się, w zależności od rodzaju listy, z kosztem 
+stałym (w przypadku stosów i kolejek) lub z kosztem proporcjonalnym do długości 
+listy. Usuwanie krawędzi jest związane z przeglądaniem listy wierzchołków 
+incydentnych z danym wierzchołkiem, wymaga więc przejrzenia całej listy 
+sąsiedztwa tego wierzchołka. </p>
+
+
+
+
+
+<p>Podobnie jak w poprzedniej implementacji, rozszerzenie grafu o nowy 
+wierzchołek wymaga utworzenia większej tablicy, a co za tym idzie przepisania 
+całej informacji. </p>
+
+
+
+
+
+<p>Na rysunku 6.8(a) przedstawiono reprezentację grafu G, z poprzedniego 
+przykładu, w postaci tablicy list incydencji&nbsp; oraz wynik usunięcia krawędzi 
+(1,5) i dołączenia krawędzi (3,5).</p>
+
+
+
+
+
+<table border="1" cellpadding="0" width="80%" id="AutoNumber2" bordercolorlight="#000000" bordercolordark="#000000">
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="34" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">TAB:</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    <font face="Verdana" color="#808080">1</font></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    1</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    3</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="34" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    5</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">TAB:</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    <font face="Verdana" color="#808080">1</font></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    1</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    3</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    <font face="Verdana" color="#808080">2</font></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    4</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="34" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    <font face="Verdana" color="#808080">2</font></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    4</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    <font face="Verdana" color="#808080">3</font></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    4</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="34" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    <font face="Verdana" color="#808080">3</font></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    4</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    5</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    <font face="Verdana" color="#808080">4</font></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    5</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="34" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    <font face="Verdana" color="#808080">4</font></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    2</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    <font face="Verdana" color="#808080">5</font></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    1</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="34" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#C0C0C0" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    <font face="Verdana" color="#808080">5</font></td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">
+    <span lang="en"><font face="Symbol" size="3">&reg;</font></span></td>
+    <td width="5%" bgcolor="#DDA0DD" bordercolor="#F5F5F5" bordercolorlight="#808080" bordercolordark="#C0C0C0" align="center">
+    1</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="34" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">(a) </td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="34" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">(b)</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="34" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="80%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" colspan="16">Rysunek 
+    6.8&nbsp;&nbsp; Reprezentacja grafu jako tablicy list incydencji.</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="34" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+</table>
+
+
+
+
+
+<p><b>Pytanie 5:</B> Stopniem grafu nazwiemy maksymalny ze stopni jego 
+wierzchołków. Jaki jest koszt ustalenia stopnia grafu, jeśli dana jest jego 
+reprezentacja macierzowa?</P>
+
+<form>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Sprawdź odpowiedź-----' NAME='Klik0' 
+onClick="napis(this.form,'n*n, gdzie n jest liczbą wierzchołków grafu.')">
+</p>
+</form>
+
+
+
+
+
+<p>Drzewa są pewnym szczególnym rodzajem grafów: są to grafy niezorientowane 
+spójne, bez pętli (nie ma krawędzi postaci (x,x)) i&nbsp; bez cykli. W 
+następnych wykładach tego kursu będziemy jeszcze wielokrotnie mówili o różnych 
+typach drzew. Tu zajmiemy się ich dynamiczną reprezentacją. Najpierw rozważymy 
+drzewa binarne, tzn. takie, w których każdy węzeł (wierzchołek) ma co najwyżej 
+dwa następniki. Zakładać będziemy, że każde drzewo ma wyróżniony 
+wierzchołek, zwany korzeniem drzewa, a węzły mają przyporządkowane etykiety, 
+będące elementami pewnego zbioru Et. </p>
+
+
+
+
+
+<p><b>Reprezentacja dynamiczna drzew </b></p>
+<p>Każdy wierzchołek drzewa jest 
+reprezentowany przez obiekt o trzech atrybutach val, left, right. Atrybut val 
+służy do zapamiętania etykiety węzła, a left i right są wskaźnikami do lewego i 
+prawego poddrzewa. Do wierzchołków drzewa mamy dostęp jedynie przez korzeń, 
+który reprezentuje całe drzewo. Niech node będzie typem wierzchołków drzewa 
+binarnego. Klasa node mogłaby być zaimplementowana następująco:</p>
+
+
+
+
+
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <blockquote>
+          <blockquote>
+            <blockquote>
+<p>class node{<br>
+&nbsp;&nbsp;&nbsp; val : Et;<br>
+&nbsp;&nbsp;&nbsp; left, right : node;<br>
+}</p>
+
+
+
+
+
+            </blockquote>
+          </blockquote>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p>Przykład dynamicznej reprezentacji drzewa został przedstawiony na rysunku 6.9 
+(a). Korzeniem tego drzewa jest wierzchołek o etykiecie 4. Atrybuty left i right 
+są zaznaczone literami l i r, odpowiednio, a strzałki wskazują obiekty, które są 
+wartościami tych atrybutów.</p>
+
+
+
+
+
+<table border="1" cellpadding="0" cellspacing="0" width="80%" id="AutoNumber3" height="268" bordercolorlight="#000000" bordercolordark="#000000">
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" colspan="2" align="center" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" height="16">
+    4</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" height="16">
+    l</td>
+    <td width="4%" align="center" bgcolor="#DDA0DD" bordercolorlight="#808080" bordercolordark="#C0C0C0" height="16">
+    r</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="32%" align="center" height="16" colspan="8" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD">
+    val</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">
+    <span lang="en"><font face="Wingdings"><font size="4">&aring;</font></font></span><font face="Wingdings" size="4">
+    </font></td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">
+    <span lang="en"><font face="Wingdings" size="4">&aelig;</font></span></td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" height="16" colspan="2" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD">
+    1</td>
+    <td width="8%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="16" colspan="2">
+    2</td>
+    <td width="8%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="16" colspan="2">
+    ...</td>
+    <td width="8%" align="center" height="16" colspan="2" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD">
+    k</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" colspan="2" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="16">
+    5</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" colspan="2" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="16">
+    8</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">
+    <span lang="en"><font face="Wingdings"><font size="4">&aring;</font></font></span><font size="4" face="Wingdings">
+    </font></td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" height="16" colspan="2" bgcolor="#F5F5F5" bordercolor="#F5F5F5">
+    <b><span lang="en"><font face="Symbol" size="4">&macr;</font></span></b></td>
+    <td width="8%" align="center" height="16" colspan="2" bgcolor="#F5F5F5" bordercolor="#F5F5F5">
+    <span lang="en"><font face="Wingdings" size="4">&aelig;</font></span></td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">
+    <span lang="en"><font face="Wingdings" size="4">&aelig;</font></span></td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="16">
+    l</td>
+    <td width="4%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="16">
+    r</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="16">
+    l</td>
+    <td width="4%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="16">
+    r</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="12%" align="center" bgcolor="#C0C0C0" colspan="3" rowspan="3" height="39" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5">
+    referencja do 1-go następnika</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" height="16" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="12%" align="center" colspan="3" rowspan="3" height="39" bgcolor="#C0C0C0" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5">
+    referencja do 2-go następnika</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="12%" align="center" height="35" colspan="3" rowspan="3" bgcolor="#C0C0C0" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5">
+    referencja do k-tego następnika</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">
+    <span lang="en"><font size="4" face="Wingdings">&aring;</font></span><font face="Wingdings" size="4">
+    </font></td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">
+    <span lang="en"><font face="Wingdings" size="4">&aelig;</font></span></td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">
+    <span lang="en"><font face="Wingdings" size="4">&aelig;</font></span></td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" height="3" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bgcolor="#F5F5F5" height="3" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" colspan="2" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="16">
+    2</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" colspan="2" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="16">
+    9</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" colspan="2" height="16">
+    7</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="3">
+    l</td>
+    <td width="4%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="3">
+    r</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="3">
+    l</td>
+    <td width="4%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="3">
+    r</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="3">
+    l</td>
+    <td width="4%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="3">
+    r</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="3" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">
+    <span lang="en"><font size="4" face="Wingdings">&aring;</font></span><font face="Wingdings" size="4">
+    </font></td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" colspan="2" height="16">
+    3</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="16">
+    l</td>
+    <td width="4%" align="center" bordercolorlight="#808080" bordercolordark="#C0C0C0" bgcolor="#DDA0DD" height="16">
+    r</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="28%" align="center" height="16" colspan="7" bgcolor="#F5F5F5" bordercolor="#F5F5F5">
+    (a) Drzewo binarne</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="40%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5" colspan="10">
+    (b) Wierzchołek drzewa stopnia k</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="44%" align="center" colspan="11" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">
+    Rysunek 6.9 Reprezentacja drzew</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="16" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="4%" align="center" height="1" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+</table>
+<p>Zauważmy, że referencje left i right pozwalają poruszać się po drzewie 
+jedynie w dół, w kierunku liści.&nbsp; Wystarczy to jednak by móc odwiedzić 
+wszystkie wierzchołki drzewa. &quot;Spacery&quot; po drzewach, to podstawowy element wielu 
+algorytmów na drzewach. Przedstawimy tu trzy rekurencyjne metody przeglądania 
+wierzchołków drzewa binarnego: InOrder, PreOrder i PostOrder. We wszystkich 
+trzech algorytmach wynikiem jest ciąg etykiet wierzchołków drzewa, którego 
+korzeniem jest obiekt root typu node.</p>
+<p style="text-align: left">&nbsp;<p>
+<div class="def" style="width: 529; height: 175">
+   <TABLE frame="void" rules="none" width="506" height="147">
+         <TR>
+            <TD width="358" height="12" colspan="2">InOrder(root : node){</TD>
+             
+            <TD width="78" height="12"></TD>
+             
+            <TD width="603" height="12"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="299" height="12"><strong>&nbsp;</strong><b>if</b> root
+            <font face="Symbol"><span lang="en">&sup1;</span> </font>null <b>then</b></TD> 
+            <TD width="78" height="12"></TD> 
+            <TD width="603" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="299" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            InOrder(root.left);</TD> 
+            <TD width="78" height="12"></TD> 
+            <TD width="603" height="12">// odwiedź lewe poddrzewo </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="299" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            write(root.val);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD> 
+            <TD width="78" height="12"></TD> 
+            <TD width="603" height="12">//wypisz etykietę tego wierzchołka</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="299" height="12">   &nbsp;<strong> </strong>&nbsp;&nbsp;&nbsp;&nbsp; 
+            InOrder(root.right)</TD>
+            <TD width="78" height="12">   </TD>
+            <TD width="603" height="12">   // odwiedź prawe poddrzewo&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="299" height="12">   <strong>&nbsp;fi;
+            </strong></TD>
+            <TD width="78" height="12">   </TD>
+            <TD width="603" height="12">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"><strong>}</strong></TD>
+            <TD width="299" height="1">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="78" height="1">   </TD>
+            <TD width="603" height="1">   </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p>Jeżeli <i>root</i> jest korzeniem drzewa przedstawionego na rysunku&nbsp; 6.9(a), to 
+w wyniku zastosowania procedury InOrder(root), zostanie wypisany następujący 
+ciąg etykiet: 2, 5, 3, 9, 4, 8, 7. Rzeczywiście ciąg 2, 5, 3, 9, to etykiety 
+lewego poddrzewa wierzchołka z etykietą 4, a ciąg&nbsp; 8,7, to etykiety prawego 
+poddrzewa. Etykiety poddrzew są wypisane zgodnie z tą samą procedurą. </p>
+<p style="text-align: left">&nbsp;<p>
+<div class="def" style="width: 628; height: 175">
+   <TABLE frame="void" rules="none" width="608" height="147">
+         <TR>
+            <TD width="358" height="12" colspan="2">PreOrder(root : node){</TD>
+             
+            <TD width="223" height="12"></TD>
+             
+            <TD width="560" height="12"> PostOrder(root : node){</TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="299" height="12"><strong>&nbsp;</strong><b>if</b> root
+            <font face="Symbol"><span lang="en">&sup1;</span> </font>null <b>then</b></TD> 
+            <TD width="223" height="12"></TD> 
+            <TD width="560" height="12"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            if</b> root <font face="Symbol"><span lang="en">&sup1;</span> </font>null
+            <b>then</b></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="299" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            write(root.val);</TD> 
+            <TD width="223" height="12"></TD> 
+            <TD width="560" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            PostOrder(root.left); </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="299" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;PreOrder(root.left);</TD> 
+            <TD width="223" height="12"></TD> 
+            <TD width="560" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            PostOrder(root.right);</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="299" height="12">   &nbsp;<strong> </strong>&nbsp;&nbsp;&nbsp;&nbsp; 
+            PreOrder(root.right)</TD>
+            <TD width="223" height="12">   </TD>
+            <TD width="560" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            write(root.val);&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="299" height="12">   <strong>&nbsp;fi;
+            </strong></TD>
+            <TD width="223" height="12">   </TD>
+            <TD width="560" height="12">   &nbsp;<strong>&nbsp;&nbsp;&nbsp;&nbsp; fi;
+            </strong></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"><strong>}</strong></TD>
+            <TD width="299" height="1">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="223" height="1">   </TD>
+            <TD width="560" height="1">   <strong>}</strong></TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p>Jeżeli <i>root</i> jest korzeniem drzewa przedstawionego na rysunku&nbsp; 6.9(a), to 
+w wyniku zastosowania procedury PreOrder(root), zostanie wypisany ciąg etykiet: 
+4, 5, 2, 9, 3, 8, 7. Zastosowanie do tego samego drzewa procedury PostOrder da w 
+wyniku ciąg 2, 3, 9, 5, 7, 8, 4.</p>
+<p>W niektórych zastosowaniach jest wygodnie, by każdy wierzchołek miał jeszcze 
+jeden atrybut father, będący referencją do wierzchołka sąsiedniego z 
+poprzedniego poziomu drzewa. Atrybut ten&nbsp; pozwala wykonywać &quot;spacery&quot; po 
+drzewie w kierunku korzenia.</p>
+<p>Przedstawiony wyżej sposób reprezentowania drzewa binarnego, można uogólnić 
+na drzewa o dowolnej, ale ograniczonej z góry liczbie następników. Na rysunku 
+6.9(b) przedstawiono przykładowy wierzchołek drzewa o k następnikach. Jest to 
+obiekt, który składa się z atrybutu val oraz tablicy Next rozmiaru k, 
+przechowującej referencje do następnych wierzchołków. </p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <blockquote>
+          <blockquote>
+<p>class node{<br>
+&nbsp;&nbsp;&nbsp; val : Et;<br>
+&nbsp;&nbsp;&nbsp; Next[] : array of node;<br>
+}</p>
+
+
+
+
+
+          </blockquote>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p>Oczywiście, konstruktor klasy <i>node</i> musi zawierać inicjalizację k 
+elementowej tablicy Next.<br>
+Odwiedzanie wierzchołków drzewa można zrealizować zgodnie z ideą procedury PreOrder (lub 
+PostOrder), odwiedzając najpierw korzeń takiego drzewa, a następnie&nbsp; 
+rekurencyjnie kolejne poddrzewa wskazane przez referencje w tablicy Next.</p>
+
+
+
+
+
+<p>
+<div class="def" style="width: 592; height: 175">
+   <TABLE frame="void" rules="none" width="560" height="147">
+         <TR>
+            <TD width="447" height="12" colspan="2">Odwiedź(root : node){</TD>
+             
+            <TD width="99" height="12"></TD>
+             
+            <TD width="547" height="12"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="388" height="12"><strong>&nbsp;</strong><b>if</b> root
+            <font face="Symbol"><span lang="en">&sup1;</span> </font>null <b>then</b></TD> 
+            <TD width="99" height="12"></TD> 
+            <TD width="547" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="388" height="12">&nbsp;&nbsp;&nbsp; write(root.val);&nbsp; </TD> 
+            <TD width="99" height="12"></TD> 
+            <TD width="547" height="12">//wypisz etykietę tego wierzchołka </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="388" height="12">&nbsp;&nbsp; <b>&nbsp;for</b> i :=1 <b>to</b> 
+            k <b>do</b>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</TD> 
+            <TD width="99" height="12"></TD> 
+            <TD width="547" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="388" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            Odwiedź (root. Next[i];</TD> 
+            <TD width="99" height="12"></TD> 
+            <TD width="547" height="12">//odwiedź i-te poddrzewo </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="388" height="12">   &nbsp;<strong> </strong>&nbsp;<b> od</b>&nbsp; </TD>
+            <TD width="99" height="12">   </TD>
+            <TD width="547" height="12">   &nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="388" height="12">   <strong>fi;
+            </strong></TD>
+            <TD width="99" height="12">   </TD>
+            <TD width="547" height="12">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1">}</TD>
+            <TD width="388" height="1">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="99" height="1">   </TD>
+            <TD width="547" height="1">   </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p><b>Pytanie 6:</B> Jaka jest maksymalna liczba wierzchołków w drzewie o 
+wysokości h, którego każdy wierzchołek ma co najwyżej 10 następników?</P>
+
+<form>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Sprawdź odpowiedź-----' NAME='Klik0' 
+onClick="napis(this.form,'(10^(h+1) -1)/9.')">
+</p>
+</form>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main06_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main06_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+</dir>
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body style="background-color: whitesmoke;" leftmargin="8" topmargin="8"
+ marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"--><!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr--><!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main12_p4.html" target="main"
+ class="NAWIGACJA"> &#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main12_cw.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 5"></a><br clear="all">
+<div class="tytulpunktu">5. Struktura Find-Union<br>
+</div>
+<br>
+<p><b>Problem</b><br>
+Dana jest rodzina&nbsp; niepustych i roz³±cznych zbiorów. Na zbiorach
+tej rodziny wykonywaæ bêdziemy dwie operacje:<br>
+</p>
+<ul>
+  <li>Find, która dla danej rodziny i elementu x zwraca zbiór tej
+rodziny, do którego nale¿y x, oraz</li>
+  <li>Union, która pozwala po³±czyæ dwa dane zbiory rodziny, tworz±c w
+wyniku now± rodzinê zbiorów.</li>
+</ul>
+<p style="text-align: justify;">Niech E bêdzie zbiorem elementów,&nbsp;
+<b>P</b>(E)
+zbiorem wszystkich podzbiorów zbioru E, oraz P niech bêdzie rodzin±
+podzbiorów zbioru E, tzn. P nale¿y do zbioru <b>P</b>(<b>P</b>(E)).
+Wtedy <br>
+</p>
+<div style="margin-left: 40px;">Find : <b>P</b>(<b>P</b>(E))&nbsp; x X
+<font face="Symbol">&#174;</font> <b>P</b>(X)<br>
+Union : <b>P</b>(<b>P</b>(X)) x <b>P</b>(X) x <b>P</b>(X) <font
+ face="Symbol">&#174;</font> <b>P</b>(<b>P</b>(X)),<br>
+</div>
+<p>przy czym,&nbsp; Find(P, x) = A wttw A <font face="Symbol"> Î </font>
+P oraz x <font face="Symbol"> Î </font>A<br>
+Union (P,A,B) = P' wttw&nbsp;
+A <font face="Symbol">&#207;</font> P' oraz B <font face="Symbol">&#207;</font>
+P' oraz (A + B) <font face="Symbol">Î</font>
+<b>P</b>(<b>P</b>(A)), dla dowolnych A, B <font face="Symbol">Î</font>
+P.<br>
+</p>
+<div style="text-align: justify;">Naszym zadaniem w tym punkcie jest
+znalezienie adekwatnej struktury danych, pozwalaj±cej stosowaæ operacje
+Find i Union z mo¿liwie niskim kosztem.&nbsp; <br>
+<br>
+Istnieje wiele ró¿nych implementacji tej struktury. Wiele z nich u¿ywa
+po prostu tablic do reprezentowania zbiorów i ich rodzin. Najlepszym
+jednak sposobem implementacji s±&nbsp; drzewa. O tej w³a¶nie
+implementacji bêdzie mowa w tym punkcie.<br>
+<br>
+Przyjmijmy, ¿e ka¿dy zbiór A rozwa¿anej rodziny P jest reprezentowany
+przez&nbsp; drzewo, którego&nbsp; wêz³y s± etykietowane elementami
+zbioru A. Drzewo takie nie musi byæ birarne. Za³ó¿my, ¿e w ka¿dym wê¼le
+takiego drzewa zapamiêtany jest element zbioru A, jako warto¶æ atrybutu
+<span style="font-style: italic;">et</span>, oraz referencja do pozycji
+zajmowanej przez&nbsp; ojca tego wierzcho³ka, zapisana jako warto¶æ
+atrybutu<span style="font-style: italic;"> father.</span> Oczywi¶cie
+korzeñ drzewa&nbsp; nie ma ojca. Jego etykietê bêdziemy uznawali za
+nazwê zbioru, do którego nale¿± etykiety zgromadzone w wierzcho³kach
+tego drzewa. Zak³adamy ponadto, ¿e maj±c element zbioru X, mamy równie¿
+dostêp do wêz³a drzewa o takiej w³a¶nie etykiecie. Mo¿na to zrealizowaæ
+numeruj±c wszystkie etykiety liczbami naturalnymi i wpisuj±c
+wierzcho³ek z i-t± etykiet±&nbsp; do specjalnej tablicy na pozycjê i-t±.<br>
+<br>
+<span style="font-weight: bold;">Przyk³ad 5.1</span><br>
+Rozwa¿my graf G którego podzia³y zbioru wierzcho³ków przedstawili¶my na
+rysunku 12.7. Rodzina zbiorów {{A,B}, {F,I,G}, {C,D,E,H}}, bêd±ca
+uzyskanym w szóstym kroku, podzia³em zbioru wierzcho³ków grafu, mo¿e
+byæ reprezentowana przez zbiór drzew przedstawionych na rysunku
+12.8(a). Zauwa¿my, ¿e krawêdzie w tym drzewie nie odpowiadaj±
+krawêdziom grafu G: na przyk³ad w grafie G nie ma krawêdzi FG.<br>
+<br>
+</div>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 60%;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek12_8.gif" title="" alt="Rodzina zbiorów"
+ style="width: 250px; height: 250px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek12_8b.gif" title="" alt="Union"
+ style="width: 250px; height: 250px;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><br>
+</p>
+<div style="text-align: justify;">Operacjê Find mo¿na zrealizowaæ
+nastêpuj±co: aby znale¼æ zbiór, do którego nale¿y wskazany element,
+przechodzimy "w górê"&nbsp; drzewa zgodnie z referencj± <span
+ style="font-style: italic;">father</span>. Gdy dojdziemy do korzenia,
+odczytujemy nazwê drzewa. Oczywi¶cie dwa elementy nale¿± do tego samego
+drzewa, je¶li&nbsp; id±c po dowi±zaniach<span
+ style="font-style: italic;"> father</span>, od wêz³ów przechowuj±cych
+te elementy, dochodzimy do tego samego korzenia. Gdyby¶my chcieli
+zbadaæ do jakiego drzewa nale¿y element C, to id±c po czerwonym
+dowi±zaniu znajdziemy wierzcho³ek o etykiecie C, a potem pos³uguj±c siê
+zielonymi dowi±zaniami&nbsp; przejdziemy do D i do&nbsp; H. Drzewo,
+które zawiera element C,&nbsp; jest wiêc wskazane przez etykietê H.<br>
+</div>
+<p style="text-align: justify;">Wykonanie operacji Union polega na
+po³±czeniu dwóch drzew. Mo¿emy to zrealizowaæ przez dowi±zanie korzenia
+jednego drzewa do korzenia drugiego drzewa. Na rysunku 12.8(b)
+przedstawiono wynik wykonania operacji Union dla drzew o korzeniach w A
+i w F: do korzenia drzewa A dowi±zali¶my korzeñ drzewa F.&nbsp;
+Wszystkie elementy A, B, F, G, I nale¿± teraz do drzewa o korzeniu A.<br>
+</p>
+<p style="text-align: justify;">Koszt operacji Union jest sta³y, nie
+zale¿y od liczby elementów przechowywanych w ³±czonych drzewach.
+Natomiast koszt operacji Find zale¿y od wysoko¶ci drzewa, które
+przegl±damy. W najgorszym przypadku, gdy drzewo sk³ada siê z jednej
+¶cie¿ki, koszt tej operacji móg³by byæ liniowy ze wzglêdu na liczbê
+elementów zbioru X.&nbsp; Je¶li mamy uzyskaæ mniejszy koszt tej
+operacji musimy siê&nbsp; postaraæ by wysoko¶æ drzew nie ros³a zbyt
+szybko. Zauwa¿my, ¿e wysoko¶æ drzewa ro¶nie tylko w wyniku operacji
+Union: wszystkie wêz³y jednego z drzew przesuwaj± siê o jeden poziom w
+dó³.&nbsp; Dla tych wêz³ów ¶cie¿ka bêdzie d³u¿sza. Naturaln± metod±
+³agodz±c± ten efekt jest tzw.<span style="font-style: italic;">
+balansowanie </span>lub<span style="font-style: italic;"> wywa¿anie</span>.&nbsp;
+Balansowanie polega na dowi±zywaniu drzewa o mniejszej wysoko¶ci do
+korzenia drzewa o wiêkszej wysoko¶ci. Tak± modyfikacjê operacji Union
+mo¿emy wykonaæ z kosztem sta³ym, je¶li w korzeniu ka¿dego z drzew
+rodziny, bêdziemy pamiêtali dodatkowo wysoko¶æ drzewa. Na rysunku
+12.9(b) przedstawiono wynik zastosowania opeacji Union z balansowaniem
+do drzew A i B z rysunku 12.(a). Poniewa¿ drzewo B jest wy¿sze, to do
+jego korzenia dowi±zujemy drzewo A. <br>
+<br>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 60%;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek12_9a.gif" title="" alt="podzia³"
+ style="width: 250px; height: 250px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek12_9b.gif" title="" alt="Wykonanie opeacji Union"
+ style="width: 250px; height: 250px;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Drug± metod± zmniejszania wysoko¶ci drzew reprezentuj±cych rodzinê
+zbiorów roz³±cznych jest tzw. <span style="font-style: italic;">kompresja
+¶cie¿ek</span>. Kompresja ¶cie¿ek polega na tym, ¿e w trakcie
+wykonywania operacji Find, wszystkie napotkane na ¶cie¿ce do korzenia
+wierzcho³ki, dowi±zujemy bezpo¶rednio do korzenia. Wymaga to
+dwukrotnego pokonania ¶cie¿ki od wêz³a pocz±tkowego do korzenia.
+Najpierw szukamy nazwy drzewa, do którego nale¿y etykieta.
+Nastêpnie,&nbsp; maj±c referencjê do korzenia tego drzewa, mo¿emy&nbsp;
+przej¶æ ponownie po tej samej ¶cie¿ce&nbsp; i zmieniæ wszystkie
+dowi±zania tak, by wskazywa³y bezpo¶rednio korzeñ drzewa. Wprawdzie
+wykonali¶my&nbsp; wiêcej operacji, ale nastêpne wykonania operacji
+Find, o ile bêd± dotyczy³y wierzcho³ków z tej ¶cie¿ki, bêd± mog³y byæ
+wykonane w jednym kroku.<br>
+Na rysunku 12.10(a) przedstawiono przyk³adowe drzewo pewnego podzia³u.
+Efekt wykonania operacji Find dla wierzcho³ka z zosta³ przedstawiony na
+rysunku 12.10(b). Wierzcho³ki x,y,z s¹ teraz synami wierzcho³ka v.
+Dziêki temu koszt nastêpnego wyszukiwania tych wierzcho³ków bêdzie
+sta³y, a koszt wyszukiwania wierzcho³ków znajduj±cych siê w drzewach B,
+C i D zmniejszy siê.<br>
+<br>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 60%;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek12_10a.gif" title="" alt="Rodzina zbiorów"
+ style="width: 250px; height: 250px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek12_10b.gif" title="" alt="Union"
+ style="width: 250px; height: 250px;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Nastêpuj±cy&nbsp; lemat wskazuje jak skuteczne
+jest takie postêpowanie:<br>
+</p>
+<br>
+<div class="lemat">Lemat 5.1 Koszt wykonania dowolnego ci±gu m operacji
+Union i Find, w
+reprezentacji drzewiastej zbiorów roz³±cznych&nbsp; z balansowaniem i
+kompresj± ¶cie¿ek&nbsp; mo¿na oszacowaæ w najgorszym razie przez O(m <font
+ face="Symbol">a</font>(n)), gdzie <font face="Symbol">a</font>(n)
+jest bardzo wolno rosn±c±
+funkcj±, której warto¶æ w praktyce nie przekracza 4.<br>
+</div>
+<p style="text-align: justify;"><span style="font-weight: bold;">Wniosek</span><br>
+Koszt algorytmu Kruskala,&nbsp; w implementacji struktury Find-Union na
+drzewach z balansowaniem i kompresj± ¶cie¿ek, wynosi O(m lg n), gdzie m
+jest liczb± krawêdzi, a n liczb± wierzcho³ków grafu.<br>
+Rzeczywi¶cie, koszt utworzenia kolejki priorytetowej zawieraj±cej
+wszystkie krawêdzie grafu wynosi O(m lg m), lub bior± pod uwagê
+wierzcho³ki grafu O(m lg n). W pêtli powtarzamy dwukrotnie wykonanie
+operacji Find i raz operacji Union.&nbsp; £±cznie daje to ci±g d³ugo¶ci
+co najwy¿ej O(m) operacji Find i Union. Na mocy Lematu 5.1 ³±czny koszt
+wykonania pêtli jest prawie&nbsp; liniowy, co ostatecznie daje
+oszacowanie kosztu algorytmu Kruskala na O(m lg n).<br>
+</p>
+<p><b>Pytanie 7</b>: Rozwa¿my graf 12.2 i zastosujmy do niego algorytm
+Kruskala zaimplementowany na drzewach z balansowaniem i kompresj±
+¶cie¿ek. Jaka jest wysoko¶æ drzewa w ostanim podziale zbioru
+wierzcho³ków grafu?&nbsp;<br>
+</p>
+<!-- <p>Odpowied¼: 2</P> -->
+<form><b><b><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0" onclick="napis(this.form,'2.')"> </b></b>
+  <p><b><b><br clear="all">
+  </b></b>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td align="left"><a href="main12_p4.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+        <td align="right">&nbsp;<a href="main12_cw.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+      </tr>
+    </tbody>
+  </table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</form>
+</body>
+</html>

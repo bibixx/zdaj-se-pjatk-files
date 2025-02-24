@@ -1,0 +1,88 @@
+Kolokwium zestaw nr 9
+
+1.
+
+SELECT ename, job, sal, deptno, mgr
+FROM emp
+WHERE mgr IN (7902,7566,7788)
+ORDER BY deptno, job;
+
+2. Sprawdziæ ilu podw³adnych ma ka¿dy kierownik (podaæ jego numer i liczbê podw³adnych).
+
+SELECT mgr, COUNT(*) "Ilosc prac"
+FROM emp
+GROUP BY mgr;
+
+3. Wypisaæ dzia³y, które zatrudniaj¹ mniej pracowników ni¿ dzia³ mieszcz¹cy siê w Dallas.
+
+SELECT deptno, COUNT(*) "Zatrudnionych"
+FROM emp
+GROUP BY deptno
+HAVING COUNT (*) <
+	(SELECT COUNT(*)
+	FROM emp
+	WHERE deptno =
+		(SELECT deptno
+		FROM dept
+		WHERE loc = 'DALLAS'));
+
+4. Znaleœæ pracowników o najgorszej pensji w ka¿dej grupie zarobkowej.
+Podaæ ich nazwisko, numer i pensjê.
+
+SELECT ename, empno, sal, grade
+FROM emp, salgrade
+WHERE sal =
+	(SELECT MIN(sal)
+	FROM emp
+	WHERE sal BETWEEN losal AND hisal);
+
+5. Znaleœæ stanowiska, na których nikt nie zarabia mniej ni¿ 250.
+
+SELECT DISTINCT job
+FROM emp
+WHERE sal > 250;
+
+6. Dla ka¿dego stanowiska policzyæ iloœæ pracowników w nim zatrudnionych. Wypisaæ stanowisko
+tylko wtedy, gdy ró¿nica miêdzy maksymaln¹ a minimaln¹ pensj¹ nie przekracza 1000
+
+SELECT e.job, COUNT(*), (MAX(sal) - MIN(sal)) Diff
+FROM emp e, salgrade s
+WHERE sal BETWEEN losal AND hisal AND sal < 1000
+GROUP BY e.job;
+
+7. -
+Wyszukaj stanowisko, dla których pensje pracowników nale¿¹ do ró¿nych grup zarobkowych.
+
+SELECT job, sal, grade
+FROM emp, salgrade
+WHERE sal =
+	(SELECT DISTINCT sal
+	FROM emp
+	WHERE sal BETWEEN losal AND hisal);
+
+8. -
+Policzyæ kwoty potrzebne na pensje w ka¿dej grupie zarobkowej.
+
+SELECT SUM(sal) "Kwota na pensje"
+FROM emp, salgrade
+WHERE sal IN
+	(SELECT sal
+	FROM emp, salgrade
+	WHERE sal BETWEEN losal AND hisal);
+
+9. Znaleœæ pracowników zarabiaj¹cych wiêksz¹ pensjê ni¿ œrednia w ich dzia³ach.
+Uporz¹dkowaæ wg rosn¹cych zarobków.
+
+SELECT ename, sal, emp.deptno, DEPT_AVG
+FROM emp,
+(SELECT deptno, AVG(sal) DEPT_AVG
+	FROM emp
+	GROUP BY deptno) SredniaWDzialach
+	WHERE emp.deptno = SredniaWDzialach.deptno
+ORDER BY sal;
+
+10. Dla ka¿dego kierownika (podaæ nazwisko) wypisaæ wszystkie zawody jego
+pracowników. Kolumny nazwaæ odpowiednio Kierownik i Stanowisko pracownika
+
+SELECT DISTINCT mgr "Kierownik", job "Stanowisko pracownika"
+FROM emp;

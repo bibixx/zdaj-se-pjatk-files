@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+
+<td align="left"><A HREF="main05_p1.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main05_p3.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all">
+<A NAME="EDU.wyklad.punkt 2"></A>
+<br clear="all">
+
+<div class="tytulpunktu">2. Złożoność problemu sortowania, koszt średni.</div> 
+
+    <p>W tym punkcie zbadamy ograniczenie dolne na liczbę porównań wykonywanych 
+    w procesie sortowania, w przypadku średnim. Zadanie polega na zbadaniu 
+    średniej długości ścieżki w drzewie decyzyjnym dla algorytmów sortujących 
+    przez porównywanie elementów.</p>
+
+
+
+
+
+<p>Niech D będzie drzewem binarnym, L zbiorem jego liści, a p(v) - długością 
+ścieżki od korzenia do liścia v w drzewie D.&nbsp; Przyjmijmy też następujące 
+oznaczenie:</P>
+
+<p style="text-align: center">epl(D) =&nbsp; <font face="Symbol">S</font><sub>v<span lang="en"><font face="Symbol">Î</font></span>L</sub> 
+p(v), </P>    <p>epl(D) jest po prostu sumą długości wszystkich ścieżek od korzenia do 
+    liści w drzewie D.&nbsp; </p>
+
+
+
+
+
+<p></P>
+
+<div class="lemat">
+<p>Lemat 2.1&nbsp;&nbsp; Jeżeli dla pewnego D wartość epl(D) jest 
+najmniejsza wśród drzew&nbsp; binarnych lokalnie pełnych 
+o n liściach, to wszystkie liście tego drzewa D znajdują się na dwóch ostatnich poziomach.</P>
+ </div>
+ 
+<p></P>
+<p>Dowód lematu 2.1</P>
+
+<p>Załóżmy przeciwnie, że w drzewie D<sub><font face="Verdana">n</font></sub> o 
+n liściach i wysokości h, istnieje liść u na poziomie k, k <font face="Symbol"><span lang="en">&pound;</span> </font>
+h-2, a mimo to wartość epl(D<sub><font face="Verdana">n</font></sub>) jest 
+minimalna wśród wszystkich drzew binarnych lokalnie pełnych o n liściach (por. 
+Rysunek 5.4). </P>
+
+<p>
+<img border="0" src="Rysunki/Rysunek5_4.gif" align="left" width="300" height="250">Niech 
+w będzie wierzchołkiem na poziomie h-1, a w<sub><font face="Verdana">1</font></sub> 
+i w<sub><font face="Verdana">2</font></sub> 
+niech będą jego następnikami. Co najmniej jeden taki wierzchołek istnieje, bo 
+drzewo D ma wysokość h. Zbudujemy nowe drzewo D*<sub><font face="Verdana">
+</font></sub>przenosząc liście w<sub><font face="Verdana">1</font></sub>, w<sub><font face="Verdana">2</font></sub>&nbsp;z ostatniego poziomu i 
+dowiązując je jako synów wierzchołka u.</P>
+
+<p>Taka modyfikacja nie zmieniła liczby liści w drzewie, zatem D* ma też n liści 
+i jest drzewem lokalnie pełnym. Mamy</P>
+
+<p style="text-align: center">epl(D*) = epl(D<sub><font face="Verdana">n</font></sub>) 
+-2h +(h-1) - k + 2(k+1),</P>
+
+<p>ponieważ w jest w D* liściem, a u nie jest, oraz&nbsp; w<sub><font face="Verdana">1</font></sub>, 
+w<sub><font face="Verdana">2 </font></sub>znajdują się teraz 
+nie na poziomie h, a na poziomie k+1. Stąd&nbsp; </P>
+
+<p style="text-align: center">epl(D*) = epl(D<sub><font face="Verdana">n</font></sub>) 
++ (k- (h-1)).  </P>
+
+<p>Ponieważ z założenia k &lt; h-1, zatem epl(D*) &lt; epl(D<sub><font face="Verdana">n</font></sub>). 
+Otrzymaliśmy sprzeczność, która dowodzi prawdziwości lematu 2.1.
+<font face="Wingdings">J</font></P>
+
+
+
+
+
+    <p>Jaka jest wartość sumy długości ścieżek w lokalnie pełnym drzewie 
+    binarnym o n liściach? Jeśli D jest to pełnym drzewem binarnym, to wszystkie 
+    ścieżki mają taką samą długość, równą lg n, a wtedy epl(D)= n<font face="Symbol"><span lang="en">´</span></font>lg 
+    n. W dalszym ciągu rozważymy dowolne drzewa rodziny D(n) drzew binarnych, lokalnie pełnych, o n 
+    liściach. Udowodnimy następujące ograniczenie dolne wartości epl dla drzew 
+    tej rodziny.</p>
+
+
+
+
+
+<p></P>
+
+<div class="lemat" style="width: 591; height: 42">
+<p>Lemat 2.2&nbsp;&nbsp;&nbsp; min{epl(D): D<span lang="en"><font face="Symbol">Î</font></span> 
+D(n)} = n <span lang="en"><font face="Symbol">ë</font></span>lg 
+n<span lang="en"><font face="Symbol">&ucirc;</font></span> + 2( n - 2<sup>
+<span lang="en"><font face="Symbol">ë</font></span>lg n</sup><font face="Symbol"><sup><span lang="en">&ucirc;</span></sup>).</font></P>
+ </div>
+ 
+<p></P>
+<p>Dowód lematu 2.2.&nbsp; </P>
+
+<p>Niech D będzie drzewem z rodziny D(n), oraz niech wartość funkcji epl 
+dla tego drzewa osiąga minimum. Na mocy lematu 2.1 wiemy, że wszystkie liście w 
+tym drzewie znajdują się na dwóch ostatnich poziomach. Rozważmy dwa przypadki.</P>
+
+<p>1. n= 2<sup><font face="Verdana">p</font></sup> dla pewnego p. Wtedy mamy do 
+czynienia z pełnym drzewem binarnym, wszystkie liście znajdują się na poziomie p 
+i oczywiście epl(D)= n lg n =&nbsp; n <span lang="en"><font face="Symbol">ë</font></span>lg 
+n<span lang="en"><font face="Symbol">&ucirc;</font></span> + 2( n - 2<sup>
+<span lang="en"><font face="Symbol">ë</font></span>lg n</sup><font face="Symbol"><sup><span lang="en">&ucirc;</span></sup>). </font>
+Zatem w tym przypadku lemat 2.2 jest prawdziwy.</P>
+
+<p>2. 2<sup><font face="Verdana">p-1</font></sup> <font face="Symbol">&lt; </font>n
+<font face="Symbol">&lt; </font>2<sup><font face="Verdana">p</font></sup>, dla 
+pewnego p. Na mocy lematu 1.1, h <font face="Symbol"> <span lang="en">&sup3;</span> <span lang="en">é</span></font>lg 
+n<font face="Symbol"><span lang="en">&ugrave;</span>.</font>&nbsp; Gdyby jednak 
+h <font face="Symbol">&gt; <span lang="en">é</span></font>lg n<font face="Symbol"><span lang="en">&ugrave;</span>, </font>
+to licząc liczbę liści w tym drzewie przy założeniu, że na przedostatnim 
+poziomie jest y nie-liści, otrzymalibyśmy&nbsp; sprzeczność z założeniem:</P>
+
+<p style="text-align: center">n = (2 <sup><font face="Verdana">h-1</font></sup> 
+- y)&nbsp; + 2y =&nbsp; 2 <sup><font face="Verdana">h-1</font></sup>&nbsp; + y &gt; 
+2<sup><font face="Symbol"><span lang="en">é</span></font>lg n<font face="Symbol"><span lang="en">&ugrave;</span> </font>
+</sup>= 2<sup><font face="Verdana">p </font></sup>&gt; n,</P>
+
+<p>((2 <sup><font face="Verdana">h-1</font></sup> - y)- to liście na 
+przedostatnim poziomie, a 2y - to liście na ostatnim poziomie). Zatem, dla drzewa D w rozważanym przypadku musi być h <font face="Symbol">= <span lang="en">é</span></font>lg 
+n<font face="Symbol"><span lang="en">&ugrave;</span>.</font>&nbsp; Policzmy 
+wartość funkcji epl(D):</P>
+
+<p style="text-align: center">epl(D) = 2y<font face="Symbol"> <span lang="en">´</span></font> 
+h + (2 <sup><font face="Verdana">h-1</font></sup> - y)<font face="Symbol"><span lang="en">´</span></font>(h-1) 
+.</P>
+
+<p>Ponieważ&nbsp; n = 2y +&nbsp; (2 <sup><font face="Verdana">h-1</font></sup> - 
+y) , to y = n - 2 <sup><font face="Verdana">h-1</font></sup> . Stąd , biorąc pod 
+uwagę równość&nbsp; <span lang="en"><font face="Symbol">ë</font></span>lg n<span lang="en"><font face="Symbol">&ucirc;</font></span> 
++1 = <span lang="en"><font face="Symbol">é</font></span>lg n<font face="Symbol"><span lang="en">&ugrave;</span>,</font> 
+otrzymujemy:</P>
+
+<p style="text-align: center">epl(D) = h <font face="Symbol"><span lang="en">´</span>
+</font>n&nbsp; - 2<sup><font face="Verdana">h</font></sup> + n = n
+<font face="Symbol"> <span lang="en">é</span></font>lg n<font face="Symbol"><span lang="en">&ugrave;</span> 
+-</font> 2 <sup><font face="Symbol"> <span lang="en">é</span></font>lg n<font face="Symbol"><span lang="en">&ugrave;</span></font></sup>&nbsp; 
++ n&nbsp; =&nbsp;&nbsp; n <span lang="en"><font face="Symbol">ë</font></span>lg 
+n<span lang="en"><font face="Symbol">&ucirc;</font></span> + 2( n - 2<sup>
+<span lang="en"><font face="Symbol">ë</font></span>lg n</sup><font face="Symbol"><sup><span lang="en">&ucirc;</span></sup>).</font>
+<font face="Wingdings">J</font></P>
+
+    <p>&nbsp;</p>
+
+
+
+
+
+<p></P>
+
+<div class="lemat">
+<p>Lemat 2.3&nbsp;&nbsp; Średnia liczba porównań wykonanych przez dowolny 
+algorytm Alg sortujący ciąg n elementowy przez porównania, jest nie mniejsza niż&nbsp;&nbsp; <span lang="en"><font face="Symbol">ë</font></span>lg 
+n<font face="Symbol">!<span lang="en">&ucirc;</span></font>,&nbsp; A(Alg, n)
+<span lang="en"><font face="Symbol">&sup3;</font></span>&nbsp; <span lang="en"><font face="Symbol">ë</font></span>lg 
+n<font face="Symbol">!<span lang="en">&ucirc;</span>.</font></P>
+ </div>
+ 
+<p></P>
+<p>Dowód lematu 2.3.</P>
+
+<p>Średnia wysokość&nbsp; h drzewa decyzyjnego wynosi, na mocy lematu 2.2, co 
+najmniej </P>
+
+<p style="text-align: center">&nbsp;(1/n!) (n! <span lang="en"><font face="Symbol">ë</font></span>lg 
+n<font face="Symbol">!<span lang="en">&ucirc;</span></font> + 2( n! - 2<sup>
+<span lang="en"><font face="Symbol">ë</font></span>lg n!</sup><font face="Symbol"><sup><span lang="en">&ucirc;</span></sup>)</font>.</P>
+
+<p>Ponieważ&nbsp; dla dowolnego x,&nbsp; x/2 <font face="Symbol">
+<span lang="en">&pound;</span> </font>2<sup>
+<span lang="en"><font face="Symbol">ë</font></span>lg x</sup><font face="Symbol"><sup><span lang="en">&ucirc;</span></sup></font>
+<font face="Symbol"><span lang="en">&pound;</span> </font>x, zatem (2<sup>
+<span lang="en"><font face="Symbol">ë</font></span>lg x</sup><font face="Symbol"><sup><span lang="en">&ucirc;</span></sup></font>
+<font face="Symbol">/ </font>x<font face="Symbol">) <span lang="en">&pound;</span>
+</font>1, a co za tym idzie 2(n! - 2<sup>
+<span lang="en"><font face="Symbol">ë</font></span>lg n!</sup><font face="Symbol"><sup><span lang="en">&ucirc;</span></sup>)</font>/ 
+n!&nbsp; <font face="Symbol"><span lang="en">&sup3;</span> </font>0. Ostatecznie</P>
+
+<p style="text-align: center">&nbsp;(1/n!) (n! <span lang="en"><font face="Symbol">ë</font></span>lg 
+n<font face="Symbol">!<span lang="en">&ucirc;</span></font> + 2( n! - 2<sup>
+<span lang="en"><font face="Symbol">ë</font></span>lg n!</sup><font face="Symbol"><sup><span lang="en">&ucirc;</span></sup>)</font>
+<font face="Symbol"><span lang="en">&sup3;</span></font> <span lang="en"><font face="Symbol">ë</font></span>lg 
+n<font face="Symbol">!<span lang="en">&ucirc;</span>.</font></P>
+
+<p>Zakończyliśmy w ten sposób dowód lematu 2.3.<font face="Wingdings"> J</font></P>
+
+
+
+
+
+<p></P>
+
+<div class="lemat">
+<p>Twierdzenie 2.1&nbsp;&nbsp; Dolne ograniczenie złożoności algorytmów 
+sortowania przez porównywanie elementów wynosi w przypadku średnim&nbsp;
+<font face="Symbol">Q</font>(n<span lang="en"><font face="Symbol">´</font></span>lg n). </P>
+ </div>
+ 
+<p></P>
+<p><b><font face="Verdana">Wniosek</font></b>: Algorytm QuickSort jest 
+asymptotycznie optymalnym algorytmem sortowania ze względu na średnią złożoność czasową.</P>
+
+
+
+
+
+<p><b>Pytanie 3</B>: Czy MergeSort jest algorytmem asymptotycznie optymalnym ze względu na 
+średnią złożoność czasową?&nbsp; </P>
+
+<!-- <p>Odpowiedź: TAK.</P> -->
+
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'TAK');">
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left">
+<A HREF="main05_p1.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main05_p3.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

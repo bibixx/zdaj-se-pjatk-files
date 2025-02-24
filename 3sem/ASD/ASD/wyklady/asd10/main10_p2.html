@@ -1,0 +1,890 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr-->
+<!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main10_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main10_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 2"></a>
+<br clear="all">
+<div class="tytulpunktu">2. Przyk³ady zastosowañ </div>
+<p><b>Problem I Sortowanie </b></p>
+<p>Dany jest n elementowy podzbiór X pewnego liniowo porz±dkowanego
+zbioru E. Przyjmijmy, ¿e elementy zbioru X znajduj± siê w tablicy TAB o
+elementach TAB[1],...,TAB[n].&nbsp; Chcemy uporz±dkowaæ elementy zbioru
+X rosn±co, tzn. tak by TAB[i] &lt; TAB[i+1] dla i=1,...n-1.&nbsp;&nbsp;
+Zauwa¿my, ¿e wszystkie elementy w tablicy TAB maj± ró¿ne warto¶ci.</p>
+<p>W przedstawionym algorytmie <i>sortowanie</i> zak³adamy, ¿e pq jest
+pocz±tkowo pust± kolejk± priorytetow±.</p>
+<p style="text-align: left;">&nbsp;</p>
+<p></p>
+<div class="def" style="width: 713px; height: 208px;">
+<table frame="void" rules="none" width="680" height="150">
+  <tbody>
+    <tr>
+      <td width="430" height="12" colspan="2">sortowanie (TAB :
+tablica){</td>
+      <td width="748" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="371" height="12"> &nbsp;i :=1;</td>
+      <td width="748" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="371" height="12"> <b>while</b> (i <font face="Symbol">
+      <span lang="en">&#163;</span></font> TAB.length) <b>do</b>&nbsp;&nbsp;
+      </td>
+      <td width="748" height="12"> // elementy TAB[1]...,TAB[i-1]
+znajduj± siê w pq</td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="371" height="12"> &nbsp;&nbsp;&nbsp;&nbsp; pq :=
+insert(TAB[i], pq);&nbsp;&nbsp;&nbsp;&nbsp; <strong>&nbsp;</strong></td>
+      <td width="748" height="12"> &nbsp;// TAB[1]...,TAB[i-1], TAB[i]
+s± w kolejce
+pq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="371" height="12"> &nbsp;&nbsp;&nbsp;&nbsp; i := i
++1;&nbsp; <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong> </td>
+      <td width="748" height="12"> &nbsp;//TAB[1]...,TAB[i-1] znajduj±
+siê w
+pq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="371" height="12"> <b>od;</b>&nbsp;&nbsp;&nbsp; <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </strong> </td>
+      <td width="748" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="371" height="12"> i :=1;&nbsp;&nbsp;&nbsp; <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </strong> </td>
+      <td width="748" height="12"> &nbsp;//TAB[1] <font face="Symbol">
+      <span lang="en">&#163;</span> </font>TAB[2]...<font face="Symbol"><span
+ lang="en">&#163;</span>
+      </font>TAB[i-1].&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="371" height="12"><strong>while&nbsp; </strong>not
+empty(pq) <strong>do </strong> </td>
+      <td width="748" height="12"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="371" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </strong>TAB[i] := min(pq); </td>
+      <td width="748" height="12">// TAB[1] <font face="Symbol">
+      <span lang="en">&#163;</span> </font>TAB[2]...<font face="Symbol"><span
+ lang="en">&#163;</span>
+      </font>TAB[i-1]<font face="Symbol"> <span lang="en">&#163;</span>
+      </font>TAB[i].</td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="371" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pq :=
+delmin(pq);&nbsp;</td>
+      <td width="748" height="12"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="371" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i :=
+i+1;</td>
+      <td width="748" height="12">//TAB[1] <font face="Symbol">
+      <span lang="en">&#163;</span> </font>TAB[2]...<font face="Symbol"><span
+ lang="en">&#163;</span>
+      </font>TAB[i-1]<font face="Symbol"><span lang="en">&#163;</span>
+      </font>TAB[i]</td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="371" height="12"> <strong>od;</strong>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      <td width="748" height="12"> &nbsp;</td>
+    </tr>
+    <tr>
+      <td width="59" height="1"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></td>
+      <td width="371" height="1"><br>
+      </td>
+      <td width="748" height="1"> &nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>Po wykonaniu pierwszej pêtli spe³niona jest formu³a:</p>
+<p style="text-align: center;">dla ka¿dego x <font face="Symbol"><span
+ lang="en">
+Î</span> </font>X, member(x, pq) oraz |{x: member(x,pq)}|= n.</p>
+<p>W³asno¶æ ta wynika z postulatu PQ3 i z za³o¿enia, ¿e elementy zbioru
+X znajduj± siê w tablicy TAB.</p>
+<p>Zajmijmy siê bardziej szczegó³owo drug± pêtl±. Niezmiennikiem tej
+pêtli jest formu³a </p>
+<p style="text-align: center;">TAB[1] <font face="Symbol">
+<span lang="en">&#163;</span> </font>TAB[2]...<font face="Symbol"><span
+ lang="en">&#163;</span>
+</font>TAB[i-1] oraz&nbsp; {x : member(x,pq)} =
+X\{TAB[1],...,TAB[i-1]}. </p>
+<p>Oczywi¶cie przed wykonaniem drugiej pêtli jest to formu³a&nbsp;
+prawdziwa: i=1, zbór {TAB[1],...,TAB[i-1]} jest pusty, a kolejka pq
+zawiera wszystkie elementy zbioru X. Za³ó¿my, ¿e formu³a ta jest
+prawdziwa na pocz±tku itej iteracji.</p>
+<p>Na mocy postulatu (PQ2), min(pq) jest najmniejszym elementem ze
+wszystkich, które nale¿± do pq, czyli min(pq)
+<span lang="en"> <font face="Symbol">&#163;</font></span> x, dla<font
+ face="Symbol">&nbsp; </font>x<font face="Symbol">
+<span lang="en">Î</span></font>X \ {TAB[1],...,TAB[i-1]} oraz <font
+ face="Symbol">
+&nbsp; </font>TAB[j]<font face="Symbol">
+<span lang="en">&#163;</span> </font>min(pq)&nbsp; dla j &lt; i. Zatem po
+wykonaniu przypisania <strong>&nbsp;&nbsp; </strong>TAB[i] :=
+min(pq);&nbsp; mamy uporz±dkowany rosn±co ci±g TAB[1] <font
+ face="Symbol">
+<span lang="en">&#163;</span> </font>TAB[2]...<font face="Symbol"><span
+ lang="en">&#163;</span>
+</font>TAB[i]. Zgodnie z postulatem (PQ4), wykonanie instrukcji
+spowoduje, ¿e element min(pq) nie bêdzie nale¿a³ do kopca. St±d {x :
+member(x,pq)} = X\{TAB[1],...,TAB[i]}. Po zmianie warto¶ci licznika i,
+mamy znów prawdziw± formu³ê niezmiennika. Poniewa¿ po n krokach kolejka
+bêdzie pusta, a niezmiennik nadal spe³niony, wiêc otrzymamy TAB[1] <font
+ face="Symbol">
+<span lang="en">&#163;</span> </font>TAB[2]...<font face="Symbol"><span
+ lang="en">&#163;</span>
+</font>TAB[n].</p>
+<p><b>Problem II Podzia³ zbioru</b></p>
+<p>Dane s± zbiory A, B, C w pewnej liniowo uporz±dkowanej przestrzeni
+&lt; E, <font face="Symbol"><span lang="en">&#163;</span>
+</font>&gt; takie, ¿e&nbsp; para (A, B) stanowi podzia³ zbioru C, tzn.</p>
+<p style="text-align: center;">A <font face="Symbol"><span lang="en">&#200;</span>&nbsp;
+</font>B = C, A <font face="Symbol"><span lang="en">Ç</span> </font>B
+=
+<span lang="en"><font face="Symbol">&#198;</font></span>.</p>
+<p>Znale¼æ podzia³ zbioru C na podzbiory A', B' takie, ¿e |A'|= |A|,
+|B'| = |B| oraz wszystkie elementy zbioru A' poprzedzaj± wszystkie
+elementy zbioru B', tzn. </p>
+<p style="text-align: center;">&nbsp;(<font face="Symbol">"</font>a
+<font face="Symbol"><span lang="en">Î</span> </font>A')(<font
+ face="Symbol">"</font>b
+<font face="Symbol"><span lang="en">Î</span> </font>B') a <font
+ face="Symbol">
+<span lang="en">&#163;</span> </font>b. </p>
+<p><b>Idea</b> rozwi±zania polega na kolejnym porównywaniu elementu
+najmniejszego ze zbioru B z elementem najwiêkszym w zbiorze A. Je¶li
+element najmniejszy w zbiorze B jest mniejszy ni¿ element najwiêkszy w
+zbiorze A, to powinien on siê znajdowaæ w zbiorze&nbsp; A. Je¶li
+natomiast najmniejszy element w B jest wiêkszy od najwiêkszego elementu
+w A, to wszystkie elementy zbioru A s± mniejsze od wszystkich elementów
+zbioru B, a wiêc osi±gnêli¶my poszukiwany podzia³.&nbsp; </p>
+<p>Przyk³ad 2.1</p>
+<p>Niech A sk³ada siê z liczb 3, 15, 1, 9, 10, 4, 8, 5, a B z liczb 24,
+17, 18, 12, 23.&nbsp; Moc zbioru wynikowego A' ma byæ taka sama jak moc
+zbioru A (i analogicznie dla B), przyjmijmy wiêc, ¿e zarówno A jak i B
+s± dwiema tablicami o o¶miu&nbsp; i piêciu&nbsp; elementach,
+odpowiednio. Kolejne stany obu tablic przedstawiono na rysunku 10.1. Po
+trzech zamianach elementów, najmniejsz± liczb± w zbiorze B jest 15, a
+najwiêksz± w A, 12. Wynika st±d, ¿e wszystkie elementy zbioru A s±
+mniejsze ni¿ elementy zbioru B.<font face="Wingdings"> J</font></p>
+<table border="1" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="60%"
+ id="AutoNumber1">
+  <tbody>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">A:</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+17</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+15</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+1</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+9</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+10</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+3</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+8</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#dda0dd">
+23</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">B:</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+24</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#dda0dd">
+4</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+18</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+12</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+5</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">23=</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">maxA</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5"><span
+ lang="en"> <font face="Symbol">&#179;</font></span></td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">minB</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">=4</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">A:</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#dda0dd">
+17</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+15</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+1</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+9</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+10</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+3</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+8</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+4</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">B:</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+24</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+23</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+18</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+12</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#dda0dd">
+5</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">17=</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">maxA</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5"><span
+ lang="en"> <font face="Symbol">&#179;</font></span></td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">minB</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">=5</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">A:</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+5</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#dda0dd">
+15</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+1</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+9</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+10</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+3</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+8</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+4</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">B:</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+24</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+23</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+18</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+12</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#dda0dd">
+17</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">15=</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">maxA</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5"><span
+ lang="en"> <font face="Symbol">&#179;</font></span></td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">minB</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">=12</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">A:</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+5</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#dda0dd">
+12</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+1</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+9</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+10</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+3</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+8</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#000000" bgcolor="#c0c0c0">
+4</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">B:</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+24</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+23</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+18</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#dda0dd">
+15</td>
+      <td width="5%" align="center" bordercolor="#000000"
+ bordercolorlight="#808080" bordercolordark="#111111" bgcolor="#c0c0c0">
+17</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">12=</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">maxA</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5"><span
+ lang="en"> <font face="Symbol">&#163;</font></span></td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">minB</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">=15</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="25%" align="center" bordercolor="#F5F5F5" colspan="5">Rysunek
+10.1</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      <td width="5%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+<p>Zwróæmy uwagê, ¿e operacje jakie wykonujemy w tym algorytmie, to
+znajdywanie minimum, wstawianie i usuwanie elementu minimalnego ze
+wzglêdu na jaki¶ porz±dek. Taki zestaw operacji jest dostêpny w ka¿dej
+kolejce priorytetowej. Przyjmijmy wiêc, ¿e struktur± danych dla naszego
+algorytmu jest kolejka priorytetowa. U¿yjemy dwóch kolejek
+priorytetowych: jednej, uporz±dkowanej ze wzglêdu na porz±dek <span
+ lang="en"><font face="Symbol">&#179;</font></span>, do reprezentowania
+zbioru A i&nbsp; drugiej, uporz±dkowanej ze wzglêdu na porz±dek<font
+ face="Symbol">
+<span lang="en">&#163;</span>,</font>&nbsp; do reprezentowania zbioru
+B.&nbsp; Niech PQ<sub><span lang="en"><font face="Symbol">&#179;</font></span></sub>
+i PQ<sub><span lang="en"><font face="Symbol">&#163;</font></span></sub> bêd±
+dwoma typami kolejek priorytetowych. W ten sposób minimum w zbiorze A,
+to element najwiêkszy tego zbioru w sensie relacji
+<span lang="en"><font face="Symbol">&#163;</font></span>. Operacja delmin,
+to operacja usuwania elementu najwiêkszego w A.&nbsp; Specyfikacjê
+problemu rozdzielania zapiszmy jako parê &lt;wp, wk&gt;, gdzie</p>
+<p style="text-align: center;">wp = {A <font face="Symbol"><span
+ lang="en">&#200;</span>&nbsp;
+</font>B = C, A <font face="Symbol"><span lang="en">Ç</span> </font>B
+=
+<span lang="en"><font face="Symbol">&#198;</font></span>, |A| = n, |B| = m }</p>
+<p style="text-align: center;">wk = {A' <font face="Symbol"><span
+ lang="en">&#200;</span>&nbsp;
+</font>B' = C, A' <font face="Symbol"><span lang="en">Ç</span> </font>B'
+=
+<span lang="en"><font face="Symbol">&#198;</font></span>,&nbsp;&nbsp; |A'| =
+n, |B'| = m, &nbsp;(<font face="Symbol">"</font>a
+<font face="Symbol"><span lang="en">Î</span> </font>A')(<font
+ face="Symbol">"</font>b
+<font face="Symbol"><span lang="en">Î</span> </font>B') a <font
+ face="Symbol">
+<span lang="en">&#163;</span> </font>b}. </p>
+<p><b>Algorytm</b> </p>
+<p>
+</p>
+<div class="def" style="width: 715px; height: 168px;">
+<table frame="void" rules="none" width="689" height="150">
+  <tbody>
+    <tr>
+      <td width="557" height="12" colspan="2">podziel(A: PQ<sub><span
+ lang="en"><font face="Symbol">&#179;</font></span></sub>, B: PQ<sub><span
+ lang="en"><font face="Symbol">&#163;</font></span></sub>){</td>
+      <td width="638" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="511" height="12"> <b>while</b> (not min(A) <font
+ face="Symbol"><span lang="en">&#163;</span> </font>min(B) ) <b>do</b></td>
+      <td width="638" height="12"> // para (A,B) stanowi podzia³ zbioru
+C</td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="511" height="12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a :=
+min(A);</td>
+      <td width="638" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="511" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; b :=
+min(B); </td>
+      <td width="638" height="12"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="511" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A :=
+delmin(A); A := insert(b,A);</td>
+      <td width="638" height="12">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="511" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; B :=
+delmin(B); B := insert(a,B);</td>
+      <td width="638" height="12"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="511" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+      <td width="638" height="12"> // para (A,B) jest podzia³em zbioru C</td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="511" height="12"><b>od</b>;</td>
+      <td width="638" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><strong>}</strong></td>
+      <td width="511" height="12"> &nbsp;&nbsp; <strong>&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; </strong> </td>
+      <td width="638" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p><b>Poprawno¶æ</b></p>
+<p>Niezmiennikiem pêtli w tym algorytmie&nbsp; jest formu³a&nbsp; |A| =
+n, |B| = m, A <font face="Symbol"><span lang="en">&#200;</span>&nbsp;
+</font>B = C, A <font face="Symbol"><span lang="en">Ç</span> </font>B
+=
+<span lang="en"><font face="Symbol">&#198;</font></span>. Rzeczywi¶cie, w
+ka¿dej iteracji, po wykonaniu instrukcji "a := min(A);b := min(B);", na
+mocy za³o¿enia o roz³±czno¶ci zbiorów A i B oraz w³asno¶ci operacji min
+w kolejce priorytetowej,&nbsp; mamy</p>
+<p style="text-align: center;">member(a,A) <span lang="en"><font
+ face="Symbol">&#217;</font></span> not member(b,A) <span lang="en"><font
+ face="Symbol">&#217;</font></span> member(b, B)
+<font face="Symbol"><span lang="en">&#217;</span> </font>not member(a,B).</p>
+<p>Po wykonaniu operacji "A := delmin(A) ", prawdziwa jest
+formu³a&nbsp; not member(a,A), czyli |{x: member(x,A)}|=n-1. Z kolei
+wykonanie operacji "A := insert(b,A);" zwiêkszy³o liczbê elementów w A,
+bo na mocy postulatu (PQ3) mamy member(b,A). Zatem |{x:
+member(x,A)}|=n. Podobnie dla zbioru B.&nbsp; Suma zbiorów A i B jest
+stale taka sama: przek³adamy tylko elementy z jednej kolejki do drugiej.</p>
+<p>Skoro przed wykonaniem pêtli&nbsp; by³ spe³niony warunek pocz±tkowy
+i skoro jest on spe³niony po wykonaniu ka¿dej iteracji, to&nbsp; jest
+spe³niony po wyj¶ciu z pêtli. Poniewa¿ wychodzimy z pêtli tylko wtedy,
+gdy spe³niony jest warunek min(A) <font face="Symbol"><span lang="en">&#163;</span>
+</font>min(B), tzn. gdy element najwiêkszy w zbiorze A jest mniejszy od
+elementu najmniejszego w zbiorze B.&nbsp; Z w³asno¶ci porz±dku
+liniowego mamy wiêc (<font face="Symbol">"</font>a
+<font face="Symbol"><span lang="en">Î</span> </font>A')(<font
+ face="Symbol">"</font>b
+<font face="Symbol"><span lang="en">Î</span> </font>B') a <font
+ face="Symbol">
+<span lang="en">&#163;</span> </font>b.&nbsp; </p>
+<p>A jaka jest gwarancja, ¿e po skoñczonej liczbie kroków rzeczywi¶cie
+spe³niony bêdzie warunek min(A) <font face="Symbol"><span lang="en">&#163;</span>
+</font>min(B)? Niech np. n&lt;m&nbsp; i niech k bêdzie liczb± elementów
+zbioru A, które s± wiêksze od pewnych elementów zbioru B.&nbsp; Po
+ka¿dej iteracji liczba k maleje o jeden: najwiêkszy element jest
+usuniêty i przeniesiony do zbioru B. Po dok³adnie k krokach wszystkie
+elementy zbioru A s± mniejsze od wszystkich elementów zbioru B, a
+wtedy&nbsp; min(A) <font face="Symbol"><span lang="en">&#163;</span> </font>min(B)
+i algorytm zatrzymuje siê.</p>
+<p><b>Koszt</b></p>
+<p>Koszt algorytmu zale¿y od przyjêtej implementacji kolejki
+priorytetowej.&nbsp; Ogólnie, algorytm wykona 2 <span lang="en"><font
+ face="Symbol">´</font></span>min{n,m}operacji delmin i insert.</p>
+<p><b>Pytanie 2</b>: Który z algorytmów sortowania: HeapSort, czy
+algorytm <i>
+sortowanie,</i> z kolejk± priorytetow± zaimplementowan± jako kopiec, ma
+mniejszy koszt, je¶li zastosowano je do tablicy o n elementach? <br>
+&nbsp;
+</p>
+<form><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0"
+ onclick="napis(this.form,'Koszt obu algorytmów mo¿na oszacowaæ przez O(nlgn).');">
+  <br>
+  <input class="GUZIK" type="button" value="c.d.Zobacz odpowied¼"
+ name="Klik0"
+ onclick="napis(this.form,'Rzeczywisty koszt algorytmu HeapSort jest mniejszy, ze wzglêdu na liniowy koszt konstrukcji kopca w tablicy.');">
+</form>
+<p></p>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main10_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main10_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

@@ -1,0 +1,706 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body style="background-color: whitesmoke;" leftmargin="8" topmargin="8"
+ marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"--><!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr--><!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main12_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main12_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<br clear="all">
+<div class="tytulpunktu">2. Algorytmy BFS i DFS<br>
+</div>
+<p style="text-align: justify;">W tym punkcie wrócimy na chwilê do
+znanych nam ju¿ algorytmów
+przegl±dania grafu metod± "wszerz" BFS i "w g³±b" DFS, por. wyk³ad VII
+p1 . Wykorzystamy, je najpierw do zbadania, czy dany graf
+niezorientowany jest spójny, a nastêpnie do budowy drzewa rozpinaj±cego
+grafu.<br>
+</p>
+<div style="text-align: justify;">
+Idea przegl±dania grafu metod± BFS "wszerz" polega na
+przeszukaniu najpierw
+wêz³ów odleg³ych o jedn± krawêdz od wybranego wierzcho³ka, nastêpnie o
+dwie krawêdzie od wybranego wierzcho³ka&nbsp; itd.&nbsp; Algorytm
+wykorzystuje kolejkê FIFO do przechowywania wierzcho³ków, których
+nastêpniki nie zosta³y jeszcze odwiedzone.&nbsp; Musimy dodatkowo
+zadbaæ by nie wpisywaæ do kolejki wierzcho³ków, które ju¿ wcze¶niej tam
+wpisali¶my. Dla ka¿dego wêz³a grafu bêdziemy wiêc pamiêtali, czy zosta³
+on ju¿ "odwiedzony" lub "zamarkowany", co tutaj oznacza "wpisany do
+kolejki", czy nie. Mo¿na to zrealizowaæ w zwyk³ej tablicy boolowskiej
+m, gdzie m[i] = true oznacza, ¿e wierzcho³ek i-ty by³ ju¿ odwiedzony w
+trakcie&nbsp; dotychczasowego przegl±dania grafu.
+</div>
+<p><span style="font-weight: bold;">Szkic algorytmu BFS</span><br>
+<br>
+1.W³ó¿ do kolejki q wybrany wierzcho³ek grafu i zamarkuj go.<br>
+2. Dopóki kolejka&nbsp; q nie jest pusta :<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Wez pierwszy
+element kolejki q.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Dopisz&nbsp;
+do kolejki wszystkie wierzcho³ki z nim incydentne, o ile nie by³y
+jeszcze zamarkowane i <br>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; ka¿dy z nich
+zamarkuj. <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Usuñ pierwszy
+element kolejki q.<br>
+</p>
+<p><br>
+Idea przegl±dania grafu metod± DFS "w g³±b" polega na rekurencyjnym
+odwiedzaniu wierzcho³ków coraz bardziej odleg³ych od wierzcho³ka
+pocz±tkowego, wzd³u¿ jednej ¶cie¿ki, tak daleko jak to jest mo¿liwe.
+Je¶li kontynuacja nie jest mo¿liwa, wracamy do poprzedniego
+wierzcho³ka, wybieramy jaki¶ nieodwiedzony wierzcho³ek z jego listy
+incydencji i powtarzamy postêpowanie.&nbsp; </p>
+<p><span style="font-weight: bold;">Szkic algorytmu DFS<br>
+</span></p>
+<p>1.Zaznacz wybrany wierzcho³ek jako odwiedzony.<br>
+2. Dla ka¿dego wierzcho³ka z listy incydencji wybranego wierzcho³ka:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Je¶li wierzcho³ek nie by³ jeszcze zamarkowany, to <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+zastosuj rekurencyjnie procedurê odwiedzania do tego wierzcho³ka.<br>
+</p>
+<p><span style="font-weight: bold;">Przyk³ad 2.1</span><br>
+</p>
+<div style="text-align: justify;">Rozwa¿my graf z rysunku 12.2.&nbsp;
+Zak³adaj±c, ¿e numeracja wierzcho³ków
+odpowiada porz±dkowi alfabetycznemu ich nazw, oraz ¿e zaczynamy
+przegl±danie wierzcho³ków grafu od wierzcho³ka A, a porz±dek na listach
+incydencji jest porz±dkiem alfabetycznym, to kolejno¶æ odwiedzania
+metod± BFS bêdzie nastêpuj±ca: A, B, F, G, C, E, I, H, D.&nbsp;
+Natomiast kolejno¶æ odwiedzania metod± DFS : A, B, C, D, E, F, I, G, H.<br>
+</div>
+<p style="text-align: justify;"><span style="font-weight: bold;">Koszt</span><br>
+Koszt postêpowania w obu algorytmach jest podobny. Dla ka¿dego
+wierzcho³ka grafu przegl±damy jego listê incydencji. W przypadku BFS,
+ka¿dy wierzcho³ek mo¿e byæ co najwy¿ej raz wpisany do kolejki, bo po
+wpisaniu markujemy go jako odwiedzony. W przypadku metody "w g³±b",
+procedurê DFS wywo³uje siê rekurencyjnie co najwy¿ej raz dla ka¿dego
+wierzcho³ka, gdy¿ wywo³uje siê j± tylko dla wierzcho³ków
+niezamarkowanych, a ka¿de wywo³anie DFS powoduje zamarkowanie
+wierzcho³ka bêd±cego argumentem procedury. Pêtle w obu algorytmach s±
+zatem skoñczone.&nbsp; Poniewa¿, w najgorszym razie, przegl±damy
+wszystkie krawêdzie grafu., zatem koszt przegl±dania&nbsp; mo¿na&nbsp;
+w obu przypadkach oszacowaæ przez O(|V| + |E|), gdzie V jest zbiorem
+wierzcho³ków, a E zbiorem krawêdzi grafu.<br>
+</p>
+<p style="text-align: justify;">Zwróæmy uwgê, ¿e postêpownie opisane w
+metodach BFS i DFS nie musi koniecznie spowodowaæ
+odwiedzenia wszystkich wierzcho³ków grafu.&nbsp; Je¿eli w danym&nbsp;
+grafie s±
+wierzcho³ki, nie po³±czone ¿adn± drog±, to&nbsp; zaczynaj±c odwiedzanie
+grafu od jednego z nich, nigdy nie dojdziemy do drugiego.&nbsp;
+Odwrotnie,
+je¿eli przechodzenie grafu metod± BFS lub DFS nie spowoduje odwiedzenia
+wszystkich wierzcho³ków grafu, to tylko dlatego, ¿e miêdzy jakimi¶
+wierzcho³kami grafu nie istnieje droga, tzn.&nbsp; s± takie
+wierzcho³ki, ¿e
+jeden z nich nie jest osi±galny z drugiego. Wynika st±d, ¿e algorytmy
+BFSi DFS mo¿na&nbsp; u¿ytæ do badania spójno¶ci grafu: je¶li po
+zakoñczeniu
+algorytmu wszystkie wierzcho³ki by³y odwiedzone, to graf jest spójny,
+je¶li istniej± jeszcze nieodwiedzone wierzcho³ki, to graf nie jest
+spójny.<br>
+</p>
+<span style="font-weight: bold;"><br>
+</span>
+<div style="text-align: justify;">Niech G bêdzie grafem, którego
+wierzcho³ki zosta³y ponumerowane liczbami natualnymi, od 1 do n.
+Przyjmijmy, ¿e graf jest przedstawiony w postaci tablicy list
+incydencji Tab. Tab[i] jest list± incydencji wierzcho³ka itego.
+Za³ó¿my, ¿e lista incydencji jest zbudowana z obiektów, których
+atrybutami s±&nbsp; val- numer wierzcho³ka i next- referencja do
+nastêpnego obiektu listy. Dodatkowo, niech m bêdzie tablic±, w której
+zaznaczymy, które wierzcho³ki zosta³y ju¿ odwiedzone. <br>
+<br>
+<span style="font-weight: bold;">Algorytm DFS - Badanie spójno¶ci grafu</span><br>
+&nbsp;<br>
+</div>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 628px; height: 245px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">DFS<br>
+      </td>
+      <td style="vertical-align: top;">(v : integer){<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">m[v] := true; x := Tab[v];<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">while</span>
+(not x = null) <span style="font-weight: bold;">do</span><br>
+      </td>
+      <td style="vertical-align: top;">//przegl±damy listê incydencji
+wêz³a v<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp; &nbsp;&nbsp;&nbsp; w :=
+x.val;<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+ style="font-weight: bold;"> if</span>&nbsp;&nbsp; (m[w] = false) <span
+ style="font-weight: bold;">then </span>DFS(w)<span
+ style="font-weight: bold;"> fi</span><br>
+      </td>
+      <td style="vertical-align: top;">// o ile w nie by³ odwiedzony<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+x := x.next; <br>
+      </td>
+      <td style="vertical-align: top;">//wywo³ujemy rekurencyjnie DFS<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;<span
+ style="font-weight: bold;">od</span>; &nbsp;&nbsp;&nbsp; <br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">result := true;<br>
+      </td>
+      <td style="vertical-align: top;">// badamy, czy wszystkie
+wierzcho³ki <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">&nbsp;for</span>
+i := 1 <span style="font-weight: bold;">to</span> n <span
+ style="font-weight: bold;">do</span>&nbsp; result :=m[i] and result; <span
+ style="font-weight: bold;">od;</span><br>
+      </td>
+      <td style="vertical-align: top;">//by³y zamarkowane<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">}<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><span style="font-weight: bold;">Algorytm BFS - Badanie spójno¶ci
+grafu</span><br>
+&nbsp;<br>
+</p>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 628px; height: 327px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">BFS<br>
+      </td>
+      <td style="vertical-align: top;">(v : integer){<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">q := in(v,q) ;<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">while</span>
+(not empty(q)) <span style="font-weight: bold;">do</span><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp; &nbsp;&nbsp;&nbsp; v :=
+first(q);&nbsp; q := out(q); <br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x
+:= Tab[v];</td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">while</span>&nbsp; (not x= null) <span
+ style="font-weight: bold;">do</span> <br>
+      </td>
+      <td style="vertical-align: top;">//przegl±damy listê incydencji
+wêz³a v</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+w := x.val;<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+ style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if</span>&nbsp;&nbsp;
+(m[w] = false) <span style="font-weight: bold;">then&nbsp;</span><span
+ style="font-weight: bold;"> </span><br>
+      </td>
+      <td style="vertical-align: top;">// o ile w nie by³ odwiedzony<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+q := in(w,q); m[w]:= true</td>
+      <td style="vertical-align: top;">//wpisujemy go do kolejki i
+markujemy<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style="font-weight: bold;">fi;</span><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+x := x.next; <br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">od</span>; &nbsp;&nbsp;&nbsp; <br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">od;</span><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">result := true;<br>
+      </td>
+      <td style="vertical-align: top;">// badamy, czy wszystkie
+wierzcho³ki <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">for</span>
+i := 1 <span style="font-weight: bold;">to</span> n <span
+ style="font-weight: bold;">do</span>&nbsp; result :=m[i] and result; <span
+ style="font-weight: bold;">od;</span><br>
+      </td>
+      <td style="vertical-align: top;">//by³y zamarkowane<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">}<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p style="text-align: justify;">Za³ó¿my teraz, ¿e graf G jest spójny i
+zmodyfikujmy algorytmy przegl±dania w taki sposób, by wypisywa³y
+krawêdzie, którymi dochodzi siê do kolejno odwiedzanych wierzcho³ków.
+Zbiór odwiedzonych krawêdzi tworzy drzewo, gdy¿ nie ma w nim cykli:
+funkcje BFS i DFS powoduj± odwiedzanie tylko nie odwiedzonych jeszcze
+wierzcho³ków.&nbsp; Drzewa uzyskane w ten sposób, nazywamy drzewami
+przeszukiwania "wszerz" i "w g³±b" odpowiednio. Poniewa¿, w przypadku,
+gdy graf jest spójny, zostan± odwiedzone wszystkie wierzcho³ki grafu,
+zatem drzewa przeszukiwañ s± drzewami rozpinaj±cymi grafu. Algorytmy
+przegl±dania DFS i BFS mo¿na wiêc wykorzystaæ do konstruowania drzewa
+rozpinaj±cego grafu.<br>
+</p>
+<p><br>
+<span style="font-weight: bold;">Algorytm DFS - Konstrukcja drzewa
+rozpinaj±cego</span><br>
+&nbsp;<br>
+</p>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 628px; height: 327px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">DFS_ST<br>
+      </td>
+      <td style="vertical-align: top;">(v : integer){<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">m[v] := true; x := Tab[v];<br>
+      </td>
+      <td style="vertical-align: top;">//Niezmiennik pêtli:<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">while</span>
+(not x = null) <span style="font-weight: bold;">do</span><br>
+      </td>
+      <td style="vertical-align: top;">//Zbiór wypisanych krawêdzi
+tworzy drzewo<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; w := x.val;<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+ style="font-weight: bold;"> if</span>&nbsp;&nbsp; (m[w] = false) <span
+ style="font-weight: bold;">then </span><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+m[w] := true;<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+wypisz krawêd¼ (v,w);<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+DFS(w);<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+ style="font-weight: bold;">&nbsp; fi;</span><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+x := x.next; <br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;<span
+ style="font-weight: bold;">od</span>; &nbsp;&nbsp;&nbsp; <br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">}<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><span style="font-weight: bold;">Algorytm BFS - Konstrukcja drzewa
+rozpinaj±cego grafu</span><br>
+&nbsp;<br>
+</p>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 628px; height: 327px;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">BFS_ST<br>
+      </td>
+      <td style="vertical-align: top;">(v : integer){<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">q := in(v,q) ;<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">while</span>
+(not empty(q)) <span style="font-weight: bold;">do</span><br>
+      </td>
+      <td style="vertical-align: top;">// Niezmiennik:<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp; &nbsp;&nbsp;&nbsp; v :=
+first(q);&nbsp; q := out(q); <br>
+      </td>
+      <td style="vertical-align: top;">// zbiór wypisanych krawêdzi
+tworzy drzewo<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x
+:= Tab[v];</td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">while</span>&nbsp; (not x= null) <span
+ style="font-weight: bold;">do</span> <br>
+      </td>
+      <td style="vertical-align: top;"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+w := x.val;<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+ style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if</span>&nbsp;&nbsp;
+(m[w] = false) <span style="font-weight: bold;">then&nbsp;</span><span
+ style="font-weight: bold;"> fi</span><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+q := in(w,q); m[w]:= true</td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+wypisz krawêd¼ (v,w);<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style="font-weight: bold;">fi;</span><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+x := x.next; <br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">od</span>; &nbsp;&nbsp;&nbsp; <br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">od;</span><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">}<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p><span style="font-weight: bold;">Przyk³ad 2.2</span> <br>
+Na rysunku 12.3 przedstawiono wynik dzia³ania procedury BFS_ST, a na
+rysunku 12.4 wynik dzia³ania procedury DFS_ST: dwa drzewa rozpinaj±ce
+&nbsp; grafu z rysunku&nbsp; 12.2 .<br>
+</p>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 60%;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek12_3.gif" title="" alt="BFS"
+ style="width: 250px; height: 250px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek12_4.gif" title="" alt="DFS"
+ style="width: 250px; height: 250px;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><br>
+</p>
+<p><b>Pytanie 3: </b>Jaki jest koszt drzewa rozpinaj±cego
+niezorientowanego grafu spójnego o n
+wierzcho³kach i m krawêdziach, je¶li funkcja kosztu tego grafu
+przyjmuje stale warto¶æ const?</p>
+<form><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0" onclick="napis(this.form,'(n-1)const.');">
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main12_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main12_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

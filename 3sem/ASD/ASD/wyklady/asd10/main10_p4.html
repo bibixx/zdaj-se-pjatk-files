@@ -1,0 +1,302 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main10_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main10_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all"><A NAME="EDU.wyklad.punkt 4"></A>
+
+<br clear="all">
+<div class="tytulpunktu">4. Tablice z haszowaniem</div>
+</p>
+<p>W strukturach drzewiastych takich jak drzewa binarnych poszukiwań czy kopce, 
+pozycja elementu w drzewie zależy od relacji zachodzącej między nim, a innymi 
+elementami. W metodach haszujących (mieszających) pozycja elementu jest 
+wyliczana na podstawie wartości elementu lub tzw. klucza, związanego z elementem.&nbsp; 
+Funkcję wyliczającą pozycję elementu w zbiorze nazywa się funkcją mieszającą lub haszującą (od ang. hash function). Własnością szczególną metod haszowania jest, 
+że pozwalają one wykonać operacje wstawiania, usuwania i wyszukiwania elementu, z kosztem niezależnym od liczby elementów w zbiorze, tzn. z 
+kosztem stałym ze względu na rozmiar danych. Struktury danych oparte na metodach haszowania nazywamy tablicami haszującymi 
+(lub tablicami z haszowaniem, tablicami z mieszaniem). Są one najczęściej 
+używanymi modelami abstrakcyjnej 
+struktury słownika, o której była mowa w poprzednim punkcie wykładu.</p>
+<p><b>Przykład 4.1</b></p>
+
+
+
+
+
+<p>Niech nr będzie funkcją przypisującą literom alfabetu kolejno liczby od 1 - 
+26, np. nr(a) = 1, nr(b) = 2 itd. Określimy funkcję h ze zbioru słów w zbiór 
+liczb naturalnych jako sumę wartości przypisanych literom modulo 13: dla 
+dowolnego słowa <i><b>w</b></i> =(e<sub><font face="Verdana">1</font></sub>e<sub><font face="Verdana">2</font></sub> 
+... e<sub><font face="Verdana">n</font></sub>)</p>
+
+
+
+
+
+<p style="text-align: center">h(<i><b>w</b></i>) = (nr(e<sub><font face="Verdana">1</font></sub>) 
++ nr(e<sub><font face="Verdana">2</font></sub>) +...+ nr(e<sub><font face="Verdana">n</font></sub>)) 
+mod 13.</p>
+
+
+
+
+
+<p>Niech zbiór elementów X składa się z następujących słów:</p>
+
+
+
+
+
+<p style="text-align: center">{antek, piotr, olek, asia, adam, 
+basia, ola,  ina}</p>
+
+
+
+
+
+<p>Wtedy&nbsp; h(antek) = (1+15+20+5+11) mod 13 = 52 mod 13 = 0 , h(piotr) = 
+(17+9+16+20+18) mod 13 = 80 mod 13 = 2, h(ola) = (16+12+1) mod 13 = 3, itd. Do zapamiętania zbioru X użyjemy 
+tablicy TAB o&nbsp; 13 pozycjach. Wartość funkcji h dla słowa <i><b>w</b></i> traktujemy jako 
+adres tego słowa w tablicy TAB. Tablica haszująca reprezentująca zbiór X jest 
+przedstawiona na rysunku 10.2. Pozycje 1, 8, 10, 11 tej tablicy nie są zajęte. </p>
+
+
+
+
+
+<table border="1" style="border-collapse: collapse" bordercolor="#000000" width="60%" id="AutoNumber1">
+  <tr>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="8%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="8%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+    <td width="7%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">0</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">1</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">2</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">3</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">4</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">5</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">6</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">7</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">8</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">9</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">10</td>
+    <td width="8%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">11</td>
+    <td width="8%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">12</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">TAB:</td>
+    <td width="7%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">antek</td>
+    <td width="7%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    piotr</td>
+    <td width="7%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    ola</td>
+    <td width="7%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    asia</td>
+    <td width="7%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    olek</td>
+    <td width="7%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    basia</td>
+    <td width="7%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    adam</td>
+    <td width="7%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    aga</td>
+    <td width="7%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">&nbsp;</td>
+    <td width="8%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">&nbsp;</td>
+    <td width="8%" align="center" bgcolor="#C0C0C0" bordercolor="#000000" bordercolorlight="#808080" bordercolordark="#C0C0C0">
+    ina</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+  </tr>
+  <tr>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="28%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5" colspan="4">
+    Rysunek&nbsp; 10.2</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="8%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+    <td width="7%" align="center" bgcolor="#F5F5F5" bordercolor="#F5F5F5">&nbsp;</td>
+  </tr>
+</table>
+<p>Jeśli pytamy, czy słowo <i><b>w</b></i> należy do zbioru reprezentowanego 
+przez tablicę TAB, to wystarczy dla tego słowa wyliczyć wartość funkcji h i 
+sprawdzić co znajduje się na pozycji TAB(h(<i><b>w</b></i>)). Jeśli pozycja jest 
+pusta lub znajduje się tam inne, niż <i><b>w</b></i>, słowo, to słowo <b><i>w</i></b> 
+nie należy do zbioru X. W przeciwnym przypadku <i><b>w </b></i>należy do X.<font face="Wingdings">
+</font><font face="Verdana">Proces dołączenia nowego elementu do zbioru X 
+zaczynamy od wyliczenia adresu, np. dla słowa&nbsp; &quot;hania&quot;, h(hania) = 8. 
+Następnie sprawdzamy, czy wyliczona pozycja jest wolna i, o ile tak jest, 
+wstawiamy nowy element do zbioru. Problem pojawia się wtedy, gdy pod wyliczonym 
+adresem słowa znajduje się już inne słowo. Na przykład, gdybyśmy do naszego 
+zbioru X chcieli dołączyć słowo &quot;kasia&quot;, to powstaje tzw. problem kolizji, 
+ponieważ h(kasia)= (11+1+19+9+1) mod 13 = 2, a pozycja TAB(2) jest  aktualnie 
+zajęta przez słowo &quot;piotr&quot;. Problemom kolizji poświęcimy więcej uwagi w dalszej 
+części wykładu.&nbsp; </font><font face="Wingdings">J</font></p>
+
+
+
+
+
+<p>Przy założeniu, że zbiór elementów nie jest duży i że klucze tych elementów 
+są liczbami naturalnymi {0,1,...,m} i rozróżniają elementy, zbiór dynamiczny 
+możemy reprezentować za pomocą zwykłej tablicy, umieszczając elementy na 
+pozycjach wskazanych przez klucze. Taka reprezentacja zbioru dynamicznego nazywa 
+się adresowaniem bezpośrednim. Po prostu, element o kluczu 2 jest umieszczony 
+bezpośrednio na pozycji drugiej tablicy, albo znajduje się tam referencja do 
+tego elementu. Operacje insert, delete, member, struktury słownika, można&nbsp; 
+w takim modelu zaimplementować bardzo prosto sprawdzając zawsze najpierw pozycję 
+wskazaną przez klucz. Koszt tych operacji jest więc stały. </p>
+
+
+
+
+
+<p>Metody haszowania są stosowane zwykle wtedy, gdy zbiory skończone, które 
+chcemy reprezentować są nieduże, ale&nbsp; uniwersum, z którego pochodzą, jest 
+bardzo duże i nie wchodzi w grę adresowanie bezpośrednie. 
+Jeśli zbiór elementów E składa się ze wszystkich co najwyżej pięcioelementowych 
+słów, a zbiory X z którymi mamy rzeczywiście do czynienia nie są większe niż 13, 
+to nie ma sensu tworzyć tablicy&nbsp; o (26<sup><font face="Verdana">6</font></sup>-1)/25 
+pozycjach (dla każdego elementu zbioru E osobna pozycja), nawet gdyby to było 
+możliwe, bo taka tablica byłaby prawie pusta. Wystarczy nam tablica 13 
+elementowa i rozsądny sposób umieszczania elementów w tej tablicy, tak by nie 
+trzeba było jej za każdym razem przeglądać w całości. Musimy więc umieć przypisać elementom konkretnego zbioru X pozycję 
+w tej tablicy.</p>
+
+
+
+
+
+<p>Ogólnie, niech E będzie uniwersum kluczy, a m przewidywanym rozmiarem 
+podzbioru X używanych przez nas kluczy, przy czym&nbsp; m &lt; |E|. Funkcją 
+mieszającą (lub haszującą) nazywamy dowolną funkcję z E w {1,..., m} </p>
+
+
+
+
+
+<p style="text-align: center">h : E <span lang="en"><font face="Symbol">&reg;</font></span> 
+{1,...,m}.&nbsp;  </p>
+
+
+
+
+
+<p>Tablica z haszowaniem jest uogólnieniem zwykłej tablicy. Jest to para (T, h), gdzie T jest tablicą o m elementach,&nbsp; h jest funkcją haszującą 
+taką, że h(e) jest tzw. pierwszym adresem elementu e w 
+tablicy T. Wartość h(e) jest używana zawsze wtedy, gdy chcemy sprawdzić, czy element e 
+należy do&nbsp; zbioru&nbsp; reprezentowanego przez tablicę haszującą, gdy 
+chcemy dołączyć do zbioru nowy klucz, lub gdy chcemy usunąć klucz. Zatem wybór funkcji haszującej ma znaczenie podstawowe. Zależy nam na tym, by taka 
+funkcja równomiernie rozrzucała elementy uniwersum E w tablicy o m elementach, 
+tzn. aby liczba tych elementów uniwersum E, którym funkcja h przypisuje ten sam 
+adres, odpowiadała stosunkowi |E|/m. W terminologii rachunku prawdopodobieństwa, 
+chcemy aby dla wszystkich x, P(h(x)=i) = 1/m. Są wtedy duże szanse, że nie zdarzy 
+się sytuacja, w której dwa różne elementy zbioru X, którego rozmiar 
+oszacowaliśmy z góry przez m, mają ten sam adres w tablicy haszującej.&nbsp; 
+Mówimy, że wystąpiła wtedy kolizja.</p>
+
+
+
+
+
+<p>Oczywiście, jeśli funkcja mieszająca jest różnowartościowa na interesującym 
+nas zbiorze kluczy, to problem kolizji nie wystąpi. Niestety, nigdy nie mamy gwarancji, że nie zdarzy się kolizja. Z<span lang="en-us">a</span>nim 
+przystąpimy do rozważ<span lang="en-us">a</span>ń,<span lang="en-us"> </span>jak 
+rozwiązać<span lang="en-us"> problem kolizji,</span> przedstawimy przykłady 
+funkcji haszujących.</p>
+
+
+
+
+
+<p><b>Pytanie 4</B>: Jakie jest prawdopodobieństwo, że dana jednorodna funkcja 
+haszująca, h : {1,...n} <span lang="en"><font face="Symbol">&reg;</font></span>{1,...m},&nbsp; 
+jest różnowartościowa?   </P>
+
+<!-- <p>Odpowiedź: m(m-1)....(m-n+1)/ m<sup><font face="Verdana">n</font></sup>.&nbsp;</P> -->
+
+<form>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,' m(m-1)....(m-n+1)/ m^n')">
+</p>
+</form>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main10_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main10_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

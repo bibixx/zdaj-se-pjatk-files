@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr-->
+<!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main10_p2.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main10_p4.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 3"></a><br clear="all">
+<div class="tytulpunktu">3. S³owniki</div>
+<p>S³ownik jest jeszcze jedn± struktur±, która s³u¿y do reprezentowania
+zbiorów skoñczonych. Tym razem jednak nie zak³adamy ¿adnego porz±dku w
+zbiorze elementów. Charakterystycznymi operacjami tej struktury s±
+operacja wstawiania, usuwania wskazanego elementu i sprawdzania, czy
+element nale¿y do wskazanego zbioru.</p>
+<p>Strukturê danych nazywamy s³ownikiem (ang. dictionary)&nbsp; wttw
+jej uniwersum sk³ada siê z dwóch roz³±cznych zbiorów E i D oraz
+okre¶lone s± operacje o sygnaturze:</p>
+<blockquote>
+  <ul>
+    <li>insert: E <font face="Symbol"> <span lang="en">´</span> </font>D
+      <span lang="en"><font face="Symbol">&#174;</font></span> D<font
+ face="Symbol"> </font>&nbsp;</li>
+    <li>delete: E<font face="Symbol"> <span lang="en">´</span> </font>D
+      <font face="Symbol"> <span lang="en">&#174;</span> </font>D</li>
+    <li>member: E <font face="Symbol"> <span lang="en">´</span>&nbsp;
+      </font>D <font face="Symbol"> <span lang="en">&#174;</span> </font>B<sub><font
+ face="Verdana">0</font></sub></li>
+    <li>empty : D <font face="Symbol"> <span lang="en">&#174;</span> </font>B<sub><font
+ face="Verdana">0&nbsp; </font></sub></li>
+  </ul>
+</blockquote>
+<p>spe³niaj±ce nastêpuj±ce postulaty</p>
+<blockquote>
+  <p style="text-align: left;">(D1)&nbsp; empty(d) <span lang="en"> <font
+ face="Symbol">&#186;</font></span>&nbsp; <font face="Symbol"><span
+ lang="en"> &#216;</span>&nbsp; </font>(<font face="Symbol"> $</font>e)
+member(e,d),&nbsp;&nbsp;&nbsp;&nbsp; <font face="Symbol"><span
+ lang="en"> &#216;</span>&nbsp; </font>empty(d) <font face="Symbol"> <span
+ lang="en"> &#174;</span> </font>member(amb(d),d))</p>
+  <p style="text-align: left;">(D2)
+member(e,insert(e,d)),&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+e <span lang="en"><font face="Symbol">&#185;</font></span> e' <span
+ lang="en"> <font face="Symbol">&#174;</font></span>&nbsp; member(e,d) <font
+ face="Symbol"> <span lang="en">&#186;</span> </font>member(e,
+insert(e',d))<font face="Symbol">&nbsp; </font></p>
+  <p style="text-align: left;">(D3) <font face="Symbol"><span lang="en">&#216;</span>
+  </font>memeber(e,
+delete(e,d)),&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+e <span lang="en"><font face="Symbol">&#185;</font></span> e'&nbsp; <span
+ lang="en"><font face="Symbol">&#174;</font></span> member(e,d) <font
+ face="Symbol"><span lang="en">&#186;</span> </font>member(e, delete(e',d))<font
+ face="Symbol">&nbsp; </font></p>
+  <p style="text-align: left;">(D4) instrukcja&nbsp; <b>while</b> not
+empty(d) <b>do</b> d := delete(amb(d),d) <b>od</b> nie zapêtla siê
+dla dowolnego s³ownika d</p>
+  <p style="text-align: left;">(D5) member(e,d) = true wttw po
+wykonaniu poni¿szego algorytmu zmienna bool ma warto¶æ true. </p>
+  <p style="text-align: left;">{boo := false; <b>while</b> (not
+empty(d) and not bool) <b>do</b> e' := amb(d); bool := (e' = e); d :=
+delete(e', d) <b>od</b>}.</p>
+</blockquote>
+<p>W powy¿szych formu³ach u¿yto dodatkowej funkcji amb: D <span
+ lang="en"><font face="Symbol">&#174;</font></span> E, która daje w wyniku
+jaki¶ (dowolnie wybrany) element s³ownika. Standardowa interpretacja
+opisanych wy¿ej operacji jest taka jak dla struktury kolejki
+priorytetowej:&nbsp; s³owniki interpretujemy jako skoñczone zbiory
+elementów pewnego zbioru E, a operacje insert, delete, member
+odpowiadaj± teoriomnogo¶ciowym operacjom sumy, ró¿nicy i nale¿enia.</p>
+<p></p>
+<div class="def">Definicja 3.1&nbsp; Standardow± struktur±&nbsp;
+s³owników nazywamy dwusortowy system algebraiczny
+<center>
+<p style="text-align: center;"><b>D</b>(E) = &lt;&nbsp; D <span
+ lang="en"> <font face="Symbol">&#200;</font></span> E;&nbsp; insert,
+delete,&nbsp; member, empty <font face="Symbol">&nbsp; </font>&gt;,</p>
+</center>
+<p>którego uniwersum sk³ada siê ze&nbsp; zbioru elementów E i&nbsp;
+zbioru D&nbsp; skoñczonych podzbiorów E,<font face="Symbol"> </font>a
+operacje struktury s± okre¶lone dla dowolnego skoñczonego zbioru
+X&nbsp; nastêpuj±co:</p>
+<blockquote>
+  <p style="text-align: left;">member(e,X) = true wttw e <font
+ face="Symbol"> <span lang="en">Î</span> </font>X&nbsp; </p>
+  <p style="text-align: left;">insert(e,X) = {e} <font face="Symbol"> <span
+ lang="en">&#200;</span>&nbsp; </font>X,<br>
+  <br>
+delete(e, X) = X \ {e},<br>
+  <br>
+empty(X) = true wttw X jest zbiorem pustym.<br>
+&nbsp;</p>
+</blockquote>
+</div>
+<p></p>
+<p>Operacja insert(e,X) pozwala powiêkszyæ zbiór X o nowy element, a
+delete(e,X) usun±æ wskazany element e ze zbioru X. Przyjmuj±c, ¿e w
+standardowej strukturze amb jest dowoln± funkcj± ze zbioru D w E, tak
+¿e amb(X) <font face="Symbol"><span lang="en">Î</span> </font>X
+(amb(X) wskazuje jaki¶ element zbioru X) mo¿na udowodniæ, ¿e w
+standardowej strukturze s³owników wszystkie wy¿ej wymienione postulaty
+s± prawdziwe. </p>
+<p>Rzeczywi¶cie, postulat pierwszy stwierdza, ¿e zbiór pusty nie
+posiada ¿adnych elementów oraz, ¿e&nbsp; wynik funkcji amb dla zbioru
+X, amb(X), jest jakim¶ elementem zbioru X. Postulat drugi
+charakteryzuje operacjê wstawiania elementu do zbioru: wynikiem
+insert(e,X) jest zbiór, do którego nale¿y e oraz wszystkie te elementy,
+które do niego nale¿a³y przed wykonaniem operacji. Postulat trzeci
+charakteryzuje operacjê delete w podobny sposób: wynikiem
+delete(e,X)&nbsp; jest zbiór X bez elementu e, ale wszystkie inne
+elementy, które nale¿a³y do X przed wykonaniem operacji, nale¿± te¿ do
+zbioru otrzymanego w wyniku. Postulat czwarty, opisuje w³asno¶æ
+skoñczono¶ci rozwa¿anych s³owników: je¿eli pewn± skoñczon± liczbê razy
+wyjmiemy (usuniemy) element wskazany przez funkcjê amb z dowolnego
+s³ownika, to otrzymamy zbiór pusty.</p>
+<p></p>
+<div class="lemat">
+<p>Lemat 3.1 Niech D'(E) bêdzie rozszerzeniem standardowej struktury
+s³owników o funkcjê amb, która dowolnemu skoñczonemu podzbiorowi E
+przypisuje jaki¶ z jego elementów. Tak rozszerzona standardowa
+struktura s³owników jest modelem postulatów (D1) - (D5).</p>
+</div>
+<p></p>
+<p>£atwo zauwa¿yæ, ¿e zarówno drzewa BST jak i AVL mog± byæ traktowane
+jako struktury standardowe s³owników w szczególnym przypadku, gdy
+zbiory etykiet maj± okre¶lony porz±dek liniowy. Operacji amb odpowiada
+wtedy funkcja minimum. Znane s± jednak inne implementacje, które
+pozwalaj± wykonaæ operacje s³ownikowe z kosztem sta³ym. S± to tablice z
+mieszaniem. </p>
+<p style="text-align: left;"><b>Pytanie 3</b>: Jaki jest koszt
+znalezienia s³owa w s³owniku reprezentowanym przez wywa¿one drzewo BST
+o &nbsp;1024 li¶ciach ? <br>
+<!-- Odpowied¼: Co najwy¿ej 11 porównañ s³ów..</P> --></p>
+<form>
+  <p><input class="GUZIK" type="button"
+ value="-----Sprawd¼ odpowied¼-----" name="Klik0"
+ onclick="napis(this.form,'Co najwy¿ej 11 porównañ s³ów.')">
+  </p>
+</form>
+<p><br clear="all">
+</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main10_p2.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main10_p4.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table-->
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+
+<td align="left"><A HREF="main15_p1.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main15_p3.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all">
+<A NAME="EDU.wyklad.punkt 2"></A>
+<br clear="all">
+
+<div class="tytulpunktu">2. Problemy decyzyjne</div> 
+
+    <p>Można przypuszczać, że tak duży koszt rozwiązania zadania &quot;wież Hanoi&quot;, 
+    czy zadania &quot;permutacje&quot; wiąże się z długim rozwiązaniem i tylko 
+    takie problemy zabierają &quot;nierozsądnie&quot; dużo czasu. Ale tak nie jest. 
+    Istnieje wiele problemów, których rozwiązanie jest bardzo krótkie, a mimo to 
+    czas potrzebny do wygenerowania tego rozwiązania jest niedopuszczalnie duży. </p>
+
+
+
+
+
+    <p><div class="def">Definicja 2.1 Problemem decyzyjnym nazywamy taki 
+  problem, którego rozwiązaniem są słowa &quot;tak&quot; lub &quot;nie&quot;.<br>
+
+    </div></p>
+
+
+
+
+    <p>W dalszej części tego punktu przedstawimy przykłady problemów 
+    decyzyjnych. </p>
+
+
+
+
+
+    <p><b>Problem układanki</b></p>
+
+
+
+
+
+    <p>Danych jest n kwadratowych kart, gdzie n jest kwadratem liczby naturalnej. W każdej z czterech części karty, wyznaczonej przez 
+    przekątne, wydrukowane są fragmenty kolorowych obrazków. Niektóre obrazki 
+    można złożyć razem (tak, jak w dziecinnej układance), inne nie pasują do siebie.&nbsp; Problem polega na tym, 
+    by zbadać, czy z danych n kart można ułożyć kwadrat tak, by wszystkie obrazki 
+    pasowały kształtem i kolorem, por. D. Harel, rzecz o istocie informatyki. 
+    Algorytmika, WNT, 1987. </p>
+
+
+
+
+
+    <p>Niech rozwiązaniem zadania będzie słowo &quot;tak&quot;, gdy istnieje takie 
+    ułożenie i słowo &quot;nie&quot;, gdy nie można z danych kart ułożyć kwadratu o 
+    wymaganych własnościach. Załóżmy dodatkowo, że karty mają ustaloną 
+    orientację i nie można ich obracać. Jest to więc problem decyzyjny. Na przykład 
+    dla kart przedstawionych na rysunku 15.2(a) nie ma rozwiązania z odpowiedzią 
+    &quot;tak&quot; dla dowolnej liczby n, a dla 
+    kart przedstawionych na rysunku&nbsp; 15.2(b) istnieje rozwiązanie z 
+    odpowiedzią &quot;tak&quot;, jak pokazano na rysunku 15.2(c).</p>
+
+
+
+
+
+    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber1">
+      <tr>
+        <td width="50%">
+        <img border="0" src="Rysunki/Rysunek15_2a.gif" width="300" height="250"></td>
+        <td width="50%">
+        <img border="0" src="Rysunki/Rysunek15_2c.gif" width="300" height="250"></td>
+      </tr>
+</table>
+
+
+
+
+
+    <p>Naiwny algorytm rozwiązania tego problemu polega na przeglądaniu 
+    wszystkich możliwych ułożeń. Dla każdego konkretnego ułożenia kart, algorytm 
+    sprawdza, czy ułożenie jest poprawne.&nbsp; I chociaż samo sprawdzenie 
+    konkretnego ułożenia ma koszt liniowy, to liczba ułożeń powoduje, że&nbsp; koszt algorytmu naiwnego wynosi O(n!). 
+    Aby przejrzeć 25! ułożeń, algorytm pracowałby 400 milionów lat na średnio 
+    szybkim komputerze.</p>
+
+
+
+
+
+    <p><b>Problem spełnialności</b></p>
+
+
+
+
+
+    <p>Jest&nbsp; to jeden z najbardziej znanych i ważnych problemów. Rozważamy 
+    klasyczny rachunek zdań. Poprawne wyrażenia tego rachunku, tzn. formuły, można 
+    zdefiniować następująco:</p>
+
+
+
+
+
+    <p style="text-align: center">formuła ::= zmienna| (formuła
+    <font face="Symbol"><span lang="en">&Ugrave;</span> </font>formuła)| (formuła
+    <span lang="en"><font face="Symbol">Ú</font></span> formuła)| (formuła
+    <span lang="en"><font face="Symbol">&THORN;</font></span>&nbsp; formuła)| <font face="Symbol">
+    <span lang="en">&Oslash;</span> </font>formuła&nbsp; </p>
+
+
+
+
+
+    <p>Mając dane wartości zmiennych, tzw. wartościowanie, możemy pytać, czy 
+    podana formuła jest, czy nie jest prawdziwa przy tym wartościowaniu.</p>
+
+
+
+
+
+    <p>Problem spełnialności polega na sprawdzeniu, czy dana formuła posiada 
+    chociaż jedno wartościowanie (jeden zestaw wartości zmiennych), przy którym 
+    jej wartością jest prawda. Na przykład, formuła <font face="Symbol"><span lang="en">&Oslash;</span>
+    </font>((p <font face="Symbol"><span lang="en">&Ugrave;</span> </font>q)<font face="Symbol"> <span lang="en">&THORN;</span></font>&nbsp; 
+    r)<font face="Symbol"> <span lang="en">&Ugrave;</span></font> (r
+    <font face="Symbol"><span lang="en">Ú</span> </font>(p <font face="Symbol">
+    <span lang="en">&THORN;</span></font> <font face="Symbol">&nbsp;<span lang="en">&Oslash;</span></font> 
+    q)) nie jest spełnialna, przy dowolnym wartościowaniu zmiennych wartością formuły 
+    jest fałsz. Natomiast formuła&nbsp;&nbsp; (<font face="Symbol"><span lang="en">&Oslash;</span>
+    </font>(p <font face="Symbol"><span lang="en">&THORN;</span></font>&nbsp; q)
+    <font face="Symbol"><span lang="en">&Ugrave;</span> </font>(q <font face="Symbol">
+    <span lang="en">Ú</span> </font>(r <font face="Symbol"><span lang="en">&THORN;</span></font>
+    <font face="Symbol">&nbsp;<span lang="en">&Oslash;</span> </font>p))&nbsp;&nbsp; 
+    jest spełnialna, bo np. przy wartościowaniu&nbsp; w(p) = 1, w(q) = 0, w(r) = 
+    0, wartością formuły jest true.</p>
+
+
+
+
+
+    <p>Wszyscy znają metodę zerojedynkową badania, czy 
+    formuła rachunku zdań jest prawdziwa, czy nie. Ta bardzo prosta metoda ma 
+    jednak koszt wykładniczy względem długości formuły: w najgorszym przypadku trzeba sprawdzić 
+    wszystkie wartościowania, a tych możliwych 
+    wartościowań jest 2<sup><font face="Verdana">n</font></sup>, gdzie n jest 
+    liczbą zmiennych. W problemie spełnialności, nie zależy nam na wskazaniu 
+    tego wartościowania, ale tylko na stwierdzeniu, czy istnieje, czy nie. Jest 
+    to problem decyzyjny.</p>
+
+
+
+
+
+    <p>&nbsp;</p>
+
+
+
+
+
+    <p>Wymienione do tej pory przykłady problemów decyzyjnych charakteryzowały 
+    się tym, że nie są dla nich znane żadne rozwiązania o koszcie wielomianowym, 
+    oraz tym, że sprawdzenie, czy dane rozwiązanie jest poprawne można 
+    zrealizować z kosztem wielomianowym.&nbsp; Ponadto nie wiadomo, czy te 
+    problemy rzeczywiście wymagają czasu ponadwielomianowego. O takich 
+    problemach mówimy, że są niedeterministyczne o czasie wielomianowym. 
+    Przyjmijmy następującą definicję.&nbsp; </p>
+
+
+
+
+
+    <p><div class="def">Definicja 2.2&nbsp; Klasa P jest klasą problemów 
+  decyzyjnych, dla których istnieje wielomianowy algorytm rozwiązywania. Klasa 
+  NP, to klasa problemów decyzyjnych, dla których dowód, że podane rozwiązanie 
+  jest poprawne, można zweryfikować w czasie wielomianowym.</div>
+<p></p>
+
+
+
+
+    <p>Klasę NP&nbsp; (N od &quot;niedeterminizm&quot;, P od &quot;wielomain&quot;) można scharakteryzować inaczej, jako klasę tych problemów 
+    decyzyjnych, które można rozwiązać algorytm niedeterministycznym w czasie 
+    wielomianowym. Zauważmy, że klasy P i NP nie stanowią podziału problemów 
+    decyzyjnych. Co więcej, każdy problem decyzyjny, dla którego znany jest 
+    algorytm rozwiązujący w czasie wielomianowym należy też do klasy NP : 
+    sprawdzenie poprawności rozwiązania można zrobić w czasie wielomianowym. 
+    Mamy więc P <font face="Symbol"><span lang="en">Í</span> </font>NP. </p>
+
+
+
+
+
+    <p>Do klasy NP należy wiele znanych problemów dotyczących grafów. Wymienimy 
+    tu trzy z nich: problem komiwojażera, problem ścieżek Hamiltona, problem 
+    kolorowania grafu.</p>
+
+
+
+
+
+<p><b>Problem komiwojażera</b></p>
+   
+<p>Dany jest graf niezorientowany, spójny&nbsp; G = &lt;V, E&gt;, |V| = n oraz funkcja 
+kosztu dla krawędzi c: E -&gt; R+. Wierzchołki grafu interpretować będziemy jako 
+miejscowości, a krawędzie jako łączące je drogi. Funkcja kosztu c, przypisuje każdej drodze 
+jej długość. Zadaniem komiwojażera jest odwiedzić wszystkie miejscowości i 
+wrócić do punktu wyjścia, w taki sposób, by całkowita długość pokonanej drogi była 
+najmniejsza. </p>
+   
+<p>Na rysunku 15.3(a) przedstawiono przykładowy graf i cykl komiwojażera o minimalnym 
+koszcie. </p>
+   
+<p>Ten sam problem można zdefiniować jako zadanie znalezienia najkrótszej drogi 
+przechodzącej przez wszystkie wierzchołki danego niezorientowanego grafu. W 
+wersji decyzyjnej problem ten brzmi: Czy dla danego k istnieje cykl przechodzący przez wszystkie wierzchołki 
+grafu, taki że suma kosztów jego krawędzi jest niewiększa niż k?</p>
+   
+<p>Wbrew pozorom nie jest to problem błahy i nie jest to problem czysto 
+teoretyczny. Warianty tego problemu pojawiają się w układach scalonych, w 
+sieciach telefonicznych, w planowaniu linii montażowych i w robotyce.</p>
+   
+<p>Najprostsze rozwiązanie polega na przeszukiwaniu wszystkich możliwych cykli. 
+Jeśli algorytm znajdzie cykl o koszcie co najwyżej k, zatrzymuje się i daje 
+odpowiedź&nbsp; &quot;tak&quot;. Jeśli takiego cyklu nie ma, algorytm odpowiada &quot;nie&quot;. W 
+przypadku grafu 15.3(a), dla&nbsp; k=28 odpowiedzią jest &quot;tak&quot;, a w przypadku 
+grafu 15.3(b), w którym wagi wszystkich krawędzi wynoszą 1, a k= 12 odpowiedzią 
+jest &quot;nie&quot;.&nbsp; </p>
+   
+
+
+
+
+<p>Koszt  algorytmu naiwnego dla 
+grafu o n wierzchołkach wynosi O(n!) i nie jest znane żadne wielomianowe 
+rozwiązanie tego problemu. Oczywiście, gdyby jakaś wyrocznia wskazała nam 
+właściwy cykl, to łatwo ( z kosztem liniowym) sprawdzilibyśmy, czy koszt tego cyklu jest&nbsp;niewiększy 
+niż k i, czy to 
+jest rzeczywiście cykl przechodzący przez wszystkie wierzchołki. Wniosek: 
+problem komiwojażera należy do klasy NP.</p>
+   
+
+
+
+
+    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber2">
+      <tr>
+        <td width="50%">
+        <img border="0" src="Rysunki/Rysunek15_3a.gif" width="300" height="250"></td>
+        <td width="50%">
+        <img border="0" src="Rysunki/Rysunek15_3b.gif" width="300" height="250"></td>
+      </tr>
+</table>
+   
+
+
+
+
+    <p style="text-align: left"><b>Problem cyklu Hamiltona</b></p>
+
+
+
+
+
+    <p style="text-align: left">Dany jest graf niezorientowany G =&lt;V, E&gt;. Pytamy, 
+    czy istnieje w tym grafie cykl (ew. ścieżka) przechodząca przez każdy wierzchołek 
+    grafu&nbsp; i to przez każdy dokładnie raz?</p>
+
+
+
+    <p>Na rysunku 15.3(b)&nbsp; przedstawiono graf i&nbsp; 
+    ścieżkę Hamiltona. Graf na rysunku 15.3(b) nie ma cyklu Hamiltona, natomiast 
+    graf na rysunku 15.3(a) ma wiele różnych cykli Hamiltona. Algorytm naiwny, jak się domyślamy, analizuje n! 
+    możliwych ścieżek. Jego koszt jest więc bardzo duży. Sprawdzenie natomiast, 
+    czy dana ścieżka przechodzi przez wszystkie wierzchołki i przez każdy tylko 
+    raz, może być zrealizowane z kosztem liniowym. Niestety, żadne rozsądne 
+    rozwiązanie problemu cyklu Hamiltona nie jest do tej pory znane. Problem Hamiltona należy do problemów 
+    NP. </p>
+
+
+
+    <p style="text-align: left">Warto tu zauważyć, że problem Eulera, znalezienia 
+    takiej drogi (albo cyklu) w grafie, która przechodzi przez 
+    wszystkie krawędzie i&nbsp;to przez każdą tylko raz, chociaż wydaje się być 
+    zadaniem bardzo podobnym, to jednak nie jest.&nbsp; W 1736 roku, Euler 
+    znalazł wielomianowe rozwiązanie zadania:</p>
+
+
+<blockquote>
+
+    <ol>
+      <li>
+
+    <p style="text-align: left">Zbadać, czy dany graf jest spójny.</p>
+
+
+      </li>
+      <li>
+
+    <p style="text-align: left">Zbadać, czy liczba krawędzi wychodzących z 
+    dowolnego wierzchołka, poza co najwyżej dwoma (w przypadku ścieżki Eulera), jest parzysta.</p>
+
+
+      </li>
+    </ol>
+
+</blockquote>
+
+<br>
+
+
+
+<p><b>Pytanie 4</B>: Jaki jest koszt powyższego algorytmu znajdowania ścieżki Eulera, jeśli graf jest dany w postaci tablicy list incydencji?</p>
+<!-- <p>Odpowiedź: O(n+m ), gdzie n jest liczbą węzłów grafu, a m liczbą krawędzi</P> -->
+
+
+<FORM>
+
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'O(n+m ), gdzie n jest liczbą węzłów grafu, a m liczbą jego krawędzi.');">
+
+</form>
+
+
+<p><br clear="all">
+
+
+
+
+
+    <p style="text-align: left"><b>Problem kolorowania grafu</b></p>
+
+
+
+
+
+    <p style="text-align: left">Dla ustalonej liczby k, zbadać, czy dany graf 
+    można pokolorować k barwami, tak by sąsiadujące ze sobą wierzchołki (tzn. 
+    połączone krawędzią) miały różne kolory.</p>
+
+
+
+
+
+    <p>Różne wersje tego problemu były znane i badane od wielu lat. W 1852 roku sformułowano 
+    tzw. problem czterech barw: 
+    czy dowolną mapę można pokolorować czterema barwami, tak by dwa sąsiadujące państwa 
+    miały  różne kolory. Przez 120 lat nikt nie mógł udowodnić, że cztery 
+    barwy wystarczą, ale też nikt nie umiał znaleźć przykładu mapy, którą trzeba 
+    by pokolorować pięcioma kolorami. Problem został rozwiązany pozytywnie 
+    dopiero w 1976 roku za pomocą komputera. Pytanie, czy dowolną mapę (graf 
+    płaski) można pokolorować czterema barwami, ma odpowiedź &quot;tak&quot;.&nbsp; 
+    Pytanie, czy graf płaski można pokolorować dwoma kolorami ma łatwe 
+    rozwiązanie. Jest natomiast zaskakujące, że dla&nbsp; trzech kolorów nie 
+    jest znany żaden algorytm o koszcie wielomianowym.&nbsp; Podobnie jest w 
+    przypadku sformułowanego powyżej problemu decyzyjnego: wszystkie znane 
+    algorytmy badania, czy dana liczba k barw wystarczy do pokolorowania danego 
+    grafu są wykładnicze. Problem kolorowania należy do klasy NP.</p>
+
+
+
+
+
+<p><b>Pytanie 5</B>: Ile kolorów jest konieczne, aby pokolorować dowolne drzewo 
+o n wierzchołkach? </p>
+
+
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'2 kolory: kolorujemy naprzemiennie poziomy drzewa. ');">
+</form>
+
+
+
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left">
+<A HREF="main15_p1.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main15_p3.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

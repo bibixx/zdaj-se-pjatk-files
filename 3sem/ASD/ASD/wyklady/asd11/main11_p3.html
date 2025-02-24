@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main11_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main11_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all">
+<br clear="all"><div class="tytulpunktu">
+3. Konstrukcja drzewa kodowego Huffmana</div>
+
+<p>Konstrukcję optymalnego kodu prefiksowego zaproponował David Huffman. W tym 
+punkcie wykładu przedstawimy metodę budowy drzewa kodowego dla optymalnego kodu 
+prefiksowego Huffmana.</p>
+
+<p>Drzewo kodowe Huffmana jest drzewem binarnym, lokalnie pełnym. W każdym 
+wierzchołku wewnętrznym tego drzewa pamiętamy sumę częstości znaków 
+występujących w poddrzewach tego wierzchołka.&nbsp; Każdy wierzchołek drzewa 
+będzie więc miał, oprócz referencji do lewego i prawego poddrzewa, atrybut f, 
+oznaczający częstość występowania znaku lub grupy znaków odpowiadających drzewu 
+o korzeniu w tym węźle.&nbsp; W liściach będą pamiętane dodatkowo znaki 
+kodowanego alfabetu. Do zapamiętania alfabetu oraz wierzchołków tworzonego 
+drzewa, algorytm Huffmana używa kolejki priorytetowej.</p>
+
+<p><b>Szkic algorytmu</b></p>
+
+<p>1. Utwórz kolejkę priorytetową pq zawierającą węzły tworzonego drzewa. 
+Początkowo elementami kolejki są liście drzewa. Porządek elementów w kolejce 
+priorytetowej zależy od częstości przypisanej znakom.</p>
+
+<p>2. Drzewo kodowe buduje się od dołu, od liści, które są traktowane jako 
+drzewa z jednym tylko węzłem. W każdym kroku algorytmu, zamiast kolejnych dwóch wierzchołków, których częstości są najmniejsze, 
+wstawiamy do kolejki priorytetowej&nbsp; pq nowy węzeł, którego&nbsp; etykietą jest suma 
+częstości przypisanych 
+usuniętym węzłom.&nbsp; Punkt 2 powtarzamy, tak długo, aż w kolejce priorytetowej 
+pozostanie tylko jeden element. Będzie to korzeń drzewa kodowego.</p>
+
+<p>Algorytm Huffmana można zaimplementować na wiele sposobów, które zależą od 
+konkretnej implementacji kolejki priorytetowej. Jedną z możliwości, jest użycie 
+kopca zaimplementowanego w tablicy. Opracowanie szczegółów tego algorytmu 
+pozostawiamy Czytelnikowi jako ćwiczenie. Zwróćmy uwagę, że algorytm Huffmana w 
+pewnych przypadkach może działać 
+niejednoznacznie, w tym sensie, że jeśli&nbsp; częstości występowania dwóch grup 
+znaków są takie same, to wybór kolejności odpowiadających im węzłów można 
+ustalić dowolnie, gdyż nie ma on wpływu na długość otrzymanego kodu, ale drzewa 
+kodowe mogą się różnić. </p>
+<p>W przedstawionym poniżej algorytmie &quot;HuffmanKod&quot; zakładamy, że TAB jest 
+tablicą,w której znajdują się znaki 
+kodowanego alfabetu oraz ich częstości występowania w pewnym pliku.&nbsp; </p>
+<p style="text-align: left">&nbsp;<p>
+<div class="def" style="width: 713; ">
+   <TABLE frame="void" rules="none"  >
+         <TR>
+            <TD width="544" height="12" colspan="2">HuffmanKod(TAB : tablica){</TD>
+             
+            <TD width="634" height="12"> </TD>
+             
+         </TR>
+         <tr>
+            <TD width="56" height="12"></TD>
+            <TD width="488" height="12">      //utwórz kolejkę priorytetową z 
+            elementów<br>
+&nbsp;//danej tablicy TAB , uporządkowaną <br>
+&nbsp;//ze względu na atrybut f &nbsp;&nbsp;&nbsp; </TD>
+             
+            <TD width="634" height="12">      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      </TD>
+             
+         </tr>
+         <tr>
+            <TD width="56" height="12"></TD>
+            <TD width="488" height="12">      &nbsp;n := TAB.length;</TD>
+             
+            <TD width="634" height="12">      // n jest liczbą znaków alfabetu</TD>
+             
+         </tr>
+         <TR>
+            <TD width="56" height="12"></TD>
+            <TD width="488" height="12"><strong>for </strong>i :=1<strong> to&nbsp; </strong>(n-1) <strong>do&nbsp; </strong> </TD> 
+            <TD width="634" height="12"></TD> 
+         </TR>
+         <tr>
+            <TD width="56" height="12"></TD>
+            <TD width="488" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; v := new 
+            node;</TD>
+            <TD width="634" height="12">   </TD>
+         </tr>
+         <TR>
+            <TD width="56" height="12"></TD>
+            <TD width="488" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>v.left 
+            := min(pq); pq := delmin(pq); </TD> 
+            <TD width="634" height="12">// min(pq) wybiera węzeł o najmniejszym 
+            atrybucie f</TD> 
+         </TR>
+         <tr>
+            <TD width="56" height="12"></TD>
+            <TD width="488" height="12">   &nbsp;&nbsp;&nbsp;&nbsp; <strong>&nbsp;</strong>v.right 
+            := min(pq); pq := delmin(pq); </TD>
+            <TD width="634" height="12">   &nbsp;</TD>
+         </tr>
+         <tr>
+            <TD width="56" height="12"></TD>
+            <TD width="488" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; v.f := 
+            v.left.f + v.right.f</TD>
+            <TD width="634" height="12">   </TD>
+         </tr>
+         <tr>
+            <TD width="56" height="12"></TD>
+            <TD width="488" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pq := 
+            insert(v,pq);</TD>
+            <TD width="634" height="12">   //dołączenie nowego węzła do kolejki 
+            priorytetowej</TD>
+         </tr>
+         <TR>
+            <TD width="56" height="12"></TD>
+            <TD width="488" height="12">   <STRONG>od;</STRONG>&nbsp;&nbsp;&nbsp;&nbsp; <STRONG>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; </STRONG>
+             </TD>
+            <TD width="634" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="56" height="1"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="488" height="1"></TD>
+            <TD width="634" height="1"> &nbsp;</TD>
+         </TR>
+   </TABLE>
+</div>
+
+<p><b>Koszt algorytmu</b></P>
+
+<p>Algorytm rozpoczynamy od utworzenia kolejki priorytetowej, której elementami 
+są liście tworzonego drzewa kodowego. Koszt utworzenia tej kolejki, o ile 
+zastosujemy algorytm konstrukcji kopca w tablicy, wynosi O(n), gdzie n jest 
+liczbą znaków kodowanego alfabetu. W drugiej części algorytmu konstruujemy 
+drzewo. Zauważmy, że po n-1 krokach, gdzie n jest liczbą&nbsp; znaków kodowanego 
+alfabetu, kolejka zawiera tylko jeden węzeł. Rzeczywiście, w każdej iteracji, z 
+kolejki są wyjmowane dwa elementy i wstawiany jeden nowy węzeł. Oznacza to, że po każdej 
+iteracji liczba elementów zmniejsza się o jeden. Jeśli kolejka 
+priorytetowa została zaimplementowana jako kopiec, to każda z wykonywanych w 
+pętli operacji kosztuje O(lg n) porównań. Wynika stąd, że koszt wykonania pętli 
+&quot;for&quot; możemy oszacować z góry przez O(n <font face="Symbol"><span lang="en">´</span>
+</font>lg n). Ostatecznie, koszt całego algorytmu możemy oszacować przez O(n
+<font face="Symbol"><span lang="en">´</span> </font>lg n).</P>
+
+<p><b>Uwaga</b> Algorytm Huffmana jest algorytmem zachłannym w tym sensie, że w 
+każdym kroku wybiera węzły o najmniejszej częstości.</P>
+
+<p>&nbsp;<div class="lemat">
+  Twierdzenie 4.1&nbsp; Algorytm HuffmanKod buduje drzewo optymalnego kodu 
+  prefiksowego.
+</div>
+
+<p><b>Przykład 3.1</b></p>
+
+<p>Przyjmijmy, że w pewnym tekście występują tylko litery A, F, H, M, N, U, a 
+ich częstości występowania w tysiącach wynoszą odpowiednio:40,8,9,11,7,25. Kolejne fazy działania algorytmu Huffmana przedstawiono na rysunku 11.3.</p>
+
+<table border="0" cellpadding="0" cellspacing="0" 
+style="border-collapse: collapse" bordercolor="#111111" width="80%" id="AutoNumber1">
+  <tr>
+    <td width="48%">
+    <img border="0" src="Rysunki/Rysunek11_3abbis.gif" width="280" height="250"></td>
+	<td width="4%"></td>
+    <td width="48%">
+    <img border="0" src="Rysunki/Rysunek11_3cbis.gif" width="280" height="250"></td>
+  </tr>
+  <tr> <p></p></tr>
+  <tr>
+    <td width="48%">
+    <img border="0" src="Rysunki/Rysunek11_3d.gif" width="280" height="250"></td>
+	<td width="4%"></td>
+    <td width="48%">
+    <img border="0" src="Rysunki/Rysunek11_3ex.gif" width="280" height="250"></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+
+<p>Z otrzymanego drzewa kodowego łatwo odczytujemy kody liter A - 0, F - 1101, H 
+- 1110, M - 1111, N - 1100, U - 10 . Ciąg 11101011011101111101100 jest kodem słowa 
+HUFFMAN.</p>
+
+<p><b>Pytanie 4:&nbsp; </b>Czy koszt algorytmu Huffmana zmieni się, jeśli 
+zamiast struktury kopca, użyjemy tablicy uporządkowanej za pomocą optymalnego 
+algorytmu sortowania, a wstawianie nowego węzła do tablicy zrealizujemy tak jak 
+w algorytmie InsertionSort? <br>
+&nbsp;</p>
+
+<FORM>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'Tak');">
+</p>
+</form>
+<p></p>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main11_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main11_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

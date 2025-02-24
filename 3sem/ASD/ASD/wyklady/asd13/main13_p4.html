@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body style="background-color: whitesmoke;" leftmargin="8" topmargin="8"
+ marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"--><!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr--><!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main13_p3.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main13_p5.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 4"></a><br clear="all">
+<div class="tytulpunktu">4. Algorytm Grahama<br>
+</div>
+<p style="text-align: justify;">Algorytm Grahama&nbsp; rozwi±zywania
+problemu otoczki, znajduje nie tylko zbiór wierzcho³ków wielok±ta tworz±cego 
+otoczkê, ale tak¿e podaje kolejno¶æ, w jakiej te wierzcho³ki wystêpuj± na 
+obwodzie wielok±ta.<br>
+</p>
+<p style="text-align: justify;">Metoda zastosowana w algorytmie
+korzysta z trzech obserwacji: <br>
+</p>
+<ol>
+  <li>punkt p[0], który ma najmniejsz± wspó³rzêdn± y (le¿±cy
+najni¿ej), a
+je¿eli jest ich wiele to taki, który dodatkowo ma najmniejsz±
+wspó³rzêdn± x, musi byæ wierzcho³kiem otoczki wypuk³ej, </li>
+  <li>je¶li uporz±dkujemy wszystkie punkty ze wzglêdu na k±t jaki
+tworzy&nbsp; wektor&nbsp; <span style="text-decoration: underline;">p[0],p</span>&nbsp;
+z dodatnim kierunkiem osi OX, to kolejno¶æ wybierania wierzcho³ków
+bêdzie odpowiada³a ich kolejno¶ci na obwodzie budowanego wielok±ta, </li>
+  <li>je¶li mamy ju¿ zbudowan± otoczkê wypuk³± zbioru Q, to wszystkie pozosta³e 
+  punkty zbioru Q le¿± po lewej stronie ka¿dej krawêdzi otoczki, je¶li 
+  przesuwamy siê po niej w kierunku przeciwnym do ruchu wskazówek zegara. </li>
+</ol>
+<p>W metodzie Grahama, otoczkê budujemy metod± kolejnych prób, rezygnuj±c 
+ewentualnie z wcze¶niej wybranych punktów, je¶li oka¿e siê, 
+¿e nie mog± one byæ 
+wierzcho³kami otoczki. 
+Do zapamiêtania kolejnych wyborów, algorytm Grahama u¿ywa stosu. 
+Po zakoñczeniu dzia³ania
+algorytmu, na stosie znajduj± siê wszystkie wierzcho³ki
+ szukanej otoczki wypuk³ej CH(Q) w kolejno¶ci ich wystêpowania na obwodzie
+ wielok±ta.</p>
+<p style="text-align: justify;"><span style="font-weight: bold;">Szkic
+Algorytmu</span><br>
+</p>
+<div style="text-align: center;"><br>
+</div>
+<div class="def" style="width: 713px;">
+<table frame="void" rules="none" style="width: 100%;"
+ border="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">GrahamCH<br>
+      </td>
+      <td style="vertical-align: top;">(Q: zbiór)<span style="font-weight: bold;">{</span><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">1.<br>
+      </td>
+      <td style="vertical-align: top;">Wybierz punkt o najmniejszej warto¶ci 
+      wspó³rzêdnej y i, je¶li takich punktów jest wiêcej ni¿ jeden, o 
+      najmniejszej wspó³rzêdnej x. Niech to bêdzie p[0].<br>
+      </td>
+    </tr>
+    <tr>
+      <td width="56" height="12">2.</td>
+      <td>Uporz±dkuj pozosta³e punkty q<span lang="en"><font face="Symbol">Î</font></span>Q ze wzglêdu na k±t jaki
+tworzy&nbsp; wektor <span style="text-decoration: underline;">p[0],q</span>&nbsp;&nbsp;
+z dodatnim kierunkiem osi&nbsp; OX. Je¶li kilka punktów tworzy ten sam k±t, to 
+      usuñ wszystkie z wyj±tkiem punktu najbardziej oddalonego od
+p[0] (tzn. takiego, który ma najwiêksz± wspó³rzêdn± y). </td>
+    </tr>
+    <tr>
+      <td width="56" height="12">
+      </td>  
+     <td>Niech&nbsp; p[1],..., p[n] bêdzie uzyskanym ci±giem punktów i niech s
+bêdzie stosem pustym.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="56" height="12">3.<br>
+      </td>
+      <td>s := push(p[0],s);&nbsp; s:= push(p[1],s);&nbsp; s:=
+push(p[2],s); </td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td><span style="font-weight: bold;">for</span> i := 3 <span
+ style="font-weight: bold;">to</span> n <span
+ style="font-weight: bold;">do&nbsp;&nbsp;&nbsp;&nbsp;</span> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="56" height="12"><br>
+      </td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">while</span> (p[i] le¿y na prawo od prostej 
+      utworzonej przez <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      dwa punkty ostatnio w³o¿one na stos )&nbsp; <span
+ style="font-weight: bold;">do</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s := pop(s)<span
+ style="font-weight: bold;">&nbsp;</span></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">&nbsp; &nbsp;  od</span>;<span
+ style="font-weight: bold;">&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;s := push(s,p[i]);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">od }<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>
+<br>
+Wprawdzie w drugim kroku algorytmu jest mowa o porównywaniu k±tów, ale nie jest 
+konieczne ich obliczanie. Wystarczy nam informacja, który z nich jest mniejszy. 
+To jednak mo¿emy wyliczyæ badaj±c iloczyn wektorowy, tak jak w punkcie 2 tego 
+wyk³adu.</p>
+<p style="text-align: justify;"></p>
+<p style="text-align: justify;"><b>Przyk³ad 4.1</b>
+</p>
+<p style="text-align: justify;">Rozwa¿my zbiór punktów przedstawiony na rysunku&nbsp; 
+13.7. Zgodnie z opisan± metod± wybierzemy, jako punkt p[0], punkt A. Na rysunku 
+13.7(a) zaznaczono k±ty, ze wzglêdu na które&nbsp; zbiór zosta³ uporz±dkowany. 
+Aby stwierdziæ np. ¿e k±t jaki tworzy odcinek EA z dodatnim kierunkiem osi X, 
+jest wiêkszy ni¿ k±t jaki tworzy odcinek BA z dodatni± pó³osi± X, wystarczy&nbsp; 
+stwierdziæ, ¿e punkt E le¿y na lewo od odcinka BA.&nbsp; W trzecim kroku 
+algorytmu na stos trafiaj± punkty A, B, C. Te trzy punkty tworz± wielok±t 
+wypuk³y. Teraz przegl±damy wszystkie pozosta³e punkty, aby stwierdziæ, czy le¿± 
+one na lewo od ostatnio znalezionej krawêdzi. W naszym przyk³adzie, punkt D le¿y 
+na prawo od odcinka BC. Musimy wiêc zrezygnowaæ z ostatnio wpisanego na stos 
+punktu C. Poniewa¿&nbsp; D le¿y na lewo od odcinka AB wiêc dopiszemy D do stosu 
+tworz±c krawêd¼ wielok±ta. Nastêpnym rozwa¿anym punktem jest E. Znów 
+stwierdzimy, ¿e E znajduje siê na prawo od BD, a wiêc musimy usun±æ ze stosu 
+punkt D. Punkt B znów pozostaje, bo E znajduje siê na lewo od odcinka AB.&nbsp; 
+Stos zawiera teraz punkty A, B, E, a rozwa¿anym punktem jest w tej chwili punkt 
+F. itd... Gdy dojdziemy do punktu J stos bêdzie zawiera³ punkty ABEGHI. Poniewa¿ 
+J znajduje siê na prawo od HI oraz na prawo od GH , ale na lewo od krawêdzi EG, 
+wiêc musimy wycofaæ ze stosu kolejno I oraz H, a na ich miejsce wpisaæ 
+wierzcho³ek J.</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="75%" id="AutoNumber1">
+  <tr>
+    <td width="33%">
+    <img border="0" src="Rysunki/Rysunek13_7a.gif" width="250" height="250"></td>
+    <td width="33%">
+    <img border="0" src="Rysunki/Rysunek13_7b.gif" width="250" height="250"></td>
+    <td width="34%">
+    <img border="0" src="Rysunki/Rysunek13_7c.gif" width="250" height="250"></td>
+  </tr>
+</table>
+<p style="text-align: justify;"><br>
+<span style="font-weight: bold;">Poprawno¶æ
+algorytmu Grahama</span></p>
+<p style="text-align: justify;"><span style="font-weight: bold;"></span>Niech
+CH(Q) bêdzie zbiorem poszukiwanych wierzcho³ków otoczki wypuk³ej zbioru
+Q.</p>
+
+<p style="text-align: justify;">1. Punkty, które zosta³y usuniête ze
+stosu nie nale¿± do otoczki wypuk³ej CH(Q). <br>
+Przypu¶æmy, ¿e w i-tej iteracji pêtli "while"&nbsp; punkt p[j] jest
+usuwany ze stosu, bo aktualnie rozwa¿any&nbsp; punkt p[i] le¿y na prawo
+od prostej wyznaczonej przez dwa ostatnio w³o¿one na stos punkty p[k] i p[j] (por.
+rysunek 13.8).&nbsp; Punkty p[i], p[0], p[k] nie s±
+wspó³liniowe, bo k±ty jakie tworz±&nbsp;wektory <span
+ style="text-decoration: underline;">p[0]p[i]</span> oraz <span
+ style="text-decoration: underline;">p[0]p[k]</span> z dodatnim kierunkiem
+osi OX s± ró¿ne (krok 2 ). Wynika st±d, ¿e mo¿na utworzyæ trójk±t&nbsp;
+<font face="Symbol">D</font>(p[i],p[0],p[k]), w którego wnêtrzu znajduje siê punkt 
+p[j]. Zatem p[j] nie
+mo¿e byæ wierzcho³kiem budowanej otoczki wypuk³ej CH(Q) i dlatego mo¿emy go 
+usun±æ ze stosu.</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="30%" id="AutoNumber2">
+  <tr>
+    <td width="100%">
+    <img border="0" src="Rysunki/Rysunek13_8.gif" width="250" height="250"></td>
+  </tr>
+</table>
+<p style="text-align: justify;">2. Punkt, który zosta³ do³±czony do
+stosu tworzy razem z innymi na stosie, wielok±t wypuk³y.<br>
+Zauwa¿my najpierw, ¿e do³±czaj±c do wielok±ta wypuk³ego dowolny
+punktu z zakreskowanych na rysunku 13.9 obszarów, otrzymujemy nadal
+wielok±t wypuk³y. Niech ostatnio w³o¿onymi na stos punktami bêd± p[k] i p[j].
+ Zgodnie z wykonanym testem, punkt p[i] zostanie
+do³±czony do stosu, gdy le¿y po lewej stronie wektora&nbsp; <u>p[k]p[j]</u>. 
+Poniewa¿
+ponadto k±t jaki tworzy wektor<span style="text-decoration: underline;">
+p[0]p[i]</span> z dodatnim kierunkiem osi OX jest wiêkszy ni¿ k±t jaki
+tworzy wektor <span style="text-decoration: underline;">p[0]p[j]</span>,&nbsp; mamy gwarancjê, ¿e do³±czany punkt nale¿y do obszaru
+bezpiecznego.&nbsp; Punkty znajduj±ce siê na stosie tworzyæ bêd± wielok±t 
+wypuk³y.</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber3">
+  <tr>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek13_9a.gif" width="250" height="250"></td>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek13_9b.gif" width="250" height="250"></td>
+  </tr>
+</table>
+&nbsp;<p>
+<span style="font-weight: bold;"> Niezmiennik: </span>zbiór punktów
+znajduj±cy siê na stosie tworzy wielok±t wypuk³y, a wszystkie, do tej
+pory przejrzane, punkty zbioru Q znajduj± siê albo wewn±trz, albo na
+jego brzegach.<br>
+<br>
+Poniewa¿ przed wykonaniem pêtli for&nbsp; niezmiennik jest spe³niony i
+jest spe³niony, gdy do³±czamy nowy wierzcho³ek oraz po wykonaniu pêtli &quot;while&quot;, zatem po zakoñczeniu pêtli 
+&quot;for&quot; te¿ jest spe³niony. Zbiór punktów
+na stosie tworzy otoczkê wypuk³± danego zbioru punktów Q.<br>
+<br>
+</p>
+<div class="lemat">Twierdzenie 4.1&nbsp; Algorytm Grahama&nbsp; jest
+poprawnym
+rozwi±zaniem problemu znalezienia otoczki wypuk³ej danego skoñczonego
+zbioru punktów na p³aszczy¼nie.&nbsp;</div>
+
+<br> 
+<div style="text-align: justify;">
+
+<span style="font-weight: bold;">Koszt
+algorytmu Grahama </span></div>
+
+<BR>Wykonanie kroku pierwszego wymaga <font face="Symbol">Q</font>(n) porównañ (szukanie minimum).
+
+Porz±dkowanie zbioru punktów wymaga czasu O(n lg n), je¶li zastosujemy
+jaki¶ szybki 
+algorytm sortowania. W kroku trzecim wykonujemy rzêdu O(n)
+
+iteracji. Aby policzyæ ³±czny koszt wykonania tych iteracji&nbsp; zauwa¿my, ¿e ka¿dy punkt p[i]
+ wk³adamy na stos dok³adnie
+raz.&nbsp;
+ Zatem ³±cznie w ca³ej pêtli &quot;for&quot; wykonamy co najwy¿ej O(n)
+
+operacji push.
+Poniewa¿
+usuwane ze stosu&nbsp; punkty nigdy ponownie nie s± rozpatrywane,
+ zatem
+mo¿emy w sumie wykonaæ co najwy¿ej O(n) operacji pop. Koszt operacji na
+stosie jest sta³y, 
+zatem ³±czny koszt pêtli "for" mo¿na oszacowaæ przez
+
+O(n). Ostatecznie, ca³kowity koszt algorytmu wynosi&nbsp; O(n lg n).</p>
+<p><b><br>
+Pytanie 5:</b> Je¿eli wszystkie punkty zbioru Q znajduj± siê na obwodzie ko³a, 
+to ile razy w algorytmie Grahama konstrukcji otoczki wypuk³ej dla zbioru Q 
+wykonamy operacjê pop usuwania elementu w³o¿onego na stos? </p>
+
+<!-- Odpowied¼: Tak, bo m = O(n*n) -->
+<form>
+  <p><input class="GUZIK" type="button" 
+value="Zobacz odpowied¼"
+ name="Klik0"
+
+ onclick="napis(this.form,' Ani razu.')">
+  </p>
+</form>
+<dir>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main13_p3.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main13_p5.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+</p>
+</dir>
+<!--/td--><!--/tr--><!--/table-->
+</body>
+</html>

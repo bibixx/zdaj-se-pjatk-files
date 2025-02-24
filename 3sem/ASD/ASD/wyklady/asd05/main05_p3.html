@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main05_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main05_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all">
+<A NAME="EDU.wyklad.punkt 3"></A><br clear="all"><div class="tytulpunktu">
+3. Sortowanie przez rozrzucanie</div>
+
+<p><BR>Paradoks? Przecież sortownie, to porządkowanie jakiegoś 
+zbioru, a rozrzucanie kojarzy się z czymś przeciwnym. Niekoniecznie. Rozrzucać 
+też możemy w sposób systematyczny!</p>
+   
+<p>Rozważmy następującą sytuację. Po skończonym egzaminie, w którym brało udział 125 
+studentów, nauczyciel wraca ze stosem prac egzaminacyjnych ułożonych w sposób 
+przypadkowy. Prace należy sprawdzić i utworzyć alfabetyczną listę studentów wraz 
+z ich ocenami.&nbsp; Algorytmy takie jak MergeSort, czy QuickSort nie wchodzą w 
+grę. Zbyt skomplikowane, by mógł je wykonać bezbłędnie człowiek dla tak dużych 
+danych. Algorytm SelectionSort, chociaż prosty, zniechęci każdego dużą liczbą 
+porównań i kłopotami technicznymi związanymi z przeglądaniem pliku 125, potem 
+124 itd. prac. Sądzę, że większość z Państwa wpadnie na pomysł, by najpierw 
+przeprowadzić wstępne &quot;uporządkowanie&quot; np. grupując prace ze względu na pierwszą 
+literę nazwiska. Wystarczy do tego dostatecznie duży stół i jednokrotne 
+przejrzenie wszystkich prac. To jest właśnie &quot;rozrzucanie&quot;. Teraz wystarczy 
+uporządkować prace w każdym z małych, jak należy się spodziewać, plików, by 
+otrzymać posortowany alfabetycznie zbiór prac.</p>
+   
+<p>Możemy też postąpić nieco inaczej. Jeżeli każda praca, oprócz nazwiska, jest 
+opatrzona czterocyfrowym numerem indeksu autora, to podzielmy prace na&nbsp; 10 
+grup, ze względu na pierwszą cyfrę numeru indeksu. Wprawdzie utworzone grupy 
+zawierają teraz więcej elementów niż w poprzedniej metodzie, ale wszystkie razem 
+zajmują dużo mniej miejsca.&nbsp; Teraz każdą grupę prac możemy uporządkować 
+osobno stosując, np. algorytm InsertionSort.</p>
+   
+<p>Algorytmy, o których będzie mowa w dalszej części tego wykładu stosują różne 
+wersje operacji rozrzucania. Dzięki temu ich koszt okaże się liniowy ze względu 
+na liczbę elementów. Niestety, podstawową wadą tych algorytmów są dodatkowe 
+założenia, które muszą spełniać dane. Algorytmy sortujące w modelu drzew 
+decyzyjnych, takie jak QuickSort, czy InsertionSort, mogły być stosowane dla 
+dowolnych danych, ale za to ich koszt był w najlepszym razie liniowo 
+logarytmiczny. </p>
+   
+<p><b>Pytanie 4. </b>Wyobraźmy sobie rekurencyjną wersję procesu sortowania prac 
+studenckich, polegającą na tym, że po pierwszym rozrzuceniu, każdą grupkę prac 
+(nazwiska autorów każdej z nich zaczynają się na tę samą literę) sortujemy 
+rozrzucając znów wszystkie prace na kupki ze względu na drugą literę nazwiska. 
+Na koniec, gdy każda praca leży osobno, łączymy je w jeden ciąg. Ile miejsca 
+zajęłoby nam posortowanie 125 prac, jeżeli prace są napisane na kartkach typu A4 
+(ok. 20 centymetrów szerokości)? </p>
+   
+ 
+<FORM>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'ok. 25 metrów');">
+</p>
+</form>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main05_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main05_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

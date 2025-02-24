@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body style="background-color: whitesmoke;" leftmargin="8" topmargin="8"
+ marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"--><!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr--><!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main12_p2.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main12_p4.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<br clear="all">
+<div class="tytulpunktu">3. Las rozpinaj±cy </div>
+<br>
+<br>
+Niech G = &lt;V, E&gt; bêdzie skoñczonym, spójnym, niezorientowanym
+grafem.<br>
+<br>
+<div class="def"> Definicaja 3.1 Lasem rozpinaj±cym dla grafu G =&lt;V,
+E&gt; nazywamy
+rodzinê drzew<br>
+<div style="text-align: center;">d<sub>1</sub> = &lt;V<sub>1</sub>, T<sub>1</sub>&gt;,...,
+d<sub>k</sub> = &lt;V<sub>k</sub>, T<sub>k</sub>&gt;.<br>
+</div>
+tak± ¿e rodzina zbiorów wierzcho³ków tych drzew tworzy podzia³ zbioru V
+(tzn. zbiory V<sub>1</sub>,...,V<sub>k</sub>&nbsp; s± niepuste i parami
+roz³±czne, a ich sum± jest zbiór wierzcho³ków grafu) , a zbiory T<sub>i</sub>
+, dla i =1,..., k, s± podzbiorami zbioru krawêdzi grafu G.<br>
+</div>
+<br>
+Przyk³ady lasów rozpinaj±cych graf przedstawiono na rysunku 12.5(a) i
+(b). Las rozpinaj±cy na rysunku 12.5(a) sk³ada siê z trzech drzew
+&lt;{A,B,G},{AB,AG}&gt;, &lt;{F,I,E},{FI,IE}&gt;,
+&lt;{H,C,D},{HD,DC}&gt;. Ka¿dy wierzcholek grafu nale¿y do dok³adnie
+jednego z drzew tego lasu. Las na rysunku 12.5(b) sk³ada siê tylko z
+dwóch drzew. Lasem rozpinaj±cym jest te¿ rodzina : {&lt;A, &gt;, &lt;B,
+&gt;, &lt;C, &gt; ...,&lt;I,&gt;}. Ka¿de drzewo tej rodziny sk³ada siê
+z jednego tylko wierzcho³ka i nie posiada krawêdzi.<br>
+<br>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 60%;">
+  <tbody>
+    <tr>
+      <td width="30%"> <img border="0" src="Rysunki/Rysunek12_5a.gif"
+ width="250" height="250"></td>
+      <td width="30%"> <img border="0" src="Rysunki/Rysunek12_5b.gif"
+ width="250" height="250"></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<p><b>Pytanie 4:</b>Czy dwa ró¿ne drzewa lasu rozpinaj±cego mog± mieæ
+wspóln± krawêd¼?&nbsp;<br>
+</p>
+<form>
+  <p><input class="GUZIK" type="button" value="Zobacz odpowied¼" name="Klik0" 
+onclick="napis(this.form,' Nie, bo zbiory wierzcho³ków tych drzew s± roz³±czne.');">
+  </p>
+</form>
+Niech c bêdzie funkcj± kosztu dla grafu G = &lt;V, E&gt;, c: E -&gt;
+R+, i niech bêdzie dany las rozpinaj±cy <br>
+<div style="text-align: center;">LR(G): d<sub>1</sub> = &lt;V<sub>1</sub>,
+T<sub>1</sub>&gt;,..., d<sub>k</sub> = &lt;V<sub>k</sub>, T<sub>k</sub>&gt;
+<br>
+</div>
+grafu G. Za³ó¿my, ¿e e jest krawêdzi± o minimalnym koszcie w¶ród
+krawêdzi, które ³±cz± wierzcho³ki nale¿±ce do ró¿nych drzew tego lasu
+rozpinaj±cego.<br>
+Rozwa¿my rodzinê DR drzew rozpinaj±cych&nbsp; grafu G, które s±
+rozszrzeniem&nbsp; lasu LR(G), tzn, rozwa¿amy drzewa rozpinaj±ce, które
+zawieraj± wszystkie krawêdzie wszystkich drzew danego lasu.<br>
+<br>
+<div class="lemat">
+Twierdzenie 3.1<br clear="all">
+W zbiorze DR nie istnieje drzewo rozpinaj±ce &lt;V,T*&gt; grafu G,
+którego koszt jest najmniejszy w¶ród wszystkich drzew rozpinaj±cych
+rodziny DR i&nbsp; takie, ¿e krawêdz e do niego nie nale¿y .<br>
+</div>
+<br>
+Dowód. Przypu¶æmy przeciwnie, ¿e takie drzewo istnieje d* = &lt;V,
+T*&gt;, <br>
+<div style="text-align: center;">d* <font face="Symbol">Î</font>D
+R,&nbsp;&nbsp;
+e <font face="Symbol">&#207; </font>T* , c(d*) =
+min {c(d): d<font face="Symbol">Î</font>DR}.<br>
+</div>
+Niech e = (u,v) oraz u <font face="Symbol">Î</font> Vi, a v <font
+ face="Symbol">Î</font> Vj dla pewnych dwóch ró¿nych indeksów
+i, j, por rysunek 12.6.<br>
+<br>
+<center>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 30%;">
+  <tbody>
+    <tr>
+      <td width="30%"> <img border="0" src="Rysunki/Rysunek12_6.gif"
+ width="250" height="250"></td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<br>
+Poniewa¿ T* jest drzewem, zatem istnieje dok³adnie jedna droga w tym
+drzewie, ³±cz±ca wierzcho³ki u i v, i która nie przechodzi przez
+krawêd¼
+e ( z za³o¿enia e nie nale¿y do T*). We¼my krawêd¼ (u',v') na tej
+drodze, tak± ¿e u' <font face="Symbol">Î</font> Vi, a v' <font
+ face="Symbol">&#207; </font> Vi. Krawêd¼ (u',v') nie nale¿y do ¿adnego z
+drzew lasu rozpinaj±cego LR(G). St±d i z za³o¿enia krawêd¼ e mia³a
+koszt najmniejszy w¶ród krawêdzi nienale¿±cych do lasu, wynika ¿e&nbsp;
+c(u',v') &gt; c(u,v). <br>
+Tworzymy nowe drzewo rozpinaj±ce grafu G, usuwaj±c z drzewa d* krawêd¼
+(u',v') i zastêpuj±c j± krawêdzi± e. Otrzymane drzewo ma koszt
+miniejszy ni¿ drzewo d*, co jest sprzeczne z przyjêtym za³o¿eniem.<br>
+<br>
+<p>
+</p>
+<p><b>Pytanie 5:</b> Ile co najwy¿ej drzew mo¿e siê znajdowaæ w lesie
+rozpinaj±cym dla danego grafu o n wierzcho³kach? <br>
+</p>
+<form>
+  <p><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0" onclick="napis(this.form,' Co najwy¿ej n drzew.');"> </p>
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main12_p2.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main12_p4.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

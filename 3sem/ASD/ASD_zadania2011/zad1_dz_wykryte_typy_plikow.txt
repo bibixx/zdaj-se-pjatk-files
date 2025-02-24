@@ -1,0 +1,27 @@
+Zad1 Wykryte typy plików w pracach z rozszerzeniami .txt
+========================================================
+Grzegorz Wierzowiecki, 2010-10
+
+
+U osób które nadały plikom rozszerzenie .txt zamiast zwyczajowego, typy plików były wykrywane przez skrypty.
+
+Proszę sprawdzić czy pliki txt zostały przemianowane na odpowiedni typ.
+
+------------------------------------------------------
+# Skrypty przemianowały wstępnie pliki następująco:
+
+NotDetected: Zadanie_01 (rozwiazanie)_Igor Maziarz_s6996_s6996.txt
+s C   
+s7103 C   
+s7174 C   
+s7305 C   
+s7316 C++ 
+s7684 C   
+
+------------------------------------------------------
+# Dodatkowe skrypty dokonały następujących korekt:
+s6996 Java
+s7305 Java
+s7316 Java
+s7684 Java
+

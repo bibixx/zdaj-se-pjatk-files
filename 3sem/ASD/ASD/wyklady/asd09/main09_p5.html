@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr-->
+<!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main09_p4.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main09_p6.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 5"></a><br clear="all">
+<div class="tytulpunktu">5. Konstrukcja kopca w tablicy</div>
+&nbsp;
+<p>Tworzenie tablicy reprezentuj±cej kopiec o n elementach przy u¿yciu
+operacji insert, tzn. przez kolejne wstawiane elementów, jest do¶æ
+kosztowne. Je¶li liczba elementów wynosi n, to koszt utworzenia&nbsp;
+kopca w tablicy wynosi O(n <font face="Symbol"><span lang="en">´</span>
+</font>lg n). Je¿eli&nbsp; liczba elementów w kopcu nie jest z góry
+znana, to musi to siê odbyæ w³a¶nie w taki sposób. Je¶li natomiast,
+znamy z góry liczbê elementów w kopcu, to koszt utworzenia kopca mo¿na
+zmniejszyæ do liniowego. Algorytm konstrukcji kopca w tablicy zosta³
+przedstawiony jako procedura Construct. Procedura ta wykorzystuje
+proces poprawiania ¶cie¿ki, o którym by³a mowa w poprzednim punkcie.</p>
+<p>Dana jest tablica TAB o n elementach. Zadanie polega na takim
+przeorganizowaniu elementów tej tablicy, by reprezentowa³a ona kopiec,
+tzn. chcemy by spe³niona by³a w³asno¶æ czê¶ciowego uporz±dkowania:</p>
+<p style="text-align: center;">(<font face="Symbol">"</font>i) (2i<font
+ face="Symbol">
+<span lang="en">&#163;</span></font> n <span lang="en"><font face="Symbol">&#174;</font></span>TAB[i]
+&lt; TAB[2i]) <font face="Symbol"><span lang="en">&#217;</span> (</font>2i+1
+<font face="Symbol"><span lang="en">&#163;</span></font> n <font
+ face="Symbol">
+<span lang="en">&#174;</span> </font>TAB[i] &lt;
+TAB[2i+1]).&nbsp;&nbsp;&nbsp;&nbsp; (*)</p>
+<p>Idea algorytmu polega na dwóch obserwacjach:</p>
+<p>1. Po³owa elementów w tablicy odpowiada li¶ciom drzewa, a wiêc
+warunek (*) jest dla tych elementów trywialnie spe³niony.</p>
+<p>2. Je¿eli zosta³y utworzone kopce A i B o korzeniach na pozycjach 2i
+oraz 2i+1, to albo etykieta na pozycji i-tej jest mniejsza od TAB[2i],
+TAB[2i+1] i wtedy mamy kopiec o korzeniu na pozycji i-tej, albo tak nie
+jest, i wtedy trzeba poprawiæ jedn±&nbsp; ¶cie¿kê "w dó³ drzewa", tak
+jak w algorytmie usuwania elementu minimalnego. </p>
+<p><b>Algorytm konstrukcji kopca w tablicy</b>.</p>
+<p>Zgodnie z opisan± ide±, algorytm konstrukcji kopca w tablicy, polega
+na sukcesywnym poprawianiu, je¶li trzeba, czê¶ciowego uporz±dkowania
+kopców, których korzenie znajduj± siê kolejno na pozycjach n div 2, n
+div 2-1, ..., 1.</p>
+<p style="text-align: left;">&nbsp;</p>
+<p></p>
+<div class="def" style="width: 713px; height: 208px;">
+<table frame="void" rules="none" width="680" height="150">
+  <tbody>
+    <tr>
+      <td width="366" height="12" colspan="2">construct (TAB : tablica){</td>
+      <td width="812" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="307" height="12"> &nbsp;k : int; &nbsp;&nbsp;&nbsp; </td>
+      <td width="812" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="307" height="12"> n := TAB.length; </td>
+      <td width="812" height="12"> // n jest d³ugo¶ci± tablicy&nbsp; </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="307" height="12"><strong>&nbsp;</strong>k := n div 2;</td>
+      <td width="812" height="12">//na pozycjach k+1,...,n znajduj± siê
+li¶cie budowanego kopca</td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="307" height="12"><strong>&nbsp;while&nbsp; </strong>(k
+&gt; 0) <strong>do </strong> </td>
+      <td width="812" height="12"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="307" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </strong>DownHeap(TAB,n, k);&nbsp;</td>
+      <td width="812" height="12">// utwórz kopiec o korzeniu w TAB[k]</td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="307" height="12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; k :=
+k-1;</td>
+      <td width="812" height="12"> &nbsp;</td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="307" height="12"> <strong>od;</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+      <strong>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; </strong> </td>
+      <td width="812" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="1"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></td>
+      <td width="307" height="1"><br>
+      </td>
+      <td width="812" height="1"> &nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p><b>Analiza poprawno¶ci algorytmu</b></p>
+<p>Niezmiennikiem pêtli "while" jest tu formu³a mówi±ca, ¿e na
+wszystkich pozycjach tablicy TAB pocz±wszy od k+1 do n&nbsp; znajduj±
+siê korzenie poprawnie zbudowanych kopców. S± to kopce jednoelementowe.
+Je¶li procedura DownHeap utworzy kopiec o korzeniu TAB[k],&nbsp; i
+wykonamy instrukcjê "k := k-1;", to po wykonaniu tre¶ci pêtli znów
+spe³niony jest niezmiennik. Po wykonaniu ca³ej pêtli, na pozycji 1 w
+tablicy TAB znajduje siê korzeñ kopca, którego etykietami s± elementy
+tablicy TAB. </p>
+<p><b>Koszt algorytmu</b> </p>
+<p>Niech n bêdzie liczb± elementów w kopcu, a h jego wysoko¶ci±, h=<font
+ face="Symbol"> <span lang="en">ë</span></font>lg(n+1)<font
+ face="Symbol"><span lang="en">&#251;</span></font>. Oszacujemy koszt
+algorytmu budowy kopca w tablicy w przypadku pesymistycznym.&nbsp;
+Przypomnijmy, ¿e liczba porównañ wykonanych przez algorytm
+DownHeap(TAB, x) zale¿y od d³ugo¶ci drogi od wierzcho³ka&nbsp; x od
+li¶cia i wymaga w ka¿dym kroku co najwy¿ej dwóch porównañ dla ustalenia
+w³a¶ciwej zale¿no¶ci miêdzy etykiet± wierzcho³ka i jego nastêpnikami.
+Dla ¶cie¿ki o d³ugo¶ci i wykonamy co najwy¿ej 2i porównañ. Mamy: </p>
+<p style="text-align: center;">W(n) <font face="Symbol"> <span
+ lang="en">&#163;</span> S</font> <sub><font face="Verdana">i=1,...,h</font></sub>&nbsp;
+2<sup><font face="Verdana">h-i
+</font></sup> <font face="Symbol"> <span lang="en">´</span></font> 2i
+.</p>
+<p>Sumowanie rozci±ga siê od 1 do h poniewa¿ rozwa¿amy tylko
+wierzcho³ki wewnêtrzne drzewa, a&nbsp; 2<sup><font face="Verdana">h-i
+</font></sup> odpowiada maksymalnej liczbie wierzcho³ków odleg³ych o i
+krawêdzi od li¶ci drzewa. Po przekszta³ceniu otrzymujemy: </p>
+<p>W(n) = 2<sup><font face="Verdana">h+1</font></sup> <font
+ face="Symbol" size="4"> S</font><sub><font face="Verdana">i=1,...,h</font></sub>&nbsp;
+2<sup><font face="Verdana">-i </font></sup> <font face="Symbol"> <span
+ lang="en">´</span></font> i = 2<sup><font face="Verdana">h+1 </font></sup>
+(1 <font face="Symbol"> <span lang="en">´</span> </font>2<sup><font
+ face="Verdana">-1</font></sup> + 2 <font face="Symbol"> <span
+ lang="en">´</span> </font>2<sup><font face="Verdana">-2</font></sup>
++ 3 <font face="Symbol"> <span lang="en">´</span> </font>2<sup><font
+ face="Verdana">-3</font></sup> +...+ h <font face="Symbol"> <span
+ lang="en">´</span> </font>2<sup><font face="Verdana">-h</font></sup>)
+= </p>
+<p>2<sup><font face="Verdana">h+1 </font></sup>(<font face="Symbol"
+ size="4">S</font><sub><font face="Verdana">j=1,...,h</font></sub>&nbsp;
+<font face="Symbol" size="4"> (S</font><sub><font face="Verdana">i=j,...,h</font></sub>2<sup><font
+ face="Verdana">-i</font></sup>) = 2<sup><font face="Verdana">h+1 </font></sup>(<font
+ face="Symbol" size="4">S</font><sub><font face="Verdana">j=1,...,h</font></sub>&nbsp;
+<font face="Symbol" size="4"> (S</font><sub><font face="Verdana">s=0,...,h
+</font></sub>2<sup><font face="Verdana">-(j+s)</font></sup>) <font
+ face="Symbol"> <span lang="en">&#163;</span> <br>
+<br>
+</font>2<sup><font face="Verdana">h+1 </font></sup>(<font face="Symbol"
+ size="4">S</font><sub><font face="Verdana">j=1,...,h</font></sub> 2<sup><font
+ face="Verdana">-j</font></sup> <font face="Symbol" size="4"> (S</font><sub><font
+ face="Verdana">s=0,...,+</font><span lang="en"><font face="Symbol">&#165;</font></span><font
+ face="Verdana">
+</font></sub>2<sup><font face="Verdana">-s</font></sup>)<font
+ face="Symbol"> <span lang="en">&#163;</span></font> 2<sup><font
+ face="Verdana">h+1 </font></sup>(<font face="Symbol" size="4">S</font><sub><font
+ face="Verdana">j=1,...,h</font></sub> 2<sup><font face="Verdana">-j</font></sup>
+(1/(1-1/2)) =<br>
+<br>
+&nbsp;2<sup><font face="Verdana">h+2
+</font></sup>(<font face="Symbol" size="4">S</font><sub><font
+ face="Verdana">j=1,...,h</font></sub> 2<sup><font face="Verdana">-j</font></sup>
+) =&nbsp; 2<sup><font face="Verdana">h+2
+</font></sup>(1- 1/2<sup><font face="Verdana">h+1</font></sup>)/(1/2)
+=&nbsp; 2<sup><font face="Verdana">h+3
+</font></sup>-4 = 4<font face="Symbol"><span lang="en">´</span></font>2<sup><font
+ face="Verdana">h+1</font></sup> - 4 = 4n =<font face="Symbol"> Q</font>(n).</p>
+<p>Analogicznie najlepszy mo¿liwy koszt tego algorytmu mo¿emy oszacowaæ
+przez&nbsp; </p>
+<p style="text-align: center;"> <font face="Symbol" size="4"> S</font><sub><font
+ face="Verdana">i=1,...,h</font></sub>&nbsp;2<sup><font face="Verdana">h-i
+</font></sup> <font face="Symbol"> <span lang="en">´</span></font> 2
+= 2<sup><font face="Verdana">h+1
+</font></sup> <font face="Symbol" size="4"> S</font><sub><font
+ face="Verdana">i=1,...,h</font></sub> 2<sup><font face="Verdana">-i </font></sup>&nbsp;=
+2n -1 = <font face="Symbol">Q</font>(n).</p>
+<p>Wynika st±d, ¿e koszt algorytmu konstrukcji kopca w tablicy jest
+liniowy.</p>
+<p></p>
+<div class="lemat">
+<p>Lemat 5.1&nbsp; Algorytm konstrukcji kopca w n elementowej tablicy
+ma koszt liniowy <font face="Symbol">Q</font>(n).&nbsp; </p>
+</div>
+<p><b>Pytanie 6</b>: Niech A bêdzie kopcem o 200 wierzcho³kach, a B
+kopcem o 127 wierzcho³kach. Niech etykietami obu drzew bêd± liczby
+naturalne wiêksze od zera. Czy drzewo postaci &lt;A, 0, B&gt;, powsta³e
+z po³±czenia drzew A i B, jest kopcem? </p>
+<!-- <p>Odpowied¼: Tak. B jest pe³nym drzewem binarnym o wysoko¶ci 6, a A jest kopcem o wysoko¶ci 7.</P> -->
+<form><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0"
+ onclick="napis(this.form,'Tak. B jest pe³nym drzewem binarnym o wysoko¶ci 6, a A jest kopcem o wysoko¶ci 7. St±d <A,0,B> jest drzewem doskona³ym.')">
+  <br>
+  <br>
+  <input class="GUZIK" type="button" value="Zobacz odpowiedzi c.d."
+ name="Klik0"
+ onclick="napis(this.form,'W³asno¶æ czê¶ciowego uporz±dkowania jest spe³niona, bo zero jest najmniejsz± z etykiet wystêpuj±cych w tym drzewie.')">
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main09_p4.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main09_p6.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

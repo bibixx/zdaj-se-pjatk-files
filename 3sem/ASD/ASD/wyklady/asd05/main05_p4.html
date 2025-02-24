@@ -1,0 +1,493 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main05_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main05_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all"><A NAME="EDU.wyklad.punkt 4"></A>
+
+<br clear="all">
+<div class="tytulpunktu">4. Sortowanie przez zliczanie</div>
+<p>W tym punkcie omówimy pewien algorytm sortowania, opierający się na bardzo 
+prostym pomyśle. Nie zawsze jednak można go stosować, gdyż wymaga pewnych 
+specjalnych założeń dotyczących danych. </p>
+<p>Niech e<sub><font face="Verdana">1</font></sub>, ..., e<sub><font face="Verdana">n</font></sub> 
+będzie n elementowym ciągiem liczb naturalnych z przedziału [0,k], k<span lang="en"><font face="Symbol">Î</font></span>N. 
+Zakładamy więc, że spełniony jest warunek </p>
+<p style="text-align: center">(( <font face="Symbol">$ </font>k
+<font face="Symbol"><span lang="en">Î</span></font>N) (<font face="Symbol">&quot;
+</font>i <font face="Symbol"><span lang="en">&pound;</span> </font>n)<font face="Symbol"> 
+( </font>e<sub>i</sub><font face="Symbol"><sub> </sub><span lang="en">Î</span></font>N
+<span lang="en"><font face="Symbol">&Ugrave;</font></span> e<sub>i<font face="Symbol">
+</font></sub><font face="Symbol"><span lang="en">&pound;</span> </font>k).</p>
+<p><b>Idea algorytmu</b> </p>
+<p>Dla każdego elementu x danego ciągu, znaleźć liczbę elementów mniejszych lub 
+równych x. Pozwoli to ustalić właściwą pozycję elementu x w ciągu 
+uporządkowanym. Jeżeli dla elementu x istnieje j elementów mniejszych lub 
+równych od niego, to x należy umieścić w ciągu wynikowym na pozycji j-tej.</p>
+<p><b>Algorytm sortowania przez zliczanie</b></p>
+<p>W przedstawionym algorytmie e jest tablicą zawierającą elementy danego ciągu, 
+C jest tablicą pomocniczą, a B tablicą wynikową. Aby ten algorytm działał 
+poprawnie musimy znać wartość parametru k, czyli największą z liczb znajdujących 
+się w ciągu danych. Jeśli liczba ta nie jest znana, to możemy ustalić jej 
+wartość szukając elementu największego w danym ciągu.</p>
+<p style="text-align: left">&nbsp;<p>
+<div class="def" style="width: 816; height: 218">
+   <TABLE frame="void" rules="none" width="782" height="178">
+         <TR>
+            <TD width="591" height="12" colspan="2">CountingSort{</TD>
+             
+            <TD width="68" height="12"></TD>
+             
+            <TD width="656" height="12"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12"><strong>&nbsp;for </strong>i:=0<strong> to </strong>
+            k<strong> do </strong>C[i] :=0<strong> od;&nbsp; </strong></TD> 
+            <TD width="68" height="12"></TD> 
+            <TD width="656" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12"><strong>&nbsp;for </strong>j:=1<strong> to</strong> 
+            n<strong> do </strong>C[e[j]] <strong>:=&nbsp; </strong>C[e[j]]+1<strong> 
+            od;</strong></TD> 
+            <TD width="68" height="12"></TD> 
+            <TD width="656" height="12">// C[j] = liczba elementów ciągu równych 
+            j</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12"><strong>&nbsp;for </strong>i := 1 <b>to</b> k<b> 
+            do</b><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp;</TD> 
+            <TD width="68" height="12"></TD> 
+            <TD width="656" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12">   &nbsp;<strong> </strong>&nbsp;&nbsp;&nbsp;&nbsp; <STRONG>&nbsp;&nbsp; </STRONG>
+             &nbsp;C[i] :=&nbsp; C[i]+ C[i-1] ;&nbsp;</TD>
+            <TD width="68" height="12">   </TD>
+            <TD width="656" height="12">   // C[i] = liczba elementów ciągu <span lang="en"><font face="Symbol">&pound;</font></span> 
+            od i&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12">   <strong>&nbsp;od;
+            </strong></TD>
+            <TD width="68" height="12">   </TD>
+            <TD width="656" height="12">   &nbsp;// e[i] &lt; e[j],&nbsp; to 
+            C[e[i]] &lt; 
+            C[e[j]] dla wszystkich i,j <font face="Symbol"><span lang="en">&pound;</span> 
+            n</font></TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12">   &nbsp;<strong>for
+            </strong>j := n <b>downto</b> 1<b> do</b><strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="68" height="12">   </TD>
+            <TD width="656" height="12">   // umieszczenie elementu e[j] na 
+            właściwej pozycji w B</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12">   &nbsp;&nbsp;&nbsp;&nbsp; B[C[e[j]]] 
+            := e[j];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="68" height="12">   </TD>
+            <TD width="656" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12">   &nbsp;&nbsp;&nbsp;&nbsp; C[e[j] ]:= 
+            C[e[j]] - 1;</TD>
+            <TD width="68" height="12">   </TD>
+            <TD width="656" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12">   &nbsp;<b>od;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="68" height="12">   </TD>
+            <TD width="656" height="12">   &nbsp;//&nbsp;B[1]<font face="Symbol"> <span lang="en">&pound;</span> </font>&nbsp;B[2] <font face="Symbol"><span lang="en">&pound;</span> </font>
+            ...<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            B[n]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"><strong>&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="532" height="1">   &nbsp;<STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG></TD>
+            <TD width="68" height="1">   </TD>
+            <TD width="656" height="1">   </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p style="text-align: left"><b>Przykład 4.1</b></P>
+
+<p style="text-align: left">Niech tablica, którą chcemy posortować zawiera 
+następujące elementy: 3,5,4,1,3,4,1,4. Ponieważ największą wartością w tej 
+tablicy jest liczba 5, zatem potrzebna nam będzie tablica pomocnicza C o sześciu 
+elementach. Tablica C będzie zawierała adresy w tablicy wynikowej, pod którymi 
+powinny się znaleźć dane elementy. </P>
+<center>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="70%" id="AutoNumber1">
+  <tr>
+    <td width="7%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">1</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">2</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">3</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">4</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">5</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">6</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">7</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">8</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">0</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">1</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">2</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">3</td>
+    <td width="7%" align="center" bgcolor="#C0C0C0">4</td>
+    <td width="6%" align="center" bgcolor="#C0C0C0">5</td>
+    <td width="8%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="7%" align="center" bgcolor="#F0F8FF">Dane</td>
+    <td width="6%" align="center" bgcolor="#F0F8FF">3</td>
+    <td width="6%" align="center" bgcolor="#F0F8FF">5</td>
+    <td width="6%" align="center" bgcolor="#F0F8FF">4</td>
+    <td width="6%" align="center" bgcolor="#F0F8FF">1</td>
+    <td width="6%" align="center" bgcolor="#F0F8FF">3</td>
+    <td width="6%" align="center" bgcolor="#F0F8FF">4</td>
+    <td width="6%" align="center" bgcolor="#F0F8FF">1</td>
+    <td width="6%" align="center" bgcolor="#F0F8FF">4</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#E6F0EB">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">0</td>
+    <td width="7%" bgcolor="#E6F0EB" align="center">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">0</td>
+    <td width="8%" align="right">
+    <p align="center" style="text-align: center">1&nbsp; </td>
+  </tr>
+  <tr>
+    <td width="55%" align="center" colspan="9">&nbsp;</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#E6F0EB">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="7%" bgcolor="#E6F0EB" align="center">3</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">1</td>
+    <td width="8%" align="right">
+    <p align="center" style="text-align: center">2 </td>
+  </tr>
+  <tr>
+    <td width="7%" align="center" rowspan="10">&nbsp;</td>
+    <td width="48%" colspan="8" align="center">tablica wynikowa B</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#E6F0EB">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">4</td>
+    <td width="7%" bgcolor="#E6F0EB" align="center">7</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">8</td>
+    <td width="8%" align="right">
+    <p align="center" style="text-align: center">3</td>
+  </tr>
+  <tr>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FF0000" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#E6F0EB">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">4</td>
+    <td width="7%" bgcolor="#E6F0EB" align="center"><b><font face="Verdana">6</font></b></td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">8</td>
+    <td width="8%" align="center">j=8</td>
+  </tr>
+  <tr>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FF0000" align="center">1</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#E6F0EB">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center"><b>1</b></td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">4</td>
+    <td width="7%" bgcolor="#E6F0EB" align="center">6</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">8</td>
+    <td width="8%" align="center">j=7</td>
+  </tr>
+  <tr>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">1</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FF0000" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#E6F0EB">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">1</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">4</td>
+    <td width="7%" bgcolor="#E6F0EB" align="center"><b>5</b></td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">8</td>
+    <td width="8%" align="center">j=6</td>
+  </tr>
+  <tr>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">1</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FF0000" align="center">3</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#E6F0EB">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">1</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center"><b>3</b></td>
+    <td width="7%" bgcolor="#E6F0EB" align="center">5</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">8</td>
+    <td width="8%" align="center">j=5</td>
+  </tr>
+  <tr>
+    <td width="6%" bgcolor="#FF0000" align="center">1</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">1</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">3</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#E6F0EB">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center"><b>0</b></td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">3</td>
+    <td width="7%" bgcolor="#E6F0EB" align="center">5</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">8</td>
+    <td width="8%" align="center">j=4</td>
+  </tr>
+  <tr>
+    <td width="6%" bgcolor="#FFE4E1" align="center">1</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">1</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">3</td>
+    <td width="6%" bgcolor="#FF0000" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#E6F0EB">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">3</td>
+    <td width="7%" bgcolor="#E6F0EB" align="center"><b>4</b></td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">8</td>
+    <td width="8%" align="center">j=3</td>
+  </tr>
+  <tr>
+    <td width="6%" bgcolor="#FFE4E1" align="center">1</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">1</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">3</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FF0000" align="center">5</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#E6F0EB">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">3</td>
+    <td width="7%" bgcolor="#E6F0EB" align="center">4</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center"><b>7</b></td>
+    <td width="8%" align="center">j=2</td>
+  </tr>
+  <tr>
+    <td width="6%" bgcolor="#FFE4E1" align="center">1</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">1</td>
+    <td width="6%" bgcolor="#FF0000" align="center">3</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">3</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">4</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">5</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="6%" align="center" bgcolor="#E6F0EB">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">0</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">2</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center"><b>2</b></td>
+    <td width="7%" bgcolor="#E6F0EB" align="center">4</td>
+    <td width="6%" bgcolor="#E6F0EB" align="center">7</td>
+    <td width="8%" align="center">j=1</td>
+  </tr>
+  <tr>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" bgcolor="#FFE4E1" align="center">&nbsp;</td>
+    <td width="6%" align="center">&nbsp;</td>
+    <td width="37%" align="center" bgcolor="#E6F0EB" colspan="6">tablica 
+    pomocnicza C</td>
+    <td width="8%" align="center">&nbsp;</td>
+  </tr>
+</table>
+</center>
+
+<p>W wierszach 1-3 powyższej tabeli przedstawiono stan 
+tablicy pomocniczej po wykonaniu kolejnych trzech pętli. Kolejne wiersze tablicy 
+C przedstawiają zmiany związane z wypełnianiem tablicy wyjściowej B. Elementy 
+dane przekładamy pod właściwy adres, wskazany w tablicy C, zaczynając od 
+ostatniego elementu ciągu. W każdym kroku, element wkładany, jest zaznaczony na 
+czerwono. I tak liczba 4 powinna trafić na pozycję C[4], czyli pozycję 
+7 w tablicy wyjściowej (bo jest aż 7 elementów w danym ciągu mniejszych bądź 
+równych 4). Zapisujemy 4, a adres w tablicy C modyfikujemy, tak by 
+następną czwórkę, o ile taka znajduje się w ciągu, wpisać na odpowiednie 
+miejsce. Zmiany adresu zaznaczyliśmy pogrubioną czcionką.&nbsp; Następnym elementem wstawionym do tablicy B jest 1. Jej 
+adresem jest C[1], czyli 2. Wstawiamy jedynkę na pozycję drugą w ciągu 
+wynikowym i modyfikujemy adres dla następnej 
+jedynki, itd. <font face="Wingdings">J</font></P>
+
+<p style="text-align: left"><b>Analiza poprawności</b></P>
+
+<p style="text-align: left">Po wykonaniu pierwszych dwóch pętli, C[i]&nbsp; = 
+krotność liczby i w danym ciągu. Po wykonaniu następnej pętli, </P>
+
+<p style="text-align: center">C[i] = x wttw w ciągu e, jest x liczb o 
+wartości&nbsp; <font face="Symbol"> <span lang="en">&pound;</span> </font>
+            i.</P>
+
+<p>Zauważmy, że elementy tablicy pomocniczej C tworzą 
+ciąg uporządkowany niemalejąco. Wszystkie liczby mniejsze lub równe i muszą, po 
+uporządkowaniu, znaleźć się na pozycjach 0 do C[i]. W tablicy B, na wypełnionych 
+pozycjach mniejszych od C[e[j]], znajdują się elementy mniejsze lub równe e[j], a 
+na pozycjach większych - elementy większe od&nbsp; e[j]. Umieszczając e[j] na 
+pozycji C[e[j]] w tablicy B, zapewniamy, że pozycje wypełnione w tablicy B 
+tworzą ciąg uporządkowany niemalejąco.</P>
+
+
+
+<p></P>
+
+<div class="lemat">
+<p>Twierdzenie 4.1&nbsp;&nbsp; Algorytm CountingSort jest poprawnym rozwiązaniem 
+problemu sortowania w strukturze liczb rzeczywistych ze względu na następującą 
+specyfikację:</P>
+<p style="text-align: center">wp = {e[i]<span lang="en"><font face="Symbol">Î</font></span>N, 
+e[i] <font face="Symbol"> <span lang="en">&pound;</span> </font>k dla i =1,...n}, </P>
+<p style="text-align: center">wk = {B[i] <font face="Symbol"><span lang="en">&pound;</span>
+</font>B[i+1] dla i=1,...,n-1, oraz&nbsp; B[1],...,B[n] jest permutacją 
+elementów e[1], ..., e[n]}</P>
+ </div>
+ 
+<p></P>
+
+<p style="text-align: left"><b>Złożoność&nbsp; algorytmu</b></P>
+
+<p>Złożoność czasowa algorytmu mierzona liczbą wykonanych operacji wynosi:</P>
+
+<blockquote>
+  <ul>
+    <li>k + n + (k-1) + 2n przypisań i </li>
+    <li>k-1 + n operacji arytmetycznych</li>
+  </ul>
+</blockquote>
+
+<p>Algorytm wykonuje zatem <font face="Symbol">Q</font>(k+n) operacji. Jeżeli k 
+= O(n), to koszt algorytmu jest liniowy w stosunku do rozmiaru danych. </P>
+
+<p>Złożoność pamięciowa algorytmu zależy od wartości parametru k, i jest 
+liniowa, gdy k=O(n).</P>
+
+<p>Ze względu na użycie tablicy o długości k, algorytm CountingSort jest 
+stosowany w przypadkach, gdy k jest niewielką liczbą naturalną, a elementy ciągu 
+powtarzają się wielokrotnie.</P>
+
+<p>Zauważmy jeszcze, że po dwóch pierwszych pętlach tego algorytmu moglibyśmy 
+wypełnić tabelę wyjściową wpisując do niej tyle jedynek ile wynosi wartość C[1], 
+tyle dwójek ile wynosi C[2] itd.&nbsp; Nie postąpimy tak jednak, bo zależy nam 
+na tym, aby algorytm posiadał cechę stabilności.</P>
+
+<p></P>
+
+<div class="def">
+<p>Definicja 4.1&nbsp;&nbsp; Powiemy, że algorytm sortowania jest stabilny wtedy 
+i tylko wtedy, gdy elementy o tej samej wartości pojawiają się na wyjściu w 
+takiej samej kolejności w jakiej występowały na wejściu. </P>
+
+</div>
+
+<p></P>
+
+
+
+<p><b>Przykład 4.2</b></P>
+
+<p>Wyobraźmy sobie, że liczby 3, 2, 2, 1, 3 są kluczami, ze względu na które 
+chcemy posortować pewne obiekty niekoniecznie liczbowe, np. Ala, Ela, Mela, Ola, 
+Tola, które już są uporządkowane w pewien specjalny sposób. W wyniku 
+zastosowania algorytmu ContingSort otrzymamy kolejność Ola(1), Ela(2), Mela(2), 
+Ala(3), Tola(3). Elementy mające ten sam klucz (np. Ela i Mela), w ciągu 
+wyjściowym występują w takim samym porządku, jak w ciągu wejściowym.<font face="Wingdings"> 
+J</font></P>
+
+
+
+<p><b>Pytanie 5</B>: Jaki jest stan tablicy pomocniczej po wykonaniu algorytmu 
+CountingSort dla ciągu 3,2,1,3,4,2,1,3? </P>
+
+<!-- <p>Odpowiedź: 0,0,2,4,7.</P> -->
+
+<FORM>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,' 0, 0, 2, 4, 7.');">
+</p>
+</form>
+
+<p><br clear="all">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main05_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main05_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

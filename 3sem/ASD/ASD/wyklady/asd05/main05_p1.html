@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+<td align="left"><A HREF="main05_p0.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td><td align="right">&nbsp;
+<A HREF="main05_p2.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td>
+    </tr>
+</table>
+
+<br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><br clear="all">
+    <div class="tytulpunktu">1. Złożoność problemu sortowania, koszt 
+      pesymistyczny</div> 
+
+    <p>W poprzednim wykładzie poznaliśmy kilka podstawowych algorytmów sortowania. Ich 
+    wspólną cechą było wykonywanie porównań elementów w celu ustalenia 
+    ostatecznej ich kolejności. Inną wspólną cechą tych algorytmów była ich 
+    uniwersalność: mogły być stosowane do obiektów dowolnych typów, byle tylko 
+    był na nich określony liniowy porządek. Złożoność 
+    tych algorytmów wahała się od kwadratowej do liniowo-logarytmicznej względem 
+    długości sortowanego ciągu. Teraz zastanowimy się nad złożonością samego 
+    problemu sortowania, tzn. zbadamy, jak kosztowne muszą być 
+    algorytmy rozwiązywania tego problemu.</p>
+  
+
+
+<p></P>
+
+<div class="def">
+<p>Definicja 1.1&nbsp;&nbsp; Drzewo binarne nazwiemy lokalnie pełnym wtedy i 
+tylko wtedy, gdy każdy wierzchołek tego drzewa jest albo liściem (czyli 
+nie ma następników), albo ma dokładnie dwa następniki.</P>
+
+</div>
+
+<p></P>
+
+
+
+<p>Niech Sort będzie dowolnym algorytmem rozwiązującym problem sortowania przez 
+porównywanie elementów.</P><p></P>
+
+<div class="def">
+<p>Definicja 1.2&nbsp; Drzewem decyzyjnym dla algorytmu sortowania Sort zastosowanym do dowolnego n 
+elementowego ciągu, nazywamy etykietowane drzewo binarne, lokalnie pełne, takie że <br>
+(1)&nbsp; etykietami wierzchołków wewnętrznych są elementy porównywane w kolejnych&nbsp; 
+krokach algorytmu Sort, <br>
+(2)&nbsp; krawędzie &quot;w lewo&quot; odpowiadają odpowiedzi TAK na postawione w 
+wierzchołku pytanie, a krawędzie &quot;w prawo&quot; odpowiadają&nbsp; odpowiedzi NIE,<br>
+(3)&nbsp; etykietami liści są uporządkowane niemalejąco permutacje elementów 
+danego ciągu.</P>
+
+</div>
+
+<p></P>
+
+    <p><b>Przykład 1.1</b></p>
+  
+
+
+    <p>Na rysunku 5.1 przedstawiono drzewo decyzyjne algorytmu SelectionSort, 
+    zastosowanego do ciągu trzyelementowego e[1], e[2], e[3].</p>
+  
+
+
+    <p><center><img border="0" src="Rysunki/Rysunek5_1.gif" width="400" height="250"></center></p>
+  
+
+
+    <p>Każde wykonanie algorytmu SelectionSort dla ciągu złożonego z trzech 
+    elementów, ma odpowiadającą mu ścieżkę 
+    w tym drzewie. Liczby i : j zapisane w wierzchołkach drzewa mówią, że 
+    porównywane są elementy&nbsp; i-ty i j-ty sortowanego ciągu. Jeśli e[i]
+    <span lang="en"><font face="Symbol">&pound;</font></span> e[j], to idziemy w lewo, 
+    a w przeciwnym przypadku idziemy w prawo. Liście drzewa zawierają kolejność 
+    w jakiej elementy sortowanego ciągu powinny występować w uporządkowaniu 
+    niemalejącym. Jeżeli sortowane elementy to e[1] = 3, e[2] = 2, e[3] = 5, to 
+    wykonaniu algorytmu SelectionSort dla tego ciągu, odpowiada przejście po 
+    ścieżce od korzenia do liścia (2,1,3). <font face="Wingdings">J</font></p>
+  
+
+
+    <p><b>Przykład 1.2</b></p>
+  
+
+
+    <p>Na rysunku 5.2 przedstawiono drzewo decyzyjne algorytmu InsertionSort, 
+    zastosowanego do ciągu trzyelementowego e[1], e[2], e[3].</p>
+  
+
+
+    <p><center><img border="0" src="Rysunki/Rysunek5_2.gif" width="400" height="250"></center></p>
+  
+
+
+    <p>Jeżeli sortujemy ciąg e[1] = 2, e[2] = 7, e[3] = 5, to wykonaniu 
+    algorytmu InsertionSort odpowiada ścieżka od korzenia do liścia (1,3,2). 
+    Zauważmy, że ścieżka odpowiadająca wykonaniu algorytmu InsetionSort dla 
+    ciągu e[1] = 3, e[2] = 2, e[3] = 5, jest krótsza niż w przypadku algorytmu 
+    SelectionSort.<font face="Wingdings"> J</font></p>
+  
+
+
+<p><b>Pytanie 1</B>: Ile wierzchołków maksymalnie może się znajdować na poziomie&nbsp; 
+k drzewa decyzyjnego (Korzeń jest na poziomie 0, synowie korzenia - na poziomie 
+1 itd)? </p>
+
+<!-- Odpowiedź: Co najwyżej 2^k.</P> -->
+
+<form>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Zobacz odpowiedź-----' NAME='Klik0' 
+onClick="napis(this.form,'Co najwyżej 2^k.')"> </p>
+</form>
+  
+
+
+<p></P>
+
+<div class="lemat">
+<p>Lemat 1.1&nbsp;&nbsp; Jeżeli n jest liczbą liści w drzewie binarnym, a h jego 
+wysokością, to&nbsp; </P>
+<p style="text-align: center">(a) n <font face="Symbol"><span lang="en">&pound;</span> </font>2 <sup>
+    <font face="Verdana">h</font></sup>,<font face="Verdana"><sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </sup></font>(b)&nbsp; h <span lang="en"><font face="Symbol">&sup3;</span> <span lang="en">é</span></font>lg 
+n<font face="Symbol"><span lang="en">&ugrave;</span>.</font></P>
+ </div>
+ 
+<p></P>
+<p>Dowód Lematu 1.1 (a) przeprowadzimy przez indukcję ze względu na h. 
+Oczywiście nierówność (a) jest prawdziwa dla h=0, bo wtedy drzewo składa się 
+tylko z jednego wierzchołka. Załóżmy, że nierówność (a) jest prawdziwa dla 
+wszystkich drzew o wysokości h.&nbsp; 
+ 
+</P>
+
+<p><center>
+<img border="0" src="Rysunki/Rysunek5_3.gif" width="300" height="250" align="left"></center></P>
+
+<p>Rozważmy drzewo o wysokości h+1, por. Rysunek 5.3. </P>
+
+<p>Niech y będzie liczbą wierzchołków wewnętrznych na przedostatnim poziomie 
+tego drzewa. Na mocy założenia indukcyjnego liczbę liści w drzewie do wysokości h możemy 
+oszacować przez 2<sup><font face="Verdana">h</font></sup>-y. Zatem wszystkich 
+liści w drzewie o wysokości h+1 jest co najwyżej 2y + (2<sup><font face="Verdana">h</font></sup>-y). Mamy 
+:</P>
+
+<p style="text-align: center">n <font face="Symbol"><span lang="en">&pound;</span></font> 
+2y + (2<sup><font face="Verdana">h</font></sup>-y) = y + 2<sup><font face="Verdana">h</font></sup> <font face="Symbol"><span lang="en">&pound;</span>&nbsp; 
+2</font><sup><font face="Verdana">h</font></sup><font face="Symbol"> + 2</font><sup><font face="Verdana">h</font></sup><font face="Symbol"> 
+= 2<sup> </sup> </font><sup>h</sup><font face="Symbol"><sup>+1</sup>.</font></P>
+
+
+
+    <p>Na mocy zasady indukcji matematycznej, nierówność (a) jest prawdziwa dla 
+    wszystkich h. </p>
+  
+
+
+    <p>&nbsp;</p>
+  
+
+
+    <p>&nbsp;</p>
+  
+
+
+    <p>Własność (b) otrzymujemy przez zlogarytmowanie nierówności (a) oraz 
+    uwzględnienie faktu, że h jest liczbą naturalną.<font face="Wingdings"> J</font></p>
+  
+
+
+    <p>Drzewo decyzyjne dla dowolnego algorytmu sortującego ciąg n elementowy 
+    musi zawierać ścieżki prowadzące do wszystkich możliwych odpowiedzi, tzn. 
+    wszystkich możliwych permutacji ciągu n elementowego. Wynika stąd, że liczba 
+    liści w tym drzewie musi być co najmniej równa n!. Na mocy Lematu 1.1 
+    wysokość h drzewa decyzyjnego dla algorytmu sortującego ciąg n elementowy 
+    musi spełniać nierówność h<font face="Symbol"> <span lang="en">&sup3;</span> <span lang="en">é</span></font>lg 
+    n!<font face="Symbol"><span lang="en">&ugrave;</span>. </font></p>
+  
+
+
+<p></P>
+
+<div class="lemat">
+<p>Lemat 1.2&nbsp;&nbsp; Każde drzewo decyzyjne dla dowolnego algorytmu 
+sortującego ciąg n elementowy przez porównywanie elementów, ma co najmniej 
+wysokość <font face="Symbol"> <span lang="en">é</span></font>lg n!<font face="Symbol"><span lang="en">&ugrave;</span></font>.</P>
+ </div>
+ 
+<p></P>
+  
+
+
+    <p>Wysokość drzewa&nbsp; decyzyjnego wyznacza ograniczenie górne na 
+    liczbę wykonanych porównań, na dowolnej ścieżce w drzewie decyzyjnym, a co za 
+    tym idzie, determinuje ograniczenie liczby porównań wykonanych przez algorytm 
+    sortujący. Wynika stąd następujące twierdzenie:<br>
+&nbsp;</p>
+  
+
+
+<p><div class="lemat">
+  <p>Twierdzenie 1.3&nbsp; Każdy algorytm Alg sortujący ciąg n elementowy przez 
+  porównania musi wykonać co najmniej <font face="Symbol"> <span lang="en">é</span></font>lg 
+  n!<font face="Symbol"><span lang="en">&ugrave;</span> </font>porównań w 
+  najgorszym przypadku, tzn.</p>
+  
+
+
+    <p style="text-align: center">W(Alg, n)<font face="Symbol"> <span lang="en">&sup3;</span></font> <font face="Symbol"> <span lang="en">é</span></font>lg 
+    n!<font face="Symbol"><span lang="en">&ugrave;</span></font>.</p>
+  
+
+
+</div>
+<p></p>
+
+
+
+    <p>Przypomnijmy, że lg n! <span lang="en"><font face="Symbol">&sup3;</font></span> 
+    n<span lang="en"><font face="Symbol">´</font></span>lgn - n<span lang="en"><font face="Symbol">´</font></span>lg e.&nbsp;Twierdzenie to mówi, że dla każdego algorytmu sortującego ciąg n 
+    elementowy przez porównywanie elementów, zawsze znajdą się takie dane, dla 
+    których algorytm musi wykonać co najmniej <font face="Symbol">Q</font>(n<span lang="en"><font face="Symbol">´</font></span>lgn) 
+    porównań.</p>
+  
+
+
+    <p><b>Uwaga.</b> Algorytm MergeSort wykonuje dla dowolnego n elementowego 
+    ciągu <font face="Symbol">O</font>(n<span lang="en"><font face="Symbol">´</font></span>lgn) 
+    porównań. Jest więc optymalnym algorytmem sortowania, bo górne ograniczenie 
+    czasu działania algorytmu jest zgodne z pesymistyczną dolną granicą 
+    złożoności problemu.</p>
+  
+
+
+<p><b>Pytanie 2</B>: Dla jakich danych algorytm SelectionSort zastosowany do 
+ciągu n elementowego wykonuje co najmniej&nbsp; <font face="Symbol"> <span lang="en">é</span></font>lg 
+  n!<font face="Symbol"><span lang="en">&ugrave;</span></font> porównań?&nbsp;&nbsp; 
+</p>
+
+<!-- Odpowiedź: Dla wszystkich danych.</P> -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Zobacz odpowiedź-----' NAME='Klik0' 
+onClick="napis(this.form,'Dla wszystkich danych.')">
+</form>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td align="left"><A HREF="main05_p0.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main05_p2.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

@@ -1,0 +1,4294 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+  <meta name="author" content="Krzysztof Barteczko">
+  <meta name="description" content="Podstawy programowania (Java)">
+  <meta name="copyright" content="(c) Krzysztof Barteczko PJWSTK 2008">
+  <link rel="stylesheet" type="text/css" href="../STYLE/common.css">   
+  <title>Dynamiczna Java</title></head>
+
+<body>
+<div align="center">
+<a name="DynJav"></a><h1>Dynamiczna Java</h1>
+</div>
+<hr>
+<i>Dynamiczne programowanie pozwala na&nbsp;tworzenie bardzo elastycznych i uniwersalnych aplikacji. W Javie ma ono wiele aspektów.<br></i><span style="font-style: italic;">Java jest językiem interpretowanym. Kompilator tworzy kod bajtowy, ten zaś podlega interpretacji przez wirtualną maszynę Javy. </span><span style="font-style: italic;">Daje to podstawy do dynamicznego, w fazie wykonania, kształtowaniu mechanizmów
+działania programu. Osiągamy to dzięki tzw. refleksji.</span><br style="font-style: italic;"><span style="font-style: italic;">
+Refleksja stanowi również podstawowy, niskopoziomowy mechanizm,
+wykorzystywany
+przy programowaniu komponentowym (JavaBeans).&nbsp;Termin JavaBeans
+wiąże się&nbsp; z koncepcją budowania
+programów z gotowych, łatwo dostosowywanych do konkretnych potrzeb,
+komponentów
+programowych. Idea to niezwykle kusząca, ale jednocześnie – z
+niewiadomych
+powodów – owiana nimbem "wyższego wtajemniczenia".&nbsp; W bardzo
+krótkim wprowadzeniu
+do JavaBeans zobaczymy, że nie ma tu nic tajemniczego ani trudnego, a
+korzyści wiążą się nie tylko z ponownym uzyciem gotowych komponentów,
+ale również z możliwością tworzeniu uniwersalnych kodów dzięki
+machanizmowi nasłuchu zmian właściwości.<br>Kolejny
+dynamiczny aspekt Javy - to adnotacje. Pozwalają one na swoistym
+metapoziomie kształtować semantykę aplikacji i&nbsp;znacząco
+upraszczają wykorzystanie różnych technologii programistycznych.<br>Ostatni
+temat w tym wykładzie dotyczy integracji Javy z&nbsp; językami
+skryptowymi. Tu dynamiczne programowanie w Javie przekracza bariery
+jednej platformy i otwiera przebogate możliwości w tworzeniu
+różnorodnych aplikacji.&nbsp; </span> 
+<hr>
+<a name="DynJav.1"></a><h2>1. Refleksja</h2><a name="DynJav.2"></a><h2>1.1. Dynamiczne ładowanie klas</h2>W klasie Object zdefiniowano metodę getClass. Zastosowana wobec dowolnego obiektu
+zwraca odnośnik do jego klasy, do obiektu klasy java.lang.Class. <br><br>
+<div class="important">Obiekty klasy Class są klasami (to ważne: tu same klasy są obiektami) </div><br>
+<br>
+Możemy wobec takich obiektów stosować różne metody klasy Class z pakietu java.lang, np. <br>
+<br>
+<ul><li>
+getSuperClass() - zwracającą obiekt klasy Class oznaczający klasę bazową danej klasy, </li><li>
+getInterfaces() - zawracającą tablicę obiektów, zawierającą interfejsy danej klasy, </li><li>
+newInstance() - tworzącą nowy obiekt danej klasy. </li></ul>
+
+
+Obiektów-klas nie możemy tworzyć za pomocą wyrażenia new. <br>
+Jedynie poprzez użycie odpowiednich metod uzyskujemy odnośniki do tych obiektów. <br>
+<br>
+Jedną z takich metod jest statyczna metoda klasy Class: <br>
+<br><b>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; forName(String NazwaKlasy); </b><br>
+<br>
+Np. pisząc: <br>
+<br>
+Class c = Class.forName("javax.swing.JButton"); <br>
+<br>lub <br>
+<br>
+Class c = javax.swing.JButton.class; &nbsp;&lt;--- <b>nazwa_klasy.<i>class</i></b> jest <b>literałem</b> oznaczającym<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;obiekt-klasę<br>
+<br>
+uzyskujemy odnośnik do&nbsp; klasy przycisków i możemy się nim posłużyć przy tworzeniu obiektu: <br>
+<br>
+JButton b = (JButton) c.newInstance(); <br>
+&nbsp;&nbsp; <br>
+W statycznym przypadku, gdy wszystko jest ustalone "w źródle" programu, sens
+takich konstrukcji jest niewielki. Ale bardzo często warto odłożyć pewne
+ustalenia do fazy wykonania programu, zwiększając jego elastyczność i uniwersalność.
+Wtedy dynamiczna reprezentacja obiektów-klas bardzo się przydaje. <br>
+<br>
+Najprostszy przykład: odroczenie ustalenia sposobu obsługi akcji na przycisku
+do fazy wykonania programu pokazano na poniższym wydruku.&nbsp; Jako argument
+podajemy nazwę klasy, której obiekt obsługuje akcję. Możemy mieć wiele takich
+(wariantowych) klas i bez żadnej rekompilacji zmieniać sposoby obsługi kliknięcia
+w przycisk.<br>
+<pre>package dynload;
+import javax.swing.*;
+
+class Main extends JFrame {
+
+  static void exit(String s) {
+    System.out.println(s);
+    System.exit(1);
+  }
+
+
+  Main(String actionClassName) {
+    Class actionClass = null;
+    Action act = null;
+    try {
+      actionClass =  Class.forName(actionClassName);
+      act = (Action) actionClass.newInstance();
+    } catch (Exception exc) {
+        exit("Obiekt klasy akcji nie może być utworzony");
+    }
+
+    JButton b = new JButton();
+    b.setAction(act);
+    add(b);
+    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    pack();
+    setLocationRelativeTo(null);
+    setVisible(true);  }
+  
+  public static void main(String args[]) {
+    final String in = JOptionPane.showInputDialog("Podaj nazwę klasy:");
+    if (in != null) {
+      SwingUtilities.invokeLater(new Runnable() {
+        public void run() {
+          new Main(in);
+        }
+      });  
+     
+    }
+  }
+
+}
+
+</pre>
+Uwaga: w powyższym przypadku newInstance zwraca referencję do obiektu klasy Object - stąd potrzeba konwersji do typu Action.<br>
+<br>
+Jeśli teraz przygotujemy dwie klasy, opisujące różne akcje np.<br>
+<pre>package dynload;
+import javax.swing.*;
+import java.awt.event.*;
+
+public class DialogAction extends AbstractAction {
+
+  final static String ACTION_NAME = "Show msg";
+
+   public DialogAction() {
+     super(ACTION_NAME);
+   }
+
+   public void actionPerformed(ActionEvent e) {
+     JOptionPane.showMessageDialog(null, ACTION_NAME);
+   }
+
+}
+</pre>
+i<br>
+<pre>package dynload;
+import javax.swing.*;
+import java.awt.event.*;
+
+public class PrintAction extends AbstractAction {
+
+  final static String ACTION_NAME = "Print";
+
+   public PrintAction() {
+     super(ACTION_NAME);
+   }
+
+   public void actionPerformed(ActionEvent e) {
+     System.out.println("Wykonan akcja: " + ACTION_NAME);
+   }
+
+}
+</pre>
+to uruchomienie głównego programu z argumentem: DialogAction:<br>
+<br>
+java Main dynload.DialogAction<br>
+<br>
+spowoduje, że przycisk w oknie uzyska nazwę Show Msg, a jego klikniecie otworzy okienko komunikaty.<br>
+<br>
+Natomiast po uruchomieniu programu z argumentem PrintAction<br>
+<br>
+java Main dynload.PrintAction<br>
+<br>
+nada przyciskowi nazwę Print, a jego kliknięcie wyprowadzi komunikat na konsolę.<br>
+<br>Uwaga: jak widać podawane nazwy klas winny być kwalifikowane nazwą pakietu.<br>
+<br>
+Takie możliwości istniały w Javie od zawsze. Ale samo dynamiczne ładowanie
+klas to zdecydowanie za mało, by można było tworzyć naprawdę elastyczne programy.
+Dopiero w wersji 1.1&nbsp; Java zyskała prawdziwą elastyczność dzięki wprowadzeniu
+mechanizmów refleksji.<br><br><a name="DynJav.3"></a><h2>1.2. Mechanizm refleksji</h2><br>Podstawowy programistyczny interfejs refleksji (<b>Core Reflection API</b>) realizowany jest przez klasy pakietu <b>java.lang.reflect</b>&nbsp; oraz rozbudowaną klasę Class z pakietu java.lang.<br>
+<br>
+<div class="def"><b>Refleksja</b> oznacza możliwoć wykonywania W TRAKCIE WYKONANIA PROGRAMU następujących działań:&nbsp; <br>
+<ul><li>uzyskiwania pełnej informacji o charakterystykach klasy (pola, metody, ich charakterystyki) </li><li>działań na polach danego obiektu, poprzez ich nazwy,&nbsp; </li><li>aktywowanie metod na rzecz danego obiektu poprzez ich nazwy i z podaniem argumentów.</li></ul>
+</div><br>
+<br>
+Użycie refleksji pozwala m.in. na: <br>
+&nbsp; <br>
+<ul><li>stwierdzenie jakie i z jakimi argumentami metody występują w danej
+klasie (np. podawanej dynamicznie w trakcie wykonania programu) </li><li>dynamiczne wywoływanie metod (specyfikowanych w trakcie wykonania programu)
+na rzecz jakiego obiektu (też dynamicznie ustalanego), </li><li>dynamiczne uzyskiwanie i modyfikacje wartości pól obiektu. </li></ul>
+Uzywając mechanizmów refleksji do metod i pól odwołujemy się poprzez ich nazwy, a nie identyfikatory. <br>
+Na czym polega różnica wobec statycznego przypadku? <br>
+<br>
+W statyce odwołania są skonkretyzowane na etapie kompilacji. <br>
+Piszemy np. b.getText(). I tak już zostanie na zawsze. <br>
+W dynamice konstrukcja jest całkiem inna - właśnie posługująca się nazwą metody. Piszemy raczej tak: b.invokeMethod("getText"). <br>
+Tu invokeMethod jest naszą własną metodą. Jako argument podajemy nazwę metody
+klasy, a ponieważ jest to String, możemy go zmieniać w każdym momencie wykonania
+programu. Np. możemy napisać: b.invokeMethod(s), a kolejne podstawienia pod
+s różnych nazw metod będzie zmieniać znaczenie tej linii programu. Właśnie
+w invokeMethod używamy środków refleksji.
+<br>&nbsp;<br>Klasy pakietu java.lang.reflect
+<br>
+<table border="1" cellspacing="1" width="623">
+<tbody><tr><td style="font-weight: bold; text-align: center;" valign="middle" width="14%">Klasa</td><td style="font-weight: bold; text-align: center;" valign="middle" width="86%">Przeznaczenie</td></tr><tr><td valign="middle" width="14%">Array&nbsp;</td><td valign="middle" width="86%">Tworzenie tablic, uzyskiwanie i ustalanie wartości elementów</td></tr><tr><td valign="middle" width="14%">Constructor&nbsp;</td><td valign="middle" width="86%">Informacja i dostęp do danego konstru
+ktora danej klasy. W szczególności wykorzystanie dla tworzenia obiektu.</td></tr><tr><td valign="middle" width="14%">Field&nbsp;</td><td valign="middle" width="86%">Informacja i dostęp do pola obiektu. Pobranie i zmiana wartości pola.</td></tr><tr><td valign="middle" width="14%">Method&nbsp;</td><td valign="middle" width="86%">Informacja o danej metodzie danej klasy. Dynamiczne wywołanie metody na rzecz danego obiektu.
+</td></tr><tr><td valign="middle" width="14%">Modifier&nbsp;</td><td valign="middle" width="86%">Uzyskiwanie informacji o modyfikatorach składowej obiektu lub klasy.</td></tr></tbody>
+</table>
+<br>
+&nbsp;<br>
+Użyteczne metody klasy java.lang.Class
+<br>&nbsp; 
+<table border="1" cellspacing="1" width="623">
+<tbody><tr><td style="font-weight: bold; text-align: center;" valign="middle" width="45%">Metoda</td><td style="font-weight: bold; text-align: center;" valign="middle" width="55%">Przeznaczenie</td></tr><tr><td valign="middle" width="45%">getClasses()&nbsp; <br>getDeclaredClasses()&nbsp;</td><td valign="middle" width="55%">Zwraca tablicę obiektów klasy Class, które są składowymi danej klasy.</td></tr><tr><td valign="middle" width="45%">getConstructors()&nbsp; <br>getDeclaredConstructors()</td><td valign="middle" width="55%">Zwraca tablicę obiektów klasy Constructor; są to konstruktory danej klasy</td></tr><tr><td valign="middle" width="45%">getConstructor(Class[]) getDeclaredConstructor(Class[])&nbsp;</td><td valign="middle" width="55%">Zwraca obiekt konstruktor (obiekt klasy konstruktor), który ma podane typy argumentów&nbsp;</td></tr><tr><td valign="middle" width="45%">getMethods()&nbsp; <br>getDeclaredMethods()&nbsp;</td><td valign="middle" width="55%">Zwraca tablicę, zawierającą odnośniki do metod klasy. Metody są obiektami klasy Method.</td></tr><tr><td valign="middle" width="45%">getMethod(String, Class[]) <br>getDeclaredMethod(String, Class[])&nbsp;</td><td valign="middle" width="55%">Zwraca metodę o podanej nazwie i podanych argumentach jako obiekt klsy Method.</td></tr></tbody>
+</table>
+<br>Uwaga : Rozróżnienie pomiędzy metodami mającymi i nie mającymi w nazwie tekstu "Declared" jest następujące: 
+<ul><li>
+    
+metody bez "Declared" zwracają składowe tylko publiczne, ale jednocześnie również dziedziczone, 
+    </li><li>
+    
+metody z "Declared" zwracają wszystkie składowe (również prywatne i zabezpieczone), ale bez dziedziczonych
+    </li></ul><br><a name="DynJav.4"></a><h2>1.3 &nbsp;Przykłady wykorzystania refleksji</h2>Przypomnijmy sobie najpierw
+prezentację różnych rodzajów ramek (wyklad o komponentach GUI). <br>Posłużył
+jej następujący program, w którym w sposób dynamiczny uzyskujemy informacje
+o polach klasy.<br>
+<pre>import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.*;
+import java.lang.reflect.*;
+
+public class Ramki extends JFrame {
+
+   // Pola klasy określają różne rodzaje ramek
+   private Border
+     // empty = BorderFactory.createEmptyBorder(),
+     blackLine = BorderFactory.createLineBorder(Color.black),
+     blueLine3 = BorderFactory.createLineBorder(Color.blue, 3),
+     // titled1 = BorderFactory.createTitledBorder("Tytuł"),
+     titled2 = new TitledBorder(blueLine3,"Tytuł",
+                   TitledBorder.CENTER, TitledBorder.CENTER,
+                   new Font("Dialog", Font.BOLD | Font.ITALIC, 16),
+                   Color.blue),
+     etched = BorderFactory.createEtchedBorder(),
+     etchedC = BorderFactory.createEtchedBorder(Color.red, Color.yellow),
+     // raisedBevel = BorderFactory.createRaisedBevelBorder(),
+     // loweredBevel = BorderFactory.createLoweredBevelBorder(),
+     matteColor = BorderFactory.createMatteBorder(5, 10, 5, 15, Color.red),
+     matteIcon = new MatteBorder(new ImageIcon("FastForward24.gif")),
+     softBevR = new SoftBevelBorder(SoftBevelBorder.RAISED),
+     softBevL = new SoftBevelBorder(SoftBevelBorder.LOWERED),
+     compound1 = BorderFactory.createCompoundBorder(softBevR, softBevL),
+     compound2 = BorderFactory.createCompoundBorder(blueLine3, compound1),
+     compound3 = BorderFactory.createCompoundBorder(compound1, matteIcon);
+
+
+  Ramki() {
+    super("Prezentacja ramek");
+    getContentPane().setLayout (new GridLayout(0,4,5,5));
+
+    // Klasa tego obiektu
+    Class c = getClass();
+
+    // Uzyskanie tablicy wszystkich zadeklarowanych pól tej klasy
+    Field[] field = c.getDeclaredFields();
+
+    // Przebiegamy po polach-ramkach
+    for (int i=0; i&lt; field.length; i++) {
+
+      // Nazwa pola (zmiennej) - opisującego kolejną ramkę
+      String fldName = field[i].getName();
+
+      // Tę nazwę wypiszemy na etykiecie
+      JLabel l = new JLabel(fldName, JLabel.CENTER);
+
+      // Uzyskanie referencji do obiektu, reprezentowanego przez
+      // pole field[i] tego (this) obiektu. Czyli - do kolejnej ramki
+
+      Object ramka = null;
+      try {
+        ramka = field[i].get(this);
+      } catch (IllegalAccessException exc) { // Ten wyjatek może wystąpić
+          exc.printStackTrace();             // gdy dostęp do pola jest zabroniony
+      }                                      // np. z innej klasy do prywatnego pola
+
+      // Dostaliśmy oczywiście ramkę, ale jako Object
+      // - konieczna konwersja do Border
+
+      l.setBorder((Border) ramka);
+
+      getContentPane().add(l);
+    }
+
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    pack();
+    show();
+  }
+
+  public static void main(String[] args) {
+    new Ramki();
+  }
+}
+</pre>
+Skrupulatny Czytelnik zapewne zauważy, zę prezentacja jest teraz nieco inna niż w rozdziale o GUI (zob. rysunek).<br>
+<br>
+<img src="images/Ramki.jpg" alt="r" border="1" height="263" width="531">
+<br>
+<br>
+W programie, w definicjach pól klasy zmieniono (w stosunku do poprzedniej
+prezentacji) niektóre własciwości ramek, niektóre zaś ramki usunięto (za
+pomocą komentarzy). Wszystkie manipulacje na zestawie ramek do prezentacji
+- dzięki refleksji - wykonujemy wyłącznie "na" polach klasy (definiujących
+ramki). Możemy więc w prosty sposób dodac nowe ramki, i - jak widzieliśmy
+- usunąć inne.<br>
+Takie zastosowanie refleksji&nbsp; znacznie ograniczyło pracochłonności pisania kodu. <br><br>Drugi przykład dotyczy dynamicznego wywołania metod.<br>Program daje użytkownikowi wybór co do następstw
+przyciśnięcia
+jakiego przycisku. Co więcej, wyborów takich użytkownik może dokonywać
+w
+fazie wykonania programu. <br>
+Zestaw możliwych akcji (na przyciskach) będzie zawarty w klasie
+ActionsSet np. <br>
+<pre>public class ActionSet {
+
+ public void dodaj() { show("Dodaj"); }
+ public void usuń() { show("Usuń"); }
+ public void zastąp() { show("Zastąp"); }
+ public void szukaj() { show("Szukaj"); }
+ public void otwórz() { show("Otwórz"); }
+
+ private void show(String string) {
+   JOptionPane.showMessageDialog(null, string);
+ }
+
+}</pre>Opcje
+dla użytkownika będą przedstawione w menu kontekstowym, otwieranym
+na przycisku. Z tego menu może on wybrać (wielokrotnie i różnie w
+trakcie
+działania programu) co konkretnie ma się stać, jeśli przyciśnie ten
+przycisk.<br>
+<br>Poniższy wydruk pokazuje konstrukcję programu. Warto zwrócić
+uwagę&nbsp;na zmienną liczbę argumentow metod refleksji.<br>
+
+<pre>import java.lang.reflect.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class ReflectionTest extends JFrame implements ActionListener {
+
+  Method currAction = null; // bieżąca metoda obsługi
+  Class actionClass = null; // klasa obsługi
+  Object actionObject = null; // obiekt obsługi
+  JPopupMenu popUp = null; // menu kontekstowe z wyborem obsługi
+  JButton b;
+
+  public ReflectionTest() {
+    super("Test refleksji");
+    try {
+      actionClass = Class.forName("ActionSet");
+      actionObject = actionClass.newInstance();
+    } catch (Exception exc) {
+      throw new RuntimeException("Wadliwa klasa obsługi");
+    }
+
+    popUp = new JPopupMenu();
+    createMenuItems();
+
+    b = new JButton("Użyj prawego klawisza myszki, by ustalić akcję");
+    b.setFont(new Font("Dialog", Font.BOLD, 24));
+    b.addActionListener(this);
+    b.setComponentPopupMenu(popUp); 
+
+    setLayout(new FlowLayout());
+    add(b);
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    pack();
+    setLocationRelativeTo(null);
+    setVisible(true);
+  }
+
+  void createMenuItems() {
+    Method mets[] = null;
+    try {
+      mets = actionClass.getMethods();
+    } catch (Exception exc) {
+      throw new RuntimeException("Niedostępna info o metodach klasy obsługi");
+    }
+
+    for (Method m : mets) {
+      if (m.getDeclaringClass() == actionClass) {
+        String name = m.getName();
+        JMenuItem mi = new JMenuItem(name);
+        mi.addActionListener(this);
+        popUp.add(mi);
+      }
+    }
+  }
+
+  void setCurrentAction(String action) {
+    try {
+      currAction = actionClass.getMethod(action); // zm. liczba arg.!!!
+      b.setText("Teraz akcją jest: " + currAction.getName() + " - kliknij!");
+    } catch (Exception exc) {
+      throw new RuntimeException("Nieznana metoda obsługi");
+    }
+  }
+
+  public void actionPerformed(ActionEvent e) {
+    Object src = e.getSource();
+    if (src instanceof JMenuItem)
+      setCurrentAction(((JMenuItem) src).getText());
+    else {
+      try {
+        currAction.invoke(actionObject); // zmienna liczba arg. !!!
+      } catch (Exception exc) {
+        JOptionPane.showMessageDialog(null, "Akcja na przycisku nieustalona!");
+      }
+    }
+  }
+
+  public static void main(String args[]) {
+    new ReflectionTest();
+  }
+
+}
+</pre><br><div style="text-align: left;">
+<span style="font-style: italic;">Zobacz działanie programu</span></div> 
+<applet codebase="demo" code="starterApplet.StarterApplet.class" archive="StarterApplet.jar" align="left" height="70" vspace="20" width="250">
+<param name="className" value="reflectmet.ReflectionTest">
+<param name="title" value="Demo programu ReflectionTest"><param name="sourceCode" value="reflectmet/source.html">
+<param name="hasArgs" value="no"><param name="hasConsole" value="no">
+</applet>
+<br><br><br><br><br><br><br><br>W programie korzystamy z klasy Method. Uzyskując odnośnik do konkretnej metody,
+możemu ustalić ją jako obsługującą zdarzenie (metoda setCurrentAction). Przy
+zajściu zdarzenia możemy "pośrednio" (dynamicznie) wywołać jego obsługę.
+Służy temu metoda invoke z klasy Method, użyta w actionPerformed. <br><br>Ogólnie:<br><br><ul><li>uzyskanie metody o nazwie name zadeklarowanej w klasie c i mającej określone przez t1, t2, ... typy argumentów:</li></ul><div style="margin-left: 40px;">String name = ....<br>Class t1 = ....<br>Class t2 - ...<br>Method m = c.getDeclaredMethod(name [, t1 [, t2 ...] )<br></div><br><div style="margin-left: 40px;">w szczegolności metoda o nazwie name bez argumentów może być uzyskana przez getMethod(name).<br></div><br><ul><li>wywolanie metody m na rzecz obiektu trg z argumentami x, y, z:</li></ul><div style="margin-left: 40px;">m.invoke(trg, x, y, x)<br></div><br>
+<br>
+<hr>
+<a name="DynJav.5"></a><h2>2. JavaBeans</h2><a name="DynJav.6"></a><h2>2.1. Pojęcie JavaBean</h2>
+<br>
+<div class="def"><b>JavaBean</b> - (bean – ziarno) – to programowy komponent "wielokretnego
+użytku", którego właściwości i funkcjonalność mogą być odczytywane i/lub
+zmieniane uniwersalnymi środkami programistycznymi.</div><br>
+<br>
+Uwaga: JavaBean oznacza zarówno obiekt, jak i klasę tego obiektu. Rozróżnienie
+zawsze jasno wynika z kontekstu. O JavaBean będziemy mówić krócej "ziarno".<br>
+<br>
+Co oznacza powyższa definicja?<br>
+Gdy wbudowujemy zewnętrzny komponent-ziarno do naszego programu, mamy do
+dyspozycji środki programistyczne, które pozwalają uzyskać o nim informacje:<br>
+<br>
+<ul><li>jakie ma właściwości? jakie metody służą do ich pobierania i ustalania? </li><li>jakie obsługuje zdarzenia? jakie zdarzenia mogą się mu przytrafiać? </li><li>jakie metody udostępnia otoczeniu (eksportuje)? </li></ul>
+Uniwersalność sposobów odczytywania i/lub zmieniana charakterystyk obiektu-ziarna opiera się na:<br>
+<ul><li>uzgodnionym protokole. dotyczącym informacji o ziarnie (standardowe wzorce deklaracji metod i/lub klasy informacyjne) </li><li>standardowych środkach pobierania informacji (introspekcja - realizowana przez klasę Introspector z pakietu java.beans) </li><li>standardowych środkach dostosowania obiektu </li></ul>
+<br><a name="DynJav.7"></a><h2>2.2.&nbsp; Właściwości i akcesory </h2>
+Ziarna mają właściwości (atrybuty).<br>
+<br>
+<div class="def">Dostęp do własciwości zapewniają metody klasy-ziarna nazywane akcesorami..<br>
+Akcesor pobierający właściwości nazywa się getter, a ustalający – setter.</div><br>
+<br>
+Wyróżniamy własciwości <b>proste </b>(w tym binarne) oraz właściwości <b>indeksowane</b>.<br>
+Właściwości proste mają jedną wartość, właściwości indeksowane – wiele wartości, przedstawianych jako tablica.<br>
+<br>
+<div class="syntax">Standardowe wzorce deklaracji akcesorów są następujące<br>
+<br>
+Dla&nbsp; prostej (niebinarnej) własciwości o nazwie NNN i typie Typ<br>
+<br>
+getter: Typ getNNN() <br>
+setter: void&nbsp; setNNN(Typ)<br>
+<br>
+np. dla ziarna javax.swing.JButton i własciwości background mamy <br>
+getter: Color getBackground()<br>
+&nbsp;i setter: void setBackground(Color).<br>
+<br>
+Dla właściwości binarnej o nazwie NNN:<br>
+<br>
+getter: boolean isNNN()<br>
+setter: void setNNN(boolean)<br>
+<br>
+np. boolean isVisible(), setVisible(boolean)<br>
+<br>
+Dla właściwości indeksowanej o nazwie NNN, której wartości reprezentowane są jako tablice elementów typu Typ:<br>
+&nbsp;<br>
+getter elementu:&nbsp; Typ getNNN(int) // zwraca wartość&nbsp; podanego indeksu właściwości<br>
+setter elementu: vois setNNN(int, Typ) // ustala wartość&nbsp; podanego indeksu właściwości<br>
+<br>
+getter tablicy: Typ[] getNNN()<br>
+setter tablicy: void setNNN(Typ[])<br>
+</div><br>
+<br>
+Właściwości ziarna mogą być <b>związane (bounded)</b>. <br>
+<br>
+O zmianie związanej właściwości ziarna mogą być zawiadamiane inne komponenty i reagować na tę zmianę. <br>
+<br>
+Właściwości ziarna mogą być <b>ograniczane (constrained)</b>.<br>
+Ograniczana właściwość – to taka, o której zmianie powiadamiane są zainteresowane
+inne komponenty i są pytane o zgodę na tę zmianę. Jeśli którykolwiek z komponentów
+nie da takiej zgody (zawetuje zmianę)&nbsp; – zmiana nie dochodzi do skutku.<br>
+<br>
+Setter związanej i/lub ograniczanej właściwości ma obowiązek wygenerować zdarzenie klasy <b>PropertyChangeEvent</b>..<br>
+<br>
+Klasy-ziarna , mające związane właściwości musżą dostarczyć metody przyłączania słuchaczy zmian właściwości: <b>addPropertyChangeListener(PropertyChangeListener)</b><br>
+<br>
+Klasy-ziarna, mające ograniczane właściwości, muszą dostarczyć&nbsp; metody <b>addVetoableChangeListener(VetoableChangeListener)</b>.<br>
+<br>
+Ziarna możemy wykorzystywać, możemy też je tworzyć (w znaczeniu: definiować klasę ziarna)<br>
+<br>
+Tworzenie ziarna (jako klasy) wymaga zdefiniowania klasy,&nbsp; która:<br>
+<ul><li>stosuje ogólnie przyjęte wzorce sygnatur metod&nbsp; i/lub uzupełniona jest
+przez dodatkową specjalną klasę opisującą "niestandardowe" informacje o ziarnie
+(implementacja interfejsu BeanInfo) </li><li>zapewnia serializację obiektów</li><li>zawiera konstruktor bezparametrowy </li><li>uzwględnia działania w środowisku wielowątkowym (do obiektu klasy może równocześnie odwoływać się kilka wątków) </li></ul>
+<br><a name="DynJav.8"></a><h2>2.3.&nbsp; Nasłuch i wetowanie zmian właściwosci</h2>
+Zmiana właściwości związanej lub ograniczanej powinna generować zdarzenie typu <b>PropertyChangeEvent</b>.<br>
+<br>
+Komponenty (obiekty) zainteresowane w śledzeniu zmian&nbsp; tej własciwości&nbsp; muszą implementować interfejs <b>PropertyChangeListener</b>.&nbsp; W ten sposób stają się słuchaczami zmian właściwości.. <br>
+Komponenty, które mogą wetować zmiany właściwości muszą implementować interfejs <b>VetoableChangeListener</b> (będą więc słuchaczami zmian właściwości ograniczonych i będę miały możliwość wetowania tych zmian).<br>
+<br>
+Zdarzenie typu PropertChangeEvent możemy zapytać o:<br>
+<ul><li>nazwę właściwości -&nbsp; String getPropertyName()</li><li>starą wartość własciwości&nbsp; (przed zmianą) – Object getOldValue()</li><li>nową wartość własciwości – Object getNewValue() </li></ul>
+Interfejs <b>PropertyChangeListener</b> ma jedną metodę:<br>
+<br>
+<b>&nbsp;&nbsp;&nbsp; public void propertyChange(PropertyChangeEvent)</b><br>
+<br>
+W implementacji tej metody, dowiadując się o zmianach właściwości, możemy na nie odpowiednio reagować.<br>
+<br>
+Również interfejs <b>VetoableChangeListener</b> ma jedną metodę: <b>vetoableChange(...)</b>
+ z argumentem–zdarzeniem typu PropertyChange. W jej implementacji , gdy dowiemy
+się już wszystkich niezbędnych szczegółow o zmianie – możemy ją zawetować.<br>
+<br>
+<b>Wetowanie zmiany</b>&nbsp; odbywa się na zasadzie zgłoszenia wyjątku <b>PropertyVetoException</b>, zatem deklaracja metody vetoableChange wygląda następująco:<br>
+<br>
+<b>&nbsp;&nbsp;&nbsp; public void vetoableChange(PropertyChangeEvent e)&nbsp; <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; throws
+PropertyVetoException<br>
+</b><br>
+a w jej implementacji – gdy po sprawdzeniu warości właściwości chcemy zgłosić veto – sygnalizujemy wyjątek: <b>throw new PropertyVetoException(...)</b>.<br>
+<br>
+<b>Słuchacze</b> zmian&nbsp; właściwości&nbsp; związanych (jak zawsze w Javie) musżą
+być przyłączeni do źródła zdarzenia., którym jest&nbsp; w tym przypadku ziarno.&nbsp;
+<br><br>
+Przyłączenie staje się możliwe, jesli w klasie-ziarnie zdefiniowano metodę <b>addPropertyChangeListener(...)</b><br>
+Musi też być zdefiniowana metoda <b>removePropertyChangeListener</b>, odłaczająca słuchacza.<br>
+<br>
+To samo dotyczy nasłuchu zmian właściwości ograniczanych: klasa zaiarno
+musi dostarczyć&nbsp; metody przyłączenia słuchacza:&nbsp; <b>addVetoableChangeListener</b> oraz metody odłączania słuchacza:&nbsp; <b>removeVetoableChangeListener</b>.<br>
+<br><font color="#ff0000"><b>
+Obowiązkiem klasy ziarna, która implementuje związane i/lub ograniczane właściwości
+jest również dostarczenie odpowiednich definicji setterów dla tych właściwości.
+<br>
+
+
+W setterach należey&nbsp; generować zdarzenie PropertyChangeEvent&nbsp; i propagować go pośród przyłączonych słuchaczy.<br>
+</b></font>
+<br>
+W pakiecie java.beans znajdują się dwie klasy narzędziowe,&nbsp; znacznie ułatwiające
+wykonanie tych zadań: PropertyChangeSupport i VetoableChangeSupport.<br>
+Klasy dostarczają metod&nbsp; generowania zdarzeń i propagacji zdarzeń zmian:<br>
+<ul><li>właściwości związanych -&nbsp; firePropertyChange </li><li>właściwości ograniczanych -&nbsp; fireVetoableChange słuchaczy.</li><li>a także metod przyłączanai i odłączania słuchaczy tych zmian (addNNNListener, removeNNListener).</li></ul>
+Konstruktory tych klas mają jako argument&nbsp; referencję do obiektu-ziarna.<br>
+<br>
+<u><b>Schemat postępowania przy implementacji właściwości związanej jest następujący:</b></u><br>
+<br>
+<pre>class Ziarno .... {
+
+  //wsparcie
+  private PropertyChangeSupport chg = new PropertyChangeSupport(this);
+
+  String text;    // to będzie właściwośc związana o nazwie "text"
+  ...
+// setter
+synchronized void setText(String newTxt) { // pamiętamy o wielowątkowości!
+
+    String oldTxt =  text;   // stara wartość
+    text = newTxt;           // ustalenie nowej wartości
+     // powiadomienie
+    chg.firePropertyChange("text", oldTxt, newTxt);
+}
+....
+
+// metody dodawania i usuwania słuchaczy
+public synchronized void addPropertyChangeListener(PropertyChangeListener l) {
+ chg.addPropertyChangeListener(l);
+ }
+
+public synchronized void removePropertyChangeListener(PropertyChangeListener l) {
+ chg.removePropertyChangeListener(l);
+ }
+...
+}
+
+</pre>
+<br>
+Implementacja właściwości ograniczanych musi uzwględniać możliwość zawetowania zmiany przez któregoś ze słuchaczy. <br>
+<br>
+<u><b>Schemat postępowania przy implementacji właściwości ograniczanej jest następujący:</b></u><br>
+<br>
+<pre>class Ziarno .... {
+
+  //wsparcie
+  private VetoableChangeSupport veto = new VetoableChangeSupport(this);
+
+  String text;    // to będzie właściwośc ograniczana o nazwie "tekst"
+  ...
+// setter
+
+synchronized void setText(String newTxt)  throws PropertyVetoException
+ {
+    String oldTxt =  text;  // stara wartość
+
+     // wywołujemy metodę fireVotoableChange, która z kolei
+     // wywołuje metody vetoableChange zarejestrowanych słuchaczy
+     // jeśli któraś z nich zgłasza veto, setter kończy działanie
+     // a wyjątek PropertyVetoException jest przekazywany do obsługi
+     //  przez metodę wywołującą setText
+
+     veto.fireVetoableChange("tekst", oldTxt, newTxt);
+
+     // Tylko jeśli nikt nie zawetował zmiany:
+
+     text = newTxt;   // ustalenie nowej wartości
+}
+....
+// metody dodawania i usuwania słuchaczy
+
+public synchronized void addVetoableChangeListener(PropertyChangeListener l) {
+ veto.addVetoableChangeListener(l);
+ }
+
+public synchronized void removeVetoableChangeListener(PropertyChangeListener l) {
+ veto.removeVetoableChangeListener(l);
+ }
+...
+}
+
+<b>// Uwaga: wsystkie klasy  zdarzeniowe i interfejsy nasłuchu
+// dla właściwości znajdują się w pakiecie java.beans.
+</b>
+</pre>
+<br>
+<br><a name="DynJav.9"></a><h2>
+2.4. &nbsp;JavaBean - przykład praktyczny</h2>
+
+Będziemy budować klasę-licznik jako JavaBean. Klasę nazwiemy <b>Counter</b>.<br>
+Licznik będzie miał jedną właściwość o nazwie <b>count</b> (stan licznika).<br>
+W wersji pierwszej uczynimy tę właściwość związaną (bounded), w&nbsp; wersji drugiej – związaną i ograniczoną (constrained).<br>
+<br> Przy budowie aplikacji zastosujemy koncepcję&nbsp; "Model-View-Controller".
+<br>
+<br>
+Sama klasa Counter odzwierciedla logikę działania licznika ("<b>model</b>
+"). Obiekty tej klasy "są niewidzialne", a zatem&nbsp; żeby zobaczyć licznik musimy
+stworzyć dodatkową klasę, która zdefiniuje widok licznika&nbsp; (<b>view</b>).<br>
+Nazwiemy ją <b>CounterView</b>. Warto zwrócić uwagę: separacja kodu jest
+korzystna – widok uniezależniamy od modelu, a model od widoku, w ten sposób
+możemy mieć np. wiele widoków licznika, lub zmieniać model nie zmieniając
+widoku.<br>
+<br>
+Komunikacja między modelem i widokiem będzie się odbywać na zasadzie nasłuchu
+zmian właściwości (zmian właściwości count) czyli obiekt klasy CounterView
+będzie też słuchaczem zmian właściwości (PropertyChangeListener).<br>
+<br>
+Musimy też mieć jakieś środki zmiany stanu licznika. Interakcję użytkownika z modelem/widokiem zapewnia tzw. kontroler.<br>
+Widzieliśmy, że w komponentach Swingu (w naturalny dla nich sposób) kontroler
+połączony jest z widokiem. Tu jednak odseparujemy jego kod od widoku, tworząc
+klasę <b>CounterControlGui</b>, zapewniającą interfejs interakcji z licznikiem.. Widok zostanie dodany do tego GUI (ale kody obu klas będą odseparowane).<br>
+<br>
+W wersji drugiej – kiedy właściwość count będzie związana i ograniczana musimy
+dostarczyć obiektu-nadzorcy, który będzie sprawdzał czy zmiana właściwości
+jest dopuszczalna i jeśli stwierdzi, że nie – będzie wetował tę zmianę. Odpowiednią
+klasę nazwiemy <b>CounterLimitator</b>.<br>
+<br>
+W metodzie main(...) klasy Main, w której nasza aplikacja zacznie życie stworzymy
+wszystkie odpowiednie obiekty w/w klas i ustanowimy niezbędne połączenia
+między nimi.<br>
+<br>
+W sumie logika działania aplikacji będzie wyglądać tak:<br>
+<br>
+<br>
+<img src="images/Counter1.jpg" alt="r" border="1" height="224" width="597">
+<br>
+<br>
+Zaczynamy od wersji pierwszej, uboższej, w której klasa Counter daje przykład
+typowego programowania JavaBean z wlaściwością związaną:<br>
+<br>
+<pre>// Klasa Counter
+
+import java.awt.event.*;
+import java.beans.*;
+import java.io.*;
+
+public class Counter implements Serializable {
+
+  private int count = 0;    // właściwość count
+
+  // Pomocniczy obiekt do prowadzenia listy słuchaczy zmian właściwości oraz
+  // propagowania zmian  wśród zarejestrowanych złuchaczy
+   private PropertyChangeSupport propertyChange = new PropertyChangeSupport(this);
+
+
+  // Konstruktory
+
+  public Counter() {
+    this(0);
+  }
+
+  public Counter(int aCount) {
+    setCount( aCount );
+  }
+
+
+  // Metody przyłączania i odłączania słuchaczy zmian właściwości
+
+  public synchronized void addPropertyChangeListener(PropertyChangeListener listener) {
+    propertyChange.addPropertyChangeListener(listener);
+  }
+
+  public synchronized void removePropertyChangeListener(PropertyChangeListener l) {
+    propertyChange.removePropertyChangeListener(l);
+  }
+
+  // Proste metody zwiększania i zmniejszania licznika
+
+  public void increment() {
+    setCount(getCount()+1);
+  }
+
+  public void decrement() {
+    setCount(getCount()-1);
+  }
+
+
+  // Getter właściwości "count"
+  public int getCount() {
+    return count;
+  }
+
+  // Setter właściowści "count"
+  public synchronized void setCount(int aCount) {
+    int oldValue = count;
+    count = aCount;
+
+    // wywołanie metody firePropertChange z klasy PropertyChangeSupport
+    // powoduje wygenerowanie zdarzenia PropertyChangeEvent i rozpropagowanie
+    // go wśród wszystkich przyłączonych słuchaczy, ale tylko wtedy, gdy nowa
+    // wartość właściwości różni się od starej wartości
+
+    propertyChange.firePropertyChange("count", new Integer(oldValue),
+                                            new Integer(aCount));
+  }
+
+}
+</pre>
+Widok licznika przedstawimy jako etykietę - klasa ta jednocześnie będzie
+nasłuchiować zmian właściwości count i odpowiednio do tego zmieniać tekst
+na etykiecie (a także wyprowadzać informacje o zmianach właściwości count
+na konsolę).<br>
+<br>
+<pre>//Klasa CounterView
+//Widok licznika przedstawiamy w postaci etykiety
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.beans.*;
+
+
+public class CounterView extends JLabel implements PropertyChangeListener {
+
+
+  // Konstruktor domyślny: inicjalizuje etykietę tekstem "0"
+  CounterView()  {
+     this("0");
+  }
+
+  // Konstruktor inicjalizujący etykietę podanym tekstem
+  CounterView(String lab) {
+     super(lab);
+     setOpaque(true);   // etykieta nie przezroczysta
+       // ramka
+     setBorder(BorderFactory.createLineBorder(Color.black));
+       // rozmiary i wyrównanie tekstu
+     setPreferredSize(new Dimension(75, 40));
+     setHorizontalAlignment(CENTER);
+  }
+
+  // obługa zdarzenia PropertyChange
+  public void propertyChange(PropertyChangeEvent e)  {
+    Integer oldVal = (Integer) e.getOldValue(),
+           newVal = (Integer) e.getNewValue();
+    System.out.println("Value changed from " + oldVal + " to " + newVal);
+    setText("" + newVal + "");  // pokazanie na etykiecie nowego stanu licznika
+   }
+
+
+}
+</pre>
+Klasa kontrolera - CounterControlGui dostarcza dwóch przycisków (zwiększ,
+zmniejsz licznik) oraz pole tekstowe, w którym można wpisać wartość licznika
+(ENTER)<br>
+Zarówno kliknięcie w przyciski jak i ENTER na polu tekstowym powoduje powstanie
+zdarzenia Action, które tu (w tej klasie) obsługujemy ustalając nowe&nbsp;wartości
+licznika za pomocą metod incremet() decrement() i setCount(...) z klasy &nbsp;Counter.
+<br>
+<br>
+<pre>import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.beans.*;
+import java.io.*;
+
+public class CounterControlGui extends JFrame implements ActionListener {
+
+  Counter counter;
+  JButton binc = new JButton("Increment");
+  JButton bdec = new JButton("Decrement");
+  JTextField txt = new JTextField(10);
+
+  // Konstruktor otrzymuje jako argumenty obiekty typu Counter i CounterView
+  // Pierwszy jest nam potrzebny do komunikacji z licznikiem, drugi - widok
+  // wbudujemy w to GUI.
+
+  CounterControlGui(Counter c, CounterView clab)  {
+    counter = c;
+    Container cp = getContentPane();
+    cp.setLayout(new FlowLayout());
+    binc.addActionListener(this);
+    cp.add(binc);
+    cp.add(clab);
+    bdec.addActionListener(this);
+    cp.add(bdec);
+    txt.addActionListener(this);
+    cp.add(txt);
+    setDefaultCloseOperation(3);
+    pack();
+    show();
+  }
+
+
+  // Obsługa akcji
+  public void actionPerformed(ActionEvent e)  {
+      if (e.getSource() == txt)  {
+         int n = 0;
+         try  {
+            n = Integer.parseInt(txt.getText());
+         } catch (NumberFormatException exc)  { return; }
+         counter.setCount(n);
+         return;
+      }
+      String cmd = e.getActionCommand();
+      if (cmd.equals("Increment")) counter.increment();
+      else if (cmd.equals("Decrement")) counter.decrement();
+      else System.out.println("Unrecognized command");
+  }
+
+}
+</pre>
+I wreszcie lacząca wszystko klasa Main, która inicjuje działanie aplikacji.<br>
+<br>
+<pre>public class Main {
+
+ public static void main(String[] args)  {
+
+   // Tworzymy obiekty: licznik i jego widok
+   Counter counter = new Counter();
+   CounterView counterView = new CounterView(""+counter.getCount());
+
+   // Rejestrujemy widok jako słuchacza zmian licznika
+   counter.addPropertyChangeListener(counterView);
+
+   // Tworzymu GUI kontrolera i pokazujemy go
+   CounterControlGui gui = new CounterControlGui(counter, counterView);
+   gui.pack();
+   gui.show();
+  }
+
+}
+</pre>
+<br>
+Dizałanie aplikacji ilustruje rysunek oraz komunikaty na konsoli, powstałe
+po kolejnych klilnięciach w przyciski Incremenet i Decrement oraz wprowadzeniu
+liczby 23 w polu tekstowym i naciśnieciu ENTER.<br>
+<br>
+<img src="images/Counter1-v1.jpg" alt="r" border="1" height="75" width="407">
+<br>
+<br>
+<div class="listing100"><br>
+Value changed from 0 to 1<br>
+Value changed from 1 to 0<br>
+Value changed from 0 to 23<br>
+</div><br>
+<br>
+<b>Wersja 2</b><br>
+<br>
+W wersji drugiej chcemy dodać obiekt – nadzorcę, który będzie sprawdzał czy
+zmiana licznika jest dopuszczalna, a jeśli nie to będzie wetował tę zmianę.<br>
+Mechanizm wetowania polega na sygnalizowaniu wyjątku PropertyVetoException.<br>
+Wyjątek ten będzie sygnalizowany przez obiekt-nadzorcę, który jest jednoczesnie
+słuchaczem zmian wartości właściwości ograniczonych (VetoableChangeListener).
+<br>
+<br>
+Klasa definiująca obiekty nadzorujące nasz licznik wygląda tak.<br>
+<br>
+<pre>import java.beans.*;
+
+public class CounterLimitator implements VetoableChangeListener {
+
+// minimalne i makszymalne dopuszczalne wartości licznika
+private int min, max;
+
+CounterLimitator(int minLim, int maxLim)  {
+  min = minLim;
+  max = maxLim;
+}
+
+// Obsługa zdarzenia vetoableChange
+// metoda może sygnalizować PropertyVetoException
+public void vetoableChange(PropertyChangeEvent e)
+            throws PropertyVetoException {
+   Integer newVal = (Integer) e.getNewValue();
+   int val = newVal.intValue();
+   // Sprawdzamy, czy zmiana  licznika jest dopuszczalna,
+   // jeśli nie – sygnalizujemy wyjatek  PropertyVetoException
+   if (val &lt; min || val &gt; max)
+      throw new PropertyVetoException("Niedopuszczalna zmiana wartości", e);
+   }
+
+}
+
+</pre>
+W klasie Counter musimy poczynić zmiany, po to by właściwość count była zarazem związana i ograniczana.<br>
+Wykorzystamy podobną do PropertyChangeSupport klasę pomocniczą VetoableChangeSupport<br>
+Obiekt tej klasy nazwiemy vetos, dostarczymy też metod przyłączania i odłączania słuchaczy zmian ograniczanych.<br>
+<br>
+<pre>public class Counter {
+
+//...
+
+private VetoableChangeSupport vetos = new VetoableChangeSupport(this);
+
+public synchronized void addVetoableChangeListener(VetoableChangeListener l) {
+	vetos.addVetoableChangeListener(l);
+}
+
+public synchronized void removeVetoableChangeListener(VetoableChangeListener l) {
+	vetos.removeVetoableChangeListener(l);
+}
+
+// ...
+}
+</pre>
+<br>
+Zmianie ulegnie też metoda setCount.<br>
+<br>
+<pre>public class Counter {
+
+//...
+public synchronized void setCount(int aCount)
+                         throws PropertyVetoException {
+
+     int oldValue = count;
+
+     // wywołujemy metodę fireVotoableChange, która z kolei
+     // wywołuje metody vetoableChange zarejestrowanych słuchaczy
+     // jeśli któraś z nich zgłasza veto, setter kończy działanie
+     // a wyjątek PropertyVetoException jest przekazywany do obsługi
+     // przez metodę wywołującą setCount
+     // (co zaznaczyliśmy w nagłówku metody przez
+     // throws PropertyVetoException)
+
+    vetos.fireVetoableChange("count", new Integer(oldValue), new Integer(aCount));
+
+    // tylko jeśli nikt nie zawetował
+
+    count = aCount;  // ustalamy nową wartość licznika
+
+    // ... powiadamiamy nasłuchujących zmiany właściwości count
+
+    propertyChange.firePropertyChange("count", new Integer(oldValue),
+                                       new Integer(aCount));
+}
+
+//...
+}
+</pre>
+Ponieważ metody increment, decrement i konstruktory wywołują metodę setCount,
+to w sygnaturach tych metod i konstruktorów musimy dodać informację, że wyjątek
+PropertyVetoException ma być obsługiwany przez&nbsp; wołającego te metody.<br>
+<br>
+A wołamy je z GUI kontrolera.<br>
+Tam jest miejsce do obsługi tego wyjątku:<br>
+<pre>public class CounterControlGui .... {
+
+....
+public void actionPerformed(ActionEvent e)  {
+  try  {
+    if (e.getSource() == txt)  {
+       int n = 0;
+       try  {
+          n = Integer.parseInt(txt.getText());
+       } catch (NumberFormatException exc)  { return; }
+       counter.setCount(n);
+       return;
+    }
+    String cmd = e.getActionCommand();
+    if (cmd.equals("Increment")) counter.increment();
+    else if (cmd.equals("Decrement")) counter.decrement();
+    else System.out.println("Unrecognized command");
+  } catch (PropertyVetoException exc)  { // obługa wyjatku:
+      System.out.println(""+ exc);       // podanie informacji
+                                         //o niedopuszczalnej zmianie wartości
+  }
+}
+
+//...
+}
+</pre>
+W klasie Main dodajemy fragment dotyczący tworzenia obiektu klasy CounterLimitator
+(nadzorcy) i rejestrujemy go jako słuchacza zmian właściwości ograniczanej:<br>
+<br>
+<pre>import java.beans.*;
+public class Main {
+
+ public static void main(String[] args) throws PropertyVetoException {
+   Counter counter = new Counter();
+   CounterView counterView = new CounterView(""+counter.getCount());
+   counter.addPropertyChangeListener(counterView);
+
+   // licznik może się zmieniać od –5 do 10
+   // bo Limitator zawetuje każdą inną zmianę
+   CounterLimitator clim = new CounterLimitator(-5, 10);
+   counter.addVetoableChangeListener(clim);
+
+   CounterControlGui gui = new CounterControlGui(counter, counterView);
+   gui.pack();
+   gui.show();
+  }
+
+}
+</pre>
+Dzialanie programu &nbsp;(przy tym samym GUI kontrolera) zilustrujemy komunikatami
+na konsoli po kolejneych kliknięciach w przycisk "Decrement".<br>
+<br>
+<br>
+<div class="listing100"><br>
+Value changed from 0 to -1<br>
+Value changed from -1 to -2<br>
+Value changed from -2 to -3<br>
+Value changed from -3 to -4<br>
+Value changed from -4 to -5<br>
+java.beans.PropertyVetoException: Niedopuszczalna zmiana wartości<br>
+</div><br>
+<br>
+Jak widać, CounterLimitator nie dopuścił do zmiany wartości z -5 na -6.<br>
+<br>
+<br>
+<br><a name="DynJav.10"></a><h2>2.5. Introspekcja</h2>
+<br>
+Srodowisko programistyczne, które ma umożliwiać dynamiczne odczytywanie własności
+i funkcjonalności dowolnych "podrzucanych" mu ziaren analizuje ziarna za
+pomocą uniwerslanych metod introspekcji. <br>
+<br>
+Introspekcja kojarzy dwa mechanizmy: <br>
+<ul><li>analizę komponentów za pomocą metod refleksji przy założeniu, że stosowane
+są pewne standardowe wzorce nazewnictwa, umożliwiające określenie&nbsp; własnściwości
+i ich typu, metod pobierania i ustalania tych właściwości,&nbsp; rodzajóa zdarzeń,&nbsp;
+metod rejestracji słuchaczy i nnych metod udostępnianych przez dane ziarno
+"na zewnątrz" </li><li>określanie uzewnętrznianych właściwości i funkcjonalności ziarna na
+podstawie dowolnie specyfikowanych przez twórcę ziarna elementów, zapisywanych
+w odpowiedniej dla danego ziarna klasie BeanInfo. </li></ul>
+Oba mechanizmy mogą być stosowane łącznie. W prostych przypadkach (prostych
+ziaren) nie ma potrzeby żmudnego tworzenia klasy BeanInfo, metody refleksji
+są całkiem wystarczające. <br>
+Introspekcja za pomocą metod refleksji jest możliwa dzięki kontraktowi dotyczącemu wzorców nazewnictwa. <br>
+<br>
+Dla właściwości introspekcja określa pary metod <b>get... (is...)&nbsp; -&nbsp; set...</b>
+ z tymi samymi nazwami właściwości i z odpowiednimi sygnaturami. Może się
+okazać, że niektóre właściwości są tylko do odczytu lub tylko do zapisu.
+Uwzględnia się też indeksowane własciwości. <br>
+<br>
+Dla&nbsp; określenia, czy istnieją możliwość obsługi zdarzeń i jakich używane są wzorce: <b>addXXXListener i removeXXXListener. </b><br>
+<br>
+Samą introspekcje realizuje klasa <b>Introspector</b>. <br>
+<br>
+Introspector analizuje klasę-zarna (i nadrzędne wobec niej klasy oraz implementowane
+interfejsy) zbierając informacje o właściowościach, metodach, zdarzeniach.
+<br>
+Informacja ta jest umieszczana w obiekcie typu <b>BeanInfo</b> (BeanInfo jest nazwą interfejsu). Wobec tego obiektu możemy następnie zastosować metody zwracające iinformacje o ziarnie. <br>
+<br>
+Np. analizę klasy-ziarna javax.swing.JButton uzyskujemy przez następujące odwołanie: <br>
+<br>
+<b>BeanInfo info = Introspector.getBeanInfo(Class.forName("javax.swing.JButton")); </b><br>
+lub<br>
+<b>BeanInfo info = Introspector.getBeanInfo(javax.swing.JButton.class)); </b><br>
+<br>
+<br>
+Następnie wobec obiektu info możemu zastosować metody interfejsu BeanInfo: <br>
+<br>
+<ul><li><b>EventSetDescriptor[]&nbsp; getEventSetDescriptors()&nbsp; - </b>zwraca tablicę deskryptorów zdarzeń<b> </b></li><li><b>PropertyDescriptor[]&nbsp; getPropertyDescriptors()&nbsp; - </b>zwraca tablicę deskryptorów własności<b> </b></li><li><b>MethodDescriptor[]&nbsp;&nbsp; getMethodDescriptors()&nbsp;&nbsp;&nbsp;&nbsp; - </b>zwraca tablicę deskryptorów metod</li><li>dla każdgo deskryptora metody <b>ParameterDescriptor[] getParameterDexriptors()</b> - zwraca tablicę deskryptorów parametrów tej metody<br>
+  </li></ul>
+Zwracane tablice są tablicami obiektów odpowiednich klas. Wobec tych obiektów
+stosujemy metody tych klas pozwalające na uzyskiwanie różnej konkretnej informacji.
+<br>
+Np. program na poiniższym wydruku analizuje klasę podaną jako argument i wypisuje niektóre informacje o niej: <br>
+<br>
+<pre>import java.lang.reflect.*;
+import java.beans.*;
+
+public class BeanAnalyze {
+
+  static void say(String s) { System.out.println(s); }
+
+  public static void main(String[] arg) throws Exception {
+
+    BeanInfo beanInfo = Introspector.getBeanInfo(Class.forName(arg[0]));
+
+    PropertyDescriptor[] pd = beanInfo.getPropertyDescriptors();
+    MethodDescriptor[] md = beanInfo.getMethodDescriptors();
+    EventSetDescriptor[] evd = beanInfo.getEventSetDescriptors();
+
+    say("Właściwości:");
+    for (int i = 0; i &lt; pd.length; i++) {
+      say(pd[i].getShortDescription());
+      // getReadMethod i getWriteMethod zwracają obiekty typu Method
+      say(" getter: "+ pd[i].getReadMethod());
+      say(" setter: "+ pd[i].getWriteMethod());
+    }
+
+    say("\nMetody:");
+    for (int i=0; i&lt;md.length; i++) {
+      say(" " + md[i].getMethod());
+    }
+
+    say("\nZdarzenia:");
+    for (int i = 0; i &lt; evd.length; i++) {
+      say("Zdarzenie : " + evd[i].getShortDescription());
+      Method[] met = evd[i].getListenerMethods();
+      say("Metody obsługi:");
+      for (int j=0; j &lt; met.length; j++)  say(" " + met[j]);
+    }
+  }
+
+}
+</pre>
+<br>
+Fragmenty (dużego!) wydruku z programu uruchomionego z argumentem javax.swing.JButton:<br>
+<br>
+<div class="listingful"><br>
+Właściwości:<br>
+UI<br>
+&nbsp;getter: public javax.swing.plaf.ButtonUI javax.swing.AbstractButton.getUI()<br>
+&nbsp;setter: public void javax.swing.AbstractButton.setUI(javax.swing.plaf.ButtonUI)<br>
+UIClassID<br>
+&nbsp;getter: public java.lang.String javax.swing.JButton.getUIClassID()<br>
+&nbsp;setter: null<br>
+accessibleContext<br>
+&nbsp;getter: public javax.accessibility.AccessibleContext javax.swing.JButton.getAccessibleContext()<br>
+&nbsp;setter: null<br>
+action<br>
+&nbsp;getter: public javax.swing.Action javax.swing.AbstractButton.getAction()<br>
+&nbsp;setter: public void javax.swing.AbstractButton.setAction(javax.swing.Action)<br>
+actionCommand<br>
+&nbsp;getter: public java.lang.String javax.swing.AbstractButton.getActionCommand()<br>
+&nbsp;setter: public void javax.swing.AbstractButton.setActionCommand(java.lang.String)<br>
+actionListeners<br>
+&nbsp;getter: public java.awt.event.ActionListener[] javax.swing.AbstractButton.getActionListeners()<br>
+&nbsp;setter: null<br>
+actionMap<br>
+&nbsp;getter: public final javax.swing.ActionMap javax.swing.JComponent.getActionMap()<br>
+&nbsp;setter: public final void javax.swing.JComponent.setActionMap(javax.swing.ActionMap)<br>
+...<br>
+<br>
+Metody:<br>
+&nbsp;public boolean java.awt.Component.action(java.awt.Event,java.lang.Object)<br>
+&nbsp;public synchronized void java.awt.Component.add(java.awt.PopupMenu)<br>
+&nbsp;public java.awt.Component java.awt.Container.add(java.awt.Component)<br>
+&nbsp;public java.awt.Component java.awt.Container.add(java.awt.Component,int)<br>
+&nbsp;public void java.awt.Container.add(java.awt.Component,java.lang.Object)<br>
+&nbsp;public void java.awt.Container.add(java.awt.Component,java.lang.Object,int)<br>
+&nbsp;public java.awt.Component java.awt.Container.add(java.lang.String,java.awt.Component)<br>
+&nbsp;public void javax.swing.AbstractButton.addActionListener(java.awt.event.ActionListener)<br>
+...<br>
+<br>
+Zdarzenia:<br>
+Zdarzenie : action<br>
+Metody obsługi:<br>
+&nbsp;public abstract void java.awt.event.ActionListener.actionPerformed(java.awt.event.ActionEvent)<br>
+Zdarzenie : ancestor<br>
+Metody obsługi:<br>
+&nbsp;public abstract void javax.swing.event.AncestorListener.ancestorMoved(javax.swing.event.AncestorEvent)<br>
+&nbsp;public abstract void javax.swing.event.AncestorListener.ancestorAdded(javax.swing.event.AncestorEvent)<br>
+&nbsp;public abstract void javax.swing.event.AncestorListener.ancestorRemoved(javax.swing.event.AncestorEvent)<br>
+Zdarzenie : change<br>
+Metody obsługi:<br>
+&nbsp;public abstract void javax.swing.event.ChangeListener.stateChanged(javax.swing.event.ChangeEvent)<br>
+...<br>
+</div><br>
+<br>
+Szczerze mowiąc, za pomocą metod instrospekcji sporo można się dowiedziec o dostępnych właściwościach i metodach danej klasy.<br>
+<br>
+Oczywiście, mając obiekty-metody (uzyskane z deskryptorów metod) mozemy je
+dynamicznie wyowływac środkami refleksji. Ale istnieje też nieco prostsza,
+specjalnie dla JavaBean przygotowana możliwość dynamicznego pobierania i
+ustalania wlaściwości oraz wołania innych metod.<br>
+<br>
+<br><a name="DynJav.11"></a><h2>2.6. Dynamiczne pobieranie i ustalanie właściwości</h2>
+W pakiecie java.beans znajdziemy dwie ciekawe klasy&nbsp; Statement i Expression<br>
+<br>
+<div class="syntax">Obiekt klasy Statement tworzymy za pomocą konstuktora:<br>
+<br>
+<b>&nbsp;&nbsp;&nbsp; Statement s = &nbsp;Statement( Object target, <br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp;String methodName, <br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp;Object[] arguments );<br>
+</b><br>
+a wywołanie na jego rzecz metody <b>void execute()</b> spowoduje wywołanie na rzecz obiektu target metody o nazwie methodName z argumentami podanymi w tablicy arguments<br>
+<br>
+Zwykle stosujemy tę procedure do ustalania właściowości JavaBean, ale może
+ona być rownież stosowana do wyołania dowolnych metod</div><br>
+<br>
+Klasa Expression dziedziczy klasę Statement. Czyli tu też możemy wołać metodę
+execute(). Jednak jej główne zastosowanie polega na dynamicznym pobieraniu
+właściwości, lub - inaczej - dynamicznym wołaniu metod, które zwracają wyniki
+i uzyskiwaniu dostępu do tych wyników. <br>
+<br>
+<div class="syntax">Obiekt klasy Expression tworzymy za pomocą konstuktora:<br>
+<br>
+<b>
+&nbsp;&nbsp;&nbsp; Expression e = &nbsp;Expression( Object target,<br>
+&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; String methodName, <br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; Object[] arguments );<br>
+</b><br>
+<ul><li>
+wywołanie na jego rzecz metody <b>void execute()</b> spowoduje wywołanie
+na rzecz obiektu target metody o nazwie methodName z argumentami podanymi
+w tablicy arguments oraz przechowanie wyniku wywołanej metody w obiekcie
+Expresion; wynik ten będzie dostępny przez wywolanie metody Object getValue()
+na rzecz obeiktu Expressiom</li><li>samo wywołanie metody <b>Object getValue()</b> spowoduje ten sam efekt o ile wynik dla danego obiektu-wyrażenia nie został jeszcze ustalony.</li></ul>
+</div><br>
+<br>
+Szczegółowo komentowany program ilustruje zastosowanie tych klas.<br>
+W poniższym przykładzie metody klas Statement i Expression bedziemy stosowac
+wobec obiektów klasy JButton oraz naszej własnej klasy TestBean, która wygląda
+tak:<br>
+<pre>public class TestBean {
+
+  private String[] headers;
+  private int count;
+
+
+  public TestBean() {
+  }
+
+  public TestBean(int n) {
+    count = n;
+  }
+
+  public String[] getHeaders() {
+    return headers;
+  }
+
+  public void setHeaders(String[] value) {
+    headers = value;
+  }
+
+  public int getCount() {
+    return count;
+  }
+
+  public void setCount(int value) {
+    count = value;
+  }
+
+}
+</pre>
+<br>
+Szczegółowo komentowany program ilustruje zastosowanie klas Statement i Expression,
+dając też pewne dodatkowe na ich temat informacje.<br>
+<pre>import java.beans.*;
+import java.awt.*;
+import javax.swing.*;
+
+public class DynamicExec {
+
+  public static void main(String[] args) throws Exception {
+
+    Statement stmt;
+    Expression expr;
+
+    JButton b = new JButton();
+
+    // Na rzecz przycisku wołamy dynamicznie metodę setText
+    // z argumentem "Przycisk"
+    stmt = new Statement(b, "setText", new Object[] { "Przycisk" });
+    stmt.execute();
+
+    // Jaki wynik? Najpierw statyczne odwołanie
+    System.out.println("Tekst na przycisku 1: " + b.getText());
+
+    // Teraz dynamicznie: stwórzmy wyrażenie, którego wynikiem
+    // jest wynik podanej metody z podanymi argumentami wywolanej
+    // na rzecz b
+    // Uwaga: brak argumentów - czyli tablica Object o rozmiarze 0
+    expr = new Expression(b, "getText", new Object[0]);
+
+    // Jeżeli wyrażenie expr nie ma jeszcze wyniku
+    // metoda getValue() wywołuje podaną w wyrażeniu metodę
+    // i zwraca jej wynik; w przeciwnym razie zwraca
+    // ustalony wczesniej wynik
+
+    String txt = (String) expr.getValue();
+    System.out.println("Tekst na przycisku 2: " + txt);
+
+    // Możemy też stosować klasy Statement i Expression
+    // wobec naszych własnych klas JavaBeans
+
+    TestBean tbean = new TestBean();
+
+    // Uwaga: przy przekazywaniu argumentów i zwrocie wynikow
+    // następują automatyczne przeksztalcenia pomiedzy
+    // typami prostymi i odpowiadającymi im klasami opakowującymi
+    // np. int - Integer  - setCount wymaga argumentu int,
+    // my podajemy Integer
+
+    stmt = new Statement(tbean, "setCount",
+                               new Object[] { new Integer(22) });
+    stmt.execute();
+
+    // Jaka jest teraz wartość właściwości count
+    // I znowu: getCount() zwraca int, my odbieramy Integer
+
+    expr = new Expression( tbean, "getCount", new Object[0] );
+    Integer val = (Integer) expr.getValue();
+
+    System.out.println("Wartość count: " + val);
+
+    // Czy możemy działać na tabliach? Ależ tak!
+
+    stmt = new Statement(tbean, "setHeaders",
+                         new Object[] { new String[] { "a", "b" } }
+                        );
+    stmt.execute();
+
+    expr = new Expression(tbean, "getHeaders", new Object[0]);
+    String[] hdr = (String[]) expr.getValue();
+
+    System.out.println("Ustalone nagłówki");
+    for (int i=0; i&lt;hdr.length; i++)
+       System.out.println(hdr[i]);
+
+    // Możemy nawet stworzyć nowy obiekt
+    // używając specjalnej nazwy metody - new  (oczywiście)
+
+    expr = new Expression(TestBean.class, "new",
+                          new Object[] { new Integer(111) }
+                         );
+    TestBean tb2 = (TestBean) expr.getValue();
+
+    expr = new Expression (tb2, "getCount", new Object[0]);
+    val = (Integer) expr.getValue();
+
+    System.out.println("W nowym obiecie count = " + val);
+
+  }
+}
+
+</pre>
+<br>
+<br>
+<br><a name="DynJav.12"></a><h2>2.7. Serializacja JavaBeans</h2>
+Oprócz zapisywania do strumieni obiektowych (ObjectOutputStream), obiekty
+JavaBeans można serializowac w postaci tekstowej, w formacie XML (wersja
+1.0, kodowanie UTF-8). Jest to nawet - w przypadku JavaBeans - bardziej "przenośny"
+sposób utrwalania obiektów.<br>
+Zapisywaniem obiektów zajmuje się klasa XMLEncoder, a ich odtwarzaniem -
+klasa XMLDccoder. Przy tym &nbsp;stan obiektu zapisywany jest w postaci &nbsp;zdatnej
+do wykorzystania przez klasy Statement i Expression przy odtwarzaniu tego
+obiektu<br>
+<br>
+Najprostsze (przeznaczone wyłącznie dla JavaBeans) zastosowanie tych klas pokazuje poniższy program.<br>
+<pre>import java.beans.*;
+import java.awt.*;
+import javax.swing.*;
+import java.io.*;
+
+public class SerialBean {
+
+  String fname = "test.xml";
+
+  public SerialBean() {
+    JButton b = new JButton("Kąśliwie wróbel ćwierkał");
+    b.setBackground(Color.red);
+    b.setForeground(Color.yellow);
+
+    try {
+      XMLEncoder enc = new XMLEncoder(
+                         new BufferedOutputStream(
+                            new FileOutputStream(fname)
+                            )
+                      );
+      enc.writeObject(b);
+      enc.close();
+    } catch (FileNotFoundException exc) {
+        exc.printStackTrace();
+        System.exit(1);
+    }
+    nowReadAndReport();
+  }
+
+  private void nowReadAndReport() {
+    try {
+      XMLDecoder dec = new XMLDecoder(
+                          new BufferedInputStream(
+                              new FileInputStream(fname)));
+      Object obj = dec.readObject();
+      JButton b = (JButton) obj;
+      dec.close();
+      System.out.println("Napis na przycisku: " + b.getText());
+      System.out.println("Kolor tła: " + b.getBackground());
+      System.out.println("Kolor tekstu : " + b.getForeground());
+
+    } catch (FileNotFoundException exc) {
+        exc.printStackTrace();
+        System.exit(1);
+    }
+  }
+
+
+
+  public static void main(String[] args) {
+    SerialBean serialbean = new SerialBean();
+  }
+
+
+}
+</pre>
+Wyprowadzi on na konsolę właściwą&nbsp; informację o stanie zapisanego a później odtworzonego obiektu:<br>
+<div class="listing100"><br>
+Napis na przycisku: Kąśliwie wróbel ćwierkał<br>
+Kolor tła: java.awt.Color[r=255,g=0,b=0]<br>
+Kolor tekstu : java.awt.Color[r=255,g=255,b=0]<br>
+</div><br>
+<br>
+Z ciekawości można zajrzeć do pliku test.xml.<br>
+<pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;java version="1.4.1-rc" class="java.beans.XMLDecoder"&gt;
+ &lt;object class="javax.swing.JButton"&gt;
+  &lt;string&gt;KÄĹ&gt;liwie wrĂłbel Ä+wierkaĹ'&lt;/string&gt;
+  &lt;void property="background"&gt;
+   &lt;object class="java.awt.Color"&gt;
+    &lt;int&gt;255&lt;/int&gt;
+    &lt;int&gt;0&lt;/int&gt;
+    &lt;int&gt;0&lt;/int&gt;
+    &lt;int&gt;255&lt;/int&gt;
+   &lt;/object&gt;
+  &lt;/void&gt;
+  &lt;void property="foreground"&gt;
+   &lt;object class="java.awt.Color"&gt;
+    &lt;int&gt;255&lt;/int&gt;
+    &lt;int&gt;255&lt;/int&gt;
+    &lt;int&gt;0&lt;/int&gt;
+    &lt;int&gt;255&lt;/int&gt;
+   &lt;/object&gt;
+  &lt;/void&gt;
+ &lt;/object&gt;
+&lt;/java&gt;
+
+</pre>
+Faktycznie, jest do dokładny szablon gotowy do zastosowania klas Expression
+(dla metody-kostsruktora new z argumentem String) i Statement (dla setBackground
+i setForeground). Wszystko opiera się na zachowaniu protokołu JavaBeans.<br>
+<br>
+Oczywiście, możemy w ten sposób serializować obiekty prawie wszystkich klas
+Javy (bo prawie wszystkie są JavaBeans) oraz&nbsp; własnych klas, spełniających
+protokół JavaBeans.<br> A nawet można uwzględnić pewne odstępstwa od tego
+protokołu (np. inicjację właściwości JavaBeans w konstruktorz, bez użycia
+setterów) poprzez dostosowanie delegata "persystencji", do którego odwołuje
+się XMLEncoder - klasy <b>DefaultPersistanceDelegate</b>. <br>O takim bardziej zaawansowanym zastosowaniu, jak również o użyciu nasłuchu wyjątków dekodowania za pomocą interfejsu <b>ExceptionListener</b> można przeczytać w dokumentacji API Javy.<br>
+<br>
+<br>
+<br><a name="DynJav.13"></a><h2>2.8. Inne zagadnienia związane z JavaBeans</h2>
+<br>
+To skrótowe wprowadzenie do JavaBeans nie wyczerpuje tematu.<br>
+Warto więc na koniec zwrócić uwagę na nieporuszone tu ważne kwestie<br>
+<ul><li>przystosowanie ziaren: klasy-edytory właściwości używane m.in. w środowiskach wizualnych </li><li>tworzenie klas BeanInfo, opisujących informacje niedostępną metodami refleksji, </li><li>koteksty (BeanContext) - swoiste kontenery, dostarczające generalnych mechanizmów i serwisów dla JavaBeans.</li></ul>
+
+Informacje na te tematy można zanaleźć w dokumentacji.<br>
+&nbsp;<br>
+<hr>
+<a name="DynJav.14"></a><h2>3. Metadane i adnotacje</h2>
+<br><a name="DynJav.15"></a><h2>3.1.&nbsp;Wprowadzenie</h2>
+
+
+
+
+<br>
+
+
+
+
+<div class="def"><b><!---->Metadane</b> to dane opisujące dane. W przypadku programowania chodzi
+o takie metadane, które opisują i uzupełniają kod źródłowy w znaczeniu semantycznym<!----></div><br>
+
+
+
+
+<br>
+
+
+
+
+Coraz częściej metadane są obecne w językach programowania.<br>
+
+
+
+
+W Javie częściowo występowały już wcześniej - w samym środowisku (dokumentacyjne np. @author),
+a częściowo jako zewnętrzne uzupełnienia (np. XDoclet, JBoss AOP).<br>
+
+
+
+
+W C# nazywają się (nieco nieszczęśliwie) atrybutami.<br>
+
+
+
+
+<br>
+
+
+
+
+Java 5 rozszerza i standaryzuje zastosowanie metadanych na platformie Javy poprzez <b>mechanizm <!----><a name="ind.3.2"></a>adnotacji</b><!---->.<br>
+
+
+
+
+<br>
+
+
+
+
+<b>Zastosowania</b> (bardzo różnorodne), m.in.
+<ul><li>do celów poprawy niezawodności programowania (np. @override),</li><li>do generacji dodatkowych kodów programu (uzupełniających klas),</li><li>do określania sposobu funkcjonowaniu programu w fazie wykonania (można krótko zapisać różne rzeczy). </li><li>do celów konfiguracyjnych,</li><li>do generowania pomocniczych plików (np. różnych deskryptorów itp.)</li></ul>
+
+
+
+
+<div class="important">Mechanizm adnotacji jest najważniejszym praktycznie uzupełnieniem Javy
+w wersji 5, choćby dlatego, że już teraz kolejne wersje dużych platform,
+takich jak J2EE, a także pakiety narzędziowe , takie jak JDBC 4.0, intensywnie używają
+adnotacji.<br>
+
+
+
+
+</div><br>
+
+
+
+
+<br>
+
+
+
+
+<b>Zalety adnotacji</b>:
+<ul><li>zastosowanie adnotacji może znacznie ułatwić pisanie i wdrażanie aplikacji,
+szczególnie dużych; kody mogą być wielokrotnie mniejsze, pracochłonność znacząco
+ograniczona itp.</li></ul>
+
+
+
+
+<br>
+
+
+
+
+<b>Wady</b>:
+<ul><li>pojawiają się jakby nowe elementy składniowo-semantyczne; ponieważ
+każdy może definiować własne adnotacje, to istnieje niebezpieczeństwo, że
+pojawi się mnóstwo "dialektów" Javy - czyli standard Javy + wymyślne, niestandardowe
+adnotacje,</li><li>adnotacje pozwalają upraszczać wiele rzeczy, zapisywać niejako symbolicznie
+jednym słowem, to co bez nich wymagało być może dziesiątek linii kodu; ale
+tych zapisów (notacji i ich znaczeń) trzeba się też uczyć (dla różnych środowisk
+za każdym razem od nowa) i mieć świadomość, do czego tego tak naprawdę te
+skróty prowadzą (co robią),</li><li>na razie nie ma dobrej koncepcji sprawdzania błędowi na poziomie metadanych.</li></ul><br><br><br><a name="DynJav.16"></a><h2>3.2 <!---->Rodzaje adnotacji<!----></h2>
+
+
+
+
+<span style="font-weight: normal;">Można wyróżnić następujące rodzaje adnotacji:</span><br>
+
+
+
+
+<ul><li><b>adnotacje wbudowane w Javę</b></li><ul><li>regularne</li><li>metaadnotacje</li></ul></ul>
+
+
+
+
+<ul><li><b>adnotacje użytkownika</b> (tworzone przez użytkownika)</li><ul><li>stosowane na etapie kompilacji (przetwarzane przez narzędzia)</li><li>stosowane w fazie wykonania (za pomocą mechanizmów refleksji)</li></ul></ul>
+
+
+
+
+<br>
+
+
+
+
+<u>Adnotacje mogą byś stosowane wobec</u>:<br>
+
+
+<ul><li>
+
+pakietów</li><li>
+
+klas</li><li>
+
+interfejsów</li><li>
+
+pól</li><li>
+
+konstruktorowi</li><li>
+
+metod</li><li>
+
+zmiennych lokalnych</li><li>
+
+innych adnotacji</li></ul>
+
+
+
+
+<br>
+
+
+
+
+Można wyraźnie zaznaczyć do czego odnosi się nowodefiniowana adnotacja za pomocą metaadnotacji <b>@Target </b>(wtedy inne jej zastosowanie będzie wykryte jako błąd w fazie kompilacji).<b><br>
+
+
+
+
+<br>
+
+
+</b><div class="notec"><b>Możliwe znaczenia (wartości) metaadnotacji @Target</b><br>
+
+
+
+
+<br>
+
+
+
+
+ANNOTATION_TYPE - dana adnotacja adnotuje inną,<br>
+
+
+
+
+PACKAGE - dotyczy pakietu,<br>
+
+
+
+
+TYPE - klas i interfejsów<br>
+
+
+
+
+METHOD - metod<br>
+
+
+
+
+CONSTRUCTOR - konstruktorów<br>
+
+
+
+
+FIELD - pól<br>
+
+
+
+
+PARAMETER - parametrów<br>
+
+
+
+
+LOCAL_VARIABLE - zmiennych lokalnych<br>
+
+
+</div><br>
+
+
+
+
+<br>
+
+
+
+
+Przykład (fragment) definicji adnotacji o nazwie Test, która może dotyczyć tylko metod:<br>
+
+
+
+
+<br>
+
+
+
+
+@Target(ElementType.METHOD)<br>
+
+
+
+
+public @interface Test <br>
+
+
+
+
+<br>
+
+
+
+
+Uwagi: <br>
+
+
+
+
+<ol><li>adnotacja nie oznaczona znacznikiem @Target ma zastosowanie wszędzie.</li><li>aby określić kilka możliwych zastosowań piszemy @Target({ a, b, c }
+), gdzie a, b, c to elementy w postaci <span style="font-weight: bold; font-style: italic;">ElementType.rodzaj,</span> a rodzaj to jeden
+z PACKAGE, METHOD, FIELD itp.</li></ol>
+
+
+
+
+<br>
+
+
+
+
+Siła adnotacji polega na tym, że mogą one być przetwarzane: <br>
+
+
+<ul><li>
+
+przez narzędzia do generacji (i ew. równoczesnej kompilacji) kodu (wtedy potrzebne są tylko w fazie kompilacji), </li><li>
+
+albo przez mechanizmy refleksji &nbsp;- wtedy powinny być zapisane w klasie wykonywalnej
+i dostępne dla tych mechanizmów w fazie wykonania programu,</li><li>
+
+albo przez narzędzia przetwarzania "binarnej" postaci klas (umożliwiające
+m.in. różne iniekcje, zmiany, usuwanie kodu binarnego) - wtedy powinny być
+zapisane w klasie, ale nie muszą być dostępne dla mechanizmów refleksji.</li></ul>
+
+
+
+
+<br><!----><!---->
+
+
+
+
+Odpowiadają temu trzy polityki utrzymywania adnotacji, specyfikowane przez metaadnotację @<b>Retention</b>.<br>
+
+
+<br>
+
+
+<div class="notec"><br>
+
+
+<div style="text-align: center;">Polityki utrzymywania adnotacji<br>
+
+
+</div>
+
+
+
+
+<br>
+
+
+
+
+RetentionPolicy.SOURCE - tylko w żródle,<br>
+
+
+
+
+RetentionPolicy.CLASS - w klasie skompilowanej, ale niedostępne w fazie wykonania,<br>
+
+
+
+
+RetentionPolicy.RUNTIME - dostępne w fazie wykonania.<br>
+
+
+</div><br>
+
+
+
+
+<br>
+
+
+
+
+Przykład:<br>
+
+
+
+
+@Retention(RetentionPolicy.SOURCE) &nbsp; // utrzymanie tylko w kodzie adnotacji AdapterFor<br>
+
+
+
+public interface @AdapterFor &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; // zostanie przetworzona przez narzędzia w fazie<br>
+
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // kompilacji<br>
+
+
+
+
+<br>
+
+
+
+
+Wśrod metaadnotacji dostępne są jeszcze:<br>
+
+
+
+
+<br>
+
+
+
+
+<b>@Documented</b> &nbsp;- mowi o tym, że dokumentacja działania
+adnotacji ma być włączona do dokumentacji wszystkich oznaczanych przez
+nią elementów<br>
+
+
+
+
+<br>
+
+
+
+
+<b>@Inherited</b> - mówi o tym, że oznaczana przez nią adnotacja
+(zaznaczająca klasy) ma być dziedziczona przez podklasy zaznaczonych
+klas.<br>
+
+
+
+
+<br>
+
+
+
+
+<br>
+
+
+
+
+Zestaw regularnych, wbudowanych w Javę adnotacji jest na razie bardzo niewielki i obejmuje:<br>
+
+
+
+
+<br>
+
+
+
+
+@Deprecated - zaznacza dowolny element jako spadkowy ("przestarzały"),<br>
+
+
+
+
+<br>
+
+
+
+
+@SupressWarnings - blokuje ostrzeżenia (podanego typu) ze strony kompilatora,<br>
+
+
+
+
+<br>
+
+
+
+
+@Override - stosowana &nbsp;wobec metod, oznacza intencję programisty przedefiniowania
+metody z nadklasy, dzięki czemu jest możliwość sprawdzenia w fazie kompilacji
+czy programista nie popełnił błędu,<br>
+
+
+
+
+<br>
+
+
+
+
+Ta ostatnia adnotacja jest b. użyteczna i należy ją stosować.<br>
+
+
+
+
+Dzięki temu unikniemy błędów niewykrywalnych nie tylko w fazie kompilacji, ale również czasem w fazie wykonania.<br>
+
+
+
+
+<br>
+
+
+
+
+Np.<br>
+
+
+
+
+<br>
+
+
+
+
+class Push extends JButton {<br>
+
+
+
+
+<br>
+
+
+
+
+&nbsp;&nbsp;&nbsp; public Dimension getPrefferedSize() { ... }<br>
+
+
+
+
+<br>
+
+
+
+
+}<br>
+
+
+
+
+<br>
+
+
+
+
+Tutaj nastąpiła pomyłka w nazwie metody - wobec czego pojawia się nowa metoda
+(nigdy nie wołana), a właściwa (getPreferredSize()) nie jest przedefiniowana.
+Błędu nie ma &nbsp;ani w kompilacji ani w fazie wykonania (oprócz - być może
+nie zawsze, nie od razu, nie w każdych okolicznościach - widocznych niewłaściwych
+rozmiarów przycisku).<br>
+
+
+
+
+<br>
+
+
+
+
+Gdy napiszemy:<br>
+
+
+
+
+<br>
+
+
+
+
+class Push extends JButton {<br>
+
+
+
+
+<br>
+
+
+
+
+
+&nbsp; @Override&nbsp; public Dimension getPrefferedSize() { ... }<br>
+
+
+
+
+<br>
+
+
+
+
+
+}&nbsp;<br>
+
+
+
+
+<br>
+
+
+
+
+to kompilator wykryje błąd i powiadomi nas o tym.<br>
+
+
+
+
+<br>
+
+
+
+
+<br>
+
+
+
+
+<div class="syntax">Jak widać, składnia zastosowania adnotacji jest bardzo prosta.<br>
+
+
+
+
+Adnotacje zaczynają sie znakiem @.<br>
+
+
+
+
+Adnotacje poprzedzają inne kwalifikatory elementów (klas, metod, pól).<br>
+
+
+
+
+</div><br><a name="DynJav.17"></a><h2>3.3. <!---->Definiowanie adnotacji<!----></h2>
+
+
+
+
+Adnotacje są definiowane jako swego rodzaju interfejsy, za pomocą słowa @<b>interface</b><br>
+
+
+
+
+Wewnątrz takiego interfejsu dostarcza się deklaracji danych, które adnotacja może zawierać.<br>
+
+
+
+
+<br>
+
+
+
+
+<div class="syntax"><br>
+
+
+
+
+[ew. kwalifikacja dostępu]&nbsp; @<b>interface</b> NazwaAdnotacji {<br>
+
+
+
+
+&nbsp; &nbsp; deklaracja1<br>
+
+
+
+
+&nbsp; &nbsp; deklaracja2<br>
+
+
+
+
+&nbsp; &nbsp; &nbsp;. . .<br>
+
+
+&nbsp;&nbsp; &nbsp;deklaracjaN<br>
+
+
+
+
+}<br>
+
+
+</div><br>
+
+
+
+
+<br>
+
+
+
+
+Każda deklaracja ma postać:<br>
+
+
+
+
+<br>
+
+
+<div class="syntax"> &nbsp;typ nazwaDanej();</div><br>
+
+
+
+
+<br>
+
+
+
+
+albo <br>
+
+
+
+
+<br>
+
+
+<div class="syntax">typ nazwaDanej() <b>default</b> wartość_domyślna;</div><br>
+
+
+
+
+<br>
+
+
+
+
+<br>
+
+
+
+
+Przy zastosowaniu adnotacji możemy podać konkretne dane:<br>
+
+
+
+
+<br>
+
+
+
+
+@NazwaAdnotacji(nazwaDanej1=wartość1, nazwaDanej2=wartość2, . . .)<br>
+
+
+
+
+<br>
+
+
+
+
+Typy danych w adnotacji mogą być następujące:<br>
+
+
+
+
+<br><ul><li>
+
+
+
+
+typy proste (int, short, long, byte, char, double, float, boolean),</li><li>
+
+
+
+
+String,</li><li>
+
+
+
+
+typ referencyjny, reprezentowany przez Class, w tym także w wersji sparametryzowanej,</li><li>
+
+
+
+
+enum.</li><li>
+
+
+
+
+adnotacja,</li><li>
+
+
+
+
+tablica (w/w elementów).</li></ul>
+
+
+
+
+<br>
+
+
+
+
+Przykład:<br>
+
+
+<pre>public @interface Opis {
+&nbsp; &nbsp; String text() default "Brak opisu";
+&nbsp; &nbsp; int version() default 1;
+}
+
+
+// i zastosowanie np. do opisu klasy:
+
+@Opis(text="Klasa warzyw", version=2)
+public class Warzywa { ... }
+
+
+
+</pre>
+
+
+
+
+<br>
+
+
+Można też tak:<br>
+
+
+
+
+<br>
+
+
+
+
+@Opis(version=5, text="Klasa warzyw")<br>
+
+
+
+
+<br>
+
+
+albo:<br>
+
+
+
+
+<br>
+
+
+
+
+@Opis(text="Klasa warzyw")<br>
+
+
+
+
+<br>
+
+
+tu pominięte dane przyjmą wartości domyślne,<br>
+
+
+
+
+w szczególności:<br>
+
+
+
+
+<br>
+
+
+<div class="notec"><br>
+
+
+@Opis <br>
+
+
+
+
+oznacza to samo co<br>
+
+
+
+
+<br>
+
+
+
+
+@Opis()<br>
+
+
+
+
+i co<br>
+
+
+
+
+<br>
+
+
+
+
+@Opis(text="Brak opisu", version=1)<br>
+
+
+
+
+</div><br>
+
+
+
+
+<br>
+
+
+Mamy też szczególny przypadek, kiedy można pominąć nazwę danych i znak =. Mianowicie:<br>
+
+
+
+
+<br>
+
+
+
+
+public @interface JakaśAdnotacja {<br>
+
+
+
+
+&nbsp; &nbsp;jakiśTyp value()<br>
+
+
+
+
+}<br>
+
+
+
+
+<br>
+
+
+
+
+<br>
+
+
+
+
+Wtedy można pisać np. tak (jeśli jakiśTyp to int):<br>
+
+
+
+
+<br>
+
+
+
+
+@JakaśAdnotacja(111)<br>
+
+
+
+
+<br>
+
+
+
+
+nadając danej oznaczanej przez value wartość 111.<br>
+
+
+
+
+<br>
+
+
+
+
+<br>
+
+
+
+
+Dane konkretnych adnotacji mogą być uzyskiwane od nich (w fazie wykonania
+lub kompilacji) poprzez odwołania do "metod" interfejsu definiującego adnotację
+<br>
+
+
+
+
+(np. jeśli annot - jest uzyskaną metodami refleksji lub przez narzędzia przetwarzania
+w fazie kompilacji adnotacją @Opis, to możemy wołać:<br>
+
+
+
+
+<br>
+
+
+
+
+String op = annot.txt();<br>
+
+
+
+
+int v = annot.version();<br><br><a name="DynJav.18"></a><h2>3.4. <!---->Przetwarzanie adnotacji w fazie wykonania<!----></h2>
+
+
+
+
+Aby przetwarzać - i odpowiednio stosować - adnotacje w fazie wykonania, należy:<br>
+
+
+
+
+<br>
+
+
+
+
+<ul><li>ustalić rodzaj adnotacji przez @Retention(RetentionPolicy.RUNTIME),</li><li>użyć metod refleksji do uzyskania informacji które elementy i za pomocą jakich adnotacji są zaznaczane,</li><li>od uzyskanych adnotacji dowiedzieć się ew. dodatkowych informacji,
+zapisanych w nich jako dane; po czym na podstawie adnotacji i tych danych
+dynamicznie wytworzyć i wykonać odpowiedni kod.</li></ul>
+
+
+
+
+Dla każdego elementu programu (uzyskanego dynamicznie): Class, Method, Field
+itp. możemy użyć metod, które zwracają informację o adnotacjach zastosowanych
+wobec tego elementu.<br>
+
+
+
+
+<br>
+
+
+
+
+<table summary="" border="1" cellpadding="3" cellspacing="0" width="100%">
+
+
+
+
+  <tbody>
+
+
+
+    <tr class="TableRowColor" bgcolor="white">
+
+
+
+      <td align="right" valign="top" width="1%">
+
+
+
+
+      <table summary="" border="0" cellpadding="0" cellspacing="0">
+
+
+
+
+        <tbody>
+
+
+
+          <tr align="right" valign="">
+
+
+
+            <td nowrap="nowrap">&lt;T extends Annotation&gt;
+            <br>
+
+
+
+
+
+T</td>
+
+
+
+          </tr>
+
+
+
+
+
+
+        </tbody>
+
+
+
+
+      </table>
+
+
+
+
+      </td>
+
+
+
+      <td>getAnnotation(Class&lt;T&gt;&nbsp;annotationType)<br>
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zwraca adnotację
+podanego typu, albu null, jeśli element nie jest oznaczony adnotacją.</td>
+
+
+
+    </tr>
+
+
+
+    <tr class="TableRowColor" bgcolor="white">
+
+
+
+      <td align="right" valign="top" width="1%">&nbsp;Annotation[]</td>
+
+
+
+      <td>getAnnotations()<br>
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zwraca wszystkie adnotacje dla tego elementu</td>
+
+
+
+    </tr>
+
+
+
+    <tr class="TableRowColor" bgcolor="white">
+
+
+
+      <td align="right" valign="top" width="1%">&nbsp;Annotation[]</td>
+
+
+
+      <td>getDeclaredAnnotations()<br>
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zwraca wszystkie
+adnotacje bezpośrednio zastosowane (z pominieciem dziedziczonych)</td>
+
+
+
+    </tr>
+
+
+
+    <tr class="TableRowColor" bgcolor="white">
+
+
+
+      <td align="right" valign="top" width="1%">&nbsp;boolean</td>
+
+
+
+      <td>isAnnotationPresent(Class&lt;? extends Annotation&gt;&nbsp;annotationType)<br>
+
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zwraca true, jeśli wobec elementu zastosowano adnotację podanego typu.</td>
+
+
+
+    </tr>
+
+
+
+
+
+
+  </tbody>
+</table>
+
+
+
+
+<br>
+
+
+
+
+Co to jest typ adnotacji?<br>
+
+
+
+
+Nic innego jak nazwa interfejsu który ją definiuje. Np. dla adnotacji, zdefiniowanej jako:<br>
+
+
+
+
+<br>
+
+
+
+
+public @interface Opis { ... }<br>
+
+
+
+
+<br>
+
+
+
+
+typem jest:<br>
+
+
+
+
+<br>
+
+
+
+
+Opis.class<br>
+
+
+
+
+albo<br>
+
+
+
+
+Class.forName("Opis");<br>
+
+
+
+
+<br>
+
+
+
+
+Uwagi: <br>
+
+
+
+
+<ul><li>przy zastosowaniu nazwanych pakietów nazwy interfejsów adnotacji muszą być kwalifikowane nazwą pakietu,</li><li>wszystkie adnotacje (jako interfejsy) rozszerzają interfejs Annotation,
+wobec czego mogą być traktowane jako Annotation i dlatego takie są wyniki
+w/w metod; zwróćmy uwagę, że dzięki parametryzacji nie musimy stosować konwersji
+zawężających.</li></ul>
+
+
+
+
+<br>
+
+
+
+
+<b>Przykład.</b><br>
+
+
+
+
+<br>
+
+
+
+
+Stworzymy i zastosujemy adnotację, dzięki której w prosty sposób w kodzie
+źródłowym będziemy ustalać do jakich kontenerów mają być wkładane wybrane
+komponenty GUI.<br>
+
+
+
+
+Adnotację nazwiemy Loc (od locate).<br>
+
+
+
+
+<br>
+
+
+
+
+<pre>import java.lang.annotation.*;
+import java.awt.*;
+
+@Target(ElementType.FIELD)             // do oznaczania pól
+@Retention(RetentionPolicy.RUNTIME)    // faza wykonania
+
+public @interface Loc {
+   String to();
+}
+</pre>
+
+
+
+
+<br>
+
+
+
+
+Adnotacja ma jedną "daną", swoisty atrybut, o nazwie<span style="font-weight: bold; font-style: italic;"> to</span>, który będzie reprezentował
+za każdym razem nazwę zmiennej oznaczającej kontener do którego dany komponent
+(oznaczony tą adnotacją)&nbsp; ma być dodany.<br>
+
+
+
+
+<br>
+
+
+
+
+A oto jej zastosowanie:<br>
+
+
+
+
+<br>
+
+
+
+
+<pre>import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.lang.reflect.*;
+
+public class Annot0 extends JFrame {
+
+  JComponent cp = (JComponent) getContentPane();
+
+  @Loc(to="cp") JPanel p1 = new JPanel();
+  @Loc(to="cp") JPanel p2 = new JPanel();
+
+  @Loc(to="p1") JButton b1 = new JButton("Przycisk 1");
+  @Loc(to="p1") JButton b2 = new JButton("Przycisk 2");
+  @Loc(to="p2") JButton b3 = new JButton("Przycisk 3");
+  @Loc(to="p2") JButton b4 = new JButton("Przycisk 4");
+  @Loc(to="p2") JButton b5 = new JButton("Przycisk 5");
+
+  public Annot0() {
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
+    try {
+      locateComponents();   // metoda ta zajmie się wkładaniem do kontenerow
+    } catch(Exception exc) {
+        exc.printStackTrace();
+    }
+    pack();
+    show();
+  }
+//....
+}
+</pre>
+
+
+
+
+<br>
+
+
+
+
+<br>
+
+
+
+
+Metoda locateComponents() nie jest trudna do napisania, jeśli tylko choć trochę władamy metodami refleksji:<br>
+
+
+
+
+<br>
+
+
+
+
+<pre>  private void locateComponents() throws Exception {
+    Class klasa =  getClass();
+    for (Field f : klasa.getDeclaredFields()) {   // po polach klasy
+      Loc annot = f.getAnnotation(Loc.class);     // dla f uzyskać anotację Loc
+      if (annot == null) continue;                // nie ma - następne pole
+      System.out.println(annot);                  // zobaczmy jak wygląda
+      String contName = annot.to();               // od adnotacji: nazwa kontenera
+      Field contField = klasa.getDeclaredField(contName);  // pole, ktore go deklaruje
+      Object container = contField.get(this);  // sam obiekt-kontener
+      Method m = container.getClass().getMethod("add", Component.class); // metoda add
+      m.invoke(container, f.get(this)); // i jej wywołanie - dodajemy komponent
+    }
+}
+</pre>Można powiedzieć, że ten sposób programowania, szczególnie w dużych projektach
+może być bardzo użyteczny, bowiem łatwo pozwala zmieniać ułożenie komponentów.<br>
+
+
+
+
+Sama metoda locateComponents() może być nieco zmodyfikowana, tak by mogła
+znaleźć się w jakiejś klasie narzędziowej i być zastosowana wobec dowolnych
+klas o podobnej j.w. konstrukcji.<br><br><a name="DynJav.19"></a><h2>3.5. <!---->Przetwarzanie adnotacji w fazie kompilacji<!----></h2>
+
+
+
+
+Niewątpliwie możliwość przetwarzania adnotacji &nbsp;w fazie kompilacji &nbsp;jest najbardziej ekscytująca. <br>
+
+
+
+
+Umożliwia np. generowanie dodatkowych klas czy niezbędnych plików zewnętrznych.<br>
+
+
+
+
+<br>
+
+
+
+
+Do takiego przetwarzania powołane są odpowiednie dodatkowe narzędzia. <br>
+
+
+
+
+<br>
+
+
+
+
+Należy do nich
+<br>
+
+
+<span style="font-weight: bold;"><!---->apt<!----></span><br>
+
+
+
+
+czyli "Annotation Processing Tool", dostępny w pakiecie Javy.<br>
+
+
+
+
+<br>
+
+
+
+
+Skąd apt ma wiedzieć, jak należy przetwarzać nasze adnotacje?<br><!----><!---->
+
+
+
+
+Otoż musimy mu to sami powiedzieć, dostarczając tzw. procesora adnotacji.<br>
+
+
+
+
+<br>
+
+
+
+
+<div class="syntax"><br>
+
+
+
+
+Procesor adnotacji definiujemy implementując we własnej klasie interfejs <b>AnnotationProcessor</b> i dostarczając definicji jedynej jego metody public void process()<br>
+
+
+
+
+<br>
+
+
+
+
+Apt uzyskuje dostęp do naszego procesora za pomocą metody getProcessorFor(...)
+z klasy, którą też musimy zdefiniować i która stanowi fabrykę procesorów
+- implementację interfejsu <b>AnnotationProcessorFactory</b>.<br>
+
+
+
+
+<br>
+
+
+
+
+Podczas wywołania tej metodzie przekazywane jest środowisko działania dla procesora - <b>AnnotationProcessorEnvironment</b>. Z tego środowiska nasz procesor może odczytać wszystkie niezbędne informacje
+o strukturze kodu źródłowego oraz sposobach tworzenia i generowania nowych
+plików, a także raportowania błędów i ostrzeżeń.<br>
+
+
+
+
+<br>
+
+
+
+
+Apt używa naszego procesora, który np. produkuje dodatkowe pliki, po czym wykonuje wszystkie niezbędna kompilacje.<br>
+
+
+
+
+<br>
+
+
+
+
+Uwaga: konieczne są importy pakietów z tools.jar - zob. przykładowy kod źródłowy.<br>
+
+
+
+
+</div><br>
+
+
+
+
+<br>
+
+
+
+
+Jako przykład rozpatrzmy prosty sposób zapisu klas typu JavaBeans.<br>
+
+
+
+
+Na podstawie tych bardzo uproszczonych zapisów będą mogły być generowane
+"prawdziwe" duże klasy JavaBeans. Przykład jest raczej ilustracyjny i do
+dalszego znaczącego rozszerzania i modyfikowania.<br>
+
+
+
+
+<br>
+
+
+
+
+Umówimy się, że na podstawie zapisu:<br>
+
+
+
+
+<br>
+
+
+
+
+<b>@BeanTemplate class <i>NazwaBeana</i>Template {</b><br>
+
+
+
+
+&nbsp; &nbsp; &nbsp; &nbsp;typ1 nazwa1;<br>
+
+
+
+
+&nbsp; &nbsp; &nbsp; &nbsp;typ2 nazwa2;<br>
+
+
+
+
+&nbsp; &nbsp; &nbsp; &nbsp;....<br>
+
+
+
+
+&nbsp; &nbsp; &nbsp; &nbsp;tyoN nazwaN;<br>
+
+
+
+
+}<br>
+
+
+
+
+<br>
+
+
+
+
+ma być wygenerowana klasa JavaBean o nazwie NazwaBeana, zawierające właściwe
+deklaracje pól (podanych) oraz odpowiednie dla nich settery i gettery.<br>
+
+
+
+
+<br>
+
+
+
+
+Musimy więc mieć adnotację @BeanTemplate:<br>
+
+
+
+
+<pre>import java.lang.annotation.*;
+
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.SOURCE)
+public @interface BeanTemplate {
+}
+</pre>
+
+
+
+
+&nbsp; <br>
+
+
+
+
+&nbsp;i odpowiedni procesor, dostarczany przez naszą implementację fabryki procesorow adnotacji:<br>
+
+
+
+
+<br>
+
+
+
+
+<pre>import com.sun.mirror.apt.*;
+import com.sun.mirror.declaration.*;
+import com.sun.mirror.type.*;
+import com.sun.mirror.util.*;
+
+import java.beans.*;
+import java.io.*;
+import java.util.*;
+
+
+public class BeanTemplateAnnotationFactory
+       implements AnnotationProcessorFactory
+{
+
+   // Typ adnotacji
+   private final String annoType = "BeanTemplate";
+
+   public Collection&lt;String&gt; supportedAnnotationTypes() {
+      return Arrays.asList(annoType);
+   }
+
+   public Collection&lt;String&gt; supportedOptions() {
+      return Arrays.asList(new String[0]);
+   }
+
+   public AnnotationProcessor   <b>// ważna metoda getProcessorFor</b>
+          getProcessorFor(Set&lt;AnnotationTypeDeclaration&gt; atds,
+                          final <b>AnnotationProcessorEnvironment env</b>)
+   {
+      return new AnnotationProcessor() { <b>// procesor - w klasie wewnętrznej</b>
+
+        <b>public void process() {</b>
+          // deklaracje markowane adnotacją annoType (teraz "BeanTemplate")
+          Collection&lt;Declaration&gt; dcls =
+             env.getDeclarationsAnnotatedWith(
+                (AnnotationTypeDeclaration) env.getTypeDeclaration(annoType));
+
+          for (Declaration d : dcls) {&nbsp;
+             if (d instanceof ClassDeclaration) {  <b>// jeżeli klasa</b>
+               ClassDeclaration cdcl = (ClassDeclaration) d;
+               String name = cdcl.getSimpleName();
+               if (!name.endsWith("Template")) {
+                  <b>// od env uzyskujemy środki raportowania błędów, ostrzeżeń, info.</b>
+                  env.getMessager().printWarning("Wadliwa nazwa klasy bean template");
+                  continue;
+               }
+               String qname = cdcl.getQualifiedName();
+               env.getMessager().printNotice(qname);
+               qname = qname.substring(0, qname.lastIndexOf("Template"));
+               name = name.substring(0, name.lastIndexOf("Template"));
+               try {
+                 <b>// od env uzyskamy plik i skojarzony z nim PrintWriter</b>
+                 PrintWriter out = env.getFiler().createSourceFile(qname);
+                 // generujemy świeży kod na podstawie info o zaznaczonej klasie
+                 out.println("public class " + name + " {" );
+                 Collection&lt;FieldDeclaration&gt; fdcl = cdcl.getFields();
+                 for (FieldDeclaration f : fdcl) {
+                   String fname = f.getSimpleName();
+                   String mname = Character.toUpperCase(fname.charAt(0)) +
+                                  fname.substring(1);
+                   String ftype = f.getType().toString();
+                   out.println("  private " + ftype + " " + fname + ";");
+                   out.println("  public " + ftype + " get" +  mname +
+                               "() { return " + fname + "; }");
+                   out.println("  public void set" +  mname +
+                               "(" + ftype + " v) { " + fname + " = v; }");
+                 }
+                 out.println("}");
+                 out.close();
+               } catch(IOException exc) { exc.printStackTrace(); }
+             }
+             else  // jeśli nie byla klasa, to ktoś się pomylił i zazn. interfejs
+               env.getMessager().printWarning("Adnotacja dotyczy interfejsu");
+          }
+        }
+      };
+   }
+
+
+
+}</pre>
+
+
+
+
+<br>
+
+
+
+
+Po skompilowaniu tej fabryki umieszczamy wynik kompilacji w katalogu, w
+którym znajdują się&nbsp; inne pliki źródłowe. Np. takie przykładowe zastosowanie:<br>
+
+
+
+
+<br>
+
+
+
+
+Uproszczona definicja beana:<br>
+
+
+
+
+<pre>import java.awt.*;
+@BeanTemplate public class Bean1Template {
+  String txt;
+  Color color;
+}
+</pre>
+
+Ponieważ, zgodnie z umową ma z tego powstać prawdziwa klasa JavaBean, to
+plik ją wykorzystujący będzie się odwoływał do Bean1, a nie Bean1Template:<br>
+
+
+
+
+<br>
+
+
+
+
+<pre>import java.awt.*;
+public class Annot1 {
+
+
+  public Annot1() {
+    Bean1 b = new Bean1();
+    b.setTxt("Pies");
+    b.setColor(Color.BLUE);
+
+    System.out.println(b.getTxt() + "\n" + b.getColor());
+
+  }
+
+  public static void main(String[] args) {
+     new Annot1();
+  }
+
+}
+</pre>
+
+
+
+
+<br>
+
+
+
+
+Aby to wszystko ze sobą polaączyć, musimy wywołać apt, podając mu lokalizację fabryki procesorow:<br>
+
+
+
+
+<br>
+
+
+
+
+<pre>apt -factory BeanTemplateAnnotationFactory *.java
+</pre>
+
+
+
+
+<br>
+
+
+
+
+APT nie tylko przeprowadzi analizę adnotacji i odpowiednie ich substytucje,
+nie tylko skorzysta z naszego procesora i pozwoli mu zapisać nowy plik źródłowy,
+ale również wywoła normalny kompilator javy, aby wszystko złożył do kupy.<br>
+
+
+
+
+<br>
+
+
+
+
+W efekcie uzyskamy nowowygenerowany plik źródłowy (który "zastępuje" uproszczony "template"):<br>
+
+
+
+
+<pre>public class Bean1 {
+  private java.awt.Color color;
+  public java.awt.Color getColor() { return color; }
+  public void setColor(java.awt.Color v) { color = v; }
+  private java.lang.String txt;
+  public java.lang.String getTxt() { return txt; }
+  public void setTxt(java.lang.String v) { txt = v; }
+}
+</pre>
+
+
+
+
+a w wyniku kompilacji wszystkiego razem działający plik Annot1.class, który wyprodukuje napis:<br>
+
+
+
+
+<br>
+
+
+
+
+Pies<br>
+
+
+
+
+java.awt.Color[r=0,g=0,b=255]<br><br><br><a style="font-weight: bold;" href="mm/w3p1/w3p1.html" target="_blank">Zobacz multimedialną prezentację użycia APT</a><a href="mm/w3p1/w3p1.html"><img style="border: 0px solid ; width: 100px; height: 80px;" alt="r" src="../../../../ZaawTechPrg/Wyklady/STYLE/video2.gif"></a><br><br>Podany przykład jest prosty, a także trochę dyskusyjny. Ale dobrze pokazuje
+potencjalnie olbrzymie możliwości tkwiące w przetwarzaniu adnotacji w fazie kompilacji.<br><br><br><a name="DynJav.20"></a><h2>3.6. Adnotacje a transformowanie kodu binarnego</h2>
+
+<br>
+
+Polityka utrzymywania adnotacji oznaczana przez metaadnotację
+@Retention jako RetentionPolicy.CLASS utrzymuje adnotację w klasie
+(kodzie binarnym), ale nie udostępnia jej mechanizmom refleksji.<br>
+
+<br>
+
+Taki typ adnotacji może być wykorzystywany przez różne narzędzia
+modyfikacji kodu binarnego klas. Należą do nich takie narzędzia jak:<br>
+
+<ul><li>Javassist,</li><li>BCEL.</li></ul>
+
+<br>
+
+<span style="font-weight: bold;">Javassist</span> pozwala na bardzo łatwe transformowanie kodu binarnego klas, polegające m.in na:<br>
+
+<ul><li>zastępowaniu metod i konstruktorów.</li><li>dodawanie kodu na początku lub w końcu ciała metod lub konstruktorów.</li></ul>
+
+Modyfikacje są łatwe, ponieważ możemy zapisać je w naturalnym języku Javy.<br>
+
+Javassist ma pewne ograniczenia. <br>
+
+Znacznie potężniejszym narzędziem jest BCEL (Byte Code Engineering
+Library), który pozwala robić praktycznie wszystko, ale wymaga
+zapisów w postaci podobnej do bajtkodu.<br>
+
+<br>
+
+Zobacz więcej o:<br>
+
+<span style="font-weight: bold;">Javassist</span> - <a href="http://jboss.com/products/javassist">http://jboss.com/products/javassist</a><br>
+
+<span style="font-weight: bold;">BCEL</span> - <a href="http://jakarta.apache.org/bcel/">http://jakarta.apache.org/bcel/</a>
+<hr>
+<a name="DynJav.21"></a><h2>4. Skrypty w Javie</h2>
+<a name="DynJav.22"></a><h2>4.1. Wprowadzenie</h2><br>W Javie 6 wbudowano możliwość uruchamiania skryptów z poziomu
+aplikacji. Naturalnie, taka możliwośc istniała zawsze, ale teraz
+mechanizmy i interfejsy zostały ustandaryzowane, a w pakietach Javy
+mamy javax.script, dodstarczający gotowych klas i interfejsów do
+wykorzystania w tym celu.<br><i><br></i><span style="font-weight: bold;">Co może robić aplikacja Javy ?</span><br><ul><li>wywoływać skrypt,</li><li>wywoływac wybrane funkcje/metody ze skryptu,</li><li>odczytywać informacje (zmienne) zmienione lub dostarczone przez skrypt</li></ul><br><span style="font-weight: bold;">Co może robić skrypt ?</span><br><ul><li>korzystać z możliwości swojego języka skryptowego</li><li>korzystać z bibliotek Javy</li><li>odczytywać informacje z aplikacji (dostęp do zmiennych)</li></ul><br><span style="font-weight: bold;">Jakie są tego&nbsp;zastosowania
+?</span><br><ul><li>prototypowanie aplikacji</li><li>testowanie aplikacji</li><li>wzbogacanie aplikacji o możliwości języków skryptowych (np. niektóre fragmenty łatwiej napisać w skrypcie)</li><li>dostarczanie użutkownikowi środków prgramistycznego dostępu do środowiska aplikacji</li><ul><li>np. makra-programy do elastycznych obliczeń</li></ul><ul><li>np. makra edycyjne</li></ul></ul><br><a name="DynJav.23"></a><h2>4.2. Motory skryptowe i dostęp do nich z aplikacji Javy</h2><div class="def">Motor skryptowy (<span style="font-weight: bold; font-style: italic;">script engine</span>)
+- to komponent software'wy, który wykonyje programy napisane w
+języku skryptowym. Wykonanie polega na interpretacji, składającej się z
+następujących faz: parsowanie kodu,&nbsp; utworzenie tablicy symboli do
+przechowywania wartości, właściwe wykonanie. Motor skryptowy nazywany
+jest także interpreterem</div><br><br><span style="font-weight: bold;">Java Script Engines (JSE)</span> - to motory skryptowe zrealizowane jako moduły napisane w Javie (pliki .jar) i eksponujące <span style="font-weight: bold;">jednolity interfejs programistyczny, zgodny ze specyfikacją JSR-223</span>. <br>Oczywiście,
+mogą one używac odwołań do funkcji rodzimych, a zatem mogą "powierzać"
+własciwe wykonanie skryptu interpreterom, które mają odpowiednie
+API do takiego współdziałania.<br><br>W bibliotekach Javy 1. 6&nbsp; dostępny jest JSE dla języka JavaScript w wersji Rhino.<br>Dodatkowe motory skryptowe są dostępne na stronie: <a href="https://scripting.dev.java.net/">https://scripting.dev.java.net/</a>.<br>Mogą powstawać (i powstają) nowe motory skryptowe.<br><br>Tabela przedstawia wybrane motory skryptowe<br><br><table border="1"><tbody><tr><th>
+Language
+</th>
+<th>
+Description
+</th>
+<th>
+Implementation
+</th>
+</tr>
+
+
+<tr>
+<td>
+<a href="http://en.wikipedia.org/wiki/Awk">AWK</a>
+</td>
+<td>
+AWK is a general purpose language that is designed for processing text-based
+data, either in files or data streams. Jawk is Java-like, Awk-like reporting
+language.
+</td>
+<td>
+<a href="http://jawk.sourceforge.net/">Jawk</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://jcp.org/en/jsr/detail?id=274">BeanShell</a>
+</td>
+<td>
+BeanShell is a small, free, embeddable Java interpreter with object scripting
+language features, written in Java. BeanShell dynamically executes standard
+Java syntax and extends it with common scripting conveniences such as loose
+types, commands, and method closures like those in Perl and JavaScript.
+</td>
+<td>
+<a href="http://www.beanshell.org/">BeanShell 2.0b5</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<b>ejs</b>
+</td>
+<td>
+"ejs" (Embedded JavaScript) is JSP-like templating engine for JavaScript.
+It supports the usual &lt;%= expr %&gt;, &lt;% code %&gt; syntax. This engine
+is completely implemented in JavaScript. You need to use JavaScript engine to
+use this script engine.
+</td>
+<td>
+Implementation contained in one JavaScript file.
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://freemarker.sourceforge.net/">FreeMarker</a>
+</td>
+<td>
+FreeMarker is a Java-based general purpose template engine.
+</td>
+<td>
+<a href="http://freemarker.sourceforge.net/">FreeMarker 2.3.8</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.jcp.org/en/jsr/detail?id=241">Groovy</a>
+</td>
+<td>
+Groovy is an agile dynamic language for the Java 2 Platform that has many of the
+features that people like so much in languages like Python, Ruby and Smalltalk,
+making them available to Java developers using a Java-like syntax.
+</td>
+<td>
+<a href="http://groovy.codehaus.org/">Groovy 1.0 jsr-06</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://jaskell.codehaus.org/">Jaskell</a>
+</td>
+<td>
+Jaskell is a lazy functional programming language. It stands for
+"Java Haskell". It features higher-order functions, function currying,
+string interpolation, lazy evaluation, dynamic typing.
+</td>
+<td>
+<a href="http://jaskell.codehaus.org/">Jaskell 1.0</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://java.sun.com/docs/books/jls">Java</a>
+</td>
+<td>
+<a href="http://java.sun.com/">http://java.sun.com</a>
+</td>
+<td>
+<a href="http://www.jcp.org/en/jsr/detail?id=199">Java Compiler API (JSR 199)</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.mozilla.org/js">JavaScript</a>
+</td>
+<td>
+Web Browser's native JS interpreter is wrapped as javax.script API.
+Note that this script engine works only under web browsers. i.e., only
+within Java applets.
+</td>
+<td>
+Web Browser's JS implementation (tested with Firefox 1.5.0)
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://jakarta.apache.org/commons/jelly/">Jelly</a>
+</td>
+<td>
+Jelly is a tool for turning XML into executable code. So Jelly is a Java
+and XML based scripting and processing engine. Jelly borrows many good ideas
+from both JSP custom tags, Velocity, Cocoon, Ant. In this script engine,
+&lt;script&gt; tag has been added. Any JSR-223 compliant language may be used.
+Also, expressions [${xxx}] may be from any scripting language rather than
+Jexl alone.
+</td>
+<td>
+<a href="http://jakarta.apache.org/commons/jelly/">Jelly 1.0</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.singularsys.com/jep/">JEP</a>
+</td>
+<td>
+JEP is a Java library for parsing and evaluating mathematical expressions.
+JEP supports BigInteger, BigDecimal, complex, Vector/Matrix/Tensor arithmetic.
+</td>
+<td>
+<a href="http://www.singularsys.com/jep/">JEP (Java Math Expression Parser) 2.4.0</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://jakarta.apache.org/commons/jexl/">Jexl</a>
+</td>
+<td>
+Java Expression Language (JEXL) is an expression language engine which can be embedded in
+applications and frameworks. JEXL is inspired by Jakarta Velocity and the Expression Language
+defined in the JavaServer Pages Standard Tag Library version 1.1 (JSTL) and JavaServer Pages
+version 2.0 (JSP).
+</td>
+<td>
+<a href="http://jakarta.apache.org/commons/jexl/">Jexl 1.0</a>
+</td>
+</tr>
+
+
+<tr>
+<td>
+<b>jst</b>
+</td>
+<td>
+"jst" (JavaScript Templates) is JSP/ASP/PHP-like templating engine for
+JavaScript. This engine uses TrimPath's JavaScript Templates implementation.
+This script engine is implemented in JavaScript. You need to use
+JavaScript engine to use this script engine.
+</td>
+<td>
+<a href="http://www.trimpath.com/project/wiki/JavaScriptTemplates">TrimPath JavaScript Templates (1.0.38)</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.judoscript.com/">JudoScript</a>
+</td>
+<td>
+A scripting language built atop Java, and is a powerful general-purpose programming
+language with intimate Java scripting support. JudoScript, or Judo for short, is a
+general-purpose, Java scripting and multi-domain language. A full-fledged general-purpose
+scripting language with full capability of Java scripting, JudoScript intimately supports
+most of today's key computing areas.
+</td>
+<td>
+<a href="http://www.judoscript.com/">JudoScript 0.9</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.ognl.org/">OGNL</a>
+</td>
+<td>
+OGNL stands for Object-Graph Navigation Language; it is an expression language for
+getting and setting properties of Java objects. You use the same expression for both
+getting and setting the value of a property
+</td>
+<td>
+<a href="http://www.ognl.org/">OGNL 2.6.9</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://pnuts.dev.java.net/">Pnuts</a>
+</td>
+<td>
+Pnuts is a simple but powerful scripring language that is embeddable into Java applications.
+It has an extensible module system and a lot of ready-to-use modules.
+</td>
+<td>
+<a href="http://pnuts.dev.java.net/">Pnuts 1.1</a>
+</td>
+</tr>
+
+
+<tr>
+<td>
+<a href="http://www.python.org/">Python</a>
+</td>
+<td>
+Python is a dynamic object oriented programming language that can be used for many kinds
+of software development. It offers strong support for integration with other languages and tools,
+comes with extensive standard libraries, and can be learned in a few days time.
+</td>
+<td>
+<a href="http://jython.sourceforge.net/">Jython 2.1</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.ruby-lang.org/">Ruby</a>
+</td>
+<td>
+Ruby is the interpreted scripting language for quick and easy object-oriented programming.
+It has many features to process text files and to do system management tasks (as in Perl).
+It is simple, straight-forward, extensible, and portable.
+</td>
+<td>
+<a href="http://jruby.sourceforge.net/">JRuby 0.9.0</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.schemers.org/">Scheme</a>
+</td>
+<td>
+Scheme is a statically scoped and properly tail-recursive dialect of the Lisp programming language
+invented by Guy Lewis Steele Jr. and Gerald Jay Sussman. It was designed to have an exceptionally
+clear and simple semantics and few different ways to form expressions. A wide variety of programming
+paradigms, including imperative, functional, and message passing styles, find convenient expression
+in Scheme.
+</td>
+<td>
+<a href="http://sisc.sourceforge.net/">SISC 1.15.3</a>
+</td>
+</tr>
+
+
+<tr>
+<td>
+<a href="http://sleep.hick.org/">Sleep</a>
+</td>
+<td>
+Sleep is a Java-based scripting language heavily inspired by Perl.
+</td>
+<td>
+<a href="http://sleep.hick.org/">Sleep 2.0</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.tcl.tk/">Tcl</a>
+</td>
+<td>
+Tcl (Tool Command Language) is a very powerful but easy to learn dynamic programming language,
+suitable for a very wide range of uses, including web and desktop applications, networking,
+administration, testing and many more. Open source and business-friendly, Tcl is a mature yet
+evolving language that is truly cross platform, easily deployed and highly extensible.
+</td>
+<td>
+<a href="http://tcljava.sourceforge.net/">Jacl 1.3.3</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://jakarta.apache.org/velocity/">Velocity</a>
+</td>
+<td>
+Velocity is a Java-based general purpose template engine.
+</td>
+<td>
+<a href="http://jakarta.apache.org/velocity/">Velocity 1.4</a>
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.w3.org/TR/xpath">XPath</a>
+</td>
+<td>
+JDK already includes <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/xpath/package-summary.html">javax.xml.xpath</a>
+package for XPath. But to extend XPath with user defined functions and variables, user needs to learn different set of
+interfaces/classes in this (and few other) package(s). We are adding a javax.script engine on top of javax.xml.xpath API
+- so that user can set variables, functions in ScriptContext and call "eval" method on ScriptEngine. Any Java method,
+constructor may be used as XPath extension function - no need to wrap it as "XPathFunction".
+</td>
+<td>
+JDK implementation of javax.xml.xpath is used.
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.w3.org/TR/xslt">XSLT</a>
+</td>
+<td>
+JDK already includes <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/package-summary.html">javax.xml.transform</a>
+package for XSLT. But to use XSLT, user needs to learn different set of interfaces/classes in
+this (and few other) package(s). We are adding a javax.script engine on top of javax.xml.transform API
+- so that user can set source, result in ScriptContext and call "eval" method on ScriptEngine.
+By default, ScriptContext's input Reader and output Writer are used for transform source and
+result.
+</td>
+<td>
+JDK implementation of javax.xml.transform is used.
+</td>
+</tr>
+
+
+</tbody></table>
+
+<span style="font-weight: normal;">Wszystkie w/w JSE są dostępne z w/w strony jako archiwum katalogów </span><b>sr223-engines.zip.</b><br><br>Dodatkowe JSE wg specyfikacji JSR 223:&nbsp;
+<ul><li>AppleScript (<a href="https://jasconn.dev.java.net/">https://jasconn.dev.java.net</a> - <b>Mac OS X only</b>)
+</li><li>Bex script (<a href="http://bexscript.sourceforge.net/">http://bexscript.sourceforge.net</a>)
+</li><li>PHP (<a href="http://www.caucho.com/resin-3.0/quercus/">http://www.caucho.com/resin-3.0/quercus/</a>) - pure Java implementation of PHP.
+</li><li>PHP (<a href="http://php-java-bridge.sourceforge.net/">http://php-java-bridge.sourceforge.net/</a>) - uses native PHP implementation through remoting.
+</li><li>Python (<a href="http://jepp.sourceforge.net/">http://jepp.sourceforge.net/</a>) - uses the native Python implementation to implement JSR 223 engine.</li><li></li></ul><div class="important">Aby JSE był dostępny z poziomu aplikacji Javy jego JAR
+musi być widoczny dla ClassLoadera (np. umieszczony na ścieżce
+CLASSPATH.</div><br>Dostęp do JSE z poziomu aplikacji Javy jest realizowany za pośrednictwem zarządcy motorów -&nbsp; <span style="font-weight: bold;">ScriptEngineManager</span>. Zajmuje się on m.in.&nbsp; wyszukiwaniem i instancjacją odpowiednich JSE. <br><br>Do odnajdywania JSE służą następujące metody klasy ScriptEngineManager.<br><table summary="" border="1" cellpadding="3" cellspacing="0" width="100%"><tbody></tbody></table><br><table summary="" border="1" cellpadding="3" cellspacing="0" width="100%"><tbody><tr><td style="background-color: rgb(255, 255, 255);">&nbsp;ScriptEngine</td><td style="background-color: rgb(255, 255, 255);"><br>getEngineByName(String&nbsp;shortName)
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wyszukuje i tworzy JSE dla podanej nazwy motoru (lub jej aliasu)</td></tr><tr class="TableRowColor" bgcolor="white"><td align="right" valign="top" width="1%">
+&nbsp;ScriptEngine</td>
+<td>getEngineByExtension(String&nbsp;extension)
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Wyszukuje i
+tworzy JSE dla podanego rozszerzenia plików skryptowych.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%">
+&nbsp;ScriptEngine</td>
+<td>getEngineByMimeType(String&nbsp;mimeType)
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; j.w. - tylko dla &nbsp;podanego typu MIME</td>
+</tr>
+</tbody></table><br><br><table summary="" border="1" cellpadding="3" cellspacing="0" width="100%"><tbody></tbody></table><table summary="" border="1" cellpadding="3" cellspacing="0" width="100%"><tbody></tbody></table><br><div style="text-align: center;">Uzyskanie JSE:<br></div><br><pre>ScriptEngineManager manager = new ScriptEngineManager();
+ScriptEngine engine = manager.getEngineByName(<span style="font-style: italic; font-weight: bold;">nazwa_motoru</span>);</pre><br>A jakie są nazwy?<br>To
+oczywiście podaje dokumentacja konkretnych JSE. Ale możemy się tego
+sami szybko dowiedzieć. Sprawdzenie nazw jest użyteczne wtedy, gdy
+nazwy się powtarzają dla różnych JSE (np. javascript) i wtedy trzeba
+zastosowac rozróżniające aliasy.<br><br>Metainformacje o JSE uzyskujemy za pomocą interfejsu <span style="font-weight: bold;">ScriptEngineFactory</span>.<br>Tak
+naprawdę ScriptEngineManager odnajduje właśnie odpowiednie fabryki dla
+danych JSE i za pomocą ich metod fabrycznych tworzy obiekty
+ScriptEngine.<br><br>Uwaga: ScriptEngineManager stosuje mechanizm <span style="font-weight: bold;">service provider</span> zob.<br><br><a href="http://java.sun.com/javase/6/docs/technotes/guides/jar/jar.html#Service%20Provider">http://java.sun.com/javase/6/docs/technotes/guides/jar/jar.html#Service%20Provider</a><br><br>do wykrywania fabryk.<br><br>Wymaga to aby JARy JSE w katalogu <span style="font-weight: bold;">META-INF</span> &nbsp;zawierały podkatalog <span style="font-weight: bold; font-style: italic;">services</span> z plikiem o nazwie <span style="font-weight: bold;">javax.script.ScriptEngineFactory</span>,
+zawierającym nazwę klasy będącej fabryką tworzącą obiekty danego JSE.
+Np. groovy-engine.jar w tym pliku zawiera nazwę
+com.sun.script.groovy.GroovyScriptEngineFactory.&nbsp; <br><br><br>Wszystkie znane zarządzcy fabryki można uzyskać za pomoca metody:<br><br><pre>ScriptEngineManager mgr ...
+List&lt;ScriptEngineFactory&gt; factories = mgr.getEngineFactories();</pre><br>Przykładowy program pokazuje dostępne informacje. <br><br><pre>import java.util.*;
+import javax.script.*;
+
+public class DiscoverEngines {
+  
+  public static void main(String[] args) {
+
+    ScriptEngineManager mgr = new ScriptEngineManager();
+   
+    List&lt;ScriptEngineFactory&gt; factories = mgr.getEngineFactories();
+    
+    for (ScriptEngineFactory factory : factories) {
+    
+      System.out.println("ScriptEngineFactory Info");
+      
+      String engName = factory.getEngineName();
+      String engVersion = factory.getEngineVersion();
+      System.out.println("Script Engine: " + engName + " v. " + engVersion);
+
+      List&lt;String&gt; engNames = factory.getNames();
+      for(String name : engNames) System.out.println("Engine Alias: " + name);
+      
+      String langName = factory.getLanguageName();
+      String langVersion = factory.getLanguageVersion();
+      System.out.println("Language: " + langName + " v. " +  langVersion);
+      
+      List&lt;String&gt; exts = factory.getExtensions();
+      for(String ext : exts) System.out.println("Script file extension: " + ext);
+      
+      System.out.println("-------------------------------------------");
+    }    
+  }
+
+}</pre>W przypadku gdy na ścieżce classpath&nbsp; znajdują się JSE dla browserjs i groovy otrzymamy wynik:<br><br><div class="listing100"><br>ScriptEngineFactory Info<br>Script Engine: groovy v. <br>Engine Alias: groovy<br>Language: groovy v. 1.0<br>Script file extension: groovy<br>-------------------------------------------<br>ScriptEngineFactory Info<br>Script Engine: Browser JavaScript Engine v. 1.5<br>Engine Alias: js<br>Engine Alias: javascript<br>Engine Alias: JavaScript<br>Engine Alias: ecmascript<br>Engine Alias: ECMAScript<br>Engine Alias: BrowserJS<br>Engine Alias: NativeJS<br>Language: JavaScript v. 1.5<br>Script file extension: js<br>-------------------------------------------<br>ScriptEngineFactory Info<br>Script Engine: Mozilla Rhino v. 1.6 release 2<br>Engine Alias: js<br>Engine Alias: rhino<br>Engine Alias: JavaScript<br>Engine Alias: javascript<br>Engine Alias: ECMAScript<br>Engine Alias: ecmascript<br>Language: ECMAScript v. 1.6<br>Script file extension: js<br>-------------------------------------------<br></div><br><a name="DynJav.24"></a><h2>4.2. Wykonanie skryptów</h2>Skrypty traktowane są jako ciągi znaków:<br><ul><li>zapisane jako String, </li><li>lub czytane z dowolnego strumienia typu Reader.</li></ul><br>Skrypt
+może być wywołany jako całość lub też - jesli język skryptowy to
+dopuszcza - może być wywołana wybrana funkcja lub metoda ze skryptu.<br><br>Do <span style="font-weight: bold;">wykonania całego skryptu</span> służy metoda <span style="font-weight: bold;">eval</span> wołana na rzecz obiektu typu ScriptEngine.<br><br><div class="syntax"><br><br><div style="margin-left: 40px;">ScriptEngine eng &nbsp;= ...;<br><span style="font-weight: bold;">eng.eval( skrypt);</span><br><br>gdzie:<br>&nbsp;&nbsp;&nbsp; skrypt - jest typu String lub typu Reader<br></div><br>Uwaga: przy wywołaniu eval nalezy obsługiwac wyjątek ScriptException<br></div><br><br>Przykład 1.<br><br><pre>import javax.script.*;
+
+
+public class GroovyTest {
+
+  public static void main(String[] args) {
+    ScriptEngineManager manager = new ScriptEngineManager();
+    ScriptEngine engine = manager.getEngineByName("groovy");
+    try {
+      String script = "\"Ala ma kota i psa\".tokenize().each { println it + ' ' + it.length()}";
+      engine.eval(script);
+    } catch (ScriptException e) {
+      e.printStackTrace();
+    }
+  }
+
+}</pre>Uwagi:<br><ol><li>treśc skryptu sformułowano w języku Groovy jako String</li><li>warto
+zwrócić uwagę na moc tego języka - metoda tokenize(), konstrukcja each
+oraz tzw. domknięcie (zamiast definiowania tradycyjnej funkcji) bardzo
+ułatwia programowanie.</li></ol><br>Wynik:<br><div class="listing100"><br>Ala 3<br>ma 2<br>kota 4<br>i 1<br>psa 3<br></div><br><br>Skrypt można wczytać też bezpośrednio z pliku:<br><br><pre>import java.io.*;
+import javax.script.*;
+
+public class GroovyTest2 {
+
+  public static void main(String[] args) {
+    ScriptEngineManager manager = new ScriptEngineManager();
+    ScriptEngine engine = manager.getEngineByName("groovy");
+
+    try {
+      engine.eval(new FileReader("test1.groovy"));
+    } catch (ScriptException e) {
+      e.printStackTrace();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+  }
+
+}</pre><br><br>Wywołanie <span style="font-weight: bold;">określonej funkcji</span> lub <span style="font-weight: bold;">metody</span>
+- zdefiniowanej w &nbsp;skrypcie - jest możliwe wtedy gdy ScriptEngine
+implementuje interfejs Invocable. Należy to zawsze sprawdzić, a
+następnie dokonać konwersji do Invocable i wywolac metodę <span style="font-weight: bold;">invokeFunction</span> lub <span style="font-weight: bold;">invokeMethod</span>.<br><br><table summary="" border="1" cellpadding="3" cellspacing="0" width="100%"><tbody><tr class="TableRowColor" bgcolor="white"><td align="right" valign="top" width="1%"><font size="-1">
+<code>&nbsp;Object</code></font></td>
+<td><code><b>invokeFunction</b>(String&nbsp;name,
+               Object...&nbsp;args)</code>
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Woła funkcje
+name zdefiniowaną w skrypcie z argumentami args i zwraca wynik w
+postaci Object. Konwersje z typów wyniku funkcji do typów Javy są
+zalezne od implementacji języka skryptowego.<br>Przy braku funkcji zgłasza wyjątek NoSuchMethodException. Skrypt powinien być wczesniej przygotowany przez wywołanie eval.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><font size="-1">
+<code>&nbsp;Object</code></font></td>
+<td><code><b>invokeMethod</b>(Object obj,
+             String&nbsp;name,
+             Object...&nbsp;args)</code>
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Wywołuje metodę name na rzecz obiektu obj z argumentami args.</td></tr></tbody></table><br>Przykład.<br><br>W pliku test1.js mamy następujący zestaw funkcji:<br><br><pre>function square(n) {
+  return n*n;
+}
+
+function cube(n) {
+  return n*n*n;
+}</pre>Będziemy je wywoływac z aplikacji Javy podając nazwę funkcji i argument:<br><br><pre>import java.io.*;
+import javax.script.*;
+import javax.swing.*;
+
+public class InvokeTest {
+
+  public static void main(String[] args) {
+    ScriptEngineManager manager = new ScriptEngineManager();
+    ScriptEngine engine = manager.getEngineByName("rhino");
+
+    if (!(engine instanceof Invocable))
+      throw new RuntimeException("Engine not invocable");
+
+    Invocable eng = (Invocable) engine; // konieczna konwersja
+
+    try {
+      engine.eval(new FileReader("test1.js")); // przygotowanie skryptu
+      String in;
+      while ((in = JOptionPane.showInputDialog("Podaj nazwe funkcji i argument")) != null) {
+        String[] call = in.split(" ");
+        double res = (Double) eng.invokeFunction(call[0], call[1]); // wołanie wybranej funkcji
+        System.out.println("Wynik " + res);
+      }
+    } catch (ScriptException e) {
+      e.printStackTrace();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (NoSuchMethodException e) {
+      e.printStackTrace();
+    }
+  }
+
+}</pre><br><br>Skrypty - o ile dany JSE to dopuszcza - mogą być także <span style="font-weight: bold;">kompilowane</span> (do symbolicznej postaci) co przyspiesza wielokrotne wykonanie. &nbsp;W tym przypadku:<br><ul><li>JSE winien implementować interfejs <span style="font-weight: bold;">Compilable</span>,</li><li>skompilowaną postać skryptu uzyskujemy z <span style="font-weight: bold;">engine.compile(skrypt)</span> w postaci wyniku typu <span style="font-weight: bold;">CompiledScript</span>,</li><li>na rzecz tego wyniku&nbsp;wołamy metodę <span style="font-weight: bold;">eval()</span>.</li></ul><br><a name="DynJav.25"></a><h2>4.3. Wymiana danych</h2>Wymiana danych pomiędzy aplikacją i skryptem odbywa się poprzez zestawy par: klucz - wartość,&nbsp;zwane &nbsp;wiązaniami (<span style="font-weight: bold; font-style: italic;">bindings</span>). W tych parach kluczem jest nazwa zmiennej, a wartością - wartość zmiennej.<br>Wiązania
+są obiektami klas implementujących interfejs Bindings. Interfejs ten
+rozszerza interfejs Map&lt;String, Object&gt;, zatem wiązania mogą być
+traktowane &nbsp;generalnie tak jak mapy (np. dodawanie za pomocą put,
+pobieranie za pomocą get). <br>Wiązania mogą być następujących rodzajów:<br><br><ul><li>GLOBAL_SCOPE
+- wiązanie globalnego zakresu (jego elementy są dostępne dla wszystkich
+JSE tworzonych przez tego samego zarządce ScriptEngineManager)</li><li>ENGINE_SCOPE
+- wiązanie "zakresu motoru" dostępne dla danego JSE (cały czas w cyklu
+jego zycia, nie tylko w trakcie wykonania konkretnego skryptu),</li><li>wiązania dodatkowych zakresów - oprócz GLOABAL_SCOPE i ENGINE_SCOPE mogą być dodatkowe zakresy,</li><li>wiązanie tworzone ad hoc i podawane &nbsp;jako argument metody eval: <span style="font-weight: bold;">eval(skrypt, Bindings).</span>&nbsp;</li></ul><br>Zakresy są zarządzane przez <span style="font-weight: bold;">ScriptContext</span> (który oprócz tego daje dostęp do strumieni we-wy i błędów JSE).<br><br>Co jest w wiązaniach i jak z nimi postępować?<br><br>Automatycznie
+wszystkie zmienne utworzone w trakcie wykonania skryptu (w skrypcie),
+są dodawane do wiązania zakresu SCRIPT_ENGINE (lub jeśli w eval podano
+argument Bindings - do tego właśnie wiązania). W aplikacji możemy:<br><ul><li>pobrać
+mapę wiązań zakresu SCRIPT_ENGINE - metody getBindings(..) z klas
+implementujących ScriptEngine lub ScriptContext i z tej mapy pobierać
+wartości zmiennych,</li><li>pobrać wartości zmiennych za pomocą metod
+get(key, value) ze ScriptEngine lub getAttribute(key,
+ScriptContext.ENGINE_SCOPE) z interfejsu ScriptContext</li><li>pobierać wartości z mapy Bindings przekazanej w eval.</li></ul><br>Zmienne aplikacji Javy możemy dodawać do wiązań za pomocą metod:<br><ul><li>scriptManager.put(key, value) // dodaje do zakresu &nbsp;GLOBAL_SCOPE</li><li>engine.put(key, value) &nbsp;// dodaje do zakresu ENGINE_SCOPE</li><li>scriptContext.setAttribute(key, value, scope) // dodaje do wybranego zakresu</li><li>put lub putAll na rzecz Bindings danego zakresu lub własnych (przekazanych w eval)</li></ul>Te zmienne będą bezpośrednio dostępne w skrypcie pod nazwami = kluczom.<br><br>Przykłady (JSE = Rhino):<br><br><pre>....
+      String script = "a =1; b = 2; c =2;";
+      engine.eval(script);
+      showBindings();
+....
+
+
+  private static void showBindings() {
+    System.out.println("Show bindings");
+    ScriptContext ctx = engine.getContext();   // uzyskanie biezącego kontekstu
+    List&lt;Integer&gt; scopes = ctx.getScopes();    // z tego kontekstu - jakie są zakresy
+    for (Integer scope : scopes) {             // dla każdego zakresu.... :
+      System.out.println("Scope: " + scope);
+      Bindings bnd = ctx.getBindings(scope);            // wiązania
+      System.out.println(bnd.getClass().getName());     // jaka to klasa?
+      for (String key : bnd.keySet()) {                 // co jest w wiązaniach?
+        System.out.println(key + " = " + bnd.get(key));
+      }
+    }
+  }</pre>Wynik:<br><div class="listing100"><br>Show bindings<br>Scope:
+100 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // &lt;--- to jest ENGINE_SCOPE<br>javax.script.SimpleBindings &nbsp; &nbsp; // wiązania są klasy SimpleBindings<br>b
+= 2.0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// zmienna ze
+skryptu<br>c = 2.0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; //
+zmienna ze skryptu<br>println = sun.org.mozilla.javascript.internal.InterpretedFunction@dd5b<br>a
+= 1.0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// zmienna ze
+skryptu <br>context = javax.script.SimpleScriptContext@c4bcdc<br>print = sun.org.mozilla.javascript.internal.InterpretedFunction@4b4333<br>Scope:
+200 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// &lt;--- zakres GLOBAL_SCOPE<br>javax.script.SimpleBindings &nbsp; &nbsp;// nic w nim nie ma bo nic nie dodaliśmy<br></div><br><br>Wiązania zakresu ENGINE_SCOPE trwają wraz z motorem - kolejne skrypty mogą je uzupełniać:<br><br><pre>      String script = "a =1; b = 2; c =2;";
+      engine.eval(script);
+      script = "xyz = 10;";
+      engine.eval(script);
+      showBindings();</pre>showBindings pokaże m.in.<br><br><div class="listing100"><br>b = 2.0<br>c = 2.0<br>a = 1.0<br>xyz = 10.0<br></div><br><br>Łatwo możemy przekazac zmienną do skryptu:<br><br><pre>      String txt = "Ala ma kota";
+      engine.put("txt", txt);
+      script = "println('Ze skryptu : ' + txt + a + b + c + xyz);";
+      engine.eval(script);
+</pre>Dostaniemy (txt pochodzi z aplikacji, zmienne a, b, c, xyz z wykonań poprzednich skryptów :<br><br>L100<br>Ze skryptu : Ala ma kota12210<br><br><br>Możemy użyć własnych Bindings:<br><pre>      Bindings sb = new SimpleBindings();
+      int i = 1000;
+      Date data = new Date();
+      sb.put("i", i);
+      sb.put("data", data);
+      script = "println('Ze skryptu : ' + data + ' liczba ' + i); hhh = 7777;"; 
+
+<span style="color: rgb(255, 0, 0);">      </span><span style="font-weight: bold; color: rgb(204, 0, 0);">engine.eval(script, sb);  // podajemy jako drugi argument Bindings</span>
+
+      showBindings();
+      System.out.println("A co jest w naszych bindings?");
+      for (String key : sb.keySet()) {
+        System.out.println(key + " = " + sb.get(key));
+      }
+      System.out.println("Koniec naszych");
+</pre>Wynik:<br><br><div class="listingful">Ze skryptu : Tue Oct 10 09:35:44 CEST 2008 liczba 1000<br>Show bindings<br>Scope: 100<br>javax.script.SimpleBindings<br>b = 2.0<br>c = 2.0<br>println = sun.org.mozilla.javascript.internal.InterpretedFunction@15dfd77<br>a = 1.0<br>context = javax.script.SimpleScriptContext@c4bcdc<br>txt = Ala ma kota<br>print = sun.org.mozilla.javascript.internal.InterpretedFunction@1abc7b9<br>xyz = 10.0<br>Scope: 200<br>javax.script.SimpleBindings<br>A co jest w naszych bindings?<br>hhh = 7777.0<br>println = sun.org.mozilla.javascript.internal.InterpretedFunction@1621e42<br>context = javax.script.SimpleScriptContext@b09e89<br>data = Tue Oct 10 09:35:44 CEST 2006<br>print = sun.org.mozilla.javascript.internal.InterpretedFunction@1787038<br>i = 1000<br>Koniec naszych<br></div><br>Tutaj
+widać, że domyślny ENGINE_SCOPE nie jest zmieniany, &nbsp;w
+przekazanych wiązaniach znajdziemy dodane przez nas zmienne (i mogą one
+być użyte w skrypcie), dodatkowo znajdą się tam &nbsp;zmienne opisujące
+kontekst (contezt, println, print).<br><br>Okazuje się, że nasze
+wiązania zastępują domyślny ENGINE_SCOPE i dlatego w poniższym
+fragmencie zmienna txt nie jest znana (chociaż jest w wiązaniach
+zakresu ENGINE):<br><pre>      script = "println('Ze skryptu liczba = ' + i); print('Ze skryptu txt: '); println(txt);";
+      engine.eval(script, sb);
+</pre>Wynik:<br><div class="listing100"><br>Ze skryptu liczba = 1000<br>Ze
+skryptu txt: javax.script.ScriptException:
+sun.org.mozilla.javascript.internal.EcmaError: ReferenceError: "txt" is
+not defined. (&lt;Unknown source&gt;#1) in &lt;Unknown source&gt; at
+line number 1<br></div><br><br>Naturalnie, możemy łączyć wiązania:<br><br><pre>      Bindings eb = engine.getBindings(ScriptContext.ENGINE_SCOPE);  // wiązania motoru
+      eb.putAll(sb);  // dodajemy do nich nasze
+      script = "println('Ze skryptu : ' + txt + ' liczba ' + i);";
+      engine.eval(script);
+      showBindings();
+</pre>Teraz będą znane zmienne zarówno z zakresu ENGINE jak i z naszych Bindings.<br><br><div class="listing100"><br>Ze skryptu : Ala ma kota liczba 1000<br>Show bindings<br>Scope: 100<br>javax.script.SimpleBindings<br>hhh = 7777.0<br>b = 2.0<br>c = 2.0<br>println = sun.org.mozilla.javascript.internal.InterpretedFunction@fa9cf<br>a = 1.0<br>data = Tue Oct 10 10:08:19 CEST 2006<br>context = javax.script.SimpleScriptContext@c4bcdc<br>txt = Ala ma kota<br>print = sun.org.mozilla.javascript.internal.InterpretedFunction@55571e<br>i = 1000<br>xyz = 10.0<br></div><br><br>Nalezy zwrócić uwagę, że Bindings dzialają tak jak każda mapa. Nie możemy liczyć na to, że po dodaniu zmiennej <span style="font-weight: bold; font-style: italic;">i</span> oraz <span style="font-style: italic; font-weight: bold;">txt</span> do Bindings, wykonaniu skryptu i zmianie wartości zmiennych ponowne wykonanie skryptu dostrzeże te zmiany:<br><br><pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i = 99;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; txt = "Nowy tekst";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; engine.eval(script);
+</pre>L100<br>Ze skryptu : Ala ma kota liczba 1000<br><br><br>Oczywiście,
+w mapie są referencje (jako wartości), ale przecież przy dodawaniu
+zmiennych typów prostych do mapy następuje boxing (i refrencja wskazuje
+na wtedy utworzony obiekt). To samo dotyczy zmiennej txt - referencja w
+mapie wskazuje na napis "Ala ma kota" &nbsp;(a nie na nowy napis "Nowy
+tekst").<br>Wyjściem z sytuacji jest albo użycie obiektów klas
+modyfikowalnych albo ponowne ładowanie mapy Bindings po zmianie
+wartości na poziomie aplikacji.<br><br>Uwaga: jako kluczy oznaczających
+nazwy zmiennych (lub inną informację przekazywaną pomiędzy skryptem i
+aplikacją) nie wolno używać nazw zarezerwowanych, które zaczynają się
+od javax.script. Obecnie zdefiniowane są następujące klucze
+zarezerwowane.<br><br><br><table style="background-color: rgb(255, 255, 204);" border="1" cellpadding="2" cellspacing="2" width="100%">
+<tbody><tr><td style="background-color: rgb(255, 255, 255);">javax.script.argv</td><td colspan="1" rowspan="6" style="background-color: rgb(255, 255, 255); text-align: center;">Zobacz w dokumentacji znaczenie podanych zmiennych</td></tr>
+<tr><td style="background-color: rgb(255, 255, 255);">javax.script.filename</td></tr>
+<tr><td style="background-color: rgb(255, 255, 255);">javax.script.engine</td></tr>
+<tr><td style="background-color: rgb(255, 255, 255);">javax.script.engine_version</td></tr>
+<tr><td style="background-color: rgb(255, 255, 255);">javax.script.language</td></tr>
+<tr><td style="background-color: rgb(255, 255, 255);">javax.script.language_version</td></tr>
+</tbody></table><br><i><br></i><a name="DynJav.26"></a><h2>4.4. Kontekst</h2><br>Wspomniany już ScriptContext zapewnia łączność pomiędzy aplikacją i skryptem.<br>Każdy skrypt wykonywany jest w jakimś kontekście (w szczególności - domyślnym).<br>Możemy zmienić kontekst domyślny, podając własny kontekst w metodzie eval:<br>eval(skrypt, ScriptContext)<br><br>Możemy też modyfikowac domyślny kontekst.<br><br>Oprócz wiązań (zakresów) - kontekst zapewnia dostęp do strumieni wejścia, wyjścia oraz błędów dla skryptu.<br><i><br></i>Poniższy fragment pokazuje jak można przechwycić wyjście skryptu:<br><br><pre>      // Zobaczmy co można zrobić z Writerem
+      StringWriter sw = new StringWriter();
+      engine.getContext().setWriter(new PrintWriter(sw));
+      script = "println('To powinno pójść na nowy Writer');";
+      engine.eval(script);
+
+      JOptionPane.showMessageDialog(null, sw.toString());</pre>W rezultacie pokaże się okienko dialogowe (komunikatów) z napisem "To powinno pójść na nowy Writer".<br><i><br></i><a name="DynJav.27"></a><h2><span style="font-weight: bold;">4.5. Dostęp do obiektów Javy ze skryptów</span></h2><br>Motory skryptowe zgodne ze specyfikacją JSR-223 umożliwiają w skryptach dostęp do klas z pakietów Javy.<br>Szczegóły (w tym składnia wywołania konstruktorów i&nbsp; metod) zależne są od implementacji języka skryptowego.<br>Generalnie poslugujemy się &nbsp;kwalifikowanymi nazwami klas (np. javax.swing.JFrame).<br>W językach, które umożliwiają dodanie do przestrzeni nazw nazw pakietów i klas Javy można stosowac konstrukcję typu import.<br><br>Oczywiście, możemy też odwoływać się do naszych własnych klas - do ich publicznych metod.<br><br>Przykłady.<br><pre>public class SwingFromRhino {
+
+  public static void main(String[] args) {
+    ScriptEngineManager manager = new ScriptEngineManager();
+    ScriptEngine engine = manager.getEngineByName("rhino");
+    
+    String script = engine.getFactory().getProgram(
+        "importPackage (javax.swing)",
+        "f = new JFrame('Okno')",
+        "f.setSize(200,200)",
+        "f.show()"
+        );
+    
+    System.out.println(script);
+    
+    try {
+      engine.eval(script);
+    } catch (ScriptException e) {
+      e.printStackTrace();
+    }
+
+  }
+
+}</pre>Warto
+zwrócić uwagę na metodę z getProgram(String ...) interfejsu
+ScriptEngineFactory, która zwraca gotowy do wykonania&nbsp; program,
+składający się z indtrukcji podanych jako argumenty, zgodnie ze
+składnią danego języka skryptowego.<br><br>W tym kontekście warto swpomnieć też o innych użytecznych metodach pomocniczych interfejsu ScriptEngineFactory:<br><table summary="" border="1" cellpadding="3" cellspacing="0" width="100%"><tbody><tr class="TableRowColor" bgcolor="white"><td align="right" valign="top" width="1%">
+&nbsp;String</td>
+<td>getMethodCallSyntax(String&nbsp;obj,
+                    String&nbsp;m,
+                    String...&nbsp;args)
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zwraca napis,
+który może być użyty w danym języku skryptowym do wywolania metody
+klasy Javy na rzecz obiektu&nbsp;<span style="font-style: italic;"></span></td>
+</tr>
+
+
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%">
+&nbsp;String</td>
+<td>getOutputStatement(String&nbsp;toDisplay)
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zwraca napis,
+który może być użyty jako instrukcja danego języka skryptowego do
+wyprowadzenia napisu toDisplay</td></tr></tbody></table><br><br>Przykład.<br><pre>class Person {
+  String name;
+
+  public Person(String name) {
+    super();
+    this.name = name;
+  }
+
+
+  public String getName() {
+    return name;
+  }
+
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+}
+
+public class Groovy2 {
+
+  public static void main(String[] args) {
+    ScriptEngineManager manager = new ScriptEngineManager();
+    ScriptEngine engine = manager.getEngineByName("groovy");
+    try {
+
+      Person p = new Person("Ala");
+      String call = engine.getFactory().getMethodCallSyntax("p", "setName", "\"Pies\"");
+
+      System.out.println(call);
+      engine.put("p", p);
+
+      engine.eval(call);
+      System.out.println(p.getName());
+
+      String out = engine.getFactory().getOutputStatement(p.getName());
+      System.out.println(out);
+      engine.eval(out);
+
+    } catch (ScriptException e) {
+      e.printStackTrace();
+    }
+
+  }
+
+}</pre><br>Wynik:<br><div class="listing100"><br>p.setName("Pies")<br>Pies<br>println("Pies")<br>Pies<br></div><br><br><br><a name="DynJav.28"></a><h2>4.6. Przykład: programowanie skryptowe na zmiennych aplikacji</h2><br>W poniższym programie przedstawiono:<br><ul><li>automatyczne przekazywanie zmiennych aplikacji do środowiska skryptowego, w tym tablic,</li><li>wykonywanie na nich obliczeń w skrypcie (w tym na tablicach),</li><li>uzyskiwanie wyników obliczeń w aplikacji,</li><li>komunikację skryptu z elementami GUI (np. pole tekstowe).</li></ul>Wykonywany skrypt wygląda następująco:<br><pre>importPackage(javax.swing);
+a = a + 1;
+b = 33;
+c = a + b;
+sum = 0;
+for (i in arr) { 
+  arr[i] = arr[i]*2;
+  sum += arr[i];
+}
+JOptionPane.showMessageDialog(null, "Suma = " + sum);
+infoText.setText("Suma = " + sum);
+</pre>przy czym zmienne a, b, c są zmiennymi liczbowymi z aplikacji, arr - tablica z aplikacji, infoText - pole tekstowe z aplikacji.<br><br>Aplikacja ma następującą postać:<br><pre>class Varman {
+  
+  private Object vars;
+  private Bindings bindings;
+  private Field[] fields;
+  
+  public Varman(Bindings bindings, Object vars) {
+    this.vars = vars;
+    this.bindings = bindings;
+    fields = vars.getClass().getDeclaredFields();
+    for (int i = 0; i &lt; fields.length; i++) {
+      try {
+        String name = fields[i].getName();
+        if (name.indexOf("this$") != -1) continue;
+        Object value =  fields[i].get(vars);
+        bindings.put(name, value);
+      } catch (Exception e) {
+        e.printStackTrace();
+      } 
+    }
+  }
+  
+  public void getVars() {
+    for (int i = 0; i &lt; fields.length; i++) {
+      String name = fields[i].getName();
+      if (name.indexOf("this$") != -1) continue;      
+      Object value =  bindings.get(name);
+      try {
+        fields[i].set(vars, value);
+      } catch (Exception e) {
+        e.printStackTrace();
+      } 
+    }
+  }
+  
+  public String getVarsPageView() {
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i &lt; fields.length; i++) {
+      try {
+        String name = fields[i].getName();
+        if (name.indexOf("this$") != -1) continue;
+        Object value = fields[i].get(vars);
+        if (fields[i].getType().isArray()) {
+          StringBuilder tmp = new StringBuilder("{ ");
+          tmp.append(Array.get(value, 0));
+          for (int j=1; j &lt; Array.getLength(value); j++) tmp.append(", ").append(Array.get(value, j));
+          tmp.append(" }");
+          value = tmp;
+        }
+        sb.append('\n').append(name).append(" = ").append(value);
+      } catch (Exception e) {
+        e.printStackTrace();
+      } 
+    }
+    return sb.toString();
+  }
+}
+
+
+public class CalcJs1 {
+
+  private ScriptEngineManager manager = new ScriptEngineManager();
+  private ScriptEngine engine = manager.getEngineByName("rhino");
+  private Bindings bindings = engine.createBindings();
+  
+  private class Var {
+    double a = 7, b, c, d, e, f;
+    int[] arr = { 1, 2, 3 };
+  }
+  
+  public CalcJs1() {
+    Var v = new Var();
+    Varman vm = new Varman(bindings, v);
+    showInfoFrame(bindings);
+    try {
+      engine.eval(new FileReader("testCalc.js"), bindings);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (ScriptException e) {
+      e.printStackTrace();
+    }
+    vm.getVars();
+    JOptionPane.showMessageDialog(null, vm.getVarsPageView(), "Wyniki", 1);
+    for (int i = 0; i &lt; v.arr.length; i++) {
+      System.out.println("arr " +i+ " = " + v.arr[i]);
+    }
+  }  
+  
+  private void showInfoFrame(Bindings bindings) {
+    JFrame f = new JFrame("Wyniki");
+    JTextField tf = new JTextField("Na razie nie ma wyniku               ");
+    f.add(tf);
+    f.pack();
+    f.setLocation(600, 300);
+    f.setVisible(true);
+    bindings.put("infoText", tf);
+  }
+
+  public static void main(String[] args) {
+    new CalcJs1();
+  }
+  
+
+}</pre><br><br><a target="_self" href="mm/Prezent1.htm">Pokaz działania aplikacji</a>.<a href="mm/Prezent1.htm"><img style="border: 0px solid ; width: 100px; height: 80px;" alt="r" src="../STYLE/video2.gif"></a><br><br><br><a name="DynJav.29"></a><h2>4.7. Przykład: wykorzystanie możliwości JavaScript w apletach Javy</h2><br>W tym przykładzie stworzymy aplet, dostarczający "eleganckiego" menu.<br>Jedna z opcji menu daje możliwość zmiany stylu strony.<br>Aby
+uzyskać zmianę stylu wykorzystamy motor skryptowy dla natywnych
+przeglądarek (BrowserJS) i napiszemy odpowiedni skrypt js, który będzie
+wykonywany po wyborze opcji w menu apletu.<br><br><a href="mm/Prezent2.htm" target="_self">Demonstracja działania</a><a href="mm/Prezent2.htm"><img style="border: 0px solid ; width: 100px; height: 80px;" alt="r" src="../STYLE/video2.gif"></a><br><br>Skrypt:<br><br><pre>function chgStyle(cssFile) {
+  var link = document.getElementById("slink");
+  link.setAttribute('href', cssFile);
+}</pre>Aplet:<br><pre>import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+
+import javax.script.*;
+import javax.swing.*;
+
+@SuppressWarnings("serial")
+public class Konfigurator extends JApplet implements ActionListener {
+
+  ScriptEngine engine;
+  String[] cssFiles = { "style/first.css", "style/second.css", "style/third.css", "style/last.css" };
+  String[] opis = { "Surowy", "Kolorowy", "Powiększony", "Słoneczny" };
+  String script;
+
+  @Override
+  public void init() {
+    ClassLoader myloader = getClass().getClassLoader();
+    ScriptEngineManager manager = new ScriptEngineManager(myloader);
+    engine = manager.getEngineByName("BrowserJS");
+    engine.put("applet", this);
+    
+    BufferedReader br;
+    StringBuilder sb = new StringBuilder();
+    try {
+      br = new BufferedReader(new FileReader("menu.js"));
+      for (String line; (line = br.readLine()) != null;)
+        sb.append(line).append('\n');
+    } catch (IOException e1) {
+      e1.printStackTrace();
+    }
+    
+    script = sb.toString();
+    
+    JMenu[] menu = { new JMenu("Wygląd"), new JMenu("Spis treści"), 
+                     new JMenu("Ważne linki"), new JMenu("Wyszukiwanie"),  new JMenu("Pomoc") }; 
+    for (int i = 0; i &lt; opis.length; i++) {
+      JMenuItem mi = new JMenuItem(opis[i]);
+      mi.setActionCommand(cssFiles[i]);
+      mi.addActionListener(this);
+      menu[0].add(mi);
+    }
+     
+    JMenuBar mb = new JMenuBar();
+    for (int i = 0; i &lt; menu.length; i++) {
+      if (i == menu.length-1) mb.add(Box.createHorizontalGlue());
+      mb.add(menu[i]);
+      menu[i].addMouseListener(new MouseAdapter() {
+        Color back; 
+        @Override
+        public void mouseEntered(MouseEvent e) {
+          Component c = e.getComponent();
+          back = c.getForeground();
+          c.setForeground(Color.BLUE);
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+          e.getComponent().setForeground(back);
+        }
+        
+      });
+    }
+
+    this.setJMenuBar(mb);
+  }
+  
+   public void actionPerformed(ActionEvent e) {
+        try {
+          String name = e.getActionCommand();
+          engine.eval(script);
+          if (engine instanceof Invocable) {
+            Invocable inv = (Invocable) engine;
+            inv.invokeFunction("chgStyle", name);
+          }
+          else JOptionPane.showMessageDialog(null, "Engine not invocable");
+        } catch (Exception exp) {
+          throw new RuntimeException(exp);
+        }
+  }
+   
+}</pre><br><br>
+<hr>
+<a name="DynJav.30"></a><h2>5. Zadania i ćwiczenia</h2><br>Będą podane w trakcie semestru
+<br>
+<hr>
+
+</body></html>

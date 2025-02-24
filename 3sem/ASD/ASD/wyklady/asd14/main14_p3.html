@@ -1,0 +1,917 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main14_p2.html" TARGET="main"  class="NAWIGACJA">
+&laquo;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main14_cw.html" TARGET="main" class="NAWIGACJA">następny 
+punkt&nbsp;&raquo;</a></td></tr></table>
+<br clear="all">
+<A NAME="EDU.wyklad.punkt 3"></A><br clear="all"><div class="tytulpunktu">
+3. Najdłuższy wspólny podciąg</div>
+
+<p><b>Problem NWP</b><BR></p>
+<p>Dane są dwa ciągi X i Y, X = (x<sub><font face="Verdana">1</font></sub>,...,x<sub><font face="Verdana">m</font></sub>), 
+Y = (y<sub><font face="Verdana">1</font></sub>,..., y<sub><font face="Verdana">n</font></sub>).&nbsp; 
+Znaleźć ciąg znaków Z = (z<sub><font face="Verdana">1</font></sub>,...,z<sub><font face="Verdana">k</font></sub>) 
+taki, że Z jest najdłuższym podciągiem zarówno ciągu X jak i ciągu Y, tzn. Z 
+jest najdłuższym ciągiem spełniającym warunki (1), (2):</p>
+   
+<blockquote>
+<p>(1) istnieją i<sub><font face="Verdana">1</font></sub>,..., i<sub><font face="Verdana">k</font></sub> 
+takie, że&nbsp; z<sub><font face="Verdana">1</font></sub>= x<sub><font face="Verdana">i1</font></sub>, ..., z<sub><font face="Verdana">k</font></sub>= 
+x<sub><font face="Verdana">ik</font></sub>, oraz&nbsp; 1 <font face="Symbol">
+<span lang="en">&pound;</span> </font>i<sub><font face="Verdana">1</font></sub><font face="Symbol"><span lang="en">&pound;</span>
+</font>... <span lang="en"><font face="Symbol">&pound;</font></span> i<sub><font face="Verdana">k</font></sub><font face="Symbol"><span lang="en">&pound;</span>&nbsp;
+</font>m,</p>
+   
+<p>(2) istnieją j<sub><font face="Verdana">1</font></sub>,..., j<sub><font face="Verdana">k</font></sub> 
+takie, że&nbsp; z<sub><font face="Verdana">1</font></sub>= y<sub><font face="Verdana">j1</font></sub>, ...,z<sub><font face="Verdana">k</font></sub>= 
+y<sub><font face="Verdana">jk</font></sub> oraz&nbsp; 1 <font face="Symbol">
+<span lang="en">&pound;</span> </font>j<sub><font face="Verdana">1</font></sub><font face="Symbol"><span lang="en">&pound;</span>
+</font>...<font face="Symbol"> <span lang="en">&pound;</span></font> j<sub><font face="Verdana">k</font></sub>
+<font face="Symbol"><span lang="en">&pound;</span> </font>n.</p>
+   
+</blockquote>
+<p>Najdłuższy 
+wspólny podciąg ciągów X i Y oznaczamy przez&nbsp; nwp(X,Y). </p>
+   
+<p><b>Przykład 3.1</b></p>
+   
+<p>Jeżeli X = bracbdeweczsagdjłaaopt i Y = dgadbreschrtadkłewo, to nwp(X,Y) = 
+abecadło. <font face="Wingdings" size="3">J</font></p>
+   
+<p>Rozwiązanie tego problemu mogłoby wyglądać następująco: </p>
+   
+<blockquote>
+  <ul>
+    <li>1. Wygenerować wszystkie możliwe podciągi ciągu X. </li>
+    <li>2. Dla każdego z nich sprawdzić, czy jest podciągiem ciągu Y. </li>
+    <li>3. Zapamiętać najdłuższy z takich ciągów.</li>
+  </ul>
+</blockquote>
+<p>Taki algorytm rzeczywiście rozwiązuje problem, ale niestety nie może zostać 
+zastosowany w praktyce. Jego złożoność jest wykładnicza. Jeśli X ma m elementów, 
+to zbiór wszystkich jego pociągów ma O(2<sup><font face="Verdana">m</font></sup>) 
+elementów. Nawet dla małych m byłby to zbyt kosztowny algorytm.</p>
+   
+<p>Przyjmijmy następujące oznaczenie dla ciągu X = ( x<sub><font face="Verdana">1</font></sub>,...,x<sub><font face="Verdana">m</font></sub>),&nbsp; 
+X<sub><font face="Verdana">i</font></sub> niech oznacza i pierwszych znaków 
+ciągu X tzn. i-ty prefiks X. Dla i=0,&nbsp; X<sub><font face="Verdana">0</font></sub> 
+jest ciągiem pustym dla i=m, X<sub><font face="Verdana">m</font></sub> jest po 
+prostu ciągiem X.</P>
+<p></P>
+
+<div class="lemat">
+<p>Lemat 3.1 Niech Z= (z<sub><font face="Verdana">1</font></sub>,...,z<sub><font face="Verdana">k</font></sub>) 
+będzie najdłuższym wspólnym podciągiem ciągu X = (x<sub><font face="Verdana">1</font></sub>,...,x<sub><font face="Verdana">m</font></sub>), 
+Y = (y<sub><font face="Verdana">1</font></sub>,..., y<sub><font face="Verdana">n</font></sub>). </P>
+<p>(1) Jeżeli&nbsp; x<sub><font face="Verdana">m</font></sub> = y<sub><font face="Verdana">n</font></sub>, 
+to z<sub><font face="Verdana">k</font></sub> = x<sub><font face="Verdana">m</font></sub> 
+= y<sub><font face="Verdana">n</font></sub> oraz Z<sub><font face="Verdana">k-1</font></sub> 
+= nwp(X <sub><font face="Verdana">m-1</font></sub>, Y<sub><font face="Verdana">n-1</font></sub>).</P>
+<p>(2) Jeżeli&nbsp; x<sub><font face="Verdana">m</font></sub> <span lang="en">
+<font face="Symbol">&sup1;</font></span> y<sub><font face="Verdana">n</font></sub>, 
+to  </P>
+ <blockquote>
+<p>Z = nwp(X<sub><font face="Verdana">m-1</font></sub>, Y), gdy z<sub><font face="Verdana">k</font></sub>
+<font face="Symbol"><span lang="en">&sup1;</span> </font>x<sub><font face="Verdana">m</font></sub>&nbsp;&nbsp;&nbsp;&nbsp; 
+oraz  </P>
+<p>Z = nwp(X, Y<sub><font face="Verdana">n-1</font></sub>), gdy z<sub><font face="Verdana">k</font></sub>
+<font face="Symbol"><span lang="en">&sup1;</span> </font>y<sub><font face="Verdana">n</font></sub>.</P>
+ </blockquote>
+ </div>
+ 
+<p></P>
+
+<p>Wydaje się, że przedstawiony tu lemat daje przepis na znajdowanie 
+najdłuższego ciągu wspólnego: jeśli ostatnie znaki ciągów są identyczne, to jest 
+to ostatni element najdłuższego wspólnego ciągu. Jeśli ostatnie znaki w ciągach X<sub><font face="Verdana">m</font></sub> i Y<sub><font face="Verdana">n</font></sub> 
+nie są jednakowe, 
+to albo ostatni element ciągu X<sub><font face="Verdana">m</font></sub> nie występuje w najdłuższym wspólnym podciągu, 
+albo ostatni element ciągu Y<sub><font face="Verdana">n</font></sub> nie występuje w najdłuższym wspólnym podciągu. 
+Prowadzi to do dwóch mniejszych problemów: znalezienia najdłuższego wspólnego 
+ciągu X<sub><font face="Verdana">m-1</font></sub>, Y<sub><font face="Verdana">n</font></sub> i najdłuższego wspólnego 
+ciągu X<sub><font face="Verdana">m</font></sub>, Y<sub><font face="Verdana">n-1</font></sub>. Dłuższy z tych ciągów jest 
+najdłuższym wspólnym podciągiem ciągów X i Y.</P>
+
+
+
+
+
+<p><b>Pytanie 4:</b> Z ilu znaków składa się najdłuższy wspólny podciąg ciągów&nbsp; 
+
+ 
+</P>
+
+
+
+
+
+<p style="text-align: center">&quot;najdłuższy_wspólny_podciąg&quot; i &quot;programowanie_dynamiczne&quot;&nbsp;
+
+
+<br>
+
+ 
+</P>
+
+
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'Z pięciu, np. &quot;aw_dc&quot; .');">
+</form>
+<BR>
+
+
+<p><b>Algorytm rekurencyjny</b></P>
+
+
+
+
+
+    <p>
+<div class="def" style="width: 512; ">
+   <TABLE frame="void" rules="none" width="476" >
+         <TR>
+            <TD width="341" height="12" colspan="2">nwp(X,Y)<b>{</b></TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="282" height="12"><strong>&nbsp;i</strong><b>f</b> (x<sub><font face="Verdana">m</font></sub> 
+            = y<sub><font face="Verdana">n</font></sub>) <b>
+            then</b></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="282" height="12"><strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Z := nwp(X<sub><font face="Verdana">m-1</font></sub>, 
+            Y<sub><font face="Verdana">n-1</font></sub>) o&nbsp; x<sub><font face="Verdana">m</font></sub>;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="282" height="12"><strong>else&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="282" height="12">   &nbsp;<strong> </strong>&nbsp;&nbsp;&nbsp;Z1 := nwp(X<sub><font face="Verdana">m-1</font></sub>,Y) 
+            ;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="282" height="12">   <strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;Z2 := nwp(&nbsp;X, Y<sub><font face="Verdana">n-1</font></sub>);&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="282" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Z := dłuższy z ciągów Z1, Z2&nbsp;;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="282" height="12">   <b>&nbsp;fi;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"><STRONG>}</STRONG></TD>
+            <TD width="282" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p>Niech T(k) oznacza koszt pesymistyczny tego algorytmu, gdzie k jest sumą 
+długości ciągów X i Y. Mamy </P>
+
+
+
+
+
+<p style="text-align: center">T(1) = 0, T(2) = 1, T (k) = 2 *T(k-1).</P>
+
+
+
+
+
+<p>Rozwiązaniem tego prostego równania rekurencyjnego jest funkcja T(n) = 2<sup><font face="Verdana">n-2</font></sup>. 
+Wynika stąd, że należy szukać innego rozwiązania problemu: algorytm rekurencyjny 
+jest zbyt kosztowny.</P>
+
+
+
+
+
+<p>To była zła nowina. Dobra nowina jest taka, że problem NWP ma własność 
+optymalnej podstruktury: przecież optymalne rozwiązanie znajdziemy, albo jako 
+wynik optymalnego rozwiązania problemu&nbsp; nwp(X<sub><font face="Verdana">m-1</font></sub>, 
+Y<sub><font face="Verdana">n-1</font></sub>), albo jako lepsze z optymalnych 
+rozwiązań podproblemów nwp(X<sub><font face="Verdana">m-1</font></sub>,Y), nwp(&nbsp;X, 
+Y<sub><font face="Verdana">n-1</font></sub>). To sugeruje, że być może metoda 
+programowania dynamicznego da dobry algorytm. Gdybyśmy jeszcze wiedzieli, który 
+z podproblemów należy rozwiązać, to zadanie stałoby się proste. Oczywiście 
+chcemy rozwiązać ten podproblem, którego rozwiązanie daje dłuższy ciąg.</P>
+
+
+
+
+
+<p>Wyliczmy najpierw długość najdłuższego wspólnego podciągu postępując tak, jak 
+w algorytmie rekurencyjnym. Oznaczmy przez dl(A,B) długość najdłuższego 
+wspólnego podciągu danych ciągów A i B. Mamy</P>
+
+
+
+
+
+<p style="text-align: center">dl(X,Y) = dl(X<sub><font face="Verdana">m-1</font></sub>, 
+Y<sub><font face="Verdana">n-1</font></sub>) +1, gdy&nbsp; x<sub><font face="Verdana">m</font></sub> 
+= y<sub><font face="Verdana">n</font></sub>,</P>
+
+
+
+
+
+<p style="text-align: center">dl(X,Y) = max (dl(X<sub><font face="Verdana">m-1</font></sub>,Y),(&nbsp;X, 
+Y<sub><font face="Verdana">n-1</font></sub>)),&nbsp; x<sub><font face="Verdana">m</font></sub>
+<span lang="en"><font face="Symbol">&sup1;</font></span> y<sub><font face="Verdana">n</font></sub>.</P>
+
+
+
+
+
+<p><b>Pytanie 5: </b>&nbsp;Jaki jest koszt rekurencyjnego algorytmu obliczania długości 
+najdłuższego wspólnego ciągu danych dwóch ciągów?</P>
+ 
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'Wykładniczy');">
+</form>
+&nbsp;<p>Na rysunku 14.4 przedstawiono fragment drzewa rekurencyjnych wywołań przy 
+obliczaniu funkcji dl. W węzłach drzewa umieszczone są parametry wywołań. Na 
+przykład, wierzchołek (5,6) odpowiadający za wywołanie funkcji dla ciągów X<sub><font face="Verdana">5</font></sub> 
+i Y<sub><font face="Verdana">6</font></sub> wymaga albo wyliczenia&nbsp; dl(X<sub><font face="Verdana">4</font></sub>,Y<sub><font face="Verdana">5</font></sub>), 
+albo dl(X<sub><font face="Verdana">4</font></sub>,Y<sub><font face="Verdana">6</font></sub>) 
+i dl(X<sub><font face="Verdana">5</font></sub>,Y<sub><font face="Verdana">5</font></sub>). 
+Zauważmy, że niektóre podproblemy, które musimy rozważać, powtarzają się 
+wielokrotnie. Zatem zapiszmy uzyskane wcześniej wyniki w tablicy i zamiast 
+wywołania rekurencyjnego skorzystajmy z nich.<br>
+
+
+
+</p>
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber2">
+  <tr>
+    <td width="100%">
+    <img border="0" src="Rysunki/Rysunek14_4.gif" width="400" height="250"></td>
+  </tr>
+</table>
+
+
+
+
+
+<p>&nbsp;</P>
+
+
+
+
+
+<p>Niech d będzie tablicą o wymiarach n <font face="Symbol"><span lang="en">´</span>
+</font>m, w której zapisywać będziemy wartości funkcji dl, d(i,j)= dl(X<sub><font face="Verdana">i</font></sub>, 
+Y<sub><font face="Verdana">j</font></sub>). W jakiej kolejności mamy wyliczać 
+wielkości d(i,j), tak by odpowiednie elementy tablicy miały już policzone 
+wartości w chwili, gdy chcemy z nich skorzystać? Do wyliczenia d(i,j) potrzebne 
+są nam pozycje (i-1,j-1) oraz pozycje w górę i na lewo od (i,j). Wystarczy zatem 
+wypełniać tablicę d wierszami.</P>
+
+
+
+
+
+<p><b>Przykład 3.2</b></P>
+
+
+
+
+
+<p>Rozważmy ciągi X =&quot;barakuda&quot;&nbsp; i Y=&quot;abrakadabra&quot;. W tabeli na rysunku 14.5 przedstawiono 
+wartości funkcji dl(X,Y). Symbole <font face="Symbol"><span lang="en">&not;</span></font>, 
+|, \&nbsp; pokazują jak obliczyliśmy wynik. Na przykład liczba 3 na pozycji (4, 
+4) oznacza, że najdłuższy wspólny podciąg ciągów BARA i ABRA składa się z 3 
+liter, natomiast znak \ oznacza, że aby to wyliczyć musieliśmy znać rozwiązanie 
+zadania &quot;po przekątnej&quot;, czyli długość najdłuższego wspólnego ciągu &quot;BRA&quot; i &quot;ABR&quot;. 
+Liczba 4 na pozycji (5,6) oznacza, że nwp(BARAK, ABRAKA) = 4. Wyliczyliśmy to 
+biorąc maksimum z dwóch rozwiązań nwp(BARAK,ABRAK) oraz nwp(BARA,ABRAKA). 
+Strzałka w lewo na pozycji (5,6) pokazuje, że maksimum znajdowało się na pozycji 
+sąsiedniej w lewo.<font face="Wingdings" size="3">J</font></P>
+
+
+
+
+
+<p>&nbsp;</P>
+
+
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="70%" id="AutoNumber1">
+  <tr>
+    <td width="100%">
+    <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber3">
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">A</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">B</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">R</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">A</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">K</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">A</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">D</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">A</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">B</td>
+        <td width="8%" bgcolor="#FFCCFF" align="center">R</td>
+        <td width="8%" bgcolor="#FFCCFF" align="center">A</td>
+        <td width="8%" bgcolor="#F5F5F5" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bgcolor="#F5F5F5" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" align="center">&nbsp;</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="8%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="8%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="8%" bgcolor="#F5F5F5" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bgcolor="#F5F5F5" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">B</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">0</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">0</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">1</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">A</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">1 \</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">2 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>2 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">2 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>2 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">2 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>2 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>2 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center">2 \</td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">R</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">1 |</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">2 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>2 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>2 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>2 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>2 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>2 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>2 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center">3 \</td>
+        <td width="8%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>3 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">A</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">1 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">2 |</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">3 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>3 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">3 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>3 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">3 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>3 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>3 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center">4 \</td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">K</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">1 |</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">2 |</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">3 |</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">4 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">U</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">1 |</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">2 |</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">3 |</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">4 |</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">D</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">1 |</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">2 |</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">3 |</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">4 |</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>4 </td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">5 \</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>5 </td>
+        <td width="7%" bgcolor="#FFCCFF" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>5 </td>
+        <td width="8%" bgcolor="#FFCCFF" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>5 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>5 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bgcolor="#FFCCFF" align="center">A</td>
+        <td width="7%" bgcolor="#C0C0C0" align="center">0</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">1 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>1 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">2 |</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">3 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">4 |</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">5 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>5 </td>
+        <td width="7%" bgcolor="#F5FFFA" align="center">6 \</td>
+        <td width="7%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>6 </td>
+        <td width="8%" bgcolor="#F5FFFA" align="center"><font face="Symbol">
+        <span lang="en">&not;</span></font>6 </td>
+        <td width="8%" bgcolor="#FFCCFF" align="center">6 \</td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bgcolor="#F5FFFA" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="42%" colspan="6" bordercolor="#F5F5F5">
+        <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rysunek 14.5</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="7%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+        <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+<p>W algorytmie obliczania długości NWP używamy dwóch tablic: tablicy d&nbsp; o wymiarach (|X|<font face="Symbol">+1)<span lang="en">´</span>(</font>|Y|+1) 
+i tablicy b o wymiarach (|X|<font face="Symbol"><span lang="en">´</span></font>|Y|). 
+Tablica d służy do zapamiętania długości najdłuższego wspólnego podciągu, a w 
+tablicy b na pozycji (i,j) zapamiętamy zadanie, które trzeba rzeczywiście 
+rozwiązać, aby uzyskać&nbsp; optymalną wartość d(i,j). Wiersz o numerze 0 i 
+kolumna o numerze 0&nbsp; w tablicy d, mają charakter pomocniczy - pozwalają 
+uprościć algorytm. Tablica b posłuży nam później do odczytania ostatecznego 
+rozwiązania.</P>
+
+
+
+
+
+    <p>
+<div class="def" style="width: 681; height: 367">
+   <TABLE frame="void" rules="none" width="649" height="178">
+         <TR>
+            <TD width="514" height="12" colspan="2">dlNWP(X,Y)<b>{</b></TD>
+             
+         </TR>
+         <tr>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12">m := |X|; n := |Y|;</TD> 
+         </tr>
+         <tr>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12"><b>for</b>&nbsp; i :=1 <b>to</b> m <b>do</b> 
+            d(i,0) := 0 <b>od</b>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            // inicjalizacja</TD> 
+         </tr>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12"><b>for</b>&nbsp; j :=1 <b>to</b> n <b>do</b> 
+            d(0,j) := 0 <b>od</b>;</TD> 
+         </TR>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12"><b>for</b>&nbsp; i :=1 <b>to</b> m <b>do</b> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 
+            wypełniamy obie tablice wierszami</TD> 
+         </TR>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12"><b>for</b>&nbsp; j :=1 <b>to</b> n <b>do</b> <strong>
+            &nbsp;&nbsp;&nbsp;</strong>&nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12">   &nbsp;<strong>&nbsp;&nbsp;&nbsp;&nbsp; if </strong>
+            (X[i] =Y[i])<strong> then </strong>&nbsp;&nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12">   <strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            d(i,j) := d(i-1,j-1) +1; b(i,j):=&quot;\&quot;;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12">   &nbsp;&nbsp;&nbsp; <b>else</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12">   <b>&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>&nbsp;&nbsp;&nbsp;&nbsp; if</b> (d(i-1,j) <font face="Symbol">
+            <span lang="en">&sup3;</span> </font>d(i,j-1)) <b>then</b>&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            d(i,j) := d(i-1,j); b(i,j) := &quot;|&quot;;</TD>
+         </TR>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12">   &nbsp;<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            else</b>&nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            d(i,j) := d(i,j-1); b(i,j) := &quot;<font face="Symbol"><span lang="en">&not;</span></font>&quot;;</TD>
+         </TR>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>&nbsp;&nbsp;&nbsp; if</b></TD>
+         </TR>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12">   <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if</b></TD>
+         </TR>
+         <TR>
+            <TD width="26" height="12"></TD>
+            <TD width="488" height="12">   <b>od</b></TD>
+         </TR>
+         <TR>
+            <TD width="26" height="12"><STRONG>}</STRONG></TD>
+            <TD width="488" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p>Koszt algorytmu jest oczywiście wielomianowy: wykonujemy rzędu O(n*m) 
+operacji arytmetycznych, gdzie m jest długością ciągu X, a n długością ciągu Y.</P>
+
+
+
+
+
+<p>Znaki &quot;|&quot;, &quot;\&quot; oraz &quot;<font face="Symbol"><span lang="en">&not;</span></font>&quot; kodują pozycję podproblemu, który trzeba rozwiązać, 
+aby w danej chwili znaleźć optymalne rozwiązanie:</P>
+
+
+
+
+
+<blockquote>
+
+
+
+
+
+<p>&nbsp;b(i,j) = &quot;|&quot; oznacza, że podproblem, który posłużył nam do znalezienia 
+optymalnej długości najdłuższego wspólnego ciągu odpowiada pozycji &quot;w górę&quot;, 
+tzn. (i-1,j),</P>
+
+
+
+
+
+<p>b(i,j) = &quot;\&quot; oznacza, że podproblem, który posłużył do znalezienia optymalnej 
+długości najdłuższego wspólnego ciągu odpowiada pozycji &quot;po przekątnej&quot;, tzn. 
+(i-1,j-1),</P>
+
+
+
+
+
+<p>b(i,j) = &quot;<font face="Symbol"><span lang="en">&not;</span></font>&quot; oznacza, że podproblem, który posłużył do znalezienia optymalnej 
+długości najdłuższego wspólnego ciągu odpowiada pozycji &quot;w lewo&quot;, tzn. (i,j-1).</P>
+
+
+
+
+
+</blockquote>
+
+
+
+
+
+<p>Korzystając z tablicy b możemy  wypisać rozwiązanie, najdłuższy wspólny 
+podciąg danych ciągów. Wystarczy w tym celu rozpocząć przeglądanie tablicy b od 
+pozycji (m,n), gdzie m jest długością ciągu X, a n długością ciągu Y, i poruszać 
+się zgodnie ze znakami |,\, <font face="Symbol"><span lang="en">&not;</span>.</font> 
+Wypisujemy wspólny znak tylko wtedy, gdy trafimy na \.&nbsp; Na rysunku 14.5 
+zaznaczono ścieżkę, którą trzeba przejść aby odczytać rozwiązanie, którym, w tym 
+przypadku, jest słowo &quot; ARAKDA &quot;. Algorytm wypisywania najdłuższego wspólnego 
+podciągu jest przedstawiony w 
+rekurencyjnej procedurze <i>drukuj.</i></P>
+
+
+
+
+
+    <p>
+<div class="def" style="width: 512;">
+   <TABLE frame="void" rules="none" width="476">
+         <TR>
+            <TD width="341" height="12" colspan="2">drukuj(i,j)<b>{</b></TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="282" height="12"><strong>&nbsp;i</strong><b>f</b> (i=0 lub 
+            j 
+            =0) <b>
+            then return fi;</b></TD> 
+         </TR>
+         <tr>
+            <TD width="26" height="12"></TD>
+            <TD width="453" height="12">   <strong>&nbsp;if </strong>(b(i,j) = 
+            &quot;\&quot;)<strong> then </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;// 
+            po przekątenej</TD>
+         </tr>
+         <tr>
+            <TD width="26" height="12"></TD>
+            <TD width="453" height="12">   <strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            drukuj(i-1, j-1);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </tr>
+         <tr>
+            <TD width="26" height="12"></TD>
+            <TD width="453" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            write (X[i])</TD>
+         </tr>
+         <tr>
+            <TD width="26" height="12"></TD>
+            <TD width="453" height="12">   <b>else</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </tr>
+         <tr>
+            <TD width="26" height="12"></TD>
+            <TD width="453" height="12">   <b>&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>if</b> (b(i,j) =&quot;|&quot;) <b>then</b>&nbsp;&nbsp;&nbsp;&nbsp; 
+            // w górę</TD>
+         </tr>
+         <tr>
+            <TD width="26" height="12"></TD>
+            <TD width="453" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            drukuj(i-1,j)</TD>
+         </tr>
+         <tr>
+            <TD width="26" height="12"></TD>
+            <TD width="453" height="12">   &nbsp;<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            else</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            // w lewo</TD>
+         </tr>
+         <tr>
+            <TD width="26" height="12"></TD>
+            <TD width="453" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            drukuj(i,j-1)</TD>
+         </tr>
+         <tr>
+            <TD width="26" height="12"></TD>
+            <TD width="453" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>&nbsp;&nbsp;&nbsp; if</b></TD>
+         </tr>
+         <tr>
+            <TD width="26" height="12"></TD>
+            <TD width="453" height="12">   <b>if</b></TD>
+         </tr>
+         <TR>
+            <TD width="59" height="12"><STRONG>}</STRONG></TD>
+            <TD width="282" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p>Koszt związany z wykonaniem procedury drukuj dla parametrów n, m wynosi O(n+m). 
+Rzeczywiście, w każdym rekurencyjnym wywołaniu algorytmu co najmniej jedna z 
+wartości albo i, albo j jest zmniejszana, a po osiągnięciu zera przez dowolną z 
+nich, algorytm kończy obliczenie.</P>
+
+
+
+
+
+<p><b>Wniosek</b> Koszt algorytmu znalezienia najdłuższego wspólnego podciągu 
+ciągów X, Y o długości odpowiednio m i n wynosi O(n*m). </P>
+
+
+
+
+
+<p><b>Pytanie 6:&nbsp; </b>W jakiej kolejności zostaną wypisane elementy najdłuższego 
+wspólnego ciągu, jeśli korzystamy z procedury drukuj?
+   
+ 
+<br>
+
+ 
+</p>
+   
+ 
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'W kolejności ich występowania w danych ciągach.');">
+</form>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main14_p2.html" TARGET="main"  class="NAWIGACJA">
+&laquo;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main14_cw.html" TARGET="main" class="NAWIGACJA">następny 
+punkt&nbsp;&raquo;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

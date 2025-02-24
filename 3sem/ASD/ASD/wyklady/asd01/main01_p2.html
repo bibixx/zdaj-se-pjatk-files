@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr-->
+<!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main01_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main01_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 2"></a>
+<br clear="all">
+<div class="tytulpunktu">2. Jêzyk algorytmów</div>
+<p>Pojêcie algorytmu pojawi³o siê du¿o wcze¶niej ni¿ komputer.
+Algorytmy liczbowe znane s± od czasów antycznych,&nbsp; np. algorytm
+Euklidesa znajdowania najwiêkszego wspólnego dzielnika dwóch liczb
+naturalnych. Samo s³owo "algorytm" pochodzi od nazwiska matematyka
+perskiego z 9 wieku n.e.: Abu Ja'Far Mohammed Ibn M<span lang="en"><font
+ face="Microsoft Sans Serif">&#251;</font></span>s<span lang="en"><font
+ face="Microsoft Sans Serif">â</font></span> al-Khow<span lang="en"><font
+ face="Microsoft Sans Serif">â</font></span>-rism<font
+ face="Microsoft Sans Serif"><span lang="en">î</span>, który poszukiwa³
+metod wykonywania podstawowych operacji arytmetycznych</font>.
+Nieformalnie, algorytm jest metod± postêpowania, okre¶laj±c± ¶ci¶le
+kolejne etapy i wykonywane operacje, w celu rozwi±zania danego
+problemu. </p>
+<p>Takie rozumienie algorytmu jest bardzo ogólne i nie zawsze odpowiada
+procesowi postêpowania, który ma byæ realizowany przez komputer. Na
+ogó³ mamy do dyspozycji tylko skoñczon± przestrzeñ do przechowywania
+danych i skoñczony czas, w którym chcemy zakoñczyæ postêpowanie.
+Matematycy&nbsp; pocz±tków XX wieku, jeszcze przed powstaniem
+pierwszego komputera, wiele uwagi po¶wiêcili sformalizowaniu pojêcia
+algorytmu. Powsta³y formalne definicje obliczalno¶ci, oparte o
+abstrakcyjne modele licz±ce, np. funkcje rekurencyjne, algorytmy
+Markova, maszyny Turinga. Okaza³o siê te¿ wkrótce, ¿e wszystkie
+zaproponowane modele s± równowa¿ne, w tym sensie, ¿e definiuj± tê sam±
+klasê funkcji obliczalnych. W zwi±zku z tym Church sformu³owa³ hipotezê
+(tzw. Teza Churcha), ¿e wszystkie "rozs±dne " pojêcia algorytmu s±
+sobie równowa¿ne.&nbsp; Obecnie, w dobie komputerów, mo¿na uznaæ, ¿e
+ka¿dy jêzyk programowania definiuje pewn± klasê algorytmów. Pojêcie
+algorytmu jest jednak ogólniejsze i nie musi siê wi±zaæ z ¿adnym
+konkretnym komputerem, ani ¿adnym konkretnym jêzykiem programowania.
+Tym niemniej, musimy stosowaæ tak± notacjê do opisu algorytmów, która
+umo¿liwi nam ich analizê. </p>
+<p>Idealny algorytm to taki, który jest krótki, ³atwo go
+zrozumieæ,&nbsp; który liczy szybko, zawsze daje dobre wyniki i zajmuje
+ma³o miejsca w pamiêci komputera. Aby sprostaæ tym wymaganiom, trzeba
+przede wszystkim zapisaæ algorytm w jêzyku o prostej sk³adni. Wydaje
+siê, ¿e jêzyk (Algolopodobny) zawieraj±cy&nbsp; instrukcjê przypisania
+oraz instrukcje: z³o¿enia, warunkow± i pêtli, spe³nia te wymogi. Z
+czasem rozszerzymy go o procedury i funkcje, tak by mo¿na by³o opisywaæ
+procesy rekurencyjne.&nbsp;Ka¿dy algorytm bêdzie mia³ jedn± z
+wymienionych postaci </p>
+<p style="text-align: center;">nazwa_algorytmu{
+instrukcje}&nbsp;&nbsp;&nbsp;&nbsp; <br>
+&nbsp;lub&nbsp;&nbsp;&nbsp; <br>
+typ_wyniku nazwa_algorytmu(parametry){instrukcje}.</p>
+<p>Algorytmy pierwszego typu nazywaæ bêdziemy czasem procedurami, a
+drugiego funkcjami. W tym wyk³adzie, bêdziemy zapisywali algorytmy
+u¿ywaj±c :</p>
+<ul>
+  <li>instrukcji przypisania postaci
+    <p></p>
+    <center>zmienna := wyra¿enie,</center>
+    <br>
+która zmiennej przypisuje warto¶æ wyra¿enia po prawej stronie symbolu
+przypisania :=,
+    <p></p>
+  </li>
+  <li> instrukcji sk³adania
+    <p></p>
+    <center> {P<sub>1</sub>;... ;P<sub>n</sub>},</center>
+    <p></p>
+która pozwala ³±czyæ algorytmy w wiêksze bloki,</li>
+  <li> instrukcji warunkowej
+    <p></p>
+    <p> </p>
+    <center>if <font face="Symbol">g</font> then P<sub>1</sub> else P<sub>2</sub>
+fi, </center>
+    <p></p>
+która, w zale¿no¶ci od warunku <font face="Symbol">g</font>, umo¿liwia
+wykonanie algorytmu P<sub>1</sub> lub algorytmu P<sub>2</sub>,</li>
+  <li>instrukcji pêtli
+    <p></p>
+    <center>while <font face="Symbol">g</font> do P od,</center>
+    <p></p>
+  </li>
+która umo¿liwia wielokrotne powtarzanie algorytmu P, dopóki prawdziwy
+jest warunek <font face="Symbol">g</font>.
+</ul>
+Z dok³adno¶ci± do ortografii, s± to znane instrukcje z jêzyków
+programowania Algol, C, C++, Pascal, czy Java. Symbole "do - od", "then
+- else - fi" pe³ni± jedynie rolê nawiasów, podobnie jak klamry {}. Na
+ogó³, nie bêdziemy siê zajmowaæ deklaracjami zmiennych, chyba ¿e przy
+omawianiu konkretnych implementacji, lub, gdy deklaracje typu zmiennych
+s± konieczne do zrozumienia dzia³ania algorytmu. Bêdziemy natomiast
+zak³adali, ¿e ka¿dy algorytm ma predefiniowan± zmienn± <b>result</b>,
+która s³u¿y do zapamiêtania wyników algorytmu. Jej typ zale¿eæ bêdzie
+od konkretnej sytuacji i od konkretnego algorytmu.
+<p>Uwaga. Czasami dla wygody, stosowaæ bêdziemy instrukcjê "for"&nbsp;
+zamiast instrukcji&nbsp; pêtli "while". Instrukcja&nbsp; "for i:= k to
+n do P od"&nbsp; oznaczaæ bêdzie to samo co program {i := k; while
+i&lt; n+1 do P; i := i+1 od}.</p>
+<p>Instrukcje sk³adania, warunkowa i instrukcja pêtli s± podstawowymi
+metodami konstruowania algorytmów. Dodatkowo, dopuszczaæ bêdziemy
+instrukcjê wywo³ania wcze¶niej zdefiniowanej procedury lub funkcji.
+Takie wywo³anie zapiszemy w postaci:</p>
+<p style="text-align: center;">nazwa_algorytmu(parametry_aktualne).</p>
+<p>Jak Czytelnik zauwa¿y³, w opisie algorytmów, nie bêdziemy u¿ywali
+instrukcji skoku typu "go to". Wiadomo, ¿e tak± instrukcjê mo¿na
+wyeliminowaæ z ka¿dego programu: mo¿emy programowaæ strukturalnie, bez
+u¿ycia instrukcji skoku. Jednak w pewnych wypadkach, szczególnie w
+pêtlach lub procedurach, wygodnie jest u¿yæ specjalnej instrukcji <b>exit</b>,
+która przerywa dzia³anie pêtli, lub instrukcji <b>return</b>
+pozwalaj±cej przerwaæ wykonanie funkcji lub procedury i wróciæ do
+instrukcji nastêpuj±cej po jej wywo³aniu.</p>
+<p>By u³atwiæ zrozumienie algorytmów, bêdziemy siê starali rozbiæ
+d³u¿sze i bardziej skomplikowane algorytmy na modu³y.&nbsp; Rolê
+ka¿dego modu³u okre¶laæ bêdziemy stosuj±c komentarze (zaznaczone
+symbolem //) albo w jêzyku polskim,&nbsp; albo w postaci formu³
+logicznych. Takie formalne komentarze, specyfikuj±ce zachowanie
+fragmentów programu, s± bardzo pomocne przy uzasadnianiu semantycznej
+poprawno¶ci programu. </p>
+<p>Zamiast formy tekstowej, czasami&nbsp; jest wygodnie u¿yæ formy
+graficznej programu, zwanej&nbsp; grafem programu.&nbsp; T³umaczenie z
+jêzyka instrukcji na jêzyk grafów, i odwrotnie, jest jednoznaczne:
+ka¿dy graf programu jest jednej z czterech mo¿liwych postaci:</p>
+<p><img border="0" src="Rysunki/Rysunek1.gif" width="95" height="121">&nbsp;&nbsp;&nbsp;&nbsp;
+lub&nbsp;&nbsp;&nbsp;&nbsp; <img border="0" src="Rysunki/Rysunek2.gif"
+ width="95" height="121">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+lub&nbsp;&nbsp;&nbsp;
+<img border="0" src="Rysunki/Rysunek3.gif" width="95" height="121">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+lub&nbsp;&nbsp;&nbsp;&nbsp; <img border="0" src="Rysunki/Rysunek4.gif"
+ width="95" height="121">
+<br>
+&nbsp;</p>
+<p>Rysunek 2.1 Grafy podstawowych instrukcji.</p>
+<p>Wêz³ami takiego grafu s± prostok±ty, odpowiadaj±ce akcjom, i owale
+odpowiadaj±ce testom wykonywanym przez algorytm. Orientacja krawêdzi
+wskazuje na kolejno¶æ wykonywania instrukcji.&nbsp;&nbsp; </p>
+<p> Z punktu widzenia semantyki, algorytm opisuje funkcjê czê¶ciow±
+przeprowadzaj±c± dane pocz±tkowe w wyniki. Poniewa¿ dane pocz±tkowe, to
+pocz±tkowe warto¶ci zmiennych, a wyniki koñcowe, to te¿ warto¶ci
+pewnych zmiennych, które uznali¶my za wa¿ne, zatem ka¿dy algorytm&nbsp;
+Alg mo¿emy rozumieæ jako funkcjê czê¶ciow±:</p>
+<p></p>
+<center>Alg : W ---&gt; W,</center>
+<p></p>
+<p>odwzorowuj±c± zbiór warto¶ciowañ W (tzn. zbiór warto¶ci zmiennych) w
+zbiór warto¶ciowañ.&nbsp; Jest to funkcja czê¶ciowa poniewa¿ mo¿e siê
+zdarzyæ, ¿e algorytm nie zatrzymuje siê dla pewnych danych
+pocz±tkowych.&nbsp; Zak³adamy, ¿e Czytelnik
+zna i rozumie semantykê podstawowych instrukcji. Zreszt±, do¶æ dobrze
+wyja¶niaj± j± przedstawione wy¿ej grafy programów.</p>
+<p><b>Pytanie 2</b>: Jak± funkcjê w zbiorze liczb rzeczywistych
+wyznacza algorytm { x := 2<font face="Symbol"> <span lang="en">´</span>
+</font>x + 3;&nbsp; x := x <font face="Symbol">&nbsp;<span lang="en">´</span></font>&nbsp;
+x;}? .</p>
+<!-- <p>Odpowied¼: f(x) = (2x+3)<sup><font face="Verdana">2</font></sup></P> -->
+<form><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0" onclick="napis(this.form,' f(x) = (2x+3)^2.');">
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main01_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main01_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

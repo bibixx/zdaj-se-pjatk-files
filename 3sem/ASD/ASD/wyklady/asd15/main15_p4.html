@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main15_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main15_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all"><A NAME="EDU.wyklad.punkt 4"></A>
+
+<br clear="all">
+<div class="tytulpunktu">4. Algorytmy aproksymacyjne</div>
+</p>
+<p>Wiele problemów optymalizacyjnych to problemy NP-zupełne. Wiele z nich 
+to problemy o istotnym praktycznym znaczeniu. Jak mamy więc postępować z 
+zagadnieniem, o którym wiadomo, że jest NP-trudne, a jednak jego rozwiązanie 
+jest dla nas niezbędne?&nbsp;Czy jest sposób rozwiązania takiego problemu, mimo 
+wszystko?</p>
+<p>Rozważmy problem komiwojażera. Skoro znalezienie najkrótszej drogi 
+przechodzącej przez wszystkie miasta jest właściwie niemożliwe, bo problem jest 
+NP-trudny, wydaje się być rozsądnym rozważyć ew. algorytmy znajdujące &quot;prawie 
+najkrótszą&quot; drogę komiwojażera. Jeśli zrezygnujemy z wymagania, by szukana droga 
+była najkrótsza, to okazuje się, że&nbsp; możemy zastosować np. algorytm 
+Kruskala, do skonstruowania minimalnego drzewa rozpinającego, i na tej podstawie 
+utworzyć co najwyżej dwukrotnie tak długą drogą komiwojażera, jak droga 
+najkrótsza. Czasami takie rozwiązanie jest lepsze niż żadne!</p>
+<p>Klasa algorytmów pozwalających rozwiązać trudne problemy optymalizacyjne, w 
+sposób, który nie daje rozwiązania optymalnego, ale jednak rozwiązanie bliskie 
+optymalnemu, za to z rozsądnym kosztem,&nbsp; nazywana jest klasą algorytmów 
+aproksymacyjnych.&nbsp; Zakładamy, że w wielu przypadkach rozwiązanie &quot;prawie 
+dobre&quot; otrzymane w rozsądnym czasie jest lepsze, niż rozwiązanie najlepsze, 
+którego znalezienie wymaga &quot;nierozsądnie dużo&quot; czasu.</p>
+<p><b>Przykład 4.1</b></p>
+<p>Rozważmy problem plecakowy sformułowany w punkcie 3 tego wykładu (por. Sara 
+Baase, Computer Algorithms). Niech&nbsp;&nbsp; 
+s<sub><font face="Verdana">1</font></sub>,...,s<sub><font face="Verdana">n</font></sub> 
+będzie ciągiem wag przypisanych obiektom i niech c będzie maksymalną, dopuszczalną wagą 
+wybranych obiektów. Szukamy&nbsp; takiego algorytmu, który znajduje wektor (x<sub><font face="Verdana">i</font></sub>)<sub><font face="Verdana">i</font>
+<span lang="en"><font face="Symbol">&pound;</font></span>n</sub> o elementach 0, 
+1, tak by suma</p>
+   
+<p style="text-align: center">s = <font face="Symbol" size="4">S</font> <sub>
+<font face="Verdana">i=1,...,n</font></sub> s<sub><font face="Verdana">i</font></sub> 
+*x<sub><font face="Verdana">i</font></sub>&nbsp;  </p>
+   
+<p>przyjmowała wartość bliską największej możliwej.   </p>
+   
+<p>Idea rozwiązania przybliżonego jest następująca: skoro nie możemy przejrzeć 
+wszystkich możliwych podzbiorów zbioru obiektów, to przynajmniej przejrzyjmy 
+podzbiory o mocy co najwyżej k i na ich bazie spróbujmy zbudować rozwiązanie. W 
+przedstawionym algorytmie przyjmujemy, że obiekty są ponumerowane liczbami 
+naturalnymi {1, ..., n}, a Set oznacza podzbiór zbioru {1, ..., n} i służy do 
+zapamiętania wybranego podzbioru obiektów.</p>
+   
+
+
+
+
+    <p style="text-align: left">&nbsp;<p>
+<div class="def" style="width: 676; height: 414">
+   <TABLE frame="void" rules="none" width="650" height="254" bordercolorlight="#808080" bordercolordark="#FFFFFF" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0" cellspacing="0">
+         <TR>
+            <TD width="1043" height="24" colspan="2">Knapsack_k {</TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12">Ustaw&nbsp; obiekty w porządku 
+            nierosnących wartości ich&nbsp; wag.</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="24"></TD>
+            <TD width="984" height="24">Niech to będzie ciąg s<sub><font face="Verdana">i1</font></sub>, 
+            s<sub><font face="Verdana">i2</font></sub>,...,s<sub><font face="Verdana">in</font></sub>.</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12">MaxSum := 0;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12">Set := {};&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            // Set jest na początku zbiorem pustym </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="17"></TD>
+            <TD width="984" height="17"><b>for</b> każdego podzbioru T zbioru 
+            {1,..., n} o co najwyżej k elementach <b>do</b></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="30"></TD>
+            <TD width="984" height="30">&nbsp;&nbsp;&nbsp; sum := suma wag 
+            obiektów w zbiorze T;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12">&nbsp;&nbsp; <b>&nbsp;for</b> j := 1 <b>
+            to</b> n <b>do&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </b>//przeglądamy pozostałe obiekty</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="23"></TD>
+            <TD width="984" height="23">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>if </b>&nbsp;(obiekt i<sub><font face="Verdana">j</font></sub> 
+            nie należy do T) <b>then </b>&nbsp;&nbsp; //i ewentualnie 
+            uzupełniamy zbiór T</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="24"></TD>
+            <TD width="984" height="24"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if</b>&nbsp; 
+            ((sum + s<sub><font face="Verdana">ij</font></sub>)
+            <font face="Symbol"><span lang="en">&pound;</span> </font>c ) <b>then</b> </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            sum := sum + s<sub><font face="Verdana">ij</font></sub>;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            T := T<span lang="en"><font face="Symbol">&Egrave;</font></span> {i<sub><font face="Verdana">j</font></sub>}</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12"><strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>fi</b><STRONG> </STRONG>
+             </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp; </strong>&nbsp; <b>&nbsp; fi</b><STRONG> </STRONG>
+             </TD> 
+         </TR>
+         <tr>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12">   &nbsp; &nbsp;&nbsp;&nbsp;<b>od</b>;&nbsp;</TD>
+         </tr>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong><b>if </b>&nbsp;(MaxSum &lt; sum) <b>then&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </b>//jeśli znalezione właśnie rozwiązanie jest lepsze</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            MaxSum := sum;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // zapamiętujemy je
+             </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            Set := T;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="984" height="12">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong><b>fi</b><STRONG> </STRONG>
+             </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="22"></TD>
+            <TD width="984" height="22">   &nbsp;<b>od</b><STRONG>&nbsp;&nbsp;&nbsp; </STRONG>
+             </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="17"><strong>}</strong></TD>
+            <TD width="984" height="17">   <strong>&nbsp;&nbsp;&nbsp;</strong></TD>
+         </TR>
+         </TABLE>
+</div>
+
+
+
+
+
+<p>Ten prosty schemat definiuje ciąg algorytmów Knapsack_k dla wszystkich k. Im 
+większe k, tym rozwiązanie uzyskane przez ten algorytm jest bliższe optymalnemu. 
+Natomiast dla ustalonego k,&nbsp; koszt algorytmu Knapsack_k można oszacować 
+przez O(k* n <sup><font face="Verdana">k+1</font></sup>). Jest to więc dla 
+każdego k, algorytm wielomianowy ze względu na rozmiar danych n.<font face="Wingdings" size="3">J<br>
+&nbsp;</font></p>
+
+<p>Nie do wszystkich problemów da się zastosować podejście aproksymacyjne. 
+Udowodniono na przykład dla problemu kolorowania grafu, że jeśli istnieje 
+algorytm, który w czasie wielomianowym wyznacza kolorowanie co najwyżej dwa razy 
+większą liczbą kolorów niż liczba minimalna, to istnieje także algorytm 
+wielomianowy, który rozwiązuje ten problem. Ponieważ problem kolorowania grafu 
+jest problemem NP-zupełnym, wynika stąd, że znalezienie algorytmu 
+aproksymacyjnego, dającego &quot;prawie&quot; dobre wyniki, jest tak samo trudne, jak&nbsp; 
+problem P = NP.</p>
+
+<p><b>Pytanie 7</B>: Przypuśćmy, że dane są obiekty o wagach&nbsp; 54, 45, 43, 29, 
+23, 21, 14, 1, oraz c= 110. Jakie rozwiązanie znajdzie algorytm Knapsack_2? </P>
+
+<!-- <p>Odpowiedź: {43, 29, 32, 14, 1}.</P> -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'Rozwiązanie optymalne: {43, 29, 32, 14, 1}.')"> 
+</form>
+
+<BR> 
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main15_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main15_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+ 
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

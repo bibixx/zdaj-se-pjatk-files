@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main08_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main08_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all"><A NAME="EDU.wyklad.punkt 4"></A>
+
+<br clear="all">
+<div class="tytulpunktu">4. Usuwanie z drzewa AVL.</div>
+</p>
+
+
+
+
+
+
+<p></P>
+<p>Zasada usuwania elementu z drzewa AVL,</P>
+
+<p style="text-align: center">delete : Et <font face="Symbol"><span lang="en">´</span>
+</font>AVL <font face="Symbol"><span lang="en">&reg;</span> </font>AVL,</P>
+
+<p>jest prawie taka sama, jak dla drzew binarnych poszukiwań. Jednak, podobnie 
+jak w przypadku wstawiania elementu, wynikiem zastosowania procedury delete, 
+opisanej dla drzew binarnych poszukiwań, nie zawsze otrzymane drzewo jest 
+wyważone.&nbsp; Postępowania będzie więc nieco bardziej skomplikowana niż dla 
+drzew BST.</P>
+
+<p><b>Metoda</b></P>
+
+<ol>
+  <li>Znajdź 
+wierzchołek z etykietą, którą chcesz usunąć z drzewa (o ile znajduje się ona w 
+  drzewie),</li>
+  <li>Usuń tę etykietę stosując algorytm delete dla BST,</li>
+  <li>Wylicz wagi wierzchołków na ścieżce od usuniętego wierzchołka w kierunku korzenia drzewa,</li>
+  <li>Wykonaj rotację względem każdego napotkanego wierzchołka, którego waga 
+  wynosi +2 lub -2.</li>
+</ol>
+
+<p>Zauważmy, że faktycznie usuwany wierzchołek, o którym mowa w punkcie 3 
+opisanej metody, nie zawsze jest tym wierzchołkiem, którego etykietę usuwamy 
+(por. algorytm delete dla BST, przypadek, gdy wierzchołek z usuwaną etykietą ma 
+dwa następniki).</P>
+
+<p><b>Przykład 4.1</b></P>
+
+<p>Rozważmy przykład przedstawiony na rysunku 8.9(a). Usunięcie etykiety 1 
+spowoduje odwiązanie węzła z tą etykietą, bo jest on liściem w tym drzewie. 
+Wynikiem usunięcia 1 jest drzewo przedstawione na rysunku 8.9(b). Poza 
+wierzchołkiem z etykietą 2, nie zmieniły się żadne dowiązania, ani wagi 
+wierzchołków.</P>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber1">
+  <tr>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_9a.gif" width="300" height="250"></td>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_9b.gif" width="300" height="250"></td>
+  </tr>
+</table>
+
+<p>Jeśli teraz usuniemy z drzewa (rysunek 8.9(b)) etykietę korzenia, to sytuacja 
+jest dużo bardziej skomplikowana. Przede wszystkim nie usuwamy bezpośrednio 
+wierzchołka z etykietą 10, ale jego bezpośredni następnik (tzn. najmniejszy 
+element w jego prawym poddrzewie), wierzchołek z etykietą 11. Etykieta 11 
+znajdzie się teraz w korzeniu drzewa wynikowego. Otrzymane drzewo jest drzewem 
+binarnych poszukiwań, nie jest jednak drzewem AVL (por. rysunek 8.9(d)). </P>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber2">
+  <tr>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_9c.gif" width="300" height="250"></td>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_9d.gif" width="300" height="250"></td>
+  </tr>
+</table>
+
+<p>Zgodnie z punktem 3 opisanej metody modyfikujemy wagi (o ile to potrzebne) 
+wierzchołków cofając się wzdłuż ścieżki poszukiwań. Ponieważ wierzchołek z 
+etykietą 12, który obejrzymy jako pierwszy, ma teraz wagę -2, należy wykonać 
+rotację prostą w lewo. Wynik tej rotacji jest przedstawiony na rysunku 8.9 (d). 
+Jednak otrzymane drzewo binarnych poszukiwań nie jest wyważone, o czym się 
+przekonamy wyliczając wagę korzenia drzewa: rotacja spowodowała zmniejszenie 
+wysokości prawego poddrzewa, które już wcześniej miało mniejszą wysokość. 
+Zgodnie z punktem 4 musimy kontynuować wykonywanie rotacji, tym razem względem 
+korzenia drzewa (wierzchołek z etykietą 11). Wynik rotacji jest przedstawiony na 
+rysunku 8.9 (e). <font face="Wingdings">J</font></P>
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber3">
+  <tr>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_9e.gif" width="300" height="250"></td>
+    <td width="50%">&nbsp;</td>
+  </tr>
+</table>
+
+<p>Zwróćmy jeszcze raz uwagę na istotną różnice w procesie wyważania drzewa dla 
+operacji insert i dla operacji delete. O ile w przypadku wstawiania nowego 
+elementu, zawsze wystarczy co najwyżej jedna rotacja, to nie jest tak w 
+przypadku usuwania. Usunięcie etykiety 10, w przykładzie 4.1, zmusiło nas do 
+wykonania dwóch rotacji. A jak jest w przypadku ogólnym? Jaka może być liczba 
+niezbędnych rotacji, jeśli drzewo ma n elementów?</P>
+
+<p><Form>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'O(lg n) rotacji.');"> 
+</FORM></P>
+
+<p>Rozważmy drzewo D<sub><font face="Verdana">1</font></sub> = &lt;LD<sub><font face="Verdana">1</font></sub>,B,PD<sub><font face="Verdana">1</font></sub>&gt; 
+i niech waga wierzchołka B wynosi -1, tzn. prawe poddrzewo, oznaczone tu przez 
+PD<sub><font face="Verdana">1</font></sub>, jest wyższe niż lewe poddrzewo. 
+Załóżmy teraz, że usunięcie jakiegoś elementu&nbsp; x spowodowało zmniejszenie 
+wysokości poddrzewa LD<sub><font face="Verdana">1</font></sub>. Zatem, dla 
+odzyskania równowagi, konieczna będzie rotacja w lewo (prosta lub podwójna) 
+względem korzenia B. Wykonanie tej rotacji może spowodować zmniejszenie się 
+wysokości drzewa D<sub><font face="Verdana">1</font></sub>. Niech teraz D<sub><font face="Verdana">1</font></sub>, 
+będzie prawym poddrzewem pewnego drzewa D<sub><font face="Verdana">2</font></sub> 
+= &lt;LD<sub><font face="Verdana">2</font></sub>,A,D<sub><font face="Verdana">1</font></sub>&gt; 
+o korzeniu A<font face="Verdana"><sub> </sub></font>i lewym poddrzewie LD<sub><font face="Verdana">2</font></sub>, 
+którego wysokość była o jeden większa niż wysokość drzewa D<sub><font face="Verdana">1</font></sub>. 
+Wynika stąd, że waga w wierzchołku A zmieniła się z +1 na +2. Wymagana jest więc 
+rotacja względem wierzchołka A.&nbsp; Ta rotacja mogła zmniejszyć wysokość 
+drzewa D<sub><font face="Verdana">2</font></sub>. Kontynuując, możemy sobie 
+wyobrazić, że drzewo D<sub><font face="Verdana">2</font></sub>&nbsp; jest lewym 
+poddrzewem pewnego drzewa D<sub><font face="Verdana">3</font></sub> = &lt;D<sub><font face="Verdana">2</font></sub>, 
+C, PD<sub><font face="Verdana">3</font></sub>&gt;, którego prawe poddrzewo&nbsp; PD<sub><font face="Verdana">3
+</font></sub>było na początku o 1 wyższe niż drzewo D<sub><font face="Verdana">2</font></sub>. 
+W wyniku zmiany wysokości w obrębie drzewa D<sub><font face="Verdana">2</font></sub>, 
+waga w korzeniu drzewa D<sub><font face="Verdana">3</font></sub> zmieni się z -1 
+na -2, a więc konieczna będzie rotacja względem tego wierzchołka, itd. Z tych 
+rozważań wynika, że w najgorszym przypadku jedno usunięcie etykiety może 
+spowodować &quot;lawinę&quot; kolejnych&nbsp; rotacji dla wszystkich wierzchołków wzdłuż 
+jednej ścieżki, od usuniętego wierzchołka do korzenia. Liczba rotacji może więc 
+być oszacowana przez O(lgn), dla drzewa o n wierzchołkach.</P>
+
+<p><b>Pytanie 4</B>: Co będzie etykietą korzenia drzewa AVL, jeśli zostało ono 
+utworzone przez kolejne wstawianie, do początkowo pustego drzewa, elementów 
+1,2,3,4,5,6,7,8,9,0, a następnie usunięcie etykiety, która znalazła się w 
+korzeniu drzewa? <BR>
+ 
+</P>
+
+<FORM>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'Etykieta 5.');"> </p>
+</form>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main08_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main08_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+</dir>
+</dir>
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

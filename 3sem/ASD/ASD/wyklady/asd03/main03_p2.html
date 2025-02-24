@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr-->
+<!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main03_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main03_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<p><a name="EDU.wyklad.punkt 3"></a><br clear="all">
+</p>
+<div class="tytulpunktu">2. Analiza kosztu ¶redniego</div>
+<p>W tym punkcie omówimy koszt ¶redni algorytmu min_max2. Zauwa¿my
+najpierw, ¿e dla ci±gu rosn±cego, algorytm w ka¿dej iteracji bêdzie
+wykonywa³ tylko jedno porównanie, stale poprawiaj±c warto¶æ aktualnego
+maksimum. Dla ci±gu malej±cego natomiast, algorytm stale bêdzie
+wykonywa³ dwa porównania, gdy¿ to w³a¶nie zmienna result.min, bêdzie za
+ka¿dym razem modyfikowana. Naszym zadaniem jest ustalenie ¶redniej
+liczby wykonanych porównañ.</p>
+<p><br>
+<a class="ODP" href="javascript:okno('odpowiedzi/odp3_2.html')">Zobacz
+algorytm min-max2</a></p>
+<p>Niech D(n) oznacza zbiór wszystkich danych rozmiaru n w pewnej
+dowolnie ustalonej strukturze, P(d) prawdopodobieñstwo wyst±pienia
+danej d<span lang="en"><font face="Symbol">Î</font></span>D(n) i t(d)
+koszt wykonania algorytmu min-max2 dla danych d, mierzony liczb±
+porównañ. Wtedy koszt ¶redni obliczymy ze wzoru:</p>
+<p style="text-align: center;">A(n) = <font face="Symbol" size="4">S</font><sub>d<span
+ lang="en"><font face="Symbol">Î</font></span>D(n)</sub> P(d)<font
+ face="Symbol"> <span lang="en">´</span></font> t(d).</p>
+<p>Jak zwykle bêdziemy zak³adali, ¿e prawdopodobieñstwo wyst±pienia
+danych d jest takie samo dla wszystkich elementów d zbioru D(n).</p>
+<p>Zauwa¿my, ¿e zachowanie algorytmu min_max2 nie zale¿y ani od typu
+elementów ci±gu, ani od ich konkretnej warto¶ci. To co jest istotne, to
+relacje<font face="Symbol"> </font>miêdzy elementami ci±gu. Zamiast
+wiêc rozwa¿aæ dowolne elementy, ograniczmy nasze rozwa¿ania do
+permutacji liczb naturalnych od 1 do n. Jak zwykle za³o¿ymy, ¿e
+wybranie konkretnych danych d, tzn. konkretnej permutacji, jest tak
+samo prawdopodobne, a wiêc, P(d) = 1/n!</p>
+<p>Policzmy teraz oczekiwan± liczbê porównañ wykonanych przez algorytm
+min_max2 dla dowolnie wybranej permutacji d. Pierwsze porównanie&nbsp;
+max <font face="Symbol"><span lang="en">&#163;</span> </font>e[i]
+wykonujemy przy ka¿dej iteracji pêtli. Natomiast test</p>
+<p style="text-align: center;">&nbsp;not (
+result.min<font face="Symbol"> <span lang="en">&#163;</span> </font>e[i]) </p>
+<p>wykonujemy tylko wtedy, gdy w pierwszym porównaniu odpowied¼ by³a
+negatywna, czyli gdy na pozycjach 1,2...,i-1 by³y elementy wiêksze od
+e[i].&nbsp; Dla ka¿dej permutacji d=(e[1],...,e[n]) wyznaczmy wiêc ci±g
+X[1],...,X[n] taki, ¿e X[i] mówi, ile jest elementów wiêkszych od e[i]
+na pozycjach od 1 do i-1 w ci±gu d. </p>
+<p> <b>Przyk³ad 2.1</b><br>
+Je¿eli d jest ci±giem (3,4,6,2,1,5,7), to odpowiadaj±cy mu ci±g X-ów ma
+postaæ ( 0,0,0,3,4,1,0), bo na wcze¶niejszych pozycjach nie ma
+elementów mniejszych od 3, nie ma elementów mniejszych od 4, ale a¿
+trzy elementy wiêksze poprzedzaj± 2 i a¿ cztery elementy wiêksze
+poprzedzaj± 1 itd. Zauwa¿my jeszcze, ¿e pozycje zer w ci±gu X
+odpowiadaj± wykonaniu tylko jednego porównania w algorytmie min_max2, a
+pozycje ró¿ne od zera odpowiadaj± wykonaniu przez nasz algorytm a¿
+dwóch porównañ.&nbsp;</p>
+Poniewa¿ ci±g X jest jednoznacznie wyznaczony dla ka¿dej permutacji,
+wiêc ró¿nych ci±gów X jest n! Oczywi¶cie na pozycji itej w ci±gu X mog±
+wyst±piæ tylko warto¶ci 0,1,...i-1, a prawdopodobieñstwo wyst±pienia
+ka¿dej z tych warto¶ci jest takie samo. Zatem P(X[i]=0) = 1/i, a w
+konsekwencji P(X[i]<font face="Symbol"><span lang="en">&#185;</span>
+</font>0) = 1-1/i.
+<p></p>
+<p>Dla ustalonych danych d, oczekiwana liczba wykonanych porównañ
+wynosi wiêc&nbsp; </p>
+<p style="text-align: center;">&nbsp;<font face="Symbol">S</font><sub>2<font
+ face="Symbol"><span lang="en">&#163;</span></font>i<font face="Symbol"><span
+ lang="en">&#163;</span></font>n</sub>(1 + 1*P(X[i] <font face="Symbol"><span
+ lang="en">&#185;</span> </font>0)) = n-1 + <font face="Symbol">S</font><sub>2<font
+ face="Symbol"><span lang="en">&#163;</span></font>i<font face="Symbol"><span
+ lang="en">&#163;</span></font>n</sub>(1*(1-1/i)) = n-1 + n - <font
+ face="Symbol">S</font><sub>1<font face="Symbol"><span lang="en">&#163;</span></font>i<font
+ face="Symbol"><span lang="en">&#163;</span></font>n</sub>1/i .</p>
+<p>Suma&nbsp; <font face="Symbol">S</font><sub>1<font face="Symbol"><span
+ lang="en">&#163;</span></font>i<font face="Symbol"><span lang="en">&#163;</span></font>n</sub>1/i&nbsp;
+to n-ta liczba harmoniczna H<sub><font face="Verdana">n</font></sub>.
+Grupuj±c odpowiednio wyrazy sumy mo¿na wykazaæ (por. <i>Invitation to
+Discrete Mathematics</i>, J.Matou<font face="Verdana">¹</font>ek, J.Ne<font
+ face="Verdana">¹</font>et<font face="Verdana">ø</font>il) , ¿e&nbsp; </p>
+<p style="text-align: center;">H<sub><font face="Verdana">n</font></sub>
+&gt;
+<span lang="en"><font face="Symbol">ë</font></span>lg n<span lang="en"><font
+ face="Symbol">&#251;</font></span>/2&nbsp; oraz H<sub><font face="Verdana">n</font></sub>
+<span lang="en">
+<font face="Symbol">&#163;</font></span>&nbsp; lg n<font face="Symbol"> +1</font>.</p>
+<p>&nbsp;Zatem ostatecznie, oczekiwan± liczbê porównañ dla danych d
+mo¿emy oszacowaæ przez&nbsp; 2n-1 - <span lang="en"><font face="Symbol">ë</font></span>lg
+n<span lang="en"><font face="Symbol">&#251;</font></span>/2 .</p>
+<p>
+</p>
+<div class="twier">
+<p>Twierdzenie 2.1</p>
+<p>¦redni koszt algorytmu min_max2 wyra¿a siê wzorem A(n) = 2n-1 - <span
+ lang="en"><font face="Symbol">ë</font></span>lg n<span lang="en"><font
+ face="Symbol">&#251;</font></span>/2&nbsp; dla dowolnych danych rozmiaru n.</p>
+</div>
+<p>W nastêpnych punktach tego wyk³adu poznamy algorytmy, które wykonuj±
+to samo zadanie z mniejszym, ni¿ algorytm min_max2, kosztem.</p>
+<p><b>Pytanie 2</b>: Dla pewnej permutacji e liczb od 1 do 7&nbsp;
+wyznaczono wektor X, w taki sposób, ¿e X[i] jest liczb± elementów
+wiêkszych od e[i] na lewo od e[i] (tak jak w rozwa¿aniach powy¿ej).
+Wiedz±c, ¿e wektor X=(0,0,2,2,1,0,3 ) wyznacz elementy ci±gu e. </p>
+<!-- <p>Odpowied¼: 3,6,1,2,5,7,4.</P> -->
+<form>
+  <p><input class="GUZIK" type="button" value="Zobacz algorytm min-max2"
+ name="Klik0" onclick="napis(this.form,'3,6,1,2,5,7,4');">
+  </p>
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main03_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main03_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

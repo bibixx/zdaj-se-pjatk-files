@@ -1,0 +1,1 @@
+java -jar -Dsun.java2d.noddraw=true MprTest.jar

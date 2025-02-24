@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main09_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main09_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all">
+<A NAME="EDU.wyklad.punkt 3"></A><br clear="all"><div class="tytulpunktu">
+3. Usuwanie minimum.</div>
+
+
+
+
+
+<p>Element minimalny, ze względu na porządek w zbiorze etykiet, znajduje się w korzeniu kopca. 
+Znalezienie elementu minimalnego nie przedstawia więc żadnego problemu. Jeśli 
+kopiec jest reprezentowany przez korzeń drzewa binarnego root typu node (por. 
+wykład VI p4.), to aby poznać wartość elementu minimalnego kopca,&nbsp; 
+wystarczy sprawdzić wartość atrybutu&nbsp; root.val.<p style="text-align: center">
+Et min(root : node){ return root.val;}.<p>Uzasadnienie, że operacja min zwraca 
+najmniejszą z etykiet przechowywanych w kopcu pozostawiamy Czytelnikowi.<p>
+Operacją, której poświęcimy więcej uwagi w tym punkcie, będzie operacja usuwania 
+minimum, delmin,<p style="text-align: center">
+delmin : Heap <font face="Symbol"><span lang="en">&reg;</span> </font>Heap,<p>polegająca na 
+usunięciu z kopca elementu najmniejszego. &nbsp; Ma ona następującą specyfikację: 
+dla dowolnego H<font face="Symbol"> <span lang="en">Î</span> </font>Heap i 
+dowolnego e <font face="Symbol"><span lang="en">Î</span> </font>Et,<p style="text-align: center">
+min(H) = e <font face="Symbol"><span lang="en">&reg;</span> (</font>min (delmin(H)) 
+&gt; e <font face="Symbol"><span lang="en">&Ugrave;</span>&nbsp; <span lang="en">&Oslash;</span></font> member(e, 
+delmin(H))).<p>Oczywiście, po wykonaniu tej operacji, powinniśmy otrzymać 
+również kopiec. Usunięcie elementu minimalnego chcemy wykonać tak, by w jak 
+najmniejszym stopniu modyfikować strukturę drzewa doskonałego. Nie możemy więc 
+po prostu usunąć wierzchołka znajdującego się w korzeniu drzewa. <p><b>Metoda</b><p>Niech x będzie liściem znajdującym się 
+najbardziej na prawo na ostatnim poziomie kopca H, tak jak zaznaczono na rysunku 
+9.4. Postępowanie składa się z trzech kroków:<ol>
+  <li>Zastąp etykietę korzenia drzewa H, etykietą wierzchołka x.</li>
+  <li>Usuń wierzchołek x z drzewa H.</li>
+  <li>Jeżeli tak otrzymane drzewo nie jest kopcem, to zaczynając od korzenia, 
+  zamieniaj etykietę wierzchołka z etykietą tego z jego synów, którego etykieta 
+  jest mniejsza, tak długo, aż otrzymane drzewo będzie kopcem.</li>
+  </ol>
+
+<p><center>
+  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="40%" id="AutoNumber3">
+    <tr>
+      <td width="100%">
+      <p align="center" style="text-align: center">
+      <img border="0" src="RYSUNKI/Rysunek9_4.gif" width="250" height="250"></td>
+    </tr>
+</table>
+</center>
+</p>
+
+  <p><b>Przykład 3.1</b><p>Rozważmy drzewo z rysunku 9.2(a). Prześledźmy proces 
+  usuwania etykiety korzenia tego drzewa. Kolejne fazy algorytmu są zilustrowane 
+  na rysunkach 9.4(a), (b), (c). W pierwszym kroku zapamiętamy etykietę liścia 
+  (na rysunku 9.4(a) zaznaczony wierzchołek z etykietą 12) znajdującego się na 
+  ostatnim poziomie drzewa, najbardziej na prawo, i umieścimy ją w korzeniu 
+  drzewa (usuwając w ten sposób etykietę 1). Otrzymane drzewo jest doskonałe, nie jest 
+  jednak częściowo uporządkowane. Uporządkowanie poprawimy, zamieniając etykietę 
+  wierzchołka z mniejszym z jego synów, tak jak zaznaczono na rysunku 9.4(b), i 
+  kontynuując ten proces w górę drzewa tak długo, aż otrzymamy drzewo częściowo uporządkowane. 
+  Wynik przedstawiono na rysunku 9.4(c).<p>&nbsp;<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="80%" id="AutoNumber2">
+    <tr>
+      <td width="33%">
+      <img border="0" src="RYSUNKI/Rysunek9_4a.gif" width="250" height="250"></td>
+      <td width="33%">
+      <img border="0" src="RYSUNKI/Rysunek9_4b.gif" width="250" height="250"></td>
+      <td width="34%">
+      <img border="0" src="RYSUNKI/Rysunek9_4c.gif" width="250" height="250"></td>
+    </tr>
+  </table>
+  <p><b>Koszt algorytmu delmin</b><p>Kroki 1 i 2 algorytmu mają stały koszt. W każdym 
+  kroku pętli 3, algorytm wykonuje co najwyżej dwa porównania (wybór najmniejszego z 
+  trzech elementów). Liczba iteracji jest równa długości przebytej ścieżki, a ta 
+w 
+  najgorszym przypadku jest równa wysokości drzewa. Koszt całkowity wykonania 
+operacji delmin możemy więc 
+  szacować z góry przez O(lg n).<p><b>Uwaga</b>. Podobnie, jak w przypadku 
+wstawiania, usuwanie minimum z drzewa-kopca sprawia trochę problemów. Chodzi o 
+znalezienie ostatniego liścia, tego, którego etykieta wędruje na miejsce 
+usuwanego minimum. Znów, jak w przypadku wstawiania, jedna referencja nie 
+wystarczy, bo po usunięciu jednego elementu, trzeba będzie ją uaktualnić (umieć 
+znów znaleźć ostatni liść). Zatem, byłoby najlepiej&nbsp; mieć referencje&nbsp; 
+do &quot;sąsiada&quot; z lewej w każdym wierzchołku. Ponadto potrzebne są 
+referencje do wierzchołka-ojca. Wszystko to wymaga dodatkowej pamięci 
+rzędu liczby przechowywanych elementów. Inną, bardziej oszczędną,&nbsp; implementację tego algorytmu 
+poznamy w punkcie czwartym wykładu.</p>
+<p><b>Pytanie 3</B>:&nbsp; Czy koszt algorytmu delmin, zastosowanego do kopca o 
+2<sup><font face="Verdana">k</font></sup> wierzchołkach, można oszacować z góry przez 2*k 
+? 
+<!-- <p>Odpowiedź: TAK.</P> -->
+
+
+<p>&nbsp;<FORM>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'Tak, bo wysokość kopca zależy logarytmicznie od liczby elementów.');">
+</p>
+</form>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main09_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main09_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

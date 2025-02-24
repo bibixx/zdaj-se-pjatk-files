@@ -1,0 +1,545 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr-->
+<!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main01_p6.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main01_cw.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 7"></a><br clear="all">
+<div class="tytulpunktu" style="width: 903px; height: 17px;">&nbsp;7.
+Problem optymalno¶ci</div>
+<p>Niech P bêdzie ustalonym problemem, a K klas± wszystkich algorytmów
+rozwi±zuj±cych ten problem (rozwa¿amy tu wszystkie algorytmy, nawet
+je¶li ich wszystkich nie znamy), stosuj±c ten sam typ operacji
+dominuj±cych oraz ten sam&nbsp; ustalony typ organizacji danych. Chcemy
+poznaæ najlepszy, tzn. najmniej kosztowny, algorytm tej klasy
+rozwi±zuj±cy problem P.</p>
+<p>
+Definiujemy z³o¿ono¶æ optymaln± klasy K, jako kres dolny z³o¿ono¶ci
+algorytmów z tej klasy. Powiemy, ¿e algorytm Alg jest optymalny w
+klasie K, je¿eli jego z³o¿ono¶æ jest równa z³o¿ono¶ci optymalnej.</p>
+<p>
+W konsekwencji algorytm Alg z klasy K jest optymalny, je¿eli nie
+istnieje w tej klasie algorytm Alg' rozwi±zuj±cy problem P zu¿ywaj±c
+mniej operacji dominuj±cych ni¿ Alg.</p>
+<p>
+<b>Przyk³ad 7.1</b></p>
+<p>
+Rozwa¿my problem znalezienia elementu najmniejszego w danym zbiorze.
+Danymi do tego algorytmu jest skoñczony ci±g x elementów dowolnej
+liniowo uporz±dkowanej przestrzeni oraz jego d³ugo¶æ n.</p>
+<p> </p>
+<div class="przyk" style="width: 510px; height: 178px;">
+<table frame="void" rules="none" width="464" height="143"
+ style="border-collapse: collapse;" bordercolor="#111111"
+ cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td width="50" height="12"> min<b>{</b></td>
+      <td width="403" height="12">&nbsp; </td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <br>
+      </td>
+      <td width="403" height="16"> <strong>&nbsp;</strong>result := x<sub>1</sub>;
+i := 2;&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <br>
+      </td>
+      <td width="403" height="16"> &nbsp;<b>while</b> (i <font
+ face="Symbol"> &#163; </font>n) <b>do </b></td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <br>
+      </td>
+      <td width="403" height="16"> <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if</b> not (result <font face="Symbol"> &#163;</font> x<sub>i</sub>) <b>then
+      </b> result := x<sub>i</sub> <b>fi</b>; </td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <br>
+      </td>
+      <td width="403" height="16"> <strong>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>i := i+1</td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <br>
+      </td>
+      <td width="403" height="16"> <strong> od </strong></td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <strong> } </strong> </td>
+      <td width="403" height="16"> <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>
+Niech K bêdzie teraz klas± wszystkich algorytmów rozwi±zuj±cych problem
+znajdowania minimum ci±gu przez porównywanie elementów. Nasz algorytm
+min, dla ci±gu n elementowego, wykonuje dok³adnie n-1 porównañ. Czy w
+klasie K znajdzie siê algorytm wykonuj±cy mniej porównañ? Twierdzimy,
+¿e w ka¿dym algorytmie klasy K, ka¿dy element ró¿ny od minimalnego musi
+byæ co najmniej raz porównany z elementem minimalnym. Przypu¶æmy, ¿e
+tak nie jest, tzn. przypu¶æmy, ¿e w klasie K istnieje taki algorytm
+min*, który znajduje element minimalny MIN bez porównywania go np. z
+elementem&nbsp; na pozycji&nbsp; i0. Zmodyfikujmy dane do tego
+algorytmu, tak by na pozycji i0 znalaz³ siê jaki¶ element mniejszy od
+MIN. Algorytm min* dla takich danych nie da poprawnego wyniku. Nie mo¿e
+wiêc nale¿eæ do rozwa¿anej klasy K.</p>
+<p>
+<b>Wniosek</b>: Algorytm min jest optymalnym rozwi±zaniem problemu
+znajdowania elementu najmniejszego ci±gu przez porównywanie elementów.
+Z³o¿ono¶æ optymalna dla tego problemu wyra¿a siê funkcj± T(n) = n-1.</p>
+<p>
+Dla wielu problemów nie mo¿emy okre¶liæ dok³adnie z³o¿ono¶ci
+optymalnej, ale za to mo¿na ustaliæ jej rz±d wielko¶ci. W takim
+przypadku, algorytm A klasy K jest optymalny, je¶li jego z³o¿ono¶æ ma
+rz±d mniejszy b±d¼ równy z³o¿ono¶ci wszystkich innych algorytmów tej
+klasy. Oczywi¶cie w klasie K mo¿e byæ wiele ró¿nych algorytmów
+optymalnych.</p>
+<p>
+W tym cyklu wyk³adów przedstawimy kilka przyk³adów problemów, dla
+których znane s± optymalne algorytmy rozwi±zywania. Na ogó³ s± to
+zadania bardzo trudne i wiele problemów nadal czeka na swoje najlepsze
+rozwi±zanie.</p>
+<p>
+<b>Przyk³ad 7.2</b></p>
+<p> Rozwa¿my problem mno¿enia macierzy. Dane s± dwie macierze A i B,
+odpowiednio rozmiarów (n×u) i (u'×m). Znale¼æ macierz C = A×B. Niech
+elementy macierzy A, B, C bêd± oznaczone odpowiednio przez a[i,j],
+b[i,j], c[i,j]. Specyfikacja algorytmu rozwi±zuj±cego ten problem mo¿e
+mieæ postaæ nastêpuj±cych warunków:</p>
+<p style="text-align: center;"> wp = {u'=u}, &nbsp;&nbsp; wk = {c[i,j]
+=
+<font face="Symbol">S</font>{a[i,k]<font face="Symbol"> <span lang="en">´</span>
+</font>b[k,j]:1<font face="Symbol"> <span lang="en">&#163;</span> </font>k<font
+ face="Symbol">
+<span lang="en">&#163;</span> </font>u} dla i=1,...,n, j=1,...,m}.</p>
+<p style="text-align: left;"> Dla uproszczenia, za³ó¿my ¿e rozwa¿amy
+macierze o elementach rzeczywistych. Jako operacjê dominuj±c±
+przyjmiemy operacjê mno¿enia liczb rzeczywistych.</p>
+<p style="text-align: left;"> <u>Rozwi±zanie 1</u>: Pierwsze
+rozwi±zanie wykorzystuje wprost definicjê mno¿enia macierzy.</p>
+<p> </p>
+<div class="przyk" style="width: 510px; height: 178px;">
+<table frame="void" rules="none" width="464" height="143"
+ style="border-collapse: collapse;" bordercolor="#111111"
+ cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td width="50" height="12"> MnM<b>_1{</b></td>
+      <td width="403" height="12">&nbsp; </td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <br>
+      </td>
+      <td width="403" height="16"> <strong>&nbsp;</strong><b>for </b>i
+:= 1<b> to </b>n<b> do</b></td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <br>
+      </td>
+      <td width="403" height="16"> &nbsp;<b>for </b>j := 1<b> to </b>m<b>&nbsp;
+do</b></td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <br>
+      </td>
+      <td width="403" height="16">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c[i,j] := 0;</td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <br>
+      </td>
+      <td width="403" height="16"> <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </b>&nbsp;<b>for </b> k := 1<b> to </b>u<b>&nbsp; do</b></td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <br>
+      </td>
+      <td width="403" height="16"> <strong>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+c[i,j] := c[i,j] + a[i,k]<font face="Symbol"> <span lang="en">´</span>
+      </font>b[k,j] </td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <br>
+      </td>
+      <td width="403" height="16"> <strong>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; od </strong></td>
+    </tr>
+    <tr>
+      <td width="50" height="16"> <strong> &nbsp;</strong></td>
+      <td width="403" height="16"> <strong> od od}</strong></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>Koszt czasowy tego algorytmu mierzony ilo¶ci± mno¿eñ wyra¿a siê
+funkcj±&nbsp; T(n,m,u) = n<font face="Symbol"><span lang="en">´</span></font>m<font
+ face="Symbol"><span lang="en">´</span></font>u. Koszt pamiêciowy
+natomiast wyra¿a siê funkcj±&nbsp; S(n,m,u) = n<font face="Symbol"> <span
+ lang="en">´</span> </font>u + m<font face="Symbol">
+<span lang="en">´</span> </font>u + n<font face="Symbol"> <span
+ lang="en">´</span>
+</font>m. Je¶li przyjmiemy, ¿e&nbsp; m = u = O(n), wtedy asymptotyczna
+z³o¿ono¶æ czasowa i pamiêciowa wyra¿aj± siê odpowiednio przez funkcje </p>
+<p style="text-align: center;">T(n) = O(n<sup><font face="Verdana">3</font></sup>)
+i S(n) = O(n<sup><font face="Verdana">2</font></sup>).</p>
+<p style="text-align: left;">Czy istnieje algorytm mno¿enia macierzy,
+którego koszt by³by mniejszy?</p>
+<p> <u>Rozwi±zanie 2</u>:</p>
+<p> Idea tego algorytmu polega na podzieleniu zadania na podzadania.
+Za³ó¿my, ¿e n = m = u = 2<sup><font face="Verdana">k</font></sup>.
+Macierze A i B mo¿na przedstawiæ jako macierz (2×2) o elementach
+bêd±cych macierzami o wymiarach (n/2×n/2). Oznaczmy te czê¶ci macierzy
+A przez A<sub><font face="Verdana">11,
+</font></sub>A<sub><font face="Verdana">12</font></sub>, A<sub><font
+ face="Verdana">21</font></sub>,<font face="Verdana"><sub>
+</sub></font>A<sub><font face="Verdana">22</font></sub>. Analogicznie
+s± zdefiniowane elementy macierze B<sub><font face="Verdana">ij</font></sub>.
+</p>
+<p> </p>
+<center>
+<table frame="void" rules="none" width="367" height="125"
+ style="border-collapse: collapse;" bordercolor="#111111"
+ cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td width="174" height="1">
+      <table border="1" cellpadding="0" cellspacing="0"
+ style="border-width: 1px; border-collapse: collapse; border-left-style: solid;"
+ bordercolor="#111111" width="68%" id="AutoNumber4" height="109">
+        <tbody>
+          <tr>
+            <td width="16%" height="56">
+            <p align="center" style="text-align: center;">A<sub><font
+ face="Verdana">11</font></sub></p>
+            </td>
+            <td width="16%" height="56">
+            <p align="center" style="text-align: center;">A<sub><font
+ face="Verdana">12</font></sub></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="16%" align="center" height="52">A<sub><font
+ face="Verdana">21</font></sub></td>
+            <td width="16%" align="center" height="52">
+            <p align="center" style="text-align: center;">A<sub><font
+ face="Verdana">22</font></sub></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+      <td width="174" height="1">
+      <table border="1" cellpadding="0" cellspacing="0"
+ style="border-width: 1px; border-collapse: collapse; border-left-style: solid;"
+ bordercolor="#111111" width="68%" id="AutoNumber4" height="109">
+        <tbody>
+          <tr>
+            <td width="16%" height="56">
+            <p align="center" style="text-align: center;">B<sub><font
+ face="Verdana">11</font></sub></p>
+            </td>
+            <td width="16%" height="56">
+            <p align="center" style="text-align: center;">B<sub><font
+ face="Verdana">12</font></sub></p>
+            </td>
+          </tr>
+          <tr>
+            <td width="16%" align="center" height="52">B<sub><font
+ face="Verdana">21</font></sub></td>
+            <td width="16%" align="center" height="52">
+            <p align="center" style="text-align: center;">B<sub><font
+ face="Verdana">22</font></sub></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</center>
+<p> Wtedy iloczyn C macierzy A i B mo¿e byæ przedstawiony równie¿ jako
+macierz (2×2) o elementach C<sub><font face="Verdana">ij</font></sub>&nbsp;bêd±cych
+macierzami o wymiarach&nbsp; (n/2×n/2). Macierze C<sub><font
+ face="Verdana">ij</font></sub> dla i,j=1,2 mo¿na wyliczyæ korzystaj±c
+z definicji mno¿enia macierzy (2×2):</p>
+<p style="text-align: center;"> C<sub><font face="Verdana">11</font></sub>
+= A<sub><font face="Verdana">11</font></sub><font face="Symbol"> <span
+ lang="en">´</span>
+</font>B<sub><font face="Verdana">11 </font></sub>+ A<sub><font
+ face="Verdana">12</font></sub><font face="Symbol"> <span lang="en">´</span>
+</font>
+B<sub><font face="Verdana">21</font></sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+C<sub><font face="Verdana">12</font></sub> = A<sub><font face="Verdana">11</font></sub><font
+ face="Symbol">
+<span lang="en">´</span> </font>B<sub><font face="Verdana">12</font></sub>
++ A<sub><font face="Verdana">12</font></sub><font face="Symbol"> <span
+ lang="en">´</span>
+</font>B<sub><font face="Verdana">22</font></sub><br>
+C<sub><font face="Verdana">21</font></sub> = A<sub><font face="Verdana">21</font></sub><font
+ face="Symbol"> <span lang="en">´</span> </font>B<sub><font
+ face="Verdana">11
+</font></sub>+ A<sub><font face="Verdana">22</font></sub><font
+ face="Symbol">
+<span lang="en">´</span> </font>B<sub><font face="Verdana">21</font></sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+C<sub><font face="Verdana">22</font></sub> = A<sub><font face="Verdana">21</font></sub><font
+ face="Symbol">
+<span lang="en">´</span> </font>B<sub><font face="Verdana">12</font></sub>
++ A<sub><font face="Verdana">22</font></sub><font face="Symbol"> <span
+ lang="en">´</span>
+</font>B<sub><font face="Verdana">22</font></sub></p>
+<p> Proste sprawdzenie dowodzi, ¿e tak otrzymana macierz C jest
+iloczynem macierzy oryginalnych A i B. </p>
+<p>Przedstawiony poni¿ej algorytm rekurencyjny wykorzystuje pomys³
+dzielenia macierzy, które chcemy pomno¿yæ, na cztery czê¶ci, tak d³ugo
+a¿ otrzymamy macierzy jednoelementowe. Aby unikn±æ tworzenia macierzy
+pomocniczych w ka¿dym wywo³aniu rekurencyjnym procedury, wyniki
+po¶rednie bêd± od razu zapisywane w wynikowej tablicy C.&nbsp;
+Otrzymamy w ten sposób nastêpuj±cy algorytm:</p>
+<p> </p>
+<div class="przyk" style="width: 844px; height: 347px;">
+<table frame="void" rules="none" width="818" height="269"
+ style="border-collapse: collapse;" bordercolor="#111111"
+ cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td width="59" height="25"> &nbsp;MnRek</td>
+      <td width="409" height="25">(n,i,j,k,l: int){&nbsp; </td>
+      <td width="662" height="25">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="59" height="24"> <br>
+      </td>
+      <td width="409" height="24"> <strong>&nbsp;</strong><b>if</b>
+n&gt;1 <b>then </b></td>
+      <td width="662" height="24"> &nbsp;</td>
+    </tr>
+    <tr>
+      <td width="59" height="27"> <br>
+      </td>
+      <td width="409" height="27"> &nbsp;&nbsp;&nbsp; MnRek(n/2, i, j
+,k, l); </td>
+      <td width="662" height="27"> // C<sub><font face="Verdana">il</font></sub>
+:= A<font face="Verdana"><sub>ij</sub></font><font face="Symbol"> <span
+ lang="en">´</span>
+      </font>B<sub><font face="Verdana">kl</font></sub></td>
+    </tr>
+    <tr>
+      <td width="59" height="27"> <br>
+      </td>
+      <td width="409" height="27"> &nbsp;&nbsp;&nbsp; MnRek(n/2, i,
+j+n/2, k+n/2,l);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+      <td width="662" height="27"> // C<sub><font face="Verdana">il</font></sub>
+:= A<sub><font face="Verdana">ij</font></sub><font face="Symbol"> <span
+ lang="en">´</span>
+      </font>B<sub><font face="Verdana">kl </font></sub>+ A<sub><font
+ face="Verdana">i(j+n/2)</font></sub><font face="Symbol"> <span
+ lang="en">´</span> </font> B<sub><font face="Verdana">(k+n/2)l</font></sub></td>
+    </tr>
+    <tr>
+      <td width="59" height="27"> <br>
+      </td>
+      <td width="409" height="27"> &nbsp;&nbsp;&nbsp; MnRek(n/2, i, j,
+k, l+n/2); <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b>&nbsp;
+      </td>
+      <td width="662" height="27"> //&nbsp; C<sub><font face="Verdana">i(l+n/2)</font></sub>
+:= A<font face="Verdana"><sub>ij</sub></font><font face="Symbol"> <span
+ lang="en">´</span>
+      </font>B<sub><font face="Verdana">k(l+n/2) </font></sub>&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="59" height="27"> <br>
+      </td>
+      <td width="409" height="27"> &nbsp;&nbsp;&nbsp; MnRek(n/2, i,
+j+n/2, k+n/2, l+n/2); </td>
+      <td width="662" height="27"> // C<sub><font face="Verdana">i(l+n/2)</font></sub>
+:= A<font face="Verdana"><sub>ij</sub></font><font face="Symbol"> <span
+ lang="en">´</span>
+      </font>B<sub><font face="Verdana">k(l+n/2) </font></sub>+ A<sub><font
+ face="Verdana">i(j+n/2)</font></sub><font face="Symbol"> <span
+ lang="en">´</span> </font> B<sub><font face="Verdana">(k+n/2)(l+n/2)</font></sub></td>
+    </tr>
+    <tr>
+      <td width="59" height="25"> <br>
+      </td>
+      <td width="409" height="25"> &nbsp;&nbsp;&nbsp; MnRek(n/2, i+n/2,
+j, k, l); </td>
+      <td width="662" height="25"> // C<sub><font face="Verdana">(i+n/2)l</font></sub>
+:= A<font face="Verdana"><sub>(i+n/2)j</sub></font><font face="Symbol">
+      <span lang="en">´</span>
+      </font>B<sub><font face="Verdana">kl</font></sub></td>
+    </tr>
+    <tr>
+      <td width="59" height="26"> <br>
+      </td>
+      <td width="409" height="26"> &nbsp;&nbsp;&nbsp; MnRek(n/2, i+n/2,
+j+n/2, k+n/2, l); </td>
+      <td width="662" height="26"> // C<sub><font face="Verdana">(i+n/2)l</font></sub>
+:= A<font face="Verdana"><sub>(i+n/2)j</sub></font><font face="Symbol">
+      <span lang="en">´</span>
+      </font>B<sub><font face="Verdana">kl </font></sub>+ A<sub><font
+ face="Verdana">(i+n/2)(j+n/2)</font></sub><font face="Symbol"> <span
+ lang="en">´</span> </font> B<sub><font face="Verdana">(k+n/2)l</font></sub></td>
+    </tr>
+    <tr>
+      <td width="59" height="27"> <br>
+      </td>
+      <td width="409" height="27"> &nbsp;&nbsp;&nbsp; MnRek(n/2, i+n/2,
+j, k, l+n/2); </td>
+      <td width="662" height="27"> // C<sub><font face="Verdana">(i+n/2)(l+n/2)</font></sub>
+:= A<font face="Verdana"><sub>(i+n/2)j</sub></font><font face="Symbol">
+      <span lang="en">´</span>
+      </font>B<sub><font face="Verdana">k(l+n/2) </font></sub> </td>
+    </tr>
+    <tr>
+      <td width="59" height="28"> <br>
+      </td>
+      <td width="409" height="28"> &nbsp;&nbsp;&nbsp; MnRek(n/2, i+n/2,
+j+n/2, k+n/2, l+n/2);</td>
+      <td width="662" height="28"> //C<sub><font face="Verdana">(i+n/2)(l+n/2)</font></sub>
+:= A<font face="Verdana"><sub>(i+n/2)j</sub></font><font face="Symbol">
+      <span lang="en">´</span>
+      </font>B<sub><font face="Verdana">k(l+n/2) </font></sub>+ A<sub><font
+ face="Verdana">(i+n/2)(j+n/2)</font></sub><font face="Symbol"> <span
+ lang="en">´</span> </font> B<sub><font face="Verdana">(k+n/2)(l+n/2)</font></sub></td>
+    </tr>
+    <tr>
+      <td width="59" height="22"> <br>
+      </td>
+      <td width="409" height="22"> <strong> else
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td width="662" height="22"> &nbsp;</td>
+    </tr>
+    <tr>
+      <td width="59" height="24"> <br>
+      </td>
+      <td width="409" height="24"> <strong>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong>C[i,l] :=
+C[i,l] + A[i,j] <font face="Symbol"> <span lang="en">´</span>
+      </font>B[k,l]</td>
+      <td width="662" height="24"> &nbsp;</td>
+    </tr>
+    <tr>
+      <td width="59" height="21"> <strong> &nbsp;</strong></td>
+      <td width="409" height="21"> <b>fi</b>}</td>
+      <td width="662" height="21"> &nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>Parametry i, j okre¶laj± lewy górny róg tego fragmentu macierzy A, a
+parametry k, l - lewy górny róg tego fragmentu macierzy B, które maj±
+zostaæ pomno¿one. Parametr n mówi o wymiarze mno¿onych macierzy.
+Algorytm wywo³any dla parametrów (2<sup><font face="Verdana">k</font></sup>,
+1, 1, 1, 1) daje poprawne wyniki, przy za³o¿eniu, ¿e pocz±tkowe
+warto¶ci w tablicy C s± zerami. </p>
+<p>Przeanalizujmy koszt zwi±zany z realizacj± tego algorytmu. Niech
+M(k) bêdzie liczb± mno¿eñ liczb rzeczywistych wykonanych przez algorytm
+MnRek dla rozwi±zania zadania o rozmiarze n = 2<sup><font face="Verdana">k</font></sup>.
+Je¶li mno¿one tablice maj± tylko po jednym elemencie, to algorytm
+wykona tylko jedno mno¿enie rzeczywiste. Je¶li n&gt;1, to wykonujemy 8
+mno¿eñ macierzy dwa razy mniejszych. St±d równanie rekurencyjne
+opisuj±ce funkcjê M(k):</p>
+<blockquote>
+  <blockquote>
+    <ul type="square">
+      <li>
+        <p style="text-align: left;"> M(MnRek, 0) = 1 </p>
+      </li>
+      <li>
+        <p style="text-align: left;"> M(MnRek, k) = 8<font face="Symbol">
+        <span lang="en">
+´</span> </font>M(MnRek, k-1) dla k&gt;0</p>
+      </li>
+    </ul>
+  </blockquote>
+</blockquote>
+<p> Rozwi±zaniem tego równania jest funkcja&nbsp; M(MnRek, k) = 8 <sup><font
+ face="Verdana">k </font></sup>= 2<sup><font face="Verdana">3k</font></sup>
+= n<sup><font face="Verdana">3</font></sup>. </p>
+<p> Niestety nie widaæ poprawy w stosunku do poprzedniego algorytmu.
+Jednak idea zawarta w tym algorytmie pozwoli³a zaprojektowaæ inny, i
+jak siê okaza³o teoretycznie lepszy, algorytm mno¿enia macierzy.</p>
+<p> Strassen zauwa¿y³, ¿e kosztem wiêkszej liczby dodawañ, mno¿enie
+macierzy (2×2) mo¿na zrealizowaæ wykonuj±c tylko 7 mno¿eñ, a nie jak
+dotychczas 8. £±cz±c pomys³ Strassena i ideê dzielenia du¿ych macierzy
+na 4 czê¶ci (zak³adamy ponownie, ¿e n=2<sup><font face="Verdana">k</font></sup>),
+tak jak w algorytmie MnRek, otrzymamy inny rekurencyjny algorytm,
+nazwijmy go Strassen, dla którego liczbê wykonanych mno¿eñ opisuje
+funkcja&nbsp; M(Strassen, k):</p>
+<blockquote>
+  <blockquote>
+    <ul type="square">
+      <li>
+        <p style="text-align: left;"> M(Strassen, 0) = 1 </p>
+      </li>
+      <li>
+        <p style="text-align: left;"> M(Strassen, k) = 7<font
+ face="Symbol">
+        <span lang="en">´</span> </font>M(Strassen, k-1) dla k&gt;0</p>
+      </li>
+    </ul>
+  </blockquote>
+</blockquote>
+<p> Rozwi±zaniem tego równania rekurencyjnego jest funkcja&nbsp;&nbsp;
+T(Strassen,k) = 7<sup><font face="Verdana">k</font></sup> , czyli
+ostatecznie T(Strassen,n) = 7<sup><font face="Verdana">lg n</font></sup>
+= n<sup><font face="Verdana">lg 7</font></sup>.</p>
+<p>Z³o¿ono¶æ czasowa algorytmu Strassena jest wiêc mniejsza ni¿
+pozosta³ych, co wiêcej rz±d wielko¶ci funkcji T(Strassen,n) jest
+istotnie mniejszy ni¿ n<sup><font face="Verdana">3</font></sup>.
+Powstaje pytanie, czy istnieje algorytm wykonuj±cy mniej mno¿eñ ni¿
+algorytm Strassena?<br>
+Wiadomo, ¿e ka¿dy algorytm mno¿enia macierzy n×n musi wykonaæ co
+najmniej n<sup><font face="Verdana">2</font></sup> mno¿eñ, tzn.
+z³o¿ono¶æ czasowa ka¿dego algorytmu rozwi±zuj±cego problem mno¿enia
+macierzy jest T(n) =<font face="Symbol"> W</font>(n<sup><font
+ face="Verdana">2</font></sup>). Nie znamy jednak ¿adnego algorytmu,
+który realizuje to ograniczenie dolne. Problem znalezienia algorytmu
+optymalnego dla problemu mno¿enia macierzy jest ci±gle otwarty.</p>
+<br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main01_p6.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main01_cw.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+</body>
+</html>

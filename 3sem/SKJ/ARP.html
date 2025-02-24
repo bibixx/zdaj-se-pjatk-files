@@ -1,0 +1,170 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="pl">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<title>ARP (protokół komunikacyjny)</title>
+</head>
+
+<body bgcolor="#ffffff">
+
+<p align="center"><font face="Microsoft Sans Serif"><b>ARP</b> (protokół komunikacyjny)</p>
+</font><font face="Microsoft Sans Serif" size="2">
+<p align="left"><b>ARP</b> (ang. Address Resolution Protocol) - protokół komunikacyjny przekształcania adresów IP
+(ustalanych autorytarnie przez użytkownika/administratora) na fizyczne, 48-bitowe adresy MAC (przypisane fizycznie m.in. do kart sieciowych) w
+komputerowych sieciach lokalnych typu Ethernet.<br><br>
+Każdy komputer w sieci powinien posiadać tzw. tablicę ARP. Znajduje się w niej adres IP i przypisany do niego adres MAC. Dzięki temu komputery mogą się ze sobą
+komunikować za pośrednictwem adresu MAC, ale tylko w obrębie danej sieci LAN. Jeśli jakieś informacje mają być przesłane do innej sieci (lub podsieci w sieci
+złożonej, sieci oddzielonej routerem, itp.), to adres MAC musi być zastąpiony adresem IP.<br><br>
+ARP jest protokołem pracującym na drugiej warstwie modelu ISO/OSI, czyli warstwie łącza danych, ponieważ pracuje ona na ramkach i może je analizować tzn.
+np. sprawdzać ich poprawność.</p>
+<p align="left"><b>Zasada działania:</b><br>
+<br>
+ARP działa w następujący sposób:<br>
+<br>
+1. Utworzenie pakietu z szukanym adresem IP.<br>
+2. Wysłanie pakietu w obrębie danej sieci.<br>
+3. Wysłany pakiet odbierają wszystkie hosty podłączone do sieci. Jako jedyny odpowiada host o szukanym IP - przesyła pakiet z odpowiedzią zawierającą adres MAC.<br>
+4. Host szukający po podebraniu pakietu z szukanym adresem MAC zapisuje go w pamięci podręcznej, dzięki czemu nie musi później szukać jeszcze raz tego samego adresu.<br><br>
+Często po podłączeniu do sieci host rozsyła zapytanie ARP o własny adres. Odpowiedzi nie będzie (gdyż nie mogą byż w danej sieci dwa komputery o tym samym IP)
+ale każdy inny host może zapisać w pamięci podręcznej dane o nowym hoście przyłączonym do sieci.</p>
+<p align="left"><u>Zad. 1</u></p>
+<p align="center"><img border="0" src="arp1.gif" width="600" height="181"></p>
+<p>Co się stanie po wykonaniu komendy:<br>
+<font face="Lucida Console" size="2"><br>
+ping 192.168.1.1</font></p>
+
+<table border="1" width="100%" id="tabela">
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2"><b>ŹRÓDŁO</b></font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2"><b>IP ŹRÓDŁA</b></font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2"><b>CEL</b></font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2"><b>IP CELU</b></font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2"><b>TREŚĆ</b></font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 01</font></td>
+		<td align="center"><hr width="80%"></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">FF</font></td>
+		<td align="center"><hr width="80%"></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">ARP REQ 192.168.0.254</font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 02</font></td>
+		<td align="center"><hr width="80%"></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 01</font></td>
+		<td align="center"><hr width="80%"></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">ARP REP MAC: 02</font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 01</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.0.1</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 02</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.1.1</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">ECHO REQ</font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 03</font></td>
+		<td align="center"><hr width="80%"></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">FF</font></td>
+		<td align="center"><hr width="80%"></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">ARP REQ 192.168.1.1</font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 04</font></td>
+		<td align="center"><hr width="80%"></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 03</font></td>
+		<td align="center"><hr width="80%"></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">ARP REP MAC: 04</font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 03</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.0.1</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 04</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.1.1</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">ECHO REQ</font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 04</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.1.1</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 03</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.0.1</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">ECHO REP</font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 02</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.1.1</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 01</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.0.1</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">ECHO REP</font></td>
+	</tr>
+</table>
+
+<p align="right"><font face="Microsoft Sans Serif" size="1">REQ = RQ = REQUEST<br>
+REP = RP = REPLY<br>
+GW = GATEWAY</font></p>
+
+<p align="left"><u>Zad. 2</u></p>
+<p align="center"><img border="0" src="arp2.gif" width="600" height="328"></p>
+<p>Co się stanie po wykonaniu komendy:<br>
+<font face="Lucida Console" size="2"><br>
+ping www.pjwstk.edu.pl</font></p>
+
+<table border="1" width="100%" id="tabela">
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2"><b>ŹRÓDŁO</b></font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2"><b>IP ŹRÓDŁA</b></font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2"><b>CEL</b></font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2"><b>IP CELU</b></font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2"><b>TREŚĆ</b></font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 01</font></td>
+		<td align="center"><hr width="80%"></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">FF</font></td>
+		<td align="center"><hr width="80%"></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">ARP REQ 192.168.0.2</font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 02</font></td>
+		<td align="center"><hr width="80%"></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 01</font></td>
+		<td align="center"><hr width="80%"></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">ARP REP MAC: 02</font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 01</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.0.1</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 02</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.0.2</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">DNS REQ
+		www.pjwstk.edu.pl</font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 02</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.0.2</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 01</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.0.1</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">DNS REP 192.168.0.3</font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 01</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.0.1</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 03</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.0.3</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">ECHO REQ</font></td>
+	</tr>
+	<tr>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 03</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.0.3</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">MAC: 01</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">192.168.0.1</font></td>
+		<td align="center"><font face="Microsoft Sans Serif" size="2">ECHO REP</font></td>
+	</tr>
+</table>
+
+<p align="right"><font face="Microsoft Sans Serif" size="1">REQ = RQ = REQUEST<br>
+REP = RP = REPLY</font></p>
+
+</body>
+</html>

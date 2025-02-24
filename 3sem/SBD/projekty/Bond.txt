@@ -1,0 +1,241 @@
+set serveroutput on
+exec dbms_output.enable(60000);
+drop table people;
+drop table locations;
+drop table federations;
+drop table specialities;
+drop table martial_arts;
+drop table salary_grade;
+
+create table federations
+(
+id_fed number(4) not null,
+name varchar(30),
+formula varchar(20),
+champs_per_year number(4),
+PRIMARY KEY(id_fed)
+);
+
+create table specialities
+(
+id_spec number(4) not null,
+spec_name varchar(30),
+origin varchar(30),
+PRIMARY KEY(id_spec)
+);
+
+create table locations
+(
+id_loc number(4) not null, 
+city varchar(30), 
+federation number(4), 
+PRIMARY KEY(id_loc),
+FOREIGN KEY(federation) REFERENCES federations(id_fed)
+);
+
+
+create table people
+(
+id_p number(4) not null, 
+surename varchar2(50) not null, 
+name varchar2(20),
+status varchar2(10),
+location number,
+speciality number,
+sal number,
+hiredate date,
+PRIMARY KEY(id_p),
+FOREIGN KEY(location) REFERENCEs locations(id_loc),
+FOREIGN KEY(speciality) REFERENCES specialities(id_spec)
+);
+
+create table martial_arts
+(
+id_ma number(4) not null, 
+loc number(4), 
+spec number(4), 
+PRIMARY KEY(id_ma),
+FOREIGN KEY(loc) REFERENCES locations(id_loc),
+FOREIGN KEY(spec) REFERENCES specialities(id_spec)
+);
+
+create table salary_grade
+(
+id_salg number(4) not null,
+job varchar(20), 
+high number, 
+low number, 
+PRIMARY KEY(id_salg)
+);
+
+
+
+CREATE OR REPLACE TRIGGER auto_id
+BEFORE INSERT ON people
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(id_p)+1,1)
+INTO :NEW.id_p
+FROM people;
+END;
+/
+
+CREATE OR REPLACE TRIGGER auto_id2
+BEFORE INSERT ON locations
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(id_loc)+1,1)
+INTO :NEW.id_loc
+FROM locations;
+END;
+/
+
+CREATE OR REPLACE TRIGGER auto_id3
+BEFORE INSERT ON federations
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(id_fed)+1,1)
+INTO :NEW.id_fed
+FROM federations;
+END;
+/
+
+CREATE OR REPLACE TRIGGER auto_id4
+BEFORE INSERT ON specialities
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(id_spec)+1,1)
+INTO :NEW.id_spec
+FROM specialities;
+END;
+/
+
+CREATE OR REPLACE TRIGGER auto_id5
+BEFORE INSERT ON martial_arts
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(id_ma)+1,1)
+INTO :NEW.id_ma
+FROM martial_arts;
+END;
+/
+
+CREATE OR REPLACE TRIGGER auto_id6
+BEFORE INSERT ON salary_grade
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(id_salg)+1,1)
+INTO :NEW.id_salg
+FROM salary_grade;
+END;
+/
+
+
+create or replace trigger sknerus
+after update or insert on people
+for each row
+Begin
+if(:NEW.sal>7000)
+then 
+DBMS_output.put_line('Too high salary');
+END IF;
+End;
+/
+
+
+create or replace trigger sal_check_on_people
+after insert or update of sal, status on people
+for each row
+when (new.status != 'BOSS')
+declare
+	minsal number;
+	maxsal number;
+begin
+	select low into minsal from salary_grade where job = :new.status;
+	select high into maxsal from salary_grade where job = :new.status;
+	
+	if :new.SAL < low or :new.SAL > high then
+		raise_application_error(-20225, 'Salary range exceeded');
+	
+	end if;
+end;
+/
+
+
+create or replace trigger job_filter
+before insert or update of job on salary_grade
+for each row
+when(new.job != 'TRAINER' and new.job != 'FIGHTER' and new.job != 'DOCTOR')
+begin
+raise_application_error(-20225, 'Please add grades for: TRAINER or FIGHTER or DOCTOR');
+end;
+/
+
+
+
+create or replace trigger info
+after insert or update on federations
+for each row
+begin
+	if :NEW.champs_per_year < 0 
+	then
+		raise_application_error(-20226, 'You must specify a valid number of championships per year
+	(zero or null - not specified,varying)');
+	else
+		DBMS_output.put_line('	You have just added a new federation!! 
+			name: '|| :NEW.name ||' 
+			Formula: '||:NEW.formula);
+	end if;
+end;
+/
+
+
+
+insert into specialities values(1, 'KICKBOXING', 'USA');
+insert into specialities values(2, 'VALE TUDO', 'BRASIL');
+insert into specialities values(3, 'MUAI THAI', 'THAILAND');
+insert into specialities values(4, 'COMBAT 56', 'POLAND');
+insert into specialities values(5, 'SAMBO', 'RUSSIA');
+insert into specialities values(6, 'JUDO', 'JAPAN');
+
+
+insert into federations values(1, 'UFC', 'MMA', 4);
+insert into federations values(2, 'K1_MAX', 'k1', 3);
+insert into federations values(3, 'PRIDE', 'MMA', 4);
+insert into federations values(4, 'Okniñski Vale Tudo', 'MMA', 2);
+insert into federations values(5, 'DJFC', 'MUAI THAI', 2);
+insert into federations values(6, 'MOKOTÓW STREET FC', 'FREESTYLE', 12);
+insert into federations values(7, 'BRZESKA MIDNIGHT FIGHT', 'FREESTYLE', 0);
+insert into federations values(8, 'JUNGLE FIGHT', 'MMA', NULL);
+
+
+insert into locations values(1, 'LAS VEGAS', 1);
+insert into locations values(2, 'TOKIO', 2);
+insert into locations values(3, 'WARSZAWA', 4);
+insert into locations values(4, 'PARIS', 2);
+insert into locations values(5, 'RIO DE JANEIRO', 2);
+insert into locations values(6, 'AMSTERDAM', 5);
+
+
+
+insert into people values(1, 'RUAS', 'MARCO', 'TRAINER', 4 , 2, 15000, '1990/09/15');
+insert into people values(2, 'CHMIELEWSKI', 'ANTONI', 'FIGHTER', 3, 6, 3000, '1990/12/12');
+insert into people values(3, 'LeBanner', 'JEROME', 'TRAINER', 5 , 1, 8000, '2005/12/15');
+insert into people values(4, 'RUTTEN', 'BAS', 'BOSS', null , null, 25000, '1989/01/04');
+insert into people values(5, 'BERNARDO', 'MIKE', 'TRAINER', 5 , 1, 10000, '2005/11/14');
+insert into people values(6, 'KiCH', 'MARK', 'TRAINER', 5 , 1, 30000, '2005/11/14');
+insert into people values(7, 'LEBEN', 'CHRIS', 'FIGHTER', 1 , 1, 3000, '2005/01/15');
+
+
+
+
+insert into martial_arts values(1,1,1);
+insert into martial_arts values(2,1,3);
+insert into martial_arts values(3,2,6);
+insert into martial_arts values(4,2,2);
+
+insert into salary_grade values(1, 'TRAINER', 15000, 7000);
+insert into salary_grade values(2, 'FIGHTER', 6000, 1500);
+insert into salary_grade values(3, 'MAGICIAN', 6000, 1500);
+
+

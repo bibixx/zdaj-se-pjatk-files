@@ -1,0 +1,34 @@
+###########
+ Mirconoid
+###########
+
+Projekt tworzony w srodowisku Eclipse przy
+uzyciu JDK 1.5.0_05 a w fazie koncowej JDK 1.5.0_06.
+(biblioteki do JMF sa obecne w osobnym instalatorze)
+
+W projekcie zostaly uzyte biblioteki JMF w wersji 2.1.1e.
+oraz biblioteki JDBC sluzace do polaczenia z baza danych MySQL.
+(biblioteki do MySQL znajduja sie w katalogu ./jars)
+
+Data ukonczanie projektu to listopad 2005 roku, 
+jednak zmienilem date na 2006 poniewaz "przeczyscilem" odrobine kod.
+
+Nazwa klasa z metoda main - Start
+(projekt uruchamia sie bez zadnych argumentów)
+
+Technologie zaimplementowane w projekcie:
+
+ - XML (dane o poszczególnych planszach)
+
+ - JDBC/MySQL (baza danych juz nie istnieje pod 
+	      podanym numerze IP w grze, jednak metody
+	      oraz klasy zwiazane z JDBC sa poprawne)
+
+ - INTERNACJONALIZATION (rozwiazane przy uzyciu plikow properties)
+
+ - JMF - Java Media Framework (do obslugi mp3 oraz avi)
+
+Do plusow projektu mozna wymienic, ze obrazy wystepujace w grze
+(tlo gry oraz tla gornego i dolnego panelu) sa przechowywane
+w pamieci karty graficznej jako VolatileImage co znacznie
+przyspiesza dzialanie aplikacji.

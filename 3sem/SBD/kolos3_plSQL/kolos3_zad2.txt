@@ -1,0 +1,16 @@
+Do bazy danych zawieraj¹cych tabele: EMP, DEPT i Salgrade dodaj dodatkow¹ tabelê o nazwie STATYSTYKA_STANOWISK_sxxxx
+ przeznaczon¹ do rejestracji informacji dotycz¹cych statystyki stanowisk. Tabela powinna zawieraæ nazwê stanowiska, liczbe osób, 
+
+ która jest na danym stanowisku w momencie wpisywania, maksymalna i minimaln¹ pensjê podstawow¹ rzeczywiœcie osi¹gan¹ przez 
+
+ pracowników zatrudnionych na tym samym stanowisku na przestrzeni ca³ej historii oraz datê ostatniej modyfikacji tych informacji 
+
+ (sysdate)
+
+ 2.Utwórz procedurê, która wype³ni tabelê STATYSTYKA_STANOWISK_sxxxx pocz¹tkowimi danymi z tabel EMP, DEPT i SALGRADE dodatkowo 
+
+ wypisuj¹c na ekran komunikaty o ka¿dym wstawioanym do tabeli wierszu.
+
+ 3. Napisz wyzwalacz poprawiaj¹cy tabelê STATYSTYKA_STANOWISK_sxxxx? gdy w tabeli EMP nast¹pi¹ zmiany maj¹ce w³yw na statystykê 
+
+ stanowisk (zak³adamy, ¿e iloœæ i nazwy stanowisk nie ulegn¹ zmianie)

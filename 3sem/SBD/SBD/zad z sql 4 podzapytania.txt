@@ -1,0 +1,49 @@
+grupa 3
+
+1.
+SELECT ename, job, sal
+FROM emp
+	WHERE sal =
+	(SELECT MIN(sal)
+	FROM emp);
+
+2.
+SELECT ename, job, sal
+FROM emp
+WHERE deptno = 20 AND sal <
+	(SELECT DISTINCT sal
+	FROM emp
+	WHERE ename = 'WARD');
+
+3.
+SELECT COUNT (*)
+FROM emp
+WHERE sal >
+	(SELECT MAX(sal)
+	FROM emp
+	WHERE deptno =
+		(SELECT deptno
+		FROM dept
+		WHERE loc = 'CHICAGO'));
+
+4.
+SELECT ename, sal, job, grade
+FROM emp, salgrade
+	WHERE sal BETWEEN losal AND hisal and (mgr) IN
+	(SELECT DISTINCT mgr
+	FROM emp
+	WHERE ename = 'WARD');
+
+5.
+
+7.
+SELECT dname
+FROM dept
+	(SELECT COUNT(*)
+	FROM emp
+	WHERE deptno <
+		(SELECT deptno
+		FROM dept
+		WHERE loc = 'DALLAS'));
+
+select dname, count(*) from emp, dept where emp.deptno = dept.deptno group by dname

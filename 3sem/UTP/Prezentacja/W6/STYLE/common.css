@@ -1,0 +1,240 @@
+div.amark {
+}
+
+BODY, P {
+ background-color: #dcdcdc;
+ color: black; 
+ font-family: Verdana;
+ font-size: 90%; 
+}
+
+TD {
+ font-family: Verdana;
+ font-size: 90%; 
+}
+
+PRE
+{
+	/*	background-color: #F4F4FF;*/
+	background-color: #d1d1d1; /*#ECECEC;*/
+	color: black;
+	display: block;
+	white-space: pre;
+	border: 2px solid #0048B0;
+	padding: 1%;
+        font-family: monospace;
+	/* font-size: 12px; opcjonalnie */
+}
+
+div.syntax
+{
+	background-color: #E3E3E3;
+	color: black;
+	display: block;
+	border: 2px solid #000033;
+	padding: 1%;
+	font-family: Verdana;
+	/*font-size: 12px;*/
+	font-weight: bolder;
+   line-height: 18px;
+	
+}
+
+
+div.notec
+{
+	background-color: #ECECEC;
+	color: black;
+	font-family: Verdana;
+	/*font-size: 11px;*/
+	border: 1px solid Black;
+	padding: 1%;
+}
+
+
+div.notel
+{
+background-color: #ECECEC;
+	color: black;
+	font-family: Verdana;
+	font-size: 11px;
+	border: 1px solid Black;
+	padding: 1%;
+  /*margin: 2px;*/
+  width: 25%;
+  float:right
+}
+
+div.notel33
+{
+   background-color: #ECECEC;
+	color: black;
+	font-family: Verdana;
+	font-size: 11px;
+	border: 1px solid Black;
+	padding: 1%;
+  /*margin: 2px;*/
+  width: 33%;
+  float:right
+}
+
+div.noter
+{
+   background-color: #ECECEC;
+	color: black;
+	font-family: Verdana;
+	font-size: 90%;
+	border: 1px solid Black;
+	padding: 1%;
+   /*margin: 2px;*/
+   width: 25%;
+   float:left
+}
+
+div.noter33
+{
+ background-color: #ECECEC;
+	color: black;
+	font-family: Verdana;
+	font-size: 11px;
+	border: 1px solid Black;
+	padding: 1%;
+  /*margin: 2px;*/
+  width: 33%;
+  float:left
+}
+
+div.def
+{
+	background-color: #AEC9FF;
+	color: black;
+	border: 2px solid #000099;
+	padding: 1%;
+	font-family: Verdana;
+	width: 90%;
+	font-weight: bolder;
+	line-height: 18px;
+} 
+
+div.important
+{
+	background-color: #000000;
+	color: #ffffff;
+	font-family: Verdana;
+	font-weight: bolder;
+	line-height: 18px;
+	border: 2px solid Red; /*width: 90%;*/
+	padding: 1%;
+}
+
+div.listing25r
+{
+ background-color: #000066;
+	color: #ffffff;
+	border: 4px ridge aliceblue;
+	font-family: monospace;
+        font-size: 90%;
+	margin: 2px;
+	padding: 1%;
+	width: 25%;
+	/*font-size: 11px;*/
+	line-height: 18px; 
+	float:right
+}
+
+div.listing25l
+{
+background-color: #000066;
+	color: #ffffff;
+	border: 4px ridge aliceblue;
+	font-family: monospace;
+   /*font-size: 75%;*/
+	margin: 2px;
+	padding: 1%;
+	width: 25%;
+	/*font-size: 11px;*/
+	line-height: 18px; 
+	float:left
+}
+
+
+
+
+div.listing33r
+{
+background-color: #000066;
+	color: #ffffff;
+	border: 4px ridge aliceblue;
+	font-family: monospace;
+   /*font-size: 75%;*/
+	margin: 2px;
+	padding: 1%;
+	width: 33%;
+	font-size: 11px;
+	height: 18px; 
+	float:right
+}
+
+div.listing33l
+{
+ 	background-color: #000066;
+	color: #ffffff;
+	border: 4px ridge aliceblue;
+	font-family: monospace;
+   /*font-size: 75%;*/
+	margin: 2px;
+	padding: 1%;
+	width: 33%;
+	/*font-size: 11px;*/
+	line-height: 18px; 
+	float:left
+
+}
+
+
+
+div.listing50
+{
+ 	background-color: #000066;
+	color: #ffffff;
+	border: 4px ridge aliceblue;
+	font-family: monospace;
+   /*font-size: 75%;*/
+	margin: 2px;
+	padding: 1%;
+	width: 50%;
+	/*font-size: 11px;*/
+	line-height: 18px;
+
+}
+
+div.listing100
+{
+	background-color: #000066;
+	color: #ffffff;
+	border: 4px ridge aliceblue;
+       font-family: monospace;
+       /*font-size: 90%;*/
+	margin: 2px;
+	padding: 1%;
+	width: 50%; /*width:90%;*/
+	/*font-size: 11px;*/
+	line-height: 18px;
+
+}
+
+div.listingful
+{
+	background-color: #000066;
+	color: #ffffff;
+	border: 4px ridge aliceblue;
+       font-family: monospace;
+       /*font-size: 90%;*/
+	margin: 2px;
+	padding: 1%;
+        width:90%;
+	/*font-size: 11px;*/
+	line-height: 18px;
+
+}
+

@@ -1,0 +1,1192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr-->
+<!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main14_p1.html" target="main"
+ class="NAWIGACJA">
+&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main14_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 2"></a>
+<br clear="all">
+<div class="tytulpunktu">2. Mno¿enie&nbsp; ³añcucha macierzy</div>
+<p><b>Problem</b></p>
+<p>Dany jest ci±g macierzy A<sub><font face="Verdana">1</font></sub>, A<sub><font
+ face="Verdana">2</font></sub>,...,A<sub><font face="Verdana">n</font></sub>.
+Obliczyæ iloczyn A<sub><font face="Verdana">1</font></sub><font
+ face="Symbol"> </font><span lang="en"><font face="Symbol">´</font></span>
+A<sub><font face="Verdana">2</font></sub> <font face="Symbol"><span
+ lang="en">´</span> </font>... <font face="Symbol"> <span lang="en">´</span>
+</font>A<sub><font face="Verdana">n</font></sub>, tak by koszt
+wykonania zadania by³ najmniejszy. </p>
+<p>Wiadomo, ¿e dwie macierze mo¿emy pomno¿yæ tylko wtedy, gdy liczba
+kolumn w pierwszej z nich jest taka sama, jak liczba wierszy w drugiej.
+W powy¿szym problemie zak³adaæ bêdziemy, ¿e wymiary macierzy s±
+odpowiednie, aby ich pomno¿enie by³o mo¿liwe. </p>
+<p>Niech p<sub><font face="Verdana">0</font></sub>, p<sub><font
+ face="Verdana">1</font></sub>,... p<sub><font face="Verdana">n</font></sub>
+oznacza ci±g, w którym para (p<sub><font face="Verdana">i-1</font></sub>,
+p<sub><font face="Verdana">i</font></sub>) jest rozmiarem macierzy A<sub><font
+ face="Verdana">i</font></sub> (macierz A<sub><font face="Verdana">i</font></sub>
+ma wiêc p<sub><font face="Verdana">i-1</font></sub> wierszy i p<sub><font
+ face="Verdana">i</font></sub> kolumn). Przy takim za³o¿eniu obliczenie
+iloczynu mo¿emy wykonaæ po kolei mno¿±c A<sub><font face="Verdana">1</font></sub>
+przez A<sub><font face="Verdana">2</font></sub>, nastêpnie wynik przez A<sub><font
+ face="Verdana">3</font></sub> itd, albo mno¿±c najpierw macierze z
+jakiego¶ wybranego segmentu np. od A<sub><font face="Verdana">i</font></sub>
+do A<sub><font face="Verdana">j</font></sub>, a potem obliczaj±c
+iloczyn A<sub><font face="Verdana">1</font></sub><font face="Symbol"> </font><font
+ face="Symbol"><span lang="en">´</span>...</font> <font face="Symbol"><span
+ lang="en">´</span> </font>A<sub><font face="Verdana">i-1</font></sub>
+<font face="Symbol"><span lang="en">´</span> </font>W <font
+ face="Symbol"> <span lang="en">´</span></font> A<sub><font
+ face="Verdana">j+1</font></sub><font face="Symbol"><span lang="en">´</span></font>...
+<font face="Symbol"><span lang="en">´</span> </font>A<sub><font
+ face="Verdana">n</font></sub>, gdzie W = A<font face="Verdana"><sub>i</sub></font><font
+ face="Symbol"> </font><span lang="en"><font face="Symbol">´</font></span>
+A<sub><font face="Verdana">i+1</font></sub> <font face="Symbol"><span
+ lang="en">´</span> </font>... <font face="Symbol"> <span lang="en">´</span>
+</font>A<sub><font face="Verdana">j</font></sub>. Oczywi¶cie pamiêtamy,
+¿e mno¿enie macierzy nie jest przemienne, jest natomiast ³±czne i z tej
+w³asno¶ci bêdziemy w³a¶nie korzystaæ szukaj±c optymalnego rozwi±zania
+problemu.</p>
+<p><b>Przyk³ad 2.1 </b> </p>
+<p>Niech A, B i C bêd± macierzami o wymiarach odpowiednio (10 <font
+ face="Symbol"><span lang="en">´</span> </font>100), (100 <font
+ face="Symbol"><span lang="en">´</span> </font>5) i (5 <font
+ face="Symbol"><span lang="en">´</span> </font>50).&nbsp; Iloczyn tych
+macierzy mo¿emy obliczyæ albo licz±c najpierw iloczyn A <font
+ face="Symbol"> <span lang="en">´</span> </font>B a potem mno¿±c
+wynik przez C, albo najpierw licz±c&nbsp; B <font face="Symbol"><span
+ lang="en">´</span> </font> C, a potem mno¿±c A przez otrzymany wynik.
+Macierze uzyskane w wyniku s± oczywi¶cie identyczne</p>
+<p style="text-align: center;">(A <font face="Symbol"><span lang="en">´</span>
+</font>B) <font face="Symbol"><span lang="en">´</span> </font>C = A <font
+ face="Symbol"><span lang="en">´</span> </font>(B <font face="Symbol">
+<span lang="en">´</span> </font>C).</p>
+<p>Obliczmy liczbê wykonanych mno¿eñ skalarnych w obu przypadkach
+pamiêtaj±c, ¿e pomno¿enie macierzy o wymiarach (n <font face="Symbol">
+<span lang="en">´</span> </font>m) przez macierz o wymiarach (m <font
+ face="Symbol"><span lang="en">´</span> </font>k) wymaga m* n * k
+mno¿eñ elementów tych macierzy, je¶li u¿ywamy zwyk³ego algorytmu
+opartego na algebraicznej definicji mno¿enia macierzy.</p>
+<p>Dla wyra¿enia (A <font face="Symbol"><span lang="en">´</span> </font>B)
+<font face="Symbol"><span lang="en">´</span> </font>C mamy wiêc
+(10*100*5) + (10 *5 * 50) mno¿eñ, bo w wyniku pomno¿enia A przez B
+otrzymamy macierz o wymiarze (10 <font face="Symbol"><span lang="en">´</span>
+</font>5). Wykonany wiêc 7500 mno¿eñ skalarnych.</p>
+<p>Dla wyra¿enia A <font face="Symbol"><span lang="en">´</span> </font>(B
+<font face="Symbol"><span lang="en">´</span> </font>C) mamy
+(10*100*50) + (100 * 5 * 50) mno¿eñ, bo w wyniku mno¿enia B przez C
+otrzymamy macierz o wymiarach (100 <font face="Symbol"><span lang="en">´</span>
+</font>50). Tym razem wykonamy 75000 mno¿eñ skalarnych.&nbsp; Ró¿nica
+jest istotna! <font face="Wingdings" size="3">J</font></p>
+<p>Najprostszy pomys³ rozwi±zania problemu mno¿enia ³añcucha macierzy
+przedstawia nastêpuj±cy algorytm.</p>
+<p><b>Algorytm naiwny</b></p>
+<blockquote>
+  <p>1. Rozwa¿yæ wszystkie mo¿liwe ustawienia nawiasów w ci±gu.</p>
+  <p>2. Dla ka¿dego ustawienia nawiasów wyliczyæ koszt mno¿enia.</p>
+  <p>3. Wybraæ to ustawienie nawiasów, przy którym koszt liczony liczb±
+wykonanych mno¿eñ jest najmniejszy.</p>
+  <p>4. Obliczyæ iloczyn macierzy dla wybranego ustawienia nawiasów.</p>
+</blockquote>
+<p>Taki algorytm gwarantuje, ¿e liczba wykonanych mno¿eñ skalarnych
+(wykonujemy je tylko w punkcie czwartym tego algorytmu) jest minimalna.
+Punkty 1-3 powy¿szej metody maj± charakter pomocniczy. Przy ich
+realizacji wykonujemy jednak pewn± liczbê mno¿eñ i dodawañ liczb
+naturalnych. Zastanówmy siê jaki jest koszt z tym zwi±zany. Pytanie
+w³a¶ciwie dotyczy liczby przypadków, które trzeba rozwa¿yæ, gdy¿ punkt
+drugi wymaga co najwy¿ej O(n) mno¿eñ rzeczywistych dla ³añcucha
+z³o¿onego z n macierzy. Ile jest wiêc mo¿liwych ustawieñ nawiasów w
+ci±gu z³o¿onym z n macierzy?</p>
+<p>Oznaczmy przez P(n) liczbê ustawieñ nawiasów w ci±gu n elementowym.
+Przyjmijmy, ¿e dla n=1, P(1)=1. Dla n=2 mamy tylko jedno ustawienie
+nawiasów, a dla n=3, dwa ustawienia, tak jak w przyk³adzie&nbsp; 2.1.
+Ogólnie, je¶li pierwszy nawias postawimy po pozycji ktej rozdzielaj±c
+ci±g mno¿eñ na dwa podci±gi A<sub><font face="Verdana">1</font></sub><font
+ face="Symbol"> </font><span lang="en"><font face="Symbol">´</font></span>
+A<sub><font face="Verdana">2</font></sub> <font face="Symbol"><span
+ lang="en">´</span> </font>... <font face="Symbol"> <span lang="en">´</span>
+</font>A<sub><font face="Verdana">k </font></sub>i&nbsp; A<sub><font
+ face="Verdana">k+1</font></sub><font face="Symbol"> </font><span
+ lang="en"><font face="Symbol">´</font></span> A<sub><font
+ face="Verdana">k+2</font></sub> <font face="Symbol"><span lang="en">´</span>
+</font>... <font face="Symbol"> <span lang="en">´</span> </font>A<sub><font
+ face="Verdana">n</font></sub>, to liczba ustawieñ nawiasów w tym
+przypadku wynosi P(k)*P(n-k). Poniewa¿ k mo¿e przyj±æ dowoln± z
+warto¶ci od 1 do n-1, wiêc otrzymujemy nastêpuj±cy wzór rekurencyjny:</p>
+<p style="text-align: center;">P(1) = 1, P(n) = <font face="Symbol"
+ size="4"> S</font><sub><font face="Verdana"> k=1 ,...,n-1</font></sub>
+P(k)*P(n-k)&nbsp; dla n&gt;1&nbsp;&nbsp; (*)</p>
+<p>Zauwa¿my, ¿e P(4) = 5, P(5) = 14, a P(6) = 42. Funkcja ta do¶æ
+szybko ro¶nie. I rzeczywi¶cie </p>
+<p></p>
+<div class="lemat">
+<p>Lemat 2.1&nbsp; Rozwi±zaniem równania rekurencyjnego (*) jest
+(n-1)sza liczba Catalana, </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+P(n)= c(n-1), gdzie c(n) = (2n nad n)/(n+1).</p>
+</div>
+<p></p>
+<p>Formu³a Stirlinga&nbsp; (n! <font face="Symbol">~</font> sqrt(2n<font
+ face="Symbol">p</font>) n<sup><font face="Verdana">n</font></sup>/e<sup><font
+ face="Verdana">n</font></sup>) pozwala przybli¿yæ liczbê
+Catalana&nbsp; nastêpuj±co: </p>
+<p style="text-align: center;">c(n) <font face="Symbol">~</font> 4<sup><font
+ face="Verdana">n</font></sup>*n<sup><font face="Verdana">-3/2</font></sup>/sqrt(<font
+ face="Symbol">p</font>). </p>
+<p>Wynika st±d, ¿e liczba mo¿liwych ustawieñ nawiasów w ci±gu n
+macierzy jest wyk³adnicza. Nawet dla niewielkich warto¶ci n, taki
+algorytm by³by zbyt kosztowny. Musimy wiêc szukaæ innego rozwi±zania.</p>
+<p>&nbsp;</p>
+<p></p>
+<div class="lemat">
+<p>Lemat 2.2&nbsp; Problem mno¿enia ³añcucha macierzy ma w³asno¶æ
+optymalnej podstruktury. </p>
+</div>
+<p></p>
+<p>Nazwijmy optymalnym nawiasowaniem ci±gu A<sub><font face="Verdana">1</font></sub>,
+A<sub><font face="Verdana">2</font></sub>,...,A<sub><font face="Verdana">n
+</font></sub>taki uk³ad nawiasów, dla którego koszt pomno¿enia
+wszystkich macierzy, mierzony liczb± mno¿eñ skalarnych, jest
+najmniejszy. Niech bêdzie optymalne nawiasowanie ci±gu A<sub><font
+ face="Verdana">1</font></sub>, A<sub><font face="Verdana">2</font></sub>,...,A<sub><font
+ face="Verdana">n</font></sub>, w którym zosta³ on rozbity na dwa
+podci±gi A<sub><font face="Verdana">1</font></sub><font face="Symbol"> </font><span
+ lang="en"><font face="Symbol">´</font></span> A<sub><font
+ face="Verdana">2</font></sub> <font face="Symbol"><span lang="en">´</span>
+</font>... <font face="Symbol"> <span lang="en">´</span> </font>A<sub><font
+ face="Verdana">k </font></sub>i&nbsp; A<sub><font face="Verdana">k+1</font></sub><font
+ face="Symbol"> </font><span lang="en"><font face="Symbol">´</font></span>
+A<sub><font face="Verdana">k+2</font></sub> <font face="Symbol"><span
+ lang="en">´</span> </font>... <font face="Symbol"> <span lang="en">´</span>
+</font>A<sub><font face="Verdana">n,</font></sub></p>
+<p style="text-align: center;">A<sub><font face="Verdana">1</font></sub><font
+ face="Symbol"> </font><span lang="en"><font face="Symbol">´</font></span>
+A<sub><font face="Verdana">2</font></sub> <font face="Symbol"><span
+ lang="en">´</span> </font>... <font face="Symbol"> <span lang="en">´</span>
+</font>A<sub><font face="Verdana">n</font></sub> = (A<sub><font
+ face="Verdana">1</font></sub><font face="Symbol"> </font><span
+ lang="en"><font face="Symbol">´</font></span> A<sub><font
+ face="Verdana">2</font></sub> <font face="Symbol"><span lang="en">´</span>
+</font>... <font face="Symbol"> <span lang="en">´</span> </font>A<sub><font
+ face="Verdana">k </font></sub>) <font face="Symbol"> <span lang="en">´</span>
+</font>(&nbsp; A<sub><font face="Verdana">k+1</font></sub><font
+ face="Symbol"> </font><span lang="en"><font face="Symbol">´</font></span>
+A<sub><font face="Verdana">k+2</font></sub> <font face="Symbol"><span
+ lang="en">´</span> </font>... <font face="Symbol"> <span lang="en">´</span>
+</font>A<sub><font face="Verdana">n</font></sub>).</p>
+<p>Uk³ad nawiasów musi byæ optymalny zarówno w ci±gu A<sub><font
+ face="Verdana">1</font></sub><font face="Symbol"> </font><span
+ lang="en"><font face="Symbol">´</font></span> A<sub><font
+ face="Verdana">2</font></sub> <font face="Symbol"><span lang="en">´</span>
+</font>... <font face="Symbol"> <span lang="en">´</span> </font>A<sub><font
+ face="Verdana">k, </font></sub>
+jak i w ci±gu A<sub><font face="Verdana">k+1</font></sub><font
+ face="Symbol"> </font><span lang="en"><font face="Symbol">´</font></span>
+A<sub><font face="Verdana">k+2</font></sub> <font face="Symbol"><span
+ lang="en">´</span> </font>... <font face="Symbol"> <span lang="en">´</span>
+</font>A<sub><font face="Verdana">n</font></sub>, gdy¿ w przeciwnym
+razie mogliby¶my rozwa¿yæ inne nawiasowanie ca³ego ci±gu, daj±ce
+mniejszy koszt mno¿enia macierzy, ni¿ to, w tej chwili rozwa¿ane. Czyli
+optymalne rozwi±zanie problemu mie¶ci w sobie optymalne rozwi±zania dla
+podproblemów. Ten fakt zachêca do zastosowania metody programowania
+dynamicznego.</p>
+<p>Zajmijmy siê teraz policzeniem kosztu rozwi±zania optymalnego. Niech
+m(i,j) bêdzie minimaln± liczb± mno¿eñ skalarnych potrzebnych do
+policzenia iloczynu A<font face="Verdana"><sub>i</sub></font><font
+ face="Symbol"> </font><span lang="en"><font face="Symbol">´</font></span>
+A<sub><font face="Verdana">2</font></sub> <font face="Symbol"><span
+ lang="en">´</span> </font>... <font face="Symbol"> <span lang="en">´</span>
+</font>A<sub><font face="Verdana">j </font></sub> dla i<font
+ face="Symbol"> <span lang="en">&#163;</span> </font>j. Mamy m(i,i) = 0,
+oraz dla i&lt;j </p>
+<p style="text-align: center;">m(i,j) = min {m(i,k) + m(k+1, j) + p<sub><font
+ face="Verdana">i-1</font></sub>*p<sub><font face="Verdana">k</font></sub>*p<sub><font
+ face="Verdana">j</font></sub> : i <font face="Symbol"><span lang="en">&#163;</span>
+</font>k <font face="Symbol">&lt; </font>j}. (**)</p>
+<p>W minimum po prawej stronie równo¶ci (**), k zmienia siê od i do
+j-1, co odpowiada ustawieniu pierwszego nawiasu po pozycji ktej. W
+wyniku mno¿enia macierzy A<font face="Verdana"><sub>i</sub></font><font
+ face="Symbol"> </font><span lang="en"><font face="Symbol">´</font></span>
+A<sub><font face="Verdana">i+1</font></sub> <font face="Symbol"><span
+ lang="en">´</span> </font>... <font face="Symbol"> <span lang="en">´</span>
+</font>A<sub><font face="Verdana">k&nbsp; </font></sub> otrzymamy
+macierz o wymiarach p<sub><font face="Verdana">i-1</font></sub><font
+ face="Symbol"><span lang="en">´</span> </font> p<sub><font
+ face="Verdana">k</font></sub>, a w wyniku mno¿enia macierzy A<sub><font
+ face="Verdana">k+1</font></sub><font face="Symbol"> </font><span
+ lang="en"><font face="Symbol">´</font></span> A<sub><font
+ face="Verdana">k+2</font></sub> <font face="Symbol"><span lang="en">´</span>
+</font>... <font face="Symbol"> <span lang="en">´</span> </font>A<sub><font
+ face="Verdana">j </font></sub> macierz o wymiarach p<sub><font
+ face="Verdana">k</font></sub><font face="Symbol"><span lang="en">´</span></font>
+p<sub><font face="Verdana">j</font></sub> . Koszt pomno¿enia tych
+macierzy wynosi wiêc p<sub><font face="Verdana">i-1</font></sub>*p<sub><font
+ face="Verdana">k</font></sub>*p<font face="Verdana"><sub>j</sub></font>.
+Je¶li k wybierzemy tak, by warto¶æ m(i,k) + m(k+1,j) + p<sub><font
+ face="Verdana">i-1</font></sub>*p<sub><font face="Verdana">k</font></sub>*p<sub><font
+ face="Verdana">j</font></sub>&nbsp; by³a najmniejsza, to koszt
+pomno¿enia A<font face="Verdana"><sub>i</sub></font><font face="Symbol">
+</font><span lang="en"><font face="Symbol">´</font></span> A<sub><font
+ face="Verdana">i+1</font></sub> <font face="Symbol"><span lang="en">´</span>
+</font>... <font face="Symbol"> <span lang="en">´</span> </font>A<sub><font
+ face="Verdana">j </font></sub> jest najmniejszy z mo¿liwych. Oznaczmy
+tê wybran± warto¶æ k przez&nbsp; s(i,j).</p>
+
+<p>Mo¿e siê wydawaæ, ¿e obliczenie warto¶ci m(i,j) mo¿emy powierzyæ
+procedurze rekurencyjnej. Gdyby¶my u¿yli wprost wzoru (**) do
+policzenia warto¶ci m(i,j), to musieliby¶my&nbsp; wywo³ywaæ
+rekurencyjnie tê procedurê dla podproblemów (i,k) i (k+1,j), dla
+wszystkich k od i do j. To jednak w konsekwencji doprowadzi³oby do
+dalszych rekurencyjnych wywo³añ,&nbsp; przy czym wiele ze spotkanych
+podproblemów powtarza³oby siê. </p>
+<p>Na rysunku 14.1 przedstawili¶my fragment drzewa mo¿liwych
+rekurencyjnych wywo³añ przy obliczaniu m(1,6). Drzewo to ma dwa typy
+wierzcho³ków: wierzcho³ki z etykietami i-j, odpowiadaj±ce wywo³aniu
+rekurencyjnemu funkcji m(i,j), oraz wierzcho³ki oznaczone pojedyncz±
+liczb±, wskazuj±c± podzia³ aktualnego zadania na dwa podzadania.
+Zauwa¿my, ¿e w wielu wierzcho³kach wystêpuj± te same wska¼niki. Oznacza
+to ponowne wykonanie tego samego rekurencyjnego obliczenia.</p>
+<table border="0" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="60%"
+ id="AutoNumber1" height="243">
+  <tbody>
+    <tr>
+      <td width="100%" height="243"> <img border="0"
+ src="Rysunki/Rysunek14_1.gif" width="400" height="229"></td>
+    </tr>
+  </tbody>
+</table>
+<p><b>Pytanie 2: </b>&nbsp;Jaki by³by koszt algorytmu rekurencyjnego
+obliczania wszystkich warto¶ci m(i,j)? </p>
+<p>&nbsp;</p>
+<form>
+  <p><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0" onclick="napis(this.form,'Wyk³adniczy.');">
+  </p>
+</form>
+<p></p>
+<p>Rzeczywi¶cie, obliczenie warto¶ci m(1,n) mogliby¶my oszacowaæ za
+pomoc± funkcji rekurencyjnej T(n), takiej ¿e T(1) <font face="Symbol"><span
+ lang="en">&#179;</span></font>1, T(n) <font face="Symbol"><span lang="en">&#179;</span>
+</font>(1+ <font face="Symbol" size="3">S</font><sub><font
+ face="Verdana">k=1,...,n-1</font></sub>(T(k) + T(n-k) + 1) dla n&gt;1.
+Zak³adamy, ¿e na wykonanie instrukcji pocz±tkowych oraz porównania przy
+wyborze minimum potrzebujemy jednostkê czasu.&nbsp; £atwo sprawdziæ, ¿e
+musi byæ T(n) <font face="Symbol"> <span lang="en">&#179;</span> </font>2<sup><font
+ face="Verdana">n-1,</font></sup> tzn . rozwi±zaniem jest funkcja
+rosn±ca co najmniej tak szybko jak 2<sup><font face="Verdana">n-1</font></sup>.
+A wiêc koszt obliczenia warto¶ci m(1,n) by³by wyk³adniczy. </p>
+<p>Wyci±gnijmy jednak z tych rozwa¿añ wniosek pozytywny: skoro
+podproblemy, które musimy rozwa¿aæ powtarzaj± siê,&nbsp; nasz problem
+ma w³asno¶æ wspólnych podproblemów. Jeszcze jeden sygna³, ¿e byæ mo¿e
+metoda programowania dynamicznego da dobre rezultaty. Zamiast wiêc
+powtarzaæ obliczenia wielokrotnie dla tych samych podproblemów,
+zapamiêtajmy wcze¶niej wyliczone warto¶ci w tablicy.</p>
+<p>&nbsp;</p>
+<table border="0" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="60%"
+ id="AutoNumber2">
+  <tbody>
+    <tr>
+      <td width="100%" bordercolor="#808080">
+      <table border="1" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="66%"
+ id="AutoNumber3">
+        <tbody>
+          <tr>
+            <td width="16%" align="center">&nbsp;</td>
+            <td width="14%" align="center" bgcolor="#c0c0c0">1</td>
+            <td width="14%" align="center" bgcolor="#c0c0c0">2</td>
+            <td width="14%" align="center" bgcolor="#c0c0c0">3</td>
+            <td width="15%" align="center" bgcolor="#c0c0c0">4</td>
+            <td width="15%" align="center" bgcolor="#c0c0c0">5</td>
+            <td width="28%" align="center" bgcolor="#c0c0c0">6</td>
+          </tr>
+          <tr>
+            <td width="16%" align="center">1</td>
+            <td width="14%" bgcolor="#c0c0c0">&nbsp;</td>
+            <td width="14%" align="center">1</td>
+            <td width="14%" align="center">6</td>
+            <td width="15%" align="center">10</td>
+            <td width="15%" align="center">14</td>
+            <td width="28%" align="center">16</td>
+          </tr>
+          <tr>
+            <td width="16%" align="center">2</td>
+            <td width="14%">&nbsp;</td>
+            <td width="14%" bgcolor="#c0c0c0" align="center">&nbsp;</td>
+            <td width="14%" align="center">2</td>
+            <td width="15%" align="center">7</td>
+            <td width="15%" align="center">11</td>
+            <td width="28%" align="center">15</td>
+          </tr>
+          <tr>
+            <td width="16%" align="center">3</td>
+            <td width="14%">&nbsp;</td>
+            <td width="14%" align="center">&nbsp;</td>
+            <td width="14%" bgcolor="#c0c0c0" align="center">&nbsp;</td>
+            <td width="15%" align="center">3</td>
+            <td width="15%" align="center">8</td>
+            <td width="28%" align="center">13</td>
+          </tr>
+          <tr>
+            <td width="16%" align="center">4</td>
+            <td width="14%">&nbsp;</td>
+            <td width="14%" align="center">&nbsp;</td>
+            <td width="14%" align="center">&nbsp;</td>
+            <td width="15%" bgcolor="#c0c0c0" align="center">&nbsp;</td>
+            <td width="15%" align="center">4</td>
+            <td width="28%" align="center">9</td>
+          </tr>
+          <tr>
+            <td width="16%" align="center">5</td>
+            <td width="14%">&nbsp;</td>
+            <td width="14%" align="center">&nbsp;</td>
+            <td width="14%" align="center">&nbsp;</td>
+            <td width="15%" align="center">&nbsp;</td>
+            <td width="15%" bgcolor="#c0c0c0" align="center">&nbsp;</td>
+            <td width="28%" align="center">5</td>
+          </tr>
+          <tr>
+            <td width="16%" align="center">6</td>
+            <td width="14%">&nbsp;</td>
+            <td width="14%">&nbsp;</td>
+            <td width="14%">&nbsp;</td>
+            <td width="15%">&nbsp;</td>
+            <td width="15%">&nbsp;</td>
+            <td width="28%" bgcolor="#c0c0c0">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="16%" align="center">&nbsp;</td>
+            <td width="14%">&nbsp;</td>
+            <td width="14%">&nbsp;</td>
+            <td width="14%">&nbsp;</td>
+            <td width="15%">&nbsp;</td>
+            <td width="15%">&nbsp;</td>
+            <td width="28%">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="16%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="14%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="58%" colspan="4" bordercolor="#F5F5F5">&nbsp;Rysunek
+14.2</td>
+            <td width="28%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="16%" align="center" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="14%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="14%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="14%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="15%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="15%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="28%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>K³opot polega teraz tylko na ustaleniu, w jakim porz±dku wyliczaæ
+wielko¶ci m(i,j). Zauwa¿my, ¿e przy obliczaniu m(i,j) korzystamy we
+wzorze (**) z warto¶ci m(i,i), m(i,i+1),...,m(i,j-1) oraz z warto¶ci
+m(i+1,j), m(i+2,j),..., m(j,j). S± to elementy i-tego wiersza i j-tej
+kolumny. Wynika st±d, ¿e wyliczenie m(i,j) powinni¶my wykonywaæ wzd³u¿
+diagonali, zgodnie z numeracj± przedstawion± na rysunku 14.2
+Otrzymujemy&nbsp; st±d nastêpuj±cy algorytm:</p>
+<p><b>Algorytm MM</b></p>
+<p>
+</p>
+<div class="def" style="width: 816px; ">
+<table frame="void" rules="none" width="782" >
+  <tbody>
+    <tr>
+      <td width="665" height="12" colspan="2"><b>{</b></td>
+      <td width="612" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="619" height="12"> <b>for</b> i := 1 <b>to</b> n <b>do</b>
+m(i,i) := 0; </td>
+      <td width="612" height="12"> //inicjalizacja diagonali</td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="619" height="12"> <b>for</b> l :=2 <b>to</b> n <b>do</b>
+      </td>
+      <td width="612" height="12"> // l= numer diagonali</td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="619" height="12"> <strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+      <b>for</b> i := 1 <b>to</b> n-l+1 <b>do</b></td>
+      <td width="612" height="12"> &nbsp;//kolejne pozycje l-tej
+diagonali</td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="619" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; j := i + l
+- 1&nbsp;;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+      <td width="612" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="619" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m(i,j) := +<font
+ face="Symbol"><span lang="en">&#165;</span> </font>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td width="612" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="619" height="12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <strong>&nbsp;&nbsp;&nbsp;&nbsp; for </strong>k := i <b>to</b>
+j-1 <b>do</b><strong>&nbsp;</strong></td>
+      <td width="612" height="12"> &nbsp;//szukamy najlepszego podzia³u</td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="619" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+q := m(i,k) + m(k+1,j) + p<sub><font face="Verdana">i-1</font></sub>*p<sub><font
+ face="Verdana">k</font></sub> *p<sub><font face="Verdana">j</font></sub>;</td>
+      <td width="612" height="12"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="619" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <b>&nbsp; if</b> q&lt; m(i,j) t<b>hen</b> m(i,j) := q; s(i,j):= k
+      <b>fi</b></td>
+      <td width="612" height="12">//s(i,j) zapamiêtujemy indeks, przy
+którym osi±gniêto minimum</td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="619" height="12"> <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+od</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+      <td width="612" height="12"> &nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="619" height="12"> <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+od</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+      <td width="612" height="12"> &nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="46" height="12"><br>
+      </td>
+      <td width="619" height="12"> <b>&nbsp;od</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td width="612" height="12"> &nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="46" height="1"><strong>&nbsp;&nbsp;&nbsp; }</strong></td>
+      <td width="619" height="1"> &nbsp;<strong>&nbsp;&nbsp;&nbsp;&nbsp;
+      </strong></td>
+      <td width="612" height="1"> <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p><b>Koszt algorytmu</b></p>
+<p>W algorytmie wystêpuj± trzy zagnie¿d¿one pêtle. Ka¿da z nich
+wykonuje siê rzêdu O(n) razy, zatem koszt czasowy algorytmu mo¿na
+oszacowaæ przez O(n<sup><font face="Verdana">3</font></sup>). Koszt
+pamiêciowy natomiast jest kwadratowy O(n<sup><font face="Verdana">2</font></sup>)
+i zwi±zany jest z konieczno¶ci± zapamiêtania warto¶ci m(i,j) oraz
+s(i,j). </p>
+<p><b>Przyk³ad 2.2</b></p>
+<p>Przypu¶æmy, ¿e mamy sze¶æ macierzy&nbsp; A<sub><font face="Verdana">1</font></sub><font
+ face="Symbol"> </font>(4<font face="Symbol"> <span lang="en">´</span>
+</font>2), A<sub><font face="Verdana">2</font></sub> (2<font
+ face="Symbol"><span lang="en">´</span> </font> 3), A<font
+ face="Verdana"><sub>3</sub></font><font face="Symbol"> </font>(3<font
+ face="Symbol"> <span lang="en">´</span> </font>1), A<font
+ face="Verdana"><sub>4</sub></font><font face="Symbol"> </font>(1<font
+ face="Symbol"> <span lang="en">´</span> </font>2),A<font
+ face="Verdana"><sub>5</sub></font><font face="Symbol"> </font>(2<font
+ face="Symbol"> <span lang="en">´</span> </font>2), A<font
+ face="Verdana"><sub>6</sub></font><font face="Symbol"> </font>(2<font
+ face="Symbol"> <span lang="en">´</span> </font>3) i chcemy obliczyæ
+iloczyn A<sub><font face="Verdana">1</font></sub><font face="Symbol"> </font><span
+ lang="en"><font face="Symbol">´</font></span> A<sub><font
+ face="Verdana">2</font></sub> <font face="Symbol"><span lang="en">´</span>
+</font>... <font face="Symbol"> <span lang="en">´</span> </font>A<sub><font
+ face="Verdana">6</font></sub>. Obliczmy zgodnie z algorytmem MM
+minimaln± liczbê mno¿eñ skalarnych, któr± trzeba wykonaæ przy
+obliczaniu tego iloczynu. W tabeli na rysunku 14.3 przedstawili¶my
+warto¶ci m(i,j), a warto¶ci najlepszych podzia³ów w tablicy s. Na
+przyk³ad do policzenia m(2,5) potrzebujemy warto¶ci:</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p>m(2,2) + m(3,5) + 2*3*2 = 0 + 10 + 12 = 22,<br>
+         m(2,3) + m(4,5) + 2*1*2 = 6 + 4 + 4 = 14,<br>
+         m(2,4) + m(5,5) + 2*2*2 = 10 + 0 + 8 = 18.</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p>Najmniejsza&nbsp; warto¶æ to 14 i dlatego m(2,5) = 14. Poniewa¿
+zosta³a ona osi±gniêta, gdy k=3 (tzn. nawias postawiono po trzeciej
+macierzy) wiêc s(2,5)= 3. Optymalne ustawienie nawiasów w tym
+przyk³adzie wygl±da nastêpuj±co : </p>
+<p style="text-align: center;">A<sub><font face="Verdana">1</font></sub><font
+ face="Symbol"> </font><span lang="en"><font face="Symbol">´</font></span>
+A<sub><font face="Verdana">2</font></sub> <font face="Symbol"><span
+ lang="en">´</span> </font>... <font face="Symbol"> <span lang="en">´</span>
+</font>A<sub><font face="Verdana">6</font></sub>= (A<sub><font
+ face="Verdana">1</font></sub><font face="Symbol"> </font><span
+ lang="en"><font face="Symbol">´</font></span> (A<sub><font
+ face="Verdana">2</font></sub> <font face="Symbol"><span lang="en">´</span>
+</font>A<sub><font face="Verdana">3</font></sub>)) <font face="Symbol"><span
+ lang="en">´</span> ((</font>A<sub><font face="Verdana">4</font></sub> <font
+ face="Symbol"><span lang="en">´</span> </font>A<sub><font
+ face="Verdana">5</font></sub>) <font face="Symbol"> <span lang="en">´</span>
+</font>A<sub><font face="Verdana">6</font></sub>).</p>
+<p style="text-align: left;">Najmniejsza liczba mno¿eñ skalarnych to w
+tym przyk³adzie 36.<font face="Wingdings" size="3">J</font></p>
+<table border="0" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="60%"
+ id="AutoNumber4">
+  <tbody>
+    <tr>
+      <td width="50%">
+      <table border="1" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="100%"
+ id="AutoNumber5">
+        <tbody>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="9%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%">m</td>
+            <td width="8%" bgcolor="#c0c0c0">1</td>
+            <td width="8%" bgcolor="#c0c0c0">2</td>
+            <td width="8%" bgcolor="#c0c0c0">3</td>
+            <td width="8%" bgcolor="#c0c0c0">4</td>
+            <td width="8%" bgcolor="#c0c0c0">5</td>
+            <td width="8%" bgcolor="#c0c0c0">6</td>
+            <td width="9%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bgcolor="#c0c0c0">1</td>
+            <td width="8%">0</td>
+            <td width="8%">24</td>
+            <td width="8%">14</td>
+            <td width="8%">22</td>
+            <td width="8%">26</td>
+            <td width="8%">36</td>
+            <td width="9%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bgcolor="#c0c0c0">2</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">0</td>
+            <td width="8%">6</td>
+            <td width="8%">10</td>
+            <td width="8%">14</td>
+            <td width="8%">22</td>
+            <td width="9%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bgcolor="#c0c0c0">3</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">0</td>
+            <td width="8%">6</td>
+            <td width="8%">10</td>
+            <td width="8%">19</td>
+            <td width="9%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bgcolor="#c0c0c0">4</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">0</td>
+            <td width="8%">4</td>
+            <td width="8%">10</td>
+            <td width="9%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bgcolor="#c0c0c0">5</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">0</td>
+            <td width="8%">12</td>
+            <td width="9%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bgcolor="#c0c0c0">6</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">&nbsp;</td>
+            <td width="8%">0</td>
+            <td width="9%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="9%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="9%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="48%" colspan="6" bordercolor="#F5F5F5">Rysunek
+14.3 (a)</td>
+            <td width="9%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="8%" bordercolor="#F5F5F5">&nbsp;</td>
+            <td width="9%" bordercolor="#F5F5F5">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+      <td width="50%">
+      <table border="1" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="100%"
+ id="AutoNumber6" height="201">
+        <tbody>
+          <tr>
+            <td width="8%" bordercolor="#F5F5F5" height="14"><br>
+            </td>
+            <td width="8%" bordercolor="#F5F5F5" height="14"><br>
+            </td>
+            <td width="8%" bordercolor="#F5F5F5" height="14"><br>
+            </td>
+            <td width="8%" bordercolor="#F5F5F5" height="14"><br>
+            </td>
+            <td width="8%" bordercolor="#F5F5F5" height="14"><br>
+            </td>
+            <td width="8%" bordercolor="#F5F5F5" height="14"><br>
+            </td>
+            <td width="8%" bordercolor="#F5F5F5" height="14"><br>
+            </td>
+            <td width="8%" bordercolor="#F5F5F5" height="14"><br>
+            </td>
+            <td width="9%" bordercolor="#F5F5F5" height="14"><br>
+            </td>
+          </tr>
+          <tr>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16">s</td>
+            <td width="8%" bgcolor="#c0c0c0" height="16">1</td>
+            <td width="8%" bgcolor="#c0c0c0" height="16">2</td>
+            <td width="8%" bgcolor="#c0c0c0" height="16">3</td>
+            <td width="8%" bgcolor="#c0c0c0" height="16">4</td>
+            <td width="8%" bgcolor="#c0c0c0" height="16">5</td>
+            <td width="8%" bgcolor="#c0c0c0" height="16">6</td>
+            <td width="9%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+          </tr>
+          <tr>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" bgcolor="#c0c0c0" height="16">1</td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16">1</td>
+            <td width="8%" height="16">1</td>
+            <td width="8%" height="16">3</td>
+            <td width="8%" height="16">3</td>
+            <td width="8%" height="16">3</td>
+            <td width="9%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+          </tr>
+          <tr>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" bgcolor="#c0c0c0" height="16">2</td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16">2</td>
+            <td width="8%" height="16">3</td>
+            <td width="8%" height="16">3</td>
+            <td width="8%" height="16">3</td>
+            <td width="9%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+          </tr>
+          <tr>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" bgcolor="#c0c0c0" height="16">3</td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16">3</td>
+            <td width="8%" height="16">3</td>
+            <td width="8%" height="16">3</td>
+            <td width="9%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+          </tr>
+          <tr>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" bgcolor="#c0c0c0" height="16">4</td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16">4</td>
+            <td width="8%" height="16">5</td>
+            <td width="9%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+          </tr>
+          <tr>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" bgcolor="#c0c0c0" height="16">5</td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16">5</td>
+            <td width="9%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+          </tr>
+          <tr>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" bgcolor="#c0c0c0" height="16">6</td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="8%" height="16"><br>
+            </td>
+            <td width="9%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+          </tr>
+          <tr>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="9%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+          </tr>
+          <tr>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="9%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+          </tr>
+          <tr>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="48%" colspan="6" height="16"
+ bordercolor="#F5F5F5"> Rysunek 14.3 (b)</td>
+            <td width="9%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+          </tr>
+          <tr>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="8%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+            <td width="9%" height="16" bordercolor="#F5F5F5"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>Maj±c wszystkie warto¶ci s(i,j) dla i&lt;j mo¿emy wypisaæ optymalne
+nawiasowanie. Nastêpuj±cy rekurencyjny algorytm "wypisz" odczytuje z
+tablicy s pozycje, w których maj± byæ umieszczone nawiasy w optymalnym
+nawiasowaniu.</p>
+<p></p>
+<div class="def" style="width: 816px; height: 218px;">
+<table frame="void" rules="none" width="782" height="178">
+  <tbody>
+    <tr>
+      <td width="432" height="12" colspan="2">wypisz( i,j : int){</td>
+      <td width="844" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="373" height="12"><strong>&nbsp; </strong><b>if</b> (i
+= j) <b> then</b></td>
+      <td width="844" height="12"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="373" height="12"><strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+write (i) </td>
+      <td width="844" height="12">//&nbsp; wypisujemy numer macierzy,
+która ma w tym miejscu wystêpowaæ.</td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="373" height="12"><strong>&nbsp;else&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp;</td>
+      <td width="844" height="12"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="373" height="12"> &nbsp;<strong> </strong>&nbsp;&nbsp;&nbsp;&nbsp;
+      <strong>&nbsp;if&nbsp; </strong> (i &lt; j)<strong> then&nbsp; </strong>
+&nbsp; </td>
+      <td width="844" height="12"> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="373" height="12"> <strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+write("(");</td>
+      <td width="844" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="373" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+wypisz (i, s(i,j));<strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td width="844" height="12"> //wypisz optymalne ustawienie
+nawiasów w ci±gu i,...,s(i,j)</td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="373" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+write("<span lang="en"><font face="Symbol">´</font></span>");</td>
+      <td width="844" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="373" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+wypisz(s(i,j)+1, j);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+      <td width="844" height="12"> //wypisz optymalne ustawienie
+nawiasów w ci±gu s(i,j)+1,...,j</td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="373" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+write(")");</td>
+      <td width="844" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="373" height="12"> &nbsp;<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+fi;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+      <td width="844" height="12"> &nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="1"><strong>&nbsp;&nbsp;&nbsp; </strong></td>
+      <td width="373" height="1"> &nbsp;<strong>fi&nbsp;
+}&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+      <td width="844" height="1"> <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>Koszt procedury wypisz jest liniowy ze wzglêdu na liczbê mno¿onych
+macierzy.</p>
+<p>Skoro umiemy wypisaæ optymalny uk³ad nawiasów, to mo¿emy tê wiedzê
+wykorzystaæ, wykonuj±c w odpowiedniej kolejno¶ci mno¿enie macierzy.
+Algorytm wyliczania iloczynu ³añcucha macierzy, korzystaj±cy z tablicy
+najlepszego nawiasowania s przedstawiono jako rekurencyjn± funkcjê
+mult.&nbsp; Zak³adamy, ¿e&nbsp; dany jest ³añcuch macierzy A<sub><font
+ face="Verdana">1</font></sub><font face="Symbol">,</font> A<sub><font
+ face="Verdana">2</font></sub>,<font face="Symbol"> </font>...,<font
+ face="Symbol"> </font>A<sub><font face="Verdana">n</font></sub>, dla
+którego wyliczono wcze¶niej najlepsze nawiasowanie&nbsp; zapamiêtane w
+tablicy s(i,j). Wynikiem tej funkcji jest iloczyn A<sub><font
+ face="Verdana">1</font></sub><font face="Symbol"> </font><span
+ lang="en"><font face="Symbol">´</font></span> A<sub><font
+ face="Verdana">2</font></sub> <font face="Symbol"><span lang="en">´</span>
+</font>... <font face="Symbol"> <span lang="en">´</span> </font>A<sub><font
+ face="Verdana">n</font></sub>, a liczba mno¿eñ u¿yta do wyliczenia
+tego iloczynu jest najmniejsza&nbsp; z mo¿liwych.</p>
+<p></p>
+<div class="def" style="width: 428px; height: 214px;">
+<table frame="void" rules="none" width="426" height="178">
+  <tbody>
+    <tr>
+      <td width="490" height="12" colspan="2">mult( i,j : int)<b>{</b></td>
+      <td width="76" height="12"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="431" height="12"> &nbsp;<strong>&nbsp;if&nbsp; </strong>
+(i &lt; j)<strong> then&nbsp; </strong> &nbsp; </td>
+      <td width="76" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="431" height="12"> <strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+X := mult (i, s(i,j) );</td>
+      <td width="76" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="431" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Y := mult (s(i,j)+1, j)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+      <td width="76" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="431" height="12">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return X <font face="Symbol"> <span lang="en">´</span> </font>Y;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td width="76" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="431" height="12"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <strong> else&nbsp;</strong></td>
+      <td width="76" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="431" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return A<sub><font face="Verdana">i</font></sub></td>
+      <td width="76" height="12"><br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="12"><br>
+      </td>
+      <td width="431" height="12"> <b>&nbsp;fi;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td width="76" height="12"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="1"><strong>&nbsp;&nbsp;&nbsp; }</strong></td>
+      <td width="431" height="1"> &nbsp;<strong>&nbsp;&nbsp;&nbsp;&nbsp;
+      </strong></td>
+      <td width="76" height="1"> <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p><b>Pytanie 3</b>: Rozwa¿my macierze A<sub><font face="Verdana">1</font></sub><font
+ face="Symbol"> </font>(4<font face="Symbol"> <span lang="en">´</span>
+</font>2), A<sub><font face="Verdana">2</font></sub> (2<font
+ face="Symbol"><span lang="en">´</span> </font>
+300), A<font face="Verdana"><sub>3</sub></font><font face="Symbol"> </font>(3<font
+ face="Symbol">00 <span lang="en">´</span> </font>1), A<font
+ face="Verdana"><sub>4</sub></font><font face="Symbol"> </font>(1<font
+ face="Symbol"> <span lang="en">´</span> </font>2),A<font
+ face="Verdana"><sub>5</sub></font><font face="Symbol"> </font>(2<font
+ face="Symbol"> <span lang="en">´</span> </font>2), A<font
+ face="Verdana"><sub>6</sub></font><font face="Symbol"> </font>(2<font
+ face="Symbol"> <span lang="en">´</span> </font>300). Jaka jest
+minimalna liczba mno¿eñ skalarnych potrzebna do obliczenia iloczynu A<sub><font
+ face="Verdana">1</font></sub><font face="Symbol"> </font><span
+ lang="en"><font face="Symbol">´</font></span> A<sub><font
+ face="Verdana">2</font></sub> <font face="Symbol"><span lang="en">´</span>
+</font>... <font face="Symbol"> <span lang="en">´</span> </font>A<sub><font
+ face="Verdana">6</font></sub>?
+<!-- <p>Odpowied¼: 2412.</P> --></p>
+<p>&nbsp;</p>
+<form><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0" onclick="napis(this.form,'2412 mno¿eñ skalarnych. ');">
+</form>
+<p></p>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main14_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main14_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

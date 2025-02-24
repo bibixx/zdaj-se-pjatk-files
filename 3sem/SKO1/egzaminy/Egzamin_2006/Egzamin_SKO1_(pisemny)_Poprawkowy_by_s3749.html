@@ -1,0 +1,199 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="pl">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<title>Egzamin SKO1 Poprawkowy - część pisemna - 16 luty 2006</title>
+</head>
+
+<body bgcolor="#ffffff">
+<basefont face="Trebuchet MS" size="3">
+<p align="center">Egzamin SKO1 Poprawkowy<br>
+<font size="1">część pisemna</font><br>
+zestaw A, 16 luty 2006</p>
+<p>Numer indeksu: ................................</p>
+<hr>
+<p><b>Zadanie 1</b></p>
+<p>Sieć LAN w firmie XYZ ma adres 172.16.0.0/20. W związku z bardzo szybkim 
+rozwojem firmy i dużą ilością nowych komputerów w sieci pojawiło się bardzo dużo 
+ramek rozgłoszeniowych. Aby ograniczyć ich ilość postanowiono podzielić sieć na 
+podsieci. Podział miał nastąpić zgodnie ze strukturą firmy. W firmie każdy 
+pracownik posiada komputer. W dziale marketingu pracuje 280 osób, w dziale 
+sprzedaży 514 osób, a w księgowości 25 osób.</p>
+<p>Podziel sieć tak, aby umożliwić dwukrotny rozrost firmy (dwa razy więcej 
+zatrudnionych osób). Pamiętaj o pozostawieniu adresu IP dla rutera w każdej z 
+podsieci.</p>
+<table border="1" width="100%" cellspacing="0" cellpadding="2">
+	<tr>
+		<td align="center">Numer<br>
+		podsieci</td>
+		<td align="center">Adres<br>
+		podsieci</td>
+		<td align="center">Maska<br>
+		(V.X.Y.Z)</td>
+		<td align="center">Zakres
+		adresów<br>
+		(razem z<br>
+		interfejsem rutera)</td>
+		<td align="center">Adres<br>
+		rozgłoszeniowy</td>
+		<td align="center">Ilość<br>
+		interfejsów<br>
+		sieciowych</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center"> - </td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center"> - </td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center"> - </td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center"> - </td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+</table>
+
+<p><b>Zadanie 2</b></p>
+
+<table border="0" width="100%">
+	<tr>
+		<td width="40%">
+<p>Mamy sieć jak na rysunku obok. Użytkownik pracujący na komputerze o adresie IP <b>223.1.1.1</b> jednokrotnie
+wysyła &quot;ping-a&quot; do komputera <i>www.yahoo.com</i>.Zakładamy, że:<br>
+1) komputery w sieci <b>223.1.1.0/24</b> nie mają żadnych wpisów w swoich tablicach ARP.<br>
+2) ruter i komputery w sieci <b>223.1.2.0/24</b> mają poprawnie wypełnione swoje tablice ARP dla całego systemu.<br>
+3) serwer <i>dns</i> posiada kompletną wiedzę o całym systemie i jest rekurencyjny.<br>
+4) komputer <b>223.1.1.1</b> zna adres IP <i>dns</i>, który jest jego domyślnym serwerem DNS, ale nie zna adresu IP komputera <i>www.yahoo.com</i>.<br>
+<b>Przedstaw</b> wszystkie niezbędne kroki, które doprowadzą do poprawnego wysłania pakietu z komputera 223.1.1.1 i do uzyskania
+odpowiedzi z komputera <i>www.yahoo.com</i>. W swoim rozwiązaniu weź pod uwagę następujące protokoły: ARP, DNS, ICMP, HTTP, TCP, UDP.</p></td>
+		<td width="60%">
+		<p align="center">
+		<img border="0" src="egz_pisemny_popr_zad2.gif" width="518" height="320"></td>
+	</tr>
+</table>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%" cellspacing="0" cellpadding="2">
+	<tr>
+		<td align="center">Treść komunikatu<br>
+		(zawartość pakietu lub ramki)</td>
+		<td align="center">Protokoły</td>
+		<td align="center">adres IP<br>
+		nadawcy</td>
+		<td align="center">adres MAC<br>
+		nadawcy</td>
+		<td align="center">adres IP<br>
+		celu</td>
+		<td align="center">adres MAC celu</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">FF:FF:FF:FF:FF:FF</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">223.1.1.3</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">223.1.1.3</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">DNS/UDP</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">FF:FF:FF:FF:FF:FF</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">ARP</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">ICMP</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">223.1.2.2</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">223.1.1.1</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">13-13-13</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">ICMP</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">12-12-12</td>
+	</tr>
+	</table>
+
+<p align="center"><font size="2">Ripped by: marcin[at]pjwstk.edu.pl. Do sprawdzania poprawności policzonej maski,
+adresu sieci i rozgłoszeniowego, warto odwiedzić:</font> <a target="_blank" href="http://42.pl/ipcalc"><font size="2">http://42.pl/ipcalc</font></a></p>
+
+</body>
+
+</html>

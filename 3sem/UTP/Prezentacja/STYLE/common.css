@@ -1,0 +1,228 @@
+PRE.code  
+{
+ background-color: #fffff7;
+ color:black;
+ border:1px solid #800000;
+ padding:2%;
+ display:block;
+ white-space:pre;
+}
+                   
+PRE.syntax
+{
+ background-color: #fffff7;
+ color:black;
+ border:2px solid dodgerblue;
+ padding:2%;
+ display:block;
+ white-space:pre;
+}
+
+PRE.shell
+{
+ background-color: #333399;
+ color: #cccccc;
+ display:block;
+ border:4px ridge aliceblue;
+ padding:1%;
+ font-size: 90%;
+ font-weight:bold;
+ white-space:pre;
+}
+
+PRE.inline
+{
+ background-color: transparent;
+ border:none;
+ display: inline;
+ white-space:pre;
+ padding:0px;
+}
+
+PRE.block
+{
+ background-color: transparent;
+ border:none;
+ display: block;
+ white-space:pre;
+ padding:0px;
+}
+
+
+
+PRE
+{
+ background-color: #fffff7;
+ color:black;
+ display:block;
+ white-space:pre;
+ border:1px solid #800000;
+ padding:2%;
+}
+
+
+div.syntax
+{
+ background-color: #fffff7;
+ color:black;
+ border:2px solid dodgerblue;
+ padding:2%;
+}
+
+
+div.notec
+{
+ background-color: #fffff7;
+ color:black;
+ border:1px solid #800000;
+ padding:1%;
+}
+
+
+div.notel
+{
+ background-color: #fffff7;
+ color:black;
+ border:1px solid #800000;
+ font-size: 80%;
+ margin: 2px;
+ padding:1%;
+ width: 25%;
+ float:right
+}
+
+div.notel33
+{
+ background-color: #fffff7;
+ color:black;
+ border:1px solid #800000;
+ font-size: 80%;
+ margin: 2px;
+ padding:1%;
+ width: 33%;
+ float:right
+}
+
+div.noter
+{
+ background-color: #fffff7;
+ color:black;
+ border:1px solid #800000;
+ font-size: 80%;
+ margin: 2px;
+ padding:1%;
+ width:25%;
+ float:left
+}
+
+div.noter33
+{
+ background-color: #fffff7;
+ color:black;
+ border:1px solid #800000;
+ font-size: 80%;
+ margin: 2px;
+ padding:1%;
+ width:33%;
+ float:left
+}
+
+div.def
+{
+ background-color: #FFE4C4;
+ color:black;
+ border:3px solid blue;
+ padding:1em;
+ width:90%;
+} 
+
+div.important
+{
+ background-color: #FFFFCC;
+ color:#CC0000;
+ border:5px solid #CC0000;
+ width:90%;
+ padding:1%;
+}
+
+div.listing25r
+{
+ background-color: #333399;
+ color: #cccccc;
+ border:4px ridge aliceblue;
+ font-family: monospace;
+ font-size: 75%;
+ margin: 2px;
+ padding:1%;
+ width:25%;
+ float:right
+}
+
+div.listing25l
+{
+ background-color: #333399;
+ color: #cccccc;
+ border:4px ridge aliceblue;
+ font-family: monospace;
+ font-size: 75%;
+ margin: 2px;
+ padding:1%;
+ width:25%;
+ float:left
+}
+
+
+
+
+div.listing33r
+{
+ background-color: #333399;
+ color: #cccccc;
+ border:4px ridge aliceblue;
+ font-family: monospace;
+ font-size: 75%;
+ margin: 2px;
+ padding:1%;
+ width:33%;
+ float:right
+}
+
+div.listing33l
+{
+ background-color: #333399;
+ color: #cccccc;
+ border:4px ridge aliceblue;
+ font-family: monospace;
+ font-size: 75%;
+ margin: 2px;
+ padding:1%;
+ width:33%;
+ float:left
+}
+
+
+
+div.listing50
+{
+ background-color: #333399;
+ color: #cccccc;
+ border:4px ridge aliceblue;
+ font-family: monospace;
+ font-size: 75%;
+ margin: 2px;
+ padding:1%;
+ width:50%;
+}
+
+div.listing100
+{
+ background-color: #333399;
+ color: #cccccc;
+ border:4px ridge aliceblue;
+ font-family: monospace;
+ font-size: 75%;
+ margin: 2px;
+ padding:1%;
+ width:90%;
+}
+

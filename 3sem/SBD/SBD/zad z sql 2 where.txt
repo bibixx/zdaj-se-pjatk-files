@@ -1,0 +1,46 @@
+I. Dla pracowników z dzialu mieszczacego sie w New Yorku z piatej grupy
+zarobkowej wypisac numer i nazwisko i date zatrudnienia, numer i nazwe
+dzialu, pensje i grupe zarobkowa.
+
+SELECT dept.loc "Lokalizacja", emp.empno "Nr pracownika", emp.ename "Imie", emp.hiredate "Data zat", dept.deptno "Nr dzialu", dept.dname "Nazwa dzialu", emp.sal "Pensja", salgrade.grade "Nr gr zarobkowej"
+FROM emp, dept, salgrade
+WHERE loc IN ('NEW YORK') AND salgrade.grade IN ('5') AND emp.deptno = dept.deptno AND sal BETWEEN losal AND hisal;
+
+II. Obok numeru, nazwiska i stanowiska kazdego Kierownika podaj numer, nazwisko i
+stanowisko jego pracowników. Wynik przygotuj tylko dla pracowników z dzialu Sales.
+
+SELECT dept.dname "Nazwa dzialu", m.empno "Nr kierownika", m.ename "Imie kierow", m.job "Stanowisko", e.empno "Nr pracow", e.ename "Imie pracow", e.job "Stanowisko"
+FROM emp e, emp m, dept
+WHERE dname IN ('SALES');
+
+IV. Ustaw pracowników pracujacych na stanowisku Clerk we wszystkie mozliwe pary w
+ten sposób, aby po lewej stronie w parze znajdowal sie pracownik z pensja mniejsza
+niz pensja pracownika po prawej stronie. Wypisz nazwiska, stanowiska i daty
+zatrudnienia tych pracowników.
+
+************************************** NIE GOTOWE
+SELECT ename "Imie", job "Stanowisko", hiredate "Data zat", ename "Imie", job "Stanowisko", hiredate "Data zat"
+from emp
+WHERE job = 'CLERK';
+************************************** NIE GOTOWE
+
+
+V. Wypisac stanowiska wystepujace zarówno w dziale ACCOUNTING jak w dziale SALES.
+
+SELECT job "Stanowisko"
+FROM emp, dept
+WHERE dname = 'ACCOUNTING'
+UNION
+SELECT job
+FROM emp, dept
+WHERE dname = 'SALES';
+
+wersja z wypisywaniem nazwy dzialu:
+
+SELECT job "Stanowisko", dname "Dzial"
+FROM emp, dept
+WHERE dname = 'ACCOUNTING'
+UNION
+SELECT job, dname
+FROM emp, dept
+WHERE dname = 'SALES';

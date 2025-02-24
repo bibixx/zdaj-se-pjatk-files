@@ -1,0 +1,666 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main05_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main05_p6.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><br clear="all"><div class="tytulpunktu">
+5. Sortowanie pozycyjne</div>
+
+
+ &nbsp;<p>Sortowanie pozycyjne jest pewnym algorytmem sortowania przez 
+rozrzucanie stosowanym przy porządkowaniu np. kart bibliotecznych (np. ze względu na 
+nazwisko autora), poczty (np. ze względu na kod pocztowy). Algorytm ten był 
+używany do sortowania kart perforowanych służących do przechowywania danych, w 
+dawnych komputerach.&nbsp; Karta składała się z 80 kolumn, z których każda miała 
+12 pozycji. Kolumna służyła do zapamiętania jednej cyfry przez wybicie dziurki 
+na odpowiedniej pozycji, zatem na jednej karcie można było zapamiętać słowo 80 
+znakowe. Maszyna sortująca, automatycznie rozdzielała karty do 12 pojemników w 
+zależności od położenia dziurki w ustalonej kolumnie. Następnie, należało wyjąć 
+karty z kolejnych pojemników tworząc jeden plik kart i ponownie użyć maszyny 
+sortującej do rozdzielenia kart ze względu na następną kolumnę. </p>
+<p>Można sądzić, że zadania sortowania liczb w systemie dziesiętnym można 
+wykonać stosując podobną zasadę: posortować najpierw dany zbiór liczb, ze 
+względu na najbardziej znaczącą cyfrę, np. tworząc rodzinę zbiorów liczb o 
+takiej samej pierwszej cyfrze. Połączyć wszystkie kubełki tworząc ponownie jeden ciąg i powtórzyć proces 
+rozrzucania, ale biorąc tym razem pod uwagę następną cyfrę rozważanych liczb. 
+Czy postępowanie takie można jednak zastosować do dowolnego ciągu liczb 
+naturalnych?&nbsp; </p>
+<p><b>Przykład 5.1</b></p>
+<p>Chcemy posortować następujący ciąg liczb 94, 572, 321, 58. Postąpimy tak, jak 
+w opisanej wyżej metodzie. W kolejnych krokach otrzymamy:</p>
+<ol>
+  <li>krok: 321, 572, 58, 94, jako wynik sortowania ze względu na najbardziej 
+  znaczącą cyfrę.</li>
+  <li>krok: 321, 94, 572, 58, jako wynik sortowania, ze względu na drugą z kolei 
+  cyfrę.</li>
+  <li>krok: 321, 572, 94, 58, jako wynik sortowania ze względu na trzecią cyfrę.</li>
+</ol>
+<p>Wynik nie jest, niestety, ciągiem uporządkowanym niemalejąco. Jest oczywiste, 
+że powodem naszego niepowodzenia jest niejednakowa liczba cyfr w rozważanych 
+liczbach.</p>
+<p>Niech zatem będzie dany ciąg liczb całkowitych d cyfrowych. Metoda zastosowana w algorytmie RadixSort jest bardzo podobna 
+do wspomnianej powyżej metody, ale zaczynamy 
+sortowanie od najmniej znaczącej cyfry. Aby posortować ciąg liczb całkowitych w 
+systemie dziesiętnym tworzymy 10 pojemników, tzw. &quot;kubełków&quot; odpowiadających cyfrom 0,...,9. Każda 
+liczba wpada najpierw do &quot;kubełka&quot; o numerze równym jej ostatniej cyfrze. 
+Następnie liczby są wyjmowane kolejno z &quot;kubełków&quot; 0,1,2... aby utworzyć jeden 
+ciąg. Teraz proces należy powtórzyć, z tym, że &quot;rozrzucając&quot;&nbsp; liczby, 
+bierzemy pod uwagę drugą od końca cyfrę, itd. </p>
+<p>Aby wynik algorytmu był zawsze poprawny trzeba zwrócić uwagę na sposób 
+reprezentacji &quot;kubełków&quot;. Gdybyśmy je zaimplementowali jako stosy, to mogłoby się 
+zdarzyć tak jak w przykładzie 5.2</p>
+<p><b>Przykład 5.2</b></p>
+<p>Dany jest ciąg&nbsp; 253, 523, 235, 532, 325, 352, 252, 525, 718. Elementy wewnątrz 
+&quot;kubełków&quot;&nbsp; będziemy układali na stosie. Pamiętamy, że każdy nowy element 
+trafia na szczyt stosu i zdejmujemy elementy najpierw ze szczytu stosu. </p>
+<center>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="80%" id="AutoNumber1">
+  <tr>
+    <td width="20%" colspan="4" align="center">Dany ciąg:</td>
+    <td width="8%" bgcolor="#C0C0C0" colspan="2" align="center">253</td>
+    <td width="8%" bgcolor="#C0C0C0" colspan="2" align="center">523</td>
+    <td width="8%" bgcolor="#C0C0C0" colspan="2" align="center">235</td>
+    <td width="8%" colspan="2" bgcolor="#C0C0C0" align="center">532</td>
+    <td width="8%" colspan="2" bgcolor="#C0C0C0" align="center">325</td>
+    <td width="8%" colspan="2" bgcolor="#C0C0C0" align="center">352</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">252</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">525</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+    <td width="8%" colspan="2" bgcolor="#C0C0C0" align="center">718</td>
+    <td width="4%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="100%" colspan="23" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="8%" rowspan="5" align="center">STOSY<br>
+    <span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" rowspan="4" align="center">&nbsp;</td>
+    <td width="4%" rowspan="4" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" rowspan="2" align="center">&nbsp;</td>
+    <td width="4%" rowspan="4" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" rowspan="4" align="center">&nbsp;</td>
+    <td width="4%" rowspan="4" align="center">&nbsp;</td>
+    <td width="4%" rowspan="3" align="center">&nbsp;</td>
+    <td width="4%" rowspan="4" align="center">&nbsp;</td>
+    <td width="8%" colspan="2" rowspan="5" align="center">STOSY<br>
+    <span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" rowspan="4" align="center">&nbsp;</td>
+    <td width="4%" rowspan="3" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" rowspan="2" align="center">&nbsp;</td>
+    <td width="4%" rowspan="4" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" rowspan="4" align="center">&nbsp;</td>
+    <td width="4%" rowspan="4" align="center">&nbsp;</td>
+    <td width="4%" rowspan="4" align="center">&nbsp;</td>
+    <td width="4%" rowspan="4" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" bgcolor="#FFE4E1" align="center">252</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">525</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">325</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">253</td>
+  </tr>
+  <tr>
+    <td width="4%" bgcolor="#FFE4E1" align="center">352</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">523</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">325</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">525</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">235</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">352</td>
+  </tr>
+  <tr>
+    <td width="4%" bgcolor="#FFE4E1" align="center">532</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">253</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">235</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">718</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">718</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">523</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">532</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">252</td>
+  </tr>
+  <tr>
+    <td width="4%" bgcolor="#C0C0C0" align="center">0</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">1</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">2</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">3</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">4</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">5</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">6</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">7</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">8</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">9</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">0</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">1</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">2</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">3</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">4</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">5</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">6</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">7</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">8</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">9</td>
+  </tr>
+  <tr>
+    <td width="96%" align="center" colspan="23">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center">I etap</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">252</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">352</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">532</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">523</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">253</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">525</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">325</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">235</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">718</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="8%" colspan="2" align="center">II etap</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">718</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">325</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">525</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">523</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">235</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">532</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">253</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">352</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">252</td>
+    <td width="4%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="96%" colspan="23" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center" rowspan="5">STOSY<br>
+    <span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" rowspan="4">&nbsp;</td>
+    <td width="4%" align="center" rowspan="4">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center" rowspan="4">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center" rowspan="4">&nbsp;</td>
+    <td width="4%" align="center" rowspan="3">&nbsp;</td>
+    <td width="4%" align="center" rowspan="4">&nbsp;</td>
+    <td width="4%" align="center" rowspan="4">&nbsp;</td>
+    <td width="48%" align="center" colspan="12" rowspan="6">Nieudana próba 
+    sortowania pozycyjnego<p style="text-align: center">z użyciem stosów</td>
+  </tr>
+  <tr>
+    <td width="4%" bgcolor="#FFE4E1" align="center">252</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">532</td>
+  </tr>
+  <tr>
+    <td width="4%" bgcolor="#FFE4E1" align="center">253</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">352</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">523</td>
+  </tr>
+  <tr>
+    <td width="4%" bgcolor="#FFE4E1" align="center">235</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">325</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">525</td>
+    <td width="4%" bgcolor="#FFE4E1" align="center">718</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center" bgcolor="#C0C0C0">0</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0">1</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0">2</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0">3</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0">4</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0">5</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0">6</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0">7</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0">8</td>
+    <td width="4%" align="center" bgcolor="#C0C0C0">9</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center">III etap</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">252</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">253</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">235</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">352</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">325</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">532</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">523</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">525</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">718</td>
+    <td width="4%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="96%" align="center" colspan="23">&nbsp;</td>
+  </tr>
+</table>
+</center>
+
+<p>W pierwszym etapie rozrzucania bierzemy pod uwagę tylko ostatnią cyfrę. 
+Zauważmy, że niektóre &quot;kubełki&quot; są puste, np. &quot;kubełek&quot; o numerze 1 jest pusty, 
+bo nie było w naszym ciągu żadnej liczby kończącej się jedynką. Po pierwszym 
+rozrzucaniu i po po połączeniu &quot;kubełków&quot; otrzymaliśmy następujący ciąg :252, 
+352, 532, 523, 253, 525, 325, 235, 718.&nbsp; Teraz powtarzamy rozrzucanie ze 
+względu na drugą cyfrę. Tak jak poprzednio elementy w &quot;kubełkach&quot; kładziemy 
+jeden nad drugim. Po&nbsp; zdjęciu elementów kolejno ze stosów o numerach 1, 2, 
+3, 5 ( bo tylko te stosy były niepuste) otrzymaliśmy ciąg 718, 325, 525, 523, 
+235, 532, 253, 352, 252. Teraz następuje trzeci etap, rozrzucanie ze względu na 
+najbardziej znaczącą cyfrę.&nbsp; Po połączeniu &quot;kubełków&quot; otrzymujemy ciąg: 
+252, 253, 235, 352, 325, 532, 525, 718, który nie jest niestety uporządkowany 
+niemalejąco. </p>
+<p>Kłopot polega na tym, że elementy są zdejmowane ze stosu w kolejności 
+odwrotnej do tej, w jakiej były wkładane na stos.&nbsp; Taki&nbsp; problem nie 
+wystąpi, jeżeli zamiast stosów użyjemy kolejek.<font face="Wingdings"> J</font></p>
+<p><b>Przykład 5.3</b></p>
+<p>Rozważmy ciąg z przykładu &nbsp;5.2 : 253, 523, 235, 532, 325, 352, 252, 525, 
+718. W tabeli poniżej przedstawiliśmy kolejne etapy&nbsp; algorytmu. </p>
+
+<center>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="80%" id="AutoNumber2">
+  <tr>
+    <td width="20%" colspan="4" align="center">Dany ciąg:</td>
+    <td width="8%" bgcolor="#C0C0C0" colspan="2" align="center">253</td>
+    <td width="8%" bgcolor="#C0C0C0" colspan="2" align="center">523</td>
+    <td width="8%" bgcolor="#C0C0C0" colspan="2" align="center">235</td>
+    <td width="8%" colspan="2" bgcolor="#C0C0C0" align="center">532</td>
+    <td width="8%" colspan="2" bgcolor="#C0C0C0" align="center">325</td>
+    <td width="8%" colspan="2" bgcolor="#C0C0C0" align="center">352</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">252</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">525</td>
+    <td width="4%" bgcolor="#C0C0C0" align="center">&nbsp;</td>
+    <td width="8%" colspan="2" bgcolor="#C0C0C0" align="center">718</td>
+  </tr>
+  <tr>
+    <td width="100%" colspan="22" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="8%" rowspan="4" align="center">Kolejki</td>
+    <td width="4%" align="center">2</td>
+    <td width="4%" align="center"><span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">532</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">352</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">252</td>
+    <td width="16%" align="center" colspan="4">&nbsp;</td>
+    <td width="8%" colspan="2" rowspan="4" align="center">Kolejki</td>
+    <td width="4%" align="center">1</td>
+    <td width="4%" align="center"><span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">718</td>
+    <td width="28%" align="center" colspan="7">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center">3</td>
+    <td width="4%" align="center"><span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">253</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">523</td>
+    <td width="20%" align="center" colspan="5">&nbsp;</td>
+    <td width="4%" align="center">2</td>
+    <td width="4%" align="center"><span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">523</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">325</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">525</td>
+    <td width="20%" align="center" colspan="5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center">5</td>
+    <td width="4%" align="center"><span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">235</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">325</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">525</td>
+    <td width="16%" align="center" colspan="4">&nbsp;</td>
+    <td width="4%" align="center">3</td>
+    <td width="4%" align="center"><span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">532</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">235</td>
+    <td width="24%" align="center" colspan="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center">8</td>
+    <td width="4%" align="center"><span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">718</td>
+    <td width="24%" align="center" colspan="6">&nbsp;</td>
+    <td width="4%" align="center">5</td>
+    <td width="4%" align="center"><span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">352</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">252</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">253</td>
+    <td width="20%" align="center" colspan="5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="92%" align="center" colspan="22">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center">I etap</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">532</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">352</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">252</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">253</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">523</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">235</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">325</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">525</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">718</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="8%" colspan="2" align="center">II etap</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">718</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">523</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">325</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">525</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">532</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">235</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">352</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">252</td>
+    <td width="4%" bgcolor="#FFFFCC" align="center">253</td>
+  </tr>
+  <tr>
+    <td width="92%" align="center" colspan="22">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center" rowspan="4">Kolejki</td>
+    <td width="4%" align="center">2</td>
+    <td width="4%" align="center"><span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">235</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">252</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">253</td>
+    <td width="16%" align="center" colspan="4">&nbsp;</td>
+    <td width="48%" align="center" colspan="12" rowspan="4">Sortowanie&nbsp; 
+    pozycyjne</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center">3</td>
+    <td width="4%" align="center"><span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">325</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">352</td>
+    <td width="20%" align="center" colspan="5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center">5</td>
+    <td width="4%" align="center"><span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">523</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">525</td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">532</td>
+    <td width="16%" align="center" colspan="4">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="4%" align="center">7</td>
+    <td width="4%" align="center"><span lang="en"><font face="Symbol">&reg;</font></span></td>
+    <td width="4%" align="center" bgcolor="#FFE4E1">718</td>
+    <td width="24%" align="center" colspan="6">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="92%" align="center" colspan="22">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center">III etap</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">235</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">252</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">253</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">325</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">352</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">523</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">525</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">532</td>
+    <td width="4%" align="center" bgcolor="#FFFFCC">718</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+    <td width="4%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="92%" align="center" colspan="22">&nbsp;</td>
+  </tr>
+</table>
+</center>
+
+<p>Tym razem &quot;kubełki&quot; są realizowane jako kolejki, do których elementy wpadają 
+zawsze na koniec, a wyjmowane są zawsze najpierw początkowe elementy. W tabeli, 
+dla uproszczenia,&nbsp; przedstawiliśmy tylko te kolejki,&nbsp; które 
+w danym etapie algorytmu były niepuste. Tym razem wynikiem trzeciego etapu 
+algorytmu jest ciąg uporządkowany niemalejąco. <font face="Wingdings">J</font></p>
+<p><b>Szkic algorytmu</b></p>
+<p>Niech e[1], ..., e[n] będzie tablicą elementów do posortowania. Załóżmy, że kolejki q[0], q[1],..., q[9] 
+są początkowo puste.</p>
+<p>
+<div class="def" style="width: 816; height: 218">
+   <TABLE frame="void" rules="none" width="782" height="178">
+         <TR>
+            <TD width="591" height="12" colspan="2">RadixSort{</TD>
+             
+            <TD width="16" height="12"></TD>
+             
+            <TD width="708" height="12"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12"><strong>&nbsp;for </strong>k := 1<strong> to </strong>
+            d<strong> do </strong>
+            </TD> 
+            <TD width="16" height="12"></TD> 
+            <TD width="708" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for </strong>
+            j := 1 <b>to</b> n<b> 
+            do</b><strong> </strong></TD> 
+            <TD width="16" height="12"></TD> 
+            <TD width="708" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp;x 
+            := k-ta cyfra od końca liczby e[j];</TD> 
+            <TD width="16" height="12"></TD> 
+            <TD width="708" height="12">//&nbsp; rozrzuć wszystkie liczby do 
+            kubełków</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12">   &nbsp;<strong> </strong>&nbsp;&nbsp;&nbsp;&nbsp; <STRONG>&nbsp;&nbsp; </STRONG>
+             &nbsp;włóż e[j] do kolejki q[x];</TD>
+            <TD width="16" height="12">   </TD>
+            <TD width="708" height="12">   &nbsp;//o numerach 0,...9 ze względu na k-tą od końca cyfrę</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; od;
+            </strong></TD>
+            <TD width="16" height="12">   </TD>
+            <TD width="708" height="12">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12">   &nbsp;<strong>&nbsp;&nbsp;&nbsp;&nbsp; for
+            </strong>j := 0&nbsp; <b>to</b> 9<b> do</b><strong>&nbsp;</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="16" height="12">   </TD>
+            <TD width="708" height="12">   //połącz kolejki w jeden ciąg </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            przepisz zawartość kolejki q[j] <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; na kolejne pozycje tablicy e ;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="16" height="12">   </TD>
+            <TD width="708" height="12">   //z zachowaniem kolejności elementów 
+            w kolejkach</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12">   &nbsp;&nbsp;&nbsp;&nbsp; <b>od</b>;</TD>
+            <TD width="16" height="12">   </TD>
+            <TD width="708" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="532" height="12">   &nbsp;<b>od;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="16" height="12">   </TD>
+            <TD width="708" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"><strong>&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="532" height="1">   &nbsp;<STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG></TD>
+            <TD width="16" height="1">   </TD>
+            <TD width="708" height="1">   </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p><b>Poprawność algorytmu RadixSort</b></p>
+<p>Załóżmy, że w wyniku k-1 pierwszych iteracji, elementy tablicy e tworzą ciąg 
+uporządkowany niemalejąco, jeśli rozważać tylko k-1 ostatnich pozycji każdej z 
+liczb.&nbsp; Prześledzimy zachowanie algorytmu w k-tym przebiegu. Niech x i y 
+będą dowolnymi elementami tablicy e i niech: </p>
+<p style="text-align: center">x = x<sub><font face="Verdana">k+1</font></sub> 10
+<sup><font face="Verdana">k+1</font></sup> + x<sub><font face="Verdana">k</font></sub> 
+10<sup><font face="Verdana">k</font></sup> + x*</p>
+<p style="text-align: center">y = y<sub><font face="Verdana">k+1</font></sub> 10
+<sup><font face="Verdana">k+1</font></sup> + y<sub><font face="Verdana">k</font></sub> 
+10<sup><font face="Verdana">k</font></sup> + y*</p>
+<p>gdzie x* i y* są liczbami mniejszymi od 10<sup><font face="Verdana">k</font></sup> 
+oraz x poprzedza y w tablicy e (tzn. x* <font face="Symbol"><span lang="en">&pound;</span>
+</font>y*). Rozważymy trzy przypadki ze względu na relację zachodzącą między k-tymi 
+cyframi rozwinięcia dziesiętnego liczb x i y: </p>
+<p>1. Albo x<sub><font face="Verdana">k</font></sub> = y<sub><font face="Verdana">k</font></sub> 
+i wtedy liczby x, y znajdą się w k-tym przebiegu w tej samej kolejce, ale x 
+zostanie w niej umieszczone wcześniej niż y i dlatego, po połączeniu kolejek, x 
+będzie poprzedzało y.</p>
+<p>2. Albo&nbsp; x<sub><font face="Verdana">k</font></sub> &lt; y<sub><font face="Verdana">k&nbsp;
+</font></sub>i wtedy x trafi do kolejki o mniejszym numerze niż y, zgodnie z zasadą rozrzucania. Ponieważ łączenie kolejek nastąpi też w kolejności rosnących 
+numerów kolejek, zatem po k-tym przebiegu x będzie poprzedzało y po połączeniu 
+kolejek.</p>
+<p>3. Albo x<sub><font face="Verdana">k</font></sub> &gt; y<sub><font face="Verdana">k</font></sub>. 
+W takim przypadku y zostanie wpisane do kolejki o numerze wcześniejszym niż 
+numer kolejki, do której wpadnie x. Gdy kolejki zostaną połączone y będzie 
+poprzedzało x. </p>
+<p>Zatem we wszystkich trzech przypadkach liczby x i y będą występowały we 
+właściwej kolejności. Po k-tej iteracji otrzymany ciąg e jest uporządkowany 
+niemalejąco ze względu na k ostatnich pozycji.</p>
+<p>Biorąc pod uwagę udowodniony powyżej niezmiennik, po d iteracjach, tablica e 
+zawiera uporządkowane niemalejąco elementy początkowego ciągu.</p>
+
+<p>&nbsp;</P><p></P>
+
+<div class="twier">
+<p>Twierdzenie 5.1</P>
+<p>Algorytm RadixSort jest całkowicie poprawny w strukturze liczb naturalnych ze 
+względu na następującą specyfikację:</P>
+<p style="text-align: center">wp = {(<font face="Symbol">$ </font>k) 10 <sup>
+<font face="Verdana">d</font></sup><font face="Symbol"> <span lang="en">&pound;</span></font> 
+e<sub><font face="Verdana">i</font></sub> &lt;10 <sup><font face="Verdana">d+1</font></sup> 
+oraz e[i] = e<sub><font face="Verdana">i</font></sub> dla dowolnego i=1,2,...,n}</P>
+<p style="text-align: center">wk = {e[1] <font face="Symbol"><span lang="en">&pound;</span></font> 
+e[2] <font face="Symbol"><span lang="en">&pound;</span></font>...<font face="Symbol">
+<span lang="en">&pound;</span></font>e[n]&nbsp; oraz ciąg e[1],...,e[n] jest 
+permutacją elementów&nbsp; e<sub><font face="Verdana">1</font></sub>,<font face="Symbol"> 
+... ,</font>e<sub><font face="Verdana">n</font></sub>}</P>
+<p></P>
+ 
+</div>
+
+ 
+
+<p>&nbsp;</p>
+<p><b>Koszt algorytmu RadixSort</b></p>
+<p>Operacjami dominującymi w tym algorytmie są operacje wkładania i usuwania 
+elementu do kolejki. W każdym przebiegu pętli zewnętrznej wykonujemy
+<font face="Symbol">Q</font>(n) tego typu operacji. Koszt całkowity algorytmu 
+zastosowanego do ciągu n liczb d-cyfrowych wynosi <font face="Symbol">Q</font>(n
+<font face="Symbol"><span lang="en">´</span> </font>d).&nbsp; Jeżeli d jest 
+stałą, to koszt algorytmu jest liniowy.</p>
+<p>Algorytm RadixSort można też przedstawić w uogólnionej postaci następująco:</p>
+<p>
+<div class="def" style="width: 502; height: 167">
+   <TABLE frame="void" rules="none" width="472" height="144">
+         <TR>
+            <TD width="868" height="12" colspan="2">RadixSort{</TD>
+             
+            <TD width="62" height="12"></TD>
+             
+            <TD width="75" height="12"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="809" height="12"><strong>&nbsp;for </strong>k := 1<strong> to </strong>
+            d<strong> do </strong>
+            </TD> 
+            <TD width="62" height="12"></TD> 
+            <TD width="75" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="809" height="12">posortuj&nbsp; dany ciąg ze względu na 
+            k-tą od końca cyfrę&nbsp; używając dowolnego stabilnego algorytmu 
+            sortowania</TD> 
+            <TD width="62" height="12"></TD> 
+            <TD width="75" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="809" height="12"><strong>&nbsp;od;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp; </TD> 
+            <TD width="62" height="12"></TD> 
+            <TD width="75" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="1"><strong>&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="809" height="1">   &nbsp;<STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG></TD>
+            <TD width="62" height="1">   </TD>
+            <TD width="75" height="1">   </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p>Zwykle, w treści pętli tego algorytmu występuje algorytm CountingSort, który 
+jest algorytmem stabilnym i łatwym do zaimplementowania. I chociaż wymaga on w 
+przypadku ogólnym dodatkowej tablicy, to w tym zastosowaniu, do sortowania 
+pozycyjnego, jego tablica pomocnicza jest dziesięcioelementowa (pozycje tej 
+tablicy odpowiadają cyfrom).</p>
+<p><b>Uwaga</b> 1. Algorytm RadixSort można stosować również do sortowania liczb 
+o różnej długości, np. uzupełniając &quot;brakujące&quot; pozycje początkowe zerami. 2. 
+Można też go stosować do sortowania dowolnych rekordów, których składowe należą 
+do dowolnych liniowo uporządkowanych zbiorów skończonych.</p>
+
+<p><b>Pytanie 6</B>: Załóżmy, że alfabet składa się z 25 liter oraz, że mamy 
+posortować 1000 słów 5 literowych. Ile kolejek musimy utworzyć w procesie 
+sortowania tych słów i ile razy wykonamy operację wkładania elementu do kolejki? 
+ </P>
+
+<!-- <p>Odpowiedź:25 kolejek. Wykonamy 5 *1000 razy operację wkładania słowa do kolejki. .</P> -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'25 kolejek. 5000 operacji wkładania do kolejki. ')">
+</form>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main05_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main05_p6.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

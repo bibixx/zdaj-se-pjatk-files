@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body style="background-color: whitesmoke;" leftmargin="8" topmargin="8"
+ marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"--><!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr--><!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main09_p0.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp; <a href="main09_p2.html" target="main"
+ class="NAWIGACJA">nastêpny
+punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 2"></a><br clear="all">
+<div class="tytulpunktu">1. Definicja kopca.</div>
+<p>Struktura kopca jest przyk³adem etykietowanego drzewa binarnego,
+wywa¿onego. Nie jest to jednak drzewo binarnych poszukiwañ. Zasady
+etykietowania wierzcho³ków s± inne, chocia¿ tak jak w przypadku drzew
+binarnych poszukiwañ, zak³ada siê, ¿e zbiór etykiet jest liniowo
+uporz±dkowany.&nbsp; Co wiêcej, kopiec, jako drzewo doskona³e, ma
+wszystkie ¶cie¿ki prawie tej samej d³ugo¶ci.&nbsp; Zestaw dostêpnych
+operacji w kopcu te¿ jest inny ni¿ w drzewach binarnych poszukiwañ.
+Kopce stanowi± strukturê danych, w której zwykle wykonujemy operacje
+wstawiania, znajdowana i usuwania minimum. S± to operacje
+charakterystyczne dla struktur zwanych kolejkami priorytetowymi. Bêdzie
+o tym mowa w nastêpnym wyk³adzie. Ten punkt wyk³adu po¶wiêcimy
+definicji kopca.</p>
+<div class="def">
+<p style="text-align: justify;">Definicja 1.1&nbsp; Powiemy, ¿e drzewo
+binarne jest doskona³e wtedy i tylko wtedy, gdy&nbsp; wszystkie poziomy
+drzewa s± maksymalne zape³nione z wyj±tkiem byæ mo¿e ostatniego
+poziomu, na którym wszystkie li¶cie s± zgrupowane maksymalnie na
+lewo.&nbsp; </p>
+</div>
+<p>Na mocy definicji 1.1, je¶li z drzewa doskona³ego o wysoko¶ci h,
+usuniemy wszystkie li¶cie z ostatniego poziomu, to otrzymamy pe³ne
+drzewo binarne o wysoko¶ci h-1 (por. rysunek 9.1 (a)).
+Charakterystyczny kszta³t drzewa doskona³ego przedstawiono na rysunku
+9.1 (b). Zaznaczone wierzcho³ki pe³ni± specjaln± rolê przy wykonywaniu
+operacji na drzewie doskona³ym.</p>
+<table border="0" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="60%"
+ id="AutoNumber3">
+  <tbody>
+    <tr>
+      <td width="50%"> <img border="0" src="RYSUNKI/Rysunek9_1a.gif"
+ width="250" height="250"></td>
+      <td width="50%"> <img border="0" src="RYSUNKI/Rysunek9_1b.gif"
+ width="250" height="250"></td>
+    </tr>
+  </tbody>
+</table>
+<p>Drzewo doskona³e o wysoko¶ci h, ma wiêc co najwy¿ej&nbsp; 2<sup><font
+ face="Verdana">h+1</font></sup> -1&nbsp; i co najmniej 2<sup><font
+ face="Verdana">h</font></sup> wierzcho³ków.</p>
+<div class="lemat">
+<p>Lemat 1.1&nbsp;&nbsp; Dla dowolnego drzewa doskona³ego o n
+wierzcho³kach i wysoko¶ci h zachodz± nierówno¶ci :</p>
+<p style="text-align: center;">2<sup><font face="Verdana">h</font></sup>
+-1<font face="Symbol"> &lt;</font> n <span lang="en"><font
+ face="Symbol">&#163;</font></span> 2<sup><font face="Verdana">h+1</font></sup>-1
+.</p>
+<p style="text-align: center;">lg(n+1)-1<font face="Symbol"> <span
+ lang="en">&#163;</span> </font>
+h &lt; lg(n+1)</p>
+</div>
+<p>W konsekwencji, wysoko¶æ h drzewa doskona³ego o n wierzcho³kach
+wynosi&nbsp;&nbsp; h = <span lang="en"> <font face="Symbol">ë</font></span>lg(n+1)<font
+ face="Symbol"><span lang="en">&#251;</span>.</font></p>
+<div class="def">
+<p style="text-align: justify;">Definicja 1.2&nbsp; Powiemy, ¿e
+etykietowane drzewo binarne D = &lt;V, E, et&gt; jest czê¶ciowo
+uporz±dkowane wtedy i tylko wtedy, gdy dla dowolnego v <font
+ face="Symbol"><span lang="en">Î</span></font>V, etykieta wierzcho³ka v
+jest mniejsza ni¿ etykiety obu jego synów, </p>
+<p style="text-align: center;"><font face="Symbol">("</font>v<font
+ face="Symbol"><span lang="en">Î</span></font>V) et(v) &lt; et(v.left) <span
+ lang="en"><font face="Symbol">&#217;</font></span> et(v) &lt; et(v.right).</p>
+</div>
+<p>Z przyjêtej definicji&nbsp; 1.2 wynika natychmiast, ¿e w dowolnym
+drzewie czê¶ciowo uporz±dkowanym:</p>
+<blockquote>
+  <ol>
+    <li>etykiety znajduj±ce siê na dowolnej drodze od korzenia do
+dowolnego li¶cia tworz± ci±g rosn±cy,</li>
+    <li>element najmniejszy jest etykiet± korzenia.</li>
+  </ol>
+</blockquote>
+<div class="def">Definicja
+1.3&nbsp; Kopcem nazywamy etykietowane drzewo binarne, doskona³e,
+czê¶ciowo uporz±dkowane.&nbsp; </div>
+<p><b>Przyk³ad 1.1</b></p>
+<p>Drzewo przedstawione na rysunku&nbsp; 9.2(a) nie jest kopcem, bo nie
+jest to drzewo doskona³e.&nbsp; Natomiast jest to drzewo czê¶ciowo
+uporz±dkowane: nastêpniki ka¿dego wierzcho³ka maj± etykiety wiêksze od
+etykiety tego wierzcho³ka. Drzewo przedstawione na rysunku 9.2(b) jest
+drzewem doskona³ym: do przedostatniego poziomu jest to pe³ne drzewo
+binarne, a li¶cie na ostatnim poziomie s± zgrupowane maksymalnie na
+lewo. Nie jest to jednak&nbsp; kopiec, poniewa¿, np. wêze³ z etykiet± 4
+ma oba nastêpniki opatrzone etykietami mniejszymi od 4. Drzewo
+przedstawione na rysunku 9.2(c) jest kopcem, bo jest to drzewo
+doskona³e i czê¶ciowo uporz±dkowane.</p>
+<table border="0" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="80%"
+ id="AutoNumber1">
+  <tbody>
+    <tr>
+      <td width="33%"> <img border="0" src="RYSUNKI/Rysunek9_2a.gif"
+ width="250" height="250"></td>
+      <td width="33%"> <img border="0" src="RYSUNKI/Rysunek9_2b.gif"
+ width="250" height="250"></td>
+      <td width="34%"> <img border="0" src="RYSUNKI/Rysunek9_2c.gif"
+ width="250" height="250"></td>
+    </tr>
+  </tbody>
+</table>
+<p><b>Uwaga</b> Przedstawione w tym wyk³adzie kopce s± etykietowane
+zwykle liczbami naturalnymi i porz±dek <font face="Symbol"><span
+ lang="en">&#163;</span></font> jest zwyk³ym porz±dkiem w zbiorze liczb
+naturalnych. Nie jest to jednak obowi±zuj±ca regu³a: etykiety mog± byæ
+elementami dowolnego zbioru liniowo uporz±dkowanego, a relacja&nbsp; <font
+ face="Symbol"><span lang="en">&#163;</span> </font>mo¿e byæ dowoln±
+relacj± liniowego porz±dku. W szczególno¶ci, mo¿e to byæ relacja <span
+ lang="en"><font face="Symbol">&#179;</font></span> w zbiorze liczb
+rzeczywistych.</p>
+<p style="text-align: left;"><b>Pytanie 1</b>: Czy jest prawd±, ¿e w
+kopcu d³ugo¶ci ¶cie¿ek od korzenia do li¶ci ró¿ni± siê co najwy¿ej o 1?
+</p>
+<!-- Odpowied¼: TAK.</P> -->
+<form><input class="GUZIK" type="button"
+ value="-----Sprawd¼ odpowied¼-----" name="Klik0"
+ onclick="napis(this.form,'TAK. W kopcu li¶cie znajduj± siê na co najwy¿ej dwóch ostatnich poziomach.')"></form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main09_p0.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main09_p2.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td-->
+<!--/tr--><!--/table--></p>
+</body>
+</html>

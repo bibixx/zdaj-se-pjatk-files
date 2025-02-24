@@ -1,0 +1,457 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main03_p0.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main03_p2.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><br clear="all">
+    <div class="tytulpunktu">1.&nbsp; Problem min-max. Algorytm naiwny.</div> 
+
+<p>Problem, który rozważymy w 
+tym punkcie, to znalezienie elementu najmniejszego i największego w danym 
+skończonym  zbiorze, reprezentowanym przez tablicę e o elementach e[1], ..., e[n]. 
+Dla uproszczenia nazywać będziemy ten problem min-max. Zaczniemy od prostego 
+rozwiązania, tzw. algorytmu 
+naiwnego, który w następnych punktach tego wykładu nieco poprawimy. Przyjmiemy, 
+że poszukiwany algorytm będzie używał zmiennej result, reprezentującej obiekt o 
+dwóch atrybutach : min i max, na 
+których zostaną zapamiętane wyniki.</P>
+
+<p>Algorytm rozwiązujący problem&nbsp; min-max, interpretowany w strukturze, w 
+której uniwersum jest zbiorem liniowo uporządkowanym,&nbsp; powinien być poprawny ze względu na 
+następującą specyfikację:</P>
+
+<p style="text-align: center">&nbsp;wp = {n&gt;0},&nbsp;&nbsp; </P>
+
+<p style="text-align: center">wk = {(<font face="Symbol">$</font> i<sub><font face="Verdana">0</font></sub>,i<sub><font face="Verdana">1</font></sub><font face="Symbol"> <span lang="en">&pound;</span> </font>
+n) (e[i<sub><font face="Verdana">0</font></sub>]=result.min <span lang="en">
+<font face="Symbol">&Ugrave;</font></span> 
+e[i<sub><font face="Verdana">1</font></sub>] = result.max), (<font face="Symbol">&quot;</font>j<font face="Symbol"><span lang="en">&pound;</span> </font>
+n)(e[i] <span lang="en"> <font face="Symbol">&pound;</font></span> result.min
+<span lang="en"><font face="Symbol">&Ugrave;</font></span> result.max <font face="Symbol"><span lang="en">&pound;</span> </font>e[i])}.</P>
+
+<p style="text-align: left"><b>Metoda</b></P>
+
+<p style="text-align: left">Najprostszym rozwiązaniem problemu min-max jest 
+znalezienie najpierw elementu największego, a potem elementu najmniejszego przez 
+dwukrotne przeglądanie ciągu. Jeżeli kolejny element jest większy od 
+największego znalezionego do tej pory, to będzie on teraz elementem największym. 
+Podobnie przy wyszukiwaniu elementu najmniejszego: porównujemy kolejne elementy 
+ciągu ze znalezionym elementem najmniejszym i ewentualnie poprawiamy jego 
+wartość, tak by wartością zmiennej result.min był element najmniejszy ze wszystkich 
+przejrzanych do tej pory elementów.&nbsp; Algorytm może być zapisany 
+następująco:</P>
+
+
+<p><div class="przyk" style="width: 750; height: 324">
+   <TABLE frame="void" rules="none" width="718">
+         <TR>
+            <TD width="33"> <p>min_max1</TD>
+            <TD width="392">{</TD>
+             
+            <TD width="615">&nbsp;</TD>
+             
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="392">result.max := e[1]; i := 2; </TD>
+             
+            <TD width="615">&nbsp;</TD>
+             
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="392"><STRONG>while </STRONG>
+            (i<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>n)  <STRONG>do </STRONG></TD> 
+            <TD width="615">&nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="392">   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if&nbsp; </STRONG>
+             not (e[i] <FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            result.max)   <STRONG>then </STRONG></TD>
+            <TD width="615">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="33">&nbsp;</TD>
+            <TD width="392">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            result.max := e[i]<STRONG> fi;</STRONG></TD>
+            <TD width="615">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="392">      &nbsp;&nbsp;&nbsp;&nbsp;      i := i+1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+             
+            <TD width="615">      &nbsp;</TD>
+             
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="392">   <STRONG>&nbsp; od ;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG></TD>
+            <TD width="615">   // (<font face="Symbol">&quot;</font>i<font face="Symbol"> <span lang="en">&pound;</span>
+</font>n) e[i] <font face="Symbol"><span lang="en">&pound;</span></font>result.<font face="Symbol"> </font>max
+<font face="Symbol"><span lang="en">&Ugrave;</span>&nbsp; </font>(<font face="Symbol">$</font>i<font face="Symbol"> <span lang="en">&pound;</span>
+</font>n) result.max = e[i]</TD>
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="392">      result.min :=e[1]; i := 2;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD> 
+            <TD width="615">      &nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="392">   <STRONG>&nbsp;while </STRONG>(i<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>n)  <STRONG>do&nbsp;&nbsp;&nbsp; </STRONG></TD>
+            <TD width="615">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="392">&nbsp;&nbsp;&nbsp;&nbsp;   <STRONG>&nbsp;if&nbsp; </STRONG>
+             not (result.min<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            e[i])   <STRONG>then </STRONG>&nbsp;</TD>
+            <TD width="615">&nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="33">&nbsp;</TD>
+            <TD width="392">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            result.min := e[i]<STRONG> fi;</STRONG></TD>
+            <TD width="615">&nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="33">&nbsp;</TD>
+            <TD width="392">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      i := i+1</TD>
+            <TD width="615">&nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="33">&nbsp;</TD>
+            <TD width="392"><strong>od;</strong></TD>
+            <TD width="615">//(<font face="Symbol">&quot;</font>i<font face="Symbol"> <span lang="en">&pound;</span>
+</font>n) result.min <font face="Symbol"><span lang="en">&pound;</span> </font>e[i]&nbsp;
+<font face="Symbol"><span lang="en">&Ugrave;</span> </font>(<font face="Symbol">$</font>i<font face="Symbol"> <span lang="en">&pound;</span>
+</font>n) result.min = e[i]</TD>
+         </TR>
+         <TR>
+            <TD width="33"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="392"></TD>
+            <TD width="615">&nbsp;</TD>
+         </TR>
+   </TABLE>
+</div>
+
+<p style="text-align: left">Pełną analizę poprawności tego algorytmu 
+pozostawiamy Czytelnikowi (por. wykład 01). Stwierdzimy teraz tylko, że 
+niezależnie od typu elementów ciągu, jeżeli tylko relacja <FONT FACE="Symbol"> <span lang="en">&pound;</span></FONT> jest liniowym 
+porządkiem, to po wykonaniu algorytmu prawdziwa będzie formuła&nbsp;</P>
+
+<p style="text-align: center">&nbsp;(<font face="Symbol">&quot; </font>i<font face="Symbol"><span lang="en">&pound;</span>
+</font>n) (e[i] <font face="Symbol"><span lang="en">&pound;</span> </font>
+result.max
+<font face="Symbol"><span lang="en">&Ugrave;</span> </font>result<font face="Symbol">.</font>min <font face="Symbol">
+<span lang="en">&pound;</span></font> e[i]). </P>
+
+<p style="text-align: left">Co więcej, wartościami zmiennych&nbsp; result.min i 
+result.max są elementy rozważanego ciągu. Zatem</P>
+
+<p></P>
+
+<div class="twier">
+<p>Twierdzenie 2.1</P>
+<p>Algorytm min_max1 jest całkowicie poprawny w każdej 
+strukturze danych Str, w której określony jest z liniowy porządek <FONT FACE="Symbol"> <span lang="en">&pound;</span></FONT>, ze względu na warunek początkowy n&gt;0 i 
+warunek końcowy  </P>
+
+<p style="text-align: center">(<font face="Symbol">&quot;</font>i<font face="Symbol"><span lang="en">&pound;</span>
+</font>n)(e[i] <font face="Symbol"><span lang="en">&pound;</span> </font>result<font face="Symbol">.</font>max
+<font face="Symbol"><span lang="en">&Ugrave;</span> </font>result.min <font face="Symbol">
+<span lang="en">&pound;</span></font> e[i])<font face="Symbol"><span lang="en">&Ugrave;</span>&nbsp; </font>
+(<font face="Symbol">$</font>i<font face="Symbol"> <span lang="en">&pound;</span>
+</font>n) result.max = e[i]<font face="Symbol"><span lang="en">&Ugrave;</span> </font>(<font face="Symbol">$</font>i<font face="Symbol"> <span lang="en">&pound;</span>
+</font>n) result.min = e[i].</P>
+
+</div>
+
+<p style="text-align: left">Zauważmy, że liczba wykonywanych operacji nie zależy 
+od kolejności elementów w ciągu. Przyjmując n jako rozmiar danych i porównywanie 
+jako operację dominującą, z łatwością oszacujemy czasowy koszt algorytmu 
+min_max1: T(n) = 2n - 2. </P>
+
+<p style="text-align: left">Ten prosty algorytm nie jest jednak najlepszy. Po 
+pierwsze, zamiast dwukrotnie przeglądać wszystkie elementy, raz w poszukiwaniu 
+elementu największego i drugi raz w poszukiwaniu elementu najmniejszego, można 
+wykonać tylko jedną&nbsp; pętlę. </P>
+
+   <TABLE frame="void" rules="none" width="489">
+         <TR>
+            <TD width="33"> {</TD>
+            <TD width="446"></TD>
+             
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="446">result.max :=e[1];&nbsp; result.min :=e[1]; i := 2;</TD>
+             
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="446"><STRONG>while </STRONG>
+            (i<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>n)  <STRONG>do </STRONG></TD> 
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="446">   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if&nbsp; </STRONG>
+             not (e[i] <FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            result.max)   <STRONG>then </STRONG>result.max := e[i]<STRONG> fi;</STRONG></TD>
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="446">&nbsp;&nbsp;&nbsp;&nbsp;   <STRONG>&nbsp;if&nbsp; </STRONG>
+             not (result.min<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            e[i])   <STRONG>then </STRONG>&nbsp;result.min := e[i]<STRONG> fi;</STRONG></TD>
+         </TR>
+         <TR>
+            <TD width="33">&nbsp;</TD>
+            <TD width="446">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      i := i+1</TD>
+         </TR>
+         <TR>
+            <TD width="33">&nbsp;</TD>
+            <TD width="446"><strong>od</strong></TD>
+         </TR>
+         <TR>
+            <TD width="33"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="446"></TD>
+         </TR>
+   </TABLE>
+
+<p style="text-align: left">Taki zabieg uprościł nieco strukturę algorytmu, ale 
+nadal wykonujemy 2(n-1) porównań. Teraz jednak łatwo zauważymy, że jeśli jakiś 
+element e[i] jest większy od aktualnego maksimum, to przecież ten element nie 
+może być jednocześnie elementem mniejszym od aktualnego minimum i nie musimy 
+wykonywać drugiego porównania. Zatem algorytm może przyjąć postać:</P>
+
+
+<p><div class="przyk">
+   <TABLE frame="void" rules="none" width="788">
+         <TR>
+            <TD width="33"> <p>min_max2{</TD>
+            <TD width="593">&nbsp;</TD>
+             
+            <TD width="27">&nbsp;</TD>
+             
+            <TD width="668">&nbsp;</TD>
+             
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="593">result.max :=e[1]; result.min := e[1]; i := 2; </TD>
+             
+            <TD width="27">&nbsp;</TD>
+             
+            <TD width="668">// result.min <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+            e[j], e[j] <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+            result.max dla j=1,...,(i-1)</TD>
+             
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="593"><STRONG>while </STRONG>
+            (i<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>n)  <STRONG>
+            do </STRONG></TD> 
+            <TD width="27">&nbsp;</TD> 
+            <TD width="668">&nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="593">   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if&nbsp; </STRONG>
+             not (e[i] <FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            result.max)   <STRONG>then&nbsp; </STRONG></TD>
+            <TD width="27">   &nbsp;</TD>
+            <TD width="668">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="33">&nbsp;</TD>
+            <TD width="593">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            result.max := e[i]</TD>
+            <TD width="27">   &nbsp;</TD>
+            <TD width="668">   // e[j]<FONT FACE="Symbol"><span lang="en">&pound;</span></FONT>result.max, 
+            dla j=1,...,i</TD>
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="593">      &nbsp;&nbsp;&nbsp;&nbsp; else&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+             
+            <TD width="27">      &nbsp;</TD>
+             
+            <TD width="668">      &nbsp;</TD>
+             
+         </TR>
+         <TR>
+            <TD width="33"></TD>
+            <TD width="593">&nbsp;&nbsp;&nbsp;&nbsp;   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            &nbsp;if&nbsp; </STRONG>
+             not (result.min<FONT FACE="Symbol"> <span lang="en">&pound;</span> </FONT>
+            e[i])   <STRONG>then </STRONG></TD>
+            <TD width="27">&nbsp;</TD>
+            <TD width="668">&nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="33">&nbsp;</TD>
+            <TD width="593">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            result.min := e[i]<STRONG> fi</STRONG></TD>
+            <TD width="27">&nbsp;</TD>
+            <TD width="668">// result.min <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+            e[j], dla j=1,...,i</TD>
+         </TR>
+         <TR>
+            <TD width="33">&nbsp;</TD>
+            <TD width="593">&nbsp;&nbsp;&nbsp;&nbsp; <b>fi;</b></TD>
+            <TD width="27">&nbsp;</TD>
+            <TD width="668">&nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="33">&nbsp;</TD>
+            <TD width="593">&nbsp;&nbsp;&nbsp;&nbsp; i := i+1;</TD>
+            <TD width="27">&nbsp;</TD>
+            <TD width="668">// result.min <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+            e[j], e[j] <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+            result.max dla j=1,...,(i-1)</TD>
+         </TR>
+         <TR>
+            <TD width="33">&nbsp;</TD>
+            <TD width="593"><strong>od</strong></TD>
+            <TD width="27">&nbsp;</TD>
+            <TD width="668">&nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="33"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="593"></TD>
+            <TD width="27">&nbsp;</TD>
+            <TD width="668">&nbsp;</TD>
+         </TR>
+   </TABLE>
+</div>
+
+<p style="text-align: left">Teraz jednak łatwo zauważyć, że koszt algorytmu 
+zależy od tego, jakie są wzajemne zależności między elementami ciągu, czyli 
+zależy od kolejności w jakiej zapisane są elementy w ciągu. W najgorszym razie 
+algorytm wykona 2n-2 porównania. Stanie się tak np. dla dowolnego ciągu 
+uporządkowanego malejąco. Dyskusję 
+kosztu średniego algorytmu przedstawimy w następnym punkcie tego wykładu. Teraz 
+zajmiemy się przeanalizowaniem jego poprawności.</P>
+
+<p style="text-align: left">Załóżmy, że wykonujemy algorytm min-max2 w 
+strukturze danych STR, w której określona jest relacja porządku liniowego <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span>, a 
+elementy tablicy e[1:n] należą do uniwersum tej struktury. Po wykonaniu 
+pierwszych trzech instrukcji przypisania, oba atrybuty zmiennej result&nbsp; są równe e[1], 
+a i=2. Zatem&nbsp; prawdziwa jest własność</P>
+
+<p style="text-align: center">(<font face="Symbol">&quot;</font>j<font face="Symbol">&lt;
+</font>i)(e[j] <font face="Symbol"><span lang="en">&pound;</span> </font>result.max
+<font face="Symbol"><span lang="en">&Ugrave;</span> </font>result.min <font face="Symbol">
+<span lang="en">&pound;</span></font> e[j]).</P>
+
+<p style="text-align: left">Załóżmy teraz, że po pewnej liczbie iteracji pętli &quot;while&quot; 
+spełniona jest formuła <font face="Symbol">g</font>(i) postaci&nbsp; result.min <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+e[j], e[j] <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> result.max dla 
+j=1,...,(i-1). Prześledźmy co się stanie w następnej iteracji. Jeżeli 
+rozważany element e[i] jest większy od wartości zmiennej max, to, po wykonaniu 
+przypisania result.max := e[i]<strong style="font-weight: 400">, wartością 
+zmiennej </strong>result.<strong style="font-weight: 400">max jest największy 
+spotkany do tej pory element. </strong>Jeżeli natomiast element 
+e[i] nie jest większy od result.max, to&nbsp; stara wartość zmiennej max wskazuje 
+element największy.&nbsp; Wykonane instrukcje nie zmieniły wartości zmiennej 
+result.min, zatem po wykonaniu pierwszego porównania mamy</P>
+
+<p style="text-align: center">e[j] <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+result.max dla j=1,...,(i-1),i,&nbsp; oraz result.min <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+e[j] dla j=1,...,(i-1).</P>
+
+<p style="text-align: left">Drugie porównanie (to po &quot;else&quot;) wykonujemy tylko 
+wtedy, gdy rozważany element e[i] był niewiększy od aktualnego maksimum. Jeśli 
+e[i] jest mniejsze od wartości aktualnego minimum, wykonujemy instrukcję 
+przypisania result.min := e[i]<strong>.</strong> Oczywiście, ani sprawdzenie testu w &quot;if&quot;, 
+ani wykonanie tej instrukcji przypisania, nie zmieniają wartości result.max. Po 
+wykonaniu pierwszej instrukcji pętli spełniona jest zatem własność&nbsp;
+<font face="Symbol">g(</font>i<font face="Symbol">+1) </font>postaci</P>
+
+<p style="text-align: center">e[j] <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+result.max dla j=1,...,(i-1),i oraz result.min <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+e[j] dla j=1,...,(i-1),i.</P>
+
+<p style="text-align: left">Wewnątrz pętli pozostała do wykonania instrukcja 
+przypisania i := i+1; Mamy zatem starą wartość zmiennej i zastąpić wartością 
+większą o 1. Zastępując w formule <font face="Symbol">g(</font>i<font face="Symbol">+1),
+</font>wyrażenie (i+1) przez i, otrzymujemy&nbsp; formułę&nbsp;
+<font face="Symbol">g</font>(i):</P>
+
+<p style="text-align: center">result.min <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+e[j],&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e[j] <span lang="en"> <FONT FACE="Symbol"> &pound;</FONT></span> 
+result.max dla 
+j=1,...,(i-1).</P>
+
+<p style="text-align: left">Udowodniliśmy więc, że jeśli na początku kolejnej 
+iteracji <font face="Symbol">g</font>(i) jest spełnione, to jest też spełnione 
+po wykonaniu tej iteracji. Formuła <font face="Symbol">g</font>(i) jest 
+niezmiennikiem pętli w tym algorytmie. Zatem po wyjściu z pętli, co jest możliwe dopiero 
+wtedy, gdy i= n+1, również spełniona jest formuła&nbsp; <font face="Symbol">g</font>(i). 
+Na wyjściu prawdziwa jest więc formuła postaci:</P>
+
+<p style="text-align: center">(result.min <font face="Symbol">
+<span lang="en">&pound;</span></font>e[1] <font face="Symbol"><span lang="en">&pound;</span> </font>
+result.max)
+<font face="Symbol"><span lang="en">&Ugrave;</span>&nbsp; </font>(result.min <font face="Symbol">
+<span lang="en">&pound;</span></font> e[2] <font face="Symbol"><span lang="en">&pound;</span> </font>
+result.max ) <span lang="en">
+<font face="Symbol">&Ugrave;</font></span> ...
+<font face="Symbol"><span lang="en">&Ugrave;</span> </font>(result.min <font face="Symbol">
+<span lang="en">&pound;</span></font>e[i-1] <font face="Symbol"><span lang="en">&pound;</span> </font>
+result.max )&nbsp;<font face="Symbol"><span lang="en">&Ugrave;</span> </font>(i = n+1),</P>
+
+<p style="text-align: left">a ponieważ wartościami zmiennych result.min, 
+result.max są elementy danego ciągu, to prawdziwy jest warunek końcowy 
+przyjętej specyfikacji algorytmu.</P>
+
+<p style="text-align: left">Jest oczywiste, że algorytm min_max2 zatrzymuje się dokładnie 
+po n-1 iteracjach, ponieważ n jest liczbą naturalną, a wartościami zmiennej i, 
+kontrolującej pętlę, są kolejne liczby naturalne zaczynając od 2. Ostatecznie</P>
+
+<p></P>
+
+<div class="twier">
+<p>Twierdzenie 2.2&nbsp; W każdej strukturze danych STR, w której określony jest z liniowy porządek <FONT FACE="Symbol"> <span lang="en">&pound;</span></FONT>, 
+algorytm min_max2&nbsp; zatrzymuje się dla dowolnego niepustego ciągu, a 
+wartością zmiennej result jest para złożona z elementu największego i&nbsp; 
+najmniejszego tego ciągu, tzn. algorytm min_max2 jest, ze względu na przyjętą 
+specyfikację, całkowicie poprawnym rozwiązaniem problemu min-max.&nbsp;&nbsp; </P>
+
+</div>
+
+<p><b>Pytanie 2</B>: Czy algorytm min_max2 działa poprawnie i jaki będzie wynik 
+algorytmu, jeśli n=0?&nbsp;  <BR><BR>
+ 
+
+<!-- <p>Odpowiedź: Wartość n=0 odpowiada pustemu 
+ciągowi e. Dla n=0 algorytm nie działa poprawnie, gdyż zmiennym min i max 
+zostanie przypisana nieokreślona wartość e[1], lub zostanie zgłoszony błąd 
+wykonania.</P> -->
+
+ <a class="ODP" href="javascript:okno('odpowiedzi/odp3_1.html')">Zobacz odpowiedź</a></p>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main03_p0.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main03_p2.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

@@ -1,0 +1,1166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.01 transitional//EN">
+<html><head rel="stylesheet" type="text/css" href="../style/common.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+  <meta name="GENERATOR" content="Mozilla/4.61 [en] (OS/2; I) [Netscape]"><title>W1</title>
+
+  <link rel="stylesheet" type="text/css" href="../style/common.css">
+  <script type="text/javascript" language="JavaScript1.2" src="../js/dodatki.js">
+  </script></head><body bgcolor="#efefef">
+<div align="center">
+<a name="W1"></a><a name="W1"></a><h1>Formatowanie, lokalizacja i internacjonalizacja</h1>
+</div><br>
+<a name="W1.1"></a><a name="W1.1"></a><h2></h2>
+<a name="W1.2"></a><a name="W1.2"></a><h2>Pierwsze spotkanie z lokalizacją</h2>
+<br>
+&nbsp;&nbsp;&nbsp; double d = 10/3.0;<br>
+
+
+
+&nbsp;&nbsp;&nbsp; System.out.println(d);<br>
+<br>
+wynik:<br>
+<br>
+
+
+
+3.3333333333333335<br>
+<br>
+Sformatować wynik.<br>
+<br>
+<pre>     NumberFormat nf = NumberFormat.getInstance();<br>     nf.setMaximumFractionDigits(3);<br>     String wynik = nf.format(d);<br>     System.out.println(wynik);<br><br></pre>
+wynik (na komputerze w Polsce):
+<h1>3,333</h1>
+<br>
+wynik (na komputerze w Anglii):<br>
+<br>
+<h1>3.333</h1>
+Co się dzieje? Dlaczego? <br>
+<a name="W1.3"></a><a name="W1.3"></a><h2>Lokalizacje </h2><div class="def">Specyficzne
+dla danego języka, regionu/kraju - reguły, dotyczące prezentacji różnych
+informacji (np.formatowania liczb i dat, pisowni tekstów, porządku alfabetycznego)
+nazwiemy lokalizacją</div>. <br>
+<br>
+<b>Potrzebny jest mechanizm lokalizacji i internacjonalizacji aplikacji, co wynika z kosztów dostosowania (zmian kodu).<br>
+</b><br>W&nbsp;Javie cały zestaw klas:<br>
+java.text i trochę w java.util.<br>
+<br>
+Taligent ====&gt; Sun zastosował w Javie 1.1.&nbsp; <br>
+Do dziś bez większych zmian. <br>
+<br>
+Taligent ====&gt; Unicode group w IBM Globalization Center of Competency
+w Cupertino (rozwój, przenoszenie do języków C++i C, na zasadach "open source").<br><br>
+Bblioteka&nbsp;<font color="#cc0000"><b>  International Components for Unicode</b></font>:<br>
+poszerzone wersje klas lokalizacyjno-internacjonalizacyjnych,&nbsp;
+a także pewne dodatkowe klasy, których w standardzie Javy brak. <br>
+Biblioteka
+wdraża najnowsze standardy Unicode (w tej chwili Unicode 4.0) i&nbsp; jest dostępna
+w wersjach dla języków Java (ICU4J), &nbsp;C++ i C (ICU4C) na stronie <a href="http://www.icu-project.org/">http://www.icu-project.org/</a><br>
+<br><div class="def">W Javie lokalizacje reprezentowane są przez obiekty klasy <b>Locale</b> z pakietu java.util</div>.<br>
+<br>
+<div class="syntax">Lokalizacja określana jest przez kombinację:<br>
+<ul>
+  <li>kodu języka, </li>
+  <li>kodu kraju,</li>
+  <li>kodu wariantu.</li>
+</ul>
+Kody te - wartości typu String -&nbsp; podajemy przy tworzeniu obiektu klasy Locale
+jako argumenty konstruktora tej klasy, przy czym mamy do dyspozycji trzy
+przeciążone konstruktory:<br>
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+<tbody><tr class="TableRowColor" bgcolor="white"><td><code><b>Locale</b>(String&nbsp;language)</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr><tr class="TableRowColor" bgcolor="white"><td><code><b>Locale</b>(String&nbsp;language,
+       String&nbsp;country)</code></td></tr><tr class="TableRowColor" bgcolor="white"><td><code><b>Locale</b>(String&nbsp;language,
+       String&nbsp;country,
+       String&nbsp;variant)</code></td></tr></tbody>
+</table>
+<br><b>
+Kod języka</b> - kombinacja dwóch małych liter, standard
+ISO-639 (zob dostępne kody : <a href="http://www.ics.uci.edu/pub/ietf/http/related/iso639.txt">http://www.ics.uci.edu/pub/ietf/http/related/iso639.txt</a>
+)<br><br>
+<b>Kod kraju</b> - to&nbsp; kombinacja dwóch dużych liter, określająca kraj
+wg standardu ISO-3166 (<a href="http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html">http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html</a>
+)<br><br>
+<b>Kod wariantu</b> - dodatkowa&nbsp; informacja, którą możemy dodać i która nie
+musi spełniać żadnych standardów, wobec czego jest specyficzna w danych warunkach (np. pakietu lokalizacyjnego) lub dla danej
+aplikacji.<br>
+</div><br>
+<br>
+Przykłady:<br>
+<br>
+Locale a = new Locale("en", "GB"); &nbsp;// język angielski, kraj Wielka Brytania <br>
+Locale b = new Locale("en", "US"); &nbsp;// język angielski, kraj Stany Zjednoczone<br>
+Locale c = new Locale("en"); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// język angielski, kraj nieokreślony<br>
+<br>
+Locale d = new Locale("pl", "PL", "Zakopane");<br><br>
+Jakie są dostępne lokalizacje?<br>
+<br>
+<pre>Locale[] loc = Locale.getAvailableLocales();</pre>
+<b>Domyślna lokalizacja</b> - na podstawie właściwości ustalonych dla platformy systemowej.<br>
+<br>
+
+Można się dowiedzieć:
+
+<pre>Locale dloc = Locale.getDefault();</pre>
+
+i zmienić:
+<pre>Locale newDefLoc = new Locale(...);<br>Locale.setDefault(newDefLoc)</pre>
+<br>
+<br>
+Obiekt klasy Locale określa lokalizację (czyli wspomniane wcześniej reguły), <br><br>
+<div class="important">Zastosowanie tych reguł - przy przetwarzaniu&nbsp; i formatowaniu informacji -
+spoczywa na obiektach innych klas. Te klasy, które biorą pod uwagę wymagania
+lokalizacyjne nazywają się <b>czułymi na lokalizację</b> (locale-sensitive).</div><br>
+<br>
+Należą do nich:<br>
+<br>
+<table border="1" cellpadding="2" cellspacing="2" width="100%">
+  <tbody>
+    <tr>
+      <td valign="top">
+      <div align="center"><b>Klasa<br>
+      </b></div>
+      </td>
+      <td valign="top">
+      <div align="center"><b>Przeznaczenie<br>
+      </b></div>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">NumberFormat (i pochodne)<br>
+      </td>
+      <td valign="top">Do formatowania liczb<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">Calendar (i pochodne)<br>
+      </td>
+      <td valign="top">Do operowania na datach i czasie<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">DateFormat (i pochodne)<br>
+      </td>
+      <td valign="top">Do formatowania dat i czasu<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">Collator<br>
+      </td>
+      <td valign="top">Do określania porządku alfabetycznego<br>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">BreakIterator<br>
+      </td>
+      <td valign="top">Do zlokalizowanego rozbioru tekstu<br>
+      </td>
+    </tr><tr><td>Scanner</td><td>Skanowanie tekstów z różnych źródeł</td></tr><tr><td>Formatter</td><td>Formatowanie danych</td></tr>
+  </tbody>
+</table>
+<br>
+<br>
+<b>Aby przetwarzać informacje w &nbsp;zlokalizowanej formie posługujemy się obiektami
+klas czułych na lokalizację. <br>
+</b><br>
+Dla zastosowania domyślnych reguł lokalizacyjnych
+uzyskujemy te obiekty za pomocą statycznych metod <br>
+<h3>&nbsp;&nbsp;&nbsp; get...Instance() </h3>
+<h3><b>&nbsp;&nbsp;&nbsp; bez argumentu, określającego lokalizację</b>.</h3>
+Np. kod na listingu pokazuje domyślną lokalizację i zgodnie z tą lokalizacją
+wypisuje bieżącą datę&nbsp;oraz liczbę 1234567.1, przy czym w trakcie działania
+zmienia domyślną lokalizację i ponawia wyprowadzanie informacji.<br>
+<pre>import java.text.*;<br>import java.util.*;<br><br>public class DefLok {<br><br>  static public void report() {<br>    Locale defLoc = Locale.getDefault();<br>    System.out.println("Domyślna lokalizacja : " + defLoc);<br>    DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);<br>    NumberFormat nf = NumberFormat.getInstance();<br>    System.out.println(df.format(new Date()));<br>    System.out.println(nf.format(1234567.1));<br>  }<br><br>  public static void main(String[] args) {<br>    report();<br>    Locale.setDefault(new Locale("en"));<br>    report();<br>  }<br><br>}<br></pre>
+&nbsp;Wydruk programu:<br>
+<div class="listing100"><br>
+Domyślna lokalizacja : pl_PL<br>
+12 lipiec 2003<br>
+1_234_567,1<br>
+Domyślna lokalizacja : en<br>
+July 12, 2003<br>
+1,234,567.1<br>
+</div><br>
+<br>Klasy lokalizacyjnie-czułe pozwalają również na uzyskiwanie ich obiektów
+przetwarzających informacje w sposób wymagany przez konkretną (nie domyślną)
+lokalizację: <br>
+<br>
+<h3>&nbsp;&nbsp;&nbsp; &nbsp;get...Instance(...) </h3>
+<h3>&nbsp;&nbsp;&nbsp; &nbsp;z argumentem
+typu Locale - określającym konkretną lokalizację. </h3>
+<h3>
+</h3>
+
+Np. poniższy program wyprowadz datę w lokalizacji domyślnej, a liczbę - najpierw
+w domyślnej, a później zgodnej z językiem angielskim.<br>
+<pre>import java.text.*;<br>import java.util.*;<br><br>public class MiscLok {<br><br>  public static void main(String[] args) {<br>    System.out.println("Domyślna lokalizacja : " + Locale.getDefault());<br>    DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);<br>    System.out.println(df.format(new Date()));<br>    double num = 123.4;<br>    NumberFormat nf = NumberFormat.getInstance();<br>    System.out.println("Liczba " + num +<br>                       " w lokalizacji domyślnej: " + nf.format(num));<br>    nf = NumberFormat.getInstance(new Locale("en"));<br>    System.out.println("Liczba " + num +<br>                       " w lokalizacji angielskiej: " + nf.format(num));<br>  }<br><br>}<br></pre>
+<br>
+<div class="listing100">Domyślna lokalizacja : pl_PL<br>
+12 lipiec 2003<br>
+Liczba 123.4 w lokalizacji domyślnej: 123,4<br>
+Liczba 123.4 w lokalizacji angielskiej: 123.4<br>
+</div><br><span style="font-weight: bold; color: rgb(255, 0, 0);">Uwaga: w/w getInstance() nie dotyczą formtora i skanera.</span><br><br><br>Poniższy przykładowy program pokazuje wykorzystanie prostej klasy Locale w celu tłumaczenia nazw krajów na różne języki.<br>
+<pre>import java.util.*;<br>import java.text.*;<br>import javax.swing.*;<br><br>class CountryTranslator {<br><br>  public static void main(String[] args) {<br><br>    Locale[] loc = Locale.getAvailableLocales();<br>    Map map = new HashMap();<br>    String kraj;<br><br>    // Dodanie dostępnych lokalizacji do mapy<br>    // klucz: nazwa kraju po polsku, wartośc - lokealizacja<br>    for (int i=0; i&lt;loc.length; i++) {<br>      String countryCode = loc[i].getCountry();  // kod kraju<br>      if (countryCode.equals("")) continue;<br>      kraj =  loc[i].getDisplayCountry();<br>      map.put(kraj, loc[i]);<br>    }<br><br>    String msg = "Podaj kraj";<br>    String in = "";<br>    while((kraj = JOptionPane.showInputDialog(msg)) != null ) {<br>      // Pobieramy lokalizację dla podanego kraju<br>      Locale savedLoc = (Locale) map.get(kraj);<br>      if (savedLoc == null) continue;<br>      msg = "Podaj kody języków, rozdzielone spacjami";<br>      while((in = JOptionPane.showInputDialog(null, msg, in)) != null ) {<br>        StringTokenizer st = new StringTokenizer(in);<br>        if (st.countTokens() == 0) continue;<br>        String rep = "Nazwa kraju " + kraj + ":\n";<br><br>        // Dla kolejnych kodów języków<br>        // uzyskujemy nazwę kraju w języku odpowiadającym<br>        // lokalizacji związanej z kodem jęsyka<br>        while(st.hasMoreTokens()) {<br>          Locale lang = new Locale(st.nextToken());<br>          rep += lang.getDisplayLanguage() + "   =   " +<br>                 savedLoc.getDisplayCountry(lang) + "\n";<br>        }<br>      JOptionPane.showMessageDialog(null,rep);<br>      }<br>      msg = "Podaj kraj";<br>    }<br>    System.exit(0);<br>  }<br>}<br></pre>
+<img src="images/nazwykraj.jpg" alt="r" align="right" border="1" height="229" width="268">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<a name="W1.4"></a><a name="W1.4"></a><h2>Formatowanie liczb</h2>NumberFormat.<br>
+Ale wygodniejszy i bardziej uniwersalny sposób formatowania liczb polega na specyfikowaniu
+wzorców formatu. <br>
+Mogą one być stosowane wobec formatorów, które są obiektami
+klasy DecimalFormat. <br>
+<br><br>
+Możemy postąpić tak:<br>
+<ul>
+<li>stworzyć obiekt klasy DecimalFormat, podając jako argument konstruktora wzorzec formatowania,</li><li>wywołać metodę format na rzecz tego obiektu.</li>
+</ul>
+
+
+Na przykład:<br>
+<pre>     double d = 10/3.0;<br>     DecimalFormat dform = new DecimalFormat("###.###");<br>     String wynik = dform.format(d);<br>     System.out.println(wynik);<br></pre>Wynik: 3,333.<br>
+<br>
+<div class="syntax">Wzorce formatowania są łańcuchami znakowymi i mają następującą postać:<br><br>
+[prefiks][częśc_całkowita][.część_dziesiętna][sufiks]
+<br><br>
+gdzie: <br><ul><li>prefiks i sufiks - dowolny ciąg znaków oprócz znaków specjalnych,</li><li>część całkowita i część dziesiętna - zero lub więcej znaków specjalnych&nbsp;
+'#' albo zero lub więcej znaków specjalnych&nbsp; '0' oraz ew. pojedyncze inne
+znaki specjalne.</li></ul><i>Uwagi: <br></i><ol><li><i>nawiasy kwadratowe oznaczają opcjonalność elememetu wzorca, z tym, że co najmniej jeden z elementów musi wystąpić;</i></li><li><i>jako wzorzec formatujący można podac dwa wzorce w powyższej postaci,
+rozdzielone średnikiem; pierwszy z nich będzie dotyczył liczb dodatnich,
+drugi - ujemnych.</i></li></ol></div>
+<br>
+<br>
+
+
+Najważniejsze znaki specjalne używane we wzorcach formatujących podaje tabela.<br>
+<br>
+<table border="1">
+<tbody><tr><th>Symbol</th><th>Opis</th></tr><tr><td>0</td><td>cyfra, jeśli jest nieznaczącym zerem pokazywana jako 0</td></tr><tr><td>#</td><td>cyfra, nieznaczące zera nie są pokazywane</td></tr><tr><td>.</td><td>miejsce separatora dziesiętnego</td></tr><tr><td>,</td><td>miejsce separatora grup cyfr (np. tysięcy)</td></tr><tr><td>E</td><td>miejsce separatora dla notacji &nbsp;inżynieryjnej lub naukowej ( np. 1E-11)</td></tr><tr><td>;</td><td>separator formatu dla liczb dodatnich i formatu dla liczb ujemnych<br>&amp;
+lt;
+/td&gt;</td></tr><tr><td>-</td><td>znak minus</td></tr><tr><td>%</td><td>powoduje mnożenie liczby przez 100 i pokazanie jej w postaci procentowej<br></td></tr><tr><td>¤</td><td>symbol waluty (np. zł); użyty dwukrotnie daje międzynarodowy symbol waluty </td></tr><tr><td>'</td><td>ujęte w apostrofy znaki specjalne mogą być pokazywane w części prefiks lub sufiks<br></td></tr></tbody>
+</table>
+<br>
+
+
+Program na wydruku pokazuje jak można korzystać z różnych formatów.<br>
+<pre>import java.text.*;<br>import java.math.*;<br><br>public class Format1 {<br><br>  public static void show(double n1, Double n2, BigDecimal n3,<br>                          String format) {<br>    DecimalFormat df = new DecimalFormat(format);<br>    System.out.println("Format " + format);<br>    System.out.println("Liczba: " +  n1 + " wygląda tak: " + df.format(n1));<br>    System.out.println("Liczba: " +  n2 + " wygląda tak: " + df.format(n2));<br>    System.out.println("Liczba: " +  n3 + " wygląda tak: " + df.format(n3));<br>  }<br><br><br>  public static void main(String[] args) {<br>    double num1  = 1.346;<br>    Double num2  = new Double(0.765474);<br>    BigDecimal num3 = new BigDecimal("100.2189091");<br><br>    show(num1, num2, num3, "#.##");<br>    show(num1, num2, num3, "#.## %");<br>    show(num1, num2, num3, "#.0000");<br>    show(num1, num2, num3, "#.00 ¤");<br>    show(num1, num2, num3, "#.00 ¤¤");<br>    show(num1, num2, num3, "[ 000.0 ]");<br><br> }<br><br>}<br></pre>
+
+
+Wyniki jego dzialania pokazuje wydruk.<br>
+<div class="listing100"><br>
+Format #.##<br>
+Liczba: 1.346 wygląda tak: 1,35<br>
+Liczba: 0.765474 wygląda tak: 0,77<br>
+Liczba: 100.2189091 wygląda tak: 100,22<br>
+Format #.## %<br>
+Liczba: 1.346 wygląda tak: 134,6 %<br>
+Liczba: 0.765474 wygląda tak: 76,55 %<br>
+Liczba: 100.2189091 wygląda tak: 10021,89 %<br>
+Format #.0000<br>
+Liczba: 1.346 wygląda tak: 1,3460<br>
+Liczba: 0.765474 wygląda tak: ,7655<br>
+Liczba: 100.2189091 wygląda tak: 100,2189<br>
+Format #.00 ¤<br>
+Liczba: 1.346 wygląda tak: 1,35 zł<br>
+Liczba: 0.765474 wygląda tak: ,77 zł<br>
+Liczba: 100.2189091 wygląda tak: 100,22 zł<br>
+Format #.00 ¤¤<br>
+Liczba: 1.346 wygląda tak: 1,35 PLN<br>
+Liczba: 0.765474 wygląda tak: ,77 PLN<br>
+Liczba: 100.2189091 wygląda tak: 100,22 PLN<br>
+Format [ 000.0 ]<br>
+Liczba: 1.346 wygląda tak: [ 001,3 ]<br>
+Liczba: 0.765474 wygląda tak: [ 000,8 ]<br>
+Liczba: 100.2189091 wygląda tak: [ 100,2 ]</div>
+<br>
+<br>   Za pomocą metody format(...) można formatowac nie
+tylko liczby typu double, ale również typu long oraz obiekty klas pochodnych
+od Number (np. Double, Float, Long, Integer) i BigInteger oraz BigDecimal.<br>
+<br>
+Klasy formatujące liczby
+są przygotowane na prezentację liczb według reguł lokalizacyjnych. Jeśli
+w metodzie getInstance() nie podamy lokalizacji - będzie użyta lokalizacja domyślna (np. polska z przecinkiem).<br><br>
+Jak uzyskać kropkę zamiast przecinka? <br>
+<pre>    DecimalFormat df = (DecimalFormat)<br>                       NumberFormat.getInstance(new Locale("en", "US"));<br>    df.applyPattern(format);<br><br></pre>Problem z walutą (będzie USD).<br>Można: setCurrency(...).<br>
+Albo nie zmieniać lokalizacji, a zmienić symbole formatora decymalnego:<br>
+ <br>
+
+
+Zmiana separatora miejsc dziesiętnych na kropkę może wyglądać tak:<br>
+
+<pre>DecimalFormat df = new DecimalFormat(format);  // formator w domyślnej lokalizacji<br>DecimalFormatSymbols sym = df.getDecimalFormatSymbols(); // symbole<br>sym.setDecimalSeparator('.');                  // ustalenie separatora miejsc dziesiętnych<br></pre>Inne symbole używane przy formatowaniu i metody ich zmian opisane są w dokumentacji.<br>
+<br>Specjalne formatory do formatowania:<br>
+<ul>
+  <li>liczb całkowitych - metoda NumberFormat.getIntegerInstance(...)</li>
+  <li>wartości wyrażonych w walucie - metoda NumberFormat.getCurrencyInstance(...)</li>
+  <li>wartości w procentach - metoda NumberFormat.getPercentInstance(...)</li>
+</ul>Prostsza drogą uzyskiwania efektów podobnych
+do użycia wzorców formatowania w szczególnych przypadkach.<br>
+<br>
+Formatory potrafią także dokonywać przekształceń odwrotnych: zamieniać napisy
+reprezentujące liczby na postać binarną tych liczb. <br>
+Np. tekst, w którym liczby podawane są z przecinkami jako separatorami miejsc
+dziesiętnych, Metoda parseDouble z klasy Double nie da oczekiwanych wyników (wyjątek).
+<br>
+<br>
+Należy zastosować metodę <b>parse(..)</b> zdefiniowaną w klasach formatorów
+i metoda ta poradzi sobie z dowolnymi sposobami zapisu liczb wedle różnych
+reguł lokalizacyjnych (a także wedle różnych formatów).<br>
+<br>Metoda parse(String) użyta na rzecz formatora.
+<ul>
+  <li>zwraca referencję do obiektu podklasy klasy Number,
+który - w zależności od wartości interpretowanego napisu może wskazywać na
+Long lub Double,</li>
+  <li>napis podlega interpretacji jako liczba zgodnie z&nbsp; lokalizacją (np.
+w polskiej lokalizacji użycie przecinka jako separatora miejsc dziesiętnych),</li>
+  <li>w zależności od zastosowanego formatu w trakcie interpretacji napisu
+może wystąpić wyjątek ParseException (albo interpretacja będzie przebiegać
+"dopóki się da", a nie pasujące znaki będą pominięte).<br>
+</li>
+</ul><div class="important">W tych przypadkach, gdy błąd może pojawić się nie tylko na samym początku
+napisu, użyteczna może okazać się metoda <b>getErrorOffset() z klasy ParseException</b>,
+która zwraca pozycję w napisie, na której pojawił się błąd.</div><br>
+<br>
+Zobaczmy na przykładzie zmodyfikowanego programu:<br>
+<pre>  public static void main(String[] args) {<br>    NumberFormat format = new DecimalFormat("[ #.0000 ]");<br>    //...<br>    while ((in = JOptionPane.showInputDialog(msg)) != null) {<br>      System.out.println("Wejscie: " + in);<br>      try {<br>        num = format.parse(in);<br>      } catch (ParseException exc) {<br>          System.out.println("Wadliwe dane: " + in);<br>          System.out.println(exc);<br>          System.out.println("Wadliwa pozycja: " + exc.getErrorOffset());<br>          continue;<br>      }<br>      System.out.println("Parse daje: " +<br>                          num.getClass().getName()+ " = " + num);<br>    }<br>  }<br></pre>
+<br>
+Przykładowy wydruk zmodyfikowanego programu :<br>
+<div class="listing100"><br>
+Wejscie: [23]<br>
+Wadliwe dane [23]<br>
+java.text.ParseException: Unparseable number: "[23]"<br>
+Wadliwa pozycja: 0<br>
+Wejscie: [ 23 ]<br>
+Parse daje: java.lang.Long = 23<br>
+Wejscie: [ 23<br>
+Wadliwe dane: [ 23<br>
+java.text.ParseException: Unparseable number: "[ 23 "<br>
+Wadliwa pozycja: 4<br>
+Wejscie: [ 23 a ]<br>
+Wadliwe dane: [ 23 a ]<br>
+java.text.ParseException: Unparseable number: "[ 23 a ]"<br>
+Wadliwa pozycja: 4<br>
+Wejscie: [ 23.000 ]<br>
+Wadliwe dane: [ 23.000 ]<br>
+java.text.ParseException: Unparseable number: "[ 23.000 ]"<br>
+Wadliwa pozycja: 4<br>
+Wejscie: [ 23, 00 ]<br>
+Wadliwe dane: [ 23, 00 ]<br>
+java.text.ParseException: Unparseable number: "[ 23, 00 ]"<br>
+Wadliwa pozycja: 5<br>
+Wejscie: [ 23,0 ]<br>
+Parse daje: java.lang.Long = 23<br>
+&nbsp;</div><br>
+<br>
+Inną formą metody parse z klas formatorów jest:<br>
+<br>
+&nbsp;&nbsp;&nbsp; Number num = parse(String dane, ParsePosition pos);<br>
+<br>
+Tutaj używamy obiektu <i><b>pos</b></i> klasy <b>ParsePosition</b>, który określa bieżącą pozycję rozbioru napisu <b><i>dane</i></b> oraz ew. pozycję (indeks) na której wystąpił błąd.<br>
+Rozbiór danych (wedle formatu) rozpoczyna się od pozycji okreslonej przez
+podany obiekt klasy ParsePosition. Napis podlega interpretacji (dopóki kolejne
+jego znaki można traktować jako znaki liczby wg danego formatu), po czym
+bieżąca pozycja rozbioru (indeks) jest ustawiana za ostatnim zinterpretowanym
+znakiem i zwracana jest liczba jako obiekt klasy Number. <br><b>
+Ta metoda nie zgłasza żadnych wyjątków</b>. W przypadku błędu&nbsp;interpretacji (a
+w zależności od formatu - występuje on albo tylko na początku napisu, albo
+gdzieś dalej)&nbsp; zwracana jest wartość null, bieżąca pozycja nie ulega zmianie,
+a &nbsp;indeks błędu ustawiany jest na znaku, który spowodowłą bład. Jeżeli nie
+ma błędu indeks błędu ma wartość -1.<br>
+Pozycje (indeks)&nbsp; - bieżący i błędu - możemy uzyskiwac od obiektu ParsePosition
+za pomocą metod getIndex() i getErrorIndex() oraz ustawiać za pomocą odpowiednich
+metod setIndex(...) i setErrorIndex(...).<br>
+<br>
+Program na wydruku pokazuje przykładowe użycie tej metody parse do wyodrębnienia
+z pliku tekstowego wszystkich informacji zapisanych w formacie walutowym
+(możemy sobie wyobrażać, że jest to plik opisujący jakieś wydatki, a naszym
+zadaniem jest ich podsumowanie)<br>
+<br>
+<pre>.import java.io.*;<br>import java.text.*;<br>import java.util.*;<br><br>public class Parse2 {<br><br>  public static void main(String[] args) {<br><br>    // Format walutowy w domyślnej lokalizacji<br>    // czyli w PL np. 12 zł<br>    NumberFormat format = NumberFormat.getCurrencyInstance();<br><br>    // Lista wartości wydatków (zapisanych w tekście pliku)<br>    List numList = new ArrayList();<br><br>    try {<br>      BufferedReader br = new BufferedReader(<br>                            new FileReader("testdata.txt")<br>                          );<br><br>      // czytanie kolejnych wierszu<br>      String in;<br>      while ((in = br.readLine()) != null) {<br><br>        int p = 0;                    // bieżący indeks rozbioru<br>        int last  = in.length() - 1;  // ostatni indeks w wierszu<br><br>        // Utworzenie pozycji rozbioru wiersza (od 0)<br>        ParsePosition ppos = new ParsePosition(0);<br><br>        // Dopóki nie dobiegliśmy do końca wiersza<br>        while (p &lt;= last) {<br>           // Próbujemy pobrać kolejną liczbę w formacie walutowym<br>           Number num = format.parse(in, ppos);<br><br>           if (num == null)              // jeżeli błąd,<br>             p = ppos.getErrorIndex()+1; // indeks na znaku po błędzie<br>           else {                        // jeżeli udało się sczytać wartość<br>             numList.add(num);           // dodajemy ją do listy<br>             p =  ppos.getIndex();   // indeks na następnym znaku po<br>           }<br>           ppos.setIndex(p);         // ustawiamy następną pozycję<br>        }                            // od której kontynuacja rozbioru<br>      }<br>      br.close();<br>    } catch(Exception exc) {<br>        exc.printStackTrace();<br>        System.exit(1);<br>    }<br><br>    // Wypisanie i podsumowanie zapisanych w pliku wydatków<br>    System.out.println("Wydatki w zł:");<br>    double suma = 0;<br>    for (Iterator iter = numList.iterator(); iter.hasNext(); ) {<br>      Number val  = (Number) iter.next();<br>      System.out.println(val);<br>      suma += val.doubleValue();<br>    }<br>    System.out.println("Wydano w sumie: " + format.format(suma));<br>  }<br>}</pre>
+<br>
+Gdy użyjemy tego programu wobec&nbsp; pliku, zawierającego następujący tekst:<br>
+<br>
+Wydano najpierw 123 zł na 23 kilo jabłek<br>
+Kolejny wydatek objął 77,77 zł (70 litrów maślanki)<br>
+a potem jeszcze doszło 999,99 zł w 4 ratach.<br>
+<br>
+to w wyniku uzyskamy:<br>
+<div class="listing100"><br>
+Wydatki w zł:<br>
+123<br>
+77.77<br>
+999.99<br>
+Wydano w sumie: 1 200,76 zł<br>
+</div><br>
+<br>
+<br>
+Przy okazji: spójrzmy na nowe środki Javy 1.5<br>
+<br>
+<pre>import java.io.*;<br>import java.text.*;<br>import java.util.*;<br><br>public class Parse2j5 {<br><br>  public static void main(String[] args) {<br><br>    // Format walutowy w domyślnej lokalizacji<br>    // czyli w PL np. 12 zł<br>    NumberFormat format = NumberFormat.getCurrencyInstance();<br><br>    // Lista wartości wydatków (zapisanych w tekście pliku)<br>    <b><font color="#ff0000">// GENERIC!!!</font></b>
+    List&lt;Double&gt; numList = new ArrayList&lt;Double&gt;();
+
+    try {
+      BufferedReader br = new BufferedReader(
+                            new FileReader("testdata.txt")
+                          );
+
+      // czytanie kolejnych wierszu
+      String in;
+      while ((in = br.readLine()) != null) {
+
+        int p = 0;                    // bieżący indeks rozbioru
+        int last  = in.length() - 1;  // ostatni indeks w wierszu
+
+        // Utworzenie pozycji rozbioru wiersza (od 0)
+        ParsePosition ppos = new ParsePosition(0);
+
+        // Dopóki nie dobiegliśmy do końca wiersza
+        while (p &lt;= last) {
+           // Próbujemy pobrać kolejną liczbę w formacie walutowym
+           Number num = format.parse(in, ppos);
+
+           if (num == null)              // jeżeli błąd,
+             p = ppos.getErrorIndex()+1; // indeks na znaku po błędzie
+           else {                        // jeżeli udało się sczytać wartość
+             numList.add(num.doubleValue()); <b><font color="#ff0000">// BOXING!!!</font></b>
+             p =  ppos.getIndex();   // indeks na następnym znaku po
+           }
+           ppos.setIndex(p);         // ustawiamy następną pozycję
+        }                            // od której kontynuacja rozbioru
+      }
+      br.close();
+    } catch(Exception exc) {
+        exc.printStackTrace();
+        System.exit(1);
+    }
+
+    // Wypisanie i podsumowanie zapisanych w pliku wydatków
+    System.out.println("Wydatki w zł:");
+    double suma = 0;
+    for( Double val : numList ) { <b><font color="#ff0000">// FOR-EACH</font></b>
+      System.out.println(val);
+      suma += val; <b><font color="#ff0000">// UNBOXING!!!</font></b>
+    }
+
+    /*for (Iterator iter = numList.iterator(); iter.hasNext(); ) {
+      Number val  = (Number) iter.next();
+      System.out.println(val);
+      suma += val.doubleValue();
+    }*/
+
+    System.out.println("Wydano w sumie: " + format.format(suma));
+  }
+}
+</pre>
+Kontrola wyjścia - sposobu formatowania:&nbsp; klasa <b>FieldPosition</b>.<br>
+<br>Istnieją też&nbsp; inne sposoby formatowania liczb.<br>
+Wśród podklas klasy NumberFormat znajdziemy klasę ChoiceFormat.<br>
+Generalnie pozwala ona kojarzyć dowolne napisy z &nbsp;(półotwartymi &nbsp;z prawej
+strony) przedziałami liczb. Formatowanie za jej pomocą polega na zastąpieniu
+liczby, "trafiającej" w dany przedział, skojarzonym z tym przedziałem napisem.<br>
+<br><br>
+Klasa ChoiceFormat jest szczególnie użyteczna przy internacjonalizacji napisów
+w programie z wykorzystaniem klasy MessageFormat.<br>
+<br><div class="notel">Uwaga: aby korzystać z klas pakietów ICU należy udostępnić archiwum
+JAR z tymi pakietami. Możemy to uczynić na kilka sposobów:<br>
+<ul>
+  <li>umieścić archiwum w katalogu javax katalogu instalacyjnego Javy (wtedy
+biblioteka ICU stanie się standardowym rozszerzeniem - inaczej zwanym pakietem
+opcjonalnym - i nasze programy będą miały do niej dostęp,</li>
+  <li>umieścić nazwę archiwum JAR biblioteki ICU na ścieżce classpath,</li>
+  <li>kompilować i uruchamiać programy z opcją -classpath, podając archiwum
+JAR biblioteki ICU wraz z innymi elmentami ścieżki (%classpath%); przy uruchamianiu
+klas z pakietu domyślnego nie należy zapomnieć o podaniu jako elementu ścieżki
+bieżącego katalogu, oznaczanego kropką,</li>
+</ul>
+</div>W&nbsp;bibliotekach ICU4J znajdziemy znacznie bardziej
+zaawansowany odpowiednik&nbsp; klasy ChoiceFormat - klasę&nbsp;
+RuleBasedNumberFormat.<br>
+Pozwala ona na formatowanie liczb za pomocą definiowania zestawów reguł.<br>
+Przykładowe zdefiniowane już reguły dla formatora RuleBasedNumber to:<br>
+<ul>
+  <li>SPELLOUT - przedstawianie liczb w postaci słownej,</li>
+  <li>ORDINAL - przedstawianie liczb jako liczebników porządkowych (z odpowiednimi końcówkami),</li>
+  <li>DURATION -&nbsp; przekształcanie liczb na jednostki czasu (godziny, minuty, sekundy).</li>
+</ul><br>
+<a name="W1.5"></a><a name="W1.5"></a><h2>Waluty</h2>
+Klasa Currency z pakietu java.util opisuje waluty. Obiekty tego typu są wykorzystywane
+przez klasę DecimalFormat i możemy je np. stosować dla zmiany formatów walutowych
+(metoda setCurrency(Currency) z klasy DecimalFormat).<br><br>
+Klasa Currency może być użyteczna w różnych sytuacjach.<br>
+Wyobraźmy sobie taki scenariusz: mamy stworzyć aplikację, która generuje
+raporty o aktualnych kursach wybranych walut w kilku językach. Aktualne kursy
+pobieramy z jakiegoś serwisu WEB na podstawie podanych międzynarodowych symboli
+walut.<br>
+Aby taki program można było napisać, trzeba wiedzieć jakie są symbole
+walut i umieć&nbsp; tłumaczyć symbole walut na wybrane języki.<br>
+<br><br>
+Pakiet ICU dostarcza dodatkowych możliwości, gdy chodzi o waluty. M.in. możemy
+uzyskać bardziej opisową, stosowaną w podanej lokalizacji nazwę waluty. Pokazuje
+to poniższy program.<br>
+<br>
+<a name="W1.6"></a><a name="W1.6"></a><h2>Strefy czasowe</h2>Strefy czasowe są przedstawiane przez obiekty klasy TimeZone z pakietu java.util.<br>
+Aby uzyskać aktualną, domyślną dla komputera na którym działa nasz program,
+strefę czasową stosujemy statyczną metodę getDefault() z klasy TimeZone.<br>W naszym programie możemy skonstruować dowolną strefę czasową, używając metody
+TimeZone.getTimeZone(String ID) i podając jako argument identyfikator strefy
+czasowej.<br>
+Listę dostępnych identyfikatorów można uzyskać jako tablicę Stringów za pomoca odwołania TimeZone.getAvailableIDs().<br>
+<br>
+Poniższy przykładowy programik pokazuje jak można wyliczyć aktualną różnicę
+czasu pomiędzy podanymi strefami czasowymi oraz jak można dowiedzieć się
+jakie strefy czasowe mają podaną różnicę czasu wobec GMT.<br>
+<br>
+<pre>import java.util.*;<br>import java.awt.*;<br>import java.awt.event.*;<br>import javax.swing.*;<br><br>public class Strefy1 {<br><br>  public static void main(String[] args) {<br><br>    // Konstruowanie stref czasowych<br>    TimeZone myTz = TimeZone.getTimeZone("Europe/Warsaw");<br>    TimeZone java = TimeZone.getTimeZone("Asia/Jakarta");<br>    TimeZone cuba = TimeZone.getTimeZone("America/Havana");<br><br>    // za pomocą pokazanej dalej metody getDiffMsg<br>    // wyliczamy i pokazujemy aktualną różnicę czasu<br>    // pomiędzy sterfami czasowymi<br><br>    System.out.println(getDiffMsg(myTz, java));<br>    System.out.println("--------------------------------------------------");<br>    System.out.println(getDiffMsg(myTz, cuba));<br>    System.out.println("--------------------------------------------------");<br>    System.out.println(getDiffMsg(cuba, java));<br>    System.out.println("--------------------------------------------------");<br><br>    // Jakie strefy czasowe mają podaną różnicę czasu wobec GMT<br><br>   for (int k = 12; k &lt;= 14; k++) {<br>     String[] ids = TimeZone.getAvailableIDs(k*3600000);<br>     Arrays.sort(ids);<br>     System.out.println(<br>      "Strefy czasowe mające różnice +" + k + " godzin wobec GMT" );<br>     for (int i=0; i &lt; ids.length; i++) {<br>       System.out.println(ids[i]);<br>     }<br>     System.out.println("--------------------------------------------------");<br>   }<br>  }<br><br>  static String getDiffMsg(TimeZone z1, TimeZone z2) {<br>    Date data = new Date();<br>    long teraz = data.getTime();<br>    double offset1 = z1.getOffset(teraz)/3600000.0;<br>    double offset2 = z2.getOffset(teraz)/3600000.0;<br>    double diff;<br>    if (offset1 &gt; offset2)  diff = -(offset1 - offset2);<br>    else diff = offset2 - offset1;<br>    String out =  "Różnica czasu pomiędzy" + '\n' +<br>                  z1.getID() + " i " + z2.getID()  + '\n' +<br>                  "wynosi teraz : " + diff + " godz."  + '\n' +<br>                  "W strefie " + z1.getID() +<br>                       (z1.inDaylightTime(data) ? " " : " nie ") +<br>                       "działa czas letni"  + '\n' +<br>                  "W strefie " + z2.getID() +<br>                       (z2.inDaylightTime(data) ? " " : " nie ") +<br>                       "działa czas letni";<br><br>    return out;<br>  }<br><br>}<br></pre>
+Wydruk:<br>
+<div class="listing100"><br>
+Różnica czasu pomiędzy<br>
+Europe/Warsaw i Asia/Jakarta<br>
+wynosi teraz : 5.0 godz.<br>
+W strefie Europe/Warsaw działa czas letni<br>
+W strefie Asia/Jakarta nie działa czas letni<br>
+--------------------------------------------------<br>
+Różnica czasu pomiędzy<br>
+Europe/Warsaw i America/Havana<br>
+wynosi teraz : -6.0 godz.<br>
+W strefie Europe/Warsaw działa czas letni<br>
+W strefie America/Havana działa czas letni<br>
+--------------------------------------------------<br>
+Różnica czasu pomiędzy<br>
+America/Havana i Asia/Jakarta<br>
+wynosi teraz : 11.0 godz.<br>
+W strefie America/Havana działa czas letni<br>
+W strefie Asia/Jakarta nie działa czas letni<br>
+--------------------------------------------------<br>
+Strefy czasowe mające różnice +12 godzin wobec GMT<br>
+Antarctica/McMurdo<br>
+Antarctica/South_Pole<br>
+Asia/Anadyr<br>
+Asia/Kamchatka<br>
+Etc/GMT-12<br>
+Kwajalein<br>
+NST<br>
+NZ<br>
+Pacific/Auckland<br>
+Pacific/Fiji<br>
+Pacific/Funafuti<br>
+Pacific/Kwajalein<br>
+Pacific/Majuro<br>
+Pacific/Nauru<br>
+Pacific/Tarawa<br>
+Pacific/Wake<br>
+Pacific/Wallis<br>
+--------------------------------------------------<br>
+Strefy czasowe mające różnice +13 godzin wobec GMT<br>
+Etc/GMT-13<br>
+Pacific/Enderbury<br>
+Pacific/Tongatapu<br>
+--------------------------------------------------<br>
+Strefy czasowe mające różnice +14 godzin wobec GMT<br>
+Etc/GMT-14<br>
+Pacific/Kiritimati<br>
+--------------------------------------------------<br>
+</div><a name="W1.7"></a><a name="W1.7"></a><h2><br>
+</h2>
+<a name="W1.8"></a><a name="W1.8"></a><h2>Kalendarze</h2>
+
+
+Informacje o datach i czasie są w Javie reprezentowane przez obiekty klasy Calendar.<br>
+<br>
+
+
+<div class="syntax">Informacje o bieżącej dacie i czasie możemy uzyskać m.in. za pomocą odwołania:<br>
+<br>
+
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Calendar c = Calendar.getInstance();<br>
+<br>   które zwraca obiekt - domyślny kalendarz dla domyślnej lokalizacji
+ustawiony na bieżącą datę i czas w strefie czasowej właściwej dla domyślnej
+lokalizacji.<br>
+
+
+</div><br>
+<br>
+
+
+Informacje o dacie i czasie są zapisane w polach obiektu-kalendarza. Dostęp do tych pól uzyskujemy za pomocą metody <b>get(...)</b>
+ , użytej na rzecz obiektu-kalendarza, z argumentem - stałą statyczną klasy
+Calendar, okreslającą o jaki rodzaj informacji nam chodzi. Oprócz tego pewne
+informacje, związane z właściwościami danego kalendarza lub dla danej lokalizacji
+można uzyskać za pomocą innych metod get... (np. jaki jest pierwszy dzień
+tygodnia - niedziela czy poniedziałek - getFirstDayOfWeek()).<br>
+<br>
+
+
+Przykładowy program spełnia funkcję przewodnika po polach kalendarza,&nbsp; pokazują
+ich znaczenie oraz sposoby uzyskiwania ich wartości.<br>
+<br>
+<pre>import java.util.*;<br><br>public class Kal1 {<br><br>  public static void say(String s) { System.out.println(s+'\n'); }<br><br>  public static void main(String[] args) {<br><br>    // uzyskanie kalendarza domyślnego<br>    // (obowiązującgo dla domyślnej lokalizacji - tu dla Polski)<br>    // ustawionego na bieżącą datę i czas<br><br>    <b>Calendar cal = Calendar.getInstance()</b>;<br><br>    say("ERA.............. " + <b>cal.get(Calendar.ERA)</b> +<br>        " (tu: 0=pne, 1=AD)");<br><br>    say("ROK.............. " + <b>cal.get(Calendar.YEAR)</b>);<br>    say("MIESIĄC.......... " + <b>cal.get(Calendar.MONTH)</b> +<br>        " (0-styczeń, 2-luty, ..., 11-grudzień)");<br><br>    say("LICZBA DNI\n" +<br>        "W MIESIĄCU....... " + <b>cal.getActualMaximum(Calendar.DAY_OF_MONTH)</b>);<br><br>    say("DZIEŃ MIESIĄCA... " + <b>cal.get(Calendar.DAY_OF_MONTH)</b>);<br>    say("DZIEŃ MIESIĄCA... " + <b>cal.get(Calendar.DATE)</b>);<br>    say("TYDZIEŃ ROKU..... " + <b>cal.get(Calendar.WEEK_OF_YEAR)</b><b>)</b>;<br>    say("TYDZIEŃ MIESIĄCA. " + <b>cal.get(Calendar.WEEK_OF_MONTH)</b>);<br>    say("DZIEŃ W ROKU..... " + <b>cal.get(Calendar.DAY_OF_YEAR)</b>);<br><br>    say("PIERWSZY DZIEŃ\n" +<br>        "TYGODNIA......... " + <b>cal.getFirstDayOfWeek()</b> +<br>        " (1-niedziela, 2-poniedziałek, ..., 7 sobota)");<br><br>    say("DZIEŃ TYGODNIA... " + <b>cal.get(Calendar.DAY_OF_WEEK)</b> +<br>        " (1-niedziela, 2-poniedziałek, ..., 7-sobota)");<br><br>    say("GODZINA.......... " + <b>cal.get(Calendar.HOUR)</b> +<br>        " (12 godzinna skala; następne odwolanie czy AM czy PM)");<br><br>    say("AM/PM............ " + <b>cal.get(Calendar.AM_PM)</b> +<br>        " (AM=0, PM=1)");<br><br>    say("GODZINA.......... " + <b>cal.get(Calendar.HOUR_OF_DAY)</b> +<br>        " (24 godzinna skala)");<br><br>    say("MINUTA........... " + <b>cal.get(Calendar.MINUTE)</b>);<br>    say("SEKUNDA.........  " + <b>cal.get(Calendar.SECOND)</b>);<br>    say("MILISEKUNDA:      " + <b>cal.get(Calendar.MILLISECOND)</b>);<br><br>    int msh = 3600*1000; // liczba milisekund w godzinie<br><br>    say("RÓŻNICA CZASU\n" +<br>        "WOBEC GMT........ " + <b>cal.get(Calendar.ZONE_OFFSET</b>)/msh);<br><br>    say("PRZESUNIĘCIE\n" +<br>        "CZASU............ " + <b>cal.get(Calendar.DST_OFFSET)</b>/msh +<br>        " (w Polsce obowiązuje w lecie)");<br><br>  }<br><br>}<br></pre>
+
+
+Na wydruku pokazano wyniki działania programu, uruchomionego we wtorek 6 maja 2003 roku o godzinie 18:05:00.<br>
+
+
+Wydruk:<br>
+<pre>ERA.............. 1 (tu: 0=pne, 1=AD)<br><br>ROK.............. 2003<br><br>MIESIĄC.......... 4 (0-styczeń, 2-luty, ..., 11-grudzień)<br><br>LICZBA DNI<br>W MIESIĄCU....... 31<br><br>DZIEŃ MIESIĄCA... 6<br><br>DZIEŃ MIESIĄCA... 6<br><br>TYDZIEŃ ROKU..... 19<br><br>TYDZIEŃ MIESIĄCA. 2<br><br>DZIEŃ W ROKU..... 126<br><br>PIERWSZY DZIEŃ<br>TYGODNIA......... 2 (1-niedziela, 2-poniedziałek, ..., 7 sobota)<br><br>DZIEŃ TYGODNIA... 3 (1-niedziela, 2-poniedziałek, ..., 7-sobota)<br><br>GODZINA.......... 6 (12 godzinna skala; następne odwolanie czy AM czy PM)<br><br>AM/PM............ 1 (AM=0, PM=1)<br><br>GODZINA.......... 18 (24 godzinna skala)<br><br>MINUTA........... 5<br><br>SEKUNDA.........  0<br><br>MILISEKUNDA:      550<br><br>RÓŻNICA CZASU<br>WOBEC GMT........ 1<br><br>PRZESUNIĘCIE<br>CZASU............ 1 (w Polsce obowiązuje w lecie)<br><br></pre><div class="important">Uwaga: należy zwrócić baczną uwagę na to, że indeksowanie miesięcy rozpoczyna
+się od 0, a nie od 1 (czyli styczeń ma numer 0). Jest to fatalny błąd, który
+popełniono w pierwszej wersji Javy, wprowadzając klasę Date.</div><br><br>
+Za pomocą metod set... kalendarza możemy ustawiać jego bieżącą datę i czas.<br>
+
+
+Np. aby ustawić kalendarz na 7 maja 2003 roku na tę samą godzinę co "teraz" możemy napisać:<br>
+<br>
+
+
+&nbsp;&nbsp;&nbsp; Calendar c = Calendar.getInstance();<br>
+
+
+&nbsp;&nbsp;&nbsp; c.set(2003, 4, 7); &nbsp;// rok 2003, indeks miesiąca = 4 (maj), dzień 7<br>
+<br>
+
+
+a jeśli chcemy zarazem ustalić godzinę 18 minut 05 napiszemy:<br>
+<br>
+
+
+&nbsp;&nbsp;&nbsp; c.set(2003, 4, 7, 18, 5);<br>
+<br>
+
+
+Możemy też zmieniać (ustawiać) wartości poszczególnych pól.<br>
+
+
+Służą do tego metody, które wykonują operacje na datach.<br>
+<br>
+
+
+<div class="syntax">Operacje na datach wykonujemy za pomocą następujących metod:<br>
+<br>
+
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <b>set</b>(id_pola, &nbsp;wartość)<br>
+
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <b>add</b>(id_pola, wartość)<br>
+
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <b>roll</b>(id_pola, wartość) <br>
+<br>
+
+
+&nbsp;&nbsp;&nbsp; gdzie:<br>
+
+ &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; id_pola - stała statyczna z klasy
+Calendar, określająca pole na którym wykonywana jest oparacja,<br>
+
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; wartość - nowa wartość pola.<br>
+
+
+</div><br>
+<br>
+
+
+Wszystkie w/w operacje uwzględniają reguły danego kalendarza, a różnica pomiędzy nimi jest następująca:<br>
+<ul>
+<li>set - ustala wartość pola; jeśli trzeba&nbsp; dostosowując inne pola (np.
+ustawienie pola DAY_OF_MONTH na wartość 31 dla kalendarza ustawionego na
+dowolną datę w czerwcu spowoduje, że kalendarz będzie wskazywał na 1 lipca,
+gdyż w czerwcu jest tylko 30 dni),</li><li>add&nbsp; - dodaje do pola podaną wartość, stosując przy tym arytmetykę
+kalendarzową (np. dodanie do 30 maja 2 dni spowoduje ustawienie kalendarza
+na &nbsp;1 czerwca),</li><li>roll - również wykonuje dodawanie, ale przy tym nie zmienia wartości
+"starszych" pól np. jeżeli dodajemy dni i okaże się, że nowa data znajdzie
+się w innym niż teraz miesiącu, to miesiąc nie zostanie zmieniony, zaś "nadwyżka"
+dni (poza końcem bieżącego miesiąca) będzie dodawana od początku miesiąca.</li>
+</ul>
+
+
+Dokładne reguły obliczeniowe są podane w dokumentacji klasy Calendar. <br><br><br>
+Możemy&nbsp; uzyskać inne kalendarze (niż domyślny):<br>
+<ul>
+  <li>dla domyślnej lokalizacji, ale ustawiony na podaną strefę czasową (Calendar.getInstance(TimeZone)),</li>
+  <li>dla podanej lokalizacji (Calendar.getInstance(Locale)),</li>
+  <li>dla podanej lokalizacji i strefy czasowej (Calendar.getInstance(TimeZone,Locale)),</li>
+</ul>
+Oto prosty przykłady. <br>
+W poniższym fragmencie kodu:<br>
+<pre>    TimeZone tz = TimeZone.getTimeZone("Asia/Jakarta");<br>    Calendar c = Calendar.getInstance(tz);<br>    System.out.println("Current time: " + c.getTime());<br>    System.out.println("Java time: " +<br>         c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE));<br><br></pre>
+kalendarz ustawiany jest na strefę czasową Javy (wyspy, nie języka). Metoda
+getTime() zwróći&nbsp; aktualny czas w domyślnej lokalizacji, ale pola kalendarza
+są ustawiane z uwzględnieniem różnicy czasu.<br>
+W wyniku otrzymamy.<br>
+<div class="listing100">Current time: Fri Jul 18 12:44:47 CEST 2003<br>
+Java time: 17:44</div><br>
+<br>
+Czym różnią się kalendarze dla różnych lokalizacji?<br>Następujący fragment kodu:<br>
+<pre>    Calendar c = Calendar.getInstance();<br>    System.out.println(c.getClass().getName());<br>    c = Calendar.getInstance(new Locale("th", "TH"));<br>    System.out.println(c.getClass().getName());<br></pre>
+wyprowadzi:<br>
+<div class="listing100">java.util.GregorianCalendar<br>
+sun.util.BuddhistCalendar<br>
+</div><br>
+<br>
+Dużo więcej kalendarzy znajdziemy w pakiecie ICU.<br>
+Mamy tam kalendarze: buddyjski, tradycyjny chiński, tradycyjny japoński, islamski, hebrajski. <br>
+<br>
+Sposób użycia tych kalendarzy oraz tóżnice pomiędzy nimi pokazuje poniższy program.<br>
+<pre>import com.ibm.icu.util.*;<br>import com.ibm.icu.text.*;<br><br>public class MiscCal {<br><br>  public static void main(String[] args) {<br>    Calendar[] kal = {<br>               Calendar.getInstance(),   // domyślny kalendarz - gregoriański<br>               new GregorianCalendar(),  // jeszcze raz - ale inaczej tworzony<br>               new BuddhistCalendar(),   // buddyjski<br>               new ChineseCalendar(),    // chiński<br>               new JapaneseCalendar(),   // japoński<br>               new IslamicCalendar(),    // islamski<br>               new HebrewCalendar(),     // hebrajski<br>               };<br>    java.util.Date teraz = new java.util.Date(); // aktualny czas<br>    System.out.println("Teraz jest: " + teraz);  // po angielsku<br><br>    // przebiegamy po klaendarzach<br>    // ustawiamy je na bieżący czas<br>    // i pokazujemy wartości takich pól jak rok, miesiąc itp.<br><br>    for (int i=0; i&lt;kal.length; i++) {<br>      kal[i].setTime(teraz);<br>      String className = kal[i].getClass().getName();<br>      String name = className.substring(className.lastIndexOf(".") + 1);<br>      System.out.println(name + " - " +<br>            "era " + kal[i].get(Calendar.ERA) +<br>            "; rok " + kal[i].get(Calendar.YEAR) +<br>            (name.equals("ChineseCalendar") ?<br>                  " czyli " + kal[i].get(Calendar.EXTENDED_YEAR)  : "") +<br>            "; mies " + kal[i].get(Calendar.MONTH) +<br>            "; dzień mies. " + kal[i].get(Calendar.DAY_OF_MONTH) +<br>            "; dzień tyg. " + kal[i].get(Calendar.DAY_OF_WEEK)<br>            );<br>    }<br>  }<br><br>}<br></pre>
+Program wyprowadzi następujące wyniki.<br>
+<div class="listing100">Teraz jest: Fri Jul 18 15:02:24 CEST 2003<br>
+GregorianCalendar - era 1; rok 2003; mies 6; dzień mies. 18; dzień tyg. 6<br>
+GregorianCalendar - era 1; rok 2003; mies 6; dzień mies. 18; dzień tyg. 6<br>
+BuddhistCalendar - era 0; rok 2546; mies 6; dzień mies. 18; dzień tyg. 6<br>
+ChineseCalendar - era 78; rok 20 czyli 4640; mies 5; dzień mies. 19; dzień tyg. 6<br>
+JapaneseCalendar - era 235; rok 15; mies 6; dzień mies. 18; dzień tyg. 6<br>
+IslamicCalendar - era 0; rok 1424; mies 4; dzień mies. 18; dzień tyg. 6<br>
+HebrewCalendar - era 0; rok 5763; mies 10; dzień mies. 18; dzień tyg. 6<br>
+</div><br>
+<br>
+Dostosowanie kalendarza do lokalizacji nie polega tylko na zmianie samego
+kalendarza. Ten sam kalendarz - np. gregoriański - w różnych lokalizacjach
+może się różnić np. pierwszym dniem tygodnia. W Polsce pierwszym dniem tygodnia
+jest poniedziałek (indeks 2). &nbsp;Dla innych krajów - może być to inny dzień
+tygodnia.<br><a name="W1.9"></a><a name="W1.9"></a><h2>Formatowanie dat</h2><div class="def">Przy formatowaniu dat podobnie jak w przypadku liczb musimy najpierw uzyskać odpowiedni formator
+za&nbsp; pomocą&nbsp;statycznych metod getXXXInstance(...) z klasy DateFormat, a następnie
+na jego rzecz użyć metody format z argumentem typu Date.</div><br>
+<br>
+
+
+Możemy zastosować:<br>
+<ul>
+<li>formator dla dat - metody getDateInstance(...)</li><li>formator dla czasu - metody getTimeInstance(...)</li><li>formator dla daty i czasu - metody getDateTimeInstance(...)</li><li>domyślny formator dla daty i czasu - metoda getInstance().</li>
+</ul>
+
+
+Argumenty w/w metod określają lokalizację oraz&nbsp;styl formatowania .<br>Oprócz tego możemy posłużyć się wzorcami formatowania.<br>
+<br>Metoda getXXXInstance() klasy DateFormat zwraca (zlokalizowany, jeśli można)
+obiekt klasy SimpleDateFormat. Za pomocą tej klasy możemy &nbsp;zastosować wzorce
+formatowania do pokazywania (i parsowania) dat i czasu.<br>
+<br>
+Wzorzec formatowania składa się z liter ('a' - 'z', 'A' - 'Z')), które mają
+specjalne znaczenie i są interpretowane jako składowe daty/czasu (lub zarezerwowane)
+oraz innych symboli, które są po prostu kopiowane przy formatowaniu. Litery
+ujęte w apostrofy nie są interpretowane.<br>
+Litery, mające specjalne znaczenie pokazuje tablica.<br>
+<br>
+<table border="0" cellpadding="0" cellspacing="3">
+<tbody><tr bgcolor="#ccccff"><th align="left">Litera
+         </th><th align="left">&nbsp;Znaczenie
+         </th><th align="left">Typ
+         </th><th align="left">Przykład
+     </th></tr><tr><td><code>G</code></td><td>Era&nbsp;
+         </td><td>Tekst</td><td><code>AD</code></td></tr><tr bgcolor="#eeeeff"><td><code>y</code></td><td>Rok
+         </td><td>Rok</td><td><code>1996</code>; <code>96</code></td></tr><tr><td><code>M</code></td><td>Miesiąc w roku
+         </td><td>Miesiąc</td><td><code>July</code>; <code>Jul</code>; <code>07</code></td></tr><tr bgcolor="#eeeeff"><td><code>w</code></td><td>Tydzień w roku
+         </td><td>Liczba<br>
+</td><td><code>27</code></td></tr><tr><td><code>W</code></td><td>Tydzień w &nbsp;miesiącu</td><td>Liczba</td><td><code>2</code></td></tr><tr bgcolor="#eeeeff"><td><code>D</code></td><td>Dzień roku
+         </td><td>Liczba</td><td><code>189</code></td></tr><tr><td><code>d</code></td><td>Dzień miesiąca
+         </td><td>Liczba</td><td><code>10</code></td></tr><tr bgcolor="#eeeeff"><td><code>F</code></td><td>Dzień tygodnia&nbsp;
+         </td><td>Liczba</td><td><code>2</code></td></tr><tr><td><code>E</code></td><td>Dzień tygodnia
+         </td><td>Tekst</td><td><code>Tuesday</code>; <code>Tue</code></td></tr><tr bgcolor="#eeeeff"><td><code>a</code></td><td>Tekst &nbsp;Am/pm&nbsp;
+         </td><td>Tekst</td><td><code>PM</code></td></tr><tr><td><code>H</code></td><td>Godzina dnia (0-23)
+         </td><td>Liczba</td><td><code>0</code></td></tr><tr bgcolor="#eeeeff"><td><code>k</code></td><td>Godzina dnia (1-24)
+         </td><td>Liczba</td><td><code>24</code></td></tr><tr><td><code>K</code></td><td>Godzina&nbsp; am/pm (0-11)
+         </td><td>Liczba</td><td><code>0</code></td></tr><tr bgcolor="#eeeeff"><td><code>h</code></td><td>Gdodzina am/pm (1-12)</td><td>Liczba</td>
+<td><br>
+</td><td><code>12</code></td></tr><tr><td><code>m</code></td><td>Minuta
+         </td><td>Liczba</td><td><code>30</code></td></tr><tr bgcolor="#eeeeff"><td><code>s</code></td><td>Sekunda
+         </td><td>Liczba</td><td><code>55</code></td></tr><tr><td><code>S</code></td><td>Milisekunda</td><td>Liczba</td><td><code>978</code></td></tr><tr bgcolor="#eeeeff"><td><code>z</code></td><td>Strefa czasowa
+         </td><td>Symbol strefy<br>
+</td><td><code>Pacific Standard Time</code>; <code>PST</code>; <code>GMT-08:00</code></td></tr><tr><td><code>Z</code></td><td>Strefa czasowa
+         </td><td>Symbol RFC 822&nbsp;</td><td><code>-0800</code></td></tr></tbody>
+</table>
+<br>Przyjrzyjmy
+się&nbsp; kilku przykładom zastosowania wzorców formatowania dat.<br>
+<br>
+Poniższy program:<br>
+<pre>import java.util.*;<br><br>public class Daty1 {<br><br>  public static void main(String[] args) {<br><br>    Calendar c = Calendar.getInstance();<br>    Date teraz = c.getTime();<br><br>    SimpleDateFormat df = (SimpleDateFormat) DateFormat.getDateInstance();<br><br>    String[] pattern = {"dd-MM-yyyy",<br>                        "MMMM, 'dzień 'dd ( EE ), 'roku 'yyyy GGGG",<br>                        "EEEE, dd MMM yyyy 'r.'"<br>                       };<br>    for (int i=0; i&lt;pattern.length; i++) {<br>      df.applyPattern(pattern[i]);<br>      System.out.println(df.format(teraz));<br>    }<br><br>  }<br><br>}<br></pre>
+wyprowadzi:<br>
+<div class="listing100"><br>
+18-07-2003<br>
+lipiec, dzień 18 ( Pt ), roku 2003 n.e.<br>
+piątek, 18 lip 2003 r.<br>
+</div><br>
+<br>
+Przy parsowaniu z użyciem zdefiniowanych wzorców formatowania teksty (zapisane
+zgodnie z tymi wzorcami) przekształcane są na daty (obiekty klasy Date).
+Reguły parsowania są podobne jak w przypadku klasy NaumberFormat.<br>
+Poniższy przykładowy fragment:<br>
+<pre>&nbsp;  public static void main(String[] args) {<br><br><br>    SimpleDateFormat df = (SimpleDateFormat) DateFormat.getDateInstance();<br><br>    String[] pattern = {"dd-MM-yyyy",<br>                        "MMMM, 'dzień 'dd ( EE ), 'roku 'yyyy GGGG",<br>                        "EEEE, dd MMM yyyy 'r.'"<br>                       };<br><br>    for (int i=0; i&lt;pattern.length; i++) {<br><br>      String in=JOptionPane.<br>                showInputDialog("Wprowadź datę wg wzorca " + pattern[i]);<br>      df.applyPattern(pattern[i]);<br>      Date data = df.parse(in, new ParsePosition(0));<br>      System.out.println(data);<br>    }<br>  }<br><br></pre>
+po wprowadzeniu w dialogach tekstów:<br>
+12-12-1999<br>
+lipiec, dzień 18 ( Pt ), roku 2003 n.e.<br>
+wtorek, 12 lipiec 2003 r.<br>
+<br>
+wyprowadzi na konsolę:<br>
+Sun Dec 12 00:00:00 CET 1999<br>
+Fri Jul 18 00:00:00 CEST 2003<br>
+Sat Jul 12 00:00:00 CEST 2003<br>
+<br>
+Zwróćmy uwagę: błędny dzień tygodnia (wtorek zamiast soboty) nie spowodował
+błędu interpretacji, ale uzyskana data jest właściwa (nazwa dnia tygodnia
+została skorygowana).<br>
+<br>
+Oczywiście, formatowanie i parsowanie podlega zasadom lokalizacji.<br>
+Istotnych informacji lokalizacyjnych dostarcza klasa DateFormatSymbols.<br>
+<br>
+Przykładowy program tworzy obiekty klasy DateFormatSymbols dla kilku lokalizacji
+i wywołuje na ich rzecz metody takie jak getWeekdays() (zwracającą nazwę
+dni tygodnia) czy getMonths() (nazwy dni miesiąca). Nazwy metod pozyskujących
+zlokalizowane informacje są samoobjaśniające sie, wynik działania programu
+pokazujemy w obszarze wielowierszowego pola edycyhnego (JTextArea) po to
+by właściwie były interpretowane znaki Unicode (zob. rysunek).<br>
+<br>
+<pre>import java.util.*;<br>import java.text.*;<br>import java.awt.*;<br>import javax.swing.*;<br><br>public class DateFormatSymbolsShow {<br><br>  String[] lang = { "fr", "es", "de", "ru" };<br><br>  String out = "";<br><br>  public DateFormatSymbolsShow() {<br>    for (int i=0; i&lt;lang.length; i++) {<br>      Locale  loc = new Locale(lang[i]);<br>      DateFormatSymbols dfs = new DateFormatSymbols(loc);<br>      out += '\n' + loc.getDisplayLanguage();<br>      // nazwy er<br>      addToOut("Ery: ", dfs.getEras());<br>      // nazwy miesięcy<br>      addToOut("Miesiące: ", dfs.getMonths());<br>      // skróty miesięcy<br>      addToOut("Miesiące - skróty: ", dfs.getShortMonths());<br>      // nazwy dni tygodnia<br>      addToOut("Dni tygodnia: ", dfs.getWeekdays());<br>      // skróty nazw dni tygodnia<br>      addToOut("Dni tygodnia - skróty: ", dfs.getShortWeekdays());<br>    }<br>    JTextArea ta = new JTextArea(out);<br>    ta.setFont(new Font("Dialog", Font.BOLD, 14));<br>    JFrame f = new JFrame();<br>    f.getContentPane().add(ta);<br>    f.pack();<br>    f.show();<br>  }<br><br>  void addToOut(String msg, String[] s) {<br>    out += "\n" + msg;<br>    for (int i=0; i&lt;s.length; i++) {<br>      out += ' ' + s[i];<br>    }<br>  }<br><br>  public static void main(String[] args) {<br>    new DateFormatSymbolsShow();<br>  }<br><br>}<br></pre>
+<br>
+<br>
+<img src="images/datefsym.jpg" alt="r" border="1" height="487" width="734">
+<br>
+<br>
+<br>
+Zwykle nie korzystamy z klasy DateFormatSymbols (jest ona używana automatycznei
+przy formatowaniu dat), Czasem jednak może zajść taka potrzeba. Wtedy można
+użyc konstruktora klasy SimpleDateFormat, dostarczając mu oprócz pierwszego
+argumentu (wzorca formatowania) argument drugi - refrencję do obiektu DateFormatSymbols.<br>
+<br>
+Wykorzystamy to teraz do poprawieniu błędów gramatycznych, które nieuchronnie
+powstają przy formatowaniu dat w języku polskim ze względu na brak uwzględnienia
+właściwej odmiany nazw miesięcy.
+Przy okazji zobaczymy, że właściwości lokalizacyjne formatowania dat można
+łatwo zmieniać (za pomocą rozlicznych metod set... z klasy DateFormatSymbols).<br>
+<br>
+<pre>import java.util.*;<br>import java.text.*;<br><br>public class DateFormatPol {<br><br>  public static String polskaData(Date data) {<br>    String[] mies = { "stycznia", "lutego", "marca", "kwietnia",<br>                      "maja", "czerwca", "lipca", "sierpnia",<br>                      "września", "października", "listopada",<br>                      "grudnia"<br>                    };<br>    DateFormatSymbols dfs = new DateFormatSymbols();<br>    dfs.setMonths(mies);<br>    SimpleDateFormat df = new SimpleDateFormat("dd MMMM yyyy", dfs);<br>    return df.format(data);<br>  }<br><br><br><br>  public static void main(String[] args) {<br>    System.out.println( polskaData( new Date() ) );<br>  }<br><br>}<br></pre>
+
+<br>
+Prrzykładowy listing programui:<br>
+<div class="listing33r">20 lipca 2003<br>
+</div> <br>
+<br>
+<a name="W1.10"></a><a name="W1.10"></a><h2>
+Zlokalizowany rozbiór tekstów</h2>zob. w książce <br>
+<br>
+<a name="W1.11"></a><a name="W1.11"></a><h2>Porównywanie i sortowanie napisów</h2>
+
+Różne języki implikują różny alfabetyczny porządek napisów.<br>
+Właściwe porównywanie napisów możemy przeprowadzić za pomocą obiektu klasy <b>Collator</b> z pakietu java.text.<br>
+<br>
+Jest to klasa czuła na lokalizację, zatem właściwą instancję kolatora dla
+domyślnej lokalizacji uzyskamy za pomocą odwołania Collator.getInstance().
+Możemy też uzyskać kolator dla dowolnej lokalizacji, podając w metodzie getInstance(...) argument-lokalizację<br>
+<br>
+Mając obiekt-kolator dla okreslonej (domyślnej lub podanej) lokalizacji możemy
+za pomocą metody compare(...) wywołanej na jego rzecz uzyskać własciwy dla
+danej lokalizacji wynik porównania dwóch napisów podanych jako argumenty
+metody.<br>
+<br>
+Łatwo się domyślić, że klasa Collator implementuje interfejs Comparator.
+Zatem porównania uzyskiwane za pomoca metody compare(...) kolatora łatwo
+uczynić podstawą sortowania tablic i kolekcji, a także decydowania o dodawaniu
+elementów do uporządkowanych zbiorów i map.<br>
+<br><b>
+Zobaczmy najprostszy przykład. Niech domyślna lokalizacja będzie lokalizacją
+polską, Jak posortować tablicę napisów w tej lokalizacji ? Reguła jest prosta:<br>
+</b>
+<ul>
+  <li><b>uzyskać kolator dla lokalizacji domyslnej (polskiej) - metoda Collator.getInstance(),</b></li>
+  <li><b>podać ten kolator jako komparator w metodzie Arrays.sort(...)&nbsp;</b></li>
+</ul><br>
+<pre>import java.util.*;<br>import java.text.*;<br><br>public class Kolator0 {<br><br>  static void sortShow(String msg, String[] txt, Collator col) {<br>    String[] copyTxt = (String[]) txt.clone();<br>    Arrays.sort(copyTxt, col);<br>    System.out.println(msg);<br>    for (int i=0; i &lt; copyTxt.length; i++) {<br>      System.out.println(copyTxt[i]);<br>    }<br>  }<br><br><br>  public static void main(String[] args) {<br>    String[] txt = { "bela", "Ala", "ą", "Ą", "ą", "ala" , "Be", "Ala",<br>                     "alabama", "be", "Be", "1", "ć", "my", "My", "Myk", "myk"  };<br>    Collator col = Collator.getInstance();<br>    sortShow("Sort pol", txt, col);<br>    Collator col1 = Collator.getInstance(new Locale("en"));<br>    sortShow("Sort en", txt, col1);<br>  }<br><br>}<br></pre>
+Program wyprowadzi na konsolę:<br>
+<div class="listing100"><br>
+Sort pol<br>
+1<br>
+ala<br>
+Ala<br>
+Ala<br>
+alabama<br>
+ą<br>
+ą<br>
+Ą<br>
+be<br>
+Be<br>
+Be<br>
+bela<br>
+ć<br>
+my<br>
+My<br>
+myk<br>
+Myk<br>
+Sort en<br>
+1<br>
+ą<br>
+ą<br>
+Ą<br>
+ala<br>
+Ala<br>
+Ala<br>
+alabama<br>
+be<br>
+Be<br>
+Be<br>
+bela<br>
+ć<br>
+my<br>
+My<br>
+myk<br>
+Myk<br>
+</div><br>
+<br>
+W jaki sposób (dla różnych lokalizacji) uzyskujemy właściwe porównania?<br>
+Otóż konkretne kolatory są obiektami klasy RuleBasedCollator, która jest podklasą klasy Collator.<br><br>
+Uporządkowanie za pomocą kolatorów klasy RuleBasedCollator odbywa się na
+podstawie porównywanie znaków w oparciu o reguły zapisane za pomocą prostej
+składni. Reguły te określają cztery (a w pakieice ICU nawet pięć) porządki:<br>
+<ul>
+  <li>podstawowy (PRIMARY), w którym rozróżniane są (zdefiniowane w zestawie reguł&nbsp; jako rozróżnialne) znaki,</li>
+  <li>drugorzędny (SECONDARY) , który określa porządek napisów identycznych
+ze względu na porządek podstawowy, ale różniących się akcentowanymi znakami
+(to dotyczy np. języków francuskiego, hiszpańskiego, angielskiego),</li>
+  <li>trzeciorzędny (TERTIARY), który napisy identyczne wedle dwóch poprzednich porządków rozróżnia na podstawie wielkości liter,</li>
+  <li>identyczności (IDENTICAL): rozróżniający wszelkie znaki, nawet te uznane
+za takie same wedle trzech poprzednicj porządków (np. w wielu lokalizacjach
+znaki \u0001 i \u0002 są uznawane za takie same wedle trzech w/w porządków,
+natomiast porządek identyczności będzie je rozróżniał)<br>
+  </li>
+</ul>
+Stosowany dla danego kolatora porządek nazywa się <i><b>siłą kolatora</b></i>.<br>
+Nawet nie znając reguł danego kolatora możemy ustalać jego siłę (np. czy
+napisy różniące się tylko wielkością liter mają być rozrózniane). Służy temu
+metoda setStrength(...) z argumentem określającym siłę kolatora (jedna ze
+stałych statycznych&nbsp; klasy Collator o nazwach PRIMARY, SECONDARY, TERTIARY,
+IDENTICAL).<br>
+<br><br><b>Możemy sami definiować reguły dla obiektów klasy RuleBasedCollator.</b><br>
+Reguły są zapisywane jak łańcuchy znakowe w postaci:<br>
+<br>
+&nbsp;&nbsp;&nbsp; &lt;relacja&gt; tekst &lt;relacja&gt; tekst ....<br>
+<br>
+gdzie relacja wprowadzana jest za pomocą znaków:<br>
+&lt; &nbsp;- większe wedle pierwszego porządku (rozróżniania liter)<br>
+; &nbsp;- &nbsp;większe wedle drugirgo porządku (rozróżniania akcentowanych liter),<br>
+, &nbsp; - większe wedle trzeciego porządku (wielkość liter)<br>
+= - równe<br>
+a tekst jest dowolym ciągiem znaków wyłączając znaki specjalne i znaki opisujące
+w/w relacje (jeśli takie znaki chcemy włączyć do porównań ujmujemy je w apostrofy).<br>
+<br>
+Na przykład:<br>
+<br>
+9 &lt; a, A &lt; b, B &lt; c, C<br>
+<br>
+Możemy też użyć znaku &amp;, który łogicznie łączy&nbsp; reguły np:<br>
+a &lt; b &amp; b &lt; c<br>
+jest identyczne z :<br>
+a &lt; b &lt; c<br>
+<br>Stworzenie pełnego zestawu reguł dla kolatora może być dość pracochłonne. trzeba bowiem uwzględnić wiele możliwych znaków.<br>
+Zobaczmy najpierw jak wygląda fragment reguł dla kolatora w lokalizacji polskiej. <br>
+Reguły te możemy uzyskać za pomocą odwołania:<br>
+<pre>    Collator col = Collator.getInstance();<br>    String rules = ((RuleBasedCollator) col).getRules();<br></pre>
+i pokazać np. w oknie:<br>
+<br>
+<img src="images/regulu.jpg" alt="r" border="1" height="174" width="491">
+<br>
+<br>
+<br>
+Spróbujmy teraz rozpatrzyć uproszczony przykład (abstrahując od wielu możliwych
+znaków). Przykłady sortowania pokazały nam, że&nbsp; rozróżnienie pomiędzy dużymi
+i małymi literami &nbsp;nie jest pierwszorzędne: tylko w przypadku gdy napisy
+są takie same kolator bierze pod uwagę tę różnicę i ustawia wtedy małe litery
+przed wielkimi. Widać to zresztą w zestawie reguł np. ... &lt; a, A &lt;
+b, B &nbsp;rozróznia&nbsp;najpierw litery a i b (bez uwzględneinia ich wielkości),
+a dopiero gdy napisy (składający się z tych liter) są takie same bierze pod
+uwagę<br>
+&nbsp;ich wielkość.<br>
+&nbsp;Stworzymy więc przykładowy inny zestaw reguł, który (przy sortowaniu rosnącym)
+ustawi wyraz&nbsp; "Polska" na początku, a inne napisy posortuje w porządku -
+najpierw duże litery, później małe (z uwzględnieniem polskich znaków i tego,
+że polskie odpsoiedniki znaleźc sie mają po "normalnych" literach np. ą po
+a).<br>
+Obrazuje to poniższy program:<br>
+<pre>import java.util.*;<br>import java.text.*;<br><br>public class Kolator1 {<br><br>  static void sortShow(String msg, String[] txt, final Collator col) {<br>    String[] copyTxt = (String[]) txt.clone();<br>    Arrays.sort(copyTxt, col);<br>    System.out.println(msg);<br>    for (int i=0; i &lt; copyTxt.length; i++) {<br>      System.out.println(copyTxt[i]);<br>    }<br>  }<br><br><br>  public static void main(String[] args) {<br><br>    // Napisy do posortowania<br>    String[] txt = { "bela", "Ala", "ą", "Ą", "ą", "ala" , "Be", "Ala",<br>                     "alabama", "be", "Be", "1", "Ćwikła", "ćwikła",<br>                     "ćwikla", "Polska",<br>                     "My", "my", "Myk", "myk"  };<br><br>    // Domyślny polski kolator<br>    Collator col = Collator.getInstance();<br>    sortShow("Default sort", txt, col);<br><br>    // Nowe reguły<br>    String rules = " &lt; Polska &lt; A &lt; Ą &lt; B &lt; C &lt; Ć &lt; D &lt; E &lt; Ę &lt; F &lt; G &lt; H" +<br>                  " &lt; I &lt; J &lt; K &lt; L &lt; Ł &lt; M &lt; N &lt; Ń &lt; O &lt; P &lt; Q &lt; R &lt; S &lt; Ś" +<br>                  " &lt; T &lt; U &lt; V &lt; W &lt; X &lt; Y &lt; Z &lt; Ź " +<br>                  " &lt; a &lt; ą &lt; b &lt; c &lt; ć &lt; d &lt; e &lt; ę &lt; f &lt; g &lt; h" +<br>                  " &lt; i &lt; j &lt; k &lt; l &lt; ł &lt; m &lt; n &lt; ń &lt; o &lt; p &lt; q &lt; r &lt; s &lt; ś" +<br>                  " &lt; t &lt; u &lt; v &lt; w &lt; x &lt; y &lt; z &lt; ź";<br><br>    try {<br>      col = new RuleBasedCollator(rules);<br>    } catch (ParseException exc) {<br>        System.out.println("Wadliwa reguła na pozycji " + exc.getErrorOffset());<br>        System.out.println(exc);<br>        System.exit(1);<br>    }<br><br>    sortShow("My new rules sort", txt, col);<br><br>  }<br><br>}<br></pre>
+
+który wyprowadzi:<br>
+<div class="listing100"><br>
+Default sort<br>
+1<br>
+ala<br>
+Ala<br>
+Ala<br>
+alabama<br>
+ą<br>
+ą<br>
+Ą<br>
+be<br>
+Be<br>
+Be<br>
+bela<br>
+ćwikla<br>
+ćwikła<br>
+Ćwikła<br>
+my<br>
+My<br>
+myk<br>
+Myk<br>
+Polska<br>
+<br>
+My new rules sort<br>
+Polska<br>
+Ala<br>
+Ala<br>
+Ą<br>
+Be<br>
+Be<br>
+Ćwikła<br>
+My<br>
+Myk<br>
+ala<br>
+alabama<br>
+ą<br>
+ą<br>
+be<br>
+bela<br>
+ćwikla<br>
+ćwikła<br>
+my<br>
+myk<br>
+1</div><br>
+<br>
+Jeżeli sortowanie jakiegoś zestawu napisów ma się powtarzać wielokrotnie,
+to dla zwiększenia efektywności działania można przyporządkować napisom klucze
+i sortować te klucze (klucze są sortowane szybciej). <br>
+Sposób postępowania jest następujący:<br>
+<ul>
+  <li>stworzyć kolekcję lub tablicę na przechowywanie kluczy (obiektów klasy CollationKeys),</li>
+  <li>dla każdego napisu, który ma podlegać porządkowaniu (sortowaniu) uzyskąc
+klucz do kolatora za pomocą wywołania metody getCollationKey(napis) z klasy
+Collator,</li>
+  <li>wstawić klucz do tablicy lub kolekcji,</li>
+  <li>posortować tablicę lub kolekcję,</li>
+  <li>teraz klucze w tablicy/kolekcji są ustwaione w porządku napisów, określanym przez kolator</li>
+  <li>żeby pokazać wynik sortowania przebiegamy tablicę/kolekcję kluczy i
+od każdgeo klucza za pomocą odwołania getSourceString() uzyskujemy skojarzony
+z nim napis.</li>
+</ul>
+Ilustruje to poniższy program.<br>
+<pre>import java.util.*;<br>import java.text.*;<br><br>public class Kolator2 {<br><br>  public static void main(String[] args) {<br><br>    // Napisy do posortowania<br>    String[] txt = { "bela", "Ala", "ą", "Ą", "ą", "ala" , "Be", "Ala",<br>                     "alabama", "be", "Be", "1", "Ćwikła", "ćwikła",<br>                     "ćwikla", "Polska",<br>                     "My", "my", "Myk", "myk"  };<br><br>    // Domyślny polski kolator<br>    Collator col = Collator.getInstance();<br><br>    // Lista kluczy<br>    List keys = new ArrayList();<br><br>    // Uzyskanie kluczy dla napisów<br>    // wartości kluczy uzyskujemy od kolatora<br>    for (int i=0; i&lt;txt.length; i++) {<br>      CollationKey key = col.getCollationKey( txt[i] );<br>      keys.add(key);<br>    }<br><br>    // Sortowanie<br>    // porównywane mogą być tylko klucze uzyskane od tego samego kolatora!<br><br>    Collections.sort(keys);<br><br>    // Pokazanie wyniku<br>    // mamy klucze ułożone w określonym porządku napisów, które reprezentują<br>    // musimy pobrać napis skojarzony z kluczem<br><br>    for (Iterator it = keys.iterator(); it.hasNext(); ) {<br>      CollationKey key = (CollationKey) it.next();<br>      String napis = key.getSourceString();<br>      System.out.println(napis);<br>    }<br>  }<br><br>}<br></pre>
+<br>
+<br>
+<a name="W1.12"></a><a name="W1.12"></a><h2>Internacjonalizacja aplikacji i dodatkowe zasoby (resource bundle)</h2>
+Nie tylka liczby, daty, czas powinny być w aplikacjach przygotowane do prezentacji
+zgodnie z wymaganiami &nbsp;danej lokalizacji. Również komunikacja aplikacji z
+użytkownikiem powinna przebiegać w języku &nbsp;użytkownika.<br>
+Wszelkiego rodzaju napisy i komunikaty dla użytkownika powinny być lokalizacyjnie przygotowane.<br><br>
+Generalnie aplikacja powinna być od początku przygotowana na działanie
+w różnych środowiskach językowych. A to oznacza konieczność odseparowania
+językowych właściwości apliakcji (takich jak język komunikatów) od samego
+jej kodu.<br>
+<br>
+Mechanizmem umożliwiającycm takie odseparowanie w Javie są tzw. dodatkowe zasobu (ResourceBundle).<br>
+Istnieją dwa rodzaje dodatkowych zasobów: oparte na klasach (ListResourceBoundle)
+i na czystych, tekstowych plikach właściwości (PropertiesResourceBundle).<br>
+<br>
+Pliki właściwości umożliwiają odseparowanie napisów, klasy ListResourceBundle - dowolnych obiektów.<br>
+<br>Jako prosty przykład stworzymy dwa pliki wartości klucz=napis: domyślny i dla lokalizacji polskiej:<br>
+<br>
+Plik HelloMessages.properties<br>
+# Komunikaty w aplikacji Hello - domyślne przy braku pliku dla danej lokalizacji<br>
+hello = Hello!<br>
+bye = Good bye!<br>
+<br>
+Plik HelloMessages_pl.properties <br>
+# Komunikaty w aplikacji Hello - po polsku<br>
+hello = Dzień dobry!<br>
+bye = Do widzenia.<br>
+<br>
+Uwaga: klucze (hello, bye) są takie same.<br>
+<br>
+Plików tych i mechanizmu dodatkowych zasobów użyjemy w prościutkiej aplikacji
+Hello (dzięki czemu komunikacja z użytkownikiem naprawdę będzie odseparowana
+od kodu źródłowego).
+<pre>import java.util.*;<br><br>public class Hello {<br><br>  static void sayHello() {<br>    Locale defLoc = Locale.getDefault();<br>    ResourceBundle msgs =<br>                   ResourceBundle.getBundle("HelloMessages", defLoc);<br>    String powitaj  = msgs.getString("hello");<br>    String pozegnaj = msgs.getString("bye");<br>    System.out.println(powitaj);<br>    System.out.println(pozegnaj);<br> }<br><br><br>  public static void main(String[] args) {<br>    sayHello(); // tutaj działa domyślna lokalizacja pl_PL<br>    // zmieniamy domyślną lokalizację<br>    Locale.setDefault(new Locale("en"));<br>    sayHello();<br>  }<br><br>}<br></pre>
+Wynik działania programu:<br>
+<div class="listing100"><br>
+Dzień dobry!<br>
+Do widzenia.<br>
+Hello!<br>
+Good bye!<br>
+</div><br>
+Uwagi: <br>
+<ul>
+  <li>pierwsza para napisów powstaje, gdyż domyślną lokalizacją jest pl_PL,
+getBundle(defLoc) nie znajduje pliku właściwości o takim sufiksie, ale znajduje
+bliski mu z sufiksem pl,&nbsp; </li>
+  <li>przy drugim odwołaniu do sayHello poszukiwany jest plik HelloMessages_en.properties,
+a ponieważ go nie ma - używany jest domyślny HelloMessages.properties</li>
+</ul>
+Tak naprawdę ResourceBundle.getBundle(..) szuka najpierw klas dziedziczących
+ListResourceBundle, a dopiero później plików właściwości.<br>
+<br>
+Użycie ListResourceBundle wymaga od nas pisania kodu (i to jest wada w stosunku
+do mechanizmu plików właściwości), ale równocześnie pozwala na wprowadzenie
+"pod kluczami" - innych obiektów niż napisy (np. jakichś liczb, obrazów,
+dźwięków - oczywiścię zlokalizowancyh).<br>
+<br>
+Nasze zlokalizowane listy zasobów są klasami, które:<br>
+<ul>
+  <li>mają nazwy zgodne z opisaną wcześniej (przy okazji plików własciwości) konwencją&nbsp; (sufiksy wskazujące na lokalizację)</li>
+  <li>dziedziczą klasęe ListResourceBundle,</li>
+  <li>dostarczają publicznej metody Object[][] getContents() która zwraca
+tablicę odpowiedniości klucze - wartości, przy czym zaróno klucze jak i odpowiadające
+im wartości mogą być dowolnymi obiektami.</li>
+</ul>
+Przykład:<br>
+<pre>public class CountryInfo_pl_PL extends ListResourceBundle {<br><br>   public Object[][] getContents() {<br>	return contents;<br>    }<br><br>    private Object[][] contents = {<br>	{ "name", "Polska" },<br>	{ "flag",  new ImageIcon("PolskaFlaga.gif" },<br>    };<br>}<br></pre>
+<br>
+Uzyskiwanie wartości z takich zasobów odbywa się w następujący sposób:<br>
+<br>
+<pre>ResourceBundle&nbsp;info =<br>		ResourceBundle.getBundle("CountryInfo", currentLocale);<br><br>String nazwaKraju = info.getString("name");<br>ImageIcon flaga = (ImageIcon) info.getObject("flag");<br></pre>
+Uwaga: jeżeli wartość nie jest Stringiem należy zastosować metodę getObject()
+i dokonać zawężającej konwersji do właściwego typu.<br>
+<br>
+<br>
+Dodatkowe zasoby (w specjalnej formie) razem z formatorem MessageFormat są
+używane do generowania złożonych komunikatów, które opisywane są za pomocą
+szablonu z wymiennymi parametrami. <br>
+<br>Np.<br>
+<br>
+Number val;<br>
+Object[] elts = { new Date(), val };<br>
+<br>
+String format = "Dnia {0,date} o godzinie {0,time}" +<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp;" wypłacono {1,number,currency}" },<br>
+&nbsp; &nbsp; <br>
+MessageFormat.format(format, elts);<br>
+<br>
+<br>
+Przykład: Msg.java<br>
+<br>
+<br>
+<b><font color="#ff0000">Java 1.5 - metody ze zmienną liczbą argumentów:</font></b><br>
+<br>
+&nbsp; private void setBlue(Component ... comps) {<br>
+&nbsp;&nbsp;&nbsp; for (Component c : comps) c.setForeground(Color.blue);<br>
+&nbsp;&nbsp;&nbsp; println("Liczba przekazanych kompoenntów: " + comps.length);<br>
+&nbsp;&nbsp;&nbsp; println("Szerokość pierwszego komponentu: " +<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+comps[0].getWidth());<br>
+&nbsp;&nbsp;&nbsp; println("Szerokość ostatniego komponentu: " +<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+comps[comps.length-1]);<br>
+&nbsp; }<br>
+<br>
+i wywolanie:<br>
+<br>
+setBlue(lab1, lab2, lab3);<br>
+<br>
+setBlue(button1, button2); &nbsp;// nie trzeba tablic !!!<br>
+<br>
+<br>
+Statyczna metoda format z klasy MessagFormat jest zdefiniowana jako metoda ze zmienną liczbą argiemnetów.<br>
+<br>
+Przykład: Msg1.java<br>
+<br>
+</body></html>

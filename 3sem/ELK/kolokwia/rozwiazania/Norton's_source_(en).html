@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>Norton's Theorem - Chapter 10: DC NETWORK ANALYSIS - Volume I - DC</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<META NAME="keywords" CONTENT="electronics,circuits,eletric,boolean algebra,math,calculas,robotics">
+<META NAME="description" CONTENT="a complete guide to electronic circuits">
+<META NAME="robots" CONTENT="FOLLOW,INDEX">
+
+<link href="http://sub.allaboutcircuits.com/Style.css" rel="stylesheet" type="text/css">
+
+<script language="javascript">
+    var submitted = 0;
+    function LockButton (form,element) {
+       if ( ! submitted ) {
+           form.elements[element].disabled=true;
+           submitted = 1;
+       }
+       else { alert("Form already submitted, please be patient"); }
+    }
+</script>
+</head>
+<body bgcolor="#0099ff" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="1" align="center">
+  <tbody><tr>
+    <td bgcolor="#000000">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" background="http://sub.allaboutcircuits.com/AllAboutCircuits_files/scan.gif">
+        <tbody><tr>
+          <td valign="bottom"><img src="http://sub.allaboutcircuits.com/AllAboutCircuits_files/logo.gif" width="304" height="26"></td>
+          <td>
+            <div align="right"><img src="http://sub.allaboutcircuits.com/AllAboutCircuits_files/cir1.jpg" width="280" height="83"></div>
+          </td>
+        </tr>
+        <tr bgcolor="#000000">
+          <td colspan="2">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tbody><tr>
+                <td>
+			                  <table width="100%" border="0" cellspacing="1" cellpadding="0">
+                    <tbody><tr bgcolor="#000000">
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/vol_1/index.html" title="Volume I - DC">Volume I - DC</a></div>
+                      </td>
+
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/vol_2/index.html" title="Volume II - AC">Volume II - AC</a></div>
+                      </td>
+
+                       <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/vol_3/index.html" title="Volume III - Semiconductors">Volume III - Semiconductors</a></div>
+                      </td>
+
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/vol_4/index.html" title="Volume IV - Digital">Volume IV - Digital</a></div>
+                      </td>
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                      </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/vol_5/index.html" title="Volume V - Reference">Volume V - Reference</a></div>
+                      </td>
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/vol_6/index.html" title="Volume VI - Experiments">Volume VI - Experiments</a></div>
+                      </td>
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://forum.allaboutcircuits.com" title="Electronics Forums">Forums</a></div>
+                      </td>
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+
+                      <td class="sidenav">
+                        <div align="center"><a href="http://www.allaboutcircuits.com/l_links.html" title="Electrical Circuit Links">Links</a></div>
+                      </td>
+                      <td class="sidenav">
+                        <div align="center"><strong><font color="white" size="3"><b>|</b></font></strong></div>
+                       </td>
+                  </tbody></table>                </td>
+                <td width="280">
+                  <div align="right"><img src="http://sub.allaboutcircuits.com/AllAboutCircuits_files/cir2.jpg" width="280" height="23"></div>
+                </td>
+              </tr>
+            </tbody></table>
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#000000">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#316ac5">
+        <tbody><tr>
+          <td width="200" valign="top"><br>
+            <table width="100%" border="0" cellspacing="1" cellpadding="3">
+              <tbody>
+              <tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/1.html" title="What is network analysis?">What is network analysis?</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/2.html" title="Branch current method">Branch current method</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/3.html" title="Mesh current method">Mesh current method</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/4.html" title="Introduction to network theorems">Introduction to network theorems</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/5.html" title="Millman's Theorem">Millman's Theorem</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/6.html" title="Superposition Theorem">Superposition Theorem</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/7.html" title="Thevenin's Theorem">Thevenin's Theorem</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/8.html" title="Norton's Theorem">Norton's Theorem</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/9.html" title="Thevenin-Norton equivalencies">Thevenin-Norton equivalencies</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/10.html" title="Millman's Theorem revisited">Millman's Theorem revisited</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/11.html" title="Maximum Power Transfer Theorem">Maximum Power Transfer Theorem</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/12.html" title="&#916;-Y and Y-&#916; conversions">&#916;-Y and Y-&#916; conversions</a></td></tr><tr><td bgcolor="#000000" height="20" class="sidenav"><a href="http://www.allaboutcircuits.com/vol_1/index.html">Back to Chapter Index</a></td></tr>              <td class="sidenav">
+              <form NAME="myform" method="GET" action="http://sub.allaboutcircuits.com/search.php">
+			  <input type="text" name="query" class="forms_field">
+			  <select name="volume_id" size="1" class="forms_dropdown">
+			  <option value="999">Search All Volumes</option>
+			  <option value="1" Selected>Volume I - DC</option>
+			  <option value="2" >Volume II - AC</option>
+			  <option value="3" >Volume III - Semiconductors</option>
+			  <option value="4" >Volume IV - Digital</option>
+			  <option value="5" >Volume V - Reference</option>
+			  <option value="6" >Volume VI - Experiments</option>
+			  </select>
+ 				<input name="Search" value="SEARCH" default="true" type="submit" class="forms_submit" >               </form>
+			  </td>
+
+              </tbody></table><br /><br />
+              <font size="2" color="#FFFFFF" face="Verdana, Arial, Helvetica">
+				  <b> Check out our <a href="http://forum.allaboutcircuits.com" title="Electronic Forums"><font color="yellow">Electronics Forums</font></a>!<br />
+							Ask questions and help answer others. Check it out!
+					</b>
+				</font><br /><br />
+</td>
+          <td bgcolor="#ffffff" valign="top">
+            <p> </p><table width="90%" border="0" cellspacing="0" cellpadding="0" align="center" class="bodytext">
+              <tbody><tr>
+                <td class="bodytext">
+					<div align="center">
+					<script type="text/javascript">
+					<!--
+					google_ad_client = "pub-6110766095769513";
+					google_ad_width = 468;
+					google_ad_height = 60;
+					google_ad_format = "468x60_as";
+					google_color_border = "336699";
+					google_color_bg = "FFFFFF";
+					google_color_link = "0000FF";
+					google_color_url = "008000";
+					google_color_text = "000000";
+					google_ad_channel ="4911351916";
+					//-->
+					</script>
+					<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+					</script><br /><br />
+					<font size="4">Norton's Theorem</font></div><br>
+					<div align="left"><a href="http://www.allaboutcircuits.com" title="All About Circuits">All About Circuits</a>&nbsp;>&nbsp;<a href="http://www.allaboutcircuits.com/vol_1/index.html" title="Volume I - DC">Volume I - DC</a>&nbsp;>&nbsp;<a href="http://www.allaboutcircuits.com/vol_1/chpt_10/index.html" title="Chapter 10: DC NETWORK ANALYSIS">Chapter 10: DC NETWORK ANALYSIS</a>&nbsp;>&nbsp;<a href="http://www.allaboutcircuits.com/vol_1/chpt_10/8.html" title="Norton's Theorem">Norton's Theorem</a></div><hr>
+<h2><u>Norton's Theorem</u></h2>
+
+<a name="Norton's Theorem"></a>
+<a name="Theorem, Norton's"></a>
+
+<p>
+Norton's Theorem states that it is possible to simplify any linear circuit, no matter how complex, to an equivalent circuit with just a single current source and parallel resistance connected to a load.  Just as with Thevenin's Theorem, the qualification of "linear" is identical to that found in the Superposition Theorem: all underlying equations must be linear (no exponents or roots).
+</p>
+
+<p>
+Contrasting our original example circuit against the Norton equivalent: it looks something like this:
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00235.png"> </p>
+
+<p>
+. . . after Norton conversion . . .
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00242.png"> </p>
+
+<a name="Current source"></a>
+<a name="Source, current"></a>
+
+<p>
+Remember that a <i>current source</i> is a component whose job is to provide a constant amount of current, outputting as much or as little voltage necessary to maintain that constant current.
+
+</p>
+
+<p>
+As with Thevenin's Theorem, everything in the original circuit except the load resistance has been reduced to an equivalent circuit that is simpler to analyze.  Also similar to Thevenin's Theorem are the steps used in Norton's Theorem to calculate the Norton source current (I<sub>Norton</sub>) and Norton resistance (R<sub>Norton</sub>).
+</p>
+
+<p>
+As before, the first step is to identify the load resistance and remove it from the original circuit:
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00237.png"> </p>
+
+<p>
+Then, to find the Norton current (for the current source in the Norton equivalent circuit), place a direct wire (short) connection between the load points and determine the resultant current.  Note that this step is exactly opposite the respective step in Thevenin's Theorem, where we replaced the load resistor with a break (open circuit):
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00243.png"> </p>
+
+<p>
+With zero voltage dropped between the load resistor connection points, the current through R<sub>1</sub> is strictly a function of B<sub>1</sub>'s voltage and R<sub>1</sub>'s resistance: 7 amps (I=E/R).  Likewise, the current through R<sub>3</sub> is now strictly a function of B<sub>2</sub>'s voltage and R<sub>3</sub>'s resistance: 7 amps (I=E/R).  The total current through the short between the load connection points is the sum of these two currents: 7 amps + 7 amps = 14 amps.  This figure of 14 amps becomes the Norton source current (I<sub>Norton</sub>) in our equivalent circuit:
+
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00244.png"> </p>
+
+<p>
+Remember, the arrow notation for a current source points in the direction <i>opposite</i> that of electron flow.  Again, apologies for the confusion.  For better or for worse, this is standard electronic symbol notation.  Blame Mr. Franklin again!
+</p>
+
+<p>
+To calculate the Norton resistance (R<sub>Norton</sub>), we do the exact same thing as we did for calculating Thevenin resistance (R<sub>Thevenin</sub>): take the original circuit (with the load resistor still removed), remove the power sources (in the same style as we did with the Superposition Theorem: voltage sources replaced with wires and current sources replaced with breaks), and figure total resistance from one load connection point to the other:
+
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00240.png"> </p>
+
+<p>
+Now our Norton equivalent circuit looks like this:
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/00245.png"> </p>
+
+<p>
+If we re-connect our original load resistance of 2 &#937;, we can analyze the Norton circuit as a simple parallel arrangement:
+
+</p>
+
+<p> <img src="http://sub.allaboutcircuits.com/images/10196.png"> </p>
+
+<p>
+As with the Thevenin equivalent circuit, the only useful information from this analysis is the voltage and current values for R<sub>2</sub>; the rest of the information is irrelevant to the original circuit.  However, the same advantages seen with Thevenin's Theorem apply to Norton's as well: if we wish to analyze load resistor voltage and current over several different values of load resistance, we can use the Norton equivalent circuit again and again, applying nothing more complex than simple parallel circuit analysis to determine what's happening with each trial load.
+</p>
+
+<ul>
+<li><b>REVIEW:</b></li>
+<li>Norton's Theorem is a way to reduce a network to an equivalent circuit composed of a single current source, parallel resistance, and parallel load.</li>
+
+<li>Steps to follow for Norton's Theorem:</li>
+<li>(1) Find the Norton source current by removing the load resistor from the original circuit and calculating current through a short (wire) jumping across the open connection points where the load resistor used to be.</li>
+<li>(2) Find the Norton resistance by removing all power sources in the original circuit (voltage sources shorted and current sources open) and calculating total resistance between the open connection points.</li>
+<li>(3) Draw the Norton equivalent circuit, with the Norton current source in parallel with the Norton resistance.  The load resistor re-attaches between the two open points of the equivalent circuit.</li>
+<li>(4) Analyze voltage and current for the load resistor following the rules for parallel circuits.</li>
+</ul>
+<div align="center"><font size=3><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/7.html">&lt;&nbsp;Back</a></font></div><div align="center"><font size=3><a href="http://www.allaboutcircuits.com/vol_1/chpt_10/9.html">Forward&nbsp;&gt;</a></font></div>
+
+<br />
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-6110766095769513";
+google_ad_width = 234;
+google_ad_height = 60;
+google_ad_format = "234x60_as";
+google_ad_channel ="4911351916";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "0072BC";
+google_color_url = "006633";
+google_color_text = "000000";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+					<br><br><br><br><br>
+					<br><br><br><br><br>
+					<br><br><br><br><br>
+					<br><br><br><br><br>
+					<br><br><br><br><br>
+                </td>
+              </tr>
+            </tbody></table>
+          <p> </p></td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#000000">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#316ac5">
+        <tbody><tr>
+          <td>
+            <div align="center"><font face="Arial, Helvetica, sans-serif" size="1" color="#cccccc"><a href="http://www.allaboutcircuits.com" title="E-Book about electric circuits"><font color="#cccccc">All About Electric Circuits</font></a>. Copyright
+              2003, AllAboutCircuits.com, All Rights Reserved. <a href="http://www.allaboutcircuits.com/l_disclaimer.html"><font color="#cccccc">Disclaimer</font></a>. <a href="http://www.allaboutcircuits.com/l_contact.html"><font color="#cccccc">Contact</font></a>.</font></div>
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+</body></html>

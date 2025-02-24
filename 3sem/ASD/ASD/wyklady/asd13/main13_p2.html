@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body style="background-color: whitesmoke;" leftmargin="8" topmargin="8"
+ marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"--><!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr--><!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main13_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main13_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<br clear="all">
+<div class="tytulpunktu">2. Iloczyn wektorowy <br>
+</div>
+<p style="text-align: justify;">W tym punkcie wyk³adu zajmiemy siê
+badaniem prostych zale¿no¶ci miêdzy obiektami geometrycznymi jakimi s±
+punkt, prosta i&nbsp; wektor. Dobór problemów nie jest
+przypadkowy:&nbsp; poruszymy te problemy elementarne, które pojawi± siê
+w nastêpnych punktach, gdzie bêdzie mowa o jednym z centralnym
+problemów geometrii obliczeniowej, jakim jest problem otoczki wypuk³ej.
+Okazuje siê, ¿e wiêkszo¶æ z nich mo¿na rozwi±zaæ za pomoc± operacji
+produktu wektorowego i/lub wykorzystuj±c jego w³a¶ciwo¶ci. St±d tytu³
+tego punktu.<br>
+&nbsp; <br>
+</p>
+<p style="text-align: justify;">Niech p<sub>1</sub> i p<sub>2</sub>
+bêd± dwoma punktami na
+p³aszczy¼nie, p<sub>1</sub> = (p<sub>1</sub>.x, p<sub>1</sub>.y), p<sub>2</sub>
+= (p<sub>2</sub>.x, p<sub>2</sub>.y). Iloczynem wektorowym wektorów
+zaczepionych w pocz±tku uk³adu wspó³rzêdnych i o koñcach odpowiednio w
+punktach p<sub>1</sub> i p<sub>2</sub> jest wektor x =&nbsp; p<sub>1</sub>
+<span lang="en"><font face="Symbol">´</font></span> p<sub>2</sub>&nbsp; prostopad³y
+do obu wektorów, taki ¿e trójka uporz±dkowana <span
+ style="text-decoration: underline;"> p</span><sub
+ style="text-decoration: underline;">1</sub>, <span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">2</sub> , x ma orientacjê dodatni±
+oraz d³ugo¶æ wektora x,&nbsp; |x| = |p1| *|p2| * sin <font face="Symbol">j</font> gdzie
+<font face="Symbol">j</font> jest
+k±tem miêdzy tymi wektorami.<br>
+</p>
+<p style="text-align: justify;">Dla celów tego wyk³adu, najwa¿niejsza
+okazuje siê interpretacja warto¶ci&nbsp; | p<sub>1</sub> x p<sub>2</sub>|,
+jako pola równoleg³oboku, utworzonego przez punkty (0,0), p<sub>1</sub>,
+p<sub>2</sub>, i p<sub>1</sub>+ p<sub>2</sub>, opatrzonego
+znakiem, por. rysunek 13. 3(a), oraz&nbsp; fakt, ¿e warto¶æ tego pola
+mo¿na wyliczyæ jako warto¶æ wyznacznika utworzonego przez wspó³rzêdne
+wektorów&nbsp; p<sub>1</sub> i p<sub>2</sub>.
+</p>
+<div style="text-align: center;">| p<sub>1</sub> <span lang="en">
+  <font face="Symbol">´</font></span> p<sub>2</sub>|
+=&nbsp; det( p<sub>1</sub> , p<sub>2</sub>
+) = p<sub>1</sub>.x&nbsp; * p<sub>2</sub>.y - p<sub>2</sub>.x&nbsp; *p<sub>1</sub>.y.<br>
+<br></div>
+
+<div style="text-align: justify;">Na podstawie tego ostatniego wzoru,
+jest oczywiste, ¿e&nbsp; |p<sub>2</sub> <span lang="en"><font face="Symbol">´</font></span> p<sub>1</sub>| = -|p<sub>1</sub>
+  <span lang="en"><font face="Symbol">´</font></span> p<sub>2</sub>|. Wynika st±d jeszcze, ¿e znak wyznacznika det( p<sub>1</sub>,
+p<sub>2</sub>
+) mówi o wzajemnym po³o¿eniu wektorów <span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">1</sub>, <span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">2</sub>. <br>
+Rozwa¿my jeszcze nieco ogólniejsz± sytuacjê:&nbsp; niech bêd± dwa
+odcinki <span style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">1</sub>&nbsp; i <span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">2</sub>&nbsp; zaczepione w punkcie
+p<sub>0</sub> i skierowane w stronê p<sub>1</sub> i p<sub>2</sub>
+odpowiednio. Aby stwierdziæ jak s± one po³o¿one wzglêdem siebie,
+przesuniemy punkt wspólny p<sub>0</sub> do pocz±tku uk³adu
+wspó³rzêdnych.&nbsp; W wyniku przesuniêcia otrzymamy wektory <span
+ style="text-decoration: underline;">(p</span><sub
+ style="text-decoration: underline;">1</sub><span
+ style="text-decoration: underline;">-p</span><sub
+ style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;"> )</span> i <span
+ style="text-decoration: underline;">(p</span><sub
+ style="text-decoration: underline;">2</sub><span
+ style="text-decoration: underline;">-p</span><sub
+ style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;">)</span>, których wzajemne
+po³o¿enie jest takie samo, jak wektorów&nbsp; <span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">1</sub>&nbsp; i <span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">2</sub> .<br>
+</div>
+<br>
+</div>
+<div class="lemat">Lemat 2.1 Niech&nbsp;&nbsp; p<sub>0</sub>, p<sub>1</sub>,
+p<sub>2</sub> bêd± dowolnymi punktami na p³aszczy¼nie i niech
+  <font face="Symbol">D</font> bêdzie
+warto¶ci± &nbsp; | (p<sub>1</sub>-p<sub>0</sub>) x (p<sub>2</sub>-p<sub>0</sub>)|
+.<br>
+<div style="margin-left: 40px;">
+<ul>
+  <li>Je¿eli&nbsp; <font face="Symbol">D</font> = 0, to punkty&nbsp; p<sub>0</sub>,
+p<sub>1</sub>
+i p<sub>2</sub> s±
+wspó³liniowe. </li>
+  <li>Je¿eli <font face="Symbol">D</font> &lt; 0,
+to&nbsp; punkt p<sub>2</sub> le¿y po prawej stronie prostej wyznaczonej
+przez
+wektor <span style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">1</sub>. </li>
+  <li>Je¿eli&nbsp; <font face="Symbol">D</font> &gt; 0, to&nbsp;
+punkt p<sub>2</sub>
+le¿y po lewej stronie prostej
+wyznaczonej przez wektor&nbsp;<span style="text-decoration: underline;">
+p</span><sub style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">1</sub>. </li>
+</ul>
+</div>
+</div>
+<br>
+Z lematu 2.1 wynika, ¿e&nbsp; je¶li&nbsp; | (p<sub>1</sub>-p<sub>0</sub>)
+<span lang="en">
+  <font face="Symbol">´</font></span> (p<sub>2</sub>-p<sub>0</sub>)| &gt;0, to p<sub>2</sub>
+jest
+po³o¿one wzglêdem p<sub>1</sub> przeciwnie do ruchu wskazówek
+zegara,&nbsp; lub
+inaczej,
+przesuwaj±c siê wzd³u¿ wektora od&nbsp; punktu p<sub>0</sub> do p<sub>1</sub>,
+punkt p<sub>2</sub> mamy zawsze po lewej rêce, por. rysunek 13.3(b).
+Natomiast na rysunku 13.3(c) punkt&nbsp; p2 le¿y w kierunku zgodnym z
+ruchem wskazówek zegara wzglêdem p<sub><font face="Verdana">1</font></sub>.<br>
+<br>
+Przyk³ad 2.1<br>
+Rozwa¿my&nbsp; punkty p<sub> 0 </sub>= (1,0), p<span
+ style="text-decoration: underline;"><sub>1</sub></span> = (0,1) oraz p<sub><acronym>2</acronym></sub>
+=(1,1). Punkt p<sub>2</sub> le¿y na&nbsp; prawo od wektora <span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">1</sub>.
+Rzeczywi¶cie det( p<sub>1</sub>-p<sub>0</sub>, p<sub>2</sub>-p<sub>0</sub>)
+= 1*(-1) - 1*0 &lt; 0.<br>
+Natomiast punkt q<sub>2</sub> = (1/4,1/4) le¿y na lewo od wektora <span
+ style="text-decoration: underline;">p<sub>1</sub>-p<sub><font face="Verdana">0</font></sub>.</span><br>
+<p style="text-align: justify;"><br>
+<br>
+</p>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 60%;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek13_3a.gif" title="" alt=" "
+ style="width: 250px; height: 250px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek13_3b.gif" title="" alt=" "
+ style="width: 250px; height: 250px;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><b>Problem I </b>&nbsp;Jak porównaæ dwa k±ty nie licz±c ich warto¶ci?&nbsp; Niech sytuacja
+bêdzie taka jak przedstawiono na rysunku 13.4a.&nbsp; Który z
+k±tów&nbsp; (p<sub>1</sub>,p<sub>0</sub>,p),
+czy (p<sub>2</sub>,p<sub>0</sub>,p) jest wiêkszy?&nbsp; Wystarczy
+stwierdziæ jakie jest wzajemne po³o¿enie&nbsp; wektorów&nbsp; <span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">1</sub> i <span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">2</sub>. Liczymy w tym celu
+wyznacznik&nbsp; det (p<sub>1</sub>- p<sub>0</sub>, p<sub>2</sub> - p0<sub>0</sub>).
+Je¿eli jego znak jest dodatni,
+to k±t<span style="text-decoration: underline;">(p</span><sub
+ style="text-decoration: underline;">2</sub> <span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;"> p)</span><sub
+ style="text-decoration: underline;"> </sub>jest wiêkszy ni¿&nbsp;
+k±t( <span style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">1</sub><span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">0</sub><span
+ style="text-decoration: underline;">p).<br>
+</span></p>
+<table cellpadding="2" cellspacing="2" border="0"
+ style="text-align: left; width: 60%;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek13_4a.gif" title="" alt="porownanie katów"
+ style="width: 250px; height: 250px;"><br>
+      </td>
+      <td style="vertical-align: top;"><img
+ src="Rysunki/Rysunek13_4b.gif" title="" alt="punt wzgl wielok±ta"
+ style="width: 250px; height: 250px;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><span style="text-decoration: underline;"><br>
+</span></p>
+<p><b>Problem II</b> Niech bêd± dane punkty tworz±ce wielok±t wypuk³y, por. rysunek
+13.3c. Jak sprawdziæ, czy dany punkt jest, czy nie jest we wnêtrzu tego
+wielok±ta? Wystarczy w tym celu sprawdziæ, czy dany punkt je¿y na lewo
+od prostych bêd±cych przed³u¿eniem boków wielok±ta id±c wzd³u¿ krawêdzi
+w kierunku od p<sub>0</sub> do p<sub>3</sub>. Punkt p na rysunku
+13.4(b) spe³nia ten warunek, a punkt p' nie spe³nia. Wprawdzie le¿y na
+lewo od wektorów <span style="text-decoration: underline;">p</span><sub>0</sub><span
+ style="text-decoration: underline;">p</span><sub>1</sub><span
+ style="text-decoration: underline;">,</span> <span
+ style="text-decoration: underline;">p</span><sub>1</sub><span
+ style="text-decoration: underline;">p</span><sub>2</sub>, <span
+ style="text-decoration: underline;">p</span><sub>2</sub><span
+ style="text-decoration: underline;">p</span><sub>3</sub>, ale jest na
+prawo od prostej wyznaczonej przez krawêd¼ <span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">2</sub><span
+ style="text-decoration: underline;">p</span><sub
+ style="text-decoration: underline;">3</sub>.
+</p>
+<p>Zauwa¿my, ¿e sprawdzenie, po której stronie prostej le¿y dany punkt ma koszt 
+sta³y, ale w przypadku problemu sprawdzenia czy dany punkt le¿y wewn±trz 
+wielok±ta wypuk³ego, wymaga wykonania liczby kroków równej liczbie krawêdzi 
+wielok±ta. <br>
+<br>
+</p>
+<p><b>Pytanie 2: </b>Rozwa¿my trzy punkty na p³aszczy¼nie (0,1), (1,0),
+(3,3). Czy punkt (2,2.5) le¿y wewn±trz, czy na zewn±trz trójk±ta utworzonego przez te
+punkty? <br>
+</p>
+<form><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0" onclick="napis(this.form,' Na zewn±trz, bo jest na prawo od odcinka (3,3)->(0,1).');">
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main13_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main13_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

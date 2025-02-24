@@ -1,0 +1,412 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr-->
+<!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main07_p2.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main07_p4.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 3"></a><br clear="all">
+<div class="tytulpunktu">3. Wyszukiwanie.</div>
+<p>Najczê¶ciej wykonywan± operacj± na zbiorach jest wyszukiwanie.
+Je¿eli skoñczony zbiór jest reprezentowany przez drzewo binarnych
+poszukiwañ, to wyszukiwanie ustalonego elementu jest bardzo
+proste.&nbsp; Operacj±, o której bêdzie mowa w tym punkcie, jest
+dwuargumentowa operacja memeber, member: Et<font face="Symbol">
+<span lang="en">´</span></font> BST <font face="Symbol"><span lang="en">&#174;</span></font>
+B<sub><font face="Verdana">0</font></sub>. Dla danej etykiety e oraz
+danego drzewa binarnych poszukiwañ D,&nbsp; jej zadaniem jest odpowied¼
+na pytanie, czy element e jest, czy nie jest etykiet± drzewa D,</p>
+<p style="text-align: center;">member(e,D) = true wttw&nbsp; e jest
+etykiet± pewnego wierzcho³ka w drzewie D.</p>
+<p>Warunek opisany powy¿ej jest oczywi¶cie warunkiem koñcowym
+specyfikacji poszukiwanego algorytmu. Warunek pocz±tkowy jest bardziej
+skomplikowany: zak³adamy, ¿e D jest drzewem binarnym, a ponadto
+spe³niony jest warunek :</p>
+<p style="text-align: center;">(<font face="Symbol">" </font>v<font
+ face="Symbol"><span lang="en">Î</span>
+</font>D)((<font face="Symbol">"</font>x) (x<font face="Symbol"> <span
+ lang="en">
+Î</span></font> LD(v) <font face="Symbol"><span lang="en">&#174;</span></font>
+et(x) &lt; et(v))&nbsp; <span lang="en"><font face="Symbol">&#217;</font></span>
+(<font face="Symbol">"</font>x) (x <font face="Symbol"><span lang="en">Î</span>
+</font>PD(v) <font face="Symbol">
+<span lang="en">&#174;</span> </font>et(v) &lt; et(x))).</p>
+<p><b>Metoda</b></p>
+<p>Zaczynaj±c od korzenia drzewa D, porównujemy etykietê odwiedzanego
+wierzcho³ka z e. Je¶li nie jest to e, to w dalszym ci±gu szukaæ
+bêdziemy w lewym poddrzewie, o ile e &lt; et(v). Je¶li et(v) &lt; e, to
+poszukiwania bêd± kontynuowane w prawym poddrzewie wierzcho³ka v.&nbsp;
+Operacja zwraca warto¶æ false, gdy e nie jest etykiet± ¿adnego
+wierzcho³ka drzewa D.</p>
+<p><b>Algorytm</b></p>
+<p>W opisanym poni¿ej algorytmie, zak³adamy, ¿e root jest korzeniem
+drzewa binarnych poszukiwañ D i obiektem typu node (por. wyk³ad VI
+p.4). </p>
+<p style="text-align: left;">&nbsp;</p>
+<p></p>
+<div class="def" style="width: 776px; height: 318px;">
+<table frame="void" rules="none" width="745" height="292"
+ bordercolorlight="#808080" bordercolordark="#FFFFFF"
+ style="border-collapse: collapse;" bordercolor="#111111"
+ cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td width="571" height="24" colspan="2">boolean member(e : Et,
+root : node) {</td>
+      <td width="35" height="24"><br>
+      </td>
+      <td width="672" height="24"> &nbsp;</td>
+    </tr>
+    <tr>
+      <td width="59" height="22"><br>
+      </td>
+      <td width="512" height="22">result := false; v := root;</td>
+      <td width="35" height="22"><br>
+      </td>
+      <td width="672" height="22">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="21"><br>
+      </td>
+      <td width="512" height="21"><strong>&nbsp;while&nbsp; </strong>(v
+      <font face="Symbol"><span lang="en">&#185;</span> </font>null and not
+result) <strong>do</strong></td>
+      <td width="35" height="21"><br>
+      </td>
+      <td width="672" height="21">// dopóki&nbsp; v jest
+wierzcho³kiem&nbsp; drzewa <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></td>
+    </tr>
+    <tr>
+      <td width="59" height="24"><br>
+      </td>
+      <td width="512" height="24"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp;
+      <b>if</b> (v.val = e) <b>then</b>&nbsp;&nbsp;&nbsp; </td>
+      <td width="35" height="24"><br>
+      </td>
+      <td width="672" height="24"> // je¶li e&nbsp; jest etykiet±&nbsp;
+v&nbsp;to wychodzimy z
+pêtli&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="20">&nbsp;</td>
+      <td width="512" height="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+result := true </td>
+      <td width="35" height="20">&nbsp;</td>
+      <td width="672" height="20"> &nbsp;</td>
+    </tr>
+    <tr>
+      <td width="59" height="16"><br>
+      </td>
+      <td width="512" height="16"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+else</b> </td>
+      <td width="35" height="16"><br>
+      </td>
+      <td width="672" height="16"> // je¶li e nie jest etykiet±
+wierzcho³ka v</td>
+    </tr>
+    <tr>
+      <td width="59" height="18"><br>
+      </td>
+      <td width="512" height="18"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if</b> (v.val &lt; e) <b>then</b></td>
+      <td width="35" height="18"><br>
+      </td>
+      <td width="672" height="18"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="16"><br>
+      </td>
+      <td width="512" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+v := v.right</td>
+      <td width="35" height="16"><br>
+      </td>
+      <td width="672" height="16"> // bêdziemy poszukiwaæ e w prawym
+poddrzewie</td>
+    </tr>
+    <tr>
+      <td width="59" height="16"><br>
+      </td>
+      <td width="512" height="16"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+else</b> </td>
+      <td width="35" height="16"><br>
+      </td>
+      <td width="672" height="16"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="16"><br>
+      </td>
+      <td width="512" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+v := v. left </td>
+      <td width="35" height="16"><br>
+      </td>
+      <td width="672" height="16"> // bêdziemy poszukiwaæ&nbsp; e w
+lewym poddrzewie</td>
+    </tr>
+    <tr>
+      <td width="59" height="16"><br>
+      </td>
+      <td width="512" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <b>fi</b></td>
+      <td width="35" height="16"><br>
+      </td>
+      <td width="672" height="16"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="16"><br>
+      </td>
+      <td width="512" height="16"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+fi</b>;</td>
+      <td width="35" height="16"><br>
+      </td>
+      <td width="672" height="16"> <br>
+      </td>
+    </tr>
+    <tr>
+      <td width="59" height="16"><br>
+      </td>
+      <td width="512" height="16"> &nbsp;<b>od;</b>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      <td width="35" height="16"> <br>
+      </td>
+      <td width="672" height="16"> <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </b></td>
+    </tr>
+    <tr>
+      <td width="59" height="18"><br>
+      </td>
+      <td width="512" height="18"> &nbsp;return result<strong>&nbsp;&nbsp;
+      </strong> </td>
+      <td width="35" height="18"> <br>
+      </td>
+      <td width="672" height="18"> &nbsp;</td>
+    </tr>
+    <tr>
+      <td width="59" height="17"><strong>}</strong></td>
+      <td width="512" height="17"> <strong>&nbsp;&nbsp;&nbsp;</strong></td>
+      <td width="35" height="17"> <br>
+      </td>
+      <td width="672" height="17"> <br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p><b>Przyk³ad 3.1</b></p>
+<p>Rozwa¿my drzewo BST przedstawione na rysunku 7.3(a). Je¶li
+zastosujemy algorytm member w celu zbadania, czy 3 jest etykiet± tego
+drzewa, to wykonany nastêpuj±ce kroki: porównamy najpierw etykietê
+korzenia z 3. Poniewa¿ 3&lt;5, zatem zgodnie z zasad± etykietowania
+drzew BST, etykieta 3 o ile znajduje siê w tym drzewie, musi siê
+znajdowaæ w lewym poddrzewie. Teraz porównujemy 3 z 2. Poniewa¿ 3 jest
+wiêksze od 2, to w nastêpnym kroku przejdziemy do prawego nastêpnika i
+porównamy 4 z 3. Poniewa¿ 3 jest mniejsze od 4, wiêc gdyby etykieta 3
+znajdowa³a siê w tym drzewie, musia³aby byæ w lewym poddrzewie
+wierzcho³ka z etykiet± 4. Wierzcho³ek ten jest jednak li¶ciem, zatem 3
+nie jest etykiet± ¿adnego wierzcho³ka w tym drzewie. <br>
+Zastosujmy teraz ten sam algorytm do znalezienia etykiety 6. Zostan±
+wykonane nastêpuj±ce porównania : 5=6, 5&lt;6, 8=6, 8&lt;6, 7=6,7&lt;6,
+6=6. Poniewa¿ 5 nie jest równe 6 oraz 5&nbsp; jest mniejsze od 6, zatem
+pójdziemy w prawo. Poniewa¿ 8 nie jest równe 6&nbsp; i 8 nie jest
+mniejsze od 6 pójdziemy pójdziemy w lewo itd. Tym razem wynikiem bêdzie
+true, gdy¿ 6 jest etykiet± wierzcho³ka w rozwa¿anym drzewie.<font
+ face="Wingdings"> J</font></p>
+<p><b>Poprawno¶æ algorytmu</b></p>
+<p>Chcemy udowodniæ, ¿e algorytm zawsze zatrzymuje siê i warto¶ci±
+zmiennej result jest true tylko wtedy, gdy w drzewie D, którego
+korzeniem jest root, zosta³ znaleziony wierzcho³ek v taki, ¿e et(v) =
+e. Pierwsza czê¶æ jest do¶æ prosta. Niech h bêdzie wysoko¶ci± drzewa D.
+W ka¿dym przebiegu pêtli, o ile nie znajdziemy elementu e, przechodzimy
+do badania wierzcho³ka z nastêpnego poziomu drzewa. Poniewa¿ z
+za³o¿enia&nbsp; w drzewie nie ma cyklu, oraz w ka¿dej iteracji pêtli
+odleg³o¶æ od korzenia (mierzona d³ugo¶ci± ¶cie¿ki) jest wiêksza ni¿ w
+iteracji poprzedniej, to po co najwy¿ej h+1 krokach dojdziemy do
+wierzcho³ka v, który jest li¶ciem i algorytm zakoñczy wykonywanie
+pêtli.&nbsp; Oczywi¶cie, je¶li znale¼li¶my wierzcho³ek, taki ¿e et(v) =
+e, to warto¶æ zmiennej result zostanie ustalona na true i algorytm te¿
+zakoñczy obliczenie.</p>
+<p>Pozostaje uzasadniæ, ¿e&nbsp; wynik jest ustalony poprawnie.
+Zauwa¿my najpierw, ¿e wynikiem jest false, je¶li drzewo jest puste.
+Niech V bêdzie zbiorem wszystkich wierzcho³ków drzewa D i Dv niech
+oznacza poddrzewo drzewa D, którego korzeniem jest wierzcho³ek v oraz
+Dv' niech bêdzie zbiorem wierzcho³ków drzewa D nie nale¿±cych do
+poddrzewa Dv. Za³ó¿my, ¿e przy kolejnym wej¶ciu do pêtli "while"
+spe³niony jest warunek (*). Warunek ten stwierdza, ¿e albo zmienna
+result ma warto¶æ true i istnieje wierzcho³ek z etykiet± e, albo result
+nadal ma warto¶æ false i ¿aden z wierzcho³ków, które nie s± w
+poddrzewie Dv, nie ma etykiety e:</p>
+<p style="text-align: center;">(*)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( result= true&nbsp; <span lang="en"><font face="Symbol">&#217;</font></span>
+(<font face="Symbol">$</font>w<span lang="en"><font face="Symbol">Î</font></span>V)
+et(w) = e) <span lang="en"><font face="Symbol">Ú</font></span> (result
+= false&nbsp;
+<font face="Symbol"><span lang="en">&#217;</span> </font>&nbsp;(<font
+ face="Symbol">"</font>w<span lang="en"><font face="Symbol">Î</font></span>Dv')
+et(w)<font face="Symbol"><span lang="en">&#185;</span></font> e),</p>
+<p>Skoro powtarzamy wykonanie pêtli, zatem warunek pêtli <strong>&nbsp;</strong>(v
+<font face="Symbol"><span lang="en">&#185;</span> </font>null and not
+result) jest spe³niony przez aktualne warto¶ci zmiennych. Oznacza to
+wobec (*), ¿e&nbsp; prawdziwa jest druga czê¶æ warunku (*). Zaj¶æ mog±
+teraz trzy przypadki. <br>
+(1) Albo v.val = e, a wtedy spe³niona bêdzie pierwsza czê¶æ
+alternatywy&nbsp; (*). <br>
+(2) Albo v.val <span lang="en"><font face="Symbol">&#185;</font></span> e i
+v.val &lt; e, a wtedy, na mocy definicji drzewa binarnych
+poszukiwañ,&nbsp; etykieta e mo¿e siê znajdowaæ jedynie w prawym
+poddrzewie wierzcho³ka v. Po wykonaniu instrukcji v := v.right,
+spe³niony jest warunek (result = false&nbsp; <font face="Symbol">
+<span lang="en">&#217;</span> </font>&nbsp;(<font face="Symbol">"</font>w<span
+ lang="en"><font face="Symbol">Î</font></span>Dv') et(w)<font
+ face="Symbol"><span lang="en">&#185;</span></font> e).<br>
+(3) Albo v.val <span lang="en"><font face="Symbol">&#185;</font></span> e
+i&nbsp; e &lt; v.val, wtedy nadal result = false i poza wierzcho³kami
+lewego poddrzewa wierzcho³ka v na pewno nie ma etykiety e, czyli po
+wykonaniu instrukcji&nbsp; v :=v.left spe³niony jest znów warunek&nbsp;
+(result = false&nbsp;
+<font face="Symbol"><span lang="en">&#217;</span> </font>&nbsp;(<font
+ face="Symbol">"</font>w<span lang="en"><font face="Symbol">Î</font></span>Dv')
+et(w)<font face="Symbol"><span lang="en">&#185;</span></font> e).</p>
+<p>Wynika st±d , ¿e po wykonaniu instrukcji warunkowej nadal jest
+spe³niona formu³a (*). </p>
+<p>Udowodnili¶my wiêc, ¿e (*) jest niezmiennikiem pêtli w algorytmie
+member. Przed rozpoczêciem pêtli warunek (*) jest trywialnie spe³niony
+przez pocz±tkowe warto¶ci zmiennych, zatem po wykonaniu instrukcji
+"while"&nbsp;&nbsp; te¿ jest prawdziwy. Wyj¶cie z pêtli mo¿e nast±piæ
+tylko, gdy result =true, lub gdy&nbsp; v=null, wiêc </p>
+<p style="text-align: center;">albo (result = true&nbsp; <span
+ lang="en">
+<font face="Symbol">&#217;</font></span> (<font face="Symbol">$</font>w<span
+ lang="en"><font face="Symbol">Î</font></span>V) et(w) = e)&nbsp;&nbsp;
+albo ( v = null <font face="Symbol"><span lang="en">&#217;</span>
+</font>&nbsp;result = false&nbsp; <font face="Symbol"><span lang="en">&#217;</span>
+</font>&nbsp;(<font face="Symbol">"</font>w<span lang="en"><font
+ face="Symbol">Î</font></span>Dv') et(w)<font face="Symbol"><span
+ lang="en">&#185;</span></font> e) .</p>
+<p>Zauwa¿my, ¿e Dv jest zbiorem pustym, gdy v= null. W konsekwencji Dv'
+= V\Dv = V. Czyli prawdziwe jest zdanie </p>
+<p style="text-align: center;">&nbsp;&nbsp; ( result= true&nbsp; <span
+ lang="en">
+<font face="Symbol">&#217;</font></span> (<font face="Symbol">$</font>w<span
+ lang="en"><font face="Symbol">Î</font></span>V) et(w) = e) <span
+ lang="en"><font face="Symbol">Ú</font></span> (result = false&nbsp;
+<font face="Symbol"><span lang="en">&#217;</span> </font>&nbsp;(<font
+ face="Symbol">"</font>w<span lang="en"><font face="Symbol">Î</font></span>V)
+et(w)<font face="Symbol"> <span lang="en">&#185;</span></font> e),</p>
+<p>które jest równowa¿ne formule&nbsp; (result= true wttw (<font
+ face="Symbol">$</font>w<span lang="en"><font face="Symbol">Î</font></span>V)
+et(w) = e).<font face="Wingdings">J</font></p>
+<p></p>
+<div class="lemat">
+<p>Lemat 3.1&nbsp;&nbsp; Algorytm member zastosowany do dowolnego
+drzewa binarnych poszukiwañ D oraz etykiety e, zwraca warto¶æ true
+wtedy i tylko wtedy, gdy istnieje wierzcho³ek w drzewie D, którego
+etykiet± jest e. </p>
+</div>
+<p></p>
+<p><b>Koszt algorytmu</b></p>
+<p>Przyjmijmy, ¿e operacj± dominuj±c± w tym algorytmie jest
+porównywanie etykiet, a rozmiarem danych niech bêdzie liczba
+wierzcho³ków drzewa. Jest do¶æ oczywiste, ¿e w najgorszym przypadku,
+np. gdy wierzcho³ki drzewa tworz± jedna tylko ¶cie¿kê, liczba
+wykonanych porównañ mo¿e byæ równa liczbie wierzcho³ków, czyli&nbsp;
+W(n) = O(n). </p>
+<p>Zastanowimy siê teraz nad kosztem algorytmu w przypadku ¶rednim.
+Niech n bêdzie liczb± wierzcho³ków drzewa i niech etykietami
+wierzcho³ków bêd± liczby naturalne od 1 do n (mo¿na te¿ przyj±æ, ¿e
+liczby s± jedynie numerami etykiet po ich posortowaniu w porz±dku
+niemalej±cym). Przyjmijmy ponadto, ¿e prawdopodobieñstwo tego, ¿e
+korzeniem drzewa jest liczba i, jest takie samo dla wszystkich
+mo¿liwych warto¶ci i.&nbsp; Wynika st±d, ¿e ¶rednia liczba porównañ
+A(n) wykonanych dla znalezienia etykiety e wynosi</p>
+<p style="text-align: center;">A(n) = <font face="Symbol" size="4">S</font><sub><font
+ face="Verdana">i=1,..n</font></sub> (1/n)<font face="Symbol"><span
+ lang="en">´</span> </font>a<sub><font face="Verdana">i</font></sub>,</p>
+<p>gdzie&nbsp; a<sub><font face="Verdana">i</font></sub> jest ¶redni±
+liczb± porównañ dla znalezienia e w drzewie, którego etykiet± korzenia
+jest i. </p>
+<p><img border="0" src="Rysunki/Rysunek7_4.gif" align="left" width="300"
+ height="250">Zauwa¿my, ¿e w lewym poddrzewie drzewa, którego korzeniem
+jest i znajduje siê tylko (i-1) wierzcho³ków (bo wszystkie etykiety w
+lewym poddrzewie maj± byæ mniejsze od i), a w prawym poddrzewie drzewa
+znajduje siê dok³adnie (n-i) wierzcho³ków (por. rysunek 7.4). Wynika
+st±d, ¿e prawdopodobieñstwo tego, ¿e szukana etykieta e znajduje siê w
+lewym poddrzewie wynosi&nbsp; (i-1)/n, a prawdopodobieñstwo tego, ¿e
+szukana etykieta e znajduje siê w prawym poddrzewie wynosi&nbsp;
+(n-i)/n. ¦rednia liczba porównañ dla znalezienia etykiety e w drzewie,
+którego etykiet± korzenia jest i wynosi wiêc:</p>
+<p style="text-align: center;">(A(i-1)+1)<span lang="en"><font
+ face="Symbol">´</font></span>(i-1)/n&nbsp; + 1<span lang="en"><font
+ face="Symbol">´</font></span>(1/n) + (A(n-i) +1)<span lang="en"><font
+ face="Symbol">´</font></span>(n-i)/n.</p>
+<p>Po podstawieniu, mamy </p>
+<p style="text-align: center;">A(0) = 0 oraz A(n) = <font face="Symbol"
+ size="4">
+S</font><sub><font face="Verdana">i=1,..n</font></sub>(1/n) +<font
+ face="Symbol" size="4"> S</font><sub><font face="Verdana">i=1,..,n-1</font></sub>(1/n<sup><font
+ face="Verdana">2</font></sup>)<font face="Symbol"><span lang="en">´</span>
+</font>2iA(i) = <font face="Symbol" size="2">1 + (1/</font>n<sup><font
+ face="Verdana">2</font></sup><font face="Symbol" size="2">)</font><font
+ face="Symbol" size="4">S</font><sub><font face="Verdana">i=1,..,n-1</font></sub>
+i<font face="Symbol"><span lang="en">´</span> </font>A(i).&nbsp; </p>
+<p>Rozwi±zaniem tego równania rekurencyjnego jest funkcja A(n)= c<font
+ face="Symbol"><span lang="en">´</span></font>lg n, gdzie c jest pewn±
+sta³±. Ostatecznie, ¶rednia liczba porównañ wykonanych przez algorytm
+member wynosi O(lg n).</p>
+<p>Z powy¿szych rozwa¿añ wynika te¿, ¿e ¶redni± wysoko¶æ drzewa BST o n
+wierzcho³kach mo¿na oszacowaæ przez&nbsp; O(lg n). W konsekwencji
+¶rednia liczba operacji wykonywanych przez algorytmy minBST i maxBST
+wynosi równie¿ O(lg n).</p>
+<p><b>Pytanie 5</b>: Zbadaj, czy jest mo¿liwe, aby w trakcie
+poszukiwania etykiety 23 za pomoc± algorytmu member, w pewnym drzewie
+binarnych poszukiwañ, napotkano wymienione poni¿ej etykiety? <br>
+(a) 50, 28, 14, 20, 23<br>
+(b)&nbsp; 15, 50, 45,&nbsp; 20, 18, 23</p>
+<form>
+  <p><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0"
+ onclick="napis(this.form,'Odp. (a) tak (b) NIE, nie mogli¶my spotkaæ 18, bo 23 jest wiêksze od 20.');">
+  </p>
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main07_p2.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main07_p4.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

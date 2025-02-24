@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main15_p2.html" TARGET="main"  class="NAWIGACJA">
+&laquo;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main15_p4.html" TARGET="main" class="NAWIGACJA">następny 
+punkt&nbsp;&raquo;</a></td></tr></table>
+<br clear="all">
+<A NAME="EDU.wyklad.punkt 3"></A><br clear="all"><div class="tytulpunktu">
+3. NP zupełność</div>
+
+<p>O klasie P wiadomo dość dużo: np. jest zamknięta na składanie i uzupełnienie. 
+Stosunkowo niewiele wiadomo o klasie NP, poza wieloma przykładami problemów do niej 
+należących. Co więcej nie wiemy nawet, czy są problemy, które należą do NP i 
+równocześnie nie należą do P. Problem, czy P = NP, został postawiony w 1971 roku 
+i do dziś pozostaje otwarty. Większość 
+teoretyków informatyki uważa, że P<font face="Symbol"> <span lang="en">&sup1;</span></font> 
+NP. Wydaje się, że łatwiej jest sprawdzić, że dane rozwiązanie jest poprawne, 
+niż je znaleźć, ale taki argument nie stanowi dowodu.</p>
+<p>Istotnym argumentem na rzecz nierówności P<font face="Symbol"> <span lang="en">&sup1;</span></font> 
+NP jest istnienie klasy NPC, tzw. problemów NP-zupełnych. Klasa NPC ma ciekawą własność, gdyby ktoś znalazł wielomianowe rozwiązanie 
+jakiegokolwiek z problemów należących do tej klasy, to byłby również 
+wielomianowy algorytm dla wszystkich innych problemów z klasy NP. Inaczej, gdyby udowodniono wykładnicze dolne ograniczenie dla jakiegokolwiek 
+problemu z klasy NPC, to wynikałoby stąd, że żadnego z problemów NPC nie można 
+rozwiązać w czasie wielomianowym. Jednym słowem, losy wszystkich problemów 
+należących do klasy NPC są takie same: albo wszystkie mają wielomianowe 
+algorytmy, albo żaden z nich.</p>
+
+  
+
+
+<p>Znanych jest ok. 1000 problemów NP-zupełnych. Do takich problemów należą 
+wszystkie wymienione w poprzednim punkcie: problem układanki, problem 
+spełniania, problem kolorowania grafu, problem komiwojażera, problem cyklu Hamiltona.&nbsp; Na przykładzie tych dwóch ostatnich problemów pokażemy na czym 
+polega wielomianowa sprowadzalność jednego problemu klasy NPC do innego problemu 
+tej klasy.</p>
+<p><b>Przykład&nbsp; 3.1</b> Redukcja problemu cyklu Hamiltona do problemu 
+komiwojażera</p>
+<p>Niech G = &lt;V,E&gt; będzie danym spójnym grafem do problemu cyklu Hamiltona. 
+Skonstruujemy graf G' = &lt;V', E', c&gt; dla problemu komiwojażera przyjmując V' = V, 
+E' = {(i,j) : i, j <font face="Symbol"><span lang="en">Î</span> </font>V}, oraz 
+c(i,j) = 0, gdy (i,j) <font face="Symbol"><span lang="en">Î</span> </font>E, 
+c(i,j) = 1, gdy (i,j) <font face="Symbol"><span lang="en">&Iuml;</span> </font>E. 
+Graf G' jest więc grafem pełnym, a koszt dowolnej krawędzi, która należała do 
+oryginalnego grafu G wynosi 0. </p>
+<p>Jeżeli graf G ma cykl Hamiltona H, to jest to też cykl w grafie G', ale suma 
+kosztów krawędzi tego cyklu wynosi zero. Zatem H jest drogą 
+komiwojażera o minimalnym koszcie w grafie G'. Odwrotnie, jeśli w grafie G' istnieje droga 
+komiwojażera o koszcie 0, to wszystkie krawędzie tej drogi musiały występować w 
+grafie G, a więc tworzą one w grafie G cykl Hamiltona. Wynika stąd, że G ma cykl 
+Hamiltona wtedy i tylko wtedy, gdy G' ma drogę komiwojażera o koszcie zero.</p>
+<p>Zatem, aby odpowiedzieć na pytanie, czy w danym grafie spójnym istnieje cykl 
+Hamiltona, wykonujemy następujące kroki: </p>
+<blockquote>
+  <ol>
+    <li>Przekształcamy dany graf G do grafu pełnego G' z wagami 0 i 1 jak wyżej.</li>
+    <li>Badamy, czy graf G' ma cykl komiwojażera o koszcie 0.</li>
+    <li>Jeżeli odpowiedzią jest tak, to G ma cykl Hamiltona.</li>
+    <li>Jeśli odpowiedzią jest &quot;nie&quot;, to G' nie ma cyklu Hamiltona.</li>
+  </ol>
+</blockquote>
+<p>Przekształcenie grafu G w graf G' ma koszt kwadratowy ze względu na liczbę 
+wierzchołków grafu. Gdybyśmy więc umieli wielomianowo rozwiązywać problem 
+komiwojażera, to koszt powyższego postępowania byłby wielomianow i umielibyśmy 
+rozwiązać problem cyklu Hamiltona z kosztem wielomianowym. Zatem problem cyklu 
+Hamiltona został zredukowany do problemu drogi komiwojażera.<font face="Wingdings" size="3"> 
+J</font></p>
+  
+
+
+    
+    <p><div class="def">Definicja 3.1&nbsp; Powiemy, że problem p1 redukuje się 
+  w czasie wielomianowym do problemu p2 wtedy i tylko wtedy, gdy<ol>
+    <li>istnieje funkcja f obliczana w czasie wielomianowym, taka że dla 
+    dowolnego x, x reprezentuje dane do problemu p1 wttw f(x) reprezentuje dane 
+    do problemu p2, oraz</li>
+    <li>rozwiązaniem problemu p1 dla danych x jest &quot;tak&quot; wttw rozwiązaniem 
+    problemu p2 dla danych f(x) jest &quot;tak&quot;.</li>
+  </ol>
+</div>
+<p></p>
+<p>Mając pojęcie redukcji, możemy teraz nieco bardziej dokładnie zdefiniować klasę NPC:</p>
+  
+
+
+    
+    <p><div class="def">Definicja 3.2&nbsp; Powiemy, że problem p należy do 
+  klasy NPC wttw 
+  <ol>
+    <li>p należy do klasy NP oraz </li>
+    <li>jest NP-trudny, tzn. każdy&nbsp; problem z klasy NP 
+  redukuje się do niego w czasie wielomianowym . </li>
+  </ol>
+</div>
+<p></p>
+<p>Pierwszym problemem, dla którego udowodniono NP-zupełność był problem 
+spełniania formuł rachunku zdań (por. 15.2). Wynik ten, uzyskany w 1971 roku, 
+pochodzi od Cooka i jest uważany za jeden z najważniejszych wyników w 
+informatyce teoretycznej. Większość dowodów NP-zupełności problemów polega na 
+wykazaniu ich redukowalności do problemu spełniania. Nie będziemy w tym 
+wykładzie zajmować się dowodzeniem NP-zupełności problemów, wspomnimy natomiast 
+jeszcze jeden problem, którego NP-zupełność została dowiedziona.</p>
+<p><b>Problem plecakowy</b></p>
+<p>Dany jest zbiór n obiektów o wadze odpowiednio s<sub><font face="Verdana">1</font></sub>,...,s<sub><font face="Verdana">n</font></sub> 
+oraz liczba c - maksymalna, dopuszczalna waga obiektów w plecaku. Jaki podzbiór zbioru obiektów wypełni plecak 
+bardziej kompletnie? Dokładniej, szukamy wektora (x<sub><font face="Verdana">i</font></sub>)<sub><font face="Verdana">i</font>
+<span lang="en"><font face="Symbol">&pound;</font></span>n</sub> o elementach 0, 1, 
+dla którego</p>
+   
+<p style="text-align: center">s = <font face="Symbol" size="4">S</font> <sub>
+<font face="Verdana">i=1,...,n</font></sub> s<sub><font face="Verdana">i</font></sub> 
+*x<sub><font face="Verdana">i</font></sub>&nbsp; przyjmuje wartość największą 
+oraz s <span lang="en"><font face="Symbol">&pound;</font></span> c.</p>
+   
+<p>Wektor&nbsp; (x<sub><font face="Verdana">i</font></sub>)<sub><font face="Verdana">i</font>
+<span lang="en"><font face="Symbol">&pound;</font></span>n</sub> wyznacza w ten 
+sposób, które obiekty umieszczamy w plecaku, a których nie bierzemy. W formie decyzyjnej problem można sformułować jako pytanie: 
+czy istnieje taki 
+ciąg zerojedynkowy&nbsp; (x<sub><font face="Verdana">i</font></sub>)<sub><font face="Verdana">i</font>
+<span lang="en"><font face="Symbol">&pound;</font></span>n</sub> , że&nbsp; </p>
+   
+<p style="text-align: center"><font face="Symbol" size="4">S</font> <sub>
+<font face="Verdana">i=1,...,n</font></sub> s<sub><font face="Verdana">i</font></sub> 
+*x<sub><font face="Verdana">i</font></sub> = c. </p>
+   
+<p>&nbsp;Nie jest znany żaden algorytm 
+wielomianowy rozwiązania tego problemu. Jeśli natomiast mamy dane rozwiązanie, 
+to możemy sprawdzić, czy jest ono poprawne, sumując wagi wybranych obiektów. 
+Udowodniono ponadto, że problem ten jest NP-trudny, dokładniej, udowodniono, że redukuje się 
+on wielomianowo do problemu spełniania. Problem plecakowy jest problemem NP-zupełnym.</p>
+   
+<p><b>Uwaga</b> Wersja problemu plecakowego, w której dla każdego 
+i, mamy nie jeden obiekt, a dowolnie dużo obiektów, oraz c i wagi s<sub><font face="Verdana">i</font></sub> 
+są liczbami naturalnymi, ma rozwiązanie wielomianowe.</p>
+   
+<p>Na zakończenie rozważań o NP-zupełności wspomnijmy, że istnieją problemy, o 
+których nie wiemy, czy należą do klasy NPC. Do takich problemów zalicza się 
+problem badania, czy dana liczba jest pierwsza. Jest to problem decyzyjny, w 
+którym daną jest liczba naturalna, a odpowiedzią jest &quot;tak&quot;, tylko wtedy, gdy 
+nie istnieje różna od niej i od zera liczba naturalna, która ją dzieli bez 
+reszty. Łatwo zauważyć, że podobny problem badania, czy dana liczba nie jest 
+pierwsza, należy do problemów NP, bo wystarczy ją podzielić przez wskazany 
+dzielnik. Trudnej jest wykazać, że jest wielomianowe potwierdzenie w przypadku 
+pierwszego, pozytywnego, sformułowania problemu, ale wiadomo, że też należy on 
+do klasy NP.&nbsp; O żadnym z tych dwóch problemów nie wiemy jednak, czy są, czy 
+nie są NP-zupełne.</p>
+   
+<p>&nbsp;</p>
+   
+<p><b>Pytanie 6:&nbsp; </b>Niech problem polega na zbadaniu, czy dana formuła 
+rachunku zdań jest, czy nie jest tautologią. Czy ten problem jest NP-zupełny? 
+</p>
+   
+ 
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'Tak, bo problem spełnialności jest w klasie NPC.');">
+</form>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main15_p2.html" TARGET="main"  class="NAWIGACJA">
+&laquo;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main15_p4.html" TARGET="main" class="NAWIGACJA">następny 
+punkt&nbsp;&raquo;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

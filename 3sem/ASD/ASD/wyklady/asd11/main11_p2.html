@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+
+<td align="left"><A HREF="main11_p1.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main11_p3.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all">
+<br clear="all">
+
+<div class="tytulpunktu">2. Problem kodowania</div> 
+
+    <p>Jednym z problemów, z którymi spotykamy się w informatyce, jest problem 
+    właściwego wykorzystania pamięci. Konstruując algorytm staramy się zwykle nie tylko o 
+    zminimalizowanie kosztów czasowych algorytmu, ale także o&nbsp; dobrą złożoność pamięciową 
+    algorytmu. Ale co zrobić, jeśli to dane są bardzo duże? Jak je przechowywać 
+    w pamięci komputera? I tu przychodzą nam z pomocą techniki kompresji danych, 
+    tzn. metody kodowania danych w takiej postaci, która pozwala zapisać ten sam 
+    zbiór informacji wykorzystując dużo mniej miejsca. Oczywiście, zależy nam 
+    tylko na takich metodach, które pozwalają szybko zakodować dane, oraz szybko 
+    i jednoznacznie odkodować zakodowaną informację.</p>
+
+
+
+
+
+    <p><b>Przykład 2.1</b></p>
+
+
+
+
+
+    <p>Przypuśćmy, że pewien zbiór danych zawiera 10<sup><font face="Verdana">6</font></sup> 
+    znaków. Jeśli każdy z tych znaków jest reprezentowany przez liczbę z 
+    przedziału 0-255, to&nbsp; na zapisanie jednego znaku musimy zużyć 8 bitów 
+    (256 = 2<sup><font face="Verdana">8</font></sup>). Wynika stąd, że na 
+    zapisanie całego pliku zużyjemy 8 <font face="Symbol"><span lang="en">´</span>
+    </font>10<sup><font face="Verdana">6</font></sup> bitów. Gdybyśmy jednak 
+    mieli dodatkową informację, np. że w danych występują jedynie cyfry od 0 do 
+    9, to moglibyśmy na znak przeznaczyć tylko 4 bity co pozwoliłoby zakodować 
+    cały zbiór na 4&nbsp;<font face="Symbol"><span lang="en">´</span> </font>10<sup><font face="Verdana">6</font></sup> 
+    bitach. Przyporządkowanie znakom kodu mogłoby wyglądać np. tak:</p>
+
+
+
+
+
+    <p style="text-align: center">0- 0000, 1- 0001, 2- 0010, 3- 0011 itd... 
+    9-1001.</p>
+
+
+
+
+
+    <p>Dekodowanie zakodowanego pliku jest, przy takim kodzie, banalnie proste: 
+    odczytujemy kolejne cztery bity (słowo kodowe) i w słowniczku sprawdzamy 
+    jaki to znak. Na przykład, ciąg bitów 0010001100100011 jest kodem liczby 
+    2323. Ponieważ słownik składa się tylko z dziesięciu elementów, więc w 
+    najgorszym razie odszukanie jednego znaku wymagać będzie porównania z 
+    dziesięcioma słowami kodowymi. Nie musimy jednak przeszukiwać słownika 
+    sekwencyjnie.&nbsp; Przedstawmy zbiór słów kodowych w postaci drzewa 
+    binarnego (drzewa kodowego), w którego liściach&nbsp; przechowywane są kodowane znaki, a każde 
+    przejście w lewo odpowiada bitowi 0, a przejście w prawo- bitowi 1. W ten 
+    sposób każda ścieżka od korzenia do liścia odpowiada&nbsp; słowu kodującemu 
+    znak zapamiętany w liściu, por. rysunek 11.2.<font face="Wingdings">J</font></p>
+
+
+
+<center>
+
+    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="40%" id="AutoNumber1">
+      <tr>
+        <td width="100%">
+        <p align="center" style="text-align: center">
+        <img border="0" src="Rysunki/Rysunek11_2bb.gif" width="300" height="250"></td>
+      </tr>
+</table> </center>
+<br>
+<div class="def">Definicja 2.1 Sposób kodowania, w którym na każdy znak 
+  przeznaczamy taką samą liczbę bitów nazywamy kodem stałej długości.</div>
+
+
+
+
+
+<p><b>Pytanie 2</B>: Ile bitów trzeba przeznaczyć na zakodowanie tekstu 
+złożonego z 10<sup><font face="Verdana">7</font></sup> znaków, jeśli użyto kodu 
+o stałej długości, a tekst składa się tylko z liczb naturalnych oddzielonych 
+przecinkami lub spacjami, oraz z liter x, y, z?</p>
+
+<FORM>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'Do zakodowania znaków tego tekstu wystarczą cztery bity. Czyli razem potrzeba 4*10^7 bitów.');">
+</p>
+</form>
+<p></p>
+
+
+
+
+
+<p>Zauważmy, że w przykładzie 2.1 niektóre liście drzewa kodowego 
+nigdy nie będą potrzebne, bo ciąg bitów prowadzący do nich, nigdy nie wystąpi w 
+zakodowanym tekście. Na przykład ciąg 1111 nie jest kodem żadnego ze znaków&nbsp; 
+tego tekstu, więc nie wystąpi w zakodowanym tekście. Co więcej, gdyby cyfry 9 i 
+8 występowały w tekście tylko niewielką liczbę razy, to i tak do ich zakodowania 
+użyjemy aż 4 bitów. Czy to nie jest marnotrawstwo?&nbsp; A może zrezygnować ze 
+stałej długości kodu i długość kodu uzależnić od częstości występowania tego 
+znaku w kodowanym tekście. Zasada jest prosta: znakom, które występują często 
+przypisujemy krótkie kody. Wynika stąd, że kody będą miał różne długości.<p>&nbsp;<p><div class="def">
+  Definicja 2.2 Sposób kodowania, w którym znakom przypisujemy różne długości 
+  nazywamy kodem zmiennej długości.</div>
+<p></p>
+
+
+
+
+
+<p><b>Przykład 2.2</b><p>Niech w danym pliku,&nbsp; cyfry 0 i 1&nbsp; występują 
+3
+<span lang="en"><font face="Symbol">´</font></span>10<sup><font face="Verdana">6</font></sup> 
+razy, a pozostałe cyfry jedynie po 5<span lang="en"><font face="Symbol">´</font></span>10<sup><font face="Verdana">5</font></sup> 
+razy. Wtedy plik zawierający  10<sup><font face="Verdana">7</font></sup> znaków można 
+zakodować używając tylko&nbsp; 8<span lang="en"><font face="Symbol">´</font></span>10<sup><font face="Verdana">6</font></sup>&nbsp; 
+bitów, stosując kod 00 dla cyfry 0, 01 dla cyfry 1 oraz czterobitowe kody dla 
+cyfr 2, 3, ..., 8, 9.<p>Liczba bitów potrzebna do zakodowania tekstu, dla którego znamy częstości 
+występowania znaków  , wynosi
+
+
+
+
+
+<p style="text-align: center"> <font face="Symbol" size="3">S</font><sub>a<font face="Symbol" size="3"><span lang="en">Î</span>A</font></sub> 
+f(a) <font face="Symbol">
+<span lang="en">´</span> </font>dT(a), 
+
+
+
+
+
+<p>gdzie f(a) jest częstością występowania 
+znaku a, a dT(a) jest długością kodu dla znaku a.<p>Problem, który się teraz 
+pojawia, to jak zbudować  kod  uzależniający długość kodu od częstości 
+występowania znaków, w taki sposób, by można go było jednoznacznie odczytać 
+(dekodować). Warunek ten 
+spełniają kody prefiksowe.<p>&nbsp;<p><div class="def">Definicja 2.3 Kod 
+  posiadający własność, że żadne słowo kodowe nie jest prefiksem żadnego innego 
+  słowa kodowego, nazywa się kodem prefiksowym, dokładniej nie istnieją dwa 
+  słowa kodowe, że&nbsp; a=(a<sub><font face="Verdana">1</font></sub>,...,a<sub><font face="Verdana">n</font></sub> 
+  ) i b= (b<sub><font face="Verdana">1</font></sub>,..., b<sub><font face="Verdana">m</font></sub>) 
+  takie że n&lt;m oraz a<sub><font face="Verdana">1</font></sub>=b<sub><font face="Verdana">1</font></sub>, 
+  a<sub><font face="Verdana">2</font></sub>=b<sub><font face="Verdana">2</font></sub>,..., 
+  a<sub><font face="Verdana">n</font></sub>=b<sub><font face="Verdana">n</font></sub>.</div>
+<p></p>
+
+
+
+
+
+<p>Kody prefiksowe są bardzo wygodne, gdyż dekodowanie jest niezwykle proste: 
+odczytujemy pierwsze słowo kodowe znajdujące się na początku zakodowanego tekstu 
+i usuwamy go. Ponieważ żadne słowo kodowe nie jest prefiksem innego słowa, więc 
+to pierwsze słowo jest jednoznacznie wyznaczone. Po jego usunięciu postępowanie 
+możemy powtórzyć.&nbsp; Identyfikację słowa znakomicie upraszcza reprezentacja 
+kodu w postaci drzewa binarnego (drzewa kodowego), por. przykład 2.1. <p>&nbsp;<div class="lemat">
+  Twierdzenie 1.1&nbsp; Jeśli istnieje optymalne kodowanie, to zawsze można 
+  znaleźć kod prefiksowy, który go realizuje.
+</div>
+<p><b>Uwaga</b> Optymalny kod jest zawsze reprezentowany przez lokalnie pełne 
+drzewo binarne, por. wykład V, definicja 1.1. Zatem, jeśli dany jest alfabet A, 
+to drzewo optymalnego kodu ma |A| liści oraz dokładnie |A|-1 wierzchołków 
+wewnętrznych.<p><b>Pytanie 3: </b>Ile bitów wymaga kod stałej długości, a ile kod zmiennej 
+długości, dla zakodowania tekstu złożonego z 1000 znaków, w którym występuje 8 różnych znaków, a każdy z taką samą częstością?&nbsp; 
+<br>
+&nbsp;<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'3000 bitów w obu przypadkach.');">
+</form>
+</p>
+
+
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="left">
+<A HREF="main11_p1.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main11_p3.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

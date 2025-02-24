@@ -1,0 +1,35 @@
+1.
+SELECT job
+FROM emp
+WHERE deptno = 10
+UNION
+SELECT job
+FROM emp
+WHERE deptno = 30;
+
+2.
+SELECT ename, hiredate, deptno
+FROM emp
+WHERE deptno IN (10,30,40)
+ORDER BY emp.empno;
+
+3.
+SELECT job, SUM((sal + NVL(comm,0))* 12)
+FROM emp, salgrade
+WHERE sal BETWEEN losal AND hisal
+GROUP BY job;
+
+4.
+SELECT ename, sal, dname
+FROM emp, dept
+WHERE emp.deptno = dept.deptno AND (sal, dname) IN
+	(SELECT MIN(sal), dname
+	FROM emp, dept
+	WHERE emp.deptno = dept.deptno
+	GROUP BY dname);
+
+5.
+SELECT MAX(sal), salgrade.grade --not ready
+FROM emp, salgrade
+WHERE sal BETWEEN losal AND hisal
+GROUP BY salgrade.grade;

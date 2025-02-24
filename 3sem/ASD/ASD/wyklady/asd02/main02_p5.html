@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main02_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main02_cw.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a>
+</td></tr></table>
+
+<br clear="all"><A NAME="EDU.wyklad.punkt 2"></A><br clear="all">
+    <div class="tytulpunktu">5.&nbsp;  <b>Optymalność algorytmu binarnych 
+      poszukiwań</b></div> 
+
+<p> Algorytm binarnych poszukiwań wykonuje zadanie wyszukiwania w ciągu 
+uporządkowanym najlepiej z przedstawionych do tej pory algorytmów. Zastanówmy 
+się, czy jest możliwe dalsze poprawienie kosztu. </p>
+
+<p> Rozważmy klasę wszystkich algorytmów, które rozwiązują problem wyszukiwania 
+w ciągu uporządkowanym przez porównywanie elementów. Dla ustalenia uwagi, niech 
+każdy algorytm w rozważanej klasie, będzie całkowicie poprawny ze względu na 
+specyfikację:</p>
+<p style="text-align: center"> wp = {n &gt; 1, e[1]&lt; e[2]&lt; ... &lt; e[n], 
+e[1]<font face="Symbol"> <span lang="en">&pound;</span></font> x <font face="Symbol">&lt;
+</font>e[n]},&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; wk = {<font face="Symbol"> </font>result<font face="Symbol">
+<span lang="en">&pound;</span> </font>n, e[result]<font face="Symbol"> <span lang="en">
+&pound;</span> </font>x <font face="Symbol"><span lang="en">&pound;</span> </font>
+e[result+1]}.</p>
+<p>Drzewem decyzyjnym dla danego algorytmu wyszukiwania nazywać będziemy drzewo 
+binarne, którego wierzchołki wewnętrzne są etykietowane parami porównywanych 
+elementów, liście zawierają wartości zmiennej result. Każdy wierzchołek 
+wewnętrzny ma dwa następniki odpowiadające akcjom, które trzeba wykonać, gdy&nbsp; 
+porównanie w tym wierzchołku dało odpowiedź tak i&nbsp; gdy dało odpowiedź nie. 
+Każda ścieżka odpowiada&nbsp; więc ciągowi porównań wykonanych przez algorytm 
+dla konkretnych danych. Wartość znajdująca się w liściu (na tej ścieżce) jest 
+uzyskanym wynikiem algorytmu. Oznaczmy przez D(Alg,n) drzewo decyzyjne dla 
+algorytmu Alg i danych o rozmiarze n.<Br>
+
+<p>Przykład 5.1</p>
+<p>Niech rozważanym 
+algorytmem będzie algorytm poszukiwań sekwencyjnych Search. Wtedy drzewo 
+decyzyjne dla dowolnego ciągu e[1], e[2], e[3], e[4],&nbsp; zostało 
+przedstawione na rysunku 2_1.<p style="text-align: center">
+<BR><img border="0" src="Rysunki/Rysunek2_1.gif" width="333" height="252"></p>
+<br>
+Przykład 5.2<p style="text-align: left">Niech rozważanym algorytmem będzie 
+algorytm Skoki. Drzewo decyzyjne dla danych e[1], e[2],...,e[16] zostało 
+przedstawione na rysunku 2_2.</p>
+
+<p style="text-align: center"><img border="0" src="Rysunki/Rysunek2_3.gif" width="500" height="500"></p>
+
+<p><b>Pytanie 5: </b>Ile maksymalnie pytań TAK/NIE trzeba zadać, aby odgadnąć 
+dowolną liczbę z przedziału [0,10<sup><font face="Verdana">6</font></sup>]? 
+</p>
+<!-- Odp. 6 lg 10.-->
+<form><p>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Zobacz odpowiedź-----' NAME='Klik0' onClick="napis(this.form,'6 lg 10.')">
+</p></form>
+
+<p>NA mocy założenia wszystkie algorytmy rozważanej 
+klasy zawsze dają poprawne wyniki, zatem wszystkie możliwe wyniki muszą się 
+znaleźć jako etykiety liści w każdym z drzew decyzyjnych odpowiadających 
+konkretnemu algorytmowi. Dla danych rozmiaru n, zmienna result, zgodnie ze 
+specyfikacją przyjmować może tylko n-1 różnych wartości. Zatem liczba liści 
+dowolnego drzewa decyzyjnego D(Alg,n) musi być co najmniej równa n-1. 
+Oczywiście, liczba liści może być dużo większa niż n-1. Algorytm może wykonywać 
+niepotrzebne porównania i wielokrotnie dochodzić do tego samego wyniku.</p>
+<p>Liczba wykonanych porównań w konkretnym obliczeniu jest równa długości 
+ścieżki od korzenia do liścia, zatem policzmy jak długie muszą być ścieżki. 
+Zanotujmy najpierw prosty fakt dotyczący drzew binarnych.</p>
+
+<p><div class="lemat">
+  <p>Lemat 5.1</p>
+  <p>Jeżeli l jest liczbą liści w drzewie binarnym, a h jego wysokością, to l <font face="Symbol"> <span lang="en">&pound;</span> </font>
+  2 <sup><font face="Verdana">h</font></sup>.</p>
+</div>
+<p></p>
+
+<p>Dowód lematu 5.1 można przeprowadzić przez proste rozumowanie indukcyjne ze 
+względu na h.
+</p>
+<p>Wróćmy do problemu długości ścieżek w drzewie decyzyjnym. Gdyby w jakimś 
+drzewie decyzyjnym D(Alg,n) wszystkie ścieżki miały długość mniejszą niż 
+lg(n-1), to wysokość tego drzewa byłaby mniejsza niż lg(n-1). Wtedy, na mocy 
+lematu 5.1, liczba liści w tym drzewie byłaby mniejsza niż 2 <sup>
+<font face="Verdana">lg(n-1)</font></sup>, czyli mniejsza od (n-1). Zmienna 
+result w algorytmie Alg nie przyjmowałaby jednej z możliwych wartości. To jednak 
+jest niemożliwe, bo założyliśmy, że wszystkie algorytmy rozważanej klasy zawsze 
+dają poprawne wyniki. Wynika stąd, że w każdym drzewie decyzyjnym musi istnieć 
+jakaś ścieżka o długości co najmniej lg(n-1). Oznacza to, że w przypadku 
+najgorszym liczba wykonanych porównań musi być co najmniej równa lg(n-1). 
+Ponieważ musi to być liczba całkowita, zatem liczba wykonanych porównań w 
+przypadku pesymistycznym wynosi co najmniej <span lang="en"><font face="Symbol">
+é</font></span>lg(n-1)<font face="Symbol"><span lang="en">&ugrave;</span>.</font></p>
+<p>Uzyskany wynik mówi, że dla dowolnego algorytmu rozwiązującego problem 
+wyszukiwania przez porównywanie elementów, zawsze znajdą się takie dane, dla 
+których algorytm wykona co najmniej <font face="Symbol">Q</font>(lg n) porównań.</p>
+<p>Ponieważ algorytm BinSearch wykonuje w najgorszym przypadku <span lang="en">
+<font face="Symbol">é</font></span>lg n<font face="Symbol"><span lang="en">&ugrave;</span></font> 
+porównań, zatem:</p>
+
+<p><div class="lemat">
+  <p>Lemat 5.2</p>
+  <p>Algorytm binarnych poszukiwań BinSearch jest optymalnym, ze względu na 
+  pesymistyczny koszt czasowy, rozwiązaniem problemu wyszukiwania elementu w 
+  danym ciągu uporządkowanym.</p>
+</div>
+<p></p>
+
+<p><b>Pytanie 6</b>: Który z algorytmów wyszukiwania w ciągu uporządkowanym 
+został zastosowany, jeżeli wykonano kolejno porównania z elementami&nbsp; ciągu 
+o następujących indeksach&nbsp; 64, 95, 111, 103, 99, 97, 96? Ile elementów miał 
+ten ciąg?  .</p>
+
+<!-- Odpowiedź: Algorytm binarnych&nbsp; poszukiwań zastosowany do ciągu o 127 
+elementach</P> -->
+
+<form>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Zobacz odpowiedź-----' NAME='Klik0' 
+onClick="napis(this.form,'Algorytm binarnych&nbsp; poszukiwań zastosowany do ciągu o 127 elementach')">
+</p>
+</form>
+<p><br clear="all">
+</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main02_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main02_cw.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

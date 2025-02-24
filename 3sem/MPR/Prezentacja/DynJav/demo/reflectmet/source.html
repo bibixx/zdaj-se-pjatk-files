@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html lang="pl">
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+  <title>Kod programu</title>
+  <style type="text/css" media="screen">
+  <!--
+   pre { background-color: #fffff7; color: black; display: block; white-space: pre; border: 1px solid #800000; padding:2% }
+   -->
+  </style>
+</head>
+<body>
+<h2>Plik ActionSet.java</h2></br>
+<pre>
+package reflectmet;
+
+import javax.swing.*;
+
+public class ActionSet {
+
+ public void dodaj() { show("Dodaj"); }
+ public void usuń() { show("Usuń"); }
+ public void zastąp() { show("Zastąp"); }
+ public void szukaj() { show("Szukaj"); }
+ public void otwórz() { show("Otwórz"); }
+
+ private void show(String string) {
+   JOptionPane.showMessageDialog(null, string);
+ }
+
+}
+</pre>
+<h2>Plik ReflectionTest.java</h2></br>
+<pre>
+package reflectmet;
+import java.lang.reflect.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class ReflectionTest extends JFrame implements ActionListener {
+
+  Method currAction = null; // bieżąca metoda obsługi
+  Class actionClass = null; // klasa obsługi
+  Object actionObject = null; // obiekt obsługi
+  JPopupMenu popUp = null; // menu kontekstowe z wyborem obsługi
+  JButton b;
+
+  public ReflectionTest() {
+    super("Test refleksji");
+    try {
+      actionClass = Class.forName("reflectmet.ActionSet");
+      actionObject = actionClass.newInstance();
+    } catch (Exception exc) {
+      throw new RuntimeException("Wadliwa klasa obsługi");
+    }
+
+    popUp = new JPopupMenu();
+    createMenuItems();
+
+    b = new JButton("Użyj prawego klawisza myszki, by ustalić akcję");
+    b.setFont(new Font("Dialog", Font.BOLD, 24));
+    b.addActionListener(this);
+    b.setComponentPopupMenu(popUp); 
+
+    setLayout(new FlowLayout());
+    add(b);
+    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    pack();
+    setLocationRelativeTo(null);
+    setVisible(true);
+  }
+
+  void createMenuItems() {
+    Method mets[] = null;
+    try {
+      mets = actionClass.getMethods();
+    } catch (Exception exc) {
+      throw new RuntimeException("Niedostępna info o metodach klasy obsługi");
+    }
+
+    for (Method m : mets) {
+      if (m.getDeclaringClass() == actionClass) {
+        String name = m.getName();
+        JMenuItem mi = new JMenuItem(name);
+        mi.addActionListener(this);
+        popUp.add(mi);
+      }
+    }
+  }
+
+  void setCurrentAction(String action) {
+    try {
+      currAction = actionClass.getMethod(action); // zm. liczba arg.!!!
+      b.setText("Teraz akcją jest: " + currAction.getName() + " - kliknij!");
+    } catch (Exception exc) {
+      throw new RuntimeException("Nieznana metoda obsługi");
+    }
+  }
+
+  public void actionPerformed(ActionEvent e) {
+    Object src = e.getSource();
+    if (src instanceof JMenuItem)
+      setCurrentAction(((JMenuItem) src).getText());
+    else {
+      try {
+        currAction.invoke(actionObject); // zmienna liczba arg. !!!
+      } catch (Exception exc) {
+        JOptionPane.showMessageDialog(null, "Akcja na przycisku nieustalona!");
+      }
+    }
+  }
+
+  public static void main(String args[]) {
+    new ReflectionTest();
+  }
+
+}
+</pre>
+
+</body>
+</html>
+     

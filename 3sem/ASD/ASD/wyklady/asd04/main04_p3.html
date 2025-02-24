@@ -1,0 +1,498 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main04_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main04_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all">
+<A NAME="EDU.wyklad.punkt 3"></A><br clear="all"><div class="tytulpunktu">
+3. Szybkie sortowanie</div>
+
+<p>
+Idea algorytmu szybkiego sortowania pochodzi od C.A.R.Hoare i polega na zastosowaniu zasady &quot;dziel i 
+zwyciężaj&quot;: podzielmy zadanie sortownia ciągu n elementowego na dwa podzadania 
+o mniej więcej takich samych rozmiarach, a uzyskane wyniki połączmy w jeden uporządkowany 
+ciąg. Aby połączenie posortowanych odcinków nie wymagało dodatkowej pracy 
+(dodatkowych porównań), wystarczy aby elementy jednego posortowanego odcinka 
+były nie większe od elementów drugiego posortowanego odcinka.&nbsp; 
+<p>
+<b>Metoda</b><ol>
+  <li>Rozdzielić elementy danego ciągu e względem pewnego wybranego elementu v, 
+  na elementy mniejsze od v i elementy większe od v.</li>
+  <li>Umieścić v na właściwej pozycji, którą ten element powinien zajmować w 
+  ciągu uporządkowanym.</li>
+  <li>Posortować (stosując tę samą metodę) elementy mniejsze od v.</li>
+  <li>Posortować (stosując tę samą metodę) elementy większe od v.</li>
+  </ol>
+<p>
+Rozdzielanie ciągu omawialiśmy przy okazji innego algorytmu stosującego zasadę 
+&quot;dziel i zwyciężaj, a mianowicie algorytmu Hoare wyszukiwania&nbsp; k-tego co do wielkości 
+elementu ciągu (por. wykład III, p.6). Podany tam algorytm Partition zastosujemy teraz w procesie 
+sortowania.<p>
+<b>Przykład 3.1</b><p>
+Niech ciąg e składa się z następujących elementów: 7,2,4,5,1,6,3,5,9,8,0. 
+Kolejne kroki algorytmu przedstawiliśmy w tabeli. Elementy, względem których 
+rozdzielany był ciąg, są zaznaczone kolorem czerwonym, elementy młodsze w 
+rozważanym podziale - kolorem żółtym, a starsze - kolorem zielonym.<p>
+<center>
+&nbsp;<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="68%" id="AutoNumber1">
+    <tr>
+      <td width="7%" align="center" bgcolor="#C0C0C0">
+      <p align="right" style="text-align: center">1</td>
+      <td width="7%" align="center" bgcolor="#C0C0C0">
+      <p align="right" style="text-align: center">2</td>
+      <td width="7%" align="center" bgcolor="#C0C0C0">
+      <p align="right" style="text-align: center">3</td>
+      <td width="7%" align="center" bgcolor="#C0C0C0">
+      <p align="right" style="text-align: center">4</td>
+      <td width="8%" align="center" bgcolor="#C0C0C0">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center" bgcolor="#C0C0C0">
+      <p align="right" style="text-align: center">6</td>
+      <td width="8%" align="center" bgcolor="#C0C0C0">
+      <p align="right" style="text-align: center">7</td>
+      <td width="8%" align="center" bgcolor="#C0C0C0">
+      <p align="right" style="text-align: center">8</td>
+      <td width="8%" align="center" bgcolor="#C0C0C0">
+      <p align="right" style="text-align: center">9</td>
+      <td width="8%" align="center" bgcolor="#C0C0C0">
+      <p align="right" style="text-align: center">10</td>
+      <td width="8%" align="center" bgcolor="#C0C0C0">
+      <p align="right" style="text-align: center">11</td>
+      <td width="31%" align="center">
+      <p align="right" style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">7</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">2</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">4</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">1</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">3</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">6</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">8</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">9</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">0</td>
+      <td width="31%" align="center">
+      <p align="right" style="text-align: center"><b>dany ciąg</b><br>
+&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="7%" align="center" bgcolor="#FF0000">
+      <p align="right" style="text-align: center">0</td>
+      <td width="7%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">2</td>
+      <td width="7%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">4</td>
+      <td width="7%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">1</td>
+      <td width="8%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">3</td>
+      <td width="8%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">6</td>
+      <td width="8%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">8</td>
+      <td width="8%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">9</td>
+      <td width="8%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center"><font face="Verdana">7</font></td>
+      <td width="31%">
+      <p align="right" style="text-align: center">1krok 1-11</td>
+    </tr>
+    <tr>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">0</td>
+      <td width="7%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">2</td>
+      <td width="7%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">4</td>
+      <td width="7%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">1</td>
+      <td width="8%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">3</td>
+      <td width="8%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">6</td>
+      <td width="8%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center" bgcolor="#FF0000">
+      <p align="right" style="text-align: center">7</td>
+      <td width="8%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">9</td>
+      <td width="8%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">8</td>
+      <td width="31%">
+      <p align="right" style="text-align: center">2krok 2-11</td>
+    </tr>
+    <tr>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">0</td>
+      <td width="7%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">2</td>
+      <td width="7%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">4</td>
+      <td width="7%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">1</td>
+      <td width="8%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">3</td>
+      <td width="8%" align="center" bgcolor="#FF0000">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">6</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">7</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">9</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">8</td>
+      <td width="31%">
+      <p align="right" style="text-align: center">3krok 2-8</td>
+    </tr>
+    <tr>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">0</td>
+      <td width="7%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">2</td>
+      <td width="7%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">1</td>
+      <td width="7%" align="center" bgcolor="#FF0000">
+      <p align="right" style="text-align: center">3</td>
+      <td width="8%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">4</td>
+      <td width="8%" align="center" bgcolor="#CCFFCC">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">6</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">7</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">9</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">8</td>
+      <td width="31%">
+      <p align="right" style="text-align: center">4krok 2-6</td>
+    </tr>
+    <tr>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">0</td>
+      <td width="7%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">1</td>
+      <td width="7%" align="center" bgcolor="#FF0000">
+      <p align="right" style="text-align: center">2</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">3</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">4</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">6</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">7</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">9</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">8</td>
+      <td width="31%">
+      <p align="right" style="text-align: center">5krok 2-3</td>
+    </tr>
+    <tr>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">0</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">1</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">2</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">3</td>
+      <td width="8%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">4</td>
+      <td width="8%" align="center" bgcolor="#FF0000">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">6</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">7</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">9</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">8</td>
+      <td width="31%">
+      <p align="right" style="text-align: center">6krok 5-6</td>
+    </tr>
+    <tr>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">0</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">1</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">2</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">3</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">4</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">6</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">7</td>
+      <td width="8%" align="center" bgcolor="#FFFF99">
+      <p align="right" style="text-align: center">8</td>
+      <td width="8%" align="center" bgcolor="#FF0000">
+      <p align="right" style="text-align: center">9</td>
+      <td width="31%">
+      <p align="right" style="text-align: center">7krok10-11</td>
+    </tr>
+    <tr>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">0</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">1</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">2</td>
+      <td width="7%" align="center">
+      <p align="right" style="text-align: center">3</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">4</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">5</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">6</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">7</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">8</td>
+      <td width="8%" align="center">
+      <p align="right" style="text-align: center">9</td>
+      <td width="31%" align="center">
+      <p align="right" style="text-align: center">wynik</td>
+    </tr>
+  </table>
+</center>
+<p>
+W pierwszym kroku rozdzielamy dany ciąg względem elementu e[11]. Ponieważ 0 jest 
+mniejsze od wszystkich elementów ciągu, więc zbiór elementów &quot;młodszych&quot; jest w 
+tym przypadku pusty. Zbiór elementów &quot;starszych&quot; to ciąg 2,4,5,1,3,6,5,8,9,7. 
+Rozdzielamy go względem 7. Część &quot;starsza&quot; zawiera elementy 9,8, a &quot;młodsza&quot; 
+elementy 2,4,5,1,3,6,5. Zajmiemy się najpierw posortowaniem części &quot;młodszej&quot;. 
+Zastosowanie Partition do ciągu 2,4,5,1,3,6,5 rozdzieli go na ciąg 2,4,5,1,3 
+oraz ciąg jednoelementowy 6, który&nbsp; jest już uporządkowany. Ciąg 2,4,5,1,3 
+rozdzielony względem 3 utworzy dwa podzbiory {1,2} i {4,5}. Pozostało już tylko 
+sprawdzenie kolejności w parach na pozycjach 2-3, 5-6, 10-11. <FONT FACE="Wingdings">&#74;</FONT>
+<p>
+<b>Uwaga</b> Algorytm Partition nie jest jedynym dobrym sposobem rozdzielania 
+elementów zbioru skończonego. W prezentacji dołączonej do wykładu znajduje się 
+opis innego algorytmu rozdzielania Split. W dalszej części wykładu poznamy 
+jeszcze inny sposób, wykorzystujący bardziej zaawansowane struktury danych.<p>
+Przedstawiany w tym punkcie algorytm QuickSort jest procedurą rekurencyjną o 
+dwóch parametrach formalnych l i p, które oznaczają lewy i prawy indeks 
+rozważanego ciągu. Jak zwykle zakładamy, że elementy sortowanego ciągu zostały 
+umieszczone w tablicy e[1],...e[n].<p style="text-align: left">&nbsp;<p>
+<div class="def" style="width: 816; height: 218">
+   <TABLE frame="void" rules="none" width="782" height="178">
+         <TR>
+            <TD width="411" height="12" colspan="2">QuickSort (l, p : int){</TD>
+             
+            <TD width="21" height="12"></TD>
+             
+            <TD width="883" height="12"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="352" height="12"><strong>&nbsp;</strong></TD> 
+            <TD width="21" height="12"></TD> 
+            <TD width="883" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="352" height="12"><strong>&nbsp;if&nbsp; </strong>(l
+            <font face="Symbol">&lt;</font> p) <strong>then </strong> </TD> 
+            <TD width="21" height="12"></TD> 
+            <TD width="883" height="12">// rozważany fragment ciągu zawiera co 
+            najmniej 2 elementy</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="352" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>&nbsp; 
+            x := Partition (l,p);&nbsp;</TD> 
+            <TD width="21" height="12"></TD> 
+            <TD width="883" height="12">// {e[l],...,e[x-1]}<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[x]<font face="Symbol"> <span lang="en">&pound;</span></font> 
+            {e[x+1],...,e[p]}</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="352" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            QuickSort(l, x-1); <STRONG>&nbsp;&nbsp;&nbsp; </STRONG>
+             </TD>
+            <TD width="21" height="12">   </TD>
+            <TD width="883" height="12">   // e[l]<font face="Symbol"> <span lang="en">&pound;</span></font> 
+            e[l+1] <font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            e[x-1]&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="352" height="12">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>QuickSort(x+1, p);</TD>
+            <TD width="21" height="12">   </TD>
+            <TD width="883" height="12">   &nbsp;// e[x+1]<font face="Symbol"> <span lang="en">&pound;</span></font> 
+            e[x+2<font face="Symbol">] <span lang="en">&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            e[p]</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="352" height="12">   &nbsp;<b>fi;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="21" height="12">   </TD>
+            <TD width="883" height="12">   &nbsp;//&nbsp;e[l]<font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[x-1]&nbsp;<span lang="en"><font face="Symbol">&pound;</font></span> 
+            e[x] <font face="Symbol"><span lang="en">&pound;</span> </font>
+            e[x+1]<font face="Symbol"> <span lang="en">&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            e[p]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="1"><strong>&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="352" height="1">   &nbsp;<STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG></TD>
+            <TD width="21" height="1">   </TD>
+            <TD width="883" height="1">   </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p style="text-align: left"><b>Analiza poprawności</b></P>
+
+<p>Jeżeli ciąg składa się z jednego tylko elementu (tzn. l = r), to oczywiście 
+jest ciągiem uporządkowanym. Załóżmy, że algorytm QuickSort zastosowany do 
+dowolnego ciągu krótszego niż p-l+1 ustawia jego elementy w porządku 
+niemalejącym. Dokładniej, zakładamy, że o ile j-i &lt; p-l, to w wyniku wywołania 
+QuickSort(i,j) mamy&nbsp; e[i] <font face="Symbol"> <span lang="en">&pound;</span> </font>
+e[i+1] <font face="Symbol"> <span lang="en">&pound;</span>... <span lang="en">&pound;</span></font> 
+e[j], oraz elementy e[i],...,e[j] są permutacją oryginalnych danych na pozycjach 
+od i-tej do j-tej.</P>
+
+<p>Na mocy twierdzenia o poprawności algorytmu Partition (por. twierdzenie 
+III.6.1), po wykonaniu instrukcji&nbsp; &quot;Partition(l,p);&quot;</P>
+
+<p style="text-align: center">{e[l],..., e[x-1]}<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            e[x]<font face="Symbol"> <span lang="en">&pound;</span></font> 
+{e[x+1],..., e[p]}.</P>
+
+<p style="text-align: left">Wiemy ponadto, że l<font face="Symbol"> <span lang="en">&pound;</span> </font>
+            x <font face="Symbol"><span lang="en">&pound;</span> </font>
+            p. Wynika stąd, że&nbsp; (x-1) - l &lt; p - l oraz&nbsp; p - (x+1)&lt; p - 
+l, co umożliwia nam zastosowanie założenia indukcyjnego do rekurencyjnych 
+wywołań &quot;QuickSort(l, x-1);&quot; i   <strong>&nbsp;</strong>&quot;QuickSort(x+1, p);&quot;. W 
+wyniku pierwszego wywołania otrzymamy e[l]<font face="Symbol"> <span lang="en">&pound;</span></font> 
+e[l+1] <font face="Symbol"> <span lang="en">&pound;</span></font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>
+e[x-1], a w wyniku drugiego wywołania&nbsp; e[x+1]<font face="Symbol"> <span lang="en">&pound;</span></font> 
+e[x+2<font face="Symbol">] <span lang="en">&pound;</span> </font>...<font face="Symbol"> <span lang="en">&pound;</span> </font>
+e[p].&nbsp; Ostatecznie cały fragment od l do p jest ciągiem uporządkowanym. Na 
+mocy zasady indukcji wnioskujemy, że dla dowolnego n,&nbsp; wykonanie algorytmu 
+QuickSort(1,n)&nbsp; spowoduje uporządkowanie ciągu e[1],...,e[n].</P>
+
+<p style="text-align: left">Zauważmy, tak jak w przypadku poprzednio omawianych 
+algorytmów, że ani typy ani wartości elementów nie mają w tym algorytmie 
+znaczenia. Algorytm działa poprawnie, tzn. ustawia elementy ciągu w porządku 
+niemalejącym, w dowolnej strukturze danych, na elementach której określony jest 
+liniowy porządek.</P>
+
+<p><div class="lemat">
+  <p>Twierdzenie 3.1&nbsp; Algorytm QuickSort jest całkowicie  poprawnym rozwiązaniem problemu sortowania, 
+  w każdej strukturze danych z liniowym porządkiem <span lang="en"><font face="Symbol">&pound;</font></span>.</p>
+</div>
+<p></p>
+
+<p style="text-align: left"><b>Analiza kosztu.</b></P>
+
+<p>Rozważmy najpierw przypadki szczególne. Jak zachowa się algorytm QuickSort 
+dla ciągu e uporządkowanego niemalejąco?&nbsp;&nbsp; Algorytm Partition używa do 
+rozdzielania, elementu z pozycji ostatniej, czyli w tym przypadku największego. 
+Zatem w wyniku rozdzielenia ciągu n elementowego zbiór elementów większych od 
+rozdzielającego będzie pusty, a zbiór elementów mniejszych będzie zawierał n-1 
+elementów. Wykonany przy tym n-1 porównań. Podobnie będzie w każdym następnym 
+wykonaniu Partition. Jest to więc najgorszy przypadek dla tego algorytmu.&nbsp; 
+Liczbę wykonanych porównań możemy opisać równaniem&nbsp; W(n) = (n-1) + W(n-1), 
+którego rozwiązaniem jest funkcja W(n) = n(n-1)/2&nbsp; rzędu<font face="Symbol">&nbsp; 
+Q</font>(n<sup><font face="Verdana">2</font></sup>).</P>
+
+<p>Aby policzyć koszt średni, załóżmy, że wszystkie permutacje elementów danego 
+ciągu są tak samo prawdopodobne i że każdy podział ciągu w wyniku działania 
+algorytmu Partition jest tak samo prawdopodobny. Ponieważ pozycja rozdzielająca 
+może się znajdować na dowolnym z n miejsc, więc przyjmujemy, że&nbsp; P( pozycja 
+elementu rozdzielającego = x) = 1/n dla dowolnego x=1,...,n.&nbsp; Koszt 
+pierwszego wykonania Partition wynosi n-1 porównań. Jeżeli element rozdzielający 
+znajdzie się na pozycji x, to kolejne wywołania rekurencyjne dotyczą ciągu x-1 
+elementowego i n-x elementowego. Mamy więc następujące równanie rekurencyjne dla 
+średniego kosztu algorytmu:</P>
+
+<p style="text-align: center">A(1) = 0, A(n) = (n-1) + (1/n)
+<font face="Symbol" size="4">S</font> <sub><font face="Verdana">x=1,...,n</font></sub> 
+(A(x-1) + A(n-x)).</P>
+
+<p>Po uproszczeniu, równanie przyjmuje postać  </P>
+
+<p style="text-align: center">A(n) = (n-1) +(2/n)
+<font face="Symbol" size="4">S</font> <sub><font face="Verdana">x=1,...,n-1</font></sub> 
+A(x),  </P>
+
+<p>a jego rozwiązaniem jest funkcja A(n)= c n lg n. Koszt średni algorytmu 
+QuickSort jest więc liniowo-logarytmiczny.</P>
+
+<p>
+<b>Pytanie 3:&nbsp; </b>Ile porównań wykona algorytm QuickSort dla ciągu 
+dziesięcioelementowego odwrotnie uporządkowanego?<br>
+&nbsp;<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'45');">
+</form>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main04_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main04_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

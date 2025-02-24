@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main11_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main11_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all"><A NAME="EDU.wyklad.punkt 4"></A>
+
+<br clear="all">
+<div class="tytulpunktu">4. Problem najkrótszych ścieżek	</div>
+</p>
+<p>Dany jest graf zorientowany G = &lt;V, E&gt; i funkcja przypisująca 
+krawędziom grafu liczby rzeczywiste, c: E <span lang="en"><font face="Symbol">&reg;</font></span> 
+R+. Funkcję c nazywamy funkcją kosztu.&nbsp; Problem, którym będziemy się 
+zajmować w tej części wykładu polega na znalezieniu 
+najkrótszych dróg między wierzchołkami tego grafu. </p>
+
+
+
+
+
+<div class="def">
+<p>Definicja 4.1 Niech p oznacza dowolną drogę (ścieżkę) od u do v w grafie G = 
+&lt;V, E&gt;, p = (v<sub><font face="Verdana">0</font></sub>,v<sub><font face="Verdana">1</font></sub>,..., 
+v<sub><font face="Verdana">k</font></sub>) oraz u = v<sub><font face="Verdana">0</font></sub>, 
+v =&nbsp; v<sub><font face="Verdana">k</font></sub>. Koszt drogi p, d(p), 
+definiujemy jako&nbsp; sumę kosztów krawędzi, leżących na tej drodze, </P>
+<p style="text-align: center">d(p) = <font face="Symbol" size="5">S</font><sub><font face="Verdana">i=0,..., 
+k-1</font></sub> c(v<sub><font face="Verdana">i</font></sub>,v<sub><font face="Verdana">i+1</font></sub>).</P>
+<p>Długość najkrótszej ścieżki od u do v oznaczamy przez <font face="Symbol">&nbsp;d</font>(u,v),
+<font face="Symbol">&nbsp;d</font>(u,v) = min<sub><font face="Verdana">p</font></sub>d(p), 
+gdzie minimum rozciąga się na wszystkie drogi p prowadzące od u do v.</P>
+</div>
+
+<p>Zauważmy najpierw, że najkrótsza ścieżka, o ile istnieje, musi być drogą prostą, tzn. taką, że wszystkie wierzchołki tej drogi są różne. Jest oczywiste, że gdyby na pewnej drodze znajdował się cykl, to usunięcie go zmniejszyłoby koszt drogi. Z drugiej strony, jeśli mamy najkrótszą ścieżkę od u do v, to tym 
+samym mamy najkrótsze ścieżki między dowolnymi dwoma wierzchołkami tej ścieżki. 
+Inaczej mówiąc, podścieżki najkrótszych ścieżek są same najkrótszymi ścieżkami.</p>
+
+<p>&nbsp;<div class="lemat">
+  Twierdzenie 4.1&nbsp; Niech p = (v<sub><font face="Verdana">0</font></sub>,v<sub><font face="Verdana">1</font></sub>,..., 
+  v<sub><font face="Verdana">k</font></sub>) będzie najkrótszą ścieżką od v<sub><font face="Verdana">0</font></sub> 
+  do v<sub><font face="Verdana">k</font></sub>&nbsp; i niech p<sub><font face="Verdana">ij</font></sub> 
+  = (v<sub><font face="Verdana">i</font></sub>,v<sub><font face="Verdana">i+1</font></sub>,..., 
+  v<sub><font face="Verdana">j</font></sub>) będzie podścieżką p, i&lt;j<font face="Symbol">
+  <span lang="en">&pound;</span></font>k. Wtedy p<sub><font face="Verdana">ij</font></sub> 
+  jest najkrótszą ścieżką od v<sub><font face="Verdana">i</font></sub> do v<sub><font face="Verdana">j</font></sub>.</div>
+
+<p>Z twierdzenia 4.1 wynika natychmiast, że dla dowolnej pary wierzchołków u, v, 
+jeśli istnieje ścieżka od u do v,oraz v' jest wierzchołkiem poprzedzającym v na 
+tej ścieżce, to</P>
+
+<p style="text-align: center">&nbsp;<font face="Symbol"> d</font>(u,v) =
+<font face="Symbol">&nbsp;d</font>(u,v') + c(v,v').</P>
+
+<p>Problem najkrótszych ścieżek można rozważać w trzech wariantach:<br>
+<br>
+I. Dla danego grafu zorientowanego znaleźć najkrótszą ścieżkę między dwoma 
+danymi wierzchołkami.
+
+<BR>II. Znaleźć najkrótsze ścieżki od wyróżnionego wierzchołka, zwanego źródłem, 
+do wszystkich innych wierzchołków grafu.
+
+<BR>III. Znaleźć najkrótsze ścieżki między dowolnymi wierzchołkami grafu.</P>
+
+<p>Chociaż problem pierwszy, wydaje się być najłatwiejszy, to nie jest znane żadne jego rozwiązanie asymptotycznie lepsze niż rozwiązanie polegające na znalezieniu najkrótszych dróg z ustalonego wierzchołka do wszystkich innych (problem II) i wybranie interesującej nas konkretnej ścieżki. Problem trzeci również można rozwiązać wykorzystując rozwiązanie problemu II. Zajmiemy się więc bardziej szczegółowo problemem II.</P>
+
+<p>Zauważmy, że w szczególnym przypadku, gdy koszty wszystkich krawędzi są takie same mamy <font face="Symbol"> d</font>(u,v) = c(u,v) * dł, gdzie dł jest długością minimalnej ścieżki od u do v.
+W tym przypadku problem najkrótszych ścieżek można rozwiązać stosując algorytm BFS przeglądania grafu "wszerz".</p>
+Załóżmy, że dany jest graf spójny, którego każdy wierzchołek ma dwa dodatkowe atrybuty m,d. Atrybut m służy do markowanie wierzchołków, a atrybut d, będzie służył do przechowywania odległości od źródła. Przyjmijmy, że graf jest dany w postaci tablicy list sąsiedztwa (incydencji). Algorytm wykorzystuje kolejkę FIFO, początkowo zawierającą tylko wierzchołek- źródło, zamrkowany jako odwiedzony i z atrybutem d=0. Przeglądanie "wszerz" realizuje się, podobnie jak w przypadku drzew:<BR>
+<p style="text-align: left">&nbsp;<p>
+<div class="def" style="width: 713; height: 208">
+   <TABLE frame="void" rules="none" width="680" height="150">
+         <TR><TD width="544" height="12" colspan="2">Dopóki kolejka nie jest pusta wykonuj:</TD>            
+         </TR>
+         <TR> 
+           <TD width="56" height="12"></TD>
+           <TD>1. wyjmij z kolejki pierwszy wierzchołek v i wstaw do niej wszystkie wierzchołki z jego listy sąsiedztwa, o ile nie były jeszcze zamarkowane,<BR></TD></TR>
+         <TR> 
+            <TD width="56" height="12"></TD>
+            <TD>2.dla każdego dopisanego do kolejki wierzchołka u, przyjmij u.d := v.d + 1;</TD></TR>
+         <TR>
+            <TD width="56" height="12"></TD> 
+            <TD>3.zamarkuj wierzchołki wstawione w tym kroku do kolejki.</TD></TR>
+</TABLE></div>
+
+
+Czytelnik zechce samodzielnie zapisać szczegóły tego algorytmu. </p>
+<p>Na zakończenie tego punktu zauważmy jeszcze, że graf utworzony przez najkrótsze ścieżki ze źródła s, tworzy drzewo o korzeniu w s. Drzewo to nie musi być jedyne.</p>
+
+<p><B>Przykład 4.1</B></p>
+<p>Na rysunku 11.4 przedstawiono graf i dwa różne drzewa najkrótszych ścieżek ze  źródła s. Ze źródła do wierzchołka v prowadzš różne najkrótsze ścieżki: s-u-v w pierwszym drzewie,  lub s-u-x-v w drugim.</p>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber1">
+  <tr>
+    <td width="20%">
+    <img border="0" src="Rysunki/Rysunek11_4a.gif" width="250" height="250"></td>
+    <td width="20%">
+    <img border="0" src="Rysunki/Rysunek11_4b.gif" width="250" height="250"></td>
+    <td width="20%">
+    <img border="0" src="Rysunki/Rysunek11_4c.gif" width="250" height="250"></td>
+  </tr>
+</table>
+<BR>
+<p><b>Pytanie 5:</B>: Jaki jest koszt algorytmu przeglądania grafu o m krawędziach i n wierzchołkach metodą BFS  ? </P>
+
+<!-- <p>Odpowiedź: O(n+m)</P> -->
+
+<form>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'O(n+m).')">
+</p>
+</form>
+<p><br clear="all">
+<DIR>
+
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main11_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main11_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+</dir>
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

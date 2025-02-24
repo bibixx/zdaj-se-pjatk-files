@@ -1,0 +1,25 @@
+1)
+select emp.empno,emp.ename,emp.deptno,dept.loc,emp.sal,salgrade.grade
+from emp,dept,salgrade
+where emp.deptno=dept.deptno and emp.sal between salgrade.losal and salgrade.hisal;
+
+2)
+select emp.empno,emp.ename,emp.deptno,dept.loc,emp.sal,salgrade.grade
+from emp,dept,salgrade
+where emp.deptno=dept.deptno and emp.sal between salgrade.losal and salgrade.hisal
+and salgrade.grade=4;
+
+3)
+select e.ename "Pracownik",e.job,e.hiredate,'   ' " ",m.ename "Manager",m.job,m.hiredate
+from emp e,emp m
+where e.mgr = m.empno and e.hiredate<m.hiredate;
+
+4)
+select a.ename "Wiecej zarabiajacy",a.sal,'   ',b.ename "Mniej zarabiajacy",b.sal
+from emp a,emp b,salgrade c,salgrade d
+where a.sal>b.sal and
+a.sal between c.losal and c.hisal and c.grade=3 and
+b.sal between d.losal and d.hisal and d.grade=3;
+
+5)
+select job from emp where deptno=10 MINUS select job from emp where deptno=20;

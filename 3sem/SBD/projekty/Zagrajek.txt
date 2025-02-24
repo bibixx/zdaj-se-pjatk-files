@@ -1,0 +1,248 @@
+DROP TABLE PARTS_IN_DEFFECT;
+DROP TABLE PART;
+DROP TABLE DEFFECTS_IN_CAR;
+DROP TABLE SERVICE_HISTORY;
+DROP TABLE CAR;
+DROP TABLE CLIENT;
+DROP TABLE MECHANIC;
+DROP TABLE MASTER;
+
+CREATE TABLE CAR
+       (id_car         NUMBER(2)       PRIMARY KEY,
+       manufacturer    VARCHAR2(15)    ,
+       version         NUMBER(5)       ,
+       nr_bodywork     NUMBER(10)      ,
+       nr_engine       NUMBER(10)      ,
+       year            NUMBER(5)       ,
+       dealer          VARCHAR2(38)    ,
+       plate_nr        VARCHAR2(10)     ,
+       route           NUMBER(10)      );
+
+CREATE TABLE CLIENT
+       (id_cliet       NUMBER(2)       PRIMARY KEY,
+       name            VARCHAR2(10)    ,
+       surname         VARCHAR2(20)    ,
+       city            VARCHAR2(20)    ,
+       street          VARCHAR2(20)    ,
+       phone           NUMBER(20)      ,
+       cell            NUMBER(38)      ,
+       pesel           NUMBER(11)      );
+
+CREATE TABLE MECHANIC
+       (id_mechanic    NUMBER(2)       PRIMARY KEY,
+       name            VARCHAR2(10)    ,
+       surname         VARCHAR2(20)    ,
+       salary          NUMBER(6)       ,
+       nickname        VARCHAR2(20)    );
+
+CREATE TABLE MASTER
+       (id_mechanic    NUMBER(2)       PRIMARY KEY,
+       name            VARCHAR2(10)    ,
+       surname         VARCHAR2(20)    ,
+       salary          NUMBER(6)       ,
+       nickname        VARCHAR2(20)    );
+
+CREATE TABLE SERVICE_HISTORY
+       (data           date					,
+       car             NUMBER(2)       REFERENCES CAR          ,
+       client          NUMBER(2)       REFERENCES CLIENT       ,
+       mechanic        NUMBER(2)       REFERENCES MECHANIC     ,
+       master          NUMBER(2)       REFERENCES MASTER       ,
+       receiption_date DATE                                    ,
+       comments        VARCHAR2(38)                            ,
+       orderid         NUMBER(2)       PRIMARY KEY             ,
+       cardone         NUMBER(1)                               ,
+       paid            NUMBER(1)                               );
+
+CREATE TABLE DEFFECTS_IN_CAR
+       (ordr           NUMBER(2)       REFERENCES SERVICE_HISTORY,
+       description     VARCHAR2(10)    ,
+       reason          VARCHAR2(30)    ,
+       solution        VARCHAR2(30)    ,
+       id_deffect      NUMBER(2)       PRIMARY KEY);
+
+CREATE TABLE PART
+       (catalog_nr     NUMBER(2)       PRIMARY KEY,
+       name            VARCHAR2(10)    ,
+       description     VARCHAR2(30)    ,
+       time_min        NUMBER(6)       ,
+       price           NUMBER(6)       );
+
+CREATE TABLE PARTS_IN_DEFFECT
+       (deffect        NUMBER(2)       REFERENCES DEFFECTS_IN_CAR,
+       part            NUMBER(2)       REFERENCES PART);
+
+
+
+INSERT INTO CAR VALUES (1, 'Fiat', 320, 32443, 52333, 2002,
+'carsewis', 'wxw014u', 12432);
+INSERT INTO CAR VALUES (2, 'Fiat', 510, 45534, 76556, 2001, 'dsa',
+'wgz0932', 30957);
+INSERT INTO CAR VALUES (3, 'Alfa Romeo', 250, 54567, 455322, 1999,
+'autorex', 'wgz2345', 102343);
+
+INSERT INTO CLIENT VALUES (1, 'Leszek', 'Miller', 'Ozarow',
+'Piotrkowska', 3423456, 456347903, 7020140762);
+INSERT INTO CLIENT VALUES (2, 'Andrzej', 'Lepper', 'Stowiecin', '',
+3345345, 434565432, 54061300256);
+INSERT INTO CLIENT VALUES (3, 'Lech', 'Kaczynski', 'Warszawa', '',
+7874356, 789845763, 49121234565);
+
+INSERT INTO MECHANIC VALUES (1, 'Stanislaw', 'Koziol', 2300, 'koziol');
+INSERT INTO MECHANIC VALUES (2, 'Marek', 'Rozum', 1500, 'rozum');
+INSERT INTO MECHANIC VALUES (3, 'Grzegorz', 'Brzecz', 1800, 'GB');
+
+INSERT INTO MASTER VALUES (1, 'Adrian', 'Ciszewski', 700, 'cichy');
+INSERT INTO MASTER VALUES (2, 'Piotr', 'Iwanejko', 490, 'ivan');
+INSERT INTO MASTER VALUES (3, 'Piotr', 'Malinowski', 900, 'malina');
+
+INSERT INTO SERVICE_HISTORY VALUES (TO_DATE('1-JAN-2006',
+'DD-MON-YYYY'), 1, 2, 1, 2, TO_DATE('30-JAN-2006', 'DD-MON-YYYY'), '', 1,
+0, 0);
+INSERT INTO SERVICE_HISTORY VALUES (TO_DATE('3-JAN-2006',
+'DD-MON-YYYY'), 3, 1, 1, 1, TO_DATE('10-JAN-2006', 'DD-MON-YYYY'), '', 2,
+0, 0);
+INSERT INTO SERVICE_HISTORY VALUES (TO_DATE('8-JAN-2006', 'DD-MON-YYYY'), 2, 2, 3, 1, TO_DATE('13-JAN-2006', 'DD-MON-YYYY'), '', 3,
+0, 0);
+
+INSERT INTO DEFFECTS_IN_CAR VALUES (1, 'no gas :) ', 'no gas', 'fill',1);
+INSERT INTO DEFFECTS_IN_CAR VALUES (2, 'top engine', 'low oil', 'fill oil',2);
+INSERT INTO DEFFECTS_IN_CAR VALUES (3, 'no lights', 'no bulb', 'new bulb',3);
+
+INSERT INTO PART VALUES (1, 'gas', '', 5, 100);
+INSERT INTO PART VALUES (2, 'oil', '', 5, 100);
+INSERT INTO PART VALUES (3, 'bulb', '', 5, 20);
+
+INSERT INTO PARTS_IN_DEFFECT VALUES (1, 3);
+INSERT INTO PARTS_IN_DEFFECT VALUES (2, 2);
+INSERT INTO PARTS_IN_DEFFECT VALUES (3, 1);
+
+CREATE OR REPLACE TRIGGER nullclientidcatcher
+AFTER INSERT OR UPDATE ON CLIENT
+FOR EACH ROW
+BEGIN
+if (:NEW.id_cliet is NULL)
+then
+RAISE.APPLICATION.ERROR(-100,'ID can't be null');
+END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER autoid
+BEFORE INSERT ON CAR
+FOR EACH ROW
+BEGIN
+SELECT NVL(MAX(car_id)+1,1)
+INTO :NEW.id_car FROM CAR;
+END;
+/
+
+CREATE OR REPLACE TRIGGER niceworkermessage
+AFTER INSERT OR UPDATE ON MASTER
+FOR EACH ROW
+BEGIN
+DBMS_output.put_line('O we have new nice worker.');
+END;
+/
+
+CREATE OR REPLACE TRIGGER nodelete
+BEFORE DELETE ON SERVICE_HISTORY
+FOR EACH ROW
+BEGIN
+if (:OLD.paid=0)
+then
+RAISE.APPLICATION.ERROR(-100,'This client have stil something to pay
+and can't be delete from the base');
+END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER mechanicsalarylimit
+BEFORE UPDATE ON MECHANIC
+FOR EACH ROW
+BEGIN
+if (:NEW.salary > 10000) then
+DBMS_output.put_line('It is too much for mechanic.');
+END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER printsalarychanges
+BEFORE DELETE OR INSERT OR UPDATE ON MASTER
+FOR EACH ROW
+WHEN (:new.master_id > 0)
+DECLARE
+   diff number;
+BEGIN
+   diff  := :new.salary  - :old.salary;
+   DBMS_output.put('Old salary: ' || :old.sal);
+   DBMS_output.put('  New salary: ' || :new.sal);
+   DBMS_output.put_line('  Difference ' || sal_diff);
+END;
+/
+
+create or replace procedure addClient(
+name            VARCHAR2    ,
+surname         VARCHAR2    ,
+city            VARCHAR2    ,
+street          VARCHAR2    ,
+phone           NUMBER      ,
+cell            NUMBER      ,
+pesel           NUMBER(11)
+)
+as
+numg INTEGER;
+customer_already_in_DB EXCEPTION;
+Begin
+      SELECT count(*) INTO numg FROM client WHERE surname=psurname
+AND pesel=ppesel;
+      If numg>0 then RAISE customer_already_in_DB;
+      Else
+              INSERT INTO client VALUES (numg,pname,psurname,pcity,pstreet,pphon,pcell,ppesel);
+              SELECT ID_Customer INTO numg FROM Customers WHERE surname=esurname AND pesel=epesel;
+              dbms_output.put_line('Client succesfuly added to the DataBase. His id=' || numg || ' and surname=' || psurname);
+              COMMIT;
+      END If;
+exception
+      when customer_already_in_DB then
+      dbms_output.put_line('Client already in the DataBase. His id='|| numg || ' and surname=' || psurname);
+End;
+/
+
+create or replace procedure riseSalary
+(
+id in number,
+value in number
+)
+as
+numg INTEGER;
+no_position EXCEPTION;
+begin
+      SELECT count(*) INTO numg FROM mechanic WHERE id_mechanic=id;
+      If numg=0 then RAISE no_position;
+      Else
+              update mechanic set salary=nvl(Salary,0)+value where id_mechanic=id;
+              dbms_output.put_line('Mechanic have now  higher salary');
+      ENd If;
+exception
+      when no_position then
+      dbms_output.put_line('No such mechanic.');
+end;
+/
+
+
+create or replace procedure deletePaidServices()
+as
+
+CURSOR paid is 
+  select orderid from SERVICE_HISTORY where paid = 0;
+  zaplacone paid%ROWTYPE;
+  BEGIN
+    LOOP
+      FETCH  paid INTO zaplacone;
+      EXIT WHEN paid%NOTFOUND;
+      delete from SERVICE_HISTORY where orderid = zaplacone;
+    END LOOP;
+    CLOSE paid;
+  END;
+/

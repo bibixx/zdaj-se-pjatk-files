@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main15_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main15_cw.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><br clear="all"><div class="tytulpunktu">
+5. Rozstrzygalność i nierozstrzygalność </div>
+
+
+ &nbsp;<p>Problemy klasy NPC, o których mówiliśmy w poprzednich punktach 
+wykładu, były problemami &quot;trudnymi&quot;, jednak nie możemy z całą stanowczością 
+powiedzieć, że nie da się ich rozwiązać w sposób &quot;łatwy&quot;. Po prostu nie wiemy, 
+czy istnieją dla nich wielomianowe algorytmy. Są jednak problemy, dla których 
+udowodniono, że są trudne, że nie istnieją&nbsp; i nigdy nie będą mogły być 
+wynalezione wielomianowe algorytmy ich rozwiązywania. Do takich problemów należy 
+m.in. problem &quot;wież Hanoi&quot;, należą uogólnione wersje gry w szachy, w której gra 
+toczy się na planszy n <font face="Symbol"><span lang="en">´</span> </font>n, 
+problem spełniania własności algorytmicznych wyrażonych w pewnym rozszerzeniu 
+rachunku zdań.&nbsp; Dla tych problemów udowodniono, wykładnicze dolne 
+oszacowanie złożoności.</p>
+
+
+
+
+
+<p>Zapomnijmy na chwilę o sprawie kosztu algorytmów. Wszystkie problemy omawiane 
+do tej pory miały jakieś rozwiązania w postaci algorytmów. Nawet, jeśli to 
+rozwiązanie wymagało bardzo dużo czasu, to jednak mogliśmy określić metodę 
+postępowania prowadzącą do rozwiązania problemu. O problemach decyzyjnych tego 
+typu mówimy, że są rozstrzygalne. Są jednak problemy, które tej cechy nie 
+posiadają: nie istnieje dla nich metoda postępowania, która po skończonej 
+liczbie kroków da rozwiązanie. Takie problemy&nbsp; nazywamy nieobliczalnymi, a 
+problemy decyzyjne tego typu nazywamy nierozstrzygalnymi.</p>
+
+
+
+
+
+<div class="def">
+<p>Definicja 15.5&nbsp;&nbsp; Powiemy, że problem decyzyjny jest rozstrzygalny, jeśli 
+istnieje algorytm, który dla dowolnych danych po skończonej liczbie kroków daje 
+rozwiązanie problemu. W przeciwnym razie, tzn. jeśli taki algorytm nie istnieje,  mówimy, że problem jest nierozstrzygalny. </P>
+</div>
+
+<p>
+
+<b>
+
+<br>
+
+Przykład 5.1</b></p>
+
+<p>
+
+Problem sprawdzenia, czy formuła klasycznej logiki predykatów jest tautologią, 
+jest 
+nierozstrzygalny. Jeśli dana formuła rachunku predykatów jest tautologią, to 
+umiemy się o tym przekonać w skończonym czasie. Jeśli jednak nie jest to 
+tautologia, to nie ma takiej metody, która po skończonej liczbie kroków 
+pozwoliłaby przerwać postępowanie i zdecydować, że to nie jest tautologia.
+<font face="Wingdings" size="3">J</font></p>
+
+<p>
+
+<b>Przykład 5.2</b></p>
+
+<p>
+
+Rozważmy problem, który przypomina zadanie układania kafelków w domu. Niech będą 
+dane &quot;kafelki&quot; -kwadraty podzielone przekątnymi na cztery części, z których 
+każda została w pewien sposób pokolorowana. Mamy skończony zbiór X wzorców 
+&quot;kafli&quot;. Zadanie polega na znalezieniu odpowiedzi na pytanie, czy dowolną 
+skończoną powierzchnię można pokryć za pomocą &quot;kafli&quot; takich jak w zbiorze X, w 
+taki sposób, że sąsiadujące &quot;kafelki&quot; pasują do siebie ( np. zgadzają się ich 
+kolory). Zakładamy, podobnie jak w problemie układanki (por. punkt 15.1), że 
+&quot;kafle&quot; mają ustaloną orientację i nie można ich obracać, oraz że liczba kafli 
+każdego typu jest nieograniczona. Problem ten nazywa się problemem domina (por. 
+D. Harel, Rzecz o istocie informatyki, WNT 1992). Udowodniono, że nie ma i nigdy 
+nie będzie w przyszłości, algorytmu, który po skończonej liczbie kroków 
+odpowiadałby, że pokrycie danej powierzchni jest lub, że pokrycie nie jest 
+możliwe. Problem domina jest nierozstrzygalny. <font face="Wingdings" size="3">J</font></p>
+
+<p>
+
+&nbsp;</p>
+
+<p>
+
+Do klasy problemów nierozstrzygalnych należą też problemy szczególnie ważne dla 
+informatyków. Jednym z nich jest problem stopu.</p>
+<p></P>
+
+<p>Dany jest pewien algorytm i dane do tego algorytmu. Zadanie polega na sprawdzeniu, 
+czy dla tych danych algorytm kończy obliczenia po skończonym czasie, czy nie. </P>
+
+<p style="text-align: center">Stop(A, d) = true&nbsp; wttw A kończy obliczenie dla danych d. </P>
+
+<p>Możemy sprawdzić, co się stanie, uruchamiając po prostu algorytm A na jakimś 
+komputerze. Jeśli jednak algorytm A dla pewnych danych ma obliczenie 
+nieskończone, to jak się o tym przekonać? A może uda się znaleźć postępowanie 
+algorytmiczne, metodę, która potrafi przeanalizować nasz algorytm A i jego dane, 
+i odpowie na nasze pytanie, bez konieczności wykonywania algorytmu A?</P>
+
+<p>Rozważmy  zadanie ogólniejsze: 
+spytajmy, czy istnieje algorytm (jednorodna metoda postępowania), który dla 
+dowolnego algorytmu i danych do niego potrafi stwierdzić, czy algorytm zatrzyma 
+się dla tych danych, czy też nie zatrzyma się?<b> </b>Tak sformułowany problem 
+nosi nazwę problemu stopu (halting problem). Niestety odpowiedź jest negatywna: 
+nie istnieje algorytm, który rozwiązuje problem stopu.</P>
+
+
+<p></P>
+
+
+
+<div class="lemat" style="width: 683; height: 42">
+<p>Twierdzenie 15.1 Problem stopu jest nierozstrzygalny.</P>
+ </div>
+ 
+<p></P>
+
+<p>Dowód. Załóżmy przeciwnie, że istnieje algorytm Q(A,x), który dla dowolnego 
+algorytmu A napisanego w pewnym ustalonym języku programowania i dla ustalonych 
+danych x, po skończonej liczbie kroków odpowiada na pytanie, czy A zapętla się 
+dla danych x, czy też nie. Przyjmijmy, że Q daje wynik &quot;tak&quot;, gdy dany program 
+A 
+zatrzymuje się, i daje wynik &quot;nie&quot;, gdy program A ma dla danych x nieskończoną pętlę. 
+Użyjemy 
+teraz algorytmu Q do skonstruowania nowego programu S. Po pierwsze wejściem do 
+programu S będzie treść badanego algorytmu A, następnie wykonamy algorytm Q dla 
+danych&nbsp; (A, A), tzn. A jest raz traktowane, jako tekst algorytmu, a drugi 
+raz jako napis opisujący jego dane wejściowe. Ponadto w przypadku, gdy Q(A,x) 
+odpowiada&nbsp; &quot;tak&quot; dopiszmy nieskończoną pętlę. Nowy algorytm S ma więc 
+np. postać:</P>
+
+<p style="text-align: center">S(A) = {x := kopia(A); Q(A,x); <b>if</b>&nbsp; wynik=&quot;tak&quot; 
+<b>then</b> <b>while</b> true <b>do</b> i := i <b>od</b> <b>fi</b>}</P>
+
+<p>Program S dla dowolnego algorytmu A albo powinien się zatrzymać, albo nie. 
+Użyjmy programu S do sprawdzenia, jak zachowuje się sam program S. Jeżeli&nbsp; 
+S(S) zatrzymuje się, to znaczy, że algorytm Q(S,S) odpowiedział &quot;nie&quot;. Oznacza 
+to jednak, że algorytm S nie zatrzymuje się dla danych S. Otrzymaliśmy 
+sprzeczność. Przypuśćmy więc przeciwnie, że program S(S) nie zatrzymał się. 
+Mogło się tak stać tylko wtedy, gdy program S wpadł w nieskończoną pętlę, którą 
+dopisaliśmy do programu Q. To oznacza, że algorytm Q musiał odpowiedzieć &quot;tak&quot;. 
+Jednak taka odpowiedź znaczy, że program będący argumentem Q, tzn. S, nie 
+zapętla się dla rozważanych danych, czyli program S nie zapętla się dla danych S. 
+Znów sprzeczność. Ale przecież zgodziliśmy się na początku, że program albo się 
+zatrzymuje, albo nie zatrzymuje się.&nbsp; Wynika stąd, że S nie ma prawa 
+istnieć, a dokładniej, nie istnieje hipotetyczny algorytm Q.
+<font face="Wingdings" size="3">J</font></P>
+
+<p><b>Pytanie 8</B>: Czy problem spełniania dla formuł rachunku zdań jest 
+rozstrzygalny ? 
+<br clear="all"></P>
+
+
+<!-- <p>Odpowiedź: TAK.</P> -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'Tak, np. metoda zerojedynkowa daje algorytm rozwiązywania tego problemu.')"> 
+</form>
+
+<BR> 
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main15_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main15_cw.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+</dir>
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

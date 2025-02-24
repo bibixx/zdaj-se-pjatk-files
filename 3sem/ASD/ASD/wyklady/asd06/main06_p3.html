@@ -1,0 +1,575 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main06_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main06_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all">
+<A NAME="EDU.wyklad.punkt 3"></A><br clear="all"><div class="tytulpunktu">
+3. Listy</div>
+
+<p>Listy są prostą i bardzo elastyczną strukturą danych umożliwiającą 
+wykonywanie operacji takich jak</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+
+<p>(1) wyszukanie elementu,<br>
+(2) dołączenie nowego elementu do listy,<br>
+(3) usunięcie wskazanego elementu listy,<br>
+(4) wskazanie elementu następnego,<br>
+(5) wskazanie elementu poprzedniego.</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<p>Elementy listy są, tak jak w przypadku stosu, czy kolejki, liniowo 
+uporządkowane ze względu na kolejność ich umieszczania. Rozważa się listy jedno i 
+dwukierunkowe. Listę jednokierunkową będziemy reprezentowali przez obiekt typu 
+LINK, o dwóch atrybutach val- reprezentujący element przechowywanego w liście 
+zbioru, oraz next - dowiązanie do następnego ogniwa listy, o ile istnieje, por. 
+rysunek 6.6(a). Listy 
+dwukierunkowe mają bogatszą strukturę, posiadają bowiem atrybut prev, wskazujący 
+poprzednie ogniwo listy, o ile takie istnieje, por. rysunek 6.6(b)</p>
+
+<center>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="61%" id="AutoNumber2" height="112">
+  <tr>
+    <td width="2%" bordercolor="#F5F5F5" height="1" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="1"></td>
+  </tr>
+  <tr>
+    <td width="2%" bordercolor="#F5F5F5" height="1" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="1"></td>
+  </tr>
+  <tr>
+    <td width="2%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    e<sub><font face="Verdana">1</font></sub></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    next</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="6%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    e<sub><font face="Verdana">2</font></sub></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    next</td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">
+    ...</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="6%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    e<sub><font face="Verdana">n-1</font></sub></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    next</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="6%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    e<sub><font face="Verdana">n</font></sub></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    next</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;</font></span></td>
+    <td width="3%" bgcolor="#C0C0C0" bordercolor="#808080" height="16" bordercolordark="#808080">
+    <p align="center" style="text-align: center">null<br>
+&nbsp;</td>
+    <td width="3%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">
+    <p align="center" style="text-align: center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="2%" bordercolor="#F5F5F5" height="1" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="1"></td>
+  </tr>
+  <tr>
+    <td width="2%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="2%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="6%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="33%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1" colspan="8">
+    Rysunek 6.6(a) Lista jednokierunkowa</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1" align="center">&nbsp;</td>
+    <td width="3%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+  </tr>
+  <tr>
+    <td width="2%" bordercolor="#F5F5F5" align="center" height="16" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="6%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="4%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="6%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="6%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="4%" bordercolor="#F5F5F5" align="center" height="16">
+    </td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="16"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="16"></td>
+  </tr>
+  <tr>
+    <td width="2%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">&nbsp;</td>
+    <td width="6%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    prev</td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    e<sub><font face="Verdana">1</font></sub></td>
+    <td width="2%" bordercolor="#808080" height="16" bgcolor="#DDA0DD">next</td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">
+    <font face="Symbol" size="4"><span lang="en">
+    &reg;<br>
+    &not;</span></font></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    prev</td>
+    <td width="4%" bordercolor="#808080" height="16" bgcolor="#DDA0DD">
+    <p align="center" style="text-align: center">e<sub><font face="Verdana">2</font></sub></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    next</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;<br>
+    </font></span>
+    <font face="Symbol" size="4"><span lang="en">
+    &not;</span></font></td>
+    <td width="6%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">
+    ...</td>
+    <td width="4%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" align="center" height="16">
+    <span lang="en">
+    <font face="Symbol" size="4">&reg;<br>
+    </font></span>
+    <font face="Symbol" size="4"><span lang="en">
+    &not;</span></font></td>
+    <td width="2%" bordercolor="#808080" height="16" bgcolor="#DDA0DD">prev</td>
+    <td width="6%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    e<sub><font face="Verdana">n</font></sub></td>
+    <td width="4%" bgcolor="#DDA0DD" bordercolor="#808080" align="center" height="16">
+    next</td>
+    <td width="2%" bordercolor="#F5F5F5" height="16"><span lang="en">
+    <font face="Symbol" size="4">&reg;<br>
+    </font></span>
+    <font face="Symbol" size="4"><span lang="en">
+    &not;</span></font></td>
+    <td width="3%" bgcolor="#C0C0C0" bordercolor="#808080" height="16" bordercolordark="#808080">
+    <p align="center" style="text-align: center">null</td>
+    <td width="3%" bgcolor="#F5F5F5" bordercolor="#F5F5F5" height="16">
+    <p align="center" style="text-align: center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="2%" bordercolor="#F5F5F5" height="1" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="6%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="4%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="2%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="1"></td>
+    <td width="3%" bordercolor="#F5F5F5" height="1"></td>
+  </tr>
+  <tr>
+    <td width="2%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1" bgcolor="#F5F5F5">&nbsp;</td>
+    <td width="6%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="2%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="6%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="33%" align="center" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1" colspan="8">
+    Rysunek 6.6(b) Lista dwukierunkowa<br>
+&nbsp;</td>
+    <td width="5%" bgcolor="#F5F5F5" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1" align="center">&nbsp;</td>
+    <td width="3%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+    <td width="4%" bordercolorlight="#F5F5F5" bordercolordark="#F5F5F5" height="1">
+    </td>
+  </tr>
+</table>
+
+</center>
+
+
+
+<p>&nbsp;</p>
+
+<p>W niektórych zastosowaniach wygodnie jest używać tzw. list cyklicznych. W 
+takiej liście, wskaźnik next ostatniego ogniwa, wskazuje na&nbsp; początkowe 
+ogniwo listy, a wskaźnik prev pierwszego ogniwa wskazuje na ogniwo ostatnie.<BR></p>
+<p><b>Przykład 3.1</b></p>
+   
+<p>Jako przykład zastosowania, rozważmy zadanie znalezienia wszystkich liczb 
+pierwszych nie większych niż pewna, z góry ustalona, liczba n. <font face="Verdana">Najprostszą metodą 
+rozwiązania tego zadania jest utworzenie tablicy n elementowej 
+i sukcesywne wykreślanie z niej liczb podzielnych przez dwa, trzy itd. Prowadzi 
+to do algorytmu zwanego sitem Eratostenesa, zapisanym tu jako Sito1.</font></p>
+   
+<p><b>Algorytm 1</b></p>
+   
+<p><font face="Verdana">W przedstawionym algorytmie n jest liczbą naturalną, a 
+tab jest tablicą o n rozmiarze n. Pozycje elementów &quot;wykreślonych&quot; z tablicy są 
+zaznaczone zerem.</font></p>
+   
+<p>
+<div class="def" style="width: 744; height: 223">
+   <TABLE frame="void" rules="none" width="697" height="174">
+         <TR>
+            <TD width="694" height="12" colspan="2">Sito1{</TD>
+             
+            <TD width="55" height="12"></TD>
+             
+            <TD width="481" height="12"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="635" height="12"><strong>&nbsp;for </strong>i := 2<strong> to </strong>
+            n<strong> do</strong>
+            tab[i] := i <strong>od;</strong></TD> 
+            <TD width="55" height="12"></TD> 
+            <TD width="481" height="12">// inicjalizacja tablicy tab</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="635" height="12"><strong>&nbsp;for </strong>
+            i := 2 <b>to</b> n<b> 
+            do </b><strong>&nbsp; </strong></TD> 
+            <TD width="55" height="12"></TD> 
+            <TD width="481" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="635" height="12"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;if </strong>
+            (tab[i]<font face="Symbol"> <span lang="en">&sup1;</span></font> 0) <b>
+            then</b> </TD> 
+            <TD width="55" height="12"></TD> 
+            <TD width="481" height="12">//&nbsp; o ile i nie było skreślone</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="635" height="12">   &nbsp;<strong> </strong>&nbsp;&nbsp;&nbsp;&nbsp; <STRONG>&nbsp;&nbsp; </STRONG>
+             &nbsp;<strong>for </strong>
+            j := i+1 <b>to</b> n <b>do</b>&nbsp; </TD>
+            <TD width="55" height="12">   </TD>
+            <TD width="481" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="8"></TD>
+            <TD width="635" height="8">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            if
+            </strong>(tab[j] mod i = 0) <b>then</b> tab[j] := 0; <b>fi</b></TD>
+            <TD width="55" height="8">   </TD>
+            <TD width="481" height="8">   &nbsp;// skreślanie liczb podzielnych 
+            przez i</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="635" height="12">   &nbsp;<strong>&nbsp;&nbsp;&nbsp;
+            </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>od</b>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="55" height="12">   </TD>
+            <TD width="481" height="12">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="635" height="12">   &nbsp;&nbsp;&nbsp; <b>&nbsp;fi</b></TD>
+            <TD width="55" height="12">   </TD>
+            <TD width="481" height="12">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="635" height="12">   <b>od;</b> &nbsp;&nbsp; </TD>
+            <TD width="55" height="12">   </TD>
+            <TD width="481" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"><strong>}</strong></TD>
+            <TD width="635" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="55" height="12">   </TD>
+            <TD width="481" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p>Poprawność algorytmu jest dość oczywista, ponieważ wszystkie liczby, podzielne 
+przez liczby mniejsze niż n są zastąpione zerami. Po wykonaniu algorytmu 
+wystarczy wybrać te pozycje, które nie są zerami i są to wszystkie liczby 
+pierwsze mniejsze niż n. </p>
+
+<p>Tablica nie jest w tym przypadku wygodną strukturą danych, gdyż 
+nieinteresujące nas pozycje, wypełnione zerami, nie tylko zajmują miejsce, ale 
+także zmuszają nas do wielokrotnego wykonywania testu (tab[i]<font face="Symbol">
+<span lang="en">&sup1;</span></font> 0). Co więcej, dla tych pozycji wykonujemy 
+niepotrzebnie instrukcję   <strong>&quot;if
+            </strong>(tab[j] mod i = 0) <b>then</b> tab[j] := 0; <b>fi&quot;.&nbsp;
+</b>Unikniemy tego problemu, jeśli użyjemy innej struktury danych.</p>
+
+<p><b>Algorytm 2</b></p>
+
+<p>Strukturą danych w tym algorytmie będzie lista. Każda liczba od 2 do n 
+zostanie początkowo umieszczona na tej liście. W i-tym etapie algorytmu będziemy 
+usuwali ogniwa listy zawierające liczby podzielne przez i. Dzięki temu lista 
+sukcesywnie zmniejsza się, a jej stan końcowy to wszystkie liczby pierwsze 
+mniejsze niż n.</p>
+<p>
+<div class="def" style="width: 832; height: 404">
+   <TABLE frame="void" rules="none" width="785" height="174">
+         <TR>
+            <TD width="763" height="12" colspan="2">Sito2{</TD>
+             
+            <TD width="40" height="12"></TD>
+             
+            <TD width="515" height="12"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="704" height="12">&nbsp;L := new LINK(2); x := L;</TD> 
+            <TD width="40" height="12">1</TD> 
+            <TD width="515" height="12">// inicjalizacja listy</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="704" height="12"><strong>&nbsp;for </strong>
+            i := 3 <b>to</b> n<b> 
+            do </b><strong>&nbsp; </strong>x.next := new LINK(i); x := x.next<strong> 
+            od;</strong></TD> 
+            <TD width="40" height="12">2</TD> 
+            <TD width="515" height="12">// utworzenie listy</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="704" height="12"><strong>&nbsp;</strong>x := L; <strong>&nbsp;&nbsp; 
+            &nbsp; </strong></TD> 
+            <TD width="40" height="12">3</TD> 
+            <TD width="515" height="12"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="704" height="12">   <strong>while </strong>(x
+            <font face="Symbol"><span lang="en">&sup1;</span> </font>null) <b>do</b>&nbsp;&nbsp; </TD>
+            <TD width="40" height="12">   4</TD>
+            <TD width="515" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="8"></TD>
+            <TD width="704" height="8">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; w := 
+            x.val;</TD>
+            <TD width="40" height="8">   5</TD>
+            <TD width="515" height="8">   //badamy podzielność przez kolejną 
+            liczbę </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="8"></TD>
+            <TD width="704" height="8">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            poprzedni := x; y := x.next;</TD>
+            <TD width="40" height="8">   6</TD>
+            <TD width="515" height="8">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="8"></TD>
+            <TD width="704" height="8">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            while&nbsp; </strong>(y <font face="Symbol"><span lang="en">&sup1;</span>
+            </font>null) <b>do</b></TD>
+            <TD width="40" height="8">   7</TD>
+            <TD width="515" height="8">   //przeszukiwanie listy w celu 
+            usunięcia liczb podzielnych przez w</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="8"></TD>
+            <TD width="704" height="8">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            if
+            </strong>(y.val mod w = 0) <b>then</b> </TD>
+            <TD width="40" height="8">   8</TD>
+            <TD width="515" height="8">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="8"></TD>
+            <TD width="704" height="8">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            poprzedni.next := y.next;</TD>
+            <TD width="40" height="8">   9</TD>
+            <TD width="515" height="8">   //omijamy liczbę podzielną przez w</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="8"></TD>
+            <TD width="704" height="8">   <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            else</b> </TD>
+            <TD width="40" height="8">   10</TD>
+            <TD width="515" height="8">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="8"></TD>
+            <TD width="704" height="8">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            poprzedni := y;</TD>
+            <TD width="40" height="8">   11</TD>
+            <TD width="515" height="8">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="8"></TD>
+            <TD width="704" height="8">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong><b>fi;</b></TD>
+            <TD width="40" height="8">   12</TD>
+            <TD width="515" height="8">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="8"></TD>
+            <TD width="704" height="8">   <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </b>&nbsp;&nbsp;&nbsp; y := y.next;</TD>
+            <TD width="40" height="8">   13</TD>
+            <TD width="515" height="8">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="704" height="12">   &nbsp;<strong>&nbsp;&nbsp;&nbsp;
+            </strong>&nbsp;<b>od</b>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="40" height="12">   14</TD>
+            <TD width="515" height="12">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="704" height="12">   &nbsp;&nbsp;&nbsp;&nbsp; x := x.next;</TD>
+            <TD width="40" height="12">   15</TD>
+            <TD width="515" height="12">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"></TD>
+            <TD width="704" height="12">   &nbsp;&nbsp;<b>od;</b>&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="40" height="12">   16</TD>
+            <TD width="515" height="12">   </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="12"><strong>}</strong></TD>
+            <TD width="704" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+            <TD width="40" height="12">   </TD>
+            <TD width="515" height="12">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p>Jak to działa? Pętla w linii 2 tworzy listę złożoną z wszystkich liczb 
+naturalnych od 2 do n. Pętla główna, w liniach od 4 do 16, sprawdza podzielność 
+przez kolejną liczbę naturalną. Samo usuwanie (omijanie) niepotrzebnych ogniw 
+listy wykonuje pętla wewnętrzna w liniach 7-14. W tym celu używamy zmiennej y 
+wskazującej aktualnie rozważany element listy, i pomocniczej zmiennej&nbsp; <i>
+poprzedni</i>, wskazującej zawsze poprzedzający y element.</p>
+   
+<p>A jaki jest koszt tego algorytmu? Oczywiste oszacowanie górne liczby 
+wykonanych instrukcji, to&nbsp; <font face="Symbol" size="4">S</font> <sub>
+<font face="Verdana">i=2...n</font></sub> (n-i), co daje&nbsp; 
+<font face="Symbol">Q</font>(n<sup><font face="Verdana">2</font></sup>) 
+operacji. Jest jednak pewien problem. Złożoność algorytmu zwykle wyrażamy jako 
+funkcję rozmiaru danych. Jaki jest więc rozmiar danych w tym przypadku? Jedyną 
+daną do tego algorytmu jest liczba n. Jako rozmiar danych możemy przyjąć, np. 
+liczbę bitów potrzebną do zapisania liczby n (tzn. lg n). Niech więc k będzie 
+rozmiarem danych. Wtedy algorytm wykona 2<sup><font face="Verdana">2k </font>
+</sup>&nbsp;operacji. Zatem koszt algorytmu Sito jest wykładniczy.</p>
+   
+<p><b>Uwaga</b> Pętle główne w obu algorytmach nie muszą być kontynuowane, 
+jeżeli dojdziemy do elementu n/2. Co więcej, pętla wewnętrzna też może zostać 
+skrócona: w przebiegu badającym podzielność przez w, nie musimy sprawdzać liczb 
+większych od n/w.</p>
+   
+<p><b>Pytanie</b> <b>4:</b> Jaki jest minimalny koszt połączenia dwóch list o długości n i m?<BR>
+</p>
+   
+<FORM>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'min(n,m)');">
+</p>
+</form>
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main06_p2.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main06_p4.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

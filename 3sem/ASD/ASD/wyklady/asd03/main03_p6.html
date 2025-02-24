@@ -1,0 +1,740 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main03_p5.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main03_cw.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+
+
+<br clear="all"><A NAME="EDU.wyklad.punkt 6"></A><br clear="all">
+<div class="tytulpunktu">6. Algorytm Hoare</div> 
+
+<p></P>
+
+<p>Przedstawiony w poprzednim punkcie problem jest szczególnym przypadkiem 
+następującego zadania:<p>Dany jest ciąg, którego elementy należą do pewnej 
+przestrzeni liniowo uporządkowanej. Niech np. <i>elem</i> będzie typem elementów 
+tego ciągu. Znaleźć k-ty największy element tego ciągu, 
+tzn. element, który ma dokładnie k-1 większych od siebie elementów.<p>
+<b>Przykład 6.1</b><p>Dla ciągu 3,5,20,7,11,60,32,19,8, drugi największy element 
+to 32, trzeci największy to 20, a czwarty największy element to 19.<font face="Wingdings">J</font><p>Niech dany 
+ciąg będzie reprezentowany przez tablicę o elementach e[1],...,e[n].
+Specyfikacja naszego zadnia może mieć następującą postać:<p style="text-align: center">wp ={n<font face="Symbol"> <span lang="en">&sup3;</span></font>k 
+&gt;0, e[i] <font face="Symbol"><span lang="en">&sup1;</span> </font>e[j] dla i
+<font face="Symbol"><span lang="en">&sup1;</span> </font>j}<p style="text-align: center">
+wk = {istnieje dokładnie k-1 elementów e[j<sub><font face="Verdana">1</font></sub>],..., 
+e[j<sub><font face="Verdana">k-1</font></sub>] takich, że result &lt; e[j]&nbsp; 
+dla j= j<sub><font face="Verdana">1</font></sub>,..., j<sub><font face="Verdana">k-1</font></sub>.}.<p style="text-align: left">
+Najprostszy algorytm rozwiązania tego zadania polega na k krotnym wyszukiwaniu 
+maksimum. W przedstawionym tu algorytmie, znalezione kolejno elementy maksymalne 
+są przestawiane na kolejne, początkowe pozycje ciągu. Użyliśmy w tym celu 
+operacji swap(e[i], e[j]), która powoduje zamianę itej i jtej pozycji ciągu. 
+Dokładniej swap(x,y) = {z := x; x := y; y := z}.<p style="text-align: left">&nbsp;<p>
+<div class="przyk" style="width: 779; height: 330">
+   <TABLE frame="void" rules="none" width="741" height="302">
+         <TR>
+            <TD width="59" height="16">K_ty{</TD>
+            <TD width="396" height="16">&nbsp; </TD>
+             
+            <TD width="41" height="16"></TD>
+             
+            <TD width="778" height="16"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="396" height="16"><strong>&nbsp;</strong>j := 1;</TD> 
+            <TD width="41" height="16"></TD> 
+            <TD width="778" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="396" height="16"><strong>&nbsp;while&nbsp; </strong>(j
+            <span lang="en"><font face="Symbol">&pound;</font></span> k) <strong>do </strong> </TD> 
+            <TD width="41" height="16"></TD> 
+            <TD width="778" height="16">//e[1]&gt;...&gt;e[j-1], e[j-1]= max{e[j-1],...,e[n]}</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="396" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>x := j;&nbsp;&nbsp;i := j +1;&nbsp; </TD> 
+            <TD width="41" height="16"></TD> 
+            <TD width="778" height="16">//x ma być pozycją elementu największego 
+            wśród e[j],...,e[n]</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="396" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            while </strong>(i&lt;n+1)<strong> do </strong></TD> 
+            <TD width="41" height="16"></TD> 
+            <TD width="778" height="16">// szukamy maksimum wśród elementów na 
+            pozycjach &gt;j</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="396" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong><b>if</b> e[i]&gt; e[x] <b>then</b> x := i <b>fi</b>;</TD> 
+            <TD width="41" height="16"></TD> 
+            <TD width="778" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="396" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            i := i+1;</TD> 
+            <TD width="41" height="16"></TD> 
+            <TD width="778" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="396" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            od;</strong></TD> 
+            <TD width="41" height="16"></TD> 
+            <TD width="778" height="16">e[x]&nbsp; = max {e[j],...,e[n]}</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="396" height="16">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            swap(e[j],e[x]);<STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG>
+             </TD>
+            <TD width="41" height="16">   </TD>
+            <TD width="778" height="16">   e[1]&gt;...&gt;e[j-1]&gt;e[j], e[j] = max{e[j],...,e[n]}</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="396" height="16">   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; j 
+            := j + 1;</TD>
+            <TD width="41" height="16">   </TD>
+            <TD width="778" height="16">   e[1]&gt;...&gt;e[j-1],   e[j-1] = max{e[j-1],...,e[n]} </TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="396" height="16">   &nbsp;<STRONG>od;</STRONG></TD>
+            <TD width="41" height="16">   </TD>
+            <TD width="778" height="16">   //&nbsp;&nbsp; j = k+1</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="396" height="16">      result := e[k]&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; </TD>
+             
+            <TD width="41" height="16">      </TD>
+             
+            <TD width="778" height="16">      //e[1]&gt;...&gt;e[k],   e[k] = max{e[k],...,e[n]}      </TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="396" height="16"></TD>
+            <TD width="41" height="16"></TD>
+            <TD width="778" height="16"> </TD>
+         </TR>
+   </TABLE>
+</div>
+
+<p style="text-align: left">Nie będziemy tu dokładniej analizować poprawności 
+tego algorytmu.&nbsp; Komentarze umieszczone obok instrukcji, pozwalają 
+uzasadnić niezmiennik pętli, który mówi, że e[j-1] jest (j-1)szym co do 
+wielkości elementem rozważanego ciągu.</P>
+
+<p style="text-align: left">Koszt tego algorytmu, mierzony liczbą wykonanych 
+porównań elementów, to suma kosztów związanych z k krotnym wyszukiwaniem 
+maksimum w coraz krótszych ciągach:</P>
+
+<p style="text-align: center">(n-1) + (n-2)+ (n-3) +... + (n-k) = k*n - 
+k(k+1)/2.</P>
+
+<p style="text-align: left">Jeśli k jest&nbsp; małą stałą, to koszt tego algorytmu jest 
+liniowy. Jeśli natomiast k= <font face="Symbol">Q</font>(n), to składnik k*n 
+spowoduje, że funkcja kosztu algorytmu będzie rosła ze wzrostem n, tak jak 
+funkcja kwadratowa.</P>
+
+<p style="text-align: left">Czy można rozwiązać problem k-tego co do wielkości 
+elementu taniej, wykonując mniejszą liczbę porównań? C.A.R.Hoare zaproponował algorytm wykorzystujący 
+zasadę &quot;dziel i zwyciężaj&quot;.</P>
+
+<p style="text-align: left"><b>Idea algorytmu Hoare: </b></P>
+
+<blockquote>
+  <ol>
+    <li>
+
+<p style="text-align: left">Rozdzielić elementy ciągu na mniejsze i większe 
+względem pewnego elementu m, np. względem pierwszego lub ostatniego elementu ciągu. Niech x 
+będzie liczbą elementów większych od m.</P>
+
+    </li>
+    <li>
+
+<p style="text-align: left">Jeżeli&nbsp; x &gt; k-1, to&nbsp; elementu k-tego 
+szukamy wśród elementów większych od m, stosując to samo postępowanie.</P>
+
+    </li>
+    <li>
+
+<p style="text-align: left">Jeżeli&nbsp; x = k-1, to m jest szukanym, k-tym co do 
+wielkości elementem ciągu.</P>
+
+    </li>
+    <li>
+
+<p style="text-align: left">Jeżeli&nbsp; x&nbsp; &lt; k-1, to wśród elementów 
+mniejszych od m szukamy (tą samą metodą) elementu (k-x-1)tego co do wielkości.</P>
+
+    </li>
+  </ol>
+</blockquote>
+
+<p style="text-align: left"><b>Przykład 6.2</b></P>
+
+<p style="text-align: left">Niech będzie ciąg e = (6, 4, 1, 8, 7, 3, 2, 5, 9, 0). 
+Przypuśćmy, że szukamy w nim 6 co do wielkości elementu. Niech elementem 
+rozdzielającym będzie pierwszy element ciągu. Tylko 9,7,8 są większe, 
+a elementy 4, 1, 3, 2, 5, 0 są mniejsze od 6. </P>
+
+<p style="text-align: center"><font face="Verdana">4, 1, 3, 2, 5, 0,</font> <b>6</b>, 8, 7, 9.</P>
+
+<p style="text-align: left">Wyróżniliśmy pozycję liczby 6, aby zaznaczyć miejsce 
+jakie liczba 6 powinna zająć po uporządkowaniu w porządku rosnącym ciągu e.&nbsp; Zgodnie z punktem 4 
+algorytmu, szukamy teraz elementu drugiego 
+co do wielkości (6-3-1=2) w ciągu elementów mniejszych, czyli w ciągu&nbsp;&nbsp; 4, 1, 3, 2, 
+5, 0. Po rozdzieleniu tego ciągu względem 4 otrzymamy 1, 2, 3, 0,&nbsp;<b>4,&nbsp; </b>5, bo tylko jeden element jest większy od 4. Na mocy punktu 3 
+algorytmu Hoare, 4 jest szukanym, szóstym co do wielkości elementem danego ciągu e.</P>
+
+<p style="text-align: left">Zupełnie inaczej będzie wyglądał przebieg 
+wyszukiwania, jeżeli jako element rozdzielający weźmiemy ostatni element ciągu, 
+w tym przypadku 0. Wszystkie elementy są większe od 0, zatem po pierwszym 
+rozdzieleniu mamy</P>
+
+<p style="text-align: center"><b>0</b>, 4, 1, 8, 7, 3, 2, 5, 9, 6</P>
+
+<p style="text-align: left">Zgodnie z ideą algorytmu Hoare, nadal szukamy 
+elementu szóstego co do wielkości w ciągu elementów większych, tzn. 4, 1, 8, 7, 
+3, 2, 5, 9, 6. Po ponownym rozdzieleniu względem elementu ostatniego mamy</P>
+
+<p style="text-align: center">4, 1, 3, 2, 5,<b> 6</b>, 8, 7, 9</P>
+
+<p style="text-align: left">Ponieważ są trzy elementy większe od 6, zatem należy 
+teraz szukać elementu (6-3-1=2) drugiego co do wielkości wśród elementów 
+mniejszych od 6. Po kolejnym rozdzieleniu ciągu 4, 1, 3, 2, 5,względem 
+ostatniego elementu, otrzymamy 4, 1, 3, 2, <b>5. </b>&nbsp;Aż cztery elementy są 
+mniejsze od 5, zatem musimy jeszcze raz powtórzyć rozdzielanie. Tym razem 
+rozdzielamy ciąg 4, 1, 3, 2, w poszukiwaniu elementu największego.<font face="Wingdings">J</font></P>
+
+<p style="text-align: left">Jedyna trudność w implementacji algorytmu Hoare, to 
+wykonanie punktu 1 z możliwie najmniejszą liczbą porównań i w taki sposób, by 
+zarówno elementy większe jak i mniejsze od elementu rozdzielającego m stanowiły zwarty segment ciągu. 
+Chcemy przecież zastosować do nich ten sam algorytm. Rozdzielanie można 
+zrealizować przepisując 
+wszystkie elementy do tablic pomocniczych, ale nie jest to konieczne. Znane są 
+różne sposoby realizacji zadania rozdzielania. Przykład 6.2 pokazuje jak wiele 
+zależy od wyboru elementu rozdzielającego i sposobu rozdzielania ciągu.</P>
+
+<p style="text-align: left">Przedstawimy poniżej algorytm rozdzielania 
+działający w miejscu, tzn. nie wykorzystujący, poza danym ciągiem, żadnej 
+dodatkowej pamięci i używający elementu ostatniego jako elementu 
+rozdzielającego. Algorytm ten zapiszemy w postaci funkcji Partition z dwoma 
+parametrami l, p, wskazującymi lewy i prawy koniec rozważanego fragmentu ciągu, 
+l&lt;p. Wynikiem tej funkcji jest pozycja, którą zajmie w ciągu element 
+rozdzielający, w taki sposób, że na pozycjach starszych znajdują się elementy 
+większe od elementu rozdzielającego, a na pozycjach młodszych, elementy mniejsze 
+lub równe od rozdzielającego. Wynik algorytmu, jak zwykle, zapiszemy na zmiennej 
+result.</P>
+
+<p style="text-align: left">Niech specyfikacją algorytmu&nbsp; Patrition 
+będą warunki:</P>
+
+<p style="text-align: center">wp = {l<font face="Symbol">
+<span lang="en">&pound;</span> </font>p },&nbsp; wk = {e[l] <font face="Symbol">
+<span lang="en">&pound;</span>...<span lang="en">&pound;</span></font>e[x-1]<font face="Symbol">
+<span lang="en">&pound;</span></font>e[x] <font face="Symbol"><span lang="en">&pound;</span>
+</font>e[x+1] <font face="Symbol"><span lang="en">&pound;</span>...<span lang="en">&pound;</span></font>e[p], 
+result = x}.</P>
+
+<p style="text-align: left">Warunek początkowy zapewnia tylko, że ciąg ma co 
+najmniej jeden element. Natomiast warunek końcowy ma zapewnić, że dokonaliśmy 
+podziału ciągu w pożądany sposób.</P>
+
+<p style="text-align: left">&nbsp;<p>
+<div class="przyk" style="width: 824; height: 330">
+   <TABLE frame="void" rules="none" width="718" height="302" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0" cellspacing="0">
+         <TR>
+            <TD width="147" height="16">int&nbsp; Partition</TD>
+            <TD width="413" height="16">&nbsp; (l, p: int)<b>{</b></TD>
+             
+            <TD width="56" height="16"></TD>
+             
+            <TD width="920" height="16"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="147" height="16"></TD>
+            <TD width="413" height="16"><strong>&nbsp;</strong>x := e[p]; i := l 
+            - 1; j := l;</TD> 
+            <TD width="56" height="16"></TD> 
+            <TD width="920" height="16">//x jest elementem rozdzielającym</TD> 
+         </TR>
+         <TR>
+            <TD width="147" height="16"></TD>
+            <TD width="413" height="16"><b>while&nbsp; </b>(j &lt; p) <b>do</b> </TD> 
+            <TD width="56" height="16"></TD> 
+            <TD width="920" height="16">//e[k] <font face="Symbol">
+            <span lang="en">&pound;</span> </font>x dla k=l,... ,i , oraz x
+            <font face="Symbol"><span lang="en">&pound;</span></font> e[k] dla 
+            k=i+1,...,j-1</TD> 
+         </TR>
+         <TR>
+            <TD width="147" height="16"></TD>
+            <TD width="413" height="16"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if</b><strong>&nbsp;&nbsp;
+            </strong> e[j]<font face="Symbol"><b> </b><span lang="en">&pound;</span></font> 
+            x &nbsp;<b>then</b> </TD> 
+            <TD width="56" height="16"></TD> 
+            <TD width="920" height="16">&nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="147" height="16"></TD>
+            <TD width="413" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            </strong>swap(e[i+1], e[j]);</TD> 
+            <TD width="56" height="16"></TD> 
+            <TD width="920" height="16">&nbsp;//e[k] <font face="Symbol">
+            <span lang="en">&pound;</span> </font>x dla k=l,... ,i, i+1 oraz x
+            <font face="Symbol"><span lang="en">&pound;</span></font> e[k] dla 
+            k=i+2,...,j</TD> 
+         </TR>
+         <TR>
+            <TD width="147" height="16"></TD>
+            <TD width="413" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i := i+1; </TD> 
+            <TD width="56" height="16"></TD> 
+            <TD width="920" height="16">//e[k] <font face="Symbol">
+            <span lang="en">&pound;</span> </font>x dla k=l,... ,i , oraz x
+            <font face="Symbol"><span lang="en">&pound;</span></font> e[k] dla 
+            k=i+1,...,j</TD> 
+         </TR>
+         <TR>
+            <TD width="147" height="16"></TD>
+            <TD width="413" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>fi;</b></TD> 
+            <TD width="56" height="16"></TD> 
+            <TD width="920" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="147" height="16"></TD>
+            <TD width="413" height="16"><b>&nbsp;&nbsp; </b>&nbsp;&nbsp; j := j+1;</TD> 
+            <TD width="56" height="16"></TD> 
+            <TD width="920" height="16">//e[k] <font face="Symbol">
+            <span lang="en">&pound;</span> </font>x dla k=l,... ,i , oraz x
+            <font face="Symbol"><span lang="en">&pound;</span></font> e[k] dla 
+            k=i+1,...,j-1</TD> 
+         </TR>
+         <TR>
+            <TD width="147" height="16"></TD>
+            <TD width="413" height="16"><strong>od ;&nbsp;&nbsp; </strong></TD> 
+            <TD width="56" height="16"></TD> 
+            <TD width="920" height="16">//&nbsp;j=p</TD> 
+         </TR>
+         <TR>
+            <TD width="147" height="16"></TD>
+            <TD width="413" height="16">   swap(e[i+1],e[p]);&nbsp;
+             </TD>
+            <TD width="56" height="16">   </TD>
+            <TD width="920" height="16">   &nbsp;//e[k] <font face="Symbol">
+            <span lang="en">&pound;</span> </font>x dla k=l,... ,i , oraz x
+            <font face="Symbol"><span lang="en">&pound;</span></font> e[k] dla 
+            k=i+1,...,p</TD>
+         </TR>
+         <TR>
+            <TD width="147" height="16"></TD>
+            <TD width="413" height="16">   result := i+1;   <STRONG>return&nbsp; </STRONG>
+             result</TD>
+            <TD width="56" height="16">   </TD>
+            <TD width="920" height="16">   </TD>
+         </TR>
+         <TR>
+            <TD width="147" height="16"><strong>&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="413" height="16">   &nbsp;</TD>
+            <TD width="56" height="16">   </TD>
+            <TD width="920" height="16">   &nbsp;</TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p style="text-align: left">Rola wskaźników i, j w algorytmie Partition jest 
+następująca: wszystkie elementy na pozycjach od l do i są mniejsze lub równe&nbsp; 
+x, na pozycjach od&nbsp; i+1 do j-1, są większe od x. Pozostałych miejsc jeszcze 
+nie zbadaliśmy.</P>
+
+<p style="text-align: left"><b>Przykład 6.3</b></P>
+
+<p style="text-align: left">Przyjrzyjmy się kolejnym stanom tablicy, do której 
+zastosowano algorytm Partition. Element rozdzielający został zaznaczony kolorem 
+czerwonym. Elementy mniejsze mają kolor żółty, a elementy większe kolor 
+fioletowy. W osobnych kolumnach zapisaliśmy wartości zmiennych i, j. </P>
+<center>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="58%" id="AutoNumber1">
+  <tr>
+    <td width="8%" align="center" bgcolor="#C0C0C0">1</td>
+    <td width="8%" align="center" bgcolor="#C0C0C0">2</td>
+    <td width="8%" align="center" bgcolor="#C0C0C0">3</td>
+    <td width="8%" align="center" bgcolor="#C0C0C0">4</td>
+    <td width="8%" align="center" bgcolor="#C0C0C0">5</td>
+    <td width="8%" align="center" bgcolor="#C0C0C0">6</td>
+    <td width="8%" align="center" bgcolor="#C0C0C0">7</td>
+    <td width="8%" align="center" bgcolor="#C0C0C0">8</td>
+    <td width="9%" align="center" bgcolor="#C0C0C0">9</td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp;&nbsp;&nbsp; i</td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp;&nbsp;&nbsp; j</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center">3</td>
+    <td width="8%" align="center">2</td>
+    <td width="8%" align="center">6</td>
+    <td width="8%" align="center">9</td>
+    <td width="8%" align="center">5</td>
+    <td width="8%" align="center">1</td>
+    <td width="8%" align="center">8</td>
+    <td width="8%" align="center">7</td>
+    <td width="9%" align="center">4</td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; i = 0</td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; j = 1</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center" bgcolor="#FFFF00">3</td>
+    <td width="8%" align="center">2</td>
+    <td width="8%" align="center">6</td>
+    <td width="8%" align="center">9</td>
+    <td width="8%" align="center">5</td>
+    <td width="8%" align="center">1</td>
+    <td width="8%" align="center">8</td>
+    <td width="8%" align="center">7</td>
+    <td width="9%" align="center"><font face="Verdana" color="#FF0000">4</font></td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; i = 1</td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; j = 2</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center" bgcolor="#FFFF00">3</td>
+    <td width="8%" align="center" bgcolor="#FFFF00">2</td>
+    <td width="8%" align="center">6</td>
+    <td width="8%" align="center">9</td>
+    <td width="8%" align="center">5</td>
+    <td width="8%" align="center">1</td>
+    <td width="8%" align="center">8</td>
+    <td width="8%" align="center">7</td>
+    <td width="9%" align="center"><font face="Verdana" color="#FF0000">4</font></td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; i = 2</td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; j = 3</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center" bgcolor="#FFFF00">3</td>
+    <td width="8%" align="center" bgcolor="#FFFF00">2</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">6</td>
+    <td width="8%" align="center">9</td>
+    <td width="8%" align="center">5</td>
+    <td width="8%" align="center">1</td>
+    <td width="8%" align="center">8</td>
+    <td width="8%" align="center">7</td>
+    <td width="9%" align="center"><font face="Verdana" color="#FF0000">4</font></td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; i = 2</td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; j = 4</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center" bgcolor="#FFFF00">3</td>
+    <td width="8%" align="center" bgcolor="#FFFF00">2</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">6</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">9</td>
+    <td width="8%" align="center">5</td>
+    <td width="8%" align="center">1</td>
+    <td width="8%" align="center">8</td>
+    <td width="8%" align="center">7</td>
+    <td width="9%" align="center"><font face="Verdana" color="#FF0000">4</font></td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; i = 2</td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; j = 5</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center" bgcolor="#FFFF00">3</td>
+    <td width="8%" align="center" bgcolor="#FFFF00">2</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">6</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">9</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">5</td>
+    <td width="8%" align="center">1</td>
+    <td width="8%" align="center">8</td>
+    <td width="8%" align="center">7</td>
+    <td width="9%" align="center"><font face="Verdana" color="#FF0000">4</font></td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; i = 2</td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; j = 6</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center" bgcolor="#FFFF00">3</td>
+    <td width="8%" align="center" bgcolor="#FFFF00">2</td>
+    <td width="8%" align="center" bgcolor="#FFFF00">1</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">9</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">5</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">6</td>
+    <td width="8%" align="center">8</td>
+    <td width="8%" align="center">7</td>
+    <td width="9%" align="center"><font face="Verdana" color="#FF0000">4</font></td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; i = 3</td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; j = 7</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center" bgcolor="#FFFF00">3</td>
+    <td width="8%" align="center" bgcolor="#FFFF00">2</td>
+    <td width="8%" align="center" bgcolor="#FFFF00">1</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">9</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">5</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">6</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">8</td>
+    <td width="8%" align="center">7</td>
+    <td width="9%" align="center"><font face="Verdana" color="#FF0000">4</font></td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; i = 3</td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; j = 8</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center" bgcolor="#FFFF00">3</td>
+    <td width="8%" align="center" bgcolor="#FFFF00">2</td>
+    <td width="8%" align="center" bgcolor="#FFFF00">1</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">9</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">5</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">6</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">8</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">7</td>
+    <td width="9%" align="center"><font face="Verdana" color="#FF0000">4</font></td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; i = 3</td>
+    <td width="12%" align="center" bgcolor="#CCCCFF">&nbsp;&nbsp; j = 9</td>
+  </tr>
+  <tr>
+    <td width="8%" align="center" bgcolor="#FFFF00">3</td>
+    <td width="8%" align="center" bgcolor="#FFFF00">2</td>
+    <td width="8%" align="center" bgcolor="#FFFF00">1</td>
+    <td width="8%" align="center">4</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">5</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">6</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">8</td>
+    <td width="8%" align="center" bgcolor="#DDA0DD">7</td>
+    <td width="9%" align="center" bgcolor="#DDA0DD">9</td>
+    <td width="24%" align="center" bgcolor="#CCCCFF" colspan="2" rowspan="2">
+    result = 4</td>
+  </tr>
+  <tr>
+    <td width="73%" align="center" colspan="9">&nbsp;</td>
+  </tr>
+</table>
+</center>
+
+<p>Każdy wiersz tabeli zawiera stan ciągu po wykonaniu kolejnej iteracji pętli. 
+Gdy j=9 opuszczamy pętlę &quot;while&quot; i wykonujemy zamianę pozycji 4tej i 9tej, 
+umieszczając tym samym element rozdzielający 4&nbsp; na pozycji czwartej. Na 
+pozycjach mniejszych niż 4 znalazł się elementy mniejsze od rozdzielającego, a 
+na pozycjach większych niż 4 znalazły się elementy większe.<font face="Wingdings">J</font></P>
+
+<p style="text-align: left"><b>Poprawność algorytmu Partition</b>: Załóżmy, że 
+po wejściu do pętli &quot;while&quot; (tzn. j&lt;p) spełniony jest warunek&nbsp;
+<font face="Symbol">g</font>(i,j) postaci:</P>
+
+<p style="text-align: center">e[k] <font face="Symbol"><span lang="en">&pound;</span>
+</font>x dla k= l,... ,i&nbsp;&nbsp;&nbsp; oraz&nbsp;&nbsp; x
+<font face="Symbol"><span lang="en">&pound;</span></font> e[k] dla k=i+1,...,j-1</P>
+
+<p style="text-align: left">Odpowiada to następującej sytuacji:</P>
+
+<p style="text-align: left">
+<img border="0" src="Rysunki/Rysunek3_4.gif" width="698" height="165"></P>
+
+<p style="text-align: left">Jeżeli element na pozycji j-tej (ten o najmniejszym 
+indeksie, którego jeszcze nie zbadaliśmy) jest mniejszy lub równy elementowi 
+rozdzielającemu x, to musimy go umieścić w segmencie elementów
+<font face="Symbol"><span lang="en">&pound;</span> </font>x. Wykonując operację 
+swap(e[i+1],e[j]), powiększymy segment elementów <font face="Symbol">
+<span lang="en">&pound;</span> </font>x. Musimy więc uaktualnić wskaźnik i, co 
+robimy wykonując instrukcję i:=i+1. Lista 
+elementów większych kończy się teraz na pozycji jtej. Jednak po wykonaniu&nbsp; 
+instrukcji j:= j+1 nadal spełnione jest <font face="Symbol">g</font>(i,j).&nbsp; </P>
+
+<p style="text-align: left">Jeżeli element na pozycji j-tej jest większy od 
+elementu rozdzielającego, to powinien on powiększyć segment elementów &gt; x. 
+Wystarczy więc przesunąć wskaźnik j o jedno miejsce w prawo. Oczywiście, znów 
+spełniona jest formuła <font face="Symbol">g</font>(i,j). </P>
+
+<p style="text-align: left">Wniosek: formuła </P>
+
+<p style="text-align: center">e[k] <font face="Symbol"><span lang="en">&pound;</span>
+</font>x dla k=l,... ,i&nbsp;&nbsp;&nbsp; oraz&nbsp;&nbsp; x <font face="Symbol">
+<span lang="en">&pound;</span></font> e[k] dla k=i+1,...,j-1</P>
+
+<p style="text-align: left">jest niezmiennikiem pętli w algorytmie Partition. 
+Innym niezmiennikiem (uzasadnienie pozostawiamy Czytelnikowi) jest formuła j
+<font face="Symbol"><span lang="en">&pound;</span></font> p. Zatem po wykonaniu pętli 
+wartością j jest p oraz spełniony jest warunek końcowy specyfikacji tego 
+algorytmu.&nbsp; </P>
+
+<p></P>
+
+<div class="twier">
+<p>Twierdzenie 6.1&nbsp; Dla dowolnego niepustego ciągu o elementach z dowolnej struktury 
+danych, która ma określony liniowy porządek, algorytm Partition zatrzymuje się, a otrzymany wynik spełnia warunek końcowy </P>
+<p style="text-align: center">e[l] <font face="Symbol">
+<span lang="en">&pound;</span> ... <span lang="en">&pound;</span> </font>e[result-1]<font face="Symbol">
+<span lang="en">&pound;</span> </font>e[result] <font face="Symbol"><span lang="en">&pound;</span>
+</font>e[result+1] <font face="Symbol"><span lang="en">&pound;</span> ... <span lang="en">&pound;</span></font> e[p].</P>
+</div>
+
+<p style="text-align: left"><b>Koszt algorytmu Partition:</b> Liczba porównań 
+wykonanych w procesie rozdzielania zależy od liczby elementów znajdujących się w 
+rozważanej części ciągu. W każdej iteracji pętli &quot;while&quot; wykonujemy tylko jedno 
+porównanie. Pętla &quot;while&quot; jest wykonywana dokładnie p - l razy. Zatem dla ciągu 
+n elementowego&nbsp; koszt algorytmu wynosi: T(Partition,n) =
+<font face="Symbol">Q</font>(n).</P>
+
+<p style="text-align: left">Algorytm Hoare zapiszemy jako algorytm rekurencyjny 
+Hoare(e, l, p,k), którego parametrami są ciąg elementów typu <i>elem</i>, l, p&nbsp; 
+to indeksy lewego i prawego końca&nbsp; fragmentu ciągu, w którym będziemy 
+kontynuować poszukiwania oraz k- numer poszukiwanego elementu. Wynikiem 
+algorytmu jest obiekt typu <i>elem, </i>k-ty największy element ciągu<i>.</i></P>
+
+<p style="text-align: left">&nbsp;<p>
+<div class="przyk" style="width: 846; height: 330">
+   <TABLE frame="void" rules="none" width="819" height="302">
+         <TR>
+            <TD width="48" height="16">elem </TD>
+            <TD width="558" height="16">&nbsp;Hoare (e: ciąg, l, p, k: int)</TD>
+             
+            <TD width="25" height="16"></TD>
+             
+            <TD width="721" height="16"> </TD>
+             
+         </TR>
+         <TR>
+            <TD width="48" height="16"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {&nbsp;&nbsp;
+            </b></TD>
+            <TD width="558" height="16"><strong>&nbsp;</strong>j := Partition(l,p);</TD> 
+            <TD width="25" height="16"></TD> 
+            <TD width="721" height="16">//j jest pozycją elementu rozdzielającego: na prawo 
+            elementy niemniejsze, na lewo elementy mniejsze.</TD> 
+         </TR>
+         <TR>
+            <TD width="48" height="16"></TD>
+            <TD width="558" height="16"><b>if </b>(p-j = k-1) <b>then</b> result 
+            := e[j]<b> </b>&nbsp;</TD> 
+            <TD width="25" height="16"></TD> 
+            <TD width="721" height="16">//e[j] jest mniejsze od dokładnie k-1 
+            elementów</TD> 
+         </TR>
+         <TR>
+            <TD width="48" height="16"></TD>
+            <TD width="558" height="16"><b>else</b><strong>&nbsp;&nbsp;&nbsp;
+            </strong> </TD> 
+            <TD width="25" height="16"></TD> 
+            <TD width="721" height="16">&nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="48" height="16"></TD>
+            <TD width="558" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            if </strong>(p-j&gt;k-1)<strong> then
+            </strong></TD> 
+            <TD width="25" height="16"></TD> 
+            <TD width="721" height="16">&nbsp;//jest co najmniej k elementów 
+            większych od e[j]</TD> 
+         </TR>
+         <TR>
+            <TD width="48" height="16"></TD>
+            <TD width="558" height="16"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            result:=Hoare(e, j+1, p, k);<strong>&nbsp; </strong></TD> 
+            <TD width="25" height="16"></TD> 
+            <TD width="721" height="16">//e[result] jest k-tym co do wielkości 
+            elementem ciągu e[j+1],...,e[p] </TD> 
+         </TR>
+         <TR>
+            <TD width="48" height="16"></TD>
+            <TD width="558" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>else </b>&nbsp; </TD> 
+            <TD width="25" height="16"></TD> 
+            <TD width="721" height="16"></TD> 
+         </TR>
+         <TR>
+            <TD width="48" height="16"></TD>
+            <TD width="558" height="16"><strong>&nbsp;&nbsp;&nbsp; </strong><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </b>result <b>:= </b>Hoare(e, l, j-1, k-(p-j+1);<b> </b><strong>&nbsp;&nbsp; </strong></TD> 
+            <TD width="25" height="16"></TD> 
+            <TD width="721" height="16">&nbsp;//e[result] jest k-(p-j+1)-tym co 
+            do wielkości elementem ciągu e[l],e[l+1],...e[j-1]</TD> 
+         </TR>
+         <TR>
+            <TD width="48" height="16"></TD>
+            <TD width="558" height="16">   <STRONG>&nbsp; </STRONG>
+             <b>fi</b><STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fi&nbsp; </STRONG>
+             </TD>
+            <TD width="25" height="16">   </TD>
+            <TD width="721" height="16">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="48" height="16"></TD>
+            <TD width="558" height="16">   <strong>return </strong>&nbsp;e[result]</TD>
+            <TD width="25" height="16">   </TD>
+            <TD width="721" height="16">   //e[result] jest k-tym co do 
+            wielkości elementem ciągu e</TD>
+         </TR>
+         <TR>
+            <TD width="48" height="16"><strong>&nbsp;&nbsp;&nbsp; }</strong></TD>
+            <TD width="558" height="16">   &nbsp;</TD>
+            <TD width="25" height="16">   </TD>
+            <TD width="721" height="16">   &nbsp;</TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p><b>Koszt algorytmu Hoare.</b> Algorytm Hoare w najgorszym przypadku może 
+działać tak źle, jak algorytm naiwny. Jeżeli dany ciąg jest uporządkowany 
+rosnąco, to w każdym rekurencyjnym wywołaniu funkcji Partition, liczba elementów 
+mniejszych od rozdzielającego jest zbiorem pustym. Zatem, o ile trzeba 
+kontynuować poszukiwania k-tego co do wielkości elementu, kontynuuje się je w 
+ciągu elementów o jeden krótszym. Biorąc pod uwagę koszt Partition, otrzymujemy 
+(n-1) + (n-2) + ...+(n-k) = kn - k(k+1)/2 porównań w przypadku pesymistycznym. 
+Na szczęście koszt średni algorytmu Hoare jest zdumiewająco dobry. Udowodniono, 
+że średni koszt algorytmu Hoare jest liniowy O(n).<p><b>Poprawność:</b> Dokładny 
+dowód poprawności algorytmu Hoare można przeprowadzić przez indukcję ze względu 
+na pewien porządek trójek (l,p,k). My zauważymy tylko, że w wyniku działania 
+Partition spełniony mamy warunek:<p style="text-align: center">e[l] <font face="Symbol">
+<span lang="en">&pound;</span>...<span lang="en">&pound;</span></font>e[j-1]<font face="Symbol">
+<span lang="en">&pound;</span></font>e[j] <font face="Symbol"><span lang="en">&pound;</span>
+</font>e[j+1] <font face="Symbol"><span lang="en">&pound;</span>...<span lang="en">&pound;</span></font>e[p],<p style="text-align: left">
+Element e[j] jest szukanym k-tym co do wielkości elementem, gdy&nbsp; p- j +1 = 
+k. Rzeczywiście, jedyne większe od e[j] elementy znajdują się na pozycjach 
+j+1,...,p i jest ich wtedy dokładnie k-1. Jeżeli elementów większych od e[j] 
+jest co najmniej k (tzn. p-j&gt;k-1), to szukanie k-tego elementu musimy 
+kontynuować właśnie wśród tych elementów, a elementy mniejsze od e[j] możemy 
+pominąć. Jeżeli elementów większych od e[j] jest niewiele (tzn. p-j &lt;k), to nie 
+ma wśród nich k-tego największego. Co więcej te większe elementy oraz element 
+e[j] możemy pominąć w dalszych rozważaniach i poszukiwać wśród elementów 
+mniejszych od e[j], elementu k-(p-j+1)-tego co do wielkości. Jeżeli wywołania 
+rekurencyjne Hoare(e, j+1, p, k) oraz<b>&nbsp;&nbsp;&nbsp;
+            </b>Hoare(e, l, j-1, k-(p-j+1)) dają poprawne wyniki, to wartość 
+zwracana jako wynik wywołania Hoare(e,l,p,k) jest też ustalona poprawnie.<p><b>
+Pytanie 8: </B>Jaki jest koszt algorytmu Hoare wyszukiwania elementu k-tego co 
+do wielkości w ciągu uporządkowanym rosnąco? &nbsp;  <br>
+
+<FORM>
+<INPUT class="GUZIK" TYPE='button' VALUE='------Zobacz odpowiedź------' NAME='Klik0' 
+onClick="napis(this.form,'n-1 +n-2 +... n-k = nk -k(k+1)/2');">
+</form>
+
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main03_p5.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main03_cw.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr>
+</table>
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

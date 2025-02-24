@@ -1,0 +1,2812 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.01 transitional//EN">
+<html lang="pl">
+<head rel="stylesheet" type="text/css" href="../style/common.css">
+
+
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+
+
+  <meta name="GENERATOR" content="Mozilla/4.61 [en] (OS/2; I) [Netscape]">
+  <title>Wykład 5</title>
+
+
+
+  <link rel="stylesheet" type="text/css" href="../style/common.css">
+
+
+  <script type="text/javascript" language="JavaScript1.2" src="../js/dodatki.js">
+  </script>
+</head>
+<body bgcolor="#efefef">
+
+<div align="center">
+<a name="W5"></a></div>
+<br>
+<h1 style="text-align: center;">NIO</h1>
+<h2>
+  K.1. Nowe wejście-wyjście (NIO): przegląd</h2>
+
+Niewątpliwie podstawowym motywem wprowadzenia nowych środk&oacute;w wejścia-wyjścia,
+zawartych w pakicie java.nio i jego podpakietach było zapewnienie zwiększenia
+efektywności działania program&oacute;w w wysokim stopniu obciążonych operacjami
+wejścia-wyjścia o dużej częstotliwości.<br>
+
+  <br>
+
+Tradycyjne wejście-wyjście w Javie jest <b>blokujące</b>, tzn. wątek, kt&oacute;ry
+podejmuje pr&oacute;bę odczytania danych ze strumienia (metoda read()) jest blokowany,
+jeśli danych w strumieniu (jeszcze) nie ma. Zatem obsługa strumieni połączeń
+sieciowych (przez serwer) musiała być wykonywana poprzez wiele wątk&oacute;w, każdy
+z kt&oacute;rych obsługiwał strumień związany z jednym gniazdem (socket) i ew. był
+blokowany na tym strumieniu, czekający na dane. W takiej sytuacji przy dużej
+liczbie połączeń działa r&oacute;wnolegle dużo wątk&oacute;w, a ponieważ liczba połaczeń
+zmienia się dynamicznie, to z dużą częstotliwością wiele wątk&oacute;w powstaje
+i umiera (przechodzi do stanu Dead). W sumie prowadzi to do problem&oacute;w efektywnościowych,
+a także jest trudne w programowaniu, gdyż:<br>
+
+
+<ul>
+
+    <li>tworzenie i przełączanie wątk&oacute;w (realizowane przez JVM) jest czasowo kosztowne,</li>
+
+    <li>szybkie narastanie niepotrzebnych obiekt&oacute;w (zakończonych wątk&oacute;w)
+powoduje zmniejszenie efektywności dzialania programu ze względu na zwiększającą
+się zajętośc pamięci, bowiem standardowy odśmiecacz JVM nie &nbsp;jest odpowiednio
+przystosowany do takiej sytuacji,</li>
+
+    <li>synchronizowanie dużej liczby wątk&oacute;w na wsp&oacute;ldzielonych zasobach
+może być trudne w programowaniu, zawodne i bardzo czasochłonna z punktu widzenia efektywności
+dzialania programu.&nbsp; </li>
+
+
+</ul>
+
+Podstawowym elementem nowego wejścia-wyjścia, odpowiadającym na te problemy,&nbsp; jest koncepcja <b>kanału</b>.<br>
+
+  <br>
+
+<div class="def"><b>Kanał</b> reprezentuje otwarte połączenie do obiektu, kt&oacute;ry wykonuje
+jedną lub wiele r&oacute;żnych operacji wejścia-wyjścia. Takim obiektem może być
+urządzenie sprzętowe, plik, gniazdo sieciowe, a nawet komponent programu.</div>
+<br>
+
+  <br>
+
+<div class="notel"><b>Gniazdo sieciowe</b> (socket) jest punktem docelowym dwustronnej komunikacji
+dw&oacute;ch program&oacute;w działających r&oacute;wnolegle w sieci</div>
+Kanały podłączone do gniazd
+sieciowych (np. klasa SocketChannel)&nbsp; umożliwiają <b>nieblokujące</b> (asynchroniczne) wejście-wyjście.<br>
+
+Przy czytaniu z takiego kanału za pomoca metody read(...), wątek nie jest
+blokowany, gdy brak danych. Metoda read(...) natychmiast zwraca wynik - liczbę
+przeczytanych bajt&oacute;w (jeśli nie ma jeszcze danych - to 0).<br>
+
+Umożliwia to <b>odpytywanie</b> (polling) - sprawdzanie co jakiś czas czy dane nadeszły. Wątek nie jest blokowany i może wykonywać inne zadania.<br>
+
+  <br>
+
+
+<div align="center"><b>Schemat nieblokującego wejścia</b><br>
+
+  </div>
+
+  <br>
+
+
+<pre>
+SocketChannel socketChannel = SocketChannel.open(); // otwarcie kanału
+socketChanel.connect(...)                           // podłączenie do gniazda
+socketChannel.configureBlocking (false);            // tryb nieblokujący
+
+...
+
+while (true) {
+   ...
+   if (socketChannel.read (buffer) != 0) {  // czy są jakieś dane?
+      processInput (buffer);                // tak - przetw&oacute;rz je
+   }
+   else {                                   // nie - wykonuj inne czynności
+     ...
+   }
+}
+</pre>
+
+Uwaga: co to jest buffer? O tym za chwilę.<br>
+
+  <br>
+
+Jasne jest, że stanowi to alternatywę dla wielu wątk&oacute;w, z kt&oacute;rych każdy blokowany
+jest na czytaniu danych z kanału. Teraz jeden wątek może obsługiwać wiele
+kanał&oacute;w bez blokowania przy braku danych.<br>
+
+Nazywa się to <b>multipleksowaniem kanał&oacute;w wejścia/wyjścia</b>. <br>
+
+  <br>
+
+Ale samo nieblokowane wejście-wyjście nie wystarcza jeszcze, by prawidłowo
+rozwiązać problem obsługi wielu połączeń. "Ręczne" odpytywanie wielu kanał&oacute;w
+ma wady:<br>
+
+
+<ul>
+
+    <li>trzeba je oprogramować (i można przy tym popełnić błędy),</li>
+
+    <li>polega na wysyłaniu instrukcji we/wy za pośrednictwem JVM (read(...)),
+co jest czasowo kosztowne i w rezultacie - przy dużej liczbie połączeń -&nbsp;
+może niedopuszczalnie zmniejszać czas reakcji na każdym z połaczeń.</li>
+
+
+</ul>
+
+Dlatego w java.nio wprowadzono mechanizm <b>selektor&oacute;w</b>,
+kt&oacute;ry łączy ze sobą zalety nieblokującego odpytywania oraz
+natychmiastowej reakcji na dane po blokowaniu wątku na odczycie.<br>
+
+  <br>
+
+Dzięki nieblokującemu we/wy, a szczeg&oacute;lnie <b>selektorom</b>:<br>
+
+
+<ul>
+
+    <li>jeden wątek może łatwo monitorować dużą liczbę gniazd sieciowych,</li>
+
+    <li>wątek ten może być zablokowany dop&oacute;ki nie pojawią się dane z <b>kt&oacute;regokolwiek</b> gniazda, a po ich pojawieniu się natychmiast wznowiony,</li>
+
+    <li>może przy tym dowiedzieć się, kt&oacute;ry ze strumieni
+danych jest gotowy do przetwarzania i natychmiast podjąc to
+przetwarzanie.&nbsp; </li>
+
+
+</ul>
+
+Niewątpliwie przy nieblokującym wejściu-wyjściu można by to oprogramować
+w Javie i bez selektor&oacute;w, ale użycie selektor&oacute;w ma dwie podstawowe zalety:<br>
+
+
+<ul>
+
+    <li>zwalnia nas od obowiązku pisania trudnego kodu,</li>
+
+    <li>jest efektywne, bowiem multipleksowanie i selekcja kanał&oacute;w są zrealizowane
+w dużej mierze przez odwolania do rodzimych funkcji platformy systemowej
+i - wobec tego - omija JVM, pozostawiając ciężką pracę do wykonania procedurom
+systemowym, kt&oacute;re robią to najsprawniej.</li>
+
+
+</ul>
+
+  <br>
+<br>
+
+"Nowe wejście-wyjście" ma rownież szereg nie&nbsp; związanych z programowaniem
+sieciowym, mających og&oacute;lniejsze znaczenie, własciwości. <br>
+
+  <br>
+
+Obecnie w Javie kanały mogą być połączone z gniazdami, plikami oraz dowolnymi
+strumieniami klas InputStream, OutputStream (te ostatnie kanały nazwiemy
+kanałami strumieniowymi).<br>
+
+  <br>
+
+Wszystkie takie kanały mają jedną wsp&oacute;lną właściwość: kanały wejściowe wprowadzają dane do&nbsp; <b>buforow bajtowych</b>, a kanały wyjściowe wyprowadzają dane z tych bufor&oacute;w. <br>
+
+<div class="notel">Bufor bajtowy przypomina nieco tablicę bajt&oacute;w: jest to skończona sekwencja
+bajt&oacute;w, na kt&oacute;rej można wykonywać pewne operacje (m.in. pobieranie i dodawanie);
+od zwykłej tablicy r&oacute;żni się przede wszystkim tym, że operacje na buforze
+są dostosowane do potrzeb wejścia-wyjścia</div>
+ Zatem zapoznanie się z koncepcją
+bufor&oacute;w -&nbsp; r&oacute;wnież jednego z element&oacute;w "nowego wejścia-wyjścia" - jest nieodzowne
+do korzystania z kanał&oacute;w.<br>
+
+Bufory mogą być też stosowane samodzielnie i dostarczają pewnych nowych,
+ciekawych możliwości, kt&oacute;re mogą być wykorzystywane niezależnie od kanałowego
+wejścia-wyjścia.<br>
+
+  <br>
+
+Zanim przejdziemy do bardziej konkretnego omawiania niekt&oacute;rych nowych możliwości,
+dostarczanych przez&nbsp; kanały i bufory, warto rzucić okiem na syntezę tych
+możliwości (tablica).<br>
+
+  <br>
+
+
+<table border="1" cellpadding="2" cellspacing="2" width="100%">
+
+    <tbody>
+
+      <tr>
+
+        <td rowspan="1" colspan="4" bgcolor="#ffffcc" valign="top">
+
+      <div align="center"><b>KANAŁY</b><br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td bgcolor="#ffcccc" valign="top"><br>
+
+        </td>
+
+        <td bgcolor="#ffcccc" valign="top">
+
+      <div align="center"><b>Kanały gniazdowe</b><br>
+
+        <br>
+
+        </div>
+
+        </td>
+
+        <td bgcolor="#ffcccc" valign="top">
+
+      <div align="center"><b>Kanały plikowe<br>
+
+        </b></div>
+
+        </td>
+
+        <td bgcolor="#ffcccc" valign="top">
+
+      <div align="center"><b>Kanały strumieniowe</b><br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top">uzyskanie kanału<br>
+
+        </td>
+
+        <td valign="top">metoda open() z klas SocketChannel,<br>
+
+ServerSocketChannel,<br>
+
+DatagramChannel<br>
+
++ connect<br>
+
+        </td>
+
+        <td valign="top">Metoda<br>
+
+        <b>getChannel()</b><br>
+
+z klas:<br>
+
+FileInputStream<br>
+
+FileOutputStream<br>
+
+RandomAccessFile&nbsp; <br>
+
+        </td>
+
+        <td valign="top">Metody statyczne klasy<br>
+
+Channels:<br>
+
+newChannel(InputStream)<br>
+
+newChannel(OutputStream)<br>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top"><br>
+
+        </td>
+
+        <td rowspan="1" colspan="3" bgcolor="#ffcccc" valign="top">
+
+      <div align="center">Możliwości dostarczane przez kanały<br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top"><b>nieblokujące </b>wejście-wyjście<br>
+
+i możliwość stosowania <b>selektor&oacute;w</b><br>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+tak<br>
+
+        </div>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+nie<br>
+
+        </div>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+nie<br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top">atomistyczne czytanie rozprowadzające po wielu buforach (<b>scattering read</b>), atomistyczne pisanie gromadzące z wielu bufor&oacute;w (<b>gathering write</b>)<br>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+tak<br>
+
+        </div>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+tak<br>
+
+        </div>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+nie<br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top"><b>mapowanie</b> plik&oacute;w na pamięć <br>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+nie<br>
+
+        </div>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+tak<br>
+
+        </div>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+nie<br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top"><b>bezpośrednie transfery kanałowe</b> (np. jedno wywołanie kopiuje cały plik do innego w spos&oacute;b bardzo efektywny) <br>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center">tak, jeśli jednym z kanał&oacute;w jest kanał plikowy<br>
+
+        </div>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center">tak<br>
+
+        </div>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center">tak, jeśli jednym z kanał&oacute;w jest kanał plikowy<br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top">blokowanie (<b>lock</b>) dostępu do całego pliku&nbsp;&nbsp; lub jego części<br>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+nie<br>
+
+        </div>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+tak<br>
+
+        </div>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+nie<br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top">czytanie, pisanie do/z bufor&oacute;w <br>
+
+(zob. możliwości bufor&oacute;w)<br>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+tak<br>
+
+        </div>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+tak<br>
+
+        </div>
+
+        </td>
+
+        <td valign="top">
+
+      <div align="center"><br>
+
+tak<br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+
+  </tbody>
+
+</table>
+
+  <br>
+
+  <br>
+
+  <br>
+
+
+<table border="1" cellpadding="2" cellspacing="2" width="100%">
+
+    <tbody>
+
+      <tr>
+
+        <td bgcolor="#ffcccc" valign="top">
+
+      <div align="center"><b>Możliwości, dostarczane przez bufory</b><br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top">r&oacute;żne <b>widoki bufor&oacute;w</b> bajtowych (jako ciągu bajt&oacute;w lub element&oacute;w wybranego typu pierwotnego)</td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top"><b>przestawianie bajt&oacute;w</b> (możliwość wyboru i/lub
+łatwej zmiany&nbsp; konwencj uporządkowania bajt&oacute;w danych binarnych - czy bardziej
+znaczące częsci danej mają w pamięci mniejsze czy większe adresy)<br>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top"><b>kodowanie - dekodowanie</b> danych w buforach
+znakowych przy uwzględnieniu wybranej strony kodowej (klasy Charset, CharsetDecoder
+i CharsetEncoder, operujące na buforach) <br>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top"><b>bufory bezpośednie</b> (bufory takie&nbsp; "opakowują"
+pamięć alokowaną poza JVM przez natywne środki platformy systemowej i umożliwiają
+m.in. wysoką efektywność operacji kanałowych, a także dają programiście możliwość
+dostępu z poziomu programu Javy do dowolnego obszaru pamięci, alokowanego
+w systemie - np. bezpośredniej pamięci graficznej)<br>
+
+        </td>
+
+      </tr>
+
+
+  </tbody>
+
+</table>
+
+  <br>
+
+  <br>
+ Zwr&oacute;ćmy na koniec jeszcze raz uwagę, że "nowe wejście-wyjście" (NIO)
+nie zastępuje "starego" (klas strumieniowych). Generalnie klasy strumieniowe
+operują na wyższym poziomie abstrakcji, kanały zaś przeznaczone są przede
+wszystkim do zwiększenia efektywności operacji wejścia-wyjścia i ukierunkowane
+są raczej na niskopoziomowe operowanie na sekwencjach bajt&oacute;w.<br>
+
+  <a name="W5.17"></a>
+<h2>
+  K.2. NIO: bufory</h2>
+
+
+<div class="def">Bufor jest ciągłą, skończoną sekwencją
+element&oacute;w jednego z typ&oacute;w pierwotnych: byte, short, char,
+long, float, double</div>
+<br>
+
+  <br>
+
+Odpowiednio do tego mamy r&oacute;żne klasy opisujące bufory np.<br>
+
+  <br>
+<span style="font-weight: bold;">
+ByteBuffer</span> - bufor bajt&oacute;w (elementy typu byte),<br>
+<span style="font-weight: bold;">
+IntBuffer</span> &nbsp;- bufor zawierający liczby calkowite typu int,<br>
+<span style="font-weight: bold;">
+DoubleBuffer</span> - bufor liczb typu double.<br>
+
+  <br>
+
+Opr&oacute;cz tych klas, odpowiadających typom pierwotnym, istnieje rownież klasa
+<span style="font-weight: bold;">MappedBuffer</span>, za pomocą kt&oacute;rej możemy mieć dostęp do pliku mapowanego na
+pamięć.<br>
+
+Og&oacute;lne charakterystyki i funkcjonalność wszystkich klas buforowych określa klasa abstrakcyjna Buffer.<br>
+
+  <br>
+
+Rysunek przedstawia hierarchię klas buforowych.<br>
+
+  <br>
+
+  <img src="images/Bufferclasses.jpg" alt="r" border="1" height="335" width="572">
+  <br>
+
+  <br>
+
+Źr&oacute;dło: &nbsp;Ron Hitchens, Java NIO, O'Reilly 2002<br>
+
+  <b style="color: rgb(251, 75, 112);">UWAGA: Kanały operują wyłącznie na buforach bajtowych.</b><br>
+
+  <br>
+<div class="notel">Opakowanie danych tablicy przez bufor oznacza, że dane są te same
+- zar&oacute;wno w buforze jak i tablicy, a operacje na buforze, zmieniające dane
+bufora zmieniają r&oacute;wnocześnie dane w tablicy i vice versa</div>
+Bufory mogą być
+tworzone poprzez:
+<ul>
+
+    <li>alokowanie prywatnej pamięci bufora - metody <b>allocate</b> i <b>allocateDirect</b> (ta ostatnia dla bufor&oacute;w bezposrednich),</li>
+
+    <li><b>opakowanie</b> istniejącej <b>tablicy element&oacute;w</b> wybranego typu pierwotnego - metoda <b>wrap</b>,</li>
+
+    <li><b>mapowanie</b> plik&oacute;w lub ich części (metoda map(...) z klasy FileChanel)<br>
+
+    </li>
+
+
+</ul>
+
+Dane do bufor&oacute;w mogą być zapisywane za pomoca metod <b>put(..)</b> z klas
+buforowych oraz na skutek czytania z kanału (read(...) z klas kanałowych).
+Metody kanałowe zapisują do bufora&nbsp; całe sekwencje bajt&oacute;w.<br>
+
+Dane z bufor&oacute;w mogą być pobierane za pomocą metod <b>get(...)</b> &nbsp;z klas buforowych oraz zapisywane do kanału (write()...) z klas kanałowych). <br>
+
+  <br>
+
+Metody put(...) i get(...) dzielą się na <b>relatywne</b> (zapisujące lub odczytujące bufor poczynając od jego bieżącej pozycji) i <b>absolutne</b> (zapisujące/odczytujące element na podanej pozycji w buforze).<br>
+
+Operacje relatywne mogą dotyczyć pojedynczego elementu lub ich sekwencji
+(zapisywanych do bufora z tablicy lub innego bufora, odczytywanych z bufora
+do tablicy).<br>
+
+  <br>
+<br>
+
+
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+
+  <tbody>
+    <tr>
+
+        <td rowspan="1" colspan="2" valign="top">
+
+      <div align="center"><b>
+Metody get(...) z klas buforowych</b><br>
+
+
+(<i><b>typ</b></i> oznacza byte, char, short, int, long, float, doble - w zależności od typu bufora).<br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%">
+
+      <div align="center"><code>&nbsp; <i>typ</i></code></div>
+
+      </td>
+      <td><code><b>get</b>()</code><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Relatywna metoda get - zwraca bieżący element</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><code>&nbsp;<b><i>typ</i></b>Buffer</code></td>
+      <td><code><b>get</b>(<b>typ</b>[]&nbsp;dst)</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relatywna
+metoda get - zapisuje tablicę dst elementami bufora, poczynając od jego
+bieżacej pozycji.</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><code>&nbsp;<i><b>typ</b></i>Buffer</code></td>
+      <td><code><b>get</b>(<b>typ</b>[]&nbsp;dst,
+    int&nbsp;offset,
+    int&nbsp;length)</code><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; j.w. ale diotyczy części tablicy</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><i><code>typ</code></i></td>
+      <td><code><b>get</b>(int&nbsp;index)</code><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absolutna metoda get - zwraca element na pozycji index.</td>
+    </tr>
+  </tbody>
+
+</table>
+
+  <br>
+
+
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+
+  <tbody>
+    <tr>
+
+        <td rowspan="1" colspan="2" valign="top">
+
+      <div align="center"><b>
+Metody put z klas buforowych</b><br>
+
+
+(<i><b>typ</b></i> oznacza byte, char, short, int, long, float, doble - w zależności od typu bufora).<br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><code>&nbsp;<i><b>typ</b></i>Buffer</code></td>
+      <td><code><b>put</b>(<b><i>typ</i></b> b)</code><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relatywna metoda put - zapisuje element b&nbsp; na bieżącej pozycji</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><code>&nbsp;<i><b>typ</b></i>Buffer</code></td>
+      <td><code><b>put</b>(<b><i>typ</i></b>[]&nbsp;src)</code><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relatywna metoda put - zapisuje do bufora tablicę element&oacute;w</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><code>&nbsp;<i><b>typ</b></i>Buffer</code></td>
+      <td><code><b>put</b>(<i><b>typ</b></i>[]&nbsp;src,
+    int&nbsp;offset,
+    int&nbsp;length)</code><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; j.w. - część tablicy</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><code>&nbsp;<i><b>typ</b></i>Buffer</code></td>
+      <td><code><b>put</b>(<b><i>typ</i></b>Buffer&nbsp;src)</code><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Relatywna metoda put - zapisuje zawartosc bufora src do bufora</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><code>&nbsp;<i><b>typ</b></i>Buffer</code></td>
+      <td><code><b>put</b>(int&nbsp;index, <i><b>typ</b></i> b)</code><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Absolutna metoda put, zapisuje b na pozycji index</td>
+    </tr>
+    <tr>
+
+        <td rowspan="1" colspan="2" valign="top">Uwaga: jeżeli bufor jest tylko do odczytu (read-only), to użycie metody put(...) spowodują powstanie wyjątku <b>ReadOnlyBufferException</b>. Bufor możemy uczynić "tylko do odczytu" za pomocą metod <b>asReadOnly()</b> z klas buforowych.<br>
+
+        </td>
+
+      </tr>
+
+  </tbody>
+
+</table>
+
+  <br>
+
+  <br>
+
+<div class="syntax">Każdy z bufor&oacute;w ma następujące (<b>ważne</b>, a czasem nieintuicyjne) charakterystyki:
+
+<ul>
+
+    <li>pojemność (<i>capacity</i>) - liczbę element&oacute;w bufora (niezmienną!),</li>
+
+    <li>limit (<i>limit</i>) - indeks pierwszego elementu, kt&oacute;ry <b>nie może</b> być czytany z bufora lub zapisany do bufora,</li>
+
+    <li>pozycję (<i>position</i>) - indeks kolejnego elementu, kt&oacute;ry będzie odczytany lub zapisany (inaczej bieżącą pozycję bufora).</li>
+
+
+</ul>
+
+Informacje o tych charakterystykach można uzyskac za pomocą metod <b><br>
+
+</b>
+
+<ul>
+
+    <li><b>int capacity() </b></li>
+
+    <li><b>int limit() </b></li>
+
+    <li><b>int position()</b> </li>
+
+
+</ul>
+
+Pojemność bufora nie może być zmieniona, ale pozycję i limit możemy&nbsp;ustawiać za pomocą metod<br>
+
+
+<ul>
+
+    <li><b>Buffer position(int pos)</b> </li>
+
+    <li><b>Buffer limit(int lim)</b></li>
+
+
+</ul>
+
+Metoda <b>remaining()</b> zwraca liczbę element&oacute;w znajdujących się pomiędzy pozycją a limitem.<br>
+
+
+Metoda <b>hasRemaining()</b> zwraca true, jeśli liczba ta jest większa od 0.</div>
+ <br>
+
+  <br>
+
+Każdy <b>relatywny</b> zapis do bufora zapisuje element bądź elementy do
+bufora poczynając od jego bieżącej pozycji i zmienia pozycję, tak by wskazywała
+na następny element (miejsce), kt&oacute;ry może być zapisany.<br>
+
+Każde <b>relatywne</b> czytanie z bufora czyta element bądź elementy, poczynajac
+od jego bieżącej pozycji i zmienia pozycję tak, by wskazywala na następny
+jeszcze nie odczytany element.<br>
+<br>
+
+  <font color="#ff0000"><b>Uwaga:<br>
+
+Operacje absolutne nie zmieniają pozycji bufora.<br>
+
+  </b><b>Czytanie z bufora bądź zapis do bufora nie zmieniają limitu bufora.<br>
+
+  </b></font>
+
+  <br>
+
+Pr&oacute;ba odczytu danych <b>poza limitem</b> spowoduje powstanie wyjątku <b>BufferUnderflowException
+</b>(brak danych w buforze), natomiast pr&oacute;ba zapisu danych poza limit spoowoduje
+wyjątek <b>BufferOverflowException</b> (przepełnienie bufora). <br>
+
+  <br>
+
+<div class="notec">Po zapisaniu danych do bufora, po to by można było je odczytać należy bufor <b>przestawić</b>.<br>
+
+  <br>
+
+  <b>Przestawienie bufora</b> polega na wywolaniu metody <b>flip()</b>, kt&oacute;ra ustawia <b>limit na bieżącą pozycję</b>, po czym ustala <b>pozycję na zero</b>.<br>
+
+  <br>
+
+Jeżeli &nbsp;po odczytaniu danych z bufora chcemy jeszcze raz przeczytać je od początku, powinniśmy bufor <b>przewinąć</b>. Służy temu metoda <b>rewind()</b>, kt&oacute;ra ustala pozcycję na zero, pozostawiając limit bez zmian</div>
+<br>
+
+  <br>
+Zachowanie bufor&oacute;w i zmiany ich charakterystyk ilustruje poniższy program.<br>
+
+  <br>
+
+
+<pre>
+import java.nio.*;
+
+class Buffers {
+
+  static void say(String s) { System.out.println(s); }
+
+  static void showParms(String msg, Buffer b) {
+    say("Charakterystyki bufora - " + msg);
+    say("capacity  :" + b.capacity());
+    say("limit     :" + b.limit());
+    say("position  :" + b.position());
+    say("remaining :" + b.remaining());
+  }
+
+  public static void main(String args[]) {
+
+    // alokacja bufora 10 bajtowego (inicjalnie warości element&oacute;w = 0)
+    ByteBuffer b = ByteBuffer.allocate(10);
+    showParms("Po utworzeniu", b);
+
+    // Zapis dw&oacute;ch bajt&oacute;w do bufora
+    b.put((byte) 7).put((byte) 9);
+    showParms("Po dodaniu dw&oacute;ch element&oacute;w", b);
+
+    // Przestawienie bufora
+    b.flip();
+    showParms("Po przestawieniu", b);
+
+    // Teraz możemy czytać wpisane dane
+    say("Czytamy pierwszy element: " + b.get());
+    showParms("Po pobraniu pierwszego elementu", b);
+    say("Czytamy drugi element: " + b.get());
+    showParms("Po pobraniu drugiego elementu", b);
+
+    say("Czy możemy jeszcze czytać?");
+    try {
+      byte x = b.get();
+    } catch (BufferUnderflowException exc) {
+       say("No, nie - proszę spojrzeć na ostatni limit!");
+    }
+
+    // Jeszcze raz odczytajmy dane z bufora
+    // w tym celu musimy go przewinąć
+    b.rewind();
+    showParms("Po przewinięciu", b);
+
+    say("Czytanie wszystkiego, co wpisaliśmy");
+    while (b.hasRemaining())
+      say("Jest: " + b.get());
+  }
+}
+</pre>
+
+kt&oacute;ry na wyjściu da:<br>
+
+<div class="listing100"><br>
+Charakterystyki bufora - Po utworzeniu<br>
+
+capacity: 10<br>
+
+limit: 10<br>
+
+position: 0<br>
+
+remaining: 10<br>
+
+Charakterystyki bufora - Po dodaniu dw&oacute;ch element&oacute;w<br>
+
+capacity: 10<br>
+
+limit: 10<br>
+
+position: 2<br>
+
+remaining: 8<br>
+
+Charakterystyki bufora - Po przestawieniu<br>
+
+capacity: 10<br>
+
+limit: 2<br>
+
+position: 0<br>
+
+remaining: 2<br>
+
+Czytamy pierwszy element: 7<br>
+
+Charakterystyki bufora - Po pobraniu pierwszego elementu<br>
+
+capacity: 10<br>
+
+limit: 2<br>
+
+position: 1<br>
+
+remaining: 1<br>
+
+Czytamy drugi element: 9<br>
+
+Charakterystyki bufora - Po pobraniu drugiego elementu<br>
+
+capacity: 10<br>
+
+limit: 2<br>
+
+position: 2<br>
+
+remaining: 0<br>
+
+Czy możemy jeszcze czytać?<br>
+
+No, nie - proszę spojrzeć na ostatni limit!<br>
+
+Charakterystyki bufora - Po przewinięciu<br>
+
+capacity: 10<br>
+
+limit: 2<br>
+
+position: 0<br>
+
+remaining: 2<br>
+
+Czytanie wszystkiego, co wpisaliśmy<br>
+
+Jest: 7<br>
+
+Jest: 9<br>
+
+</div>
+<br>
+
+  <br>
+
+  <font color="#cc0000"><b>Proszę uważnie przeanalizować działanie i wyniki tego programu.</b></font><br>
+
+  <br>
+
+  <br>
+
+Warto podkreślić, że nawigacja "po buforze" zawsze odbywa się w kontekście typu jego element&oacute;w.<br>
+
+Np.&nbsp; w buforze typu IntBuffer&nbsp;elementami są liczby typu int, get zwraca element
+typu int, a&nbsp; pozycja będzie się przesuwać tak, by wskazywać na następny element
+typu int (4 bajty).<br>
+
+Natomiast w buforze typu ByteBuffer pobieranie, zapisywanie i zmiany pozycji dotyczą pojedynczych bajt&oacute;w.<br>
+
+Należy zwr&oacute;cić szczeg&oacute;lną uwagę na bufory bajtowe, bowiem<br>
+
+  <br>
+
+<div class="important">Bufory bajtpwe (typu ByteBuffer) odgrywają szczeg&oacute;lną rolę, bowiem tylko one są używane w operacjach na kanalach.</div>
+<br>
+
+  <br>
+
+  <a name="W5.18"></a>
+<h2>K.3 NIO: kanały i bufory</h2>
+
+Aby używać kanal&oacute;w musimy importować nazwy klas z pakietu java.nio.channels.<br>
+
+Bufory wymagają importu java.nio.<br>
+
+  <br>
+
+Schematy użycia kanał&oacute;w w operacjach wejścia-wyjścia przedstaiwono poniżej.
+Dla ustalenia uwagi posługujemy się tu kanałami plikowymi.<br>
+
+  <br>
+
+
+<table bgcolor="#ffffcc" border="1" cellpadding="2" cellspacing="2" width="100%">
+
+    <tbody>
+
+      <tr>
+
+        <td bgcolor="#ffcccc" valign="top">
+
+      <div align="center"><b>Zapis do&nbsp; kanału</b><br>
+
+        </div>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top"><b>1. Alokacja bufora bajtowego</b><br>
+
+        <br>
+
+&nbsp; &nbsp; &nbsp;ByteBuffer buf = ByteBuffer.allocate(N); // N - rozmiar bufora<br>
+
+        <br>
+
+        <b>2. Zapis danych do bufora (</b>np. z użyciem metod put...)<br>
+
+        <br>
+
+        <b>3. Uzyskanie kanału klasy FileChannel "do zapisu"</b><br>
+
+        <br>
+
+Możemy go uzyskać za pomocą metod getChannel() z klas FileOutputStream oraz
+&nbsp; RandomAccessFile (kanał "do zapisu i do odczytu", jeśli taki był tryb otwarcia
+pliku o dostępie swobodnym). Np.<br>
+
+        <br>
+
+&nbsp; &nbsp; FileOutputStream out &nbsp;= new FileOutputStream(...);<br>
+
+&nbsp; &nbsp; FileChannel fc = out.getChannel();<br>
+
+        <br>
+
+        <b>4. Zapis bufora - użycie metod write z klasy FileChannel. Np.</b><br>
+
+        <br>
+
+&nbsp; &nbsp;fc.write(buf);<br>
+
+        <br>
+
+        <b>5. Zamknięcie kanału:</b><br>
+
+        <br>
+
+&nbsp; &nbsp;fc.close();<br>
+
+        <br>
+
+Zamknięty kanał pozostaje zamknięty. Metoda isOpen() pozwala stwierdzić czy kanał jest otwarty.<br>
+
+        <br>
+
+        </td>
+
+      </tr>
+
+
+  </tbody>
+
+</table>
+
+  <br>
+
+  <br>
+
+  <br>
+
+
+<table bgcolor="#ffffcc" border="1" cellpadding="2" cellspacing="2" width="100%">
+
+  <tbody>
+    <tr>
+      <td bgcolor="#ffcccc" valign="top">
+      <div align="center"><b>Czytanie z&nbsp; kanału</b><br>
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><b>1. Alokacja bufora bajtowego</b><br>
+      <br>
+
+&nbsp; &nbsp; &nbsp;ByteBuffer buf = ByteBuffer.allocate(N); // N - rozmiar bufora<br>
+      <br>
+      <b>2. Uzyskanie kanału klasy FileChannel "do odczytu"</b><br>
+      <br>
+
+Możemy go uzyskać za pomocą metod getChannel() z klas FileInputStream oraz
+&nbsp; RandomAccessFile (kanał "do zapisu i do odczytu", jesli taki był tryb otwarcia
+pliku o dostępie swobodnym). Np.<br>
+      <br>
+
+&nbsp; &nbsp; FileInputStream out &nbsp;= new FileInputStream(...);<br>
+
+&nbsp; &nbsp; FileChannel fc = out.getChannel();<br>
+      <br>
+      <b>3. Czytanie do bufora - użycie metod read z klasy FileChannel. Np.</b><br>
+      <br>
+
+&nbsp; &nbsp;fc.read(buf);<br>
+
+        <br>
+
+        <b>4. Zamknięcie kanału:</b><br>
+
+        <br>
+
+
+&nbsp; &nbsp;fc.close();<br>
+
+        <br>
+
+
+Zamknięty kanał pozostaje zamknięty.<br>
+
+        <br>
+
+        <b>5. Określenie właściwej pozycji i limitu bufora po wczytaniu do niego danych. </b><br>
+
+&nbsp; &nbsp; Np. poprzez przestawienie bufora:<br>
+
+        <br>
+
+&nbsp; &nbsp; buf.flip();<br>
+
+        <br>
+
+        <b>6. Odczytanie danych z bufora za pomocą metod get...</b><br>
+
+        <br>
+
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+
+  <br>
+
+  <br>
+
+Poniższy program ilustruje powyższy schemat. Komentarze szczeg&oacute;łowo omawiają użyte w nim konstrukcje. <b><font color="#ff0000">Proszę zwr&oacute;cić na nie baczną uwagę</font></b>.<br>
+
+  <br>
+
+
+<pre>
+import java.io.*;
+import java.nio.*;
+import java.nio.channels.*;
+
+class SimpleChannel {
+
+  String fname = "test.tmp";
+  byte[] data = {1,2,3,4,5 };
+
+  SimpleChannel() {
+    try {
+      writeChannel(fname, data);
+      byte[] wynik = readChannel(fname);
+      for (int i=0; i &lt; wynik.length; i++) System.out.println(wynik[i]);
+    } catch(Exception exc) {
+        exc.printStackTrace();
+        System.exit(1);
+    }
+  }
+
+  void writeChannel(String fname, byte[] data) throws Exception {
+
+    // Możemy utworzyć bufor przez opakowanie istniejącej tablicy
+    ByteBuffer buf = ByteBuffer.wrap(data);
+
+    FileOutputStream out = new FileOutputStream(fname);
+
+    // Uzyakanie kanału
+    FileChannel fc = out.getChannel();
+
+    //Zapis
+    fc.write(buf);
+    fc.close();
+  }
+
+  byte[] readChannel(String fname) throws Exception {
+
+
+    // Stworzenie strumienia na podstawie obiektu klasy File
+    FileInputStream in = new FileInputStream(fname;
+
+    // Uzyskanie kanału
+    FileChannel fc = in.getChannel();
+
+    // Metoda size() z klasy FileChannel
+    // zwraca long -rozmiar plku, do kt&oacute;rego podlączony jest kanał
+    int size = (int) fc.size();
+
+    // Utworzenie bufora
+    ByteBuffer buf = ByteBuffer.allocate(size);
+
+    // Czytanie do bufora
+    // nbytes - liczba przeczytanych bajt&oacute;w
+    int nbytes = fc.read(buf);
+    fc.close();
+
+    // Po przeczytaniu danych musimy bufor przestawić
+    buf.flip();
+
+    // Stworzenie tablicy na wynik czytania
+    // jej rozmiar będzie określony przez liczbę przeczytanuych bajt&oacute;w
+    // kt&oacute;rą możemy podać na dwa sposoby: poprzednie nbytes
+    // lub uzyskując informację o liczbie jeszcze nieodczytanych bajt&oacute;w z bufora
+
+    byte[] wynik = new byte[buf.remaining()];
+    buf.get(wynik);
+    return wynik;
+  }
+
+  public static void main(String args[]) {
+   new SimpleChannel();
+  }
+}  &nbsp;
+</pre>
+
+  <br>
+
+W klasie FileChannel zdefiniowano wiele metod pozwalających na czytanie z
+- zapis do kanał&oacute;w oraz pozycjonowanie i przewijanie plik&oacute;w, do kt&oacute;rych te
+kanały są podlączone.<br>
+
+
+  <a name="W5.19"></a>
+<h2>K.4. Widoki bufor&oacute;w bajtowych</h2>
+
+Jak już wiemy, w operacjach kanalowych używa się wyłącznie bufor&oacute;w bajtowych,.<br>
+
+Zapewniają one łatwy dostęp do element&oacute;w - bajt&oacute;w.<br>
+Ale jak w &nbsp;takim razie przetwarzać dane innych typ&oacute;w (niż
+bajty) pobierane z kanał&oacute;w lub zapisywać takie dane do kanału?<br>
+
+  <br>
+
+Są po temu przynajmniej dwie możliwości.<br>
+
+  <br>
+
+Pierwsza polega na użyciu metod klasy ByteBuffer: <br>
+
+  <br>
+
+&nbsp;&nbsp;&nbsp; <i><b>ttt</b></i> elt = get<i><b>Ttt</b></i>() <br>
+
+&nbsp;&nbsp;&nbsp; put<i><b>Ttt</b></i>(<i><b>Ttt</b></i> elt)<br>
+
+  <br>
+
+kt&oacute;re umożliwają zapisywanie i pobieranie danych typu ttt (short, int, long, float, double, char).<br>
+
+  <br>
+
+Drugi spos&oacute;b - znacznie ciekawszy i przyjemniejszy - polega na użyciu <b>widok&oacute;w</b> bufor&oacute;w bajtowych<br>
+
+  <br>
+
+<div class="syntax">Metoda klasy ByteBuffer:<br>
+
+  <br>
+
+&nbsp;&nbsp;&nbsp; <i><b>Ttt</b></i>Buffer as<i><b>Ttt</b></i>Buffer()<br>
+
+  <br>
+
+gdzie: <i><b>ttt</b></i> - jeden z typ&oacute;w short, int, long, float, double, char<br>
+
+  <br>
+
+użyta wobec bufora bajtowego buf zwraca referencję do bufora klasy <i><b>Ttt</b></i>Buffer, co pozwala na działanie na danych pierwotnego bufora bajtowego buf za pomocą metod <b>get</b> i <b>put</b> klasy <i><b>Ttt</b></i>Buf czyli tak, jakby pierwotny bufor bajtowy zawierał elementy typu <i><b>ttt</b></i>.<br>
+
+  <br>
+
+M&oacute;wimy, że metoda ...asBuffer() zwraca <b>widok</b> bufora bajtowego jako bufora typu <i><b>Ttt</b></i>Buffer, gdyż nie następuej tu żadne kopiowanie danych i zmiany danych wykonywane
+za pośrednictwem obu obiekt&oacute;w - bufora pierwotnego oraz jego widoku dotyczą
+tego samego bufora.</div>
+<br>
+
+  <br>
+
+Koncepcję widoku bufora bajtowego ilustruje poniższy program.<br>
+
+  <br>
+
+
+<pre>
+import java.nio.*;
+
+class BufView1 {
+
+  public static void main(String args[]) {
+
+    final int SHORT_SIZE = 2;
+    // Alokacja buforu bajtowego,
+    // mogącego przechowywać do 10 liczb typu short
+    ByteBuffer bb = ByteBuffer.allocate(10*SHORT_SIZE);
+
+    // Widok na ten bofor jak na short-bufor
+    <b>ShortBuffer sb = bb.asShortBuffer();</b>
+
+    // Dodanie trzech liczb typu short
+    short a = 1, b = 2, c = 3;
+    sb.put(a).put(b).put(c);
+
+    // Co wpisano do bufora? Na wydruku: 1, 2, 3
+    sb.flip();
+    while (sb.hasRemaining()) System.out.println(sb.get());
+
+    // Operujemy teraz na nim za pomocą bufora bajtowego
+    // zmieniając bajty na pozycji 1, 3 i 5.
+    byte  x = 4, y = 5, z = 6;
+    bb.put(1, x).put(3, y).put(5, z);
+
+    // Co pokaże short-bufor? Na wydruku 4, 5, 6
+    sb.rewind();
+    while (sb.hasRemaining()) System.out.println(sb.get());
+  }
+}
+</pre>
+
+  <br>
+
+Z widokami bufora bajtowego wiąże się jednak pewna pułapka.<br>
+
+Ot&oacute;ż, mimo, że bufor i jego widok dotyczą tych samych danych to jednak mamy
+dwa bufory (bufor bajtowy i jego widok jakiegoś wybranego typu - np. ShortBuffer
+), a w tych buforach zmiany pozycji oraz limitu są niezalezne od siebie.<br>
+
+  <br>
+
+<div class="important">Pozycja i limit bufora bajtowego są <b>niezależne</b> od pozycji i limitu&nbsp; jego widoku.</div>
+<br>
+
+  <br>
+
+Gdybyśmy np. chcieli w poprzendim przykladzie po wpisaniu liczb short do
+bufora bajtowego (za pomocą jego widoku) pokazać kolejne bajty wszystkich
+wpisanych liczb, to moglibyśmy pojść błędnym tropem: po wpisaniu danych przestawić
+bufor short (flip) i sądząc, że pierwotny bufor bajtowy także dostosuje swoją
+pozycję i limit wypisywać bajty w pętli dop&oacute;ki hasRemaining() nie zwr&oacute;ci
+false.<br>
+Ilustruje to poniższy program (w kt&oacute;rym używamy metody showParms
+zpoprzednich przykład&oacute;w dla pokazania charakterystyk bufora):<br>
+
+  <br>
+
+
+<pre>
+  public static void main(String args[]) {
+
+    final int SHORT_SIZE = 2;
+    ByteBuffer bb = ByteBuffer.allocate(10*SHORT_SIZE);
+    ShortBuffer sb = bb.asShortBuffer();
+    short a = 1, b = 2, c = 3;
+    sb.put(a).put(b).put(c);
+    showParms("bufor short - po dodaniu liczb", sb);
+    showParms("bufor bajtowy - po dodaniu liczb", bb);
+
+    sb.flip();
+    showParms("bufor short - po przestawieniu", sb);
+    showParms("bufor bajtowy - po flip bufora short", bb);
+    System.out.print("Dane");
+    while (bb.hasRemaining()) System.out.print(" " + bb.get());
+  }
+}
+</pre>
+
+&nbsp;Wydruk.<br>
+
+<div class="listing100"><br>
+
+Charakterystyki bufora - bufor short - po dodaniu liczb<br>
+
+capacity: 10<br>
+
+limit: 10<br>
+
+position: 3<br>
+
+remaining: 7<br>
+
+  <br>
+
+Charakterystyki bufora - bufor bajtowy - po dodaniu liczb<br>
+
+capacity: 20<br>
+
+limit: 20<br>
+
+position: 0<br>
+
+remaining: 20<br>
+
+  <br>
+
+Charakterystyki bufora - bufor short - po przestawieniu<br>
+
+capacity: 10<br>
+
+limit: 3<br>
+
+position: 0<br>
+
+remaining: 3<br>
+
+  <br>
+
+Charakterystyki bufora - bufor bajtowy - po flip bufora short<br>
+
+capacity: 20<br>
+
+limit: 20<br>
+
+position: 0<br>
+
+remaining: 20<br>
+
+Dane 0 1 0 2 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0</div>
+<br>
+
+  <br>
+
+Zwr&oacute;cmy uwagę: dodanie element&oacute;w do widoku bufora bajtowego nie zmienia jego
+pozycji i limitu, zmienia tylko pozycję i limit w widoku, Rownież flip()
+widoku nie ma wpływu na te parametry bufora bajtowego. Program wypisuje cały
+bufor, bajt po bajcie, a nie bajty tych element&oacute;w, ktore zostały dodane.<br>
+
+  <br>
+
+Aby w tym przykładzie wypisac tylko bajty wpisanych danych, powinniścmy po
+przestawieniu widoku bufora zmienić odpowiednio limit bufora bajtowego:
+
+<pre>
+    sb.flip();
+    bb.limit(sb.limit()*SHORT_SIZE);
+    System.out.print("Bajty wpisanych danych");
+    while (bb.hasRemaining()) System.out.print(" " + bb.get());
+</pre>
+
+  <br>
+
+Jednak przy czytaniu danych z kanał&oacute;w nie ma takiej potrzeby. Dane są wczytywane
+do bufora bajtowego, a nie do jego widoku. Zatem należy przestawić bufor
+bajtowy, a dopiero potem stworzyć i posługiwać się jego widokiem. <span style="font-weight: bold;">Jest to sensowne,
+bowiem widok bierze pod uwagę pozycję i limit bufora, na podstawie kt&oacute;rego
+jest tworzony, odpowiednio ustawiając swoją pozycję i limit.</span><br>
+
+  <br>
+
+Co pokazuje poniższy program.<br>
+
+  <br>
+
+
+<pre>
+import java.io.*;
+import java.nio.*;
+import java.nio.channels.*;
+
+class BuffChan {
+
+  String fname = "testfile.tmp";
+
+  // inicjacja danych testowych
+  void init() throws Exception {
+    double[] data = { 0.1, 0.2, 0.3 };
+    DataOutputStream out = new DataOutputStream(
+                             new FileOutputStream(fname)
+                            );
+    for (int i=0; i &lt; data.length; i++) out.writeDouble(data[i]);
+    out.close();
+
+  }
+
+  BuffChan() throws Exception {
+
+    // inicjalcja danych testowych
+    init();
+
+    // utworzenie bufora
+    ByteBuffer buf = ByteBuffer.allocate(1000); // nie wiemy ile, maks 100B
+
+    // uzyskanie kanału
+    FileChannel fcin = new FileInputStream(fname).getChannel();
+
+    // czytanie z kanału do bufora
+    fcin.read(buf);
+    fcin.close();
+
+    // przestawienie bufora bajtowego
+    buf.flip();
+
+    // Utworzenie widoku bufora
+    DoubleBuffer dbuf = buf.asDoubleBuffer();
+
+    // Wypisanie odczytanych danych
+    while (dbuf.hasRemaining()) System.out.println(dbuf.get());
+  }
+
+  public static void main(String args[]) throws Exception {
+    new BuffChan();
+  }
+}
+</pre>
+
+  <br>
+
+  <br>
+
+  <a name="W5.20"></a>
+<h2>K.5. NIO: bufory - uporządkowanie bajt&oacute;w (endianess)</h2>
+
+
+  Przy czytaniu i zapisywaniu plik&oacute;w, tworzonych na r&oacute;żnych platformach
+sprzętowych, &nbsp;powstaje problem uporządkowania (kolejności występowania) bajt&oacute;w
+danych binarnych,<br>
+
+Wynika to z tego w jaki spos&oacute;b dane binarne przechowywane są w pamięci (i jak zapisywane w rejestrach procesora).<br>
+
+  <br>
+
+Porządek bajt&oacute;w w reprezentacji binarnej danych określa się terminem <b><i>endianess</i></b>.<br>
+
+  <br>
+
+Istnieją dwa r&oacute;żne porządki:<br>
+
+  <br>
+
+
+<ul>
+
+    <li>
+Porządek BIG ENDIAN oznacza, że mniej znaczące bajty danych są zapisywane
+pod większymi adresami pamięci (niejako od prawej do lewej) </li>
+
+    <li>
+Porządek LITLLE ENDIAN jest odwrotny: najpierw są zapisywane mniej znaczące bajty, p&oacute;źniej bardziej (od lewej do prawej).</li>
+
+
+</ul>
+Ilustruje to rysunek, na kt&oacute;rym pokazano porządek bajt&oacute;w
+liczby typu int r&oacute;wnej 1234567 (heksadecymalnie 0x12D687).<br>
+
+  <br>
+
+  <img src="images/Endianess.jpg" alt="r" border="1" height="299" width="363">
+  <br>
+
+  <br>
+
+O tym jaki jest porządek bajt&oacute;w w buforach możemy dowiedzieć się za pomocą
+metody <b>order()</b>, kt&oacute;ra zwraca referencję do obiektu klasy <b>ByteOrder</b>.<br>
+
+W przypadku bufor&oacute;w bajtowych (i tylko dla nich) &nbsp;możemy zmienić porządek
+za pomocą wywołania metody <b>order(ByteOrder)</b> z argumentem będącym stałą statyczną
+z klasy ByteOrder:<br>
+
+  <br>
+
+
+<ul>
+
+    <li><b>
+order (ByteOrder.BIG_ENDIAN) - zmienia porządek na BIG ENDIAN</b></li>
+
+    <li><b>
+order (ByteOrder.LITTLE_ENDIAN) - zmienia porządek na&nbsp;LITTLE ENDIAN</b></li>
+
+
+</ul>
+
+
+
+<div class="important"><b>Widoki</b> bufora bajtowego mają ten porządek bajt&oacute;w, kt&oacute;ry występował dla
+bufora bajtowego w momencie tworzenia widoku (możemy powiedzieć, że widok
+dziedziczy porządek swojego bufora,&nbsp; bajtowego&nbsp;obowiązujący w chwili tworzenia
+widoku)</div>
+<br>
+
+  <br>
+
+Ilustruje to poniższy program:<br>
+
+  <br>
+
+
+<pre>
+import java.nio.*;
+
+class Endianness {
+
+   static void show(int n) {
+       String s = Integer.toHexString(n);
+       int l = s.length();
+       for (int i=l; i &lt; 8; i++) s = '0' + s;
+       System.out.println("Liczba " + n + " hex -&gt; " + s.toUpperCase());
+   }
+
+   public static void main(String args[]) {
+     int num = Integer.parseInt(args[0]);
+     ByteBuffer buf = ByteBuffer.allocate(4);
+     System.out.println(buf.order().toString());
+     IntBuffer b1 = buf.asIntBuffer();
+     System.out.println("Porządek b1 " + b1.order());
+     b1.put(num);
+     b1.flip();
+     show(b1.get());
+     buf.order(ByteOrder.LITTLE_ENDIAN);
+     System.out.println("Porządek buf " + buf.order());
+     System.out.println("Porządek b1 " + b1.order());
+     b1.rewind();
+     show(b1.get());
+     System.out.println("Porządek buf " + buf.order());
+     System.out.println("Porządek dziedzizcony " + buf.asIntBuffer().order());
+     show(buf.asIntBuffer().get());
+  }
+}
+</pre>
+
+kt&oacute;ry dla podanej jako argument liczby 987654321 wyprowadzi następujące wyniki:<br>
+
+  <br>
+
+<div class="listing100"><br>
+
+BIG_ENDIAN<br>
+
+Porządek b1 BIG_ENDIAN<br>
+
+Liczba 987654321 hex -&gt; 3ADE68B1<br>
+
+Porządek buf LITTLE_ENDIAN<br>
+
+Porządek b1 BIG_ENDIAN<br>
+
+Liczba 987654321 hex -&gt; 3ADE68B1<br>
+
+Porządek buf LITTLE_ENDIAN<br>
+
+Porządek dziedzizcony LITTLE_ENDIAN<br>
+
+Liczba -1318527430 hex -&gt; B168DE3A<br>
+
+</div>
+<br>
+
+  <br>
+
+  <br>
+
+<br>
+
+  <a name="W5.21"></a>
+<h2>
+  K.6. NIO: bufory znakowe. Kodowanie i dekodowanie.&nbsp;</h2>
+
+Bufory znakowe (klasa CharBuffer) reprezentują sekwencje element&oacute;w typu char (znaki unikodu).<br>
+Mają one wszystkie właściwości bufor&oacute;w (o kt&oacute;rych już
+była mowa), ale dodatkowo zapewniają pewną specyficzną funkcjonalność.<br>
+
+  <br>
+
+Zauważmy, że sekwencje znak&oacute;w są reprezentowane r&oacute;wnież przez obiekty klas String i StringBuffer. <br>
+
+Od Javy 1.4 uog&oacute;lniono więc pewne elementarne operacje na sekwencjach znak&oacute;w, wprowadzając interfejs <b>CharSequence</b>
+. Interfej ten implementowany jest przez wszystkie klasy w/w klasy: String,
+StringBuffer i CharBuffer, dzięki czemu możliwe jest (do pewnego stopnia)
+uniwersalne operowanie na sekwencjach znak&oacute;w, niezaleznie od tego, czy są
+one obiektami klas String, StringBuffer czy CharBuffer. <br>
+
+  <br>
+
+Metody interfejsu CharSequence podano w tablicy,<br>
+
+
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+
+  <tbody>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><code>&nbsp;char</code></td>
+      <td><code><b>charAt</b>(int&nbsp;index)</code><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zwraca znak na pozycji index</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><code>&nbsp;int</code></td>
+      <td><code><b>length</b>()</code><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zwraca długość sekwencji znak&oacute;w</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><code>&nbsp;CharSequence</code></td>
+      <td><code><b>subSequence</b>(int&nbsp;start,
+            int&nbsp;end)</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zwraca
+podsekwencję od znaku na pozycji start do znaku na pozycji end
+(wyłacznie)</td>
+    </tr>
+    <tr class="TableRowColor" bgcolor="white">
+      <td align="right" valign="top" width="1%"><code>&nbsp;String</code></td>
+      <td><code><b>toString</b>()</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zwraca
+referencję do nowego obiektu klasy String, zawierającego tę sekwencję
+znak&oacute;w.</td>
+    </tr>
+  </tbody>
+
+</table>
+
+  <br>
+
+Używając tych metod można napisac uniwersalną metodę operującą na sekwencjach
+znak&oacute;w, kt&oacute;ra jako argument może przyjmować referencję do obiektu dowolnej
+z klas: String, StringBUffer i CharBuffer (należy się spodziewać, że zetsaw
+metod interfejsu CharSequence zostanie w przyszłości wzbogacony, co rozszerzy
+możliwości pisania uniwersalnych fragment&oacute;w kodu). Już teraz zresztą CharSequence
+pełni istotną użyteczną rolę, bowiem metody klas pakietu java.util.regex,
+umozliwiające anlalizę łańcuch&oacute;w znakowych za pomocą wyrażeń regularnych,
+operują na obiektach typu CharSequence.<br>
+
+  <br>
+
+Z punktu widzenia bufor&oacute;w znakowych, wprowadzenie interfejsu CharSequence ma dwie ważne konsekwencje:<br>
+
+
+<ul>
+
+    <li>poza znanymi nam metodami buforowymi na buforach znakowych można operowac za pomocą metod tego interfejsu, </li>
+
+    <li>klasa CharBuffer dostarcza metody wrap opakowującej dowolną sekwencję
+znak&oacute;w (obiekt klasy implementującej interfejs CharSequence) i dzięki temu
+możemy np. w następujący spos&oacute;b tworzyć bufory znakowe.:</li>
+
+
+</ul>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; String txt = editor.getText();<br>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; CharBuffer buf = CharBuffer.wrap(txt);<br>
+
+  <br>
+
+To miłe, że mamy takie bufory znakowe, ale przecież kanały mogą operowac wyłącznie na buforach bajtowych.<br>
+
+Przy kanałowym czytaniu i zapisie strumieni tekstowych powstaje więc problem kodowania i dekodowania informacji tekstowej. <br>
+
+Znany nam spos&oacute;b kodowania-dekodowania za pomocą klas InputStreamReader i
+OutputStreamReader dotyczy tylko plik&oacute;w, a przy tym nie nadaje się do zastosowania
+przy polączeniach kanałowych, bowiem kanały plikowe można uzyskać tylko od
+obiekt&oacute;w klas FileInputStream, FileOutputStream i RandomAccessFile. <br>
+
+  <br>
+
+Dla rozwiązania problemu dekodowania - kodowania można,&nbsp; co prawda, zastosować
+klasę String, jak pokazuje poniższy program (konwertujący pliki z jednej
+strony kodowej na inną).<br>
+
+  <br>
+
+
+<pre>
+import java.io.*;
+import java.nio.*;
+import java.nio.channels.*;
+
+class Ende1 {
+
+  public static void main(String[] args) {
+
+    if (args.length != 4) {
+      System.out.println("Syntax: in in_enc out out_enc");
+      System.exit(1);
+    }
+
+    String infile  = args[0],     // plik wejściowy
+           in_enc  = args[1],     // wejściowa strona kodowa
+           outfile = args[2],     // plik wyjściowy
+           out_enc = args[3];     // wyjściowa strona kodowa
+
+    try {
+       FileChannel fcin = new FileInputStream(infile).getChannel();
+       FileChannel fcout = new FileOutputStream(outfile).getChannel();
+       ByteBuffer buf = ByteBuffer.allocate((int)fcin.size());
+
+       // czytanie z kanału
+       fcin.read(buf);
+
+       // przeniesienie zawartości bufora do tablicy bytes
+       buf.flip();
+       byte[] bytes = new byte[buf.capacity()];
+       buf.get(bytes);
+
+       // dekodowanie - za pomocą konstruktora klasy String
+       String txt = new String(bytes, in_enc);
+
+       // enkodowanie za pomocą metody getBytes z klasy String
+       // utworzenie nowego bufora dla kanału wyjściowego
+       // zapis do pliku poprzez kanał
+       bytes = txt.getBytes(out_enc);
+       buf = ByteBuffer.wrap(bytes);
+       fcout.write(buf);
+
+       fcin.close();
+       fcout.close();
+    } catch (Exception e) {
+        System.err.println(e);
+        System.exit(1);
+    }
+
+  }
+}&nbsp;</pre>
+
+ale jest to rozwiązanie dodatkowo obciążające pamięć operacyjną oraz - jak widać - mało wygodne w programowaniu.<br>
+
+  <br>
+
+W NIO rozwiązano problem kodowania-dekodowania za pomoca wprowadzenia nowych klas <b>Charset, CharsetDecoder, CharsetEncoder</b> w pakiecie java.nio.charset. <br>
+
+  <br>
+
+
+<ul>
+
+    <li>Klasy CharsetDecoder i CharsetEncoder&nbsp; dostarczają
+bogatych środk&oacute;w i pełnej kontroli nad procesem kodowania i
+dekodowania. </li>
+
+
+</ul>
+
+
+<ul>
+
+    <li>Klasa Charset dostarcza definicji stron kodowych, a także wygodnych
+metod kodowania i dekodowania (kt&oacute;re są łatwiejsze w użyciu niż zastosowanie
+klas CharsetEncoder i CharsetDecoder).</li>
+
+
+</ul>
+
+<div class="syntax"><br>
+
+
+<div align="center"><b>Dekodowanie-kodowanie za pomocą Charset polega na:</b></div>
+
+
+<ul>
+
+    <li>utworzeniu obiektu klasy Charset, za pomocą statycznej metody forName(String),
+reprezentująccgo stronę kodową, kt&oacute;rej nazwę podano jako argument np:</li>
+
+
+</ul>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Charset charset = Charset.forName("ISO-8895-2");<br>
+
+  <br>
+
+
+<ul>
+
+    <li><b>dekodowaniu</b> bajt&oacute;w z bufora bajtowego z danej strony kodowej
+na sekwencję znak&oacute;w Unicode, zapisaną w buforze znakowym &nbsp;za pomocą metody
+decode(...):</li>
+
+
+</ul>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ByteBuffer buf &nbsp;= ...<br>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; CharBuffer cbuf = charset.decode(buf);<br>
+
+  <br>
+
+
+<ul>
+
+    <li>lub <b>kodowaniu</b> znak&oacute;w Unicodu z bufora znakowego
+do bajt&oacute;w, reprezentujących tekst zakodowany wedle danej strony
+kodowej w buforze bajtowym:</li>
+
+
+</ul>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; CharBuffer cbuf&nbsp; = ...<br>
+
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ByteBuffer buf = charset.encode(cbuf);<br>
+
+</div>
+<br>
+
+&nbsp;<br>
+
+Informację o nazwach dostępnych w danej implementacji JVM stron kodowych można
+uzyskać za pomocą metody availCharsets() z klasy Charset.<br>
+
+  <br>
+
+Przykładowy program pokazuje zastosowanie tej procedury do konwersji plik&oacute;w
+z jednej strony kodowej na inną (z wykorzystaniem kanał&oacute;w).<br>
+
+  <br>
+
+
+<pre>
+import java.io.*;
+import java.nio.*;
+import java.nio.channels.*;
+import java.nio.charset.*;
+
+
+class Ende2 {
+
+  public static void main(String[] args) {
+
+    if (args.length != 4) {
+      System.out.println("Syntax: in in_enc out out_enc");
+      System.exit(1);
+    }
+
+    String infile  = args[0],     // plik wejściowy
+           in_enc  = args[1],     // wejściowa strona kodowa
+           outfile = args[2],     // plik wyjściowy
+           out_enc = args[3];     // wyjściowa strona kodowa
+
+    try {
+       FileChannel fcin = new FileInputStream(infile).getChannel();
+       FileChannel fcout = new FileOutputStream(outfile).getChannel();
+       ByteBuffer buf = ByteBuffer.allocate((int)fcin.size());
+
+       // czytanie z kanału
+       fcin.read(buf);
+
+       // Strony kodowe
+       Charset inCharset  = Charset.forName(in_enc),
+               outCharset = Charset.forName(out_enc);
+
+       // dekodowanie bufora bajtowego
+       buf.flip();
+       CharBuffer cbuf = inCharset.decode(buf);
+
+       // enkodowanie bufora znakowego
+       // i zapis do pliku poprzez kanał
+
+       buf = outCharset.encode(cbuf);
+       fcout.write(buf);
+
+       fcin.close();
+       fcout.close();
+    } catch (Exception e) {
+        System.err.println(e);
+        System.exit(1);
+    }
+  }
+}
+</pre>
+
+  <br>
+
+  <br>
+
+  <a name="W5.22"></a>
+<h2>K.7. NIO: operacje kanałowe na wielu buforach (scattering i gathering)</h2>
+
+
+  Kanały pozwalają za jednym odwołaniem czytać dane do wielu bufor&oacute;w (<i><b>scatter read</b></i>) lub
+zapisywać dane z wielu bufor&oacute;w (<i><b>gather write</b></i>). <br>
+
+Służą do tego metody read i write (z klas
+kanałowych), kt&oacute;re jako argument mają <b>tablice bufor&oacute;w</b>.<br>
+
+  <br>
+
+  <br>
+
+<br>
+
+Jest to bardzo użyteczna właściwość, pozwala bowiem w łatwiejszy spos&oacute;b &nbsp;programować
+uzyskiwanie przez kanały danych, mających określoną strukturę, w kt&oacute;rej można
+wyr&oacute;żnić jakieś części o określonym rozmiarze.<br>
+
+Przykładem mogą być &nbsp;pliki graficzne lub dane z nagł&oacute;wkami komunikacyjnymi.<br>
+
+  <br>
+
+Program testujący czytanie do wielu bufor&oacute;w.<br>
+
+  <br>
+
+
+<pre>
+import java.io.*;
+import java.nio.*;
+import java.nio.channels.*;
+
+public class ScatteringTest {
+
+  static final String fname = "scatter.tst";  // nazwa pliku testowego
+
+  public static void main(String[] args) throws Exception {
+
+    // Zapisywanie danych testowych
+
+    DataOutputStream out = new DataOutputStream(
+    	                       new FileOutputStream(fname) );
+    short[]  dat1 = { 1, 2, 3, };
+    double[] dat2 = { 10.1, 10.2, 10.3 };
+    for (int i=0; i &lt; dat1.length; i++) out.writeShort(dat1[i]);
+    for (int i=0; i &lt; dat2.length; i++) out.writeDouble(dat2[i]);
+    out.close();
+
+    //-----------------------------------------------------------+
+    // Odczytywanie danych testowych                             |
+    //-----------------------------------------------------------+
+
+    FileInputStream in = new FileInputStream(fname);
+
+    // Uzyskanie kanału
+    FileChannel channel = in.getChannel();
+
+    // Tablica bajt-bufor&oacute;w
+    final int SHORT_SIZE  = 2,  // ile bajt&oacute;w ma short
+              DOUBLE_SIZE = 8;  // ........... i double
+
+    ByteBuffer[] buffers = { ByteBuffer.allocate(dat1.length*SHORT_SIZE),
+                             ByteBuffer.allocate(dat2.length*DOUBLE_SIZE)
+                           };
+    <b>// jedno czytanie z kanału zapisuje kilka bufor&oacute;w !</b>
+    long r = <b>channel.read(buffers)</b>;
+
+    System.out.println("Liczba bajt&oacute;w przeczytanych do obu bufor&oacute;w: " + r);
+
+    // Przed uzyskiwaniem danych z bufor&oacute;w - trzeba je przestawić!
+    buffers[0].flip();
+    buffers[1].flip();
+
+    // Pierwssy bufor
+    // Widok na bufor jako na zawierający liczby short
+    ShortBuffer buf1 = buffers[0].asShortBuffer();
+    System.out.println("Dane 1");
+    while ( buf1.hasRemaining()) {
+      short elt = buf1.get();
+      System.out.println(elt);
+    }
+
+    // Drugi bufor
+    // Widok na bufor jako na zawierający liczby double
+    DoubleBuffer buf2 = buffers[1].asDoubleBuffer();
+    System.out.println("Dane 2");
+    while ( buf2.hasRemaining()) System.out.println(buf2.get());
+  }
+}
+</pre>
+
+wyprowadzi następujące wyniki:<br>
+
+<div class="listing100">Liczba bajt&oacute;w przeczytanych do obu bufor&oacute;w: 30<br>
+
+Dane 1<br>
+
+1<br>
+
+2<br>
+
+3<br>
+
+Dane 2<br>
+
+10.1<br>
+
+10.2<br>
+
+10.3</div>
+<br>
+
+  <br>
+
+R&oacute;wnież przy zapisywaniu danych przez kanały, możliwość jednorazowego zapisu
+z wielu bufor&oacute;w może być wielce wygodna. Np. w pewnych buforach możemy przygotować
+stałe fragmenty danych i już ich nie zmieniać, inne zaś bufory wypełniać
+dynamicznie zmieniającą się treścią.<br>
+
+Potrzebne będzie tylko jedno wywołanie metody write, by zapisać cały zestaw
+bufor&oacute;w (co opr&oacute;cz wygody programistycznej ma r&oacute;wnież pozytywny wpływ na efektywność
+działania naszego programu).<br>
+
+  <br>
+
+Przykładowy program zapisuje kilka plik&oacute;w, każdy z kt&oacute;rych ma taki sam nagł&oacute;wek
+i zakończenie. Częsć środkową wypełniają zmieniające się - od pliku do pliku
+- dane.<br>
+
+
+<pre>
+import java.io.*;
+import java.nio.*;
+import java.nio.channels.*;
+import java.nio.charset.*;
+
+class GatheringTest {
+
+  public static void main(String[] args) throws Exception {
+
+    // To będą stałe części każdego pliku
+    String sHeader = "To jest nagł&oacute;wek. Może być duży";
+    String sFooter = "To jest zakończenie. Może być duże";
+
+    // To będą dane, kt&oacute;re się zmieniają od pliku do pliku
+    byte[][] dane = { { 1, 2, 3},       // dane 1-go pliku
+                     { 9, 10, 11, 12 }, // dane 2-go pliku
+                     { 100, 101}        // dane 3-go pliku
+                   };
+
+    Charset charset = Charset.forName("windows-1250");
+    ByteBuffer header = charset.encode(CharBuffer.wrap(sHeader)),
+               footer = charset.encode(CharBuffer.wrap(sFooter));
+
+    // Drugi element tablicy bufor&oacute;w będzie dynamicznie się zmienial
+    // na razie = null
+    ByteBuffer[] contents = { header, null, footer };
+    for (int i = 0; i&lt;dane.length; i++) {
+      FileChannel fc = new FileOutputStream("plik"+i).getChannel();
+      contents[1] = ByteBuffer.wrap(dane[i]);  // podstawienie zmiennych danych
+      <b>fc.write(contents);</b>                      // zapis danych ze wszystkich bufor&oacute;w!
+      fc.close();
+      header.rewind();
+      footer.rewind();
+    }
+  }
+
+
+}
+</pre>
+
+<br>
+
+Czytanie i pisanie "po wielu buforach" od razu, nazywane także wektorowym wejściem-wyjściem (<i><b>vectored I/O</b></i>) jest <b>atomistyczne</b>
+ nie tylko w tym sensie, że realizowane jest przez jedno odwołanie z poziomu
+programu. Na nowoczesnych platformach systemowych daje ono dużą poprawę efektywności,
+bowiem następuje znaczna redukcja liczby niskopoziomowych (na poziomie jądra
+systemu) operacji we/wy oraz ich optymalizacja (w skrajnym przypadku do atomistycznej
+- pojedynczej - calkowicie zoptymalizowanej niskopoziomowej operacji we/wy).<br>
+
+  <br>
+
+<br>
+
+  <a name="W5.23"></a>
+<h2>
+K.8. NIO: mapowanie plik&oacute;w</h2>
+
+
+
+<div class="def">Mapowanie pliku polega na odzwierciedleniu całości lub części pliku w pamięci, bezpośrednio dostępnej dla programu.</div>
+<br>
+
+  <br>
+
+Mapowanie pliku w NIO uzyskujemy poprzez uzyskanie kanału podłączonego do
+pliku (niech oznacza go zmienna channel), a następnie użycie metody map z
+klasy FileChannel. Metoda ta zwraca referencję do obiektu klasy MappedByteBuffer
+(pochodnej od Buffer), kt&oacute;ry jest bajtowym buforem bezpośrednim (direct),
+zawierającym bajty pliku lub jego wybranego segmentu.<br>
+
+  <br>
+
+<div class="syntax"><br>
+
+
+<div align="center"><b>Mapowanie pliku</b><br>
+
+
+<div align="left"><br>
+
+  </div>
+
+  </div>
+
+&nbsp;&nbsp;&nbsp; FileChannel channel = ....; // podłączenie kanału do pliku<br>
+
+&nbsp;&nbsp;&nbsp; MappedByteBuffer buf = channel.map( tryb, pozycja, rozmiar);<br>
+
+  <br>
+
+gdzie:<br>
+
+
+<ul>
+
+    <li>buf - bufor bajtowy, reprezentujący zwartość pliku lub jego segmentu<br>
+
+    </li>
+
+    <li>tryb - jedna z opcji będących stałymi statycznymi klasy FileChannel.MapMode o nazwach</li>
+
+
+  <ul>
+
+      <li>READ_ONLY - możliwe tylko odczytywanie bufora</li>
+
+      <li>READ_WRITE - możliwe zmiany w buforze i ew. automatycznej propagacji
+zmian do pliku i ew. widocznośi tych zmian przez inne programy mapujące ten
+sam plik,</li>
+
+      <li>PRIVATE - możliwe zmiany w buforze, ale bez propagowania ich do
+pliku (będą więc niewidoczne dla innych program&oacute;w mapujących ten plik)</li>
+
+
+  </ul>
+
+    <li>pozycja - pzocucja pliku, od ktorej zaczyna się mapowanie</li>
+
+    <li>rozmiar - rozmiar mapowanego segmentu pliku<br>
+
+    </li>
+
+
+</ul>
+
+</div>
+<br>
+
+  <br>
+
+Po zmapowaniu pliku, na uzyskanym buforze bajtowym i jego widokach możemy
+wykonywać operacje, znane nam z klas buforowych, a operacje te de-facto będą
+operacjami na zawartości pliku. <br>
+
+  <br>
+
+Dostępne tryby dzialania zależą od tryb&oacute;w podłączenia (otwarcia) kanału.<br>
+
+Tryb READ_ONLY może być użyty tylko dla kanał&oacute;w otwartych do czytania, natomiast
+tryby READ_WRITE oraz PRIVATE wymagają kanał&oacute;w otwartych w trybie odczytu-zapisu.<br>
+
+  <br>
+
+Odpowiedniość między trybami kanał&oacute;w, a rodzajami plik&oacute;w/strumieni pokazuje poniższa tablica.<br>
+
+  <br>
+
+
+<table border="1" cellpadding="2" cellspacing="2" width="100%">
+
+    <tbody>
+
+      <tr>
+
+        <td bgcolor="#ffcccc" valign="top">
+
+      <div align="center"><b>Tryb mapowania<br>
+
+        </b></div>
+
+        </td>
+
+        <td bgcolor="#ffcccc" valign="top">
+
+      <div align="center"><b>Tryb otwarcia kanału<br>
+
+        </b></div>
+
+        </td>
+
+        <td bgcolor="#ffcccc" valign="top">
+
+      <div align="center"><b>Rodzaj pliku, <br>
+
+do kt&oacute;rego podłączamy kanał<br>
+
+metodą getChannel()<br>
+
+        </b></div>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top">READ_ONLY<br>
+
+        </td>
+
+        <td valign="top">tylko do odczytu<br>
+
+        </td>
+
+        <td valign="top">FileInputStream<br>
+
+RandomAccesFile otwarty w trybie tylko do odczytu ("r")<br>
+
+        </td>
+
+      </tr>
+
+      <tr>
+
+        <td valign="top">READ_WRITE<br>
+
+PRIVATE<br>
+
+        </td>
+
+        <td valign="top"><br>
+
+do odczytu-zapisu <br>
+
+        </td>
+
+        <td valign="top"><br>
+
+RandomAccesFile otwarty w trybie pisania-czytania ("rw")<br>
+
+        </td>
+
+      </tr>
+
+
+  </tbody>
+
+</table>
+
+  <br>
+
+  <br>
+
+Mapowanie plik&oacute;w może być wygodne z punktu widzenia programowania (działanie
+na pliku jak na buforze i jego widokach - lub w niekt&oacute;rych przypadkach jak
+na tablicy).<br>
+
+  <br>
+
+<div class="important">Ale nie tylko to jest zaletą mapowania plik&oacute;w. <br>
+
+Ot&oacute;ż uzyskiwany bufor mapujący (obiekt klasy MappedByteBuffer) &nbsp;jest <b>buforem bezpośrednim</b>, czyli alokowanym poza przestrzenią adresową programu . <br>
+
+W&nbsp;nowoczesnych systemach operacyjnych może on prawie w og&oacute;le nie zajmować
+pamięci systemu! &nbsp;Oczywiście jakieś fragmenty pamięci są używane dla prowadzenia
+odwzorowania, ale generalnie strony pamięci wirtualnej nie są zajęte. Obszarem
+stronicowanie jest sam plik!</div>
+<br>
+
+  <br>
+
+Sprawia to, iż wiele program&oacute;w naraz może mapować ten sam duży plik i działać
+na nim, nawet jeśli sumaryczna wielkość wszystkich odwzorowań przekracza
+wielkość dostępnej pamięci operacyjnej.<br>
+
+Z drugiej strony, to że bufory dla mapowanych plik&oacute;w są bezpośrednie (czyli
+alokowane gdzieś poza programami) sprawia, że mapowane pliki mogą stanowić
+wygodną realizację <b>pamięci dzielonej</b> (przez r&oacute;żne procesy) i sposobem na komunikwoanie się tych proces&oacute;w.<br>
+
+  <br>
+
+Zobaczmy przykłady.<br>
+
+Pierwszy program ilustracyjny zapisuje najpierw plik testowy liczbami całkowitymi,
+następnie uzyskuje kanał i mapuje plik, po czym wykonuje zmiany w tym pliku,
+operując wylącznie na mapującym buforze. <br>
+
+  <br>
+
+
+<pre>
+import java.io.*;
+import java.nio.*;
+import java.nio.channels.*;
+
+class MapFiles1 {
+
+  String fname = "test";
+
+  public MapFiles1() throws Exception {
+    init();         // inicjacja pliku testowego
+    mapAndChange(); // mapowanie i zmiana danych pliku
+    checkResult();  // sprawdzenie wynik&oacute;w
+  }
+
+  void init() throws IOException {
+    int[] data = { 10, 11, 12, 13 };
+    DataOutputStream out = new DataOutputStream(
+                               new FileOutputStream(fname)
+                            );
+    for (int i=0; i&lt;data.length; i++) out.writeInt(data[i]);
+    out.close();
+  }
+
+  void mapAndChange() throws IOException {
+
+    // Aby dokonywać zmian musimy przyłączyć kanal
+    // do pliku otwartego w trybie "read-write"
+    RandomAccessFile file =  new RandomAccessFile(fname, "rw");
+    FileChannel channel = file.getChannel();
+
+    // Mapowanie pliku
+    MappedByteBuffer buf;
+    buf  = channel.map(
+                FileChannel.MapMode.READ_WRITE,  // tryb "odczyt-zapis"
+                                             0,  // od początku pliku
+                            (int)channel.size()  // cały plik
+            );
+
+    // Uzyskujemy widok na bufor = zmapowany plik
+    IntBuffer ibuf = buf.asIntBuffer();
+
+    // Dla ciekawości: jakie charakterystyki widoku
+    System.out.println(ibuf + " --- Direct: " +  ibuf.isDirect());
+
+    int i = 0;
+    while (ibuf.hasRemaining()) {
+      int num = ibuf.get();       // pobieramy kolejny element
+      ibuf.put(i++, num * 10);    // zapisujemy jego wartość*10 na jego pozycji    }
+    }
+
+    // Zapewnia, że zmiany na pewno zostaną odzwierciedlone w pliku
+    buf.force();
+
+    channel.close();
+  }
+
+  void checkResult() throws IOException {
+    DataInputStream in = null;
+    try {
+      in = new DataInputStream(new FileInputStream(fname));
+      while(true) System.out.println(in.readInt());
+    } catch(EOFException exc) {
+        return;
+    } finally {
+        in.close();
+    }
+  }
+
+  public static void main(String[] args) throws Exception  {
+    new MapFiles1();
+  }
+}
+</pre>
+
+Program wyprowadzi:<br>
+
+<div class="listing100">java.nio.DirectIntBufferS[pos=0 lim=4 cap=4] --- Direct: true<br>
+
+100<br>
+
+110<br>
+
+120<br>
+
+130</div>
+<br>
+
+  <br>
+
+Na przykładzie tego programu warto zwr&oacute;cić uwagę na następujące kwestie:<br>
+
+
+<ul>
+
+    <li>program praktycznie nie konsumuje pamięci dla przechowywania pliku
+(zar&oacute;wno MappedByteBuffer, jak i jego widok jako IntBuffer są buforami bezpośrednimi)</li>
+
+    <li>po zmapowaniu pliku, pozycja bufora bajtowego jest ustawiona na
+0, &nbsp;a jego pojemność i limit na liczbę zmapowanych bajt&oacute;w; widoki "dziedziczą"
+te ustawienia, dokonując jedynie przeliczeń limitu i pojmeności z uwzględnieniem
+rozmiaru typu element&oacute;w,<br>
+
+    </li>
+
+    <li>użycie metody <b>force()</b> z klasy MappedByteBuffer zapewnia fizyczny
+zapis do pliku; spos&oacute;b i częstostliwość fizycznego zapisu zmienianych w buforze
+danych zależy od systemu operacyjnego, może się okazać, że nawet po zamknięciu
+kanału, systemowe czy sprzętowe cache/bufory nie są wymiatane.</li>
+
+
+</ul>
+
+Drugi program ma trochę bardziej praktyczne zastosowanie. Pozwala on "w miejscu"
+zmienić kodowanie podanego jako argument pliku z Windows1250 na ISO-8859-2
+jednocześnie zamieniając wszystkie litery na duże.<br>
+
+Przy okazji zobaczymy, że:<br>
+
+
+<ul>
+
+    <li>dekodowanie bufora bajtowego tworzy nowy bufor znakowy, kt&oacute;ry opakowuje
+tablicę element&oacute;w typu char[]. Ta tablica istnieje (ona własnie, praktycznie,
+jest tym buforem znakowym) i możemy mieć do niej dostęp poprzez odwołanie
+      <b>array()</b> z klasy CharBuffer (dla wszystkich klas buforowych metoda array zwraca tablicę opakowaną przez bufor, ale tylko wtedy, <b>gdy takie opakowanie miało miejsce</b>),</li>
+
+    <li>czasem potrzebne może być zastosowanie klasy CharsetEncoder (jej
+metody encode używamy po to by dokonać kodowania do już istniejącego bufora
+bajtowego, &nbsp;w naszym przypadku - mapującego plik). Analogicznie (ale niejako
+w drugą stronę)&nbsp; może być zastosowana klasa CharsetDecoder.</li>
+
+
+</ul>
+
+Oto tekst programu. Proszę go przetestowac na jakimś samodzielnie utworzonym
+pliku html, zapisanym w stronie kodowej Windows 1250). <br>
+
+
+<pre>
+import java.io.*;
+import java.nio.*;
+import java.nio.channels.*;
+import java.nio.charset.*;
+
+class MapFiles2 {
+
+  public static void main(String[] args) throws Exception  {
+    Charset inCharset = Charset.forName("windows-1250"),
+           outCharset = Charset.forName("ISO-8859-2");
+
+    RandomAccessFile file = new RandomAccessFile(args[0], "rw");
+    FileChannel fc = file.getChannel();
+
+    // Mapowanie pliku
+    MappedByteBuffer mbb = fc.map(FileChannel.MapMode.READ_WRITE,
+                                  0, (int) fc.size());
+
+    // Utworzenia bufora znakowego ze zdekodowanymi znakami
+    // z bufora bajtowego (mapujące plik). Konwersja: win1250-&gt;unicode
+    CharBuffer cbuf = inCharset.decode(mbb);
+
+    // Okazuje się, że ten nowo utworzony bufor opakowuje tablicę
+    // zatem możemy ją uzyskać i działać na jej elementach
+    // to dzialanie oznacza dzialanie na elementach bufora
+    char[] chArr = cbuf.array();
+    for (int i=0; i &lt; chArr.length; i++)
+      chArr[i] = Character.toUpperCase(chArr[i]);
+
+    // Po dekodowaniu bufor bajtowy musi być przewinięty do początku
+    // aby koder (zob. dalej) m&oacute;gł w nim zapisywać kodowane dane
+    mbb.rewind();
+
+    // Utworzenie kodera, zamieniającego Unicode na wyjściową stronę kodową
+    CharsetEncoder encoder = outCharset.newEncoder();
+
+    // Koder zapisuje istniejący bufor mbb (ten kt&oacute;ry mapuje plik)
+    // ostatni argument - true oznacza zakończenie pracy kodera na tym wywołaniu
+    encoder.encode(cbuf, mbb, true);
+    fc.close();
+  }
+}
+</pre>
+
+  <br>
+
+  <br>
+
+<br>
+
+  <a name="W5.24"></a>
+<h2>
+K.9. NIO: bezpośrednie transfery kanałowe</h2>
+
+
+
+<div class="def">Bezpośredni transfer kanałowy polega na przeslaniu wszystkich danych
+jednego kanału do drugiego kanału za pomocą jednego odwołania z poziomu programu,
+z możliwym (w zależności od systemu operacyjnego i platformy sprzętowej)
+pominięciem systemowych operacji wejścia-wyjścia, a zrealizowanym jako bardzo
+szybki trarnsfer wykonywany przez sam sprzęt ze wsparciem ze strony jądra
+systemu</div>
+&nbsp; <br>
+
+  <br>
+
+Obecnie w NIO bezpośrednie transfery kanałowe dotyczą tarnsfer&oacute;w do/z plik&oacute;w.<br>
+
+Klasa FileChannel dostarcza dw&oacute;ch metod, kt&oacute;re pozwalają na:<br>
+
+  <br>
+
+
+<ul>
+
+    <li>bezpośredni transfer kanałowy z dowolnego kanalu do kanalu plikowego (metoda <b>transferTo</b>)</li>
+
+    <li>bezpośredni transfer kanalowy z kanalu plikowego do dowlonego kanału (metoda <b>transferFrom</b>)</li>
+
+
+</ul>
+
+Bezpośrednie transfery kanałowe w systemach, kt&oacute;re w swoim jądrze zapewniają
+wsparcie takich transfer&oacute;w, mogą być bardzo szybkie i efektywne. <br>
+
+W innych systemach (jak np. Windows), poprawa efektywności (w por&oacute;wnaniu
+z tradycyjnymi sposobami kopiowania danych) może być r&oacute;żna, nawet dość nieznaczna.<br>
+
+  <br>
+
+Zawsze jednak zaletą stosowania metod <b>transfer...</b> &nbsp;z klasy FileChannel
+pozostaje możliwośc uniknięcia potrzeby programowania (w kliku wierszach,
+ale zawsze to trochę pracy) procedur kopiowania danych z/do plik&oacute;w.<br>
+
+  <br>
+
+Oto przykładowy program, por&oacute;wnujący dwa sposoby kopiowania plik&oacute;w: za pomocą
+bezpośredniego transferu kanałowego i poprzez buforowane strumienie.<br>
+
+
+<pre>
+import java.nio.*;
+import java.nio.channels.*;
+import java.io.*;
+
+class DirectTransfer {
+
+  String inFileName;
+  String outFileName;
+
+  DirectTransfer(String infn, String outfn) throws Exception {
+    inFileName  = infn;
+    outFileName = outfn;
+    directTransfer();
+    copyByStream();
+  }
+
+
+  void directTransfer() throws Exception {
+
+    FileInputStream in = new FileInputStream(inFileName);
+    FileOutputStream out =  new FileOutputStream(outFileName);
+    FileChannel fcin = in.getChannel();
+    FileChannel fcout = out.getChannel();
+    long size = fcin.size();
+    System.out.println("Copying file " + size + "B.");
+
+    long start =  System.currentTimeMillis();
+
+    // Bezpośredni transfer
+    fcout.transferFrom(fcin, 0, size);
+
+    long end = System.currentTimeMillis();
+
+    System.out.println("Direct transfer time " + (end - start));
+
+   }
+
+
+  final int BUFSIZE = 5000000;
+  void copyByStream() throws Exception  {
+
+    FileInputStream fin = new FileInputStream(inFileName);
+    BufferedInputStream in = new BufferedInputStream(fin, BUFSIZE );
+    FileOutputStream fout = new FileOutputStream(outFileName);
+    BufferedOutputStream out = new BufferedOutputStream(fout, BUFSIZE);
+
+    byte[] b = new byte[BUFSIZE];
+    long start =  System.currentTimeMillis();
+    while (true) {
+      int n = in.read(b);
+      if (n == -1) break;
+      out.write(b, 0, n);
+    }
+    in.close();
+    out.close();
+
+    long end = System.currentTimeMillis();
+    System.out.println("Stream time " + (end - start));
+  }
+
+
+   public static void main(String[] args) throws Exception {
+     new DirectTransfer(args[0], args[1]);
+   }
+}
+</pre>
+
+Możliwy wynik:<br>
+
+<div class="listing100"><br>
+
+Copying file 51793936B.<br>
+
+Direct transfer time 2470<br>
+
+Stream time 6150</div>
+<br>
+
+  <br>
+
+  <br>
+
+<br>
+
+  <br>
+
+</body>
+</html>

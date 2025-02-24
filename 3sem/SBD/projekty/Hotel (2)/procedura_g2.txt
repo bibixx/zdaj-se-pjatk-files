@@ -1,0 +1,109 @@
+create or replace procedure rezerwuj_VIP(ident number, pocz date, kon date, kat number)
+as
+
+b integer;
+numo integer;
+czy number;
+wolny pokoje.id_pokoju%type;
+
+Cursor wolne_pokoje is
+SELECT id_pokoju
+FROM pokoje 
+	WHERE
+	id_kategorii= kat
+AND
+	NOT EXISTS (SELECT * FROM rezerwacje,r_przydzielona
+WHERE
+rezerwacje.id_rezerwacji=r_przydzielona.id_rezerwacji
+AND r_przydzielona.id_pokoju = pokoje.id_pokoju
+AND (kon between rezerwacje.rez_od
+AND rezerwacje.rez_do
+OR pocz BETWEEN rezerwacje.rez_od AND rezerwacje.rez_do)); 
+
+Cursor znajdz is 
+SELECT goœcie.id_goscia, r_przydzielona.id_pokoju,r_przydzielona.id_rezerwacji
+FROM pokoje, rezerwacje, goœcie, r_przydzielona
+WHERE
+pokoje.id_kategorii = kat
+AND r_przydzielona.id_pokoju = pokoje.id_pokoju
+AND rezerwacje.id_rezerwacji=r_przydzielona.id_rezerwacji
+AND rezerwacje.id_goscia= goœcie.id_goscia
+AND czy_Vip = 0
+AND 	pocz between rezerwacje.rez_od
+AND rezerwacje.rez_do
+	ORDER BY rezerwacje.rez_od DESC;
+
+zmiana znajdz%rowtype;
+
+Begin 
+	SELECT count (1) INTO b
+	FROM goœcie
+	WHERE id_goscia = ident;
+
+	if b > 0 then
+		open wolne_pokoje;
+		fetch wolne_pokoje  into wolny;
+		if wolne_pokoje%found then 
+			dbms_output.put_line('Wolny = '|| wolny);
+			select nvl(Max(id_rezerwacji)+1,1) into numo
+			from rezerwacje;
+			insert into rezerwacje 
+			values (numo,pocz,kon,ident);
+			insert into r_przydzielona
+			values(numo, wolny);
+			dbms_output.put_line('Wolny zarezerwowany pokoj nr '|| wolny);
+		else
+			dbms_output.put_line ('Nie ma wolnego pokoju ');
+			select czy_vip into czy from goœcie 
+			where id_goscia = ident;
+
+			if czy = 0 then 
+			dbms_output.put_line('Wstawiamy do zamowien');
+			select nvl(Max(id_rezerwacji)+1,1) into numo
+			from rezerwacje;
+
+			insert into rezerwacje values (numo,pocz,kon,ident);
+			insert into r_zamowiona values (numo, kat);
+
+			else --to prawdziwy VIP
+			dbms_output.put_line('to VIP');
+			open znajdz;
+			
+			fetch znajdz into zmiana;
+			if znajdz%found then
+				select id_rezerwacji into numo
+				from rezerwacje
+				where zmiana.id_rezerwacji= rezerwacje.id_rezerwacji;
+				insert into r_zamowiona Values( numo, kat);
+				delete from r_przydzielona
+				where id_rezerwacji = numo;
+dbms_output.put_line('Wstawiamy do rezerwacji zamowionych' || 
+zmiana.id_goscia);
+
+			select nvl(Max(id_rezerwacji)+1,1) into b
+			from rezerwacje;
+			insert into rezerwacje 
+			values (b,pocz,kon,ident);
+			
+			insert into r_przydzielona values (b, zmiana.id_pokoju);
+
+			dbms_output.put_line('Wstawiamy do rezerwacji przydzielonych  '||ident);
+			else
+			dbms_output.put_line('NIemozliwa rezerwacja');
+
+			SELECT nvl(Max(id_rezerwacji)+1,1) INTO b
+			FROM rezerwacje;
+
+			insert into rezerwacje 
+			values (b,pocz,kon,ident);
+			
+			insert into r_zamowiona values (b, kat);
+			end if;
+			end if;
+			end if;
+close wolne_pokoje;
+else 
+dbms_output.put_line('Nie ma takiego goscia');
+
+end if;
+end;

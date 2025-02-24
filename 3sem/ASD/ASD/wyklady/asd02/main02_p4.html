@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main02_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main02_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<p><A NAME="EDU.wyklad.punkt 2"></A><br clear="all">
+    </p>
+    <div class="tytulpunktu">4.&nbsp; Algorytm binarnych poszukiwań</div> 
+
+<p> W tym punkcie omówimy algorytm rozwiązywania problemu wyszukiwania, który 
+wykorzystuje&nbsp; w sposób bardzo istotny, założenie o uporządkowaniu danego 
+ciągu. Dla uproszczenia założymy, że x należy do przedziału [e[1], e[n]]. 
+Przyjmijmy specyfikację algorytmu </p>
+<p style="text-align: center"> wp = {n &gt; 1, e[1]&lt; e[2]&lt; ... &lt; e[n], 
+e[1]<font face="Symbol"> <span lang="en">&pound;</span></font> x <font face="Symbol">&lt;
+</font>e[n]},</p>
+<p style="text-align: center"> wk = {<font face="Symbol"> </font>result<font face="Symbol">
+<span lang="en">&pound;</span> </font>n, e[result]<font face="Symbol"> <span lang="en">
+&pound;</span> </font>x <font face="Symbol">&lt; </font>e[result+1]}.</p>
+<p> Metoda zastosowana w tym algorytmie nosi nazwę &quot;dziel i zwyciężaj&quot;.&nbsp; W tym przypadku 
+polega ona na znalezieniu zadania o mniejszym rozmiarze, 
+którego rozwiązanie jest równocześnie rozwiązaniem zadania początkowego.&nbsp; <BR/> </p>
+<div class="przyk" style="width: 595; height: 307">
+   <TABLE frame="void" rules="none" width="586" height="279">
+      <COL align="left"><COL align="left"><COL align="left"><COL align="left"><COL align="left"><COL align="left"><COL align="left">
+      <TBODY>
+         <TR>
+            <TD width="58" height="15"> BinSearch<b>{</b></TD>
+            <TD width="254" height="15"></TD>
+             
+            <TD width="7" height="15">&nbsp; </TD>
+             
+            <TD width="249" height="15"></TD>
+             
+         </TR>
+         <TR>
+            <TD width="58" height="16"></TD>
+            <TD width="254" height="16">   i := 1; j := n;   <STRONG>&nbsp;</STRONG> </TD>
+            <TD width="7" height="16">   </TD>
+            <TD width="249" height="16">   </TD>
+         </TR>
+         <TR>
+            <TD width="58" height="16"></TD>
+            <TD width="254" height="16">      <b>&nbsp;</b><STRONG>while&nbsp; </STRONG>(i+1 
+            &lt; j)   <STRONG>do </STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD>
+             
+            <TD width="7" height="16">      </TD>
+             
+            <TD width="249" height="16">      //e[i] <span lang="en">
+            <font face="Symbol">&pound;</font></span><font face="Symbol"> </font>x &lt; 
+            e[j]&nbsp; oraz i&lt;j</TD>
+             
+         </TR>
+         <TR>
+            <TD width="58" height="16"></TD>
+            <TD width="254" height="16">   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG>m := (i + j) 
+            div 2;</TD>
+            <TD width="7" height="16">   </TD>
+            <TD width="249" height="16">   //&nbsp; i <font face="Symbol">&lt;&nbsp; </font>m &lt; 
+            j</TD>
+         </TR>
+         <TR>
+            <TD width="58" height="16"></TD>
+            <TD width="254" height="16">   <STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </STRONG>
+            <b>if</b> e(m) <span lang="en"><font face="Symbol">&pound;</font></span> x
+            <b>then</b> </TD>
+            <TD width="7" height="16">   </TD>
+            <TD width="249" height="16">   //&nbsp; e[m] <span lang="en">
+            <font face="Symbol">&pound;</font></span><font face="Symbol"> </font>x &lt; 
+            e[j]</TD>
+         </TR>
+         <TR>
+            <TD width="58" height="16"></TD>
+            <TD width="254" height="16">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>i := m</TD>
+            <TD width="7" height="16">   </TD>
+            <TD width="249" height="16">   //&nbsp; e[i] <span lang="en">
+            <font face="Symbol">&pound;</font></span><font face="Symbol"> </font>x &lt; 
+            e[j] oraz i&lt;j</TD>
+         </TR>
+         <TR>
+            <TD width="58" height="16"></TD>
+            <TD width="254" height="16">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            else</strong></TD>
+            <TD width="7" height="16">   </TD>
+            <TD width="249" height="16">   //&nbsp; e[i] <span lang="en">
+            <font face="Symbol">&pound;</font></span><font face="Symbol"> </font>x &lt; 
+            e[m]</TD>
+         </TR>
+         <TR>
+            <TD width="58" height="16"></TD>
+            <TD width="254" height="16">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>j := m</TD>
+            <TD width="7" height="16">   </TD>
+            <TD width="249" height="16">   //&nbsp; e[i] <span lang="en">
+            <font face="Symbol">&pound;</font></span><font face="Symbol"> </font>x &lt; 
+            e[j] oraz i&lt;j</TD>
+         </TR>
+         <TR>
+            <TD width="58" height="16"></TD>
+            <TD width="254" height="16">   <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fi</strong></TD>
+            <TD width="7" height="16">   </TD>
+            <TD width="249" height="16">   </TD>
+         </TR>
+         <TR>
+            <TD width="58" height="16"></TD>
+            <TD width="254" height="16">   <strong>od;</strong></TD>
+            <TD width="7" height="16">   </TD>
+            <TD width="249" height="16">   //&nbsp;i&lt;j,&nbsp; e[i] <span lang="en">
+            <font face="Symbol">&pound;</font></span><font face="Symbol"> </font>x &lt; 
+            e[j] oraz i+1=j</TD>
+         </TR>
+         <TR>
+            <TD width="58" height="16"></TD>
+            <TD width="254" height="16">   result := i</TD>
+            <TD width="7" height="16">   </TD>
+            <TD width="249" height="16">   //&nbsp; e[result] <span lang="en">
+            <font face="Symbol">&pound;</font></span><font face="Symbol"> </font>x &lt; 
+            e[result+1]</TD>
+         </TR>
+         <TR>
+            <TD width="58" height="16"><strong>}</strong></TD>
+            <TD width="254" height="16">   </TD>
+            <TD width="7" height="16">   </TD>
+            <TD width="249" height="16">   </TD>
+         </TR>
+      </TBODY>
+   </TABLE>
+</div>
+<p> Formuły zapisane obok instrukcji informują o własnościach prawdziwych w
+  trakcie realizacji algorytmu. Wynika z nich, że niezmiennikiem pętli w tym 
+algorytmie, jest formuła&nbsp; (e[i]<font face="Symbol">
+<span lang="en">&pound;</span></font> x <font face="Symbol">&lt; </font>e[j]
+<font face="Symbol"><span lang="en">&Ugrave;</span>&nbsp; </font>i &lt; j). </p>
+<p> Rzeczywiście, jeżeli formuła (e[i]<font face="Symbol">
+<span lang="en">&pound;</span></font> x <font face="Symbol">&lt; </font>e[j]&nbsp;<font face="Symbol"><span lang="en">&Ugrave;</span> </font>i &lt; j) 
+jest spełniona na początku kolejnej iteracji oraz spełniony jest warunek pętli, 
+to&nbsp; po sprawdzeniu, po której stronie elementu środkowego e[m] znajduje się 
+x&nbsp; oraz przesunięciu odpowiedniego końca przedziału znów mamy prawdziwą 
+formułę (e[i]<font face="Symbol">
+<span lang="en">&pound;</span> </font>x<font face="Symbol"> &lt; </font>e[j]). 
+Ponieważ i+1&lt;j, to (i+j)/2&lt;j, oraz i &lt;(i+j)/2, czyli w obu przypadkach po 
+wykonaniu przypisania i :=m lub j :=m, mamy i&lt;j. Na mocy twierdzenia I.4.1 (o 
+niezmiennikach), po wyjściu z pętli mamy i+1<font face="Symbol"> <span lang="en">&sup3;</span></font> 
+j oraz prawdziwy jest niezmiennik.&nbsp; Zatem&nbsp; (e[i]<font face="Symbol">
+<span lang="en">&pound;</span></font> x <font face="Symbol">&lt; </font>e[j]
+<font face="Symbol"><span lang="en">&Ugrave;</span>&nbsp; </font>i &lt; j 
+<font face="Symbol"><span lang="en">&Ugrave;</span>&nbsp; </font>i+1=j), czyli 
+algorytm ustala wartość zmiennej result zgodnie z wymaganiami specyfikacji. 
+Udowodniliśmy w ten sposób, że dla wszystkich danych spełniających warunek 
+początkowy, jeżeli algorytm daje wynik, to spełnia on warunek końcowy w dowolnej 
+strukturze danych z określonym liniowym porządkiem.</p>
+
+<p></P>
+
+<div class="twier">
+<p>Twierdzenie 4.1</P>
+<p>W każdej strukturze danych STR, w której określony jest z liniowy porządek <FONT FACE="Symbol"> <span lang="en">&pound;</span></FONT>, 
+algorytm BinSearch jest całkowicie poprawny ze względu na specyfikację&nbsp; </P>
+
+<p style="text-align: center">wp = {n &gt; 1, e[1]&lt; e[2]&lt; ... &lt; e[n], 
+e[1]<font face="Symbol"> <span lang="en">&pound;</span></font> x <font face="Symbol">&lt;
+</font>e[n]}, wk = {<font face="Symbol"> </font>result<font face="Symbol">
+<span lang="en">&pound;</span> </font>n, e[result]<font face="Symbol"> <span lang="en">
+&pound;</span> </font>x <font face="Symbol">&lt; </font>e[result+1]}.</P>
+
+</div>
+
+<p> Dla dowodu twierdzenia 4.1 trzeba jeszcze pokazać, że algorytm BinSearch 
+zatrzymuje się dla dowolnych danych spełniających warunek początkowy. </p>
+<p> Zauważmy, że jeżeli różnica j - i&nbsp; pewnej iteracji wynosi c, to w 
+następnej iteracji jest mniejsza od c, bo</p>
+<p style="text-align: center"> j - [(i+j)/2] &lt; j - i&nbsp;&nbsp; oraz&nbsp;&nbsp; 
+[(i+j)/2] - i &lt; j - i.</p>
+<p> Zatem ciąg różnic j - i wartości zmiennych i, j w kolejnych iteracjach pętli 
+&quot;While&quot;, jest ciągiem malejącym liczb naturalnych. Ponieważ nie można zbudować 
+nieskończonego ciągu malejącego liczb naturalnych, zatem po skończonej liczbie 
+kroków warunek j - i &gt;1 nie będzie spełniony. Algorytm zakończy wtedy 
+obliczenie. Wynika stąd, że algorytm BinSearch zatrzymuje się dla dowolnych 
+danych, co kończy dowód twierdzenia 4.1.</p>
+<p> <b>Analiza kosztu</b>: </p>
+<p> Zastanówmy się najpierw czym będziemy mierzyć koszt czasowy tego algorytmu.
+  Poza operacjami przypisania i operacjami arytmetycznymi, wykonuje się porównywanie
+  elementów. Zauważmy, że dla tego algorytmu, nie jest istotne czym są elementy 
+ciągu i jakie mają wartości. Ważne są tylko relacje między x, a elementami 
+ciągu. Wydaje się więc naturalnym wybranie porównywania, jako operacji dominującej, 
+przy pomocy której będziemy mierzyli koszt czasowy algorytmu. Zauważmy jeszcze,
+  że niezależnie od wartości elementów, algorytm zawsze postępuje podobnie: w
+  każdym kroku patrzymy, w której połowie rozważanego fragmentu ciągu, znajduje
+  się x.</p>
+<p> Pytanie o liczbą wykonanych operacji dominujących sprowadza się do pytania: 
+ile iteracji wykona pętla &quot;while&quot;. Ponieważ w każdej iteracji, segment, w którym 
+mieści się x, jest dwa razy krótszy od rozważanego w poprzedniej iteracji, zatem pytanie sprowadza się  do tego, ile razy ciąg o długości n
+  można podzielić na 2  części. Ponieważ algorytm zatrzymuje się, gdy indeksy i, 
+j są sąsiednimi liczbami naturalnymi, zatem w najgorszym razie wykona&nbsp; <span lang="en">
+<font face="Symbol">é</font></span>lg n<font face="Symbol"><span lang="en">&ugrave;</span> </font>
+porównań.</p>
+<p style="text-align: left"> Koszt czasowy algorytmu BinSearch jest 
+logarytmiczny w stosunku do liczby elementów ciągu, T(BinSearch, n) =
+<font face="Symbol">Q</font>(lg n). Jest to więc istotna poprawa w porównaniu z 
+algorytmami wyszukiwania przedstawionymi w poprzednich punktach tego wykładu.</p>
+
+
+<p><b>Pytanie 4</B>: Który z algorytmów wykona mniejszą liczbę porównań w przypadku 
+najgorszym: algorytm Skoki z długością skoku równą&nbsp; <span lang="en">
+<font face="Symbol">é</font></span><font face="Symbol"><span lang="en">Ö</span>(</font>n-1)
+<span lang="en"><font face="Symbol">&ugrave;</font></span>, czy algorytm poszukiwań binarnych? 
+
+
+<!--Odpowiedź Algorytm BinSearch wykona <span lang="en">
+<font face="Symbol">é</font></span>lg n<span lang="en"><font face="Symbol">&ugrave;</font></span> 
+porównań, a algorytm Skoki wykona w najgorszym razie <font face="Symbol">(</font><span lang="en"><font face="Symbol">é</font></span><font face="Symbol"><span lang="en">Ö</span>(</font>n-1)<span lang="en"><font face="Symbol">&ugrave;</font></span> 
++ <span lang="en">
+<font face="Symbol">é</font></span><font face="Symbol"><span lang="en">Ö</span>(</font>n-1)<span lang="en"><font face="Symbol">&ugrave;</font></span> 
+- 1) porównań. Ponieważ lg n &lt; 2 <span lang="en"><font face="Symbol">Ö</font></span>n 
+dla wszystkich n&gt;1. Mniejszy koszt ma algorytm poszukiwań binarnych, bo funkcja 
+logarytm rośnie do nieskończoności dużo wolniej niż funkcja pierwiastek. </p>
+
+-->
+
+<form>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='-----Zobacz odpowiedź-----' NAME='Klik0' 
+onClick="napis(this.form,'Mniejszy koszt ma algorytm poszukiwań binarnych, bo logarytm rośnie dużo wolniej niż pierwiastek.')">
+</p>
+</form>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main02_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main02_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

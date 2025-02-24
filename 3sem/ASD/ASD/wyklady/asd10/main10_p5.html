@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main10_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main10_p6.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><br clear="all"><div class="tytulpunktu">
+5. Przykłady funkcji mieszających</div>
+
+
+ &nbsp;<BR>
+
+Funkcja haszująca została zdefiniowana jako odwzorowanie przypisujące kluczom 
+adresy, tzn. pozycje w tablicy haszującej. Jeśli liczba elementów, które chcemy 
+zapamiętać w tablicy haszującej, wynosi n, a liczba możliwych adresów wynosi m, 
+to liczba funkcji mieszających wynosi m<sup><font face="Verdana">n</font></sup>. 
+Liczba funkcji ze zbioru n elementowego w zbiór m elementowy jest, jak widać, 
+bardzo duża. Nie wszystkie jednak z tych funkcji nadają się do naszych celów. 
+Nawet jeśli ograniczymy się do tzw. funkcji doskonałych, tzn. 
+różnowartościowych,&nbsp; to większość z nich nie jest przydatna. Funkcja haszująca, 
+której wartość wylicza się bardzo często, musi mieć prostą 
+defincję a jej wyliczanie powinno być szybkie. Co więcej, zależy nam na tym, by 
+równomiernie rozrzucała elementy danego zbioru kluczy w tablicy. <p>Zwykle 
+będziemy zakładać, że klucze są liczbami naturalnymi identyfikującymi w pewien 
+sposób elementy rozważanych przez nas zbiorów.&nbsp; Wybór funkcji haszującej 
+zależy od zbioru kluczy, z którymi pracujemy. Kilka, ogólnie znanych i często 
+stosowanych, przykładów funkcji mieszających jest treścią tego punktu.</p>
+<p><b>Dzielenie</b></p>
+<p>Najprostszym przykładem funkcji mieszającej jest funkcja postaci </p>
+<p style="text-align: center">h(x) = x mod m, </p>
+<p>o ile uniwersum kluczy składa się z liczb naturalnych, a m jest rozmiarem 
+tablicy haszującej. Jest to łatwa i szybka funkcją haszująca. Jeśli elementami 
+uniwersum są słowa, to możemy również użyć funkcji mieszającej zdefiniowanej 
+przez dzielenie, ponieważ słowa są reprezentowane przez ciągi bitów, a te z 
+kolei możemy potraktować jako binarną reprezentację pewnej liczby, którą użyjemy 
+jako klucza.</p>
+<p>Jeśli litera A jest reprezentowana przez ciąg binarny 00001, B przez 
+00010,..., L przez 01100,.. to słowo ALA jest reprezentowane przez&nbsp; 
+000010110000001 (konkatenacja reprezentacji liter). Liczbą odpowiadającą temu 
+ciągowi bitów jest 1409. Zakładając, że tablica haszująca ma 13 elementów, słowo 
+ALA powinno się znaleźć na pozycji piątej, bo 1409 mod 13 = 5.</p>
+<p>Przy takiej funkcji mieszającej trzeba unikać pewnych wartości m. Na 
+przykład, gdyby m = 2<sup><font face="Verdana">p</font></sup>, to wartość h(k) 
+zależałaby tylko od p ostatnich bitów rozwinięcia dwójkowego liczby k. Na 
+przykład, gdybyśmy przyjęli m=16, to wszystkie słowa reprezentowane przez liczby 
+parzyste, znajdowałyby się na pozycjach parzystych, a pozycja słowa zależałaby 
+tylko od czterech ostatnich bitów. Dobra 
+liczba m powinna, w przypadku funkcji mieszającej za pomocą operacji modulo, być liczbą pierwszą, niezbyt bliską potędze 
+dwójki.</p>
+<p>Jeśli nic szczególnego nie wiemy o kluczach, to zwykle stosujemy tę właśnie 
+metodę.</p>
+<p><b>Mnożenie</b></p>
+<p>Dla danego parametru <font face="Symbol">q</font>, 0&lt;<font face="Symbol">q</font>&lt;1 
+niech funkcja mieszająca ma postać:</p>
+<p style="text-align: center">h(x) = <span lang="en"><font face="Symbol">ë</font></span>(( <font face="Symbol">q <span lang="en">´</span> </font>x) 
+mod 1) m<span lang="en"><font face="Symbol">&ucirc;</font></span>.</p>
+<p>Wartością funkcji h jest tym razem część dziesiętna iloczynu x i 
+<font face="Symbol">q</font>, wynik 
+mnożymy przez m, i ostatecznie część całkowita wyniku będzie adresem klucza x.</p>
+<p>Na przykład, jeśli&nbsp; <font face="Symbol">q </font>= 0.511 oraz m = 13, to słowo ALA, reprezentowane 
+przez ciąg bitów 000010110000001, </p>
+<p style="text-align: center">h(ALA) =&nbsp; <span lang="en">
+<font face="Symbol">ë</font></span>(1409<font face="Symbol"><span lang="en">´</span> 
+q) </font>mod 1 <font face="Symbol">)<span lang="en">´</span> </font>m<span lang="en"><font face="Symbol">&ucirc;</font></span>&nbsp; 
+=&nbsp; <span lang="en"><font face="Symbol">ë</font></span>(719,999 mod 1) <font face="Symbol"><span lang="en">´</span> </font>m<span lang="en"><font face="Symbol">&ucirc;</font></span> 
+=&nbsp; <span lang="en"><font face="Symbol">ë</font></span>0,999 <font face="Symbol"><span lang="en">´</span> </font>m
+<span lang="en"><font face="Symbol">&ucirc;</font></span>= 12</p>
+<p>zostanie umieszczone na pozycji 12. </p>
+<p>Przy takiej funkcji haszującej wartość m nie ma wielkiego znaczenia. Istotna 
+jest natomiast wartość parametru q, która na podstawie teoretycznych badań nie 
+powinna być ani bliska zeru, ani bliska jedności, powinna być natomiast oddalona 
+od nich o&nbsp; (<span lang="en"><font face="Symbol">Ö</font></span>5 -1)/2.</p>
+<p><b>Wycinanie</b></p>
+<p>W tej metodzie do obliczenia adresu wykorzystuje się tylko część klucza. Może 
+to być np. fragment środkowy, albo ostatnie cztery pozycje, albo konkretnie 
+wskazane pozycje.&nbsp; Na ogół pomijamy te fragmenty klucza, które nie 
+rozróżniają dostatecznie dobrze elementów. </p>
+<p>Na przykład, gdybyśmy chcieli zapamiętać telefony naszych znajomych z 
+Warszawy, to nie ma sensu brać pod uwagę prefiksu 22, gdyż jest on identyczny 
+dla wszystkich telefonów warszawskich. Jeśli&nbsp; nasz zbiór składa się z imion 
+dziewcząt (Polek), to przy wyliczaniu adresu elementu, nie będziemy brali pod 
+uwagę ostatniej litery, gdyż na ogół jest to litera 'a'.</p>
+<p><b>Kompresja</b></p>
+<p>Załóżmy, że elementy rozważanego uniwersum są reprezentowane przez ciągi 
+bitów. W tej metodzie rozrzucania używamy wszystkich bitów. Dzielimy natomiast 
+cały ciąg na odcinki równej długości i wykonujemy operację XOR na 
+odpowiadających bitach. </p>
+<p>Na przykład, jeśli elementami interesującego nas uniwersum są słowa i 
+przypisaliśmy literom liczby, np. tak jak w przykładzie 4.1, to adresem słowa 
+może być suma binarnych reprezentacji liter w sensie operacji XOR traktowana 
+jako liczba z przedziału 0-31. Mamy wtedy</p>
+<p style="text-align: center">h(antek) = 00001 XOR 01111 XOR 10100 XOR 00101 XOR 
+01011 = 10100 = (20)<sub><font face="Verdana">10</font></sub></p>
+<p style="text-align: center">h(piotr) = 10001 XOR 01001 XOR 10000 XOR 10100 XOR 
+10010 = 01110 = (14)<sub><font face="Verdana">10</font></sub>.</p>
+<p>Zwróćmy uwagę, że operacja XOR jest łączna i przemienna. Wynika stąd, że 
+wszystkie słowa o takich samych literach otrzymają ten sam adres.&nbsp; </p>
+<p>Nie będziemy się tu zajmować głębiej funkcjami mieszającymi. Wiele innych 
+przykładów można znaleźć w literaturze. Zauważmy tylko na zakończenie tego 
+punktu, że niezależne od tego, jak zdefiniujemy funkcję mieszającą, zawsze może 
+się zdarzyć, że wystąpi kolizja: różne elementy otrzymają ten sam adres.</p>
+<p><b>Pytanie 5</B>: Jaki jest koszt wyszukania słowa w zbiorze reprezentowanym 
+przez tablicę z haszowaniem stosującą mieszanie opisane w ostatnim przykładzie 
+(kompresja), a jakie gdybyśmy te same elementy umieścili po prostu na kolejnych 
+pozycjach w zwykłej tablicy (zakładamy, że nie wystąpił problem kolizji)?&nbsp; 
+</P>
+
+<!-- <p>Odpowiedź: W zwykłej tablicy musielibyśmy wykonać w najgorszym przypadku 31 porównań słów, -->
+<!-- a w przypadku tablicy haszującej jedno wyliczenie adresu słowa.</P> -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'W zwykłej tablicy, w najgorszym przypadku 31 porównań słów,a w haszującej jedno wyliczenie adresu słowa.')">
+</form>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main10_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main10_p6.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

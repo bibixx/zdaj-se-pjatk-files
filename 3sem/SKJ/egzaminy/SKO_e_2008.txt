@@ -1,0 +1,127 @@
+Czas potrzebny na przes³anie ma³ego pakietu od nadawcy do odbiorcy i z powrotem to... (podaj skrót)
+tls	
+ttl	
+[x] rtt 	
+rtp
+
+Jakim poleceniem (system operacyjny Linux) mo¿emy sprawdziæ konfiguracje interfejsów sieciowych (podaj tylko nazwê polecenia)?
+interfaces	
+[x] ifconfig 	
+nslookup	
+netinet
+
+Protoko³y nie kontroluj¹ wysy³ania/odbierania informacji.
+Nie	
+[x] Tak
+
+Protokó³ bezstanowy utrzymuje informacje o trwaj¹cym po³¹czeniu podczas wiêcej ni¿ jednej wymiany komunikatów.
+Tak	
+[x] Nie
+
+Warstwy sesji, prezentacji, aplikacji modelu OSI/ISO zosta³y "po³¹czone" w jedn¹ warstwe aplikacji modelu internetowego.
+Nie	
+[x] Tak
+
+W warstwie ³¹cza mówimy o:
+segmentach 	
+[x] ramkach 	
+bitach 	
+pakietach
+
+Protokó³ stanowy utrzymuje informacje o trwaj¹cym po³¹czeniu podczas wiêcej ni¿ jednej wymiany komunikatów.
+Nie	
+[x] Tak
+
+Ilu warstwowy jest model sieci OSI/ISO?
+cztero	
+szeœcio	
+[x] siedmio 	
+piêcio
+
+FTP jest protoko³em bezstanowym.
+[x] Nie	
+Tak
+
+Cechy UDP to
+[x] zawodna komunikacja 	
+kontrola przep³ywu 	
+wirtualny kana³ komunikacyjny 	
+[x] brak kontroli przep³ywu
+
+Jakie mamy typy zapytañ DNS?
+[x] rekurencyjne 	
+[x] iteracyjne 	
+niepe³ne 	
+pe³ne
+
+Telnet:
+stanowi bezpieczne zdalne pod³¹czenie do zdalnego systemu 	
+¿adne z wyjaœnieñ nie jest prawid³owe 	
+[x] umo¿liwia korzystanie z komputera znajduj¹cego siê w zdalnym wêŸle sieci 	
+nie wystêpuje w systemach Uniksowych
+
+System nazewnictwa i adresowanie stosowane w Internecie, umo¿liwiaj¹cy konwersjê numerycznych adresów internetowych na nazwy to:
+[x] ¿adne z powy¿szych wyjaœnieñ nie jest prawid³owe 	
+DES 	
+DSS 	
+NDS
+
+Które z wymienionych to funkcje TCP
+[x] numery sekwencyjne 128 bitowe 	
+kontrola przeci¹¿enia 	
+[x] gwarancja maksymalnego opóŸnienia 	
+gwarancja przepustowoœci 	
+[x] kontrola przep³ywu
+
+Wybierz protoko³y warstwy aplikacji, korzystaj¹ce przede wszystkim z protoko³u TCP
+DNS 	
+[x] SNMP 	
+[x] HTTP 	
+[x] FTP 	
+[x] SMTP 	
+TFTP
+
+HTTP jest protoko³em stanowym.
+Tak	
+[x] Nie
+
+Mówi siê, ¿e protokó³ FTP u¿ywa komunikacji kontrolnej "poza pasmem". Czy to oznacza ¿e:
+wykorzystywana jest multipleksacja FDM 	
+[x] polecenia kontrolne wysy³ane s¹ przez oddzielne po³¹czenie nie wykorzystywane do danych 	
+wykorzystywana jest multipleksacja TDM 	
+polecenia kontrolne wysy³ane s¹ przez po³¹czenie wykorzystywane równie¿ do danych
+
+Z jakiego protoko³u warstwy ni¿szej korzysta przede wszystkim DNS?
+[x] UDP 	
+UTP 	
+FTP 	
+TCP
+
+Telefonia internetowa wykorzystuje zazwyczaj protokó³
+[x] udp 	
+ipvoice 	
+tcp 	
+http
+
+Mechanizm Okna (Window) jest wykorzystywany w:
+[x] protokole IP 	
+protokole OSPF 	
+protokole UDP 	
+protokole TCP
+
+Jakie parametry wykorzystywane s¹ przy demultipleksacji protoko³u TCP?
+port Ÿród³a 	
+[x] adres IP celu 	
+adres IP Ÿród³a 	
+[x] port celu
+
+Zaznacz ceche kontroli przeci¹¿eñ z pomoc¹ sieci
+routery udostêpniaj¹ informacjê zwrotn¹ systemom koñcowym 	
+t¹ metod¹ pos³uguje siê TCP 	
+estymuje przeci¹¿enie na podstawie obci¹¿enia procesora routera
+
+Jakie s¹ Ÿród³a opóŸnienia pakietów?
+opóŸnienie transmisji 	
+oczekiwanie w kolejce 	
+opóŸnienie propagacji 	
+przetwarzanie w wêz³ach

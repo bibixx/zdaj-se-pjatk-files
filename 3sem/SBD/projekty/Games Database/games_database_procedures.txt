@@ -1,0 +1,479 @@
+###################################################################################
+create or replace procedure procedure_1
+as
+begin
+declare
+CURSOR finding is select * from positions where P_RELASE_DATE > sysdate-360;
+found positions%ROWTYPE;
+begin
+    LOOP
+      FETCH finding INTO found;
+      EXIT WHEN finding%NOTFOUND;
+      DBMS_output.put_line('1 '||found.P_TITLE||'');
+      DBMS_output.put_line('2 '||found.P_SUB_TITLE||'');
+      DBMS_output.put_line('3 '||found.P_RELASE_DATE||'');
+    END LOOP;
+    CLOSE finding ;
+  END;
+end;
+/
+
+
+
+Create or replace procedure show_games(devid number) 
+as
+num integer;
+CURSOR found IS SELECT G_ORIGINAL_TITLE,G_ORIGINAL_SUB_TITLE FROM GAMES where G_DEVELOPER_FK = devid ;
+no_found EXCEPTION;
+BEGIN
+if found%FOUND THEN 
+for num IN found
+	LOOP
+		DBMS_OUTPUT.put_line('Game : ' || num.G_ORIGINAL_TITLE || ' ' || num.G_ORIGINAL_SUB_TITLE);
+	END LOOP;
+	ELSE
+	raise no_found;
+	END IF;
+EXCEPTION
+	when no_found THEN
+	DBMS_OUTPUT.put_line('@@@ No games found from this developer @@@');
+END;
+/
+
+
+
+CREATE OR REPLACE PROCEDURE show_positions
+AS
+BEGIN
+declare
+
+CURSOR TAKE_DATA IS SELECT P_TITLE, P_SUB_TITLE, P_RELASE_DATE from POSITIONS;
+begin
+FOR var IN TAKE_DATA
+  LOOP
+	DBMS_output.put_line('TITLE: ' ||var.P_TITLE||
+			     ' SUBTITLE: ' || var.P_SUB_TITLE||
+			     ' RELASE DATE: ' || var.P_RELASE_DATE );
+  END LOOP;	
+end;
+END;
+/
+
+
+
+CREATE OR REPLACE PROCEDURE show_positions2
+AS
+BEGIN
+declare
+
+CURSOR jan IS SELECT P_TITLE, P_SUB_TITLE, P_RELASE_DATE from POSITIONS WHERE P_RELASE_DATE between '01-jan-06' and LAST_DAY (TO_DATE ('01','MM'));
+CURSOR feb IS SELECT P_TITLE, P_SUB_TITLE, P_RELASE_DATE from POSITIONS WHERE P_RELASE_DATE between '01-feb-06' and LAST_DAY (TO_DATE ('02','MM'));
+CURSOR mar IS SELECT P_TITLE, P_SUB_TITLE, P_RELASE_DATE from POSITIONS WHERE P_RELASE_DATE between '01-mar-06' and LAST_DAY (TO_DATE ('03','MM'));
+begin
+FOR var IN mar
+  LOOP
+	DBMS_output.put_line('TITLE: ' ||var.P_TITLE||
+			     ' SUBTITLE: ' || var.P_SUB_TITLE||
+			     ' RELASE DATE: ' || var.P_RELASE_DATE );
+  END LOOP;	
+end;
+END;
+/
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+				procedury zwiazane z data
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+###################################################################################
+		ZMIANA DATY WYDANIA GRY WZGLEDEM ID GRY NA SYSTEMOWA
+###################################################################################
+create or replace procedure change_Date1(id number)
+as
+num INTEGER;
+no_position EXCEPTION;
+begin
+      SELECT count(*) INTO num FROM POSITIONS WHERE P_ID=id;
+      If num=0 then RAISE no_position;
+      Else
+              update POSITIONS set P_RELASE_DATE = sysdate where P_ID=id;
+              dbms_output.put_line('### Position updated ###');
+      End If;
+exception
+      when no_position then
+      dbms_output.put_line('@@@ No such position !!! @@@');
+end;
+/
+###################################################################################
+		ZMIANA DATY WYDANIA GRY WZGLEDEM ID GRY NA DOWOLNA
+###################################################################################
+create or replace procedure change_Date2(id number, data date)
+as
+num INTEGER;
+no_position EXCEPTION;
+begin
+      SELECT count(*) INTO num FROM POSITIONS WHERE P_ID=id;
+      If num=0 then RAISE no_position;
+      Else
+              update POSITIONS set P_RELASE_DATE = data  where P_ID=id;
+              dbms_output.put_line('### Position updated ###');
+      ENd If;
+exception
+      when no_position then
+      dbms_output.put_line('@@@ No such position in databese !!! @@@');
+end;
+/
+###################################################################################
+		ZMIANA DATY WYDANIA GRY WZGLEDEM TYTULU GRY NA DOWOLNA
+###################################################################################
+create or replace procedure change_Date3(title char, data date)
+as
+num INTEGER;
+no_position EXCEPTION;
+begin
+      SELECT count(*) INTO num FROM POSITIONS WHERE P_TITLE=title;
+      If num=0 then RAISE no_position;
+      Else
+              update POSITIONS set P_RELASE_DATE = data where P_TITLE=title;
+              dbms_output.put_line('### Position updated ###');
+      ENd If;
+exception
+      when no_position then
+      dbms_output.put_line('@@@ No such position !!! @@@');
+end;
+/
+###################################################################################
+		ILE GIER ZOSTALO WYDANYCH W PRZEDZIALE data1 i data2
+###################################################################################
+create or replace procedure how_many(data1 date, data2 date)
+as
+num INTEGER;
+no_position EXCEPTION;
+begin
+      SELECT count(*) INTO num FROM POSITIONS WHERE P_RELASE_DATE between data1 and data2;
+      If num=0 then RAISE no_position;
+      Else
+              dbms_output.put_line('||num||');
+      ENd If;
+exception
+      when no_position then
+      dbms_output.put_line('@@@ No such position acepting criteria @@@');
+end;
+/
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+		procedury zwiazane z dodawaniem nowego elementu do tablicy
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+###################################################################################
+			DODAWANIE NOWEGO DEVELOPERA
+###################################################################################
+create or replace procedure add_DEVELOPER(name char, town char, country char, www char)
+as
+
+the_same     INTEGER;
+the_same2    INTEGER;
+
+already_exist  EXCEPTION;
+already_exist2 EXCEPTION;
+begin
+       select count(*) into the_same  from DEVELOPERS where D_NAME=name and D_COUNTRY=country;
+       select count(*) into the_same2 from DEVELOPERS where D_NAME=name or  D_COUNTRY=country;
+
+       if the_same>0  then raise already_exist;
+       else
+               insert into DEVELOPERS values(1, name, town, country, www);
+               DBMS_output.put_line('### Developer '||name||' '||town||' '||country||''||www||' has been added ###');
+               commit;
+end if;
+       if the_same2>0 then raise already_exist2;
+       else
+               insert into DEVELOPERS values(1, name, town, country, www);
+               DBMS_output.put_line('### Developer '||name||' '||town||' '||country||' '||www||' has been added ###');
+               commit;
+end if;
+
+exception
+       when already_exist then
+       dbms_output.put_line('@@@ Cant have 2 the same developers in databese !!! @@@');
+       dbms_output.put_line('@@@ Identical element was found in the table @@@');
+
+       when already_exist2 then
+       dbms_output.put_line('@@@ Cant have 2 the same developers in databese !!! @@@');
+END;
+/
+###################################################################################
+			DODAWANIE NOWEGO PUBLISHERA
+###################################################################################
+create or replace procedure add_PUBLISHER(name char, town char, country char, www char)
+as
+
+the_same     INTEGER;
+the_same2    INTEGER;
+
+already_exist  EXCEPTION;
+already_exist2 EXCEPTION;
+begin
+       select count(*) into the_same  from PUBLISHERS where P_NAME=name and P_COUNTRY=country;
+       select count(*) into the_same2 from PUBLISHERS where P_NAME=name or  P_COUNTRY=country;
+
+       if the_same>0  then raise already_exist;
+       else
+               insert into PUBLISHERS values(1, name, town, country, www);
+               DBMS_output.put_line('### Publisher '||name||' '||town||' '||country||''||www||' has been added ###');
+               commit;
+end if;
+       if the_same2>0 then raise already_exist2;
+       else
+               insert into PUBLISHERS values(1, name, town, country, www);
+               DBMS_output.put_line('### Publisher '||name||' '||town||' '||country||' '||www||' has been added ###');
+               commit;
+end if;
+
+exception
+       when already_exist then
+       dbms_output.put_line('@@@ Cant have 2 the same developers in databese !!! @@@');
+       dbms_output.put_line('@@@ Identical element was found in the table @@@');
+
+       when already_exist2 then
+       dbms_output.put_line('@@@ Cant have 2 the same developers in databese !!! @@@');
+END;
+/
+###################################################################################
+				DODAWANIE NOWEGO TYPU GRY
+###################################################################################
+create or replace procedure add_type(name char, abb char)
+as
+
+the_same     INTEGER;
+the_same2    INTEGER;
+
+already_exist  EXCEPTION;
+already_exist2 EXCEPTION;
+begin
+       select count(*) into the_same  from Types where T_NAME=name and T_ABBREVIATION=abb;
+       select count(*) into the_same2 from Types where T_NAME=name or  T_ABBREVIATION=abb;
+
+       if the_same>0  then raise already_exist;
+       else
+               insert into Types values(1, name, abb);
+               DBMS_output.put_line('### Type '||name||' '||abb||' has been added ###');
+               commit;
+end if;
+       if the_same2>0 then raise already_exist2;
+       else
+               insert into Types values(1, name, abb);
+               DBMS_output.put_line('### Type '||name||' '||abb||' has been added ###');
+               commit;
+end if;
+
+exception
+       when already_exist then
+       dbms_output.put_line('@@@ Cant have 2 the same types of games !!! @@@');
+       dbms_output.put_line('@@@ Identical element was found in the table @@@');
+
+       when already_exist2 then
+       dbms_output.put_line('@@@ Cant have 2 the same types of games !!! @@@');
+END;
+/
+###################################################################################
+				DODAWANIE NOWEGO JEZYKA GRY
+###################################################################################
+create or replace procedure add_LANGUAGE(name char, abb char)
+as
+
+the_same     INTEGER;
+the_same2    INTEGER;
+
+already_exist  EXCEPTION;
+already_exist2 EXCEPTION;
+begin
+       select count(*) into the_same  from LANGUAGES where L_NAME=name and L_ABBREVIATION=abb;
+       select count(*) into the_same2 from LANGUAGES where L_NAME=name or  L_ABBREVIATION=abb;
+
+       if the_same>0  then raise already_exist;
+       else
+               insert into LANGUAGES values(1, name, abb);
+               DBMS_output.put_line('### Language '||name||' '||abb||' has been added ###');
+               commit;
+end if;
+       if the_same2>0 then raise already_exist2;
+       else
+               insert into LANGUAGES values(1, name, abb);
+               DBMS_output.put_line('### Language '||name||' '||abb||' has been added ###');
+               commit;
+end if;
+
+exception
+       when already_exist then
+       dbms_output.put_line('@@@ Cant have 2 the same languages in databese !!! @@@');
+       dbms_output.put_line('@@@ Identical element was found in the table @@@');
+
+       when already_exist2 then
+       dbms_output.put_line('@@@ Cant have 2 the same languages in databese !!! @@@');
+       dbms_output.put_line('@@@ Element with the same name OR abbreviation occured @@@');
+END;
+/
+###################################################################################
+				DODAWANIE NOWEJ PLATFORMY
+###################################################################################
+create or replace procedure add_PLATFORM(name char, abb char)
+as
+
+the_same     INTEGER;
+the_same2    INTEGER;
+
+already_exist  EXCEPTION;
+already_exist2 EXCEPTION;
+begin
+       select count(*) into the_same  from PLATFORMS where P_NAME=name and P_ABBREVIATION=abb;
+       select count(*) into the_same2 from PLATFORMS where P_NAME=name or  P_ABBREVIATION=abb;
+
+       if the_same>0  then raise already_exist;
+       else
+               insert into PLATFORMS values(1, name, abb);
+               DBMS_output.put_line('### Platform  '||name||' '||abb||' has been added ###');
+               commit;
+end if;
+       if the_same2>0 then raise already_exist2;
+       else
+               insert into PLATFORMS values(1, name, abb);
+               DBMS_output.put_line('### Platform '||name||' '||abb||' has been added ###');
+               commit;
+end if;
+
+exception
+       when already_exist then
+       dbms_output.put_line('@@@ Cant have 2 the same platforms in databese !!! @@@');
+       dbms_output.put_line('@@@ Identical element was found in the table @@@');
+
+       when already_exist2 then
+       dbms_output.put_line('@@@ Cant have 2 the same platforms in databese !!! @@@');
+       dbms_output.put_line('@@@ Element with the same name OR abbreviation occured @@@');
+END;
+/
+###################################################################################
+				DODAWANIE NOWEJ GRY
+###################################################################################
+create or replace procedure add_GAME(title char, subtitle char, dev number, type number, lan number, pla number)
+as
+
+the_same     INTEGER;
+the_same2    INTEGER;
+
+already_exist  EXCEPTION;
+already_exist2 EXCEPTION;
+begin
+       select count(*) into the_same  from GAMES where G_ORIGINAL_TITLE=title and G_ORIGINAL_SUB_TITLE=subtitle;
+       select count(*) into the_same2 from GAMES where G_ORIGINAL_TITLE=title or  G_ORIGINAL_SUB_TITLE=subtitle;
+
+       if the_same>0  then raise already_exist;
+       else
+               insert into GAMES values(1, title, subtitle, dev, type, lan, pla);
+               DBMS_output.put_line('### Game '||title||' '||subtitle||' '||dev||' '||type||' '||lan||' '||pla||' has been added ###');
+               commit;
+end if;
+       if the_same2>0 then raise already_exist2;
+       else
+               insert into GAMES values(1, title, subtitle, dev, type, lan, pla);
+               DBMS_output.put_line('### Game '||title||' '||subtitle||' '||dev||' '||type||' '||lan||' '||pla||' has been added ###');
+               commit;
+end if;
+
+exception
+       when already_exist then
+       dbms_output.put_line('@@@ Cant have 2 the same games in databese !!! @@@');
+       dbms_output.put_line('@@@ Identical element was found in the table @@@');
+
+       when already_exist2 then
+       dbms_output.put_line('@@@ Cant have 2 the same games in databese !!! @@@');
+       dbms_output.put_line('@@@ Element with the same name OR abbreviation occured @@@');
+END;
+/
+###################################################################################
+				DODAWANIE NOWEJ POZYCJI
+###################################################################################
+create or replace procedure add_POSITION(game number, lan number, pub number, data date, title char, subtitle char)
+as
+
+the_same     INTEGER;
+the_same2    INTEGER;
+
+already_exist  EXCEPTION;
+already_exist2 EXCEPTION;
+begin
+       select count(*) into the_same  from POSITIONS where P_TITLE=title and P_SUB_TITLE=subtitle;
+       select count(*) into the_same2 from POSITIONS where P_TITLE=title or  P_SUB_TITLE=subtitle;
+
+       if the_same>0  then raise already_exist;
+       else
+               insert into POSITIONS values(1, game, lan, pub, data, title, subtitle);
+               DBMS_output.put_line('### Game '||game||' '||lan||' '||pub||' '||data||' '||title||' '||subtitle||' has been added ###');
+               commit;
+end if;
+       if the_same2>0 then raise already_exist2;
+       else
+               insert into POSITIONS values(1, game, lan, pub, data, title, subtitle);
+               DBMS_output.put_line('### Game '||game||' '||lan||' '||pub||' '||data||' '||title||' '||subtitle||' has been added ###');
+               commit;
+end if;
+
+exception
+       when already_exist then
+       dbms_output.put_line('@@@ Cant have 2 the same positions in databese !!! @@@');
+       dbms_output.put_line('@@@ Identical element was found in the table @@@');
+
+       when already_exist2 then
+       dbms_output.put_line('@@@ Cant have 2 the same positions in databese !!! @@@');
+       dbms_output.put_line('@@@ Element with the same name OR abbreviation occured @@@');
+END;
+/
+###################################################################################
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+		procedury zwiazane z usuwaniem nowego elementu do tablicy
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+create or replace procedure remove_type(Name CHAR, abb CHAR)
+as
+num integer;
+none exception;
+BEGIN
+     select count(*) into num from types where T_Name=Name and T_ABBREVIATION=abb;
+if num = 0
+then
+       raise none;
+else
+       DELETE FROM types
+       WHERE T_Name=Name and T_ABBREVIATION=abb;
+       DBMS_output.put_line('Type : ' || Name || ' ' || abb ||' has been deleted!');
+end if;
+exception
+       when none then
+       DBMS_output.put_line('No such type exists in database !');
+END;
+/
+
+
+
+
+
+
+
+
+
+execute procedure_1;
+execute show_games(1);
+execute show_positions;
+execute show_positions2;
+
+execute change_Date1( 1 );
+execute change_Date2( 1,22-JUL-06 );
+execute change_Date3('S.T.A.L.K.E.R.',22-JUL-06);
+execute how_many( 05-JAN-06 , 30-MAR-06 );
+execute how_many2;
+
+execute add_type    ( 'First Person Perspective', 'FPP' );
+execute add_language( 'Vietnamiese', 'VIET' );
+
+execute remove_type( 'First Person Perspective', 'FPP' );

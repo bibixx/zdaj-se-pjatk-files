@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="pl">
+  <title></title>
+  <meta name="Keywords" content="s³owa kluczowe">
+  <meta name="Description" content="">
+  <link rel="stylesheet" type="text/css" href="../main.css">
+  <link rel="stylesheet" type="text/css" href="../style.html">
+  <script language="JavaScript" src="../skrypty.js"
+ type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8"
+ marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"--><!--tr-->
+<!--td-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main08_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main08_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<br clear="all">
+<a name="EDU.wyklad.punkt 2"></a>
+<br clear="all">
+<div class="tytulpunktu">2. Rotacje</div>
+<p>Operacje wstawiania i usuwania elementu z drzewa BST mog± zmieniæ
+strukturê drzewa, w taki sposób ¿e w³asno¶æ wywa¿enia nie bêdzie
+zachowana. Aby przywróciæ strukturê AVL, konieczne s± lokalne operacje
+na atrybutach wierzcho³ków, tzw. rotacje.&nbsp; W tym punkcie wyk³adu
+omówimy cztery typy rotacji: rotacjê w prawo i rotacjê w lewo, zwane
+pojedynczymi (lub prostymi) rotacjami, i rotacje podwójne w prawo i w
+lewo.</p>
+<p>Dla wygody, drzewo binarne bêdziemy opisywaæ w sposób liniowy, jako
+trójkê &lt;LD, r, PD&gt;, gdzie r jest jego korzeniem, a LD i PD
+odpowiednio jego lewym i prawym poddrzewem.</p>
+<p><b>Rotacja w prawo. </b> </p>
+<p>Rozwa¿my drzewo binarne D postaci &lt;&lt;X,A,Y&gt;,B,Z&gt;, o
+korzeniu B. Rotacja w prawo wzglêdem wierzcho³ka B polega na "obrocie"
+wierzcho³ków A, B wzd³u¿ zewnêtrznych&nbsp; krawêdzi grafu, jak
+zaznaczono na rysunku 8.2 (a), tak by otrzymaæ drzewo&nbsp; &lt;
+X,A,&lt;Y,B,Z&gt;&gt;. Korzeniem otrzymanego po rotacji drzewa jest
+wierzcho³ek A (por. rysunek 8.2(b). Zauwa¿my, ¿e zmiany s± lokalne. Nie
+zmieniamy ¿adnych etykiet, ani dowi±zañ wewn±trz poddrzew X, Y, Z. Co
+wiêcej, je¿eli h(X) = h(Y) = h(Z) = k, to wysoko¶æ drzewa te¿ zostaje
+zachowana. Rzeczywi¶cie, wysoko¶ci± drzewa przed i po rotacji jest k+2.
+Zatem, je¶li drzewo przed rotacj± by³o wywa¿one, pozostanie wywa¿one po
+rotacji. Je¶li drzewo przed rotacj± by³o drzewem BST, po rotacji
+pozostanie drzewem BST: etykiety poddrzewa Y, jako mniejsze od B i
+wiêksze od A (z za³o¿enia), trafi³y na prawo od A i na lewo od B.</p>
+<table border="0" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="60%"
+ id="AutoNumber1">
+  <tbody>
+    <tr>
+      <td width="50%"> <img border="0" src="Rysunki/Rysunek8_2a.gif"
+ width="250" height="250"></td>
+      <td width="50%"> <img border="0" src="Rysunki/Rysunek8_2b.gif"
+ width="250" height="250"></td>
+    </tr>
+  </tbody>
+</table>
+<p>Operacja rotacji w prawo mo¿e byæ zrealizowana za pomoc± procedury
+Rotacja_w_prawo z jednym parametrem w, który okre¶la wierzcho³ek
+wzglêdem którego zostanie wykonana rotacja. </p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p>Rotacja_w_prawo(w : node){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; aux := w.left; w.left := aux.right;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; aux.right:= w; w := aux;<br>
+}</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p><br>
+</p>
+<p> <b>Rotacja w lewo.</b></p>
+<p>Rotacja w lewo jest operacj± symetryczn± do operacji rotacji w prawo
+i polega na "obrocie" wierzcho³ków A, B, tak jak zaznaczono na rysunku
+8.3 (a) wzglêdem zewnêtrznych krawêdzi grafu. Je¿eli dane drzewo jest
+postaci &lt;Z,B,&lt;Y,A,X&gt;&gt;, to po wykonaniu rotacji w lewo
+otrzymamy drzewo &lt;&lt;Z,B,Y&gt;,A,X&gt;. Wynik rotacji w lewo zosta³
+przedstawiony na rysunku 8.3 (b). Podobnie jak poprzednio, rotacja w
+lewo zachowuje w³asno¶æ bycia drzewem binarnych poszukiwañ. Je¶li h(X)
+= h(Y) = h(Z) = k, to wysoko¶æ drzewa zarówno przed jak i po rotacji
+wynosi k+2. Algorytm rotacji w lewo zosta³ zapisany jako procedura
+Rotacja_w_lewo. Parametrem tej procedury jest wierzcho³ek w, wzglêdem
+którego dokonujemy rotacji.<br>
+&nbsp;</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p>Rotacja_w_lewo(w : node){ <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; aux := w.right; w.right :=
+aux.left;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; aux.left := w; w := aux;<br>
+}<br>
+      <br>
+&nbsp;</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p>Koszt wykonania obu rotacji prostych jest sta³y: wykonujemy tylko
+kilka instrukcji przypisania zmieniaj±cych niektóre referencje.</p>
+<table border="0" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="60%"
+ id="AutoNumber2">
+  <tbody>
+    <tr>
+      <td width="50%"> <img border="0" src="Rysunki/Rysunek8_3a.gif"
+ width="250" height="250"></td>
+      <td width="50%"> <img border="0" src="Rysunki/Rysunek8_3b.gif"
+ width="250" height="250"></td>
+    </tr>
+  </tbody>
+</table>
+<p>&nbsp;</p>
+<p><b>Podwójna rotacja w prawo.</b></p>
+<p>Rotacja podwójna, jak sama nazwa wskazuje, jest nieco bardziej
+skomplikowana. Niech dane drzewo binarne D ma postaæ
+&lt;&lt;X,A,&lt;Y,B,Z&gt;&gt;,C,U&gt;. Rotacja podwójna wzglêdem
+wierzcho³ka C jest z³o¿eniem dwóch rotacji prostych: rotacji w lewo
+wzglêdem wierzcho³ka A oraz rotacji w prawo wzglêdem wierzcho³ka C. Po
+pierwszej rotacji otrzymujemy drzewo &lt;&lt;&lt;X,A,Y&gt;,
+B,Z&gt;,C,U&gt;, a po drugiej, drzewo &lt;&lt;X,A,Y&gt;,
+B,&lt;Z,C,U&gt;&gt;. Drzewo przed i po rotacji podwójnej w prawo
+zosta³o przedstawione na rysunkach 8.4(a), 8.4(b). Je¿eli h(U) = h(X)=
+k oraz h(Y)= h(Z)= k-1, to wysoko¶ci± drzewa przed rotacj± i drzewa po
+rotacji jest k+2. Je¿eli drzewo przed rotacj± by³o wywa¿one, to po
+rotacji bêdzie tak¿e drzewem wywa¿onym. </p>
+<p><b>Uwaga.</b> Zauwa¿my, ¿e po pierwszej prostej rotacji w lewo, ta
+w³asno¶æ dla drzewa&nbsp; D nie jest spe³niona.</p>
+<p>Ponadto, w³asno¶æ bycia drzewem BST zostanie zachowana.
+Rzeczywi¶cie, etykiety wierzcho³ków A, B, C jak równie¿ wierzcho³ki
+wewn±trz poddrzew X, Y, Z, U, zachowuj± w³asno¶ci uporz±dkowania drzew
+binarnych poszukiwañ. Etykiety wierzcho³ków w poddrzewie Y s± mniejsze
+ni¿ etykieta w wierzcho³ku B, ale wiêksze ni¿ A (o ile D jest drzewem
+BST). Dowi±zuj±c poddrzewo Y jako prawego syna wierzcho³ka A,
+zachowujemy w³asno¶æ&nbsp; uporz±dkowania, mówi±c±, ¿e w prawym
+poddrzewie A, etykiety musz± byæ wiêksze od etykiety w wierzcho³ku A.
+Podobnie, etykiety w poddrzewie Z s±&nbsp; wiêksze od B i mniejsze ni¿
+etykieta w wierzcho³ku C, jako ¿e przed rotacj± znajdowa³y siê na lewo
+od C. Mo¿emy wiêc dowi±zaæ Y w prawym poddrzewie B, jako lewy nastêpnik
+C. W³asno¶æ: wszystkie etykiety w lewym poddrzewie wierzcho³ka musz±
+byæ mniejsze od etykiety w tym wierzcho³ku, bêdzie zachowana.</p>
+<p>&nbsp;
+<table border="0" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="60%"
+ id="AutoNumber5">
+  <tbody>
+    <tr>
+      <td width="50%"> <img border="0" src="Rysunki/Rysunek8_4a.gif"
+ width="250" height="250"></td>
+      <td width="50%"> <img border="0" src="Rysunki/Rysunek8_4b.gif"
+ width="250" height="250"></td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p>Rotacjê podwójn± w prawo mo¿na zrealizowaæ tak jak to przedstawiono
+w procedurze Rotacja_w_lewo_prawo z jednym parametrem, wierzcho³kiem w,
+wzglêdem którego wykonywana jest&nbsp; rotacja.</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p>Rotacja_w_lewo_prawo(w : node){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rotacja_w_lewo(w.left);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rotacja_w_prawo(w);<br>
+}</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p><b>Podwójna rotacja w lewo.</b></p>
+<p>Operacj± dualn± do rotacji podwójnej w prawo, jest rotacja podwójna
+w lewo. Niech drzewo binarne ma postaæ
+&lt;U,C,&lt;&lt;Z,B,Y&gt;,A,X&gt;&gt;, por. rysunek 8.5 (a). Wynik
+rotacji podwójnej w lewo, &lt;&lt;U,C,Z&gt;,B,&lt;Y,A,X&gt;&gt;, zosta³
+przedstawiony na rysunku 8.5(b). Rotacja ta jest z³o¿eniem prostej
+rotacji w prawo wzglêdem wierzcho³ka A, oraz prostej rotacji w lewo
+wzglêdem wierzcho³ka C.&nbsp; </p>
+<p>&nbsp;
+<table border="0" cellpadding="0" cellspacing="0"
+ style="border-collapse: collapse;" bordercolor="#111111" width="60%"
+ id="AutoNumber4">
+  <tbody>
+    <tr>
+      <td width="50%"> <img border="0" src="Rysunki/Rysunek8_5a.gif"
+ width="250" height="250"></td>
+      <td width="50%"> <img border="0" src="Rysunki/Rysunek8_5b.gif"
+ width="250" height="250"></td>
+    </tr>
+  </tbody>
+</table>
+</p>
+<p>Rotacjê podwójn± w lewo mo¿na zrealizowaæ tak jak to przedstawiono w
+procedurze Rotacja_w_prawo_lewo. Jedynym parametrem tej procedury jest
+wierzcho³ek w, wzglêdem którego wykonywana jest&nbsp; rotacja.</p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p>Rotacja_w_prawo_lewo(w : node){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rotacja_w_prawo(w.left);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rotacja_w_lewo(w);<br>
+}</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p>Koszt obu rotacji podwójnych jest sta³y, jako ¿e koszty rotacji
+prostych by³y sta³e.</p>
+<p><b>Pytanie 2</b>: Czy porz±dek inorder etykiet wierzcho³ków drzewa
+BST jest zachowany przy rotacji w prawo? &nbsp; <br>
+&nbsp;</p>
+<form><input class="GUZIK" type="button" value="Zobacz odpowied¼"
+ name="Klik0"
+ onclick="napis(this.form,'Tak. Rotacja nie zmienia ani liczby ani etykiet wierzcho³ków, oraz zachowuje w³asno¶æ bycia drzewem BST.');">
+</form>
+<p><br clear="all">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="left"><a href="main08_p1.html" target="main"
+ class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+      <td align="right">&nbsp;<a href="main08_p3.html" target="main"
+ class="NAWIGACJA">nastêpny punkt&nbsp;&#187;</a></td>
+    </tr>
+  </tbody>
+</table>
+<!--/td--><!--/tr-->
+<!--/table--></p>
+</body>
+</html>

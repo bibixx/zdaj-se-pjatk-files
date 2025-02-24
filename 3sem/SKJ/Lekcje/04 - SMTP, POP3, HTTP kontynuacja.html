@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<link rel="stylesheet" type="text/css" href="pliki/main.css">
+<title>04 - SMTP, POP3, HTTP kontynuacja</title>
+</head>
+<body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+<table border="0" cellpadding="5" cellspacing="5" height="100%" width="100%">
+<tbody><tr heigh="100%"><td bgcolor="#e6f0eb" valign="top" width="25%"><br>
+        <a class="menulink" href="01%20-%20Cwiczenia%20Linux%20Knoppix.html" onfocus="blur();" title="Ćwiczenia Linux/Knoppix" onmouseover="window.status='Ćwiczenia Linux/Knoppix'; return true;" onmouseout="window.status=''; ">
+	1. Ćwiczenia Linux/Knoppix</a><br>
+	<br>
+	<a class="menulink" href="02%20-%20Skaner%20sieci%20-%20Ethereal.html" onfocus="blur();" title="Skaner sieci - Ethereal" onmouseover="window.status='Skaner sieci - Ethereal'; return true;" onmouseout="window.status=''; ">
+	2. Skaner sieci - Ethereal</a><br>
+	<br>
+	<a class="menulink" href="03%20-%20Automaty%20skonczone.html" onfocus="blur();" title="Automaty skończone" onmouseover="window.status='Automaty skończone'; return true;" onmouseout="window.status=''; ">
+	3. Automaty skończone</a><br>
+	<br>
+	<a class="menulink" href="04%20-%20SMTP,%20POP3,%20HTTP%20kontynuacja.html" onfocus="blur();" title="SMTP, POP3, HTTP kontynuacja" onmouseover="window.status='SMTP, POP3, HTTP kontynuacja'; return true;" onmouseout="window.status=''; ">
+	<b>4. SMTP, POP3, HTTP kontynuacja</b></a><br>
+	<br>
+	<a class="menulink" href="05%20-%20Warstwa%20transportowa.html" onfocus="blur();" title="Warstwa tranportowa" onmouseover="window.status='Warstwa tranportowa'; return true;" onmouseout="window.status=''; ">
+	5. Warstwa tranportowa</a><br>
+	<br>
+	<a class="menulink" href="07%20-%20Protokoly%20rutingu.html" onfocus="blur();" title="Protokoły rutingu" onmouseover="window.status='Protokoły rutingu'; return true;" onmouseout="window.status=''; ">
+	7. Protokoły rutingu</a><br>
+	<br>
+	<a class="menulink" href="08%20-%20Warstwa%20sieci.html" onfocus="blur();" title="Warstwa sieci" onmouseover="window.status='Warstwa sieci'; return true;" onmouseout="window.status=''; ">
+	8. Warstwa sieci</a><br>
+	<br>
+	<a class="menulink" href="09%20-%20Powtorzenie%20materialu.html" onfocus="blur();" title="Powtórzenie materiału" onmouseover="window.status='Powtórzenie materiału'; return true;" onmouseout="window.status=''; ">
+	9.  Powtórzenie materiału</a><br>
+        <br>
+        <a class="menulink" href="javascript:window.close();" onfocus="blur();" onmouseover="window.status='Wyjście'; return true;" onmouseout="window.status=''; ">
+        Wyjście</a></td>
+<td bgcolor="whitesmoke" valign="top"><form name="f" method="post" action="eld.asp?id=46&amp;sid=128&amp;z=1"><p></p><h2>Powtórzenie</h2><p></p><p>Ćwiczenia mają na celu powtórzenie materiału z Ethereal'a, oraz rozszerzenie go o kolejne ćwiczenia.</p><p></p><h4>Zadanie</h4><p></p><p><b>SMTP</b></p><p></p><ol><p></p><p>    </p><li>Uruchomić Mozille (ikona z czerwoną "gozillą")<p></p><p>    </p></li><li>Wybrać "mail &amp; news" (na dole po lewej stronie)<p></p><p>    </p></li><li>Skonfigurować konto pocztowe:<p></p><p>    </p><ol type="a"><p></p><p>	    </p><li>email<p></p><p>	    </p></li><li>username = cokolwiek<p></p><p>	    </p></li><li>email = s1337@pjwstk.edu.pl<p></p><p>	    </p></li><li>POP3<p></p><p>	    </p></li><li>incomming mail serwer = poczta.pjwstk.edu.pl<p></p><p>	    </p></li><li>s1337<p></p><p>	    </p></li><li>Account name = dowolna<p></p><p>	    </p></li><li>!!! Odznaczyć "download now" !!!<p></p><p>    </p></li></ol><p></p><p>    </p></li><li> Edit -&gt; Mail &amp; News -&gt; server settings<p></p><p>    </p></li><li> Zaznaczyć "leave messages on server" i odznaczyć reszte<p></p><p>    </p></li><li> Outgoing server - odznaczyć "use name &amp; pass"<p></p><p>    </p></li><li> Uruchomić Ethereal'a jako root (z okna terminala "sudo ethereal")<p></p><p>    </p></li><li> Wpisać filtr:<p></p><p></p><pre><p></p><p>ip.addr==AAA.BBB.CCC.DDD &amp;&amp; ( tcp.port==110 || tcp.port==25 )</p><p>gdzie AAA.BBB.CCC.DDD to nasz adres IP (polecenie ifconfig) </p></pre><p></p><p>    </p></li><li> Uruchomić capture<p></p><p>    </p></li><li> W Mozilli wybrać Compose (new mail)<p></p><p>    </p></li><li> W Option wybrać format i ustawić na Plain text only<p></p><p>    </p></li><li> Wypelnić odpowiednio pola:<p></p><p></p><pre><p></p><p>To: s1337</p><p>Subject: To jest temat</p><p>Treść: SKO test</p><p></p></pre><p></p><p>    </p></li><li> Wysłać maila<p></p><p>    </p></li><li> Nacisnąć Get Msgs<p></p><p>    </p></li><li> Wyłaczyc Ethereal'a<p></p><p>    </p></li><li> Analizować pakiety<p></p><p>    </p></li><li> Na kartce wypisać wymiane informacji pomiedzy serwerem, a klientem w protokole POP3 i SMTP<p></p><p>    </p></li><li> Na podstawie zebranych informacji wyslać maila do siebie, tak aby byl zaadresowany do Linus Torvalds <linus @torvalds.org="">, od Bill Gates <bill @gates.com=""></bill></linus><p></p><p></p><p><b>UWAGA!</b>
+W przypadku pomyłki serwer nie odpowie nam nic, albo odpowie po długim
+czasie po wpisaniu rcpt to. Istnieje druga wersja zamiast ehlo podajemy
+helo i wtedy odpowiedz serwera jest inna.<br> </p><p><b>UWAGA!</b> Po EHLO lub HELO musi byc FQDN (nazwa komputera wraz z domeną)<br></p><p><b>UWAGA!</b>
+Nalezy zauważyć, ze rcpt to i To: to nie sa te same pola. Pierwsze jest
+informacją dla serwera do kogo ma wyslać, a drugie tylko dowolnym polem
+w wiadomości.</p><p></p><p></p></li></ol><p></p><p>Mniej wiecej tak to powinno wyglądać:</p><p><b>POP3</b></p><p></p><ol><p></p><p>	</p><li>Tak
+samo postępujemy z POP3. Tym razem należy sprawdzić czy coś nie
+przyszło na konto w szczególności, że przed chwilą coś tam wysłaliśmy.<br> <p></p><p><b>UWAGA!</b> Jeśli ktoś ma przekierowanie na inne konto, to wiadomości nie będzie. Polecenie <b>UIDL</b> sluży do określenia czy dana wiadomość była już odczytana przez klienta pocztowego.</p><p></p></li></ol><p></p><p><b>POP3 - kontynuacja</b></p><p></p><ol><p></p><p></p><li>Sprawdzić
+pocztę w Mozilli. Zwrócić uwagę na nadawcę i odbiorcę. Wirusy i
+spamerzy zachowują się często w ten sposób, że podmieniają (tak jak my
+w tym przykładzie) adres nadawcy i odbiorcy, a wysyłają wiadomość
+jeszcze do kogoś innego.<p></p><p>	</p></li><li>Dlaczego nie musieliśmy autoryzować się przy wysyłaniu wiadomości?<p></p><p>	</p></li><li>Jeżeli byśmy wysyłali wiadomość do innego serwera (innej domeny), czy zakończyło by się to powiedzeniem?<br> <p></p><p>	</p></li><li>Co to jest open relay?<p></p><p>	</p></li><li>Jak zabezpieczyć się przed przekazywaniem poczty? <p></p><p>	</p></li><li>W jaki sposób zabezpieczyć się przed przesyłaniem hasła czystym tekstem? <p></p><p>	</p></li><li>Co znacza odpowiedzi serwera 2XX, 3XX, 4XX, 5XX ?<p></p><p></p></li></ol><p></p><p></p><p></p><h4>Zadanie</h4><p></p><p><b>HTTP</b></p><p></p><ol><p></p><p>	</p><li>Uruchomić Ethereala jako root (sudo ethereal)<p></p><p>	</p></li><li>Wpisać filtr:<p></p><p></p><pre><p></p><p>ip.addr==AAA.BBB.CCC.DDD &amp;&amp; tcp.port==80</p><p>gdzie AAA.BBB.CCC.DDD to nasz adres IP (polecenie ifconfig)</p><p></p></pre><p></p><p>	</p></li><li>Uruchomić capture<p></p><p>	</p></li><li>Uruchomić przeglądarkę i wejść na stronę bss.pjwstk.edu.pl<p></p><p>	</p></li><li>Przeanalizować połączenie<p></p><p>	</p></li><li>Polaczyć się na http://bss.pjwstk.edu.pl przy pomocy telnetu w takim sam sposób jak przeglądarka<br><p></p><p></p><p><b>UWAGA!</b> Po ostatnim nagłówku wysłanym do serwera nacisnąć dwukrotnie enter.</p><p></p></li></ol><p></p></form></td></tr></tbody></table></body></html>

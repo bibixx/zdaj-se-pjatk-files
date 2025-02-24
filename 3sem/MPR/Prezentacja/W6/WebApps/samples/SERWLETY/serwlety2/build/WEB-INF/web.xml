@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+    <display-name>Serwlety 2</display-name>
+    <description>Przykladowe serwlety 2</description>
+
+    <context-param>
+       <param-name>presentationServ</param-name>
+       <param-value>/presentation</param-value>
+    </context-param>
+
+    <context-param>
+       <param-name>getParamsServ</param-name>
+       <param-value>/getparams</param-value>
+    </context-param>
+
+    <context-param>
+       <param-name>resBundleServ</param-name>
+       <param-value>/resbundleinfo</param-value>
+    </context-param>
+
+    <context-param>
+       <param-name>commandClassName</param-name>
+       <param-value>FindCommand</param-value>
+    </context-param>
+
+    <context-param>
+       <param-name>resBundleName</param-name>
+       <param-value>RegexParamsDef</param-value>
+    </context-param>
+
+    <servlet>
+       <servlet-name>RegexTest</servlet-name>
+       <description> Regularne wyrazenia 1 (zle)</description>
+       <servlet-class>RegexTest</servlet-class>
+       <init-param>
+          <param-name>regexFormFile</param-name>
+          <param-value>regexform.html</param-value>
+       </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegexTest</servlet-name>
+        <url-pattern>/regex1 </url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>ControllerServ</servlet-name>
+       <description>Regularne wyrazenia 2</description>
+       <servlet-class>ControllerServ</servlet-class>
+       <init-param>
+          <param-name>regexFormFile</param-name>
+          <param-value>regexform.html</param-value>
+       </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ControllerServ</servlet-name>
+        <url-pattern>/regex</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>ResourceBundleServ</servlet-name>
+       <description></description>
+       <servlet-class>ResourceBundleServ</servlet-class>
+       <init-param>
+          <param-name>regexFormFile</param-name>
+          <param-value>regexform.html</param-value>
+       </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResourceBundleServ</servlet-name>
+        <url-pattern>/resbundleinfo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>GetParamsServ</servlet-name>
+       <description></description>
+       <servlet-class>GetParamsServ</servlet-class>
+       <init-param>
+          <param-name>regexFormFile</param-name>
+          <param-value>regexform.html</param-value>
+       </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetParamsServ</servlet-name>
+        <url-pattern>/getparams</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+       <servlet-name>ResultPresent</servlet-name>
+       <description>Serwlet prezentacji</description>
+       <servlet-class>ResultPresent</servlet-class>
+       <init-param>
+          <param-name>regexFormFile</param-name>
+          <param-value>regexform.html</param-value>
+       </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResultPresent</servlet-name>
+        <url-pattern>/presentation</url-pattern>
+    </servlet-mapping>
+
+</web-app>

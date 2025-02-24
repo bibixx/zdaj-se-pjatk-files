@@ -1,0 +1,332 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main07_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main07_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<br clear="all"><A NAME="EDU.wyklad.punkt 4"></A>
+
+<br clear="all">
+<div class="tytulpunktu">4. Operacja wstawiania do BST</div>
+</p>
+<p>Operacja <i>insert, </i>wstawiania elementu do drzewa BST jest operacją 
+dwuargumentową,  </p>
+<p style="text-align: center">insert : Et <font face="Symbol"><span lang="en">´</span> </font>
+BST <font face="Symbol"><span lang="en">&reg;</span> </font>BST,  </p>
+<p>która dla danej 
+etykiety e i drzewa binarnych poszukiwań D daje w wyniku drzewo binarnych 
+poszukiwań D* spełniające warunek wk,</p>
+<p style="text-align: center">wk = (member(e,D*) <font face="Symbol">
+<span lang="en">&Ugrave;</span></font> (<font face="Symbol">&quot;</font>x, e<font face="Symbol"><span lang="en">&sup1;</span></font>x) 
+(member(x,D) <font face="Symbol"><span lang="en">&ordm;</span> </font>member(x,D*))).</p>
+<p>Etykietami w drzewie D* są dokładnie etykiety drzewa D oraz etykieta e. 
+Wynika stąd, że jeśli e była etykietą jakiegoś wierzchołka w drzewie D, to po 
+wykonaniu operacji insert(e,D) zbiór etykiet nie ulegnie zmianie.</p>
+<p>Naszym zadaniem w tym punkcie, jest przedstawienie jednorodnego postępowania, 
+które pozwoli zrealizować dołączanie nowej etykiety do dowolnego drzewa binarnych 
+poszukiwań, tak by w wyniku&nbsp; powstało również drzewo binarnych poszukiwań. </p>
+<p><b>Metoda</b></p>
+<p>Zaczynając od korzenia drzewa D, przeglądamy wierzchołki w poszukiwaniu 
+elementu e.&nbsp; Jeśli e jest etykietą w tym drzewie, to wynikiem jest dane 
+drzewo D. Jeśli e nie występuje w D, znajdujemy wierzchołek v, który mógłby być 
+ojcem wierzchołka z etykietą e. Tworzymy nowy wierzchołek, przypisujemy mu 
+etykietę e i dołączamy go jako lewego syna 
+wierzchołka v, gdy e &lt; v.val, i jako prawego syna v, gdy&nbsp; v.val &lt; e. 
+Oczywiście, jeśli drzewo jest puste, to w wyniku otrzymamy drzewo złożone z 
+jednego tylko wierzchołka z etykietą e.</p>
+  
+
+
+<p><b>Algorytm </b></p>
+<p>Algorytm <i>insert</i> jest niewielką modyfikacją algorytmu <i>member</i>. Teraz 
+jednak interesuje nas nie tylko informacja, czy e jest, czy nie jest etykietą 
+drzewa. Chcemy też znać właściwe miejsce, dla etykiety e, jeśli jeszcze nie 
+występowała w tym drzewie. Tym właściwym miejscem&nbsp; jest ostatni wierzchołek 
+na ścieżce poszukiwań etykiety e. W poniższym algorytmie zakładamy, że <i>new 
+node</i> jest instrukcją utworzenia nowego wierzchołka z wszystkimi atrybutami 
+równymi null. Zadaniem zmiennej bool jest przerwanie wykonywania pętli, gdy 
+postępowanie zostanie zakończone.</p>
+<p>
+<div class="def" style="width: 700; ">
+   <TABLE frame="void" rules="none" width="660"  bordercolorlight="#808080" bordercolordark="#FFFFFF" style="border-collapse: collapse" bordercolor="#111111" cellpadding="0" cellspacing="0">
+         <TR>
+            <TD width="754" height="24" colspan="2">&nbsp;node insert(e : Et, root : 
+            node) <b>{</b></TD>
+             
+            <TD width="29" height="24"></TD>
+             
+            <TD width="447" height="24"> &nbsp;</TD>
+             
+         </TR>
+         <TR>
+            <TD width="59" height="22"></TD>
+            <TD width="695" height="22"><b>if</b> (root = null) <b>then</b>&nbsp;</TD> 
+            <TD width="29" height="22"></TD> 
+            <TD width="447" height="22">//jeśli drzewo jest puste, to tworzymy 
+            wierzchołek &nbsp;z etykietą e, jako root&nbsp;&nbsp;&nbsp;&nbsp; </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="21"></TD>
+            <TD width="695" height="21">&nbsp;&nbsp;&nbsp;&nbsp; root:= new node; root.val := e;</TD> 
+            <TD width="29" height="21"></TD> 
+            <TD width="447" height="21"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="24"></TD>
+            <TD width="695" height="24"><b>else</b> <strong>
+            &nbsp;&nbsp;</strong></TD> 
+            <TD width="29" height="24"></TD> 
+            <TD width="447" height="24"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="24">&nbsp;</TD>
+            <TD width="695" height="24">&nbsp;&nbsp;&nbsp;&nbsp; bool := false; 
+            v := root; </TD> 
+            <TD width="29" height="24">&nbsp;</TD> 
+            <TD width="447" height="24"> &nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="24">&nbsp;</TD>
+            <TD width="695" height="24">&nbsp;&nbsp;&nbsp;&nbsp; <b>while</b> 
+            (not bool) <b>do</b></TD> 
+            <TD width="29" height="24">&nbsp;</TD> 
+            <TD width="447" height="24"> &nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="24">&nbsp;</TD>
+            <TD width="695" height="24">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>&nbsp; if</b> (v.val 
+            = e) <b>then </b>bool := true</TD> 
+            <TD width="29" height="24">&nbsp;</TD> 
+            <TD width="447" height="24"> //&nbsp;jeśli e jest etykietą w tym drzewie, 
+            to wynikiem jest to samo drzewo&nbsp; </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="24">&nbsp;</TD>
+            <TD width="695" height="24">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>else</b></TD> 
+            <TD width="29" height="24">&nbsp;</TD> 
+            <TD width="447" height="24"> &nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="24">&nbsp;</TD>
+            <TD width="695" height="24">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>&nbsp;if</b>&nbsp; (v.val &lt;e) <b>then</b></TD> 
+            <TD width="29" height="24">&nbsp;</TD> 
+            <TD width="447" height="24"> &nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="24">&nbsp;</TD>
+            <TD width="695" height="24">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>if</b> (v.right <span lang="en"><font face="Symbol">&sup1;</font></span>null)
+            <b>then</b> v := v.right</TD> 
+            <TD width="29" height="24">&nbsp;</TD> 
+            <TD width="447" height="24"> //będziemy przeszukiwać prawe poddrzewo</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="24">&nbsp;</TD>
+            <TD width="695" height="24">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>else</b></TD> 
+            <TD width="29" height="24">&nbsp;</TD> 
+            <TD width="447" height="24"> &nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="24">&nbsp;</TD>
+            <TD width="695" height="24">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            w := new node; w.val := e; </TD> 
+            <TD width="29" height="24">&nbsp;</TD> 
+            <TD width="447" height="24"> // dowiązujemy nowy wierzchołek z </TD> 
+         </TR>
+         <tr>
+            <TD width="59" height="16"></TD>
+            <TD width="695" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            v. right := w; bool := true</TD> 
+            <TD width="29" height="16"></TD> 
+            <TD width="447" height="16"> etykietą e jako prawego syna v</TD> 
+         </tr>
+         <TR>
+            <TD width="59" height="24">&nbsp;</TD>
+            <TD width="695" height="24">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>fi;</b></TD> 
+            <TD width="29" height="24">&nbsp;</TD> 
+            <TD width="447" height="24"> &nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="24">&nbsp;</TD>
+            <TD width="695" height="24">
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else</b> </TD> 
+            <TD width="29" height="24">&nbsp;</TD> 
+            <TD width="447" height="24"> &nbsp;</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="695" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if</b> 
+            (v.left <span lang="en"><font face="Symbol">&sup1;</font></span>null) <b>then</b>&nbsp;&nbsp;&nbsp;&nbsp; 
+            v := v.left </TD> 
+            <TD width="29" height="16"></TD> 
+            <TD width="447" height="16"> //będziemy przeszukiwać lewe poddrzewo</TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="18"></TD>
+            <TD width="695" height="18"><b>&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>else&nbsp;&nbsp;&nbsp; </b></TD> 
+            <TD width="29" height="18"></TD> 
+            <TD width="447" height="18"> </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="695" height="16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; w := new node; w.val := e;</TD> 
+            <TD width="29" height="16"></TD> 
+            <TD width="447" height="16"> // dowiązujemy nowy wierzchołek z </TD> 
+         </TR>
+         <tr>
+            <TD width="59" height="20">&nbsp;</TD>
+            <TD width="695" height="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; y.left := w; 
+            bool := true</TD> 
+            <TD width="29" height="20">&nbsp;</TD> 
+            <TD width="447" height="20"> etykietą e jako lewego syna v</TD> 
+         </tr>
+         <tr>
+            <TD width="59" height="15"></TD>
+            <TD width="695" height="15">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fi</b></TD> 
+            <TD width="29" height="15"></TD> 
+            <TD width="447" height="15"> </TD> 
+         </tr>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="695" height="16">&nbsp;<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fi</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </TD> 
+            <TD width="29" height="16"></TD> 
+            <TD width="447" height="16"> </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="16"></TD>
+            <TD width="695" height="16"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fi</b> </TD> 
+            <TD width="29" height="16"></TD> 
+            <TD width="447" height="16"> </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="15"></TD>
+            <TD width="695" height="15">&nbsp;&nbsp;&nbsp;&nbsp; <b>od</b></TD> 
+            <TD width="29" height="15"></TD> 
+            <TD width="447" height="15"> </TD> 
+         </TR>
+         <TR>
+            <TD width="59" height="18"></TD>
+            <TD width="695" height="18">   <b>fi;</b>&nbsp;<STRONG>&nbsp; </STRONG>
+             </TD>
+            <TD width="29" height="18">   </TD>
+            <TD width="447" height="18">   &nbsp;</TD>
+         </TR>
+         <TR>
+            <TD width="59" height="17"></TD>
+            <TD width="695" height="17">   <strong>&nbsp;</strong>return root<STRONG> &nbsp;}</STRONG></TD>
+            <TD width="29" height="17">   </TD>
+            <TD width="447" height="17">   </TD>
+         </TR>
+         </TABLE>
+</div>
+
+<p><b>Przykład 4.1</b></p>
+<p>Na rysunku 7.5 przedstawiono drzewa binarnych poszukiwań otrzymane przez 
+kolejne wstawianie etykiet 6, 5, 8, 9, 7 do początkowo pustego drzewa. Zauważmy, 
+że nowe elementy pojawiają się jako etykiety liści. </p>
+   
+<p><center><img border="0" src="Rysunki/Rysunek7_5.gif" width="300" height="300"></center></p>
+   
+<p><b>Pytanie 6:</B>&nbsp; Niech będzie etykietą różną od wszystkich etykiet 
+drzewa D. Czy po wykonaniu instrukcji &quot;D* := insert(e,D);&quot; prawdziwe jest zdanie 
+&quot;Jeśli w jest wierzchołkiem drzewa D* i w.val = e, to w jest liściem w drzewie 
+D*.&quot;? <FORM>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,'Tak. Nowy wierzchołek jest zawsze dowiązywany na końcu ścieżki.');">
+</p>
+</form>
+
+
+<p>&nbsp;</p>
+   
+
+
+<p><b>Poprawność algorytmu insert</b></p>
+   
+
+
+<p>Algorytm <i>insert</i> zatrzymuje 
+się dla dowolnych danych D, e: w każdej iteracji pętli, o ile nie znaleźliśmy 
+jeszcze ani etykiety e, ani właściwego miejsca dla e, schodzimy w głąb drzewa na 
+następny poziom (instrukcje: v:= v.left lub v:= v.right). Proces ten zakończy 
+się po skończonej liczbie kroków, bo wysokość drzewa&nbsp; D jest skończona.</p>
+   
+
+
+<p>Żadna z instrukcji algorytmu nie zmienia wartości etykiet danego drzewa D, 
+więc drzewo otrzymane w wyniku zawiera wszystkie etykiety drzewa D. Przypuśćmy, 
+że w pewnej iteracji pętli zachodzą warunki&nbsp; e &lt; v.val oraz v.left = null. 
+Z pierwszego warunku wynika, że e musi się znaleźć w lewym poddrzewie 
+wierzchołka v, z drugiego warunku, że to poddrzewo jest puste. Zatem e nie 
+należy do drzewa D i możemy dowiązać nowy wierzchołek z etykietą e, jako lewego 
+syna wierzchołka v. Zmienna bool jest w tym momencie algorytmu ustalona na <b>
+true</b>, więc proces zostanie zakończony, a w wyniku otrzymamy drzewo binarnych 
+poszukiwań, w którym znajduje się etykieta e. Analogiczna sytuacja zachodzi, gdy 
+v.val&lt;e oraz v.right = null.</p>
+   
+
+
+<p>Jako wniosek z powyższych rozważań otrzymujemy następujący lemat:</p>
+   
+
+
+<p></P>
+
+<div class="lemat">
+<p>Lemat 4.1&nbsp;&nbsp; Algorytm insert zatrzymuje się dla dowolnego drzewa 
+binarnych poszukiwań D i dowolnej etykiety e, a wynikiem jest drzewo binarnych 
+poszukiwań D* spełniające warunek&nbsp; member(e,D*) <font face="Symbol">
+<span lang="en">&Ugrave;</span></font> (<font face="Symbol">&quot;</font>x, e<font face="Symbol"><span lang="en">&sup1;</span></font>x) 
+(member(x,D) <font face="Symbol"><span lang="en">&ordm;</span> </font>member(x,D*)).</P>
+ </div>
+ 
+<p></P>
+   
+<p><b>Koszt algorytmu</b></p>
+   
+<p>Koszt algorytmu mierzony liczbą wykonanych porównań jest zdeterminowany przez 
+proces wyszukiwania elementu e lub miejsc, gdzie powinien zostać dowiązany 
+wierzchołek z etykietą e. Pozostałe czynności związane z utworzeniem nowego 
+wierzchołka mają koszt stały. Zatem&nbsp; w najgorszym wypadku koszt wynosi O(n), 
+a średnio O(lg n), gdzie n jest liczbą wierzchołków w drzewie D (por. analizę 
+kosztu algorytmu <i>memebr</i>).</p>
+   
+<p><b>Pytanie 7:</B>&nbsp; Jaka jest wysokość drzewa binarnych poszukiwań, jeśli 
+do początkowo pustego drzewa włożono kolejno etykiety&nbsp; 5, 7, 2, 1, 9, 3, 6, 
+0? 
+&nbsp;<FORM>
+<p>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' onClick="napis(this.form,'3');">
+</p>
+</form>
+
+
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main07_p3.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main07_p5.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table>
+<!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>

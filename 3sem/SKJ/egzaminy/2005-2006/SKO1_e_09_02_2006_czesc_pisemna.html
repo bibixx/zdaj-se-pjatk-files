@@ -1,0 +1,214 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="pl">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<title>Egzamin SKO1 - część pisemna - 9 luty 2006</title>
+</head>
+
+<body bgcolor="#ffffff">
+<basefont face="Trebuchet MS" size="3">
+<p align="center">Egzamin SKO1<br>
+<font size="1">część pisemna</font><br>
+9 luty 2006</p>
+<p>Numer indeksu: ................................</p>
+<hr>
+<p><b>Zadanie 1</b></p>
+<p>Masz daną sieć 148.48.8.0/24. Podziel sieć tak, aby uzyskać trzy podsieci spełniające poniższe warunki:<br>
+W dwóch z nich powinny znaleść się:</p>
+<ul>
+	<li>po 32 komputery,</li>
+	<li>po dwie drukarki sieciowe,</li>
+	<li>i po jednym adresie IP dla interfejsu routera.</li>
+</ul>
+<p>Trzecia podsieć powinna być większa od każdej z pozostałych dwóch.</p>
+<p>Uzupełnij poniższą tabelę:</p>
+<ol>
+	<li>Podaj adres każdej z podsieci wraz z ich maskami w formie A.B.C.D/V.X.Y.Z.</li>
+	<li>Podaj zakres adresów IP dla każdej z podsieci do wykorzystania dla komputerów, drukarek sieciowych i interfejsów routera.</li>
+	<li>Podaj adresy rozgłoszeniowe dla każdej z podsieci.</li>
+	<li>Podaj ilość adresów dostępnych dla interfejsów sieciowych w każdej podsieci.</li>
+</ol>
+<table border="1" width="100%" cellspacing="0" cellpadding="2">
+	<tr>
+		<td align="center">Numer<br>
+		podsieci</td>
+		<td align="center">Adres<br>
+		podsieci</td>
+		<td align="center">Maska<br>
+		(V.X.Y.Z)</td>
+		<td align="center">Zakres<br>
+		adresów</td>
+		<td align="center">Adres<br>
+		rozgłoszeniowy</td>
+		<td align="center">Ilość<br>
+		interfejsów<br>
+		sieciowych</td>
+	</tr>
+	<tr>
+		<td align="center">1</td>
+		<td align="center"><font color="#005380">148.48.8.0/26</font></td>
+		<td align="center"><font color="#005380">255.255.255.192</font></td>
+		<td align="center"><font color="#005380">148.48.8.0</font> - <font color="#005380">148.48.8.63</font></td>
+		<td align="center"><font color="#005380">148.48.8.63/26</font></td>
+		<td align="center"><font color="#005380">62</font></td>
+	</tr>
+	<tr>
+		<td align="center">2</td>
+		<td align="center"><font color="#005380">148.48.8.64/26</font></td>
+		<td align="center"><font color="#005380">255.255.255.192</font></td>
+		<td align="center"><font color="#005380">148.48.8.64</font> - <font color="#005380">148.48.8.127</font></td>
+		<td align="center"><font color="#005380">148.48.8.127/26</font></td>
+		<td align="center"><font color="#005380">62</font></td>
+	</tr>
+	<tr>
+		<td align="center">3</td>
+		<td align="center"><font color="#005380">148.48.8.128/25</font></td>
+		<td align="center"><font color="#005380">255.255.255.128</font></td>
+		<td align="center"><font color="#005380">148.48.8.128</font> - <font color="#005380">148.48.8.255</font></td>
+		<td align="center"><font color="#005380">148.48.8.255/25</font></td>
+		<td align="center"><font color="#005380">126</font></td>
+	</tr>
+</table>
+
+<p><b>Zadanie 2</b></p>
+
+<table border="0" width="100%">
+	<tr>
+		<td width="60%">
+		<p align="center">
+		<img border="0" src="egz_pisemny_zad2.gif" width="542" height="603"></td>
+		<td width="40%">
+<p>Zakładamy, że od godziny w całej<br>
+sieci przedstawionej na sąsiednim<br>
+diagramie nie pojawia się żadna<br>
+ramka, więc cache ARP komputerów<br>
+są puste. Zakładamy też, że sieć<br>
+działa sprawnie i wydajnie: pakiety<br>
+nie są gubione i nie ma fragmentacji.<br>
+Domyślnym serwerem DNS jest<br>
+komputer oznaczony jako DNS (o IP<br>
+172.20.1.1).</p>
+<p>Wypisz wszystkie ramki, które<br>
+pojawią się na interfejsie komputera<br>
+KOMP_2 po wydaniu na nim<br>
+polecenia (w systemie Linux):<br>
+<font face="Lucida Console">ping -n -c 2 172.20.1.1</font><br>
+a zaraz potem<br>
+<font face="Lucida Console">ping -c 2 kernel.org</font></p>
+<p>(uwaga: nie wszystkie wiersze poniższej<br>
+tabelki muszą być wypełnione)</p></td>
+	</tr>
+</table>
+
+<p>&nbsp;</p>
+
+<table border="1" width="100%" cellspacing="0" cellpadding="2">
+	<tr>
+		<td align="center">Treść komunikatu<br>
+		(zawartość pakietu lub ramki)</td>
+		<td align="center">Protokoły</td>
+		<td align="center">adres IP<br>
+		nadawcy</td>
+		<td align="center">adres MAC<br>
+		nadawcy</td>
+		<td align="center">adres IP<br>
+		celu</td>
+		<td align="center">adres MAC celu</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+</table>
+
+<p align="center"><font size="2">Jeśli masz bardziej czytelny diagram, wyślij go do mnie na marcin[at]pjwstk.edu.pl. Do sprawdzania poprawności policzonej maski,
+adresu sieci i rozgłoszeniowego, warto odwiedzić:</font> <a target="_blank" href="http://42.pl/ipcalc"><font size="2">http://42.pl/ipcalc</font></a></p>
+
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title></title>
+<meta name="Keywords" content="słowa kluczowe">
+<meta name="Description" content="">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../main.css">
+<LINK REL="stylesheet" TYPE="text/css" HREF="../style.html">
+<script language="JavaScript" src="../skrypty.js" type="text/javascript"></script>
+</head>
+<body bgcolor="whitesmoke" leftmargin="8" topmargin="8" marginwidth="8" marginheight="8">
+<!--body bgcolor="whitesmoke" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0"-->
+<!--table width="100%" cellspacing="4" cellpadding="4" border="0"-->
+<!--tr-->
+    <!--td--><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main08_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main08_cw.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><br clear="all"><A NAME="EDU.wyklad.punkt 5"></A><br clear="all"><div class="tytulpunktu">
+5. Koszty operacji&nbsp; na drzewach AVL.</div>
+
+
+ &nbsp;<p>Niech D<sub><font face="Verdana">h</font></sub> będzie drzewem AVL o 
+wysokości h, które zawiera najmniejszą możliwą liczbę wierzchołków wśród 
+wszystkich wyważonych drzew binarnych poszukiwań. Niech N<sub><font face="Verdana">h</font></sub> 
+oznacza liczbę wierzchołków w drzewie D<sub><font face="Verdana">h</font></sub>.</P>
+<p><b>Przykład 5.1</b></P>
+<p>Gdy h=0, to drzewo, które można narysować ma jeden wierzchołek. Zatem N<sub><font face="Verdana">0</font></sub> 
+= 1. Gdy h=1, można zbudować tylko drzewa o 3 lub o 2 wierzchołkach, zatem N<sub><font face="Verdana">1</font></sub>=2. 
+Na rysunku 8.10 przedstawiono przykładowe drzewa D<sub><font face="Verdana">0</font></sub>-D<sub><font face="Verdana">3</font></sub>. 
+Usunięcie dowolnego wierzchołka w tych drzewach zaburza własność wyważenia, albo 
+powoduje zmniejszenie wysokości. <font face="Wingdings">J</font></P>
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="60%" id="AutoNumber1">
+  <tr>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_10abc.gif" width="250" height="250"></td>
+    <td width="50%">
+    <img border="0" src="Rysunki/Rysunek8_10d.gif" width="250" height="250"></td>
+  </tr>
+</table>
+<p>Ogólnie, drzewo D<sub><font face="Verdana">h</font></sub> można przedstawić 
+jako połączenie drzewa D<sub><font face="Verdana">h-1</font></sub> o wysokości 
+h-1 z drzewem D<sub><font face="Verdana">h-2</font></sub> o wysokości h-2, jak 
+pokazano na rysunku 8.11. Drzewa tego typu nazywa się drzewami Fibonacciego.</P>
+
+<p><center><img border="0" src="Rysunki/Rysunek8_11.gif" width="250" height="250"></center></P>
+<p>&nbsp;</P>
+
+<p>Wynika stąd natychmiast, że liczba wierzchołków w drzewie D<sub><font face="Verdana">h</font></sub> 
+jest sumą liczb wierzchołków jego lewego i prawego poddrzewa zwiększoną o 1 
+(korzeń drzewa). Mamy zatem</P>
+<p style="text-align: center">N<sub><font face="Verdana">0</font></sub> = 1,&nbsp;N<sub><font face="Verdana">1</font></sub> 
+= 2,&nbsp; N<sub><font face="Verdana">h</font></sub> = N<sub><font face="Verdana">h-1</font></sub> 
++ N<sub><font face="Verdana">h-2</font></sub> +1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+(*)</P>
+<p>&nbsp;</P>
+<p></P>
+
+<div class="lemat">
+<p>Lemat 5.1&nbsp; Dla dowolnego&nbsp; h<font face="Symbol"> <span lang="en">&sup3;</span></font> 
+0, minimalną liczbę wierzchołków w wyważonym drzewie binarnych poszukiwań można 
+oszacować&nbsp; przez N<sub><font face="Verdana">h</font></sub>
+<font face="Symbol"><span lang="en">&sup3;</span></font> 2<sup><font face="Verdana"> 
+h/2</font></sup>.</P>
+ </div>
+ 
+<p></P>
+
+<p>Dowód lematu 5.1 przeprowadzimy przez indukcję ze względu na h. Dla h=0, h=1&nbsp; 
+nierówność jest spełniona, jak pokazuje przykład 5.1. Załóżmy, że nierówność N<sub><font face="Verdana">i</font></sub>
+<font face="Symbol"><span lang="en">&sup3;</span></font> 2<sup><font face="Verdana"> 
+i/2</font></sup>&nbsp; jest spełniona dla wszystkich liczb naturalnych i 
+mniejszych niż pewna ustalona liczba h i o szacujmy wartość&nbsp; N<sub><font face="Verdana">h
+</font></sub>korzystając z rekurencyjnej definicji (*). Mamy </P>
+<p style="text-align: center">N<sub><font face="Verdana">h</font></sub> = N<sub><font face="Verdana">h-1</font></sub> 
++ N<sub><font face="Verdana">h-2</font></sub> +1<font face="Symbol">
+<span lang="en">&sup3;</span></font> 2<sup><font face="Verdana"> (h-1)/2</font></sup> 
++ 2<sup><font face="Verdana"> (h-2)/2</font></sup>&nbsp; + 1 = 2<sup><font face="Verdana"> 
+h/2</font></sup>( 1/2 + <span lang="en"><font face="Symbol">Ö</font></span>2/2 
+)+1.</P>
+<p>Ponieważ (1+ <span lang="en"><font face="Symbol">Ö</font></span>2)/2
+<font face="Symbol"><span lang="en">&sup3;</span> </font>1, więc ostatecznie&nbsp; 
+N<sub><font face="Verdana">h</font></sub> <font face="Symbol"><span lang="en">&sup3;</span></font> 
+2<sup><font face="Verdana"> h/2</font></sup>.<font face="Wingdings"> J</font></P>
+<p>Jako natychmiastowy wniosek z lematu 5.1 otrzymujemy: </P>
+<p></P>
+
+<div class="lemat">
+<p>Lemat 5.2&nbsp; Koszt operacji member, insert i delete dla dowolnego drzewa 
+AVL o n wierzchołkach są rzędu O(lg n).</P>
+ </div>
+ 
+<p></P>
+<p>Rzeczywiście, skoro minimalna liczba wierzchołków w drzewie o wysokości h 
+wynosi N<sub><font face="Verdana">h</font></sub>, zatem, jeśli n jest liczbą 
+wierzchołków w dowolnym AVL o wysokości h, to&nbsp; n <font face="Symbol">
+<span lang="en">&sup3;</span> </font>N<sub><font face="Verdana">h</font></sub>. 
+Z lematu 5.2 mamy&nbsp; więc&nbsp; n<font face="Symbol">
+<span lang="en">&sup3;</span> </font>2<sup><font face="Verdana"> h/2</font></sup>. 
+Po zlogarytmowaniu otrzymamy&nbsp; h <font face="Symbol"><span lang="en">&pound;</span>
+</font>2lg n. Czyli w dowolnym drzewie AVL, wysokość jest nie większa niż 
+podwojony logarytm z liczby wierzchołków drzewa. Koszt operacji member, insert, 
+delete jest proporcjonalny do wysokości drzewa, w którym te operacje są 
+wykonywane. Stąd oszacowanie złożoności algorytmów dla tych operacji O(lg n).</P>
+
+<p><b>Pytanie 5</B>: Ile można zbudować&nbsp;różnych drzew AVL&nbsp; o  etykietach 
+1,2,3,4,5,6,7 i wysokości 3?&nbsp;</P>
+
+<!-- <p>Odpowiedź:  16 różnych drzew.</P> -->
+
+<form>
+<INPUT class="GUZIK" TYPE='button' VALUE='Zobacz odpowiedź' NAME='Klik0' 
+onClick="napis(this.form,' 16 różnych drzew.')">
+</form>
+<p><br clear="all"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td align="left"><A HREF="main08_p4.html" TARGET="main"  class="NAWIGACJA">&#171;&nbsp;poprzedni punkt</a>&nbsp;</td>
+<td align="right">&nbsp;<A HREF="main08_cw.html" TARGET="main" class="NAWIGACJA">następny punkt&nbsp;&#187;</a></td></tr></table><!--/td-->
+<!--/tr-->
+<!--/table-->
+</body>
+</html>
