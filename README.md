@@ -8,6 +8,9 @@ If you want to add new file or edit already existing one, edit or create a file 
 
 Should you have any problems or questions, feel free to contact me using [zdaj@zdaj.se](mailto:zdaj@zdaj.se.).
 
+> [!important]
+> This is a very large repo (7+ GB). Try not to download it in full but rather make changes using GitHub's UI.
+
 ## 🍻 Wanna help?
 
 If you want to help me with creating and maintaining this service you could use one of the methods that are available here: [https://pjatk.zdaj.se/donate](https://pjatk.zdaj.se/donate).
