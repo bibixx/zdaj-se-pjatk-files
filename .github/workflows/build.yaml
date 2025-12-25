@@ -23,18 +23,22 @@ jobs:
           sparse-checkout: |
             wrangler.json
             _meta
+            _headers
 
-      - name: Setup bun
-        uses: oven-sh/setup-bun@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          bun-version: 1.3.5
+          node-version: 22
 
-      - name: Implode overrides
-        run: bun _meta/build-json.js
+      - name: Build JSON files
+        run: node _meta/build-json.js
+
+      - name: Copy _headers
+        run: cp _headers dist/_headers
 
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          packageManager: bun
+          packageManager: pnpm
