@@ -60,13 +60,13 @@ function main() {
 
     // Write formatted JSON
     fs.writeFileSync(
-      join(__dirname, "../files.json"),
+      join(__dirname, "../dist/files.json"),
       JSON.stringify(tree, null, 2)
     );
 
     // Write minified JSON
     fs.writeFileSync(
-      join(__dirname, "../files.min.json"),
+      join(__dirname, "../dist/files.min.json"),
       JSON.stringify(tree)
     );
 
