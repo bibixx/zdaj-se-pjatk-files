@@ -20,7 +20,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          filter: blob:none
+          sparse-checkout: |
+            wrangler.json
+            _meta
 
       - name: Setup bun
         uses: oven-sh/setup-bun@v1
