@@ -57,6 +57,12 @@ function main() {
       .filter((line) => line.length > 0);
 
     const tree = buildPathTree(paths);
+    const distDir = join(__dirname, "../dist");
+
+    // Create dist directory if it doesn't exist
+    if (!fs.existsSync(distDir)) {
+      fs.mkdirSync(distDir);
+    }
 
     // Write formatted JSON
     fs.writeFileSync(
