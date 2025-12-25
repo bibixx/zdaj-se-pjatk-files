@@ -30,11 +30,9 @@ jobs:
           bun-version: 1.3.5
 
       - name: Install dependencies
-        working-directory: scripts
         run: bun install
 
       - name: Implode overrides
-        working-directory: scripts
         run: bun _meta/build-json.js
 
       - name: Build & Deploy Worker
