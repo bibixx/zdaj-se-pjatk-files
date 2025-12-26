@@ -36,11 +36,9 @@ jobs:
       - name: Copy _headers
         run: cp _headers dist/_headers
 
-      - name: Install Wrangler v4
-        run: npm install --save-dev wrangler@4
-
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: 4.54.0
