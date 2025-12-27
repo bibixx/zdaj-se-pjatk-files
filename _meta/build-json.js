@@ -2,15 +2,17 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 const { join } = require("path");
 
-function buildPathTree(paths) {
+function buildPathTree(partsArray) {
   const root = {
     files: [],
     subdirectories: {},
   };
 
-  paths.forEach((path) => {
-    const parts = path.split("/").filter((p) => p !== "");
-    parts.shift();
+  partsArray.forEach((parts) => {
+    if (parts.length < 2) {
+      return;
+    }
+
     let currentLevel = root;
 
     for (let i = 0; i < parts.length; i++) {
@@ -45,18 +47,43 @@ function buildPathTree(paths) {
   return cleanupEmptySubdirs(root);
 }
 
+function sortObjectKeys(obj) {
+  if (Array.isArray(obj)) {
+    return obj.map(sortObjectKeys).sort();
+  }
+
+  if (obj && typeof obj === "object") {
+    return Object.keys(obj)
+      .sort()
+      .reduce((sorted, key) => {
+        sorted[key] = sortObjectKeys(obj[key]);
+        return sorted;
+      }, {});
+  }
+
+  return obj;
+}
+
 function main() {
   try {
-    const input = execSync(
-      "find . \\( -path './_meta/*' -o -path './.git/*' \\) -prune -o -type f -print -mindepth 2"
-    ).toString();
+    const ignoreFolders = ["_meta", ".git", "node_modules", "dist", ".github", ".wrangler"];
+    let input = "";
 
-    const paths = input
+    if (process.env.CI) {
+      input = execSync(`git -c core.quotePath=false ls-tree -r HEAD --name-only`).toString();
+    } else {
+      input = execSync(`find * -type f -print`).toString();
+    }
+
+    const parts = input
       .split(/\r?\n/)
       .map((line) => line.trim())
-      .filter((line) => line.length > 0);
+      .filter((line) => line.length > 0)
+      .map((line) => line.split("/").filter((p) => p !== ""))
+      .filter((parts) => !ignoreFolders.includes(parts[0]));
 
-    const tree = buildPathTree(paths);
+    const tree = buildPathTree(parts);
+    const sortedTree = sortObjectKeys(tree);
     const distDir = join(__dirname, "../dist");
 
     // Create dist directory if it doesn't exist
@@ -65,16 +92,10 @@ function main() {
     }
 
     // Write formatted JSON
-    fs.writeFileSync(
-      join(__dirname, "../dist/files.json"),
-      JSON.stringify(tree, null, 2)
-    );
+    fs.writeFileSync(join(__dirname, "../dist/files.json"), JSON.stringify(sortedTree, null, 2));
 
     // Write minified JSON
-    fs.writeFileSync(
-      join(__dirname, "../dist/files.min.json"),
-      JSON.stringify(tree)
-    );
+    fs.writeFileSync(join(__dirname, "../dist/files.min.json"), JSON.stringify(sortedTree));
 
     console.log("Successfully generated:\n- files.json\n- files.min.json");
   } catch (error) {
